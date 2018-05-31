@@ -1,0 +1,4142 @@
+//==============================================================
+// 蜃気楼の塔 2012年ver	by refis
+//==============================================================
+
+//============================================================
+// mapnametable.txt (頂上用)
+//------------------------------------------------------------
+//jp_ev_map03.rsw#わからない所#
+
+//============================================================
+// resnametable.txt (頂上用)
+//------------------------------------------------------------
+//jp_ev_map03.gnd#juperos_02.gnd#
+//jp_ev_map03.gat#juperos_02.gat#
+//jp_ev_map03.rsw#juperos_02.rsw#
+//政煽昔斗凪戚什\map\jp_ev_map03.bmp#政煽昔斗凪戚什\map\gon_test.bmp#
+
+//============================================================
+// 転送NPC
+//------------------------------------------------------------
+prontera.gat,142,99,6	script	塔転送員	754,{
+	mes "[塔転送員 パラノ]";
+	mes "我々は現在、蜃気楼の塔の";
+	mes "調査員を募集しています。";
+	next;
+	switch(select("参加したい","詳しく知りたい","興味ない")) {
+	case 1:
+		break;
+	case 2:
+		mes "[塔転送員 パラノ]";
+		mes "今までの調査では、";
+		mes "塔は4つ存在していることが";
+		mes "わかっており、";
+		next;
+		mes "[塔転送員 パラノ]";
+		mes "ジュノーフィールド、";
+		mes "ソグラト砂漠、";
+		mes "コモドフィールドの";
+		next;
+		mes "[塔転送員 パラノ]";
+		mes "それぞれの塔の";
+		mes "調査が終了しました。";
+		next;
+		mes "[塔転送員 パラノ]";
+		mes "それによって、最後の塔が";
+		mes "アユタヤフィールドに";
+		mes "出現することが判り、";
+		mes "急遽、調査団を派遣すること";
+		mes "となったのです。";
+		next;
+		break;
+	case 3:
+		mes "[塔転送員 パラノ]";
+		mes "そうですか。ぜひとも";
+		mes "参加していただきたかったの";
+		mes "ですが……";
+		mes "仕方ないですね。";
+		close;
+	}
+	mes "[塔転送員 パラノ]";
+	mes "現在、塔の付近では";
+	mes "我々調査団の指揮を執っています、";
+	mes "『スノート・フラール』が";
+	mes "待機しております。";
+	next;
+	mes "[塔転送員 パラノ]";
+	mes "もし調査団に参加されたい";
+	mes "場合は、現地へ転送いたします。";
+	mes "どうされますか？";
+	next;
+	if(select("送ってもらう","結構です") == 2) {
+		mes "[塔転送員 パラノ]";
+		mes "そうですか。ぜひとも";
+		mes "参加していただきたかったの";
+		mes "ですが……";
+		mes "仕方ないですね。";
+		close;
+	}
+	mes "[塔転送員 パラノ]";
+	mes "ありがとうございます！";
+	mes "では、塔の前にお送りします。";
+	close2;
+	warp "ayo_fild01.gat",232,44;
+	end;
+}
+
+ayo_fild01.gat,230,51,3	script	スノート#r1	744,{
+	mes "[スノート]";
+	mes "私はジュノーの考古学者の";
+	mes "スノート！";
+	mes "私は今、蜃気楼の塔の謎を";
+	mes "調べているの。";
+	next;
+	mes "[スノート]";
+	mes "でも、";
+	mes "内部にはたくさんモンスターがいて";
+	mes "私達だけでは調査が進められないの！";
+	next;
+	mes "[スノート]";
+	mes "それに塔がとても不安定で、";
+	mes "一定時間で消えてしまうから";
+	mes "調査時間も限られているのよ……";
+	next;
+	mes "[スノート]";
+	mes "それだけではなく、";
+	mes "不思議な事もたくさん起こっているわ。";
+	mes "なぜか、アイテムとスキルのいくつか";
+	mes "が使えないの。";
+	mes "だから、調査するにしても";
+	mes "危険が多いわ。";
+	next;
+	mes "[スノート]";
+	mes "でも万が一、内部で力尽きてしまっても";
+	mes "塔が消えてしまう前に";
+	mes "私達が安全な場所へ運び出すから、";
+	mes "その点は安心して！";
+	next;
+	mes "[スノート]";
+	mes "あと、お礼に何かできないかと、";
+	mes "知り合いを通じて色々相談してみたら、";
+	mes "この遺跡に興味をもった";
+	mes "ポイントショップの方々が";
+	mes "調査スポンサーとして協力して";
+	mes "くれるって！";
+	next;
+	mes "[スノート]";
+	mes "だから、協力してくれた冒険者の";
+	mes "皆さんには、調査内容に応じて";
+	mes "ショップポイントを報酬として";
+	mes "支払わせてもらうわ！";
+	next;
+	mes "[スノート]";
+	mes "でも今はまだ塔への入り口は";
+	mes "開いていないわ。";
+	mes "次回の調査に協力をお願いね！";
+	close;
+}
+
+ayo_fild01.gat,230,51,3	script	スノート#r2	744,{
+	if(BaseLevel < 120 || Job == Job_Novice) {
+		mes "[スノート]";
+		mes "ノービスの方や120未満の方は";
+		mes "行く事が出来ないわ。";
+		mes "申し訳ないわね。";
+		close;
+	}
+	mes "[スノート]";
+	mes "私はジュノーの考古学者の";
+	mes "スノート！";
+	mes "私は今、蜃気楼の塔の謎を";
+	mes "調べているの。";
+	next;
+	mes "[スノート]";
+	mes "でも、";
+	mes "内部にはたくさんモンスターがいて";
+	mes "私達だけでは調査が進められないの！";
+	next;
+	mes "[スノート]";
+	mes "今がちょうど塔に入るチャンスよ！";
+	mes "どう？調査に参加してみない？";
+	next;
+	switch(select("調査に協力する。","興味ない。","報酬はなに？")) {
+	case 1:
+		mes "[スノート]";
+		mes "調査にご協力して頂けるのね！";
+		mes "それじゃ、塔に案内するわね！";
+		close2;
+		warp "tower_c0.gat",90,91;
+		end;
+	case 2:
+		mes "[スノート]";
+		mes "そう……";
+		mes "とても残念だけど、";
+		mes "またの機会にお願いするわね！";
+		close;
+	case 3:
+		mes "[スノート]";
+		mes "調査のお礼に何かできないかと、";
+		mes "知り合いを通じて色々相談してみたら、";
+		mes "この遺跡に興味をもった";
+		mes "ポイントショップの方々が";
+		mes "調査スポンサーとして協力して";
+		mes "くれるって！";
+		next;
+		mes "[スノート]";
+		mes "だから、協力してくれた冒険者の";
+		mes "皆さんには、調査内容に応じて";
+		mes "ショップポイントを報酬として";
+		mes "支払わせてもらうわ！";
+		close;
+	}
+	end;
+OnInit:
+	disablenpc;
+	end;
+}
+
+//============================================================
+// 蜃気楼タイマーイベント
+//------------------------------------------------------------
+tower_c0.gat,0,0,0	script	mirage_timer	-1,{
+OnInit:
+	goto Initialize;
+	end;
+//--------------------------------------------------------
+// 発生時間設定
+OnClock0145:
+OnClock0515:
+OnClock1245:
+OnClock1815:
+OnClock2045:
+OnClock2300:
+//--------------------------------------------------------
+	announce "スノート ： 冒険者の皆さん、5分後に蜃気楼の塔が出現するはずよ！",0,0x00FFFF;
+	enablenpc "スノート#r1";
+	disablenpc "スノート#r2";
+	sleep 300000;
+	enablenpc "スノート#r2";
+	disablenpc "スノート#r1";
+	donpcevent "mirage_timer::Initialize";
+	initnpctimer;
+	announce "スノート ： 塔への入り口が開いたわ！",0,0x00FFFF;
+	end;
+OnTimer5000:
+	announce "スノート ： 冒険者の皆さん、いまが塔に入るチャンスよ！",0,0x00FFFF;
+	end;
+OnTimer10000:
+	announce "スノート ： 塔の入り口は、5分で閉じてしまうから急いで！",0,0x00FFFF;
+	end;
+OnTimer300000:
+	disablenpc "スノート#r2";
+	enablenpc "スノート#r1";
+	donpcevent "mirage0";
+	announce "スノート ： 塔の入り口が閉まったようだわ。",0,0x00FFFF;
+	sleep 5000;
+	announce "スノート ： 今回参加できなかった冒険者の皆さんは、次回の調査に協力をお願いね！",0,0x00FFFF;
+	end;
+OnTimer1800000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： 塔に入って30分位経ったかな？",9,0xEE88FF;
+	end;
+OnTimer1805000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： まだ時間的に余裕はあるはずよ。",9,0xEE88FF;
+	end;
+OnTimer3600000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： 1時間位経ったのかしら。",9,0xEE88FF;
+	end;
+OnTimer3605000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： あと30分程度しか時間がないわね。",9,0xEE88FF;
+	end;
+OnTimer4200000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： 残り時間も少なくなってきたわね。",9,0xEE88FF;
+	end;
+OnTimer4205000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： だいたい20分位かしら……",9,0xEE88FF;
+	end;
+OnTimer4500000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： 残り10分位だね！",9,0xEE88FF;
+	end;
+OnTimer4505000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： そろそろ戻る準備をしないとダメね。",9,0xEE88FF;
+	end;
+OnTimer5100000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： あと5分位で時間ね！",9,0xEE88FF;
+	end;
+OnTimer5105000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： 安全に戻る為にも早急にモンスターを倒して！",9,0xEE88FF;
+	end;
+OnTimer5330000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： そろそろ塔が消える時間よ！",9,0xEE88FF;
+	end;
+OnTimer5335000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： 皆さん戻る準備はいい？",9,0xEE88FF;
+	end;
+OnTimer5340000:
+	for(set '@i,0; '@i<13; set '@i,'@i+1)
+		mapannounce "tower_c" +'@i+ ".gat","スノート ： それじゃ、皆さんを調査員の前まで送るわね！",9,0xEE88FF;
+	end;
+OnTimer5400000:
+Initialize:
+	stopnpctimer;
+	for(set '@i,0; '@i<13; set '@i,'@i+1) {
+		if(getmapusers("tower_c" +'@i+ ".gat")>0)
+			areawarp "tower_c" +'@i+ ".gat",0,0,300,300,"SavePoint",0,0;
+	}
+	disablenpc "mirage4012";
+	disablenpc "mirage4013";
+	disablenpc "mirage4014";
+	disablenpc "mirage4014_";
+	disablenpc "mirage4015";
+	disablenpc "mirage4015_";
+	disablenpc "mirage4016";
+	disablenpc "mirage4016_";
+	disablenpc "mirage4017a";
+	disablenpc "mirage4017b";
+	disablenpc "mirage4017c";
+	disablenpc "mirage4017d";
+	disablenpc "mirage4018";
+	disablenpc "mirage4019a";
+	disablenpc "mirage4019b";
+	disablenpc "mirage4019c";
+	disablenpc "mirage4019d";
+	disablenpc "mirage4019e";
+	disablenpc "mirage4020";
+	disablenpc "mirage4021";
+	disablenpc "mirage4021_";
+	disablenpc "mirage4022a";
+	disablenpc "mirage4022b";
+	disablenpc "mirage4022c";
+	disablenpc "mirage4022d";
+	disablenpc "mirage4022e";
+	disablenpc "mirage4022f";
+	disablenpc "mirage4023";
+	disablenpc "不思議な石版#r0";
+	disablenpc "不思議な石版#r1";
+	disablenpc "不思議な石版#r2";
+	disablenpc "不思議な石版#r3";
+	disablenpc "不思議な石版#r3_";
+	disablenpc "不思議な石版#r4";
+	disablenpc "不思議な石版#r6";
+	disablenpc "不思議な石版#r7";
+	disablenpc "不思議な石版#r8a";
+	disablenpc "不思議な石版#r8b";
+	disablenpc "不思議な石版#r9a";
+	disablenpc "不思議な石版#r9b";
+	disablenpc "不思議な石版#r10";
+	killmonster "tower_c1.gat","All";
+	killmonster "tower_c2.gat","All";
+	killmonster "tower_c3.gat","All";
+	killmonster "tower_c4.gat","All";
+	killmonster "tower_c5.gat","All";
+	killmonster "tower_c6.gat","All";
+	killmonster "tower_c7.gat","All";
+	killmonster "tower_c8.gat","All";
+	killmonster "tower_c9.gat","All";
+	killmonster "tower_c10.gat","All";
+	set getvariableofnpc('start,"スノート#r0"),0;
+	end;
+}
+
+//============================================================
+// 蜃気楼の塔 ロビー
+//------------------------------------------------------------
+tower_c0.gat,95,96,4	script	スノート#r0	744,{
+	if(!'start) {
+		mes "[スノート]";
+		mes "ようやく、石板の謎がわかったの！";
+		mes "もっと上の階層が調査できるわ！";
+		mes "この塔の謎を解明することが私の全て！";
+		mes "私ならきっとできるわ！";
+		mes "あなたもそう思うでしょ？";
+		next;
+		mes "[スノート]";
+		mes "まだ、石板が現れるまでしばらく";
+		mes "時間があるから";
+		mes "装備を整えたりして";
+		mes "準備を怠らないようにしてね！";
+		close;
+	}
+	mes "[スノート]";
+	mes "石版に触れることで、";
+	mes "封印が解けていく状況がわかるわ。";
+	mes "ロビーの石板だけは";
+	mes "決まった順序で触れないと";
+	mes "封印が解除できないように";
+	mes "なっているの。";
+	next;
+	mes "[スノート]";
+	mes "みんなでバラバラに触れると";
+	mes "封印が元に戻ってしまうから";
+	mes "順番を守って触れないとだめよ！";
+	close;
+}
+tower_c0.gat,94,97,4	script	ミシュナ	755,{
+	mes "[ミシュナ]";
+	mes "もし塔への挑戦を諦めるのでしたら";
+	mes "おっしゃってください。";
+	mes "どうされますか？";
+	next;
+	if(select("戻らない","街へ戻る")==2){
+		mes "[ミシュナ]";
+		mes "戻られるのですね。";
+		mes "わかりました。";
+		mes "街までお送りいたします。";
+		warp "SavePoint",0,0;
+		end;
+	}
+	mes "[ミシュナ]";
+	mes "さすがは" +strcharinfo(0)+ "さんですね！";
+	mes "スノートさんと一緒に";
+	mes "頑張って塔の謎を解き明かして";
+	mes "くださいね！";
+	close;
+}
+
+// 石版のゲージ表示
+function	script	sekiban_func	{
+	for(set '@i,1; '@i<=10; set '@i,'@i+1){
+		set '@progress$,(10*getarg(0)/getarg(1)<'@i ? "■":"□")+'@progress$;
+	}
+	set '@num,200 - 200*getarg(0)/getarg(1);
+	mes "[不思議な石版]";
+	if('@num)
+		mes "ウィィィイイイイン……";
+	else
+		mes "ファァァァーーーン……";
+	mes "　";
+	mes "‐不思議な文字が描かれている‐";
+	mes '@progress$;
+	mes "…… " +'@num;
+	close;
+	return;
+}
+
+
+tower_c0.gat,0,0,0	script	mirage0	-1,{
+	initnpctimer;
+	end;
+OnTimer30000:
+	announce "スノート ： 今から2分後に石版が現れるはずよ。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 石版に触れることで、封印が解けていく状況がわかるわ。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： これまでの調査では、",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 石版に描かれる数が0を指し示したときに、手をかざすと",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 次の階への道が開くことがわかっているわ。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 石版が消えてから、しばらくすると道が開くはずよ。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： モンスター達を倒していくと、",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 0に近づいていくこともわかっているの。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 塔の存在が安定している時間は、",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： だいたい1時間30分位だから、",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： できるだけ多くの階を調査する為にも、",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 内部へ進んだら、モンスター達を素早く倒すことが必要よ。",9,0xEE88FF;
+	end;
+OnTimer120000:
+	set getvariableofnpc('start,"スノート#r0"),1;
+	enablenpc "不思議な石版#r0";
+	donpcevent "不思議な石版#r0::OnStart";
+	announce "石版が現れた",9;
+	sleep 5000;
+	announce "スノート ： みんな！　石版に描かれる数が重要よ！",9,0xEE88FF;
+	stopnpctimer;
+	end;
+}
+
+// ロビー石板
+tower_c0.gat,89,102,4	script	不思議な石版#r0	858,{
+	callfunc "sekiban_func",'sekiban0_val,10;
+	end;
+OnStart:
+	initnpctimer;
+	set 'sekiban0_val,1;
+	end;
+OnTimer10000:
+OnTimer20000:
+OnTimer30000:
+OnTimer40000:
+OnTimer50000:
+OnTimer60000:
+OnTimer70000:
+OnTimer80000:
+OnTimer90000:
+	set 'sekiban0_val,'sekiban0_val + 1;
+	end;
+OnTimer100000:
+	if(getmapusers("this")>0)
+		announce "先に進む道が開いた",9;
+	enablenpc "mirage4012";
+	donpcevent "mirage::OnStart";
+	end;
+OnTimer120000:
+	mapannounce "tower_c1.gat","スノート ： では皆さん、調査の為にモンスターの退治をお願い！",9,0xEE88FF;
+	sleep 5000;
+	mapannounce "tower_c1.gat","スノート ： 私は皆さんの後から調査しながら進みます！",9,0xEE88FF;
+	end;
+OnTimer160000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer220000:
+	stopnpctimer;
+	areawarp "tower_c0.gat",0,0,300,300,"SavePoint",0,0;
+	end;
+}
+
+//ロビー→１Ｆ
+tower_c0.gat,88,116,0		warp	mirage4012		1,1,tower_c1.gat,99,65
+
+//３F
+tower_c4.gat,100,181,0		warp	mirage4031		1,1,tower_c4.gat,139,82
+tower_c4.gat,137,84,0		warp	mirage4024		1,1,tower_c4.gat,100,177
+tower_c4.gat,150,71,0		warp	mirage4025		1,1,tower_c4.gat,142,164
+tower_c4.gat,144,166,0		warp	mirage4026		1,1,tower_c4.gat,148,73
+tower_c4.gat,32,122,0		warp	mirage4027		1,1,tower_c4.gat,60,82
+tower_c4.gat,62,84,0		warp	mirage4028		1,1,tower_c4.gat,36,122
+tower_c4.gat,49,71,0		warp	mirage4029		1,1,tower_c4.gat,54,164
+tower_c4.gat,56,166,0		warp	mirage4030		1,1,tower_c4.gat,51,73
+//８F
+tower_c8.gat,100,181,0		warp	mirage4041		1,1,tower_c8.gat,143,166
+tower_c8.gat,137,84,0		warp	mirage4034		1,1,tower_c8.gat,161,122
+tower_c8.gat,152,160,0		warp	mirage4036		1,1,tower_c8.gat,149,72
+tower_c8.gat,136,158,0		warp	mirage4043		1,1,tower_c8.gat,100,177
+
+tower_c8.gat,32,122,0		warp	mirage4037		1,1,tower_c8.gat,60,73
+tower_c8.gat,64,86,0		warp	mirage4038		1,1,tower_c8.gat,36,122
+tower_c8.gat,47,70,0		warp	mirage4039		1,1,tower_c8.gat,148,69
+tower_c8.gat,64,157,0		warp	mirage4040		1,1,tower_c8.gat,60,73
+tower_c8.gat,49,84,0		warp	mirage4042		1,1,tower_c8.gat,51,160
+tower_c8.gat,46,175,0		warp	mirage4035		1,1,tower_c8.gat,143,166
+
+//============================================================
+// 蜃気楼の塔 1F
+//------------------------------------------------------------
+tower_c1.gat,0,0,0	script	mirage	-1,{
+OnStart:
+	set 'allmob,0;
+	initnpctimer;
+	end;
+OnTimer1000:
+	monster "tower_c1.gat",81,95,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",81,99,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",81,103,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",83,96,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",83,99,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",83,102,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",85,98,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",85,100,"デワタドラゴン",2152,1;
+	end;
+OnTimer10000:
+	monster "tower_c1.gat",92,97,"ラフレシア",1162,1;
+	monster "tower_c1.gat",92,99,"ラフレシア",1162,1;
+	monster "tower_c1.gat",92,101,"ラフレシア",1162,1;
+	monster "tower_c1.gat",90,99,"ラフレシア",1162,1;
+	end;
+OnTimer20000:
+	monster "tower_c1.gat",106,97,"アーノルディ",2151,1;
+	monster "tower_c1.gat",106,99,"アーノルディ",2151,1;
+	monster "tower_c1.gat",106,101,"アーノルディ",2151,1;
+	monster "tower_c1.gat",109,99,"アーノルディ",2151,1;
+	end;
+OnTimer25000:
+	monster "tower_c1.gat",118,95,"スリーパー",1386,1;
+	monster "tower_c1.gat",118,99,"スリーパー",1386,1;
+	monster "tower_c1.gat",118,103,"スリーパー",1386,1;
+	monster "tower_c1.gat",116,96,"スリーパー",1386,1;
+	monster "tower_c1.gat",116,99,"スリーパー",1386,1;
+	monster "tower_c1.gat",116,102,"スリーパー",1386,1;
+	monster "tower_c1.gat",114,98,"スリーパー",1386,1;
+	monster "tower_c1.gat",114,100,"スリーパー",1386,1;
+	end;
+OnTimer35000:
+	monster "tower_c1.gat",97,84,"ジャガー",2072,1;
+	monster "tower_c1.gat",97,89,"ジャガー",2072,1;
+	monster "tower_c1.gat",102,84,"ジャガー",2072,1;
+	monster "tower_c1.gat",102,89,"ジャガー",2072,1;
+	end;
+OnTimer45000:
+	monster "tower_c1.gat",84,97,"バナスパティ",2154,1;
+	monster "tower_c1.gat",84,102,"バナスパティ",2154,1;
+	monster "tower_c1.gat",89,97,"バナスパティ",2154,1;
+	monster "tower_c1.gat",89,102,"バナスパティ",2154,1;
+	end;
+OnTimer55000:
+	monster "tower_c1.gat",110,97,"ピラニア",2070,1;
+	monster "tower_c1.gat",110,102,"ピラニア",2070,1;
+	monster "tower_c1.gat",115,97,"ピラニア",2070,1;
+	monster "tower_c1.gat",115,102,"ピラニア",2070,1;
+	end;
+OnTimer60000:
+	monster "tower_c1.gat",95,118,"マブカ",1884,1;
+	monster "tower_c1.gat",98,118,"マブカ",1884,1;
+	monster "tower_c1.gat",101,118,"マブカ",1884,1;
+	monster "tower_c1.gat",104,118,"マブカ",1884,1;
+	monster "tower_c1.gat",97,117,"マブカ",1884,1;
+	monster "tower_c1.gat",102,117,"マブカ",1884,1;
+	end;
+OnTimer70000:
+	monster "tower_c1.gat",99,112,"クルピラ",2074,1;
+	monster "tower_c1.gat",99,107,"クルピラ",2074,1;
+	monster "tower_c1.gat",100,112,"クルピラ",2074,1;
+	monster "tower_c1.gat",100,107,"クルピラ",2074,1;
+	monster "tower_c1.gat",97,109,"ババヤガ",1882,1;
+	monster "tower_c1.gat",97,110,"ババヤガ",1882,1;
+	monster "tower_c1.gat",102,109,"ババヤガ",1882,1;
+	monster "tower_c1.gat",102,110,"ババヤガ",1882,1;
+	end;
+OnTimer80000:
+	monster "tower_c1.gat",85,108,"バナスパティ",2154,1;
+	monster "tower_c1.gat",86,109,"トゥカン",2073,1;
+	monster "tower_c1.gat",87,110,"トゥカン",2073,1;
+	monster "tower_c1.gat",88,111,"トゥカン",2073,1;
+	monster "tower_c1.gat",89,112,"バナスパティ",2154,1;
+	monster "tower_c1.gat",90,113,"バナスパティ",2154,1;
+	end;
+OnTimer90000:
+	monster "tower_c1.gat",113,108,"首なしラバ",2071,1;
+	monster "tower_c1.gat",112,109,"首なしラバ",2071,1;
+	monster "tower_c1.gat",111,110,"ブトイジョ",2155,1;
+	monster "tower_c1.gat",110,111,"ブトイジョ",2155,1;
+	monster "tower_c1.gat",109,112,"ブトイジョ",2155,1;
+	monster "tower_c1.gat",108,113,"首なしラバ",2071,1;
+	end;
+OnTimer95000:
+	monster "tower_c1.gat",95,118,"マブカ",1884,1;
+	monster "tower_c1.gat",98,118,"マブカ",1884,1;
+	monster "tower_c1.gat",101,118,"マブカ",1884,1;
+	monster "tower_c1.gat",104,118,"マブカ",1884,1;
+	monster "tower_c1.gat",97,117,"マブカ",1884,1;
+	monster "tower_c1.gat",102,117,"マブカ",1884,1;
+	end;
+OnTimer100000:
+	monster "tower_c1.gat",81,95,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",81,99,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",81,103,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",83,96,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",83,99,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",83,102,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",85,98,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",85,100,"デワタドラゴン",2152,1;
+	monster "tower_c1.gat",92,97,"ラフレシア",1162,1;
+	monster "tower_c1.gat",92,99,"ラフレシア",1162,1;
+	monster "tower_c1.gat",92,101,"ラフレシア",1162,1;
+	monster "tower_c1.gat",90,99,"ラフレシア",1162,1;
+	end;
+OnTimer105000:
+	monster "tower_c1.gat",106,97,"アーノルディ",2151,1;
+	monster "tower_c1.gat",106,99,"アーノルディ",2151,1;
+	monster "tower_c1.gat",106,101,"アーノルディ",2151,1;
+	monster "tower_c1.gat",109,99,"アーノルディ",2151,1;
+	monster "tower_c1.gat",118,95,"スリーパー",1386,1;
+	monster "tower_c1.gat",118,99,"スリーパー",1386,1;
+	monster "tower_c1.gat",118,103,"スリーパー",1386,1;
+	monster "tower_c1.gat",116,96,"スリーパー",1386,1;
+	monster "tower_c1.gat",116,99,"スリーパー",1386,1;
+	monster "tower_c1.gat",116,102,"スリーパー",1386,1;
+	monster "tower_c1.gat",114,98,"スリーパー",1386,1;
+	monster "tower_c1.gat",114,100,"スリーパー",1386,1;
+	end;
+OnTimer110000:
+	areamonster "tower_c1.gat",61,95,70,104,"ウジャス",1883,4;
+	areamonster "tower_c1.gat",61,95,70,104,"イアラ",2069,4;
+	areamonster "tower_c1.gat",129,95,138,104,"ウジャス",1883,4;
+	areamonster "tower_c1.gat",129,95,138,104,"イアラ",2069,4;
+	end;
+OnTimer120000:
+	enablenpc "不思議な石版#r1";
+	announce "石版が現れた",9;
+	set 'allmob,2;
+	areamonster "tower_c1.gat",95,129,104,138,"デワタドラゴン",2152,2,"mirage::OnKilled3";
+	areamonster "tower_c1.gat",95,129,104,138,"スリーパー",1386,2,"mirage::OnKilled3";
+	areamonster "tower_c1.gat",95,129,104,138,"バナスパティ",2154,2,"mirage::OnKilled3";
+	areamonster "tower_c1.gat",95,129,104,138,"ピラニア",2070,2,"mirage::OnKilled3";
+	end;
+OnKilled3:
+	set 'mob,getmapmobs("tower_c1.gat","mirage::OnKilled3");
+	set 'allmob,'allmob + 1;
+	if('mob) end;
+	set 'allmob,10;
+	end;
+}
+
+// 1F石板
+tower_c1.gat,99,133,4	script	不思議な石版#r1	858,{
+	if(getvariableofnpc('allmob,"mirage")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r1";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	enablenpc "mirage4013";
+	donpcevent "mirage1::OnStart";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	disablenpc "mirage4013";
+	if(getmapusers("this")>0)
+	areawarp "tower_c1.gat",0,0,300,300,"SavePoint",0,0;
+	killmonster "tower_c1.gat","All";
+	stopnpctimer;
+}
+
+//１Ｆ→２Ｆ
+tower_c1.gat,99,65,0	script	mirage4013	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c2.gat",103,100;
+}
+
+//============================================================
+// 蜃気楼の塔 2F
+//------------------------------------------------------------
+tower_c2.gat,0,0,0	script	mirage1	-1,{
+OnStart:
+	set 'allmob,0;
+	initnpctimer;
+	end;
+OnTimer1000:
+	monster "tower_c2.gat",85,99,"ポムスパイダー",2132,1;
+	monster "tower_c2.gat",88,99,"ポムスパイダー",2132,1;
+	monster "tower_c2.gat",85,102,"ポムスパイダー",2132,1;
+	monster "tower_c2.gat",88,102,"ポムスパイダー",2132,1;
+	monster "tower_c2.gat",81,98,"アングラマンティス",2133,1;
+	monster "tower_c2.gat",83,98,"アングラマンティス",2133,1;
+	monster "tower_c2.gat",81,103,"アングラマンティス",2133,1;
+	monster "tower_c2.gat",83,103,"アングラマンティス",2133,1;
+	end;
+OnTimer10000:
+	monster "tower_c2.gat",76,90,"ネペンテス",1988,1;
+	monster "tower_c2.gat",76,109,"ネペンテス",1988,1;
+	monster "tower_c2.gat",123,90,"ネペンテス",1988,1;
+	monster "tower_c2.gat",123,109,"ネペンテス",1988,1;
+	end;
+OnTimer15000:
+	monster "tower_c2.gat",87,107,"シーカー",1774,1;
+	monster "tower_c2.gat",87,110,"ビホルダー",1633,1;
+	monster "tower_c2.gat",89,112,"シーカー",1774,1;
+	monster "tower_c2.gat",92,112,"ビホルダー",1633,1;
+	monster "tower_c2.gat",89,106,"ホドレムリン",1773,1;
+	monster "tower_c2.gat",89,108,"グレムリン",1632,1;
+	monster "tower_c2.gat",91,109,"ホドレムリン",1773,1;
+	monster "tower_c2.gat",93,109,"グレムリン",1632,1;
+	end;
+OnTimer30000:
+	monster "tower_c2.gat",87,92,"シーカー",1774,1;
+	monster "tower_c2.gat",87,89,"ビホルダー",1633,1;
+	monster "tower_c2.gat",92,87,"シーカー",1774,1;
+	monster "tower_c2.gat",89,87,"ビホルダー",1633,1;
+	monster "tower_c2.gat",89,93,"ホドレムリン",1773,1;
+	monster "tower_c2.gat",89,91,"グレムリン",1632,1;
+	monster "tower_c2.gat",93,89,"ホドレムリン",1773,1;
+	monster "tower_c2.gat",91,89,"グレムリン",1632,1;
+	end;
+OnTimer45000:
+	set 'mob,1;
+	monster "tower_c2.gat",122,114,"ヴァンベルク",1771,1;
+	monster "tower_c2.gat",124,114,"アガヴ",1769,1,"mirage1::OnKilled1";
+	monster "tower_c2.gat",126,114,"アイシラ",1772,1;
+	monster "tower_c2.gat",122,116,"ファナト",1797,1;
+	monster "tower_c2.gat",124,116,"アガヴ",1769,1,"mirage1::OnKilled1";
+	monster "tower_c2.gat",126,116,"アウノエ",1796,1;
+	monster "tower_c2.gat",110,90,"シーカー",1774,1;
+	monster "tower_c2.gat",110,92,"シーカー",1774,1;
+	monster "tower_c2.gat",110,94,"ビホルダー",1633,1;
+	monster "tower_c2.gat",105,89,"ホドレムリン",1773,1;
+	monster "tower_c2.gat",107,89,"ホドレムリン",1773,1;
+	monster "tower_c2.gat",109,89,"グレムリン",1632,1;
+	end;
+OnTimer50000:
+	if('mob)
+		stopnpctimer;
+	monster "tower_c2.gat",110,105,"シーカー",1774,1;
+	monster "tower_c2.gat",110,107,"シーカー",1774,1;
+	monster "tower_c2.gat",110,109,"ビホルダー",1633,1;
+	monster "tower_c2.gat",105,110,"ホドレムリン",1773,1;
+	monster "tower_c2.gat",107,110,"ホドレムリン",1773,1;
+	monster "tower_c2.gat",109,110,"グレムリン",1632,1;
+	end;
+OnKilled1:
+	set 'mob,getmapmobs("tower_c2.gat","mirage1::OnKilled1");
+	if('mob) end;
+	monster "tower_c2.gat",122,82,"ヴァンベルク",1771,1;
+	monster "tower_c2.gat",124,82,"アガヴ",1769,1,"mirage1::OnKilled2";
+	monster "tower_c2.gat",126,82,"アイシラ",1772,1;
+	monster "tower_c2.gat",122,84,"ファナト",1797,1;
+	monster "tower_c2.gat",124,84,"アガヴ",1769,1,"mirage1::OnKilled2";
+	monster "tower_c2.gat",126,84,"アウノエ",1796,1;
+	end;
+OnKilled2:
+	set 'mob,getmapmobs("tower_c2.gat","mirage1::OnKilled2");
+	if('mob) end;
+	startnpctimer;
+	end;
+OnTimer55000:
+	monster "tower_c2.gat",122,76,"働きブワヤ",2330,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",124,76,"働きブワヤ",2330,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",122,74,"アサルトタートル",1315,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",122,74,"アサルトタートル",1315,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",124,78,"アサルトタートル",1315,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",124,78,"アサルトタートル",1315,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",122,123,"働きブワヤ",2330,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",124,123,"働きブワヤ",2330,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",122,121,"アサルトタートル",1315,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",122,121,"アサルトタートル",1315,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",124,125,"アサルトタートル",1315,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",124,125,"アサルトタートル",1315,1,"mirage1::OnKilled3";
+	end;
+OnTimer70000:
+	monster "tower_c2.gat",113,73,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",113,75,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",113,77,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",116,73,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",116,75,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",116,77,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",113,122,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",113,124,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",113,126,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",116,122,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",116,124,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",116,126,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	end;
+OnTimer80000:
+	stopnpctimer;
+	monster "tower_c2.gat",88,95,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",88,97,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",88,99,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",88,101,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",88,103,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",90,96,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",90,98,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",90,99,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",90,100,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",90,102,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",92,99,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",92,97,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",92,101,"ブリライト",1211,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",94,98,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",94,100,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	monster "tower_c2.gat",96,99,"三葉蟲",1279,1,"mirage1::OnKilled3";
+	end;
+OnKilled3:
+	set 'mob,getmapmobs("tower_c2.gat","mirage1::OnKilled3");
+	if('mob) end;
+	startnpctimer;
+	end;
+OnTimer90000:
+	monster "tower_c2.gat",99,100,"働きブワヤ",2330,1;
+	monster "tower_c2.gat",101,99,"ドラコ",2013,1;
+	monster "tower_c2.gat",101,101,"ドラコ",2013,1;
+	monster "tower_c2.gat",101,95,"ゴールドオシドス",1713,1;
+	monster "tower_c2.gat",103,97,"ゴールドオシドス",1713,1;
+	monster "tower_c2.gat",101,105,"ブルーオシドス",1716,1;
+	monster "tower_c2.gat",103,103,"ブルーオシドス",1716,1;
+	monster "tower_c2.gat",96,109,"レッドペロス",1714,1;
+	monster "tower_c2.gat",98,108,"レッドペロス",1714,1;
+	monster "tower_c2.gat",96,92,"グリーンペロス",1717,1;
+	monster "tower_c2.gat",98,93,"グリーンペロス",1717,1;
+	end;
+OnTimer105000:
+	areamonster "tower_c2.gat",89,89,110,110,"女王直属アンドレ",1237,3;
+	areamonster "tower_c2.gat",89,89,110,110,"女王直属ピエール",1238,3;
+	areamonster "tower_c2.gat",89,89,110,110,"女王直属デニーロ",1239,3;
+	areamonster "tower_c2.gat",74,85,76,104,"女王直属アンドレ",1237,3;
+	areamonster "tower_c2.gat",74,85,76,104,"女王直属ピエール",1238,3;
+	areamonster "tower_c2.gat",74,85,76,104,"女王直属デニーロ",1239,3;
+	monster "tower_c2.gat",98,104,"オーガトゥース",1204,2;
+	monster "tower_c2.gat",95,99,"エクスキューショナー",1205,2;
+	monster "tower_c2.gat",101,99,"ミステルテイン",1203,2;
+	end;
+OnTimer120000:
+	enablenpc "不思議な石版#r2";
+	announce "石版が現れた",9;
+	set 'allmob,1;
+	monster "tower_c2.gat",72,92,"鹿角スカラバ",2085,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",72,94,"剛角スカラバ",2086,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",72,96,"剛角スカラバ",2086,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",72,98,"鹿角スカラバ",2085,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",72,100,"鹿角スカラバ",2085,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",72,102,"剛角スカラバ",2086,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",72,104,"剛角スカラバ",2086,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",72,108,"鹿角スカラバ",2085,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",73,93,"双角スカラバ",2084,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",73,95,"一角スカラバ",2083,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",73,97,"双角スカラバ",2084,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",73,99,"一角スカラバ",2083,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",73,101,"双角スカラバ",2084,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",73,103,"一角スカラバ",2083,1,"mirage1::OnKilled4";
+	monster "tower_c2.gat",73,105,"双角スカラバ",2084,1,"mirage1::OnKilled4";
+	end;
+OnKilled4:
+	set 'mob,getmapmobs("tower_c2.gat","mirage1::OnKilled4");
+	if('mob) end;
+	set 'allmob,10;
+	end;
+}
+
+// 2F石板
+tower_c2.gat,95,100,4	script	不思議な石版#r2	858,{
+	if(getvariableofnpc('allmob,"mirage1")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r2";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage1"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	if(rand(2)) {
+		enablenpc "mirage4014";
+		donpcevent "mirage2::OnStart";
+	} else {
+		enablenpc "mirage4014_";
+		donpcevent "mirage2_::OnStart";
+	}
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	stopnpctimer;
+	if(getmapusers("this")>0)
+	areawarp "tower_c2.gat",0,0,300,300,"SavePoint",0,0;
+	killmonster "tower_c2.gat","All";
+	set getvariableofnpc('flag,"mirage1"),0;
+}
+
+//２Ｆ→３Ｆ
+tower_c2.gat,104,100,0	script	mirage4014	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c4.gat",99,17;
+}
+tower_c2.gat,104,100,0	script	mirage4014_	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c4.gat",162,122;
+}
+
+//============================================================
+// 蜃気楼の塔 3F
+//------------------------------------------------------------
+tower_c4.gat,0,0,0	script	mirage2	-1,{
+OnStart:
+	set 'flag,0;
+	set 'allmob,0;
+	monster "tower_c4.gat",95,45,"イグニゼム=セニア",1652,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,48,"イグニゼム=セニア",1652,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,51,"イグニゼム=セニア",1652,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,60,"ヒュッケバイン=トリス",1653,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,63,"ヒュッケバイン=トリス",1653,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,66,"ヒュッケバイン=トリス",1653,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,76,"アルマイア=デュンゼ",1654,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,79,"アルマイア=デュンゼ",1654,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,82,"アルマイア=デュンゼ",1654,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,45,"イグニゼム=セニア",1652,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,48,"イグニゼム=セニア",1652,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,51,"イグニゼム=セニア",1652,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,60,"ヒュッケバイン=トリス",1653,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,63,"ヒュッケバイン=トリス",1653,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,66,"ヒュッケバイン=トリス",1653,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,76,"アルマイア=デュンゼ",1654,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,79,"アルマイア=デュンゼ",1654,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,82,"アルマイア=デュンゼ",1654,1,"mirage2::OnKilled";
+	sleep 10000;
+	monster "tower_c4.gat",99,116,"イグニゼム=セニア",1652,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",100,116,"イグニゼム=セニア",1652,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,119,"ヒュッケバイン=トリス",1653,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,120,"ヒュッケバイン=トリス",1653,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",103,118,"アルマイア=デュンゼ",1654,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",103,119,"アルマイア=デュンゼ",1654,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",108,113,"カトリーヌ=ケイロン",1639,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",108,130,"カトリーヌ=ケイロン",1639,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",92,113,"セシル=ディモン",1638,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",92,130,"セシル=ディモン",1638,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,134,"マーガレッタ=ソリン",1637,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",98,134,"マーガレッタ=ソリン",1637,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",102,134,"マーガレッタ=ソリン",1637,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",105,134,"マーガレッタ=ソリン",1637,1,"mirage2::OnKilled";
+	end;
+OnSummon1:
+	monster "tower_c4.gat",135,119,"慰める者",1703,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",133,120,"慰める者",1703,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",135,121,"慰める者",1703,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",133,122,"慰める者",1703,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",135,123,"慰める者",1703,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",115,119,"ドリアード",1493,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",112,120,"ドリアード",1493,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",115,121,"ドリアード",1493,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",112,122,"ドリアード",1493,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",115,123,"ドリアード",1493,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",135,119,"保護する者",1701,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",133,120,"保護する者",1701,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",135,121,"保護する者",1701,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",133,122,"保護する者",1701,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",135,123,"保護する者",1701,1,"mirage2::OnKilled";
+	sleep 3000;
+	monster "tower_c4.gat",153,119,"天仙娘々",1416,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",153,120,"天仙娘々",1416,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",153,121,"天仙娘々",1416,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",153,122,"天仙娘々",1416,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",153,123,"天仙娘々",1416,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",153,124,"天仙娘々",1416,1,"mirage2::OnKilled";
+	sleep 3000;
+	monster "tower_c4.gat",97,154,"ロリルリ",1505,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",98,154,"ロリルリ",1505,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",99,154,"ロリルリ",1505,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",100,154,"ロリルリ",1505,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",101,154,"ロリルリ",1505,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",102,154,"ロリルリ",1505,1,"mirage2::OnKilled";
+	end;
+OnSummon2:
+	areamonster "tower_c4.gat",98,148,102,163,"ハーピー",1376,8,"mirage2::OnKilled";
+	areamonster "tower_c4.gat",98,164,102,176,"ヴァイオリー",1390,8,"mirage2::OnKilled";
+
+	areamonster "tower_c4.gat",28,116,32,126,"パピヨン",1408,5,"mirage2::OnKilled";
+	areamonster "tower_c4.gat",37,116,47,126,"チュンイー",1519,5,"mirage2::OnKilled";
+	areamonster "tower_c4.gat",53,116,63,126,"メデューサ",1148,5,"mirage2::OnKilled";
+
+	areamonster "tower_c4.gat",132,116,142,126,"セドラ",2204,5,"mirage2::OnKilled";
+	areamonster "tower_c4.gat",150,116,160,126,"チュンイー",1519,5,"mirage2::OnKilled";
+	areamonster "tower_c4.gat",163,116,169,126,"サキュバス",1370,5,"mirage2::OnKilled";
+	end;
+OnSummon3:
+	enablenpc "不思議な石版#r3";
+	announce "石版が現れた",9;
+	set 'allmob,1;
+	monster "tower_c4.gat",95,66,"慰める者",1703,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,66,"慰める者",1703,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,66,"慰める者",1703,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,66,"慰める者",1703,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,66,"慰める者",1703,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,66,"保護する者",1701,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,66,"保護する者",1701,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,66,"保護する者",1701,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,66,"保護する者",1701,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,66,"保護する者",1701,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",95,42,"ロリルリ",1505,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",96,42,"ロリルリ",1505,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",97,42,"ロリルリ",1505,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",98,42,"ロリルリ",1505,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",99,42,"ロリルリ",1505,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",100,44,"ジョーカー",1131,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",101,44,"ジョーカー",1131,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",102,44,"ジョーカー",1131,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",103,44,"ジョーカー",1131,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",104,44,"ジョーカー",1131,1,"mirage2::OnKilled";
+
+	monster "tower_c4.gat",100,119,"キャットナインテイル",1307,2,"mirage2::OnKilled";
+	monster "tower_c4.gat",66,121,"ランドグリスゴースト",1765,1,"mirage2::OnKilled";
+
+	monster "tower_c4.gat",30,118,"パピヨン",1408,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",30,119,"パピヨン",1408,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",30,120,"パピヨン",1408,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",30,121,"パピヨン",1408,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",30,122,"パピヨン",1408,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",40,118,"天仙娘々",1416,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",40,119,"天仙娘々",1416,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",40,120,"天仙娘々",1416,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",40,121,"天仙娘々",1416,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",40,122,"天仙娘々",1416,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",48,118,"チェペット",1250,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",48,119,"チェペット",1250,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",48,120,"チェペット",1250,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",48,121,"チェペット",1250,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",48,122,"チェペット",1250,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",58,118,"エンカント",2310,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",58,119,"エンカント",2310,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",58,120,"エンカント",2310,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",58,121,"エンカント",2310,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",58,122,"エンカント",2310,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",68,118,"サキュバス",1370,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",68,119,"サキュバス",1370,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",68,120,"サキュバス",1370,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",68,121,"サキュバス",1370,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",68,122,"サキュバス",1370,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",79,118,"悪夢のマナナンガル",2338,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",79,119,"悪夢のマナナンガル",2338,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",79,120,"悪夢のマナナンガル",2338,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",79,121,"悪夢のマナナンガル",2338,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",79,122,"悪夢のマナナンガル",2338,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",86,118,"悪夢のマンククーラム",2339,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",86,119,"悪夢のマンククーラム",2339,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",86,120,"悪夢のマンククーラム",2339,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",86,121,"悪夢のマンククーラム",2339,1,"mirage2::OnKilled";
+	monster "tower_c4.gat",86,122,"悪夢のマンククーラム",2339,1,"mirage2::OnKilled";
+	end;
+OnKilled:
+	set 'mob,getmapmobs("tower_c4.gat","mirage2::OnKilled");
+	if('mob <= 0) {
+		sleep 5000;
+		switch('flag) {
+		case 0: donpcevent "mirage2::OnSummon1"; break;
+		case 1: donpcevent "mirage2::OnSummon2"; break;
+		case 2: donpcevent "mirage2::OnSummon3"; break;
+		default: set 'allmob,10; break;
+		}
+		set 'flag,'flag+1;
+	}
+	end;
+}
+tower_c4.gat,0,0,0	script	mirage2_	-1,{
+OnStart:
+	set 'flag,0;
+	set 'allmob,0;
+	monster "tower_c4.gat",124,122,"イグニゼム=セニア",1652,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",125,122,"イグニゼム=セニア",1652,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",126,122,"イグニゼム=セニア",1652,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",127,122,"イグニゼム=セニア",1652,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",125,121,"イグニゼム=セニア",1652,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",109,125,"ヒュッケバイン=トリス",1653,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",107,126,"ヒュッケバイン=トリス",1653,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",109,127,"ヒュッケバイン=トリス",1653,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",107,128,"ヒュッケバイン=トリス",1653,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",109,129,"ヒュッケバイン=トリス",1653,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",109,113,"アルマイア=デュンゼ",1654,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",107,114,"アルマイア=デュンゼ",1654,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",109,115,"アルマイア=デュンゼ",1654,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",107,116,"アルマイア=デュンゼ",1654,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",109,117,"アルマイア=デュンゼ",1654,1,"mirage2_::OnKilled";
+	sleep 10000;
+	monster "tower_c4.gat",125,120,"カトリーヌ=ケイロン",1639,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",125,121,"セシル=ディモン",1638,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",99,116,"イグニゼム=セニア",1652,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",100,116,"イグニゼム=セニア",1652,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",95,119,"ヒュッケバイン=トリス",1653,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",95,120,"ヒュッケバイン=トリス",1653,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",103,118,"アルマイア=デュンゼ",1654,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",103,119,"アルマイア=デュンゼ",1654,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",108,113,"カトリーヌ=ケイロン",1639,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",92,130,"カトリーヌ=ケイロン",1639,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",92,113,"セシル=ディモン",1638,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",108,130,"セシル=ディモン",1638,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",95,134,"マーガレッタ=ソリン",1637,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",98,134,"マーガレッタ=ソリン",1637,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",102,134,"マーガレッタ=ソリン",1637,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",105,134,"マーガレッタ=ソリン",1637,1,"mirage2_::OnKilled";
+	end;
+OnSummon1:
+	monster "tower_c4.gat",65,119,"慰める者",1703,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",63,120,"慰める者",1703,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",65,121,"慰める者",1703,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",63,122,"慰める者",1703,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",65,123,"慰める者",1703,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",85,119,"ドリアード",1493,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",82,120,"ドリアード",1493,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",85,121,"ドリアード",1493,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",82,122,"ドリアード",1493,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",85,123,"ドリアード",1493,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",65,119,"保護する者",1701,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",63,120,"保護する者",1701,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",65,121,"保護する者",1701,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",63,122,"保護する者",1701,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",65,123,"保護する者",1701,1,"mirage2_::OnKilled";
+	sleep 3000;
+	monster "tower_c4.gat",46,119,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",46,120,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",46,121,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",46,122,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",46,123,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",46,124,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	sleep 3000;
+	monster "tower_c4.gat",97,154,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",98,154,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",99,154,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",100,154,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",101,154,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",102,154,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	end;
+OnSummon2:
+	areamonster "tower_c4.gat",98,148,102,163,"ハーピー",1376,8,"mirage2_::OnKilled";
+	areamonster "tower_c4.gat",98,164,102,176,"ヴァイオリー",1390,8,"mirage2_::OnKilled";
+
+	areamonster "tower_c4.gat",28,116,32,126,"パピヨン",1408,5,"mirage2_::OnKilled";
+	areamonster "tower_c4.gat",37,116,47,126,"チュンイー",1519,5,"mirage2_::OnKilled";
+	areamonster "tower_c4.gat",53,116,63,126,"メデューサ",1148,5,"mirage2_::OnKilled";
+
+	areamonster "tower_c4.gat",132,116,142,126,"セドラ",2204,5,"mirage2_::OnKilled";
+	areamonster "tower_c4.gat",150,116,160,126,"チュンイー",1519,5,"mirage2_::OnKilled";
+	areamonster "tower_c4.gat",167,116,171,126,"サキュバス",1370,5,"mirage2_::OnKilled";
+	end;
+OnSummon3:
+	enablenpc "不思議な石版#r3_";
+	announce "石版が現れた",9;
+	set 'allmob,1;
+	monster "tower_c4.gat",95,66,"慰める者",1703,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",95,66,"慰める者",1703,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",95,66,"慰める者",1703,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",95,66,"慰める者",1703,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",95,66,"慰める者",1703,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",104,66,"保護する者",1701,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",104,66,"保護する者",1701,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",104,66,"保護する者",1701,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",104,66,"保護する者",1701,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",104,66,"保護する者",1701,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",95,42,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",96,42,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",97,42,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",98,42,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",99,42,"ロリルリ",1505,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",100,44,"ジョーカー",1131,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",101,44,"ジョーカー",1131,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",102,44,"ジョーカー",1131,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",103,44,"ジョーカー",1131,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",104,44,"ジョーカー",1131,1,"mirage2_::OnKilled";
+
+	monster "tower_c4.gat",100,119,"キャットナインテイル",1307,2,"mirage2_::OnKilled";
+	monster "tower_c4.gat",134,121,"ランドグリスゴースト",1765,1,"mirage2_::OnKilled";
+
+	monster "tower_c4.gat",170,118,"パピヨン",1408,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",170,119,"パピヨン",1408,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",170,120,"パピヨン",1408,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",170,121,"パピヨン",1408,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",170,122,"パピヨン",1408,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",160,118,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",160,119,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",160,120,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",160,121,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",160,122,"天仙娘々",1416,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",158,118,"チェペット",1250,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",158,119,"チェペット",1250,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",158,120,"チェペット",1250,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",158,121,"チェペット",1250,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",158,122,"チェペット",1250,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",148,118,"エンカント",2310,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",148,119,"エンカント",2310,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",148,120,"エンカント",2310,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",148,121,"エンカント",2310,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",148,122,"エンカント",2310,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",138,118,"サキュバス",1370,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",138,119,"サキュバス",1370,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",138,120,"サキュバス",1370,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",138,121,"サキュバス",1370,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",138,122,"サキュバス",1370,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",129,118,"悪夢のマナナンガル",2338,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",129,119,"悪夢のマナナンガル",2338,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",129,120,"悪夢のマナナンガル",2338,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",129,121,"悪夢のマナナンガル",2338,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",129,122,"悪夢のマナナンガル",2338,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",116,118,"悪夢のマンククーラム",2339,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",116,119,"悪夢のマンククーラム",2339,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",116,120,"悪夢のマンククーラム",2339,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",116,121,"悪夢のマンククーラム",2339,1,"mirage2_::OnKilled";
+	monster "tower_c4.gat",116,122,"悪夢のマンククーラム",2339,1,"mirage2_::OnKilled";
+	end;
+OnKilled:
+	set 'mob,getmapmobs("tower_c4.gat","mirage2_::OnKilled");
+	if('mob <= 0) {
+		sleep 5000;
+		switch('flag) {
+		case 0: donpcevent "mirage2_::OnSummon1"; break;
+		case 1: donpcevent "mirage2_::OnSummon2"; break;
+		case 2: donpcevent "mirage2_::OnSummon3"; break;
+		default: set 'allmob,10; break;
+		}
+		set 'flag,'flag+1;
+	}
+	end;
+}
+
+// 3F石板
+tower_c4.gat,165,122,4	script	不思議な石版#r3	858,{
+	if(getvariableofnpc('allmob,"mirage2")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r3";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage2"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	enablenpc "mirage4015";
+	if(rand(2))
+		set getvariableofnpc('type,"mirage3"),1;
+	else
+		set getvariableofnpc('type,"mirage3"),2;
+	donpcevent "mirage3::OnStart";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	stopnpctimer;
+	if(getmapusers("this")>0) {
+		areawarp "tower_c4.gat",0,0,300,300,"SavePoint",0,0;
+	}
+	killmonster "tower_c4.gat","All";
+	set getvariableofnpc('flag,"mirage2"),0;
+}
+tower_c4.gat,99,18,4	script	不思議な石版#r3_	858,{
+	if(getvariableofnpc('allmob,"mirage2_")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r3_";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage2_"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	enablenpc "mirage4015_";
+	if(rand(2))
+		set getvariableofnpc('type,"mirage3"),1;
+	else
+		set getvariableofnpc('type,"mirage3"),2;
+	donpcevent "mirage3::OnStart";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	stopnpctimer;
+	if(getmapusers("this")>0) {
+		areawarp "tower_c4.gat",0,0,300,300,"SavePoint",0,0;
+	}
+	killmonster "tower_c4.gat","All";
+	set getvariableofnpc('flag,"mirage2_"),0;
+}
+
+//３Ｆ→４Ｆ
+tower_c4.gat,99,17,0	script	mirage4015	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	if(getvariableofnpc('type,"mirage3") == 1)
+		warp "tower_c7.gat",65,100;
+	else
+		warp "tower_c7.gat",125,100;
+}
+tower_c4.gat,163,122,0	script	mirage4015_	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	if(getvariableofnpc('type,"mirage3") == 1)
+		warp "tower_c7.gat",65,100;
+	else
+		warp "tower_c7.gat",125,100;
+}
+
+//============================================================
+// 蜃気楼の塔 4F
+//------------------------------------------------------------
+tower_c7.gat,0,0,0	script	mirage3	-1,{
+OnStart:
+	set 'flag,0;
+	set 'allmob,0;
+	monster "tower_c7.gat",135,99,"アクアエレメンタル",2016,1;
+	monster "tower_c7.gat",133,94,"アクアエレメンタル",2016,1;
+	monster "tower_c7.gat",133,104,"アクアエレメンタル",2016,1;
+	monster "tower_c7.gat",137,94,"アクアエレメンタル",2016,1;
+	monster "tower_c7.gat",137,104,"アクアエレメンタル",2016,1;
+	sleep 10000;
+	monster "tower_c7.gat",65,99,"アクアエレメンタル",2016,1;
+	monster "tower_c7.gat",63,94,"アクアエレメンタル",2016,1;
+	monster "tower_c7.gat",63,104,"アクアエレメンタル",2016,1;
+	monster "tower_c7.gat",67,94,"アクアエレメンタル",2016,1;
+	monster "tower_c7.gat",67,104,"アクアエレメンタル",2016,1;
+	sleep 5000;
+	monster "tower_c7.gat",98,100,"フレイムシューター",1495,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",98,90,"フレイムシューター",1495,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",93,93,"フレイムシューター",1495,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",91,100,"フレイムシューター",1495,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",93,105,"フレイムシューター",1495,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",98,109,"フレイムシューター",1495,1,"mirage3::OnKilled";
+	sleep 3000;
+	monster "tower_c7.gat",109,100,"ヴァイオリー",1390,1;
+	monster "tower_c7.gat",105,103,"ヴァイオリー",1390,1;
+	monster "tower_c7.gat",105,97,"ヴァイオリー",1390,1;
+	sleep 5000;
+	monster "tower_c7.gat",89,105,"カヴァク=イカルス",1656,1;
+	monster "tower_c7.gat",89,107,"カヴァク=イカルス",1656,1;
+	monster "tower_c7.gat",89,109,"カヴァク=イカルス",1656,1;
+	monster "tower_c7.gat",90,110,"セシル=ディモン",1638,1;
+	monster "tower_c7.gat",92,110,"セシル=ディモン",1638,1;
+	monster "tower_c7.gat",94,110,"セシル=ディモン",1638,1;
+	sleep 5000;
+	monster "tower_c7.gat",89,90,"カヴァク=イカルス",1656,1;
+	monster "tower_c7.gat",89,92,"カヴァク=イカルス",1656,1;
+	monster "tower_c7.gat",89,94,"カヴァク=イカルス",1656,1;
+	monster "tower_c7.gat",90,89,"セシル=ディモン",1638,1;
+	monster "tower_c7.gat",92,89,"セシル=ディモン",1638,1;
+	monster "tower_c7.gat",94,89,"セシル=ディモン",1638,1;
+	sleep 5000;
+	monster "tower_c7.gat",110,90,"ディミック",1669,1;
+	monster "tower_c7.gat",110,92,"ウィンドディミック",1670,1;
+	monster "tower_c7.gat",110,94,"アイスディミック",1671,1;
+	monster "tower_c7.gat",105,89,"アースディミック",1672,1;
+	monster "tower_c7.gat",107,89,"フレイムディミック",1673,1;
+	monster "tower_c7.gat",109,89,"ディミック",1669,1;
+	monster "tower_c7.gat",121,106,"ドロセラ",1781,1;
+	monster "tower_c7.gat",121,109,"ドロセラ",1781,1;
+	monster "tower_c7.gat",121,112,"ドロセラ",1781,1;
+	monster "tower_c7.gat",121,115,"ドロセラ",1781,1;
+	monster "tower_c7.gat",121,118,"ドロセラ",1781,1;
+	monster "tower_c7.gat",126,106,"ペノメナ",1216,1;
+	monster "tower_c7.gat",126,109,"ペノメナ",1216,1;
+	monster "tower_c7.gat",126,112,"ペノメナ",1216,1;
+	monster "tower_c7.gat",126,115,"ペノメナ",1216,1;
+	monster "tower_c7.gat",126,118,"ペノメナ",1216,1;
+	sleep 5000;
+	monster "tower_c7.gat",110,105,"ディミック",1669,1;
+	monster "tower_c7.gat",110,107,"ウィンドディミック",1670,1;
+	monster "tower_c7.gat",110,109,"アイスディミック",1671,1;
+	monster "tower_c7.gat",105,110,"アースディミック",1672,1;
+	monster "tower_c7.gat",107,110,"フレイムディミック",1673,1;
+	monster "tower_c7.gat",109,110,"ディミック",1669,1;
+	sleep 5000;
+	monster "tower_c7.gat",121,81,"ドロセラ",1781,1;
+	monster "tower_c7.gat",121,84,"ドロセラ",1781,1;
+	monster "tower_c7.gat",121,87,"ドロセラ",1781,1;
+	monster "tower_c7.gat",121,90,"ドロセラ",1781,1;
+	monster "tower_c7.gat",121,93,"ドロセラ",1781,1;
+	monster "tower_c7.gat",126,81,"ペノメナ",1216,1;
+	monster "tower_c7.gat",126,84,"ペノメナ",1216,1;
+	monster "tower_c7.gat",126,87,"ペノメナ",1216,1;
+	monster "tower_c7.gat",126,90,"ペノメナ",1216,1;
+	monster "tower_c7.gat",126,93,"ペノメナ",1216,1;
+	sleep 5000;
+	monster "tower_c7.gat",109,123,"メガリス",1274,1;
+	monster "tower_c7.gat",105,121,"メガリス",1274,1;
+	monster "tower_c7.gat",105,125,"メガリス",1274,1;
+	monster "tower_c7.gat",115,121,"メガリス",1274,1;
+	monster "tower_c7.gat",115,125,"メガリス",1274,1;
+	monster "tower_c7.gat",109,73,"メガリス",1274,1;
+	monster "tower_c7.gat",105,71,"メガリス",1274,1;
+	monster "tower_c7.gat",105,75,"メガリス",1274,1;
+	monster "tower_c7.gat",115,71,"メガリス",1274,1;
+	monster "tower_c7.gat",115,75,"メガリス",1274,1;
+	monster "tower_c7.gat",76,75,"スティング",1489,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",75,76,"スティング",1489,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",76,124,"スティング",1489,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",75,123,"スティング",1489,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,75,"スティング",1489,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",124,76,"スティング",1489,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,124,"スティング",1489,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",124,123,"スティング",1489,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",78,78,"フィラ",2021,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",78,121,"フィラ",2021,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",121,78,"フィラ",2021,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",121,121,"フィラ",2021,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",75,78,"リンコ",2020,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",78,75,"リンコ",2020,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",75,121,"リンコ",2020,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",78,124,"リンコ",2020,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",121,75,"リンコ",2020,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",124,78,"リンコ",2020,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",121,124,"リンコ",2020,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",124,121,"リンコ",2020,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",98,73,"スティング",1489,1;
+	monster "tower_c7.gat",98,76,"スティング",1489,1;
+	monster "tower_c7.gat",98,122,"スティング",1489,1;
+	monster "tower_c7.gat",98,125,"スティング",1489,1;
+	monster "tower_c7.gat",101,73,"セシル=ディモン",1638,1;
+	monster "tower_c7.gat",101,76,"セシル=ディモン",1638,1;
+	monster "tower_c7.gat",101,122,"カヴァク=イカルス",1656,1;
+	monster "tower_c7.gat",101,125,"カヴァク=イカルス",1656,1;
+	end;
+OnSummon1:
+	sleep 2000;
+	areamonster "tower_c7.gat",60,133,93,139,"アクアエレメンタル",2016,2;
+	areamonster "tower_c7.gat",60,133,93,139,"ヴァイオリー",1390,2;
+	areamonster "tower_c7.gat",60,133,93,139,"フレイムシューター",1495,2;
+	areamonster "tower_c7.gat",60,133,93,139,"ディミック",1669,2;
+	areamonster "tower_c7.gat",60,133,93,139,"ネペンテス",1988,2;
+	sleep 2000;
+	areamonster "tower_c7.gat",106,133,137,139,"アクアエレメンタル",2016,2;
+	areamonster "tower_c7.gat",106,133,137,139,"ヴァイオリー",1390,2;
+	areamonster "tower_c7.gat",106,133,137,139,"フレイムシューター",1495,2;
+	areamonster "tower_c7.gat",106,133,137,139,"ディミック",1669,2;
+	areamonster "tower_c7.gat",106,133,137,139,"ネペンテス",1988,2;
+	sleep 2000;
+	areamonster "tower_c7.gat",133,61,139,139,"アクアエレメンタル",2016,2;
+	areamonster "tower_c7.gat",133,61,139,139,"ヴァイオリー",1390,2;
+	areamonster "tower_c7.gat",133,61,139,139,"フレイムシューター",1495,2;
+	areamonster "tower_c7.gat",133,61,139,139,"ディミック",1669,2;
+	areamonster "tower_c7.gat",133,61,139,139,"ネペンテス",1988,2;
+	sleep 2000;
+	areamonster "tower_c7.gat",60,60,67,139,"アクアエレメンタル",2016,2;
+	areamonster "tower_c7.gat",60,60,67,139,"ヴァイオリー",1390,2;
+	areamonster "tower_c7.gat",60,60,67,139,"フレイムシューター",1495,2;
+	areamonster "tower_c7.gat",60,60,67,139,"ディミック",1669,2;
+	areamonster "tower_c7.gat",60,60,67,139,"ネペンテス",1988,2;
+	sleep 2000;
+	areamonster "tower_c7.gat",60,60,139,64,"アクアエレメンタル",2016,2;
+	areamonster "tower_c7.gat",60,60,139,64,"ヴァイオリー",1390,2;
+	areamonster "tower_c7.gat",60,60,139,64,"フレイムシューター",1495,2;
+	areamonster "tower_c7.gat",60,60,139,64,"ディミック",1669,2;
+	areamonster "tower_c7.gat",60,60,139,64,"ネペンテス",1988,2;
+	sleep 5000;
+	monster "tower_c7.gat",98,73,"ウィンドディミック",1670,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",98,76,"アイスディミック",1671,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",98,122,"アースディミック",1672,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",98,125,"フレイムディミック",1673,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",101,73,"ネペンテス",1988,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",101,76,"ネペンテス",1988,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",101,122,"ネペンテス",1988,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",101,125,"ネペンテス",1988,1,"mirage3::OnKilled";
+	end;
+OnSummon2:
+	sleep 2000;
+	enablenpc "不思議な石版#r4";
+	announce "石版が現れた",9;
+	set 'allmob,1;
+	monster "tower_c7.gat",75,83,"深淵の騎士",1219,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",73,81,"深淵の騎士",1219,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",73,85,"深淵の騎士",1219,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",77,81,"深淵の騎士",1219,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",77,85,"深淵の騎士",1219,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",75,91,"ディミック",1669,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",73,89,"ウィンドディミック",1670,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",73,93,"アイスディミック",1671,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",77,89,"アースディミック",1672,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",77,93,"フレイムディミック",1673,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,83,"深淵の騎士",1219,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,81,"深淵の騎士",1219,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,85,"深淵の騎士",1219,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,81,"深淵の騎士",1219,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,85,"深淵の騎士",1219,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,91,"ディミック",1669,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,89,"ウィンドディミック",1670,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,93,"アイスディミック",1671,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,89,"アースディミック",1672,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",123,93,"フレイムディミック",1673,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",112,120,"リンコ",2020,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",115,123,"フィラ",2021,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",112,126,"アクアエレメンタル",2016,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",85,120,"リンコ",2020,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",83,123,"フィラ",2021,1,"mirage3::OnKilled";
+	monster "tower_c7.gat",85,126,"アクアエレメンタル",2016,1,"mirage3::OnKilled";
+	end;
+OnKilled:
+	set 'mob,getmapmobs("tower_c7.gat","mirage3::OnKilled");
+	if('mob <= 0) {
+		sleep 2000;
+		switch('flag) {
+		case 0: donpcevent "mirage3::OnSummon1"; break;
+		case 1: donpcevent "mirage3::OnSummon2"; break;
+		default: set 'allmob,10; break;
+		}
+		set 'flag,'flag+1;
+	}
+	end;
+}
+
+// 4F石板
+tower_c7.gat,95,100,4	script	不思議な石版#r4	858,{
+	if(getvariableofnpc('allmob,"mirage3")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r4";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage3"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	if(rand(2))
+		set getvariableofnpc('type,"mirage4"),1;
+	else
+		set getvariableofnpc('type,"mirage4"),2;
+	donpcevent "mirage4::OnStart";
+	if(getvariableofnpc('type,"mirage3") == 1)
+		enablenpc "mirage4016";
+	else
+		enablenpc "mirage4016_";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	stopnpctimer;
+	if(getmapusers("this")>0) {
+		areawarp "tower_c7.gat",0,0,300,300,"SavePoint",0,0;
+	}
+	killmonster "tower_c7.gat","All";
+	set getvariableofnpc('flag,"mirage3"),0;
+}
+
+//４Ｆ→５Ｆ
+tower_c7.gat,64,100,0	script	mirage4016	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	if(getvariableofnpc('type,"mirage4") == 1) {
+		switch(rand(4)) {
+			case 0: warp "tower_c3.gat",141,99; end;
+			case 1: warp "tower_c3.gat",59,99; end;
+			case 2: warp "tower_c3.gat",100,60; end;
+			case 3: warp "tower_c3.gat",100,140; end;
+		}
+	} else {
+		switch(rand(2)) {
+			case 0: warp "tower_c3.gat",100,60; end;
+			case 1: warp "tower_c3.gat",100,140; end;
+		}
+	}
+}
+tower_c7.gat,126,100,0	script	mirage4016_	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	if(getvariableofnpc('type,"mirage4") == 1) {
+		switch(rand(4)) {
+			case 0: warp "tower_c3.gat",141,99; end;
+			case 1: warp "tower_c3.gat",59,99; end;
+			case 2: warp "tower_c3.gat",100,60; end;
+			case 3: warp "tower_c3.gat",100,140; end;
+		}
+	} else {
+		switch(rand(2)) {
+			case 0: warp "tower_c3.gat",100,60; end;
+			case 1: warp "tower_c3.gat",100,140; end;
+		}
+	}
+}
+
+//============================================================
+// 蜃気楼の塔 5F
+//------------------------------------------------------------
+tower_c3.gat,0,0,0	script	mirage4	-1,{
+OnStart:
+	set 'flag,0;
+	monster "tower_c3.gat",95,94,"アイスタイタン",1777,1,"mirage4::OnKilled";
+	monster "tower_c3.gat",99,94,"アイスタイタン",1777,1,"mirage4::OnKilled";
+	monster "tower_c3.gat",103,94,"アイスタイタン",1777,1,"mirage4::OnKilled";
+	monster "tower_c3.gat",95,104,"アイスタイタン",1777,1,"mirage4::OnKilled";
+	monster "tower_c3.gat",99,104,"アイスタイタン",1777,1,"mirage4::OnKilled";
+	monster "tower_c3.gat",103,104,"アイスタイタン",1777,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ヴェナート",1676,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ヴェナート",1677,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ヴェナート",1678,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ヴェナート",1679,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ヴェナート",1676,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ヴェナート",1677,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ヴェナート",1678,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ヴェナート",1679,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ヴェナート",1676,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ヴェナート",1677,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ヴェナート",1678,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ヴェナート",1679,3,"mirage4::OnKilled";
+
+	if('type == 1)
+		sleep 10000;
+
+	areamonster "tower_c3.gat",83,83,90,110,"ヘルアポカリプス",1978,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ディミック",1669,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ウィンドディミック",1670,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"アイスディミック",1671,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"アースディミック",1672,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"フレイムディミック",1673,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ブラディウムゴーレム",2024,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"アラーム",1193,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ラーヴァゴーレム",1366,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ヘルアポカリプス",1978,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ディミック",1669,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ウィンドディミック",1670,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"アイスディミック",1671,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"アースディミック",1672,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"フレイムディミック",1673,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ブラディウムゴーレム",2024,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"アラーム",1193,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ラーヴァゴーレム",1366,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ヘルアポカリプス",1978,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ディミック",1669,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ウィンドディミック",1670,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"アイスディミック",1671,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"アースディミック",1672,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"フレイムディミック",1673,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ブラディウムゴーレム",2024,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"アラーム",1193,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ラーヴァゴーレム",1366,2,"mirage4::OnKilled";
+
+	if('type == 2) {
+		sleep 20000;
+		areamonster "tower_c3.gat",83,83,90,110,"ヘルアポカリプス",1978,2,"mirage4::OnKilled";
+		areamonster "tower_c3.gat",83,83,90,110,"ディミック",1669,1;
+		areamonster "tower_c3.gat",83,83,90,110,"ウィンドディミック",1670,1;
+		areamonster "tower_c3.gat",83,83,90,110,"アイスディミック",1671,1;
+		areamonster "tower_c3.gat",83,83,90,110,"アースディミック",1672,1;
+		areamonster "tower_c3.gat",83,83,90,110,"フレイムディミック",1673,1;
+		areamonster "tower_c3.gat",83,83,90,110,"ブラディウムゴーレム",2024,2;
+		areamonster "tower_c3.gat",83,83,90,110,"アラーム",1193,2;
+		areamonster "tower_c3.gat",83,83,90,110,"ラーヴァゴーレム",1366,2;
+		areamonster "tower_c3.gat",90,100,115,113,"ヘルアポカリプス",1978,2,"mirage4::OnKilled";
+		areamonster "tower_c3.gat",90,100,115,113,"ディミック",1669,1;
+		areamonster "tower_c3.gat",90,100,115,113,"ウィンドディミック",1670,1;
+		areamonster "tower_c3.gat",90,100,115,113,"アイスディミック",1671,1;
+		areamonster "tower_c3.gat",90,100,115,113,"アースディミック",1672,1;
+		areamonster "tower_c3.gat",90,100,115,113,"フレイムディミック",1673,1;
+		areamonster "tower_c3.gat",90,100,115,113,"ブラディウムゴーレム",2024,2;
+		areamonster "tower_c3.gat",90,100,115,113,"アラーム",1193,2;
+		areamonster "tower_c3.gat",90,100,115,113,"ラーヴァゴーレム",1366,2;
+		areamonster "tower_c3.gat",93,83,109,96,"ヘルアポカリプス",1978,2,"mirage4::OnKilled";
+		areamonster "tower_c3.gat",93,83,109,96,"ディミック",1669,1;
+		areamonster "tower_c3.gat",93,83,109,96,"ウィンドディミック",1670,1;
+		areamonster "tower_c3.gat",93,83,109,96,"アイスディミック",1671,1;
+		areamonster "tower_c3.gat",93,83,109,96,"アースディミック",1672,1;
+		areamonster "tower_c3.gat",93,83,109,96,"フレイムディミック",1673,1;
+		areamonster "tower_c3.gat",93,83,109,96,"ブラディウムゴーレム",2024,2;
+		areamonster "tower_c3.gat",93,83,109,96,"アラーム",1193,2;
+		areamonster "tower_c3.gat",93,83,109,96,"ラーヴァゴーレム",1366,2;
+	}
+	sleep 25000;
+	if('type == 1) {
+		monster "tower_c3.gat",59,99,"テンタクルス",2384+rand(5),1;
+		monster "tower_c3.gat",99,60,"テンタクルス",2384+rand(5),1;
+		monster "tower_c3.gat",99,139,"テンタクルス",2384+rand(5),1;
+		monster "tower_c3.gat",139,99,"テンタクルス",2384+rand(5),1;
+	} else {
+		monster "tower_c3.gat",94,95,"テンタクルス",2384+rand(5),1;
+		monster "tower_c3.gat",94,102,"テンタクルス",2384+rand(5),1;
+		monster "tower_c3.gat",103,95,"テンタクルス",2384+rand(5),1;
+		monster "tower_c3.gat",103,102,"テンタクルス",2384+rand(5),1;
+	}
+	end;
+OnSummon1:
+	areamonster "tower_c3.gat",83,83,90,110,"キングドラモ",2198,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"スロフォ",2201,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ドフレ",2203,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"セドラ",2204,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"クラーケンベイビー",2397,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ポセイドン",2396,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"セイレーン",2395,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"マーマン",2394,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"キングドラモ",2198,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"スロフォ",2201,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ドフレ",2203,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"セドラ",2204,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"クラーケンベイビー",2397,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ポセイドン",2396,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"セイレーン",2395,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"マーマン",2394,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"キングドラモ",2198,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"スロフォ",2201,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ドフレ",2203,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"セドラ",2204,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"クラーケンベイビー",2397,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ポセイドン",2396,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"セイレーン",2395,2,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"マーマン",2394,2,"mirage4::OnKilled";
+	end;
+OnSummon2:
+	areamonster "tower_c3.gat",83,83,90,110,"タタチョ",1986,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ナーガ",1993,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ルシオラヴェスパ",1994,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ピンギキュラ",1995,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"ダークピンギキュラ",2015,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",83,83,90,110,"テンドリルリオン",1991,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"タタチョ",1986,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ナーガ",1993,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ルシオラヴェスパ",1994,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ピンギキュラ",1995,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ダークピンギキュラ",2015,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",90,100,115,113,"ハードロックマンモス",1990,1,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"タタチョ",1986,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ナーガ",1993,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ルシオラヴェスパ",1994,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ピンギキュラ",1995,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ダークピンギキュラ",2015,3,"mirage4::OnKilled";
+	areamonster "tower_c3.gat",93,83,109,96,"ボイタタ",2068,1,"mirage4::OnKilled";
+	end;
+OnClear:
+	sleep 2000;
+	announce "先に進む道が開いた",9;
+	enablenpc "mirage4017a";
+	enablenpc "mirage4017b";
+	if('flag == 1) {
+		enablenpc "mirage4017c";
+		enablenpc "mirage4017d";
+	}
+	initnpctimer;
+	donpcevent "mirage5";
+	end;
+OnTimer120000:
+	disablenpc "mirage4017a";
+	disablenpc "mirage4017b";
+	if('flag == 1) {
+		disablenpc "mirage4017c";
+		disablenpc "mirage4017d";
+	}
+	if(getmapusers("this")>0)
+	areawarp "tower_c3.gat",0,0,300,300,"SavePoint",0,0;
+	killmonster "tower_c3.gat","All";
+	set 'flag,0;
+	stopnpctimer;
+	end;
+OnKilled:
+	set 'mob,getmapmobs("tower_c3.gat","mirage4::OnKilled");
+	if('mob <= 0) {
+		sleep 2000;
+		switch('flag) {
+		case 0: donpcevent "mirage4::OnSummon1"; break;
+		case 1: donpcevent "mirage4::OnSummon2"; break;
+		case 2: donpcevent "mirage4::OnClear"; break;
+		}
+		set 'flag,'flag+1;
+	}
+	end;
+}
+
+//５Ｆ→休憩ポイント
+tower_c3.gat,100,60,0	script	mirage4017a	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c11.gat",90,91;
+}
+tower_c3.gat,100,140,0	script	mirage4017b	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c11.gat",90,91;
+}
+tower_c3.gat,59,99,0	script	mirage4017c	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c11.gat",90,91;
+}
+tower_c3.gat,141,99,0	script	mirage4017d	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c11.gat",90,91;
+}
+
+//============================================================
+// 蜃気楼の塔 中間休憩所
+//------------------------------------------------------------
+tower_c11.gat,0,0,0	script	mirage5	-1,{
+	disablenpc "mirage4018";
+	initnpctimer;
+	sleep 20000;
+	announce "スノート ： ここはモンスター達の気配もないし安全みたいね。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： このフロアは他の階と仕掛けが違うみたい。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： ここは私が解いてみるわ。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 少し時間がかかりそう……調べるのに2分は必要ね。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： これを解けば、石版が現れるはずよ。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 今のうちにアイテムの補充とか休憩をしておいてね。",9,0xEE88FF;
+	end;
+OnTimer150000:
+	announce "石版が現れた",9;
+	sleep 5000;
+	announce "スノート ： これでよし！　そろそろ石版に変化があるはずよ。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 今回、塔の中で発見した植物……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 破壊すると支援効果を得ることができるものもあれば、",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： モンスターを召喚してきたりと、色々種類があるみたいだけど……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 文書にあった『封印された施設』に何か関係があるのかしら。",9,0xEE88FF;
+	sleep 10000;
+	announce "先に進む道が開いた",9;
+	enablenpc "mirage4018";
+	if(rand(2))
+		set getvariableofnpc('type,"mirage6"),1;
+	else
+		set getvariableofnpc('type,"mirage6"),2;
+	donpcevent "mirage6::OnStart";
+	end;
+OnTimer215000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer305000:
+	disablenpc "mirage4018";
+	areawarp "tower_c11.gat",0,0,300,300,"SavePoint",0,0;
+	stopnpctimer;
+	end;
+}
+
+//休憩所
+tower_c11.gat,87,97,4	script	スノート#5	744,{
+	mes "[スノート]";
+	mes "ここは安全そうね！";
+	mes "ここで一度休憩する事にしましょう！";
+	mes "回復剤など足りない方は";
+	mes "私の助手のオーインが余分に";
+	mes "持ってきてるから";
+	mes "分けてもらうといいわ。";
+	close;
+}
+
+tower_c11.gat,92,97,4	shop	調査員エルナ	702,536:200,504:2400,522:10000,568:1400,505:10000,645:1600,656:3000,657:6000,1065:200,1751:5,1752:5,1771:120
+tower_c11.gat,96,101,4	shop	忍具・弾丸販売員	762,13200:2,13201:20,13202:40,13251:14,13252:28,13253:54,13254:140,7521:200,7522:200,7523:200,7524:400
+tower_c11.gat,100,101,4	shop	ジェムストーン販売商人	803,717:1200
+tower_c11.gat,104,101,4	script	旅の修理工	85,{
+	mes "[修理工]";
+	mes "そこの旅人、";
+	mes "修理したいアイテムはあるか？";
+	mes "アイテムの修理は俺に任せてくれ！";
+	next;
+	if(select("実は修理して欲しいアイテムが……","今は特に無いです")==2) {
+		mes "[修理工]";
+		mes "ふむ……";
+		mes "なら俺に用は無いな。";
+		close;
+	}
+	set '@num,getrepairableitemcount();
+	if('@num==0) {
+		mes "[修理工]";
+		mes "おいおい……";
+		mes "修理する必要のあるものなんて";
+		mes "一つも持っていないじゃないか。";
+		mes "はぁ……";
+		mes "お前のようなヤツが増えると";
+		mes "俺の商売もあがったりだよ……";
+		close;
+	}
+	set '@price,'@num*50000;
+	mes "[修理工]";
+	mes "ふむ……";
+	mes "お前が持っているアイテムで";
+	mes "損傷しているアイテムは";
+	mes '@num+ "だな。";
+	next;
+	mes "[修理工]";
+	mes "一つ修理するのに 50000 Zenyだから";
+	mes "全て直すと" +'@price+ "Zenyとなる。";
+	mes "修理するか？";
+	next;
+	if(select("お願いします","いいえ")==2) {
+		mes "[修理工]";
+		mes "俺は、アイテムが傷ついたまま";
+		mes "放って置かれるのが";
+		mes "たまらなく嫌いなんだ。";
+		mes "損傷したアイテムはすぐ直そうぜ。";
+		close;
+	}
+	if(Zeny<'@price) {
+		mes "[修理工]";
+		mes "お金が足りないようだ";
+		close;
+	}
+	set Zeny,Zeny-'@price;
+	repairitem;
+	mes "[修理工]";
+	mes "OK！";
+	mes "直ったな。";
+	mes "アイテムにも寿命があるってことを";
+	mes "覚えておくんだな。";
+	close;
+}
+tower_c11.gat,83,101,4	script	ポイント商人	700,{
+	mes "[ポイント商人]";
+	mes "こんにちは。";
+	mes "ここでは鉱石をさらに砕いた";
+	mes "触媒として使用する";
+	mes "^FF0000各種ポイント^000000を販売しています。";
+	mes "何か必要ですか？";
+	next;
+	switch(select("スカーレットポイント(火) - 200z","ライムグリーンポイント(地) - 200z","インディゴポイント(水) - 200z","イエローウィッシュポイント(風) - 200z","会話を終える")) {
+	case 1:
+		set '@itemid,6360;
+		set '@element$,"火属性";
+		break;
+	case 2:
+		set '@itemid,6363;
+		set '@element$,"地属性";
+		break;
+	case 3:
+		set '@itemid,6361;
+		set '@element$,"水属性";
+		break;
+	case 4:
+		set '@itemid,6362;
+		set '@element$,"風属性";
+		break;
+	case 5:
+		mes "[ポイント商人]";
+		mes "またのご利用をお待ちしています。";
+		close;
+	}
+	mes "[ポイント商人]";
+	mes "^ff0000" +getitemname('@itemid)+ "^000000ですね。";
+	mes "こちらは^0000ff" +'@element$+ "^000000のポイントです。";
+	mes "何個購入しますか？";
+	mes "同時に1000個まで購入できます。";
+	mes "キャンセルするには、";
+	mes "0を入力してください。";
+	next;
+	input '@num;
+	if('@num == 0) {
+		mes "[ポイント商人]";
+		mes "キャンセルしました。";
+		mes "またのご利用をお待ちしています。";
+		close;
+	}
+	if('@num < 0 || '@num > 1000) {
+		mes "[ポイント商人]";
+		mes "正しい数を入力してください。";
+		mes "一度に購入できるのは";
+		mes "1000個までとなります。";
+		close;
+	}
+	mes "[ポイント商人]";
+	mes "^ff0000" +getitemname('@itemid)+ "^000000を";
+	mes "^0000ff" +'@num+ "個^000000で";
+	mes "よろしいですか？";
+	next;
+	if(select("はい","いいえ") == 2) {
+		mes "[ポイント商人]";
+		mes "キャンセルしました。";
+		mes "またのご利用をお待ちしています。";
+		close;
+	}
+	if(200*'@num > Zeny) {
+		mes "[ポイント商人]";
+		mes "お客様、すみませんが、";
+		mes "所持金が不足しています。";
+		close;
+	}
+	if(checkweight('@itemid,'@num) == 0) {
+		mes "[ポイント商人]";
+		mes "おや、荷物が一杯のようです。";
+		mes "少し数を減らしてから、";
+		mes "ご利用ください。";
+		close;
+	}
+	set Zeny,Zeny-200*'@num;
+	getitem '@itemid,'@num;
+	mes "[ポイント商人]";
+	mes "ご利用ありがとうございます。";
+	close;
+}
+
+//休憩ポイント→６Ｆ
+tower_c11.gat,88,116,0	script	mirage4018	45,2,2,{
+	if(getvariableofnpc('type,"mirage6") == 1) {
+		switch(rand(4)) {
+		case 0: warp "tower_c5.gat",85,110; end;
+		case 1: warp "tower_c5.gat",90,89; end;
+		case 2: warp "tower_c5.gat",110,112; end;
+		case 3: warp "tower_c5.gat",113,89; end;
+		}
+	} else {
+		warp "tower_c5.gat",99,100;
+	}
+}
+
+//============================================================
+// 蜃気楼の塔 6F
+//------------------------------------------------------------
+tower_c5.gat,0,0,0	script	mirage6	-1,{
+OnStart:
+	set 'flag,0;
+	set 'allmob,0;
+	if('type == 1) {
+		monster "tower_c5.gat",92,92,"頭領タコの足",2193,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",92,107,"頭領タコの足",2193,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",107,92,"頭領タコの足",2193,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",107,107,"頭領タコの足",2193,1,"mirage6::OnKilled";
+		sleep 5000;
+		monster "tower_c5.gat",90,90,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",90,94,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",94,90,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",94,94,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",90,105,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",90,105,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",94,109,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",94,109,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",105,90,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",105,90,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",109,94,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",109,94,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",105,105,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",105,109,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",109,105,"子分タコ",2192,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",109,109,"子分タコ",2192,1,"mirage6::OnKilled";
+		sleep 3000;
+		monster "tower_c5.gat",97,85,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",98,85,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,85,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",100,85,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",101,85,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",102,85,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",97,88,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",98,88,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,88,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",100,88,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",101,88,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",102,88,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",97,114,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",98,114,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,114,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",100,114,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",101,114,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",102,114,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",97,111,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",98,111,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,111,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",100,111,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",101,111,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",102,111,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",85,97,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",85,98,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",85,99,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",85,100,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",85,101,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",85,102,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",88,97,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",88,98,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",88,99,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",88,100,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",88,101,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",88,102,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",114,97,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",114,98,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",114,99,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",114,100,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",114,101,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",114,102,"レッドエルマ",2197,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",111,97,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",111,98,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",111,99,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",111,100,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",111,101,"シオラバ",2199,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",111,102,"シオラバ",2199,1,"mirage6::OnKilled";
+		sleep 3000;
+		monster "tower_c5.gat",94,100,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",98,100,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",101,100,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",105,100,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,95,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,99,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,101,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,105,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		sleep 5000;
+		monster "tower_c5.gat",99,100,"頭領タコ",2194,1,"mirage6::OnKilled";
+	} else {
+		areamonster "tower_c5.gat",62,96,69,103,"頭領タコの足",2193,1,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",62,96,69,103,"レッドエルマ",2197,2,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",62,96,69,103,"シオラバ",2199,2,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",62,96,69,103,"子分タコ",2192,5,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",96,62,103,69,"頭領タコの足",2193,1,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",96,62,103,69,"レッドエルマ",2197,2,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",96,62,103,69,"シオラバ",2199,2,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",96,62,103,69,"子分タコ",2192,5,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",96,130,103,137,"頭領タコの足",2193,1,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",96,130,103,137,"レッドエルマ",2197,2,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",96,130,103,137,"シオラバ",2199,2,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",96,130,103,137,"子分タコ",2192,5,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",130,96,137,103,"頭領タコの足",2193,1,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",130,96,137,103,"レッドエルマ",2197,2,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",130,96,137,103,"シオラバ",2199,2,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",130,96,137,103,"子分タコ",2192,5,"mirage6::OnKilled";
+		sleep 10000;
+		monster "tower_c5.gat",94,100,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",98,100,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",101,100,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",105,100,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,95,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,99,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,101,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,105,"ワイルドライダー",2208,1,"mirage6::OnKilled";
+		monster "tower_c5.gat",99,100,"頭領タコ",2194,1,"mirage6::OnKilled";
+	}
+	end;
+
+OnSummon1:
+	areamonster "tower_c5.gat",85,88,114,111,"ステムワーム",1215,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"インプ",1837,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"バフォメット.Jr",1101,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ゴールドオシドス",1713,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ブルーオシドス",1716,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"スコグル",1752,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"プルス",1753,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ジェミニ-S58",1681,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ディミック",1669,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ウィンドディミック",1670,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"アイスディミック",1671,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"アースディミック",1672,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"フレイムディミック",1673,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"フレイムヴェナート",1675,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ヴェナート",1676,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ウィンドヴェナート",1677,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"アースヴェナート",1678,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"アイスヴェナート",1679,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"慰める者",1703,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"監視する者",1700,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ごっついミノタウロス",1310,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"保護する者",1701,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"執行する者",1702,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ブラッディナイト",1268,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ダークイリュージョン",1302,4,"mirage6::OnKilled";
+	end;
+OnSummon2:
+	areamonster "tower_c5.gat",85,88,114,111,"ゴールドオシドス",1713,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ブルーオシドス",1716,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ごっついミノタウロス",1310,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"ステムワーム",1215,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"チンピラ",1313,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"プルス",1753,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"スコグル",1752,4,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"タナトスの憎悪",1704,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"タナトスの絶望",1705,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"タナトスの悲しみ",1706,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"タナトスの苦悩",1707,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"モロクの現身(天使型)",1918,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"モロクの現身(物質型)",1919,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"モロクの現身(人間型)",1920,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"モロクの現身(精霊型)",1921,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"コボルドリーダー",1296,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"デビルリング",1582,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",85,88,114,111,"アークエンジェリング",1388,2,"mirage6::OnKilled";
+	sleep 5000;
+	if('type == 1) {
+		areamonster "tower_c5.gat",85,88,114,111,"グルームアンダーナイト",1768,1,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",85,88,114,111,"クトルラナックス",1779,1,"mirage6::OnKilled";
+	} else {
+		areamonster "tower_c5.gat",85,88,114,111,"ペクソジン",1518,1,"mirage6::OnKilled";
+		areamonster "tower_c5.gat",85,88,114,111,"レディータニー",1688,1,"mirage6::OnKilled";
+	}
+	sleep 10000;
+	enablenpc "不思議な石版#r6";
+	announce "石版が現れた",9;
+	set 'allmob,1;
+	areamonster "tower_c5.gat",62,96,69,103,"ロリルリ",1505,1,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",62,96,69,103,"ブラッディマーダー",1507,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",62,96,69,103,"デュラハン",1504,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",62,96,69,103,"ハイローゾイスト",1510,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",62,96,69,103,"ジビット",1503,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",62,96,69,103,"ルード",1509,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",62,96,69,103,"ディスガイズ",1506,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,62,103,69,"ロリルリ",1505,1,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,62,103,69,"ブラッディマーダー",1507,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,62,103,69,"デュラハン",1504,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,62,103,69,"ハイローゾイスト",1510,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,62,103,69,"ジビット",1503,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,62,103,69,"ルード",1509,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,62,103,69,"ディスガイズ",1506,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,130,103,137,"ロリルリ",1505,1,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,130,103,137,"ブラッディマーダー",1507,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,130,103,137,"デュラハン",1504,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,130,103,137,"ハイローゾイスト",1510,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,130,103,137,"ジビット",1503,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,130,103,137,"ルード",1509,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",96,130,103,137,"ディスガイズ",1506,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",130,96,137,103,"ロリルリ",1505,1,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",130,96,137,103,"ブラッディマーダー",1507,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",130,96,137,103,"デュラハン",1504,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",130,96,137,103,"ハイローゾイスト",1510,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",130,96,137,103,"ジビット",1503,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",130,96,137,103,"ルード",1509,2,"mirage6::OnKilled";
+	areamonster "tower_c5.gat",130,96,137,103,"ディスガイズ",1506,2,"mirage6::OnKilled";
+	end;
+OnKilled:
+	set 'mob,getmapmobs("tower_c5.gat","mirage6::OnKilled");
+	if('mob <= 0) {
+		sleep 2000;
+		switch('flag) {
+		case 0: donpcevent "mirage6::OnSummon1"; break;
+		case 1: donpcevent "mirage6::OnSummon2"; break;
+		default: set 'allmob,10; break;
+		}
+		set 'flag,'flag+1;
+	}
+	end;
+}
+
+// 6F石板
+tower_c5.gat,99,133,4	script	不思議な石版#r6	858,{
+	if(getvariableofnpc('allmob,"mirage6")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r6";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage6"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	if(getvariableofnpc('type,"mirage6") == 1) {
+		enablenpc "mirage4019a";
+		enablenpc "mirage4019b";
+		enablenpc "mirage4019c";
+		enablenpc "mirage4019d";
+	} else {
+		enablenpc "mirage4019e";
+	}
+	donpcevent "mirage7::OnStart";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	stopnpctimer;
+	if(getmapusers("this")>0)
+	areawarp "tower_c5.gat",0,0,300,300,"SavePoint",0,0;
+	killmonster "tower_c5.gat","All";
+	set getvariableofnpc('flag,"mirage6"),0;
+}
+
+//６Ｆ→７Ｆ
+tower_c5.gat,85,110,0	script	mirage4019a	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c6.gat",94,111;
+}
+tower_c5.gat,90,89,0	script	mirage4019b	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c6.gat",94,89;
+}
+tower_c5.gat,110,112,0	script	mirage4019c	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c6.gat",109,112;
+}
+tower_c5.gat,113,89,0	script	mirage4019d	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c6.gat",111,89;
+}
+tower_c5.gat,99,100,0	script	mirage4019e	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	switch(rand(3)) {
+	case 0: warp "tower_c6.gat",59,100; end;
+	case 1: warp "tower_c6.gat",100,139; end;
+	case 2: warp "tower_c6.gat",142,100; end;
+	}
+}
+
+//============================================================
+// 蜃気楼の塔 7F
+//------------------------------------------------------------
+tower_c6.gat,0,0,0	script	mirage7	-1,{
+OnStart:
+	set 'flag,0;
+	set 'allmob,0;
+	sleep 10000;
+	areamonster "tower_c6.gat",83,83,90,110,"スカイデリーター",1384,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",83,83,90,110,"グラウンドデリーター",1385,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",83,83,90,110,"レッドペロス",1714,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",83,83,90,110,"グリーンペロス",1717,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",83,83,90,110,"ブルーオシドス",1716,4,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",83,83,90,110,"ゴールドオシドス",1713,4,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",83,83,90,110,"ハイドラランサー",1720,1,"mirage7::OnKilled";
+
+	areamonster "tower_c6.gat",90,100,115,113,"スカイデリーター",1384,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"グラウンドデリーター",1385,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"レッドペロス",1714,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"グリーンペロス",1717,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"ブルーオシドス",1716,4,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"ゴールドオシドス",1713,4,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"ハイドラランサー",1720,1,"mirage7::OnKilled";
+
+	areamonster "tower_c6.gat",93,83,109,96,"スカイデリーター",1384,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"グラウンドデリーター",1385,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"レッドペロス",1714,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"グリーンペロス",1717,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"ブルーオシドス",1716,4,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"ゴールドオシドス",1713,4,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"ハイドラランサー",1720,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"ミュータントドラゴン",1262,1,"mirage7::OnKilled";
+	sleep 5000;
+	monster "tower_c6.gat",137,102,"ドラコの卵",2014,1,"mirage7::OnKilled1";
+	monster "tower_c6.gat",141,100,"ドラコの卵",2014,1,"mirage7::OnKilled1";
+	monster "tower_c6.gat",142,95,"ドラコの卵",2014,1,"mirage7::OnKilled1";
+	monster "tower_c6.gat",125,99,"ロリルリ",1505,1;
+	monster "tower_c6.gat",122,97,"ロリルリ",1505,1;
+	monster "tower_c6.gat",122,101,"ロリルリ",1505,1;
+	monster "tower_c6.gat",128,97,"ロリルリ",1505,1;
+	monster "tower_c6.gat",128,101,"ロリルリ",1505,1;
+	monster "tower_c6.gat",136,100,"働きブワヤ",2330,1;
+	monster "tower_c6.gat",138,97,"働きブワヤ",2330,1;
+
+	monster "tower_c6.gat",99,73,"サキュバス",1370,1;
+	monster "tower_c6.gat",97,70,"サキュバス",1370,1;
+	monster "tower_c6.gat",97,76,"サキュバス",1370,1;
+	monster "tower_c6.gat",101,70,"サキュバス",1370,1;
+	monster "tower_c6.gat",101,76,"サキュバス",1370,1;
+	monster "tower_c6.gat",94,63,"ウィンドディミック",1670,1;
+	monster "tower_c6.gat",97,62,"アイスディミック",1671,1;
+	monster "tower_c6.gat",99,61,"ディミック",1669,1;
+	monster "tower_c6.gat",101,62,"アースディミック",1672,1;
+	monster "tower_c6.gat",104,63,"フレイムディミック",1673,1;
+
+	monster "tower_c6.gat",57,103,"ドラコの卵",2014,1,"mirage7::OnKilled3";
+	monster "tower_c6.gat",55,100,"ドラコの卵",2014,1,"mirage7::OnKilled3";
+	monster "tower_c6.gat",57,97,"ドラコの卵",2014,1,"mirage7::OnKilled3";
+	monster "tower_c6.gat",73,99,"ロリルリ",1505,1;
+	monster "tower_c6.gat",70,97,"ロリルリ",1505,1;
+	monster "tower_c6.gat",70,101,"ロリルリ",1505,1;
+	monster "tower_c6.gat",76,97,"ロリルリ",1505,1;
+	monster "tower_c6.gat",76,101,"ロリルリ",1505,1;
+	monster "tower_c6.gat",136,100,"働きブワヤ",2330,1;
+	monster "tower_c6.gat",138,97,"働きブワヤ",2330,1;
+
+	monster "tower_c6.gat",99,125,"サキュバス",1370,1;
+	monster "tower_c6.gat",97,122,"サキュバス",1370,1;
+	monster "tower_c6.gat",97,128,"サキュバス",1370,1;
+	monster "tower_c6.gat",101,122,"サキュバス",1370,1;
+	monster "tower_c6.gat",101,128,"サキュバス",1370,1;
+	monster "tower_c6.gat",94,137,"ウィンドディミック",1670,1;
+	monster "tower_c6.gat",97,136,"アイスディミック",1671,1;
+	monster "tower_c6.gat",99,135,"ディミック",1669,1;
+	monster "tower_c6.gat",101,136,"アースディミック",1672,1;
+	monster "tower_c6.gat",104,137,"フレイムディミック",1673,1;
+	end;
+OnSummon1:
+	areamonster "tower_c6.gat",135,94,146,105,"ハイドラランサー",1720,2;
+	areamonster "tower_c6.gat",135,94,146,105,"働きブワヤ",2330,2;
+	areamonster "tower_c6.gat",135,94,146,105,"ドラコの卵",2014,2;
+	areamonster "tower_c6.gat",135,94,146,105,"ゴールドオシドス",1713,2;
+	areamonster "tower_c6.gat",90,55,109,64,"ハイドラランサー",1720,2;
+	areamonster "tower_c6.gat",90,55,109,64,"働きブワヤ",2330,2;
+	areamonster "tower_c6.gat",90,55,109,64,"ドラゴンの卵",1721,2;
+	areamonster "tower_c6.gat",90,55,109,64,"ブルーオシドス",1716,2;
+	areamonster "tower_c6.gat",55,89,64,109,"ハイドラランサー",1720,2;
+	areamonster "tower_c6.gat",55,89,64,109,"働きブワヤ",2330,2;
+	areamonster "tower_c6.gat",55,89,64,109,"ドラコの卵",2014,2;
+	areamonster "tower_c6.gat",55,89,64,109,"ディミック",1669,2;
+	areamonster "tower_c6.gat",91,135,109,143,"ハイドラランサー",1720,2;
+	areamonster "tower_c6.gat",91,135,109,143,"働きブワヤ",2330,2;
+	areamonster "tower_c6.gat",91,135,109,143,"ドラゴンの卵",1721,2;
+	areamonster "tower_c6.gat",91,135,109,143,"ヴェナート",1676,2;
+	areamonster "tower_c6.gat",83,83,90,110,"エリセル",1735,2;
+	areamonster "tower_c6.gat",83,83,90,110,"エリオット",1736,2;
+	areamonster "tower_c6.gat",83,83,90,110,"ミュータントドラゴン",1262,1;
+	areamonster "tower_c6.gat",83,83,90,110,"ブルーオシドス",1716,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",83,83,90,110,"ゴールドオシドス",1713,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",83,83,90,110,"ハイドラランサー",1720,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"エリセル",1735,2;
+	areamonster "tower_c6.gat",90,100,115,113,"エリオット",1736,2;
+	areamonster "tower_c6.gat",90,100,115,113,"ミュータントドラゴン",1262,1;
+	areamonster "tower_c6.gat",90,100,115,113,"ブルーオシドス",1716,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"ゴールドオシドス",1713,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"ハイドラランサー",1720,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"エリセル",1735,2;
+	areamonster "tower_c6.gat",93,83,109,96,"エリオット",1736,2;
+	areamonster "tower_c6.gat",93,83,109,96,"ミュータントドラゴン",1262,1;
+	areamonster "tower_c6.gat",93,83,109,96,"ブルーオシドス",1716,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"ゴールドオシドス",1713,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"ハイドラランサー",1720,1,"mirage7::OnKilled";
+	monster "tower_c6.gat",139,93,"ドラコの卵",2014,1,"mirage7::OnKilled1";
+	monster "tower_c6.gat",101,52,"ドラコの卵",2014,1,"mirage7::OnKilled2";
+	monster "tower_c6.gat",62,92,"ドラコの卵",2014,1,"mirage7::OnKilled3";
+	monster "tower_c6.gat",95,143,"ドラコの卵",2014,1,"mirage7::OnKilled4";
+	end;
+OnSummon2:
+	enablenpc "不思議な石版#r7";
+	announce "石版が現れた",9;
+	set 'allmob,1;
+	areamonster "tower_c6.gat",83,83,90,110,"ヴェナート",1676,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",83,83,90,110,"働きブワヤ",2330,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",83,83,90,110,"ハイドラランサー",1720,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"ディミック",1669,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"働きブワヤ",2330,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",90,100,115,113,"ハイドラランサー",1720,1,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"ミュータントドラゴン",1262,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"働きブワヤ",2330,2,"mirage7::OnKilled";
+	areamonster "tower_c6.gat",93,83,109,96,"ハイドラランサー",1720,1,"mirage7::OnKilled";
+	switch(rand(3)) {
+	case 0:
+		areamonster "tower_c6.gat",85,88,114,111,"彷徨う紫色の竜",2131,1,"mirage7::OnKilled";
+		end;
+	case 1:
+		areamonster "tower_c6.gat",85,88,114,111,"ニーズヘッグの影",2022,1,"mirage7::OnKilled";
+		end;
+	case 2:
+		areamonster "tower_c6.gat",85,88,114,111,"データルザウルス",1719,1,"mirage7::OnKilled";
+		end;
+	}
+	end;
+OnKilled:
+	set 'mob,getmapmobs("tower_c6.gat","mirage7::OnKilled");
+	if('mob <= 0) {
+		sleep 2000;
+		switch('flag) {
+		case 0: donpcevent "mirage7::OnSummon1"; break;
+		case 1: donpcevent "mirage7::OnSummon2"; break;
+		default:
+			if('mob5 <= 0) {
+				set 'allmob,10;
+			}
+			break;
+		}
+		set 'flag,'flag+1;
+	}
+	end;
+OnKilled1:
+	set 'mob1,getmapmobs("tower_c6.gat","mirage7::OnKilled1");
+	if('mob1 <= 0) {
+		areamonster "tower_c6.gat",135,94,146,105,"ハイドラランサー",1720,1;
+		areamonster "tower_c6.gat",135,94,146,105,"ブルーオシドス",1716,2;
+		areamonster "tower_c6.gat",135,94,146,105,"ゴールドオシドス",1713,2;
+		areamonster "tower_c6.gat",135,94,146,105,"ブワヤの影",2332,1,"mirage7::OnKilled5";
+	}
+	end;
+OnKilled2:
+	set 'mob2,getmapmobs("tower_c6.gat","mirage7::OnKilled2");
+	if('mob2 <= 0) {
+		areamonster "tower_c6.gat",90,55,109,64,"ハイドラランサー",1720,1;
+		areamonster "tower_c6.gat",90,55,109,64,"ブルーオシドス",1716,2;
+		areamonster "tower_c6.gat",90,55,109,64,"ゴールドオシドス",1713,2;
+		areamonster "tower_c6.gat",90,55,109,64,"ブワヤの影",2332,1,"mirage7::OnKilled5";
+	}
+	end;
+OnKilled3:
+	set 'mob3,getmapmobs("tower_c6.gat","mirage7::OnKilled3");
+	if('mob3 <= 0) {
+		areamonster "tower_c6.gat",55,89,64,109,"ハイドラランサー",1720,1;
+		areamonster "tower_c6.gat",55,89,64,109,"ブルーオシドス",1716,2;
+		areamonster "tower_c6.gat",55,89,64,109,"ゴールドオシドス",1713,2;
+		areamonster "tower_c6.gat",55,89,64,109,"ブワヤの影",2332,1,"mirage7::OnKilled5";
+	}
+	end;
+OnKilled4:
+	set 'mob4,getmapmobs("tower_c6.gat","mirage7::OnKilled4");
+	if('mob4 <= 0) {
+		areamonster "tower_c6.gat",91,135,109,143,"ハイドラランサー",1720,1;
+		areamonster "tower_c6.gat",91,135,109,143,"ブルーオシドス",1716,2;
+		areamonster "tower_c6.gat",91,135,109,143,"ゴールドオシドス",1713,2;
+		areamonster "tower_c6.gat",91,135,109,143,"ブワヤの影",2332,1,"mirage7::OnKilled5";
+	}
+	end;
+OnKilled5:
+	set 'mob5,getmapmobs("tower_c6.gat","mirage7::OnKilled5");
+	if('mob <= 0 && 'mob5 <= 0) {
+		set 'allmob,10;
+	}
+	end;
+}
+
+// 7F石板
+tower_c6.gat,99,59,4	script	不思議な石版#r7	858,{
+	if(getvariableofnpc('allmob,"mirage7")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r7";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage7"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	enablenpc "mirage4020";
+//	if(rand(2))
+		donpcevent "mirage8::OnStart";
+//	else
+//		donpcevent "mirage8_::OnStart";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	stopnpctimer;
+	if(getmapusers("this")>0)
+	areawarp "tower_c6.gat",0,0,300,300,"SavePoint",0,0;
+	killmonster "tower_c6.gat","All";
+	set getvariableofnpc('flag,"mirage7"),0;
+}
+
+//７Ｆ→８Ｆ
+tower_c6.gat,99,92,0	script	mirage4020	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+//	if(getvariableofnpc('type,"mirage8") == 1)
+		warp "tower_c8.gat",99,66;
+//	else
+//		warp "tower_c8.gat",56,165;
+}
+
+//============================================================
+// 蜃気楼の塔 8F
+//------------------------------------------------------------
+tower_c8.gat,0,0,0	script	mirage8	-1,{
+OnStart:
+	initnpctimer;
+	set 'flag,0;
+	set 'allmob,0;
+	monster "tower_c8.gat",92,120,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",107,120,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",88,131,"ボウガーディアン",1830,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",112,131,"ボウガーディアン",1830,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",90,113,"サラマンダー",1831,1;
+	monster "tower_c8.gat",92,113,"サラマンダー",1831,1;
+	monster "tower_c8.gat",92,115,"サラマンダー",1831,1;
+	monster "tower_c8.gat",108,113,"サラマンダー",1831,1;
+	monster "tower_c8.gat",108,115,"サラマンダー",1831,1;
+	monster "tower_c8.gat",110,113,"サラマンダー",1831,1;
+	end;
+OnTimer15000:
+	monster "tower_c8.gat",99,88,"ディミック",1669,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",96,86,"ウィンドディミック",1670,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",96,90,"アイスディミック",1671,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",102,86,"アースディミック",1672,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",102,90,"フレイムディミック",1673,1,"mirage8::OnKilled";
+	end;
+OnTimer20000:
+	monster "tower_c8.gat",92,118,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",107,118,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",96,113,"ソードガーディアン",1829,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",94,111,"ソードガーディアン",1829,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",96,111,"ソードガーディアン",1829,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",98,111,"ソードガーディアン",1829,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",100,111,"ネクロマンサー",1870,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",98,113,"ネクロマンサー",1870,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",100,113,"ネクロマンサー",1870,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",102,113,"ネクロマンサー",1870,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",102,111,"ソードガーディアン",1829,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",104,111,"ソードガーディアン",1829,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",106,111,"ソードガーディアン",1829,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",104,113,"ソードガーディアン",1829,1,"mirage8::OnKilled";
+	end;
+OnTimer35000:
+	monster "tower_c8.gat",68,120,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",68,123,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",52,122,"アノリアン",1206,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",48,118,"アノリアン",1206,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",48,126,"アノリアン",1206,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",56,118,"ウィンドゴースト",1263,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",56,126,"アノリアン",1206,1,"mirage8::OnKilled";
+
+	monster "tower_c8.gat",96,160,"ソードガーディアン",1829,1;
+	monster "tower_c8.gat",103,160,"ソードガーディアン",1829,1;
+	monster "tower_c8.gat",94,160,"ボウガーディアン",1830,1;
+	monster "tower_c8.gat",105,160,"ボウガーディアン",1830,1;
+	monster "tower_c8.gat",99,168,"彷徨う者",1208,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",96,168,"彷徨う者",1208,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",99,165,"彷徨う者",1208,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",99,171,"彷徨う者",1208,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",102,168,"彷徨う者",1208,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",94,143,"ラギッドゾンビ",1865,1;
+	monster "tower_c8.gat",94,146,"ラギッドゾンビ",1865,1;
+	monster "tower_c8.gat",94,149,"ラギッドゾンビ",1865,1;
+	monster "tower_c8.gat",105,143,"ラギッドゾンビ",1865,1;
+	monster "tower_c8.gat",105,146,"ラギッドゾンビ",1865,1;
+	monster "tower_c8.gat",105,149,"ラギッドゾンビ",1865,1;
+
+	monster "tower_c8.gat",122,120,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",122,123,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",140,123,"アクラウス",1194,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",136,120,"アクラウス",1194,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",136,123,"アクラウス",1194,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",144,120,"ジェスター",1267,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",144,126,"アクラウス",1194,1,"mirage8::OnKilled";
+
+	monster "tower_c8.gat",97,38,"セイレン=ウィンザー",1634,1;
+	monster "tower_c8.gat",97,41,"セイレン=ウィンザー",1634,1;
+	monster "tower_c8.gat",101,38,"マーガレッタ=ソリン",1637,1;
+	monster "tower_c8.gat",101,41,"マーガレッタ=ソリン",1637,1;
+	end;
+OnTimer60000:
+	stopnpctimer;
+	monster "tower_c8.gat",97,44,"カトリーヌ=ケイロン",1639,1;
+	monster "tower_c8.gat",100,45,"カトリーヌ=ケイロン",1639,1;
+	monster "tower_c8.gat",103,44,"カトリーヌ=ケイロン",1639,1;
+	monster "tower_c8.gat",95,58,"セシル=ディモン",1638,1;
+	monster "tower_c8.gat",104,58,"セシル=ディモン",1638,1;
+	monster "tower_c8.gat",95,64,"ハワード=アルトアイゼン",1636,1;
+	monster "tower_c8.gat",104,64,"ハワード=アルトアイゼン",1636,1;
+	monster "tower_c8.gat",98,75,"エレメス=ガイル",1635,1;
+	monster "tower_c8.gat",101,75,"エレメス=ガイル",1635,1;
+	end;
+OnSummon1:
+	monster "tower_c8.gat",59,72,"三葉蟲",1279,1;
+	monster "tower_c8.gat",59,75,"三葉蟲",1279,1;
+	monster "tower_c8.gat",59,81,"三葉蟲",1279,1;
+	monster "tower_c8.gat",63,74,"ブリライト",1211,1;
+	monster "tower_c8.gat",64,78,"ブリライト",1211,1;
+	monster "tower_c8.gat",63,82,"ブリライト",1211,1;
+	monster "tower_c8.gat",52,81,"アクラウス",1194,1;
+	monster "tower_c8.gat",52,75,"アクラウス",1194,1;
+	monster "tower_c8.gat",52,71,"アクラウス",1194,1;
+	monster "tower_c8.gat",48,74,"ヘルフライ",2302,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",46,78,"ヘルフライ",2302,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",48,82,"ヘルフライ",2302,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",53,85,"ドラゴンフライ",1091,1;
+	monster "tower_c8.gat",51,169,"ランドグリスゴースト",1765,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",50,163,"アガヴ",1769,1;
+	monster "tower_c8.gat",124,84,"アガヴ",1769,1;
+	monster "tower_c8.gat",52,160,"ファナト",1797,1;
+	monster "tower_c8.gat",54,162,"アウノエ",1796,1;
+	monster "tower_c8.gat",56,160,"アウノエ",1796,1;
+	monster "tower_c8.gat",54,170,"ファナト",1797,1;
+	monster "tower_c8.gat",58,168,"ファナト",1797,1;
+	monster "tower_c8.gat",58,164,"エキオ",1770,1;
+	monster "tower_c8.gat",60,166,"ネクロマンサー",1870,1;
+	monster "tower_c8.gat",60,162,"ネクロマンサー",1870,1;
+	monster "tower_c8.gat",139,166,"ランドグリスゴースト",1765,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",139,161,"アガヴ",1769,1;
+	monster "tower_c8.gat",141,167,"アガヴ",1769,1;
+	monster "tower_c8.gat",141,163,"ファナト",1797,1;
+	monster "tower_c8.gat",146,166,"アウノエ",1796,1;
+	monster "tower_c8.gat",145,159,"アウノエ",1796,1;
+	monster "tower_c8.gat",147,161,"ファナト",1797,1;
+	monster "tower_c8.gat",148,164,"エキオ",1770,1;
+	monster "tower_c8.gat",149,159,"ネクロマンサー",1870,1;
+	monster "tower_c8.gat",150,161,"ネクロマンサー",1870,1;
+	monster "tower_c8.gat",147,75,"アクラウス",1194,1;
+	monster "tower_c8.gat",146,81,"ブリライト",1211,1;
+	monster "tower_c8.gat",144,84,"三葉蟲",1279,1;
+	monster "tower_c8.gat",142,75,"ファナト",1797,1;
+	monster "tower_c8.gat",141,81,"ヘルフライ",2302,1;
+	monster "tower_c8.gat",135,76,"ネクロマンサー",1870,1;
+	monster "tower_c8.gat",135,82,"アウノエ",1796,1;
+	end;
+OnSummon2:
+	enablenpc "不思議な石版#r8a";
+	announce "石版が現れた",9;
+	set 'allmob,1;
+	monster "tower_c8.gat",100,165,"ダークロード",1272,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",95,146,"サラマンダー",1831,1;
+	monster "tower_c8.gat",103,146,"サラマンダー",1831,1;
+	monster "tower_c8.gat",96,145,"ウィンドディミック",1670,1;
+	monster "tower_c8.gat",102,145,"フレイムディミック",1673,1;
+	monster "tower_c8.gat",95,159,"サラマンダー",1831,1;
+	monster "tower_c8.gat",103,159,"サラマンダー",1831,1;
+	monster "tower_c8.gat",96,158,"ウィンドディミック",1670,1;
+	monster "tower_c8.gat",102,158,"アースディミック",1672,1;
+	monster "tower_c8.gat",98,161,"カトリーヌ=ケイロン",1639,1;
+	monster "tower_c8.gat",102,161,"カトリーヌ=ケイロン",1639,1;
+	monster "tower_c8.gat",95,165,"セシル=ディモン",1638,1;
+	monster "tower_c8.gat",104,165,"セシル=ディモン",1638,1;
+	monster "tower_c8.gat",96,150,"ハワード=アルトアイゼン",1636,1;
+	monster "tower_c8.gat",98,150,"エレメス=ガイル",1635,1;
+	monster "tower_c8.gat",101,150,"エレメス=ガイル",1635,1;
+	monster "tower_c8.gat",104,150,"ハワード=アルトアイゼン",1636,1;
+
+	monster "tower_c8.gat",96,132,"ソードガーディアン",1829,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",98,132,"ボウガーディアン",1830,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",100,132,"ボウガーディアン",1830,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",102,132,"ソードガーディアン",1829,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",91,127,"サラマンダー",1831,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",94,127,"サラマンダー",1831,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",94,130,"サラマンダー",1831,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",104,127,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",104,130,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",107,127,"深淵の騎士",1219,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",123,116,"ウィンドディミック",1670,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",127,116,"アイスディミック",1671,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",125,122,"ディミック",1669,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",123,128,"アースディミック",1672,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",127,128,"フレイムディミック",1673,1,"mirage8::OnKilled";
+
+	monster "tower_c8.gat",91,113,"アースディミック",1672,1;
+	monster "tower_c8.gat",91,130,"フレイムディミック",1673,1;
+	monster "tower_c8.gat",107,113,"アイスディミック",1671,1;
+	monster "tower_c8.gat",107,130,"ウィンドディミック",1670,1;
+	monster "tower_c8.gat",132,118,"コバルトミネラル",1976,1;
+	monster "tower_c8.gat",132,128,"コバルトミネラル",1976,1;
+	monster "tower_c8.gat",134,118,"ファナト",1797,1;
+	monster "tower_c8.gat",134,128,"アウノエ",1796,1;
+	monster "tower_c8.gat",136,118,"ザクダム",1979,1;
+	monster "tower_c8.gat",136,128,"ザクダム",1979,1;
+	monster "tower_c8.gat",138,118,"ヘルアポカリプス",1978,1;
+	monster "tower_c8.gat",138,128,"ヘルアポカリプス",1978,1;
+	monster "tower_c8.gat",147,116,"ビホルダーマスター",1975,1;
+	monster "tower_c8.gat",147,122,"ビホルダーマスター",1975,1;
+	monster "tower_c8.gat",147,128,"ビホルダーマスター",1975,1;
+	monster "tower_c8.gat",154,118,"ビホルダーマスター",1975,1;
+	monster "tower_c8.gat",154,128,"ビホルダーマスター",1975,1;
+	monster "tower_c8.gat",159,118,"ヘビィメタリン",1977,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",159,124,"ヘビィメタリン",1977,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",161,116,"バンシーマスター",1974,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",161,122,"バンシーマスター",1974,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",161,128,"バンシーマスター",1974,1,"mirage8::OnKilled";
+
+	monster "tower_c8.gat",74,116,"アースディミック",1672,1;
+	monster "tower_c8.gat",74,126,"フレイムディミック",1673,1;
+	monster "tower_c8.gat",81,116,"アイスディミック",1671,1;
+	monster "tower_c8.gat",81,126,"ウィンドディミック",1670,1;
+	monster "tower_c8.gat",36,116,"コバルトミネラル",1976,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",36,122,"コバルトミネラル",1976,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",36,128,"コバルトミネラル",1976,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",38,118,"ヘビィメタリン",1977,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",38,124,"ヘビィメタリン",1977,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",44,116,"ファナト",1797,1;
+	monster "tower_c8.gat",44,128,"ファナト",1797,1;
+	monster "tower_c8.gat",51,116,"アウノエ",1796,1;
+	monster "tower_c8.gat",51,122,"アウノエ",1796,1;
+	monster "tower_c8.gat",51,128,"アウノエ",1796,1;
+	monster "tower_c8.gat",62,118,"コバルトミネラル",1976,1;
+	monster "tower_c8.gat",62,128,"コバルトミネラル",1976,1;
+	monster "tower_c8.gat",64,118,"ファナト",1797,1;
+	monster "tower_c8.gat",64,128,"アウノエ",1796,1;
+	monster "tower_c8.gat",66,118,"ザクダム",1979,1;
+	monster "tower_c8.gat",66,128,"ザクダム",1979,1;
+	monster "tower_c8.gat",68,118,"ヘルアポカリプス",1978,1;
+	monster "tower_c8.gat",68,128,"ヘルアポカリプス",1978,1;
+
+	monster "tower_c8.gat",96,91,"アースディミック",1672,1;
+	monster "tower_c8.gat",96,93,"フレイムディミック",1673,1;
+	monster "tower_c8.gat",103,91,"アイスディミック",1671,1;
+	monster "tower_c8.gat",103,93,"ウィンドディミック",1670,1;
+	monster "tower_c8.gat",99,92,"ヘルアポカリプス",1978,1;
+	monster "tower_c8.gat",100,92,"ヘルアポカリプス",1978,1;
+	monster "tower_c8.gat",98,25,"執行する者",1702,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",99,25,"執行する者",1702,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",100,25,"執行する者",1702,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",101,25,"執行する者",1702,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",97,24,"監視する者",1700,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",98,24,"監視する者",1700,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",99,24,"監視する者",1700,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",100,24,"監視する者",1700,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",101,24,"監視する者",1700,1,"mirage8::OnKilled";
+	monster "tower_c8.gat",102,24,"監視する者",1700,1,"mirage8::OnKilled";
+	end;
+OnKilled:
+	set 'mob,getmapmobs("tower_c8.gat","mirage8::OnKilled");
+	if('mob <= 0) {
+		sleep 2000;
+		switch('flag) {
+		case 0: donpcevent "mirage8::OnSummon1"; break;
+		case 1: donpcevent "mirage8::OnSummon2"; break;
+		default: set 'allmob,10; break;
+		}
+		set 'flag,'flag+1;
+	}
+	end;
+}
+
+// 8F石板
+tower_c8.gat,56,165,4	script	不思議な石版#r8a	858,{
+	if(getvariableofnpc('allmob,"mirage8")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r8a";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage8"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	enablenpc "mirage4021";
+	if(rand(2))
+		set getvariableofnpc('type,"mirage9"),1;
+	else
+		set getvariableofnpc('type,"mirage9"),2;
+	donpcevent "mirage9::OnStart";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	stopnpctimer;
+	if(getmapusers("this")>0)
+	areawarp "tower_c8.gat",0,0,300,300,"SavePoint",0,0;
+	killmonster "tower_c8.gat","All";
+	set getvariableofnpc('flag,"mirage8"),0;
+}
+
+tower_c8.gat,99,66,4	script	不思議な石版#r8b	858,{
+	if(getvariableofnpc('allmob,"mirage8")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r8b";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage8"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	enablenpc "mirage4021_";
+	if(rand(2))
+		set getvariableofnpc('type,"mirage9"),1;
+	else
+		set getvariableofnpc('type,"mirage9"),2;
+	donpcevent "mirage9::OnStart";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	stopnpctimer;
+	if(getmapusers("this")>0)
+	areawarp "tower_c8.gat",0,0,300,300,"SavePoint",0,0;
+	killmonster "tower_c8.gat","All";
+	set getvariableofnpc('flag,"mirage8"),0;
+}
+
+//８Ｆ→９Ｆ
+tower_c8.gat,99,66,0	script	mirage4021	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	if(getvariableofnpc('type,"mirage9") == 1) {
+		switch(rand(4)) {
+			case 0: warp "tower_c9.gat",141,99; end;
+			case 1: warp "tower_c9.gat",59,99; end;
+			case 2: warp "tower_c9.gat",100,60; end;
+			case 3: warp "tower_c9.gat",100,140; end;
+		}
+	} else {
+		switch(rand(8)) {
+			case 0:case 1: warp "tower_c9.gat",100,93; end;
+			case 2:case 3: warp "tower_c9.gat",100,106; end;
+			case 4: warp "tower_c9.gat",59,99; end;
+			case 5: warp "tower_c9.gat",141,99; end;
+			case 6: warp "tower_c9.gat",100,60; end;
+			case 7: warp "tower_c9.gat",100,140; end;
+		}
+	}
+}
+tower_c8.gat,56,165,0	script	mirage4021_	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	if(getvariableofnpc('type,"mirage9") == 1) {
+		switch(rand(4)) {
+			case 0: warp "tower_c9.gat",141,99; end;
+			case 1: warp "tower_c9.gat",59,99; end;
+			case 2: warp "tower_c9.gat",100,60; end;
+			case 3: warp "tower_c9.gat",100,140; end;
+		}
+	} else {
+		switch(rand(8)) {
+			case 0:case 1: warp "tower_c9.gat",100,93; end;
+			case 2:case 3: warp "tower_c9.gat",100,106; end;
+			case 4: warp "tower_c9.gat",59,99; end;
+			case 5: warp "tower_c9.gat",141,99; end;
+			case 6: warp "tower_c9.gat",100,60; end;
+			case 7: warp "tower_c9.gat",100,140; end;
+		}
+	}
+}
+
+//============================================================
+// 蜃気楼の塔 9F
+//------------------------------------------------------------
+tower_c9.gat,0,0,0	script	mirage9	-1,{
+OnStart:
+	set 'flag,0;
+	initnpctimer;
+	if('type == 2) {
+		monster "tower_c9.gat",94,94,"テンタクルス",2384+rand(5),1;
+		monster "tower_c9.gat",96,97,"テンタクルス",2384+rand(5),1;
+		monster "tower_c9.gat",94,100,"テンタクルス",2384+rand(5),1;
+		monster "tower_c9.gat",96,103,"テンタクルス",2384+rand(5),1;
+	}
+	end;
+OnTimer5000:
+	areamonster "tower_c9.gat",89,89,112,112,"深淵の騎士",1219,4;
+	areamonster "tower_c9.gat",89,89,112,112,"彷徨う者",1208,4;
+	areamonster "tower_c9.gat",89,89,112,112,"デスワード",1698,4;
+	areamonster "tower_c9.gat",89,89,112,112,"エンシェントミミック",1699,4;
+	areamonster "tower_c9.gat",89,89,112,112,"イグニゼム=セニア",1652,4;
+	areamonster "tower_c9.gat",89,89,112,112,"ヒュッケバイン=トリス",1653,4;
+	areamonster "tower_c9.gat",89,89,112,112,"アルマイア=デュンゼ",1654,4;
+	areamonster "tower_c9.gat",89,89,112,112,"イレンド=エベシ",1655,4;
+	areamonster "tower_c9.gat",89,89,112,112,"カヴァク=イカルス",1656,4;
+	areamonster "tower_c9.gat",89,89,112,112,"ラウレル=ヴィンダー",1657,4;
+	end;
+OnTimer15000:
+	monster "tower_c9.gat",96,95,"深淵の騎士",1219,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",98,95,"深淵の騎士",1219,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",100,95,"深淵の騎士",1219,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",102,95,"深淵の騎士",1219,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",96,101,"彷徨う者",1208,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",98,101,"彷徨う者",1208,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",100,101,"彷徨う者",1208,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",102,101,"彷徨う者",1208,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",73,98,"ごっついミノタウロス",1310,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",73,101,"ごっついミノタウロス",1310,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",125,98,"ごっついミノタウロス",1310,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",125,101,"ごっついミノタウロス",1310,1,"mirage9::OnKilled";
+	end;
+OnTimer30000:
+	monster "tower_c9.gat",93,139,"マナナンガル",2311,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",95,137,"マナナンガル",2311,1;
+	monster "tower_c9.gat",95,139,"マナナンガル",2311,1;
+	monster "tower_c9.gat",95,141,"マナナンガル",2311,1;
+	monster "tower_c9.gat",104,137,"マンククーラム",2312,1;
+	monster "tower_c9.gat",104,139,"マンククーラム",2312,1;
+	monster "tower_c9.gat",104,141,"マンククーラム",2312,1;
+	monster "tower_c9.gat",106,139,"マンククーラム",2312,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",93,60,"ブギスギス",2309,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",95,58,"ブギスギス",2309,1;
+	monster "tower_c9.gat",95,60,"ブギスギス",2309,1;
+	monster "tower_c9.gat",95,62,"ブギスギス",2309,1;
+	monster "tower_c9.gat",104,58,"ティクバラン",2313,1;
+	monster "tower_c9.gat",104,60,"ティクバラン",2313,1;
+	monster "tower_c9.gat",104,62,"ティクバラン",2313,1;
+	monster "tower_c9.gat",106,60,"ティクバラン",2313,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",58,104,"チャナック",2314,1;
+	monster "tower_c9.gat",60,104,"チャナック",2314,1;
+	monster "tower_c9.gat",62,104,"チャナック",2314,1;
+	monster "tower_c9.gat",60,106,"チャナック",2314,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",60,96,"ワクワク",2315,1;
+	monster "tower_c9.gat",58,96,"ワクワク",2315,1;
+	monster "tower_c9.gat",62,96,"ワクワク",2315,1;
+	monster "tower_c9.gat",60,94,"ワクワク",2315,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",139,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",141,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",143,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",141,106,"ジェジェリン",2316,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",141,96,"エンカント",2310,1;
+	monster "tower_c9.gat",139,96,"エンカント",2310,1;
+	monster "tower_c9.gat",143,96,"エンカント",2310,1;
+	monster "tower_c9.gat",141,94,"エンカント",2310,1,"mirage9::OnKilled";
+	end;
+OnTimer45000:
+	monster "tower_c9.gat",84,116,"イグニゼム=セニア",1652,1;
+	monster "tower_c9.gat",86,116,"ヒュッケバイン=トリス",1653,1;
+	monster "tower_c9.gat",88,116,"アルマイア=デュンゼ",1654,1;
+	monster "tower_c9.gat",90,116,"イレンド=エベシ",1655,1;
+	monster "tower_c9.gat",92,116,"カヴァク=イカルス",1656,1;
+	monster "tower_c9.gat",94,116,"ラウレル=ヴィンダー",1657,1;
+	end;
+OnTimer60000:
+	monster "tower_c9.gat",104,116,"イグニゼム=セニア",1652,1;
+	monster "tower_c9.gat",106,116,"ヒュッケバイン=トリス",1653,1;
+	monster "tower_c9.gat",108,116,"アルマイア=デュンゼ",1654,1;
+	monster "tower_c9.gat",110,116,"イレンド=エベシ",1655,1;
+	monster "tower_c9.gat",113,116,"カヴァク=イカルス",1656,1;
+	monster "tower_c9.gat",115,116,"ラウレル=ヴィンダー",1657,1;
+	end;
+OnTimer75000:
+	monster "tower_c9.gat",91,111,"エレメス=ガイル",1635,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",94,111,"エレメス=ガイル",1635,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",97,111,"エレメス=ガイル",1635,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",97,108,"エレメス=ガイル",1635,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",103,111,"マーガレッタ=ソリン",1637,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",103,108,"マーガレッタ=ソリン",1637,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",106,111,"マーガレッタ=ソリン",1637,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",109,111,"マーガレッタ=ソリン",1637,1,"mirage9::OnKilled";
+	end;
+OnTimer90000:
+	monster "tower_c9.gat",84,108,"カトリーヌ=ケイロン",1639,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",115,108,"カトリーヌ=ケイロン",1639,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",90,108,"ダークイリュージョン",1302,1;
+	monster "tower_c9.gat",90,110,"レイブオルマイ",1306,1;
+	monster "tower_c9.gat",90,112,"レイブオルマイ",1306,1;
+	monster "tower_c9.gat",112,108,"ダークイリュージョン",1302,1;
+	monster "tower_c9.gat",112,110,"ごっついミノタウロス",1310,1;
+	monster "tower_c9.gat",112,112,"ごっついミノタウロス",1310,1;
+	end;
+OnTimer100000:
+	stopnpctimer;
+	monster "tower_c9.gat",85,97,"セイレン=ウィンザー",1634,1;
+	monster "tower_c9.gat",114,97,"セイレン=ウィンザー",1634,1;
+	monster "tower_c9.gat",93,139,"ワクワク",2315,1;
+	monster "tower_c9.gat",95,137,"ワクワク",2315,1;
+	monster "tower_c9.gat",95,139,"ワクワク",2315,1;
+	monster "tower_c9.gat",95,141,"ワクワク",2315,1;
+	monster "tower_c9.gat",104,137,"マンククーラム",2312,1;
+	monster "tower_c9.gat",104,139,"マンククーラム",2312,1;
+	monster "tower_c9.gat",104,141,"マンククーラム",2312,1;
+	monster "tower_c9.gat",106,139,"マンククーラム",2312,1;
+	monster "tower_c9.gat",93,60,"エンカント",2310,1;
+	monster "tower_c9.gat",95,58,"エンカント",2310,1;
+	monster "tower_c9.gat",95,60,"エンカント",2310,1;
+	monster "tower_c9.gat",95,62,"エンカント",2310,1;
+	monster "tower_c9.gat",104,58,"チャナック",2314,1;
+	monster "tower_c9.gat",104,60,"チャナック",2314,1;
+	monster "tower_c9.gat",104,62,"チャナック",2314,1;
+	monster "tower_c9.gat",106,60,"チャナック",2314,1;
+	monster "tower_c9.gat",58,104,"ティクバラン",2313,1;
+	monster "tower_c9.gat",60,104,"ティクバラン",2313,1;
+	monster "tower_c9.gat",62,104,"ティクバラン",2313,1;
+	monster "tower_c9.gat",60,106,"ティクバラン",2313,1;
+	monster "tower_c9.gat",60,96,"マナナンガル",2311,1;
+	monster "tower_c9.gat",58,96,"マナナンガル",2311,1;
+	monster "tower_c9.gat",62,96,"マナナンガル",2311,1;
+	monster "tower_c9.gat",60,94,"マナナンガル",2311,1;
+	monster "tower_c9.gat",139,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",141,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",143,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",141,106,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",141,96,"ブギスギス",2309,1;
+	monster "tower_c9.gat",139,96,"ブギスギス",2309,1;
+	monster "tower_c9.gat",143,96,"ブギスギス",2309,1;
+	monster "tower_c9.gat",141,94,"ブギスギス",2309,1;
+	end;
+OnSummon1:
+	startnpctimer;
+	if('type == 1) {
+		monster "tower_c9.gat",94,94,"テンタクルス",2384+rand(5),1;
+		monster "tower_c9.gat",96,97,"テンタクルス",2384+rand(5),1;
+		monster "tower_c9.gat",94,100,"テンタクルス",2384+rand(5),1;
+		monster "tower_c9.gat",96,103,"テンタクルス",2384+rand(5),1;
+	}
+	monster "tower_c9.gat",93,139,"マナナンガル",2311,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",95,137,"マナナンガル",2311,1;
+	monster "tower_c9.gat",95,139,"マナナンガル",2311,1;
+	monster "tower_c9.gat",95,141,"マナナンガル",2311,1;
+	monster "tower_c9.gat",104,137,"マンククーラム",2312,1;
+	monster "tower_c9.gat",104,139,"マンククーラム",2312,1;
+	monster "tower_c9.gat",104,141,"マンククーラム",2312,1;
+	monster "tower_c9.gat",106,139,"マンククーラム",2312,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",93,60,"ブギスギス",2309,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",95,58,"ブギスギス",2309,1;
+	monster "tower_c9.gat",95,60,"ブギスギス",2309,1;
+	monster "tower_c9.gat",95,62,"ブギスギス",2309,1;
+	monster "tower_c9.gat",104,58,"ティクバラン",2313,1;
+	monster "tower_c9.gat",104,60,"ティクバラン",2313,1;
+	monster "tower_c9.gat",104,62,"ティクバラン",2313,1;
+	monster "tower_c9.gat",106,60,"ティクバラン",2313,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",58,104,"チャナック",2314,1;
+	monster "tower_c9.gat",60,104,"チャナック",2314,1;
+	monster "tower_c9.gat",62,104,"チャナック",2314,1;
+	monster "tower_c9.gat",60,106,"チャナック",2314,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",60,96,"ワクワク",2315,1;
+	monster "tower_c9.gat",58,96,"ワクワク",2315,1;
+	monster "tower_c9.gat",62,96,"ワクワク",2315,1;
+	monster "tower_c9.gat",60,94,"ワクワク",2315,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",139,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",141,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",143,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",141,106,"ジェジェリン",2316,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",141,96,"エンカント",2310,1;
+	monster "tower_c9.gat",139,96,"エンカント",2310,1;
+	monster "tower_c9.gat",143,96,"エンカント",2310,1;
+	monster "tower_c9.gat",141,94,"エンカント",2310,1,"mirage9::OnKilled";
+	switch(rand(3)) {
+	case 0:
+		areamonster "tower_c9.gat",83,83,90,110,"ドレイク",1112,1,"mirage9::OnKilled";
+		areamonster "tower_c9.gat",83,83,90,110,"イグニゼム=セニア",1658,1,"mirage9::OnKilled";
+		break;
+	case 1:
+		areamonster "tower_c9.gat",83,83,90,110,"イグニゼム=セニア",1658,1,"mirage9::OnKilled";
+		areamonster "tower_c9.gat",83,83,90,110,"タオグンカ",1583,1,"mirage9::OnKilled";
+		break;
+	case 2:
+		areamonster "tower_c9.gat",83,83,90,110,"ドレイク",1112,1,"mirage9::OnKilled";
+		areamonster "tower_c9.gat",83,83,90,110,"タオグンカ",1583,1,"mirage9::OnKilled";
+		break;
+	}
+	end;
+OnTimer105000:
+	monster "tower_c9.gat",99,54,"アークエンジェリング",1388,1;
+	monster "tower_c9.gat",50,100,"アークエンジェリング",1388,1;
+	monster "tower_c9.gat",101,148,"アークエンジェリング",1388,1;
+	monster "tower_c9.gat",148,100,"アークエンジェリング",1388,1;
+	monster "tower_c9.gat",84,96,"悪夢のマンククーラム",2339,1;
+	monster "tower_c9.gat",84,98,"悪夢のマンククーラム",2339,1;
+	monster "tower_c9.gat",89,96,"悪夢のマンククーラム",2339,1;
+	monster "tower_c9.gat",89,98,"悪夢のマンククーラム",2339,1;
+	monster "tower_c9.gat",84,106,"悪夢のマナナンガル",2338,1;
+	monster "tower_c9.gat",84,108,"悪夢のマナナンガル",2338,1;
+	monster "tower_c9.gat",89,106,"悪夢のマナナンガル",2338,1;
+	monster "tower_c9.gat",89,108,"悪夢のマナナンガル",2338,1;
+	monster "tower_c9.gat",108,96,"悪夢のワクワク",2334,1;
+	monster "tower_c9.gat",108,98,"悪夢のワクワク",2334,1;
+	monster "tower_c9.gat",113,96,"悪夢のワクワク",2334,1;
+	monster "tower_c9.gat",113,98,"悪夢のワクワク",2334,1;
+	monster "tower_c9.gat",108,106,"悪夢のチャナック",2340,1;
+	monster "tower_c9.gat",108,108,"悪夢のチャナック",2340,1;
+	monster "tower_c9.gat",113,106,"悪夢のチャナック",2340,1;
+	monster "tower_c9.gat",113,108,"悪夢のチャナック",2340,1;
+	end;
+OnTimer130000:
+	monster "tower_c9.gat",93,139,"監視する者",1700,1;
+	monster "tower_c9.gat",95,137,"監視する者",1700,1;
+	monster "tower_c9.gat",95,139,"監視する者",1700,1;
+	monster "tower_c9.gat",95,141,"監視する者",1700,1;
+	monster "tower_c9.gat",104,137,"慰める者",1703,1;
+	monster "tower_c9.gat",104,139,"慰める者",1703,1;
+	monster "tower_c9.gat",104,141,"慰める者",1703,1;
+	monster "tower_c9.gat",106,139,"慰める者",1703,1;
+	monster "tower_c9.gat",93,60,"執行する者",1702,1;
+	monster "tower_c9.gat",95,58,"執行する者",1702,1;
+	monster "tower_c9.gat",95,60,"執行する者",1702,1;
+	monster "tower_c9.gat",95,62,"執行する者",1702,1;
+	monster "tower_c9.gat",104,58,"保護する者",1701,1;
+	monster "tower_c9.gat",104,60,"保護する者",1701,1;
+	monster "tower_c9.gat",104,62,"保護する者",1701,1;
+	monster "tower_c9.gat",106,60,"保護する者",1701,1;
+	monster "tower_c9.gat",58,104,"執行する者",1702,1;
+	monster "tower_c9.gat",60,104,"執行する者",1702,1;
+	monster "tower_c9.gat",62,104,"執行する者",1702,1;
+	monster "tower_c9.gat",60,106,"執行する者",1702,1;
+	monster "tower_c9.gat",60,96,"慰める者",1703,1;
+	monster "tower_c9.gat",58,96,"慰める者",1703,1;
+	monster "tower_c9.gat",62,96,"慰める者",1703,1;
+	monster "tower_c9.gat",60,94,"慰める者",1703,1;
+	monster "tower_c9.gat",139,104,"監視する者",1700,1;
+	monster "tower_c9.gat",141,104,"監視する者",1700,1;
+	monster "tower_c9.gat",143,104,"監視する者",1700,1;
+	monster "tower_c9.gat",141,106,"監視する者",1700,1;
+	monster "tower_c9.gat",141,96,"保護する者",1701,1;
+	monster "tower_c9.gat",139,96,"保護する者",1701,1;
+	monster "tower_c9.gat",143,96,"保護する者",1701,1;
+	monster "tower_c9.gat",141,94,"保護する者",1701,1;
+	end;
+OnTimer145000:
+	monster "tower_c9.gat",84,83,"イグニゼム=セニア",1652,1;
+	monster "tower_c9.gat",86,83,"ヒュッケバイン=トリス",1653,1;
+	monster "tower_c9.gat",88,83,"アルマイア=デュンゼ",1654,1;
+	monster "tower_c9.gat",90,83,"イレンド=エベシ",1655,1;
+	monster "tower_c9.gat",92,83,"カヴァク=イカルス",1656,1;
+	monster "tower_c9.gat",94,83,"ラウレル=ヴィンダー",1657,1;
+	end;
+OnTimer160000:
+	monster "tower_c9.gat",104,83,"イグニゼム=セニア",1652,1;
+	monster "tower_c9.gat",106,83,"ヒュッケバイン=トリス",1653,1;
+	monster "tower_c9.gat",108,83,"アルマイア=デュンゼ",1654,1;
+	monster "tower_c9.gat",110,83,"イレンド=エベシ",1655,1;
+	monster "tower_c9.gat",113,83,"カヴァク=イカルス",1656,1;
+	monster "tower_c9.gat",115,83,"ラウレル=ヴィンダー",1657,1;
+	end;
+OnTimer180000:
+	enablenpc "不思議な石版#r9a";
+	announce "石版が現れた",9;
+	set 'allmob,1;
+	monster "tower_c9.gat",91,111,"ハワード=アルトアイゼン",1636,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",94,111,"ハワード=アルトアイゼン",1636,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",97,111,"セシル=ディモン",1638,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",97,108,"セシル=ディモン",1638,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",103,111,"マーガレッタ=ソリン",1637,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",103,108,"マーガレッタ=ソリン",1637,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",106,111,"カトリーヌ=ケイロン",1639,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",109,111,"カトリーヌ=ケイロン",1639,1,"mirage9::OnKilled";
+	end;
+OnTimer195000:
+	monster "tower_c9.gat",110,99,"ブラッディナイト",1268,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",99,106,"ダークイリュージョン",1302,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",87,99,"ジェミニ-S58",1681,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",74,99,"ドゥネイール",2018,1,"mirage9::OnKilled";
+	monster "tower_c9.gat",126,99,"ラタトスク",2017,1,"mirage9::OnKilled";
+	end;
+OnTimer210000:
+	areamonster "tower_c9.gat",89,89,112,112,"エンシェントツリー",2019,3;
+	areamonster "tower_c9.gat",89,89,112,112,"ダークシャドー",2023,3;
+	areamonster "tower_c9.gat",89,89,112,112,"ポムスパイダー",2132,3;
+	areamonster "tower_c9.gat",89,89,112,112,"アングラマンティス",2133,3;
+	areamonster "tower_c9.gat",89,89,112,112,"パルス",2134,3;
+	areamonster "tower_c9.gat",89,89,112,112,"リトルファートゥム",2136,3;
+	areamonster "tower_c9.gat",89,89,112,112,"ミミン",2137,3;
+	monster "tower_c9.gat",93,139,"ワクワク",2315,1;
+	monster "tower_c9.gat",95,137,"ワクワク",2315,1;
+	monster "tower_c9.gat",95,139,"ワクワク",2315,1;
+	monster "tower_c9.gat",95,141,"ワクワク",2315,1;
+	monster "tower_c9.gat",104,137,"マンククーラム",2312,1;
+	monster "tower_c9.gat",104,139,"マンククーラム",2312,1;
+	monster "tower_c9.gat",104,141,"マンククーラム",2312,1;
+	monster "tower_c9.gat",106,139,"マンククーラム",2312,1;
+	monster "tower_c9.gat",93,60,"エンカント",2310,1;
+	monster "tower_c9.gat",95,58,"エンカント",2310,1;
+	monster "tower_c9.gat",95,60,"エンカント",2310,1;
+	monster "tower_c9.gat",95,62,"エンカント",2310,1;
+	monster "tower_c9.gat",104,58,"チャナック",2314,1;
+	monster "tower_c9.gat",104,60,"チャナック",2314,1;
+	monster "tower_c9.gat",104,62,"チャナック",2314,1;
+	monster "tower_c9.gat",106,60,"チャナック",2314,1;
+	monster "tower_c9.gat",58,104,"ティクバラン",2313,1;
+	monster "tower_c9.gat",60,104,"ティクバラン",2313,1;
+	monster "tower_c9.gat",62,104,"ティクバラン",2313,1;
+	monster "tower_c9.gat",60,106,"ティクバラン",2313,1;
+	monster "tower_c9.gat",60,96,"マナナンガル",2311,1;
+	monster "tower_c9.gat",58,96,"マナナンガル",2311,1;
+	monster "tower_c9.gat",62,96,"マナナンガル",2311,1;
+	monster "tower_c9.gat",60,94,"マナナンガル",2311,1;
+	monster "tower_c9.gat",139,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",141,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",143,104,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",141,106,"ジェジェリン",2316,1;
+	monster "tower_c9.gat",141,96,"ブギスギス",2309,1;
+	monster "tower_c9.gat",139,96,"ブギスギス",2309,1;
+	monster "tower_c9.gat",143,96,"ブギスギス",2309,1;
+	monster "tower_c9.gat",141,94,"ブギスギス",2309,1;
+	end;
+OnTimer220000:
+	areamonster "tower_c9.gat",87,108,113,110,"ランドグリスゴースト",1765,1,"mirage9::OnKilled";
+	areamonster "tower_c9.gat",55,97,71,102,"デスワード",1698,1;
+	areamonster "tower_c9.gat",55,97,71,102,"エンシェントミミック",1699,1;
+	areamonster "tower_c9.gat",55,97,71,102,"エンシェントマミー",1297,1;
+	areamonster "tower_c9.gat",55,97,71,102,"エンシェントワーム",1305,1;
+	areamonster "tower_c9.gat",129,97,144,102,"デスワード",1698,1;
+	areamonster "tower_c9.gat",129,97,144,102,"エンシェントミミック",1699,1;
+	areamonster "tower_c9.gat",129,97,144,102,"エンシェントマミー",1297,1;
+	areamonster "tower_c9.gat",129,97,144,102,"エンシェントワーム",1305,1;
+	areamonster "tower_c9.gat",89,89,112,112,"イグニゼム=セニア",1652,1;
+	areamonster "tower_c9.gat",89,89,112,112,"ヒュッケバイン=トリス",1653,1;
+	areamonster "tower_c9.gat",89,89,112,112,"アルマイア=デュンゼ",1654,1;
+	areamonster "tower_c9.gat",89,89,112,112,"イレンド=エベシ",1655,1;
+	areamonster "tower_c9.gat",89,89,112,112,"カヴァク=イカルス",1656,1;
+	areamonster "tower_c9.gat",89,89,112,112,"ラウレル=ヴィンダー",1657,1;
+	areamonster "tower_c9.gat",89,89,112,112,"セイレン=ウィンザー",1634,1;
+	areamonster "tower_c9.gat",89,89,112,112,"エレメス=ガイル",1635,1;
+	areamonster "tower_c9.gat",89,89,112,112,"ハワード=アルトアイゼン",1636,1;
+	areamonster "tower_c9.gat",89,89,112,112,"マーガレッタ=ソリン",1637,1;
+	areamonster "tower_c9.gat",89,89,112,112,"セシル=ディモン",1638,1;
+	areamonster "tower_c9.gat",89,89,112,112,"カトリーヌ=ケイロン",1639,1;
+	end;
+OnTimer230000:
+	areamonster "tower_c9.gat",89,89,112,112,"パルス",2134,2;
+	areamonster "tower_c9.gat",89,89,112,112,"リトルファートゥム",2136,2;
+	areamonster "tower_c9.gat",89,89,112,112,"ミミン",2137,2;
+	monster "tower_c9.gat",93,139,"監視する者",1700,1;
+	monster "tower_c9.gat",95,137,"監視する者",1700,1;
+	monster "tower_c9.gat",95,139,"監視する者",1700,1;
+	monster "tower_c9.gat",95,141,"監視する者",1700,1;
+	monster "tower_c9.gat",104,137,"慰める者",1703,1;
+	monster "tower_c9.gat",104,139,"慰める者",1703,1;
+	monster "tower_c9.gat",104,141,"慰める者",1703,1;
+	monster "tower_c9.gat",106,139,"慰める者",1703,1;
+	monster "tower_c9.gat",93,60,"執行する者",1702,1;
+	monster "tower_c9.gat",95,58,"執行する者",1702,1;
+	monster "tower_c9.gat",95,60,"執行する者",1702,1;
+	monster "tower_c9.gat",95,62,"執行する者",1702,1;
+	monster "tower_c9.gat",104,58,"保護する者",1701,1;
+	monster "tower_c9.gat",104,60,"保護する者",1701,1;
+	monster "tower_c9.gat",104,62,"保護する者",1701,1;
+	monster "tower_c9.gat",106,60,"保護する者",1701,1;
+	monster "tower_c9.gat",58,104,"執行する者",1702,1;
+	monster "tower_c9.gat",60,104,"執行する者",1702,1;
+	monster "tower_c9.gat",62,104,"執行する者",1702,1;
+	monster "tower_c9.gat",60,106,"執行する者",1702,1;
+	monster "tower_c9.gat",60,96,"慰める者",1703,1;
+	monster "tower_c9.gat",58,96,"慰める者",1703,1;
+	monster "tower_c9.gat",62,96,"慰める者",1703,1;
+	monster "tower_c9.gat",60,94,"慰める者",1703,1;
+	monster "tower_c9.gat",139,104,"監視する者",1700,1;
+	monster "tower_c9.gat",141,104,"監視する者",1700,1;
+	monster "tower_c9.gat",143,104,"監視する者",1700,1;
+	monster "tower_c9.gat",141,106,"監視する者",1700,1;
+	monster "tower_c9.gat",141,96,"保護する者",1701,1;
+	monster "tower_c9.gat",139,96,"保護する者",1701,1;
+	monster "tower_c9.gat",143,96,"保護する者",1701,1;
+	monster "tower_c9.gat",141,94,"保護する者",1701,1;
+	end;
+OnTimer250000:
+	areamonster "tower_c9.gat",55,97,71,102,"デスワード",1698,1;
+	areamonster "tower_c9.gat",55,97,71,102,"エンシェントミミック",1699,1;
+	areamonster "tower_c9.gat",55,97,71,102,"エンシェントマミー",1297,1;
+	areamonster "tower_c9.gat",55,97,71,102,"エンシェントワーム",1305,1;
+	areamonster "tower_c9.gat",129,97,144,102,"デスワード",1698,1;
+	areamonster "tower_c9.gat",129,97,144,102,"エンシェントミミック",1699,1;
+	areamonster "tower_c9.gat",129,97,144,102,"エンシェントマミー",1297,1;
+	areamonster "tower_c9.gat",129,97,144,102,"エンシェントワーム",1305,1;
+	monster "tower_c9.gat",93,139,"監視する者",1700,1;
+	monster "tower_c9.gat",95,137,"監視する者",1700,1;
+	monster "tower_c9.gat",95,139,"監視する者",1700,1;
+	monster "tower_c9.gat",95,141,"監視する者",1700,1;
+	monster "tower_c9.gat",104,137,"慰める者",1703,1;
+	monster "tower_c9.gat",104,139,"慰める者",1703,1;
+	monster "tower_c9.gat",104,141,"慰める者",1703,1;
+	monster "tower_c9.gat",106,139,"慰める者",1703,1;
+	monster "tower_c9.gat",93,60,"執行する者",1702,1;
+	monster "tower_c9.gat",95,58,"執行する者",1702,1;
+	monster "tower_c9.gat",95,60,"執行する者",1702,1;
+	monster "tower_c9.gat",95,62,"執行する者",1702,1;
+	monster "tower_c9.gat",104,58,"保護する者",1701,1;
+	monster "tower_c9.gat",104,60,"保護する者",1701,1;
+	monster "tower_c9.gat",104,62,"保護する者",1701,1;
+	monster "tower_c9.gat",106,60,"保護する者",1701,1;
+	monster "tower_c9.gat",58,104,"執行する者",1702,1;
+	monster "tower_c9.gat",60,104,"執行する者",1702,1;
+	monster "tower_c9.gat",62,104,"執行する者",1702,1;
+	monster "tower_c9.gat",60,106,"執行する者",1702,1;
+	monster "tower_c9.gat",60,96,"慰める者",1703,1;
+	monster "tower_c9.gat",58,96,"慰める者",1703,1;
+	monster "tower_c9.gat",62,96,"慰める者",1703,1;
+	monster "tower_c9.gat",60,94,"慰める者",1703,1;
+	monster "tower_c9.gat",139,104,"監視する者",1700,1;
+	monster "tower_c9.gat",141,104,"監視する者",1700,1;
+	monster "tower_c9.gat",143,104,"監視する者",1700,1;
+	monster "tower_c9.gat",141,106,"監視する者",1700,1;
+	monster "tower_c9.gat",141,96,"保護する者",1701,1;
+	monster "tower_c9.gat",139,96,"保護する者",1701,1;
+	monster "tower_c9.gat",143,96,"保護する者",1701,1;
+	monster "tower_c9.gat",141,94,"保護する者",1701,1;
+	end;
+OnTimer260000:
+	stopnpctimer;
+	areamonster "tower_c9.gat",89,89,112,112,"エンシェントツリー",2019,3;
+	areamonster "tower_c9.gat",89,89,112,112,"ダークシャドー",2023,3;
+	areamonster "tower_c9.gat",89,89,112,112,"ポムスパイダー",2132,3;
+	areamonster "tower_c9.gat",89,89,112,112,"アングラマンティス",2133,3;
+	areamonster "tower_c9.gat",89,89,112,112,"パルス",2134,3;
+	areamonster "tower_c9.gat",89,89,112,112,"リトルファートゥム",2136,3;
+	areamonster "tower_c9.gat",89,89,112,112,"ミミン",2137,3;
+	end;
+OnKilled:
+	set 'mob,getmapmobs("tower_c9.gat","mirage9::OnKilled");
+	if('mob <= 0) {
+		sleep 2000;
+		switch('flag) {
+		case 0: donpcevent "mirage9::OnSummon1"; break;
+		default: set 'allmob,10; break;
+		}
+		set 'flag,'flag+1;
+	}
+	end;
+}
+
+// 9F石板
+tower_c9.gat,92,98,4	script	不思議な石版#r9a	858,{
+	if(getvariableofnpc('allmob,"mirage9")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r9a";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage9"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	if(getvariableofnpc('type,"mirage9") == 1) {
+		enablenpc "mirage4022a";
+		enablenpc "mirage4022b";
+		enablenpc "mirage4022c";
+		enablenpc "mirage4022d";
+	} else {
+		enablenpc "mirage4022e";
+		enablenpc "mirage4022f";
+	}
+	if(rand(2))
+		set getvariableofnpc('type,"mirage10"),1;
+	else
+		set getvariableofnpc('type,"mirage10"),2;
+	donpcevent "mirage10::OnStart";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	stopnpctimer;
+	if(getmapusers("this")>0)
+	areawarp "tower_c9.gat",0,0,300,300,"SavePoint",0,0;
+	killmonster "tower_c9.gat","All";
+	set getvariableofnpc('flag,"mirage9"),0;
+}
+
+tower_c9.gat,105,98,4	script	不思議な石版#r9b	858,{
+	if(getvariableofnpc('allmob,"mirage9")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r9b";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage9"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	if(getvariableofnpc('type,"mirage9") == 1) {
+		enablenpc "mirage4022a";
+		enablenpc "mirage4022b";
+		enablenpc "mirage4022c";
+		enablenpc "mirage4022d";
+	} else {
+		enablenpc "mirage4022e";
+		enablenpc "mirage4022f";
+	}
+	if(rand(2))
+		set getvariableofnpc('type,"mirage10"),1;
+	else
+		set getvariableofnpc('type,"mirage10"),2;
+	donpcevent "mirage10::OnStart";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	stopnpctimer;
+	if(getmapusers("this")>0)
+	areawarp "tower_c9.gat",0,0,300,300,"SavePoint",0,0;
+	killmonster "tower_c9.gat","All";
+	set getvariableofnpc('flag,"mirage9"),0;
+}
+
+//９Ｆ→１０Ｆ
+tower_c9.gat,100,60,0	script	mirage4022a	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c10.gat",99,100;
+}
+tower_c9.gat,100,139,0	script	mirage4022b	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c10.gat",99,100;
+}
+tower_c9.gat,59,99,0	script	mirage4022c	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c10.gat",99,100;
+}
+tower_c9.gat,141,99,0	script	mirage4022d	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c10.gat",99,100;
+}
+tower_c9.gat,100,93,0	script	mirage4022e	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c10.gat",99,100;
+}
+tower_c9.gat,100,106,0	script	mirage4022f	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+500;
+	warp "tower_c10.gat",99,100;
+}
+
+//============================================================
+// 蜃気楼の塔 10F
+//------------------------------------------------------------
+tower_c10.gat,0,0,0	script	mirage10	-1,{
+OnStart:
+	initnpctimer;
+	donpcevent "mirage_mushroom10::OnStart";
+	set 'flag,0;
+	set 'allmob,0;
+	end;
+OnTimer30000:
+	stopnpctimer;
+	monster "tower_c10.gat",86,97,"テンタクルス",2384+rand(5),1;
+	monster "tower_c10.gat",90,100,"テンタクルス",2384+rand(5),1;
+	monster "tower_c10.gat",100,109,"テンタクルス",2384+rand(5),1;
+	monster "tower_c10.gat",104,113,"テンタクルス",2384+rand(5),1;
+	monster "tower_c10.gat",93,94,"ヘラクレススカラバ",2161,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",96,100,"ヘラクレススカラバ",2161,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",100,104,"レギウススカラバ",2164,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",100,100,"アトラススカラバ",2163,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",100,97,"アトラススカラバ",2163,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",106,94,"レギウススカラバ",2164,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",104,100,"コーカサススカラバ",2162,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",106,106,"アトラススカラバ",2163,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",91,115,"コーカサススカラバ",2162,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",87,102,"アイスディミック",1671,1;
+	monster "tower_c10.gat",89,105,"アースディミック",1672,1;
+	monster "tower_c10.gat",112,107,"フレイムディミック",1673,1;
+	monster "tower_c10.gat",100,89,"ウィンドディミック",1670,1;
+	monster "tower_c10.gat",90,86,"タナトスの憎悪",1704,1;
+	monster "tower_c10.gat",106,107,"タナトスの絶望",1705,1;
+	monster "tower_c10.gat",110,100,"タナトスの悲しみ",1706,1;
+	monster "tower_c10.gat",83,103,"タナトスの苦悩",1707,1;
+	for(set '@i,0; '@i<3; set '@i,'@i+1) {
+		switch(rand(11)) {
+		case 0: areamonster "tower_c10.gat",83,83,90,110,"ヴェルゼブブ",1873,1; break;
+		case 1: areamonster "tower_c10.gat",83,83,90,110,"魔剣士タナトスの思念体",1708,1; break;
+		case 2: areamonster "tower_c10.gat",83,83,90,110,"堕ちた大神官ヒバム",1871,1; break;
+		case 3: areamonster "tower_c10.gat",83,83,90,110,"キエル-D-01",1734,1; break;
+		case 4: areamonster "tower_c10.gat",83,83,90,110,"女王スカラバ",2087,1; break;
+		case 5: areamonster "tower_c10.gat",83,83,90,110,"女帝スカラバ",2165,1; break;
+		case 6: areamonster "tower_c10.gat",83,83,90,110,"オークヒーロー",1087,1; break;
+		case 7: areamonster "tower_c10.gat",83,83,90,110,"オークロード",1190,1; break;
+		case 8: areamonster "tower_c10.gat",83,83,90,110,"オシリス",1038,1; break;
+		case 9: areamonster "tower_c10.gat",83,83,90,110,"ファラオ",1157,1; break;
+		case 10:areamonster "tower_c10.gat",83,83,90,110,"レヤック",2156,1; break;
+		}
+	}
+	end;
+OnSummon1:
+	startnpctimer;
+	monster "tower_c10.gat",84,109,"セイレン=ウィンザー",1634,1;
+	monster "tower_c10.gat",89,113,"ランデル=ロレンス",2221,1;
+	end;
+OnTimer35000:
+	monster "tower_c10.gat",84,90,"エレメス=ガイル",1635,1;
+	monster "tower_c10.gat",89,86,"ガーティー=ウー",2225,1;
+	end;
+OnTimer40000:
+	monster "tower_c10.gat",111,86,"ハワード=アルトアイゼン",1636,1;
+	monster "tower_c10.gat",115,90,"エミュール=プラメール",2222,1;
+	end;
+OnTimer45000:
+	monster "tower_c10.gat",111,113,"マーガレッタ=ソリン",1637,1;
+	monster "tower_c10.gat",115,109,"チェン=リウ",2224,1;
+	end;
+OnTimer50000:
+	monster "tower_c10.gat",93,105,"カトリーヌ=ケイロン",1639,1;
+	monster "tower_c10.gat",94,106,"カトリーヌ=ケイロン",1639,1;
+	end;
+OnTimer55000:
+	monster "tower_c10.gat",93,95,"セリア=アルデ",2223,1;
+	monster "tower_c10.gat",94,94,"セリア=アルデ",2223,1;
+	end;
+OnTimer60000:
+	monster "tower_c10.gat",104,94,"アルフォシオ=バジル",2226,1;
+	monster "tower_c10.gat",105,95,"アルフォシオ=バジル",2226,1;
+	end;
+OnTimer65000:
+	monster "tower_c10.gat",104,106,"トレンティーニ",2227,1;
+	monster "tower_c10.gat",105,105,"トレンティーニ",2227,1;
+	end;
+OnTimer70000:
+	stopnpctimer;
+	areamonster "tower_c10.gat",93,94,105,106,"イグニゼム=セニア",1652,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",93,94,105,106,"ヒュッケバイン=トリス",1653,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",93,94,105,106,"アルマイア=デュンゼ",1654,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",93,94,105,106,"イレンド=エベシ",1655,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",93,94,105,106,"カヴァク=イカルス",1656,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",93,94,105,106,"ラウレル=ヴィンダー",1657,1,"mirage10::OnKilled";
+	end;
+OnSummon2:
+	donpcevent "mirage_mushroom10::OnStart2";
+	areamonster "tower_c10.gat",89,89,112,112,"ポムスパイダー",2132,1;
+	areamonster "tower_c10.gat",89,89,112,112,"アングラマンティス",2133,1;
+	areamonster "tower_c10.gat",89,89,112,112,"パルス",2134,1;
+	areamonster "tower_c10.gat",89,89,112,112,"リトルファートゥム",2136,1;
+	areamonster "tower_c10.gat",89,89,112,112,"ミミン",2137,1;
+	areamonster "tower_c10.gat",89,89,112,112,"アイスディミック",1671,1;
+	areamonster "tower_c10.gat",89,89,112,112,"アースディミック",1672,1;
+	areamonster "tower_c10.gat",89,89,112,112,"フレイムディミック",1673,1;
+	areamonster "tower_c10.gat",89,89,112,112,"ウィンドディミック",1670,1;
+	areamonster "tower_c10.gat",89,89,112,112,"タナトスの憎悪",1704,1;
+	areamonster "tower_c10.gat",89,89,112,112,"タナトスの絶望",1705,1;
+	areamonster "tower_c10.gat",89,89,112,112,"タナトスの悲しみ",1706,1;
+	areamonster "tower_c10.gat",89,89,112,112,"タナトスの苦悩",1707,1;
+	areamonster "tower_c10.gat",89,89,112,112,"ダークイリュージョン",1302,1;
+	areamonster "tower_c10.gat",89,89,112,112,"ブラッディナイト",1268,1;
+	areamonster "tower_c10.gat",89,89,112,112,"ごっついミノタウロス",1310,1;
+	areamonster "tower_c10.gat",83,83,110,110,"ヘラクレススカラバ",2161,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",83,83,110,110,"コーカサススカラバ",2162,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",83,83,110,110,"アトラススカラバ",2163,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",83,83,110,110,"レギウススカラバ",2164,1,"mirage10::OnKilled";
+	end;
+OnSummon3:
+	areamonster "tower_c10.gat",83,83,110,110,"キングドラモ",2198,1;
+	areamonster "tower_c10.gat",83,83,110,110,"スロフォ",2201,1;
+	areamonster "tower_c10.gat",83,83,110,110,"ドフレ",2203,1;
+	areamonster "tower_c10.gat",83,83,110,110,"セドラ",2204,1;
+	areamonster "tower_c10.gat",89,89,112,112,"ポムスパイダー",2132,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"アングラマンティス",2133,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"パルス",2134,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"リトルファートゥム",2136,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"ミミン",2137,1,"mirage10::OnKilled";
+	sleep 5000;
+	areamonster "tower_c10.gat",83,83,110,110,"キングドラモ",2198,1;
+	areamonster "tower_c10.gat",83,83,110,110,"スロフォ",2201,1;
+	areamonster "tower_c10.gat",83,83,110,110,"ドフレ",2203,1;
+	areamonster "tower_c10.gat",83,83,110,110,"セドラ",2204,1;
+	sleep 5000;
+	areamonster "tower_c10.gat",83,83,110,110,"キングドラモ",2198,1;
+	areamonster "tower_c10.gat",83,83,110,110,"スロフォ",2201,1;
+	areamonster "tower_c10.gat",83,83,110,110,"ドフレ",2203,1;
+	areamonster "tower_c10.gat",83,83,110,110,"セドラ",2204,1;
+	areamonster "tower_c10.gat",83,83,110,110,"ヘラクレススカラバ",2161,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",83,83,110,110,"コーカサススカラバ",2162,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",83,83,110,110,"アトラススカラバ",2163,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",83,83,110,110,"レギウススカラバ",2164,1,"mirage10::OnKilled";
+	end;
+OnSummon4:
+	donpcevent "mirage_mushroom10::OnStart3";
+	areamonster "tower_c10.gat",89,89,112,112,"ダークイリュージョン",1302,4;
+	areamonster "tower_c10.gat",89,89,112,112,"深淵の騎士",1219,4;
+	areamonster "tower_c10.gat",89,89,112,112,"彷徨う者",1208,4;
+	areamonster "tower_c10.gat",89,89,112,112,"ブラッディナイト",1268,4;
+	areamonster "tower_c10.gat",89,89,112,112,"ポムスパイダー",2132,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"アングラマンティス",2133,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"パルス",2134,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"リトルファートゥム",2136,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"ミミン",2137,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",83,83,110,110,"ヘラクレススカラバ",2161,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",83,83,110,110,"コーカサススカラバ",2162,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",83,83,110,110,"アトラススカラバ",2163,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",83,83,110,110,"レギウススカラバ",2164,1,"mirage10::OnKilled";
+	end;
+OnSummon5:
+	areamonster "tower_c10.gat",89,89,112,112,"アイスディミック",1671,6;
+	sleep 3000;
+	areamonster "tower_c10.gat",89,89,112,112,"アースディミック",1672,6;
+	sleep 3000;
+	areamonster "tower_c10.gat",89,89,112,112,"フレイムディミック",1673,6;
+	sleep 3000;
+	areamonster "tower_c10.gat",89,89,112,112,"ウィンドディミック",1670,6;
+	sleep 3000;
+	enablenpc "不思議な石版#r10";
+	announce "石版が現れた",9;
+	set 'allmob,1;
+	monster "tower_c10.gat",109,107,"魔法の茨",1960,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",109,110,"魔法の茨",1960,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",105,98,"治癒の茨",1959,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",105,100,"治癒の茨",1959,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",108,90,"浄化の茨",1961,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",105,102,"狙撃の茨",1958,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",103,100,"狙撃の茨",1958,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",102,104,"狙撃の茨",1958,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",89,91,"治癒の茨",1959,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",96,100,"エントヴァイエン",1957,1;
+	monster "tower_c10.gat",94,96,"狙撃の茨",1958,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",105,81,"治癒の茨",1959,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",99,102,"浄化の茨",1961,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",99,104,"浄化の茨",1961,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",101,90,"狙撃の茨",1958,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",97,104,"浄化の茨",1961,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",99,106,"浄化の茨",1961,1,"mirage10::OnKilled";
+	monster "tower_c10.gat",90,110,"魔法の茨",1960,1,"mirage10::OnKilled";
+	sleep 10000;
+	monster "tower_c10.gat",84,109,"セイレン=ウィンザー",1634,1;
+	monster "tower_c10.gat",89,113,"ランデル=ロレンス",2221,1;
+	monster "tower_c10.gat",84,90,"エレメス=ガイル",1635,1;
+	monster "tower_c10.gat",89,86,"ガーティー=ウー",2225,1;
+	monster "tower_c10.gat",111,86,"ハワード=アルトアイゼン",1636,1;
+	monster "tower_c10.gat",115,90,"エミュール=プラメール",2222,1;
+	monster "tower_c10.gat",111,113,"マーガレッタ=ソリン",1637,1;
+	monster "tower_c10.gat",115,109,"チェン=リウ",2224,1;
+	monster "tower_c10.gat",93,105,"カトリーヌ=ケイロン",1639,1;
+	monster "tower_c10.gat",93,95,"セリア=アルデ",2223,1;
+	monster "tower_c10.gat",104,94,"アルフォシオ=バジル",2226,1;
+	monster "tower_c10.gat",104,106,"トレンティーニ",2227,1;
+	sleep 10000;
+	areamonster "tower_c10.gat",89,89,112,112,"ダークイリュージョン",1302,4;
+	areamonster "tower_c10.gat",89,89,112,112,"深淵の騎士",1219,4;
+	areamonster "tower_c10.gat",89,89,112,112,"ポムスパイダー",2132,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"アングラマンティス",2133,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"パルス",2134,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"リトルファートゥム",2136,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"ミミン",2137,1,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"悪夢のマンククーラム",2339,2,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"悪夢のマナナンガル",2338,2,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"悪夢のワクワク",2334,2,"mirage10::OnKilled";
+	areamonster "tower_c10.gat",89,89,112,112,"悪夢のチャナック",2340,2,"mirage10::OnKilled";
+	end;
+OnKilled:
+	set 'mob,getmapmobs("tower_c10.gat","mirage10::OnKilled");
+	if('mob <= 0) {
+		sleep 2000;
+		switch('flag) {
+		case 0: donpcevent "mirage10::OnSummon1"; break;
+		case 1: donpcevent "mirage10::OnSummon2"; break;
+		case 2: donpcevent "mirage10::OnSummon3"; break;
+		case 3: donpcevent "mirage10::OnSummon4"; break;
+		case 4: donpcevent "mirage10::OnSummon5"; break;
+		default: set 'allmob,10; break;
+		}
+		set 'flag,'flag+1;
+	}
+	end;
+}
+
+tower_c10.gat,0,0,0	script	mirage_mushroom10	-1,{
+OnStart:
+	initnpctimer;
+	set 'north,1;
+	set 'south,1;
+	set 'east,1;
+	set 'west,1;
+	set 'central,0;
+	monster "tower_c10.gat",108,119,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledNorth";
+	monster "tower_c10.gat",90,82,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledSouth";
+	monster "tower_c10.gat",118,93,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledEast";
+	monster "tower_c10.gat",80,94,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledWest";
+	end;
+OnStart2:
+	startnpctimer;
+	set 'north,1;
+	set 'south,1;
+	set 'east,1;
+	set 'west,1;
+	set 'central,1;
+	monster "tower_c10.gat",89,118,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledNorth";
+	monster "tower_c10.gat",109,81,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledSouth";
+	monster "tower_c10.gat",118,109,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledEast";
+	monster "tower_c10.gat",81,110,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledWest";
+	monster "tower_c10.gat",95,97,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledCentral";
+	end;
+OnStart3:
+	startnpctimer;
+	set 'north,1;
+	set 'south,1;
+	set 'east,1;
+	set 'west,1;
+	set 'central,1;
+	monster "tower_c10.gat",108,119,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledNorth";
+	monster "tower_c10.gat",90,82,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledSouth";
+	monster "tower_c10.gat",118,93,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledEast";
+	monster "tower_c10.gat",80,94,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledWest";
+	monster "tower_c10.gat",95,97,"黒いきのこ",1084,1,"mirage_mushroom10::OnKilledCentral";
+	end;
+OnTimer1000:
+OnTimer120000:
+OnTimer240000:
+OnTimer360000:
+	killmonster "tower_c10.gat","mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",95,138,"フレイムヴェナート",1675,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",97,138,"ヴェナート",1676,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",99,138,"ウィンドヴェナート",1677,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",101,138,"アースヴェナート",1678,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",103,138,"アイスヴェナート",1679,1,"mirage_mushroom10::OnKilled";
+	if('north) {
+		monster "tower_c10.gat",96,132,"働きブワヤ",2330,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",96,135,"深淵の騎士",1219,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",103,135,"アークダム",1668,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",103,132,"ザクダム",1979,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",100,129,"ブワヤの影",2332,1,"mirage_mushroom10::OnKilled";
+	}
+	monster "tower_c10.gat",99,70,"フレイムヴェナート",1675,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",95,65,"ヴェナート",1676,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",95,61,"ウィンドヴェナート",1677,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",104,61,"アースヴェナート",1678,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",104,65,"アイスヴェナート",1679,1,"mirage_mushroom10::OnKilled";
+	if('south) {
+		monster "tower_c10.gat",97,68,"働きブワヤ",2330,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,68,"深淵の騎士",1219,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",97,63,"アークダム",1668,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,63,"ザクダム",1979,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",99,65,"ブワヤの影",2332,1,"mirage_mushroom10::OnKilled";
+	}
+	monster "tower_c10.gat",61,96,"フレイムヴェナート",1675,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",61,98,"ヴェナート",1676,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",61,100,"ウィンドヴェナート",1677,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",61,102,"アースヴェナート",1678,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",61,104,"アイスヴェナート",1679,1,"mirage_mushroom10::OnKilled";
+	if('east) {
+		monster "tower_c10.gat",62,96,"働きブワヤ",2330,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",66,95,"深淵の騎士",1219,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",64,97,"アークダム",1668,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",62,102,"ザクダム",1979,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",68,103,"ブワヤの影",2332,1,"mirage_mushroom10::OnKilled";
+	}
+	monster "tower_c10.gat",130,103,"フレイムヴェナート",1675,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",137,103,"ヴェナート",1676,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",133,99,"ウィンドヴェナート",1677,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",130,96,"アースヴェナート",1678,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",137,96,"アイスヴェナート",1679,1,"mirage_mushroom10::OnKilled";
+	if('west) {
+		monster "tower_c10.gat",135,95,"働きブワヤ",2330,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",131,95,"深淵の騎士",1219,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",131,104,"アークダム",1668,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",135,104,"ザクダム",1979,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",128,99,"ブワヤの影",2332,1,"mirage_mushroom10::OnKilled";
+	}
+	end;
+OnTimer370000:
+	stopnpctimer;
+	end;
+OnTimer381000:
+OnTimer500000:
+OnTimer620000:
+OnTimer740000:
+	killmonster "tower_c10.gat","mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",95,138,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",97,138,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",99,138,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",101,138,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",103,138,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	if('north) {
+		monster "tower_c10.gat",96,132,"働きブワヤ",2330,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",96,135,"深淵の騎士",1219,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",103,135,"アークダム",1668,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",103,132,"ザクダム",1979,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",100,129,"ブワヤの影",2332,1,"mirage_mushroom10::OnKilled";
+	}
+	monster "tower_c10.gat",99,70,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",95,65,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",95,61,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",104,61,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",104,65,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	if('south) {
+		monster "tower_c10.gat",97,68,"働きブワヤ",2330,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,68,"深淵の騎士",1219,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",97,63,"アークダム",1668,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,63,"ザクダム",1979,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",99,65,"ブワヤの影",2332,1,"mirage_mushroom10::OnKilled";
+	}
+	monster "tower_c10.gat",61,96,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",61,98,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",61,100,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",61,102,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",61,104,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	if('east) {
+		monster "tower_c10.gat",62,96,"働きブワヤ",2330,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",66,95,"深淵の騎士",1219,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",64,97,"アークダム",1668,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",62,102,"ザクダム",1979,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",68,103,"ブワヤの影",2332,1,"mirage_mushroom10::OnKilled";
+	}
+	monster "tower_c10.gat",130,103,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",137,103,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",133,99,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",130,96,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	monster "tower_c10.gat",137,96,"グリーンペロス",1717,1,"mirage_mushroom10::OnKilled";
+	if('west) {
+		monster "tower_c10.gat",135,95,"働きブワヤ",2330,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",131,95,"深淵の騎士",1219,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",131,104,"アークダム",1668,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",135,104,"ザクダム",1979,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",128,99,"ブワヤの影",2332,1,"mirage_mushroom10::OnKilled";
+	}
+	if('central) {
+		monster "tower_c10.gat",91,106,"働きブワヤ",2330,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",86,92,"深淵の騎士",1219,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",104,95,"アークダム",1668,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",104,112,"ザクダム",1979,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",96,97,"ブワヤの影",2332,1,"mirage_mushroom10::OnKilled";
+	}
+	end;
+OnTimer750000:
+	stopnpctimer;
+	end;
+
+OnTimer760000:
+OnTimer880000:
+OnTimer1000000:
+OnTimer1120000:
+	killmonster "tower_c10.gat","mirage_mushroom10::OnKilled";
+	if('north) {
+		monster "tower_c10.gat",97,118,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",97,117,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",98,117,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",99,117,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",100,117,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",101,117,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,117,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,118,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",96,132,"悪夢のマンククーラム",2339,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",96,135,"悪夢のマナナンガル",2338,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",103,135,"悪夢のワクワク",2334,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",103,132,"悪夢のチャナック",2340,1,"mirage_mushroom10::OnKilled";
+	}
+	if('south) {
+		monster "tower_c10.gat",97,81,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",97,82,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",98,82,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",99,82,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",100,82,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",101,82,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,82,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,81,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",97,68,"悪夢のマンククーラム",2339,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,68,"悪夢のマナナンガル",2338,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",97,63,"悪夢のワクワク",2334,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,63,"悪夢のチャナック",2340,1,"mirage_mushroom10::OnKilled";
+	}
+	if('east) {
+		monster "tower_c10.gat",118,102,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",117,102,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",117,101,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",117,100,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",117,99,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",117,98,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",117,97,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",118,97,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",62,96,"悪夢のマンククーラム",2339,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",66,95,"悪夢のマナナンガル",2338,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",64,97,"悪夢のワクワク",2334,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",62,102,"悪夢のチャナック",2340,1,"mirage_mushroom10::OnKilled";
+	}
+	if('west) {
+		monster "tower_c10.gat",81,97,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",82,97,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",82,98,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",82,99,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",82,100,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",82,101,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",82,102,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",81,102,"ネペンテス",1988,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",135,95,"悪夢のマンククーラム",2339,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",131,95,"悪夢のマナナンガル",2338,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",131,104,"悪夢のワクワク",2334,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",135,104,"悪夢のチャナック",2340,1,"mirage_mushroom10::OnKilled";
+	}
+	if('central) {
+		monster "tower_c10.gat",96,102,"悪夢のマンククーラム",2339,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",96,98,"悪夢のマナナンガル",2338,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,103,"悪夢のワクワク",2334,1,"mirage_mushroom10::OnKilled";
+		monster "tower_c10.gat",102,98,"悪夢のチャナック",2340,1,"mirage_mushroom10::OnKilled";
+	}
+	end;
+OnTimer1130000:
+	stopnpctimer;
+	end;
+OnKilled:
+	end;
+OnKilledNorth:
+	set 'north,0;
+	end;
+OnKilledSouth:
+	set 'south,0;
+	end;
+OnKilledEast:
+	set 'east,0;
+	end;
+OnKilledWest:
+	set 'west,0;
+	end;
+OnKilledCentral:
+	set 'central,0;
+	end;
+}
+
+tower_c10.gat,99,100,4	script	不思議な石版#r10	858,{
+	if(getvariableofnpc('allmob,"mirage10")>=10 && !getnpctimer(1)) {
+		initnpctimer;
+		disablenpc "不思議な石版#r10";
+	}
+	callfunc "sekiban_func",getvariableofnpc('allmob,"mirage10"),10;
+	end;
+OnTimer10000:
+	announce "先に進む道が開いた",9;
+	enablenpc "mirage4023";
+	initnpctimer "スノート#r12";
+	end;
+OnTimer40000:
+	announce "先に進む道が歪み、消えかかっている",9;
+	end;
+OnTimer120000:
+	disablenpc "mirage4023";
+	if(getmapusers("this")>0){
+		areawarp "tower_c10.gat",0,0,300,300,"SavePoint",0,0;
+	}
+	killmonster "tower_c10.gat","All";
+	set 'flag,0;
+	stopnpctimer;
+	end;
+}
+
+//１０Ｆ→最上階
+tower_c10.gat,99,100,0	script	mirage4023	45,2,2,{
+	set PC_SHOP_POINT,PC_SHOP_POINT+1550;
+	warp "jp_ev_map03.gat",15,286;
+}
+
+//============================================================
+// 蜃気楼の塔 最上階
+//------------------------------------------------------------
+jp_ev_map03.gat,24,276,4	script	スノート#r12	744,{
+	mes "[スノート]";
+	mes "調査への協力感謝するわ！";
+	mes "今回の調査はここで終わりよ！";
+	mes "ここにいるみんなには";
+	mes "調査のお礼にスポンサーから";
+	mes "頂いているショップポイントを";
+	mes "配ったわ。";
+	next;
+	mes "[スノート]";
+	mes "次回の調査にも協力をお願いね！";
+	close;
+
+OnTimer60000:
+	announce "スノート ： 皆さん、ここまでお疲れ様でした！",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： ここのエリアを調べたいのだけど、",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： ここから先の所で水晶らしきものに阻まれて先に進めないの。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： んー……水晶の向こうには建築物があるみたい。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： モンスターの姿は……向こう側には見受けられないわね。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： うーん、どうにかこの水晶を除きたいんだけどな……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： よく見ると、このフロアの床って結構傷があるのね。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 何か重いものを引きずったような跡もあるし……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： これなんか、足跡と形がそっくりよ。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： ……なんだか跡の流れに規則性があるわね。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 水晶の向こう側に続いているわ……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： ……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： あら？",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 水晶の隙間に何かはさまってる。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 取れるかな。んんーっ",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： えいっ！",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： ……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： これは……随分、型が古いけど……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 子供用の靴かしら？",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： どうしてこんな塔の中に靴なんか……しかも子供用の。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 床の規則性のあるこすれたような傷跡も気になるし……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： なんだか、これって……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： ……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： あなたたちも思った？",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 古い子供用の靴に、床の跡。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： これって人のいた痕跡よね。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 私が推測するに……",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： この先には少なくとも人が住んでいた場所があると思うの。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 今、私たちがいるのはそこへの入口にあたる場所なんだわ。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： あの水晶は警備システムか何かなのね、きっと。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： ……うーん、この先に進めないのが、本当にくやしいわ！",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： だから、時間の限り、ここにとどまって探索してみようと思うの。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： もしかしたら、この先に進む方法もわかるかもしれない。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 途中で見つけた植物みたいなものについても調査が必要ね。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： あとは学者たちの仕事になるわ。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 今回、皆さんにお願いできるのはここまでね。",9,0xEE88FF;
+	sleep 5000;
+	announce "スノート ： 調査協力ありがとうございました！",9,0xEE88FF;
+	end;
+OnTimer420000:
+	areawarp "jp_ev_map03.gat",0,0,300,300,"SavePoint",0,0;
+	stopnpctimer;
+	donpcevent "mirage_timer::Initialize";
+	end;
+OnInit:
+	areasetcell "jp_ev_map03.gat",44,224,48,231,1;
+	areasetcell "jp_ev_map03.gat",48,231,55,235,1;
+	end;
+}
+
+jp_ev_map03.gat,44,227,4	script	 #mirage_cry01	1914,{}
+jp_ev_map03.gat,44,228,4	script	 #mirage_cry02	1914,{}
+jp_ev_map03.gat,44,229,4	script	 #mirage_cry03	1914,{}
+jp_ev_map03.gat,44,230,4	script	 #mirage_cry04	1914,{}
+jp_ev_map03.gat,44,231,4	script	 #mirage_cry05	1914,{}
+jp_ev_map03.gat,45,231,4	script	 #mirage_cry06	1914,{}
+jp_ev_map03.gat,46,231,4	script	 #mirage_cry07	1914,{}
+jp_ev_map03.gat,47,231,4	script	 #mirage_cry08	1914,{}
+jp_ev_map03.gat,48,231,4	script	 #mirage_cry09	1914,{}
+jp_ev_map03.gat,48,232,4	script	 #mirage_cry10	1914,{}
+jp_ev_map03.gat,48,233,4	script	 #mirage_cry11	1914,{}
+jp_ev_map03.gat,48,234,4	script	 #mirage_cry12	1914,{}
+jp_ev_map03.gat,48,235,4	script	 #mirage_cry13	1914,{}
+jp_ev_map03.gat,49,235,4	script	 #mirage_cry14	1914,{}
+jp_ev_map03.gat,50,235,4	script	 #mirage_cry15	1914,{}
+jp_ev_map03.gat,51,235,4	script	 #mirage_cry16	1914,{}
+jp_ev_map03.gat,52,235,4	script	 #mirage_cry17	1914,{}
+jp_ev_map03.gat,45,226,4	script	 #mirage_cry18	1914,{}
+jp_ev_map03.gat,45,227,4	script	 #mirage_cry19	1914,{}
+jp_ev_map03.gat,45,228,4	script	 #mirage_cry20	1914,{}
+jp_ev_map03.gat,45,229,4	script	 #mirage_cry21	1914,{}
+jp_ev_map03.gat,45,230,4	script	 #mirage_cry22	1914,{}
+jp_ev_map03.gat,46,230,4	script	 #mirage_cry23	1914,{}
+jp_ev_map03.gat,47,230,4	script	 #mirage_cry24	1914,{}
+jp_ev_map03.gat,48,230,4	script	 #mirage_cry25	1914,{}
+jp_ev_map03.gat,49,230,4	script	 #mirage_cry26	1914,{}
+jp_ev_map03.gat,49,231,4	script	 #mirage_cry27	1914,{}
+jp_ev_map03.gat,49,232,4	script	 #mirage_cry28	1914,{}
+jp_ev_map03.gat,49,233,4	script	 #mirage_cry29	1914,{}
+jp_ev_map03.gat,49,234,4	script	 #mirage_cry30	1914,{}
+jp_ev_map03.gat,50,234,4	script	 #mirage_cry31	1914,{}
+jp_ev_map03.gat,51,234,4	script	 #mirage_cry32	1914,{}
+jp_ev_map03.gat,52,234,4	script	 #mirage_cry33	1914,{}
+jp_ev_map03.gat,53,234,4	script	 #mirage_cry34	1914,{}
+jp_ev_map03.gat,54,234,4	script	 #mirage_cry35	1914,{}
+jp_ev_map03.gat,55,234,4	script	 #mirage_cry36	1914,{}
+
+tower_c0.gat	mapflag	nomemo			dummy
+tower_c0.gat	mapflag	noteleport		dummy
+tower_c0.gat	mapflag	nosave	SavePoint	dummy
+tower_c0.gat	mapflag	noicewall		dummy
+tower_c1.gat	mapflag	nomemo			dummy
+tower_c1.gat	mapflag	noteleport		dummy
+tower_c1.gat	mapflag	nosave	SavePoint		dummy
+tower_c1.gat	mapflag	noicewall		dummy
+tower_c2.gat	mapflag	nomemo			dummy
+tower_c2.gat	mapflag	noteleport		dummy
+tower_c2.gat	mapflag	nosave	SavePoint		dummy
+tower_c2.gat	mapflag	noicewall		dummy
+tower_c3.gat	mapflag	nomemo			dummy
+tower_c3.gat	mapflag	noteleport		dummy
+tower_c3.gat	mapflag	nosave	SavePoint		dummy
+tower_c3.gat	mapflag	noicewall		dummy
+tower_c4.gat	mapflag	nomemo			dummy
+tower_c4.gat	mapflag	noteleport		dummy
+tower_c4.gat	mapflag	nosave	SavePoint		dummy
+tower_c4.gat	mapflag	noicewall		dummy
+tower_c5.gat	mapflag	nomemo			dummy
+tower_c5.gat	mapflag	noteleport		dummy
+tower_c5.gat	mapflag	nosave	SavePoint		dummy
+tower_c5.gat	mapflag	noicewall		dummy
+tower_c6.gat	mapflag	nomemo			dummy
+tower_c6.gat	mapflag	noteleport		dummy
+tower_c6.gat	mapflag	nosave	SavePoint		dummy
+tower_c6.gat	mapflag	noicewall		dummy
+tower_c7.gat	mapflag	nomemo			dummy
+tower_c7.gat	mapflag	noteleport		dummy
+tower_c7.gat	mapflag	nosave	SavePoint		dummy
+tower_c7.gat	mapflag	noicewall		dummy
+tower_c8.gat	mapflag	nomemo			dummy
+tower_c8.gat	mapflag	noteleport		dummy
+tower_c8.gat	mapflag	nosave	SavePoint		dummy
+tower_c8.gat	mapflag	noicewall		dummy
+tower_c9.gat	mapflag	nomemo			dummy
+tower_c9.gat	mapflag	noteleport		dummy
+tower_c9.gat	mapflag	nosave	SavePoint		dummy
+tower_c9.gat	mapflag	noicewall		dummy
+tower_c10.gat	mapflag	nomemo			dummy
+tower_c10.gat	mapflag	noteleport		dummy
+tower_c10.gat	mapflag	nosave	SavePoint		dummy
+tower_c10.gat	mapflag	noicewall		dummy
+tower_c11.gat	mapflag	nomemo			dummy
+tower_c11.gat	mapflag	noteleport		dummy
+tower_c11.gat	mapflag	nosave	SavePoint		dummy
+tower_c11.gat	mapflag	noicewall		dummy
+jp_ev_map03.gat	mapflag	nomemo			dummy
+jp_ev_map03.gat	mapflag	noteleport		dummy
+jp_ev_map03.gat	mapflag	nosave	SavePoint		dummy
+jp_ev_map03.gat	mapflag	noicewall		dummy

@@ -1,0 +1,773 @@
+//= Auriga Script ==============================================================
+// Ragnarok Online Orcs Memory Script	by Blaze
+//- Registry -------------------------------------------------------------------
+// ORCS_1QUE -> 0～
+//==============================================================================
+
+//============================================================
+// クエストNPC
+//------------------------------------------------------------
+gef_fild10.gat,238,202,6	script	謎の研究者	865,{
+	switch(ORCS_1QUE) {
+	case 0:
+		mes "[謎の研究者]";
+		mes "クックック……！";
+		mes "ハァーッハッハ!!";
+		mes "オークどもめ、私に指一本";
+		mes "触れられないようだな……！";
+		mes "やはり^0000FF狭間の石^000000の力は素晴らしい……！";
+		next;
+		if(select("オークが触れられない？","（なんだこの人……）") == 2) {
+			mes "[謎の研究者]";
+			mes "なんだ、お前は？";
+			mes "そんな目で私を見るな！";
+			mes "あっち行け！";
+			mes "シッシッ!!";
+			close;
+		}
+		mes "[謎の研究者]";
+		mes "んんんんんー？";
+		mes "なんだ、興味があるのか？";
+		next;
+		mes "[謎の研究者]";
+		mes "ククク……信じがたい事実だが……";
+		mes "私がモロクの調査をしていた時、";
+		mes "次元の狭間でとある鉱石が見つかった。";
+		mes "そしてこの鉱石には";
+		mes "凄まじい力が秘められていることが";
+		mes "わかったのだ！";
+		next;
+		menu "次元の狭間で……？",-;
+		mes "[謎の研究者]";
+		mes "そう、次元の狭間で見つかった鉱石……";
+		mes "時や空間を超越した場所に";
+		mes "影響を与える……？";
+		mes "もしくは影響を受けたのか……？";
+		mes "詳しくはわからんが、とにかく";
+		mes "この石の力は次元を超えるのだ！";
+		next;
+		mes "[謎の研究者]";
+		mes "私はついさっき、それで";
+		mes "時間旅行じみたことを経験した。";
+		mes "そこにある石像がわかるか？";
+		mes "こいつには現代科学の髄と";
+		mes "次元の狭間の鉱石が持つ力を";
+		mes "高レベルで融合させてある……";
+		next;
+		mes "[謎の研究者]";
+		mes "どうだ、お前も";
+		mes "時間旅行をしてみないか？";
+		next;
+		if(BaseLevel < 30) {
+			mes "[謎の研究者]";
+			mes "……と思ったが……";
+			mes "お前、^FF0000レベルが30未満^000000だな。";
+			mes "そんなんじゃ次元を超える力に";
+			mes "耐えられん。";
+			mes "いくら私でも失敗することが";
+			mes "わかっていることを薦める暇はない！";
+			close;
+		}
+		if(BaseLevel > 80) {
+			mes "[謎の研究者]";
+			mes "……と思ったが……";
+			mes "お前、^FF0000レベルが81以上^000000だな。";
+			mes "あんまりお前の力が強すぎると";
+			mes "妙な現象が発生しかねん。";
+			mes "さすがにそいつはまずいからな。";
+			mes "あきらめろ！";
+			close;
+		}
+		menu "これって不正な実験ですよね？",-;
+		mes "[謎の研究者]";
+		mes "もちろん不正だ！";
+		next;
+		mes "[謎の研究者]";
+		mes "だがそれが何だ？";
+		mes "これほどまでに研究者という生き物を";
+		mes "奮い立たせる素材が目の前にある！";
+		mes "それを！　本能的に！";
+		mes "研究することは間違っていない！";
+		next;
+		mes "[謎の研究者]";
+		mes "クックック、まあやってみろ！";
+		mes "面白いぞ！";
+		mes "オークどもと話が出来るぞ、ハハハ！";
+		next;
+		if(select("じゃあ、してみます","……こういうのは苦手です") == 2) {
+			mes "[謎の研究者]";
+			mes "つまらん！";
+			mes "お前は本当につまらん！";
+			close;
+		}
+		mes "[謎の研究者]";
+		mes "物分りがいいじゃないか！";
+		mes "さあ、そこの石像に触れるがいい。";
+		mes "オークどもの過去の劇を";
+		mes "堪能するがいい！";
+		mes "ククク！";
+		set ORCS_1QUE,1;
+		close;
+	case 1:
+		mes "[謎の研究者]";
+		mes "ん？　なんだ？";
+		mes "時間旅行をしてみたければ";
+		mes "そこの石像に触れるがいい。";
+		mes "オークどもの過去の劇を";
+		mes "堪能できるぞ！";
+		mes "ククク！";
+		next;
+		if(select("わかりました","もう一度説明してください") == 1) {
+			mes "[謎の研究者]";
+			mes "物分りがいいじゃないか！";
+			mes "ククク！";
+			close;
+		}
+		mes "[謎の研究者]";
+		mes "はああああー？";
+		mes "めんどくさい奴だな！";
+		next;
+		mes "[謎の研究者]";
+		mes "いいか……信じがたい事実だが……";
+		mes "私がモロクの調査をしていた時、";
+		mes "次元の狭間でとある鉱石が見つかった。";
+		mes "そしてこの鉱石には";
+		mes "凄まじい力が秘められていることが";
+		mes "わかったのだ！";
+		next;
+		mes "[謎の研究者]";
+		mes "次元の狭間で見つかった鉱石……";
+		mes "時や空間を超越した場所に";
+		mes "影響を与える……？";
+		mes "もしくは影響を受けたのか……？";
+		mes "詳しくはわからんが、とにかく";
+		mes "この石の力は次元を超えるのだ！";
+		next;
+		mes "[謎の研究者]";
+		mes "私はついさっき、それで";
+		mes "時間旅行じみたことを経験した。";
+		mes "そこにある石像……";
+		mes "こいつには現代科学の髄と";
+		mes "次元の狭間の鉱石が持つ力を";
+		mes "高レベルで融合させてある……";
+		next;
+		mes "[謎の研究者]";
+		mes "そいつを使えばお前も";
+		mes "時間旅行が出来るというわけだ。";
+		next;
+		mes "[謎の研究者]";
+		mes "ただし！";
+		mes "時間旅行が出来るのは";
+		mes "レベル30～80までの人間に限る！";
+		mes "弱すぎたら次元を超える力に";
+		mes "耐えられないし、";
+		mes "強すぎても変な現象が起きかねん。";
+		next;
+		mes "[謎の研究者]";
+		mes "それだけ繊細ってことだ。";
+		mes "説明は以上だ！";
+		mes "満足したか？";
+		close;
+	}
+}
+
+//============================================================
+// 説明NPC
+//------------------------------------------------------------
+gef_fild10.gat,238,205,3	script	研究メモ	857,{
+	mes "[研究メモ]";
+	mes "‐過去のオーク地下洞窟の";
+	mes "　研究メモ‐";
+	next;
+	switch(select("^FF0000時間^000000について","^FF0000制限^000000について","^FF0000注意点^000000について")) {
+	case 1:
+		mes "[研究メモ]";
+		mes "過去に時間移動するための";
+		mes "鍵を作成し、時間移動すると、";
+		mes "その移動先は";
+		mes "他のパーティーと干渉しない";
+		mes "空間のようである。";
+		next;
+		mes "[研究メモ]";
+		mes "時間移動を行うと";
+		mes "^FF0000時間移動の影響^000000を受ける。";
+		mes "また、時間移動していられる";
+		mes "限界の時間は";
+		mes "^0000FF1時間^000000である。";
+		next;
+		mes "[研究メモ]";
+		mes "一度現在に戻るか、1時間経過して";
+		mes "現在に戻った後、再度";
+		mes "鍵を作成したり、移動するには";
+		mes "一度移動した時から";
+		mes "^0000FF約4時間^000000の時間を要する。";
+		close;
+	case 2:
+		mes "[研究メモ]";
+		mes "過去の地下洞窟は";
+		mes "例の巫女の呪術だろうか、";
+		mes "謎の力が張り巡らされているようだ。";
+		mes "そのため一部スキルやアイテムが";
+		mes "効果を発揮しない。";
+		next;
+		mes "[研究メモ]";
+		mes "スキルでは、";
+		mes "^0000FFテレポート、アイスウォール、";
+		mes "スパイダーウェブ、インティミデイト、";
+		mes "アブラカタブラ^000000が使えない。";
+		mes "また^0000FF太陽と月と星の感情^000000による";
+		mes "登録も不可能。";
+		next;
+		mes "[研究メモ]";
+		mes "アイテムでは、";
+		mes "^0000FFハイローゾイストカード、";
+		mes "アゾート^000000といった";
+		mes "モンスターを変換する効果が";
+		mes "無効化される。";
+		next;
+		mes "[研究メモ]";
+		mes "テレポートと同じ効果の";
+		mes "^0000FFハエの羽^000000なども";
+		mes "使うことができない。";
+		close;
+	case 3:
+		mes "[研究メモ]";
+		mes "決してモンスターを";
+		mes "テイミングしてはならない。";
+		mes "もししてしまった場合は、";
+		mes "先に進めなくなる可能性がある。";
+		mes "そうなったら、現実に";
+		mes "戻るほかない。";
+		close;
+	}
+}
+
+//============================================================
+// ダンジョン生成NPC
+//------------------------------------------------------------
+gef_fild10.gat,242,202,0	script	狭間の石	406,{
+	if(ORCS_1QUE < 1) {
+		mes "‐妙な雰囲気の石がある……‐";
+		close;
+	}
+	if(getonlinepartymember() < 1) {
+		mes "【狭間の石】";
+		mes "1人以上のパーティーを組んでから";
+		mes "再試行せよ。";
+		close;
+	}
+	if(checkquest(12059)) {
+		//if(checkquest(12059)&2) {
+			delquest 12059;
+			mes "【狭間の石】";
+			mes "^FF0000時間移動の影響^000000が消えた。";
+			mes "ここの鍵の作成、及び入場が";
+			mes "可能になった。";
+			close;
+		//}
+		mes "【狭間の石】";
+		mes "ここに足を踏み入れたため、";
+		mes "^FF0000時間移動の影響^000000を受けている状態。";
+		mes "影響が消えるまで";
+		mes "鍵の作成、入場を行う資格はない。";
+		close;
+	}
+	else {
+		if(getpartyleader(getcharid(1)) == strcharinfo(0)) {
+			mes "【狭間の石】";
+			mes "資格ある代表の者よ。";
+			mes "ここに入る鍵を作るか？";
+			set '@str$,"Orc's Memoryの鍵の作成";
+		}
+		else {
+			mes "【狭間の石】";
+			mes "資格ある者よ。";
+			mes "ここに入るか？";
+		}
+	}
+	next;
+	switch(select('@str$,"Orc's Memoryに入る","キャンセル")) {
+	case 1:
+		if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+			mes "【狭間の石】";
+			mes "代表権が無くなっている。";
+			mes "再試行せよ。";
+			close;
+		}
+		mdcreate "Orc's Memory";
+		mes "【狭間の石】";
+		mes "■パーティー名";
+		mes "^0000FF" +getpartyname(getcharid(1))+ "^000000";
+		mes "■パーティーリーダー";
+		mes "^0000FF" +getpartyleader(getcharid(1))+ "^000000";
+		mes " ";
+		mes "^006400Orc's Memory^000000の鍵の作成試行中。";
+		next;
+		mes "【狭間の石】";
+		mes "作成に成功した場合は";
+		mes "再び守護石に話しかけ、";
+		mes "『Orc's Memoryに入る』を";
+		mes "選択することで入場が可能。";
+		close;
+	case 2:
+		switch(mdenter("Orc's Memory")) {
+		case 0:	// エラーなし
+			announce "[" +strcharinfo(1)+ "]パーティーの[" +strcharinfo(0)+ "]が[Orc's Memory]に入場します",0x9,0x00FF99;
+			setquest 12059;
+			donpcevent getmdnpcname("OrcsControl1-1")+ "::OnStart";
+			donpcevent getmdnpcname("OrcsControl2-1")+ "::OnStart";
+			end;
+		case 1:	// パーティー未加入
+			mes "【狭間の石】";
+			mes "パーティーが解体されている。";
+			mes "再試行せよ。";
+			close;
+		case 2:	// ダンジョン未作成
+			mes "【狭間の石】";
+			mes "Orc's Memory の鍵が";
+			mes "存在しない。";
+			mes "パーティーリーダーが鍵を";
+			mes "作成していない状態。";
+			close;
+		default:	// その他エラー
+			mes "【狭間の石】";
+			mes "不明なエラーが発生。";
+			close;
+		}
+	case 3:
+		close;
+	}
+}
+
+//============================================================
+// オーク地下洞窟 01（過去）
+//------------------------------------------------------------
+1@orcs.gat,0,0,0	script	OrcsControl1-1	-1,{
+OnStart:
+	if('flag)
+		end;
+	set 'flag,1;
+	areasetcell getmdmapname("1@orcs.gat"),164,27,180,27,1;
+	for(set '@x,164; '@x <= 180; set '@x,'@x+1)
+		monster getmdmapname("1@orcs.gat"),'@x,28,"",1080,1,getmdnpcname("OrcsControl1-1")+ "::OnKilled";
+	disablenpc getmdnpcname("OrcsGate1-1");
+	disablenpc getmdnpcname("OrcsGate1-2");
+	disablenpc getmdnpcname("OrcsGate1-3");
+	disablenpc getmdnpcname("OrcsGate1-4");
+	end;
+OnKilled:
+	end;
+}
+
+1@orcs.gat,0,0,0	script	OrcsControl1-2	-1,{
+OnStart:
+	areamonster getmdmapname("1@orcs.gat"),0,0,0,0,"オーク兵",1023,30,getmdnpcname("OrcsControl1-2")+ "::OnKilled1";
+	areamonster getmdmapname("1@orcs.gat"),0,0,0,0,"訓練された狼",1106,15,getmdnpcname("OrcsControl1-2")+ "::OnKilled2";
+	areamonster getmdmapname("1@orcs.gat"),0,0,0,0,"オーク弓兵",1189,15,getmdnpcname("OrcsControl1-2")+ "::OnKilled3";
+	areamonster getmdmapname("1@orcs.gat"),98,35,178,115,"",2067,10,getmdnpcname("OrcsControl1-2")+ "::OnKilled4";
+	end;
+OnKilled1:
+	set '@rand,rand(30);
+	if('@rand == 0) {
+		areamonster getmdmapname("1@orcs.gat"),0,0,0,0,"オーク兵",1023,1,getmdnpcname("OrcsControl1-2")+ "::OnKilled1";
+	}
+	else if('@rand == 1) {
+		areamonster getmdmapname("1@orcs.gat"),0,0,0,0,"オーク突撃兵",1213,1,getmdnpcname("OrcsControl1-2")+ "::OnKilled1";
+	}
+	else if('@rand < 4) {
+		areamonster getmdmapname("1@orcs.gat"),41,81,51,91,"オーク突撃兵",1213,1,getmdnpcname("OrcsControl1-2")+ "::OnKilled1";
+		if(!rand(10))
+			announce "オーク守護大将 : 突撃兵たちはいるか!?　敵勢力を抑えろ!!",0x9,0xFF4444;
+	}
+	else {
+		areamonster getmdmapname("1@orcs.gat"),17,177,27,187,"オーク突撃兵",1213,1,getmdnpcname("OrcsControl1-2")+ "::OnKilled1";
+		if(!rand(5))
+			announce "[警告] 第四区域に一部兵力が集結を開始！",0x9,0x77FF77;
+		if(!rand(100))
+			initnpctimer;
+	}
+	end;
+OnKilled2:
+	if(rand(2)) {
+		areamonster getmdmapname("1@orcs.gat"),0,0,0,0,"訓練された狼",1106,1,getmdnpcname("OrcsControl1-2")+ "::OnKilled2";
+	}
+	else {
+		areamonster getmdmapname("1@orcs.gat"),17,177,27,187,"訓練された狼",1106,1,getmdnpcname("OrcsControl1-2")+ "::OnKilled2";
+	}
+	end;
+OnKilled3:
+	set '@rand,rand(30);
+	if('@rand == 0) {
+		areamonster getmdmapname("1@orcs.gat"),0,0,0,0,"オーク弓兵",1189,1,getmdnpcname("OrcsControl1-2")+ "::OnKilled3";
+	}
+	else if('@rand < 4) {
+		areamonster getmdmapname("1@orcs.gat"),43,155,47,159,"オーク弓兵",1189,1,getmdnpcname("OrcsControl1-2")+ "::OnKilled3";
+	}
+	else {
+		areamonster getmdmapname("1@orcs.gat"),17,177,27,187,"オーク弓兵",1189,1,getmdnpcname("OrcsControl1-2")+ "::OnKilled3";
+	}
+	end;
+OnKilled4:
+	areamonster getmdmapname("1@orcs.gat"),0,0,0,0,"",2067,1,getmdnpcname("OrcsControl1-2")+ "::OnKilled4";
+	end;
+OnKilled5:
+	end;
+OnTimer10:
+	announce "オーク守護大将 : 埒が明かないな！　スタラクタイトゴーレムを召喚しろ!!",0x9,0xFF4444;
+	end;
+OnTimer4010:
+	announce "[警告] スタラクタイトゴーレムが地下の泥土より出現！",0x9,0x77FF77;
+	areamonster getmdmapname("1@orcs.gat"),17,177,27,187,"スタラクタイトゴーレム",1278,20,getmdnpcname("OrcsControl1-2")+ "::OnKilled5";
+	end;
+}
+
+1@orcs.gat,0,0,0	script	OrcsControl1-3	-1,{
+OnStart:
+	areamonster getmdmapname("1@orcs.gat"),137,83,143,89,"オーク封印守護兵",1023,1,getmdnpcname("OrcsControl1-3")+ "::OnKilled1";
+	end;
+OnKilled1:
+	enablenpc getmdnpcname("OrcsGate1-1");
+	announce "[情報] 【オーク封印守護兵】1体撃破！　次の区域へ移動可能！",0x9,0x44FFFF;
+	areamonster getmdmapname("1@orcs.gat"),103,105,109,111,"オーク封印守護兵",1023,1,getmdnpcname("OrcsControl1-3")+ "::OnKilled2";
+	sleep 10300;
+	announce "クルガーの囁き : ここのオークたちはちょっと前まで俺の仲間だった……だが巫女の精神支配を受けて自らの意思を失ってしまった。",0x9,0xFF4499;
+	sleep 8400;
+	announce "クルガーの囁き : だが今はどうすることも出来ん。残っている仲間を助ける為にも巫女は倒さねばならないのだ。",0x9,0xFF4499;
+	end;
+OnKilled2:
+	enablenpc getmdnpcname("OrcsGate1-2");
+	announce "[情報] 【オーク封印守護兵】2体撃破！　次の区域へ移動可能！",0x9,0x44FFFF;
+	areamonster getmdmapname("1@orcs.gat"),32,40,38,46,"オーク封印守護兵",1023,1,getmdnpcname("OrcsControl1-3")+ "::OnKilled3";
+	sleep 10300;
+	announce "クルガーの囁き : ここまでの道に仲間たちの骸があった……巫女は何も知らないオークたちを自分の儀式に使った。",0x9,0xFF4499;
+	sleep 8400;
+	announce "クルガーの囁き : だが、それは全て俺のためだったんだ……自分が蒔いた種は自分でなんとかしなくてはな……",0x9,0xFF4499;
+	end;
+OnKilled3:
+	enablenpc getmdnpcname("OrcsGate1-3");
+	announce "[情報] 【オーク封印守護兵】3体撃破！　次の区域へ移動可能！",0x9,0x44FFFF;
+	areamonster getmdmapname("1@orcs.gat"),19,177,25,183,"オーク封印守護兵",1023,1,getmdnpcname("OrcsControl1-3")+ "::OnKilled4";
+	end;
+OnKilled4:
+	enablenpc getmdnpcname("OrcsGate1-4");
+	announce "[情報] 【オーク封印守護兵】全て撃破！　次の階層へ移動可能！",0x9,0x44FFFF;
+	killmonster getmdmapname("1@orcs.gat"),getmdnpcname("OrcsControl1-2")+ "::OnKilled1";
+	killmonster getmdmapname("1@orcs.gat"),getmdnpcname("OrcsControl1-2")+ "::OnKilled2";
+	killmonster getmdmapname("1@orcs.gat"),getmdnpcname("OrcsControl1-2")+ "::OnKilled3";
+	killmonster getmdmapname("1@orcs.gat"),getmdnpcname("OrcsControl1-2")+ "::OnKilled4";
+	killmonster getmdmapname("1@orcs.gat"),getmdnpcname("OrcsControl1-2")+ "::OnKilled5";
+	sleep 10300;
+	announce "クルガーの囁き : あと少しだ……",0x9,0xFF4499;
+	sleep 8400;
+	announce "クルガーの囁き : ここを抜ければ次の階層に移動できる。気を抜くなよ。",0x9,0xFF4499;
+	end;
+}
+
+1@orcs.gat,180,29,4	script	クルガー#Orcs1	433,{
+	if(getnpctimer(1) == 0)
+		initnpctimer;
+	end;
+OnTimer10:
+	announce "クルガー : 何故こんなに遅れた!!　言い訳を聞く要素はひとつも無いぞ!?　今が一番大変だというのに!!",0x9,0xFFFF00;
+	end;
+OnTimer5710:
+	announce "クルガー : 計画通りに進んでいれば我々の仲間が門を開けていたはずだ！　だがお前達が現れたせいで巫女にバレてやりづらくなった！",0x9,0xFFFF00;
+	end;
+OnTimer14610:
+	announce "オーク守護大将 : 新しい勢力が入った気配がするな……巡回兵！　入口近辺を警邏しろ！",0x9,0xFF4444;
+	end;
+OnTimer20210:
+	announce "クルガー : まずいな……奴らがすぐにでも群がってくるだろう。いいか、今から言うことをよく聞け。",0x9,0xFFFF00;
+	end;
+OnTimer24910:
+	announce "クルガー : 我々に気付いた巫女はこの階層を四つの区域に分けて封印魔術を施した。そして区域ごとに一人の守護兵が封印を管理している……",0x9,0xFFFF00;
+	end;
+OnTimer34310:
+	announce "クルガー : もう理解したろ？　奴らを片付けて封印を解くんだ！　そうすれば次の階層に移動できる！",0x9,0xFFFF00;
+	end;
+OnTimer39710:
+	announce "クルガー : ただしひとつ注意しろ！　封印の守護兵以外には手を出すな！　奴ら、仲間がやられる度に兵力を増強してきやがる！",0x9,0xFFFF00;
+	end;
+OnTimer49210:
+	announce "クルガー : 最悪の場合は次の階層に行くどころじゃなくなる可能性がある。なるべく全面対決を避けて進むんだ！",0x9,0xFFFF00;
+	end;
+OnTimer56310:
+	announce "[任務] 【オーク封印守護兵】を倒せ！　守護兵以外のオーク兵との戦闘を極力避けろ！",0x9,0x44FFFF;
+	donpcevent getmdnpcname("OrcsControl1-2")+ "::OnStart";
+	killmonster getmdmapname("1@orcs.gat"),getmdnpcname("OrcsControl1-1")+ "::OnKilled";
+	areasetcell getmdmapname("1@orcs.gat"),164,27,180,27,0;
+	hideonnpc;
+	end;
+OnTimer60000:
+	donpcevent getmdnpcname("OrcsControl1-3")+ "::OnStart";
+	end;
+}
+
+1@orcs.gat,168,125,0	warp	OrcsGate1-1	3,3,1@orcs.gat,168,130
+1@orcs.gat,89,94,0		warp	OrcsGate1-2	3,3,1@orcs.gat,85,85
+1@orcs.gat,38,105,0		warp	OrcsGate1-3	3,3,1@orcs.gat,38,110
+1@orcs.gat,21,189,0		warp	OrcsGate1-4	3,3,2@orcs.gat,32,171
+
+//============================================================
+// オーク地下洞窟 02（過去）
+//------------------------------------------------------------
+2@orcs.gat,0,0,0	script	OrcsControl2-1	-1,{
+OnStart:
+	if('flag)
+		end;
+	set 'flag,1;
+	areasetcell getmdmapname("2@orcs.gat"),28,166,37,166,1;
+	for(set '@x,28; '@x <= 37; set '@x,'@x+1)
+		monster getmdmapname("2@orcs.gat"),'@x,165,"",1080,1,getmdnpcname("OrcsControl2-1")+ "::OnKilled";
+	disablenpc getmdnpcname("OrcsGate2-1");
+	disablenpc getmdnpcname("OrcsGate2-2");
+	disablenpc getmdnpcname("OrcsGate2-3");
+	disablenpc getmdnpcname("OrcsGate2-4");
+	end;
+OnKilled:
+	end;
+}
+
+2@orcs.gat,0,0,0	script	OrcsControl2-2	-1,{
+OnStart:
+	areamonster getmdmapname("2@orcs.gat"),0,0,0,0,"オーク怨霊",1152,30,getmdnpcname("OrcsControl2-2")+ "::OnKilled1";
+	areamonster getmdmapname("2@orcs.gat"),0,0,0,0,"腐ったオーク兵",1153,15,getmdnpcname("OrcsControl2-2")+ "::OnKilled2";
+	areamonster getmdmapname("2@orcs.gat"),0,0,0,0,"",2067,10,getmdnpcname("OrcsControl2-2")+ "::OnKilled3";
+	end;
+OnKilled1:
+	set '@rand,rand(30);
+	if('@rand == 0) {
+		areamonster getmdmapname("2@orcs.gat"),0,0,0,0,"オーク怨霊",1152,1,getmdnpcname("OrcsControl2-2")+ "::OnKilled1";
+	}
+	else if('@rand == 1) {
+		areamonster getmdmapname("2@orcs.gat"),0,0,0,0,"オーク突撃兵",1213,1,getmdnpcname("OrcsControl2-2")+ "::OnKilled1";
+	}
+	else if('@rand < 4) {
+		areamonster getmdmapname("2@orcs.gat"),157,112,167,122,"オーク突撃兵",1213,1,getmdnpcname("OrcsControl2-2")+ "::OnKilled1";
+		if(!rand(10))
+			announce "[警告] オーク突撃兵たちが第三区域に集結を開始！",0x9,0xFF4444;
+	}
+	else {
+		areamonster getmdmapname("2@orcs.gat"),173,13,183,23,"オーク突撃兵",1213,1,getmdnpcname("OrcsControl2-2")+ "::OnKilled1";
+		if(!rand(5))
+			announce "[警告] 巫女のテリトリーに多数の兵が集結を開始！",0x9,0x77FF77;
+		if(!rand(70))
+			initnpctimer;
+	}
+	end;
+OnKilled2:
+	set '@rand,rand(30);
+	if('@rand == 0) {
+		areamonster getmdmapname("2@orcs.gat"),0,0,0,0,"オーク弓兵",1189,1,getmdnpcname("OrcsControl2-2")+ "::OnKilled2";
+	}
+	else if('@rand < 23) {
+		areamonster getmdmapname("2@orcs.gat"),168,10,184,26,"オーク弓兵",1189,1,getmdnpcname("OrcsControl2-2")+ "::OnKilled2";
+		if(!rand(15))
+			announce "[警告] オーク軍の部隊が最終区域に集結を開始！",0x9,0x77FF77;
+	}
+	else {
+		areamonster getmdmapname("2@orcs.gat"),168,21,184,21,"オーク弓兵",1189,1,getmdnpcname("OrcsControl2-2")+ "::OnKilled2";
+	}
+	end;
+OnKilled3:
+	areamonster getmdmapname("2@orcs.gat"),0,0,0,0,"",2067,1,getmdnpcname("OrcsControl2-2")+ "::OnKilled3";
+	end;
+OnKilled4:
+	end;
+OnTimer10:
+	announce "謎の声 : しつこい奴らよ。この程度でこちらが崩れると思ったかえ？",0x9,0xFF4444;
+	end;
+OnTimer4010:
+	announce "[警告] 降霊儀式により、古代の呪われた魂が甦る！",0x9,0x77FF77;
+	areamonster getmdmapname("2@orcs.gat"),167,25,177,35,"邪悪なる古の魂",1475,30,getmdnpcname("OrcsControl2-2")+ "::OnKilled4";
+	end;
+}
+
+2@orcs.gat,0,0,0	script	OrcsControl2-3	-1,{
+OnStart1:
+	monster getmdmapname("2@orcs.gat"),109,156,"オーク守護大将",1981,1,getmdnpcname("OrcsControl2-3")+ "::OnKilled1";
+	announce "オーク守護大将 : このネズミ野郎どもめ!!　勇気があるならば俺と闘え!!",0x9,0xFF8888;
+	end;
+OnKilled1:
+	enablenpc getmdnpcname("OrcsGate2-1");
+	hideoffnpc getmdnpcname("松明#2-1");
+	announce "[情報] オーク守護大将を撃破！　次の区域へ移動可能！",0x9,0x44FFFF;
+	end;
+OnStart2:
+	monster getmdmapname("2@orcs.gat"),67,64,"オーク狙撃兵",1982,1,getmdnpcname("OrcsControl2-3")+ "::OnKilled2";
+	announce "オーク狙撃兵 : ふん、よくここまで来たな！　だが残念！　お前たちの冒険はここで終わりだ!!",0x9,0xFF8888;
+	end;
+OnKilled2:
+	enablenpc getmdnpcname("OrcsGate2-2");
+	hideoffnpc getmdnpcname("松明#3-1");
+	announce "[情報] オーク狙撃兵を撃破！　次の区域へ移動可能！",0x9,0x44FFFF;
+	end;
+OnStart3:
+	monster getmdmapname("2@orcs.gat"),152,147,"堕ちたオークの怨念",1983,1,getmdnpcname("OrcsControl2-3")+ "::OnKilled3";
+	announce "堕ちたオークの怨念 : 肉ダ！　肉をヨこセ！　腹ガ減っタ！　人間、食ウ！",0x9,0xFF8888;
+	end;
+OnKilled3:
+	enablenpc getmdnpcname("OrcsGate2-3");
+	initnpctimer;
+	monster getmdmapname("2@orcs.gat"),179,15,"堕ちたオークヒーロー",1850,1,getmdnpcname("OrcsControl2-3")+ "::OnKilled4";
+	monster getmdmapname("2@orcs.gat"),185,8,"巫女カルガルラスィ",1984,1,getmdnpcname("OrcsControl2-3")+ "::OnKilled5";
+	end;
+OnKilled4:
+	announce "堕ちたオークヒーロー : 無念………………",0x9,0xFF7777;
+	sleep 5000;
+	announce "巫女カルガルラスィ : ……なんという役立たずじゃ。反吐が出るわ。",0x9,0xFFFF00;
+	end;
+OnKilled5:
+	enablenpc getmdnpcname("OrcsGate2-3");
+	hideoffnpc getmdnpcname("クルガー#Orcs3");
+	switch(rand(4)) {
+	case 0:
+		announce "巫女カルガルラスィ : こ……こんなはずでは……この虫けらども……!!",0x9,0xFFFF00;
+		break;
+	case 1:
+		announce "巫女カルガルラスィ : この強さ……人間とは思えぬ……!!",0x9,0xFFFF00;
+		break;
+	case 2:
+		announce "巫女カルガルラスィ : まだ……死ぬわけには行かぬ……!!",0x9,0xFFFF00;
+		break;
+	default:
+		announce "巫女カルガルラスィ : 話にならぬ……このようなことがあってたまるかぁぁ!!",0x9,0xFFFF00;
+		break;
+	}
+	killmonster getmdmapname("2@orcs.gat"),getmdnpcname("OrcsControl2-2")+ "::OnKilled1";
+	killmonster getmdmapname("2@orcs.gat"),getmdnpcname("OrcsControl2-2")+ "::OnKilled2";
+	killmonster getmdmapname("2@orcs.gat"),getmdnpcname("OrcsControl2-2")+ "::OnKilled3";
+	killmonster getmdmapname("2@orcs.gat"),getmdnpcname("OrcsControl2-2")+ "::OnKilled4";
+	killmonster getmdmapname("2@orcs.gat"),getmdnpcname("OrcsControl2-3")+ "::OnKilled4";
+	end;
+OnTimer10:
+	announce "巫女カルガルラスィ : ホッホホ！　結局ここまで来たのかえ。貴様らの送り込んだ刺客は無謀であった。その阿呆なオークはわらわの足元で転がっておるわ。",0x9,0xFFFF00;
+	end;
+OnTimer6810:
+	announce "巫女カルガルラスィ : わらわの忠実なる僕よ、侵入者どもを殲滅してまいれ。",0x9,0xFFFF00;
+	end;
+OnTimer10310:
+	announce "堕ちたオークヒーロー : 御意………………",0x9,0xFF7777;
+	end;
+OnTimer13110:
+	announce "[警告] 巫女に発見された！　別行動していたクルガーの作戦は失敗した模様！　巫女を倒せ！",0x9,0x8888ff;
+	end;
+}
+
+2@orcs.gat,35,169,4	script	クルガー#Orcs2	433,{
+	if(getnpctimer(1) == 0)
+		initnpctimer;
+	end;
+OnTimer10:
+	announce "クルガー : よし、来たな。今のうちに巫女のところに行く方法を教える。",0x9,0xFFFF00;
+	end;
+OnTimer3510:
+	announce "クルガー : 巫女があちこちに立てた松明が見えるか？　あれに魔力を込めることで次の区域への封印が解かれるはずだ。",0x9,0xFFFF00;
+	end;
+OnTimer10710:
+	announce "クルガー : 無論簡単に触れられないように敵は動くだろう。小規模な戦いは避けられないか……",0x9,0xFFFF00;
+	end;
+OnTimer16310:
+	announce "クルガー : だがなるべく巫女直属の兵士が防衛することがないように静かに行動したほうがいいだろうな。",0x9,0xFFFF00;
+	end;
+OnTimer21910:
+	announce "クルガー : よし、先に進んでくれ。俺は俺で行動する……",0x9,0xFFFF00;
+	end;
+OnTimer23910:
+	announce "[任務] 最大限戦闘を避けつつ松明に魔力を込め、封印を解け！　なお、魔力を込められる松明は一定の順番で決まる！",0x9,0x44FFFF;
+	donpcevent getmdnpcname("OrcsControl2-2")+ "::OnStart";
+	killmonster getmdmapname("2@orcs.gat"),getmdnpcname("OrcsControl2-1")+ "::OnKilled";
+	areasetcell getmdmapname("2@orcs.gat"),28,166,37,166,0;
+	hideoffnpc getmdnpcname("松明#1-1");
+	hideonnpc;
+	end;
+OnTimer28910:
+	announce "クルガー : そうだ、言い忘れていた。松明には一人で触れろ！　あんまり複数人で同時に触れると痛い目にあうぞ！",0x9,0xFFFF00;
+	end;
+}
+
+2@orcs.gat,26,164,0	script	松明#1-1	844,{
+	progressbar 5;
+	set '@n1,substr(strnpcinfo(2),0,1);
+	set '@n2,substr(strnpcinfo(2),2,1);
+	if('@n2 < 4) {
+		announce "[任務] " +(('@n2==1)? "一": ('@n2==2)? "二": "三")+ "つ目の松明に魔力注入完了！　次に魔力を込められる松明を探して触れろ！",0x9,0x44FFFF;
+		hideoffnpc getmdnpcname("松明#" +'@n1+ "-" +('@n2+1));
+	}
+	else {
+		donpcevent getmdnpcname("OrcsControl2-3")+ "::OnStart" +'@n1;
+	}
+	initnpctimer;
+	hideonnpc;
+	end;
+OnTimer100:
+	misceffect 96;
+	end;
+OnTimer2000:
+	misceffect 97;
+	end;
+OnInit:
+	hideonnpc;
+	end;
+}
+2@orcs.gat,55,155,0		duplicate(松明#1-1)	松明#1-2	844
+2@orcs.gat,108,146,0	duplicate(松明#1-1)	松明#1-3	844
+2@orcs.gat,98,171,0		duplicate(松明#1-1)	松明#1-4	844
+2@orcs.gat,35,92,0		duplicate(松明#1-1)	松明#2-1	844
+2@orcs.gat,32,70,0		duplicate(松明#1-1)	松明#2-2	844
+2@orcs.gat,70,31,0		duplicate(松明#1-1)	松明#2-3	844
+2@orcs.gat,84,51,0		duplicate(松明#1-1)	松明#2-4	844
+2@orcs.gat,142,145,0	duplicate(松明#1-1)	松明#3-1	844
+2@orcs.gat,162,134,0	duplicate(松明#1-1)	松明#3-2	844
+2@orcs.gat,144,117,0	duplicate(松明#1-1)	松明#3-3	844
+2@orcs.gat,136,98,0		duplicate(松明#1-1)	松明#3-4	844
+
+2@orcs.gat,172,13,0	script	クルガー#Orcs3	434,{
+	switch(ORCS_1QUE) {
+	case 1:
+		mes "[クルガー]";
+		mes "…………";
+		mes strcharinfo(0)+ "、";
+		mes "お前か……";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "……！";
+		mes "傷が酷い！　動かないほうが……";
+		next;
+		mes "[クルガー]";
+		mes "いいんだ……";
+		mes "俺は失敗したんだからな……";
+		mes "巫女は……？";
+		mes "巫女はどうなった……？";
+		next;
+		mes "[" +strcharinfo(0)+ "]";
+		mes "巫女は倒しましたよ。";
+		mes "ところで、結局あの巫女の";
+		mes "正体は何なんです？";
+		next;
+		mes "[クルガー]";
+		mes "……結局……";
+		mes "俺は自分の手で娘を止めることは";
+		mes "出来なかっただろう……";
+		mes "だがもう、その娘も、";
+		mes "自分を苦しめた悪夢も……";
+		mes "終わったこと……だ……";
+		next;
+		mes "-切実な表情で何か言おうと";
+		mes "　していたクルガーだったが、";
+		mes "　そのまま最後の息を吐くと";
+		mes "　やがて冷たくなっていった……";
+		mes "　と同時に、目の前に光が溢れた-";
+		set ORCS_1QUE,2;
+		close2;
+
+	}
+}
+
+2@orcs.gat,48,100,0		warp	OrcsGate2-1	3,3,2@orcs.gat,47,93
+2@orcs.gat,101,55,0		warp	OrcsGate2-2	3,3,2@orcs.gat,107,55
+2@orcs.gat,167,104,0	warp	OrcsGate2-3	3,3,2@orcs.gat,167,95
+2@orcs.gat,182,8,0	script	OrcsGate2-4	45,3,3,{
+	warp "gef_fild10.gat",240,197;
+	end;
+}

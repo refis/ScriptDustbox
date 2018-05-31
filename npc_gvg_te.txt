@@ -1,0 +1,3653 @@
+//= Auriga Script ==============================================================
+// Ragnarok Online GvGTE Script by refis
+//==============================================================================
+
+//==========================================
+// monster
+//------------------------------------------
+teg_dun01.gat,0,0,0,0	monster	セイレン=ウィンザー		2415,20,5000,0,0
+teg_dun01.gat,0,0,0,0	monster	エレメス=ガイル			2416,15,5000,0,0
+teg_dun01.gat,0,0,0,0	monster	ハワード=アルトアイゼン	2417,15,5000,0,0
+teg_dun01.gat,0,0,0,0	monster	セシル=ディモン			2418,35,5000,0,0
+teg_dun01.gat,0,0,0,0	monster	カトリーヌ=ケイロン		2419,30,5000,0,0
+teg_dun01.gat,0,0,0,0	monster	マーガレッタ=ソリン		2420,20,5000,0,0
+teg_dun01.gat,0,0,0,0	monster	ウィッシュ=マスコット	2441,1,28800000,7200000,1
+
+teg_dun02.gat,0,0,0,0	monster	イグニゼム=セニア		2421,5,5000,0,0
+teg_dun02.gat,0,0,0,0	monster	ヒュッケバイン=トリス	2422,5,5000,0,0
+teg_dun02.gat,0,0,0,0	monster	アルマイア=デュンゼ		2423,5,5000,0,0
+teg_dun02.gat,0,0,0,0	monster	カヴァク=イカルス		2424,10,5000,0,0
+teg_dun02.gat,0,0,0,0	monster	ジョセフィーナ			2425,10,5000,0,0
+teg_dun02.gat,0,0,0,0	monster	ラウレル=ヴィンダー		2426,10,5000,0,0
+teg_dun02.gat,0,0,0,0	monster	イレンド=エベシ			2427,5,5000,0,0
+teg_dun02.gat,0,0,0,0	monster	アーティス=マスコット	2442,1,28800000,7200000,1
+
+//==========================================
+// TEポーション
+//------------------------------------------
+te_alde_gld.gat,215,184,5	script	TEポーション商人#alde	125,{
+	mes "[TEポーション商人]";
+	mes "ここでは、攻城戦TEのエリアでのみ";
+	mes "使用可能なポーションを売っているよ。";
+	next;
+	mes "[TEポーション商人]";
+	mes "1個あたりの値段は、";
+	mes "攻城戦TEホワイトスリムポーションが";
+	mes "^3355FF275 Zeny^000000。";
+	mes "攻城戦TE白ポーションは";
+	mes "^3355FF200 Zeny^000000だよ～！";
+	next;
+	switch(select("攻城戦TEホワイトスリムポーションを買う","攻城戦TE白ポーションを買う","攻城戦TEポーションについて","取引をやめる")) {
+	case 1:
+		set '@itemid,11558;
+		set '@price,275;
+		break;
+	case 2:
+		set '@itemid,11557;
+		set '@price,200;
+		break;
+	case 3:
+		mes "[TEポーション商人]";
+		mes "攻城戦TEポーションは、";
+		mes "攻城戦TEのエリアでのみ";
+		mes "使用可能なポーションだよ。";
+		next;
+		mes "[TEポーション商人]";
+		mes "攻城戦TE白ポーションと";
+		mes "攻城戦TEホワイトスリムポーションの";
+		mes "2種類あるんだ。";
+		next;
+		mes "[TEポーション商人]";
+		mes "攻城戦TE白ポーションは";
+		mes "HPをだいたい325くらい";
+		mes "回復してくれるよ。";
+		mes "1個あたりの重量は30で、";
+		mes "値段は^3355FF200 Zeny^000000だ。";
+		next;
+		mes "[TEポーション商人]";
+		mes "攻城戦TEホワイトスリムポーションは";
+		mes "効果は攻城戦TE白ポーションと";
+		mes "同じだけど、重量が軽いんだ。";
+		mes "その分、値段が高いよ。";
+		mes "1個あたりの重量は10で、";
+		mes "値段は^3355FF275 Zeny^000000だ。";
+		next;
+		mes "[TEポーション商人]";
+		mes "それから、別途手数料がかかるけど、";
+		mes "攻城戦TEホワイトスリムポーションは";
+		mes "お隣のTEポーション箱作成商人が、";
+		mes "10個を1箱にまとめてくれるよ。";
+		next;
+		mes "[TEポーション商人]";
+		mes "持ち運びに便利になるので、";
+		mes "あわせてご利用くださいね～！";
+		close;
+	case 4:
+		mes "[TEポーション商人]";
+		mes "攻城戦TEポーションが必要になったら";
+		mes "またお立ち寄りくださいね！";
+		close;
+	}
+	mes "[TEポーション商人]";
+	mes "ありがとうございます!!";
+	mes "ポーションは一度に";
+	mes "^0000FF200個^000000まで買えるよ～";
+	next;
+	mes "[TEポーション商人]";
+	mes "1個^3355FF" +'@price+ " Zenyだけど、";
+	mes "何個必要かな？";
+	while(1) {
+		next;
+		input '@num;
+		if('@num == 0) {
+			mes "[TEポーション商人]";
+			mes "あら？";
+			mes "購入をやめるんだね。";
+			mes "攻城戦TEポーションが必要になったら";
+			mes "またお立ち寄りくださいね！";
+			close;
+		}
+		if('@num > 0 && '@num <= 200)
+			break;
+		mes "[TEポーション商人]";
+		mes "一度に販売できるのは";
+		mes "200個までだよ！";
+		mes "購入数をもう一度確認してね～";
+	}
+	if('@price*'@num < Zeny) {
+		mes "[TEポーション商人]";
+		mes "お客さん、お金が足りないようだよ。";
+		mes "1つ ^3355FF" +'@price+ " Zeny^000000なので……。";
+		close;
+	}
+	set Zeny,Zeny-'@price*'@num;
+	getitem '@itemid,'@num;
+	mes "[TEポーション商人]";
+	mes "はい、" +'@num+ "個！";
+	mes "ありがとうございましたー！";
+	close;
+OnInit:
+	waitingroom "TEポーション販売",0;
+	end;
+}
+te_prt_gld.gat,112,153,5	duplicate(TEポーション商人#alde)	TEポーション商人#prt	107
+
+te_alde_gld.gat,211,184,5	script	TEポーション箱作成商人::TE_alde	125,{
+	mes "[TEポーション箱作成商人]";
+	mes "いらっしゃい！";
+	mes "ここでは、";
+	mes "攻城戦TEホワイトスリムポーションを";
+	mes "10個まとめて1箱に詰める作業を";
+	mes "しているんだ。";
+	next;
+	mes "[TEポーション箱作成商人]";
+	mes "箱にまとめることで";
+	mes "持ち運びに便利！";
+	mes "1箱作るのに、";
+	mes "^3355FF攻城戦TEホワイトスリムポーション10個";
+	mes "と、500 Zeny^000000が必要だ。";
+	next;
+	switch(select("攻城戦TE回復箱を作る","攻城戦TE回復箱について","取引をやめる")) {
+	case 1:
+		mes "[TEポーション箱作成商人]";
+		mes "何箱作ればいいかな？";
+		mes "一度に作れるのは、50箱までだよー";
+		while(1) {
+			next;
+			input '@num;
+			if('@num == 0) {
+				mes "[TEポーション箱作成商人]";
+				mes "おや？";
+				mes "箱にまとめなくていいのかな？";
+				mes "まあ、箱にまとめたくなったら、";
+				mes "いつでも来てくださいね！";
+				close;
+			}
+			if('@num > 0 && '@num <= 50)
+				break;
+			mes "[TEポーション箱作成商人]";
+			mes "一度にまとめることができるのは";
+			mes "50箱までだよ！";
+			mes "数をもう一度確認してね～";
+		}
+		if(500*'@num < Zeny) {
+			mes "[TEポーション箱作成商人]";
+			mes "お客さん、お金が足りないようだよ。";
+			mes "1箱 ^3355FF500 Zeny^000000なので……。";
+			close;
+		}
+		if(countitem(11558) < '@num*10) {
+			mes "[TEポーション箱作成商人]";
+			mes "お客さん、その数作るには";
+			mes "攻城戦TEホワイトスリムポーションが";
+			mes "足りないようだよ。";
+			mes "1箱あたり ^3355FF10個^000000必要なので……。";
+			close;
+		}
+		set Zeny,Zeny-500*'@num;
+		delitem 11558,'@num*10;
+		getitem 12873,'@num;
+		mes "[TEポーション箱作成商人]";
+		mes "はい、" +'@num+ "箱！";
+		mes "ありがとうございましたー！";
+		close;
+	case 2:
+		mes "[TEポーション箱作成商人]";
+		mes "いくら攻城戦TE白ポーションより軽い";
+		mes "攻城戦TEホワイトスリムポーション";
+		mes "とはいえ、たくさん持っていたら";
+		mes "かさばるだろう？";
+		next;
+		mes "[TEポーション箱作成商人]";
+		mes "そこで！";
+		mes "^3355FF攻城戦TEホワイトスリムポーションを";
+		mes "攻城戦TE回復箱という箱にまとめて、^000000";
+		mes "さらに持ち運びに便利にするのが";
+		mes "僕の仕事なんだ！";
+		next;
+		mes "[TEポーション箱作成商人]";
+		mes "攻城戦TE回復箱1箱に";
+		mes "攻城戦TEホワイトスリムポーションを";
+		mes "10個入れるんだ。";
+		next;
+		mes "[TEポーション箱作成商人]";
+		mes "攻城戦TEホワイトスリムポーション";
+		mes "10個を1箱にまとめるのに、";
+		mes "手数料として^3355FF 500 Zeny^000000";
+		mes "いただいているよ～";
+		close;
+	case 3:
+		mes "[TEポーション箱作成商人]";
+		mes "おや？";
+		mes "箱にまとめなくていいのかな？";
+		mes "まあ、箱にまとめたくなったら、";
+		mes "いつでも来てくださいね！";
+		close;
+	}
+OnInit:
+	waitingroom "TEポーション箱作成",0;
+	end;
+}
+te_prt_gld.gat,116,153,5	duplicate(TE_alde)	TEポーション箱作成商人::TE_prt	125
+
+//==========================================
+// レンタル装備
+//------------------------------------------
+te_alde_gld.gat,209,182,5	script	レンタル装備管理者::TE_rnt_alde	893,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "[レンタル装備管理者]";
+		mes "攻城戦TEルールが適用されている";
+		mes "グロリアとカプラガーデンで";
+		mes "使用することができる装備を";
+		mes "貸し出しています。";
+		next;
+		mes "[レンタル装備管理者]";
+		mes "申し訳ございませんが、";
+		mes "あなたは攻城戦TEに参加できない";
+		mes "職業のようです。";
+		mes "装備をお貸しすることができません。";
+		close;
+	}
+	mes "[レンタル装備管理者]";
+	mes "いらっしゃいませ。";
+	mes "ここでは、攻城戦TE地域で";
+	mes "使用することができる";
+	mes "レンタル装備の貸し出しを";
+	mes "行なっています。";
+	if(gettime(3) < 19 || gettime(3) >= 22) {
+		next;
+		mes "[レンタル装備管理者]";
+		mes "現在は貸し出し期間ではありません。";
+		mes "装備をレンタルしたい場合は、";
+		mes "^FF0000攻城戦TEの開始1時間前から終了までに^000000";
+		mes "私のところに来てください。";
+		close;
+	}
+	while(1) {
+		next;
+		switch(select("装備をレンタルする","レンタル装備とは","レンタル装備のリストを見る","やめる")) {
+		case 1:
+			mes "[レンタル装備管理者]";
+			mes "どの装備が必要ですか？";
+			next;
+			switch(select("[盾] [鎧] [肩にかける物]","[兜] [アクセサリー] [靴]","[剣] [槍] [斧] [カタール] [風魔手裏剣]","[鈍器] [杖] [爪] [本]","[弓] [銃] [楽器] [鞭]","やめる")) {
+			case 1:
+				mes "[レンタル装備管理者]";
+				mes "^0000FF盾、鎧、肩にかける物^000000";
+				mes "ですね。";
+				mes "貸し出しを希望するものを";
+				mes "選択してください。";
+				next;
+				switch(select("^4d4dff攻城戦TEバックラー - レンタル中^000000:^cccccc攻城戦TEシールド(装備不可)^000000:攻城戦TEマジックガード:攻城戦TEロングコート:^cccccc攻城戦TEメイル(装備不可)^000000:攻城戦TEマジックコート:攻城戦TEマフラー:^cccccc攻城戦TEマント(装備不可)^000000:攻城戦TEマジックマント:他のリストを見る")) {
+				case 1: set '@itemid,2178; break;
+				case 2: set '@itemid,2179; break;
+				case 3: set '@itemid,2180; break;
+				case 4: set '@itemid,15062; break;
+				case 5: set '@itemid,15063; break;
+				case 6: set '@itemid,15064; break;
+				case 7: set '@itemid,20702; break;
+				case 8: set '@itemid,20703; break;
+				case 9: set '@itemid,20704; break;
+				case 10:set '@itemid,0; break;
+				}
+				if('@itemid) {
+					if(countitem('@itemid) > 0) {
+						mes "[レンタル装備管理者]";
+						mes getitemname('@itemid)+ "は";
+						mes "すでに貸し出し中ですね。 ";
+						mes "他に必要なものはありますか？";
+					} else if('@allow) {
+						mes "[レンタル装備管理者]";
+						mes "あなたはそのアイテムを";
+						mes "装備できませんよ。";
+						mes "他に必要なものはありますか？";
+					} else {
+						mes "[レンタル装備管理者]";
+						mes getitemname('@itemid)+ "ですね。";
+						mes "^4d4dff今から約24時間貸し出します。^000000";
+						if(checkitemblank()==0) {
+							next;
+							mes "[レンタル装備管理者]";
+							mes "……と思いましたが、";
+							mes "よく見るとそれ以上";
+							mes "持てないようですね。";
+							mes "アイテムを整理してから";
+							mes "もう一度来てください。";
+							close;
+						}
+						mes "なお、時間が過ぎると消滅します。";
+						mes "他に必要なものはありますか？";
+						getitem '@itemid,1;
+					}
+				}
+				break;
+			case 2:
+				mes "[レンタル装備管理者]";
+				mes "^0000FF兜、アクセサリー、靴^000000";
+				mes "ですね。";
+				mes "貸し出しを希望するものを";
+				mes "選択してください。";
+				next;
+				switch(select("攻城戦TEキャップ:^cccccc攻城戦TEボーンヘルム(装備不可)^000000:攻城戦TEマジックアイズ:攻城戦TE守護の指輪:攻城戦TE怒りの指輪:攻城戦TE反抗の指輪:攻城戦TEシューズ:^cccccc攻城戦TEブーツ(装備不可)^000000:攻城戦TEマジックサンダル:他のリストを見る")) {
+				case 1: set '@itemid,18732; set '@over,0; break;
+				case 2: set '@itemid,18733; set '@over,0; break;
+				case 3: set '@itemid,18734; set '@over,0; break;
+				case 4: set '@itemid,2944; set '@over,1; break;
+				case 5: set '@itemid,2945; set '@over,1; break;
+				case 6: set '@itemid,2946; set '@over,1; break;
+				case 7: set '@itemid,2496; set '@over,0; break;
+				case 8: set '@itemid,2497; set '@over,0; break;
+				case 9: set '@itemid,2498; set '@over,0; break;
+				case 10:set '@itemid,0; break;
+				}
+				if('@itemid) {
+					if('@over && countitem('@itemid) > 0) {
+						mes "[レンタル装備管理者]";
+						mes getitemname('@itemid)+ "は";
+						mes "すでに貸し出し中ですね。 ";
+						mes "他に必要なものはありますか？";
+					} else if('@allow) {
+						mes "[レンタル装備管理者]";
+						mes "あなたはそのアイテムを";
+						mes "装備できませんよ。";
+						mes "他に必要なものはありますか？";
+					} else {
+						mes "[レンタル装備管理者]";
+						mes getitemname('@itemid)+ "ですね。";
+						mes "^4d4dff今から約24時間貸し出します。^000000";
+						if(checkitemblank()==0) {
+							next;
+							mes "[レンタル装備管理者]";
+							mes "……と思いましたが、";
+							mes "よく見るとそれ以上";
+							mes "持てないようですね。";
+							mes "アイテムを整理してから";
+							mes "もう一度来てください。";
+							close;
+						}
+						mes "なお、時間が過ぎると消滅します。";
+						mes "他に必要なものはありますか？";
+						getitem '@itemid,1;
+					}
+				}
+				break;
+			case 3:
+				mes "[レンタル装備管理者]";
+				mes "^0000FF剣、槍、斧、カタール、風魔手裏剣^000000";
+				mes "ですね。";
+				mes "貸し出しを希望するものを";
+				mes "選択してください。";
+				next;
+				switch(select("^cccccc攻城戦TEナイフ(装備不可)^000000:^cccccc攻城戦TEソード(装備不可)^000000:^cccccc攻城戦TEツーハンドソード(装備不可)^000000:^cccccc攻城戦TEパイク(装備不可)^000000:^cccccc攻城戦TEランス(装備不可)^000000:^cccccc攻城戦TEアックス(装備不可)^000000:^cccccc攻城戦TEツーハンドアックス(装備不可)^000000:^cccccc攻城戦TEカタール(装備不可)^000000:^cccccc攻城戦TE風魔手裏剣(装備不可)^000000:他のリストを見る")) {
+				case 1: set '@itemid,; break;
+				case 2: set '@itemid,; break;
+				case 3: set '@itemid,; break;
+				case 4: set '@itemid,; break;
+				case 5: set '@itemid,; break;
+				case 6: set '@itemid,; break;
+				case 7: set '@itemid,; break;
+				case 8: set '@itemid,; break;
+				case 9: set '@itemid,; break;
+				case 10:set '@itemid,0; break;
+				}
+				if('@itemid) {
+					if(countitem('@itemid) > 0) {
+						mes "[レンタル装備管理者]";
+						mes getitemname('@itemid)+ "は";
+						mes "すでに貸し出し中ですね。 ";
+						mes "他に必要なものはありますか？";
+					} else if('@allow) {
+						mes "[レンタル装備管理者]";
+						mes "あなたはそのアイテムを";
+						mes "装備できませんよ。";
+						mes "他に必要なものはありますか？";
+					} else {
+						mes "[レンタル装備管理者]";
+						mes getitemname('@itemid)+ "ですね。";
+						mes "^4d4dff今から約24時間貸し出します。^000000";
+						if(checkitemblank()==0) {
+							next;
+							mes "[レンタル装備管理者]";
+							mes "……と思いましたが、";
+							mes "よく見るとそれ以上";
+							mes "持てないようですね。";
+							mes "アイテムを整理してから";
+							mes "もう一度来てください。";
+							close;
+						}
+						mes "なお、時間が過ぎると消滅します。";
+						mes "他に必要なものはありますか？";
+						getitem '@itemid,1;
+					}
+				}
+				break;
+			case 4:
+				mes "[レンタル装備管理者]";
+				mes "^0000FF鈍器、杖、爪、本^000000";
+				mes "ですね。";
+				mes "貸し出しを希望するものを";
+				mes "選択してください。";
+				next;
+				switch(select("攻城戦TEメイス:攻城戦TEスタッフ:攻城戦TEツーハンドスタッフ:攻城戦TEフィスト:攻城戦TE本:他のリストを見る")) {
+				case 1: set '@itemid,16025; break;
+				case 2: set '@itemid,1667; break;
+				case 3: set '@itemid,2019; break;
+				case 4: set '@itemid,1834; break;
+				case 5: set '@itemid,1591; break;
+				case 6: set '@itemid,0; break;
+				}
+				if('@itemid) {
+					if(countitem('@itemid) > 0) {
+						mes "[レンタル装備管理者]";
+						mes getitemname('@itemid)+ "は";
+						mes "すでに貸し出し中ですね。 ";
+						mes "他に必要なものはありますか？";
+					} else if('@allow) {
+						mes "[レンタル装備管理者]";
+						mes "あなたはそのアイテムを";
+						mes "装備できませんよ。";
+						mes "他に必要なものはありますか？";
+					} else {
+						mes "[レンタル装備管理者]";
+						mes getitemname('@itemid)+ "ですね。";
+						mes "^4d4dff今から約24時間貸し出します。^000000";
+						if(checkitemblank()==0) {
+							next;
+							mes "[レンタル装備管理者]";
+							mes "……と思いましたが、";
+							mes "よく見るとそれ以上";
+							mes "持てないようですね。";
+							mes "アイテムを整理してから";
+							mes "もう一度来てください。";
+							close;
+						}
+						mes "なお、時間が過ぎると消滅します。";
+						mes "他に必要なものはありますか？";
+						getitem '@itemid,1;
+					}
+				}
+				break;
+			case 5:
+				mes "[レンタル装備管理者]";
+				mes "^0000FF弓、銃、楽器、鞭^000000";
+				mes "ですね。";
+				mes "貸し出しを希望するものを";
+				mes "選択してください。";
+				next;
+				switch(select("^cccccc攻城戦TE弓(装備不可)^000000:^cccccc攻城戦TE拳銃(装備不可)^000000:^cccccc攻城戦TEライフル(装備不可)^000000:^cccccc攻城戦TEガトリングガン(装備不可)^000000:^cccccc攻城戦TEショットガン(装備不可)^000000:^cccccc攻城戦TEグレネードガン(装備不可)^000000:^cccccc攻城戦TEギター(装備不可)^000000:^cccccc攻城戦TEロープ(装備不可)^000000:他のリストを見る")) {
+				case 1: set '@itemid,; break;
+				case 2: set '@itemid,; break;
+				case 3: set '@itemid,; break;
+				case 4: set '@itemid,; break;
+				case 5: set '@itemid,; break;
+				case 6: set '@itemid,; break;
+				case 7: set '@itemid,; break;
+				case 8: set '@itemid,; break;
+				case 9: set '@itemid,0; break;
+				}
+				if('@itemid) {
+					if(countitem('@itemid) > 0) {
+						mes "[レンタル装備管理者]";
+						mes getitemname('@itemid)+ "は";
+						mes "すでに貸し出し中ですね。 ";
+						mes "他に必要なものはありますか？";
+					} else if('@allow) {
+						mes "[レンタル装備管理者]";
+						mes "あなたはそのアイテムを";
+						mes "装備できませんよ。";
+						mes "他に必要なものはありますか？";
+					} else {
+						mes "[レンタル装備管理者]";
+						mes getitemname('@itemid)+ "ですね。";
+						mes "^4d4dff今から約24時間貸し出します。^000000";
+						if(checkitemblank()==0) {
+							next;
+							mes "[レンタル装備管理者]";
+							mes "……と思いましたが、";
+							mes "よく見るとそれ以上";
+							mes "持てないようですね。";
+							mes "アイテムを整理してから";
+							mes "もう一度来てください。";
+							close;
+						}
+						mes "なお、時間が過ぎると消滅します。";
+						mes "他に必要なものはありますか？";
+						getitem '@itemid,1;
+					}
+				}
+				break;
+			case 6:
+				mes "[レンタル装備管理者]";
+				mes "またのご利用をお待ちしております。";
+				close;
+			}
+			break;
+		case 2:
+			mes "[レンタル装備管理者]";
+			mes "レンタル装備とは、攻城戦TEに";
+			mes "参加する方のために";
+			mes "^4d4dff無料で提供^000000している";
+			mes "装備の事です。";
+			next;
+			mes "[レンタル装備管理者]";
+			mes "^4d4dffレンタル装備はBaseレベル40以上で";
+			mes "装備が可能になります。^000000";
+			mes "自分の職業にあった装備を";
+			mes "自由にレンタルできますので";
+			mes "お好みのアイテムをお選びください。";
+			next;
+			mes "[レンタル装備管理者]";
+			mes "また、レンタル装備は全て、";
+			mes "貸し出しているものですので";
+			mes "^4d4dff他の人に渡したり、";
+			mes "捨てたりすることができません。^000000";
+			next;
+			mes "[レンタル装備管理者]";
+			mes "レンタル装備は貸し出しから";
+			mes "24時間で消滅しますので、";
+			mes "ご注意ください。";
+			next;
+			mes "[レンタル装備管理者]";
+			mes "なお、レンタル装備は";
+			mes "^4d4dff攻城戦TE地域から離れると";
+			mes "本来の力を発揮できません。^000000";
+			next;
+			mes "[レンタル装備管理者]";
+			mes "レンタル装備が本来の力を";
+			mes "発揮する地域は、次のとおりです。";
+			next;
+			mes "[レンタル装備管理者]";
+			mes "グロリア地域のゲオルグ";
+			mes "リハルト、ウィグナー";
+			mes "ハイネン、ネレウスの各砦内";
+			next;
+			mes "[レンタル装備管理者]";
+			mes "カプラガーデン地域のグラリス";
+			mes "ディフォルテー、ソリン";
+			mes "ビニット、Ｗの各砦内です。";
+			next;
+			mes "[レンタル装備管理者]";
+			mes "レンタル装備の説明は以上です。";
+			mes "他に何かご利用になりますか？";
+			break;
+		case 3:
+			mes "[レンタル装備管理者]";
+			mes "装備アイテムの一覧を";
+			mes "ご覧ください。";
+			close2;
+			readbook "";
+			end;
+		case 4:
+			mes "[レンタル装備管理者]";
+			mes "またのご利用をお待ちしております。";
+			close;
+		}
+	}
+OnInit:
+	waitingroom "レンタル装備",0;
+	end;
+}
+te_prt_gld.gat,125,153,3	duplicate(TE_rnt_alde)	レンタル装備管理者::TE_rnt_prt	893
+
+//==========================================
+// 商人
+//------------------------------------------
+-	shop	TE_gld_callshop	-1,1750:1,1770:2,1751:3,717:600,13200:1,13201:15,13202:30,13250:4,13251:10,13252:20,13253:40,13254:100,7521:150,7522:150,7523:150,7524:300
+te_alde_gld.gat,198,180,5	script	矢弾系販売人#alde	893,{
+	callshop "TE_gld_callshop";
+	end;
+OnInit:
+	waitingroom "矢・弾丸・手裏剣等 販売中",0;
+	end;
+}
+te_prt_gld.gat,125,160,3	duplicate(矢弾系販売人#alde)	矢弾系販売人#prt	893
+
+te_alde_gld.gat,202,180,5	script	貿易商人#alde	893,{
+	mes "[貿易商人]";
+	mes "いらっしゃいませ。";
+	mes "ここでは、忍者・ガンスリンガーの方に";
+	mes "苦無・グレネード弾を";
+	mes "交換しています。";
+	mes "何かご用ですか？";
+	next;
+	switch(select("苦無が欲しい","弾丸が欲しい","用は無い")) {
+	case 1:
+		mes "[貿易商人]";
+		mes "ごめんなさい。";
+		mes "苦無は忍者以外の方は";
+		mes "交換する事が出来ません。";
+		close;
+		mes "[貿易商人]";
+		mes "忍者の方ですね。";
+		mes "かしこまりました。";
+		mes "どの苦無が欲しいですか？";
+		next;
+		switch(select("猛毒の苦無：10個","氷柱の苦無：10個","狂風の苦無：10個","黒土の苦無：10個","烈火の苦無：10個","やめる")) {
+		case 1:
+			mes "[貿易商人]";
+			mes "手裏剣20個と影宝珠1個で、";
+			mes "猛毒の苦無10個を1束として";
+			mes "交換しています。";
+		case 2:
+			mes "[貿易商人]";
+			mes "雨雲の手裏剣8個と氷閃石2個で、";
+			mes "氷柱の苦無10個を1束として";
+			mes "交換しています。";
+		case 3:
+			mes "[貿易商人]";
+			mes "閃光の手裏剣4個と風鈴石2個で、";
+			mes "狂風の苦無10個を1束として";
+			mes "交換しています。";
+		case 4:
+			mes "[貿易商人]";
+			mes "鋭刃の手裏剣2個と影宝珠1個で、";
+			mes "黒土の苦無10個を1束として";
+			mes "交換しています。";
+		case 5:
+			mes "[貿易商人]";
+			mes "刺針の手裏剣1個と烈火石2個で、";
+			mes "烈火の苦無10個を1束として";
+			mes "交換しています。";
+		case 6:
+			mes "[貿易商人]";
+			mes "かしこまりました。";
+			mes "またのお越しをお待ちしております。";
+			close;
+		}
+		next;
+		mes "[貿易商人]";
+		mes "何セット欲しいですか？";
+		mes "一度に500束まで取引できます。";
+		mes "取引を止める時は0にしてください。";
+		next;
+		input '@num;
+		if('@num < 1 || '@num > 500) {
+			mes "[貿易商人]";
+			mes "かしこまりました。";
+			mes "取引を中止しました。";
+			close;
+		}
+		mes "[貿易商人]";
+		mes "取引完了です。";
+		mes "またのお越しをお待ちしております。";
+		delitem 7524,1;
+		delitem 13250,20;
+		getitem 13259,10;
+		close;
+	case 2:
+		mes "[貿易商人]";
+		mes "ごめんなさい。";
+		mes "弾丸はガンスリンガー以外の方は";
+		mes "交換する事が出来ません。";
+		close;
+	case 3:
+		mes "[貿易商人]";
+		mes "またのお越しをお待ちしております。";
+		close;
+	}
+OnInit:
+	waitingroom "苦無・グレネード弾 交換中",0;
+	end;
+}
+te_prt_gld.gat,129,160,3	duplicate(貿易商人#alde)	貿易商人#prt	893
+
+//==========================================
+// TEミッション
+//------------------------------------------
+te_alde_gld.gat,218,182,5	script	訓練教官#kafra	899,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "[訓練教官]";
+		mes "おや、あなたは……";
+		mes "すまないがTE地域は";
+		mes "上位2次職業まで、および";
+		mes "レベル拡張がされていない";
+		mes "職業のための空間なんだ。";
+		next;
+		mes "[訓練教官]";
+		mes "だから、ここではあなたに";
+		mes "お願いできることはないんだ。";
+		mes "申し訳ない……。";
+		close;
+	}
+	if(BaseLevel < 70) {
+		mes "[訓練教官]";
+		mes "ああ、すまん！";
+		mes "悪いけどミッションは^4d4dffBaseLv70^000000以上を";
+		mes "対象としているんだ。";
+		mes "もっと鍛えてから、来てくれるかな？";
+		close;
+	}
+	if(gettime(3) < 19 || gettime(3) >= 22) {
+		mes "[訓練教官]";
+		mes "ここでは、TE地域で遂行できる";
+		mes "ミッションが受けられるぞ。";
+		next;
+		mes "[訓練教官]";
+		mes "ただ、ミッションは受注可能な時間、";
+		mes "不可能な時間が決まっているんだ。";
+		mes "残念だけど今がその受注不可能な";
+		mes "時間だ。";
+		next;
+		mes "[訓練教官]";
+		mes "すでに受注しているミッションの";
+		mes "結果だけ確認してやるぞ。";
+	} else {
+		mes "[訓練教官]";
+		mes "ここでは、TE地域で遂行できる";
+		mes "ミッションが受けられるぞ。";
+		mes "さあ、何がいい？";
+		set '@str$,"ミッションを受注する";
+	}
+	set '@kafra1,checkquest(7510) | checkquest(7511) | checkquest(7512);
+//	set '@kafra2,checkquest(7504) | checkquest(7505) | checkquest(7506);
+	set '@kafra3,checkquest(7513) | checkquest(7514) | checkquest(7515);
+	next;
+	switch(select('@str$,"受注したミッションの報告/確認をする","ミッションとは？","やめる")) {
+	case 1:
+		mes "[訓練教官]";
+		mes "同じ内容のミッションの場合、";
+		mes "倒したり集めたりする数が違うものでも";
+		mes "同時に受けることはできないから、";
+		mes "気をつけるんだぞ！";
+		next;
+		mes "[訓練教官]";
+		mes "どのミッションを受けるのかな？";
+		mes "さあ、選んで！";
+		next;
+		switch(select(
+			('@kafra1? "^808080泥棒ポリン退治 -受注中-^000000": "泥棒ポリン退治"),
+//			('@kafra2? "^808080エンペリウムブレイカー -受注中-^000000": "エンペリウムブレイカー"),
+			('@kafra3? "^808080盗まれた明細書回収 -受注中-^000000": "盗まれた明細書回収")
+		)) {
+		case 1:
+			if('@kafra1) {
+				mes "[訓練教官]";
+				mes "それは現在受注中の";
+				mes "ミッションだな。";
+				mes "新たに受注をしたいのなら、";
+				mes "先に報告をしてくれ。";
+				next;
+				mes "[訓練教官]";
+				mes "それから、同じ種類のミッションは";
+				mes "同時には受けられないから、";
+				mes "気をつけな！";
+				next;
+				mes "[訓練教官]";
+				mes "もし同じ種類の、";
+				mes "もっと簡単なミッションや、";
+				mes "もっと難しいミッションに";
+				mes "受け直したい場合は、";
+				mes "まずは今受けているミッションを";
+				mes "破棄するんだ。";
+				next;
+				mes "[訓練教官]";
+				mes "ミッションの破棄は、";
+				mes "^FF0000『受注したミッションの報告/";
+				mes "確認をする』^000000からできるぞ。";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "カプラガーデン内で、";
+			mes "攻城戦の時間帯を狙って";
+			mes "^4d4dff泥棒ポリン^000000が出現するという";
+			mes "情報提供があったんだ。";
+			next;
+			mes "[訓練教官]";
+			mes "攻城戦の混雑に紛れて";
+			mes "何か企んでいるのかもしれない。";
+			next;
+			mes "[訓練教官]";
+			mes "そこで、";
+			mes "その^4d4dff泥棒ポリンを退治^000000";
+			mes "してほしいんだ。";
+			mes "何匹退治してくれるんだ？";
+			next;
+			switch(select("泥棒ポリン退治　1匹","泥棒ポリン退治　10匹","泥棒ポリン退治　30匹")) {
+			case 1:
+				set '@num,1;
+				set '@quest,7510;
+				break;
+			case 2:
+				set '@num,10;
+				set '@quest,7511;
+				break;
+			case 3:
+				set '@num,30;
+				set '@quest,7512;
+				break;
+			}
+			mes "[訓練教官]";
+			mes "わかった。";
+			mes "それでは、^4d4dff泥棒ポリンを";
+			mes '@num+ "匹以上退治^000000して、";
+			mes "報告してくれ。";
+			next;
+			if(select("受ける","受けない")==2) {
+				mes "[訓練教官]";
+				mes "そうか……";
+				mes "まあ気が変わったら、";
+				mes "受けてみてくれ！";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "ミッション^4d4dff制限時間は4時間^000000だ。";
+			mes "その間に解決して報告してくれよ！";
+			setquest '@quest;
+			close;
+		case 2:
+			if('@kafra2) {
+				mes "[訓練教官]";
+				mes "それは現在受注中の";
+				mes "ミッションだな。";
+				mes "新たに受注をしたいのなら、";
+				mes "先に報告をしてくれ。";
+				next;
+				mes "[訓練教官]";
+				mes "それから、同じ種類のミッションは";
+				mes "同時には受けられないから、";
+				mes "気をつけな！";
+				next;
+				mes "[訓練教官]";
+				mes "もし同じ種類の、";
+				mes "もっと簡単なミッションや、";
+				mes "もっと難しいミッションに";
+				mes "受け直したい場合は、";
+				mes "まずは今受けているミッションを";
+				mes "破棄するんだ。";
+				next;
+				mes "[訓練教官]";
+				mes "ミッションの破棄は、";
+				mes "^FF0000『受注したミッションの報告/";
+				mes "確認をする』^000000からできるぞ。";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "突然だけど、質問だ！";
+			mes "攻城戦で一番重要なことは";
+			mes "なんだと思う？";
+			next;
+			mes "[訓練教官]";
+			mes "そう！";
+			next;
+			mes "[訓練教官]";
+			mes "エンペリウムの破壊だ！";
+			mes "そのエンペリウムを破壊する";
+			mes "ミッションがある！";
+			next;
+			mes "[訓練教官]";
+			mes "グロリアでもカプラガーデンでも、";
+			mes "今のこの時間に存在する";
+			mes "^4d4dffエンペリウムを破壊^000000するんだ！";
+			mes "さあ、いくつ破壊できるんだ？";
+			next;
+			switch(select("エンペリウム　1つ","エンペリウム　3つ","エンペリウム　5つ")) {
+			case 1:
+				set '@num,1;
+				set '@quest,7504;
+				break;
+			case 2:
+				set '@num,3;
+				set '@quest,7505;
+				break;
+			case 3:
+				set '@num,5;
+				set '@quest,7506;
+				break;
+			}
+			mes "[訓練教官]";
+			mes "わかった。";
+			mes "それでは、グロリアでも";
+			mes "カプラガーデンでも構わない。";
+			mes "^4d4dffエンペリウムを" +'@num+ "つ以上破壊^000000して、";
+			mes "報告してくれ。";
+			next;
+			if(select("受ける","受けない")==2) {
+				mes "[訓練教官]";
+				mes "そうか……";
+				mes "まあ気が変わったら、";
+				mes "受けてみてくれ！";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "ミッション^4d4dff制限時間は4時間^000000だ。";
+			mes "その間に解決して報告してくれよ！";
+			setquest '@quest;
+			close;
+		case 3:
+			if('@kafra3) {
+				mes "[訓練教官]";
+				mes "それは現在受注中の";
+				mes "ミッションだな。";
+				mes "新たに受注をしたいのなら、";
+				mes "先に報告をしてくれ。";
+				next;
+				mes "[訓練教官]";
+				mes "それから、同じ種類のミッションは";
+				mes "同時には受けられないから、";
+				mes "気をつけな！";
+				next;
+				mes "[訓練教官]";
+				mes "もし同じ種類の、";
+				mes "もっと簡単なミッションや、";
+				mes "もっと難しいミッションに";
+				mes "受け直したい場合は、";
+				mes "まずは今受けているミッションを";
+				mes "破棄するんだ。";
+				next;
+				mes "[訓練教官]";
+				mes "ミッションの破棄は、";
+				mes "^FF0000『受注したミッションの報告/";
+				mes "確認をする』^000000からできるぞ。";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "カプラガーデン砦で盗難事件が";
+			mes "発生したんだ。";
+			mes "盗まれたのは、";
+			mes "明細書らしい。";
+			next;
+			mes "[訓練教官]";
+			mes "攻城戦の時間を狙って犯行を";
+			mes "行ったんだろう。";
+			mes "^4d4dff盗まれた明細書^000000を回収してくれ、";
+			mes "という依頼だ。";
+			mes "いくつ回収してくれるんだ？";
+			next;
+			switch(select("盗まれた明細書回収　10枚","盗まれた明細書回収　20枚","盗まれた明細書回収　30枚")) {
+			case 1:
+				set '@num,10;
+				set '@quest,7513;
+				break;
+			case 2:
+				set '@num,20;
+				set '@quest,7514;
+				break;
+			case 3:
+				set '@num,30;
+				set '@quest,7515;
+				break;
+			}
+			mes "[訓練教官]";
+			mes "わかった。";
+			mes "それでは、^4d4dff盗まれた明細書を";
+			mes '@num+ "枚以上回収^000000して、";
+			mes "報告してくれ。";
+			next;
+			if(select("受ける","受けない")==2) {
+				mes "[訓練教官]";
+				mes "そうか……";
+				mes "まあ気が変わったら、";
+				mes "受けてみてくれ！";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "ミッション^4d4dff制限時間は4時間^000000だ。";
+			mes "その間に解決して報告してくれよ！";
+			setquest '@quest;
+			close;
+		}
+	case 2:
+		if('@kafra1 == 0 && '@kafra2 == 0 && '@kafra3== 0 ) {
+			mes "[訓練教官]";
+			mes "おや？";
+			mes "確認しようにも、";
+			mes "ミッションを受けて";
+			mes "いないじゃないか！";
+			next;
+			mes "[訓練教官]";
+			mes "まずはミッションを";
+			mes "受けてみるんだ！";
+			close;
+		}
+		mes "[訓練教官]";
+		mes "どのミッションの";
+		mes "確認をするんだ？";
+		next;
+		switch(select(
+			('@kafra1? "泥棒ポリン退治　^4d4dff報告/確認^000000": ""),
+//			('@kafra2? "エンペリウムブレイカー　^4d4dff報告/確認^000000": ""),
+			('@kafra3? "盗まれた明細書回収　^4d4dff報告/確認^000000": "")
+		)) {
+		case 1:
+			if(checkquest(7510)) {
+				set '@num,1;
+				set '@quest,7510;
+			} else if(checkquest(7511)) {
+				set '@num,10;
+				set '@quest,7511;
+			} else if(checkquest(7512)) {
+				set '@num,30;
+				set '@quest,7512;
+			} else
+				close;
+			if(checkquest('@quest) & 0x2) {
+				mes "[訓練教官]";
+				mes "これは……";
+				mes "タイムオーバーだね。";
+				mes "残念だけどミッション失敗！";
+				mes "次の機会に頑張ってくれよ！";
+				delquest '@quest;
+				close;
+			}
+			if(checkquest('@quest) & 0x4) {
+				mes "[訓練教官]";
+				mes "時間内に完了したようだね！";
+				mes "しかし、どうしてポリンが";
+				mes "そのような時間に動き回って";
+				mes "いたんだろう……。";
+				next;
+				mes "[訓練教官]";
+				mes "まっ！";
+				mes "とにかくお疲れ様！";
+				delquest '@quest;
+				getitem 12873,'@num;
+				close;
+			}
+			mes "[訓練教官]";
+			mes "まだミッションは、";
+			mes "完了していないようだな！";
+			next;
+			mes "[訓練教官]";
+			mes "このミッションは、";
+			mes "カプラガーデン内に現れる";
+			mes "^0000FF泥棒ポリンを" +'@num+ "体^000000";
+			mes "退治することなんだ。";
+			break;
+		case 2:
+			if(checkquest(7504)) {
+				set '@num,1;
+				set '@quest,7504;
+			} else if(checkquest(7505)) {
+				set '@num,3;
+				set '@quest,7505;
+			} else if(checkquest(7506)) {
+				set '@num,5;
+				set '@quest,7506;
+			} else
+				close;
+			if(checkquest('@quest) & 0x2) {
+				mes "[訓練教官]";
+				mes "これは……";
+				mes "タイムオーバーだね。";
+				mes "残念だけどミッション失敗！";
+				mes "次の機会に頑張ってくれよ！";
+				delquest '@quest;
+				close;
+			}
+			if(checkquest('@quest) & 0x4) {
+				// 未調査
+			}
+			mes "[訓練教官]";
+			mes "まだミッションは、";
+			mes "完了していないようだね！";
+			next;
+			mes "[訓練教官]";
+			mes "このミッションは、";
+			mes "^0000FFグロリア、またはカプラガーデンに";
+			mes "存在するエンペリウムを";
+			mes "破壊すること^000000だ。";
+			break;
+		case 3:
+			if(checkquest(7513)) {
+				set '@num,10;
+				set '@quest,7513;
+			} else if(checkquest(7514)) {
+				set '@num,20;
+				set '@quest,7514;
+			} else if(checkquest(7515)) {
+				set '@num,30;
+				set '@quest,7515;
+			} else
+				close;
+			if(checkquest('@quest) & 0x2) {
+				mes "[訓練教官]";
+				mes "これは……";
+				mes "タイムオーバーだね。";
+				mes "残念だけどミッション失敗！";
+				mes "次の機会に頑張ってくれよ！";
+				delquest '@quest;
+				close;
+			}
+			if(countitem(6668) >= '@num) {
+				mes "[訓練教官]";
+				mes "明細書が" +'@num+ "枚以上！";
+				mes "ちゃんと回収したようだね。";
+				mes "ポリンはなぜ明細書を盗んだんだろう？";
+				next;
+				mes "[訓練教官]";
+				mes "まあ、とにかくお疲れ様。";
+				mes "これは持ち主に返してあげないとね。";
+				delitem 6668,'@num;
+				delquest '@quest;
+				getitem 12873,'@num/10;
+				close;
+			}
+			mes "[訓練教官]";
+			mes "まだミッションは、";
+			mes "完了していないようだね！";
+			next;
+			mes "[訓練教官]";
+			mes "このミッションは、";
+			mes "^0000FFカプラガーデン砦で盗難された";
+			mes "明細書を" +'@num+ "枚回収すること^000000だ。";
+			break;
+		}
+		next;
+		mes "[訓練教官]";
+		mes "あ、もしかしてやめるのか？";
+		next;
+		if(select("いいえ","やめます")==1) {
+			mes "[訓練教官]";
+			mes "まだミッションを遂行できる時間が";
+			mes "残っているから頑張ってみて。";
+			close;
+		}
+		mes "[訓練教官]";
+		mes "ふむ……";
+		mes "今まで頑張った分があっても、";
+		mes "無駄になってしまうが、";
+		mes "本当に取り消していいんだな？";
+		next;
+		if(select("取り消さない","はい")==1) {
+			mes "[訓練教官]";
+			mes "ミッションを続けるんだな？";
+			mes "まだ遂行できる時間が";
+			mes "残っているから頑張ってみて。";
+			close;
+		}
+		mes "[訓練教官]";
+		mes "そっか……";
+		mes "じゃあ、望み通りに";
+		mes "該当ミッションは取り消すよ。";
+		delquest '@quest;
+		close;
+	case 3:
+		mes "[訓練教官]";
+		mes "TE地域でやれることが";
+		mes "攻城戦だけじゃあ、";
+		mes "つまらないだろう？";
+		mes "だから^4d4dff攻城戦の時間にできる仕事を^000000";
+		mes "準備しておいたんだ！";
+		next;
+		mes "[訓練教官]";
+		mes "ミッションは";
+		mes "^4d4dff攻城が始まる1時間前から";
+		mes "攻城戦TEが終了する時間まで";
+		mes "受注することができる。^000000";
+		next;
+		mes "[訓練教官]";
+		mes "また、すべて";
+		mes "^4d4dff4時間の任務遂行制限時間^000000がある。";
+		mes "4時間以内にクリアし、報告まで完了";
+		mes "しなくてはいけないということだ！";
+		next;
+		mes "[訓練教官]";
+		mes "まあ、暇つぶしにでも";
+		mes "挑戦してみてくれ。";
+		close;
+	case 4:
+		mes "[訓練教官]";
+		mes "そうか。";
+		mes "気が変わったらいつでも来てくれ。";
+		mes "攻城戦TEの時間中しか";
+		mes "ミッションの遂行はできないという";
+		mes "制限があるけどな、ははは。";
+		close;
+	}
+OnInit:
+	waitingroom "攻城戦TEミッション",0;
+	end;
+}
+
+te_prt_gld.gat,114,149,5	script	訓練教官#gloria	899,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "[訓練教官]";
+		mes "おや、あなたは……";
+		mes "すまないがTE地域は";
+		mes "上位2次職業まで、および";
+		mes "レベル拡張がされていない";
+		mes "職業のための空間なんだ。";
+		next;
+		mes "[訓練教官]";
+		mes "だから、ここではあなたに";
+		mes "お願いできることはないんだ。";
+		mes "申し訳ない……。";
+		close;
+	}
+	if(BaseLevel < 70) {
+		mes "[訓練教官]";
+		mes "ああ、すまん！";
+		mes "悪いけどミッションは^4d4dffBaseLv70^000000以上を";
+		mes "対象としているんだ。";
+		mes "もっと鍛えてから、来てくれるかな？";
+		close;
+	}
+	if(gettime(3) < 19 || gettime(3) >= 22) {
+		mes "[訓練教官]";
+		mes "ここでは、TE地域で遂行できる";
+		mes "ミッションが受けられるぞ。";
+		next;
+		mes "[訓練教官]";
+		mes "ただ、ミッションは受注可能な時間、";
+		mes "不可能な時間が決まっているんだ。";
+		mes "残念だけど今がその受注不可能な";
+		mes "時間だ。";
+		next;
+		mes "[訓練教官]";
+		mes "すでに受注しているミッションの";
+		mes "結果だけ確認してやるぞ。";
+	} else {
+		mes "[訓練教官]";
+		mes "ここでは、TE地域で遂行できる";
+		mes "ミッションが受けられるぞ。";
+		mes "さあ、何がいい？";
+		set '@str$,"ミッションを受注する";
+	}
+	set '@gloria1,checkquest(7501) | checkquest(7502) | checkquest(7503);
+//	set '@gloria2,checkquest(7504) | checkquest(7505) | checkquest(7506);
+	set '@gloria3,checkquest(7507) | checkquest(7508) | checkquest(7509);
+	next;
+	switch(select('@str$,"受注したミッションの報告/確認をする","ミッションとは？","やめる")) {
+	case 1:
+		if(gettime(3) < 19 || gettime(3) >= 22)
+			close;
+		mes "[訓練教官]";
+		mes "同じ内容のミッションの場合、";
+		mes "倒したり集めたりする数が違うものでも";
+		mes "同時に受けることはできないから、";
+		mes "気をつけるんだぞ！";
+		next;
+		mes "[訓練教官]";
+		mes "どのミッションを受けるのかな？";
+		mes "さあ、選んで！";
+		next;
+		switch(select(
+			('@gloria1? "^808080怪しいオークベイビー退治 -受注中-^000000": "怪しいオークベイビー退治"),
+//			('@gloria2? "^808080エンペリウムブレイカー -受注中-^000000": "エンペリウムブレイカー"),
+			('@gloria3? "^808080小さな木箱回収 -受注中-^000000": "小さな木箱回収")
+		)) {
+		case 1:
+			if('@gloria1) {
+				mes "[訓練教官]";
+				mes "それは現在受注中の";
+				mes "ミッションだな。";
+				mes "新たに受注をしたいのなら、";
+				mes "先に報告をしてくれ。";
+				next;
+				mes "[訓練教官]";
+				mes "それから、同じ種類のミッションは";
+				mes "同時には受けられないから、";
+				mes "気をつけな！";
+				next;
+				mes "[訓練教官]";
+				mes "もし同じ種類の、";
+				mes "もっと簡単なミッションや、";
+				mes "もっと難しいミッションに";
+				mes "受け直したい場合は、";
+				mes "まずは今受けているミッションを";
+				mes "破棄するんだ。";
+				next;
+				mes "[訓練教官]";
+				mes "ミッションの破棄は、";
+				mes "^FF0000『受注したミッションの報告/";
+				mes "確認をする』^000000からできるぞ。";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "グロリア内で、";
+			mes "攻城戦の時間帯を狙って";
+			mes "^4d4dff怪しいオークベイビー^000000が出現するという";
+			mes "情報提供があったんだ。";
+			next;
+			mes "[訓練教官]";
+			mes "攻城戦の混雑に紛れて";
+			mes "何か企んでいるのかもしれない。";
+			next;
+			mes "[訓練教官]";
+			mes "そこで、";
+			mes "その^4d4dff怪しいオークベイビーを退治^000000";
+			mes "してほしいんだ。";
+			mes "何匹退治してくれるんだ？";
+			next;
+			switch(select("怪しいオークベイビー退治　1匹","怪しいオークベイビー退治　10匹","怪しいオークベイビー退治　30匹")) {
+			case 1:
+				set '@num,1;
+				set '@quest,7501;
+				break;
+			case 2:
+				set '@num,10;
+				set '@quest,7502;
+				break;
+			case 3:
+				set '@num,30;
+				set '@quest,7503;
+				break;
+			}
+			mes "[訓練教官]";
+			mes "わかった。";
+			mes "それでは、^4d4dff怪しいオークベイビーを";
+			mes '@num+ "匹以上退治^000000して、";
+			mes "報告してくれ。";
+			next;
+			if(select("受ける","受けない")==2) {
+				mes "[訓練教官]";
+				mes "そうか……";
+				mes "まあ気が変わったら、";
+				mes "受けてみてくれ！";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "ミッション^4d4dff制限時間は4時間^000000だ。";
+			mes "その間に解決して報告してくれよ！";
+			setquest '@quest;
+			close;
+		case 2:
+			if('@gloria2) {
+				mes "[訓練教官]";
+				mes "それは現在受注中の";
+				mes "ミッションだな。";
+				mes "新たに受注をしたいのなら、";
+				mes "先に報告をしてくれ。";
+				next;
+				mes "[訓練教官]";
+				mes "それから、同じ種類のミッションは";
+				mes "同時には受けられないから、";
+				mes "気をつけな！";
+				next;
+				mes "[訓練教官]";
+				mes "もし同じ種類の、";
+				mes "もっと簡単なミッションや、";
+				mes "もっと難しいミッションに";
+				mes "受け直したい場合は、";
+				mes "まずは今受けているミッションを";
+				mes "破棄するんだ。";
+				next;
+				mes "[訓練教官]";
+				mes "ミッションの破棄は、";
+				mes "^FF0000『受注したミッションの報告/";
+				mes "確認をする』^000000からできるぞ。";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "突然だけど、質問だ！";
+			mes "攻城戦で一番重要なことは";
+			mes "なんだと思う？";
+			next;
+			mes "[訓練教官]";
+			mes "そう！";
+			next;
+			mes "[訓練教官]";
+			mes "エンペリウムの破壊だ！";
+			mes "そのエンペリウムを破壊する";
+			mes "ミッションがある！";
+			next;
+			mes "[訓練教官]";
+			mes "グロリアでもカプラガーデンでも、";
+			mes "今のこの時間に存在する";
+			mes "^4d4dffエンペリウムを破壊^000000するんだ！";
+			mes "さあ、いくつ破壊できるんだ？";
+			next;
+			switch(select("エンペリウム　1つ","エンペリウム　3つ","エンペリウム　5つ")) {
+			case 1:
+				set '@num,1;
+				set '@quest,7504;
+				break;
+			case 2:
+				set '@num,3;
+				set '@quest,7505;
+				break;
+			case 3:
+				set '@num,5;
+				set '@quest,7506;
+				break;
+			}
+			mes "[訓練教官]";
+			mes "わかった。";
+			mes "それでは、グロリアでも";
+			mes "カプラガーデンでも構わない。";
+			mes "^4d4dffエンペリウムを" +'@num+ "つ以上破壊^000000して、";
+			mes "報告してくれ。";
+			next;
+			if(select("受ける","受けない")==2) {
+				mes "[訓練教官]";
+				mes "そうか……";
+				mes "まあ気が変わったら、";
+				mes "受けてみてくれ！";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "ミッション^4d4dff制限時間は4時間^000000だ。";
+			mes "その間に解決して報告してくれよ！";
+			setquest '@quest;
+			close;
+		case 3:
+			if('@gloria3) {
+				mes "[訓練教官]";
+				mes "それは現在受注中の";
+				mes "ミッションだな。";
+				mes "新たに受注をしたいのなら、";
+				mes "先に報告をしてくれ。";
+				next;
+				mes "[訓練教官]";
+				mes "それから、同じ種類のミッションは";
+				mes "同時には受けられないから、";
+				mes "気をつけな！";
+				next;
+				mes "[訓練教官]";
+				mes "もし同じ種類の、";
+				mes "もっと簡単なミッションや、";
+				mes "もっと難しいミッションに";
+				mes "受け直したい場合は、";
+				mes "まずは今受けているミッションを";
+				mes "破棄するんだ。";
+				next;
+				mes "[訓練教官]";
+				mes "ミッションの破棄は、";
+				mes "^FF0000『受注したミッションの報告/";
+				mes "確認をする』^000000からできるぞ。";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "ここグロリアで盗難事件が";
+			mes "発生したんだ。";
+			mes "盗まれたのは、";
+			mes "重要な物品を収納した";
+			mes "小さな木箱だ。";
+			next;
+			mes "[訓練教官]";
+			mes "攻城戦の時間を狙って犯行を";
+			mes "行ったんだろう。";
+			mes "盗まれた^4d4dff小さな木箱^000000を回収してくれ、";
+			mes "という依頼だ。";
+			mes "いくつ回収してくれるんだ？";
+			next;
+			switch(select("小さな木箱回収　10枚","小さな木箱回収　20枚","小さな木箱回収　30枚")) {
+			case 1:
+				set '@num,10;
+				set '@quest,7507;
+				break;
+			case 2:
+				set '@num,20;
+				set '@quest,7508;
+				break;
+			case 3:
+				set '@num,30;
+				set '@quest,7509;
+				break;
+			}
+			mes "[訓練教官]";
+			mes "わかった。";
+			mes "それでは、^4d4dff小さな木箱を";
+			mes '@num+ "個以上回収^000000して、";
+			mes "報告してくれ。";
+			next;
+			if(select("受ける","受けない")==2) {
+				mes "[訓練教官]";
+				mes "そうか……";
+				mes "まあ気が変わったら、";
+				mes "受けてみてくれ！";
+				close;
+			}
+			mes "[訓練教官]";
+			mes "ミッション^4d4dff制限時間は4時間^000000だ。";
+			mes "その間に解決して報告してくれよ！";
+			setquest '@quest;
+			close;
+		}
+	case 2:
+		if('@gloria1 == 0 && '@gloria2 == 0 && '@gloria3== 0 ) {
+			mes "[訓練教官]";
+			mes "おや？";
+			mes "確認しようにも、";
+			mes "ミッションを受けて";
+			mes "いないじゃないか！";
+			next;
+			mes "[訓練教官]";
+			mes "まずはミッションを";
+			mes "受けてみるんだ！";
+			close;
+		}
+		mes "[訓練教官]";
+		mes "どのミッションの";
+		mes "確認をするんだ？";
+		next;
+		switch(select(
+			('@gloria1? "怪しいオークベイビー退治　^4d4dff報告/確認^000000": ""),
+//			('@gloria2? "エンペリウムブレイカー　^4d4dff報告/確認^000000": ""),
+			('@gloria3? "小さな木箱回収　^4d4dff報告/確認^000000": "")
+		)) {
+		case 1:
+			if(checkquest(7501)) {
+				set '@num,1;
+				set '@quest,7501;
+			} else if(checkquest(7502)) {
+				set '@num,10;
+				set '@quest,7502;
+			} else if(checkquest(7503)) {
+				set '@num,30;
+				set '@quest,7503;
+			} else
+				close;
+			if(checkquest('@quest) & 0x2) {
+				mes "[訓練教官]";
+				mes "これは……";
+				mes "タイムオーバーだね。";
+				mes "残念だけどミッション失敗！";
+				mes "次の機会に頑張ってくれよ！";
+				delquest '@quest;
+				close;
+			}
+			if(checkquest('@quest) & 0x4) {
+				mes "[訓練教官]";
+				mes "時間内に完了したようだね！";
+				mes "しかし、どうしてオークベイビーが";
+				mes "このような時間に動き回って";
+				mes "いたんだろう……。";
+				next;
+				mes "[訓練教官]";
+				mes "まっ！";
+				mes "とにかくお疲れ様！";
+				delquest '@quest;
+				getitem 12873,'@num;
+				close;
+			}
+			mes "[訓練教官]";
+			mes "まだミッションは、";
+			mes "完了していないようだな！";
+			next;
+			mes "[訓練教官]";
+			mes "このミッションは、";
+			mes "グロリア内に現れる";
+			mes "^0000FF怪しいオークベイビーを" +'@num+ "体^000000";
+			mes "退治することなんだ。";
+			break;
+		case 2:
+			if(checkquest(7504)) {
+				set '@num,1;
+				set '@quest,7504;
+			} else if(checkquest(7505)) {
+				set '@num,3;
+				set '@quest,7505;
+			} else if(checkquest(7506)) {
+				set '@num,5;
+				set '@quest,7506;
+			} else
+				close;
+			if(checkquest('@quest) & 0x2) {
+				mes "[訓練教官]";
+				mes "これは……";
+				mes "タイムオーバーだね。";
+				mes "残念だけどミッション失敗！";
+				mes "次の機会に頑張ってくれよ！";
+				delquest '@quest;
+				close;
+			}
+			if(checkquest('@quest) & 0x4) {
+				// 未調査
+			}
+			mes "[訓練教官]";
+			mes "まだミッションは、";
+			mes "完了していないようだね！";
+			next;
+			mes "[訓練教官]";
+			mes "このミッションは、";
+			mes "^0000FFグロリア、またはカプラガーデンに";
+			mes "存在するエンペリウムを";
+			mes "破壊すること^000000だ。";
+			break;
+		case 3:
+			if(checkquest(7507)) {
+				set '@num,10;
+				set '@quest,7507;
+			} else if(checkquest(7508)) {
+				set '@num,20;
+				set '@quest,7508;
+			} else if(checkquest(7509)) {
+				set '@num,30;
+				set '@quest,7509;
+			} else
+				close;
+			if(checkquest('@quest) & 0x2) {
+				mes "[訓練教官]";
+				mes "これは……";
+				mes "タイムオーバーだね。";
+				mes "残念だけどミッション失敗！";
+				mes "次の機会に頑張ってくれよ！";
+				delquest '@quest;
+				close;
+			}
+			if(countitem(6592) >= '@num) {
+				mes "[訓練教官]";
+				mes "小さな木箱が" +'@num+ "個以上！";
+				mes "ちゃんと回収したようだね。";
+				mes "オークベイビーはなぜ木箱を";
+				mes "盗んだんだろう？";
+				next;
+				mes "[訓練教官]";
+				mes "まあ、とにかくお疲れ様。";
+				mes "これは持ち主に返してあげないとね。";
+				delitem 6592,'@num;
+				delquest '@quest;
+				getitem 12873,'@num/10;
+				close;
+			}
+			// 未調査
+			mes "[訓練教官]";
+			mes "まだミッションは、";
+			mes "完了していないようだね！";
+			next;
+			mes "[訓練教官]";
+			mes "このミッションは、";
+			mes "^0000FFグロリア砦で盗難された";
+			mes "小さな木箱を" +'@num+ "個回収すること^000000だ。";
+			break;
+		}
+		next;
+		mes "[訓練教官]";
+		mes "あ、もしかしてやめるのか？";
+		next;
+		if(select("いいえ","やめます")==1) {
+			mes "[訓練教官]";
+			mes "まだミッションを遂行できる時間が";
+			mes "残っているから頑張ってみて。";
+			close;
+		}
+		mes "[訓練教官]";
+		mes "ふむ……";
+		mes "今まで頑張った分があっても、";
+		mes "無駄になってしまうが、";
+		mes "本当に取り消していいんだな？";
+		next;
+		if(select("取り消さない","はい")==1) {
+			mes "[訓練教官]";
+			mes "ミッションを続けるんだな？";
+			mes "まだ遂行できる時間が";
+			mes "残っているから頑張ってみて。";
+			close;
+		}
+		mes "[訓練教官]";
+		mes "そっか……";
+		mes "じゃあ、望み通りに";
+		mes "該当ミッションは取り消すよ。";
+		delquest '@quest;
+		close;
+	case 3:
+		mes "[訓練教官]";
+		mes "TE地域でやれることが";
+		mes "攻城戦だけじゃあ、";
+		mes "つまらないだろう？";
+		mes "だから^4d4dff攻城戦の時間にできる仕事を^000000";
+		mes "準備しておいたんだ！";
+		next;
+		mes "[訓練教官]";
+		mes "ミッションは";
+		mes "^4d4dff攻城が始まる1時間前から";
+		mes "攻城戦TEが終了する時間まで";
+		mes "受注することができる。^000000";
+		next;
+		mes "[訓練教官]";
+		mes "また、すべて";
+		mes "^4d4dff4時間の任務遂行制限時間^000000がある。";
+		mes "4時間以内にクリアし、報告まで完了";
+		mes "しなくてはいけないということだ！";
+		next;
+		mes "[訓練教官]";
+		mes "まあ、暇つぶしにでも";
+		mes "挑戦してみてくれ。";
+		close;
+	case 4:
+		mes "[訓練教官]";
+		mes "そうか。";
+		mes "気が変わったらいつでも来てくれ。";
+		mes "攻城戦TEの時間中しか";
+		mes "ミッションの遂行はできないという";
+		mes "制限があるけどな、ははは。";
+		close;
+	}
+OnInit:
+	waitingroom "攻城戦TEミッション",0;
+	end;
+}
+
+te_alde_gld.gat,206,180,5	script	修練教官#kafra	899,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "[修練教官]";
+		mes "攻城戦TEエリアのすべての";
+		mes "サービスおよびクエストは、";
+		mes "3次職業および限界突破した";
+		mes "スーパーノービスのような";
+		mes "レベル拡張をした職業は";
+		mes "利用できないぞ。";
+		close;
+	}
+	mes "[修練教官]";
+	mes "カプラガーデンで遂行が可能な";
+	mes "作戦や討伐依頼を取り扱っている。";
+	mes "攻城戦中にしかできないものもあるが";
+	mes "毎日できるものもあるから";
+	mes "その気があるならやってみな。";
+	next;
+	switch(select("カプラガーデン占領報酬","ギルドダンジョン討伐依頼","作戦について","必要ない")) {
+	case 1:
+		mes "[修練教官]";
+		mes "すまないが、占領報酬は";
+		mes "ギルドマスターのみ挑戦が可能だ。";
+		mes "一般のギルドメンバーは";
+		mes "討伐依頼を受けてみな。";
+		close;
+	case 2:
+		mes "[修練教官]";
+		mes "カプラガーデンの";
+		mes "ギルドダンジョンで";
+		mes "遂行できる依頼だ。";
+		mes "まあ、途中で止めたくなったら";
+		mes "取り消してやるから";
+		mes "気楽に挑戦してみるといい。";
+		next;
+		switch(select("カプラガーデン討伐依頼[1]","カプラガーデン討伐依頼[2]","必要ない")) {
+		case 1:
+		case 2:
+			if(BaseLevel < 70) {
+				mes "[修練教官]";
+				mes "うむ……";
+				mes "残念だが該当する討伐依頼は";
+				mes "^4d4dffBaseレベル70^000000以上を対象としている。";
+				mes "Baseレベルを上げてから";
+				mes "また来てくれ。";
+				close;
+			}
+		case 3:
+			mes "[修練教官]";
+			mes "まあ、ギルドダンジョンを対象と";
+			mes "したものだから、別に時間に追われる";
+			mes "必要はないだろう。";
+			mes "好きな時にチャレンジしてみるがいい。";
+			close;
+		}
+	case 3:
+		mes "[修練教官]";
+		mes "『占領報酬』は文字通り";
+		mes "^4d4dff砦を占領している数によって^000000";
+		mes "報酬を与える。";
+		mes "^4d4dff私が確認を受け付けた時に";
+		mes "君のギルドが占領している砦の数^000000で";
+		mes "報酬が変わる。";
+		next;
+		mes "[修練教官]";
+		mes "占領報酬の性質上、^4d4dff攻城戦の時間中と、";
+		mes "攻城戦終了後30分間^000000だけ受諾できる。";
+		mes "また、^4d4dff私が報酬を渡した後は";
+		mes "次に確認できるようになるまで";
+		mes "1時間待たなくてはいけなくなるから";
+		mes "タイミングは良く考えた方がいい。^000000";
+		next;
+		mes "[修練教官]";
+		mes "君がギルドマスターで、";
+		mes "攻城戦をやっているのであれば";
+		mes "一度は挑戦してみな。";
+		next;
+		mes "[修練教官]";
+		mes "『討伐依頼』は、";
+		mes "ギルドダンジョンで遂行可能な";
+		mes "モンスター討伐を発行している。";
+		mes "単純だ。";
+		close;
+	case 4:
+		mes "[修練教官]";
+		mes "そうか。";
+		mes "用があったらまた話しかけてくれ。";
+		close;
+	}
+OnInit:
+	waitingroom "討伐クエスト・占領報酬",0;
+	end;
+}
+
+te_prt_gld.gat,125,149,3	script	修練教官#gloria	899,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "[修練教官]";
+		mes "攻城戦TEエリアのすべての";
+		mes "サービスおよびクエストは、";
+		mes "3次職業および限界突破した";
+		mes "スーパーノービスのような";
+		mes "レベル拡張をした職業は";
+		mes "利用できないぞ。";
+		close;
+	}
+	mes "[修練教官]";
+	mes "グロリアで遂行が可能な";
+	mes "作戦や討伐依頼を取り扱っている。";
+	mes "攻城戦中にしかできないものもあるが";
+	mes "毎日できるものもあるから";
+	mes "その気があるならやってみな。";
+	next;
+	switch(select("グロリア占領報酬","ギルドダンジョン討伐依頼","作戦について","必要ない")) {
+	case 1:
+		mes "[修練教官]";
+		mes "すまないが、占領報酬は";
+		mes "ギルドマスターのみ挑戦が可能だ。";
+		mes "一般のギルドメンバーは";
+		mes "討伐依頼を受けてみな。";
+		close;
+	case 2:
+		mes "[修練教官]";
+		mes "グロリアギルドダンジョンで";
+		mes "遂行できる依頼だ。";
+		mes "まあ、途中で止めたくなったら";
+		mes "取り消してやるから";
+		mes "気楽に挑戦してみるといい。";
+		set '@mes1$,"グロリア討伐依頼[1]" +(checkquest(7541)? "^4d4dff結果確認^000000": "");
+		set '@mes2$,"グロリア討伐依頼[2]" +(checkquest(7542)? "^4d4dff結果確認^000000": "");
+		next;
+		switch(select('@mes1$,'@mes2$,"必要ない")) {
+		case 1:
+			if(BaseLevel < 70) {
+				mes "[修練教官]";
+				mes "うむ……";
+				mes "残念だが、該当する討伐依頼は";
+				mes "^4d4dffBaseレベル70^000000以上を対象としている。";
+				mes "Baseレベルを上げてから";
+				mes "また来てくれ。";
+				close;
+			}
+			if(checkquest(7559)) {
+				if(!(checkquest(7559) & 0x2)) {
+					mes "[修練教官]";
+					mes "この討伐依頼は22時間に1度だけ";
+					mes "請け負うことができる。";
+					mes "前回の依頼の報告後";
+					mes "22時間経過してから、来てくれないか。";
+					close;
+				}
+				delquest 7559;
+				mes "[修練教官]";
+				mes "該当する討伐依頼の待機時間が";
+				mes "終わったことを確認した。";
+				mes "確認用の記録は削除しよう。";
+				mes "再度依頼を受けるには";
+				mes "もう一度話しかけてくれ。";
+				close;
+			}
+			if(checkquest(7541)) {
+				if(!(checkquest(7541) & 0x4)) {
+					mes "[修練教官]";
+					mes "ん？";
+					mes "まだ依頼を遂行できていない";
+					mes "ようだが……";
+					mes "何か問題でもあるのか？";
+					next;
+					if(select("いいえ","依頼を諦める")==1) {
+						mes "[修練教官]";
+						mes "いつまで君がギルドダンジョンを";
+						mes "使用できるかは分からないが";
+						mes "まあ頑張ってくれ。";
+						close;
+					}
+					mes "[修練教官]";
+					mes "まあ、強制しているわけではないから";
+					mes "好きにすればいい。";
+					mes "依頼は取り消したよ。";
+					delquest 7541;
+					close;
+				}
+				mes "[修練教官]";
+				mes "おお、見事に完了したようだね。";
+				mes "約束の報酬をあげよう。";
+				setquest 7559;
+				delquest 7541;
+				getexp 94000,0;		//lv98
+				getexp 0,101000;	//lv67
+				getitem 6615,1;
+				close;
+			}
+			mes "[修練教官]";
+			mes "グロリア討伐依頼の1番目だね。";
+			mes "ギルドダンジョンに登場する";
+			mes "モンスター退治をしてもらう。";
+			next;
+			mes "[修練教官]";
+			mes "^4d4dffナイトのセイレン=ウィンザー、";
+			mes "ブラックスミスの";
+			mes "ハワード=アルトアイゼン";
+			mes "アサシンのエレメス=ガイルを";
+			mes "各30匹以上^000000狩って来てくれ。";
+			next;
+			mes "[修練教官]";
+			mes "見事達成したら、それに見合う経験値を";
+			mes "報酬として与えよう。";
+			next;
+			if(select("受ける","やめる")==2) {
+				mes "[修練教官]";
+				mes "まあ、好きなようにしな。";
+				close;
+			}
+			mes "[修練教官]";
+			mes "ギルドダンジョンに入れるのは";
+			mes "砦を占領しているギルドの";
+			mes "メンバーだけだからな。";
+			mes "武運を祈る。";
+			setquest 7541;
+			close;
+		case 2:
+			if(BaseLevel < 70) {
+				mes "[修練教官]";
+				mes "うむ……";
+				mes "残念だが、該当する討伐依頼は";
+				mes "^4d4dffBaseレベル70^000000以上を対象としている。";
+				mes "Baseレベルを上げてから";
+				mes "また来てくれ。";
+				close;
+			}
+			if(checkquest(7560)) {
+				if(!(checkquest(7560) & 0x2)) {
+					mes "[修練教官]";
+					mes "この討伐依頼は22時間に1度だけ";
+					mes "請け負うことができる。";
+					mes "前回の依頼の報告後";
+					mes "22時間経過してから、来てくれないか。";
+					close;
+				}
+				delquest 7560;
+				mes "[修練教官]";
+				mes "該当する討伐依頼の待機時間が";
+				mes "終わったことを確認した。";
+				mes "確認用の記録は削除しよう。";
+				mes "再度依頼を受けるには";
+				mes "もう一度話しかけてくれ。";
+				close;
+			}
+			if(checkquest(7542)) {
+				if(!(checkquest(7542) & 0x4)) {
+					mes "[修練教官]";
+					mes "ん？";
+					mes "まだ依頼を遂行できていない";
+					mes "ようだが……";
+					mes "何か問題でもあるのか？";
+					next;
+					if(select("いいえ","依頼を諦める")==1) {
+						mes "[修練教官]";
+						mes "いつまで君がギルドダンジョンを";
+						mes "使用できるかは分からないが";
+						mes "まあ頑張ってくれ。";
+						close;
+					}
+					mes "[修練教官]";
+					mes "まあ、強制しているわけではないから";
+					mes "好きにすればいい。";
+					mes "依頼は取り消したよ。";
+					delquest 7542;
+					close;
+				}
+				mes "[修練教官]";
+				mes "おお、見事に完了したようだね。";
+				mes "約束の報酬をあげよう。";
+				setquest 7560;
+				delquest 7542;
+				getexp 94000,0;		//lv98
+				getexp 0,101000;	//lv67
+				getitem 6615,1;
+				close;
+			}
+			mes "[修練教官]";
+			mes "グロリア討伐依頼の2番目だね。";
+			mes "ギルドダンジョンに登場する";
+			mes "モンスター退治をしてもらう。";
+			next;
+			mes "[修練教官]";
+			mes "^4d4dffウィザードのカトリーヌ=ケイロン、";
+			mes "プリーストのマーガレッタ=ソリン、";
+			mes "ハンターのセシル=ディモンを";
+			mes "各30匹以上^000000狩って来てくれ。";
+			next;
+			mes "[修練教官]";
+			mes "見事達成したら、それに見合う経験値を";
+			mes "報酬として与えよう。";
+			next;
+			if(select("受ける","やめる")==2) {
+				mes "[修練教官]";
+				mes "まあ、好きなようにしな。";
+				close;
+			}
+			mes "[修練教官]";
+			mes "ギルドダンジョンに入れるのは";
+			mes "砦を占領しているギルドの";
+			mes "メンバーだけだからな。";
+			mes "武運を祈る。";
+			setquest 7542;
+			close;
+		case 3:
+			mes "[修練教官]";
+			mes "まあ、ギルドダンジョンを";
+			mes "対象としたものだから";
+			mes "別に時間に追われる必要はないだろう。";
+			mes "好きな時にチャレンジしてみるがいい。";
+			close;
+		}
+	case 3:
+		mes "[修練教官]";
+		mes "『占領報酬』は文字通り";
+		mes "^4d4dff砦を占領している数によって^000000";
+		mes "報酬を与える。";
+		mes "^4d4dff私が確認を受け付けた時に";
+		mes "君のギルドが占領している砦の数^000000で";
+		mes "報酬が変わる。";
+		next;
+		mes "[修練教官]";
+		mes "占領報酬の性質上、^4d4dff攻城戦の時間中と、";
+		mes "攻城戦終了後30分間^000000だけ受諾できる。";
+		mes "また、^4d4dff私が報酬を渡した後は";
+		mes "次に確認できるようになるまで";
+		mes "1時間待たなくてはいけなくなるから";
+		mes "タイミングは良く考えた方がいい。^000000";
+		next;
+		mes "[修練教官]";
+		mes "君がギルドマスターで、";
+		mes "攻城戦をやっているのであれば";
+		mes "一度は挑戦してみな。";
+		next;
+		mes "[修練教官]";
+		mes "『討伐依頼』は、";
+		mes "ギルドダンジョンで遂行可能な";
+		mes "モンスター討伐を発行している。";
+		mes "単純だ。";
+		close;
+	case 4:
+		mes "[修練教官]";
+		mes "そうか。";
+		mes "用があったらまた話しかけてくれ。";
+		close;
+	}
+OnInit:
+	waitingroom "討伐クエスト・占領報酬",0;
+	end;
+}
+
+//==========================================
+// カプラガーデン
+//------------------------------------------
+// 01 執事クロード
+// 02 執事ラルス
+// 03 執事バレリアン
+// 04 執事アルポルス
+// 05 執事アンペール
+//------------------------------------------
+alde_gld.gat,228,189,3	script	カプラサービス#tes01	115,{
+	mes "[カプラソリン]";
+	mes "いつもお客様のために奉仕する";
+	mes "カプラサービスです～";
+	mes "遂に私たちのカプラサービスが";
+	mes "砦を設立することになりました！";
+	next;
+	switch(select("カプラガーデンについて聞く","攻城戦TEについて聞く","参加資格について聞く","やめる")) {
+	case 1:
+		mes "[カプラソリン]";
+		mes "私たちカプラサービスが";
+		mes "ルーンミッドガッツ王室と協力して";
+		mes "新しく提供する砦の地域です。";
+		mes "カプラの庭園という意味です。";
+		next;
+		mes "[カプラソリン]";
+		mes "ルイーナを元にして作られたので";
+		mes "同じ形をしているけど……";
+		mes "こちらは中級者向けなので";
+		mes "大丈夫ですよ。";
+		mes "言わば練習舞台!?";
+		next;
+		mes "[カプラソリン]";
+		mes "ルイーナにはカプラガーデンが";
+		mes "ヴァルキリーレルムには王室によって";
+		mes "グロリアが建設されました。";
+		mes "私たちのカプラサービスは";
+		mes "みなさんが新しい砦で";
+		mes "良い経験を得ることを願っています。";
+		close;
+	case 2:
+		mes "[カプラソリン]";
+		mes "攻城戦TEは^4d4dff3次職業を除外した";
+		mes "1次、2次職業だけで争う";
+		mes "新しい攻城戦^000000です。";
+		next;
+		mes "[カプラソリン]";
+		mes "より多くの人たちが攻城戦を通じて";
+		mes "経験を積むことができるように";
+		mes "このたび特別に用意しました！";
+		next;
+		mes "[カプラソリン]";
+		mes "さらに、攻城戦地域だけで使用できる";
+		mes "装備アイテムも貸し出していますので";
+		mes "ぜひご利用ください！";
+		next;
+		mes "[カプラソリン]";
+		mes "さあ、私からの説明よりも";
+		mes "実際に行って体験してください～";
+		close;
+	case 3:
+		mes "[カプラソリン]";
+		mes "^FF0000レベル拡張がされていない1次、";
+		mes "2次職、特殊1次職、転生1次職、";
+		mes "上位2次職^000000のみ参加可能です。";
+		next;
+		mes "[カプラソリン]";
+		mes "つまり、3次職や限界突破した";
+		mes "スーパーノービスのような、";
+		mes "拡張職業の上位は参加不可です。";
+		close;
+	case 4:
+		mes "[カプラソリン]";
+		mes "カプラガーデンによって";
+		mes "みなさんの生活に";
+		mes "楽しさを与えることができるように";
+		mes "私たちカプラサービスは";
+		mes "がんばります～";
+		close;
+	}
+}
+
+alde_gld.gat,224,185,5	script	カプラサービス#tes02	117,{
+	mes "[カプラディフォルテー]";
+	mes "カプラガーデンはルイーナを";
+	mes "元にして作られたので";
+	mes "構造がまったく同じです。";
+	next;
+	mes "[カプラディフォルテー]";
+	mes "このワープゲートを利用すると";
+	mes "カプラガーデンに移動できます。";
+	close;
+}
+
+te_alde_gld.gat,228,189,3	script	カプラサービス#tes03	112,{
+	mes "[カプラＷ]";
+	mes "このワープゲートで";
+	mes "ルイーナに移動できます！";
+	next;
+	mes "[カプラＷ]";
+	mes "私「Ｗ」の名前がついている城は";
+	mes "どちらのギルドが占領しましたか？";
+	mes "ふふ……砦の名前に採用されるなんて";
+	mes "私がテーリング姉さんより";
+	mes "優秀ということですよね？";
+	close;
+}
+
+te_alde_gld.gat,224,185,5	script	カプラサービス#tes04	116,{
+	mes "[カプラテーリング]";
+	mes "ここはカプラガーデンです。";
+	mes "カプラガーデンおよび";
+	mes "グロリアにある砦の攻城戦は";
+	mes "レベル拡張がされていない1次、";
+	mes "2次職、特殊1次職、転生1次職、";
+	mes "上位2次職のみ参加可能です。";
+	next;
+	mes "[カプラテーリング]";
+	mes "カプラガーデンと";
+	mes "グロリアでは";
+	mes "他にもミッションが発生します。";
+	mes "注意してみるといいですよ。";
+	next;
+	mes "[カプラテーリング]";
+	mes "また、真心を尽くして";
+	mes "装備を用意しているので";
+	mes "いつでもレンタルできます。";
+	next;
+	mes "[カプラテーリング]";
+	mes "私たちが用意したレンタル装備品は";
+	mes "攻城戦TEが行われるカプラガーデンと";
+	mes "グロリアでのみ使うことが可能です。";
+	next;
+	mes "[カプラテーリング]";
+	mes "……あ";
+	mes "カプラガーデンの砦の名前に";
+	mes "私の名前がついていないから";
+	mes "私が気を悪くしているなんて";
+	mes "思っていませんよね？";
+	next;
+	mes "[カプラテーリング]";
+	mes "そんなことはありませんからね？";
+	mes "私がＷに劣るなんてありえませんよ。";
+	mes "ほほほ。";
+	close;
+}
+
+//==========================================
+// 入場
+//------------------------------------------
+alde_gld.gat,222,186,4	script	ギルドフラッグ	722,{}
+alde_gld.gat,220,184,4	script	ギルドフラッグ	722,{}
+alde_gld.gat,218,182,4	script	ギルドフラッグ	722,{}
+alde_gld.gat,216,180,4	script	ギルドフラッグ	722,{}
+alde_gld.gat,214,178,4	script	ギルドフラッグ	722,{}
+alde_gld.gat,225,188,0	warp	to_kafragarten	1,1,te_alde_gld.gat,228,185
+
+//==========================================
+// ギルドフラッグ
+//------------------------------------------
+te_alde_gld.gat,61,87,6		script	ギルドフラッグ	722,{}
+te_alde_gld.gat,61,79,6		script	ギルドフラッグ	722,{}
+te_alde_gld.gat,45,87,8		script	ギルドフラッグ	722,{}
+te_alde_gld.gat,51,87,8		script	ギルドフラッグ	722,{}
+
+te_alde_gld.gat,99,251,4	script	ギルドフラッグ	722,{}
+te_alde_gld.gat,99,244,4	script	ギルドフラッグ	722,{}
+
+te_alde_gld.gat,146,82,0	script	ギルドフラッグ	722,{}
+te_alde_gld.gat,138,83,0	script	ギルドフラッグ	722,{}
+
+te_alde_gld.gat,239,246,2	script	ギルドフラッグ	722,{}
+te_alde_gld.gat,239,239,2	script	ギルドフラッグ	722,{}
+
+te_alde_gld.gat,265,93,6	script	ギルドフラッグ	722,{}
+te_alde_gld.gat,265,87,6	script	ギルドフラッグ	722,{}
+
+te_alde_gld.gat,257,153,7	script	ギルドフラッグ	722,{}
+te_alde_gld.gat,257,166,5	script	ギルドフラッグ	722,{}
+te_alde_gld.gat,262,153,7	script	ギルドフラッグ	722,{}
+te_alde_gld.gat,262,166,5	script	ギルドフラッグ	722,{}
+te_alde_gld.gat,267,153,7	script	ギルドフラッグ	722,{}
+
+//==========================================
+// warp
+//------------------------------------------
+te_alde_gld.gat,48,79,0		warp	aldeg-1_aldeg-1-1	45,1,1,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "‐攻城戦TEには3次職及び";
+		mes "　限界突破したスーパーノービスは";
+		mes "　入場できません‐";
+		close;
+	}
+	warp "te_aldecas1.gat",34,248;
+	end;
+}
+te_alde_gld.gat,95,253,0	warp	aldeg-2_aldeg-2-1	45,1,1,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "‐攻城戦TEには3次職及び";
+		mes "　限界突破したスーパーノービスは";
+		mes "　入場できません‐";
+		close;
+	}
+	warp "te_aldecas2.gat",88,163;
+	end;
+}
+te_alde_gld.gat,142,81,0	warp	aldeg-3_aldeg-3-1	45,1,1,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "‐攻城戦TEには3次職及び";
+		mes "　限界突破したスーパーノービスは";
+		mes "　入場できません‐";
+		close;
+	}
+	warp "te_aldecas3.gat",114,286;
+	end;
+}
+te_alde_gld.gat,243,242,0	warp	aldeg-4_aldeg-4-1	45,1,1,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "‐攻城戦TEには3次職及び";
+		mes "　限界突破したスーパーノービスは";
+		mes "　入場できません‐";
+		close;
+	}
+	warp "te_aldecas4.gat",149,17;
+	end;
+}
+te_alde_gld.gat,259,90,0	warp	aldeg-5_aldeg-5-1	45,1,1,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "‐攻城戦TEには3次職及び";
+		mes "　限界突破したスーパーノービスは";
+		mes "　入場できません‐";
+		close;
+	}
+	warp "te_aldecas5.gat",216,103;
+	end;
+}
+
+te_aldecas1.gat,34,252,0	warp	aldeg-1-1_aldeg-1	1,1,te_alde_gld.gat,48,83
+te_aldecas2.gat,88,159,0	warp	aldeg-2-1_aldeg-2	1,1,te_alde_gld.gat,95,249
+te_aldecas3.gat,114,290,0	warp	aldeg-3-1_aldeg-3	1,1,te_alde_gld.gat,142,85
+te_aldecas4.gat,145,17,0	warp	aldeg-4-1_aldeg-4	1,1,te_alde_gld.gat,239,242
+te_aldecas5.gat,216,107,0	warp	aldeg-5-1_aldeg-5	1,1,te_alde_gld.gat,264,90
+
+te_alde_gld.gat,225,188,0	warp	to_luina	1,1,alde_gld.gat,228,185
+
+//==========================================
+// 案内人
+//------------------------------------------
+te_alde_gld.gat,45,84,3	script	案内人#ag01	893,{
+	mes "[案内人]";
+	mes "ここは「グラリス」砦です。";
+	close;
+}
+
+te_alde_gld.gat,103,250,3	script	案内人#ag02	893,{
+	mes "[案内人]";
+	mes "ここは「ディフォルテー」砦です。";
+	close;
+}
+
+te_alde_gld.gat,138,87,7	script	案内人#ag03	893,{
+	mes "[案内人]";
+	mes "ここは「ソリン」砦です。";
+	close;
+}
+
+te_alde_gld.gat,239,249,3	script	案内人#ag04	893,{
+	mes "[案内人]";
+	mes "ここは「ビニット」砦です。";
+	close;
+}
+
+te_alde_gld.gat,264,96,5	script	案内人#ag05	893,{
+	mes "[案内人]";
+	mes "ここは「Ｗ」砦です。";
+	close;
+}
+
+//==========================================
+// グロリア
+//------------------------------------------
+// 01 執事クルベ
+// 02 執事カミーユ
+// 03 執事エドゥアール
+// 04 執事カサト
+// 05 執事フィサーロ
+//------------------------------------------
+prt_gld.gat,118,151,4	script	グロリア案内兵士#tes01	105,{
+	mes "[案内兵士]";
+	mes "ルーンミッドガッツ王国と";
+	mes "七つの王家に栄光あれ！";
+	next;
+	mes "[案内兵士]";
+	mes "ここは王国の七王家と";
+	mes "カプラサービスによって建築された";
+	mes "攻城戦TE砦グロリアです。";
+	next;
+	switch(select("グロリアについて聞く","攻城戦TEについて聞く","参加資格について聞く","やめる")) {
+	case 1:
+		mes "[案内兵士]";
+		mes "グロリアとは、七王家と王国の栄光を";
+		mes "末永く称えるため、命名した地名です。";
+		mes "より多くの者たちが強くなるように";
+		mes "という王家の念願を込めて";
+		mes "ヴァルキリーレルムを";
+		mes "真似て建築しました。";
+		next;
+		mes "[案内兵士]";
+		mes "グロリアとカプラサービスが";
+		mes "管理しているアルデバランの";
+		mes "カプラガーデンは、";
+		mes "中級者向けの、言わば攻城戦の";
+		mes "練習舞台です。";
+		next;
+		mes "[案内兵士]";
+		mes "参加資格の制限のほか、";
+		mes "一部のカードやグロリアス装備の";
+		mes "使用制限など、これまでの攻城戦とは";
+		mes "少しだけ違います。";
+		mes "この新しい砦で、攻城戦の経験を";
+		mes "積まれると良いでしょう。";
+		close;
+	case 2:
+		mes "[案内兵士]";
+		mes "より多くの人々が";
+		mes "攻城戦を経験できるように";
+		mes "王家で用意した新しい舞台です。";
+		mes "これまでの攻城戦にはない";
+		mes "新しいルールと、特別な支援が";
+		mes "用意されています。";
+		next;
+		mes "[案内兵士]";
+		mes "^4d4dff攻城戦TEのルールが適用される";
+		mes "グロリアとカプラガーデンは";
+		mes "3次職業、及び限界突破した";
+		mes "スーパーノービスのような";
+		mes "レベル拡張をした職業は";
+		mes "参加することができません。^000000";
+		next;
+		mes "[案内兵士]";
+		mes "また、該当地域だけで使用可能な、";
+		mes "様々な装備品を無料で貸出しています。";
+		mes "おそらく、これが今までの攻城戦との";
+		mes "大きな差だと思われます。";
+		close;
+	case 3:
+		mes "[案内兵士]";
+		mes "^4d4dffノービスを含む1次、2次職及び";
+		mes "特殊1次職が参加可能^000000です。";
+		mes "もちろん転生1次、上位2次職も";
+		mes "含みます。";
+		next;
+		mes "[案内兵士]";
+		mes "参加できない職業は3次職業および";
+		mes "限界突破したスーパーノービスのような";
+		mes "レベル拡張をした職業です。";
+		mes "また参加資格のない職業のスキルによる";
+		mes "強化も消滅します。";
+		close;
+	case 4:
+		mes "[案内兵士]";
+		mes "あなたに王家とオーディンの";
+		mes "加護がありますように！";
+		close;
+	}
+}
+
+prt_gld.gat,122,151,4	script	グロリア案内兵士#tes02	105,{
+	mes "[案内兵士]";
+	mes "グロリアへの入場はこちらの";
+	mes "ワープゲートです。";
+	close;
+}
+
+te_prt_gld.gat,118,159,4	script	グロリア案内兵士#tes03	105,{
+	mes "[案内兵士]";
+	mes "ここはグロリアです。";
+	mes "ヴァルキリーレルムに";
+	mes "戻るには、ワープゲートで";
+	mes "移動してください。";
+	close;
+}
+
+te_prt_gld.gat,122,159,4	script	グロリア案内兵士#tes04	105,{
+	mes "[案内兵士]";
+	mes "ここはグロリアです。";
+	mes "カプラガーデンおよびグロリアの";
+	mes "砦の攻城戦は";
+	mes "レベル拡張がされていない1次、";
+	mes "2次職、特殊1次職、転生1次、";
+	mes "上位2次職のみ参加可能です。";
+	next;
+	mes "[案内兵士]";
+	mes "カプラガーデンとグロリアでは";
+	mes "ミッションを受けることもできます。";
+	mes "エンペリウムとは関係がない";
+	mes "ミッションもあるようなので";
+	mes "挑戦してみてください。";
+	next;
+	mes "[案内兵士]";
+	mes "なお、王室とカプラサービスは";
+	mes "みなさんに、多彩なレンタル装備を";
+	mes "用意しています。";
+	mes "レンタル時間は短いですが、";
+	mes "無料でレンタルしておりますので";
+	mes "どうぞご利用ください。";
+	close;
+}
+
+//==========================================
+// 入場
+//------------------------------------------
+prt_gld.gat,112,155,4	script	ギルドフラッグ	722,{}
+prt_gld.gat,116,155,4	script	ギルドフラッグ	722,{}
+prt_gld.gat,120,155,4	script	ギルドフラッグ	722,{}
+prt_gld.gat,124,155,4	script	ギルドフラッグ	722,{}
+prt_gld.gat,128,155,4	script	ギルドフラッグ	722,{}
+prt_gld.gat,120,153,0	warp	to_gloria	1,1,te_prt_gld.gat,120,149
+
+//==========================================
+// ギルドフラッグ
+//------------------------------------------
+te_prt_gld.gat,131,60,6		script	ギルドフラッグ	722,{}
+te_prt_gld.gat,138,68,6		script	ギルドフラッグ	722,{}
+te_prt_gld.gat,138,60,6		script	ギルドフラッグ	722,{}
+te_prt_gld.gat,135,60,6		script	ギルドフラッグ	722,{}
+
+te_prt_gld.gat,244,126,8	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,244,128,8	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,236,126,8	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,236,128,8	script	ギルドフラッグ	722,{}
+
+te_prt_gld.gat,147,140,4	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,147,136,4	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,158,140,4	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,158,136,4	script	ギルドフラッグ	722,{}
+
+te_prt_gld.gat,120,243,6	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,120,236,6	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,122,243,6	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,122,236,6	script	ギルドフラッグ	722,{}
+
+te_prt_gld.gat,199,243,2	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,199,236,2	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,197,243,2	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,197,236,2	script	ギルドフラッグ	722,{}
+
+te_prt_gld.gat,160,210,4	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,153,213,3	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,150,220,2	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,169,220,6	script	ギルドフラッグ	722,{}
+te_prt_gld.gat,167,213,5	script	ギルドフラッグ	722,{}
+
+//==========================================
+// warp
+//------------------------------------------
+te_prt_gld.gat,129,65,0		warp	prtg-1_prtg-1		45,1,1,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "‐攻城戦TEには3次職及び";
+		mes "　限界突破したスーパーノービスは";
+		mes "　入場できません‐";
+		close;
+	}
+	warp "te_prtcas01.gat",99,32;
+	end;
+}
+te_prt_gld.gat,240,124,0	warp	prtg-2_prtg-2		45,1,1,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "‐攻城戦TEには3次職及び";
+		mes "　限界突破したスーパーノービスは";
+		mes "　入場できません‐";
+		close;
+	}
+	warp "te_prtcas02.gat",43,229;
+	end;
+}
+te_prt_gld.gat,153,141,0	warp	prtg-3_prtg-3		45,1,1,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "‐攻城戦TEには3次職及び";
+		mes "　限界突破したスーパーノービスは";
+		mes "　入場できません‐";
+		close;
+	}
+	warp "te_prtcas03.gat",168,12;
+	end;
+}
+te_prt_gld.gat,107,240,0	warp	prtg-4_prtg-4		45,1,1,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "‐攻城戦TEには3次職及び";
+		mes "　限界突破したスーパーノービスは";
+		mes "　入場できません‐";
+		close;
+	}
+	warp "te_prtcas04.gat",86,13;
+	end;
+}
+te_prt_gld.gat,212,240,0	warp	prtg-5_prtg-5		45,1,1,{
+	if(Job >= Job_RuneKnight && Job <= Job_ExpandedSuperNovice) {
+		mes "‐攻城戦TEには3次職及び";
+		mes "　限界突破したスーパーノービスは";
+		mes "　入場できません‐";
+		close;
+	}
+	warp "te_prtcas05.gat",17,235;
+	end;
+}
+te_prtcas01.gat,103,32,0	warp	prtg-1-01_prtg-1	1,1,te_prt_gld.gat,134,65
+te_prtcas02.gat,43,233,0	warp	prtg-2-01_prtg-2	1,1,te_prt_gld.gat,240,128
+te_prtcas03.gat,168,8,0		warp	prtg-3-03_prtg-3	1,1,te_prt_gld.gat,153,137
+te_prtcas04.gat,86,9,0		warp	prtg-4-03_prtg-3	1,1,te_prt_gld.gat,111,240
+te_prtcas05.gat,17,231,0	warp	prtg-5-04_prtg-5	1,1,te_prt_gld.gat,208,240
+
+te_prt_gld.gat,120,160,0	warp	to_valkyrie			1,1,prt_gld.gat,120,149
+
+//==========================================
+// 案内人
+//------------------------------------------
+te_prt_gld.gat,142,74,3	script	案内人#pg01	893,{
+	mes "[案内人]";
+	mes "ここは「ゲオルグ」砦です。";
+	close;
+}
+
+te_prt_gld.gat,246,134,3	script	案内人#pg02	893,{
+	mes "[案内人]";
+	mes "ここは「リハルト」砦です。";
+	close;
+}
+
+te_prt_gld.gat,162,141,3	script	案内人#pg03	893,{
+	mes "[案内人]";
+	mes "ここは「ウィグナー」砦です。";
+	close;
+}
+
+te_prt_gld.gat,117,243,3	script	案内人#pg04	893,{
+	mes "[案内人]";
+	mes "ここは「ハイネン」砦です。";
+	close;
+}
+
+te_prt_gld.gat,203,243,3	script	案内人#pg05	893,{
+	mes "[案内人]";
+	mes "ここは「ネリウス」砦です。";
+	close;
+}
+
+prt_gld.gat,125,149,3	script	修練教官#gqprt	899,{
+	mes "[修練教官]";
+	mes "ヴァルキリーレルムで遂行が可能な";
+	mes "作戦や討伐依頼を取り扱っている。";
+	mes "攻城戦中にしかできないものもあるが";
+	mes "毎日できるものもあるから";
+	mes "その気があるならやってみな。";
+	next;
+	switch(select("ヴァルキリーレルム占領報酬","ギルドダンジョン討伐依頼","作戦について","必要ない")) {
+	case 1:
+		mes "[修練教官]";
+		mes "すまないが、占領報酬は";
+		mes "ギルドマスターのみ挑戦が可能だ。";
+		mes "一般のギルドメンバーは";
+		mes "討伐依頼を受けてみな。";
+		close;
+	case 2:
+		mes "[修練教官]";
+		mes "ヴァルキリーレルムの";
+		mes "ギルドダンジョンで";
+		mes "遂行できる討伐依頼だ。";
+		mes "まあ、途中で止めたくなったら";
+		mes "取り消してやるから";
+		mes "気楽に挑戦してみるといい。";
+		next;
+		if(select("ヴァルキリーレルム討伐依頼[1]","必要ない") == 2) {
+			mes "[修練教官]";
+			mes "まあ、ギルドダンジョンを";
+			mes "対象としたものだから";
+			mes "別に時間に追われる必要はないだろう。";
+			mes "好きな時にチャレンジしてみるがいい。";
+			close;
+		}
+		mes "[修練教官]";
+		mes "うむ……";
+		mes "残念だが、該当する討伐依頼は";
+		mes "^4d4dffBaseレベル100^000000以上を対象としている。";
+		mes "Baseレベルを上げてから";
+		mes "また来てくれ。";
+		close;
+	case 3:
+		mes "[修練教官]";
+		mes "『占領報酬』は文字通り";
+		mes "^4d4dff砦を占領している数によって^000000";
+		mes "報酬を与える。";
+		mes "^4d4dff私が確認を受け付けた時に";
+		mes "君のギルドが占領している砦の数^000000で";
+		mes "報酬が変わる。";
+		next;
+		mes "[修練教官]";
+		mes "占領報酬の性質上、^4d4dff攻城戦の時間中と、";
+		mes "攻城戦終了後30分間^000000だけ受諾できる。";
+		mes "また、^4d4dff私が報酬を渡した後は";
+		mes "次に確認できるようになるまで";
+		mes "1時間待たなくてはいけなくなるから";
+		mes "タイミングは良く考えた方がいい。^000000";
+		next;
+		mes "[修練教官]";
+		mes "君がギルドマスターで、";
+		mes "攻城戦をやっているのであれば";
+		mes "一度は挑戦してみな。";
+		next;
+		mes "[修練教官]";
+		mes "『討伐依頼』は、";
+		mes "ギルドダンジョンで遂行可能な";
+		mes "モンスター討伐を発行している。";
+		mes "単純だ。";
+		close;
+	case 4:
+		mes "[修練教官]";
+		mes "そうか。";
+		mes "用があったらまた話しかけてくれ。";
+		close;
+	}
+OnInit:
+	waitingroom "討伐クエスト・占領報酬",0;
+	end;
+}
+alde_gld.gat,176,163,5	script	修練教官#gqaldeg	899,{
+	mes "[修練教官]";
+	mes "ルイーナで遂行が可能な";
+	mes "作戦や討伐依頼を取り扱っている。";
+	mes "攻城戦中にしかできないものもあるが";
+	mes "毎日できるものもあるから";
+	mes "その気があるならやってみな。";
+	next;
+	switch(select("ルイーナ占領報酬","ギルドダンジョン討伐依頼","作戦について","必要ない")) {
+	case 1:
+		mes "[修練教官]";
+		mes "すまないが、占領報酬は";
+		mes "ギルドマスターのみ挑戦が可能だ。";
+		mes "一般のギルドメンバーは";
+		mes "討伐依頼を受けてみな。";
+		close;
+	case 2:
+		mes "[修練教官]";
+		mes "ルイーナのギルドダンジョンで";
+		mes "遂行できる討伐依頼だ。";
+		mes "まあ、途中で止めたくなったら";
+		mes "取り消してやるから";
+		mes "気楽に挑戦してみるといい。";
+		next;
+		if(select("ルイーナ討伐依頼[1]","必要ない") == 2) {
+			mes "[修練教官]";
+			mes "まあ、ギルドダンジョンを";
+			mes "対象としたものだから";
+			mes "別に時間に追われる必要はないだろう。";
+			mes "好きな時にチャレンジしてみるがいい。";
+			close;
+		}
+		mes "[修練教官]";
+		mes "うむ……";
+		mes "残念だが、該当する討伐依頼は";
+		mes "^4d4dffBaseレベル100^000000以上を対象としている。";
+		mes "Baseレベルを上げてから";
+		mes "また来てくれ。";
+		close;
+	case 3:
+		mes "[修練教官]";
+		mes "『占領報酬』は文字通り";
+		mes "^4d4dff砦を占領している数によって^000000";
+		mes "報酬を与える。";
+		mes "^4d4dff私が確認を受け付けた時に";
+		mes "君のギルドが占領している砦の数^000000で";
+		mes "報酬が変わる。";
+		next;
+		mes "[修練教官]";
+		mes "占領報酬の性質上、^4d4dff攻城戦の時間中と、";
+		mes "攻城戦終了後30分間^000000だけ受諾できる。";
+		mes "また、^4d4dff私が報酬を渡した後は";
+		mes "次に確認できるようになるまで";
+		mes "1時間待たなくてはいけなくなるから";
+		mes "タイミングは良く考えた方がいい。^000000";
+		next;
+		mes "[修練教官]";
+		mes "君がギルドマスターで、";
+		mes "攻城戦をやっているのであれば";
+		mes "一度は挑戦してみな。";
+		next;
+		mes "[修練教官]";
+		mes "『討伐依頼』は、";
+		mes "ギルドダンジョンで遂行可能な";
+		mes "モンスター討伐を発行している。";
+		mes "単純だ。";
+		close;
+	case 4:
+		mes "[修練教官]";
+		mes "そうか。";
+		mes "用があったらまた話しかけてくれ。";
+		close;
+	}
+OnInit:
+	waitingroom "討伐クエスト・占領報酬",0;
+	end;
+}
+gef_fild13.gat,197,242,3	script	修練教官#gqgefg	899,{
+	mes "[修練教官]";
+	mes "ブリトニアで遂行が可能な";
+	mes "作戦や討伐依頼を取り扱っている。";
+	mes "攻城戦中にしかできないものもあるが";
+	mes "毎日できるものもあるから";
+	mes "その気があるならやってみな。";
+	next;
+	switch(select("ブリトニア占領報酬","ギルドダンジョン討伐依頼","作戦について","必要ない")) {
+	case 1:
+		mes "[修練教官]";
+		mes "すまないが、占領報酬は";
+		mes "ギルドマスターのみ挑戦が可能だ。";
+		mes "一般のギルドメンバーは";
+		mes "討伐依頼を受けてみな。";
+		close;
+	case 2:
+		mes "[修練教官]";
+		mes "ブリトニアのギルドダンジョンで";
+		mes "遂行できる討伐依頼だ。";
+		mes "まあ、途中で止めたくなったら";
+		mes "取り消してやるから";
+		mes "気楽に挑戦してみるといい。";
+		next;
+		if(select("ブリトニア討伐依頼[1]","必要ない") == 2) {
+			mes "[修練教官]";
+			mes "まあ、ギルドダンジョンを";
+			mes "対象としたものだから";
+			mes "別に時間に追われる必要はないだろう。";
+			mes "好きな時にチャレンジしてみるがいい。";
+			close;
+		}
+		mes "[修練教官]";
+		mes "うむ……";
+		mes "残念だが、該当する討伐依頼は";
+		mes "^4d4dffBaseレベル100^000000以上を対象としている。";
+		mes "Baseレベルを上げてから";
+		mes "また来てくれ。";
+		close;
+	case 3:
+		mes "[修練教官]";
+		mes "『占領報酬』は文字通り";
+		mes "^4d4dff砦を占領している数によって^000000";
+		mes "報酬を与える。";
+		mes "^4d4dff私が確認を受け付けた時に";
+		mes "君のギルドが占領している砦の数^000000で";
+		mes "報酬が変わる。";
+		next;
+		mes "[修練教官]";
+		mes "占領報酬の性質上、^4d4dff攻城戦の時間中と、";
+		mes "攻城戦終了後30分間^000000だけ受諾できる。";
+		mes "また、^4d4dff私が報酬を渡した後は";
+		mes "次に確認できるようになるまで";
+		mes "1時間待たなくてはいけなくなるから";
+		mes "タイミングは良く考えた方がいい。^000000";
+		next;
+		mes "[修練教官]";
+		mes "君がギルドマスターで、";
+		mes "攻城戦をやっているのであれば";
+		mes "一度は挑戦してみな。";
+		next;
+		mes "[修練教官]";
+		mes "『討伐依頼』は、";
+		mes "ギルドダンジョンで遂行可能な";
+		mes "モンスター討伐を発行している。";
+		mes "単純だ。";
+		close;
+	case 4:
+		mes "[修練教官]";
+		mes "そうか。";
+		mes "用があったらまた話しかけてくれ。";
+		close;
+	}
+OnInit:
+	waitingroom "討伐クエスト・占領報酬",0;
+	end;
+}
+pay_gld.gat,198,178,5	script	修練教官#gqpayg	899,{
+	mes "[修練教官]";
+	mes "チュンリム湖で遂行が可能な";
+	mes "作戦や討伐依頼を取り扱っている。";
+	mes "攻城戦中にしかできないものもあるが";
+	mes "毎日できるものもあるから";
+	mes "その気があるならやってみな。";
+	next;
+	switch(select("チュンリム湖占領報酬","ギルドダンジョン討伐依頼","作戦について","必要ない")) {
+	case 1:
+		mes "[修練教官]";
+		mes "すまないが、占領報酬は";
+		mes "ギルドマスターのみ挑戦が可能だ。";
+		mes "一般のギルドメンバーは";
+		mes "討伐依頼を受けてみな。";
+		close;
+	case 2:
+		mes "[修練教官]";
+		mes "チュンリム湖の";
+		mes "ギルドダンジョンで";
+		mes "遂行できる討伐依頼だ。";
+		mes "まあ、途中で止めたくなったら";
+		mes "取り消してやるから";
+		mes "気楽に挑戦してみるといい。";
+		next;
+		if(select("チュンリム湖討伐依頼[1]","必要ない") == 2) {
+			mes "[修練教官]";
+			mes "まあ、ギルドダンジョンを";
+			mes "対象としたものだから";
+			mes "別に時間に追われる必要はないだろう。";
+			mes "好きな時にチャレンジしてみるがいい。";
+			close;
+		}
+		mes "[修練教官]";
+		mes "うむ……";
+		mes "残念だが、該当する討伐依頼は";
+		mes "^4d4dffBaseレベル100^000000以上を対象としている。";
+		mes "Baseレベルを上げてから";
+		mes "また来てくれ。";
+		close;
+	case 3:
+		mes "[修練教官]";
+		mes "『占領報酬』は文字通り";
+		mes "^4d4dff砦を占領している数によって^000000";
+		mes "報酬を与える。";
+		mes "^4d4dff私が確認を受け付けた時に";
+		mes "君のギルドが占領している砦の数^000000で";
+		mes "報酬が変わる。";
+		next;
+		mes "[修練教官]";
+		mes "占領報酬の性質上、^4d4dff攻城戦の時間中と、";
+		mes "攻城戦終了後30分間^000000だけ受諾できる。";
+		mes "また、^4d4dff私が報酬を渡した後は";
+		mes "次に確認できるようになるまで";
+		mes "1時間待たなくてはいけなくなるから";
+		mes "タイミングは良く考えた方がいい。^000000";
+		next;
+		mes "[修練教官]";
+		mes "君がギルドマスターで、";
+		mes "攻城戦をやっているのであれば";
+		mes "一度は挑戦してみな。";
+		next;
+		mes "[修練教官]";
+		mes "『討伐依頼』は、";
+		mes "ギルドダンジョンで遂行可能な";
+		mes "モンスター討伐を発行している。";
+		mes "単純だ。";
+		close;
+	case 4:
+		mes "[修練教官]";
+		mes "そうか。";
+		mes "用があったらまた話しかけてくれ。";
+		close;
+	}
+OnInit:
+	waitingroom "討伐クエスト・占領報酬",0;
+	end;
+}
+aru_gld.gat,96,203,3	script	修練教官#gqaru	899,{
+	mes "[修練教官]";
+	mes "ヴァルフレイヤで遂行が可能な";
+	mes "作戦や討伐依頼を取り扱っている。";
+	mes "攻城戦中にしかできないものもあるが";
+	mes "毎日できるものもあるから";
+	mes "その気があるならやってみな。";
+	next;
+	switch(select("ヴァルフレイヤ占領報酬","ギルドダンジョン討伐依頼","作戦について","必要ない")) {
+	case 1:
+		mes "[修練教官]";
+		mes "すまないが、占領報酬は";
+		mes "ギルドマスターのみ挑戦が可能だ。";
+		mes "一般のギルドメンバーは";
+		mes "討伐依頼を受けてみな。";
+		close;
+	case 2:
+		mes "[修練教官]";
+		mes "ヴァルフレイヤの";
+		mes "ギルドダンジョンで";
+		mes "遂行できる依頼だ。";
+		mes "まあ、途中で止めたくなったら";
+		mes "取り消してやるから";
+		mes "気楽に挑戦してみるといい。";
+		next;
+		if(checkquest(7539)) {
+			if(select("ヴァルフレイヤ討伐依頼[1]^4d4dff結果確認^000000","必要ない") == 2) {
+				mes "[修練教官]";
+				mes "まあ、ギルドダンジョンを";
+				mes "対象としたものだから";
+				mes "別に時間に追われる必要はないだろう。";
+				mes "好きな時にチャレンジしてみるがいい。";
+				close;
+			}
+			mes "[修練教官]";
+			mes "ん？";
+			mes "まだ依頼を遂行できていない";
+			mes "ようだが……";
+			mes "何か問題でもあるのか？";
+			next;
+			if(select("いいえ","依頼を諦める") == 1) {
+				mes "[修練教官]";
+				mes "いつまで君がギルドダンジョンを";
+				mes "使用できるかは分からないが";
+				mes "まあ頑張ってくれ。";
+				close;
+			}
+			mes "[修練教官]";
+			mes "まあ、強制しているわけではないから";
+			mes "好きにすればいい。";
+			mes "依頼は取り消したよ。";
+			delquest 7539;
+			close;
+		}
+		if(select("ヴァルフレイヤ討伐依頼[1]","必要ない") == 2) {
+			mes "[修練教官]";
+			mes "まあ、ギルドダンジョンを";
+			mes "対象としたものだから";
+			mes "別に時間に追われる必要はないだろう。";
+			mes "好きな時にチャレンジしてみるがいい。";
+			close;
+		}
+		if(BaseLevel < 100) {	// 96でも受けれた
+			mes "[修練教官]";
+			mes "うむ……";
+			mes "残念だが、該当する討伐依頼は";
+			mes "^4d4dffBaseレベル100^000000以上を対象としている。";
+			mes "Baseレベルを上げてから";
+			mes "また来てくれ。";
+			close;
+		}
+		mes "[修練教官]";
+		mes "ヴァルフレイヤ討伐依頼[1]だね。";
+		mes "ギルドダンジョンに登場する";
+		mes "モンスター退治をしてもらう。";
+		next;
+		mes "[修練教官]";
+		mes "^4d4dffバンシーマスターを50匹と、";
+		mes "ビホルダーマスターを30匹以上^000000";
+		mes "狩って来てくれ。";
+		mes "見事達成したら、それに見合う経験値を";
+		mes "報酬として与えよう。";
+		next;
+		if(select("受ける","やめる") == 2) {
+			mes "[修練教官]";
+			mes "まあ、好きなようにしな。";
+			close;
+		}
+		mes "[修練教官]";
+		mes "ギルドダンジョンに入れるのは";
+		mes "砦を占領しているギルドの";
+		mes "メンバーだけだからな。";
+		mes "武運を祈る。";
+		setquest 7539;
+		close;
+	case 3:
+		mes "[修練教官]";
+		mes "『占領報酬』は文字通り";
+		mes "^4d4dff砦を占領している数によって^000000";
+		mes "報酬を与える。";
+		mes "^4d4dff私が確認を受け付けた時に";
+		mes "君のギルドが占領している砦の数^000000で";
+		mes "報酬が変わる。";
+		next;
+		mes "[修練教官]";
+		mes "占領報酬の性質上、^4d4dff攻城戦の時間中と、";
+		mes "攻城戦終了後30分間^000000だけ受諾できる。";
+		mes "また、^4d4dff私が報酬を渡した後は";
+		mes "次に確認できるようになるまで";
+		mes "1時間待たなくてはいけなくなるから";
+		mes "タイミングは良く考えた方がいい。^000000";
+		next;
+		mes "[修練教官]";
+		mes "君がギルドマスターで、";
+		mes "攻城戦をやっているのであれば";
+		mes "一度は挑戦してみな。";
+		next;
+		mes "[修練教官]";
+		mes "『討伐依頼』は、";
+		mes "ギルドダンジョンで遂行可能な";
+		mes "モンスター討伐を発行している。";
+		mes "単純だ。";
+		close;
+	case 4:
+		mes "[修練教官]";
+		mes "そうか。";
+		mes "用があったらまた話しかけてくれ。";
+		close;
+	}
+OnInit:
+	waitingroom "討伐クエスト・占領報酬",0;
+	end;
+}
+sch_gld.gat,270,117,3	script	修練教官#gqsch	899,{
+	mes "[修練教官]";
+	mes "ニダヴェリールで遂行が可能な";
+	mes "作戦や討伐依頼を取り扱っている。";
+	mes "攻城戦中にしかできないものもあるが";
+	mes "毎日できるものもあるから";
+	mes "その気があるならやってみな。";
+	next;
+	switch(select("ニダヴェリール占領報酬","ギルドダンジョン討伐依頼","作戦について","必要ない")) {
+	case 1:
+		mes "[修練教官]";
+		mes "すまないが、占領報酬は";
+		mes "ギルドマスターのみ挑戦が可能だ。";
+		mes "一般のギルドメンバーは";
+		mes "討伐依頼を受けてみな。";
+		close;
+	case 2:
+		mes "[修練教官]";
+		mes "ニダヴェリールの";
+		mes "ギルドダンジョンで";
+		mes "遂行できる依頼だ。";
+		mes "まあ、途中で止めたくなったら";
+		mes "取り消してやるから";
+		mes "気楽に挑戦してみるといい。";
+		next;
+		if(checkquest(7539)) {
+			if(select("ニダヴェリール討伐依頼[1]^4d4dff結果確認^000000","必要ない") == 2) {
+				mes "[修練教官]";
+				mes "まあ、ギルドダンジョンを";
+				mes "対象としたものだから";
+				mes "別に時間に追われる必要はないだろう。";
+				mes "好きな時にチャレンジしてみるがいい。";
+				close;
+			}
+			mes "[修練教官]";
+			mes "ん？";
+			mes "まだ依頼を遂行できていない";
+			mes "ようだが……";
+			mes "何か問題でもあるのか？";
+			next;
+			if(select("いいえ","依頼を諦める") == 1) {
+				mes "[修練教官]";
+				mes "いつまで君がギルドダンジョンを";
+				mes "使用できるかは分からないが";
+				mes "まあ頑張ってくれ。";
+				close;
+			}
+			mes "[修練教官]";
+			mes "まあ、強制しているわけではないから";
+			mes "好きにすればいい。";
+			mes "依頼は取り消したよ。";
+			delquest 7537;
+			close;
+		}
+		if(select("ニダヴェリール討伐依頼[1]","必要ない") == 2) {
+			mes "[修練教官]";
+			mes "まあ、ギルドダンジョンを";
+			mes "対象としたものだから";
+			mes "別に時間に追われる必要はないだろう。";
+			mes "好きな時にチャレンジしてみるがいい。";
+			close;
+		}
+		if(BaseLevel < 100) {	// 96でも受けれた
+			mes "[修練教官]";
+			mes "うむ……";
+			mes "残念だが、該当する討伐依頼は";
+			mes "^4d4dffBaseレベル100^000000以上を対象としている。";
+			mes "Baseレベルを上げてから";
+			mes "また来てくれ。";
+			close;
+		}
+		mes "[修練教官]";
+		mes "ニダヴェリール討伐依頼[1]だね。";
+		mes "ギルドダンジョンに登場する";
+		mes "モンスター退治をしてもらう。";
+		next;
+		mes "[修練教官]";
+		mes "^4d4dffヘルアポカリプスと";
+		mes "ザクダムを各50匹以上^000000";
+		mes "狩って来てくれ。";
+		mes "見事達成したら、それに見合う経験値を";
+		mes "報酬として与えよう。";
+		next;
+		if(select("受ける","やめる") == 2) {
+			mes "[修練教官]";
+			mes "まあ、好きなようにしな。";
+			close;
+		}
+		mes "[修練教官]";
+		mes "ギルドダンジョンに入れるのは";
+		mes "砦を占領しているギルドの";
+		mes "メンバーだけだからな。";
+		mes "武運を祈る。";
+		setquest 7537;
+		close;
+	case 3:
+		mes "[修練教官]";
+		mes "『占領報酬』は文字通り";
+		mes "^4d4dff砦を占領している数によって^000000";
+		mes "報酬を与える。";
+		mes "^4d4dff私が確認を受け付けた時に";
+		mes "君のギルドが占領している砦の数^000000で";
+		mes "報酬が変わる。";
+		next;
+		mes "[修練教官]";
+		mes "占領報酬の性質上、^4d4dff攻城戦の時間中と、";
+		mes "攻城戦終了後30分間^000000だけ受諾できる。";
+		mes "また、^4d4dff私が報酬を渡した後は";
+		mes "次に確認できるようになるまで";
+		mes "1時間待たなくてはいけなくなるから";
+		mes "タイミングは良く考えた方がいい。^000000";
+		next;
+		mes "[修練教官]";
+		mes "君がギルドマスターで、";
+		mes "攻城戦をやっているのであれば";
+		mes "一度は挑戦してみな。";
+		next;
+		mes "[修練教官]";
+		mes "『討伐依頼』は、";
+		mes "ギルドダンジョンで遂行可能な";
+		mes "モンスター討伐を発行している。";
+		mes "単純だ。";
+		close;
+	case 4:
+		mes "[修練教官]";
+		mes "そうか。";
+		mes "用があったらまた話しかけてくれ。";
+		close;
+	}
+OnInit:
+	waitingroom "討伐クエスト・占領報酬",0;
+	end;
+}
+sch_gld.gat,266,119,5	script	カシャニャンGX#gq01	564,{}
+pay_gld.gat,196,176,5	script	カシャニャンGX#gq01	564,{}
+gef_fild13.gat,198,246,3	script	カシャニャンGX#gq01	564,{}
+te_alde_gld.gat,180,163,3	script	カシャニャンGX#gq01	564,{}
+alde_gld.gat,180,163,3	script	カシャニャンGX#gq01	564,{}
+te_prt_gld.gat,107,155,3	script	カシャニャンGX#gq01	564,{}
+aru_gld.gat,89,204,5	script	カシャニャンGX#gq01	564,{}
+prt_gld.gat,107,155,3	script	カシャニャンGX#gq01	564,{
+	mes "‐攻城戦ギルド記念コインを使用して";
+	mes "　品物と交換が可能な交換機だ。";
+	mes "　好きな項目を選択した後、";
+	mes "　必要な数のコインを";
+	mes "　投入すればいいようだ‐";
+	while(1) {
+		next;
+		switch(select("交換リストを見る","消耗品と交換","プレゼントと交換","クヴァシルリング","やめる")) {
+		case 1:
+			mes "[カシャニャンGX]";
+			mes "カシャニャンGXをご利用いただき";
+			mes "ありがとうございます！";
+			mes "攻城戦ギルド記念コインと交換が可能な";
+			mes "品物のリストです！";
+			next;
+			mes "＝妖精の涙シリーズ＝";
+			mes "製薬研究の頂点に立った学者、";
+			mes "ビンセントが製作したポーション。";
+			mes "とても短い瞬間だが超人的な能力を";
+			mes "使うことができるようにしてくれる。";
+			next;
+			mes "[効果詳細]";
+			mes "^4d4dff瞬間的にHPを3000失うが、^000000";
+			mes "^4d4dff10秒間、使用した妖精の涙の^000000";
+			mes "^4d4dff種類に応じた状態異常にならない。^000000";
+			next;
+			mes "＝羽のベレー [1]＝";
+			mes "安定感ある着心地と";
+			mes "空色が引き立つ高級帽子。";
+			mes "羽毛をつけていっそう素敵になった。";
+			next;
+			mes "[装備詳細]";
+			mes "^4d4dff系列 : 兜　　防御 : 1^000000";
+			mes "^4d4dff位置 : 上段　重量 : 60^000000";
+			mes "^4d4dff要求レベル : 1^000000";
+			mes "^4d4dff装備 : ノービスを除く全ての職業^000000";
+			mes "^4d4dff特殊効果 : Mdef + 1^000000";
+			mes "^4d4dff人間型から受けるダメージ - 10%^000000";
+			next;
+			mes "＝[衣装] 羽のベレー ＝";
+			mes "安定感ある着心地と";
+			mes "空色が引き立つ高級帽子。";
+			mes "羽毛をつけていっそう素敵になった。";
+			mes "^4d4dff衣装装備、全職業装着可能。^000000";
+			next;
+			mes "品物のリストはここまでだ。";
+			continue;
+		case 2:
+			mes "[カシャニャンGX]";
+			mes "消耗品のリストを選びましたね！";
+			mes "^4d4dff攻城戦ギルド記念コイン^000000と";
+			mes "交換ですにゃん！";
+			next;
+			switch(select("妖精の涙・スタン－コイン 2","妖精の涙・凍結－コイン 2","妖精の涙・睡眠－コイン 2","妖精の涙・呪い－コイン 1","妖精の涙・石化－コイン 2","妖精の涙・沈黙－コイン 1","妖精の涙・暗黒－コイン 1","他の品物を見る")) {
+			case 1:
+				set '@gain,;
+				set '@num,2;
+				break;
+			case 2:
+				set '@gain,;
+				set '@num,2;
+				break;
+			case 3:
+				set '@gain,;
+				set '@num,2;
+				break;
+			case 4:
+				set '@gain,;
+				set '@num,1;
+				break;
+			case 5:
+				set '@gain,;
+				set '@num,2;
+				break;
+			case 6:
+				set '@gain,;
+				set '@num,1;
+				break;
+			case 7:
+				set '@gain,;
+				set '@num,1;
+				break;
+			case 8:
+				mes "‐他の品物を見ることにした‐";
+				continue;
+			}
+			mes "[カシャニャンGX]";
+			mes "攻城戦ギルド記念コイン " +'@num+ "枚を";
+			mes getitemname('@gain)+ " 1つと";
+			mes "交換しますにゃん！";
+			mes "よろしいですか？";
+			next;
+			if(select("交換する","他のリストを見る") == 2) {
+				mes "‐他の品物を見ることにした‐";
+				continue;
+			}
+			mes "‐攻城戦ギルド記念コインが";
+			mes "　足りません。";
+			mes "　" +getitemname('@gain)+ "と交換するには";
+			mes "　攻城戦ギルド記念コインが";
+			mes "　" +'@num+ "枚必要です‐";
+			continue;
+		case 3:
+			mes "[カシャニャンGX]";
+			mes "素晴らしいプレゼントの項目を";
+			mes "選びましたね！";
+			mes "各品物ごとに必要なコインは";
+			mes "個別に書かれてありますにゃん！";
+			next;
+			switch(select("古いカード帖－コイン 150","古い紫色の箱－コイン 25","古く青い箱－コイン 10","宝石箱－コイン 50","包装された仮面－コイン 20","羽のベレー","やめる")) {
+			case 1:
+				set '@gain,;
+				set '@num,150;
+				break;
+			case 2:
+				set '@gain,;
+				set '@num,25;
+				break;
+			case 3:
+				set '@gain,;
+				set '@num,10;
+				break;
+			case 4:
+				set '@gain,;
+				set '@num,50;
+				break;
+			case 5:
+				set '@gain,;
+				set '@num,20;
+				break;
+			case 6:
+				mes "[カシャニャンGX]";
+				mes "羽で装飾されたすばらしいベレー帽を";
+				mes "選びましたね！";
+				mes "カードを装着できる羽のベレーと";
+				mes "[衣装］羽のベレーが";
+				mes "準備できましたにゃん！";
+				next;
+				switch(select("羽のベレー[1]－コイン1500","[衣装] 羽のベレー－コイン500","他の品物を見る")) {
+				case 1:
+					mes "[カシャニャンGX]";
+					mes "カードを装着することができる";
+					mes "羽のベレーです！";
+					next;
+					mes "[カシャニャンGX]";
+					mes "攻城戦ギルド記念コイン1500枚を";
+					mes "羽のベレー[1] 1つと";
+					mes "交換しますにゃん！";
+					mes "よろしいですか？";
+					next;
+					if(select("交換する","他のリストを見る") == 2) {
+						mes "‐他の品物を見ることにした‐";
+						continue;
+					}
+					mes "‐攻城戦ギルド記念コインが";
+					mes "　足りません。";
+					mes "　羽のベレー[1]と交換するには";
+					mes "　攻城戦ギルド記念コインが";
+					mes "　1500枚必要です‐";
+					continue;
+				case 2:
+					mes "[カシャニャンGX]";
+					mes "衣装用の羽のベレーです！";
+					next;
+					mes "[カシャニャンGX]";
+					mes "攻城戦ギルド記念コイン500枚を";
+					mes "[衣装] 羽のベレー 1つと";
+					mes "交換しますにゃん！";
+					mes "よろしいですか？";
+					next;
+					if(select("交換する","他のリストを見る") == 2) {
+						mes "‐他の品物を見ることにした‐";
+						continue;
+					}
+					mes "‐攻城戦ギルド記念コインが";
+					mes "　足りません。";
+					mes "　[衣装] 羽のベレーと交換するには";
+					mes "　攻城戦ギルド記念コインが";
+					mes "　500枚必要です‐";
+					continue;
+				case 3:
+					mes "‐他の品物を見ることにした‐";
+					continue;
+				}
+			case 7:
+				mes "‐他の品物を見ることにした‐";
+				continue;
+			}
+			mes "[カシャニャンGX]";
+			mes "攻城戦ギルド記念コイン" +'@num+ "枚を";
+			mes getitemname('@gain)+ " 1つと";
+			mes "交換しますにゃん！";
+			mes "よろしいですか？";
+			next;
+			if(select("交換する","他のリストを見る") == 2) {
+				mes "‐他の品物を見ることにした‐";
+				continue;
+			}
+			mes "‐攻城戦ギルド記念コインが";
+			mes "　足りません。";
+			mes "　" +getitemname('@gain)+ "と交換するには";
+			mes "　攻城戦ギルド記念コインが";
+			mes "　" +'@num+ "枚必要です‐";
+			continue;
+		case 4:
+			mes "[カシャニャンGX]";
+			mes "クヴァシルリングのカテゴリーです！";
+			mes "クヴァシルリングに関する説明と";
+			mes "交換が可能にゃん！";
+			next;
+			switch(select("グリーンクヴァシルリングと交換","ブルークヴァシルリングと交換","レッドクヴァシルリングと交換","ブラウンクヴァシルリングと交換","やめる")) {
+			case 1:
+				mes "＝グリーンクヴァシルリング＝";
+				mes "賢者と呼ばれた神族クヴァシルの";
+				mes "力が込められたといううわさの指輪。";
+				mes "特殊な治癒能力がある。";
+				next;
+				mes "[装備詳細]";
+				mes "^4d4dff系列 : アクセサリー^000000";
+				mes "^4d4dff防御 : 0^000000";
+				mes "^4d4dff重量 : 10^000000";
+				mes "^4d4dff要求レベル : 1^000000";
+				mes "^4d4dff装備 : 全ての職業^000000";
+				next;
+				mes "[装備詳細]";
+				mes "^4d4dff特殊効果 : MaxHP + 100^000000";
+				mes "^4d4dff[ぴしゃりハーブ]Lv1^000000";
+				mes "^4d4dff使用可能^000000";
+				next;
+				mes "[カシャニャンGX]";
+				mes "グリーンクヴァシルリングは";
+				mes "^4d4dff攻城戦ギルド記念コイン1000個^000000、";
+				mes "または^4d4dff他の色のクヴァシルリング1個^000000";
+				mes "^4d4dffと攻城戦ギルド記念コイン100個^000000で";
+				mes "交換することができます！";
+				mes "交換しますか？";
+				next;
+				switch(select("攻城戦ギルド記念コインで交換","ブルーをグリーンに交換","レッドをグリーンに交換","ブラウンをグリーンに交換","やめる")) {
+				case 1:
+					mes "[カシャニャンGX]";
+					mes "攻城戦ギルド記念コイン1000枚と";
+					mes "グリーンクヴァシルリングを";
+					mes "交換するにゃ。";
+					mes "よろしいですか？";
+					next;
+					if(select("交換する","いいえ") == 2) {
+						mes "‐他の品物を見ることにした‐";
+						continue;
+					}
+					mes "‐グリーンクヴァシルリングは";
+					mes "　^4d4dff攻城戦ギルド記念コイン1000個^000000と";
+					mes "　交換することができる。";
+					mes "　コインの所持数が足りないようだ‐";
+					close;
+				case 2:
+					set '@itemid,;
+					set '@color$,"ブルー";
+					break;
+				case 3:
+					set '@itemid,;
+					set '@color$,"レッド";
+					break;
+				case 4:
+					set '@itemid,;
+					set '@color$,"ブラウン";
+					break;
+				case 5:
+					mes "‐他の品物を見ることにした‐";
+					continue;
+				}
+				mes "[カシャニャンGX]";
+				mes "クヴァシルリングの" +'@color$+ "と";
+				mes "攻城戦ギルド記念コイン100枚、";
+				mes "これをクヴァシルリングのグリーンと";
+				mes "交換していいかにゃ？";
+				next;
+				if(select("交換する","いいえ") == 2) {
+					mes "‐他の品物を見ることにした‐";
+					continue;
+				}
+				mes "‐交換にはクヴァシルリングの" +'@color$+ "と";
+				mes "　攻城戦ギルド記念コイン100個が";
+				mes "　必要です‐";
+				close;
+			case 2:
+				mes "＝ブルークヴァシルリング＝";
+				mes "賢者と呼ばれた神族クヴァシルの";
+				mes "力が込められたといううわさの指輪。";
+				mes "特殊な治癒能力がある。";
+				next;
+				mes "[装備詳細]";
+				mes "^4d4dff系列 : アクセサリー^000000";
+				mes "^4d4dff防御 : 0^000000";
+				mes "^4d4dff重量 : 10^000000";
+				mes "^4d4dff要求レベル : 1^000000";
+				mes "^4d4dff装備 : 全ての職業^000000";
+				next;
+				mes "[装備詳細]";
+				mes "^4d4dff特殊効果 : MaxSP + 30^000000";
+				mes "^4d4dff[スノーフリップ]Lv1^000000";
+				mes "^4d4dff使用可能^000000";
+				next;
+				mes "[カシャニャンGX]";
+				mes "ブルークヴァシルリングは";
+				mes "^4d4dff他の色のクヴァシルリング1個と^000000";
+				mes "^4d4dff攻城戦ギルド記念コイン100個^000000で";
+				mes "交換することができます！";
+				mes "交換しますか？";
+				next;
+				switch(select("レッドをブルーに交換","グリーンをブルーに交換","ブラウンをブルーに交換","やめる")) {
+				case 1:
+					set '@itemid,;
+					set '@color$,"ブルー";
+					break;
+				case 2:
+					set '@itemid,;
+					set '@color$,"レッド";
+					break;
+				case 3:
+					set '@itemid,;
+					set '@color$,"グリーン";
+					break;
+				case 4:
+					mes "‐他の品物を見ることにした‐";
+					continue;
+				}
+				mes "[カシャニャンGX]";
+				mes "クヴァシルリングの" +'@color$+ "と";
+				mes "攻城戦ギルド記念コイン100枚、";
+				mes "これをクヴァシルリングのブルーと";
+				mes "交換していいかにゃ？";
+				next;
+				if(select("交換する","いいえ") == 2) {
+					mes "‐他の品物を見ることにした‐";
+					continue;
+				}
+				mes "‐交換にはクヴァシルリングの" +'@color$+ "と";
+				mes "　攻城戦ギルド記念コイン100個が";
+				mes "　必要です‐";
+				close;
+			case 3:
+				mes "＝レッドクヴァシルリング＝";
+				mes "賢者と呼ばれた神族クヴァシルの";
+				mes "力が込められたといううわさの指輪。";
+				mes "特殊な治癒能力がある。";
+				next;
+				mes "[装備詳細]";
+				mes "^4d4dff系列 : アクセサリー^000000";
+				mes "^4d4dff防御 : 0^000000";
+				mes "^4d4dff重量 : 10^000000";
+				mes "^4d4dff要求レベル : 1^000000";
+				mes "^4d4dff装備 : 全ての職業^000000";
+				next;
+				mes "[装備詳細]";
+				mes "^4d4dff特殊効果 : MaxSP + 30^000000";
+				mes "^4d4dff[ピオニーマミー]Lv1^000000";
+				mes "^4d4dff使用可能^000000";
+				next;
+				mes "[カシャニャンGX]";
+				mes "レッドクヴァシルリングは";
+				mes "^4d4dff他の色のクヴァシルリング1個と^000000";
+				mes "^4d4dff攻城戦ギルド記念コイン100個^000000で";
+				mes "交換することができます！";
+				mes "どの色のリングと交換しますか？";
+				next;
+				switch(select("ブルーをレッドに交換","グリーンをレッドに交換","ブラウンをレッドに交換","やめる")) {
+				case 1:
+					set '@itemid,;
+					set '@color$,"ブルー";
+					break;
+				case 2:
+					set '@itemid,;
+					set '@color$,"レッド";
+					break;
+				case 3:
+					set '@itemid,;
+					set '@color$,"グリーン";
+					break;
+				case 4:
+					mes "‐他の品物を見ることにした‐";
+					continue;
+				}
+				mes "[カシャニャンGX]";
+				mes "クヴァシルリングの" +'@color$+ "と";
+				mes "攻城戦ギルド記念コイン100枚、";
+				mes "これをクヴァシルリングのレッドと";
+				mes "交換していいかにゃ？";
+				next;
+				if(select("交換する","いいえ") == 2) {
+					mes "‐他の品物を見ることにした‐";
+					continue;
+				}
+			case 4:
+				mes "＝ブラウンクヴァシルリング＝";
+				mes "賢者と呼ばれた神族クヴァシルの";
+				mes "力が込められたといううわさの指輪。";
+				mes "特殊な治癒能力がある。";
+				next;
+				mes "[装備詳細]";
+				mes "^4d4dff系列 : アクセサリー^000000";
+				mes "^4d4dff防御 : 0^000000";
+				mes "^4d4dff重量 : 10^000000";
+				mes "^4d4dff要求レベル : 1^000000";
+				mes "^4d4dff装備 : 全ての職業^000000";
+				next;
+				mes "[装備詳細]";
+				mes "^4d4dff特殊効果 : MaxHP + 100^000000";
+				mes "^4d4dff[世界樹のほこり]Lv1^000000";
+				mes "^4d4dff使用可能^000000";
+				next;
+				mes "[カシャニャンGX]y";
+				mes "ブラウンクヴァシルリングは";
+				mes "^4d4dffクヴァシルリング1個と^000000";
+				mes "^4d4dff記念コイン100個^000000で";
+				mes "交換することができます！";
+				mes "どの色のリングを使用して";
+				mes "交換しますか？";
+				next;
+				switch(select("ブルーをブラウンに交換","レッドをブラウンに交換","グリーンをブラウンに交換","やめる")) {
+				case 1:
+					set '@itemid,;
+					set '@color$,"ブルー";
+					break;
+				case 2:
+					set '@itemid,;
+					set '@color$,"レッド";
+					break;
+				case 3:
+					set '@itemid,;
+					set '@color$,"グリーン";
+					break;
+				case 4:
+					mes "‐他の品物を見ることにした‐";
+					continue;
+				}
+				mes "[カシャニャンGX]";
+				mes "クヴァシルリングの" +'@color$+ "と";
+				mes "攻城戦ギルド記念コイン100枚、";
+				mes "これをクヴァシルリングのブラウンと";
+				mes "交換していいかにゃ？";
+				next;
+				if(select("交換する","いいえ") == 2) {
+					mes "‐他の品物を見ることにした‐";
+					continue;
+				}
+				mes "‐交換にはクヴァシルリングの" +'@color$+ "と";
+				mes "　攻城戦ギルド記念コイン100個が";
+				mes "　必要です‐";
+				close;
+			case 5:
+				mes "‐他の品物を見ることにした‐";
+				continue;
+			}
+		case 5:
+			mes "‐交換機を使用しません‐";
+			close;
+		}
+	}
+}

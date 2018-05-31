@@ -1,0 +1,3910 @@
+//= Auriga Script ==============================================================
+// Ragnarok Online Geffen Magic Tournament Script	by refis
+//==============================================================================
+
+dali.gat,98,141,3	script	次元の狭間研究学者#a1	903,{/* 57290 */
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		mes "[次元の狭間研究学者]";
+		mes "次元の狭間は非常に不安定で";
+		mes "一人でしか入れないのだ。";
+		mes "パーティーリーダー以外の";
+		mes "進入は制限しているから、";
+		mes "入りたければ^ff0000パーティーリーダーに";
+		mes "なってから私に話しかけてくれないか。^000000";
+		close;
+	}
+	if(checkquest(9315)) {
+		if(checkquest(9308)) {
+		}
+		if(checkquest(9309)) {
+			delquest 9309;
+			setquest 9309; //state=1
+			delquest 9309;
+			setquest 9310; //state=1
+			delquest 9310;
+			setquest 9311; //state=1
+			delquest 9311;
+			setquest 9312; //state=1
+			delquest 9312;
+			setquest 9313; //state=1
+			delquest 9313;
+			setquest 9314; //state=1
+			delquest 9314;
+			mes "[次元の狭間研究学者]";
+			mes "狭間から帰ってきたか！";
+			mes "それで何があったのだ？";
+			next;
+			mes "‐狭間での出来事について";
+			mes "　知っている内容を話した‐";
+			next;
+			mes "[次元の狭間研究学者]";
+			mes "ふむ……";
+			mes "そうかそうか。";
+			mes "少し情報が足りないが";
+			mes "非常に助かったよ。";
+			next;
+			mes "[次元の狭間研究学者]";
+			mes "だがまだまだ足りない！";
+			mes "また私を助けて欲しいのだ。";
+			mes "狭間でゲフェン魔法大会について";
+			mes "調べてくれないか？";
+			mes "待っているよ。";
+			delquest 9315;
+			setquest 9315; //state=1
+			delquest 9315;
+			close;
+		}
+		mes "[次元の狭間研究学者]";
+		mes "狭間から帰ってきたか！";
+		mes "それで何があったのだ？";
+		next;
+		mes "‐狭間での出来事について";
+		mes "　知っている内容を話した‐";
+		next;
+		mes "[次元の狭間研究学者]";
+		mes "うむむ……";
+		mes "新しいことは何もないが……。";
+		mes "ご苦労だったよ。";
+		mes "次も頑張ってくれ。";
+		next;
+		mes "[次元の狭間研究学者]";
+		mes "やはりまだまだ足りない！";
+		mes "また私を助けて欲しいのだ。";
+		mes "ゲフェン魔法大会について";
+		mes "調べてくれないか？";
+		mes "待っているよ";
+		delquest 9315;
+		setquest 9315; //state=1
+		delquest 9315;
+		close;
+	}
+	if(checkquest(9316)) {
+		if(checkquest(9316) & 0x2 == 0) {
+			mes "[次元の狭間研究学者]";
+			mes "また調べてきてくれるのか？";
+			mes "ん？　しかし……";
+			mes "前回の探検から充分な時間が";
+			mes "経過していないようだな。";
+			next;
+			mes "[次元の狭間研究学者]";
+			mes "次元の狭間は非常に不安定で";
+			mes "元に戻るまでには";
+			mes "^FF0000最後に入ってから23時間必要だ。^000000";
+			mes "時間が経過したら、また来てくれ。";
+			//mes "[次元の狭間研究学者]";
+			//mes "次元の狭間は非常に不安定なんだ。";
+			//mes "入場してから1回目の";
+			//mes "^ff0000午前5時以降^000000に来てくれ。";
+			//mes "但し、最後の入場をしてから";
+			//mes "^ff00002時間^000000経過しないと";
+			//mes "中には入れないぞ。";
+			close;
+		}
+		mes "[次元の狭間研究学者]";
+		mes "また来てくれると信じていたよ。";
+		mes "ありがとう！";
+		next;
+		mes "[次元の狭間研究学者]";
+		mes "次元移動機を通じて";
+		mes "狭間の中に入り、";
+		mes "ゲフェン魔法大会に参加して";
+		mes "昔、存在していた世界の";
+		mes "英雄の痕跡を";
+		mes "私に知らせてくれないか？";
+		next;
+		mes "[次元の狭間研究学者]";
+		mes "ただ、狭間は非常に不安定で";
+		mes "多くの人は入れないのだ。";
+		mes "たった一人でしか入れない";
+		mes "という点を注意して欲しい。";
+		mes "それじゃ入るかい？";
+		next;
+		if(select("はい","いいえ") == 2) {
+			mes "[次元の狭間研究学者]";
+			mes "そうかい、気が変わったら";
+			mes "ぜひとも調べてくれ。";
+			close;
+		}
+		mdcreate "Magic Tournament";
+		mes "[次元の狭間研究学者]";
+		mes "次元移動機の起動に成功した。";
+		mes "起動時間が過ぎる前に";
+		mes "早めに出発してくれ。";
+		close;
+	}
+	mes "[次元の狭間研究学者]";
+	mes "君は遠い昔、";
+	mes "ゲフェンで魔法大会が";
+	mes "行われていたことを知っているか？";
+	next;
+	mes "[次元の狭間研究学者]";
+	mes "私はその真実が知りたくて";
+	mes "数十年間研究を続けたのだ。";
+	mes "そしてこの狭間を";
+	mes "ついに見つけたのだ！";
+	next;
+	mes "[次元の狭間研究学者]";
+	mes "しかし私では狭間に入ることが";
+	mes "できなかったのだ。";
+	mes "おかげでここで研究ばかり";
+	mes "していたのだが、";
+	mes "そこに君が現れたのさ。";
+	next;
+	mes "[次元の狭間研究学者]";
+	mes "ここまでたどり着いた";
+	mes "君なら十二分にこの狭間に入り、";
+	mes "ゲフェン魔法大会についても";
+	mes "調べられるだろう。";
+	next;
+	mes "[次元の狭間研究学者]";
+	mes "次元移動機を通じて";
+	mes "狭間の中に入り、";
+	mes "ゲフェン魔法大会に参加して";
+	mes "昔、存在していた世界の";
+	mes "英雄の痕跡を";
+	mes "私に知らせてくれないか？";
+	next;
+	mes "[次元の狭間研究学者]";
+	mes "ただ、狭間は非常に不安定で";
+	mes "多くの人は入れないのだ。";
+	mes "たった一人でしか入れない";
+	mes "という点を注意して欲しい。";
+	mes "それじゃ入るかい？";
+	next;
+	if(select("はい","いいえ") == 2) {
+		mes "[次元の狭間研究学者]";
+		mes "そうかい、気が変わったら";
+		mes "ぜひとも調べてくれ。";
+		close;
+	}
+	mdcreate "Magic Tournament";
+	mes "[次元の狭間研究学者]";
+	mes "次元移動機の起動に成功した。";
+	mes "起動時間が過ぎる前に";
+	mes "早めに出発してくれ。";
+	close;
+OnInit:
+	waitingroom "ゲフェン魔法大会", 20; //57290
+	end;
+}
+
+dali.gat,100,147,3	script	次元移動機#a1	10007,{/* 57291 */
+	if(checkquest(9316)) {
+		if(checkquest(9316) & 0x2 == 0) {
+			mes "‐次元の狭間が閉じている。";
+			mes "　入ることはできなさそうだ‐";
+			//mes "‐次元の狭間が閉じている。";
+			//mes "　入場してから1回目の^ff0000午前5時以降^000000に";
+			//mes "　再度、入場できるだろう。";
+			//mes "　但し、最後の入場をしてから";
+			//mes "　^ff00002時間^000000経過しないと";
+			//mes "　中には入れないようだ‐";
+			close;
+		}
+		delquest 9286;
+		setquest 9286; //state=1
+		delquest 9286;
+		delquest 9309;
+		setquest 9309; //state=1
+		delquest 9309;
+		setquest 9310; //state=1
+		delquest 9310;
+		setquest 9311; //state=1
+		delquest 9311;
+		setquest 9312; //state=1
+		delquest 9312;
+		setquest 9313; //state=1
+		delquest 9313;
+		setquest 9314; //state=1
+		delquest 9314;
+	}
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		mes "[次元の狭間研究学者]";
+		mes "次元の狭間は非常に不安定で";
+		mes "一人でしか入れないのだ。";
+		mes "パーティーリーダー以外の";
+		mes "進入は制限しているから、";
+		mes "入りたければ^ff0000パーティーリーダーに";
+		mes "なってから私に話しかけてくれないか。^000000";
+		close;
+	}
+	mes "‐次元移動機がある。";
+	mes "　ゲフェン魔法大会に行きますか？‐";
+	next;
+	if(select("行く","行かない") == 2) {
+		mes "‐あなたは次元移動機から離れた‐";
+		close;
+	}
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		mes "‐次元の狭間が不安定なため";
+		mes "　パーティーリーダー一人しか";
+		mes "　入ることができない‐";
+		close;
+	}
+	switch(mdenter("Magic Tournament")) {
+	case 0:	// エラーなし
+		announce "メモリアルダンジョン[Magic Tournament] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99;
+		donpcevent getmdnpcname("#メモリアル開始")+ "::OnStart"; //83854
+		set GMT_1QUE,0;
+		setquest 9316; //state=1
+		delquest 9316;
+		setquest 9316; //state=1
+		delquest 9316;
+		setquest 9316; //state=1
+		setquest 118924; //state=1
+		delquest 118924;
+		setquest 118924; //state=1
+		delquest 118924;
+		setquest 118924; //state=1
+		setquest 9315; //state=1
+		delquest 9315;
+		setquest 9315; //state=1
+		delquest 9315;
+		setquest 9315; //state=1
+		//warp "1@gef.gat",119,209;
+		end;
+	case 1:	// パーティー未加入
+		mes "‐次元の狭間が不安定なため";
+		mes "　パーティーリーダー一人しか";
+		mes "　入ることができない‐";
+		close;
+	case 2:	// ダンジョン未作成
+		mes "‐パーティーリーダーがダンジョンを";
+		mes "　生成していません‐";
+		close;
+	default:	// その他エラー
+		close;
+	}
+}
+
+dali.gat,92,147,3	script	ゲフェンコイン交換員#1	893,{/* 57292 */
+	mes "[ゲフェンコイン交換員]";
+	mes "こんにちは。";
+	mes "私は研究のお手伝いで";
+	mes "ゲフェン魔法大会コインを";
+	mes "集めています。";
+	mes "お礼は色々用意していますので";
+	mes "一度ご覧になってください。";
+	next;
+	switch(select("盾","アクセサリー","鎧","消耗品","経験値","会話を終了する")) {
+	case 1:
+		mes "[ゲフェンコイン交換員]";
+		mes "盾は2種類が用意されています。";
+		mes "どれをご覧になりますか。";
+		while(1) {
+			next;
+			switch(select("マジックリフレクター <^006400コイン^000000 900枚>","大百科事典改訂版 <^006400コイン^000000 900枚>","以前のリストに戻る")) {
+			case 1:
+				mes "‐マジックリフレクター[1]‐";
+				mes "^006400Mdef + 10^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400ターゲッティング魔法を^000000";
+				mes "^006400一定確率で反射^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[マジックリフレクター]の^000000";
+				mes "^006400精錬値が7以上の時、^000000";
+				mes "^006400ターゲッティング魔法を^000000";
+				mes "^006400反射する確率が上昇^000000";
+				mes "^006400精錬値が9以上の時、^000000";
+				mes "^006400ターゲッティング魔法を^000000";
+				mes "^006400反射する確率が上昇^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400系列 : 盾^000000";
+				mes "^006400防御 : 50^000000";
+				mes "^006400重量 : 100^000000";
+				mes "^006400要求レベル : 99^000000";
+				mes "^006400装備 : 全ての職業^000000";
+				set '@gain,2185;
+				set '@cost,900;
+				break;
+			case 2:
+				mes "‐大百科事典改訂版[1]‐";
+				mes "^006400Int + 3 , Dex + 2^000000";
+				mes "^006400Cri + 3^000000";
+				mes "^006400Matk + 5^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[大百科事典改訂版]の^000000";
+				mes "^006400精錬値が7以上の時、追加で^000000";
+				mes "^006400Cri + 2^000000";
+				mes "^006400精錬値が9以上の時、追加で^000000";
+				mes "^006400Matk + 5^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[大百科事典]と共に装備時、^000000";
+				mes "^006400[大百科事典]の^000000";
+				mes "^006400精錬値が1上がる度に追加で^000000";
+				mes "^006400攻撃速度 + 1%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400系列 : 盾^000000";
+				mes "^006400防御 : 50^000000";
+				mes "^006400重量 : 20^000000";
+				mes "^006400要求レベル : 99^000000";
+				mes "^006400装備 : プリースト系 セージ系 拳聖^000000";
+				set '@gain,2186;
+				set '@cost,900;
+				break;
+			case 3:
+				break;
+			}
+			if('@gain == 0) {
+				break;
+			}
+			next;
+			mes "[ゲフェンコイン交換員]";
+			mes getitemname('@gain)+ "は";
+			mes "ゲフェン魔法大会コイン" +'@cost+ "枚と";
+			mes "交換可能です。";
+			mes "交換なさいますか？";
+			next;
+			if(select("交換しない","交換する") == 1) {
+				mes "[ゲフェンコイン交換員]";
+				mes "他の品物もご覧になってください。";
+				continue;
+			}
+		}
+		break;
+	case 2:
+		mes "[ゲフェンコイン交換員]";
+		mes "アクセサリーは2種類が";
+		mes "用意されています。";
+		while(1) {
+			next;
+			switch(select("身体強化リング <^006400コイン^000000 1800枚>","魔力増幅リング <^006400コイン^000000 1800枚>","以前のリストに戻る")) {
+			case 1:
+				mes "‐身体強化リング[1]‐";
+				mes "^006400物理攻撃で^000000";
+				mes "^006400与えるダメージ + 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[アンティマジックスーツ]と^000000";
+				mes "^006400共に装備時、追加で^000000";
+				mes "^006400攻撃速度 + 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[ゲフェンマジックローブ]と^000000";
+				mes "^006400共に装備時、追加で^000000";
+				mes "^006400スキルディレイ - 5%^000000";
+				mes "^006400人間形モンスターから^000000";
+				mes "^006400受けるダメージ - 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400系列 : アクセサリー^000000";
+				mes "^006400防御 : 0^000000";
+				mes "^006400重量 : 10^000000";
+				mes "^006400要求レベル : 90^000000";
+				mes "^006400装備 : 全ての職業^000000";
+				set '@gain,2963;
+				set '@cost,1800;
+				break;
+			case 2:
+				mes "‐魔力増幅リング[1]‐";
+				mes "^006400Matk + 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[アンティマジックスーツ]と^000000";
+				mes "^006400共に装備時、追加で^000000";
+				mes "^006400スキルディレイ - 5%^000000";
+				mes "^006400人間形モンスターから^000000";
+				mes "^006400受けるダメージ - 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[ゲフェンマジックローブ]と^000000";
+				mes "^006400共に装備時、追加で^000000";
+				mes "^006400詠唱時間 - 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400系列 : アクセサリー^000000";
+				mes "^006400防御 : 0^000000";
+				mes "^006400重量 : 10^000000";
+				mes "^006400要求レベル : 90^000000";
+				mes "^006400装備 : 全ての職業^000000";
+				set '@gain,2964;
+				set '@cost,1800;
+				break;
+			case 3:
+				break;
+			}
+			if('@gain == 0) {
+				break;
+			}
+			next;
+			mes "[ゲフェンコイン交換員]";
+			mes getitemname('@gain)+ "は";
+			mes "ゲフェン魔法大会コイン" +'@cost+ "枚と";
+			mes "交換可能です。";
+			mes "交換なさいますか？";
+			next;
+			if(select("交換しない","交換する") == 1) {
+				mes "[ゲフェンコイン交換員]";
+				mes "他の品物もご覧になってください。";
+				continue;
+			}
+		}
+		break;
+	case 3:
+		mes "[ゲフェンコイン交換員]";
+		mes "鎧は2種類が";
+		mes "用意されています。";
+		while(1) {
+			next;
+			switch(select("アンティマジックスーツ <^006400コイン^000000 1350枚>","ゲフェンマジックローブ <^006400コイン^000000 1350枚>","以前のリストに戻る")) {
+			case 1:
+				mes "‐アンティマジックスーツ[1]‐";
+				mes "^006400MaxHP + 5%^000000";
+				mes "^006400Mdef + 10^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[アンティマジックスーツ]の^000000";
+				mes "^006400精錬値が7以上の時、追加で^000000";
+				mes "^006400Mdef + 5^000000";
+				mes "^006400精錬値が9以上の時、追加で^000000";
+				mes "^006400MaxHP + 2%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[身体強化リング]と^000000";
+				mes "^006400共に装備時、追加で^000000";
+				mes "^006400攻撃速度 + 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[魔力増幅リング]と^000000";
+				mes "^006400共に装備時、追加で^000000";
+				mes "^006400スキルディレイ - 5%^000000";
+				mes "^006400人間形モンスターから^000000";
+				mes "^006400受けるダメージ - 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400系列 : 鎧^000000";
+				mes "^006400防御 : 50^000000";
+				mes "^006400重量 : 150^000000";
+				mes "^006400要求レベル : 99^000000";
+				mes "^006400装備 : 全ての職業^000000";
+				set '@gain,15073;
+				set '@cost,1350;
+				break;
+			case 2:
+				mes "‐ゲフェンマジックローブ[1]‐";
+				mes "^006400スキル使用時、^000000";
+				mes "^006400消費SP - 10%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400詠唱が中断されない^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400詠唱時間 + 15%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[ゲフェンマジックローブ]の^000000";
+				mes "^006400精錬値が7以上の時、追加で^000000";
+				mes "^006400スキル使用時、消費SP - 5%^000000";
+				mes "^006400精錬値が9以上の時、追加で^000000";
+				mes "^006400詠唱時間 - 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[身体強化リング]と^000000";
+				mes "^006400共に装備時、追加で^000000";
+				mes "^006400スキルディレイ - 5%^000000";
+				mes "^006400人間形モンスターから^000000";
+				mes "^006400受けるダメージ - 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400[魔力増幅リング]と^000000";
+				mes "^006400共に装備時、追加で^000000";
+				mes "^006400詠唱時間 - 5%^000000";
+				mes "^006400─────────────^000000";
+				mes "^006400系列 : 鎧^000000";
+				mes "^006400防御 : 40^000000";
+				mes "^006400重量 : 100^000000";
+				mes "^006400要求レベル : 99^000000";
+				mes "^006400装備 : 全ての職業^000000";
+				set '@gain,15074;
+				set '@cost,1350;
+				break;
+			case 3:
+				break;
+			}
+			if('@gain == 0) {
+				break;
+			}
+			next;
+			mes "[ゲフェンコイン交換員]";
+			mes getitemname('@gain)+ "は";
+			mes "ゲフェン魔法大会コイン" +'@cost+ "枚と";
+			mes "交換可能です。";
+			mes "交換なさいますか？";
+			next;
+			if(select("交換しない","交換する") == 1) {
+				mes "[ゲフェンコイン交換員]";
+				mes "他の品物もご覧になってください。";
+				continue;
+			}
+		}
+		break;
+	case 4:
+		mes "[ゲフェンコイン交換員]";
+		mes "消耗品は1種類が";
+		mes "用意されています。";
+		next;
+		if(select("フェンリルの呪符 <^006400コイン^000000 20枚>","以前のリストに戻る") == 2) {
+			break;
+		}
+		mes "‐フェンリルの呪符‐";
+		mes "^0064005分間、Matk + 25^000000";
+		mes "^006400固定詠唱時間 - 50%^000000";
+		next;
+		mes "[ゲフェンコイン交換員]";
+		mes "フェンリルの呪符は";
+		mes "ゲフェン魔法大会コイン20枚と";
+		mes "交換可能です。";
+		mes "一度に50個まで交換出来ます。";
+		mes "いくつ交換なさいますか？";
+		mes "0を入力するとキャンセル出来ます。";
+		next;
+		input '@num;
+		if('@num == 0) {
+			mes "[ゲフェンコイン交換員]";
+			mes "キャンセルしました。";
+			mes "またのご利用をお待ちしています。";
+			close;
+		}
+		if('@num < 0 || '@num > 50) {
+			mes "[ゲフェンコイン交換員]";
+			mes "正しい数を入力してください。";
+			mes "一度に交換できるのは";
+			mes "50個までとなります。";
+			close;
+		}
+		set '@value,20 * '@num;
+		mes "[ゲフェンコイン交換員]";
+		mes "フェンリルの呪符";
+		mes "^0000ff" +'@num+ "個^000000を";
+		mes "コイン" +'@value+ "枚と";
+		mes "交換します。";
+		mes "よろしいですか？";
+		next;
+		if(select("はい","いいえ") == 2) {
+			mes "[ゲフェンコイン交換員]";
+			mes "キャンセルしました。";
+			close;
+		}
+		mes "[ゲフェンコイン交換員]";
+		mes "^006400ゲフェン魔法大会コイン^000000 " +'@value+ "枚を";
+		mes "所持していないため";
+		mes "交換できませんでした。";
+		next;
+		mes "[ゲフェンコイン交換員]";
+		mes "^006400ゲフェン魔法大会コイン^000000は";
+		mes "ゲフェン魔法大会に参加し";
+		mes "良い成績を残すと獲得できます。";
+		close;
+	case 5:
+		mes "[ゲフェンコイン交換員]";
+		mes "経験値は^FF000023時間に1回^000000";
+		mes "^FF0000BaseLv90以上の方のみ";
+		mes "交換することができます。";
+		next;
+		mes "[ゲフェンコイン交換員]";
+		mes "なお、ゲフェン魔法大会コイン";
+		mes "1枚につき";
+		mes "BaseExp100,000、または";
+		mes "JobExp　50,000、もらえます。";
+		mes "交換単位は5枚、10枚、15枚です。";
+		mes "どちらの経験値をご希望ですか？";
+		next;
+		while(1) {
+			switch(select("BaseExpを貰う","JobExpを貰う","以前のリストに戻る")) {
+			case 1:
+				set '@exptype$,"BaseExp";
+				break;
+			case 2:
+				set '@exptype$,"JobExp";
+				break;
+			case 3:
+				break;
+			}
+			if('@exptype$ == "") {
+				break;
+			}
+			mes "[ゲフェンコイン交換員]";
+			mes '@exptype$+ "が欲しいのですね。";
+			mes "　";
+			mes "何枚利用しますか？";
+			next;
+			switch(select("5枚","10枚","15枚")) {
+			case 1:
+				set '@num,5;
+				break;
+			case 2:
+				set '@num,10;
+				break;
+			case 3:
+				set '@num,15;
+				break;
+			}
+			if('@exptype$ == "BaseExp") {
+				set '@exp,100000 * '@num;
+			}
+			else {
+				set '@exp,50000 * '@num;
+			}
+			mes "[ゲフェンコイン交換員]";
+			mes "ゲフェン魔法大会コイン、" +'@num+ "枚で";
+			mes '@exptype$+ "を";
+			mes '@exp+ "、入手できますね。";
+			mes "これで良いですか？";
+			next;
+			if(select("はい","いいえ") == 2) {
+				continue;
+			}
+			if(checkquest(114730)) {
+				if(checkquest(114730) & 0x2 == 0) {
+					mes "[ゲフェンコイン交換員]";
+					mes "おや？　前回の交換から、";
+					mes "23時間経過していないようですね。";
+					mes "経験値は^FF000023時間に1回^000000だけ";
+					mes "交換することができますので";
+					mes "しばらく経ってからお越し下さい。";
+					continue;
+				}
+			}
+			if(countitem(6671) < '@num) {
+				mes "[ゲフェンコイン交換員]";
+				mes "^006400ゲフェン魔法大会コイン^000000 " +'@num+ "枚を";
+				mes "所持していないため";
+				mes "交換できませんでした。";
+				next;
+				mes "[ゲフェンコイン交換員]";
+				mes "^006400ゲフェン魔法大会コイン^000000は";
+				mes "ゲフェン魔法大会に参加し";
+				mes "良い成績を残すと獲得できます。";
+				close;
+			}
+			if(checkquest(114730))
+				delquest 114730;
+			setquest 114730;
+			mes "[ゲフェンコイン交換員]";
+			mes "はい、どうぞ。";
+			delitem 6671,'@num;
+			for(set '@i,0; '@i<'@num; set '@i,'@i+1) {
+				if('@exptype$ == "BaseExp") {
+					getexp 100000,0;
+				}
+				else {
+					getexp 0,50000;
+				}
+			}
+			close;
+		}
+		break;
+	case 6:
+		mes "[ゲフェンコイン交換員]";
+		mes "またのお越しをおまちしています。";
+		close;
+	}
+	mes "[ゲフェンコイン交換員]";
+	mes "^006400ゲフェン魔法大会コイン^000000 " +'@cost+ "枚を";
+	mes "所持していないため";
+	mes "交換できませんでした。";
+	next;
+	mes "[ゲフェンコイン交換員]";
+	mes "^006400ゲフェン魔法大会コイン^000000は";
+	mes "ゲフェン魔法大会に参加し";
+	mes "良い成績を残すと獲得できます。";
+	close;
+OnInit:
+	waitingroom "コイン交換", 20; //57292
+	end;
+}
+
+1@ge_st.gat,107,57,4	script	魔法大会進行係#1	899,{/* 83647 */
+	switch(GMT_1QUE) {
+	case 10:
+		hideoffnpc "アカデミーマスター#1"; //83648
+		cutin "acamaster_a.bmp", 2;
+		mes "[ゲフェンアカデミーマスター]";
+		mes "レディースアンドジェントルメン！";
+		mes "長い歴史と伝統が息づく";
+		mes "ゲフェン魔法大会に";
+		mes "ようこそいらっしゃいました！";
+		next;
+		mes "[ゲフェンアカデミーマスター]";
+		mes "3年毎に開かれる";
+		mes "最高のイベント!!";
+		mes "ゲフェン魔法大会!!";
+		next;
+		mes "[ゲフェンアカデミーマスター]";
+		mes "ゲフェン魔法大会はA組とB組に";
+		mes "分かれて予選が進められ";
+		mes "決勝はA組とB組の";
+		mes "最終勝利者同士の対決となります！";
+		next;
+		mes "[ゲフェンアカデミーマスター]";
+		mes "私はA組の司会を担当する";
+		mes "ゲフェンアカデミーマスター!!";
+		mes "アークメイジ、ザンジバル・ヘルモード";
+		mes "と申します！";
+		next;
+		mes "[ゲフェンアカデミーマスター]";
+		mes "本日はこの栄誉ある司会役を";
+		mes "任されたことに感謝いたします！";
+		mes "そろそろ開始の時間が迫ってきました！";
+		next;
+		mes "[ゲフェンアカデミーマスター]";
+		mes "ゴホン……ゲホゲホ！";
+		close2;
+		cutin "acamaster_a.bmp", 255;
+		hideonnpc getmdnpcname("魔法大会進行係#1"); //83647
+		set GMT_1QUE,11;
+		delquest 9294;
+		setquest 9295; //state=1
+		end;
+	case 11:
+		mes "[魔法大会進行係]";
+		mes "第1試合を勝ち残りましたね!!";
+		mes "おめでとうございます！";
+		next;
+		switch(select("第2試合を始める","会話を終了する","ここで試合を棄権する")) {
+		case 1:
+			mes "[魔法大会進行係]";
+			mes "試合に勝利した選手には";
+			mes "勝利手当てとして";
+			mes "^006400ゲフェン魔法大会コイン^000000を";
+			mes "お渡ししています。";
+			next;
+			mes "[魔法大会進行係]";
+			mes "それでは次のA組第2試合を";
+			mes "始めたいと思います！";
+			close2;
+			getitem 6671, 5;
+			hideonnpc getmdnpcname("魔法大会進行係#1"); //83647
+			hideoffnpc getmdnpcname("ディオ・アネモス#1"); //83656
+			hideonnpc getmdnpcname("魔法大会医療班#1"); //83649
+			set GMT_1QUE,12;
+			delquest 9295;
+			setquest 9296; //state=1
+			warp "1@ge_st.gat",104,50;
+			end;
+		case 2:
+			mes "[魔法大会進行係]";
+			mes "準備が完了しましたら";
+			mes "話しかけてください。";
+			close;
+		}
+	case 12:
+		mes "[魔法大会進行係]";
+		mes "第2試合を勝ち残りましたね!!";
+		mes "おめでとうございます！";
+		next;
+		switch(select("第3試合を始める","会話を終了する","ここで試合を棄権する")) {
+		case 1:
+			mes "[魔法大会進行係]";
+			mes "試合に勝利した選手には";
+			mes "勝利手当てとして";
+			mes "^006400ゲフェン魔法大会コイン^000000を";
+			mes "お渡ししています。";
+			next;
+			mes "[魔法大会進行係]";
+			mes "それでは次のA組第3試合を";
+			mes "始めたいと思います！";
+			close2;
+			getitem 6671, 5;
+			hideonnpc getmdnpcname("魔法大会進行係#1"); //83647
+			hideoffnpc getmdnpcname("ブラック・カネイリー#a1"); //83659
+			hideonnpc getmdnpcname("魔法大会医療班#1"); //83649
+			set GMT_1QUE,13;
+			delquest 9296;
+			setquest 9297; //state=1
+			warp "1@ge_st.gat",104,50;
+			end;
+		case 2:
+			mes "[魔法大会進行係]";
+			mes "準備が完了しましたら";
+			mes "話しかけてください。";
+			close;
+		}
+	case 13:
+		mes "[魔法大会進行係]";
+		mes "第3試合を勝ち残りましたね!!";
+		mes "おめでとうございます！";
+		next;
+		switch(select("第4試合を始める","会話を終了する","ここで試合を棄権する")) {
+		case 1:
+			mes "[魔法大会進行係]";
+			mes "試合に勝利した選手には";
+			mes "勝利手当てとして";
+			mes "^006400ゲフェン魔法大会コイン^000000を";
+			mes "お渡ししています。";
+			next;
+			mes "[魔法大会進行係]";
+			mes "それでは次のA組第4試合を";
+			mes "始めたいと思います！";
+			close2;
+			getitem 6671, 5;
+			hideonnpc getmdnpcname("魔法大会進行係#1"); //83647
+			hideoffnpc getmdnpcname("フェモン#1"); //83660
+			hideonnpc getmdnpcname("魔法大会医療班#1"); //83649
+			set GMT_1QUE,14;
+			delquest 9297;
+			setquest 9298; //state=1
+			warp "1@ge_st.gat",104,50;
+			end;
+		case 2:
+			mes "[魔法大会進行係]";
+			mes "準備が完了しましたら";
+			mes "話しかけてください。";
+			close;
+		}
+	case 14:
+		mes "[魔法大会進行係]";
+		mes "第4試合を勝ち残りましたね!!";
+		mes "おめでとうございます！";
+		next;
+		switch(select("第5試合を始める","会話を終了する","ここで試合を棄権する")) {
+		case 1:
+			mes "[魔法大会進行係]";
+			mes "試合に勝利した選手には";
+			mes "勝利手当てとして";
+			mes "^006400ゲフェン魔法大会コイン^000000を";
+			mes "お渡ししています。";
+			next;
+			mes "[魔法大会進行係]";
+			mes "それでは次のA組第5試合を";
+			mes "始めたいと思います！";
+			close2;
+			getitem 6671, 5;
+			hideonnpc getmdnpcname("魔法大会進行係#1"); //83647
+			hideoffnpc getmdnpcname("オルドル#1"); //83661
+			hideonnpc getmdnpcname("魔法大会医療班#1"); //83649
+			set GMT_1QUE,15;
+			delquest 9298;
+			setquest 9299; //state=1
+			warp "1@ge_st.gat",104,50;
+			end;
+		case 2:
+			mes "[魔法大会進行係]";
+			mes "準備が完了しましたら";
+			mes "話しかけてください。";
+			close;
+		}
+	case 15:
+		mes "[魔法大会進行係]";
+		mes "第5試合を勝ち残りましたね!!";
+		mes "おめでとうございます！";
+		next;
+		switch(select("第6試合を始める","会話を終了する","ここで試合を棄権する")) {
+		case 1:
+			mes "[魔法大会進行係]";
+			mes "試合に勝利した選手には";
+			mes "勝利手当てとして";
+			mes "^006400ゲフェン魔法大会コイン^000000を";
+			mes "お渡ししています。";
+			next;
+			mes "[魔法大会進行係]";
+			mes "それでは次のA組第6試合を";
+			mes "始めたいと思います！";
+			close2;
+			getitem 6671, 5;
+			hideonnpc getmdnpcname("魔法大会進行係#1"); //83647
+			hideoffnpc getmdnpcname("ブルート・ハゼ#1"); //83662
+			hideonnpc getmdnpcname("魔法大会医療班#1"); //83649
+			set GMT_1QUE,16;
+			delquest 9299;
+			setquest 9300; //state=1
+			warp "1@ge_st.gat",104,50;
+			end;
+		case 2:
+			mes "[魔法大会進行係]";
+			mes "準備が完了しましたら";
+			mes "話しかけてください。";
+			close;
+		}
+	case 16:
+		mes "[魔法大会進行係]";
+		mes "第6試合を勝ち残りましたね!!";
+		mes "おめでとうございます！";
+		next;
+		switch(select("第7試合を始める","会話を終了する","ここで試合を棄権する")) {
+		case 1:
+			mes "[魔法大会進行係]";
+			mes "試合に勝利した選手には";
+			mes "勝利手当てとして";
+			mes "^006400ゲフェン魔法大会コイン^000000を";
+			mes "お渡ししています。";
+			next;
+			mes "[魔法大会進行係]";
+			mes "それでは次のA組第7試合を";
+			mes "始めたいと思います！";
+			close2;
+			getitem 6671, 15;
+			hideonnpc getmdnpcname("魔法大会進行係#1"); //83647
+			hideoffnpc getmdnpcname("黒魔#1"); //66964
+			hideonnpc getmdnpcname("魔法大会医療班#1"); //83649
+			set GMT_1QUE,17;
+			delquest 9300;
+			setquest 9301; //state=1
+			warp "1@ge_st.gat",104,50;
+			end;
+		case 2:
+			mes "[魔法大会進行係]";
+			mes "準備が完了しましたら";
+			mes "話しかけてください。";
+			close;
+		}
+	case 17:
+		mes "[魔法大会進行係]";
+		mes "第7試合を勝ち残りましたね!!";
+		mes "おめでとうございます！";
+		next;
+		switch(select("第8試合を始める","会話を終了する","ここで試合を棄権する")) {
+		case 1:
+			mes "[魔法大会進行係]";
+			mes "試合に勝利した選手には";
+			mes "勝利手当てとして";
+			mes "^006400ゲフェン魔法大会コイン^000000を";
+			mes "お渡ししています。";
+			next;
+			mes "[魔法大会進行係]";
+			mes "それでは次のA組第8試合を";
+			mes "始めたいと思います！";
+			close2;
+			if(checkitemblank() == 0) {
+				mes "[魔法大会進行係]";
+				mes "あら……";
+				mes "荷物が多くて渡せませんね。";
+				mes "種類数を減らしてきてもらえますか？";
+				close;
+			}
+			getitem 6671, 5;
+			hideonnpc getmdnpcname("魔法大会進行係#1"); //83647
+			hideoffnpc getmdnpcname("イフォドス#1"); //66965
+			hideonnpc getmdnpcname("魔法大会医療班#1"); //83649
+			set GMT_1QUE,18;
+			delquest 9301;
+			setquest 9302; //state=1
+			warp "1@ge_st.gat",104,50;
+			end;
+		case 2:
+			mes "[魔法大会進行係]";
+			mes "準備が完了しましたら";
+			mes "話しかけてください。";
+			close;
+		}
+	case 18:
+		mes "[魔法大会進行係]";
+		mes "第8試合を勝ち残りましたね!!";
+		mes "おめでとうございます！";
+		next;
+		switch(select("第9試合を始める","会話を終了する","ここで試合を棄権する")) {
+		case 1:
+			mes "[魔法大会進行係]";
+			mes "試合に勝利した選手には";
+			mes "勝利手当てとして";
+			mes "^006400ゲフェン魔法大会コイン^000000を";
+			mes "お渡ししています。";
+			next;
+			mes "[魔法大会進行係]";
+			mes "それでは次のA組第7試合を";
+			mes "始めたいと思います！";
+			close2;
+			getitem 6671, 5;
+			hideonnpc getmdnpcname("魔法大会進行係#1"); //83647
+			hideoffnpc getmdnpcname("レチェニエ#1"); //66966
+			hideonnpc getmdnpcname("魔法大会医療班#1"); //83649
+			set GMT_1QUE,19;
+			delquest 9302;
+			setquest 9303; //state=1
+			warp "1@ge_st.gat",104,50;
+			end;
+		case 2:
+			mes "[魔法大会進行係]";
+			mes "準備が完了しましたら";
+			mes "話しかけてください。";
+			close;
+		}
+	}
+}
+1@ge_st.gat,109,57,4	script	アカデミーマスター#1	10006,{/* 83648 (hide)*/
+OnStart:
+	set 'name$,strcharinfo(0);
+	initnpctimer;
+	unittalk "ゲフェンアカデミーマスター : それでは!!　ゲフェン!!　魔法!!　大会を!!　かいすぃ!!";
+	end;
+OnTimer1500:
+	unittalk "ゲフェンアカデミーマスター : いったしぃ!!　ま!!";
+	end;
+OnTimer3000:
+	unittalk "ゲフェンアカデミーマスター : すうううううう!!　ヒアウィゴー!!";
+	donpcevent getmdnpcname("魔法大会観覧者#a1")+"::OnTalk1";
+	misceffect 89, getmdnpcname("#魔法大会花火_11"); //78479
+	donpcevent getmdnpcname("魔法大会観覧者#a2")+"::OnTalk1";
+	misceffect 89, getmdnpcname("#魔法大会花火_13"); //78481
+	end;
+OnTimer4000:
+	hideoffnpc getmdnpcname("アルヒ#1"); //76650
+	end;
+OnTimer6000:
+	donpcevent getmdnpcname("魔法アカデミー学生#a2")+"::OnTalk1";
+	unittalk "ゲフェンアカデミーマスター : それではA組第1試合を開始いたします！";
+	misceffect 30, getmdnpcname("#魔法大会花火_11"); //78479
+	misceffect 89, getmdnpcname("#魔法大会花火_12"); //78480
+	misceffect 30, getmdnpcname("#魔法大会花火_13"); //78481
+	misceffect 89, getmdnpcname("#魔法大会花火_14"); //78482
+	end;
+OnTimer8000:
+	unittalk "ゲフェンアカデミーマスター : 今回が魔法大会初参加の謎の選手！";
+	donpcevent getmdnpcname("ベインス観覧客#a1")+"::OnTalk1";
+	end;
+OnTimer9000:
+	misceffect 92, getmdnpcname("#魔法大会花火_11"); //78479
+	misceffect 30, getmdnpcname("#魔法大会花火_12"); //78480
+	misceffect 92, getmdnpcname("#魔法大会花火_13"); //78481
+	misceffect 30, getmdnpcname("#魔法大会花火_14"); //78482
+	end;
+OnTimer10000:
+	unittalk "ゲフェンアカデミーマスター : 名前さえ知られていない無名の流れ者！　" +'name$+ "!!";
+	end;
+OnTimer12000:
+	misceffect 89, getmdnpcname("#魔法大会花火_17"); //78559
+	misceffect 92, getmdnpcname("#魔法大会花火_12"); //78480
+	misceffect 89, getmdnpcname("#魔法大会花火_19"); //78561
+	misceffect 92, getmdnpcname("#魔法大会花火_14"); //78482
+	end;
+OnTimer13000:
+	donpcevent getmdnpcname("魔法大会観覧者#a2")+"::OnTalk2";
+	end;
+OnTimer15000:
+	unittalk "ゲフェンアカデミーマスター : そして相手は!!";
+	misceffect 30, getmdnpcname("#魔法大会花火_17"); //78559
+	misceffect 89, getmdnpcname("#魔法大会花火_18"); //78560
+	misceffect 30, getmdnpcname("#魔法大会花火_19"); //78561
+	misceffect 89, getmdnpcname("#魔法大会花火_20"); //78562
+	end;
+OnTimer16000:
+	donpcevent getmdnpcname("魔法大会観覧者#a3")+"::OnTalk1";
+	donpcevent getmdnpcname("アルベルタ観覧客#a1")+"::OnTalk1";
+	end;
+OnTimer17000:
+	unittalk "ゲフェンアカデミーマスター : 名家の御曹司がゲフェン魔法大会に挑戦！　気は弱いがやる気は十分！";
+	end;
+OnTimer18000:
+	misceffect 92, getmdnpcname("#魔法大会花火_17"); //78559
+	misceffect 30, getmdnpcname("#魔法大会花火_18"); //78560
+	misceffect 92, getmdnpcname("#魔法大会花火_19"); //78561
+	misceffect 30, getmdnpcname("#魔法大会花火_20"); //78562
+	end;
+OnTimer19000:
+	unittalk "ゲフェンアカデミーマスター : 幼い挑戦者、仮面のノービス！　アルヒ！";
+	end;
+OnTimer21000:
+	misceffect 92, getmdnpcname("#魔法大会花火_18"); //78560
+	end;
+OnTimer21500:
+	misceffect 92, getmdnpcname("#魔法大会花火_20"); //78562
+	end;
+OnTimer22000:
+	donpcevent getmdnpcname("アルヒ#1")+"::OnTalk1";
+	end;
+OnTimer24000:
+	donpcevent getmdnpcname("アルヒ#1")+"::OnTalk2";
+	end;
+OnTimer26000:
+	donpcevent getmdnpcname("アルヒ#1")+"::OnTalk3";
+	end;
+OnTimer28000:
+	donpcevent getmdnpcname("アルヒ#1")+"::OnTalk4";
+	end;
+OnTimer30000:
+	donpcevent getmdnpcname("アルヒ#1")+"::OnTalk5";
+	end;
+OnTimer32000:
+	donpcevent getmdnpcname("アルヒ#1")+"::OnTalk6";
+	end;
+OnTimer34000:
+	misceffect 89, getmdnpcname("#魔法大会花火_11"); //78479
+	misceffect 89, getmdnpcname("#魔法大会花火_13"); //78481
+	end;
+OnTimer35000:
+	donpcevent getmdnpcname("魔法アカデミー学生#a5")+"::OnTalk1";
+	end;
+OnTimer37000:
+	misceffect 30, getmdnpcname("#魔法大会花火_11"); //78479
+	misceffect 89, getmdnpcname("#魔法大会花火_12"); //78480
+	misceffect 30, getmdnpcname("#魔法大会花火_13"); //78481
+	misceffect 89, getmdnpcname("#魔法大会花火_14"); //78482
+	end;
+OnTimer38000:
+	donpcevent getmdnpcname("魔法アカデミー学生#a2")+"::OnTalk2";
+	donpcevent getmdnpcname("ベインス観覧客#a1")+"::OnTalk2";
+	end;
+OnTimer39000:
+	announce "ゲフェンアカデミーマスター : 制限時間は3分！　制限時間内に勝負がつかない場合は", 0x1, 0xffff00, 0x190, 14, 0, 0;
+	end;
+OnTimer40000:
+	misceffect 92, getmdnpcname("#魔法大会花火_11"); //78479
+	misceffect 30, getmdnpcname("#魔法大会花火_12"); //78480
+	misceffect 92, getmdnpcname("#魔法大会花火_13"); //78481
+	misceffect 30, getmdnpcname("#魔法大会花火_14"); //78482
+	end;
+OnTimer41000:
+	announce "ゲフェンアカデミーマスター : 審判判定で決定されます！　それでは試合……", 0x1, 0xffff00, 0x190, 14, 0, 0;
+	end;
+OnTimer43000:
+	announce "ゲフェンアカデミーマスター : 始め!!!!", 0x1, 0xffff00, 0x190, 18, 0, 0;
+	hideonnpc getmdnpcname("アルヒ#1"); //76650
+	misceffect 92, getmdnpcname("#魔法大会花火_12"); //78480
+	misceffect 92, getmdnpcname("#魔法大会花火_14"); //78482
+	end;
+OnTimer44000:
+	stopnpctimer;
+	unittalk "ゲフェンアカデミーマスター : さあ、試合が始まりました！　どのような結果になるのか今から見ものです！";
+	end;
+OnWin1_1:
+	unittalk "ゲフェンアカデミーマスター : A組の第1試合が終了しました！　勝利した選手は勝利手当てを毎試合ごとに受け取ることが出来ます。";
+	end;
+OnWin1_2:
+	unittalk "ゲフェンアカデミーマスター : また、次の試合の準備をする時間が与えられます！";
+	end;
+OnWin1_3:
+	unittalk "ゲフェンアカデミーマスター : 魔法大会進行係に準備完了を知らせていただければ次の試合を開始いたします。";
+	end;
+}
+1@ge_st.gat,109,51,4	script	魔法大会医療班#1	475,{/* 83649 (hide)*/
+	mes "[魔法大会医療班]";
+	mes "ここまで勝ち残った選手は";
+	mes "一旦治療を受けることができます。";
+	mes "治療を受けますか？";
+	next;
+	if(select("治療を受ける","会話を終了する") == 2) {
+		mes "[魔法大会医療班]";
+		mes "優勝できるといいですね。";
+		close;
+	}
+	mes "[魔法大会医療班]";
+	mes "治療が完了しました。";
+	mes "次の試合も頑張ってください！";
+	percentheal 100,100;
+	close2;
+	hideonnpc getmdnpcname("魔法大会医療班#1"); //83649
+	end;
+}
+1@ge_st.gat,109,49,0	script	#魔法大会敗北1	139,{/* 83650 (hide)*/}
+1@ge_st.gat,109,49,0	script	#魔法大会終了_1	139,{/* 83651 (hide)*/}
+1@ge_st.gat,109,49,0	script	#対戦相手管理	139,{/* 83652 (hide)*/
+OnStart1:
+OnKilled1:
+	setquest 115550; //state=1
+	delquest 115550;
+	donpcevent getmdnpcname("アルヒ#1")+"::OnStart";
+	end;
+}
+1@ge_st.gat,92,51,0		script	#試合中アナウンス_timer	139,{/* 83653 (hide)*/}
+1@ge_st.gat,92,51,0		script	#試合中アナウンス_timer	139,{/* 83654 */}
+1@ge_st.gat,114,50,4	script	アルヒ#1	670,{/* 83655 (hide)*/
+	end;
+OnTalk1:
+	unittalk "アルヒ : 大丈夫……。";
+	end;
+OnTalk2:
+	unittalk "アルヒ : 僕には父様と母様にもらったこれがある。";
+	end;
+OnTalk3:
+	unittalk "アルヒ : ヴィゾフニルの羽飾りと女神の仮面。";
+	end;
+OnTalk4:
+	unittalk "アルヒ : せせせせ、精一杯がんばります。";
+	end;
+OnTalk5:
+	unittalk "アルヒ : よ、よろしくおねがいひまひゅ……！";
+	end;
+OnTalk6:
+	unittalk "アルヒ : あ、噛んじゃった……。";
+	end;
+OnStart:
+	initnpctimer;
+	hideoffnpc getmdnpcname("アルヒ#1"); //76650
+	end;
+OnTimer1000:
+	unittalk "アルヒ : うぅ……完敗です……。";
+	donpcevent getmdnpcname("アカデミーマスター#1")+"::OnWin1_1";
+	end;
+OnTimer3000:
+	unittalk "アルヒ : 僕とは次元が違うことを痛感しました……。";
+	end;
+OnTimer5000:
+	unittalk "アルヒ : 僕の試合はここで終わりですが……。";
+	donpcevent getmdnpcname("アカデミーマスター#1")+"::OnWin1_2";
+	end;
+OnTimer7000:
+	unittalk "アルヒ : 次の試合もがんばってください！";
+	end;
+OnTimer9000:
+	unittalk "アルヒ : お、応援しています！";
+	donpcevent getmdnpcname("アカデミーマスター#1")+"::OnWin1_3";
+	end;
+OnTimer10000:
+	hideonnpc getmdnpcname("アルヒ#1"); //76650
+	end;
+OnTimer12000:
+	stopnpctimer;
+	hideoffnpc getmdnpcname("魔法大会進行係#1"); //76621
+	end;
+}
+1@ge_st.gat,114,50,4	script	ディオ・アネモス#1	669,{/* 83656 (hide)*/}
+1@ge_st.gat,114,50,4	script	ビリー・コスルリース#n1	682,{/* 83657 (hide)*/}
+1@ge_st.gat,114,50,4	script	ヒピア・スニキ#n1	681,{/* 83658 (hide)*/}
+1@ge_st.gat,114,50,4	script	ブラック・カネイリー#a1	671,{/* 83659 (hide)*/}
+1@ge_st.gat,114,50,4	script	フェモン#1	672,{/* 83660 (hide)*/}
+1@ge_st.gat,114,50,4	script	オルドル#1	673,{/* 83661 (hide)*/}
+1@ge_st.gat,114,50,4	script	ブルート・ハゼ#1	674,{/* 83662 (hide)*/}
+1@ge_st.gat,114,50,4	script	黒魔#1	675,{/* 83663 (hide)*/}
+1@ge_st.gat,114,50,4	script	イフォドス#1	676,{/* 83664 (hide)*/}
+1@ge_st.gat,114,50,4	script	レチェニエ#1	677,{/* 83665 (hide)*/}
+1@ge_st.gat,114,50,4	script	ユメヒメ#1	678,{/* 83666 (hide)*/}
+1@ge_st.gat,114,50,4	script	ジュー#1	679,{/* 83667 (hide)*/}
+1@ge_st.gat,114,50,4	script	ディワイ#1	680,{/* 83668 (hide)*/}
+1@ge_st.gat,114,50,4	script	フェイ・カナビアン#1	665,{/* 83669 (hide)*/}
+1@ge_st.gat,115,50,0	script	#アルフォン召喚	139,{/* 83670 (hide)*/}
+1@ge_st.gat,114,50,4	script	フェンリル#13	664,{/* 83671 (hide)*/}
+1@ge_st.gat,95,62,6		script	魔法大会観覧者#a1	870,{/* 83672 */
+	end;
+OnTalk1:
+	unittalk "魔法大会観覧者 : おおお！　始まる始まる！";
+	end;
+}
+1@ge_st.gat,113,62,4	script	魔法大会観覧者#a2	868,{/* 83673 */
+	end;
+OnTalk1:
+	unittalk "魔法大会観覧者 : どれどれ！　誰が勝つかな？";
+	end;
+OnTalk2:
+	unittalk "魔法大会観覧者 : あいつ初参加か？　気合入れろよ！";
+	end;
+}
+1@ge_st.gat,99,62,6		script	魔法大会観覧者#a3	727,{/* 83674 */
+	end;
+OnTalk1:
+	unittalk "魔法大会観覧者 : いけいけ～!!";
+	end;
+}
+1@ge_st.gat,119,62,4	script	魔法大会観覧者#a4	728,{/* 83675 */}
+1@ge_st.gat,123,62,4	script	魔法アカデミー学生#a1	805,{/* 83676 */}
+1@ge_st.gat,103,62,6	script	魔法アカデミー学生#a2	84,{/* 83677 */
+	end;
+OnTalk1:
+	unittalk "魔法アカデミー学生 : イヤッホー!!";
+	end;
+OnTalk2:
+	unittalk "魔法アカデミー学生 : ドキドキする！";
+	end;
+}
+1@ge_st.gat,114,62,4	script	魔法アカデミー学生#a3	86,{/* 83678 */}
+1@ge_st.gat,109,62,4	script	魔法アカデミー学生#a4	921,{/* 83679 */}
+1@ge_st.gat,122,62,4	script	魔法アカデミー学生#a5	72,{/* 83680 */
+	end;
+OnTalk1:
+	unittalk "魔法アカデミー学生 : どっちもがんばれー!!";
+	end;
+}
+1@ge_st.gat,97,62,6		script	プロンテラ観覧客#a1	985,{/* 83681 */}
+1@ge_st.gat,115,62,4	script	プロンテラ観覧客#a2	945,{/* 83682 */}
+1@ge_st.gat,117,62,4	script	フェイヨン観覧客#a1	803,{/* 83683 */}
+1@ge_st.gat,101,62,6	script	フェイヨン観覧客#a2	828,{/* 83684 */}
+1@ge_st.gat,121,62,4	script	アルベルタ観覧客#a1	712,{/* 83685 */
+	end;
+OnTalk1:
+	unittalk "アルベルタ観覧客 : 期待してるぞ!!";
+	end;
+}
+1@ge_st.gat,105,62,6	script	アルベルタ観覧客#a2	89,{/* 83686 */}
+1@ge_st.gat,107,62,6	script	ベインス観覧客#a1	558,{/* 83687 */
+	end;
+OnTalk1:
+	unittalk "ベインス観覧客 : 早く！　試合！　早く！";
+	end;
+OnTalk2:
+	unittalk "ベインス観覧客 : いい試合をみせてね！";
+	end;
+}
+1@ge_st.gat,111,62,4	script	コモド観覧客#a1	850,{/* 83688 */}
+1@ge_st.gat,106,62,6	script	ロキ#a2	512,{/* 83689 */}
+1@ge_st.gat,108,62,6	script	ケイオス#a2	683,{/* 83690 */}
+1@ge_st.gat,110,62,4	script	アイリス#a2	666,{/* 83691 */}
+1@ge_st.gat,112,62,4	script	リディア#a2	10010,{/* 83692 */}
+1@ge_st.gat,93,62,6		script	魔法大会観覧者#a5	46,{/* 83693 */}
+1@ge_st.gat,94,62,6		script	魔法大会観覧者#a6	67,{/* 83694 */}
+1@ge_st.gat,96,62,6		script	魔法大会観覧者#a8	47,{/* 83695 */}
+1@ge_st.gat,98,62,6		script	魔法大会観覧者#a10	48,{/* 83696 */}
+1@ge_st.gat,100,62,6	script	魔法大会観覧者#a12	49,{/* 83697 */}
+1@ge_st.gat,102,62,6	script	魔法大会観覧者#a14	66,{/* 83698 */}
+1@ge_st.gat,104,62,6	script	魔法大会観覧者#a16	68,{/* 83699 */}
+1@ge_st.gat,116,62,4	script	魔法大会観覧者#a28	69,{/* 83700 */}
+1@ge_st.gat,118,62,4	script	魔法大会観覧者#a30	70,{/* 83701 */}
+1@ge_st.gat,120,62,4	script	魔法大会観覧者#a32	51,{/* 83702 */}
+1@ge_st.gat,124,62,4	script	魔法大会観覧者#a36	71,{/* 83703 */}
+1@ge_st.gat,125,62,4	script	魔法大会観覧者#a37	52,{/* 83704 */}
+1@ge_st.gat,87,59,6		script	魔法大会観覧者#a198	484,{/* 83705 */}
+1@ge_st.gat,87,60,6		script	魔法大会観覧者#a199	534,{/* 83706 */}
+1@ge_st.gat,88,61,6		script	魔法大会観覧者#a200	540,{/* 83707 */}
+1@ge_st.gat,89,62,6		script	魔法大会観覧者#a201	923,{/* 83708 */}
+1@ge_st.gat,90,63,6		script	魔法大会観覧者#a202	124,{/* 83709 */}
+1@ge_st.gat,91,63,6		script	魔法大会観覧者#a203	838,{/* 83710 */}
+1@ge_st.gat,92,64,6		script	魔法大会観覧者#a38	771,{/* 83711 */}
+1@ge_st.gat,93,64,6		script	魔法大会観覧者#a39	73,{/* 83712 */}
+1@ge_st.gat,94,64,6		script	魔法大会観覧者#a40	74,{/* 83713 */}
+1@ge_st.gat,95,64,6		script	魔法大会観覧者#a41	54,{/* 83714 */}
+1@ge_st.gat,96,64,6		script	魔法大会観覧者#a42	55,{/* 83715 */}
+1@ge_st.gat,97,64,6		script	魔法大会観覧者#a43	56,{/* 83716 */}
+1@ge_st.gat,98,64,6		script	魔法大会観覧者#a44	57,{/* 83717 */}
+1@ge_st.gat,99,64,6		script	魔法大会観覧者#a45	75,{/* 83718 */}
+1@ge_st.gat,100,64,6	script	魔法大会観覧者#a46	76,{/* 83719 */}
+1@ge_st.gat,101,64,6	script	魔法大会観覧者#a47	77,{/* 83720 */}
+1@ge_st.gat,102,64,6	script	魔法大会観覧者#a48	78,{/* 83721 */}
+1@ge_st.gat,103,64,6	script	魔法大会観覧者#a49	58,{/* 83722 */}
+1@ge_st.gat,104,64,6	script	魔法大会観覧者#a50	106,{/* 83723 */}
+1@ge_st.gat,105,64,6	script	魔法大会観覧者#a51	59,{/* 83724 */}
+1@ge_st.gat,106,64,6	script	魔法大会観覧者#a52	60,{/* 83725 */}
+1@ge_st.gat,107,64,6	script	魔法大会観覧者#a53	79,{/* 83726 */}
+1@ge_st.gat,108,64,6	script	魔法大会観覧者#a54	80,{/* 83727 */}
+1@ge_st.gat,109,64,4	script	魔法大会観覧者#a55	947,{/* 83728 */}
+1@ge_st.gat,110,64,4	script	魔法大会観覧者#a56	53,{/* 83729 */}
+1@ge_st.gat,111,64,4	script	魔法大会観覧者#a57	62,{/* 83730 */}
+1@ge_st.gat,112,64,4	script	魔法大会観覧者#a58	107,{/* 83731 */}
+1@ge_st.gat,113,64,4	script	魔法大会観覧者#a59	108,{/* 83732 */}
+1@ge_st.gat,114,64,4	script	魔法大会観覧者#a60	61,{/* 83733 */}
+1@ge_st.gat,115,64,4	script	魔法大会観覧者#a61	804,{/* 83734 */}
+1@ge_st.gat,116,64,4	script	魔法大会観覧者#a62	123,{/* 83735 */}
+1@ge_st.gat,117,64,4	script	魔法大会観覧者#a63	90,{/* 83736 */}
+1@ge_st.gat,118,64,4	script	魔法大会観覧者#a64	91,{/* 83737 */}
+1@ge_st.gat,119,64,4	script	魔法大会観覧者#a65	92,{/* 83738 */}
+1@ge_st.gat,120,64,4	script	魔法大会観覧者#a65	300,{/* 83739 */}
+1@ge_st.gat,121,64,4	script	魔法大会観覧者#a67	920,{/* 83740 */}
+1@ge_st.gat,122,64,4	script	魔法大会観覧者#a68	806,{/* 83741 */}
+1@ge_st.gat,123,64,4	script	魔法大会観覧者#a69	807,{/* 83742 */}
+1@ge_st.gat,124,64,4	script	魔法大会観覧者#a70	808,{/* 83743 */}
+1@ge_st.gat,125,64,4	script	魔法大会観覧者#a71	711,{/* 83744 */}
+1@ge_st.gat,126,64,4	script	魔法大会観覧者#a72	714,{/* 83745 */}
+1@ge_st.gat,127,63,4	script	魔法大会観覧者#a73	724,{/* 83746 */}
+1@ge_st.gat,128,63,4	script	魔法大会観覧者#a74	885,{/* 83747 */}
+1@ge_st.gat,129,62,4	script	魔法大会観覧者#a75	809,{/* 83748 */}
+1@ge_st.gat,130,61,4	script	魔法大会観覧者#a76	810,{/* 83749 */}
+1@ge_st.gat,130,60,4	script	魔法大会観覧者#a77	63,{/* 83750 */}
+1@ge_st.gat,128,60,4	script	魔法大会観覧者#a78	744,{/* 83751 */}
+1@ge_st.gat,128,59,4	script	魔法大会観覧者#a79	953,{/* 83752 */}
+1@ge_st.gat,128,58,4	script	魔法大会観覧者#a80	408,{/* 83753 */}
+1@ge_st.gat,128,57,4	script	魔法大会観覧者#a81	473,{/* 83754 */}
+1@ge_st.gat,128,56,4	script	魔法大会観覧者#a82	64,{/* 83755 */}
+1@ge_st.gat,128,55,4	script	魔法大会観覧者#a83	65,{/* 83756 */}
+1@ge_st.gat,128,54,4	script	魔法大会観覧者#a84	740,{/* 83757 */}
+1@ge_st.gat,128,53,4	script	魔法大会観覧者#a85	473,{/* 83758 */}
+1@ge_st.gat,128,52,4	script	魔法大会観覧者#a86	474,{/* 83759 */}
+1@ge_st.gat,128,51,4	script	魔法大会観覧者#a87	478,{/* 83760 */}
+1@ge_st.gat,128,45,2	script	魔法大会観覧者#a88	741,{/* 83761 */}
+1@ge_st.gat,128,44,2	script	魔法大会観覧者#a89	122,{/* 83762 */}
+1@ge_st.gat,128,43,2	script	魔法大会観覧者#a90	121,{/* 83763 */}
+1@ge_st.gat,128,42,2	script	魔法大会観覧者#a91	879,{/* 83764 */}
+1@ge_st.gat,128,41,2	script	魔法大会観覧者#a92	979,{/* 83765 */}
+1@ge_st.gat,128,40,2	script	魔法大会観覧者#a93	914,{/* 83766 */}
+1@ge_st.gat,128,39,2	script	魔法大会観覧者#a94	813,{/* 83767 */}
+1@ge_st.gat,128,38,2	script	魔法大会観覧者#a95	120,{/* 83768 */}
+1@ge_st.gat,128,37,2	script	魔法大会観覧者#a96	742,{/* 83769 */}
+1@ge_st.gat,128,33,2	script	魔法大会観覧者#a101	816,{/* 83770 */}
+1@ge_st.gat,127,33,2	script	魔法大会観覧者#a102	817,{/* 83771 */}
+1@ge_st.gat,125,32,2	script	魔法大会観覧者#a104	886,{/* 83772 */}
+1@ge_st.gat,123,32,2	script	魔法大会観覧者#a106	745,{/* 83773 */}
+1@ge_st.gat,121,32,2	script	魔法大会観覧者#a108	82,{/* 83774 */}
+1@ge_st.gat,119,32,2	script	魔法大会観覧者#a110	941,{/* 83775 */}
+1@ge_st.gat,117,32,2	script	魔法大会観覧者#a112	83,{/* 83776 */}
+1@ge_st.gat,115,32,2	script	魔法大会観覧者#a114	951,{/* 83777 */}
+1@ge_st.gat,113,32,2	script	魔法大会観覧者#a116	983,{/* 83778 */}
+1@ge_st.gat,111,32,2	script	魔法大会観覧者#a118	846,{/* 83779 */}
+1@ge_st.gat,109,32,2	script	魔法大会観覧者#a120	985,{/* 83780 */}
+1@ge_st.gat,107,32,8	script	魔法大会観覧者#a122	701,{/* 83781 */}
+1@ge_st.gat,105,32,8	script	魔法大会観覧者#a124	987,{/* 83782 */}
+1@ge_st.gat,103,32,8	script	魔法大会観覧者#a126	989,{/* 83783 */}
+1@ge_st.gat,101,32,8	script	魔法大会観覧者#a128	466,{/* 83784 */}
+1@ge_st.gat,99,32,8	script	魔法大会観覧者#a130	892,{/* 83785 */}
+1@ge_st.gat,97,32,8	script	魔法大会観覧者#a132	991,{/* 83786 */}
+1@ge_st.gat,95,32,8	script	魔法大会観覧者#a134	993,{/* 83787 */}
+1@ge_st.gat,93,32,8	script	魔法大会観覧者#a136	748,{/* 83788 */}
+1@ge_st.gat,92,32,8	script	魔法大会観覧者#a137	725,{/* 83789 */}
+1@ge_st.gat,91,33,8	script	魔法大会観覧者#a138	726,{/* 83790 */}
+1@ge_st.gat,89,38,8	script	魔法大会観覧者#a144	542,{/* 83791 */}
+1@ge_st.gat,89,39,8	script	魔法大会観覧者#a145	937,{/* 83792 */}
+1@ge_st.gat,89,40,8	script	魔法大会観覧者#a146	757,{/* 83793 */}
+1@ge_st.gat,89,41,8	script	魔法大会観覧者#a147	758,{/* 83794 */}
+1@ge_st.gat,89,42,8	script	魔法大会観覧者#a148	759,{/* 83795 */}
+1@ge_st.gat,89,43,8	script	魔法大会観覧者#a149	892,{/* 83796 */}
+1@ge_st.gat,89,44,8	script	魔法大会観覧者#a150	760,{/* 83797 */}
+1@ge_st.gat,89,45,8	script	魔法大会観覧者#a151	761,{/* 83798 */}
+1@ge_st.gat,89,51,6	script	魔法大会観覧者#a189	982,{/* 83799 */}
+1@ge_st.gat,89,52,6	script	魔法大会観覧者#a190	919,{/* 83800 */}
+1@ge_st.gat,89,53,6	script	魔法大会観覧者#a191	413,{/* 83801 */}
+1@ge_st.gat,89,54,6	script	魔法大会観覧者#a192	943,{/* 83802 */}
+1@ge_st.gat,89,55,6	script	魔法大会観覧者#a193	538,{/* 83803 */}
+1@ge_st.gat,89,56,6	script	魔法大会観覧者#a194	536,{/* 83804 */}
+1@ge_st.gat,89,57,6	script	魔法大会観覧者#a195	482,{/* 83805 */}
+1@ge_st.gat,89,58,6	script	魔法大会観覧者#a196	95,{/* 83806 */}
+1@ge_st.gat,89,59,6	script	魔法大会観覧者#a197	911,{/* 83807 */}
+1@ge_st.gat,94,34,8	script	魔法大会観覧者#a153	87,{/* 83808 */}
+1@ge_st.gat,96,34,8	script	魔法大会観覧者#a155	704,{/* 83809 */}
+1@ge_st.gat,98,34,8	script	魔法大会観覧者#a157	894,{/* 83810 */}
+1@ge_st.gat,100,34,8	script	魔法大会観覧者#a159	906,{/* 83811 */}
+1@ge_st.gat,102,34,8	script	魔法大会観覧者#a161	476,{/* 83812 */}
+1@ge_st.gat,104,34,8	script	魔法大会観覧者#a163	995,{/* 83813 */}
+1@ge_st.gat,106,34,8	script	魔法大会観覧者#a165	839,{/* 83814 */}
+1@ge_st.gat,108,34,8	script	魔法大会観覧者#a167	717,{/* 83815 */}
+1@ge_st.gat,110,34,2	script	魔法大会観覧者#a169	863,{/* 83816 */}
+1@ge_st.gat,112,34,2	script	魔法大会観覧者#a171	819,{/* 83817 */}
+1@ge_st.gat,114,34,2	script	魔法大会観覧者#a173	821,{/* 83818 */}
+1@ge_st.gat,116,34,2	script	魔法大会観覧者#a175	917,{/* 83819 */}
+1@ge_st.gat,118,34,2	script	魔法大会観覧者#a177	793,{/* 83820 */}
+1@ge_st.gat,120,34,2	script	魔法大会観覧者#a179	823,{/* 83821 */}
+1@ge_st.gat,122,34,2	script	魔法大会観覧者#a181	825,{/* 83822 */}
+1@ge_st.gat,124,34,2	script	魔法大会観覧者#a183	918,{/* 83823 */}
+1@ge_st.gat,109,49,0	script	#ガヤ管理	139,{/* 83824 (hide)*/}
+1@ge_st.gat,92,59,0		script	#魔法大会花火_11	139,{/* 83825 (hide)*/}
+1@ge_st.gat,100,60,0	script	#魔法大会花火_12	139,{/* 83826 (hide)*/}
+1@ge_st.gat,109,60,0	script	#魔法大会花火_13	139,{/* 83827 (hide)*/}
+1@ge_st.gat,118,60,0	script	#魔法大会花火_14	139,{/* 83828 (hide)*/}
+1@ge_st.gat,126,59,0	script	#魔法大会花火_15	139,{/* 83829 (hide)*/}
+1@ge_st.gat,126,37,0	script	#魔法大会花火_16	139,{/* 83830 (hide)*/}
+1@ge_st.gat,118,36,0	script	#魔法大会花火_17	139,{/* 83831 (hide)*/}
+1@ge_st.gat,109,36,0	script	#魔法大会花火_18	139,{/* 83832 (hide)*/}
+1@ge_st.gat,100,36,0	script	#魔法大会花火_19	139,{/* 83833 (hide)*/}
+1@ge_st.gat,92,37,0		script	#魔法大会花火_20	139,{/* 83834 (hide)*/}
+1@ge_st.gat,104,53,6	script	アルヒ#q1	670,{/* 83835 (hide)*/}
+1@ge_st.gat,100,49,6	script	ディオ・アネモス#q1	669,{/* 83836 (hide)*/}
+1@ge_st.gat,102,46,8	script	フェモン#q1	672,{/* 83837 (hide)*/}
+1@ge_st.gat,104,44,8	script	オルドル#q1	673,{/* 83838 (hide)*/}
+1@ge_st.gat,112,45,2	script	ブルート・ハゼ#q1	674,{/* 83839 (hide)*/}
+1@ge_st.gat,116,46,2	script	黒魔#q1	675,{/* 83840 (hide)*/}
+1@ge_st.gat,115,53,4	script	イフォドス#q1	676,{/* 83841 (hide)*/}
+1@ge_st.gat,116,49,4	script	レチェニエ#q1	677,{/* 83842 (hide)*/}
+1@ge_st.gat,112,53,4	script	ユメヒメ#q1	678,{/* 83843 (hide)*/}
+1@ge_st.gat,109,54,4	script	ジュー#q1	679,{/* 83844 (hide)*/}
+1@ge_st.gat,106,50,4	script	ディワイ#q1	680,{/* 83845 (hide)*/}
+1@ge_st.gat,107,48,8	script	フェイ・カナビアン#q1	665,{/* 83846 (hide)*/}
+1@ge_st.gat,112,50,4	script	フェンリル#q1	664,{/* 83847 (hide)*/}
+1@ge_st.gat,88,48,0	script	#応援NPC制御	139,{/* 83848 (hide)*/}
+1@ge_st.gat,88,48,8	script	魔法大会観覧者#z1	810,{/* 83849 (hide)*/
+	setquest 114700; //state=1
+	compquest 114700;
+	mes "[怪しい男]";
+	mes "張った張ったー。";
+	mes "さぁ張った。";
+	mes "今なら" +strcharinfo(0)+ "の倍率";
+	mes "90倍　だよ。";
+	mes "さぁ一口どうだ！";
+	next;
+	mes "[怪しい男]";
+	mes "あっ、やべっ。";
+	mes "　";
+	mes "おい、試合頑張れよ。";
+	mes "頼むぞ。　じゃあな！";
+	close2;
+	hideonnpc getmdnpcname("魔法大会観覧者#z1"); //75847
+	end;
+}
+1@ge_st.gat,88,48,8	script	魔法大会観覧者#z2	72,{/* 83850 (hide)*/
+	setquest 114701; //state=1
+	compquest 114701;
+	mes "[変な歌を歌う少女]";
+	mes "応援ソング歌います！";
+	mes "　";
+	mes "フー！レー！フーレ！";
+	mes "フーーー！";
+	mes "フカヒレ！";
+	mes "ありがとうございました。";
+	close2;
+	hideonnpc getmdnpcname("魔法大会観覧者#z2"); //92304
+	end;
+}
+1@ge_st.gat,88,48,8	script	魔法大会観覧者#z3	61,{/* 83851 */
+	setquest 114702; //state=1
+	compquest 114702;
+	mes "[戦い好きのマスター]";
+	mes "お酒は好きですか？";
+	mes "勝利後の美酒に酔えるよう";
+	mes "頑張ってください。";
+	close2;
+	hideonnpc getmdnpcname("魔法大会観覧者#z3"); //83851
+	end;
+}
+1@ge_st.gat,88,48,8	script	魔法大会観覧者#z4	553,{/* 83852 (hide)*/
+	setquest 114703; //state=1
+	compquest 114703;
+	mes "[夢中な猫]";
+	mes "頑張れー！";
+	mes "いけー！　もっとやれにゃー！";
+	mes "餌代を取り返すにゃー！";
+	mes "負けたままでは終われないにゃー！";
+	close2;
+	hideonnpc getmdnpcname("魔法大会観覧者#z4"); //53738
+	end;
+}
+1@ge_st.gat,88,48,8	script	魔法大会観覧者#z5	655,{/* 83853 (hide)*/}
+
+1@gef.gat,119,199,0	script	#メモリアル開始	139,5,5,{/* 83854 */
+OnStart:
+	hideonnpc getmdnpcname("#イベント1開始2");
+	hideonnpc getmdnpcname("#イベント番外_1");
+	hideonnpc getmdnpcname("ケイオス#1");
+	hideonnpc getmdnpcname("ゲフェン不良#1");
+	hideonnpc getmdnpcname("ビリー・コスルリース#2");
+	hideonnpc getmdnpcname("ゲフェン不良#3");
+	hideonnpc getmdnpcname("ゲフェン不良#11");
+	hideonnpc getmdnpcname("ビリー・コスルリース#22");
+	hideonnpc getmdnpcname("ゲフェン不良#33");
+	hideonnpc getmdnpcname("カプラの女性#1");
+	hideonnpc getmdnpcname("ケイオス#2");
+	hideonnpc getmdnpcname("ケイオス#3");
+	hideonnpc getmdnpcname("アイリス#1");
+
+	hideonnpc getmdnpcname("#イベント2開始2");
+	hideonnpc getmdnpcname("#イベント番外2");
+	hideonnpc getmdnpcname("ロキ#1");
+	hideonnpc getmdnpcname("ヒピア・スニキ#1");
+	hideonnpc getmdnpcname("ゲフェンごろつき#2");
+	hideonnpc getmdnpcname("ゲフェンごろつき#3");
+	hideonnpc getmdnpcname("ゲフェンごろつき#11");
+	hideonnpc getmdnpcname("ヒピア・スニキ#22");
+	hideonnpc getmdnpcname("ゲフェンごろつき#33");
+	hideonnpc getmdnpcname("魔法アカデミー学生#1");
+	hideonnpc getmdnpcname("魔法アカデミー学生#2");
+	hideonnpc getmdnpcname("フェンリル#1");
+	hideonnpc getmdnpcname("ロキ#2");
+	hideonnpc getmdnpcname("ロキ#3");
+
+	hideonnpc getmdnpcname("#イベント3開始2");
+	hideonnpc getmdnpcname("ブラック・カネイリー#2");
+	hideonnpc getmdnpcname("ブラック・カネイリー#1");
+	hideonnpc getmdnpcname("ブラック・カネイリー#3");
+	hideonnpc getmdnpcname("ブラック・カネイリー#11");
+	hideonnpc getmdnpcname("ブラック・カネイリー#22");
+	hideonnpc getmdnpcname("ブラック・カネイリー#33");
+	hideonnpc getmdnpcname("#イベント番外3");
+	hideonnpc getmdnpcname("リディア#1");
+	hideonnpc getmdnpcname("ゲフェン住民#1");
+	hideonnpc getmdnpcname("ゲフェン住民#2");
+	hideonnpc getmdnpcname("ゲフェン住民#3");
+
+	hideonnpc getmdnpcname("アイリス#a1");
+	hideonnpc getmdnpcname("ケイオス#a1");
+	hideonnpc getmdnpcname("リディア#a1");
+	hideonnpc getmdnpcname("フェンリル#a1");
+	hideonnpc getmdnpcname("ロキ#a1");
+
+	hideonnpc getmdnpcname("#大会入口");
+	hideonnpc getmdnpcname("#大会出口");
+
+	hideonnpc getmdnpcname("アカデミーマスター#1");
+	hideonnpc getmdnpcname("魔法大会医療班#1");
+	hideonnpc getmdnpcname("アルヒ#1");
+	hideonnpc getmdnpcname("ディオ・アネモス#1");
+	hideonnpc getmdnpcname("ビリー・コスルリース#n1");
+	hideonnpc getmdnpcname("ヒピア・スニキ#n1");
+	hideonnpc getmdnpcname("ブラック・カネイリー#a1");
+	hideonnpc getmdnpcname("フェモン#1");
+	hideonnpc getmdnpcname("オルドル#1");
+	hideonnpc getmdnpcname("ブルート・ハゼ#1");
+	hideonnpc getmdnpcname("黒魔#1");
+	hideonnpc getmdnpcname("イフォドス#1");
+	hideonnpc getmdnpcname("レチェニエ#1");
+	hideonnpc getmdnpcname("ユメヒメ#1");
+	hideonnpc getmdnpcname("ジュー#1");
+	hideonnpc getmdnpcname("ディワイ#1");
+	hideonnpc getmdnpcname("フェイ・カナビアン#1");
+	hideonnpc getmdnpcname("#アルフォン召喚");
+	hideonnpc getmdnpcname("フェンリル#13");
+
+	hideonnpc getmdnpcname("魔法大会観覧者#z1");
+	hideonnpc getmdnpcname("魔法大会観覧者#z2");
+	hideonnpc getmdnpcname("魔法大会観覧者#z3");
+	hideonnpc getmdnpcname("魔法大会観覧者#z4");
+	hideonnpc getmdnpcname("魔法大会観覧者#z5");
+
+	for(set '@i,1;'@i<=10;set '@i,'@i+1) {
+		donpcevent getmdnpcname("#魔法大会花火_"+ '@i)+ "::OnStart";
+		donpcevent getmdnpcname("#魔法大会花火_b"+ '@i)+ "::OnStart";
+	}
+	donpcevent getmdnpcname("男冒険者#a7")+ "::OnStart";
+	end;
+OnTouch:
+	initnpctimer;
+	announce "ゲフェン放送 : ついに！　待ちに待ったゲフェン魔法大会が間もなく開始されます！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	viewpoint 1, 122, 58, 1, 0x000000; //65208
+	hideonnpc getmdnpcname("#メモリアル開始"); //83854
+	misceffect 1, getmdnpcname("#メモリアル開始"); //83854
+	end;
+OnTimer3000:
+	announce "ゲフェン放送 : ゲフェン市民の皆様と冒険者の皆さんの奮ってのご参加をお待ちしております！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer6000:
+	announce "ゲフェン放送 : ゲフェン魔法大会への参加をご希望の方はゲフェン6時方向にある噴水台にお集まりください！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer20000:
+	stopnpctimer;
+	announce "ゲフェン放送 : ゲフェン魔法大会への参加をご希望の方はゲフェン6時方向にある噴水台にお集まりください！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+}
+
+1@gef.gat,121,58,0	script	#魔法大会受付1	139,15,15,{/* 83855 (hide)*/
+OnTouch:
+	hideonnpc getmdnpcname("#魔法大会受付1");
+	unittalk getcharid(3),strcharinfo(0)+" : 魔法大会受付員がいる。参加申し込みをしよう。";
+	delquest 9287;
+	setquest 9291; //state=1
+	end;
+}
+
+1@gef.gat,122,58,4	script	魔法大会受付員#1	937,{/* 83856 */
+	viewpoint 2, 1, 1, 1, 0xFFFFFF; //65210
+	if(checkquest(9294)) {
+		mes "[魔法大会受付員]";
+		mes "魔法大会が間もなく始まります！";
+		mes "6時方向の入口から";
+		mes "大会に参加することができます。";
+		next;
+		mes "[魔法大会受付員]";
+		mes "それではご武運を！";
+		close;
+	}
+	if(checkquest(9293) & 0x4) {
+		mes "[魔法大会受付員]";
+		mes "試験合格、おめでとうございます。";
+		next;
+		mes "[魔法大会受付員]";
+		mes "それでは登録手続きを進めますね。";
+		mes "試験は問題なく合格……。";
+		mes "職業……、装備……。";
+		mes "名前を教えてください。";
+		next;
+		menu "名乗る",-;
+		mes "[魔法大会受付員]";
+		mes strcharinfo(0)+ "様、ですね。";
+		mes "登録しました。";
+		mes "これで登録完了です！";
+		next;
+		mes "[魔法大会受付員]";
+		mes "魔法大会は1回勝利するごとに";
+		mes "ゲフェン魔法大会コインがもらえます。";
+		mes "入手出来なくなってしまわぬよう";
+		mes "ゲフェン魔法大会コインの";
+		mes "所持数にはご注意ください！";
+		next;
+		mes "[魔法大会受付員]";
+		mes "魔法大会は間もなく始まります！";
+		mes "6時方向の入口から";
+		mes "大会に参加することができます。";
+		next;
+		mes "[魔法大会受付員]";
+		mes "それではご武運を！";
+		delquest 9293;
+		setquest 9294; //state=1
+		viewpoint 1, 120, 34, 2, 0x000000; //83856
+		hideonnpc getmdnpcname("#大会入口"); //84000
+		close;
+	}
+	mes "[魔法大会受付員]";
+	mes "こんにちは！";
+	mes "ゲフェン魔法大会にようこそ！";
+	mes "ご用件はなんでしょうか？";
+	while(1) {
+		next;
+		switch(select("ゲフェン魔法大会参加受付:ゲフェン魔法大会について:ゲフェン魔法大会出場報酬:会話をやめる")) {
+		case 1:
+			mes "[魔法大会受付員]";
+			mes "魔法大会の選手登録は";
+			mes "別途の参加費はありません。";
+			mes "が、実力を試させてもらいます。";
+			mes "そのために簡単な試験を";
+			mes "受けていただきます。";
+			next;
+			mes "[魔法大会受付員]";
+			mes "試験はいたって簡単。";
+			mes "「デザートウルフ」を一匹";
+			mes "召喚しますので";
+			mes "60秒以内に倒せば合格です。";
+			next;
+			mes "[魔法大会受付員]";
+			mes "もし失敗した場合は";
+			mes "試験失敗となりますが、";
+			mes "いつでも再挑戦が可能です。";
+			mes "それでは試験を開始しますか？";
+			next;
+			if(select("はい","いいえ") == 2) {
+				mes "[魔法大会受付員]";
+				mes "魔法大会に参加することは";
+				mes "大変名誉なことです。";
+				mes "気が変わったら";
+				mes "またいらしてください。";
+				break;
+			}
+			mes "[魔法大会受付員]";
+			mes "がんばって試験を合格し";
+			mes "魔法大会に参加できると";
+			mes "いいですね。";
+			mes "それでは！　開始！";
+			close2;
+			setquest 9293; //state=1
+			hideonnpc getmdnpcname("魔法大会受付員#1"); //65210
+			end;
+		case 2:
+			mes "[魔法大会受付員]";
+			mes "ゲフェン魔法大会は";
+			mes "3年毎に開かれる";
+			mes "魔法祭の中でも";
+			mes "名実共に最高峰の行事です。";
+			next;
+			mes "[魔法大会受付員]";
+			mes "以前は魔法研究の";
+			mes "成果を発表し発展方向や、";
+			mes "研究方法を話し合う";
+			mes "行事でしたが、時間が経つにつれて";
+			mes "現在のお祭のような";
+			mes "行事になりました。";
+			next;
+			mes "[魔法大会受付員]";
+			mes "魔法祭の華である";
+			mes "魔法大会ですので、";
+			mes "世界中のマジシャンが集まります。";
+			mes "中には相当な実力者もいるので";
+			mes "非常にレベルの高い大会となります。";
+			break;
+		case 3:
+			mes "[魔法大会受付員]";
+			mes "ゲフェン魔法大会にて";
+			mes "よい成績を上げると";
+			mes "ゲフェン魔法大会コインを";
+			mes "受け取ることができます。";
+			next;
+			mes "[魔法大会受付員]";
+			mes "コインは魔法大会に参加した方のみに";
+			mes "お配りしているもので、";
+			mes "これを集めている人も沢山います。";
+			break;
+		case 4:
+			mes "[魔法大会受付員]";
+			mes "それではゲフェン魔法大会を";
+			mes "心行くまで楽しんでください。";
+			close;
+		}
+		next;
+		mes "[魔法大会受付員]";
+		mes "他にご用件はありますか？";
+	}
+}
+
+1@gef.gat,166,168,0	script	#イベント1開始	139,{/* 83857 (hide)*/}
+1@gef.gat,166,169,0	script	#イベント1開始2	139,{/* 83858 (hide)*/}
+1@gef.gat,166,167,0	script	#イベント番外_1	139,{/* 83859 (hide)*/}
+1@gef.gat,173,167,4	script	ケイオス#1	683,{/* 83860 (hide)*/}
+1@gef.gat,159,172,6	script	ゲフェン不良#1	682,{/* 83861 (hide)*/}
+1@gef.gat,160,176,6	script	ビリー・コスルリース#2	682,{/* 83862 (hide)*/}
+1@gef.gat,164,175,6	script	ゲフェン不良#3	682,{/* 83863 (hide)*/}
+1@gef.gat,166,168,6	script	ゲフェン不良#11	682,{/* 83864 (hide)*/}
+1@gef.gat,167,169,6	script	ビリー・コスルリース#22	682,{/* 83865 (hide)*/}
+1@gef.gat,168,170,6	script	ゲフェン不良#33	682,{/* 83866 (hide)*/}
+1@gef.gat,169,167,2	script	カプラの女性#1	114,{/* 83867 (hide)*/}
+1@gef.gat,168,168,4	script	ケイオス#2	683,{/* 83868 (hide)*/}
+1@gef.gat,162,174,4	script	ケイオス#3	683,{/* 83869 (hide)*/}
+1@gef.gat,170,168,4	script	アイリス#1	666,{/* 83870 (hide)*/}
+1@gef.gat,72,169,0	script	#イベント2開始	139,{/* 83871 (hide)*/}
+1@gef.gat,72,170,0	script	#イベント2開始2	139,{/* 83872 (hide)*/}
+1@gef.gat,72,168,0	script	#イベント番外2	139,{/* 83873 (hide)*/}
+1@gef.gat,69,168,8	script	ロキ#1	512,{/* 83874 (hide)*/}
+1@gef.gat,75,172,4	script	ヒピア・スニキ#1	681,{/* 83875 (hide)*/}
+1@gef.gat,76,170,4	script	ゲフェンごろつき#2	681,{/* 83876 (hide)*/}
+1@gef.gat,73,173,4	script	ゲフェンごろつき#3	681,{/* 83877 (hide)*/}
+1@gef.gat,68,171,4	script	ゲフェンごろつき#11	681,{/* 83878 (hide)*/}
+1@gef.gat,70,171,4	script	ヒピア・スニキ#22	681,{/* 83879 (hide)*/}
+1@gef.gat,70,169,4	script	ゲフェンごろつき#33	681,{/* 83880 (hide)*/}
+1@gef.gat,70,167,1	script	魔法アカデミー学生#1	123,{/* 83881 (hide)*/}
+1@gef.gat,73,170,1	script	魔法アカデミー学生#2	123,{/* 83882 (hide)*/}
+1@gef.gat,68,169,8	script	フェンリル#1	664,{/* 83883 (hide)*/}
+1@gef.gat,69,170,8	script	ロキ#2	512,{/* 83884 (hide)*/}
+1@gef.gat,67,170,8	script	ロキ#3	512,{/* 83885 (hide)*/}
+1@gef.gat,114,143,0	script	#イベント3開始	139,{/* 83886 */}
+1@gef.gat,109,141,0	script	#イベント3開始2	139,{/* 83887 (hide)*/}
+1@gef.gat,107,126,4	script	ブラック・カネイリー#2	671,{/* 83888 */}
+1@gef.gat,108,139,6	script	ブラック・カネイリー#1	671,{/* 83889 (hide)*/}
+1@gef.gat,111,118,4	script	ブラック・カネイリー#3	671,{/* 83890 (hide)*/}
+1@gef.gat,123,111,4	script	ブラック・カネイリー#11	671,{/* 83891 */}
+1@gef.gat,129,121,4	script	ブラック・カネイリー#22	671,{/* 83892 (hide)*/}
+1@gef.gat,114,137,4	script	ブラック・カネイリー#33	671,{/* 83893 (hide)*/}
+1@gef.gat,110,140,0	script	#イベント番外3	139,{/* 83894 (hide)*/}
+1@gef.gat,104,141,6	script	リディア#1	10010,{/* 83895 (hide)*/}
+1@gef.gat,111,146,4	script	ゲフェン住民#1	67,{/* 83896 (hide)*/}
+1@gef.gat,106,141,4	script	ゲフェン住民#2	67,{/* 83897 (hide)*/}
+1@gef.gat,111,146,4	script	ゲフェン住民#3	67,{/* 83898 (hide)*/}
+
+1@gef.gat,125,105,4	script	アイリス#a1	666,{/* 83899 (hide)*/
+	if(checkquest(9310) & 0x8) {
+		cutin "hero_iris_02.bmp", 2;
+		mes "[アイリス]";
+		mes "旅の途中で飛行船にトラブルが";
+		mes "おきた時には本当、ついてないなって";
+		mes "思ったんだけどね～。";
+		mes "面白い大会も見れたから、";
+		mes "結果的には良かったのかもね。";
+		close2;
+		cutin "hero_iris_02.bmp", 255;
+		end;
+	}
+	cutin "hero_iris_02.bmp", 2;
+	mes "[アイリス]";
+	mes "試合、お疲れ様！";
+	mes "今回は残念だったわね。";
+	mes "次はいい結果になるといいね。";
+	next;
+	mes "[アイリス]";
+	mes "とはいえ、がんばってたのは";
+	mes "すごく伝わったし……";
+	mes "たいしたものじゃないけど";
+	mes "私からプレゼント！";
+	mes "これからもがんばってね。";
+	switch(rand(5)) {
+	case 0: getitem 501, 1; break;
+	case 1: getitem 502, 1; break;
+	case 2: getitem 503, 1; break;
+	case 3: getitem 504, 1; break;
+	case 4: getitem 505, 1; break;
+	}
+	setquest 9310; //state=1
+	compquest 9310;
+	close2;
+	cutin "hero_iris_01.bmp", 255;
+	end;
+}
+
+1@gef.gat,123,108,4	script	ケイオス#a1	683,{/* 83900 (hide)*/
+	if(checkquest(9311) & 0x8) {
+		cutin "hero_chaos_01.bmp", 2;
+		mes "[ケイオス]";
+		mes "飛行船に問題が起き、宿を探して";
+		mes "ここ、ゲフェンに来たんだ。";
+		mes "色々あってフェンリルが大会に出る！";
+		mes "って決まった時はどうなるかと";
+		mes "不安だったんだが……。";
+		mes "ある意味、結果オーライだったな。";
+		close2;
+		cutin "hero_chaos_01.bmp", 255;
+		end;
+	}
+	cutin "hero_chaos_01.bmp", 2;
+	mes "[ケイオス]";
+	mes "いい試合だったぜ！";
+	mes "まあ、惜しいところもあるが";
+	mes "それ以上に、あんたには";
+	mes "可能性を感じたしな！";
+	next;
+	mes "[ケイオス]";
+	mes "ってことで、だ。";
+	mes "こっちも見てて熱くなるような";
+	mes "試合を見せてくれたお礼だ！";
+	mes "たいしたものじゃないが……";
+	mes "良かったら貰ってくれ。";
+	switch(rand(5)) {
+	case 0: getitem 501, 1; break;
+	case 1: getitem 502, 1; break;
+	case 2: getitem 503, 1; break;
+	case 3: getitem 504, 1; break;
+	case 4: getitem 505, 1; break;
+	}
+	setquest 9311; //state=1
+	compquest 9311;
+	close2;
+	cutin "hero_chaos_01.bmp", 255;
+	end;
+}
+
+1@gef.gat,117,108,6	script	リディア#a1	10010,{/* 83901 (hide)*/
+	if(checkquest(9312) & 0x8) {
+		cutin "lydia_a.bmp", 2;
+		mes "[リディア]";
+		mes "あーあ、飛行船でもっと";
+		mes "金目のものがないか";
+		mes "見ておけばよかったなあ。";
+		mes "こんなんじゃ、いつまでも";
+		mes "世界一のトレジャーハンターに";
+		mes "なれやしないよ。";
+		close2;
+		cutin "lydia_a.bmp", 255;
+		end;
+	}
+	cutin "lydia_a.bmp", 2;
+	mes "[リディア]";
+	mes "あんたの試合、";
+	mes "しっかり観客席から";
+	mes "見せてもらったよ！";
+	next;
+	mes "[リディア]";
+	mes "試合結果は残念だったね……。";
+	mes "でも、あんたもがんばったんだし";
+	mes "次また、がんばればいいよ！";
+	mes "ほら！　これあげるから！";
+	switch(rand(5)) {
+	case 0: getitem 501, 1; break;
+	case 1: getitem 502, 1; break;
+	case 2: getitem 503, 1; break;
+	case 3: getitem 504, 1; break;
+	case 4: getitem 505, 1; break;
+	}
+	setquest 9312; //state=1
+	compquest 9312;
+	close2;
+	cutin "lydia_a.bmp", 255;
+	end;
+}
+
+1@gef.gat,120,108,4	script	フェンリル#a1	664,{/* 83902 (hide)*/
+	if(checkquest(9313) & 0x8) {
+		cutin "fenrir_a.bmp", 2;
+		mes "[フェンリル]";
+		mes "宿探しついでに今回の大会に";
+		mes "参加することになったのだけれど、";
+		mes "私としては参加して正解だったわ。";
+		mes "お陰で私もまだまだ修行が";
+		mes "必要なことがわかったのだから。";
+		close2;
+		cutin "fenrir_a.bmp", 255;
+		end;
+	}
+	cutin "fenrir_a.bmp", 2;
+	mes "[フェンリル]";
+	mes "試合の結果と、あなたの";
+	mes "試合内容についてロキから";
+	mes "さっき話を聞いたわ。";
+	mes "結果は残念だったけど";
+	mes "とりあえず今は、";
+	mes "休息するべきよ。";
+	next;
+	mes "[フェンリル]";
+	mes "そして、同じ魔法大会に";
+	mes "参加した選手として";
+	mes "全力を尽くしたあなたに";
+	mes "私からも、ささやかだけど";
+	mes "贈り物を贈るわ。";
+	mes "これからもがんばってね。";
+	getitem 608, 1;
+	setquest 9313; //state=1
+	compquest 9313;
+	close2;
+	cutin "fenrir_a.bmp", 255;
+	end;
+}
+
+1@gef.gat,115,105,6	script	ロキ#a1	512,{/* 83903 (hide)*/
+	if(checkquest(9314) & 0x8) {
+		cutin "ep14_roki01.bmp", 2;
+		mes "[ロキ]";
+		mes "俺たちは飛行船で旅をしていたが";
+		mes "問題が起きて、ここで足止めを";
+		mes "食っている状態だ。";
+		mes "飛行船がなければ動けないというのも";
+		mes "不便なものだな。";
+		close2;
+		cutin "ep14_roki01.bmp", 255;
+		end;
+	}
+	cutin "ep14_roki01.bmp", 2;
+	mes "[ロキ]";
+	mes "お前の試合、見せてもらった。";
+	mes "まだまだ荒削りだが……";
+	mes "見所があるようだな。";
+	next;
+	mes "[ロキ]";
+	mes "……。";
+	mes "これは俺からの餞別だ。";
+	mes "受け取れ。";
+	switch(rand(5)) {
+	case 0: getitem 501, 1; break;
+	case 1: getitem 502, 1; break;
+	case 2: getitem 503, 1; break;
+	case 3: getitem 504, 1; break;
+	case 4: getitem 505, 1; break;
+	}
+	setquest 9314; //state=1
+	compquest 9314;
+	close2;
+	cutin "ep14_roki01.bmp", 255;
+	end;
+}
+
+1@gef.gat,145,125,4	script	アルヒ#z1	670,{/* 83904 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[アルヒ]";
+		mes "……ふう。";
+		mes "結果は残念でしたけど……";
+		mes "あなたとご一緒できて";
+		mes "楽しかったです。";
+		mes "あ、あの……戦ってくれて、";
+		mes "本当にありがとうございました！";
+		close;
+	}
+	else {
+		mes "[アルヒ]";
+		mes "ぼ、僕はアルヒといいます。";
+		mes "……あなたも参加者なんですか？";
+		mes "じ、実は僕も参加する予定なんです。";
+		mes "とはいえ、実戦はこれが初めてで……";
+		mes "こんな状態で、良い成績が残せるか";
+		mes "僕自身、不安です……。";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "アルヒ : 試合の結果はだめだったけど、楽しかったなあ……！";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "アルヒ : いつも執事のセポスがやってくれるから、登録に手間取っちゃったなあ……。";
+			end;
+		case 1:
+			unittalk "アルヒ : 噂には聞いていたけど、女性の人もいるんだなあ……。";
+			end;
+		case 2:
+			unittalk "アルヒ : えーっと、武器の扱い方の参考書、もう一回読み直しておこうかな……。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,91,117,6	script	ディオ・アネモス#z1	669,{/* 83905 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[ディオ・アネモス]";
+		mes "大会も終わってしまったねぇ。";
+		mes "ちなみに僕は体調が";
+		mes "いまいちだったようだ……。";
+		mes "皆には黙っていたけど、";
+		mes "昨日から少し体調がよくなくてねぇ！";
+		mes "いや～参った参ったねぇ。";
+		close;
+	}
+	else {
+		mes "[ディオ・アネモス]";
+		mes "僕はねぇ、ディオ・アネモス。";
+		mes "ある崇高な目的のために";
+		mes "この大会に参加するんだよねぇ。";
+		mes "どうやら君も参加者の";
+		mes "1人みたいだねぇ。";
+		mes "まっ、よろしく頼むよ。";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "ディオ・アネモス : 女性相手に本気を出せないし、負けたのはある意味、当然の結果だねぇ。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "ディオ・アネモス : 僕の戦いぶりを見て、ファンが増えたら困るねぇ……。";
+			end;
+		case 1:
+			unittalk "ディオ・アネモス : マイハニーほどじゃないが、可愛い子もいるもんだねぇ。";
+			end;
+		case 2:
+			unittalk "ディオ・アネモス : 相手が女性だと戦いにくいから、やめてほしいねぇ……。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,53,90,6	script	フェモン#z1	672,5,5,{/* 83906 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[フェモン]";
+		mes "……そんなまさか！";
+		mes "このオレが負けるとは……。";
+		mes "でも、オレの美しさの";
+		mes "アピールはできたはずだしな。";
+		mes "それでよしとするか……。";
+		mes "それじゃ、お疲れ。";
+		close;
+	}
+	else {
+		mes "[フェモン]";
+		mes "その格好から察するに、";
+		mes "魔法大会に参加するみたいだな。";
+		mes "オレはフェモン。";
+		mes "組み合わせ次第じゃ、";
+		mes "戦うことになりそうだな。";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "フェモン : 負けた女の子を慰めてあげたいが、暇はなさそうだな。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "フェモン : ……ナンパは大会の後のお楽しみにしておくかね。";
+			end;
+		case 1:
+			unittalk "フェモン : 女の子からの熱い視線を感じるぜ……。";
+			end;
+		case 2:
+			unittalk "フェモン : へえ。期待してなかったが出場者にも、可愛い子は多いんだな。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,85,68,6	script	オルドル#z1	673,{/* 83907 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[オルドル]";
+		mes "……やはり、努力したところで";
+		mes "生まれたときに決められた";
+		mes "運命は変えられないのか……。";
+		mes "あ、あなたは……。";
+		mes "失礼、独り言です……。";
+		mes "大会、お疲れ様でした。";
+		close;
+	}
+	else {
+		mes "[オルドル]";
+		mes "あなたも参加されるのですか？";
+		mes "私はオルドル。";
+		mes "魔法大会参加者の1人です。";
+		mes "由緒あるゲフェン魔法大会に";
+		mes "参加できるとは……。";
+		mes "とても光栄なことです。";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "オルドル : 彼女のような腕利きの人でも負けてしまうなんて……やはり、世界は広い。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "オルドル : 何故だろう、最近妙に誰かに見られている視線を感じる……。";
+			end;
+		case 1:
+			unittalk "オルドル : ……もしかしたら私も彼女たちのように……だめだ！　大会前だからと弱気になってどうするんだ、私！";
+			end;
+		case 2:
+			unittalk "オルドル : てっきり1人か2人くらいかと思ったけど、女性の参加者も割りと居るんだな……。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,111,62,6	script	ブルート・ハゼ#z1	674,{/* 83908 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[ブルート・ハゼ]";
+		mes "……ああ、良かった！";
+		mes "このうさ耳、かなり年季入ってるから、";
+		mes "壊れないか心配で……。";
+		mes "試合に集中するどころじゃ";
+		mes "なかったわ……。";
+		mes "……あ、なんでもないよ～？";
+		close;
+	}
+	else {
+		mes "[ブルート・ハゼ]";
+		mes "なになにー？";
+		mes "ボクに興味あるのかな？";
+		mes "ボクはブルート・ハゼ！";
+		mes "この頭のうさ耳は……";
+		mes "え？　うさ耳の名前は聞いてない？";
+		mes "ちぇーっ。";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "ブルート・ハゼ : ……ふう、女性のほうが攻撃が激しくてビックリだよ。だから同性は苦手なんだよ。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "ブルート・ハゼ : 誰かさんの血みどろメイク♪　楽しみだなあ！";
+			end;
+		case 1:
+			unittalk "ブルート・ハゼ : 同性は苦手だからあたらないといいなー……。";
+			end;
+		case 2:
+			unittalk "ブルート・ハゼ : んー、女性が割りといるっぽいけど、ボクと近い年齢の人は居ない感じかな？　残念！";
+			end;
+		}
+	}
+}
+
+1@gef.gat,104,42,6	script	黒魔#z1	675,{/* 83909 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[黒魔]";
+		mes "……チッ。";
+		mes "いい子ちゃんの手本みたいな";
+		mes "戦いっぷりで、興ざめだぜ。";
+		mes "本来のターゲットもあたる前に、";
+		mes "倒されちまったしな。";
+		mes "時間の無駄だったぜ……。";
+		close;
+	}
+	else {
+		mes "[黒魔]";
+		mes "……おい。";
+		mes "お前は俺様を漆黒の牙と知って、";
+		mes "話しかけてるのか？";
+		mes "いや、その平和ボケした面をみる限り";
+		mes "知らないで話しかけたようだな。";
+		mes "なら、もう話しかけるな。";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "黒魔 : ……チッ。あの女、なかなか運がいいみたいだな。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "黒魔 : あの女……あれで、ばれないと思っているのか。おめでたいやつだな。";
+			end;
+		case 1:
+			unittalk "黒魔 : しかし、子悪魔帽の色がすっかり変わっちまったな。もう元の色すら憶えてないぜ……。";
+			end;
+		case 2:
+			unittalk "黒魔 : ……どの女も、ファルコンの衆みたいに見分けがつかねーな。同じに見えるぜ。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,115,66,6	script	イフォドス#z1	676,{/* 83910 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[イフォドス]";
+		mes "まさかの負けだと……!?";
+		mes "おかしい！";
+		mes "叫び声の量なら俺が勝っていたはずだ！";
+		mes "それに、縁起を担いで奮発して";
+		mes "強運の汁を10杯飲んだのに！";
+		mes "お、思い出したら腹の調子が……。";
+		close;
+	}
+	else {
+		mes "[イフォドス]";
+		mes "やあやあ！";
+		mes "あんたも大会参加者か!?";
+		mes "俺の名前はイフォドス！";
+		mes "ルーンミッドガッツ全域を";
+		mes "駆けめぐる参加者の1人だ！";
+		mes "よろしくなーっ！";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "イフォドス : まさか女性に負けるとは……最近の女性は怖いな……。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "イフォドス : 対戦相手は女性じゃないほうが……いやいや、しかし！　俺が華麗に勝って、そこから芽生える……ブツブツ。";
+			end;
+		case 1:
+			unittalk "イフォドス : 対戦相手じゃなけりゃ、デートの一つや二つ……ううむ、まったくもって残念だ。";
+			end;
+		case 2:
+			unittalk "イフォドス : 戦闘では無敗を誇る俺でも、なぜかモテないんだよな……。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,137,53,4	script	レチェニエ#z1	677,{/* 83911 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[レチェニエ]";
+		mes "……。";
+		mes "えっ、あらー？";
+		mes "どうかなさいました？";
+		mes "え、試合終わりましたの？";
+		mes "まあ、いつのまに!?";
+		mes "私、全然記憶がありませんわ……。";
+		close;
+	}
+	else {
+		mes "[レチェニエ]";
+		mes "うふふ、あなたも参加されますの？";
+		mes "申し遅れました、私はレチェニエ。";
+		mes "生まれはラヘルなのですが、";
+		mes "今はプロンテラに住んでおりますの。";
+		mes "あら……お祈りの時間ですわ。";
+		mes "また後ほど、ごきげんよう。";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "レチェニエ : 肝心なところで記憶が途切れるているせいで、負けた実感がありませんわ……。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "レチェニエ : この大会が終わったら、私は新天地に旅立たなくては……。";
+			end;
+		case 1:
+			unittalk "レチェニエ : どうせなら、女性同士の対戦は美や、女性らしさを競う内容に変更すればよろしいのに……。";
+			end;
+		case 2:
+			unittalk "レチェニエ : ……参加者に女性が割りといらっしゃることに驚きですわ。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,158,63,4	script	ユメヒメ#z1	678,{/* 83912 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[ユメヒメ]";
+		mes "いや～ん、負けちゃった！";
+		mes "みんな、強いのね。";
+		mes "若さ溢れる動きで、羨ましいわぁ……！";
+		mes "私ももう少し若かったら……。";
+		mes "ううん、まだ私も大丈夫……よね？";
+		mes "……30すぎたら、ダメかしら……。";
+		close;
+	}
+	else {
+		mes "[ユメヒメ]";
+		mes "あら～？　お姉さんにご用事？";
+		mes "私はユメヒメよ～♪";
+		mes "参加者に見えないと思うけど";
+		mes "これでも一応、大会に出場する";
+		mes "参加者の1人なの♪";
+		mes "よろしくねぇ～♪";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "ユメヒメ : これが若さの差なのかしら!?　お姉さん、ショックだわ……。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "ユメヒメ : 可愛いお嬢さんが多いけど、ダンサー志望の子は居なさそう……。";
+			end;
+		case 1:
+			unittalk "ユメヒメ : 女の子をつい、ダンサーの杓子定規で見ちゃうわ……。だめねえ。";
+			end;
+		case 2:
+			unittalk "ユメヒメ : ダンサーをやっていると、どうしても体型の維持が大変なのよね。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,178,91,4	script	ジュー#z1	679,{/* 83913 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[ジュー]";
+		mes "うむ、見事だ。";
+		mes "あの若さでこれだけ動ける者が";
+		mes "いるとはな……。";
+		mes "これでこそ、この大会に参加した";
+		mes "価値があるというものだ。";
+		close;
+	}
+	else {
+		mes "[ジュー]";
+		mes "拙者は、ジューと申す。";
+		mes "今回、この大会に出場する権利を";
+		mes "幸運にも得ることができた1人だ。";
+		mes "しかし、スカーフをつけていると";
+		mes "熱がこもって暑いな……。";
+		mes "だが、外すわけには……。";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "ジュー : ……勝者に性別など、やはり関係ないのだな。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "ジュー : 存外、女性のほうが侮れない可能性が高い。今一度、眦を決するべきだな。";
+			end;
+		case 1:
+			unittalk "ジュー : 女性がこのような大会に出場するなど、以前は考えられなかったことだな。";
+			end;
+		case 2:
+			unittalk "ジュー : ふむ……女性の出場者も存外、多いのだな。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,113,99,4	script	ディワイ#z1	680,{/* 83914 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[ディワイ]";
+		mes "何もいうことがないほどに、";
+		mes "素晴らしい戦いだった。";
+		mes "今回の大会の観覧者に、私が";
+		mes "世話になった育ての親が来ているんだ。";
+		mes "あの人たちの前で、あのような戦いを";
+		mes "おこなえたことに感謝だな。";
+		close;
+	}
+	else {
+		mes "[ディワイ]";
+		mes "私の名はディワイ。";
+		mes "どうやら君も、参加者のようだね。";
+		mes "しかし君は肝が据わっている。";
+		mes "敵となるかもしれない私に";
+		mes "こうして声をかけるのだから。";
+		mes "気に入ったよ。";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "ディワイ : 何もいうことがないほどに、決勝戦は素晴らしい戦いだった。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "ディワイ : いやはや、今日は一人の参加者として来ているのに、つい授業のことを考えてしまう。";
+			end;
+		case 1:
+			unittalk "ディワイ : 族長、ウータン族、弟子の皆はもう中に居るのだろうか。";
+			end;
+		case 2:
+			unittalk "ディワイ : 見た感じ、弟子たちよりも若い参加者もいるようだな……。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,117,72,6	script	フェイ・カナビアン#z1	665,{/* 83915 */
+	mes "‐大会参加者のようだ";
+	mes "　話しかけてみようか‐";
+	next;
+	if(select("やめる","こんにちは") == 1) {
+		mes "‐やっぱりやめておこう‐";
+		close;
+	}
+	if(checkquest(9308) || checkquest(9309)) {
+		mes "[フェイ・カナビアン]";
+		mes "え？";
+		mes "あたしが負けたの!?";
+		mes "嘘だ～……！";
+		mes "負ける方程式はないはずだよ？";
+		mes "あたしが優勝するパターンだよ？";
+		mes "絶対おかしいよ!?";
+		close;
+	}
+	else {
+		mes "[フェイ・カナビアン]";
+		mes "あたしに声をかけるとは！";
+		mes "君、なかなか見る目あるよ～！";
+		mes "あたしは今をときめく錬金術師！";
+		mes "フェイ・カナビアンだよ！";
+		mes "ホムンクルス大好きっ子！";
+		mes "よっろしくぅ～♪";
+		close;
+	}
+OnTouch:
+	if(checkquest(9308) || checkquest(9309)) {
+		unittalk "フェイ・カナビアン : うーん、これはもしかして夢？　でも痛かったし……。あたしが負けるなんて、ありえないのになあ。";
+	}
+	else {
+		switch(rand(3)) {
+		case 0:
+			unittalk "フェイ・カナビアン : うーん、ペアのホムンクルスとかも、楽しそうだなあ……。";
+			end;
+		case 1:
+			unittalk "フェイ・カナビアン : あたしが優勝したら、同性からの嫉妬が怖そうだなあ……。まっ、いいか！";
+			end;
+		case 2:
+			unittalk "フェイ・カナビアン : へぇ、参加者にも結構女の子がいるんだ～。";
+			end;
+		}
+	}
+}
+
+1@gef.gat,116,203,5	script	案内要員#5	705,{/* 83916 */
+	viewpoint 1, 166, 168, 1, 0x32CD32; //65270
+	viewpoint 1, 72, 169, 2, 0x0000FF; //65270
+	viewpoint 1, 114, 143, 3, 0xFF8000; //65270
+	cutin "gef_soldier.bmp", 2;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "魔法の都市^8B4513ゲフェン^000000へ";
+	mes "ようこそ！";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "現在、ゲフェン魔法大会に乗じて";
+	mes "^ff0000悪事を企む輩^000000が";
+	mes "出没しているようです。";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "^32cd32東側^000000には不良が、";
+	mes "^FF8000南側^000000には泥棒が、";
+	mes "^0000FF西側^000000にはごろつきが、";
+	mes "それぞれ目撃されているようです。";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "我々も警戒は行っていますが、";
+	mes "ご注意ください！";
+	close2;
+	cutin "gef_soldier.bmp", 255;
+	end;
+}
+
+1@gef.gat,116,203,5	script	案内要員#6	705,{/* 83917 (hide)*/
+	cutin "gef_soldier.bmp", 2;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "今回のゲフェン魔法大会は";
+	mes "終了しました。";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "ご来場いただきまして、";
+	mes "誠にありがとうございます。";
+	mes "お楽しみいただけたでしょうか。";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "ゲフェン魔法大会運営一同、";
+	mes "皆様に楽しんでいただけるよう、";
+	mes "さらに精進してまいりますので、";
+	mes "次回開催時もご期待ください！";
+	close2;
+	cutin "gef_soldier.bmp", 255;
+	end;
+}
+
+1@gef.gat,203,116,4	script	案内要員#4	705,{/* 83918 */
+	cutin "gef_soldier.bmp", 2;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "魔法の都市^8B4513ゲフェン^000000へ";
+	mes "ようこそ！";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "現在はゲフェン魔法大会が開催中で";
+	mes "出し物や催し物が多くあります。";
+	mes "^006400魔法大会^000000への参加をお望みなら";
+	mes "ゲフェン6時方向にある";
+	mes "噴水台に行ってみてください。";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "また魔法大会開催を記念して";
+	mes "ゲフェンのあちこちに魔法の花火が";
+	mes "設置されていますので退屈することは";
+	mes "ないと思います。";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "歴史と伝統が息づく";
+	mes "ゲフェン魔法大会は冒険者の皆さんを";
+	mes "決して失望させません！";
+	mes "それでは楽しい観光になりますよう！";
+	close2;
+	cutin "gef_soldier.bmp", 255;
+	end;
+}
+
+1@gef.gat,36,123,6	script	案内要員#1	705,{/* 83919 */
+	cutin "gef_soldier.bmp", 2;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "魔法の都市^8B4513ゲフェン^000000へ";
+	mes "ようこそ！";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "現在はゲフェン魔法大会が開催中で";
+	mes "出し物や催し物が多くあります。";
+	mes "^006400魔法大会^000000への参加をお望みなら";
+	mes "ゲフェン6時方向にある";
+	mes "噴水台に行ってみてください。";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "また魔法大会開催を記念して";
+	mes "ゲフェンのあちこちに魔法の花火が";
+	mes "設置されていますので退屈することは";
+	mes "ないと思います。";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "歴史と伝統が息づく";
+	mes "ゲフェン魔法大会は冒険者の皆さんを";
+	mes "決して失望させません！";
+	mes "それでは楽しい観光になりますよう！";
+	close2;
+	cutin "gef_soldier.bmp", 255;
+	end;
+}
+
+1@gef.gat,123,203,4	script	案内要員#2	705,{/* 83920 */
+	cutin "gef_soldier.bmp", 2;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "魔法の都市^8B4513ゲフェン^000000へ";
+	mes "ようこそ！";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "現在はゲフェン魔法大会が開催中で";
+	mes "出し物や催し物が多くあります。";
+	mes "^006400魔法大会^000000への参加をお望みなら";
+	mes "ゲフェン6時方向にある";
+	mes "噴水台に行ってみてください。";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "また魔法大会開催を記念して";
+	mes "ゲフェンのあちこちに魔法の花火が";
+	mes "設置されていますので退屈することは";
+	mes "ないと思います。";
+	next;
+	mes "[ゲフェン魔法大会案内人]";
+	mes "歴史と伝統が息づく";
+	mes "ゲフェン魔法大会は冒険者の皆さんを";
+	mes "決して失望させません！";
+	mes "それでは楽しい観光になりますよう！";
+	close2;
+	cutin "gef_soldier.bmp", 255;
+	end;
+}
+
+1@gef.gat,124,173,4	script	ゲフェン男性#a1	49,{/* 83921 */
+	end;
+OnTouch:
+	switch(rand(3)) {
+	case 0:
+		unittalk "ゲフェン住民 : この機会にいい出会いがあるといいな……。";
+		end;
+	case 1:
+		unittalk "ゲフェン住民 : 魔法大会の季節になると人が多いな～。";
+		end;
+	case 2:
+		unittalk "ゲフェン住民 : この歳で未だに独身……さびしい……。";
+		end;
+	}
+}
+
+1@gef.gat,194,91,4	script	ゲフェン子供#a2	82,{/* 83922 */
+	end;
+OnTouch:
+	switch(rand(3)) {
+	case 0:
+		unittalk "ゲフェン子供 : つまらない！　お祭りなのに！";
+		end;
+	case 1:
+		unittalk "ゲフェン子供 : 何か楽しいことはないかな！";
+		end;
+	case 2:
+		unittalk "ゲフェン子供 : パパにおこづかいもらおっと！";
+		end;
+	}
+}
+
+1@gef.gat,71,86,4	script	ゲフェン娘#a3	478,{/* 83923 */
+	end;
+OnTalk1:
+	unittalk "ゲフェン娘 : 寂しいわ……人ごみが多いから余計に寂しい。";
+	end;
+OnTalk2:
+	unittalk "ゲフェン娘 : いい男なんてどこにもいないし！";
+	end;
+OnTalk3:
+	unittalk "ゲフェン娘 : 脳ミソまで筋肉で出来てるようなおじさん達しか見えないわよ！";
+	end;
+OnTalk4:
+	unittalk "ゲフェン娘 : ふう……そうだね。";
+	end;
+OnTalk5:
+	unittalk "ゲフェン娘 : あら！　どこに！";
+	end;
+OnTalk6:
+	unittalk "ゲフェン娘 : きゃー！　かっこいい！";
+	end;
+OnTalk7:
+	unittalk "ゲフェン娘 : 早く！　誰か話しかけてよ！";
+	end;
+OnTalk8:
+	unittalk "ゲフェン娘 : そんなのダメ～!!";
+	end;
+OnTalk9:
+	unittalk "ゲフェン娘 : 二人ともいいお・と・こ！";
+	end;
+OnTalk10:
+	unittalk "ゲフェン娘 : 私たちの友情よ、永遠に！";
+	end;
+}
+
+1@gef.gat,73,84,4	script	ゲフェン娘#a4	879,{/* 83924 */
+	end;
+OnTalk1:
+	unittalk "ゲフェン娘 : なに怖いこと言ってるの！";
+	end;
+OnTalk2:
+	unittalk "ゲフェン娘 : だからって花盛りの私たちの青春をさびしく過ごすなんて……。";
+	end;
+OnTalk3:
+	unittalk "ゲフェン娘 : はあ……そうだね。";
+	end;
+OnTalk4:
+	unittalk "ゲフェン娘 : え？　どこ？　どこ？";
+	end;
+OnTalk5:
+	unittalk "ゲフェン娘 : あれ、絶対あたしに言ったのよ！";
+	end;
+OnTalk6:
+	unittalk "ゲフェン娘 : それはあなたが専門じゃない！　早く話しかけてみてよ！";
+	end;
+OnTalk7:
+	unittalk "ゲフェン娘 : もしかして彼女?!";
+	end;
+OnTalk8:
+	unittalk "ゲフェン娘 : ただの友達みたい！";
+	end;
+OnTalk9:
+	unittalk "ゲフェン娘 : しょせんこんなオチだと思ったわよ……。";
+	end;
+OnTalk10:
+	unittalk "ゲフェン娘 : 私たちの友情よ、永遠に！";
+	end;
+}
+
+1@gef.gat,75,82,4	script	ゲフェン娘#a5	92,{/* 83925 */
+	end;
+OnTalk1:
+	unittalk "ゲフェン娘 : ゲフェンに来る冒険者にはいい男もいるはずよ！　逆ナンパするのよ！";
+	end;
+OnTalk2:
+	unittalk "ゲフェン娘 : いいえ、希望を捨ててはいけない……あきらめないで！　みんな！";
+	end;
+OnTalk3:
+	unittalk "ゲフェン娘 : うん？　え！　あっち！　あっちにいい男！";
+	end;
+OnTalk4:
+	unittalk "ゲフェン娘 : ほら！　あの人、あの人！";
+	end;
+OnTalk5:
+	unittalk "ゲフェン娘 : キャー！　かっこいいわ！";
+	end;
+OnTalk6:
+	unittalk "ゲフェン娘 : ど、どうしよ……話しかけてみる？";
+	end;
+OnTalk7:
+	unittalk "ゲフェン娘 : !!　……誰かを待ってるみたい。";
+	end;
+OnTalk8:
+	unittalk "ゲフェン娘 : 良かった！　男よ。";
+	end;
+OnTalk9:
+	unittalk "ゲフェン娘 : 私たちには縁なんてないみたい……。";
+	end;
+OnTalk10:
+	unittalk "ゲフェン娘 : 私たちの友情よ、永遠に！";
+	end;
+}
+
+1@gef.gat,68,79,6	script	イケメン冒険者#a6	751,{/* 83926 */
+	end;
+OnTalk1:
+	unittalk "イケメン冒険者 : さすがに魔法大会だからかな……かわいい人が多いな……。";
+	end;
+OnTalk2:
+	unittalk "イケメン冒険者 : もうそろそろ来るはずなんだけどな……。";
+	end;
+OnTalk3:
+	unittalk "イケメン冒険者 : 全然！　そんなことないよ、マイハニー！";
+	end;
+}
+
+1@gef.gat,70,77,2	script	男冒険者#a7	869,{/* 83927 */
+	end;
+OnTalk1:
+	unittalk "男冒険者 : ごめん、待たせた？";
+	end;
+OnTalk2:
+	unittalk "男冒険者 : ダーリン……。";
+	end;
+OnTimer1000:
+	hideonnpc getmdnpcname("イケメン冒険者#a6"); //76148
+	hideonnpc getmdnpcname("男冒険者#a7"); //76149
+	end;
+OnTimer2000:
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk1";
+	end;
+OnTimer4000:
+	donpcevent getmdnpcname("ゲフェン娘#a4")+"::OnTalk1";
+	end;
+OnTimer6000:
+	donpcevent getmdnpcname("ゲフェン娘#a5")+"::OnTalk1";
+	end;
+OnTimer8000:
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk2";
+	end;
+OnTimer10000:
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk3";
+	end;
+OnTimer12000:
+	donpcevent getmdnpcname("ゲフェン娘#a4")+"::OnTalk2";
+	end;
+OnTimer14000:
+	donpcevent getmdnpcname("ゲフェン娘#a5")+"::OnTalk2";
+	end;
+OnTimer16000:
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk4";
+	donpcevent getmdnpcname("ゲフェン娘#a4")+"::OnTalk3";
+	end;
+OnTimer18000:
+	donpcevent getmdnpcname("ゲフェン娘#a5")+"::OnTalk3";
+	end;
+OnTimer20000:
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk5";
+	donpcevent getmdnpcname("ゲフェン娘#a4")+"::OnTalk4";
+	end;
+OnTimer21000:
+	donpcevent getmdnpcname("ゲフェン娘#a5")+"::OnTalk4";
+	hideoffnpc getmdnpcname("イケメン冒険者#a6"); //76148
+	end;
+OnTimer23000:
+	donpcevent getmdnpcname("イケメン冒険者#a6")+"::OnTalk1";
+	end;
+OnTimer24000:
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk6";
+	donpcevent getmdnpcname("ゲフェン娘#a4")+"::OnTalk5";
+	donpcevent getmdnpcname("ゲフェン娘#a5")+"::OnTalk5";
+	end;
+OnTimer26000:
+	donpcevent getmdnpcname("ゲフェン娘#a5")+"::OnTalk6";
+	end;
+OnTimer28000:
+	donpcevent getmdnpcname("ゲフェン娘#a4")+"::OnTalk6";
+	end;
+OnTimer30000:
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk7";
+	end;
+OnTimer32000:
+	donpcevent getmdnpcname("イケメン冒険者#a6")+"::OnTalk2";
+	end;
+OnTimer34000:
+	donpcevent getmdnpcname("ゲフェン娘#a5")+"::OnTalk7";
+	end;
+OnTimer36000:
+	donpcevent getmdnpcname("ゲフェン娘#a4")+"::OnTalk7";
+	end;
+OnTimer38000:
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk8";
+	hideoffnpc getmdnpcname("男冒険者#a7"); //76149
+	end;
+OnTimer40000:
+	donpcevent getmdnpcname("男冒険者#a7")+"::OnTalk1";
+	end;
+OnTimer42000:
+	donpcevent getmdnpcname("ゲフェン娘#a5")+"::OnTalk8";
+	end;
+OnTimer44000:
+	donpcevent getmdnpcname("ゲフェン娘#a4")+"::OnTalk8";
+	end;
+OnTimer46000:
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk9";
+	end;
+OnTimer48000:
+	donpcevent getmdnpcname("イケメン冒険者#a6")+"::OnTalk3";
+	emotion 3,getmdnpcname("イケメン冒険者#a6"); //76148
+	end;
+OnTimer49000:
+	emotion 23, getmdnpcname("ゲフェン娘#a3"); //76090
+	emotion 23, getmdnpcname("ゲフェン娘#a4"); //76091
+	emotion 23, getmdnpcname("ゲフェン娘#a5"); //76147
+	end;
+OnTimer51000:
+	emotion 3, getmdnpcname("イケメン冒険者#a6"); //76148
+	donpcevent getmdnpcname("男冒険者#a7")+"::OnTalk2";
+	emotion 3, getmdnpcname("男冒険者#a7"); //76149
+	end;
+OnTimer53000:
+	donpcevent getmdnpcname("ゲフェン娘#a5")+"::OnTalk9";
+	end;
+OnTimer54000:
+	emotion 3, getmdnpcname("イケメン冒険者#a6"); //76148
+	end;
+OnTimer55000:
+	donpcevent getmdnpcname("ゲフェン娘#a4")+"::OnTalk9";
+	emotion 3, getmdnpcname("男冒険者#a7"); //76149
+	end;
+OnTimer57000:
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk10";
+	emotion 3, "イケメン冒険者#a6"; //76148
+	end;
+OnTimer58000:
+	emotion 3, getmdnpcname("男冒険者#a7"); //76149
+	donpcevent getmdnpcname("ゲフェン娘#a3")+"::OnTalk10";
+	emotion 28, getmdnpcname("ゲフェン娘#a3"); //76090
+	donpcevent getmdnpcname("ゲフェン娘#a4")+"::OnTalk10";
+	emotion 28, getmdnpcname("ゲフェン娘#a4"); //76091
+	donpcevent getmdnpcname("ゲフェン娘#a5")+"::OnTalk10";
+	emotion 28, getmdnpcname("ゲフェン娘#a5"); //76147
+	end;
+OnTimer60000:
+	emotion 3, getmdnpcname("イケメン冒険者#a6"); //76148
+	end;
+OnTimer61000:
+	emotion 3, getmdnpcname("男冒険者#a7"); //76149
+	end;
+OnTimer64000:
+	emotion 3, getmdnpcname("男冒険者#a7"); //76149
+	end;
+OnTimer90000:
+OnStart:
+	initnpctimer;
+	end;
+}
+
+1@gef.gat,42,102,6	script	ゲフェン住人#a8	50,{/* 83928 */
+	mes "[ゲフェン住人]";
+	mes "魔法大会の季節は観光客で賑わうな！";
+	close;
+}
+
+1@gef.gat,103,100,6	script	ゲフェン住人#a9	54,{/* 83929 */
+	mes "[ゲフェン住人]";
+	mes "おなかへったな～。";
+	close;
+}
+
+1@gef.gat,128,93,4	script	ゲフェン住人#a10	979,{/* 83930 */
+	mes "[ゲフェン住人]";
+	mes "大会参加者の選手さんかい？";
+	mes "大会を盛り上げてくれて";
+	mes "ありがとうね～！";
+	close;
+}
+
+1@gef.gat,130,196,6	script	魔法大会観覧者#c5	46,{/* 83931 */
+	mes "[魔法大会観覧者]";
+	mes "!!";
+	mes "なんと！　魔法のような花火だな！";
+	mes "どんな仕組みで動いているのか";
+	mes "気になるぞ……。";
+	close;
+}
+
+1@gef.gat,137,190,6	script	魔法大会観覧者#c6	67,{/* 83932 */
+	mes "[魔法大会観覧者]";
+	mes "おばあちゃん！";
+	mes "綺麗な花火が沢山あがってるよ！";
+	close;
+}
+
+1@gef.gat,149,196,6	script	魔法大会観覧者#c8	47,{/* 83933 */
+	mes "[魔法大会観覧者]";
+	mes "人ごみは苦手だけど、";
+	mes "魔法大会は見たい……。";
+	mes "私はどうしたらいいんだ！";
+	close;
+}
+
+1@gef.gat,136,188,6	script	魔法大会観覧者#c10	771,{/* 83934 */
+	mes "[魔法大会観覧者]";
+	mes "ホホホ……";
+	mes "そんなにはしゃいで、";
+	mes "転ばないようにね。";
+	close;
+}
+
+1@gef.gat,110,195,4	script	魔法大会観覧者#c12	49,{/* 83935 */
+	mes "[魔法大会観覧者]";
+	mes "賑わってるな～。";
+	close;
+}
+
+1@gef.gat,104,189,4	script	魔法大会観覧者#c14	66,{/* 83936 */
+	mes "[魔法大会観覧者]";
+	mes "どうしよう～。";
+	mes "友達とはぐれちゃったよ～。";
+	close;
+}
+
+1@gef.gat,94,194,4	script	魔法大会観覧者#c16	68,{/* 83937 */
+	mes "[魔法大会観覧者]";
+	mes "さすが魔法大会！";
+	mes "すごいな～、";
+	mes "そこら中に魔法の花火があがってる！";
+	close;
+}
+
+1@gef.gat,52,155,6	script	魔法大会観覧者#c28	69,{/* 83938 */
+	mes "[魔法大会観覧者]";
+	mes "あの人の髪色ステキ！";
+	mes "わたしも染めちゃおうかしら～。";
+	close;
+}
+
+1@gef.gat,55,142,4	script	魔法大会観覧者#c30	70,{/* 83939 */
+	mes "[魔法大会観覧者]";
+	mes "お兄様！　早くいらしてくださいな！";
+	close;
+}
+
+1@gef.gat,58,146,4	script	魔法大会観覧者#c32	51,{/* 83940 */
+	mes "[魔法大会観覧者]";
+	mes "ちょ、ちょっとまってくれよ～！";
+	mes "楽器が重くて走れないんだ～！";
+	close;
+}
+
+1@gef.gat,45,149,6	script	魔法大会観覧者#c36	71,{/* 83941 */
+	mes "[魔法大会観覧者]";
+	mes "!!";
+	mes "なんだか視線を感じるわ！";
+	mes "殿方に見られてるのかしら！";
+	close;
+}
+
+1@gef.gat,44,133,6	script	魔法大会観覧者#c37	52,{/* 83942 */
+	mes "[魔法大会観覧者]";
+	mes "ウォオオオ～！";
+	mes "ワシも参加したかったぞ～！";
+	close;
+}
+
+1@gef.gat,45,126,6	script	魔法大会観覧者#c38	48,{/* 83943 */
+	mes "[魔法大会観覧者]";
+	mes "こんにちは。";
+	mes "絶好の魔法大会日和ですね。";
+	close;
+}
+
+1@gef.gat,44,118,6	script	魔法大会観覧者#c39	73,{/* 83944 */
+	mes "[魔法大会観覧者]";
+	mes "あなたも魔法大会には初めて来たの？";
+	close;
+}
+
+1@gef.gat,55,113,4	script	魔法大会観覧者#c40	74,{/* 83945 */
+	mes "[魔法大会観覧者]";
+	mes "お祭りはいくつになっても心躍るわ～！";
+	close;
+}
+
+1@gef.gat,50,107,6	script	魔法大会観覧者#c41	54,{/* 83946 */
+	mes "[魔法大会観覧者]";
+	mes "いい天気だなー。";
+	close;
+}
+
+1@gef.gat,44,95,6	script	魔法大会観覧者#c42	55,{/* 83947 */
+	mes "[魔法大会観覧者]";
+	mes "次はどこに行こうかのう。";
+	mes "賑やかで楽しいのう～。";
+	close;
+}
+
+1@gef.gat,52,83,6	script	魔法大会観覧者#c43	56,{/* 83948 */
+	mes "[魔法大会観覧者]";
+	mes "シッ！　静かに！";
+	mes "私は観覧者に紛れて、";
+	mes "ここの警備をしているのだ。";
+	mes "気づかれないよう協力してくれ。";
+	close;
+}
+
+1@gef.gat,72,65,6	script	魔法大会観覧者#c44	57,{/* 83949 */
+	mes "[魔法大会観覧者]";
+	mes "おやおや！　君は！";
+	mes "……ん？";
+	mes "おお、すまない。人違いの様だ。";
+	mes "知り合いの冒険者によく似ている。";
+	close;
+}
+
+1@gef.gat,83,60,6	script	魔法大会観覧者#c45	75,{/* 83950 */
+	mes "[魔法大会観覧者]";
+	mes "あれ～……。";
+	mes "二人ともいつの間にか";
+	mes "いなくなっちゃった……。";
+	mes "はぐれちゃったかなぁ。";
+	close;
+}
+
+1@gef.gat,94,68,6	script	魔法大会観覧者#c46	76,{/* 83951 */
+	mes "[魔法大会観覧者]";
+	mes "どこ行っちゃったんだろう……。";
+	mes "あっ、あそこ見て！";
+	mes "あの子じゃない？";
+	close;
+}
+
+1@gef.gat,97,66,4	script	魔法大会観覧者#c47	77,{/* 83952 */
+	mes "[魔法大会観覧者]";
+	mes "ほんと！　あの子だわ！";
+	mes "やっと見つけた～！";
+	mes "こう人が多いとはぐれちゃうね。";
+	mes "気を付けないと！";
+	close;
+}
+
+1@gef.gat,106,56,6	script	魔法大会観覧者#c48	78,{/* 83953 */
+	mes "[魔法大会観覧者]";
+	mes "お祭りはいいわねぇ～。";
+	mes "若者が多くて活気があるわねぇ～。";
+	mes "私も若返っちゃうわぁ～。";
+	close;
+}
+
+1@gef.gat,134,63,4	script	魔法大会観覧者#c49	58,{/* 83954 */
+	mes "[魔法大会観覧者]";
+	mes "あっ、あの娘！";
+	mes "かわいいなぁ、ひとりかなぁ。";
+	mes "声かけてみようかなぁ……。";
+	close;
+}
+
+1@gef.gat,145,47,4	script	魔法大会観覧者#c50	106,{/* 83955 */
+	mes "[魔法大会観覧者]";
+	mes "おや？　参加者の方ですか？";
+	mes "私は観覧者に変装して";
+	mes "ここの警備をしているのですよ。";
+	mes "ほかのお客様には内緒ですよ。";
+	close;
+}
+
+1@gef.gat,154,55,4	script	魔法大会観覧者#c51	59,{/* 83956 */
+	mes "[魔法大会観覧者]";
+	mes "あなたも大会の参加者ですか？";
+	mes "カッコイイなぁ……！";
+	mes "僕も次は頑張って参加してみようかな！";
+	close;
+}
+
+1@gef.gat,147,65,5	script	魔法大会観覧者#c52	60,{/* 83957 */
+	mes "[魔法大会観覧者]";
+	mes "麗しい女性がいらっしゃいますなぁ。";
+	mes "おっと、いけないいけない。";
+	mes "聖職者たるもの、";
+	mes "女性をそのような目で";
+	mes "みてはいけませんね。";
+	close;
+}
+
+1@gef.gat,163,76,4	script	魔法大会観覧者#c53	79,{/* 83958 */
+	mes "[魔法大会観覧者]";
+	mes "神父様ったら、";
+	mes "どこにいっちゃったんだろう。";
+	mes "綺麗な女性が好きだから、";
+	mes "女性の多い所にいると思うんだけど。";
+	close;
+}
+
+1@gef.gat,167,68,4	script	魔法大会観覧者#c54	80,{/* 83959 */
+	mes "[魔法大会観覧者]";
+	mes "食事もおいしいし、";
+	mes "魔法大会は楽しいねぇ！";
+	mes "まだまだ食べちゃうぞ～！";
+	close;
+}
+
+1@gef.gat,175,74,4	script	魔法大会観覧者#c55	947,{/* 83960 */
+	mes "[魔法大会観覧者]";
+	mes "お主はもう大会参加者に会ったか？";
+	mes "今年の魔法大会は";
+	mes "つわものぞろいらしいぞ！";
+	close;
+}
+
+1@gef.gat,180,84,4	script	魔法大会観覧者#c56	53,{/* 83961 */
+	mes "[魔法大会観覧者]";
+	mes "こんにちは！";
+	mes "魔法大会、楽しんでる？";
+	mes "私はとっても楽しいわ！";
+	mes "ちょっと遠かったけど、";
+	mes "頑張って来た甲斐があるわ！";
+	close;
+}
+
+1@gef.gat,189,97,4	script	魔法大会観覧者#c57	62,{/* 83962 */
+	mes "[魔法大会観覧者]";
+	mes "わーい！";
+	mes "一緒に遊ぼうよー！";
+	close;
+}
+
+1@gef.gat,194,110,4	script	魔法大会観覧者#c58	107,{/* 83963 */
+	mes "[魔法大会観覧者]";
+	mes "うう～ん、腹が減って動けん！";
+	mes "しかし、この店には";
+	mes "鍋しか売っていない！";
+	mes "うう～ん……。";
+	close;
+}
+
+1@gef.gat,185,107,6	script	魔法大会観覧者#c59	108,{/* 83964 */
+	mes "[魔法大会観覧者]";
+	mes "魔法大会が見たくて";
+	mes "こっそり抜け出してきたのだ！";
+	mes "どうだ、私の完璧な変装。";
+	mes "誰にもばれるまい！";
+	close;
+}
+
+1@gef.gat,189,120,4	script	魔法大会観覧者#c60	61,{/* 83965 */
+	mes "[魔法大会観覧者]";
+	mes "あっ、あなた！";
+	mes "王様の恰好をした変なおじさんを";
+	mes "見かけませんでしたか?!";
+	close;
+}
+
+1@gef.gat,152,120,4	script	魔法大会観覧者#c62	123,{/* 83967 */
+	mes "[魔法大会観覧者]";
+	mes "たのしいな～！";
+	mes "次はどっちにいこう！";
+	close;
+}
+
+1@gef.gat,138,110,4	script	魔法大会観覧者#c63	90,{/* 83968 */
+	mes "[魔法大会観覧者]";
+	mes "見て、この花火！";
+	mes "こんなに近くで燃えているのに、";
+	mes "全く熱くないのよ。";
+	mes "魔法ってすごいわね。";
+	close;
+}
+
+1@gef.gat,128,99,4	script	魔法大会観覧者#c64	91,{/* 83969 */
+	mes "[魔法大会観覧者]";
+	mes "こんにちは！";
+	mes "私ゲフェンって初めて来たの！";
+	mes "ステキな街ね！";
+	close;
+}
+
+1@gef.gat,105,109,6	script	魔法大会観覧者#c65	92,{/* 83970 */
+	mes "[魔法大会観覧者]";
+	mes "うわぁ……。";
+	mes "人が多くて目が回りそう……。";
+	close;
+}
+
+1@gef.gat,96,122,6	script	魔法大会観覧者#c66	93,{/* 83971 */
+	mes "[魔法大会観覧者]";
+	mes "こんにちは！";
+	mes "お祭りたのしいねぇ！";
+	close;
+}
+
+1@gef.gat,132,137,6	script	魔法大会観覧者#c67	920,{/* 83972 */
+	mes "[魔法大会観覧者]";
+	mes "こんなに人がいるなんて！";
+	mes "魔法大会って人気なんですね。";
+	close;
+}
+
+1@gef.gat,141,132,4	script	魔法大会観覧者#c68	806,{/* 83973 */
+	mes "[魔法大会観覧者]";
+	mes "おやおや、冒険者さん。";
+	mes "ばれてしまいましたか？";
+	mes "私は観覧者に変装して";
+	mes "ここの警備をしているのですよ。";
+	mes "怪しい人物がいたら教えてくださいね。";
+	close;
+}
+
+1@gef.gat,124,72,4	script	魔法大会観覧者#c69	807,{/* 83974 */
+	mes "[魔法大会観覧者]";
+	mes "こんにちは、いいお天気ですね。";
+	mes "お祭りですからね。";
+	mes "晴れて良かったです。";
+	close;
+}
+
+1@gef.gat,130,49,6	script	魔法大会観覧者#c70	808,{/* 83975 */
+	mes "[魔法大会観覧者]";
+	mes "あなた強そうですね。";
+	mes "魔法大会の参加者の方ですか？";
+	mes "私とちょっと";
+	mes "肩慣らししませんか？";
+	mes "ハハハ……。冗談ですよ。";
+	close;
+}
+
+1@gef.gat,127,196,0	script	#魔法大会花火_1	139,{/* 83977 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 30; //65331
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 29; //65331
+	end;
+}
+
+1@gef.gat,146,175,0	script	#魔法大会花火_2	139,{/* 83978 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 62; //65332
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 22; //65332
+	end;
+}
+
+1@gef.gat,182,163,0	script	#魔法大会花火_3	139,{/* 83979 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 89; //65333
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 74; //65333
+	end;
+}
+
+1@gef.gat,183,126,0	script	#魔法大会花火_4	139,{/* 83980 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 97; //65334
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 92; //65334
+	end;
+}
+
+1@gef.gat,194,89,0	script	#魔法大会花火_5	139,{/* 83981 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 234; //65335
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 225; //65335
+	end;
+}
+
+1@gef.gat,141,56,0	script	#魔法大会花火_6	139,{/* 83982 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 256; //65336
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 258; //65336
+	end;
+}
+
+1@gef.gat,127,49,0	script	#魔法大会花火_7	139,{/* 83983 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 257; //65337
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 244; //65337
+	end;
+}
+
+1@gef.gat,123,75,0	script	#魔法大会花火_8	139,{/* 83984 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 92; //65338
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 29; //65338
+	end;
+}
+
+1@gef.gat,135,111,0	script	#魔法大会花火_9	139,{/* 83985 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 62; //65339
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 30; //65339
+	end;
+}
+
+1@gef.gat,134,145,0	script	#魔法大会花火_10	139,{/* 83986 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 234; //65340
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 89; //65340
+	end;
+}
+
+1@gef.gat,90,197,0	script	#魔法大会花火_b1	139,{/* 83987 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 28; //65341
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 258; //65341
+	end;
+}
+
+1@gef.gat,71,181,0	script	#魔法大会花火_b2	139,{/* 83988 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 97; //65342
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 29; //65342
+	end;
+}
+
+1@gef.gat,62,147,0	script	#魔法大会花火_b3	139,{/* 83989 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 195; //65343
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 116; //65343
+	end;
+}
+
+1@gef.gat,59,125,0	script	#魔法大会花火_b4	139,{/* 83990 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 32; //65344
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 62; //65344
+	end;
+}
+
+1@gef.gat,62,91,0	script	#魔法大会花火_b5	139,{/* 83991 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 92; //65345
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 30; //65345
+	end;
+}
+
+1@gef.gat,98,58,0	script	#魔法大会花火_b6	139,{/* 83992 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 225; //65346
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 234; //65346
+	end;
+}
+
+1@gef.gat,112,49,0	script	#魔法大会花火_b7	139,{/* 83993 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 28; //65347
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 89; //65347
+	end;
+}
+
+1@gef.gat,116,75,0	script	#魔法大会花火_b8	139,{/* 83994 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 257; //65348
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 94; //65348
+	end;
+}
+
+1@gef.gat,107,111,0	script	#魔法大会花火_b9	139,{/* 83995 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 244; //65349
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 255; //65349
+	end;
+}
+
+1@gef.gat,106,145,0	script	#魔法大会花火_b10	139,{/* 83996 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer7000:
+	misceffect 92; //65350
+	end;
+OnTimer20000:
+	initnpctimer;
+	misceffect 195; //65350
+	end;
+}
+
+1@gef.gat,124,65,4	script	カプラ職員#gef	114,{/* 83997 */
+	mes "[カプラ職員]";
+	mes "いらっしゃいませ";
+	mes "カプラサービスは";
+	mes "いつも皆様のそばにいます。";
+	mes "何をお手伝いいたしましょう？";
+	next;
+	switch(select("倉庫サービス -> 40zeny","カートサービス","終了")) {
+	case 1:
+		if(Zeny < 40) {
+			mes "[カプラ職員]";
+			mes "お客様、お金が足りません。";
+			mes "倉庫利用料金は40Zenyです。";
+			close;
+		}
+		mes "[カプラ職員]";
+		mes "倉庫を開きます。";
+		close2;
+		set Zeny,Zeny-40;
+		openstorage;
+		end;
+	case 2:
+		if(getbaseclass(Class) != CLASS_MC) {
+			mes "[カプラ職員]";
+			mes "申し訳ございません。";
+			mes "カートは商人とその上位職専用の";
+			mes "サービスです。";
+			close;
+		}
+		if(checkcart()) {
+			mes "[カプラ職員]";
+			mes "お客様は現在カートを";
+			mes "利用されています。";
+			close;
+		}
+		mes "[カプラ職員]";
+		mes "カート利用料金は800Zenyです。";
+		mes "また、カートを利用するには";
+		mes "「プッシュカート」スキルが必要です。";
+		mes "そのスキルがないとカートを利用";
+		mes "できずにお金だけ消えてしまいます。";
+		mes "準備はよろしいですか？";
+		next;
+		if(select("利用する","取り消し")==2) {
+			mes "[カプラ職員]";
+			mes "ありがとうございました。";
+			mes "またご利用くださいませ。";
+			close;
+		}
+		if(Zeny<800) {
+			mes "[カプラ職員]";
+			mes "お客様、お金が足りません。";
+			mes "カート利用料金は800Zenyです。";
+			close;
+		}
+		set Zeny,Zeny-800;
+		set KAFRA_PIT,KAFRA_PIT+80;
+		setcart;
+		close;
+	case 3:
+		mes "[カプラ職員]";
+		mes "我々カプラサービスは、より完璧な";
+		mes "サービスと管理業務を目指し";
+		mes "お客様が安心してご利用いただけるよう";
+		mes "いつも最善を尽くしています。";
+		next;
+		mes "[カプラ職員]";
+		mes "（株）カプラサービスをご利用いただき";
+		mes "ありがとうございました。";
+		close;
+	}
+}
+
+1@gef.gat,193,152,4	shop	テイミング商人#gef	124,537:1000,643:3000,10013:1500,10014:2000,6095:1000,6096:1000,6097:1000,6098:1000,6099:1000,6100:1000,6104:1000,6105:1000,6106:1000,6107:1000,6108:1000,6109:1000,6110:1000,6111:1000,6112:1000,6115:1000	//83998
+1@gef.gat,196,111,3	shop	料理材料商人#gef	85,7482:200	//83999
+
+1@gef.gat,120,34,0	script	#大会入口	45,1,1,{/* 84000 */
+	hideonnpc getmdnpcname("#大会入口"); //84000
+	set GMT_1QUE,10;
+	warp getmdmapname("1@ge_st.gat"),104,50;
+	end;
+}
+
+1@gef.gat,98,141,0	warp	#gef_a8	1,1,1@gef_in.gat,28,160	//84001
+1@gef.gat,182,59,0	warp	#gef_a1	1,1,1@gef_in.gat,106,177	//84002
+1@gef.gat,43,85,0	warp	#gef_a2	1,1,1@gef_in.gat,70,138	//84003
+
+1@gef.gat,119,213,0	script	#大会出口	45,1,1,{/* 84004 (hide)*/
+	mes "‐ここから次元の狭間へ";
+	mes "　移動することができるようです。";
+	mes "　魔法大会を終了して";
+	mes "　次元の狭間、時の通路に";
+	mes "　戻りますか？‐";
+	next;
+	if(select("もう少し見回ってみる","次元の狭間に戻る") == 1) {
+		mes "‐あなたはその場を離れた‐";
+		close;
+	}
+	warp "dali.gat",94,144;
+	end;
+}
+
+1@gef.gat,115,201,4	script	不思議な看板#1	857,{/* 84005 */
+	mes "‐何を見ようか‐";
+	next;
+	switch(select("キャラクター","応援")) {
+	case 1:
+		while(1) {
+			switch(select("アルヒ","ディオ・アネモス","フェモン","オルドル","ブルート・ハゼ","黒魔","イフォドス","レチェニエ","ユメヒメ","ジュー","ディワイ","フェイ・カナビアン","見るのをやめる")) {
+			case 1:
+				mes "[不思議な看板]";
+				mes "アルヒ";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 2:
+				mes "[不思議な看板]";
+				mes "ディオ・アネモス";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 3:
+				mes "[不思議な看板]";
+				mes "フェモン";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 4:
+				mes "[不思議な看板]";
+				mes "オルドル";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 5:
+				mes "[不思議な看板]";
+				mes "ブルート・ハゼ";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 6:
+				mes "[不思議な看板]";
+				mes "黒魔";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 7:
+				mes "[不思議な看板]";
+				mes "イフォドス";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 8:
+				mes "[不思議な看板]";
+				mes "レチェニエ";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 9:
+				mes "[不思議な看板]";
+				mes "ユメヒメ";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 10:
+				mes "[不思議な看板]";
+				mes "ジュー";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 11:
+				mes "[不思議な看板]";
+				mes "ディワイ";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 12:
+				mes "[不思議な看板]";
+				mes "フェイ・カナビアン";
+				mes "　";
+				mes "まだ聞く事が出来ない話が";
+				mes "　4　ほどあるようだ。";
+				break;
+			case 13:
+				mes "‐見るのをやめた‐";
+				close;
+			}
+			next;
+		}
+	case 2:
+		mes "[不思議な看板]";
+		mes "‐応援状況‐";
+		setarray '@str$,"未確認","未確認","未確認","未確認","未確認";
+		if(checkquest(114701) & 0x8)
+			set '@str$[1],"変な歌を歌う少女";
+		if(checkquest(114702) & 0x8)
+			set '@str$[2],"戦い好きのマスター";
+		if(checkquest(114703) & 0x8)
+			set '@str$[3],"夢中な猫";
+		next;
+		switch(select('@str$[0],'@str$[1],'@str$[2],'@str$[3],'@str$[4],"見るのをやめる")) {
+		case 1:
+			mes "‐まだ見たことがない人のようだ‐";
+			close;
+		case 2:
+			if(checkquest(114701) & 0x8 == 0) {
+				mes "‐まだ見たことがない人のようだ‐";
+				close;
+			}
+			mes "‐あなたは既に";
+			mes "　変な歌を歌う少女の";
+			mes "　応援を受けた事があるようだ‐";
+			close;
+		case 3:
+			if(checkquest(114702) & 0x8 == 0) {
+				mes "‐まだ見たことがない人のようだ‐";
+				close;
+			}
+			mes "‐あなたは既に";
+			mes "　戦い好きのマスターの";
+			mes "　応援を受けた事があるようだ‐";
+			close;
+		case 4:
+			if(checkquest(114703) & 0x8 == 0) {
+				mes "‐まだ見たことがない人のようだ‐";
+				close;
+			}
+			mes "‐あなたは既に";
+			mes "　夢中な猫の";
+			mes "　応援を受けた事があるようだ‐";
+			close;
+		case 5:
+			mes "‐まだ見たことがない人のようだ‐";
+			close;
+		case 6:
+			mes "‐見るのをやめた‐";
+			close;
+		}
+	}
+}
+
+1@gef_in.gat,110,172,0	script	クリストフ・ジュニア #1	63,{/* 65360 */
+	mes "[クリストフ・ジュニア]";
+	mes "^8B4513クリストフ家^000000の";
+	mes "鍛冶屋へようこそ。";
+	mes "ここでは精錬に関連した";
+	mes "全ての品物を販売したり";
+	mes "製作をしています。";
+	next;
+	mes "[クリストフ・ジュニア]";
+	mes "今はゲフェン祭の期間中につき";
+	mes "臨時休業となっています。";
+	mes "楽しいお祭が終わった後に";
+	mes "またお越しください。";
+	close;
+}
+
+1@gef_in.gat,106,181,0	warp	#gef_a3	1,1,1@gef.gat,178,63
+1@gef_in.gat,70,132,0	warp	#gef_a4	1,1,1@gef.gat,46,88
+1@gef_in.gat,70,158,0	warp	#gef_a5	1,1,1@gef_in.gat,70,146
+1@gef_in.gat,70,149,0	warp	#gef_a6	1,1,1@gef_in.gat,70,161
+1@gef_in.gat,28,156,0	warp	#gef_a7	1,1,1@gef.gat,101,138
+1@gef_in.gat,77,167,0	shop	道具商人#gefa	68,1750:1,611:40,501:50,502:200,503:550,504:1200,645:800,656:1500,601:60,602:300,2241:5000	//65366
+1@gef_in.gat,77,173,0	shop	魔法商人#gef	64,717:600,1601:50,1604:2500,1607:9500,1610:45000,2232:7500,2321:8000,2332:7000	//65367
+1@gef_in.gat,26,178,4	shop	防具商人#gef	66,2628:400,2101:500,2107:60000,2401:400,2501:1000,2230:50000,2301:10,2303:200,2305:1000,2321:8000,2332:7000	//65368
+1@gef_in.gat,30,178,4	shop	武器商人#gefa	47,1750:1,1751:3,1101:100,1701:1000,1201:50,1204:1250,1207:2400,1210:8500,1213:14000,1216:19500,1601:50,1604:2500,1607:9500,1610:45000	//65369
+1@gef_in.gat,22,171,7	shop	武器商人#gefb	84,1146:42000,1245:40000	//65370
+1@gef_in.gat,74,144,0	shop	商人#gef	66,911:160,910:40,912:480	//65371
+1@gef_in.gat,65,144,4	shop	道具商人#gefb	64,1092:3,1093:10	//65372
