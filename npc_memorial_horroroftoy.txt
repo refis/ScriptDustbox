@@ -1968,12 +1968,35 @@ xmas.gat,240,297,3	script	カーイン#1	713,{/* 63277 */
 			mes "また会おう。";
 			close;
 		}
+		if(getequipid(1) != 18848) {
+			mes "[カーイン]";
+			mes "あんたがかぶっているものは";
+			mes "瑞々しいバラじゃないな。";
+			mes "いった材料をちゃんと";
+			mes "用意してくれないのなら";
+			mes "この話はなしだな。";
+			close;
+		}
+		if(getequiprefinerycnt(1) < 9) {
+			mes "[カーイン]";
+			mes "あんたがかぶっている瑞々しいバラは";
+			mes "精錬値が足りていない。";
+			mes "精錬値が9以上ないと交換できないぞ。";
+			close;
+		}
+		//未調査
+		if(countitem(7642) < 1000) {
+			mes "[カーイン]";
+			mes "血塗られたコインが足りないな";
+			mes "1000枚用意しないと交換できないぞ";
+			close;
+		}
+		delitem 7642,1000;
+		delequip 1;
+		getitem 18849,1;
 		mes "[カーイン]";
-		mes "あんたがかぶっているものは";
-		mes "瑞々しいバラじゃないな。";
-		mes "いった材料をちゃんと";
-		mes "用意してくれないのなら";
-		mes "この話はなしだな。";
+		mes "ほらよ！";
+		mes "これがセリーヌのリボンだ！";
 		close;
 	case 4:
 		mes "[カーイン]";
@@ -2367,6 +2390,7 @@ OnMDInit:
 	hideonnpc getmdnpcname("#fac5wp");
 	hideonnpc getmdnpcname("#fac5wp2");
 	hideonnpc getmdnpcname("#fac6wp");
+	hideonnpc getmdnpcname("#jeton2");
 	hideonnpc getmdnpcname("非常口#exwp1");
 	for(set '@i,1;'@i<=10; set '@i,'@i+1)
 		hideonnpc getmdnpcname("作業員#xm_d"+'@i);
@@ -2748,34 +2772,34 @@ OnTimer1000:
 	hideonnpc getmdnpcname("#fac1bs");
 	end;
 OnTimer2000:
-	areamonster getmdmapname("1@xm_d.gat"),10,20,116,105,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
+	areamonster getmdmapname("1@xm_d.gat"),61,118,71,128,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
 	end;
 OnTimer3000:
-	areamonster getmdmapname("1@xm_d.gat"),10,20,116,105,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
+	areamonster getmdmapname("1@xm_d.gat"),61,118,71,128,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
 	end;
 OnTimer4000:
-	areamonster getmdmapname("1@xm_d.gat"),10,20,116,105,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
+	areamonster getmdmapname("1@xm_d.gat"),61,118,71,128,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
 	end;
 OnTimer5000:
-	areamonster getmdmapname("1@xm_d.gat"),10,20,116,105,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
+	areamonster getmdmapname("1@xm_d.gat"),61,118,71,128,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
 	end;
 OnTimer6000:
-	areamonster getmdmapname("1@xm_d.gat"),10,20,116,105,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
+	areamonster getmdmapname("1@xm_d.gat"),61,118,71,128,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
 	end;
 OnTimer7000:
-	areamonster getmdmapname("1@xm_d.gat"),10,20,116,105,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
+	areamonster getmdmapname("1@xm_d.gat"),61,118,71,128,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
 	end;
 OnTimer8000:
-	areamonster getmdmapname("1@xm_d.gat"),10,20,116,105,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
+	areamonster getmdmapname("1@xm_d.gat"),61,118,71,128,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
 	end;
 OnTimer9000:
-	areamonster getmdmapname("1@xm_d.gat"),10,20,116,105,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
+	areamonster getmdmapname("1@xm_d.gat"),61,118,71,128,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
 	end;
 OnTimer10000:
-	areamonster getmdmapname("1@xm_d.gat"),10,20,116,105,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
+	areamonster getmdmapname("1@xm_d.gat"),61,118,71,128,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
 	end;
 OnTimer11000:
-	areamonster getmdmapname("1@xm_d.gat"),10,20,116,105,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
+	areamonster getmdmapname("1@xm_d.gat"),61,118,71,128,"おもちゃ工場警備兵",2990,1,getmdnpcname("#alert1")+ "::OnKilled";
 	end;
 OnTimer60000:
 	killmonster getmdmapname("1@xm_d.gat"),getmdnpcname("#alert1")+"::OnKilled";
@@ -3983,19 +4007,19 @@ OnStart:
 	end;
 OnCheck:
 OnTimer10000:
-	//if('mob1) {
-	//	getunitxy('mob1,'@map$,'@x,'@y);
-	//	if('@x < 212 || '@y > 201 || '@y < 166)) {
-	//		announce "セリーヌ・キミ : ダメ！　この場所から離れちゃダメッ！",0x9,0xff6666;
-	//		set 'mob1,0;
-	//		killmonster getmdmapname("1@xm_d.gat"),getmdnpcname("xm_d#heal_c")+"::OnKilled1";
-	//		set 'mob2,0;
-	//		killmonster getmdmapname("1@xm_d.gat"),getmdnpcname("xm_d#heal_c")+"::OnKilled2";
-	//		hideoffnpc getmdnpcname("#kimion1"); //86904
-	//		hideoffnpc getmdnpcname("セリーヌ・キミ#2"); //86905
-	//		end;
-	//	}
-	//}
+	if('mob1) {
+		getmapxy('@map$,'@x,'@y,3,'mob1);
+		if('@x < 212 || '@y > 201 || '@y < 166)) {
+			announce "セリーヌ・キミ : ダメ！　この場所から離れちゃダメッ！",0x9,0xff6666;
+			set 'mob1,0;
+			killmonster getmdmapname("1@xm_d.gat"),getmdnpcname("xm_d#heal_c")+"::OnKilled1";
+			set 'mob2,0;
+			killmonster getmdmapname("1@xm_d.gat"),getmdnpcname("xm_d#heal_c")+"::OnKilled2";
+			hideoffnpc getmdnpcname("#kimion1"); //86904
+			hideoffnpc getmdnpcname("セリーヌ・キミ#2"); //86905
+			end;
+		}
+	}
 	if('mob1 && 'mob2) {
 		set 'mob1hp,getmobhp('mob1);
 		set 'mob2hp,getmobhp('mob2);
@@ -4041,41 +4065,33 @@ OnTimer21000:
 OnKilled1:
 	set 'mob1,0;
 	if('mob2 == 0) {
-		announce "セリーヌ・キミ : わたしを倒しても無駄だよ……。またわたしはこの工場にもどってくるんだから……。",0x9,0xff6666,0x190,15;
-		sleep 5000;
-		set '@user,getmapusers("this");
-		hideoffnpc getmdnpcname("xm_d_box#00");
-		setarray '@box,0,7,10,4,9,5,1,12,2,8,6,11,3;
-		for(set '@i,1;'@i<='@user; set '@i,'@i+1) {
-			hideoffnpc getmdnpcname("xm_d_box#"+'@box['@i]);
-		}
-		sleep 5000;
-		announce "キャサリンゼータ : !?　キミを退けたんですか!?　凄い……。とりあえず、その部屋の南西にある通路から、私がいる場所へきてください！",0x9,0xffff00,0x190,12;
-		hideoffnpc getmdnpcname("#fac6wp");
-		hideoffnpc getmdnpcname("キャサリンゼータ#6"); //55995
-		donpcevent getmdnpcname("xm_d_box#00")+"::OnStart";
+		donpcevent getmdnpcname("#finalbs_e")+"::OnStart";
 	}
 	end;
 OnKilled2:
 	set 'mob2,0;
 	if('mob1 == 0) {
-		announce "セリーヌ・キミ : わたしを倒しても無駄だよ……。またわたしはこの工場にもどってくるんだから……。",0x9,0xff6666,0x190,15;
-		sleep 5000;
-		set '@user,getmapusers("this");
-		hideoffnpc getmdnpcname("xm_d_box#00");
-		setarray '@box,0,7,10,4,9,5,1,12,2,8,6,11,3;
-		for(set '@i,1;'@i<='@user; set '@i,'@i+1) {
-			hideoffnpc getmdnpcname("xm_d_box#"+'@box['@i]);
-		}
-		sleep 5000;
-		announce "キャサリンゼータ : !?　キミを退けたんですか!?　凄い……。とりあえず、その部屋の南西にある通路から、私がいる場所へきてください！",0x9,0xffff00,0x190,12;
-		hideoffnpc getmdnpcname("#fac6wp");
-		hideoffnpc getmdnpcname("キャサリンゼータ#6"); //55995
-		donpcevent getmdnpcname("xm_d_box#00")+"::OnStart";
+		donpcevent getmdnpcname("#finalbs_e")+"::OnStart";
 	}
 	end;
 }
-1@xm_d.gat,1,5,3		script	#finalbs_e	844,{/* 55991 (hide)*/}
+1@xm_d.gat,1,5,3		script	#finalbs_e	844,{/* 55991 (hide)*/
+OnStart:
+	announce "セリーヌ・キミ : わたしを倒しても無駄だよ……。またわたしはこの工場にもどってくるんだから……。",0x9,0xff6666,0x190,15;
+	set '@user,getmapusers("this");
+	hideoffnpc getmdnpcname("xm_d_box#00");
+	hideoffnpc getmdnpcname("#fac6wp");
+	hideoffnpc getmdnpcname("#jeton2");
+	hideoffnpc getmdnpcname("キャサリンゼータ#6"); //55995
+	donpcevent getmdnpcname("xm_d_box#00")+"::OnStart";
+	setarray '@box,0,7,10,4,9,5,1,12,2,8,6,11,3;
+	for(set '@i,1;'@i<='@user; set '@i,'@i+1) {
+		hideoffnpc getmdnpcname("xm_d_box#"+'@box['@i]);
+	}
+	sleep 6000;
+	announce "キャサリンゼータ : !?　キミを退けたんですか!?　凄い……。とりあえず、その部屋の南西にある通路から、私がいる場所へきてください！",0x9,0xffff00,0x190,12;
+	end;
+}
 1@xm_d.gat,205,159,0	warp	#fac6wp	2,2,1@xm_d.gat,205,147
 1@xm_d.gat,218,145,0	script	#jeton2	139,5,5,{/* 55993 */
 	initnpctimer;

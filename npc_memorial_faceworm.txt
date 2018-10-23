@@ -77,9 +77,7 @@ payon.gat,157,54,5	script	年配の女性#pa0829	103,{/* 60507 */
 		mes "今はこれしか無くて……。";
 		mes "良かったら食べて頂戴。";
 		delitem 6650,1;
-		getitem 532,1;
-		getitem 538,1;
-		getitem 518,1;
+		getitem RAND_FOOD,3;
 		compquest 114655;
 		close;
 	}
@@ -237,9 +235,7 @@ payon.gat,161,54,3	script	異国的な商人#pa0829	99,{/* 60508 */
 		mes "アルバムのお礼にこれをどうぞ。";
 		mes "気に入って頂けると良いのですが……。";
 		delitem 6652,1;
-		getitem 522,1;
-		getitem 532,1;
-		getitem 559,1;
+		getitem RAND_FOOD,3;
 		compquest 114660;
 		close;
 	}
@@ -320,9 +316,7 @@ payon.gat,161,50,1	script	強そうに見える男#pa0829	88,{/* 60509 */
 			mes "ぜひ、憎き蛇を倒す為に";
 			mes "お役立てください。";
 			delitem 6653,1;
-			getitem 512,1;
-			getitem 544,1;
-			getitem 566,1;
+			getitem RAND_FOOD,3;
 			close;
 		}
 		mes "‐少し袋がくたびれた";
@@ -375,9 +369,7 @@ payon.gat,161,50,1	script	強そうに見える男#pa0829	88,{/* 60509 */
 		mes "ぜひ、憎き蛇を倒す為に";
 		mes "お役立てください。";
 		delitem 6653,1;
-		getitem 526,1;
-		getitem 550,1;
-		getitem 663,1;
+		getitem RAND_FOOD,3;
 		compquest 114665;
 		close;
 	}
@@ -474,9 +466,7 @@ payon.gat,139,68,4	script	薄暗い男#pa0829	795,{/* 60510 */
 		mes "キットンもっと嬉しい。^000000";
 		delitem 6651,1;
 		compquest 114670;
-		getitem 555,1;
-		getitem 551,1;
-		getitem 520,1;
+		getitem RAND_FOOD,3;
 		close;
 	}
 	mes "‐^0000ffすでに死んだ人の魂が、";
@@ -765,18 +755,23 @@ OnStart:
 	hideonnpc getmdnpcname("#虫5褒賞");
 	hideonnpc getmdnpcname("大商人の箱#1");
 
-	monster getmdmapname("1@face.gat"),0,0,"サベージ",1166,40;
-	monster getmdmapname("1@face.gat"),0,0,"天下大将軍",1277,70;
-	monster getmdmapname("1@face.gat"),0,0,"ビートル",1494,40;
+	areamonster getmdmapname("1@face.gat"),0,0,0,0,"サベージ",1166,40;
+	areamonster getmdmapname("1@face.gat"),0,0,0,0,"天下大将軍",1277,70;
+	areamonster getmdmapname("1@face.gat"),0,0,0,0,"ビートル",1494,40;
 	end;
 }
 
 1@face.gat,110,348,6	script	ケイオス#0	683,{/* 56414 */
-	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
-		// 未調査
-		close;
-	}
 	cutin "H_CHAOS01.bmp", 2;
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		mes "[ケイオス]";
+		mes "今はお前らの代表者と";
+		mes "話してる途中だから";
+		mes "待っててくれるか？";
+		close2;
+		cutin "H_CHAOS01.bmp", 255;
+		end;
+	}
 	mes "[ケイオス]";
 	mes "ん？　他の懸賞金ハンターが";
 	mes "ここに来るなんて話は";
@@ -969,7 +964,7 @@ OnTalk6:
 	mes "後にしてくれる？";
 	close2;
 	cutin "H_IRIS02.bmp", 255;
-	end
+	end;
 OnTalk1:
 	unittalk "アイリス : あー気持ちのいい風ー♪";
 	end;
@@ -1015,6 +1010,8 @@ OnTimer1000:
 OnStart:
 	initnpctimer;
 	end;
+OnTimer3600000:
+	end;
 OnStop:
 	stopnpctimer;
 	end;
@@ -1024,8 +1021,9 @@ OnStop:
 OnStart:
 	if('mob) end;
 	announce "アイリス : フェイスワームが逃げ始めた！　って、なにか巨大な影がこっちに向かってきてるよ！", 0x9, 0x00ffff, 0x190, 20, 0, 0;
-	set 'mob,callmonster(getmdmapname("1@face.gat"),145,74,"ダークフェイスワーム#1",2530,1,getmdnpcname("#ボス虫0")+"::OnKilled");
-	setmobmaxhp 'mob,2600000+getmapusers(getmdmapname("1@face.gat"))*200000;
+	set 'mob,callmonster(getmdmapname("1@face.gat"),145,74,"ダークフェイスワーム#1",2530,getmdnpcname("#ボス虫0")+"::OnKilled");
+	setmobhp 'mob,2600000+getmapusers(getmdmapname("1@face.gat"))*200000;
+	set 'mobmax,getmobhp('mob);
 	end;
 OnKilled:
 	set 'mob,0;
@@ -1045,18 +1043,19 @@ OnStop:
 	end;
 OnTimer1000:
 	set '@boss,getvariableofnpc('mob,getmdnpcname("#ボス虫0"));
+	set '@maxhp,getvariableofnpc('mobmax,getmdnpcname("#ボス虫0"));
 	if('@boss) {
-		set '@dummy,getmapxy('@map$,'@x,'@y,3,'boss);
-		set '@rate,getmobhp('@boss) / getmobmaxhp('@boss) * 100
+		set '@dummy,getmapxy('@map$,'@x,'@y,3,'@boss);
+		set '@rate,getmobhp('@boss) / '@maxhp * 100;
 		if('@rate > 80) {
-			set 'mob[0],callmonster(getmdmapname("1@face.gat"),'@x-4,'@y,"フェイスワームの卵",2540,1,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
-			set 'mob[1],callmonster(getmdmapname("1@face.gat"),'@x+4,'@y,"フェイスワームの卵",2540,1,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
+			set 'mob[0],callmonster(getmdmapname("1@face.gat"),'@x-4,'@y,"フェイスワームの卵",2540,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
+			set 'mob[1],callmonster(getmdmapname("1@face.gat"),'@x+4,'@y,"フェイスワームの卵",2540,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
 		}
 		else {
-			set 'mob[0],callmonster(getmdmapname("1@face.gat"),'@x-4,'@y,"フェイスワームの卵",2540,1,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
-			set 'mob[1],callmonster(getmdmapname("1@face.gat"),'@x+4,'@y,"フェイスワームの卵",2540,1,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
-			set 'mob[2],callmonster(getmdmapname("1@face.gat"),'@x,'@y+4,"フェイスワームの卵",2540,1,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
-			set 'mob[3],callmonster(getmdmapname("1@face.gat"),'@x,'@y+4,"フェイスワームの卵",2540,1,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
+			set 'mob[0],callmonster(getmdmapname("1@face.gat"),'@x-4,'@y,"フェイスワームの卵",2540,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
+			set 'mob[1],callmonster(getmdmapname("1@face.gat"),'@x+4,'@y,"フェイスワームの卵",2540,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
+			set 'mob[2],callmonster(getmdmapname("1@face.gat"),'@x,'@y-4,"フェイスワームの卵",2540,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
+			set 'mob[3],callmonster(getmdmapname("1@face.gat"),'@x,'@y+4,"フェイスワームの卵",2540,getmdnpcname("#ボス虫0_bc")+"::OnKilled");
 		}
 	}
 	end;
@@ -1066,24 +1065,40 @@ OnTimer12000:
 		for(set '@i,0;'@i<3;set '@i,'@i+1) {
 			if('mob['@i]) {
 				set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob['@i]);
+				if('@dummy == -1)
+					break;
 				monster '@map$,'@x,'@y,"フェイスワームの幼虫",2541,1;
 				set '@num,'@num+1;
 				set '@dummy,removemonster('mob['@i]);
 				set 'mob['@i],0;
 			}
 		}
-		announce "アイリス : ダークフェイスワームが卵を" +'@num+ "個食べて、元気を取り戻したみたい……。やっかいね……。", 0x9, 0xff00ee, 0x190, 18, 0, 0;
-		setmobhp '@boss,getmobhp('@boss)+50000*'@num;	// 未調査
+		if('@num > 0) {
+			announce "アイリス : ダークフェイスワームが卵を" +'@num+ "個食べて、元気を取り戻したみたい……。やっかいね……。", 0x9, 0xff00ee, 0x190, 18, 0, 0;
+			setmobhp '@boss,getmobhp('@boss)+50000*'@num;	// 未調査
+		}
 	}
 	end;
 OnTimer13000:
 	initnpctimer;
+	end;
+OnKilled:
 	end;
 }
 
 1@face.gat,149,92,0	warp	#虫1入口	2,2,1@face.gat,127,95	//56421
 
 1@face.gat,120,97,6	script	ケイオス#1	683,{/* 56422 */
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		// 未調査
+		mes "[ケイオス]";
+		mes "今はお前らの代表者と";
+		mes "話してる途中だから";
+		mes "待っててくれるか？";
+		close2;
+		cutin "H_CHAOS01.bmp", 255;
+		end;
+	}
 	cutin "H_CHAOS01.bmp", 2;
 	mes "[ケイオス]";
 	mes "もう追いついたのか。";
@@ -1231,6 +1246,8 @@ OnTimer1000:
 OnStart:
 	initnpctimer;
 	end;
+OnTimer3600000:
+	end;
 OnStop:
 	stopnpctimer;
 	end;
@@ -1240,8 +1257,8 @@ OnStop:
 OnStart:
 	if('mob) end;
 	announce "アイリス : フェイスワームが逃げ始めた！　って、なにか巨大な影がこっちに向かってきてるよ！", 0x9, 0x00ffff, 0x190, 20, 0, 0;
-	set 'mob,callmonster(getmdmapname("1@face.gat"),165,270,"ダークフェイスワーム#2",2530,1,getmdnpcname("#ボス虫1")+"::OnKilled");
-	setmobmaxhp 'mob,2600000+getmapusers(getmdmapname("1@face.gat"))*200000;
+	set 'mob,callmonster(getmdmapname("1@face.gat"),165,270,"ダークフェイスワーム#2",2530,getmdnpcname("#ボス虫1")+"::OnKilled");
+	setmobhp 'mob,2600000+getmapusers(getmdmapname("1@face.gat"))*200000;
 	end;
 OnKilled:
 	set 'mob,0;
@@ -1254,6 +1271,16 @@ OnKilled:
 1@face.gat,139,100,0	warp	#虫2入口	2,2,1@face.gat,155,113	//56428
 
 1@face.gat,153,113,7	script	ケイオス#2	683,{/* 56429 */
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		// 未調査
+		mes "[ケイオス]";
+		mes "今はお前らの代表者と";
+		mes "話してる途中だから";
+		mes "待っててくれるか？";
+		close2;
+		cutin "H_CHAOS01.bmp", 255;
+		end;
+	}
 	cutin "H_CHAOS01.bmp", 2;
 	mes "[ケイオス]";
 	mes "お前ら、随分と手慣れているな。";
@@ -1321,6 +1348,8 @@ OnTimer1000:
 OnStart:
 	initnpctimer;
 	end;
+OnTimer3600000:
+	end;
 OnStop:
 	stopnpctimer;
 	end;
@@ -1330,8 +1359,9 @@ OnStop:
 OnStart:
 	if('mob) end;
 	announce "アイリス : フェイスワームが逃げ始めた！　って、なにか巨大な影がこっちに向かってきてるよ！", 0x9, 0x00ffff, 0x190, 20, 0, 0;
-	set 'mob,callmonster(getmdmapname("1@face.gat"),277,305,"ダークフェイスワーム#3",2530,1,getmdnpcname("#ボス虫2")+"::OnKilled");
-	setmobmaxhp 'mob,2600000+getmapusers(getmdmapname("1@face.gat"))*200000;
+	set 'mob,callmonster(getmdmapname("1@face.gat"),277,305,"ダークフェイスワーム#3",2530,getmdnpcname("#ボス虫2")+"::OnKilled");
+	setmobhp 'mob,2600000+getmapusers(getmdmapname("1@face.gat"))*200000;
+	set 'mobmax,getmobhp('mob);
 	end;
 OnKilled:
 	set 'mob,0;
@@ -1351,21 +1381,22 @@ OnStop:
 	end;
 OnTimer8000:
 	set '@boss,getvariableofnpc('mob,getmdnpcname("#ボス虫2"));
+	set '@maxhp,getvariableofnpc('mobmax,getmdnpcname("#ボス虫2"));
 	if('@boss) {
-		set '@dummy,getmapxy('@map$,'@x,'@y,3,'boss);
-		set '@rate,getmobhp('@boss) / getmobmaxhp('@boss) * 100
+		set '@dummy,getmapxy('@map$,'@x,'@y,3,'@boss);
+		set '@rate,getmobhp('@boss) / '@maxhp * 100;
 		if('@rate > 80) {
 			setarray '@xr,3,3,3,3,1,1,1,1,-1,-1,-1,-1,-3,-3,-3,-3;
 			setarray '@yr,3,1,-1,-3,3,1,-1,-3,3,1,-1,-3,3,1,-1,-3;
-			for(set '@i,0;'@i<getarraysize('@x);set '@i,'@i+1) {
-				monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"猛毒袋",2531,1,getmdnpcname("#ボス虫2_bc")+"::OnKilled");
+			for(set '@i,0;'@i<getarraysize('@xr);set '@i,'@i+1) {
+				monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"猛毒袋",2531,1,getmdnpcname("#ボス虫2_bc")+"::OnKilled";
 			}
 		}
 		else {
 			setarray '@xr,5,5,5,5,5,5,3,3,3,3,3,3,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-3,-3,-3,-3,-3,-3,-5,-5,-5,-5,-5,-5;
 			setarray '@yr,5,3,1,-1,-3,-5,5,3,1,-1,-3,-5,5,3,1,-1,-3,-5,5,3,1,-1,-3,-5,5,3,1,-1,-3,-5,5,3,1,-1,-3,-5;
-			for(set '@i,0;'@i<getarraysize('@x);set '@i,'@i+1) {
-				monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"猛毒袋",2531,1,getmdnpcname("#ボス虫2_bc")+"::OnKilled");
+			for(set '@i,0;'@i<getarraysize('@xr);set '@i,'@i+1) {
+				monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"猛毒袋",2531,1,getmdnpcname("#ボス虫2_bc")+"::OnKilled";
 			}
 		}
 	}
@@ -1380,6 +1411,8 @@ OnTimer16000:
 		}
 	}
 	initnpctimer;
+	end;
+OnKilled:
 	end;
 }
 
@@ -1398,6 +1431,8 @@ OnTimer16000:
 OnTouch:
 	hideonnpc;
 	initnpctimer;
+	donpcevent getmdnpcname("#虫3_timer")+"::OnStart";
+	donpcevent getmdnpcname("#虫3_mobdead")+"::OnStart";
 	donpcevent getmdnpcname("#虫3_猛毒地帯")+"::OnStart";
 	viewpoint 1, 268, 126, 1, 0xFF8000; //64055
 	end;
@@ -1422,9 +1457,11 @@ OnTimer30000:
 	initnpctimer;
 	for(set '@i,0;'@i<40;set '@i,'@i+5) {
 		for(set '@j,0;'@j<40;set '@j,'@j+5) {
-			monster getmdmapname("1@face.gat"),249+'@i,106+'@j,"猛毒袋",2536,1,getmdnpcname("#虫3_猛毒地帯")+"::OnKilled");
+			monster getmdmapname("1@face.gat"),249+'@i,106+'@j,"猛毒袋",2536,1,getmdnpcname("#虫3_猛毒地帯")+"::OnKilled";
 		}
 	}
+	end;
+OnKilled:
 	end;
 }
 
@@ -1454,6 +1491,8 @@ OnTimer1000:
 OnStart:
 	initnpctimer;
 	end;
+OnTimer3600000:
+	end;
 OnStop:
 	stopnpctimer;
 	end;
@@ -1463,8 +1502,9 @@ OnStop:
 OnStart:
 	if('mob) end;
 	announce "アイリス : 西の方から何かの叫び声が聞こえる……。見に行ってみよう。", 0x9, 0xffffff, 0x190, 20, 0, 0;
-	set 'mob,callmonster(getmdmapname("1@face.gat"),213,110,"ダークフェイスワーム#4",2530,1,getmdnpcname("#ボス虫3")+"::OnKilled");
-	setmobmaxhp 'mob,2600000+getmapusers(getmdmapname("1@face.gat"))*200000;
+	set 'mob,callmonster(getmdmapname("1@face.gat"),213,110,"ダークフェイスワーム#4",2530,getmdnpcname("#ボス虫3")+"::OnKilled");
+	setmobhp 'mob,2600000+getmapusers(getmdmapname("1@face.gat"))*200000;
+	set 'mobmax,getmobhp('mob);
 	end;
 OnKilled:
 	set 'mob,0;
@@ -1484,27 +1524,28 @@ OnStop:
 	end;
 OnTimer15000:
 	set '@boss,getvariableofnpc('mob,getmdnpcname("#ボス虫3"));
+	set '@maxhp,getvariableofnpc('mobmax,getmdnpcname("#ボス虫3"));
 	if('@boss) {
-		set '@dummy,getmapxy('@map$,'@x,'@y,3,'boss);
-		set '@rate,getmobhp('@boss) / getmobmaxhp('@boss) * 100
+		set '@dummy,getmapxy('@map$,'@x,'@y,3,'@boss);
+		set '@rate,getmobhp('@boss) / '@maxhp * 100;
 		if('@rate > 80) {
 			setarray '@xr,5,5,5,0,0,0,-5,-5,-5;
 			setarray '@yr,5,0,-5,5,0,-5,5,0,-5;
 			for(set '@i,0;'@i<getarraysize('@x);set '@i,'@i+1) {
-				monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#ボス虫3_bc")+"::OnKilled");
+				monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#ボス虫3_bc")+"::OnKilled";
 			}
 		}
 		else {
 			setarray '@xr,5,5,5,0,0,0,-5,-5,-5;
 			setarray '@yr,5,0,-5,5,0,-5,5,0,-5;
 			for(set '@i,0;'@i<getarraysize('@x);set '@i,'@i+1) {
-				monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#ボス虫3_bc")+"::OnKilled");
+				monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#ボス虫3_bc")+"::OnKilled";
 			}
 		}
 	}
-	end;
-OnTimer15000:
 	initnpctimer;
+	end;
+OnKilled:
 	end;
 }
 
@@ -1680,6 +1721,8 @@ OnTalk6:
 OnStart:
 	initnpctimer;
 	end;
+OnTimer3600000:
+	end;
 OnStop:
 	stopnpctimer;
 	end;
@@ -1688,8 +1731,9 @@ OnStop:
 1@face.gat,1,3,0	script	#女王虫4	139,{
 OnStart:
 	if('mob) end;
-	set 'mob,callmonster(getmdmapname("1@face.gat"),213,153,"女王フェイスワーム",2529,1,getmdnpcname("#女王虫4")+"::OnKilled");
-	setmobmaxhp 'mob,26000000+getmapusers(getmdmapname("1@face.gat"))*2000000;
+	set 'mob,callmonster(getmdmapname("1@face.gat"),213,153,"女王フェイスワーム",2529,getmdnpcname("#女王虫4")+"::OnKilled");
+	setmobhp 'mob,26000000+getmapusers(getmdmapname("1@face.gat"))*2000000;
+	set 'mobmax,getmobhp('mob);
 	end;
 OnSpawn:
 	//announce "アイリス : 巣から離れすぎだよ！　巣から離れすぎると、女王フェイスワームが落ち着くまでは凶暴になるから気をつけて！", 0x9, 0xff3333, 0x190, 15, 0, 0;
@@ -1708,7 +1752,7 @@ OnSpawn:
 	set 'hp,getmobhp('mob);
 	set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob);
 	set '@dummy,removemonster(getvariableofnpc('mob,getmdnpcname("#女王虫4")));
-	set 'mob,callmonster(getmdmapname("1@face.gat"),'@x,'@y,"女王フェイスワーム",2529,1,getmdnpcname("#女王虫4")+"::OnKilled");
+	set 'mob,callmonster(getmdmapname("1@face.gat"),'@x,'@y,"女王フェイスワーム",2529,getmdnpcname("#女王虫4")+"::OnKilled");
 	setmobhp 'mob,'hp;
 	end;
 OnKilled:
@@ -1728,23 +1772,24 @@ OnStop:
 OnStart:
 	initnpctimer;
 	set '@boss,getvariableofnpc('mob,getmdnpcname("#女王虫4"));
+	set '@maxhp,getvariableofnpc('mobmax,getmdnpcname("#女王虫4"));
 	if('@boss) {
 		set '@dummy,getmapxy('@map$,'@x,'@y,3,'@boss);
 		switch(rand(1,3)) {
 		case 1:
-			set '@rate,getmobhp('@boss) / getmobmaxhp('@boss) * 100
+			set '@rate,getmobhp('@boss) / '@maxhp * 100;
 			if('@rate > 70) {
 				setarray '@xr,-3,-3,3,3;
 				setarray '@yr,-3,3,-3,3;
 				for(set '@i,0;'@i<getarraysize('@x);set '@i,'@i+1) {
-					monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#女王虫4_bc")+"::OnKilled");
+					monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#女王虫4_bc")+"::OnKilled";
 				}
 			}
 			else {
 				setarray '@xr,5,5,5,0,0,0,-5,-5,-5;
 				setarray '@yr,5,0,-5,5,0,-5,5,0,-5;
 				for(set '@i,0;'@i<getarraysize('@x);set '@i,'@i+1) {
-					monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#女王虫4_bc")+"::OnKilled");
+					monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#女王虫4_bc")+"::OnKilled";
 				}
 			}
 		case 2:
@@ -1853,6 +1898,8 @@ OnTimer1000:
 1@face.gat,200,158,6	duplicate(ケイオス#北)	ケイオス#西	683
 
 1@face.gat,212,156,0	script	#ケイon3	139,5,5,{/* 56490 (hide)*/
+	end;
+OnTouch:
 	initnpctimer;
 	end;
 OnTimer3000:
@@ -1938,7 +1985,17 @@ OnTalk3:
 	announce "今回の戦闘に所要された時間は" +'@time/60+ "分" +'@time%60+ "秒です。", 0x9, 0xffff33, 0x190, 12, 0, 0;
 	misceffect 10; //56495
 	hideonnpc; //56495
-	//dropitem 20717, 1;
+	setarray '@card,4700,4710,4720,4730,4740,4750,4701,4711,4721,4731,4741,4751,4702,4712,4722,4732,4742,4752,4703,4713,4723,4733,4743,4753,4704,4714,4724,4734,4744,4754;
+	if('@time <= 121){
+		if(rand(1,100) <= 70)
+			dropitem2 getmdmapname("1@face.gat"),155+rand(-2,2),82+rand(-2,2),20717,1,0,0,rand(2,5),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+		else
+			dropitem2 getmdmapname("1@face.gat"),155+rand(-2,2),82+rand(-2,2),rand(20717,20718),1,0,0,rand(4,6),0,0,rand(4853,4858),'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+	}
+	else {
+		if(rand(1,100) <= 70) dropitem2 getmdmapname("1@face.gat"),155+rand(-2,2),82+rand(-2,2),20717,1,0,0,rand(0,3),0,0,0,0,'@card[rand(getarraysize('@card))];
+		else dropitem2 getmdmapname("1@face.gat"),155+rand(-2,2),82+rand(-2,2),rand(20717,20718),1,0,0,rand(2,4),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+	}
 	end;
 OnTouch:
 	viewpoint 2, 1, 1, 1, 0xFFFFFF; //56495
@@ -1946,13 +2003,23 @@ OnTouch:
 	end;
 }
 1@face.gat,162,271,3	script	#虫2褒賞	10005,15,15,{/* 56496 (hide)*/
-	donpcevent getmdnpcname("#虫1_timer")+"::OnStop";
 	set '@time,getnpctimer(0,getmdnpcname("#虫1_timer"))/1000;
+	donpcevent getmdnpcname("#虫1_timer")+"::OnStop";
 	announce "今回の戦闘に所要された時間は" +'@time/60+ "分" +'@time%60+ "秒です。", 0x9, 0xffff33, 0x190, 12, 0, 0;
 	misceffect 10; //56495
 	hideonnpc; //56495
-	//dropitem 20717, 1;
-	//dropitem 7228,getmapusers(getmdmapname("1@face.gat"));
+	setarray '@card,4700,4710,4720,4730,4740,4750,4701,4711,4721,4731,4741,4751,4702,4712,4722,4732,4742,4752,4703,4713,4723,4733,4743,4753,4704,4714,4724,4734,4744,4754;
+	if('@time <= 121){
+		if(rand(1,100) <= 70)
+			dropitem2 getmdmapname("1@face.gat"),162+rand(-2,2),271+rand(-2,2),20717,1,0,0,rand(2,5),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+		else
+			dropitem2 getmdmapname("1@face.gat"),162+rand(-2,2),271+rand(-2,2),rand(20717,20718),1,0,0,rand(4,6),0,0,rand(4853,4858),'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+	}
+	else {
+		if(rand(1,100) <= 70) dropitem2 getmdmapname("1@face.gat"),162+rand(-2,2),271+rand(-2,2),20717,1,0,0,rand(0,3),0,0,0,0,'@card[rand(getarraysize('@card))];
+		else dropitem2 getmdmapname("1@face.gat"),162+rand(-2,2),271+rand(-2,2),rand(20717,20718),1,0,0,rand(2,4),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+	}
+	dropitem getmdmapname("1@face.gat"),162+rand(-2,2),271+rand(-2,2),7228,getmapusers(getmdmapname("1@face.gat")),0;
 	end;
 OnTouch:
 	viewpoint 2, 1, 1, 1, 0xFFFFFF; //64115
@@ -1969,7 +2036,17 @@ OnTouch:
 	announce "今回の戦闘に所要された時間は" +'@time/60+ "分" +'@time%60+ "秒です。", 0x9, 0xffff33, 0x190, 12, 0, 0;
 	misceffect 10; //56495
 	hideonnpc; //56495
-	//dropitem 20717, 1;
+	setarray '@card,4700,4710,4720,4730,4740,4750,4701,4711,4721,4731,4741,4751,4702,4712,4722,4732,4742,4752,4703,4713,4723,4733,4743,4753,4704,4714,4724,4734,4744,4754;
+	if('@time <= 121){
+		if(rand(1,100) <= 70)
+			dropitem2 getmdmapname("1@face.gat"),278+rand(-2,2),308+rand(-2,2),20717,1,0,0,rand(2,5),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+		else
+			dropitem2 getmdmapname("1@face.gat"),278+rand(-2,2),308+rand(-2,2),rand(20717,20718),1,0,0,rand(4,6),0,0,rand(4853,4858),'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+	}
+	else {
+		if(rand(1,100) <= 70) dropitem2 getmdmapname("1@face.gat"),278+rand(-2,2),308+rand(-2,2),20717,1,0,0,rand(0,3),0,0,0,0,'@card[rand(getarraysize('@card))];
+		else dropitem2 getmdmapname("1@face.gat"),278+rand(-2,2),308+rand(-2,2),rand(20717,20718),1,0,0,rand(2,4),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+	}
 	end;
 OnTouch:
 	viewpoint 2, 1, 1, 1, 0xFFFFFF; //64116
@@ -1986,8 +2063,18 @@ OnTouch:
 	announce "今回の戦闘に所要された時間は" +'@time/60+ "分" +'@time%60+ "秒です。", 0x9, 0xffff33, 0x190, 12, 0, 0;
 	misceffect 10; //56495
 	hideonnpc; //56495
-	//dropitem 20717, 1;
-	//dropitem 7444,getmapusers(getmdmapname("1@face.gat"));
+	setarray '@card,4700,4710,4720,4730,4740,4750,4701,4711,4721,4731,4741,4751,4702,4712,4722,4732,4742,4752,4703,4713,4723,4733,4743,4753,4704,4714,4724,4734,4744,4754;
+	if('@time <= 111){
+		if(rand(1,100) <= 70)
+			dropitem2 getmdmapname("1@face.gat"),214+rand(-2,2),108+rand(-2,2),20717,1,0,0,rand(2,5),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+		else
+			dropitem2 getmdmapname("1@face.gat"),214+rand(-2,2),108+rand(-2,2),rand(20717,20718),1,0,0,rand(4,6),0,0,rand(4853,4858),'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+	}
+	else {
+		if(rand(1,100) <= 70) dropitem2 getmdmapname("1@face.gat"),214+rand(-2,2),108+rand(-2,2),20717,1,0,0,rand(0,3),0,0,0,0,'@card[rand(getarraysize('@card))];
+		else dropitem2 getmdmapname("1@face.gat"),214+rand(-2,2),108+rand(-2,2),rand(20717,20718),1,0,0,rand(2,4),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+	}
+	dropitem getmdmapname("1@face.gat"),214+rand(-2,2),108+rand(-2,2),7444,getmapusers(getmdmapname("1@face.gat")),0;
 	end;
 OnTouch:
 	viewpoint 2, 1, 1, 1, 0xFFFFFF; //64117
@@ -2228,6 +2315,24 @@ OnTimer15000:
 		}
 		else
 			announce '@time/60+ "分" +'@time%60+ "秒を記録しましたが最短記録を更新する事はできませんでした。", 0x9, 0xffff33, 0x190, 12, 0, 0;
+		setarray '@card,4700,4710,4720,4730,4740,4750,4701,4711,4721,4731,4741,4751,4702,4712,4722,4732,4742,4752,4703,4713,4723,4733,4743,4753,4704,4714,4724,4734,4744,4754,4705,4715,4725,4735,4745,4755,4706,4716,4726,4736,4746,4756;
+		if('@time<271){
+			set '@rate,rand(1,100);
+			set '@amount,rand(1,100)<=20?2:1;
+			if('@rate <= 20){
+				for(set '@i,0; '@i<'@amount; set '@i,'@i+1) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(9,10),0,0,rand(4853,4858),'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+			} else if('@rate <= 50){
+				for(set '@i,0; '@i<'@amount; set '@i,'@i+1) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(5,9),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+			} else {
+				for(set '@i,0; '@i<'@amount; set '@i,'@i+1) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(3,7),0,0,0,0,'@card[rand(getarraysize('@card))];
+			}
+		} else {
+			set '@rate,rand(1,100);
+			if('@rate <= 5)	dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(9,10),0,0,rand(4853,4858),'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+			 else if('@rate <= 25) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(5,9),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+			 else dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(3,7),0,0,0,0,'@card[rand(getarraysize('@card))];
+		}
+		break;
 		//dropitem 20717, 1;
 		//dropitem 20717, 1;
 		end;
@@ -2310,7 +2415,7 @@ OnTimer15000:
 		end;
 	}
 OnTimer1000:
-	if('@flag < 8)
+	if('flag < 8)
 		hideoffnpc; //56495
 	end;
 }
