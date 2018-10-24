@@ -1,6 +1,7 @@
-
 moro_cav.gat,41,73,4	script	守護者ニーズヘッグ#epeo	510,{/* 65386 */
-	if(checkquest(7583) == 0) {
+	if(checkquest(7597)) {
+	}
+	if(checkquest(7593) == 0) {
 		cutin "ep14_nyd01.bmp", 2;
 		mes "[ニーズヘッグ]";
 		mes "申し訳ありませんが、";
@@ -103,7 +104,9 @@ OnInit:
 	end;
 }
 moro_cav.gat,45,75,0	script	世界樹に似た樹#eom_gate	844,{/* 65387 */
-	if(checkquest(7583) == 0) {
+	if(checkquest(7597)) {
+	}
+	if(checkquest(7593) == 0) {
 		cutin "ep14_nyd01.bmp", 2;
 		mes "[ニーズヘッグ]";
 		mes "申し訳ありませんが、";
@@ -147,7 +150,7 @@ moro_cav.gat,45,75,0	script	世界樹に似た樹#eom_gate	844,{/* 65387 */
 	}
 	switch(mdenter("end_of_morocc")) {
 	case 0:	// エラーなし
-		announce "メモリアルダンジョン[end_of_morocc] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")", 0x1, 0x00ff99, 0x190, 12, 0, 0;
+		announce "メモリアルダンジョン[end_of_morocc] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")", 0x9, 0x00ff99, 0x190, 12, 0, 0;
 		setquest 96435; //state=1
 		//warp "1@eom.gat",101,16;
 		end;
@@ -216,8 +219,11 @@ OnKilled2:
 }
 
 1@eom.gat,101,43,3	script	魔神の使徒・アハト#ahat	493,{/* 61682 */
-	cutin "ep13_ahat_m.bmp", 2;
-	{
+	if(Sex)
+		cutin "ep13_ahat_f.bmp", 2;
+	else
+		cutin "ep13_ahat_m.bmp", 2;
+	if(DIC_2QUE < 16) {		// 猫耳と尻尾の男クエスト
 		mes "[アハト]";
 		mes "初めてお目にかかりますね。";
 		mes "魔神の最初のしもべ、";
@@ -272,7 +278,10 @@ OnKilled2:
 }
 
 1@eom.gat,101,55,3	script	魔神の使徒・アハト#ah02	493,{/* 61684 */
-	cutin "ep13_ahat_m.bmp", 2;
+	if(Sex)
+		cutin "ep13_ahat_f.bmp", 2;
+	else
+		cutin "ep13_ahat_m.bmp", 2;
 	mes "[アハト]";
 	mes "クッ……ハハ……アハハハッ！";
 	mes "さ、流石……我が主が一目おく";

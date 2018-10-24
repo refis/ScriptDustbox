@@ -276,8 +276,10 @@ morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
 		mes "では";
 		mes "^0000FF北西側にあるピラミッド近くの水辺^000000に";
 		mes "一緒に行きましょう。";
-		set EP143_PARA,5;
-		chgquest 11350,11351;
+		if(EP143_PARA != 5) {
+			set EP143_PARA,5;
+			chgquest 11350,11351;
+		}
 		close2;
 		warp "moc_ruins.gat",106,135;
 		end;
@@ -529,8 +531,10 @@ moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
 		mes "‐次元の狭間への入場は";
 		mes "　^0000FF異世界クエスト^000000を完了している";
 		mes "　必要があります‐";
-		set EP143_PARA,7;
-		chgquest 11351,11352;
+		if(EP143_PARA != 7) {
+			set EP143_PARA,7;
+			chgquest 11351,11352;
+		}
 		close;
 	default:
 		cutin "ep143_tasmi.bmp", 2;
