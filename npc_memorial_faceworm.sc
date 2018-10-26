@@ -1531,14 +1531,14 @@ OnTimer15000:
 		if('@rate > 80) {
 			setarray '@xr,5,5,5,0,0,0,-5,-5,-5;
 			setarray '@yr,5,0,-5,5,0,-5,5,0,-5;
-			for(set '@i,0;'@i<getarraysize('@x);set '@i,'@i+1) {
+			for(set '@i,0;'@i<getarraysize('@xr);set '@i,'@i+1) {
 				monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#ボス虫3_bc")+"::OnKilled";
 			}
 		}
 		else {
 			setarray '@xr,5,5,5,0,0,0,-5,-5,-5;
 			setarray '@yr,5,0,-5,5,0,-5,5,0,-5;
-			for(set '@i,0;'@i<getarraysize('@x);set '@i,'@i+1) {
+			for(set '@i,0;'@i<getarraysize('@xr);set '@i,'@i+1) {
 				monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#ボス虫3_bc")+"::OnKilled";
 			}
 		}
@@ -1781,14 +1781,14 @@ OnStart:
 			if('@rate > 70) {
 				setarray '@xr,-3,-3,3,3;
 				setarray '@yr,-3,3,-3,3;
-				for(set '@i,0;'@i<getarraysize('@x);set '@i,'@i+1) {
+				for(set '@i,0;'@i<getarraysize('@xr);set '@i,'@i+1) {
 					monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#女王虫4_bc")+"::OnKilled";
 				}
 			}
 			else {
 				setarray '@xr,5,5,5,0,0,0,-5,-5,-5;
 				setarray '@yr,5,0,-5,5,0,-5,5,0,-5;
-				for(set '@i,0;'@i<getarraysize('@x);set '@i,'@i+1) {
+				for(set '@i,0;'@i<getarraysize('@xr);set '@i,'@i+1) {
 					monster getmdmapname("1@face.gat"),'@x+'@xr['@i],'@y+'@yr['@i],"#毒溜まり",2536,1,getmdnpcname("#女王虫4_bc")+"::OnKilled";
 				}
 			}

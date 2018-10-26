@@ -1,3 +1,7 @@
+//====================================================================
+//Ragnarok Online - Summoner Script	by refis
+//====================================================================
+
 new_do5.gat,90,247,0	script	object01#new_do5	139,30,3,{/* 53232 */
 	mes "[シェレ]";
 	mes "そっちじゃないわ。";
@@ -7,7 +11,27 @@ new_do5.gat,90,247,0	script	object01#new_do5	139,30,3,{/* 53232 */
 	end;
 }
 new_do5.gat,95,264,4	script	シェレ#new_do5	10165,{/* 53234 */
-	setquest 102845; //state=1
+	if(DORAM_0QUE) {
+		mes "^ff0000【インフォメーション】";
+		mes "スキップ処理を実行中です。";
+		mes "クライアントを終了しないでください。";
+		mes "実行中に終了した場合、";
+		mes "一部のアイテムや経験値を";
+		mes "受け取れない場合があります。^000000";
+		next;
+		mes "^ff0000【インフォメーション】^000000";
+		mes "^0000ff[next] をクリックしてください。^000000";
+		next;
+		mes "[シェレ]";
+		mes "わかったわ。";
+		mes "それじゃそのように";
+		mes "手配しておくわ。";
+		mes "あなたの活躍、期待してるわ！";
+		set DORAM_0QUE,0;
+		warp "lasagna.gat",298,238;
+		end;
+	}
+	setquest 102845;
 	compquest 102845;
 	mes "[シェレ]";
 	mes "パースタ大陸へようこそ！";
@@ -42,37 +66,593 @@ new_do5.gat,95,264,4	script	シェレ#new_do5	10165,{/* 53234 */
 	mes "初心者だったら、";
 	mes "チュートリアルは絶対に";
 	mes "受けておいた方が良いわよ。^000000";
-	
 	while {
-	next;
-	switch(select("ここはどこ？","^009eff冒険の基礎を学ぶ(チュートリアルを開始)^000000","^ff0000すぐに冒険を始める(チュートリアルを省略)^000000")) {
-	case 1:
-		mes "[シェレ]";
-		mes "ここは^ff0000パースタ大陸^000000にある";
-		mes "^ff0000港町ラザーニャ。^000000";
-		mes "最近ではミッドガルドという";
-		mes "新大陸が発見されたせいで、";
-		mes "大陸の各地からたくさんのドラムが";
-		mes "集まってきているわ。";
 		next;
-		mes "[シェレ]";
-		mes "ただ……興味本位だけで";
-		mes "冒険の基礎もできていない";
-		mes "ドラムが多過ぎるのよ。";
-		mes "だから私がここで";
-		mes "外から来たドラムを案内しているの。";
-		continue;
-	case 2:
-		mes "[シェレ]";
-		mes "それじゃ、";
-		mes "チュートリアル会場に送るわね。";
-		mes "あなたの活躍、期待してるわよ！";
-		close2;
-		warp "do_tu01e.gat",29,283;
-		end;
-	case 3:
+		switch(select("ここはどこ？","^009eff冒険の基礎を学ぶ(チュートリアルを開始)^000000","^ff0000すぐに冒険を始める(チュートリアルを省略)^000000")) {
+		case 1:
+			mes "[シェレ]";
+			mes "ここは^ff0000パースタ大陸^000000にある";
+			mes "^ff0000港町ラザーニャ。^000000";
+			mes "最近ではミッドガルドという";
+			mes "新大陸が発見されたせいで、";
+			mes "大陸の各地からたくさんのドラムが";
+			mes "集まってきているわ。";
+			next;
+			mes "[シェレ]";
+			mes "ただ……興味本位だけで";
+			mes "冒険の基礎もできていない";
+			mes "ドラムが多過ぎるのよ。";
+			mes "だから私がここで";
+			mes "外から来たドラムを案内しているの。";
+			continue;
+		case 2:
+			mes "[シェレ]";
+			mes "それじゃ、";
+			mes "チュートリアル会場に送るわね。";
+			mes "あなたの活躍、期待してるわよ！";
+			close2;
+			warp "do_tu01e.gat",29,283;
+			end;
+		case 3:
+			mes "^ff0000【インフォメーション】";
+			mes "<すべてのチュートリアルを";
+			mes "スキップする>を選択すると、";
+			mes "チュートリアルで獲得できる";
+			mes "全ての経験値やアイテムを";
+			mes "受け取った状態で、";
+			mes "ラザーニャから冒険を開始できます。^000000";
+			next;
+			mes "^ff0000【インフォメーション】";
+			mes "ただし、一度選んでしてしまうと";
+			mes "チュートリアルの内容を";
+			mes "再度確認することはできません。";
+			mes "チュートリアルをスキップしますか？^000000";
+			next;
+			if(select("少し考える","^ff0000すべてのチュートリアルをスキップする^000000") == 1) {
+				mes "[シェレ]";
+				mes "わかったわ。";
+				mes "では、どうするのかしら？";
+				continue;
+			}
+			mes "^ff0000【インフォメーション】";
+			mes "スキップ処理を実行中です。";
+			mes "クライアントを終了しないでください。";
+			mes "実行中に終了した場合、";
+			mes "一部のアイテムや経験値を";
+			mes "受け取れない場合があります。^000000";
+			next;
+			set DORAM_0QUE,1;
+			setquest 98499;
+			delquest 98499;
+			if(DORAM_1QUE <= 4){
+				setquest 98451;
+				delquest 98451;
+				getitem 26135, 1;
+			}
+			if(DORAM_1QUE <= 22){
+				setquest 98452;
+				delquest 98452;
+			}
+			if(DORAM_1QUE <= 27) {
+				setquest 98453;
+				delquest 98453;
+			}
+			if(DORAM_1QUE <= 30) {
+				setquest 98454;
+				delquest 98454;
+			}
+			if(DORAM_1QUE <= 32) {
+				setquest 98455;
+				delquest 98455;
+				getitem 15273, 1;
+				getitem 22183, 1;
+			}
+			if(DORAM_1QUE <= 34) {
+				setquest 98456;
+				delquest 98456;
+			}
+			if(DORAM_1QUE <= 37) {
+				setquest 98457;
+				delquest 98457;
+				getitem 569, 50;
+			}
+			if(DORAM_1QUE <= 40) {
+				setquest 98458;
+				delquest 98458;
+			}
+			if(DORAM_1QUE <= 42) {
+				setquest 98459;
+				delquest 98459;
+				getitem 19330, 1;
+				getitem 28576, 1;
+				getitem 15274, 1;
+				getitem 22184, 1;
+			}
+			if(DORAM_1QUE <= 40) {
+				getitem 12324, 1;
+			}
+			if(DORAM_1QUE == 0) {
+				setquest 98400;
+				delquest 98400;
+				getexp 2,0;
+				getexp 0,10;
+			}
+			if(DORAM_1QUE <= 1) {
+				setquest 98401;
+				delquest 98401;
+				getexp 4,0;
+				getexp 0,20;
+			}
+			if(DORAM_1QUE <= 2) {
+				setquest 98402;
+				delquest 98402;
+				getexp 6,0;
+				getexp 0,40;
+			}
+			if(DORAM_1QUE <= 3) {
+				setquest 98403;
+				delquest 98403;
+				getexp 9,0;
+				getexp 0,60;
+			}
+			if(DORAM_1QUE <= 6) {
+				setquest 98404;
+				delquest 98404;
+				getexp 12,0;
+				getexp 0,80;
+			}
+			if(DORAM_1QUE <= 8) {
+				setquest 98405;
+				delquest 98405;
+				getexp 15,0;
+				getexp 0,100;
+			}
+			if(DORAM_1QUE <= 10) {
+				setquest 98406;
+				delquest 98406;
+				getexp 18,0;
+				getexp 0,200;
+			}
+			if(DORAM_1QUE <= 12) {
+				setquest 98407;
+				delquest 98407;
+				getexp 21,0;
+				getexp 0,400;
+			}
+			if(DORAM_1QUE <= 14) {
+				setquest 98408;
+				delquest 98408;
+				getexp 27,0;
+				getexp 0,600;
+				delitem 26135, 1;
+				getitem2 26135, 1;
+			}
+			if(DORAM_1QUE <= 16) {
+				setquest 98409;
+				delquest 98409;
+				getexp 40,0;
+				getexp 0,800;
+			}
+			if(DORAM_1QUE <= 18) {
+				setquest 98410;
+				delquest 98410;
+				getexp 48,0;
+				getexp 0,1000;
+			}
+			if(DORAM_1QUE <= 20) {
+				setquest 98411;
+				delquest 98411;
+				getexp 61,0;
+				getexp 0,1200;
+			}
+			if(DORAM_1QUE <= 20) {
+				setquest 98412;
+				delquest 98412;
+				getexp 73,0;
+				getexp 0,1400;
+			}
+			if(DORAM_1QUE <= 23) {
+				setquest 98413;
+				delquest 98413;
+				getexp 87,0;
+				getexp 0,1600;
+			}
+			if(DORAM_1QUE <= 24) {
+				skill 142,1,0;
+				getexp 103,0;
+				getexp 0,1800;
+			}
+			if(DORAM_1QUE <= 25) {
+				setquest 98415;
+				delquest 98415;
+				getexp 121,0;
+				getexp 0,2000;
+			}
+			if(DORAM_1QUE <= 28) {
+				setquest 98416;
+				delquest 98416;
+				getexp 140,0;
+				getexp 0,2200;
+			}
+			if(DORAM_1QUE <= 29) {
+				setquest 98417;
+				delquest 98417;
+				getexp 157,0;
+				getexp 0,2400;
+			}
+			if(DORAM_1QUE <= 31) {
+				setquest 98418;
+				delquest 98418;
+				getexp 177,0;
+				getexp 0,2600;
+			}
+			if(DORAM_1QUE <= 32) {
+				setquest 98420;
+				delquest 98420;
+				getexp 239,0;
+				getexp 0,3000;
+			}
+			if(DORAM_1QUE <= 32) {
+				setquest 98421;
+				delquest 98421;
+				getexp 267,0;
+				getexp 0,3200;
+			}
+			if(DORAM_1QUE <= 35) {
+				setquest 98422;
+				delquest 98422;
+				getexp 298,0;
+				getexp 0,3400;
+				setquest 98423;
+				delquest 98423;
+				getexp 332,0;
+				getexp 0,3600;
+			}
+			if(DORAM_1QUE <= 36) {
+				setquest 98424;
+				delquest 98424;
+				getexp 389,0;
+				getexp 0,3800;
+			}
+			if(DORAM_1QUE <= 38) {
+				setquest 98425;
+				delquest 98425;
+				getexp 430,0;
+				getexp 0,4000;
+			}
+			if(DORAM_1QUE <= 39) {
+				setquest 98426;
+				delquest 98426;
+				getexp 475,0;
+				getexp 0,6000;
+				setquest 98427;
+				delquest 98427;
+				getexp 524,0;
+				getexp 0,8000;
+			}
+			if(DORAM_1QUE <= 40) {
+				setquest 98428;
+				delquest 98428;
+			}
+			if(DORAM_1QUE <= 41) {
+				getexp 577,0;
+				getexp 0,10000;
+			}
+			if(DORAM_1QUE <= 42) {
+				setquest 98429;
+				delquest 98429;
+				getexp 0,25000;
+			}
+			mes "^ff0000【インフォメーション】^000000";
+			mes "^0000ff[next] をクリックしてください。^000000";
+			next;
+			mes "[シェレ]";
+			mes "わかったわ。";
+			mes "それじゃそのように";
+			mes "手配しておくわ。";
+			mes "あなたの活躍、期待してるわ！";
+			set DORAM_0QUE,0;
+			warp "lasagna.gat",298,238;
+			end;
+		}
+	}
 }
-
+new_do5.gat,137,98,4	script	シェレ#do_tu05a	10165,{/* 53235 */
+	mes "[シェレ]";
+	mes "あら、チュートリアルの";
+	mes "終了をご希望かしら？";
+	while() {
+		next;
+		switch(select("少し考える","^009effチュートリアルに戻る^000000","^ff0000すべてのチュートリアルをスキップする^000000")) {
+		case 1:
+			mes "[シェレ]";
+			mes "わかったわ。";
+			mes "決まったらもう一度声かけてね。";
+			close;
+		case 2:
+			mes "[シェレ]";
+			mes "それじゃ、";
+			mes "チュートリアル会場に送るわね。";
+			mes "あなたの活躍、期待してるわよ！";
+			close2;
+			warp "do_tu01a.gat",29,281;
+			end;
+		case 3:
+			break;
+		}
+		mes "^ff0000【インフォメーション】";
+		mes "<すべてのチュートリアルを";
+		mes "スキップする>を選択すると、";
+		mes "チュートリアルで獲得できる";
+		mes "全ての経験値やアイテムを";
+		mes "受け取った状態で、";
+		mes "ラザーニャから冒険を開始できます。^000000";
+		next;
+		mes "^ff0000【インフォメーション】";
+		mes "ただし、一度選んでしてしまうと";
+		mes "チュートリアルの内容を";
+		mes "再度確認することはできません。";
+		mes "チュートリアルをスキップしますか？^000000";
+		next;
+		select("少し考える:^ff0000すべてのチュートリアルをスキップする^000000")
+		mes "[シェレ]";
+		mes "わかったわ。";
+		mes "では、どうするのかしら？";
+		next;
+		select("少し考える:^009effチュートリアルに戻る^000000:^ff0000すべてのチュートリアルをスキップする^000000")
+		mes "^ff0000【インフォメーション】";
+		mes "<すべてのチュートリアルを";
+		mes "スキップする>を選択すると、";
+		mes "チュートリアルで獲得できる";
+		mes "全ての経験値やアイテムを";
+		mes "受け取った状態で、";
+		mes "ラザーニャから冒険を開始できます。^000000";
+		next;
+		mes "^ff0000【インフォメーション】";
+		mes "ただし、一度選んでしてしまうと";
+		mes "チュートリアルの内容を";
+		mes "再度確認することはできません。";
+		mes "チュートリアルをスキップしますか？^000000";
+		next;
+		select("少し考える:^ff0000すべてのチュートリアルをスキップする^000000")
+		mes "^ff0000【インフォメーション】";
+		mes "スキップ処理を実行中です。";
+		mes "クライアントを終了しないでください。";
+		mes "実行中に終了した場合、";
+		mes "一部のアイテムや経験値を";
+		mes "受け取れない場合があります。^000000";
+		next;
+		setquest 98499;
+		delquest 98499;
+		if(DORAM_1QUE <= 4){
+			setquest 98451;
+			delquest 98451;
+			getitem 26135, 1;
+		}
+		if(DORAM_1QUE <= 22){
+			setquest 98452;
+			delquest 98452;
+		}
+		if(DORAM_1QUE <= 27) {
+			setquest 98453;
+			delquest 98453;
+		}
+		if(DORAM_1QUE <= 30) {
+			setquest 98454;
+			delquest 98454;
+		}
+		if(DORAM_1QUE <= 32) {
+			setquest 98455;
+			delquest 98455;
+			getitem 15273, 1;
+			getitem 22183, 1;
+		}
+		if(DORAM_1QUE <= 34) {
+			setquest 98456;
+			delquest 98456;
+		}
+		if(DORAM_1QUE <= 37) {
+			setquest 98457;
+			delquest 98457;
+			getitem 569, 50;
+		}
+		if(DORAM_1QUE <= 40) {
+			setquest 98458;
+			delquest 98458;
+		}
+		if(DORAM_1QUE <= 42) {
+			setquest 98459;
+			delquest 98459;
+			getitem 19330, 1;
+			getitem 28576, 1;
+			getitem 15274, 1;
+			getitem 22184, 1;
+		}
+		if(DORAM_1QUE <= 40) {
+			getitem 12324, 1;
+		}
+		if(DORAM_1QUE == 0) {
+			setquest 98400;
+			delquest 98400;
+			getexp 2,0;
+			getexp 0,10;
+		}
+		if(DORAM_1QUE <= 1) {
+			setquest 98401;
+			delquest 98401;
+			getexp 4,0;
+			getexp 0,20;
+		}
+		if(DORAM_1QUE <= 2) {
+			setquest 98402;
+			delquest 98402;
+			getexp 6,0;
+			getexp 0,40;
+		}
+		if(DORAM_1QUE <= 3) {
+			setquest 98403;
+			delquest 98403;
+			getexp 9,0;
+			getexp 0,60;
+		}
+		if(DORAM_1QUE <= 6) {
+			setquest 98404;
+			delquest 98404;
+			getexp 12,0;
+			getexp 0,80;
+		}
+		if(DORAM_1QUE <= 8) {
+			setquest 98405;
+			delquest 98405;
+			getexp 15,0;
+			getexp 0,100;
+		}
+		if(DORAM_1QUE <= 10) {
+			setquest 98406;
+			delquest 98406;
+			getexp 18,0;
+			getexp 0,200;
+		}
+		if(DORAM_1QUE <= 12) {
+			setquest 98407;
+			delquest 98407;
+			getexp 21,0;
+			getexp 0,400;
+		}
+		if(DORAM_1QUE <= 14) {
+			setquest 98408;
+			delquest 98408;
+			getexp 27,0;
+			getexp 0,600;
+			delitem 26135, 1;
+			getitem2 26135, 1;
+		}
+		if(DORAM_1QUE <= 16) {
+			setquest 98409;
+			delquest 98409;
+			getexp 40,0;
+			getexp 0,800;
+		}
+		if(DORAM_1QUE <= 18) {
+			setquest 98410;
+			delquest 98410;
+			getexp 48,0;
+			getexp 0,1000;
+		}
+		if(DORAM_1QUE <= 20) {
+			setquest 98411;
+			delquest 98411;
+			getexp 61,0;
+			getexp 0,1200;
+		}
+		if(DORAM_1QUE <= 20) {
+			setquest 98412;
+			delquest 98412;
+			getexp 73,0;
+			getexp 0,1400;
+		}
+		if(DORAM_1QUE <= 23) {
+			setquest 98413;
+			delquest 98413;
+			getexp 87,0;
+			getexp 0,1600;
+		}
+		if(DORAM_1QUE <= 24) {
+			skill 142,1,0;
+			getexp 103,0;
+			getexp 0,1800;
+		}
+		if(DORAM_1QUE <= 25) {
+			setquest 98415;
+			delquest 98415;
+			getexp 121,0;
+			getexp 0,2000;
+		}
+		if(DORAM_1QUE <= 28) {
+			setquest 98416;
+			delquest 98416;
+			getexp 140,0;
+			getexp 0,2200;
+		}
+		if(DORAM_1QUE <= 29) {
+			setquest 98417;
+			delquest 98417;
+			getexp 157,0;
+			getexp 0,2400;
+		}
+		if(DORAM_1QUE <= 31) {
+			setquest 98418;
+			delquest 98418;
+			getexp 177,0;
+			getexp 0,2600;
+		}
+		if(DORAM_1QUE <= 32) {
+			setquest 98420;
+			delquest 98420;
+			getexp 239,0;
+			getexp 0,3000;
+		}
+		if(DORAM_1QUE <= 32) {
+			setquest 98421;
+			delquest 98421;
+			getexp 267,0;
+			getexp 0,3200;
+		}
+		if(DORAM_1QUE <= 35) {
+			setquest 98422;
+			delquest 98422;
+			getexp 298,0;
+			getexp 0,3400;
+			setquest 98423;
+			delquest 98423;
+			getexp 332,0;
+			getexp 0,3600;
+		}
+		if(DORAM_1QUE <= 36) {
+			setquest 98424;
+			delquest 98424;
+			getexp 389,0;
+			getexp 0,3800;
+		}
+		if(DORAM_1QUE <= 38) {
+			setquest 98425;
+			delquest 98425;
+			getexp 430,0;
+			getexp 0,4000;
+		}
+		if(DORAM_1QUE <= 39) {
+			setquest 98426;
+			delquest 98426;
+			getexp 475,0;
+			getexp 0,6000;
+			setquest 98427;
+			delquest 98427;
+			getexp 524,0;
+			getexp 0,8000;
+		}
+		if(DORAM_1QUE <= 40) {
+			setquest 98428;
+			delquest 98428;
+		}
+		if(DORAM_1QUE <= 41) {
+			getexp 577,0;
+			getexp 0,10000;
+		}
+		if(DORAM_1QUE <= 42) {
+			setquest 98429;
+			delquest 98429;
+			getexp 0,25000;
+		}
+		mes "^ff0000【インフォメーション】^000000";
+		mes "[シェレ]";
+		mes "わかったわ。";
+		mes "それじゃそのように";
+		mes "手配しておくわ。";
+		mes "あなたの活躍、期待してるわ！";
+		warp "lasagna.gat",298,238;
+		end;
+	}
+}
 do_tu01e.gat,134,381,0	script	warp01#do_tu01e	45,2,2,{/* 52825 */
 	mes "^ff0000【インフォメーション】";
 	mes "進行中のチュートリアルから";
@@ -98,22 +678,24 @@ do_tu01e.gat,134,381,0	script	warp01#do_tu01e	45,2,2,{/* 52825 */
 	end;
 }
 
-do_tu01e.gat,29,283,0	script	object01#do_tu01e	139,3,3,{/* 52826 */
+do_tu01e.gat,29,283,0	script	object01#do_tu01e	139,1,1,{/* 52826 */
 	if(DORAM_1QUE == 0) {
 		initnpctimer;
+		cutin "do_su_001.bmp", 3;
+		setquest 98400;
 		set DORAM_1QUE,1;
 	}
 	end;
 OnTimer1000:
-	unittalk "自警団員アジェニャー : おい、そこの新入り！　こっちだ！";
+	donpcevent "自警団員アジェニャー#do::OnTalk1";
 	end;
 OnTimer3000:
 	stopnpctimer;
-	unittalk "自警団員アジェニャー : こっちに来て！　私をクリックするんだ！";
+	donpcevent "自警団員アジェニャー#do::OnTalk2";
 	end;
 }
 
-do_tu01e.gat,35,288,3	script	自警団員アジェニャー#do	10162,6,6,{/* 52827 */
+do_tu01e.gat,35,288,3	script	自警団員アジェニャー#do	10162,{/* 52827 */
 	if(distance(getcharid(3)) > 5) {
 		showmessage "‐もっと近づいてから話しかけよう‐","";
 		end;
@@ -146,6 +728,9 @@ do_tu01e.gat,35,288,3	script	自警団員アジェニャー#do	10162,6,6,{/* 52827 */
 		switch(select("はじめる","このチュートリアルをスキップ","すべてのチュートリアルをスキップする")) {
 		case 1:
 			break;
+		case 3:
+			warp "do_tu05a.gat",136,95;
+			end;
 		}
 		mes "[自警団員アジェニャー]";
 		mes "今お前が私に話しかけてくれたように";
@@ -225,7 +810,7 @@ do_tu01e.gat,35,288,3	script	自警団員アジェニャー#do	10162,6,6,{/* 52827 */
 		mes "アリオを探しましょう！^000000";
 		next;
 		cutin "do_su_003.bmp", 255;
-		viewpoint 1, 60, 322, 1, 0xFF0000; //52827
+		viewpoint 1, 60, 322, 1, 0xFF0000;
 		mes "[自警団員アジェニャー]";
 		mes "^009effアリオ^000000のところにまで";
 		mes "無事に辿り着けるように、";
@@ -240,13 +825,13 @@ do_tu01e.gat,35,288,3	script	自警団員アジェニャー#do	10162,6,6,{/* 52827 */
 		mes "尋ねてみると良い。";
 		mes "私からは以上だ。";
 		next;
-		setquest 98401; //state=1
+		setquest 98401;
 		mes "^009eff【インフォメーション】";
 		mes "クエスト「自警団員のレクチャー」を";
 		mes "受注しました。";
 		mes "クエストウィンドウを開いて";
 		mes "確認してみましょう！^000000";
-		chgquest 98401,98402; //state=1
+		chgquest 98401,98402;
 		set DORAM_1QUE,2;
 		getexp 4,20;
 		close;
@@ -280,7 +865,7 @@ do_tu01e.gat,35,288,3	script	自警団員アジェニャー#do	10162,6,6,{/* 52827 */
 		mes "アリオを探しましょう！^000000";
 		next;
 		cutin "do_su_003.bmp", 255;
-		viewpoint 1, 60, 322, 1, 0xFF0000; //52827
+		viewpoint 1, 60, 322, 1, 0xFF0000;
 		mes "[自警団員アジェニャー]";
 		mes "アリオのところにまで";
 		mes "無事に辿り着けるように、";
@@ -324,6 +909,12 @@ do_tu01e.gat,35,288,3	script	自警団員アジェニャー#do	10162,6,6,{/* 52827 */
 			warp "do_tu05e.gat",26,62;
 		end;
 	}
+OnTalk1:
+	unittalk "自警団員アジェニャー : おい、そこの新入り！　こっちだ！";
+	end;
+OnTalk2:
+	unittalk "自警団員アジェニャー : こっちに来て！　私をクリックするんだ！";
+	end;
 }
 do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 	if(distance(getcharid(3)) > 5) {
@@ -345,7 +936,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		case 1:
 			break;
 		}
-		emotion 12; //52828
+		emotion 12;
 		mes "[自警団員アリオ]";
 		mes "やあ、元気かい？";
 		mes "これから君の案内を担当する";
@@ -377,7 +968,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "左クリックしてみましょう！^000000";
 		close2;
 		set DORAM_1QUE,3;
-		setquest 98403; //state=1
+		setquest 98403;
 		end;
 	case 3:
 		if(!(checkquest(98403)&0x4)) {
@@ -396,7 +987,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "おお、中々の実力じゃないか。";
 		mes "新大陸を目指しているだけの";
 		mes "ことはあるな。";
-		emotion 21; //52828
+		emotion 21;
 		next;
 		mes "[自警団員アリオ]";
 		mes "君ならこの先の厳しい環境でも";
@@ -424,7 +1015,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "これをやろう。";
 		next;
 		if(DORAM_1QUE == 4){
-			//setquest 98451; //state=1
+			//setquest 98451;
 			//compquest 98451;
 			set DORAM_1QUE,5;
 			getitem 26135,1;
@@ -484,7 +1075,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "アイテムが捨てられることはなくなります。";
 		mes "心配な人はロック状態に";
 		mes "しておきましょう。^000000";
-		setquest 98404; //state=1
+		setquest 98404;
 		set DORAM_1QUE,6;
 		close2;
 		cutin "do_su_002.bmp", 255;
@@ -550,7 +1141,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 			cutin "do_su_002.bmp", 255;
 			end;
 		}
-		emotion 21; //52828
+		emotion 21;
 		mes "[自警団員アリオ]";
 		mes "なかなか飲みこみが早いな。";
 		mes "新大陸を目指しているだけの";
@@ -648,7 +1239,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "装備アイテムがすべて外され、";
 		mes "ステータス取得状況が";
 		mes "リセットされました。^000000";
-		setquest 98405; //state=1
+		setquest 98405;
 		resetstatus;
 		unequip -1;
 		set DORAM_1QUE,8;
@@ -689,7 +1280,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 			cutin "do_su_002.bmp", 255;
 			end;
 		}
-		emotion 21; //52828
+		emotion 21;
 		mes "[自警団員アリオ]";
 		mes "よし、ちゃんとDexを上げてきたな。";
 		mes "これでモンスターに攻撃が";
@@ -782,7 +1373,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "装備アイテムがすべて外され、";
 		mes "スキル取得状況が";
 		mes "リセットされました。^000000";
-		setquest 98406; //state=1
+		setquest 98406;
 		resetskill;
 		unequip -1;
 		set DORAM_1QUE,10;
@@ -850,7 +1441,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 			mes "「かみつく」を習得しましょう。^000000";
 			close;
 		}
-		emotion 21; //52828
+		emotion 21;
 		mes "[自警団員アリオ]";
 		mes "ちゃんとスキルを";
 		mes "覚えてきたな。";
@@ -928,7 +1519,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "ここから東に行ったところにいる。^000000";
 		mes "スキルを使いこなせばできるはずだ！";
 		close2;
-		setquest 98407; //state=1
+		setquest 98407;
 		set DORAM_1QUE,12;
 		end;
 	case 12:
@@ -968,7 +1559,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 			cutin "do_su_002.bmp", 255;
 			end;
 		}
-		emotion 21; //52828
+		emotion 21;
 		mes "[自警団員アリオ]";
 		mes "やるじゃないか。";
 		mes "まあ新大陸に行きたいなら";
@@ -1036,7 +1627,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "精錬に失敗することはない。";
 		mes "安心して行ってこい！";
 		close2;
-		setquest 98408; //state=1
+		setquest 98408;
 		set DORAM_1QUE,14;
 		end;
 	case 14:
@@ -1082,7 +1673,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 			mes "精錬してくるんだ！";
 			close;
 		}
-		emotion 21; //52828
+		emotion 21;
 		mes "[自警団員アリオ]";
 		mes "見事な猫じゃらしだ！";
 		mes "さすが新大陸を目指すドラムだな。";
@@ -1143,7 +1734,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "よし、それじゃ座った状態で";
 		mes "話しかけてみろ！";
 		close2;
-		setquest 98409; //state=1
+		setquest 98409;
 		set DORAM_1QUE,16;
 		end;
 	case 16:
@@ -1180,7 +1771,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 			cutin "do_su_002.bmp", 255;
 			end;
 		}
-		emotion 21; //52828
+		emotion 21;
 		mes "[自警団員アリオ]";
 		mes "そうだ、時には進むだけじゃなく、";
 		mes "立ち止まって休むことも重要だぞ。";
@@ -1231,7 +1822,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "初心者用青ポーション 5個^009eff";
 		mes "を購入しましょう！^000000";
 		close2;
-		setquest 98410; //state=1
+		setquest 98410;
 		set DORAM_1QUE,18;
 		cutin "do_su_002.bmp", 255;
 		end;
@@ -1260,7 +1851,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 			cutin "do_su_002.bmp", 255;
 			end;
 		}
-		emotion 21; //52828
+		emotion 21;
 		mes "[自警団員アリオ]";
 		mes "ちゃんと買って来れたようだな。";
 		mes "おつかいくらいなら";
@@ -1308,7 +1899,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "声をかけてくれ。";
 		percentheal -50,-50;
 		close2;
-		setquest 98411; //state=1
+		setquest 98411;
 		set DORAM_1QUE,20;
 		end;
 	case 20:
@@ -1336,7 +1927,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 			cutin "do_su_002.bmp", 255;
 			end;
 		}
-		emotion 21, "自警団員アリオ#do_tu01e"; //52828
+		emotion 21, "自警団員アリオ#do_tu01e";
 		mes "[自警団員アリオ]";
 		mes "アイテムの使い方も覚えたな。";
 		mes "緊急時に備えて";
@@ -1359,7 +1950,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "[自警団員アリオ]";
 		mes "ふむ、それでは次は……";
 		next;
-		cloakoffnpc "道具屋の末っ子#do_tu01e"; //52830
+		cloakoffnpc "道具屋の末っ子#do_tu01e";
 		dopcevent "道具屋の末っ子#do_tu01e::OnTalk1";
 		next;
 		mes "[自警団員アリオ]";
@@ -1401,7 +1992,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "私はラザーニャの可愛い末っ子ですよ！";
 		mes "とにかく、箱の件は頼みましたよ。";
 		next;
-		cloakonnpc "道具屋の末っ子#do_tu01e"; //52830
+		cloakonnpc "道具屋の末っ子#do_tu01e";
 		mes "[自警団員アリオ]";
 		mes "……";
 		mes "はぁ……。";
@@ -1436,7 +2027,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "直接アイテムウィンドウに";
 		mes "入る場合があります。^000000";
 		close2;
-		setquest 98412; //state=1
+		setquest 98412;
 		set DORAM_1QUE,22;
 		cutin "do_su_002.bmp", 255;
 		end;
@@ -1474,7 +2065,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "街についたら治療師ハルを";
 		mes "探して渡してくれ。";
 		next;
-		emotion 27; //52828
+		emotion 27;
 		mes "[自警団員アリオ]";
 		mes "町には道なりに北東に歩いて";
 		mes "いけばいい。";
@@ -1490,13 +2081,13 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "ラザーニャの町に";
 		mes "移動することができます。^000000";
 		close;
-		viewpoint 1, 134, 381, 1, 0xFF0000; //52828
+		viewpoint 1, 134, 381, 1, 0xFF0000;
 		cutin "do_su_002.bmp", 255;
-		setquest 98452; //state=1
+		setquest 98452;
 		delquest 98452;
 		delquest 98412;
 		getexp 73,1400;
-		setquest 98413; //state=1
+		setquest 98413;
 		set DORAM_1QUE,23;
 		end;
 	case 23:
@@ -1524,7 +2115,7 @@ do_tu01e.gat,60,322,3	script	自警団員アリオ#do_tu01e	10154,{/* 52828 */
 		mes "ラザーニャの町に";
 		mes "移動することができます。^000000";
 		close2;
-		viewpoint 1, 134, 381, 1, 0xFF0000; //52828
+		viewpoint 1, 134, 381, 1, 0xFF0000;
 		cutin "do_su_002.bmp", 255;
 		end;
 	case 24:
@@ -1690,7 +2281,7 @@ do_tu01e.gat,66,323,4	script	旅の鍛冶屋#do_tu01e	10163,{/* 52831 */
 	close;
 }
 do_tu02e.gat,150,54,0	warp	warp01#do_tu02e	2,2,do_tu01e.gat,131,378	//52832
-do_tu02e.gat,358,91,0	warp	warp02#do_tu02e	2,2,do_tu04e.gat,20,98 //52833 from_pos=(356, 91)
+do_tu02e.gat,358,91,0	warp	warp02#do_tu02e	2,2,do_tu04e.gat,20,98	//52833
 do_tu02e.gat,205,327,0	script	warp03#do_tu02e	45,2,2,{/* 52834 */
 	switch(DORAM_1QUE) {
 	case 33:
@@ -1750,7 +2341,7 @@ do_tu02e.gat,153,58,0	script	object01#do_tu02e	139,3,3,{/* 52835 */
 		mes "状況に応じてマップのサイズを";
 		mes "変えてみましょう！^000000";
 		close2;
-		viewpoint 1, 224, 126, 1, 0xFF0000; //52835
+		viewpoint 1, 224, 126, 1, 0xFF0000;
 		end;
 	}
 	end;
@@ -1781,7 +2372,7 @@ do_tu02e.gat,224,126,5	script	治療師ハル#do_tu02e	10164,{/* 52836 */
 		case 1:
 			break;
 		}
-		emotion 20, "治療師ハル#do_tu02e"; //52836
+		emotion 20, "治療師ハル#do_tu02e";
 		mes "[治療師ハル]";
 		mes "そろそろ荷物が届く頃なんですが……";
 		mes "遅いな……。";
@@ -1789,7 +2380,7 @@ do_tu02e.gat,224,126,5	script	治療師ハル#do_tu02e	10164,{/* 52836 */
 		mes "[治療師ハル]";
 		mes "あれ？";
 		mes "その箱は？";
-		cloakoffnpc "道具屋の末っ子#do_tu02e"; //52837
+		cloakoffnpc "道具屋の末っ子#do_tu02e";
 		donpcevent "道具屋の末っ子#do_tu02e::OnTalk1";
 		next;
 		mes "[治療師ハル]";
@@ -1813,7 +2404,7 @@ do_tu02e.gat,224,126,5	script	治療師ハル#do_tu02e	10164,{/* 52836 */
 		mes "そ、それじゃ私はこれで！";
 		next;
 		donpcevent "道具屋の末っ子#do_tu02e::OnTalk2";
-		cloakonnpc "道具屋の末っ子#do_tu02e"; //52837
+		cloakonnpc "道具屋の末っ子#do_tu02e";
 		mes "[治療師ハル]";
 		mes "おや、もう行ってしまった。";
 		mes "せっかちな子だね。";
@@ -1867,8 +2458,8 @@ do_tu02e.gat,224,126,5	script	治療師ハル#do_tu02e	10164,{/* 52836 */
 		mes "[治療師ハル]";
 		mes "はい！";
 		mes "できました！";
-		misceffect 58,""; //self
-		misceffect 234,""; //self
+		misceffect 58,"";
+		misceffect 234,"";
 		skill 142,1,0;
 		next;
 		cutin "do_su_010.bmp", 3;
@@ -1885,7 +2476,7 @@ do_tu02e.gat,224,126,5	script	治療師ハル#do_tu02e	10164,{/* 52836 */
 		mes "危ない時はポーションなどで";
 		mes "回復するようにしてくださいね。";
 		next;
-		cloakoffnpc "自警団員アリオ#do_tu02e"; //52838
+		cloakoffnpc "自警団員アリオ#do_tu02e";
 		donpcevent "自警団員アリオ#do_tu02e::OnTalk1";
 		mes "[自警団員アリオ]";
 		mes "お、ちゃんと荷物を";
@@ -1921,13 +2512,13 @@ do_tu02e.gat,224,126,5	script	治療師ハル#do_tu02e	10164,{/* 52836 */
 		mes "受注しました。";
 		mes "クエストウィンドウを開いて";
 		mes "確認してみましょう！^000000";
-		cloakonnpc "自警団員アリオ#do_tu02e"; //52838
-		setquest 98414; //state=1
-		viewpoint 1, 235, 198, 1, 0xFF0000; //52836
+		cloakonnpc "自警団員アリオ#do_tu02e";
+		setquest 98414;
+		viewpoint 1, 235, 198, 1, 0xFF0000;
 		delquest 98414;
 		getexp 103,1800;
 		delitem 1081,1;
-		setquest 98415; //state=1
+		setquest 98415;
 		set DORAM_1QUE,25;
 		cutin "do_su_002.bmp", 255;
 		close;
@@ -1950,7 +2541,7 @@ do_tu02e.gat,224,126,5	script	治療師ハル#do_tu02e	10164,{/* 52836 */
 		mes "開くことができます。^000000";
 		close2;
 		cutin "do_su_002.bmp", 255;
-		viewpoint 1, 235, 198, 1, 0xFF0000; //52836
+		viewpoint 1, 235, 198, 1, 0xFF0000;
 		end;
 	case 26:
 		mes "[治療師ハル]";
@@ -2101,11 +2692,11 @@ do_tu02e.gat,235,198,3	script	ペロン団長#do_tu02e	10152,{/* 52840 */
 		mes "お友達を誘ってパーティーを";
 		mes "組んでみましょう！^000000";
 		close2;
-		viewpoint 1, 358, 91, 1, 0xFF0000; //52840
+		viewpoint 1, 358, 91, 1, 0xFF0000;
 		cutin "do_su_002.bmp", 255;
 		end;
 	case 28:
-		emotion 21; //52840
+		emotion 21;
 		mes "[ペロン団長]";
 		mes "無事に枝を持ち帰りましたね。";
 		mes "お見事です。";
@@ -2118,12 +2709,13 @@ do_tu02e.gat,235,198,3	script	ペロン団長#do_tu02e	10152,{/* 52840 */
 		mes "私についてきてください。";
 		mes "次のテストを行います。";
 		close2;
-		setquest 98417; //state=1
+		setquest 98417;
 		warp "do_tu03e.gat",61,94;
 		end;
 	case 29:
 	case 30:
 	case 31:
+		close;
 	case 32:
 		delquest 98419;
 		getexp 214,2800;
@@ -2146,7 +2738,7 @@ do_tu02e.gat,235,198,3	script	ペロン団長#do_tu02e	10152,{/* 52840 */
 		mes "あなたはファルファーレ自警団に";
 		mes "ふさわしい人物です。";
 		next;
-		emotion 46,""; //self
+		emotion 46,"";
 		mes "[ペロン団長]";
 		mes "あなたの入団を認めましょう。";
 		mes "おめでとうございます。";
@@ -2180,18 +2772,18 @@ do_tu02e.gat,235,198,3	script	ペロン団長#do_tu02e	10152,{/* 52840 */
 		mes "あるんですけどね。";
 		mes "ハハハハ。";
 		close2;
-		setquest 98455; //state=1
+		setquest 98455;
 		delquest 98455;
 		set DORAM_1QUE,33;
 		getitem 25046,1;	// 乗船許可書
 		getitem 15273,1;	// 白いTシャツ
 		getitem 22183,1;	// 木のスリッパ
-		setquest 98420; //state=1
+		setquest 98420;
 		cutin "do_su_002.bmp", 255;
 		delquest 98420;
 		getexp 239,3000;
-		viewpoint 1, 203, 324, 1, 0xFF0000; //52840
-		setquest 98421; //state=1
+		viewpoint 1, 203, 324, 1, 0xFF0000;
+		setquest 98421;
 		end;
 	case 33:
 		mes "[ペロン団長]";
@@ -2200,7 +2792,7 @@ do_tu02e.gat,235,198,3	script	ペロン団長#do_tu02e	10152,{/* 52840 */
 		mes "あなたを乗せてくれるでしょう。";
 		mes "さっそく行ってみてください。";
 		close2;
-		viewpoint 1, 203, 324, 1, 0xFF0000; //52840
+		viewpoint 1, 203, 324, 1, 0xFF0000;
 		end;
 	default:
 		mes "^ff0000【インフォメーション】";
@@ -2259,7 +2851,7 @@ do_tu02e.gat,203,324,5	script	エッグリン#do_tu02e	10157,{/* 52841 */
 		case 1:
 			break;
 		}
-		emotion 45; //52841
+		emotion 45;
 		mes "[エッグリン]";
 		mes "乗船希望かな？";
 		mes "チケットを見せて。";
@@ -2305,15 +2897,15 @@ do_tu02e.gat,203,324,5	script	エッグリン#do_tu02e	10157,{/* 52841 */
 		mes "料理長もそれが勇敢な行為だと";
 		mes "信じてる。";
 		next;
-		setquest 98456; //state=1
+		setquest 98456;
 		delquest 98456;
 		getitem 25047,1;		// カルニャック
 		set DORAM_1QUE,35;
-		emotion 12, "エッグリン#do_tu02e"; //52841
+		emotion 12, "エッグリン#do_tu02e";
 		mes "[エッグリン]";
 		mes "わかったかな？";
 		mes "それじゃよろしく頼むよ！";
-		setquest 98422; //state=1
+		setquest 98422;
 		next;
 		mes "^009eff【インフォメーション】";
 		mes "クエスト「船員のお願い」を";
@@ -2335,7 +2927,7 @@ do_tu02e.gat,203,324,5	script	エッグリン#do_tu02e	10157,{/* 52841 */
 		mes "料理長もそれが勇敢な行為だと";
 		mes "信じてる。";
 		next;
-		emotion 12; //52841
+		emotion 12;
 		mes "[エッグリン]";
 		mes "わかったかな？";
 		mes "それじゃよろしく頼むよ！";
@@ -2422,7 +3014,7 @@ do_tu03e.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{/* 52842 */
 		mes "まずはその枝を";
 		mes "ジンドウに渡してください。";
 		close2;
-		setquest 98418; //state=1
+		setquest 98418;
 		set DORAM_1QUE,30;
 		end;
 	case 30:
@@ -2440,12 +3032,12 @@ do_tu03e.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{/* 52842 */
 		next;
 		if(select("吹く","殴る") == 2) {
 			mes "‐ボコ！‐";
-			misceffect 1, "バジルリスク捕虜#do_tu0"; //52844
+			misceffect 1, "バジルリスク捕虜#do_tu0";
 			next;
 			mes "[捕虜のバジルリスク]";
 			mes "グハッ！";
 			next;
-			emotion 23; //52842
+			emotion 23;
 			mes "[ペロン団長]";
 			mes "ちょ、ちょっと！";
 			mes "何してるんですか！";
@@ -2475,12 +3067,12 @@ do_tu03e.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{/* 52842 */
 			close;
 		case 3:
 			mes "‐グサ！‐";
-			misceffect 4, "バジルリスク捕虜#do_tu0"; //52844
+			misceffect 4, "バジルリスク捕虜#do_tu0";
 			next;
 			mes "[捕虜のバジルリスク]";
 			mes "イテッ！";
 			next;
-			emotion 23; //52842
+			emotion 23;
 			mes "[ペロン団長]";
 			mes "ちょ、ちょっと！";
 			mes "何してるんですか！";
@@ -2500,12 +3092,12 @@ do_tu03e.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{/* 52842 */
 		next;
 		if(select("さらに演奏する","叩く") == 2) {
 			mes "‐バン！‐";
-			misceffect 3, "バジルリスク捕虜#do_tu0"; //52844
+			misceffect 3, "バジルリスク捕虜#do_tu0";
 			next;
 			mes "[捕虜のバジルリスク]";
 			mes "アウチッ！";
 			next;
-			emotion 23; //52842
+			emotion 23;
 			mes "[ペロン団長]";
 			mes "ちょ、ちょっと！";
 			mes "何してるんですか！";
@@ -2530,12 +3122,12 @@ do_tu03e.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{/* 52842 */
 		next;
 		if(select("演奏し続ける","斬る") == 2) {
 			mes "‐ザク！‐";
-			misceffect 565, "バジルリスク捕虜#do_tu0"; //52844
+			misceffect 565, "バジルリスク捕虜#do_tu0";
 			next;
 			mes "[捕虜のバジルリスク]";
 			mes "グフッ！";
 			next;
-			emotion 23; //52842
+			emotion 23;
 			mes "[ペロン団長]";
 			mes "ちょ、ちょっと！";
 			mes "何してるんですか！";
@@ -2555,7 +3147,7 @@ do_tu03e.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{/* 52842 */
 		mes "あいつが目的だなんて";
 		mes "絶対に言うもんか！";
 		next;
-		emotion 21; //52842
+		emotion 21;
 		mes "[ペロン団長]";
 		mes "そこまで！";
 		mes "もう十分でしょう。";
@@ -2582,7 +3174,7 @@ do_tu03e.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{/* 52842 */
 		delitem 25043, 1;
 		delquest 98418;
 		getexp 177,2600;
-		setquest 98419; //state=1
+		setquest 98419;
 		set DORAM_1QUE,32;
 		warp "do_tu02e.gat",235,196;
 		end;
@@ -2619,7 +3211,7 @@ do_tu03e.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{/* 52842 */
 }
 do_tu03e.gat,64,92,3	script	ジンドウ#do_tu03e	10159,{/* 52843 */
 	if(DORAM_1QUE == 30) {
-		setquest 98454; //state=1
+		setquest 98454;
 		delquest 98454;
 		delitem 25044, 1;
 		getitem 25043, 1;
@@ -2647,13 +3239,13 @@ do_tu03e.gat,64,92,3	script	ジンドウ#do_tu03e	10159,{/* 52843 */
 	close;
 }
 do_tu03e.gat,61,91,5	script	バジルリスク捕虜#do_tu0	10158,{/* 52844 */
-	emotion 9; //52844
+	emotion 9;
 	mes "[バジルリスク捕虜]";
 	mes "……。";
 	close;
 }
 
-do_tu04e.gat,16,98,0	warp	warp01#do_tu04e	2,2,do_tu02e.gat,355,92 //52845 from_pos=(18, 98)
+do_tu04e.gat,16,98,0	warp	warp01#do_tu04e	2,2,do_tu02e.gat,355,92	//52845 from_pos=(18, 98)
 do_tu04e.gat,348,244,0	script	warp02#do_tu04e	45,2,2,{/* 52846 */
 	if(DORAM_1QUE < 38) {
 		mes "‐なにやら危なそうな気がする。";
@@ -2679,7 +3271,7 @@ do_tu04e.gat,20,98,0	script	object01#do_tu04e	139,3,3,{/* 52847 */
 		mes "^ff0000<Alt>キー+<U>キー^009effで";
 		mes "開くことができます。^000000";
 		close2;
-		viewpoint 1, 340, 251, 1, 0xFF0000; //52847
+		viewpoint 1, 340, 251, 1, 0xFF0000;
 		cutin "do_su_001.bmp", 255;
 		end;
 	}
@@ -2687,11 +3279,11 @@ do_tu04e.gat,20,98,0	script	object01#do_tu04e	139,3,3,{/* 52847 */
 }
 do_tu04e.gat,340,251,3	script	大きなトゲの生えた枝#do	111,{/* 52848 */
 	if(DORAM_1QUE == 27) {
-		setquest 98453; //state=1
+		setquest 98453;
 		compquest 98453;
 		getitem 25044,1;
 		set DORAM_1QUE,28;
-		misceffect 5; //52848
+		misceffect 5;
 		mes "‐大きなトゲの生えた枝を";
 		mes "　手に入れた。";
 		mes "　ペロン団長のところへ戻ろう‐";
@@ -2721,7 +3313,7 @@ OnInit:
 	end;
 OnTimer2000:
 	initnpctimer;
-	misceffect 6; //52848
+	misceffect 6;
 	end;
 }
 do_tu05e.gat,59,62,0	warp	warp01#do_tu05e	2,2,do_tu02e.gat,205,324	//52849 from_pos=(57, 62)
@@ -2753,10 +3345,10 @@ do_tu05e.gat,186,57,3	script	料理長#do_tu05e	548,{/* 52854 */
 		mes "今は忙しいから後にしてくれ。";
 		next;
 		menu "超大型新人が来てやったぞ！",-;
-		misceffect 1, "料理長#do_tu05e"; //52854
-		emotion 9, "料理長#do_tu05e"; //52854
-		emotion 23, "甲板長#do_tu05e"; //52858
-		emotion 23, "操舵手#do_tu05e"; //52859
+		misceffect 1, "料理長#do_tu05e";
+		emotion 9, "料理長#do_tu05e";
+		emotion 23, "甲板長#do_tu05e";
+		emotion 23, "操舵手#do_tu05e";
 		mes "[料理長]";
 		mes "……。";
 		next;
@@ -2767,15 +3359,15 @@ do_tu05e.gat,186,57,3	script	料理長#do_tu05e	548,{/* 52854 */
 		mes "俺は売られた喧嘩は買う主義だ！";
 		mes "武器を取りな！";
 		next;
-		emotion 4, "甲板長#do_tu05e"; //52858
+		emotion 4, "甲板長#do_tu05e";
 		mes "[甲板長]";
 		mes "おいおいおいマジかよ。";
 		next;
-		emotion 16, "操舵手#do_tu05e"; //52859
+		emotion 16, "操舵手#do_tu05e";
 		mes "[操舵手]";
 		mes "死ぬわアイツ。";
 		next;
-		emotion 29, "料理長#do_tu05e"; //52854
+		emotion 29, "料理長#do_tu05e";
 		mes "[料理長]";
 		mes "若造が料理長の座を奪おうとは";
 		mes "いい度胸だ！";
@@ -2786,7 +3378,7 @@ do_tu05e.gat,186,57,3	script	料理長#do_tu05e	548,{/* 52854 */
 		mes "この期に及んで怖気づいたか！";
 		mes "さっきまでの威勢はどうした！";
 		next;
-		emotion 0, "甲板長#do_tu05e"; //52858
+		emotion 0, "甲板長#do_tu05e";
 		mes "[甲板長]";
 		mes "……あれ？";
 		next;
@@ -2799,7 +3391,7 @@ do_tu05e.gat,186,57,3	script	料理長#do_tu05e	548,{/* 52854 */
 		mes "これ、料理長が注文した";
 		mes "カルニャックじゃ？";
 		next;
-		emotion 0, "料理長#do_tu05e"; //52854
+		emotion 0, "料理長#do_tu05e";
 		mes "[料理長]";
 		mes "何……？";
 		next;
@@ -2811,7 +3403,7 @@ do_tu05e.gat,186,57,3	script	料理長#do_tu05e	548,{/* 52854 */
 		mes "‐あなたは船の外で会った";
 		mes "　ドラムのことを話した‐";
 		next;
-		emotion 36, "料理長#do_tu05e"; //52854
+		emotion 36, "料理長#do_tu05e";
 		mes "[料理長]";
 		mes "またあいつか！";
 		mes "新人を使い走りにするだけじゃなく";
@@ -2834,7 +3426,7 @@ do_tu05e.gat,186,57,3	script	料理長#do_tu05e	548,{/* 52854 */
 		mes "いつまで経っても半人前の";
 		mes "問題児なんだ。";
 		next;
-		emotion 15, "料理長#do_tu05e"; //52854
+		emotion 15, "料理長#do_tu05e";
 		mes "[料理長]";
 		mes "食材を届けてくれてありがとうな。";
 		mes "船長なら船内に入ってすぐの";
@@ -2842,11 +3434,11 @@ do_tu05e.gat,186,57,3	script	料理長#do_tu05e	548,{/* 52854 */
 		mes "早く挨拶してきな。";
 		close2;
 		delitem 25047, 1;
-		setquest 98423; //state=1
+		setquest 98423;
 		delquest 98423;
 		set DORAM_1QUE,36;
 		getexp 332,3600;
-		setquest 98424; //state=1
+		setquest 98424;
 		end;
 	case 36:
 		mes "[料理長]";
@@ -2950,7 +3542,7 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "早く出ていきなさい。";
 		next;
 		menu "乗船許可書を渡す",-;
-		emotion 33; //52860
+		emotion 33;
 		mes "[ガムベリー船長]";
 		mes "新しい冒険者か。";
 		mes "私はこの船の船長^0000cdガムベリー^000000、";
@@ -3051,7 +3643,7 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "龍の巣の入り口までは……";
 		mes "^ff0000ステルロー^000000、君が案内してくれるか。";
 		next;
-		emotion 33, "ステルロー#do_tu05e"; //52861
+		emotion 33, "ステルロー#do_tu05e";
 		mes "[ステルロー]";
 		mes "了解です、船長。";
 		next;
@@ -3069,12 +3661,12 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "危なくなったら使ってくれ。";
 		mes "それでは頼んだぞ。";
 		next;
-		setquest 98457; //state=1
+		setquest 98457;
 		delquest 98457;
 		set DORAM_1QUE,38;
 		getitem 569, 50;
 		delitem 25046, 1;
-		setquest 98425; //state=1
+		setquest 98425;
 		mes "^009eff‐ガムベリー船長から";
 		mes "　初心者用ポーションを受け取った‐^000000";
 		next;
@@ -3110,9 +3702,9 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "準備ができたら俺に声をかけてくれ。";
 		close;
 	case 42:
-		cloakoffnpc "甲板長#do_tu05e_2"; //52937
-		cloakoffnpc "操舵手#do_tu05e_2"; //52938
-		cloakoffnpc "ステルロー#do_tu05e"; //52935
+		cloakoffnpc "甲板長#do_tu05e_2";
+		cloakoffnpc "操舵手#do_tu05e_2";
+		cloakoffnpc "ステルロー#do_tu05e";
 		mes "[ガムベリー船長]";
 		mes "おお、無事だったか。";
 		mes "なかなか帰って来ないから";
@@ -3133,7 +3725,7 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "もうしばらくすれば";
 		mes "煙も晴れてくるはずだが……。";
 		next;
-		emotion 0, "ステルロー#do_tu05e"; //52935
+		emotion 0, "ステルロー#do_tu05e";
 		mes "[ステルロー]";
 		mes "船長！";
 		mes "外を見てください！";
@@ -3152,12 +3744,12 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "……";
 		mes "……こうしちゃいられん。";
 		next;
-		emotion 27, "ガムベリー船長#do_tu05e"; //52934
+		emotion 27, "ガムベリー船長#do_tu05e";
 		mes "[ガムベリー船長]";
 		mes "ステルロー！　各員に伝達！";
 		mes "出航の準備だ！";
 		next;
-		emotion 21, "ステルロー#do_tu05e"; //52935
+		emotion 21, "ステルロー#do_tu05e";
 		mes "[ステルロー]";
 		mes "了解！";
 		next;
@@ -3166,17 +3758,17 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "沖の煙は晴れた！";
 		mes "ただちに出航の準備に移れ！";
 		next;
-		emotion 27, "ステルロー#do_tu05e"; //52935
+		emotion 27, "ステルロー#do_tu05e";
 		mes "[ステルロー]";
 		mes "操舵手と甲板長！";
 		mes "いつまでも油を売ってないで、";
 		mes "さっさと持ち場へ戻れ！";
 		next;
-		emotion 29, "甲板長#do_tu05e_2"; //52937
+		emotion 29, "甲板長#do_tu05e_2";
 		mes "[甲板長]";
 		mes "へいへーいっと！";
 		next;
-		emotion 32, "操舵手#do_tu05e_2"; //52938
+		emotion 32, "操舵手#do_tu05e_2";
 		mes "[操舵手]";
 		mes "ったく、待ちわびたぜ！";
 		next;
@@ -3184,16 +3776,16 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "さあ、忙しくなるぞ。";
 		mes "これまでの遅れを取り戻すんだ！";
 		next;
-		misceffect 119, "ガムベリー船長#do_tu05e"; //52934
+		misceffect 119, "ガムベリー船長#do_tu05e";
 		mes "[ガムベリー船長]";
 		mes "てめえら！";
 		mes "気合入れて取り掛かれ！";
 		donpcevent "ステルロー#do_tu05e::OnTalk1";
 		donpcevent "甲板長#do_tu05e::OnTalk1";
 		donpcevent "操舵手#do_tu05e::OnTalk1";
-		cloakonnpc "ステルロー#do_tu05e"; //52935
-		cloakonnpc "甲板長#do_tu05e_2"; //52937
-		cloakonnpc "操舵手#do_tu05e_2"; //52938
+		cloakonnpc "ステルロー#do_tu05e";
+		cloakonnpc "甲板長#do_tu05e_2";
+		cloakonnpc "操舵手#do_tu05e_2";
 		next;
 		menu "いよいよ出航ですか？",-;
 		mes "[ガムベリー船長]";
@@ -3202,7 +3794,7 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "君は今のうちに一度町に戻って";
 		mes "準備を整えて来ると良い。";
 		next;
-		emotion 29, "ガムベリー船長#do_tu05e"; //52934
+		emotion 29, "ガムベリー船長#do_tu05e";
 		mes "[ガムベリー船長]";
 		mes "フフフ……";
 		mes "久しぶりの船出に";
@@ -3222,7 +3814,7 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "あながち嘘ではなさそうだ。";
 		next;
 		menu "それはエッグリンが……",-;
-		emotion 18, "ガムベリー船長#do_tu05e"; //52934
+		emotion 18, "ガムベリー船長#do_tu05e";
 		mes "[ガムベリー船長]";
 		mes "ハッハッハ！";
 		mes "まあそう謙遜するな。";
@@ -3258,10 +3850,10 @@ do_tu05e.gat,26,64,5	script	ガムベリー船長#do_tu05e	10153,{/* 52860 */
 		mes "あまり遅いと置いて行って";
 		mes "しまうかもしれんぞ。ハッハッハ！";
 		close2;
-		misceffect 42,""; //self
-		misceffect 91,""; //self
-		misceffect 68,""; //self
-		setquest 98459; //state=1
+		misceffect 42,"";
+		misceffect 91,"";
+		misceffect 68,"";
+		setquest 98459;
 		delquest 98459;
 		getitem 19330, 1;
 		getitem 28576, 1;
@@ -3354,8 +3946,8 @@ OnTalk1:
 }
 do_tu05e.gat,30,57,0	script	object01#do_tu05e	139,11,11,{/* 52862 */
 	if(DORAM_1QUE == 42) {
-		cloakoffnpc "甲板長#do_tu05e_2"; //52937
-		cloakoffnpc "操舵手#do_tu05e_2"; //52938
+		cloakoffnpc "甲板長#do_tu05e_2";
+		cloakoffnpc "操舵手#do_tu05e_2";
 	}
 	end;
 }
@@ -3387,7 +3979,7 @@ do_tu06e.gat,29,146,5	script	自警団員#do_tu06e	10162,{/* 52866 */
 	if(DORAM_1QUE == 38) {
 		if(checkquest(98425)) {
 			delquest 98425;
-			getexp 430,4000; //4000
+			getexp 430,4000;
 		}
 		mes "[自警団員]";
 		mes "おや、新米の冒険者さんが";
@@ -3396,7 +3988,7 @@ do_tu06e.gat,29,146,5	script	自警団員#do_tu06e	10162,{/* 52866 */
 		mes "‐あなたはラザーニャの海で";
 		mes "　起こっていることを伝えた‐";
 		next;
-		emotion 5; //52866
+		emotion 5;
 		mes "[自警団員]";
 		mes "へ～なるほど。";
 		mes "そんなことが起きてたんですね。";
@@ -3422,9 +4014,9 @@ do_tu06e.gat,29,146,5	script	自警団員#do_tu06e	10162,{/* 52866 */
 		mes "迷っても大丈夫なように、";
 		mes "地図に印をつけておきました。";
 		mes "さあ、行きましょう。";
-		viewpoint 1, 157, 98, 1, 0xFF0000; //52866
+		viewpoint 1, 157, 98, 1, 0xFF0000;
 		close2;
-		setquest 98426; //state=1
+		setquest 98426;
 		set DORAM_1QUE,39;
 		end;
 	}
@@ -3450,7 +4042,7 @@ do_tu06e.gat,29,146,5	script	自警団員#do_tu06e	10162,{/* 52866 */
 		mes "迷っても大丈夫なように、";
 		mes "地図に印をつけておきました。";
 		mes "さあ、行きましょう。";
-		viewpoint 1, 157, 98, 1, 0xFF0000; //52866
+		viewpoint 1, 157, 98, 1, 0xFF0000;
 		close;
 	}
 }
@@ -3502,12 +4094,12 @@ do_tu06e.gat,153,103,3	script	自警団員#do_tu06e_2	10162,{/* 52867 */
 			end;
 		}
 		if(!chackquest(98427))
-			setquest 98427; //state=1
+			setquest 98427;
 		warp "do_tu07e.gat",190,20;
 		end;
 	}
 }
-do_tu07e.gat,190,15,0	warp	warp01#do_tu07e	2,2,do_tu06e.gat,153,98 //52868 from_pos=(190, 15)
+do_tu07e.gat,190,15,0	warp	warp01#do_tu07e	2,2,do_tu06e.gat,153,98	//52868 from_pos=(190, 15)
 do_tu07e.gat,190,20,0	script	object01#do_tu07e	139,4,4,{/* 52869 */
 	if(DORAM_1QUE == 39) {
 		mes "^009eff【インフォメーション】";
@@ -3524,7 +4116,7 @@ do_tu07e.gat,190,20,0	script	object01#do_tu07e	139,4,4,{/* 52869 */
 		mes "^ff0000<Alt>キー+<U>キー^009effで";
 		mes "開くことができます。^000000";
 		close2;
-		viewpoint 1, 162, 158, 1, 0xFF0000; //52869
+		viewpoint 1, 162, 158, 1, 0xFF0000;
 		cutin "do_su_001.bmp", 255;
 		end;
 	}
@@ -3566,7 +4158,7 @@ do_tu07e.gat,162,158,3	script	タルトゥーフィ#do_tu07e	10161,{/* 52871 */
 			delquest 98427;
 			getexp 524,8000;
 		}
-		emotion 6, "タルトゥーフィ#do_tu07e"; //52871
+		emotion 6, "タルトゥーフィ#do_tu07e";
 		mes "[タルトゥーフィ]";
 		mes "ええい、";
 		mes "騒がしいやつらだな。";
@@ -3579,7 +4171,7 @@ do_tu07e.gat,162,158,3	script	タルトゥーフィ#do_tu07e	10161,{/* 52871 */
 		next;
 		mes "‐大きな龍が何が呟いている‐";
 		next;
-		emotion 0, "タルトゥーフィ#do_tu07e"; //52871
+		emotion 0, "タルトゥーフィ#do_tu07e";
 		mes "[タルトゥーフィ]";
 		mes "ん？　誰？";
 		mes "初めて見る顔だね。";
@@ -3630,7 +4222,7 @@ do_tu07e.gat,162,158,3	script	タルトゥーフィ#do_tu07e	10161,{/* 52871 */
 		mes "僕だってやりたくて";
 		mes "やってるわけじゃないんだ。";
 		next;
-		emotion 0, "タルトゥーフィ#do_tu07e"; //52871
+		emotion 0, "タルトゥーフィ#do_tu07e";
 		mes "[タルトゥーフィ]";
 		mes "そうだ！";
 		mes "君たちでこの周りにいる";
@@ -3649,7 +4241,7 @@ do_tu07e.gat,162,158,3	script	タルトゥーフィ#do_tu07e	10161,{/* 52871 */
 		mes "クエストを受注しました。";
 		mes "クエストウィンドウを開いて";
 		mes "確認してみましょう！^000000";
-		setquest 98428; //state=1
+		setquest 98428;
 		set DORAM_1QUE,40;
 		close2;
 		cutin "do_su_002.bmp", 255;
@@ -3708,7 +4300,7 @@ do_tu07e.gat,162,158,3	script	タルトゥーフィ#do_tu07e	10161,{/* 52871 */
 		mes "　何かを渡された‐";
 		next;
 		if(DORAM_1QUE == 40) {
-			setquest 98458; //state=1
+			setquest 98458;
 			delquest 98458;
 			getitem 12324, 1;
 			set DORAM_1QUE,41;
@@ -3735,7 +4327,7 @@ do_tu07e.gat,162,158,3	script	タルトゥーフィ#do_tu07e	10161,{/* 52871 */
 		delquest 98428;
 		set DORAM_1QUE,42;
 		getexp 577,10000;
-		setquest 98429; //state=1
+		setquest 98429;
 		end;
 	}
 	if(DORAM_1QUE == 42) {
@@ -3847,7 +4439,7 @@ do_tu02e.gat,236,173,3	script	酔っ払い#do_tu02e_02	561,{/* 53244 */
 	close;
 }
 do_tu02e.gat,200,278,5	script	心配そうなドラム#do_tu0	559,{/* 53245 */
-	emotion 54; //53245
+	emotion 54;
 	mes "[心配そうなドラム]";
 	mes "最近、不法にイワシを獲る漁船に";
 	mes "騙されて乗せられるドラムが";
@@ -3857,7 +4449,7 @@ do_tu02e.gat,200,278,5	script	心配そうなドラム#do_tu0	559,{/* 53245 */
 	close;
 }
 do_tu02e.gat,202,276,5	script	浮かれたドラム#do_tu02e	560,{/* 53246 */
-	emotion 18; //53246
+	emotion 18;
 	mes "[浮かれたドラム]";
 	mes "やった！";
 	mes "豪華クルーズ旅行が当たったぞ！";
@@ -3879,13 +4471,13 @@ do_tu02e.gat,236,179,5	script	ニャンクン#do_tu02e	10163,{/* 53248 */
 	close;
 }
 do_tu02e.gat,229,197,5	script	トス#do_tu02e	10164,{/* 53249 */
-	emotion 22; //53249
+	emotion 22;
 	mes "[トス]";
 	mes "やはり有名な場所だから人が多いな。";
 	close;
 }
 do_tu02e.gat,228,193,5	script	ポルト#do_tu02e	10163,{/* 53250 */
-	emotion 32; //53250
+	emotion 32;
 	mes "[ポルト]";
 	mes "ここに来たなら";
 	mes "カルーニャミルクは";
@@ -3893,7 +4485,7 @@ do_tu02e.gat,228,193,5	script	ポルト#do_tu02e	10163,{/* 53250 */
 	close;
 }
 do_tu02e.gat,226,196,5	script	アラム#do_tu02e	10166,{/* 53251 */
-	emotion 7; //53251
+	emotion 7;
 	mes "[アラム]";
 	mes "きょろきょろしないの！";
 	mes "田舎者丸出しじゃない！";
@@ -3928,7 +4520,7 @@ do_tu02e.gat,227,187,1	script	ヴォンゴロ#do_tu02e	544,{/* 53252 */
 	mes "魚屋さんまで走って";
 	mes "買いに行くんです。";
 	next;
-	emotion 54; //53252
+	emotion 54;
 	mes "[ヴォンゴロ]";
 	mes "あーあ、本当に美味しいのに……。";
 	close;
@@ -3953,7 +4545,7 @@ do_tu02e.gat,232,187,6	script	フェットゥチーニャ#do_t	545,{/* 53253 */
 	mes "自警団と猫の手職員たちの泣き言、";
 	mes "新米冒険者たちからの相談等々……";
 	next;
-	emotion 28; //53253
+	emotion 28;
 	mes "[フェットゥチーニャ]";
 	mes "24時間じゃ足りないです。";
 	mes "従業員を増やせばいいのに！";
@@ -4008,7 +4600,7 @@ do_tu02e.gat,184,234,5	script	幼いニャンコ#do_tu02e_0	422,{/* 53258 */
 	end;
 }
 do_tu02e.gat,186,231,3	script	幼いニャンコ#do_tu02e_0	10167,{/* 53259 */
-	emotion 28; //53259
+	emotion 28;
 	unittalk "幼いニャンコ : これどうして転がらないにゃ～？転がるようにしてにゃ～。";
 	end;
 }
@@ -4052,7 +4644,7 @@ do_tu02e.gat,77,263,5	script	タルリー#do_tu02e	10166,{/* 53265 */
 	close;
 }
 do_tu02e.gat,191,174,3	script	ゴルリ#do_tu02e	547,{/* 53266 */
-	emotion 45; //53266
+	emotion 45;
 	mes "[ゴルリ]";
 	mes "良い天気だにゃあ。";
 	close;
@@ -4114,7 +4706,7 @@ lasagna.gat,300,242,4	script	カプラ職員#lasagna	117,{/* 50102 */
 		mes "^009eff【インフォメーション】";
 		mes "南東の広場にいる";
 		mes "オリオに話しかけましょう！^000000";
-		setquest 98440; //state=1
+		setquest 98440;
 		compquest 98440;
 		viewpoint 1, 323, 229, 1, 0xFF0000; //50102
 		close;

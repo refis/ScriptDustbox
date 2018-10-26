@@ -1,3 +1,4 @@
+/*
 2939,誘惑の魔神の影＠貫通攻撃,attack,158,2,1000,0,5000,yes,target,always,0,,,,,,6
 2939,誘惑の魔神の影＠闇属性攻撃,attack,190,3,2000,0,5000,yes,target,always,0,,,,,,
 2940,猜疑の魔神の影＠ダブルストレイフィング,attack,46,1,2000,0,5000,yes,target,always,0,,,,,,
@@ -15,6 +16,7 @@
 2960,フレイムクロス＠インビジブル,idle,353,1,10000,0,30000,yes,self,always,0,,,,,,
 2960,フレイムクロス＠インビジブル,attack,353,1,10000,0,30000,yes,self,always,0,,,,,,
 2960,フレイムクロス＠フレイムクロス,idle,711,1,10000,0,10000,no,self,always,0,,,,,,
+*/
 
 dali.gat,64,129,0	warp	#dali_to_dali02	1,1,dali02.gat,66,101	//58439
 dali02.gat,66,97,0	warp	#dali02_to_dali	1,1,dali.gat,64,125		//59130
@@ -389,14 +391,14 @@ dali02.gat,141,120,3	script	魔神の塔 次元移動機#tnm	10007,{/* 59118 */
 	}
 }
 dali02.gat,137,121,3	script	魔学者アティ#tnm02	620,{/* 59117 */
-	{
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		mes "[魔学者アティ]";
 		mes "調査隊か？";
 		mes "魔神の塔は一人で行けるほど甘くない。";
 		mes "まずはリーダーと話させてくれ。";
 		close;
 	}
-	{
+	if(checkquest(7577)) {
 		if(getonlinepartymember() < 1) {
 			mes "[魔学者アティ]";
 			mes "調査志願者か？";
@@ -404,20 +406,18 @@ dali02.gat,137,121,3	script	魔学者アティ#tnm02	620,{/* 59117 */
 			mes "結成してくれ。";
 			close;
 		}
-		if(checkquest(7577)) {
-			if(checkquest(7577) & 0x4) {
-				mes "‐再調査が可能になりました‐";
-				delquest 7577;
-				close;
-			}
-			mes "[魔学者アティ]";
-			mes "調査希望者か？";
-			mes "ふむ。すまないが、";
-			mes "すぐに再調査は出来ないのだ。";
-			mes "前回の調査から少なくとも";
-			mes "^ff000023時間^000000経過してから来てくれ。";
+		if(checkquest(7577) & 0x4) {
+			mes "‐再調査が可能になりました‐";
+			delquest 7577;
 			close;
 		}
+		mes "[魔学者アティ]";
+		mes "調査希望者か？";
+		mes "ふむ。すまないが、";
+		mes "すぐに再調査は出来ないのだ。";
+		mes "前回の調査から少なくとも";
+		mes "^ff000023時間^000000経過してから来てくれ。";
+		close;
 	}
 	if(getonlinepartymember() < 1) {
 		mes "[魔学者アティ]";
@@ -508,7 +508,7 @@ OnStart:
 	mes "[偵察兵]";
 	mes "次の階さえ突破すれば最上階ですが、";
 	mes "多数の魔族がいます。";
-	donpcevent "偵察兵#tnm01")+ "::OnTalk1";
+	donpcevent getmdnpcname("偵察兵#tnm01")+ "::OnTalk1";
 	next;
 	mes "[偵察兵]";
 	mes "この人員での突破は";
@@ -558,13 +558,28 @@ OnTimer3000:
 }
 
 1@tnm1.gat,56,110,3	script	副隊長ハイム#heim	691,{/* 60432 (hide)*/
-	if(TNM1_QUE == 0) {
-		if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		if(TNM1_QUE == 0) {
 			mes "[副隊長ハイム]";
 			mes "援軍なのか？";
 			mes "ならどうしてそこで突っ立っている！";
 			close;
 		}
+		else if(TNM1_QUE < 8) {
+			mes "[副隊長ハイム]";
+			mes "負傷兵の応急処置が最優先だ。";
+			mes "衛生兵に協力してやってくれ。";
+			close;
+		}
+		else {
+			mes "[副隊長ハイム]";
+			mes "幸い、戦死者はいないようだ。";
+			mes "これ以上部下たちが傷つくのは";
+			mes "耐えられない。";
+			close;
+		}
+	}
+	if(TNM1_QUE == 0) {
 		stopnpctimer;
 		mes "[副隊長ハイム]";
 		mes "援軍なのか？";
@@ -617,7 +632,7 @@ OnStart:
 	end;
 OnTimer3000:
 	initnpctimer;
-	emotion 9, getmdnpcname("副隊長ハイム#heim"; //60432
+	emotion 9, getmdnpcname("副隊長ハイム#heim"); //60432
 	end;
 OnTalk1:
 	unittalk "副隊長ハイム : アサシンギルドの支援か！　よく来てくれた!!";
@@ -1426,7 +1441,7 @@ OnKilled:
 		mes "　^ff0000システムを再起動した。^000000";
 		mes "　再起動したルシルに話しかけよう‐";
 		setpartyinmap TNM1_QUE,12;
-		killmonster getmdnpcname("アサシン・ヒュー#hui02")+ "::OnKilled";
+		killmonsterall getmdnpcname("アサシン・ヒュー#hui02")+ "::OnKilled";
 		close;
 	case 12:
 		cutin "tnm_lucile02.bmp", 2;
@@ -1539,7 +1554,7 @@ OnTimer2000:
 	monster getmdmapname("1@tnm2.gat"),142,214,"魔神石#05",2938,1,getmdnpcname("#tnm2topmob")+ "::OnKilled5";
 	end;
 OnTimer4000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
 	if(!'first) {
 		areamonster getmdmapname("1@tnm2.gat"),68-3,167-3, 68+3,167+3,"誘惑の魔神の影",2939,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
 		areamonster getmdmapname("1@tnm2.gat"),90-3,86-3, 90+3,86+3,"誘惑の魔神の影",2939,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
@@ -1549,7 +1564,7 @@ OnTimer4000:
 	}
 	end;
 OnTimer5000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
 	if(!'first) {
 		areamonster getmdmapname("1@tnm2.gat"),68-3,167-3, 68+3,167+3,"猜疑の魔神の影",2940,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
 		areamonster getmdmapname("1@tnm2.gat"),90-3,86-3, 90+3,86+3,"猜疑の魔神の影",2940,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
@@ -1565,9 +1580,9 @@ OnTimer6000:
 	end;
 OnTimer21000:
 	announce "ルシル : 魔神石が1回目の移動を始めました。", 0x9, 0x00ff00;
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled1";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled3";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled5";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled1";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled3";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled5";
 	end;
 OnTimer22000:
 	if('stone & 0x1 == 0)
@@ -1583,8 +1598,8 @@ OnTimer26000:
 	donpcevent getmdnpcname("tnm2flamecross")+ "::OnStart";
 	end;
 OnTimer31000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled4";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled4";
 	end;
 OnTimer32000:
 	if('stone & 0x2 == 0)
@@ -1593,7 +1608,7 @@ OnTimer32000:
 		monster getmdmapname("1@tnm2.gat"),197,162,"魔神石#04",2938,1,getmdnpcname("#tnm2topmob")+ "::OnKilled4";
 	end;
 OnTimer34000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
 	if(!'first) {
 		areamonster getmdmapname("1@tnm2.gat"),78-3,165-3, 78+3,165+3,"誘惑の魔神の影",2939,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
 		areamonster getmdmapname("1@tnm2.gat"),96-3,95-3, 96+3,95+3,"誘惑の魔神の影",2939,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
@@ -1603,7 +1618,7 @@ OnTimer34000:
 	}
 	end;
 OnTimer35000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
 	if(!'first) {
 		areamonster getmdmapname("1@tnm2.gat"),78-3,165-3, 78+3,165+3,"猜疑の魔神の影",2940,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
 		areamonster getmdmapname("1@tnm2.gat"),96-3,95-3, 96+3,95+3,"猜疑の魔神の影",2940,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
@@ -1619,9 +1634,9 @@ OnTimer46000:
 	end;
 OnTimer51000:
 	announce "ルシル : 魔神石が2回目の移動を始めました。", 0x9, 0x00ff00;
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled1";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled3";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled5";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled1";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled3";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled5";
 	end;
 OnTimer52000:
 	if('stone & 0x1 == 0)
@@ -1632,8 +1647,8 @@ OnTimer52000:
 		monster getmdmapname("1@tnm2.gat"),140,195,"魔神石#05",2938,1,getmdnpcname("#tnm2topmob")+ "::OnKilled5";
 	end;
 OnTimer61000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled4";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled4";
 	end;
 OnTimer62000:
 	if('stone & 0x2 == 0)
@@ -1642,7 +1657,7 @@ OnTimer62000:
 		monster getmdmapname("1@tnm2.gat"),188,161,"魔神石#04",2938,1,getmdnpcname("#tnm2topmob")+ "::OnKilled4";
 	end;
 OnTimer64000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
 	if(!'first) {
 		areamonster getmdmapname("1@tnm2.gat"),88-3,163-3, 88+3,163+3,"誘惑の魔神の影",2939,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
 		areamonster getmdmapname("1@tnm2.gat"),103-3,104-3, 103+3,104+3,"誘惑の魔神の影",2939,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
@@ -1652,7 +1667,7 @@ OnTimer64000:
 	}
 	end;
 OnTimer65000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
 	if(!'first) {
 		areamonster getmdmapname("1@tnm2.gat"),88-3,163-3, 88+3,163+3,"猜疑の魔神の影",2940,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
 		areamonster getmdmapname("1@tnm2.gat"),103-3,104-3, 103+3,104+3,"猜疑の魔神の影",2940,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
@@ -1668,9 +1683,9 @@ OnTimer66000:
 	end;
 OnTimer81000:
 	announce "ルシル : 魔神石が3回目の移動を始めました。", 0x9, 0x00ff00;
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled1";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled3";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled5";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled1";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled3";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled5";
 	end;
 OnTimer82000:
 	if('stone & 0x1 == 0)
@@ -1686,8 +1701,8 @@ OnTimer86000:
 	donpcevent getmdnpcname("tnm2flamecross")+ "::OnStart";
 	end;
 OnTimer91000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled4";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled4";
 	end;
 OnTimer92000:
 	if('stone & 0x2 == 0)
@@ -1696,7 +1711,7 @@ OnTimer92000:
 		monster getmdmapname("1@tnm2.gat"),179,158,"魔神石#04",2938,1,getmdnpcname("#tnm2topmob")+ "::OnKilled4";
 	end;
 OnTimer94000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
 	if(!'first) {
 		areamonster getmdmapname("1@tnm2.gat"),98-3,160-3, 98+3,160+3,"誘惑の魔神の影",2939,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
 		areamonster getmdmapname("1@tnm2.gat"),110-3,110-3, 110+3,110+3,"誘惑の魔神の影",2939,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2939";
@@ -1706,7 +1721,7 @@ OnTimer94000:
 	}
 	end;
 OnTimer95000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
 	if(!'first) {
 		areamonster getmdmapname("1@tnm2.gat"),98-3,160-3, 98+3,160+3,"猜疑の魔神の影",2940,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
 		areamonster getmdmapname("1@tnm2.gat"),110-3,110-3, 110+3,110+3,"猜疑の魔神の影",2940,2,getmdnpcname("#tnm2topmob")+ "::OnKilled2940";
@@ -1722,9 +1737,9 @@ OnTimer106000:
 	end;
 OnTimer111000:
 	announce "ルシル : 魔神石が4回目の移動を始めました。", 0x9, 0x00ff00;
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled1";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled3";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled5";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled1";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled3";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled5";
 	end;
 OnTimer112000:
 	if('stone & 0x1 == 0)
@@ -1735,8 +1750,8 @@ OnTimer112000:
 		monster getmdmapname("1@tnm2.gat"),140,173,"魔神石#05",2938,1,getmdnpcname("#tnm2topmob")+ "::OnKilled5";
 	end;
 OnTimer121000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled4";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled4";
 	end;
 OnTimer122000:
 	if('stone & 0x2 == 0)
@@ -1751,9 +1766,9 @@ OnTimer126000:
 	end;
 OnTimer141000:
 	announce "ルシル : 魔神石が5回目の移動を始めました。　そろそろ危険です!!", 0x9, 0x00ff00;
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled1";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled3";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled5";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled1";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled3";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled5";
 	end;
 OnTimer142000:
 	if('stone & 0x1 == 0)
@@ -1769,8 +1784,8 @@ OnTimer146000:
 	donpcevent getmdnpcname("tnm2flamecross")+ "::OnStart";
 	end;
 OnTimer151000:
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled4";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled4";
 	end;
 OnTimer152000:
 	if('stone & 0x2 == 0)
@@ -1785,9 +1800,9 @@ OnTimer166000:
 	end;
 OnTimer171000:
 	announce "ルシル : かなり危険な状態です！　なんとか防いでください！", 0x9, 0xff0000;
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled1";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled3";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled5";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled1";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled3";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled5";
 	end;
 OnTimer172000:
 	if('stone & 0x1 == 0)
@@ -1807,8 +1822,8 @@ OnTimer178000:
 	end;
 OnTimer181000:
 	announce "ルシル : これ以上は限界です!!!", 0x9, 0xff0000;
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled4";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled4";
 	end;
 OnTimer182000:
 	if('stone & 0x2 == 0)
@@ -1833,11 +1848,11 @@ OnTimer186000:
 	set 'first,1;
 	set 'count,5;
 	set 'stone,0;
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled1";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled2";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled3";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled4";
-	killmonster getmdnpcname("#tnm2topmob")+ "::OnKilled5";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled1";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled2";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled3";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled4";
+	killmonsterall getmdnpcname("#tnm2topmob")+ "::OnKilled5";
 	end;
 OnTimer189000:
 	donpcevent getmdnpcname("魔王モロク#tnm01")+ "::OnFail2";
@@ -2274,7 +2289,7 @@ OnTimer3000:
 	end;
 OnTimer8000:
 	stopnpctimer;
-	killmonster getmdnpcname("#tnm2flamecross")+ "::OnKilled";
+	killmonsterall getmdnpcname("#tnm2flamecross")+ "::OnKilled";
 	end;
 }
 
@@ -2791,7 +2806,7 @@ OnStart:
 	end;
 OnCrossEff:
 	if('mob) {
-		getunitxy '@map$,'@x,'@y,'mob;
+		getmapxy '@map$,'@x,'@y,3,'mob;
 		unittalk 'mob,"魔神の巨影 : どうだ！　地獄の炎は!!";
 		for(set '@i,3;'@i<=12;set '@i,'@i+3) {
 			set '@effmob['@j+0],callmonster(getmdmapname("1@tnm3.gat"),'@x+'@i,'@y+'@i," ",2960);
@@ -2817,7 +2832,7 @@ OnCrossEff:
 	end;
 OnCircleEff:
 	if('mob) {
-		getunitxy '@map$,'@x,'@y,'mob;
+		getmapxy '@map$,'@x,'@y,3,'mob;
 		unittalk 'mob,"魔神の巨影 : うわははははは!!";
 		setarray '@dx,-3, 3, 9, 9, 6,  0,-12,-12,-9,-3, 6;
 		setarray '@dy, 3, 6, 0,-3,-9,-12, -3,  3, 9,15,18;
@@ -2891,6 +2906,14 @@ OnStop:
 		mes "アイツを倒すのが俺の任務だ。";
 		mes "手伝ってくれ！";
 		cutin "ep14_roki01.bmp", 2;
+		if(getmercinfo(0)) {
+			next;
+			mes "[ロキ]";
+			mes "……";
+			close2;
+			cutin "ep14_roki01.bmp", 255;
+			end;
+		}
 		hideonnpc getmdnpcname("ロキ#tnmloki02"); //84740
 		setquest 114800; //state=1
 		compquest 114800;
@@ -3047,7 +3070,7 @@ OnTimer22000:
 		mes "……心、感情というのを……";
 		mes "感じられる機会かもしれないしな。";
 		setquest 114800; //state=1
-		compquest 114800;
+		delquest 114800;
 	}
 	close2;
 	cutin "ep14_roki01.bmp", 255;

@@ -9,7 +9,7 @@ yuno.gat,179,174,4	script	バンズ#yuno	851,{
 		mes "オレになにか用があるのか？";
 		close;
 	}
-	if(NC_PILEBUNKER > 0) {
+	if(countitem(1549) > 0) {
 		// 未調査
 		mes "[バンズ]";
 		mes "パイルバンカーの";
@@ -269,7 +269,6 @@ yuno.gat,179,174,4	script	バンズ#yuno	851,{
 	delitem 1415,1;	//串
 	getitem 1549,1;	//パイルバンカー
 	getitem 1360,1;	//ツーハンドアックス
-	set NC_PILEBUNKER,1;
 	next;
 	mes "[バンズ]";
 	mes "そうそう……";
