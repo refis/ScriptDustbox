@@ -1,8 +1,13 @@
 hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
+	if(Job != Job_Hunter && Job != Job_Ranger) {
+		// 未調査
+		mes "[カエクス]";
+		close;
+	}
 	switch(TOGARI_QUE) {
 	case 0:
 	case 1:
-		emotion 3; //58969
+		emotion 3;
 		mes "[カエクス]";
 		mes "レンジャーかあ。";
 		mes "ウォーグの背中に乗って";
@@ -25,7 +30,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 		mes "来たんだけれど……。";
 		mes "追い返されてしまったんだ。";
 		next;
-		emotion 54; //58969
+		emotion 54;
 		mes "[カエクス]";
 		mes "はぁ……";
 		mes "どうして転職試験に";
@@ -46,7 +51,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 		mes "実は僕、^FF0000目が見えない^000000んだよ。";
 		mes "だから君の顔も、";
 		mes "実際にはわかっていない。";
-		emotion 0,""; //self
+		emotion 0,"";
 		next;
 		mes "[カエクス]";
 		mes "はは、驚いた？";
@@ -135,7 +140,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 		mes "　ハンターギルドの建物に入って";
 		mes "　すぐ左手にいるハンターギルド員に";
 		mes "　カエクスの頼み事を伝えに行こう‐";
-		chgquest 115000,115003; //state=1
+		chgquest 115000,115003;
 		set TOGARI_QUE,2;
 		close;
 	case 2:
@@ -159,7 +164,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 		mes "　頼みは聞き入れられなかったことを";
 		mes "　カエクスに伝えた‐";
 		next;
-		emotion 28, "カエクス#togari1"; //58969
+		emotion 28, "カエクス#togari1";
 		mes "[カエクス]";
 		mes "そうなのか……";
 		mes "結果は残念だけど";
@@ -174,7 +179,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 		mes "[カエクス]";
 		mes "…………。";
 		next;
-		emotion 32, "カエクス#togari1"; //58969
+		emotion 32, "カエクス#togari1";
 		mes "[カエクス]";
 		mes "いや、あきらめないぞ！";
 		mes "僕は絶対、立派なハンターになる！";
@@ -289,7 +294,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 		mes "‐ハンターギルドの建物に入って";
 		mes "　すぐ左手にいるハンターギルド員に";
 		mes "　^ff0000鳥狩の呼子^000000の事を伝えに行こう‐";
-		chgquest 115006,115009; //state=1
+		chgquest 115006,115009;
 		set TOGARI_QUE,4;
 		close;
 	case 4:
@@ -328,7 +333,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 		mes "‐ハンターギルドの建物に入って";
 		mes "　すぐ左手にいるハンターギルド員に";
 		mes "　^ff0000鳥狩の呼子^000000を渡しに行こう‐";
-		chgquest 115012,115015; //state=1
+		chgquest 115012,115015;
 		set TOGARI_QUE,6;
 		close;
 	case 6:
@@ -389,7 +394,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 		mes "たくさん協力してくれたお礼だよ。";
 		mes "受け取って。";
 		next;
-		chgquest 115027,201675; //state=1
+		chgquest 115027,201675;
 		getitem 18985, 1;
 		set TOGARI_QUE,12;
 		mes "[カエクス]";
@@ -599,7 +604,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 				mes "途中でやめたくなった場合は、";
 				mes "もう一度僕に話しかけてくれれば";
 				mes "いいからね。";
-				setquest 96255; //state=1
+				setquest 96255;
 				set TOGARI_QUE,13;
 				close;
 			case 2:
@@ -629,7 +634,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 				mes "[カエクス]";
 				mes "途中でやめたくなった場合は、";
 				mes "もう一度僕に話しかけてね。";
-				setquest 115030; //state=1
+				setquest 115030;
 				set TOGARI_QUE,14;
 				close;
 			case 3:
@@ -665,7 +670,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 				mes "途中でやめたくなった場合は、";
 				mes "もう一度僕に話しかけてくれれば";
 				mes "いいからね。";
-				setquest 96260; //state=1
+				setquest 96260;
 				set TOGARI_QUE,13;
 				close;
 			case 2:
@@ -698,7 +703,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 				mes "[カエクス]";
 				mes "途中でやめたくなった場合は、";
 				mes "もう一度僕に話しかけてね。";
-				setquest 115033; //state=1
+				setquest 115033;
 				set TOGARI_QUE,14;
 				close;
 			case 3:
@@ -734,7 +739,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 				mes "途中でやめたくなった場合は、";
 				mes "もう一度僕に話しかけてくれれば";
 				mes "いいからね。";
-				setquest 96265; //state=1
+				setquest 96265;
 				set TOGARI_QUE,13;
 				close;
 			case 2:
@@ -767,7 +772,7 @@ hugel.gat,214,225,3	script	カエクス#togari1	86,{/* 58969 */
 				mes "[カエクス]";
 				mes "途中でやめたくなった場合は、";
 				mes "もう一度僕に話しかけてね。";
-				setquest 115036; //state=1
+				setquest 115036;
 				set TOGARI_QUE,14;
 				close;
 			case 3:
@@ -787,17 +792,20 @@ OnTouch:
 		// 未調査
 		mes "[カエクス]";
 		mes "あぁー、困ったなぁ";
-		setquest 115000; //state=1
+		setquest 115000;
 		TOGARI_QUE,1;
 		close;
 	}
 	end;
+OnInit:
+	waitingroom "笛吹きハンター！",0;
+	end;
 }
-close;
+
 hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 	switch(TOGARI_QUE) {
 	case 2:
-		emotion 1; //58970
+		emotion 1;
 		mes "[ハンターギルド員]";
 		mes "ん？　私に何か用か？";
 		next;
@@ -865,7 +873,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 		mes "　カエクスのところに戻り、";
 		mes "　頼みは聞き入れられなかったことを";
 		mes "　伝えよう‐";
-		chgquest 115003,115006; //state=1
+		chgquest 115003,115006;
 		TOGARI_QUE,3;
 		close;
 	case 3:
@@ -926,7 +934,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 		mes "　目が潤んでいるような気がする‐";
 		next;
 		menu "涙？",-;
-		emotion 19, "ハンターギルド員#togari"; //58970
+		emotion 19, "ハンターギルド員#togari";
 		mes "[ハンターギルド員]";
 		mes "いや！　いやいや!!";
 		mes "泣いてなどいない!!";
@@ -952,7 +960,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 		mes "「アンタ」はないだろ!?";
 		mes "ああ……天使のような子が……。";
 		next;
-		emotion 28, "ハンターギルド員#togari"; //58970
+		emotion 28, "ハンターギルド員#togari";
 		mes "[ハンターギルド員]";
 		mes "それに比べてカエクスは";
 		mes "いい弟だなぁ……。";
@@ -987,7 +995,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 		mes "　^ff0000鳥狩の呼子^000000を持ってくるよう";
 		mes "　頼まれた。";
 		mes "　カエクスのところに戻ろう‐";
-		chgquest 115009,115012; //state=1
+		chgquest 115009,115012;
 		TOGARI_QUE,5;
 		close;
 	case 5:
@@ -1180,7 +1188,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 		mes "　頼みたいことがあると言われた。";
 		mes "　もう一度ハンターギルド員に";
 		mes "　話しかけよう‐";
-		chgquest 115015,115018; //state=1
+		chgquest 115015,115018;
 		TOGARI_QUE,7;
 		close;
 	case 7:
@@ -1229,7 +1237,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 				mes "　依頼内容を変えたい場合、";
 				mes "　もう一度ハンターギルド員に";
 				mes "　話しかけるといいらしい‐";
-				chgquest 115018,96250; //state=1
+				chgquest 115018,96250;
 				TOGARI_QUE,8;
 				close;
 			case 2:
@@ -1269,7 +1277,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 				mes "　依頼内容を変えたい場合、";
 				mes "　もう一度ハンターギルド員に";
 				mes "　話しかけるといいらしい‐";
-				chgquest 115018,115021; //state=1
+				chgquest 115018,115021;
 				TOGARI_QUE,9;
 				close;
 			}
@@ -1338,7 +1346,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 			mes "　依頼内容を変えたい場合、";
 			mes "　もう一度ハンターギルド員に";
 			mes "　話しかけるといいらしい‐";
-			chgquest 96250,115021; //state=1
+			chgquest 96250,115021;
 			TOGARI_QUE,9;
 			close;
 		}
@@ -1354,7 +1362,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 		mes "　ハンターギルド員に報告した。";
 		mes "　もう一度ハンターギルド員に";
 		mes "　話しかけよう‐";
-		chgquest 96250,115024; //state=1
+		chgquest 96250,115024;
 		TOGARI_QUE,10;
 		close;
 	case 9:
@@ -1411,7 +1419,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 		mes "　依頼内容を変えたい場合、";
 		mes "　もう一度ハンターギルド員に";
 		mes "　話しかけるといいらしい‐";
-		chgquest 115021,96250; //state=1
+		chgquest 115021,96250;
 		TOGARI_QUE,8;
 		close;
 	case 10:
@@ -1528,7 +1536,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 		mes "　今後はハンターギルドのために";
 		mes "　働くらしい。";
 		mes "　カエクスのところに行ってみよう‐";
-		chgquest 115024,115027; //state=1
+		chgquest 115024,115027;
 		TOGARI_QUE,11;
 		close;
 	case 11:
@@ -1560,7 +1568,7 @@ hu_in01.gat,376,373,4	script	ハンターギルド員#togari	66,{/* 58970 */
 		mes "思えるようになったよ……。";
 		close;
 	default:
-		emotion 1; //58970
+		emotion 1;
 		mes "[ハンターギルド員]";
 		mes "ん？　何か用か？";
 		mes "ハンターへの転職試験の申し込みなら";
