@@ -40,10 +40,10 @@ harboro2.gat,58,265,0,0	monster	デビルズフィンガーズ	3743,1,60000,0,0
 harboro2.gat,53,262,0,0	monster	デビルズフィンガーズ	3743,1,60000,0,0
 harboro2.gat,53,261,0,0	monster	デビルズフィンガーズ	3743,1,60000,0,0
 harboro2.gat,58,262,0,0	monster	デビルズフィンガーズ	3743,1,60000,0,0
-harboro2.gat,0,0,0,0	monster	カニバラウス	3787,80,5000,0,0
-harboro2.gat,0,0,0,0	monster	プラズマラット	3788,80,5000,0,0
-harboro2.gat,0,0,0,0	monster	クランプ	1209,40,5000,0,0
-harboro2.gat,0,0,0,0	monster	三葉蟲		1279,30,5000,0,0
+harboro2.gat,0,0,0,0	monster	カニバラウス			3787,80,5000,0,0
+harboro2.gat,0,0,0,0	monster	プラズマラット			3788,80,5000,0,0
+harboro2.gat,0,0,0,0	monster	クランプ				1209,40,5000,0,0
+harboro2.gat,0,0,0,0	monster	三葉蟲					1279,30,5000,0,0
 //------------------------------------------------------------
 // harboro3.gat
 harboro3.gat,53,153,0,0	monster	デビルズフィンガーズ	3743,1,60000,0,0
@@ -86,31 +86,31 @@ harboro3.gat,58,265,0,0	monster	デビルズフィンガーズ	3743,1,60000,0,0
 harboro3.gat,53,262,0,0	monster	デビルズフィンガーズ	3743,1,60000,0,0
 harboro3.gat,53,261,0,0	monster	デビルズフィンガーズ	3743,1,60000,0,0
 harboro3.gat,58,262,0,0	monster	デビルズフィンガーズ	3743,1,60000,0,0
-harboro3.gat,0,0,0,0	monster	カニバラウス	3787,80,5000,0,0
-harboro3.gat,0,0,0,0	monster	プラズマラット	3788,80,5000,0,0
-harboro3.gat,0,0,0,0	monster	クランプ	1209,40,5000,0,0
-harboro3.gat,0,0,0,0	monster	三葉蟲		1279,30,5000,0,0
+harboro3.gat,0,0,0,0	monster	カニバラウス			3787,80,5000,0,0
+harboro3.gat,0,0,0,0	monster	プラズマラット			3788,80,5000,0,0
+harboro3.gat,0,0,0,0	monster	クランプ				1209,40,5000,0,0
+harboro3.gat,0,0,0,0	monster	三葉蟲					1279,30,5000,0,0
 //------------------------------------------------------------
 // rockrdg1.gat
 rockrdg1.gat,0,0,0,0	monster	ラウンドライダー	3736,20,5000,0,0
 rockrdg1.gat,0,0,0,0	monster	サイドライダー		3737,20,5000,0,0
 rockrdg1.gat,0,0,0,0	monster	ブレードライダー	3738,20,5000,0,0
-rockrdg1.gat,0,0,0,0	monster	コヨーテ	3739,250,5000,0,0
-rockrdg1.gat,0,0,0,0	monster	ガリオン	1783,40,5000,0,0
+rockrdg1.gat,0,0,0,0	monster	コヨーテ			3739,250,5000,0,0
+rockrdg1.gat,0,0,0,0	monster	ガリオン			1783,40,5000,0,0
 //------------------------------------------------------------
 // rockrdg2.gat
-rockrdg2.gat,0,0,0,0	monster	ラウンドライダー	3736,97,0,0,0
-rockrdg2.gat,0,0,0,0	monster	サイドライダー	3737,97,0,0,0
-rockrdg2.gat,0,0,0,0	monster	ブレードライダー	3738,95,0,0,0
-rockrdg2.gat,0,0,0,0	monster	コヨーテ	3739,37,0,0,0
-rockrdg2.gat,0,0,0,0	monster	ガリオン	1783,10,0,0,0
+rockrdg2.gat,0,0,0,0	monster	ラウンドライダー	3736,100,5000,0,0
+rockrdg2.gat,0,0,0,0	monster	サイドライダー		3737,100,5000,0,0
+rockrdg2.gat,0,0,0,0	monster	ブレードライダー	3738,100,5000,0,0
+rockrdg2.gat,0,0,0,0	monster	コヨーテ			3739,40,5000,0,0
+rockrdg2.gat,0,0,0,0	monster	ガリオン			1783,10,5000,0,0
 //------------------------------------------------------------
 // rockmi1.gat
 rockmi1.gat,0,0,0,0	monster	トップラウンドライダー	3747,200,5000,0,0
 rockmi1.gat,0,0,0,0	monster	トップサイドライダー	3748,80,5000,0,0
 rockmi1.gat,0,0,0,0	monster	トップブレードライダー	3749,20,5000,0,0
-rockmi1.gat,0,0,0,0	monster	ガスター	3740,50,5000,0,0
-rockmi1.gat,0,0,0,0	monster	ブリライト	1211,50,5000,0,0
+rockmi1.gat,0,0,0,0	monster	ガスター				3740,50,5000,0,0
+rockmi1.gat,0,0,0,0	monster	ブリライト				1211,50,5000,0,0
 //------------------------------------------------------------
 // rockmi2.gat
 rockmi2.gat,86,39,1,1	monster	紫鉱石	3742,1,10000,0,0
@@ -149,8 +149,8 @@ rockmi2.gat,111,53,1,1	monster	紫鉱石	3742,1,10000,0,0
 rockmi3.gat,0,0,0,0	monster	トップラウンドライダー	3747,200,5000,0,0
 rockmi3.gat,0,0,0,0	monster	トップサイドライダー	3748,80,5000,0,0
 rockmi3.gat,0,0,0,0	monster	トップブレードライダー	3749,20,5000,0,0
-rockmi3.gat,0,0,0,0	monster	ガスター	3740,50,5000,0,0
-rockmi3.gat,0,0,0,0	monster	ブリライト	1211,50,5000,0,0
+rockmi3.gat,0,0,0,0	monster	ガスター				3740,50,5000,0,0
+rockmi3.gat,0,0,0,0	monster	ブリライト				1211,50,5000,0,0
 
 @spawn(type: BL_MOB, ID: 57561, speed: 150, option: 0, view: 3736, pos: "rockrdg1.gat"(242, 42), dir: 0, name: "ラウンドライダー")
 @nomalattack(src: "3736:ラウンドライダー:rockrdg1.gat"(57565), dst: , damage: 871, sDelay: 1000, dDelay: 400, aDelay: 1000)
