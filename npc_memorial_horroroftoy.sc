@@ -2273,6 +2273,7 @@ xmas.gat,233,305,4	script	転送装置	10007,{
 		if(checkquest(96405))
 			delquest 96405;
 		setquest 12331;
+		//setquest 118903;
 		setquest 96400;
 		//warp "1@xm_d.gat",111,22;
 		close;
@@ -2347,10 +2348,10 @@ OnMDInit:
 	hideonnpc getmdnpcname("セリーヌ・キミ#2");
 	hideonnpc getmdnpcname("囚われたサンタ#3");
 	hideonnpc getmdnpcname("囚われたサンタ#4");
-	hideonnpc getmdnpcname("xm_d_change#1");
-	hideonnpc getmdnpcname("xm_d_change#2");
-	hideonnpc getmdnpcname("xm_d_change#3");
-	hideonnpc getmdnpcname("xm_d_change#4");
+	hideonnpc getmdnpcname("職員用の衣服ボックス#1");
+	hideonnpc getmdnpcname("職員用の衣服ボックス#2");
+	hideonnpc getmdnpcname("職員用の衣服ボックス#3");
+	hideonnpc getmdnpcname("職員用の衣服ボックス#4");
 	hideonnpc getmdnpcname("#fac1bs");
 	hideonnpc getmdnpcname("#pck1");
 	hideonnpc getmdnpcname("#kimion1");
@@ -2423,12 +2424,12 @@ OnTimer48000:
 	end;
 OnTimer53000:
 	donpcevent getmdnpcname("キャサリンゼータ#01")+"::OnTalk10";
-	hideoffnpc getmdnpcname("xm_d_change#1");
-	hideoffnpc getmdnpcname("xm_d_change#2");
-	hideoffnpc getmdnpcname("xm_d_change#3");
-	misceffect 247,getmdnpcname("xm_d_change#1");
-	misceffect 247,getmdnpcname("xm_d_change#2");
-	misceffect 247,getmdnpcname("xm_d_change#3");
+	hideoffnpc getmdnpcname("職員用の衣服ボックス#1");
+	hideoffnpc getmdnpcname("職員用の衣服ボックス#2");
+	hideoffnpc getmdnpcname("職員用の衣服ボックス#3");
+	misceffect 247,getmdnpcname("職員用の衣服ボックス#1");
+	misceffect 247,getmdnpcname("職員用の衣服ボックス#2");
+	misceffect 247,getmdnpcname("職員用の衣服ボックス#3");
 	end;
 OnTimer59000:
 	donpcevent getmdnpcname("キャサリンゼータ#01")+"::OnTalk11";
@@ -2468,12 +2469,12 @@ OnTimer103000:
 OnTimer109000:
 	hideonnpc getmdnpcname("キャサリンゼータ#01");
 	announce "工場案内放送 : おもちゃ工場の家族のみなさ～ん。みんな起きて下さい。楽しい労働時間がやって来ましたよ～。",0x9,0x00ff44;
-	hideoffnpc getmdnpcname("xm_d_change#1");
-	hideoffnpc getmdnpcname("xm_d_change#2");
-	hideoffnpc getmdnpcname("xm_d_change#3");
-	misceffect 247,getmdnpcname("xm_d_change#1");
-	misceffect 247,getmdnpcname("xm_d_change#2");
-	misceffect 247,getmdnpcname("xm_d_change#3");
+	hideoffnpc getmdnpcname("職員用の衣服ボックス#1");
+	hideoffnpc getmdnpcname("職員用の衣服ボックス#2");
+	hideoffnpc getmdnpcname("職員用の衣服ボックス#3");
+	misceffect 247,getmdnpcname("職員用の衣服ボックス#1");
+	misceffect 247,getmdnpcname("職員用の衣服ボックス#2");
+	misceffect 247,getmdnpcname("職員用の衣服ボックス#3");
 	end;
 OnTimer115000:
 	announce "工場案内放送 : 工場内のゴミや有害なものを片付けて、いつものように安全に作業を行って下さい。",0x9,0x00ff44;
@@ -2546,7 +2547,7 @@ OnTalk17:
 	end;
 }
 
-1@xm_d.gat,13,105,6	script	職員用の衣服ボックス#1::xm_d_change#1	10033,{
+1@xm_d.gat,13,105,6	script	職員用の衣服ボックス#1	10033,{
 	progressbar 1;
 	sc_end SC_MONSTER_TRANSFORM;
 	musiceffect "52";
@@ -2557,7 +2558,7 @@ OnTalk17:
 	close;
 }
 
-1@xm_d.gat,116,16,6	script	職員用の衣服ボックス#2::xm_d_change#2	10033,{
+1@xm_d.gat,116,16,6	script	職員用の衣服ボックス#2	10033,{
 	progressbar 1;
 	sc_end SC_MONSTER_TRANSFORM;
 	musiceffect "52";
@@ -2568,7 +2569,7 @@ OnTalk17:
 	close;
 }
 
-1@xm_d.gat,10,20,6	script	職員用の衣服ボックス#3::xm_d_change#3	10033,{
+1@xm_d.gat,10,20,6	script	職員用の衣服ボックス#3	10033,{
 	progressbar 1;
 	sc_end SC_MONSTER_TRANSFORM;
 	musiceffect "52";
@@ -2868,8 +2869,8 @@ OnTimer52000:
 	stopnpctimer;
 	hideonnpc getmdnpcname("キャサリンゼータ#21");
 	hideonnpc getmdnpcname("#bgm06");
-	hideoffnpc getmdnpcname("xm_d_change#4");
-	misceffect 247,getmdnpcname("xm_d_change#4");
+	hideoffnpc getmdnpcname("職員用の衣服ボックス#4");
+	misceffect 247,getmdnpcname("職員用の衣服ボックス#4");
 	for(set '@i,1; '@i<=10; set '@i,'@i+1)
 		hideoffnpc getmdnpcname("作業員#xm_d"+ '@i);
 	donpcevent getmdnpcname("#fac2ct")+ "::OnStart";
@@ -2894,8 +2895,8 @@ OnTimer112000:
 	stopnpctimer;
 	hideonnpc getmdnpcname("キャサリンゼータ#21");
 	hideonnpc getmdnpcname("#bgm06");
-	hideoffnpc getmdnpcname("xm_d_change#4");
-	misceffect 247,getmdnpcname("xm_d_change#4");
+	hideoffnpc getmdnpcname("職員用の衣服ボックス#4");
+	misceffect 247,getmdnpcname("職員用の衣服ボックス#4");
 	for(set '@i,1; '@i<=10; set '@i,'@i+1)
 		hideoffnpc getmdnpcname("作業員#xm_d"+ '@i);
 	donpcevent getmdnpcname("#fac2ct")+ "::OnStart";
@@ -2942,7 +2943,7 @@ OnTalk10:
 	end;
 }
 
-1@xm_d.gat,185,94,6		script	職員用の衣服ボックス#4::xm_d_change#4	10033,5,5,{
+1@xm_d.gat,185,94,6		script	職員用の衣服ボックス#4	10033,5,5,{
 	progressbar 1;
 	sc_end SC_MONSTER_TRANSFORM;
 	musiceffect "128";

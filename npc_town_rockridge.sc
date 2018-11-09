@@ -239,6 +239,14 @@ alberta.gat,240,103,5	script	カラムプッチ#alberta	709,3,3,{/* 61481 */
 		mes "貿易の為の航海中に";
 		mes "偶然発見された大陸なんだ。";
 		next;
+		if(BaseLevel < 70) {
+			mes "[カラムプッチ]";
+			mes "今その大陸で少々問題が起きていて";
+			mes "ベテランの冒険者を探しているんだ。";
+			mes "もし^ff0000BaseLv70以上^000000の知り合いがいたら";
+			mes "この話を伝えてくれないか。";
+			close;
+		}
 		mes "[カラムプッチ]";
 		mes "その大陸は";
 		mes "^4d4dffロックリッジ^000000と名付けられ、";
@@ -321,31 +329,35 @@ alberta.gat,240,103,5	script	カラムプッチ#alberta	709,3,3,{/* 61481 */
 	warp "harboro1.gat",70,215;
 	end;
 OnTouch:
-	if(ROCKRIDGE_1QUE == 0)
+	if(ROCKRIDGE_1QUE == 0 && BaseLevel >= 70)
 		unittalk "カラムプッチ : お、そこの前途有望な冒険者さん！　ちょっと私の話を聞いてくれないか？
 	end;
 }
-harboro2.gat,284,104,0	warp	harboro2_harboro1	2,2,harboro1.gat,318,124	//60619 from_pos=(283, 103)
+harboro2.gat,284,104,0	warp	harboro2_harboro1	2,2,harboro1.gat,318,124	//60619
 
-harboro1.gat,241,218,0	warp	harboro1_harin01_01	1,1,har_in01.gat,18,18		//59784 from_pos=(240, 218)
-har_in01.gat,18,15,0	warp	harin01_harboro1_01	1,1,harboro1.gat,241,215	//59785 from_pos=(18, 15)
-rockrdg1.gat,312,193,0	warp	harboro1_harin01_02	1,1,har_in01.gat,26,87		//59786 from_pos=(313, 193)
-har_in01.gat,26,90,0	warp	harin01_harboro1_02	1,1,harboro1.gat,312,197	//59787 from_pos=(26, 89)
+harboro1.gat,241,218,0	warp	harboro1_harin01_01	1,1,har_in01.gat,18,18		//59784
+har_in01.gat,18,15,0	warp	harin01_harboro1_01	1,1,harboro1.gat,241,215	//59785
+rockrdg1.gat,312,193,0	warp	harboro1_harin01_02	1,1,har_in01.gat,26,87		//59786
+har_in01.gat,26,90,0	warp	harin01_harboro1_02	1,1,harboro1.gat,312,197	//59787
 
 harboro1.gat,362,206,0	script	harboro1_rockrdg1	45,1,1,{/* 59788 */
 	if(BaseLevel < 130) {
-		close;
+		donpcevent "自警団員#harboro1::OnTalk";
+		end;
 	}
 	warp "rockrdg1.gat",37,246;
 	end;
 }
-rockrdg1.gat,33,246,0	warp	rockrdg1_harboro1	1,1,harboro1.gat,358,206	//59976 from_pos=(33, 246)
+rockrdg1.gat,33,246,0	warp	rockrdg1_harboro1	1,1,harboro1.gat,358,206	//59976
 harboro1.gat,360,209,3	script	自警団員#harboro1	10220,{/* 59789 */
 	mes "[自警団員]";
 	mes "この先は危険です。";
 	mes "BaseLv130以上の方のみ";
 	mes "お通ししています。";
 	close;
+OnTalk:
+	unittalk "自警団員 : この先は危険です。BaseLv130以上の方のみお通ししています。";
+	end;
 }
 har_in01.gat,34,28,0	script	harin01_harin01_01	45,1,1,{/* 59790 */
 	if(ROCKRIDGE_1QUE < 6) {
@@ -357,7 +369,7 @@ har_in01.gat,34,28,0	script	harin01_harin01_01	45,1,1,{/* 59790 */
 	warp "har_in01.gat",99,27;
 	end;
 }
-har_in01.gat,99,30,0	warp	harin01_harin01_02	1,1,har_in01.gat,34,31	//59791 from_pos=(99, 30)
+har_in01.gat,99,30,0	warp	harin01_harin01_02	1,1,har_in01.gat,34,31	//59791
 harboro1.gat,60,215,5	script	カラムプッチ#harboro1	709,{/* 59792 */
 	mes "[カラムプッチ]";
 	mes "アルベルタに戻るか？";
@@ -495,7 +507,7 @@ harboro1.gat,80,218,5	script	コステル#harboro1	10210,{/* 59793 */
 		mes "^4d4dffアイアット・ワープ^000000です。";
 		mes "会って詳しい話を聞いてください。";
 		mes "どうかよろしくお願いします。";
-		viewpoint 1, 241, 218, 1, 0x00FF00;
+		viewpoint 1,241,218,1,0x00FF00;
 		delquest 7791;
 		setquest 7792;
 		set ROCKRIDGE_1QUE,2;
@@ -508,7 +520,7 @@ harboro1.gat,80,218,5	script	コステル#harboro1	10210,{/* 59793 */
 		mes "^4d4dffアイアット・ワープ^000000は";
 		mes "町の唯一の保安官なので";
 		mes "詳しい話を聞いてください。";
-		viewpoint 1, 241, 218, 1, 0x00FF00;
+		viewpoint 1,241,218,1,0x00FF00;
 		close;
 	case 3:
 		mes "[コステル]";
@@ -581,7 +593,7 @@ harboro1.gat,80,218,5	script	コステル#harboro1	10210,{/* 59793 */
 		mes "　周辺を見回している。";
 		mes "　とりあえずコステルの意見を";
 		mes "　アイアットに伝えよう‐";
-		viewpoint 1, 241, 218, 1, 0x00FF00;
+		viewpoint 1,241,218,1,0x00FF00;
 		delquest 7793;
 		setquest 7794;
 		set ROCKRIDGE_1QUE,4;
@@ -694,7 +706,7 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 	case 0:
 		// 未調査
 	case 1:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "新しい開拓民か？";
 		mes "本当に絶え間なく";
@@ -707,10 +719,10 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		mes "市長が君を鉱山の作業員として";
 		mes "雇用してくれるかもしれないだろう？";
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 2:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "何の用だ？";
 		mes "今はかなり困った知らせが来て";
@@ -801,10 +813,10 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		setquest 7793;
 		set ROCKRIDGE_1QUE,3;
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 3:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "コステルはいつものように";
 		mes "港にいるだろう。";
@@ -812,10 +824,10 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		mes "予想は出来るが、一応報告は";
 		mes "しておかないとな。くははははっ！";
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 4:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "お、調度良いタイミングだな。";
 		mes "こちらの準備は終わった。";
@@ -844,7 +856,7 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		setquest 7795;
 		set ROCKRIDGE_1QUE,5;
 		next;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		mes "‐ジョニーとの交渉に";
 		mes "　向かいますか？‐";
 		next;
@@ -859,7 +871,7 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		warp "rockrdg1_q.gat",157,300;
 		end;
 	case 5:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "町の東には^4d4dffキワワ砂漠^000000が広がっている。";
 		mes "砂漠の北部に^4d4dff今は運行していない";
@@ -871,7 +883,7 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		mes "^4d4dffジョニー・ジェイムス^000000の顔を";
 		mes "拝みに行くとしようか。";
 		next;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		mes "‐ジョニーとの交渉に";
 		mes "　向かいますか？‐";
 		next;
@@ -886,19 +898,19 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		warp "rockrdg1_q.gat",157,300;
 		end;
 	case 6:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		unittalk "……どう思う？";
 		sleep2 4000;
-		cutin "rock_iboka_all.bmp", 2;
+		cutin "rock_iboka_all",2;
 		donpcevent "イヴォカ・スクーディー#::OnTalk1";
 		sleep2 4000;
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		unittalk "アイアット・ワープ : 普通の拷問や脅迫では効果は薄いか……。";
 		sleep2 3000;
-		cutin "rock_iboka_all.bmp", 2;
+		cutin "rock_iboka_all",2;
 		donpcevent "イヴォカ・スクーディー#::OnTalk2";
 		sleep2 3000;
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		unittalk "アイアット・ワープ : アルバートだろうな。";
 		sleep2 2000;
 		set ROCKRIDGE_1QUE,7;
@@ -948,20 +960,20 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		mes "詳しい話はイヴォカから";
 		mes "直接聞いてくれ。";
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 7:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "イヴォカはやつらの仲を裂こうと";
 		mes "言っているが……。";
 		mes "詳しい話はイヴォカから";
 		mes "直接聞いてくれ。";
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 8:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "^4d4dffジョニーは地下に拘留^000000中だ。";
 		mes "まずはアルバートがジョニーを";
@@ -969,10 +981,10 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		mes "といった感じに追い詰めて、";
 		mes "うまく説得しよう。";
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 9:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "アルバートを呼び出す方法まで";
 		mes "聞きだせたのか？";
@@ -1014,21 +1026,21 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		setquest 7799;
 		set ROCKRIDGE_1QUE,10;
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 10:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "アルバートのところへ行く前に、";
 		mes "^4d4dffショーン・マッカーディ^000000に";
 		mes "会って話を聞いてみてくれ。";
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 11:
 	case 12:
 	case 13:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "なるほど、そんな話だったか。 ";
 		mes "向こうの切り札だった鉱山は";
@@ -1036,10 +1048,10 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		mes "と教えてやるのは";
 		mes "効果的かもしれないな。";
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 14:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		if(countitem(25247) > 0) {
 			mes "[アイアット・ワープ]";
 			mes "ふむ、新たな鉱山の噂は";
@@ -1078,10 +1090,10 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		mes "鉱石の場所がわかれば";
 		mes "もうこっちのものだ。";
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 15:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		// 未調査
 		if(countitem(25247) > 0) {
 			mes "[アイアット・ワープ]";
@@ -1217,7 +1229,7 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 			mes "くははははっ！";
 			mes "まあ、よく考えてくれ。";
 			close2;
-			cutin "rock_worp.bmp", 255;
+			cutin "rock_worp",255;
 			end;
 		}
 		if(checkitemblank() == 0) {
@@ -1225,7 +1237,7 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 			mes "　荷物に1個以上の空きを";
 			mes "　作ってください‐";
 			close2;
-			cutin "rock_cact02.bmp", 255;
+			cutin "rock_cact02",255;
 			end;
 		}
 		mes "[アイアット・ワープ]";
@@ -1273,25 +1285,25 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		mes "自信を持って堂々と歩いてくれ！";
 		mes "それじゃあな！";
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	case 16:
 	case 17:
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "君はこのロックリッジにとって";
 		mes "大きな幸運だ。";
 		mes "未来の若き英雄よ！";
 		mes "自信を持って堂々と歩いてくれ！";
 		close2;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		end;
 	}
 }
 har_in01.gat,14,24,5	script	イヴォカ・スクーディー#	10212,{/* 59795 */
 	switch(ROCKRIDGE_1QUE) {
 	case 7:
-		cutin "rock_iboka_all.bmp", 2;
+		cutin "rock_iboka_all",2;
 		mes "[イヴォカ・スクーディー]";
 		mes "ジョニーは顔には出しませんが、";
 		mes "自身の立場が不安なのは";
@@ -1349,17 +1361,17 @@ har_in01.gat,14,24,5	script	イヴォカ・スクーディー#	10212,{/* 59795 */
 		mes "後は徐々に戦力を削っていけば";
 		mes "自然と崩壊するでしょう。";
 		next;
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "なるほどな。";
 		mes "しかしジョニーに嘘を";
 		mes "どうやって信じ込ませる？";
 		next;
-		cutin "rock_iboka_all.bmp", 2;
+		cutin "rock_iboka_all",2;
 		mes "[イヴォカ・スクーディー]";
 		mes "そこは私に任せてください。";
 		next;
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "わかった、良いだろう。";
 		mes "コステルだったらゼニーを渡して";
@@ -1375,10 +1387,10 @@ har_in01.gat,14,24,5	script	イヴォカ・スクーディー#	10212,{/* 59795 */
 		setquest 7797;
 		set ROCKRIDGE_1QUE,8;
 		close2;
-		cutin "rock_iboka_all.bmp", 255;
+		cutin "rock_iboka_all",255;
 		end;
 	case 8:
-		cutin "rock_iboka_all.bmp", 2;
+		cutin "rock_iboka_all",2;
 		mes "[イヴォカ・スクーディー]";
 		mes "上手くいくかはあなた次第です。";
 		mes "ジョニーに考える余地を";
@@ -1389,14 +1401,14 @@ har_in01.gat,14,24,5	script	イヴォカ・スクーディー#	10212,{/* 59795 */
 		mes "拘留されています。";
 		mes "早くいきましょう。";
 		close2;
-		cutin "rock_iboka_all.bmp", 255;
+		cutin "rock_iboka_all",255;
 		end;
 	case 9:
 	case 10:
 	case 11:
 	case 12:
 	case 13:
-		cutin "rock_iboka_all.bmp", 2;
+		cutin "rock_iboka_all",2;
 		mes "[イヴォカ・スクーディー]";
 		mes "ジョニーに渡したのは";
 		mes "私が書いた偽の手紙です。";
@@ -1409,35 +1421,35 @@ har_in01.gat,14,24,5	script	イヴォカ・スクーディー#	10212,{/* 59795 */
 		mes "鉱山の前にある岩を三回叩くのが";
 		mes "やつらの合図だそうです。";
 		close2;
-		cutin "rock_iboka_all.bmp", 255;
+		cutin "rock_iboka_all",255;
 		end;
 	case 14:
-		cutin "rock_iboka_all.bmp", 2;
+		cutin "rock_iboka_all",2;
 		mes "[イヴォカ・スクーディー]";
 		mes "成果があったみたいですね！";
 		mes "早くジョニーに教えてやりましょう！";
 		mes "ふふふふふ……。";
 		close2;
-		cutin "rock_iboka_all.bmp", 255;
+		cutin "rock_iboka_all",255;
 		end;
 	case 15:
 	case 16:
 	case 17:
-		cutin "rock_iboka_all.bmp", 2;
+		cutin "rock_iboka_all",2;
 		mes "[イヴォカ・スクーディー]";
 		mes "牛賊団がこれからどうするかは";
 		mes "容易に想像できます。";
 		mes "自警団の訓練を強化しなければ。";
 		close2;
-		cutin "rock_iboka_all.bmp", 255;
+		cutin "rock_iboka_all",255;
 		end;
 	default:
-		cutin "rock_iboka_all.bmp", 2;
+		cutin "rock_iboka_all",2;
 		mes "[イヴォカ・スクーディー]";
 		mes "ここは保安官事務室。";
 		mes "犯罪者を捕まえておく場所です。";
 		close2;
-		cutin "rock_iboka_all.bmp", 255;
+		cutin "rock_iboka_all",255;
 		end;
 	}
 OnTalk1:
@@ -1464,7 +1476,7 @@ OnTalk4:
 }
 rockrdg1_q.gat,153,303,5	script	アイアット・ワープ#revt	10211,{/* 59797 */
 	if(ROCKRIDGE_1QUE != 5) {
-		cutin "rock_worp.bmp", 0;
+		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
 		mes "作戦は成功だ。";
 		mes "キャクター族だから";
@@ -1486,7 +1498,7 @@ rockrdg1_q.gat,153,303,5	script	アイアット・ワープ#revt	10211,{/* 59797 */
 		mes "では保安官事務室に";
 		mes "戻ることにしよう。";
 		next;
-		cutin "rock_worp.bmp", 255;
+		cutin "rock_worp",255;
 		mes "‐保安官事務室に";
 		mes "　向かいますか？‐";
 		next;
@@ -1494,162 +1506,121 @@ rockrdg1_q.gat,153,303,5	script	アイアット・ワープ#revt	10211,{/* 59797 */
 			mes "‐あなたは";
 			mes "　思いとどまった‐";
 			close2;
-			cutin "rock_worp.bmp", 255;
+			cutin "rock_worp",255;
 			end;
 		}
 		mes "‐あなたは保安官事務室に";
 		mes "　向かった‐";
 		close2;
-		warp "har_in01.gat",18, 18;
+		warp "har_in01.gat",18,18;
 		end;
 	}
-	// タイマーカウンタ未調査、sleep2処理？
-	donpcevent "アイアット・ワープ#revt::OnStart";
-	set '@aid,getcharid(3);
-	pcblockmove 1;
-	end;
-OnStart:
-	initnpctimer;
 	unittalk "アイアット・ワープ : ここが約束の場所だ。そろそろ時間のはずだが……。";
-	end;
-OnTimer3000:
+	sleep2 3000;
 	cloakoffnpc "ジョニー・ジェイムス#re"; //59798
+	sleep2 1000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk1";
-	end;
-OnTimer6000:
-	emotion 1, "ジョニー・ジェイムス#re"; //59798
+	sleep2 4000;
+	emotion 1,"ジョニー・ジェイムス#re"; //59798
 	donpcevent "ジョニー・ジェイムス#re::OnTalk2";
-	end;
-OnTimer9000:
+	sleep2 4000;
 	cloakoffnpc "アルバート・フォード#re"; //59798
 	donpcevent "アルバート・フォード#re::OnTalk1";
-	end;
-OnTimer12000:
+	sleep2 4000;
 	donpcevent "アルバート・フォード#re::OnTalk2";
-	end;
-OnTimer15000:
+	sleep2 4000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk3";
-	end;
-OnTimer18000:
+	sleep2 4000;
 	unittalk "アイアット・ワープ : おいおいジョニー、うちの先生に対して口のきき方がなってないぞ？";
-	end;
-OnTimer21000:
+	sleep2 4000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk4";
-	end;
-OnTimer24000:
+	sleep2 6000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk5";
-	end;
-OnTimer27000:
+	sleep2 4000;
 	unittalk "アイアット・ワープ : 今回の交渉役はコステルではない。次期市長である先生がすることになった！";
-	end;
-OnTimer30000:
-	emotion 5, "ジョニー・ジェイムス#re"; //59798
+	sleep2 6000;
+	emotion 5,"ジョニー・ジェイムス#re"; //59798
 	donpcevent "ジョニー・ジェイムス#re::OnTalk6";
-	end;
-OnTimer33000:
-	emotion 9, "アルバート・フォード#re"; //59802
+	sleep2 6000;
+	emotion 9,"アルバート・フォード#re"; //59802
 	donpcevent "アルバート・フォード#re::OnTalk3";
-	end;
-OnTimer36000:
+	sleep2 4000;
 	unittalk "アイアット・ワープ : こんな嘘をついて何の得がある？　良いからさっさとそっちの要求を言いな。";
-	end;
-OnTimer39000:
+	sleep2 6000;
 	unittalk "アイアット・ワープ : 要求を本社で検討しなきゃならんのだ。ちんたらしてるといつになるかわからんぞ！";
-	end;
-OnTimer42000:
+	sleep2 6000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk7";
-	end;
-OnTimer45000:
+	sleep2 5000;
 	unittalk "アイアット・ワープ : 今だ！";
-	end;
-OnTimer48000:
-	misceffect 563, "ジョニー・ジェイムス#re"; //59798
+	sleep2 500;
+	misceffect 563,"ジョニー・ジェイムス#re"; //59798
 	cloakoffnpc "キャクター族のガンマン#"; //59799
 	cloakoffnpc "キャクター族のガンマン#"; //59800
 	cloakoffnpc "キャクター族のガンマン#"; //59801
 	cloakoffnpc "イヴォカ・スクーディー#"; //59796
 	donpcevent "イヴォカ・スクーディー#::OnTalk1";
+	sleep2 1000;
 	donpcevent "キャクター族のガンマン#::OnTalk1";	//59799
 	donpcevent "キャクター族のガンマン#::OnTalk1";	//59800
 	donpcevent "キャクター族のガンマン#::OnTalk1";	//59801
+	sleep2 2000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk8";
-	end;
-OnTimer51000:
+	sleep2 2000;
 	donpcevent "アルバート・フォード#re::OnTalk4";
-	end;
-OnTimer54000:
-	misceffect 563, "ジョニー・ジェイムス#re"; //59798
+	sleep2 2000;
+	misceffect 563,"ジョニー・ジェイムス#re"; //59798
 	donpcevent "キャクター族のガンマン#::OnTalk1";	//59799
 	donpcevent "キャクター族のガンマン#::OnTalk2";	//59800
 	donpcevent "キャクター族のガンマン#::OnTalk1";	//59801
-	end;
-OnTimer57000:
+	sleep2 2000;
 	unittalk "アイアット・ワープ : くっくっく……";
-	end;
-OnTimer60000:
+	sleep2 1000;
 	donpcevent "イヴォカ・スクーディー#::OnTalk2";
-	end;
-OnTimer63000:
+	sleep2 2000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk9";
-	end;
-OnTimer66000:
+	sleep2 3000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk10";
-	end;
-OnTimer69000:
+	sleep2 3000;
 	donpcevent "アルバート・フォード#re::OnTalk5";
-	end;
-OnTimer72000:
+	sleep2 1000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk11";
-	end;
-OnTimer75000:
 	cloakonnpc "アルバート・フォード#re"; //59798
+	sleep2 1000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk12";
-	end;
-OnTimer78000:
+	sleep2 3000;
 	unittalk "アイアット・ワープ : おいおいジョニー。　お前の部下が逃げていくぞ？";
-	end;
-OnTimer81000:
+	//sleep2 100;
 	donpcevent "イヴォカ・スクーディー#::OnTalk3";
-	end;
-OnTimer84000:
+	sleep2 3000;
 	unittalk "アイアット・ワープ : みんな！　よくやってくれた！　さあ、連行だ！";
-	end;
-OnTimer87000:
+	sleep2 1000;
 	donpcevent "キャクター族のガンマン#::OnTalk2";	//59799
 	donpcevent "キャクター族のガンマン#::OnTalk3";	//59800
 	donpcevent "キャクター族のガンマン#::OnTalk2";	//59801
-	end;
-OnTimer90000:
+	sleep2 1000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk13";
-	end;
-OnTimer93000:
+	sleep2 1000;
 	donpcevent "キャクター族のガンマン#::OnTalk3";	//59799
+	sleep2 1000;
 	donpcevent "キャクター族のガンマン#::OnTalk4";	//59800
+	sleep2 1000;
 	donpcevent "キャクター族のガンマン#::OnTalk3";	//59801
-	end;
-OnTimer96000:
+	sleep2 2000;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk14";
-	end;
-OnTimer99000:
+	sleep2 1000;
 	donpcevent "イヴォカ・スクーディー#::OnTalk4";
-	end;
-OnTimer102000:
+	sleep2 2000;
 	cloakonnpc "キャクター族のガンマン#"; //59799
 	cloakonnpc "キャクター族のガンマン#"; //59800
 	cloakonnpc "キャクター族のガンマン#"; //59801
 	cloakonnpc "イヴォカ・スクーディー#"; //59796
 	cloakonnpc "ジョニー・ジェイムス#re"; //59798
-	end;
-OnTimer105000:
-	stopnpctimer;
+	sleep2 2000;
 	unittalk "アイアット・ワープ : 作戦は成功だ。私たちも戻ろうか。";
-	if(attachrid('@aid)) {
-		delquest 7795;
-		setquest 7796;
-		set ROCKRIDGE_1QUE,6;
-		cutin "rock_worp.bmp", 255;
-		detachrid;
-	}
+	delquest 7795;
+	setquest 7796;
+	set ROCKRIDGE_1QUE,6;
+	cutin "rock_worp",255;
 	end;
 }
 rockrdg1_q.gat,160,306,3	script	ジョニー・ジェイムス#re	10213,{/* 59798 (cloaking)*/
@@ -1757,13 +1728,13 @@ OnTalk5:
 har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 	switch(ROCKRIDGE_1QUE) {
 	case 8:
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "汚いやつらめ！　地獄へ落ちろ！";
 		mes "よくここに面を出せたな！";
 		cloakoffnpc "イヴォカ・スクーディー#"; //59804
 		next;
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "おい、うちの未来の市長様に向かって";
 		mes "何なんだその言い方は。";
@@ -1776,12 +1747,12 @@ har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 		mes "お前にも等しく交渉のチャンスを";
 		mes "くれるんだ。ありがたく思え。";
 		next;
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "何!?";
 		mes "どういうことだ？";
 		next;
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "我々としてはさっさとお前を";
 		mes "吊るしてやってもいいんだがね。";
@@ -1793,47 +1764,47 @@ har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 		mes "ないですよ！";
 		mes "さっさとやっちゃいましょう！";
 		next;
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "さっきからわけのわからんことを";
 		mes "言っているが、一体何なんだ。";
 		mes "何があったんだ？";
 		next;
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "アルバートが新しく";
 		mes "牛賊団のボスになったんだ。";
 		mes "お前は見捨てられたんだよ。";
 		next;
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "は？";
 		mes "いきなり何を言いだすかと思えば……";
 		mes "そんな戯言を信じられるか！";
 		next;
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "本当だとも。";
 		mes "実際、彼は君を見捨てて";
 		mes "逃げたじゃないか。";
 		next;
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "……。";
 		next;
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "そして奪った鉱石を買い取れと";
 		mes "言ってきたんだ。";
 		mes "これがアルバートからの手紙だ。";
 		next;
-		cutin "rock_iboka_all.bmp", 255;
+		cutin "rock_iboka_all",255;
 		mes "‐イヴォカはジョニーに";
 		mes "　手紙を渡した。";
 		mes "　さっき見たアルバートの手紙とは";
 		mes "　少し違うようだ‐";
 		next;
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "これは……";
 		mes "確かにアルバートの文字だ。";
@@ -1843,7 +1814,7 @@ har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 		mes "許せねぇ……";
 		mes "あの野郎、ぶっ殺してやる！";
 		next;
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "そんなわけで、";
 		mes "お前に人質としての価値は";
@@ -1855,22 +1826,22 @@ har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 		mes "さっさと裁いちまおう、";
 		mes "ということになったんだが……。";
 		next;
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "……。";
 		next;
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "この未来の市長様が";
 		mes "あまりにも哀れなお前に";
 		mes "最後のチャンスを";
 		mes "与えてやるというんだ。";
 		next;
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "チャンスだと……？";
 		next;
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "そうだ。";
 		mes "ジョニー、";
@@ -1893,16 +1864,16 @@ har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 		mes "お前の罪を軽くしてやる、";
 		mes "ということだ。どうだ？";
 		next;
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "……。";
 		next;
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "考えている時間はない。";
 		mes "今すぐ返答しろ。";
 		next;
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "……。";
 		next;
@@ -1910,11 +1881,11 @@ har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 		mes "わかった……。";
 		mes "だがひとつ条件がある。";
 		next;
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "なんだ？";
 		next;
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "アルバート……";
 		mes "あの裏切り者を始末してくれ。";
@@ -1948,23 +1919,23 @@ har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 		delquest 7797;
 		set ROCKRIDGE_1QUE,9;
 		close2;
-		cutin "rock_james_all.bmp", 255;
+		cutin "rock_james_all",255;
 		end;
 	case 9:
 	case 10:
 	case 11:
 	case 12:
 	case 13:
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "用が済んだならさっさと行け！";
 		mes "アルバートを始末するまでは";
 		mes "その顔を見せるな！";
 		close2;
-		cutin "rock_james_all.bmp", 255;
+		cutin "rock_james_all",255;
 		end;
 	case 14:
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "アルバートはどうなった!?";
 		mes "あの卑劣で汚い裏切り者は！";
@@ -1997,45 +1968,45 @@ har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 		mes "それから、あの保安官に";
 		mes "ちゃんと俺が協力したことを";
 		mes "伝えておけよ！";
-		delitem 25249, 1;
+		delitem 25249,1;
 		setquest 7804;
 		delquest 7803;
 		set ROCKRIDGE_1QUE,15;
 		close2;
-		cutin "rock_james_all.bmp", 255;
+		cutin "rock_james_all",255;
 		end;
 	case 15:
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "くそっ……";
 		mes "ここから出たら……";
 		mes "この屈辱、";
 		mes "必ず晴らしてやるぞ……。";
 		close2;
-		cutin "rock_james_all.bmp", 255;
+		cutin "rock_james_all",255;
 		end;
 	case 16:
 	case 17:
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "いつになったら俺は釈放されるんだ？";
 		mes "あまり忍耐力がある方じゃないぞ。";
 		close2;
-		cutin "rock_james_all.bmp", 255;
+		cutin "rock_james_all",255;
 		end;
 	default:
-		cutin "rock_james_all.bmp", 2;
+		cutin "rock_james_all",2;
 		mes "[ジョニー・ジェイムス]";
 		mes "汚いやつらめ！　地獄へ落ちろ！";
 		mes "よくここに面を出せたな！";
 		close2;
-		cutin "rock_james_all.bmp", 255;
+		cutin "rock_james_all",255;
 		end;
 	}
 }
 har_in01.gat,88,22,6	script	イヴォカ・スクーディー#	10212,{/* 59804 (cloaking)*/
 	if(ROCKRIDGE_1QUE == 9) {
-		cutin "rock_iboka_all.bmp", 0;
+		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
 		mes "（思っていた以上に";
 		mes "　単純な奴でしたね。";
@@ -2043,7 +2014,7 @@ har_in01.gat,88,22,6	script	イヴォカ・スクーディー#	10212,{/* 59804 (cloaking)*/
 		close2;
 	}
 	cloakonnpc "イヴォカ・スクーディー#"; //59804
-	cutin "rock_iboka_all.bmp", 255;
+	cutin "rock_iboka_all",255;
 	end;
 }
 harboro1.gat,288,193,5	script	ショーン・マッカーディ#	10215,{/* 59805 */
@@ -2117,7 +2088,7 @@ harboro1.gat,288,193,5	script	ショーン・マッカーディ#	10215,{/* 59805 */
 		mes "‐あなたは鉱山の入口に";
 		mes "　向かった‐";
 		close2;
-		warp "rockrdg2_q.gat",347, 210;
+		warp "rockrdg2_q.gat",347,210;
 		end;
 	case 11:
 	case 12:
@@ -2139,7 +2110,7 @@ harboro1.gat,288,193,5	script	ショーン・マッカーディ#	10215,{/* 59805 */
 		mes "‐あなたは鉱山の入口に";
 		mes "　向かった‐";
 		close2;
-		warp "rockrdg2_q.gat",347, 210;
+		warp "rockrdg2_q.gat",347,210;
 		end;
 	case 14:
 	case 15:
@@ -2175,7 +2146,7 @@ rockrdg2_q.gat,347,216,5	script	ショーン・マッカーディ#	10215,{/* 59806 */
 		mes "[ショーン・マッカーディ]";
 		mes "足元に気をつけてください。";
 		close2;
-		warp "rockmi2.gat",14, 86;
+		warp "rockmi2.gat",14,86;
 		end;
 	}
 	if(ROCKRIDGE_1QUE == 13) {
@@ -2195,7 +2166,7 @@ rockrdg2_q.gat,347,216,5	script	ショーン・マッカーディ#	10215,{/* 59806 */
 		mes "‐アルバートの隠れ家に";
 		mes "　向かった‐";
 		close2;
-		warp "rockrdg2_q.gat",281, 306;
+		warp "rockrdg2_q.gat",281,306;
 		end;
 	}
 }
@@ -2299,7 +2270,7 @@ rockrdg2_q.gat,279,313,3	script	ポッコリと穴の開いた岩#	10042,{/* 59808 */
 	mes "‐あなたはロックリッジに";
 	mes "　向かった‐";
 	close2;
-	warp "har_in01.gat",18, 18;
+	warp "har_in01.gat",18,18;
 	end;
 }
 rockrdg2_q.gat,282,310,3	script	アルバート・フォード#ro	10214,{/* 59809 (cloaking)*/
@@ -2445,7 +2416,7 @@ rockrdg2_q.gat,282,310,3	script	アルバート・フォード#ro	10214,{/* 59809 (cloakin
 		mes "‐上手くアルバートを";
 		mes "　騙すことができたようだ。";
 		mes "　たてがみを持って町へ戻ろう‐";
-		getitem 25249, 1;
+		getitem 25249,1;
 		setquest 7803;
 		delquest 7802;
 		set ROCKRIDGE_1QUE,14;
@@ -2483,7 +2454,7 @@ rockrdg2_q.gat,282,310,3	script	アルバート・フォード#ro	10214,{/* 59809 (cloakin
 		mes "‐あなたは保安官事務室に";
 		mes "　向かった‐";
 		close2;
-		warp "har_in01.gat",18, 18;
+		warp "har_in01.gat",18,18;
 		end;
 	}
 	end;
@@ -2611,7 +2582,7 @@ harboro1.gat,275,206,4	script	ハワード#harboro1	899,{/* 59812 */
 	}
 }
 harboro1.gat,291,207,5	script	カプラ職員#rockridge	117,{/* 59813 */
-	cutin "kafra_01.bmp", 2;
+	cutin "kafra_01",2;
 	set '@code,1;
 	set '@price,2000;
 	callfunc "KafraMain",1,0x1db,"harboro1.gat",298,203,"NULL",0,0,40,800,'@code,'@price;
@@ -2668,47 +2639,47 @@ harboro1.gat,356,211,5	script	案内要員#rockridge01	10193,{/* 59815 */
 			mes "^006400カプラ職員^000000の位置を";
 			mes "ミニマップに表示しておきますね。";
 			mes "まだ探している場所はありますか？";
-			viewpoint 1, 291, 207, 1, 0xFFFF33; //59815
+			viewpoint 1,291,207,1,0xFFFF33; //59815
 			continue;
 		case 2:
 			mes "[保安官助手]";
 			mes "^006400旅館^000000の位置を";
 			mes "ミニマップに表示しておきますね。";
 			mes "まだ探している場所はありますか？";
-			viewpoint 1, 156, 215, 2, 0xAAFF00; //59815
+			viewpoint 1,156,215,2,0xAAFF00; //59815
 			continue;
 		case 3:
 			mes "[保安官助手]";
 			mes "^006400武器・防具屋^000000の位置を";
 			mes "ミニマップに表示しておきますね。";
 			mes "まだ探している場所はありますか？";
-			viewpoint 1, 312, 193, 3, 0x008080; //59815
+			viewpoint 1,312,193,3,0x008080; //59815
 			continue;
 		case 4:
 			mes "[保安官助手]";
 			mes "^006400道具屋^000000の位置を";
 			mes "ミニマップに表示しておきますね。";
 			mes "まだ探している場所はありますか？";
-			viewpoint 1, 312, 193, 4, 0xFF1493; //59815
+			viewpoint 1,312,193,4,0xFF1493; //59815
 			continue;
 		case 5:
 			mes "[保安官助手]";
 			mes "^006400保安官事務室^000000の位置を";
 			mes "ミニマップに表示しておきますね。";
 			mes "まだ探している場所はありますか？";
-			viewpoint 1, 241, 218, 5, 0xFFCCFF; //59815
+			viewpoint 1,241,218,5,0xFFCCFF; //59815
 			continue;
 		case 6:
 			mes "[保安官助手]";
 			mes "ミニマップに表示したものを";
 			mes "すべて削除しました。";
 			mes "他に何か必要ですか？";
-			viewpoint 2, 1, 1, 0, 0xFFFFFF; //59815
-			viewpoint 2, 1, 1, 1, 0xFFFFFF; //59815
-			viewpoint 2, 1, 1, 2, 0xFFFFFF; //59815
-			viewpoint 2, 1, 1, 3, 0xFFFFFF; //59815
-			viewpoint 2, 1, 1, 4, 0xFFFFFF; //59815
-			viewpoint 2, 1, 1, 5, 0xFFFFFF; //59815
+			viewpoint 2,1,1,0,0xFFFFFF; //59815
+			viewpoint 2,1,1,1,0xFFFFFF; //59815
+			viewpoint 2,1,1,2,0xFFFFFF; //59815
+			viewpoint 2,1,1,3,0xFFFFFF; //59815
+			viewpoint 2,1,1,4,0xFFFFFF; //59815
+			viewpoint 2,1,1,5,0xFFFFFF; //59815
 			continue;
 		case 7:
 			mes "[保安官助手]";
@@ -2823,7 +2794,7 @@ harboro1.gat,228,170,3	script	風来の猫#rkrgtwn	553,5,5,{/* 59824 */
 	mes "[風来の猫]";
 	mes "牛賊団にすべて奪われて、";
 	mes "飲み物を買うお金すらない……。";
-	emotion 28, "風来の猫#rkrgtwn"; //59824
+	emotion 28,"風来の猫#rkrgtwn"; //59824
 	close;
 OnTouch:
 	unittalk "風来の猫 : 東側というのはどっちだ！！";
@@ -3538,7 +3509,7 @@ harboro1.gat,305,178,5	script	剛毛の羊#srdg01	890,{/* 59838 */}
 harboro1.gat,299,179,7	script	元気のない羊#srdg01	890,{/* 59839 */}
 harboro1.gat,297,178,5	script	寝ている羊#srdg01	890,{/* 59840 */}
 harboro1.gat,301,175,7	script	羊飼い#srdg01	726,{/* 59841 */
-	emotion 28, "羊飼い#srdg01"; //59841
+	emotion 28,"羊飼い#srdg01"; //59841
 	mes "[羊飼い]";
 	mes "みんなごめんね……";
 	mes "君たちをここに";
@@ -3572,7 +3543,7 @@ harboro1.gat,187,236,3	script	訪問客#srdg01	690,{/* 59848 */
 	mes "[訪問客]";
 	mes "飲食店に人がいないな……。";
 	next;
-	emotion 6, "訪問客#srdg02"; //59849
+	emotion 6,"訪問客#srdg02"; //59849
 	mes "[訪問客]";
 	mes "美味しくないから人がいないのは";
 	mes "当たり前じゃないか？";
@@ -3582,7 +3553,7 @@ harboro1.gat,187,236,3	script	訪問客#srdg01	690,{/* 59848 */
 	mes "この町で一番美味しい料理が";
 	mes "食べられるのがどこなのか。";
 	next;
-	emotion 1, "訪問客#srdg02"; //59849
+	emotion 1,"訪問客#srdg02"; //59849
 	mes "[訪問客]";
 	mes "どこなの？";
 	next;
@@ -3610,8 +3581,8 @@ harboro1.gat,182,236,5	script	訪問客#srdg02	688,{/* 59849 */
 	mes "食事をもらえると";
 	mes "思っているんじゃないのか？";
 	next;
-	emotion 52, "彷徨う犬#srdg01"; //59850
-	emotion 52, "彷徨う犬#srdg02"; //59851
+	emotion 52,"彷徨う犬#srdg01"; //59850
+	emotion 52,"彷徨う犬#srdg02"; //59851
 	mes "[訪問客]";
 	mes "うう……";
 	mes "視線が気になって";
@@ -3619,17 +3590,17 @@ harboro1.gat,182,236,5	script	訪問客#srdg02	688,{/* 59849 */
 	close;
 }
 harboro1.gat,183,241,5	script	彷徨う犬#srdg01	81,{/* 59850 */
-	emotion 43, "彷徨う犬#srdg01"; //59850
+	emotion 43,"彷徨う犬#srdg01"; //59850
 	unittalk "（残すかな……残すよね？）";
 	end;
 }
 harboro1.gat,182,241,5	script	彷徨う犬#srdg02	81,{/* 59851 */
-	emotion 43, "彷徨う犬#srdg02"; //59851
+	emotion 43,"彷徨う犬#srdg02"; //59851
 	unittalk "（お肉くれないかな。）";
 	end;
 }
 harboro1.gat,282,201,3	script	ロックリッジタイガー#sr	554,{/* 59852 */
-	emotion 45, "ロックリッジタイガー#sr"; //59852
+	emotion 45,"ロックリッジタイガー#sr"; //59852
 	end;
 }
 harboro1.gat,216,262,7	script	巨商のラクダ#1	938,{/* 59853 */}
@@ -3905,18 +3876,18 @@ harboro1.gat,86,218,3	script	ウェルチー#rockwn01	634,5,5,{/* 59917 */
 	mes "音もするし……";
 	mes "本当に活気あふれる町です！";
 	next;
-	emotion 18, "ウェルチー#rockwn01"; //59917
+	emotion 18,"ウェルチー#rockwn01"; //59917
 	mes "[ウェルチー]";
 	mes "立っているだけで";
 	mes "嬉しくなってきて笑ってしまいます。";
 	mes "はははは！";
 	close;
 OnTouch:
-	emotion 2, "ウェルチー#rockwn01"; //59917
+	emotion 2,"ウェルチー#rockwn01"; //59917
 	end;
 }
 harboro1.gat,88,217,3	script	イディス・リッチー#rock	703,{/* 59918 */
-	emotion 19, "イディス・リッチー#rock"; //59918
+	emotion 19,"イディス・リッチー#rock"; //59918
 	mes "[イディス・リッチー]";
 	mes "私のお父さんは駅で働いています。";
 	mes "駅は北の方にあります。";
@@ -3990,7 +3961,7 @@ harboro1.gat,84,200,5	script	デルバート・レイク#rock	848,{/* 59921 */
 	mes "全部このデルバート様が";
 	mes "掘り出してやる！";
 	next;
-	emotion 6, "コンスタンス#rockwn18"; //59935
+	emotion 6,"コンスタンス#rockwn18"; //59935
 	mes "[コンスタンス]";
 	mes "この人、大丈夫かしら？";
 	mes "これは鉱物ではなく、";
@@ -4005,7 +3976,7 @@ harboro1.gat,80,204,7	script	エルシー#rockwn05	96,5,5,{/* 59922 */
 	mes "[エルシー]";
 	mes "うわー！　すごく綺麗！";
 	next;
-	emotion 1, "エルシー#rockwn05"; //59922
+	emotion 1,"エルシー#rockwn05"; //59922
 	mes "[エルシー]";
 	mes "500万zeny……";
 	mes "ねえ？　それってどのくらいなの？";
@@ -4016,7 +3987,7 @@ harboro1.gat,80,204,7	script	エルシー#rockwn05	96,5,5,{/* 59922 */
 	mes "200zenyでいいよ。";
 	close;
 OnTouch:
-	emotion 0, "エルシー#rockwn05"; //59922
+	emotion 0,"エルシー#rockwn05"; //59922
 	end;
 }
 harboro1.gat,86,210,4	script	カルメン・オニール#rock	102,{/* 59923 */
@@ -4068,7 +4039,7 @@ OnTalk1:
 	end;
 }
 harboro1.gat,98,211,3	script	ロレッター#rockwn08	641,5,5,{/* 59925 */
-	emotion 3, "ロレッター#rockwn08"; //59925
+	emotion 3,"ロレッター#rockwn08"; //59925
 	mes "[ロレッター]";
 	mes "自由の都市ロックリッジでも";
 	mes "主神様はみなさんと一緒にいます！";
@@ -4082,7 +4053,7 @@ harboro1.gat,98,211,3	script	ロレッター#rockwn08	641,5,5,{/* 59925 */
 	mes "ですから一緒に";
 	mes "感謝のお祈りをしながら……。";
 	next;
-	emotion 16, "ドロレス#rockwn09"; //59926
+	emotion 16,"ドロレス#rockwn09"; //59926
 	mes "[ドロレス]";
 	mes "ロレッター姉様、足が痛いです。";
 	mes "主神様が心にいらっしゃるとしても、";
@@ -4105,8 +4076,8 @@ harboro1.gat,98,211,3	script	ロレッター#rockwn08	641,5,5,{/* 59925 */
 	mes "好きな物を買ってあげますよ。";
 	mes "だから今はもう少し聖職者らしく……。";
 	next;
-	emotion 14, "ドロレス#rockwn09"; //59926
-	emotion 14, "モリス#rockwn10"; //59927
+	emotion 14,"ドロレス#rockwn09"; //59926
+	emotion 14,"モリス#rockwn10"; //59927
 	donpcevent "ドロレス#rockwn09::OnTalk1";
 	donpcevent "モリス#rockwn10::OnTalk1";
 	mes "[モリス]";
@@ -4135,7 +4106,7 @@ harboro1.gat,100,211,3	script	ドロレス#rockwn09	79,{/* 59926 */
 	mes "勘違いするでしょ！";
 	mes "今日も一番遅く起きたくせに……。";
 	next;
-	emotion 19, "ドロレス#rockwn09"; //59926
+	emotion 19,"ドロレス#rockwn09"; //59926
 	mes "[ドロレス]";
 	mes "べ、ベッドにいらっしゃった";
 	mes "主神様とお話をしていただけです！";
@@ -4158,7 +4129,7 @@ harboro1.gat,101,210,3	script	モリス#rockwn10	60,{/* 59927 */
 	mes "初めて抱いた気持ちは";
 	mes "私の中で変わっていません。";
 	next;
-	emotion 2, "モリス#rockwn10"; //59927
+	emotion 2,"モリス#rockwn10"; //59927
 	mes "[モリス]";
 	mes "肉体が辛いと心と神も";
 	mes "離れやすいです。";
@@ -4231,8 +4202,8 @@ harboro1.gat,75,211,1	script	ゼヴァーディー#rockwn13	82,{/* 59930 */
 	close;
 OnTouch:
 	unittalk "ゼヴァーディー : ロックリッジにようこそ！";
-	misceffect 72, "ゼヴァーディー#rockwn13"; //59930
-	emotion 14, "ゼヴァーディー#rockwn13"; //59930
+	misceffect 72,"ゼヴァーディー#rockwn13"; //59930
+	emotion 14,"ゼヴァーディー#rockwn13"; //59930
 	end;
 }
 harboro1.gat,75,219,3	script	エイリーン#rockwn14	96,{/* 59931 */
@@ -4245,8 +4216,8 @@ harboro1.gat,75,219,3	script	エイリーン#rockwn14	96,{/* 59931 */
 	close;
 OnTouch:
 	unittalk "エイリーン : 冒険者様を歓迎しますよ～！";
-	misceffect 72, "エイリーン#rockwn14"; //59931
-	emotion 14, "エイリーン#rockwn14"; //59931
+	misceffect 72,"エイリーン#rockwn14"; //59931
+	emotion 14,"エイリーン#rockwn14"; //59931
 	end;
 }
 harboro1.gat,83,221,3	script	マフアカヤ#rockwn15	10225,{/* 59932 */
@@ -4267,7 +4238,7 @@ harboro1.gat,83,221,3	script	マフアカヤ#rockwn15	10225,{/* 59932 */
 	mes "大自然の前ではイパリみたいに";
 	mes "子どもでしかないんだぞ。";
 	next;
-	emotion 18, "明るいイパリ#rockwn16"; //59933
+	emotion 18,"明るいイパリ#rockwn16"; //59933
 	mes "[明るいイパリ]";
 	mes "あはははは！　嘘だ～！";
 	mes "お爺ちゃんは背も高いし、";
@@ -4293,7 +4264,7 @@ harboro1.gat,82,221,3	script	明るいイパリ#rockwn16	10226,5,5,{/* 59933 */
 	mes "たまにイパリにはよくわからない話を";
 	mes "してくれるけど……。";
 	next;
-	emotion 2, "明るいイパリ#rockwn16"; //59933
+	emotion 2,"明るいイパリ#rockwn16"; //59933
 	mes "[明るいイパリ]";
 	mes "イパリがお爺ちゃんくらい";
 	mes "大きくなったらわかるようになるよね？";
@@ -4302,7 +4273,7 @@ harboro1.gat,82,221,3	script	明るいイパリ#rockwn16	10226,5,5,{/* 59933 */
 	mes "聞くことにします！";
 	close;
 OnTouch:
-	emotion 18, "明るいイパリ#rockwn16"; //59933
+	emotion 18,"明るいイパリ#rockwn16"; //59933
 	end;
 }
 harboro1.gat,93,201,1	script	ローランドバーツ#rockwn	10203,{/* 59934 */
@@ -4313,7 +4284,7 @@ harboro1.gat,93,201,1	script	ローランドバーツ#rockwn	10203,{/* 59934 */
 	mes "今日も目を光らせながら";
 	mes "町を警戒しています。";
 	next;
-	emotion 16, "ローランドバーツ#rockwn"; //59934
+	emotion 16,"ローランドバーツ#rockwn"; //59934
 	mes "[ローランドバーツ]";
 	mes "一番頭を悩ませているのは";
 	mes "やはり牛賊団だけど……";
@@ -4336,7 +4307,7 @@ harboro1.gat,85,195,1	script	コンスタンス#rockwn18	850,5,5,{/* 59935 */
 	mes "思ったら、いきなりつるはしで";
 	mes "掘り始めたんだよ！";
 	next;
-	emotion 7, "コンスタンス#rockwn18"; //59935
+	emotion 7,"コンスタンス#rockwn18"; //59935
 	mes "[コンスタンス]";
 	mes "あれは鉱物じゃなくて、";
 	mes "町の人たちが力を合わせて作った";
@@ -4390,7 +4361,7 @@ harboro1.gat,94,237,3	script	コルデル#rockn01	573,{/* 59937 */
 	mes "なってきたけど……";
 	mes "発展には苦労がつきものです。";
 	next;
-	emotion 14, "コルデル#rockn01"; //59937
+	emotion 14,"コルデル#rockn01"; //59937
 	mes "[コルデル]";
 	mes "だけど難題を目の前にしても";
 	mes "手を止めないのが、";
@@ -4467,7 +4438,7 @@ harboro1.gat,311,53,5	script	ジョイス・レスリー#rock	90,{/* 59942 */
 	mes "冒険者がそれを知って";
 	mes "どうするつもりですか？";
 	next;
-	emotion 54, "ジョイス・レスリー#rock"; //59942
+	emotion 54,"ジョイス・レスリー#rock"; //59942
 	mes "[ジョイス・レスリー]";
 	mes "ごめんなさい、";
 	mes "怒るつもりはなかったの。";
@@ -4475,7 +4446,7 @@ harboro1.gat,311,53,5	script	ジョイス・レスリー#rock	90,{/* 59942 */
 	close;
 }
 harboro1.gat,321,237,5	script	ルビナ・アドラー#rockn0	882,{/* 59943 */
-	emotion 2, "ルビナ・アドラー#rockn0"; //59943
+	emotion 2,"ルビナ・アドラー#rockn0"; //59943
 	mes "[ルビナ・アドラー]";
 	mes "う～ん、ここで味わうことができる";
 	mes "食べ物の中では、";
@@ -4492,7 +4463,7 @@ harboro1.gat,321,237,5	script	ルビナ・アドラー#rockn0	882,{/* 59943 */
 	mes "よく見たらアガベジュースではなく、";
 	mes "アガベ「味」ジュースと書いてある。";
 	next;
-	emotion 4, "ルビナ・アドラー#rockn0"; //59943
+	emotion 4,"ルビナ・アドラー#rockn0"; //59943
 	mes "[ルビナ・アドラー]";
 	mes "え……まさか、";
 	mes "アガベ成分は入ってないの？";
@@ -4566,7 +4537,7 @@ harboro1.gat,126,236,7	script	ジェイダー#rockn11	881,{/* 59947 */
 	mes "はあ……わかってないね。";
 	mes "仕事があることを喜ばないと！";
 	next;
-	emotion 54, "ジェイダー#rockn11"; //59947
+	emotion 54,"ジェイダー#rockn11"; //59947
 	mes "[ジェイダー]";
 	mes "わあ！";
 	mes "いつから聞いていたんですか？";
@@ -4608,7 +4579,7 @@ harboro1.gat,130,232,7	script	ポトニャス#rockn13	545,{/* 59949 */
 	mes "毎日貨物を運んでいたから";
 	mes "腰が痛いにゃ。";
 	next;
-	emotion 57, "ポトニャス#rockn13"; //59949
+	emotion 57,"ポトニャス#rockn13"; //59949
 	mes "[ポトニャス]";
 	mes "このままだと治療費の方が";
 	mes "高くつきそうだにゃん……。";
@@ -4622,7 +4593,7 @@ harboro1.gat,74,259,3	script	イエローマックコディ#ro	633,{/* 59950 */
 	mes "雨風と海水、外にいる連中から";
 	mes "貨物を守るこの仕事は私の誇りだ！";
 	next;
-	emotion 28, "イエローマックコディ#ro"; //59950
+	emotion 28,"イエローマックコディ#ro"; //59950
 	mes "[イエローマックコディ]";
 	mes "最近は……うむ。";
 	mes "牛賊団のせいで";
@@ -4733,7 +4704,7 @@ harboro1.gat,130,158,3	script	アクハ#rockn19	10222,{/* 59956 */
 	mes "棘が全部引き抜かれるって";
 	mes "言っていたよ！　どうしよう？";
 	next;
-	emotion 28, "アクハ#rockn19"; //59956
+	emotion 28,"アクハ#rockn19"; //59956
 	mes "[アクハ]";
 	mes "うわああ～ん！";
 	mes "お婆ちゃ～ん！　どこにいるの～？";
@@ -4753,7 +4724,7 @@ harboro1.gat,130,158,3	script	アクハ#rockn19	10222,{/* 59956 */
 	mes "もうすぐお婆ちゃんにも会えるわ。";
 	mes "あっちに行ってみましょう。";
 	next;
-	emotion 16, "アクハ#rockn19"; //59956
+	emotion 16,"アクハ#rockn19"; //59956
 	mes "[アクハ]";
 	mes "棘が抜かれてつるつるになったら";
 	mes "恥ずかしいよぅ……。";
@@ -4780,7 +4751,7 @@ harboro1.gat,132,157,3	script	ナハリ#rockn19	10226,{/* 59957 */
 	mes "あ！　向こうに異邦人が";
 	mes "たくさんいるわ！　行ってみましょ！";
 	next;
-	emotion 28, "アクハ#rockn19"; //59956
+	emotion 28,"アクハ#rockn19"; //59956
 	mes "[アクハ]";
 	mes "こんな事をしてて";
 	mes "家に帰れなくなったら";
@@ -4856,7 +4827,7 @@ OnTouch:
 	end;
 }
 harboro1.gat,291,200,5	script	大陸案内員#harboro1	10218,{/* 59965 */
-	cutin "rock_cact02.bmp", 2;
+	cutin "rock_cact02",2;
 	mes "[大陸案内員]";
 	mes "やあ異邦人さん。";
 	mes "この大陸を案内してほしいのか？";
@@ -4868,7 +4839,7 @@ harboro1.gat,291,200,5	script	大陸案内員#harboro1	10218,{/* 59965 */
 		mes "牛賊団との揉め事が収まるまでは";
 		mes "ちょっと無理だな。";
 		close2;
-		cutin "rock_cact02.bmp", 255;
+		cutin "rock_cact02",255;
 		end;
 	}
 	if(ROCKRIDGE_1QUE == 16) {
@@ -4881,13 +4852,13 @@ harboro1.gat,291,200,5	script	大陸案内員#harboro1	10218,{/* 59965 */
 			mes "　荷物に1個以上の空きを";
 			mes "　作ってください‐";
 			close2;
-			cutin "rock_cact02.bmp", 255;
+			cutin "rock_cact02",255;
 			end;
 		}
 		setquest 73250;
 		delquest 73250;
 		set ROCKRIDGE_1QUE,17;
-		getitem 25250, 10;
+		getitem 25250,10;
 		mes "[大陸案内員]";
 		mes "牛賊団の連中相手に";
 		mes "ひと仕事してくれたようだな。";
@@ -4936,7 +4907,7 @@ harboro1.gat,291,200,5	script	大陸案内員#harboro1	10218,{/* 59965 */
 			mes "[大陸案内員]";
 			mes "また来てくれ。";
 			close2;
-			cutin "rock_cact02.bmp", 255;
+			cutin "rock_cact02",255;
 			end;
 		}
 		if(Zeny < 4500) {
@@ -4945,7 +4916,7 @@ harboro1.gat,291,200,5	script	大陸案内員#harboro1	10218,{/* 59965 */
 			mes "Zenyが足りないな。";
 			mes "また来てくれ。";
 			close2;
-			cutin "rock_cact02.bmp", 255;
+			cutin "rock_cact02",255;
 			end;
 		}
 		set Zeny,Zeny-4500;
@@ -4955,13 +4926,13 @@ harboro1.gat,291,200,5	script	大陸案内員#harboro1	10218,{/* 59965 */
 		mes "傷の治療が終わったぞ。";
 		mes "また来てくれ。";
 		close2;
-		cutin "rock_cact02.bmp", 255;
+		cutin "rock_cact02",255;
 		end;
 	case 3:
 		mes "[大陸案内員]";
 		mes "また来てくれ。";
 		close2;
-		cutin "rock_cact02.bmp", 255;
+		cutin "rock_cact02",255;
 		end;
 	}
 	mes "[大陸案内員]";
@@ -5232,11 +5203,15 @@ harboro2.gat,291,44,3	script	白い配管#40	10046,{/* 60674 */
 	close;
 }
 
-rockrdg1.gat,371,206,0	warp	rockrdg1_rockrdg2_01	1,1,rockrdg2.gat,31,207		//59977 from_pos=(371, 205)
-rockrdg2.gat,27,207,0	warp	rockrdg2_rockrdg1_01	1,1,rockrdg1.gat,367,206	//59978 from_pos=(27, 207)
+rockrdg1.gat,371,206,0	warp	rockrdg1_rockrdg2_01	1,1,rockrdg2.gat,31,207		//59977
+rockrdg2.gat,27,207,0	warp	rockrdg2_rockrdg1_01	1,1,rockrdg1.gat,367,206	//59978
 rockrdg2.gat,304,350,0	script	rockrdg2_rockmi1_01	45,1,1,{/* 59979 */
 	if(BaseLevel < 160) {
+		donpcevent "自警団員#rockrdg2::OnTalk";
 		end;
+	}
+	warp "rockrdg1.gat",37,246;
+	end;
 	}
 	mes "‐ロックリッジ鉱山の入口だ。";
 	mes "　どこに行きますか？‐";
@@ -5259,12 +5234,15 @@ rockrdg2.gat,301,349,3	script	自警団員#rockrdg2	10220,{/* 59980 */
 	mes "BaseLv160以上の方のみ";
 	mes "お通ししています。";
 	close;
+OnTalk:
+	donpcevent "自警団員 : この先は危険です。BaseLv160以上の方のみお通ししています。";
+	end;
 }
-rockmi1.gat,247,16,0	warp	rockmi1_rockrdg2_01	1,1,rockrdg2.gat,304,344	//59512 from_pos=(27, 207)
-rockmi3.gat,247,16,0	warp	rockmi3_rockrdg2_01	1,1,rockrdg2.gat,304,344	//51122 from_pos=(248, 17)
+rockmi1.gat,247,16,0	warp	rockmi1_rockrdg2_01	1,1,rockrdg2.gat,304,344	//59512
+rockmi3.gat,247,16,0	warp	rockmi3_rockrdg2_01	1,1,rockrdg2.gat,304,344	//51122
 
 rockrdg1.gat,262,90,7	script	うずくまった馬#rr	10217,{/* 59981 */
-	cutin "rock_cact01.bmp", 2;
+	cutin "rock_cact01",2;
 	mes "[うずくまった馬]";
 	mes "調子はどうだ？";
 	mes "太陽と大地の祝福が";
@@ -5283,16 +5261,16 @@ rockrdg1.gat,262,90,7	script	うずくまった馬#rr	10217,{/* 59981 */
 	mes "やるべきことを終わらせてから";
 	mes "また訪ねて来てくれ。";
 	close2;
-	cutin "rock_cact01.bmp", 255;
+	cutin "rock_cact01",255;
 	end;
 }
 rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
-	cutin "rock_cact03.bmp", 2;
+	cutin "rock_cact03",2;
 	mes "[キャクターロン]";
 	mes "みかけない異邦人ね。";
 	mes "何か用かしら？";
 	next;
-	cutin "rock_cact03.bmp", 255;
+	cutin "rock_cact03",255;
 	mes "‐牛賊団の問題が解決してから";
 	mes "　また来よう‐";
 	close;
@@ -5314,7 +5292,7 @@ rockrdg1.gat,305,200,3	script	キャクター少女#rrem04	10226,{/* 59985 */
 	mes "[キャクター少女]";
 	mes "……見知らぬ人、";
 	mes "近寄らないで。暴れるわよ。";
-	emotion 7, "キャクター少女#rrem04"; //59985
+	emotion 7,"キャクター少女#rrem04"; //59985
 	close;
 }
 rockrdg1.gat,195,183,3	script	好奇心旺盛なコヨーテ#rr	3739,{/* 59986 */}
@@ -5345,7 +5323,7 @@ rockrdg2.gat,295,328,5	script	病弱なガスト#rockdaily	10231,{/* 59992 */
 rockrdg1.gat,36,250,5	script	ミスター・マックフィー#	98,{/* 59993 */
 	mes "[ミスター・マックフィー]";
 	mes "うわあ、牛賊団か!?";
-	emotion 23, "ミスター・マックフィー#"; //59993
+	emotion 23,"ミスター・マックフィー#"; //59993
 	next;
 	mes "[ミスター・マックフィー]";
 	mes "なんだ、冒険者様じゃないですか。";
@@ -5482,12 +5460,12 @@ rockrdg1.gat,310,48,3	script	エレクター#rockc06	10222,{/* 60008 */
 	mes "大きくなって町で一番頑丈な";
 	mes "網を作る職人になります！";
 	next;
-	emotion 9, "エレクター#rockc06"; //60008
+	emotion 9,"エレクター#rockc06"; //60008
 	mes "[エレクター]";
 	mes "あ……でも一番頑丈な網を編むのは";
 	mes "お婆さんなんだ……。";
 	next;
-	emotion 2, "エレクター#rockc06"; //60008
+	emotion 2,"エレクター#rockc06"; //60008
 	mes "[エレクター]";
 	mes "じゃあエレクターはですね、";
 	mes "大きくなって町で二番目に頑丈な";
@@ -5522,7 +5500,7 @@ rockrdg1.gat,297,84,7	script	タネスカ#rockc08	549,{/* 60010 */
 	mes "美しいほどのバランスと";
 	mes "豊富な音を作る共鳴部位……。";
 	next;
-	emotion 3, "タネスカ#rockc08"; //60010
+	emotion 3,"タネスカ#rockc08"; //60010
 	mes "[タネスカ]";
 	mes "ああ、今すぐに叩いてみたい！";
 	mes "あの音を聞いてみたいです！";
@@ -5584,7 +5562,7 @@ rockrdg1.gat,297,111,3	script	ロイタネン#rockc10	727,{/* 60013 */
 	mes "あれ、またキャクター族の町だ。";
 	mes "また道に迷ったみたい……。";
 	next;
-	emotion 28, "ロイタネン#rockc10"; //60013
+	emotion 28,"ロイタネン#rockc10"; //60013
 	mes "[ロイタネン]";
 	mes "キワワ砂漠はあまりに広いうえに";
 	mes "どこも地形が似ているから、";
