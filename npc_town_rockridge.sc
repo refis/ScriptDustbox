@@ -2806,13 +2806,21 @@ har_in01.gat,16,86,4	script	防具屋#rockridge02	50,{/* 59819 */
 		mes "長く商売を続けるための基本です。";
 		close;
 	}
-	// タバコ100k、パイプタバコ500k、白ひげ5k　各10
 	mes "[防具屋]";
 	mes "ここは防具屋です。";
 	mes "今日は";
-	mes "^0000ffタバコと";
-	mes "パイプタバコと";
-	mes "白ひげ^000000が";
+	switch('flag) {
+	case 1:	// タバコ100k、パイプタバコ500k、白ひげ5k　各10
+		mes "^0000ffタバコと";
+		mes "パイプタバコと";
+		mes "白ひげ^000000が";
+		break;
+	case 2:	// ソンブレロ700k、インディアンの鉢巻き700k、カウボーイハット700k　各10
+		mes "^0000ffソンブレロと";
+		mes "インディアンの鉢巻きと";
+		mes "カウボーイハット^000000が";
+		break;
+	}
 	mes "入荷しています。";
 	next;
 	mes "[防具屋]";
@@ -2829,21 +2837,22 @@ har_in01.gat,16,86,4	script	防具屋#rockridge02	50,{/* 59819 */
 	mes "揃えているので^000000、";
 	mes "一度見ていってください。";
 	close2;
-	//selectshop  'rockridgeitem_id,'rockridgeitem_num,'rockridgeitem_val;
+	//selectshop 'rockridgeitem_id,'rockridgeitem_num,'rockridgeitem_val;
 	end;
 OnInit:
 	// 詳細未確認
 	//if() {							// 1週間経ったか確認
 	//}
 	//set 'rockridgetimer,gettime(0);	// 現在の週を保存
-	//switch(rand(x)) {					// 商品リストを更新
+	//set 'flag,rand(1,2);				// 商品リストの選択
+	//switch('flag) {					// 商品リストを更新
 	//case 1:
 	//	setarray 'rockridgeitem_id,512,512,512;
 	//	setarray 'rockridgeitem_num,10,10,10;
 	//	setarray 'rockridgeitem_val,100000,500000,5000;
 	//	break;
 	//}
-	//end;
+	end;
 }
 har_in01.gat,24,69,3	script	穏やかな夫人#rockridge0	74,{/* 59820 */
 	mes "[穏やかな夫人]";

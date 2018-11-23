@@ -1,5 +1,48 @@
+@spawn(type: BL_MOB, ID: 36433, speed: 150, option: 0, view: 3010, pos: "dali.gat"(138, 132), dir: 0, name: "生者のオークベイビー")
+@spawn(type: BL_MOB, ID: 11528, speed: 150, option: 0, view: 3011, pos: "dali.gat"(145, 107), dir: 0, name: "生者の子デザートウルフ")
+@spawn(type: BL_MOB, ID: 32898, speed: 120, option: 0, view: 3012, pos: "dali.gat"(138, 132), dir: 0, name: "生者のマリンスフィアー")
+@spawn(type: BL_MOB, ID: 26291, speed: 150, option: 0, view: 3013, pos: "dali.gat"(103, 124), dir: 0, name: "生者のオークウォリアー")
+@spawn(type: BL_MOB, ID: 39730, speed: 150, option: 0, view: 3014, pos: "dali.gat"(144, 130), dir: 0, name: "生者のデザートウルフ")
+@spawn(type: BL_MOB, ID: 26817, speed: 150, option: 0, view: 3015, pos: "dali.gat"(143, 130), dir: 0, name: "生者のフェン")
+
 moro_cav.gat,45,60,5	script	調査隊員 #sara	419,{/* 65379 */
 	if(!(checkquest(15006) & 0x8)) {
+		mes "[調査隊員]";
+		mes "ここはモロク復活を防ぐ連合軍の";
+		mes "最前線です。";
+		mes "私は調査隊により発見された";
+		mes "^ff0000黄色い種^000000の調査を行っています。";
+		next;
+		mes "[調査隊員]";
+		mes "しかし、黄色い種の内部には";
+		mes "強力なモンスターが生息しており";
+		mes "調査隊も甚大な被害を";
+		mes "受けてしまいました……。";
+		next;
+		mes "[調査隊員]";
+		mes "調査は続行しなければなりませんが";
+		mes "私一人の力では調査を行なえません。";
+		next;
+		mes "[調査隊員]";
+		mes "そこで、腕の立つであろう";
+		mes "冒険者の方々にお手伝いを";
+		mes "お願いしているのです。";
+		next;
+		mes "[調査隊員]";
+		mes "お願いします！";
+		mes "黄色い種の内部の調査に";
+		mes "協力してください！";
+		next;
+		menu "協力する",-;
+		mes "[調査隊員]";
+		mes "ありがとうございます！";
+		mes "黄色い種の内部は非常に危険です。";
+		mes "必ずパーティーを組んでから";
+		mes "調査を行ってください。";
+		mes "よろしくお願いします！";
+		setquest 15006; //state=1
+		compquest 15006;
+		close;
 	}
 	mes "[調査隊員]";
 	mes "黄色い種の内部は非常に危険です。";
@@ -92,6 +135,7 @@ moro_cav.gat,50,63,5	script	黄色い種#bios	844,{/* 65380 */
 				setquest 116535; //state=1
 				compquest 116535;
 			//}
+			//setquest 118927; //state=1
 			close2;
 			warp "1@dth1.gat",17,93;
 			end;
@@ -126,7 +170,17 @@ OnInit:
 1@dth1.gat,84,95,0	script	#BARRICADE1_6	1905,{/* 69835 */}
 1@dth1.gat,84,96,0	script	#BARRICADE1_7	1905,{/* 69836 */}
 1@dth1.gat,84,97,0	script	#BARRICADE1_8	1905,{/* 69837 */}
-
+1@dth1.gat,1,1,0	script	#bios1_mobdead	139,{
+OnStart:
+	//位置指定ありそう、未調査
+	//@spawn(type: BL_MOB, ID: 35633, speed: 150, option: 0, view: 3010, pos: "dali.gat"(90, 94), dir: 0, name: "生者のオークベイビー")
+	//@spawn(type: BL_MOB, ID: 35588, speed: 150, option: 0, view: 3011, pos: "dali.gat"(90, 94), dir: 0, name: "生者の子デザートウルフ")
+	areamonster getmdmapname("1@dth2.gat"),90,46,316,169,"生者のオークベイビー",3010,24,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	areamonster getmdmapname("1@dth2.gat"),90,46,316,169,"生者の子デザートウルフ",3011,24,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	areamonster getmdmapname("1@dth2.gat"),90,46,316,169,"生者のマリンスフィアー",3012,24,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	end;
+OnKilled:
+}
 1@dth1.gat,71,97,3	script	ジェイス#bios1	467,{/* 69839 */
 	mes "[ジェイス]";
 	mes "……ジェイスだ。";
@@ -134,18 +188,263 @@ OnInit:
 	mes "[ジェイス]";
 	mes "……。";
 	close;
+OnTalk1:
+	unittalk "ジェイス : ……ジェイスだ。";
+	end;
+OnTalk2:
+	unittalk "ジェイス : ……";
+	end;
+OnTalk3:
+	unittalk "ジェイス : ……どうしてこんなところに？";
+	end;
+OnTalk4:
+	unittalk "ジェイス : ……!!!　誰だ!?";
+	end;
+OnTalk5:
+	unittalk "ジェイス : ……先行する。あとからついて来てくれ。";
+	end;
 }
-1@dth1.gat,74,94,3	script	死神アンク#bios1	3029,{/* 69840 (hide)*/}
+1@dth1.gat,74,94,3	script	死神アンク#bios1	3029,{/* 69840 (hide)*/
+	end;
+OnTalk1:
+	unittalk "？？？？ : クックック。";
+	end;
+OnTalk2:
+	unittalk "？？？？ : ようこそビオスの島へ。";
+	end;
+OnTalk3:
+	unittalk "死神アンク : 私は死神アンク。ここは私が作り出した死と生の空間です。";
+	end;
+OnTalk4:
+	unittalk "死神アンク : これはこれは、みなさん威勢がいいようですね。";
+	end;
+OnTalk5:
+	unittalk "死神アンク : これからモロク様に捧げる生贄を調達しようとしていたのですが……。";
+	end;
+OnTalk6:
+	unittalk "死神アンク : まさか生贄が自らやって来るとは……ククク。";
+	end;
+OnTalk7:
+	unittalk "死神アンク : モロク様の力になれる事を光栄に思いなさい。";
+	end;
+OnTalk8:
+	unittalk "死神アンク : クク、威勢が良くて結構です。ただ、急ぐ必要はありません。";
+	end;
+OnTalk9:
+	unittalk "死神アンク : まずは私の世界でゆっくり……くつろぐことです。ククククク。";
+	end;
+}
 1@dth1.gat,67,97,5	script	ブリド#bios1	468,{/* 69841 */
-	mes "[ブリド]";
-	mes "私はブリド。";
-	mes "魔王モロクの復活を";
-	mes "阻止しに来たんだ。";
-	close;
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		mes "[ブリド]";
+		mes "私はブリド。";
+		mes "魔王モロクの復活を";
+		mes "阻止しに来たんだ。";
+		close;
+	}
+	if(select("先を急ぐ","会話をする") == 1) {
+	}
+	mes "‐見慣れない男性二人組が居る‐";
+	close2;
+	initnpctimer;
+	end;
+OnTimer1000:
+	unittalk "ブリド : おや？　こんなところで冒険者に会うとは……";
+	end;
+OnTimer4000:
+	unittalk "ブリド : 君も魔王モロクの復活を阻止しに来たのか？";
+	end;
+OnTimer7000:
+	unittalk "ブリド : 私はプロンテラから来たブリド。こいつは……";
+	end;
+OnTimer10000:
+	donpcevent getmdnpcname("ジェイス#bios1")+ "::OnTalk1";
+	end;
+OnTimer13000:
+	unittalk "ブリド : すまんな。ジェイスは人見知りなんだ。";
+	end;
+OnTimer16000:
+	donpcevent getmdnpcname("ジェイス#bios1")+ "::OnTalk2";
+	end;
+OnTimer19000:
+	unittalk "ブリド : それより、後ろから誰か追いかけて来ているが、君の知り合いか？";
+	end;
+OnTimer20000:
+	stopnpctimer;
+	hideoffnpc getmdnpcname("#会話用ダミー1");
+	end;
+OnTalk1:
+	unittalk "ブリド : あんたら……連合軍の司令官アジフと教官長イグリドか！";
+	end;
+OnTalk2:
+	unittalk "ブリド : あんたらが居るなら心強い！　よろしく頼むぜ！";
+	end;
+OnTalk3:
+	unittalk "ブリド : なにっ!!";
+	end;
+OnTalk4:
+	unittalk "ブリド : はっ！　三下に用はない！";
+	end;
+OnTalk5:
+	unittalk "ブリド : 誰だか知らんが、まずはお前を倒してやるっ!!";
+	end;
+OnTalk6:
+	unittalk "ブリド : くそっ！　消えやがった!!";
+	end;
+OnTalk7:
+	unittalk "ブリド : あいつが魔王モロクを復活させようとしているのか？";
+	end;
+OnTalk8:
+	unittalk "ブリド : 奴を追うぞ！　ジェイス急げ！";
+	end;
 }
-1@dth1.gat,67,97,0	script	#会話用ダミー1	139,{/* 69842 (hide)*/}
-1@dth1.gat,60,96,5	script	司令官アジフ#bios1	459,{/* 69843 (hide)*/}
-1@dth1.gat,60,93,5	script	教官長イグリド#bios1	751,{/* 69844 (hide)*/}
+1@dth1.gat,67,97,0	script	#会話用ダミー1	139,9,9,{/* 69842 (hide)*/
+	mes "‐誰が来ている？‐";
+	next;
+	switch(select("アジフとイグリドだ","キドとリーンだ","セルザン達だ","ヒシエとエイヴァントだ","ヘスランタとアバランチェだ","誰もいない")) {
+	case 1:
+		mes "‐振り向くと、アジフとイグリドが居た‐";
+		close2;
+		donpcevent getmdnpcname("司令官アジフ#bios1")+ "::OnStart";
+		end;
+	}
+}
+1@dth1.gat,60,96,5	script	司令官アジフ#bios1	459,{/* 69843 (hide)*/
+	//
+	end;
+OnStart:
+	hideonnpc getmdnpcname("#会話用ダミー1");
+	hideoffnpc getmdnpcname("司令官アジフ#bios1");
+	hideoffnpc getmdnpcname("教官長イグリド#bios1");
+	initnpctimer;
+	end;
+OnTimer1000:
+	unittalk "アジフ : みんな、無事か！　俺が来たからにはもう大丈夫だ！";
+	end;
+OnTimer4000:
+	donpcevent getmdnpcname("教官長イグリド#bios1")+ "::OnTalk1";
+	end;
+OnTimer7000:
+	unittalk "アジフ : うるさい！　あと、俺の事は司令官と呼べ！";
+	end;
+OnTimer10000:
+	donpcevent getmdnpcname("ブリド#bios1")+ "::OnTalk1";
+	end;
+OnTimer13000:
+	donpcevent getmdnpcname("ジェイス#bios1")+ "::OnTalk3";
+	end;
+OnTimer16000:
+	unittalk "アジフ : こいつには借りがあってな。そいつを返しに来たんだ。";
+	end;
+OnTimer19000:
+	donpcevent getmdnpcname("教官長イグリド#bios1")+ "::OnTalk2";
+	end;
+OnTimer22000:
+	donpcevent getmdnpcname("ブリド#bios1")+ "::OnTalk2";
+	end;
+OnTimer25000:
+	donpcevent getmdnpcname("死神アンク#bios1")+ "::OnTalk1";
+	end;
+OnTimer28000:
+	donpcevent getmdnpcname("ジェイス#bios1")+ "::OnTalk4";
+	end;
+OnTimer31000:
+	hideoffnpc getmdnpcname("死神アンク#bios1");
+	donpcevent getmdnpcname("死神アンク#bios1")+ "::OnTalk2";
+	end;
+OnTimer34000:
+	donpcevent getmdnpcname("死神アンク#bios1")+ "::OnTalk3";
+	end;
+OnTimer37000:
+	donpcevent getmdnpcname("ブリド#bios1")+ "::OnTalk3";
+	end;
+OnTimer40000:
+	unittalk "アジフ : へぇ、こいつが親玉か。";
+	end;
+OnTimer43000:
+	donpcevent getmdnpcname("教官長イグリド#bios1")+ "::OnTalk3";
+	end;
+OnTimer46000:
+	unittalk "アジフ : 全員、気を抜くんじゃないぞ！";
+	end;
+OnTimer49000:
+	donpcevent getmdnpcname("死神アンク#bios1")+ "::OnTalk4";
+	end;
+OnTimer52000:
+	donpcevent getmdnpcname("死神アンク#bios1")+ "::OnTalk5";
+	end;
+OnTimer55000:
+	donpcevent getmdnpcname("死神アンク#bios1")+ "::OnTalk6";
+	end;
+OnTimer58000:
+	donpcevent getmdnpcname("死神アンク#bios1")+ "::OnTalk7";
+	end;
+OnTimer61000:
+	donpcevent getmdnpcname("ブリド#bios1")+ "::OnTalk4";
+	end;
+OnTimer64000:
+	donpcevent getmdnpcname("ブリド#bios1")+ "::OnTalk5";
+	end;
+OnTimer67000:
+	donpcevent getmdnpcname("死神アンク#bios1")+ "::OnTalk8";
+	end;
+OnTimer70000:
+	donpcevent getmdnpcname("死神アンク#bios1")+ "::OnTalk9";
+	end;
+OnTimer73000:
+	hideonnpc getmdnpcname("死神アンク#bios1");
+	donpcevent getmdnpcname("ブリド#bios1")+ "::OnTalk6";
+	end;
+OnTimer76000:
+	donpcevent getmdnpcname("ブリド#bios1")+ "::OnTalk7";
+	end;
+OnTimer79000:
+	donpcevent getmdnpcname("ブリド#bios1")+ "::OnTalk8";
+	hideonnpc getmdnpcname("ブリド#bios1");
+	end;
+OnTimer82000:
+	donpcevent getmdnpcname("ジェイス#bios1")+ "::OnTalk5";
+	end;
+OnTimer83000:
+	hideonnpc getmdnpcname("ジェイス#bios1");
+	end;
+OnTimer86000:
+	unittalk "アジフ : イグリド！　俺たちも続くぞ！";
+	end;
+OnTimer89000:
+	hideonnpc getmdnpcname("司令官アジフ#bios1"); //79297
+	hideonnpc getmdnpcname("教官長イグリド#bios1"); //79298
+	hideonnpc getmdnpcname("#BARRICADE1_1"); //79284
+	hideonnpc getmdnpcname("#BARRICADE1_2"); //79285
+	hideonnpc getmdnpcname("#BARRICADE1_3"); //79286
+	hideonnpc getmdnpcname("#BARRICADE1_4"); //79287
+	hideonnpc getmdnpcname("#BARRICADE1_5"); //79288
+	hideonnpc getmdnpcname("#BARRICADE1_6"); //79289
+	hideonnpc getmdnpcname("#BARRICADE1_7"); //79290
+	hideonnpc getmdnpcname("#BARRICADE1_8"); //79291
+	areasetcell getmdmapname("1@dth1.gat"),84,90,85,97,0;
+	end;
+OnTimer92000:
+	announce "死神アンク : 死、それは生ある者のみに訪れる恐怖。すべてはここから始まるのです……", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+OnTimer95000:
+	stopnpctimer;
+	announce "ブリド : 待てアンク！　くそっ、東に逃げたようだな。奴を追うぞ！", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+}
+1@dth1.gat,60,93,5	script	教官長イグリド#bios1	751,{/* 69844 (hide)*/
+	//
+	end;
+OnTalk1:
+	unittalk "イグリド : 兄貴！　司令官が前線に出るなんてどういうつもりだ！";
+	end;
+OnTalk2:
+	unittalk "イグリド : そういうわけだから、悪いが俺たちも同行させて貰うぜ。";
+	end;
+OnTalk3:
+	unittalk "イグリド : さすが……他とは桁違いの強さみたいだな。";
+	end;
+}
 1@dth1.gat,60,96,5	script	キド#bios1	884,{/* 69845 (hide)*/}
 1@dth1.gat,60,93,5	script	リーン#bios1	885,{/* 69846 (hide)*/}
 1@dth1.gat,60,96,5	script	連合軍事務官#bios1	754,{/* 69847 (hide)*/}
@@ -158,9 +457,11 @@ OnInit:
 1@dth1.gat,60,93,5	script	先発隊長アバランチェ#bi	450,{/* 69854 (hide)*/}
 1@dth1.gat,67,97,0	script	#会話用ダミー2	139,{/* 69855 (hide)*/}
 
-1@dth1.gat,326,103,0	script	warp1#bios1	45,{/* 69858 */
-setquest 116535; //state=1
-compquest 116535;
+1@dth1.gat,326,103,0	script	warp1#bios1	45,1,1,{/* 69858 */
+	setquest 116535; //state=1
+	compquest 116535;
+	warp getmdmapname("1@dth2.gat"),17,93;
+	end;
 }
 
 1@dth2.gat,150,126,0	script	#BARRICADE2_1	1905,{/* 69859 */}
@@ -171,8 +472,69 @@ compquest 116535;
 1@dth2.gat,150,131,0	script	#BARRICADE2_6	1905,{/* 69864 */}
 1@dth2.gat,150,132,0	script	#BARRICADE2_7	1905,{/* 69865 */}
 1@dth2.gat,150,133,0	script	#BARRICADE2_8	1905,{/* 69866 */}
-1@dth2.gat,67,97,0	script	start1#bios2	139,{/* 69869 (hide)*/}
-1@dth2.gat,67,97,0	script	BC用#bios2	139,{/* 69870 */}
+1@dth2.gat,1,1,0	script	#bios2_mobdead	139,{
+OnStart:
+	monster getmdmapname("1@dth2.gat"),144, 130,"生者のデザートウルフ",3014,4,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	monster getmdmapname("1@dth2.gat"),143, 130,"生者のフェン",3015,4,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	monster getmdmapname("1@dth2.gat"),103, 124,"生者のオークウォリアー",3013,5,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	monster getmdmapname("1@dth2.gat"),102, 124,"生者のデザートウルフ",3014,3,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	monster getmdmapname("1@dth2.gat"),101, 124,"生者のフェン",3015,3,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	monster getmdmapname("1@dth2.gat"),119, 160,"生者のオークウォリアー",3013,5,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	monster getmdmapname("1@dth2.gat"),118, 160,"生者のデザートウルフ",3014,4,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	monster getmdmapname("1@dth2.gat"),117, 160,"生者のフェン",3015,4,getmdnpcname("#bios2_mobdead")+ "::OnKilled";
+	end;
+OnKilled:
+	set '@count,getmapmobs(getmdmapname("1@xm_d.gat"),getmdnpcname("#fac1ct")+ "::OnKilled");
+	if('@count < 28) {
+		initnpctimer;
+		viewpoint 1,71,129,1,0xFF8000;
+		killmonster getmdmapname("1@xm_d.gat"),getmdnpcname("#fac1ct")+"::OnKilled";
+		announce "作業班長案内放送 : あれ？　みんなどこに行ってしまったんだ!?",0x9,0xff8800;
+	}
+	end;
+}
+1@dth2.gat,67,97,0	script	start1#bios2	139,0,10,{/* 69869 */
+	hideonnpc getmdnpcname("start1#bios2"); //90417
+	donpcevent getmdnpcname("BC用#bios2")+ "::OnStart";
+	end;
+}
+1@dth2.gat,67,97,0	script	BC用#bios2	139,{/* 69870 */
+OnStart:
+	initnpctimer;
+	end;
+//タイマー未調査
+OnTimer1000:
+	announce "アジフ : ふん、この程度の敵、俺の相手じゃねえな。", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+OnTimer4000:
+	announce "イグリド : こうして兄貴と背中合わせで戦ってると傭兵時代を思い出すよ。", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+OnTimer7000:
+	announce "死神アンク : ククク。怯えなさい人間。", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+OnTimer10000:
+	announce "死神アンク : 成長の終着点とは、すなわち深淵。", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+OnTimer13000:
+	announce "死神アンク : 死を迎え、冥府へと落ちてしまえば", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+OnTimer16000:
+	donpcevent getmdnpcname("#bios2_mobdead")+ "::OnStart";
+	end;
+OnTimer19000:
+	announce "死神アンク : 物語と違い、貴方の手を引く吟遊詩人は現れない。", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+OnTimer22000:
+	announce "死神アンク : さあ、死に怯えなさい。心を恐怖に染め上げるのです。", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+OnTimer25000:
+	announce "死神アンク : 恐怖は贄となり、モロク様は再び生まれ変わるでしょう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+OnTimer28000:
+	stopnpctimer;
+	announce "ブリド : 待つんだアンク!!　くそっ。まずは邪魔なモンスター達を全て倒すぞ！", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
+}
 1@dth2.gat,326,103,0	script	warp1#bios2	45,{/* 69873 */}
 
 1@dth3.gat,62,80,3	script	死者のオークゾンビ#1bio	3016,{/* 69874 (hide)*/}

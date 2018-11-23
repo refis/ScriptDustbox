@@ -1,5 +1,7 @@
 moro_cav.gat,41,73,4	script	守護者ニーズヘッグ#epeo	510,{/* 65386 */
-	if(checkquest(7597)) {
+	if(checkquest(7598)) {	// クールタイム中
+	}
+	if(checkquest(7597)) {	// 討伐後未報告
 	}
 	if(checkquest(7593) == 0) {
 		cutin "ep14_nyd01.bmp", 2;
@@ -104,7 +106,9 @@ OnInit:
 	end;
 }
 moro_cav.gat,45,75,0	script	世界樹に似た樹#eom_gate	844,{/* 65387 */
-	if(checkquest(7597)) {
+	if(checkquest(7598)) {	// クールタイム中
+	}
+	if(checkquest(7597)) {	// 討伐後未報告
 	}
 	if(checkquest(7593) == 0) {
 		cutin "ep14_nyd01.bmp", 2;
@@ -182,21 +186,20 @@ OnInit:
 OnStart:
 	initnpctimer;
 	set '@mdmap$,getmdmapname("1@eom.gat");
-	set '@event1$,getmdnpcname("callmon#eom1")+"::OnKilled1";
-	set '@event2$,getmdnpcname("callmon#eom1")+"::OnKilled2";
-	set '@mob1,callmonster('@mdmap$,102,30,"魔神の使徒・アハト",3105,'@event1$);
-	set '@mob2,callmonster('@mdmap$,98, 30,"魔神の破片",1918,'@event2$);
-	set '@mob3,callmonster('@mdmap$,100, 30,"魔神の破片",1918,'@event2$);
-	set '@mob4,callmonster('@mdmap$,104, 30,"魔神の破片",1918,'@event2$);
-	set '@mob5,callmonster('@mdmap$,106, 30,"魔神の破片",1918,'@event2$);
-	set '@mob6,callmonster('@mdmap$,102,40,"魔神の使徒・シナイム",3106,'@event1$);
-	set '@mob7,callmonster('@mdmap$,98, 40,"魔神の破片",1921,'@event2$);
-	set '@mob8,callmonster('@mdmap$,100, 40,"魔神の破片",1921,'@event2$);
-	set '@mob9,callmonster('@mdmap$,104, 40,"魔神の破片",1921,'@event2$);
-	set '@mob0,callmonster('@mdmap$,106, 40,"魔神の破片",1921,'@event2$);
+	set '@event$,getmdnpcname("callmon#eom1")+"::OnKilled";
+	set '@mob1,callmonster('@mdmap$,102,30,"魔神の使徒・アハト",3105,'@event$);
+	set '@mob2,callmonster('@mdmap$,98, 30,"魔神の破片",1918,'@event$);
+	set '@mob3,callmonster('@mdmap$,100, 30,"魔神の破片",1918,'@event$);
+	set '@mob4,callmonster('@mdmap$,104, 30,"魔神の破片",1918,'@event$);
+	set '@mob5,callmonster('@mdmap$,106, 30,"魔神の破片",1918,'@event$);
+	set '@mob6,callmonster('@mdmap$,102,40,"魔神の使徒・シナイム",3106,'@event$);
+	set '@mob7,callmonster('@mdmap$,98, 40,"魔神の破片",1921,'@event$);
+	set '@mob8,callmonster('@mdmap$,100, 40,"魔神の破片",1921,'@event$);
+	set '@mob9,callmonster('@mdmap$,104, 40,"魔神の破片",1921,'@event$);
+	set '@mob0,callmonster('@mdmap$,106, 40,"魔神の破片",1921,'@event$);
 	if(getmapusers('@mdmap$) == 1) {
-		setmobhp('@mob1,getmobhp('@mob1)/2);
-		setmobhp('@mob6,getmobhp('@mob6)/2);
+		setmobhp '@mob1,getmobhp('@mob1)/2;
+		setmobhp '@mob6,getmobhp('@mob6)/2;
 	}
 	end;
 OnTimer3000:
@@ -206,15 +209,13 @@ OnTimer6000:
 	stopnpctimer;
 	announce "アハト : さあ、我が主と会うに相応しい力を持っているか、私に見せてください！", 0x9, 0x00ff00;
 	end;
-OnKilled1:
-	set '@count,getmapmobs(getmdmapname("1@eom.gat"),getmdnpcname("callmon#eom1")+ "::OnKilled1");
+OnKilled:
+	set '@count,getmapmobs(getmdmapname("1@eom.gat"),getmdnpcname("callmon#eom1")+ "::OnKilled");
 	if('@count <= 0) {
 		hideoffnpc getmdnpcname("空になっている魂の器#sh"); //99823
 		hideoffnpc getmdnpcname("空になっている魂の器#ah"); //99825
 		hideoffnpc getmdnpcname("魔神の使徒・アハト#ah02"); //99822
 	}
-	end;
-OnKilled2:
 	end;
 }
 
@@ -274,6 +275,7 @@ OnKilled2:
 	setquest 7596; //state=1
 	cutin "ep13_ahat_f.bmp", 255;
 	mapwarp getmdmapname("1@eom.gat"),getmdmapname("1@eom.gat"),103,16;
+	donpcevent getmdnpcname("callmon#eom1")+"::OnStart";
 	end;
 }
 
@@ -378,7 +380,9 @@ OnStartAH:
 	end;
 }
 1@eom.gat,100,122,3	script	見慣れない少年#mockid01	10038,{/* 61690 */
-select("急ぐ:会話をする")
+	if(select("急ぐ","会話をする") == 1) {
+		// 未調査
+	}
 	cutin "morocc_kid.bmp", 2;
 	mes "[少年]";
 	mes "ようこそ。";
@@ -388,7 +392,7 @@ select("急ぐ:会話をする")
 	next;
 	mes "["+strcharinfo(0)+"]";
 	mes "君は？";
-	unittalk ,"君は？";
+	unittalk getcharid(3),"君は？";
 	next;
 	mes "[少年]";
 	mes "あれ？　分からないの？";
@@ -501,12 +505,12 @@ OnTimer96000:
 	hideonnpc getmdnpcname("ロキ#eomloki01"); //82799
 	end;
 OnTimer96500:
-	hideoffnpc getmdnpcname("#gate_to_ice"); //82801
-	misceffect 135, getmdnpcname("#gate_to_ice"); //82801
+	hideoffnpc getmdnpcname("#eom_gate_to_ice"); //82801
+	misceffect 135, getmdnpcname("#eom_gate_to_ice"); //82801
 	end;
 OnTimer97000:
 	stopnpctimer;
-	misceffect 231, getmdnpcname("#gate_to_ice"); //82801
+	misceffect 231, getmdnpcname("#eom_gate_to_ice"); //82801
 	end;
 }
 
@@ -635,7 +639,7 @@ OnTalk3:
 	unittalk "ニーズヘッグ : 世界樹イグドラシルの守護者たる、ニーズヘッグが命じます。……この世界から消えなさい!!";
 	end;
 }
-1@eom.gat,91,120,0	warp	#gate_to_ice	2,2,1@eom.gat,56,88 //61694
+1@eom.gat,91,120,0	warp	#eom_gate_to_ice	2,2,1@eom.gat,56,88	//61694
 1@eom.gat,100,122,3	script	モロク#mockid03	10038,{/* 61695 (hide)*/
 	cutin "morocc_kid.bmp", 2;
 	mes "[モロク]";
@@ -662,11 +666,11 @@ OnTalk3:
 	misceffect 57, "モロク#mockid03"; //82802
 	misceffect 6, "モロク#mockid03"; //82802
 	hideonnpc "モロク#mockid03"; //82802
-	hideoffnpc "#gate_to_last"; //82803
-	misceffect 316, "#gate_to_last"; //82803
+	hideoffnpc "#eom_gate_to_last"; //82803
+	misceffect 316, "#eom_gate_to_last"; //82803
 	end;
 }
-1@eom.gat,98,127,0	script	#gate_to_last	45,2,2,{
+1@eom.gat,98,127,0	script	#eom_gate_to_last	45,2,2,{
 	setquest 96438; //state=1
 	warp "1@eom.gat",102,178; //61696
 	end;
@@ -693,7 +697,7 @@ OnTalk3:
 	misceffect 313,""; //self
 	close;
 }
-1@eom.gat,67,149,0	script	#ice_to_center	45,2,2,{
+1@eom.gat,67,149,0	script	#eom_ice_to_center	45,2,2,{
 	setquest 96437; //state=1
 	warp "1@eom.gat",136,93; //61705
 	end;
@@ -723,7 +727,7 @@ OnTalk3:
 	misceffect 313,""; //self
 	close;
 }
-1@eom.gat,147,156,0	warp	#fire_to_center	2,2,1@eom.gat,98,115 //61723
+1@eom.gat,147,156,0	warp	#eom_fire_to_center	2,2,1@eom.gat,98,115	//61723
 1@eom.gat,101,194,0	script	#bgm_change1	139,{/* 61724 */}
 1@eom.gat,101,194,0	script	#bgm_change2	139,{/* 61725 (hide)*/}
 1@eom.gat,101,194,0	script	#bgm_change3	139,{/* 61726 (hide)*/}
