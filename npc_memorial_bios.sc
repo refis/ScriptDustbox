@@ -95,6 +95,14 @@ moro_cav.gat,50,63,5	script	黄色い種#bios	844,{/* 65380 */
 		mes "　加入している必要がある‐^000000";
 		close;
 	}
+	if(checkquest(15005) == 0 || checkquest(118927) == 0) {
+		mes "‐この先は入場してから1回目の";
+		mes "　^ff0000午前5時以降^000000に進行可能です。";
+		mes "　但し、最後の入場をしてから";
+		mes "　^ff00001時間^000000経過するまでは";
+		mes "　進行できませんのでご注意ください‐";
+		close;
+	}
 	if(checkquest(15005) & 0x2) {
 		delquest 15005;
 		delquest 15007;
