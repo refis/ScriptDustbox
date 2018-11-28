@@ -2,6 +2,8 @@
 @nomalattack(src: "2998:モロク??:0qj1@rev.gat"(40236), dst: , damage: 0, sDelay: 824, dDelay: 400, aDelay: 2625)
 @nomalattack(src: ""(), dst: 40236, damage: 64, sDelay: 260, dDelay: 440, tick: 432013023)
 
+@spawn(type: BL_MOB, ID: 23072, speed: 195, option: 0, view: 3007, pos: "0qj1@rev.gat"(34, 121), dir: 0, name: "イグリドの魂")
+
 moro_cav.gat,61,69,3	script	先任追跡隊員#a1	730,{/* 65381 */
 	if(checkquest(201725)) {
 		mes "[先任追跡隊員]";
@@ -146,33 +148,64 @@ OnInit:
 }
 
 1@rev.gat,27,181,0	script	#RZメモリアルスタート	139,1,1,{/* 75055 (hide)*/
+OnTouch:
+	hideonnpc "#RZメモリアルスタート"; //70777
+	hideoffnpc "#RZイベント_1"; //70780
+	misceffect 1, "#RZメモリアルスタート"; //70777
+	end;
 }
-1@rev.gat,34,120,0	script	#RZメモリアルエフェクト	139,{/* 75056 (hide)*/}
-1@rev.gat,34,48,0	script	#RZメモリアルエフェクト	139,{/* 75057 (hide)*/}
-1@rev.gat,31,181,0	script	#RZイベント_1	139,{/* 75058 (hide)*/
+1@rev.gat,34,120,0	script	#RZ_EFFECT01	139,{/* 75056 (hide)*/
 OnStart:
-	set '@map$,getmdmapname("1@rev.gat");
-	set '@label$,getmdnpcname("#RZイベント_1")+ "::OnKilled";
-	monster '@map$,38,180,"モルス・グール",3001,1,'@label$;
-	monster '@map$,38,181,"モルス・グール",3001,1,'@label$;
-	monster '@map$,38,182,"モルス・グール",3001,1,'@label$;
-	monster '@map$,54,180,"モルス・グール",3001,1,'@label$;
-	monster '@map$,54,181,"モルス・グール",3001,1,'@label$;
-	monster '@map$,54,182,"モルス・グール",3001,1,'@label$;
-	monster '@map$,70,180,"モルス・グール",3001,1,'@label$;
-	monster '@map$,70,181,"モルス・グール",3001,1,'@label$;
-	monster '@map$,70,182,"モルス・グール",3001,1,'@label$;
+OnTimer2000:
+	initnpctimer;
+	misceffect 196; //77455
 	end;
-OnKilled:
-	set '@count,getmapmobs(getmdmapname("1@rev.gat"),getmdnpcname("#RZイベント_1")+ "::OnKilled");
-	if('@count <= 0) {
-		hideoffnpc getmdnpcname("死神アンク#RZイベント_2"); //69673
-		hideoffnpc getmdnpcname("教官長イグリド#入口奥_0"); //81075
-		donpcevent getmdnpcname("#RZイベント_1-2")+ "::OnStart"
-	}
+OnStop:
+	stopnpctimer;
 	end;
 }
-1@rev.gat,31,181,0	script	#RZイベント_1-2	139,{/* 75059 */
+1@rev.gat,34,48,0	script	#RZ_EFFECT02	139,{/* 75057 (hide)*/
+OnStart:
+OnTimer2000:
+	initnpctimer;
+	misceffect 196; //77455
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+}
+1@rev.gat,31,181,0	script	#RZイベント_1	139,5,5,{/* 75058 (hide)*/
+OnTouch:
+	initnpctimer;
+	end;
+OnTimer2000:
+	announce "モロク : 誰だ？　私の休息の邪魔をするのは。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer4000:
+	announce "‐どこからともなく声がする。どうやらここがモロクの潜伏先で間違いないようだ‐", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer8000:
+	announce "？？？ : 待ってくれ！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer10000:
+	stopnpctimer;
+	misceffect 60,""; //self
+	hideonnpc "#RZイベント_1"; //70780
+	hideoffnpc "#RZイベント_1-2"; //70781
+	end;
+}
+1@rev.gat,31,181,0	script	#RZイベント_1-2	139,5,5,{/* 75059 */
+OnTouch:
+	mes "‐後方から声が聞こえる？";
+	mes "　誰か来たのだろうか‐";
+	next;
+	switch(select("イグリド","キド","ヒシエ","誰もいない")) {
+	case 1:
+		hideonnpc "#RZイベント_1"; //70780
+		hideoffnpc "教官長イグリド#入口"; //70783
+		mes "‐仲間がかけつけた-";
+		close;
+	}
 OnStart:
 	initnpctimer;
 	announce "死神アンク : また会いましたね。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
@@ -203,34 +236,96 @@ OnTimer24000:
 	end;
 OnTimer27000:
 	stopnpctimer;
-	hideoffnpc "#RZ移動_30_0qj"; //69829
-	hideoffnpc "#RZ移動_31_0qj"; //69830
+	hideoffnpc "#RZ移動_30"; //69829
+	hideoffnpc "#RZ移動_31"; //69830
 	end;
 }
 1@rev.gat,20,181,0	script	#モルス入口スタート	139,{/* 75060 */
-select("イグリド:キド:ヒシエ:誰もいない")
-mes "‐仲間がかけつけた-";
-close;
+	set '@map$,getmdmapname("1@rev.gat");
+	set '@label$,getmdnpcname("#RZイベント_1")+ "::OnKilled";
+	monster '@map$,38,180,"モルス・グール",3001,1,'@label$;
+	monster '@map$,38,181,"モルス・グール",3001,1,'@label$;
+	monster '@map$,38,182,"モルス・グール",3001,1,'@label$;
+	monster '@map$,54,180,"モルス・グール",3001,1,'@label$;
+	monster '@map$,54,181,"モルス・グール",3001,1,'@label$;
+	monster '@map$,54,182,"モルス・グール",3001,1,'@label$;
+	monster '@map$,70,180,"モルス・グール",3001,1,'@label$;
+	monster '@map$,70,181,"モルス・グール",3001,1,'@label$;
+	monster '@map$,70,182,"モルス・グール",3001,1,'@label$;
+	end;
+OnKilled:
+	set '@count,getmapmobs(getmdmapname("1@rev.gat"),getmdnpcname("#RZイベント_1")+ "::OnKilled");
+	if('@count <= 0) {
+		hideoffnpc getmdnpcname("死神アンク#RZイベント_2"); //69673
+		hideoffnpc getmdnpcname("教官長イグリド#入口奥"); //81075
+		donpcevent getmdnpcname("#RZイベント_1-2")+ "::OnStart"
+	}
+	end;
 }
-1@rev.gat,25,183,5	script	教官長イグリド#入口	751,{/* 75061 */}
+1@rev.gat,25,183,5	script	教官長イグリド#入口	751,{/* 75061 */
+	mes "[イグリド]";
+	mes "気を付けろ！";
+	mes "敵が来ているぞ！";
+	close;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer100:
+	unittalk "イグリド : ふぅ。間に合ったようだな。";
+	end;
+OnTimer3100:
+	donpcevent "#モルス入口スタート::OnStart";
+	unittalk "イグリド : 兄……いや、司令官に許可はもらってきた。一緒に俺も行かせてくれ。";
+	end;
+OnTimer6100:
+	stopnpctimer;
+	unittalk "イグリド : ふぅ。間に合ったようだな。";
+	end;
+}
 1@rev.gat,25,183,5	script	キド#入口	884,{/* 75062 (hide)*/}
 1@rev.gat,25,183,5	script	ヒシエ#入口	623,{/* 75063 (hide)*/}
-1@rev.gat,60,184,5	script	教官長イグリド#入口奥	751,{/* 75064 (hide)*/}
+1@rev.gat,60,184,5	script	教官長イグリド#入口奥	751,{/* 75064 (hide)*/
+	mes "[イグリド]";
+	mes "死神みてえな顔しやがって！";
+	close;
+}
 1@rev.gat,60,184,5	script	キド#入口奥	884,{/* 75065 (hide)*/}
 1@rev.gat,60,184,5	script	ヒシエ#入口奥	623,{/* 75066 (hide)*/}
 1@rev.gat,64,181,4	script	死神アンク#RZイベント_2	3029,{/* 75067 (hide)*/}
-1@rev.gat,34,126,4	script	死神アンク#RZイベント_3	3029,{/* 75068 (hide)*/}
+1@rev.gat,34,126,4	script	死神アンク#RZイベント_3	3029,{/* 75068 (hide)*/
+	end;
+OnTalk1:
+	unittalk "死神アンク : ……こんなものですかあなた方の力は？";
+	end;
+OnTalk2:
+	unittalk "死神アンク : 失望しましたよ。モロク様の回復に必要なエネルギー源としては到底力不足ですね。";
+	end;
+OnTalk3:
+	unittalk "死神アンク : ここから立ち去りなさい!!　もうあなた方に興味は無い。";
+	end;
+}
 
-1@rev.gat,34,55,4	script	死神アンク#RZイベント_5	3029,{/* 75070 (hide)*/}
+1@rev.gat,34,55,4	script	死神アンク#RZイベント_5	3029,{/* 75070 (hide)*/
+	end;
+OnTalk1:
+	unittalk "死神アンク : ……こんなものですかあなた方の力は？";
+	end;
+OnTalk2:
+	unittalk "死神アンク : 失望しましたよ。モロク様の回復に必要なエネルギー源としては到底力不足ですね。";
+	end;
+OnTalk3:
+	unittalk "死神アンク : ここから立ち去りなさい!!　もうあなた方に興味は無い。";
+	end;
+}
 1@rev.gat,112,48,4	script	死神アンク#RZイベント_6	3029,{/* 75071 (hide)*/}
 1@rev.gat,63,181,0	warp	#RZ移動_30	8,8,1@rev.gat,103,177	//75072
 1@rev.gat,47,181,0	warp	#RZ移動_31	8,8,1@rev.gat,103,177	//75073
 1@rev.gat,31,181,0	warp	#RZ移動_32	8,8,1@rev.gat,103,177	//75074
 1@rev.gat,104,176,0	script	#RZイベント_3	139,1,1,{/* 75075 (hide)*/
 	initnpctimer;
-	hideonnpc "#RZイベント_3_0qj"; //69840
-	hideoffnpc "教官長イグリド#モロク_0"; //69841
-	hideoffnpc "モロク??#RZ1_0qj"; //69725
+	hideonnpc "#RZイベント_3"; //69840
+	hideoffnpc "教官長イグリド#モロク"; //69841
+	hideoffnpc "モロク??#RZ1"; //69725
 	unittalk getcharid(3),strcharinfo(0)+ " : モロク!?";
 	end;
 OnTimer2500:
@@ -251,21 +346,22 @@ OnTimer12500:
 	end;
 OnTimer15500:
 	donpcevent getmdnpcname("モロク??#RZ1")+ "::OnTalk4";
-	misceffect 169, "モロク??#RZ1_0qj"; //69725
+	misceffect 169, "モロク??#RZ1"; //69725
 	end;
 OnTimer18500:
 	donpcevent getmdnpcname("モロク??#RZ1")+ "::OnTalk5";
-	misceffect 225, "モロク??#RZ1_0qj"; //69725
+	misceffect 225, "モロク??#RZ1"; //69725
 	end;
 OnTimer21500:
 	stopnpctimer;
-	hideonnpc "モロク??#RZ1_0qj"; //69725
+	hideonnpc "モロク??#RZ1"; //69725
 	monster getmdmapname("1@rev.gat"),111,178,"モロク??",2998,1,getmdnpcname("#RZイベント_3")+ "::OnKilled";
 	end;
 OnKilled:
-	startnpctimer;
-	hideoffnpc "モロク??#RZ1_0qj"; //69725
-	hideoffnpc "教官長イグリド#モロク_0"; //69841
+	initnpctimer;
+	setnpctimer 22000;
+	hideoffnpc "モロク??#RZ1"; //69725
+	//hideoffnpc "教官長イグリド#モロク"; //69841
 	donpcevent getmdnpcname("モロク??#RZ1")+ "::OnTalk6";
 	end;
 OnTimer24500:
@@ -276,7 +372,7 @@ OnTimer27500:
 	end;
 OnTimer30500:
 	donpcevent getmdnpcname("モロク??#RZ1")+ "::OnTalk9";
-	hideoffnpc "モロク??#RZ1_0qj"; //69725
+	hideoffnpc "モロク??#RZ1"; //69725
 	end;
 OnTimer33500:
 	donpcevent getmdnpcname("教官長イグリド#モロク")+ "::OnTalk3";
@@ -285,17 +381,17 @@ OnTimer36500:
 	donpcevent getmdnpcname("教官長イグリド#モロク")+ "::OnTalk4";
 	end;
 OnTimer39500:
-	hideonnpc "教官長イグリド#モロク_0"; //69841
+	hideonnpc "教官長イグリド#モロク"; //69841
 	end;
 OnTimer45500:
 	announce "イグリド : ぐ、ぐわぁぁ！　なんだこれは……。", 0x9, 0x00ebff, 0x190, 12, 0, 0;
 	end;
 OnTimer47500:
 	stopnpctimer;
-	hideoffnpc "#RZ移動_1_0qj"; //69551
-	hideoffnpc "#RZ移動_2_0qj"; //69552
-	hideoffnpc "#RZ移動_3_0qj"; //69553
-	hideoffnpc "#RZ移動_4_0qj"; //69554
+	hideoffnpc "#RZ移動_1"; //69551
+	hideoffnpc "#RZ移動_2"; //69552
+	hideoffnpc "#RZ移動_3"; //69553
+	hideoffnpc "#RZ移動_4"; //69554
 	end;
 }
 1@rev.gat,102,180,5	script	教官長イグリド#モロク	751,{/* 75076 */
@@ -353,7 +449,16 @@ OnTalk9:
 1@rev.gat,33,120,4	script	教官長イグリド#2戦目	751,{/* 75080 */}
 1@rev.gat,33,120,4	script	キド#2戦目	884,{/* 75081 (hide)*/}
 1@rev.gat,33,120,4	script	ヒシエ#2戦目	623,{/* 75082 (hide)*/}
-1@rev.gat,33,120,0	script	#停止エフェクトRZ1	139,{/* 75083 (hide)*/}
+1@rev.gat,33,120,0	script	#停止エフェクトRZ1	139,{/* 75083 (hide)*/
+OnStart:
+OnTimer9950:
+	initnpctimer;
+	misceffect 74;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+}
 1@rev.gat,33,108,0	script	#2部屋目デバフ_1	139,{/* 75084 (hide)*/}
 1@rev.gat,33,112,0	script	#2部屋目デバフ_2	139,{/* 75085 (hide)*/}
 1@rev.gat,33,116,0	script	#2部屋目デバフ_3	139,{/* 75086 (hide)*/}
@@ -363,255 +468,202 @@ OnTalk9:
 1@rev.gat,33,131,0	script	#2部屋目デバフ_7	139,{/* 75090 (hide)*/}
 1@rev.gat,34,120,0	script	#魂エフェクト用	139,{/* 75091 */}
 1@rev.gat,35,119,0	script	#戦闘_1RZ1	139,2,2,{/* 75092 (hide)*/
-	hideonnpc getmdnpcname("#戦闘_1RZ1_0qj"); //69796
+	hideonnpc getmdnpcname("#戦闘_1RZ1"); //69796
+	monster getmdmapname("1@rev.gat"),34,121,"イグリドの魂",3007,1,getmdnpcname("#戦闘_1RZ1")+ "::OnKilled1";
 	donpcevent getmdnpcname("#戦闘_1RZ1_timer")+ "::OnStart";
+	end;
+OnSpawn:
+	set '@map$,getmdmapname("1@rev.gat");
+	set '@label$,getmdnpcname("#戦闘_1RZ1")+ "::OnKilled2";
+	monster '@map$,38,180,"モルス・グール",3001,1,'@label$;
+	monster '@map$,38,181,"モルス・グール",3001,1,'@label$;
+	monster '@map$,38,182,"モルス・グール",3001,1,'@label$;
+	monster '@map$,54,180,"モルス・グール",3001,1,'@label$;
+	misceffect 124, "教官長イグリド#2戦目"; //69726
+	misceffect 220, "教官長イグリド#2戦目"; //69726
+	misceffect 368, "教官長イグリド#2戦目"; //69726
+	misceffect 9, "#魂エフェクト用"; //69768
 	end;
 }
 1@rev.gat,35,119,0	script	#戦闘_1RZ1_timer	139,{/* 75093 */
-misceffect 89, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : ククク。まんまと引っかかるとは愚かな人たちですね。どうですか魂が肉体と分離される気分は。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : 先ほどのモロク様は私が作り出した幻影です。本当のモロク様は現在休息をとっています。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : しかし……そうまでしてモロク様に会いたいとは。人間であるあなた方がモロク様までたどり着けるとは思いませんが……。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : いいでしょう。あなた方がモロク様に会う資格があるかどうか、私が試して差し上げます。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : あまり私を失望させないでくださいよ？　力不足と判断したらここから立ち去っていただきますので……。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : ここの最深部にたどりつけないような者など、モロク様に会う資格はありません。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : さあ、あなた方の力、見せていただきましょう！　ククク!!", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 124, "教官長イグリド#2戦目_0q"; //69726
-misceffect 220, "教官長イグリド#2戦目_0q"; //69726
-misceffect 368, "教官長イグリド#2戦目_0q"; //69726
-misceffect 9, "#魂エフェクト用_0qj"; //69768
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 37884, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 37983, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 37973, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 37917, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 124, "教官長イグリド#2戦目_0q"; //69726
-misceffect 220, "教官長イグリド#2戦目_0q"; //69726
-misceffect 368, "教官長イグリド#2戦目_0q"; //69726
-misceffect 9, "#魂エフェクト用_0qj"; //69768
-@spawn(type: BL_MOB, ID: 39730, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 39496, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 39190, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 39467, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-announce "死神アンク : 私の部下達よ！　もっと恐怖と苦痛を与えるのです！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 124, "教官長イグリド#2戦目_0q"; //69726
-misceffect 220, "教官長イグリド#2戦目_0q"; //69726
-misceffect 368, "教官長イグリド#2戦目_0q"; //69726
-misceffect 9, "#魂エフェクト用_0qj"; //69768
-@spawn(type: BL_MOB, ID: 39580, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 39086, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 39630, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 39899, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(25, 116), dir: 4, name: "モルス・グール")
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 124, "教官長イグリド#2戦目_0q"; //69726
-misceffect 220, "教官長イグリド#2戦目_0q"; //69726
-misceffect 368, "教官長イグリド#2戦目_0q"; //69726
-misceffect 9, "#魂エフェクト用_0qj"; //69768
-@spawn(type: BL_MOB, ID: 40387, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 42252, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-@spawn(type: BL_MOB, ID: 1215, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 37232, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : まだ足りない……！　もっと恐怖を！　苦痛を！　味わわせるのです!!", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 124, "教官長イグリド#2戦目_0q"; //69726
-misceffect 220, "教官長イグリド#2戦目_0q"; //69726
-misceffect 368, "教官長イグリド#2戦目_0q"; //69726
-misceffect 9, "#魂エフェクト用_0qj"; //69768
-@spawn(type: BL_MOB, ID: 46126, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 47198, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 9687, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 31206, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 124, "教官長イグリド#2戦目_0q"; //69726
-misceffect 220, "教官長イグリド#2戦目_0q"; //69726
-misceffect 368, "教官長イグリド#2戦目_0q"; //69726
-misceffect 9, "#魂エフェクト用_0qj"; //69768
-@spawn(type: BL_MOB, ID: 36970, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 38404, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 36796, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : ククク……。いいですよ。もっと抵抗しなさい！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 124, "教官長イグリド#2戦目_0q"; //69726
-misceffect 220, "教官長イグリド#2戦目_0q"; //69726
-misceffect 368, "教官長イグリド#2戦目_0q"; //69726
-misceffect 9, "#魂エフェクト用_0qj"; //69768
-@spawn(type: BL_MOB, ID: 16696, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 17524, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 17388, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 18560, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 38621, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 124, "教官長イグリド#2戦目_0q"; //69726
-misceffect 220, "教官長イグリド#2戦目_0q"; //69726
-misceffect 368, "教官長イグリド#2戦目_0q"; //69726
-misceffect 9, "#魂エフェクト用_0qj"; //69768
-@spawn(type: BL_MOB, ID: 38560, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 38687, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-@spawn(type: BL_MOB, ID: 38764, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(25, 119), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-@spawn(type: BL_MOB, ID: 38695, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : 私の見込んだ通り、力ある者のようですね。ククク……面白い！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 124, "教官長イグリド#2戦目_0q"; //69726
-misceffect 220, "教官長イグリド#2戦目_0q"; //69726
-misceffect 368, "教官長イグリド#2戦目_0q"; //69726
-misceffect 9, "#魂エフェクト用_0qj"; //69768
-@spawn(type: BL_MOB, ID: 42600, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 42651, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 42898, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 43094, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 43182, speed: 200, option: 0, view: 3003, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・アーチャー")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 124, "教官長イグリド#2戦目_0q"; //69726
-misceffect 220, "教官長イグリド#2戦目_0q"; //69726
-misceffect 368, "教官長イグリド#2戦目_0q"; //69726
-misceffect 9, "#魂エフェクト用_0qj"; //69768
-@spawn(type: BL_MOB, ID: 44259, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 44346, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 44189, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-@spawn(type: BL_MOB, ID: 9666, speed: 1000, option: 0, view: 3001, pos: "0qj1@rev.gat"(0, 0), dir: 0, name: "モルス・グール")
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : ククク……なかなかしぶといですね！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-announce "死神アンク : だが……いつまで続きますかね。ククク！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-misceffect 74, "#停止エフェクトRZ1_0qj"; //69729
-misceffect 196, "#RZメモリアルエフェクト"; //77455
-hideonnpc "#2部屋目デバフ_1_0qj"; //69730
-hideonnpc "#2部屋目デバフ_2_0qj"; //69731
-hideonnpc "#2部屋目デバフ_3_0qj"; //69468
-hideonnpc "#2部屋目デバフ_4_0qj"; //69732
-hideonnpc "#2部屋目デバフ_5_0qj"; //69765
-hideonnpc "#2部屋目デバフ_6_0qj"; //69766
-hideonnpc "#2部屋目デバフ_7_0qj"; //69767
-hideoffnpc "#RZ移動_5_0qj"; //69555
-hideoffnpc "#RZ移動_6_0qj"; //69556
-hideoffnpc "#RZ移動_7_0qj"; //69557
-hideoffnpc "#RZ移動_8_0qj"; //69561
+OnStart:
+	initnpctimer;
+	//hideonnpc getmdnpcname("#戦闘_1RZ1"); //69796		//何故か2回hide
+	misceffect 89, getmdnpcname("#RZ_EFFECT01"); //77455
+	announce "死神アンク : ククク。まんまと引っかかるとは愚かな人たちですね。どうですか魂が肉体と分離される気分は。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer200:
+	misceffect 196, getmdnpcname("#RZ_EFFECT01"); //77455
+	end;
+OnTimer1600:
+	donpcevent getmdnpcname("#停止エフェクトRZ1")+ "::OnStart";
+	end;
+OnTimer1850:
+	donpcevent getmdnpcname("#RZ_EFFECT01")+ "::OnStart";
+	end;
+OnTimer3700:
+	announce "死神アンク : 先ほどのモロク様は私が作り出した幻影です。本当のモロク様は現在休息をとっています。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer8700:
+	announce "死神アンク : しかし……そうまでしてモロク様に会いたいとは。人間であるあなた方がモロク様までたどり着けるとは思いませんが……。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer13700:
+	announce "死神アンク : いいでしょう。あなた方がモロク様に会う資格があるかどうか、私が試して差し上げます。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer18700:
+	announce "死神アンク : あまり私を失望させないでくださいよ？　力不足と判断したらここから立ち去っていただきますので……。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer23700:
+	announce "死神アンク : ここの最深部にたどりつけないような者など、モロク様に会う資格はありません。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer28700:
+	announce "死神アンク : さあ、あなた方の力、見せていただきましょう！　ククク!!", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer32700:
+	donpcevent getmdnpcname("#戦闘_1RZ1")+ "::OnSpawn";
+	end;
+OnTimer48700:
+	donpcevent getmdnpcname("#戦闘_1RZ1")+ "::OnSpawn";
+	end;
+OnTimer63700:
+	announce "死神アンク : 私の部下達よ！　もっと恐怖と苦痛を与えるのです！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("#戦闘_1RZ1")+ "::OnSpawn";
+	end;
+OnTimer80700:
+	donpcevent getmdnpcname("#戦闘_1RZ1")+ "::OnSpawn";
+	end;
+OnTimer93700:
+	announce "死神アンク : まだ足りない……！　もっと恐怖を！　苦痛を！　味わわせるのです!!", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("#戦闘_1RZ1")+ "::OnSpawn";
+	end;
+OnTimer108700:
+	donpcevent getmdnpcname("#戦闘_1RZ1")+ "::OnSpawn";
+	end;
+OnTimer125700:
+	announce "死神アンク : ククク……。いいですよ。もっと抵抗しなさい！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("#戦闘_1RZ1")+ "::OnSpawn";
+	end;
+OnTimer140700:
+	donpcevent getmdnpcname("#戦闘_1RZ1")+ "::OnSpawn";
+	end;
+OnTimer163700:
+	announce "私の見込んだ通り、力ある者のようですね。ククク……面白い！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("#戦闘_1RZ1")+ "::OnSpawn";
+	end;
+OnTimer188700:
+	donpcevent getmdnpcname("#戦闘_1RZ1")+ "::OnSpawn";
+	end;
+OnTimer215700:
+	if('@count) {
+		//fail
+	}
+	else
+		announce "死神アンク : ククク……なかなかしぶといですね！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer217700:
+	announce "死神アンク : だが……いつまで続きますかね。ククク！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer223700:
+	donpcevent getmdnpcname("#RZ_EFFECT01"); //77455
+	donpcevent getmdnpcname("#停止エフェクトRZ1"); //69729
+	hideonnpc "#2部屋目デバフ_1"; //69730
+	hideonnpc "#2部屋目デバフ_2"; //69731
+	hideonnpc "#2部屋目デバフ_3"; //69468
+	hideonnpc "#2部屋目デバフ_4"; //69732
+	hideonnpc "#2部屋目デバフ_5"; //69765
+	hideonnpc "#2部屋目デバフ_6"; //69766
+	hideonnpc "#2部屋目デバフ_7"; //69767
+	hideoffnpc "#RZ移動_5"; //69555
+	hideoffnpc "#RZ移動_6"; //69556
+	hideoffnpc "#RZ移動_7"; //69557
+	hideoffnpc "#RZ移動_8"; //69561
+	end;
 }
-1@rev.gat,34,47,0	script	#戦闘_2RZ1	139,{/* 75094 (hide)*/}
-1@rev.gat,34,47,0	script	#戦闘_2RZ1_timer	139,{/* 75095 */}
+1@rev.gat,34,47,0	script	#戦闘_2RZ1	139,1,1,{/* 75094 (hide)*/
+	hideonnpc getmdnpcname("#戦闘_2RZ1"); //69796
+	donpcevent getmdnpcname("#戦闘_2RZ1_timer")+ "::OnStart";
+	end;
+OnSpawn:
+	set '@map$,getmdmapname("1@rev.gat");
+	set '@label$,getmdnpcname("#戦闘_1RZ1")+ "::OnKilled2";
+	monster '@map$,38,180,"モルス・グール",3001,1,'@label$;
+	monster '@map$,38,181,"モルス・グール",3001,1,'@label$;
+	monster '@map$,38,182,"モルス・グール",3001,1,'@label$;
+	monster '@map$,54,180,"モルス・グール",3001,1,'@label$;
+	misceffect 124, "教官長イグリド#2戦目"; //69726
+	misceffect 220, "教官長イグリド#2戦目"; //69726
+	misceffect 368, "教官長イグリド#2戦目"; //69726
+	misceffect 9, "#魂エフェクト用"; //69768
+	end;
+}
+1@rev.gat,34,47,0	script	#戦闘_2RZ1_timer	139,{/* 75095 */
+OnStart:
+	initnpctimer;
+	misceffect 89, getmdnpcname("#RZ_EFFECT02"); //77455
+	announce "死神アンク : 私の部下を倒して解放されたと思っているようですが、この空間はモロク様の意思により進化しています。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer500:
+	donpcevent getmdnpcname("#RZ_EFFECT02")+ "::OnStart";
+	end;
+OnTimer4000:
+	announce "死神アンク : 並大抵の実力では抜け出せませんよ？　ククク。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer4000:
+	announce "死神アンク : しかし……お強い。やはりあなた方の魂はモロク様の回復に役立ちそうですね。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer9000:
+	announce "死神アンク : その魂と苦痛を生贄にして差し上げましょう。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer14000:
+	announce "死神アンク : あなた方の魂はモロク様の血となり肉となるのです。これは光栄な事ですよ！　ククク!!", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer19000:
+	announce "死神アンク : さあ、行きなさい私の部下達よ!!　あの者たちの肉体と魂を引き裂き、モロク様に捧げるのです！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer24000:
+	announce "死神アンク : もちろん、先ほどと同様、力不足と判断したらここから立ち去っていただきますがね……。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer29000:
+	announce "死神アンク : ククク……さぁ存分にその力を発揮してください！　モロク様のために!!", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer33000:
+	donpcevent getmdnpcname("#戦闘_2RZ1")+ "::OnSpawn";
+	end;
+OnTimer49000:
+	announce "死神アンク : この心地よい感覚。……素晴らしい!!", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer74500:
+	announce "死神アンク : モロク様に貢献出来る事、光栄に思いなさい！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer99500:
+	announce "死神アンク : もっとです！もっと力を!!", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer139500:
+	announce "死神アンク : いいですよ。クック。もっと足掻きなさい……！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer184000:
+	announce "死神アンク : 死への恐怖や苦悩がモロク様の力になるのです！", 0x1, 0x00ebff, 0x190, 12, 0, 0;
+	end;
+OnTimer209000:
+	hideoffnpc "死神アンク#RZイベント_5"; //69824
+	donpcevent "死神アンク#RZイベント_5::OnTalk1";
+	end;
+OnTimer212000:
+	donpcevent "死神アンク#RZイベント_5::OnTalk2";
+	end;
+OnTimer215000:
+	donpcevent "死神アンク#RZイベント_5::OnTalk3";
+	end;
+OnTimer218000:
+	hideonnpc "死神アンク#RZイベント_5"; //69824
+	end;
+OnTimer223000:
+	hideoffnpc "#RZ移動_13a"; //70387
+	hideoffnpc "#RZ移動_14a"; //70388
+	hideoffnpc "#RZ移動_15a"; //70389
+	hideoffnpc "#RZ移動_16a"; //70437
+	end;
+}
 1@rev.gat,112,48,4	script	モルス・魔導士#RZ1	10029,{/* 75096 (hide)*/}
 1@rev.gat,104,47,0	script	#戦闘_3RZ1	139,{/* 75097 (hide)*/}
 1@rev.gat,108,51,5	script	教官長イグリド#ボス戦	751,{/* 75098 (hide)*/}
@@ -631,15 +683,15 @@ hideoffnpc "#RZ移動_8_0qj"; //69561
 1@rev.gat,28,114,0	warp	#RZ移動_6	5,5,1@rev.gat,31,50	//75977
 1@rev.gat,39,114,0	warp	#RZ移動_7	5,5,1@rev.gat,31,50	//75978
 1@rev.gat,39,125,0	warp	#RZ移動_8	5,5,1@rev.gat,31,50	//75979
-1@rev.gat,28,125,0	script	#RZ移動_5a	45,{/* 75980 (hide)*/}
-1@rev.gat,28,114,0	script	#RZ移動_6a	45,{/* 75981 (hide)*/}
-1@rev.gat,39,114,0	script	#RZ移動_7a	45,{/* 75982 (hide)*/}
-1@rev.gat,39,125,0	script	#RZ移動_8a	45,{/* 75983 (hide)*/}
+1@rev.gat,28,125,0	warp	#RZ移動_5a	5,5,moro_cav.gat,59,63
+1@rev.gat,28,114,0	warp	#RZ移動_6a	5,5,moro_cav.gat,59,63
+1@rev.gat,39,114,0	warp	#RZ移動_7a	5,5,moro_cav.gat,59,63
+1@rev.gat,39,125,0	warp	#RZ移動_8a	5,5,moro_cav.gat,59,63
 
-1@rev.gat,28,53,0	script	#RZ移動_13a	45,{/* 75988 (hide)*/}
-1@rev.gat,28,42,0	script	#RZ移動_14a	45,{/* 75989 (hide)*/}
-1@rev.gat,39,42,0	script	#RZ移動_15a	45,{/* 75990 (hide)*/}
-1@rev.gat,39,53,0	script	#RZ移動_16a	45,{/* 75991 (hide)*/}
+1@rev.gat,28,53,0	warp	#RZ移動_13a	5,5,moro_cav.gat,59,63
+1@rev.gat,28,42,0	warp	#RZ移動_14a	5,5,moro_cav.gat,59,63
+1@rev.gat,39,42,0	warp	#RZ移動_15a	5,5,moro_cav.gat,59,63
+1@rev.gat,39,53,0	warp	#RZ移動_16a	5,5,moro_cav.gat,59,63
 1@rev.gat,28,53,0	warp	#RZ移動_13	5,5,1@rev.gat,104,48
 1@rev.gat,28,42,0	warp	#RZ移動_14	5,5,1@rev.gat,104,48
 1@rev.gat,39,42,0	warp	#RZ移動_15	5,5,1@rev.gat,104,48
