@@ -102,7 +102,10 @@ moc_prydn2.gat,0,0,0,0	monster	グレイヴアクラウス	2358,20,5000,0,0
 2362,アメンホテプ＠取り巻き召喚,idle,196,6,10000,0,30000,yes,self,slaves,0,2359,2361,2359,,,
 2362,アメンホテプ＠取り巻き召喚,idle,196,1,10000,0,0,yes,self,onspawn,,1038,,,,,
 
-moc_prydb1.gat,103,54,3	script	怪しい猫#nightmare1	547,{/* 59128 */
+//============================================================
+// ピラミッドナイトメア 転送NPC
+//------------------------------------------------------------
+moc_prydb1.gat,103,54,3	script	怪しい猫#prydn1	547,{
 	if(BaseLevel < 100) {
 		mes "[怪しい猫]";
 		mes "まさかマミーに";
@@ -131,7 +134,7 @@ moc_prydb1.gat,103,54,3	script	怪しい猫#nightmare1	547,{/* 59128 */
 		mes "[怪しい猫]";
 		mes "よし。それじゃあついて来て！";
 		close2;
-		set Zeny, Zeny -5000;
+		set Zeny,Zeny-5000;
 		warp "moc_prydn1.gat",93,96;
 		end;
 	case 2:
@@ -191,23 +194,49 @@ moc_prydb1.gat,103,54,3	script	怪しい猫#nightmare1	547,{/* 59128 */
 		close;
 	}
 OnInit:
-	waitingroom "秘密の地下室",0; //59128
+	waitingroom "秘密の地下室",0;
 	end;
 }
 
-moc_ruins.gat,75,170,3	script	採掘に向かう猫#outdoor1	561,{/* 59129 */
-	if(BaseLevel < 100 || BaseLevel > 135) {
-		mes "[採掘に向かう猫]";
-		mes "さーて、行くかな。";
-		mes "　";
-		mes "‐^ff0000BaseLv100から135の間のみ^000000";
-		mes "　受諾する事が出来るクエストです‐";
+moc_prydn1.gat,94,98,3	script	怪しい猫#\prydn2	547,{
+	mes "[怪しい猫]";
+	mes "怪しいモンスターが";
+	mes "うようよしているな……。";
+	mes "物騒だし早く元の場所に帰ろう。";
+	next;
+	if(select("戻る","まだ残る") == 2) {
+		emotion 4;
+		mes "[怪しい猫]";
+		mes "まだ残るのか？";
+		mes "戻りたくなったら";
+		mes "声をかけてくれ。";
 		close;
 	}
+	mes "[怪しい猫]";
+	mes "さぁさぁ、早く戻ろう。";
+	close2;
+	warp "moc_prydb1.gat",100,57;
+	end;
+}
+
+//============================================================
+// ピラミッドナイトメア 討伐NPC
+//------------------------------------------------------------
+moc_ruins.gat,75,170,3	script	採掘に向かう猫#prydn_out	561,{
 	if(!checkquest(118850)) {
 		mes "[採掘に向かう猫]";
-		mes "さーて、行くかな。";
+		if(strnpcinfo(2) == "prydn_out") {
+			mes "さーて、行くかな。";
+		}
+		else {
+			mes "くそっ、やはりモンスターが多いな。";
+		}
 		mes "　";
+		if(BaseLevel < 100 || BaseLevel > 135) {
+			mes "‐^ff0000BaseLv100から135の間のみ^000000";
+			mes "　受諾する事が出来るクエストです‐";
+			close;
+		}
 		mes "おっ、なんだお前。冒険者か？";
 		mes "くくっ。いい所にきたな。";
 		mes "ちょっと俺の手伝いをしてくれないか？";
@@ -240,7 +269,7 @@ moc_ruins.gat,75,170,3	script	採掘に向かう猫#outdoor1	561,{/* 59129 */
 		mes "[採掘に向かう猫]";
 		mes "ありがてえ。";
 		mes "それじゃあもう一度話しかけてくれ。";
-		setquest 118850; //state=1
+		setquest 118850;
 		compquest 118850;
 		close;
 	}
@@ -252,18 +281,22 @@ moc_ruins.gat,75,170,3	script	採掘に向かう猫#outdoor1	561,{/* 59129 */
 	mes "おう。よく来たな。";
 	mes "今日はどうする？";
 	next;
-	switch(select("討伐を受ける/報告する","討伐をあきらめる","説明を聞く","会話をやめる")) {
+	set '@str$,"討伐を受ける/報告する";
+	if(BaseLevel < 100 || BaseLevel > 135)
+		set '@str$,"報告する";
+	switch(select('@str$,"討伐をあきらめる","説明を聞く","会話をやめる")) {
 	case 1:
-//ダイヤモンド１カラット
-//ダイヤモンド２カラット
-//ダイヤモンド３カラット
-//銀の指輪
-//金の指輪
-//ダイヤの指輪
-//黄金
-//宝箱　1個
-//宝箱　2個
-//宝箱　5個
+		if((checkquest(118855) && checkquest(118855) & 0x2 == 0) ||
+			(checkquest(118860) && checkquest(118860) & 0x2 == 0)) {
+			mes "[採掘に向かう猫]";
+			mes "ん。お前か";
+			mes "今はまだ大丈夫だ。";
+			mes "あまり根詰めずにやってくれ。";
+			mes "　";
+			mes "‐このクエストは";
+			mes "　1時間に1回、挑戦出来ます‐";
+			close;
+		}
 		set '@d[0],checkquest(97000);
 		set '@d[1],checkquest(97002);
 		set '@d[2],checkquest(97004);
@@ -277,34 +310,91 @@ moc_ruins.gat,75,170,3	script	採掘に向かう猫#outdoor1	561,{/* 59129 */
 			mes "期待しているぞ。";
 			close;
 		}
-		if(checkquest(118855)) {
-			if(checkquest(118855) & 0x2 == 0) {
-				mes "[採掘に向かう猫]";
-				mes "ん。お前か";
-				mes "今はまだ大丈夫だ。";
-				mes "あまり根詰めずにやってくれ。";
-				mes "　";
-				mes "‐このクエストは";
-				mes "　1時間に1回、挑戦出来ます‐";
+		if(('@d[0]+'@d[1]+'@d[2]) > 3 || ('@d[3]+'@d[4]+'@d[5]) > 3) {
+			set '@cnt,'@cnt + ('@d[0]&4)? 1: 0;
+			set '@cnt,'@cnt + ('@d[1]&4)? 3: 0;
+			set '@cnt,'@cnt + ('@d[2]&4)? 6: 0;
+			set '@cnt,'@cnt + ('@d[3]&4)? 1: 0;
+			set '@cnt,'@cnt + ('@d[4]&4)? 3: 0;
+			set '@cnt,'@cnt + ('@d[5]&4)? 6: 0;
+			mes "[採掘中の猫]";
+			mes "ほう。充分な量のモンスターを";
+			mes "倒して来てくれたようだな。";
+			mes "それじゃあお前には";
+			mes "おたから袋から^ff0000" +'@cnt+ "^000000個ほど";
+			mes "アイテムを渡すことにしよう。";
+			mes "報酬を受け取るか？";
+			next;
+			if(select("はい","いいえ") == 2) {
+				mes "[採掘中の猫]";
+				mes "なんだ。荷物でも多いのか？";
+				mes "報酬を受け取る準備が出来たら";
+				mes "またくるんだな。";
 				close;
 			}
+			mes "[採掘中の猫]";
+			mes "それじゃあ渡そう。";
+			mes "この^ff0000おたから袋^000000には";
+			mes "色々なものが入っている。";
+			mes "何が出るかはお前の運しだいだ。";
+			mes "幸運を祈るんだな。";
+			next;
+			if('@d[0]&4) {
+				delquest 97000;
+				delquest 97002;
+				delquest 97004;
+			}
+			if('@d[3]&4) {
+				delquest 97006;
+				delquest 97008;
+				delquest 97010;
+			}
+			//ダイヤモンド１カラット,ダイヤモンド２カラット,ダイヤモンド３カラット
+			//銀の指輪,金の指輪,ダイヤの指輪,黄金,宝箱　1個,宝箱　2個,宝箱　5個
+			setarray '@gain,731,732,2611,2610,2613,969,7444,7444,7444, 730;
+			setarray '@num,   1,  1,   1,   1,   1,  1,   1,   2,   5,   1;
+			setarray '@rate,300,100, 300, 200, 200,100, 100,  80,  50,1000;
+			for(set '@i,0; '@i < '@cnt; set '@i,'@i+1) {
+				for(set '@j,0; '@j < getarraysize('@gain); set '@j,'@j+1) {
+					if(rand(1000) < '@rate['@j]) {
+						getitem '@gain,'@num;
+						break;
+					}
+				}
+			}
+			mes "[採掘中の猫]";
+			mes "よし。こんなもんだな。";
+			mes "ありがとうな。";
+			close;
+		}
+		if(BaseLevel < 100 || BaseLevel > 135) {
+			// 未調査
+			mes "‐^ff0000BaseLv100から135の間のみ^000000";
+			mes "　受諾する事が出来るクエストです‐";
+			close;
 		}
 		mes "[採掘に向かう猫]";
 		mes "^ff0000グレイヴアクラウス^000000と";
 		mes "^ff0000グレイヴミノタウロス^000000を";
 		mes "倒してきてくれ。";
 		mes "頼んだぞ。";
-		setquest 97000; //state=1
-		setquest 118855; //state=1
-		setquest 97002; //state=1
-		setquest 97004; //state=1
-		setquest 97006; //state=1
-		setquest 118860; //state=1
-		setquest 97008; //state=1
-		setquest 97010; //state=1
+		if(!checkquest(118855))
+			setquest 118855;
+		if(!checkquest(97000)) {
+			setquest 97000;
+			setquest 97002;
+			setquest 97004;
+		}
+		if(!checkquest(118860))
+			setquest 118860;
+		if(!checkquest(97006)) {
+			setquest 97006;
+			setquest 97008;
+			setquest 97010;
+		}
 		close;
 	case 2:
-		if(!checkquest(97000)) {
+		if(!checkquest(97000) && !checkquest(97006)) {
 			mes "[採掘に向かう猫]";
 			mes "ん？　依頼を諦めたい？";
 			mes "だが、おまえにお願いしている";
@@ -328,12 +418,16 @@ moc_ruins.gat,75,170,3	script	採掘に向かう猫#outdoor1	561,{/* 59129 */
 		mes "そうか。仕方ないな。";
 		mes "わかったよ。";
 		mes "その気になったらまた来てくれよな。";
-		delquest 97000;
-		delquest 97002;
-		delquest 97004;
-		delquest 97006;
-		delquest 97008;
-		delquest 97010;
+		if(checkquest(97000)) {
+			delquest 97000;
+			delquest 97002;
+			delquest 97004;
+		}
+		if(checkquest(97006)) {
+			delquest 97006;
+			delquest 97008;
+			delquest 97010;
+		}
 		close;
 	case 3:
 		mes "[採掘に向かう猫]";
@@ -459,374 +553,406 @@ moc_ruins.gat,75,170,3	script	採掘に向かう猫#outdoor1	561,{/* 59129 */
 		close;
 	}
 OnInit:
-	waitingroom "討伐クエスト", 0; //59129
+	waitingroom "討伐クエスト", 0;
 	end;
 }
 
-moc_prydn1.gat,94,98,3	script	怪しい猫#nightmare2	547,{/* 60763 */
-	mes "[怪しい猫]";
-	mes "怪しいモンスターが";
-	mes "うようよしているな……。";
-	mes "物騒だし早く元の場所に帰ろう。";
-	next;
-	if(select("戻る","まだ残る") == 2) {
-		emotion 4; //60763
-		mes "[怪しい猫]";
-		mes "まだ残るのか？";
-		mes "戻りたくなったら";
-		mes "声をかけてくれ。";
-		close;
-	}
-	mes "[怪しい猫]";
-	mes "さぁさぁ、早く戻ろう。";
-	close2;
-	warp "moc_prydb1.gat",100,57;
+moc_prydn1.gat,97,96,3	duplicate(採掘に向かう猫#prydn_out)	採掘中の猫#prydn_floor1	561
+moc_prydn2.gat,97,59,3	duplicate(採掘に向かう猫#prydn_out)	採掘中の猫#prydn_floor2	561
+
+moc_prydn2.gat,198,11,0	warp	pd_nightmare_2to1	1,1,moc_prydn1.gat,213,10
+moc_prydn1.gat,218,9,0	warp	pd_nightmare_1to2	1,1,moc_prydn2.gat,195,11
+
+//============================================================
+// ピラミッドナイトメア1F 隠しワープ
+//------------------------------------------------------------
+moc_prydn1.gat,17,186,0	script	#prydn_Secret_1-1	139,0,10,{
+	emotion 1,"";
 	end;
 }
 
-moc_prydn2.gat,198,11,0	warp	nightmare_pry_2to1	1,1,moc_prydn1.gat,213,10	//60764
-moc_prydn1.gat,218,9,0	warp	nightmare_pry_1to2	1,1,moc_prydn2.gat,195,11	//60765
-
-moc_prydn1.gat,97,96,3	script	採掘中の猫#floor1	561,{/* 60766 */
-	mes "[採掘中の猫]";
-	mes "くそっ、やはりモンスターが多いな。";
-	mes "　";
-	mes "‐^ff0000BaseLv100から135の間のみ^000000";
-	mes "　受諾する事が出来るクエストです‐";
-	close;
-OnInit:
-	waitingroom "討伐クエスト",0; //60766
-	end;
-}
-
-moc_prydn2.gat,97,59,3	script	採掘中の猫#floor2	561,{/* 60767 */
-	mes "[採掘中の猫]";
-	mes "くそっ、やはりモンスターが多いな。";
-	mes "　";
-	mes "‐^ff0000BaseLv100から135の間のみ^000000";
-	mes "　受諾する事が出来るクエストです‐";
-	close;
-OnInit:
-	waitingroom "討伐クエスト",0; //60767
-	end;
-}
-
-moc_prydn1.gat,17,186,0	script	#Secret_1-1	139,0,10,{/* 60768 */
-	emotion 1,""; //self
-	end;
-}
-moc_prydn1.gat,24,171,0	script	#Secret_1-2	139,1,1,{/* 60769 */
-	soundeffect "se_door02.wav", 0, 0; //60769
+moc_prydn1.gat,24,171,0	script	#prydn_Secret_1-2	139,1,1,{
+	soundeffect "se_door02.wav", 0, 0;
 	warp "moc_prydn1.gat",219,40;
 	end;
 }
-moc_prydn1.gat,214,31,0	script	#Secret_2-1	139,10,0,{/* 60770 */
-	emotion 1,""; //self
+
+moc_prydn1.gat,214,31,0	script	#prydn_Secret_2-1	139,10,0,{
+	emotion 1,"";
 	end;
 }
-moc_prydn1.gat,219,44,0	script	#Secret_2-2	139,1,1,{/* 60771 */
-	soundeffect "se_door02.wav", 0, 0; //60771
+
+moc_prydn1.gat,219,44,0	script	#prydn_Secret_2-2	139,1,1,{
+	soundeffect "se_door02.wav", 0, 0;
 	warp "moc_prydn1.gat",24,175;
 	end;
 }
-moc_prydn1.gat,15,58,0	script	#Secret_3-1	139,10,0,{/* 60772 */
-	emotion 1,""; //self
+
+moc_prydn1.gat,15,58,0	script	#prydn_Secret_3-1	139,10,0,{
+	emotion 1,"";
 	end;
 }
-moc_prydn1.gat,9,72,0	script	#Secret_3-2	139,2,1,{/* 60773 */
-	soundeffect "se_door02.wav", 0, 0; //60773
+
+moc_prydn1.gat,9,72,0	script	#prydn_Secret_3-2	139,2,1,{
+	soundeffect "se_door02.wav", 0, 0;
 	warp "moc_prydn1.gat",220,133;
 	end;
 }
-moc_prydn1.gat,214,157,0	script	#Secret_4-1	139,10,0,{/* 60774 */
-	emotion 1,""; //self
+
+moc_prydn1.gat,214,157,0	script	#prydn_Secret_4-1	139,10,0,{
+	emotion 1,"";
 	end;
 }
-moc_prydn1.gat,220,129,0	script	#Secret_4-2	139,2,1,{/* 60775 */
-	soundeffect "se_door02.wav", 0, 0; //60775
+
+moc_prydn1.gat,220,129,0	script	#prydn_Secret_4-2	139,2,1,{
+	soundeffect "se_door02.wav", 0, 0;
 	warp "moc_prydn1.gat",9,68;
 	end;
-}
-moc_prydn1.gat,58,57,0	script	#Secret_5-1	139,0,10,{/* 60776 */
-	emotion 1,""; //self
+OnInit:
+	hideonnpc;
 	end;
 }
-moc_prydn1.gat,72,52,0	script	#Secret_5-2	139,1,2,{/* 60777 */
-	soundeffect "se_door02.wav", 0, 0; //60777
+
+moc_prydn1.gat,58,57,0	script	#prydn_Secret_5-1	139,0,10,{
+	emotion 1,"";
+	end;
+}
+
+moc_prydn1.gat,72,52,0	script	#prydn_Secret_5-2	139,1,2,{
+	soundeffect "se_door02.wav", 0, 0;
 	warp "moc_prydn1.gat",35,220;
 	end;
 }
-moc_prydn1.gat,59,214,0	script	#Secret_6-1	139,0,10,{/* 60778 */
-	emotion 1,""; //self
+
+moc_prydn1.gat,59,214,0	script	#prydn_Secret_6-1	139,0,10,{
+	emotion 1,"";
 	end;
 }
-moc_prydn1.gat,31,219,0	script	#Secret_6-2	139,1,2,{/* 60779 */
-	soundeffect "se_door02.wav", 0, 0; //60779
+
+moc_prydn1.gat,31,219,0	script	#prydn_Secret_6-2	139,1,2,{
+	soundeffect "se_door02.wav", 0, 0;
 	warp "moc_prydn1.gat",68,52;
 	end;
 }
-moc_prydn1.gat,101,169,0	script	#Secret_7-1	139,0,10,{/* 60780 */
-	emotion 1,""; //self
+
+moc_prydn1.gat,101,169,0	script	#prydn_Secret_7-1	139,0,10,{
+	emotion 1,"";
 	end;
 }
-moc_prydn1.gat,87,164,0	script	#Secret_7-1	139,1,2,{/* 60781 */
-	soundeffect "se_door02.wav", 0, 0; //60781
+
+moc_prydn1.gat,87,164,0	script	#prydn_Secret_7-1	139,1,2,{
+	soundeffect "se_door02.wav", 0, 0;
 	warp "moc_prydn1.gat",194,66;
 	end;
 }
-moc_prydn1.gat,183,72,0	script	#Secret_8-1	139,10,0,{/* 60782 */
-	emotion 1,""; //self
+
+moc_prydn1.gat,183,72,0	script	#prydn_Secret_8-1	139,10,0,{
+	emotion 1,"";
 	end;
 }
-moc_prydn1.gat,198,66,0	script	#Secret_8-2	139,1,2,{/* 60783 */
-	soundeffect "se_door02.wav", 0, 0; //60783
+
+moc_prydn1.gat,198,66,0	script	#prydn_Secret_8-2	139,1,2,{
+	soundeffect "se_door02.wav", 0, 0;
 	warp "moc_prydn1.gat",91,164;
 	end;
 }
 
-moc_prydn2.gat,179,99,0	script	#Secret_A	139,1,1,{/* 60784 */
-	soundeffect "complete.wav", 0, 0; //60784
+//============================================================
+// ピラミッドナイトメア2F 隠しワープ
+//------------------------------------------------------------
+moc_prydn2.gat,179,99,0	script	#prydn_Secret_A	139,1,1,{
+	soundeffect "complete.wav", 0, 0;
 	warp "moc_prydn2.gat",195,11;
 	end;
 }
-moc_prydn2.gat,193,16,0	script	#Secret_B-1	139,1,1,{/* 60785 */
+
+moc_prydn2.gat,193,16,0	script	#prydn_Secret_B-1	139,1,1,{
 	showscript "!?";
-	soundeffect "se_door02.wav", 0, 0; //60785
-	hideonnpc "#Secret_B-1"; //60785
-	hideoffnpc "#Secret_B-2"; //60786
+	soundeffect "se_door02.wav", 0, 0;
+	hideonnpc "#prydn_Secret_B-1";
+	hideoffnpc "#prydn_Secret_B-2";
 	initnpctimer;
 	end;
 OnTimer8000:
-	hideonnpc "#Secret_B-2"; //60786
-	hideoffnpc "#Secret_B-1"; //60785
+	hideonnpc "#prydn_Secret_B-2";
+	hideoffnpc "#prydn_Secret_B-1";
 	end;
 }
-moc_prydn2.gat,193,5,0	script	#Secret_B-2	139,1,1,{/* 60786 (hide)*/
-	soundeffect "complete.wav", 0, 0; //60786
+
+moc_prydn2.gat,193,5,0	script	#prydn_Secret_B-2	139,1,1,{
+	soundeffect "complete.wav", 0, 0;
 	warp "moc_prydn2.gat",101,187;
 	end;
+OnInit:
+	hideonnpc;
+	end;
 }
-moc_prydn2.gat,127,47,0	script	#Secret_C-1	139,1,1,{/* 60787 */
+
+moc_prydn2.gat,127,47,0	script	#prydn_Secret_C-1	139,1,1,{
 	showscript "!?";
-	soundeffect "se_door02.wav", 0, 0; //60785
-	hideonnpc "#Secret_C-1"; //60789
-	hideoffnpc "#Secret_C-2"; //60786
+	soundeffect "se_door02.wav", 0, 0;
+	hideonnpc "#prydn_Secret_C-1";
+	hideoffnpc "#prydn_Secret_C-2";
 	initnpctimer;
 	end;
 OnTimer8000:
-	hideonnpc "#Secret_C-2"; //60786
-	hideoffnpc "#Secret_C-1"; //60789
+	hideonnpc "#prydn_Secret_C-2";
+	hideoffnpc "#prydn_Secret_C-1";
 	end;
 }
-moc_prydn2.gat,128,58,0	script	#Secret_C-2	139,1,1,{/* 60788 (hide)*/
-	soundeffect "se_door02.wav", 0, 0; //60788
+
+moc_prydn2.gat,128,58,0	script	#prydn_Secret_C-2	139,1,1,{
+	soundeffect "se_door02.wav", 0, 0;
 	warp "moc_prydn2.gat",135,59;
 	end;
+OnInit:
+	hideonnpc;
+	end;
 }
-moc_prydn2.gat,133,75,0	script	#Secret_C-3	139,1,1,{/* 60789 */
+
+moc_prydn2.gat,133,75,0	script	#prydn_Secret_C-3	139,1,1,{
 	showscript "!?";
-	soundeffect "se_door02.wav", 0, 0; //60785
-	hideonnpc "#Secret_C-3"; //60789
-	hideoffnpc "#Secret_C-4"; //60786
+	soundeffect "se_door02.wav", 0, 0;
+	hideonnpc "#prydn_Secret_C-3";
+	hideoffnpc "#prydn_Secret_C-4";
 	initnpctimer;
 	end;
 OnTimer8000:
-	hideonnpc "#Secret_C-4"; //60786
-	hideoffnpc "#Secret_C-3"; //60789
+	hideonnpc "#prydn_Secret_C-4";
+	hideoffnpc "#prydn_Secret_C-3";
 	end;
 }
-moc_prydn2.gat,133,49,0	script	#Secret_C-4	139,1,1,{/* 60790 (hide)*/
-	soundeffect "se_door02.wav", 0, 0; //60790
+
+moc_prydn2.gat,133,49,0	script	#prydn_Secret_C-4	139,1,1,{
+	soundeffect "se_door02.wav", 0, 0;
 	warp "moc_prydn2.gat",126,51;
 	end;
+OnInit:
+	hideonnpc;
+	end;
 }
-moc_prydn2.gat,29,88,0	script	#Secret_D-1	139,1,0,{/* 60791 */
+
+moc_prydn2.gat,29,88,0	script	#prydn_Secret_D-1	139,1,0,{
 OnTouch:
 	switch('flag) {
 	case 0:
 		showscript "?";
 		set 'flag,1;
-		soundeffect "alarm_move.wav", 0, 0; //60795
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 1:
 		showscript "!?";
 		set 'flag,2;
-		soundeffect "alarm_move.wav", 0, 0; //60795
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 2:
-		soundeffect "se_door02.wav", 0, 0; //60795
-		hideonnpc "#Secret_D-1"; //60795
-		hideoffnpc "#Secret_D-2"; //60796
+		soundeffect "se_door02.wav", 0, 0;
+		hideonnpc "#prydn_Secret_D-1";
+		hideoffnpc "#prydn_Secret_D-2";
 		initnpctimer;
 		end;
 	}
 OnTimer8000:
 	set 'flag,0;
-	hideonnpc "#Secret_D-2"; //60796
-	hideoffnpc "#Secret_D-1"; //60795
+	hideonnpc "#prydn_Secret_D-2";
+	hideoffnpc "#prydn_Secret_D-1";
 	end;
 }
-moc_prydn2.gat,44,95,0	script	#Secret_D-2	139,1,1,{/* 60792 (hide)*/
-	soundeffect "se_door01.wav", 0, 0; //60792
+
+moc_prydn2.gat,44,95,0	script	#prydn_Secret_D-2	139,1,1,{
+	soundeffect "se_door01.wav", 0, 0;
 	warp "moc_prydn2.gat",49,95;
 	end;
+OnInit:
+	hideonnpc;
+	end;
 }
-moc_prydn2.gat,45,87,0	script	#Secret_D-3	139,1,0,{/* 60793 */
+
+moc_prydn2.gat,45,87,0	script	#prydn_Secret_D-3	139,1,0,{
 OnTouch:
 	switch('flag) {
 	case 0:
 		showscript "?";
 		set 'flag,1;
-		soundeffect "alarm_move.wav", 0, 0; //60795
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 1:
 		showscript "!?";
 		set 'flag,2;
-		soundeffect "alarm_move.wav", 0, 0; //60795
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 2:
-		soundeffect "se_door02.wav", 0, 0; //60795
-		hideonnpc "#Secret_D-3"; //60795
-		hideoffnpc "#Secret_D-4"; //60796
+		soundeffect "se_door02.wav", 0, 0;
+		hideonnpc "#prydn_Secret_D-3";
+		hideoffnpc "#prydn_Secret_D-4";
 		initnpctimer;
 		end;
 	}
 OnTimer8000:
 	set 'flag,0;
-	hideonnpc "#Secret_D-4"; //60796
-	hideoffnpc "#Secret_D-3"; //60795
+	hideonnpc "#prydn_Secret_D-4";
+	hideoffnpc "#prydn_Secret_D-3";
 	end;
 }
-moc_prydn2.gat,45,95,0	script	#Secret_D-4	139,1,1,{/* 60794 (hide)*/
-	soundeffect "se_door01.wav", 0, 0; //60794
+
+moc_prydn2.gat,45,95,0	script	#prydn_Secret_D-4	139,1,1,{
+	soundeffect "se_door01.wav", 0, 0;
 	warp "moc_prydn2.gat",40,95;
 	end;
+OnInit:
+	hideonnpc;
+	end;
 }
-moc_prydn2.gat,29,172,0	script	#Secret_E-1	139,1,0,{/* 60795 */
+
+moc_prydn2.gat,29,172,0	script	#prydn_Secret_E-1	139,1,0,{
 OnTouch:
 	switch('flag) {
 	case 0:
 		showscript "?";
 		set 'flag,1;
-		soundeffect "alarm_move.wav", 0, 0; //60795
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 1:
 		showscript "!?";
 		set 'flag,2;
-		soundeffect "alarm_move.wav", 0, 0; //60795
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 2:
-		soundeffect "se_door02.wav", 0, 0; //60795
-		hideonnpc "#Secret_E-1"; //60795
-		hideoffnpc "#Secret_E-2"; //60796
+		soundeffect "se_door02.wav", 0, 0;
+		hideonnpc "#prydn_Secret_E-1";
+		hideoffnpc "#prydn_Secret_E-2";
 		initnpctimer;
 		end;
 	}
 OnTimer8000:
 	set 'flag,0;
-	hideonnpc "#Secret_E-2"; //60796
-	hideoffnpc "#Secret_E-1"; //60795
+	hideonnpc "#prydn_Secret_E-2";
+	hideoffnpc "#prydn_Secret_E-1";
 	end;
 }
-moc_prydn2.gat,44,178,0	script	#Secret_E-2	139,1,1,{/* 60796 (hide)*/
-	soundeffect "se_door01.wav", 0, 0; //60796
+
+moc_prydn2.gat,44,178,0	script	#prydn_Secret_E-2	139,1,1,{
+	soundeffect "se_door01.wav", 0, 0;
 	warp "moc_prydn2.gat",51,178;
 	end;
+OnInit:
+	hideonnpc;
+	end;
 }
-moc_prydn2.gat,47,196,0	script	#Secret_E-3	139,1,0,{/* 60797 */
+
+moc_prydn2.gat,47,196,0	script	#prydn_Secret_E-3	139,1,0,{
 OnTouch:
 	switch('flag) {
 	case 0:
 		showscript "?";
 		set 'flag,1;
-		soundeffect "alarm_move.wav", 0, 0; //60797
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 1:
 		showscript "!?";
 		set 'flag,2;
-		soundeffect "alarm_move.wav", 0, 0; //60797
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 2:
-		soundeffect "se_door02.wav", 0, 0; //60797
-		hideonnpc "#Secret_E-3"; //60797
-		hideoffnpc "#Secret_E-4"; //60798
+		soundeffect "se_door02.wav", 0, 0;
+		hideonnpc "#prydn_Secret_E-3";
+		hideoffnpc "#prydn_Secret_E-4";
 		initnpctimer;
 		end;
 	}
 OnTimer8000:
 	set 'flag,0;
-	hideonnpc "#Secret_E-4"; //60798
-	hideoffnpc "#Secret_E-3"; //60797
+	hideonnpc "#prydn_Secret_E-4";
+	hideoffnpc "#prydn_Secret_E-3";
 	end;
 }
-moc_prydn2.gat,47,187,0	script	#Secret_E-4	139,1,1,{/* 60798 (hide)*/
-	soundeffect "se_door01.wav", 0, 0; //60798
+
+moc_prydn2.gat,47,187,0	script	#prydn_Secret_E-4	139,1,1,{
+	soundeffect "se_door01.wav", 0, 0;
 	warp "moc_prydn2.gat",40,187;
 	end;
+OnInit:
+	hideonnpc;
+	end;
 }
-moc_prydn2.gat,156,196,0	script	#Secret_F-1	139,1,0,{/* 60799 */
+
+moc_prydn2.gat,156,196,0	script	#prydn_Secret_F-1	139,1,0,{
 OnTouch:
 	switch('flag) {
 	case 0:
 		showscript "?";
 		set 'flag,1;
-		soundeffect "alarm_move.wav", 0, 0; //60797
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 1:
 		showscript "!?";
 		set 'flag,2;
-		soundeffect "alarm_move.wav", 0, 0; //60797
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 2:
-		soundeffect "se_door02.wav", 0, 0; //60797
-		hideonnpc "#Secret_F-1"; //60797
-		hideoffnpc "#Secret_F-2"; //60798
+		soundeffect "se_door02.wav", 0, 0;
+		hideonnpc "#prydn_Secret_F-1";
+		hideoffnpc "#prydn_Secret_F-2";
 		initnpctimer;
 		end;
 	}
 OnTimer8000:
 	set 'flag,0;
-	hideonnpc "#Secret_F-2"; //60798
-	hideoffnpc "#Secret_F-1"; //60797
+	hideonnpc "#prydn_Secret_F-2";
+	hideoffnpc "#prydn_Secret_F-1";
 	end;
 }
-moc_prydn2.gat,156,187,0	script	#Secret_F-2	139,1,1,{/* 60800 (hide)*/
-	soundeffect "se_door01.wav", 0, 0; //60798
+
+moc_prydn2.gat,156,187,0	script	#prydn_Secret_F-2	139,1,1,{
+	soundeffect "se_door01.wav", 0, 0;
 	warp "moc_prydn2.gat",163,187;
 	end;
+OnInit:
+	hideonnpc;
+	end;
 }
-moc_prydn2.gat,174,172,0	script	#Secret_F-3	139,1,0,{/* 60801 */
+
+moc_prydn2.gat,174,172,0	script	#prydn_Secret_F-3	139,1,0,{
 OnTouch:
 	switch('flag) {
 	case 0:
 		showscript "?";
 		set 'flag,1;
-		soundeffect "alarm_move.wav", 0, 0; //60797
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 1:
 		showscript "!?";
 		set 'flag,2;
-		soundeffect "alarm_move.wav", 0, 0; //60797
+		soundeffect "alarm_move.wav", 0, 0;
 		end;
 	case 2:
-		soundeffect "se_door02.wav", 0, 0; //60797
-		hideonnpc "#Secret_F-3"; //60797
-		hideoffnpc "#Secret_F-4"; //60798
+		soundeffect "se_door02.wav", 0, 0;
+		hideonnpc "#prydn_Secret_F-3";
+		hideoffnpc "#prydn_Secret_F-4";
 		initnpctimer;
 		end;
 	}
 OnTimer8000:
 	set 'flag,0;
-	hideonnpc "#Secret_F-4"; //60798
-	hideoffnpc "#Secret_F-3"; //60797
+	hideonnpc "#prydn_Secret_F-4";
+	hideoffnpc "#prydn_Secret_F-3";
 	end;
 }
-moc_prydn2.gat,159,178,0	script	#Secret_F-4	139,1,1,{/* 60802 (hide)*/
-	soundeffect "se_door01.wav", 0, 0; //60798
+
+moc_prydn2.gat,159,178,0	script	#prydn_Secret_F-4	139,1,1,{
+	soundeffect "se_door01.wav", 0, 0;
 	warp "moc_prydn2.gat",152,178;
 	end;
+OnInit:
+	hideonnpc;
+	end;
 }
-moc_prydn2.gat,102,182,4	script	アメンホテプの棺#kannok	801,{/* 60803 */}
+
+//============================================================
+// ピラミッドナイトメアMVP
+//------------------------------------------------------------
+moc_prydn2.gat,102,182,4	script	アメンホテプの棺#prydn	801,{}
+
 moc_prydn2.gat,0,0,0	script	#moc_prydn2MVP	-1,{
 	end;
 OnInit:
@@ -844,13 +970,13 @@ OnTimer30600000:
 		end;
 OnTimer32400000:
 	stopnpctimer;
-	hideonnpc "アメンホテプの棺#kannok";
+	hideonnpc "アメンホテプの棺#prydn";
 	areamonster "moc_prydn2.gat",0,0,0,0,"墓地の守護者",1098,15,"#moc_prydn2MVP::OnKilled2";
 	monster "moc_prydn2.gat",102,85,"アメンホテプ",2362,1,"#moc_prydn2MVP::OnKilled";
 	end;
 OnKilled:
 	initnpctimer;
-	hideoffnpc "アメンホテプの棺#kannok";
+	hideoffnpc "アメンホテプの棺#prydn";
 	end;
 OnKilled2:
 	end;
