@@ -198,7 +198,7 @@ OnInit:
 	end;
 }
 
-moc_prydn1.gat,94,98,3	script	怪しい猫#\prydn2	547,{
+moc_prydn1.gat,94,98,3	script	怪しい猫#prydn2	547,{
 	mes "[怪しい猫]";
 	mes "怪しいモンスターが";
 	mes "うようよしているな……。";
