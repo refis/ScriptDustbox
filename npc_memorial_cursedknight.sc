@@ -10,20 +10,193 @@
 @nomalattack(src: "2959:呪いの根源:1@spa.gat"(42054), dst: 4631724, damage: 0, sDelay: 420, dDelay: 400, aDelay: 672)
 
 dali02.gat,46,135,5	script	老婆#dk	846,{/* 51201 */
+	set '@f,countitem(6672);
 	mes "[老婆]";
 	mes "強い思いは時に強い力を持つ……。";
-	mes "^ff0000記憶の欠片^000000を持っていたら";
-	mes "私の所に持ってきなさい。";
-	mes "^ff0000レクイエム装備^000000に";
-	mes "精錬をしてあげるぞよ。";
-	close;
+	if('@f == 0) {
+		mes "^ff0000記憶の欠片^000000を持っていたら";
+		mes "私の所に持ってきなさい。";
+		mes "^ff0000レクイエム装備^000000に";
+		mes "精錬をしてあげるぞよ。";
+		close;
+	}
+	mes "むむ？　そなた……。";
+	mes "^ff0000記憶の欠片^000000を持っているな。";
+	mes "私に渡せばその欠片を使って、";
+	mes "レクイエム装備に精錬をしてやろう。";
+	next;
+	switch(select("精錬する","説明を聞く","やめておく")) {
+	case 1:
+		break;
+	case 2:
+		mes "[老婆]";
+		mes "記憶の欠片は思いの塊じゃ。";
+		mes "この先で入手出来る";
+		mes "レクイエム装備も";
+		mes "強い思いが宿った装備じゃ。";
+		next;
+		mes "[老婆]";
+		mes "私の力を使えば";
+		mes "そのレクイエム装備に";
+		mes "記憶の欠片を用いる事で";
+		mes "いわゆる精錬と同じ効果を";
+		mes "得る事が出来るんじゃ。";
+		next;
+		mes "[老婆]";
+		mes "精錬をしたい場合は";
+		mes "精錬したい防具・武器を装備した状態で";
+		mes "記憶の欠片を用意して";
+		mes "私に話しかけなさい。";
+		mes "^ff0000記憶の欠片1つで1回^000000";
+		mes "精錬をしてやろう。";
+		next;
+		mes "[老婆]";
+		mes "その他は通常の精錬と同様じゃ。";
+		mes "^ff0000精錬に失敗してしまうと";
+		mes "装備が破壊されてしまう^000000。";
+		mes "破壊された装備は";
+		mes "^ff00002度と使えなくなる^000000から";
+		mes "注意するんじゃよ。ふぉふぉふぉ。";
+		close;
+	case 3:
+		mes "[老婆]";
+		mes "そうかい。";
+		close;
+	}
+	mes "[老婆]";
+	mes "どれを精錬するんじゃ？";
+	next;
+	set '@menu,select(
+			(getequipid(2)!=0? "^nItemID^" +getequipid(2): "体-[装備していない]"),
+			(getequipid(3)!=0? "^nItemID^" +getequipid(3): "左手-[装備していない]"),
+			(getequipid(4)!=0? "^nItemID^" +getequipid(4): "右手-[装備していない]"),
+			(getequipid(5)!=0? "^nItemID^" +getequipid(5): "肩にかける物-[装備していない]"),
+			(getequipid(6)!=0? "^nItemID^" +getequipid(6): "靴-[装備していない]"));
+	set '@menu,'@menu+1;
+	set '@refine,getequiprefinerycnt('@menu);
+	switch(getequipid('@menu)) {
+	case 0:
+		mes "[老婆]";
+		mes "ぼけているのか？";
+		mes "何も装備していないようじゃぞ。";
+		close;
+	default:
+		mes "[老婆]";
+		mes "これはレクイエム装備では無い。";
+		mes "私が出来るのは";
+		mes "レクイエム装備だけじゃ。";
+		close;
+	}
+	if('@refine < 3 && '@f >= 4 - '@refine) {	// 精錬値が2以下で+4までの分の記憶の欠片があるとき
+		mes "[老婆]";
+		mes "おやおや、この装備はまだ";
+		mes "安全に精錬が可能みたいだねぇ。";
+		mes "もしよかったら";
+		mes "^ff0000+4まで一気に精錬する^000000事も出来るけど";
+		mes "どうするんだい？";
+		next;
+		switch(select("1回だけ精錬","一気に精錬","やめる")) {
+		case 1:
+			break;
+		case 2:
+			set '@num,4 - '@refine;
+			mes "[老婆]";
+			mes "そなたの装備の精錬値は^ff0000+" +'@refine+ "^000000じゃから";
+			mes "^ff0000" +'@num+ "回^000000、一気に精錬してあげよう。";
+			mes "精錬していいかい？";
+			next;
+			if(select("はい","いいえ") == 2) {
+				mes "[老婆]";
+				mes "そうか……。";
+				mes "気が変わったら";
+				mes "また来てくれ。";
+				close;
+			}
+			for(set '@j,0;'@j<'@num;set '@j,'@j+1)
+				successrefitem '@menu;
+			delitem 6672,'@num;
+			mes "[老婆]";
+			mes "無事に完成したようじゃな。";
+			mes "良い物が出来たぞ。";
+			close;
+		case 3:
+			mes "[老婆]";
+			mes "そうか……。";
+			mes "気が変わったら";
+			mes "また来てくれ。";
+			close;
+		}
+	}
+	if('@refine >= 4) {
+		mes "[老婆]";
+		mes "ほう。この装備は既にかなり";
+		mes "精錬をしてあるようじゃな。";
+		mes "これから先は";
+		mes "装備が壊れるかもしれない。";
+		mes "壊れると^ff00002度と使えなくなるが^000000";
+		mes "それでもいいかな？";
+		next;
+		if(select("はい","いいえ") == 2) {
+			mes "[老婆]";
+			mes "そうか……。";
+			mes "気が変わったら";
+			mes "また来てくれ。";
+			close;
+		}
+	}
+	delitem 6672,1;
+	mes "[老婆]";
+	mes "それでは行くぞよ！";
+	mes "……ふぉっ！";
+	if(getequippercentrefinery('@i) > rand(100)) {
+		successrefitem '@menu;
+		next;	// modif
+		mes "[老婆]";
+		mes "無事に完成したようじゃな。";
+		mes "良い物が出来たぞ。";
+		close;
+	}
+	else {
+		failedrefitem '@menu;
+		next;	// modif
+		mes "[老婆]";
+		mes "くっ……";
+		mes "失敗してしまったようじゃ。";
+		mes "すまないのう……。";
+		close;
+	}
 OnInit:
-	waitingroom "レクイエム装備精錬",0; //51201
+	waitingroom "レクイエム装備精錬",0;
 	end;
 }
 
 dali02.gat,43,129,5	script	近衛兵#dk	686,{/* 51199 */
-	if(BaseLevel < 110) {
+	if(BaseLevel < 100) {
+		mes "[近衛兵]";
+		mes "……君は……";
+		mes "旅人か……？";
+		mes "何にしろ君は、自分の名前を";
+		mes "忘れたりなどしていない";
+		mes "だろう？";
+		mes "羨ましいよ……。";
+		next;
+		menu "どうしました？",-;
+		mes "[近衛兵]";
+		mes "こんな私の話を聞いて";
+		mes "くれるのか……。";
+		mes "詳細を話したいところだが、";
+		mes "君はまだ若いようだ。";
+		mes "恐らく私の話を聞いたところで";
+		mes "理解できないだろう……。";
+		next;
+		mes "[近衛兵]";
+		mes "すまない、それ程やっかいな話なんだ。";
+		mes "何より私自身が、困惑しているからね。";
+		mes "　";
+		mes "‐これ以上、話は聞けないようだ。";
+		mes "　^ff0000Baseレベルを100以上^000000にしてから";
+		mes "　また来てみよう……‐";
+		close;
 	}
 	if(checkquest(114750) & 0x8 == 8) {
 		mes "‐一人の鎧で身を固めた男が";
@@ -149,7 +322,7 @@ dali02.gat,43,129,5	script	近衛兵#dk	686,{/* 51199 */
 		mes "さて、君にも準備が必要だろう。";
 		mes "この機械を使う準備ができたら";
 		mes "私に話しかけてくれるかな？";
-		setquest 114750; //state=1
+		setquest 114750;
 		compquest 114750;
 		close;
 	}
@@ -163,6 +336,30 @@ dali02.gat,43,129,5	script	近衛兵#dk	686,{/* 51199 */
 		mes "君さえよければ";
 		mes "私の記憶を取り戻す";
 		mes "手伝いをしてくれると助かる。";
+		close;
+	}
+	if(checkquest(1261)) {
+		if(checkquest(1261) & 0x2) {
+			mes "[近衛兵]";
+			mes "稼動するためのパワーが";
+			mes "十分、充電されたようだ。";
+			mes "これならもう、";
+			mes "起動は可能なはずだ。";
+			delquest 1261;
+			delquest 114760;
+			close;
+		}
+		mes "[近衛兵]";
+		mes "今はまだ、次元移動機が";
+		mes "稼動するためのパワーが";
+		mes "足りないようなんだ。";
+		mes "もう少し待ってくれ。";
+		next;
+		mes "[インフォメーション]";
+		mes "‐^ff0000入場してから1回目の午前5時以降^000000";
+		mes "　且つ";
+		mes "　^ff0000最後の入場から1時間経過後^000000";
+		mes "　に再度入場可能になります‐";
 		close;
 	}
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
@@ -202,11 +399,22 @@ dali02.gat,43,129,5	script	近衛兵#dk	686,{/* 51199 */
 	mes "準備を整えて、まっていてくれ。";
 	close;
 OnInit:
-	waitingroom "呪いの剣士",0; //51199
+	waitingroom "呪いの剣士",0;
 	end;
 }
 
 dali02.gat,40,134,5	script	次元移動機	10007,{/* 51200 */
+	if(BaseLevel < 100) {
+		mes "[近衛兵]";
+		mes "……君は……。";
+		mes "どうやらまだまだ、";
+		mes "成長段階にあるという";
+		mes "感じだね。";
+		next;
+		mes "‐^ff0000BaseLv100以上から^000000";
+		mes "　進行可能です‐";
+		close;
+	}
 	mes "‐次元移動機がある‐";
 	next;
 	if(select("入る","やめておく") == 2) {
@@ -214,12 +422,38 @@ dali02.gat,40,134,5	script	次元移動機	10007,{/* 51200 */
 		mes "そうか……仕方ない。";
 		close;
 	}
+	if(checkquest(1261)) {
+		if(checkquest(1261) & 0x2) {
+			mes "^0000ff‐呪いの剣士の入場制限が";
+			mes "　解除されました。";
+			mes "　近衛兵と";
+			mes "　話を進めてください‐^000000";
+			delquest 1261;
+			delquest 114760;
+			delquest 114765;
+			close;
+		}
+		mes "[近衛兵]";
+		mes "今はまだ、次元移動機が";
+		mes "稼動するためのパワーが";
+		mes "足りないようなんだ。";
+		mes "もう少し待ってくれ。";
+		next;
+		mes "[インフォメーション]";
+		mes "‐^ff0000入場してから1回目の午前5時以降^000000";
+		mes "　且つ";
+		mes "　^ff0000最後の入場から1時間経過後^000000";
+		mes "　に再度入場可能になります‐";
+		close;
+	}
 	switch(mdenter("Cursed Knight")) {
 	case 0:	// エラーなし
 		announce "メモリアルダンジョン[Cursed Knight] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
 		donpcevent getmdnpcname("#DK_Control1")+ "::OnStart";
-		setquest 1261; //state=1
-		setquest 114760; //state=1
+		setquest 1261;
+		setquest 114760;
+		if(checkquest(114765)&0x8)
+			delquest 114765;
 		close2;
 		//warp "1@spa.gat",42,196;
 		end;
@@ -313,6 +547,18 @@ OnTalk7:
 	mes "‐先ほどの近衛兵がいたので";
 	mes "　声をかけようとした瞬間……‐";
 	next;
+	if(checkquest(114755)&0x8) {
+		if(select("会話を省略する","二人の会話を聞く") == 1) {
+			mes "‐時間が瞬時に流れたのを感じた‐";
+			close2;
+			hideonnpc getmdnpcname("国王#dk");
+			hideonnpc getmdnpcname("近衛兵#dk");
+			hideonnpc getmdnpcname("黒づくめの男#dkf1");
+			donpcevent getmdnpcname("#DK_NPCTimer1")+ "::OnStart";
+			misceffect 904,"";
+			end;
+		}
+	}
 	mes "[謎の声]";
 	mes "ほう……これは珍しい。";
 	mes "アレを見ろ、アイツは生きた";
@@ -329,9 +575,9 @@ OnTalk7:
 	mes "　大きな剣を持った";
 	mes "　一人の黒づくめの男が";
 	mes "　こちらを見つめていた‐";
-	cutin "sakray.bmp", 2;
+	cutin "sakray.bmp",2;
 	next;
-	cutin "sakray.bmp", 255;
+	cutin "sakray.bmp",255;
 	mes "‐しかし何故だろう。";
 	mes "　黒づくめの男の顔と声に";
 	mes "　見覚えがある気がした。";
@@ -350,10 +596,10 @@ OnTalk7:
 	mes "‐驚いたことに、その声は";
 	mes "　^FF0000禍々しい気を放つ一振りの";
 	mes "　剣^000000から聞こえていた……‐";
-	cutin "tartanos.bmp", 3;
+	cutin "tartanos.bmp",3;
 	next;
-	cutin "tartanos.bmp", 255;
-	cutin "sakray.bmp", 2;
+	cutin "tartanos.bmp",255;
+	cutin "sakray.bmp",2;
 	mes "[黒づくめの男]";
 	mes "……そういうことらしい。";
 	mes "ならば、お前に教えてやろう。";
@@ -377,7 +623,7 @@ OnTalk7:
 	mes "クックックック……。";
 	donpcevent getmdnpcname("黒づくめの男#dkf1")+ "::OnTalk6";
 	next;
-	cutin "tartanos.bmp", 3;
+	cutin "tartanos.bmp",3;
 	mes "[謎の声]";
 	mes "人間は他人の不幸が";
 	mes "好きらしいからな……。";
@@ -385,9 +631,9 @@ OnTalk7:
 	mes "頃にまた会おうじゃないか。";
 	donpcevent getmdnpcname("黒づくめの男#dkf1")+ "::OnTalk7";
 	next;
-	cutin "tartanos.bmp", 255;
-	misceffect 454, getmdnpcname("黒づくめの男#dkf1"); //68731
-	hideonnpc getmdnpcname("黒づくめの男#dkf1"); //68731
+	cutin "tartanos.bmp",255;
+	misceffect 454,getmdnpcname("黒づくめの男#dkf1");
+	hideonnpc getmdnpcname("黒づくめの男#dkf1");
 	mes "‐そして男の姿が消えた途端、";
 	mes "　止まっていた時が";
 	mes "　動き出したような感覚に";
@@ -465,15 +711,15 @@ OnTalk7:
 	mes "彼女にもしものことがあれば私は……。";
 	donpcevent getmdnpcname("近衛兵#dk")+ "::OnTalk4";
 	close2;
-	hideonnpc getmdnpcname("国王#dk"); //68732
-	hideonnpc getmdnpcname("近衛兵#dk"); //68730
+	hideonnpc getmdnpcname("国王#dk");
+	hideonnpc getmdnpcname("近衛兵#dk");
 	donpcevent getmdnpcname("#DK_NPCTimer1")+ "::OnStart";
 	misceffect 904,"";
 	end;
 OnStart:
 OnTimer3000:
 	initnpctimer;
-	emotion 9, getmdnpcname("国王#dk"); //60431
+	emotion 9,getmdnpcname("国王#dk");
 	end;
 }
 
@@ -482,21 +728,21 @@ OnStart:
 	initnpctimer;
 	end;
 OnTimer3000:
-	announce "若い男の声 : そうだ……。ティアラ姫の側で彼女を守ること。それだけが私の幸せ、生きがいだった。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
+	announce "若い男の声 : そうだ……。ティアラ姫の側で彼女を守ること。それだけが私の幸せ、生きがいだった。",0x9,0x7cfc00,0x190,20,0,0;
 	end;
 OnTimer6000:
-	announce "若い男の声 : しかし、突然のモンスターの襲来。これが全ての悲劇の始まりだった……。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
+	announce "若い男の声 : しかし、突然のモンスターの襲来。これが全ての悲劇の始まりだった……。",0x9,0x7cfc00,0x190,20,0,0;
 	end;
 OnTimer9000:
 	stopnpctimer;
-	announce "‐時間が速く流れるような感覚の後、北で何かが開くような音がした‐", 0x9, 0xffff00, 0x190, 20, 0, 0;
-	misceffect 35, getmdnpcname("亡霊の王宮2階"); //68734
-	hideoffnpc getmdnpcname("亡霊の王宮2階"); //68734
+	announce "‐時間が速く流れるような感覚の後、北で何かが開くような音がした‐",0x9,0xffff00,0x190,20,0,0;
+	misceffect 35,getmdnpcname("亡霊の王宮2階");
+	hideoffnpc getmdnpcname("亡霊の王宮2階");
 	donpcevent getmdnpcname("近衛兵#dk1")+ "::OnStart";
 	end;
 }
 
-1@spa.gat,41,217,0	warp	亡霊の王宮2階	2,2,1@spa.gat,114,120 //68734 from_pos=(41, 217)
+1@spa.gat,41,217,0	warp	亡霊の王宮2階	2,2,1@spa.gat,114,120
 
 1@spa.gat,135,125,3	script	ティアラ姫#dk	640,{/* 68735 */
 	mes "‐美しい女性が佇んでいる。";
@@ -530,6 +776,17 @@ OnTalk5:
 	mes "……姫様、ご無事でなによりです。";
 	unittalk "近衛兵 : ……姫様、ご無事でなによりです。";
 	next;
+	if(checkquest(114755)&0x8) {
+		if(select("急ぐ","二人の会話を聞く") == 1) {
+			mes "‐時間が瞬時に流れたのを感じた‐";
+			close2;
+			hideonnpc getmdnpcname("近衛兵#dk1");
+			hideonnpc getmdnpcname("ティアラ姫#dk");
+			donpcevent getmdnpcname("#DK_NPCTimer2")+ "::OnStart";
+			misceffect 904,"";
+			end;
+		}
+	}
 	mes "[ティアラ姫]";
 	mes "この城にモンスターが入り込んだと、";
 	mes "侍女から聞きました……。";
@@ -614,15 +871,15 @@ OnTalk5:
 	mes "……参りましょう！";
 	unittalk "近衛兵 : 姫様！　安全な場所までお送りします!!……参りましょう！";
 	close2;
-	hideonnpc getmdnpcname("近衛兵#dk1"); //68736
-	hideonnpc getmdnpcname("ティアラ姫#dk"); //68735
-	misceffect 904,""; //self
+	hideonnpc getmdnpcname("近衛兵#dk1");
+	hideonnpc getmdnpcname("ティアラ姫#dk");
+	misceffect 904,"";
 	donpcevent getmdnpcname("#DK_NPCTimer2")+ "::OnStart";
 	end;
 OnStart:
 OnTimer3000:
 	initnpctimer;
-	emotion 9, getmdnpcname("近衛兵#dk1"); //60431
+	emotion 9,getmdnpcname("近衛兵#dk1");
 	end;
 }
 
@@ -631,14 +888,14 @@ OnStart:
 	initnpctimer;
 	end;
 OnTimer3000:
-	announce "若い男の声 : 美しく聡明なティアラ姫……私は……私は……。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
+	announce "若い男の声 : 美しく聡明なティアラ姫……私は……私は……。",0x9,0x7cfc00,0x190,20,0,0;
 	end;
 OnTimer6000:
-	announce "若い男の声 : 願わくば貴女と、永遠の時を過ごしたかった……。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
+	announce "若い男の声 : 願わくば貴女と、永遠の時を過ごしたかった……。",0x9,0x7cfc00,0x190,20,0,0;
 	end;
 OnTimer9000:
 	stopnpctimer;
-	hideoffnpc getmdnpcname("隣国の王子#dk3"); //68738
+	hideoffnpc getmdnpcname("隣国の王子#dk3");
 	end;
 }
 
@@ -659,14 +916,14 @@ OnTouch:
 		unittalk "隣国の王子 : あの近衛兵は使えそうだ。とりあえず彼には今回のモンスターの襲撃事件の首謀者という役でも担っていただこう。ククククク。";
 		close2;
 		hideonnpc getmdnpcname("隣国の王子#dk3");
-		announce "‐時間が速く流れるような感覚の後、北で何かが開くような音がした‐", 0x9, 0xffff00, 0x190, 20, 0, 0;
-		misceffect 35, getmdnpcname("亡霊の王宮3階"); //68739
-		hideoffnpc getmdnpcname("亡霊の王宮3階"); //68739
+		announce "‐時間が速く流れるような感覚の後、北で何かが開くような音がした‐",0x9,0xffff00,0x190,20,0,0;
+		misceffect 35,getmdnpcname("亡霊の王宮3階");
+		hideoffnpc getmdnpcname("亡霊の王宮3階");
 		donpcevent getmdnpcname("国王#dk1")+ "::OnStart";
 	}
 	end;
 }
-1@spa.gat,117,137,0	warp	亡霊の王宮3階	2,2,1@spa.gat,60,43 //68739 from_pos=(119, 135)
+1@spa.gat,117,137,0	warp	亡霊の王宮3階	2,2,1@spa.gat,60,43
 
 1@spa.gat,28,52,7	script	騎士団長#dk	418,{/* 68740 */
 	mes "‐男は苦渋の色を浮かべた表情で、";
@@ -719,6 +976,22 @@ OnTalk3:
 	mes "まさか裏切られるとは……な。";
 	unittalk "国王 : ここにモンスターを呼び寄せたのがまさかそなただったとは……。一番信頼していたそなたにまさか裏切られるとは……な。";
 	next;
+	if(checkquest(114755)&0x8) {
+		if(select("急ぐ","二人の会話を聞く") == 1) {
+			mes "‐時間が瞬時に流れたのを感じた‐";
+			close2;
+			hideonnpc getmdnpcname("国王#dk1");
+			hideonnpc getmdnpcname("近衛兵#dk2");
+			hideonnpc getmdnpcname("騎士団長#dk");
+			hideonnpc getmdnpcname("兵士#dk1");
+			hideonnpc getmdnpcname("兵士#dk2");
+			hideonnpc getmdnpcname("兵士#dk3");
+			donpcevent getmdnpcname("#DK_NPCTimer3")+ "::OnStart";
+			setnpctimer 30000,getmdnpcname("#DK_NPCTimer3");
+			misceffect 904,"";
+			end;
+		}
+	}
 	mes "[近衛兵]";
 	mes "誤解です！　陛下！";
 	mes "私は……私は断じて";
@@ -751,20 +1024,20 @@ OnTalk3:
 	mes "私のようなもののために……。";
 	donpcevent getmdnpcname("近衛兵#dk2")+ "::OnTalk3";
 	close2;
-	hideonnpc getmdnpcname("国王#dk1"); //68745
-	hideonnpc getmdnpcname("近衛兵#dk2"); //68744
-	hideonnpc getmdnpcname("騎士団長#dk"); //68740
-	hideonnpc getmdnpcname("兵士#dk1"); //68741
-	hideonnpc getmdnpcname("兵士#dk2"); //68742
-	hideonnpc getmdnpcname("兵士#dk3"); //68743
-	hideoffnpc getmdnpcname("近衛兵#dk3"); //68747
-	hideoffnpc getmdnpcname("魔剣タルタノス#dkt"); //68748
+	hideonnpc getmdnpcname("国王#dk1");
+	hideonnpc getmdnpcname("近衛兵#dk2");
+	hideonnpc getmdnpcname("騎士団長#dk");
+	hideonnpc getmdnpcname("兵士#dk1");
+	hideonnpc getmdnpcname("兵士#dk2");
+	hideonnpc getmdnpcname("兵士#dk3");
+	hideoffnpc getmdnpcname("近衛兵#dk3");
+	hideoffnpc getmdnpcname("魔剣タルタノス#dkt");
 	donpcevent getmdnpcname("#DK_NPCTimer3")+ "::OnStart";
 	end;
 OnStart:
 OnTimer3000:
 	initnpctimer;
-	emotion 9, getmdnpcname("国王#dk1"); //60431
+	emotion 9,getmdnpcname("国王#dk1");
 	end;
 }
 
@@ -773,53 +1046,54 @@ OnStart:
 	initnpctimer;
 	end;
 OnTimer3000:
-	announce "不吉な声 : この場所に珍しく人間が来たと思えば……クックック。忠誠心高き近衛兵よ、謀られたな。", 0x9, 0xff0000, 0x190, 16, 0, 0;
-	misceffect 885, getmdnpcname("魔剣タルタノス#dkt"); //68748
-	misceffect 829, getmdnpcname("魔剣タルタノス#dkt"); //68748
+	announce "不吉な声 : この場所に珍しく人間が来たと思えば……クックック。忠誠心高き近衛兵よ、謀られたな。",0x9,0xff0000,0x190,16,0,0;
+	misceffect 885,getmdnpcname("魔剣タルタノス#dkt");
+	misceffect 829,getmdnpcname("魔剣タルタノス#dkt");
 	end;
 OnTimer6000:
 	unittalk "近衛兵 : 誰だ……。誰が私に語りかけている……。私のことは放っておいてくれ……。";
 	end;
 OnTimer9000:
-	announce "不吉な声 : 後から来た身分で、随分なご挨拶だな。我はこの世を支配するために生まれた剣、タルタノス。", 0x9, 0xff0000, 0x190, 16, 0, 0;
+	announce "不吉な声 : 後から来た身分で、随分なご挨拶だな。我はこの世を支配するために生まれた剣、タルタノス。",0x9,0xff0000,0x190,16,0,0;
 	end;
 OnTimer12000:
-	announce "魔剣タルタノス : もし貴様がこの状況からの脱却を願うのであれば、我と契約をするといい。さすれば命の危険が迫る姫君もまだ、助かるかもしれぬぞ？", 0x9, 0xff0000, 0x190, 16, 0, 0;
+	announce "魔剣タルタノス : もし貴様がこの状況からの脱却を願うのであれば、我と契約をするといい。さすれば命の危険が迫る姫君もまだ、助かるかもしれぬぞ？",0x9,0xff0000,0x190,16,0,0;
 	end;
 OnTimer15000:
 	unittalk "近衛兵 : 契約？　どうして、私が契約を……！　それよりも何故だ!!　何故、姫に危険が迫っている!!";
 	end;
 OnTimer18000:
-	announce "魔剣タルタノス : 特別にもう一つ教えてやろう。貴様を陥れた相手……それこそ、あの隣国の王子だ。", 0x9, 0xff0000, 0x190, 16, 0, 0;
+	announce "魔剣タルタノス : 特別にもう一つ教えてやろう。貴様を陥れた相手……それこそ、あの隣国の王子だ。",0x9,0xff0000,0x190,16,0,0;
 	end;
 OnTimer21000:
 	unittalk "近衛兵 : ……隣国の王子……!?　やはりあの時見た人影は……！　……クッ……！　この鎖さえなければ……!!";
 	end;
 OnTimer24000:
-	announce "魔剣タルタノス : クックックッ。まだ我が言葉が信じられぬようだな。しかしそうでなくては、面白くない。", 0x9, 0xff0000, 0x190, 16, 0, 0;
+	announce "魔剣タルタノス : クックックッ。まだ我が言葉が信じられぬようだな。しかしそうでなくては、面白くない。",0x9,0xff0000,0x190,16,0,0;
 	end;
 OnTimer27000:
-	announce "魔剣タルタノス : では、今回だけ特別だ。面白いショーを見せてやろう。……我を手に取れ。さすれば、わかるだろう。", 0x9, 0xff0000, 0x190, 16, 0, 0;
+	announce "魔剣タルタノス : では、今回だけ特別だ。面白いショーを見せてやろう。……我を手に取れ。さすれば、わかるだろう。",0x9,0xff0000,0x190,16,0,0;
 	end;
 OnTimer30000:
-	announce "若い男の声 : 魔剣タルタノスとの邂逅……。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
+	announce "若い男の声 : 魔剣タルタノスとの邂逅……。",0x9,0x7cfc00,0x190,20,0,0;
 	end;
 OnTimer33000:
-	announce "若い男の声 : 魔剣を手に取る私の心にあったのは果たして姫への想いか、それとも……。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
-	hideonnpc getmdnpcname("近衛兵#dk3"); //68747
-	hideonnpc getmdnpcname("魔剣タルタノス#dkt"); //68748
+	announce "若い男の声 : 魔剣を手に取る私の心にあったのは果たして姫への想いか、それとも……。",0x9,0x7cfc00,0x190,20,0,0;
+	hideonnpc getmdnpcname("近衛兵#dk3");
+	hideonnpc getmdnpcname("魔剣タルタノス#dkt");
 	end;
 OnTimer36000:
 	stopnpctimer;
-	hideoffnpc getmdnpcname("亡霊の王宮4階"); //68749
+	misceffect 35,getmdnpcname("亡霊の王宮4階");
+	hideoffnpc getmdnpcname("亡霊の王宮4階");
 	donpcevent getmdnpcname("近衛兵#dk4")+ "::OnStart";
-	announce "‐時間が速く流れるような感覚の後、南東で何かが開くような音がした‐", 0x9, 0xffff00, 0x190, 20, 0, 0;
+	announce "‐時間が速く流れるような感覚の後、南東で何かが開くような音がした‐",0x9,0xffff00,0x190,20,0,0;
 	end;
 }
 
 1@spa.gat,31,57,5	script	近衛兵#dk3	10018,{/* 68747 (hide)*/}
 1@spa.gat,35,56,5	script	魔剣タルタノス#dkt	844,{/* 68748 (hide)*/}
-1@spa.gat,54,28,0	warp	亡霊の王宮4階	2,2,1@spa.gat,218,186 //68749 from_pos=(54, 30)
+1@spa.gat,54,28,0	warp	亡霊の王宮4階	2,2,1@spa.gat,218,186
 
 1@spa.gat,201,214,1	script	魔剣タルタノス#dkt1	1205,{/* 68750 */
 	end;
@@ -908,6 +1182,24 @@ OnTalk9:
 	mes "‐隣国の王子と近衛兵が";
 	mes "　話しているのが見える‐";
 	next;
+	if(checkquest(114755)&0x8) {
+		if(select("急ぐ","二人の会話を聞く") == 1) {
+			mes "‐時間が瞬時に流れたのを感じた‐";
+			close2;
+			hideonnpc getmdnpcname("近衛兵#dk4");
+			hideonnpc getmdnpcname("魔剣タルタノス#dkt1");
+			hideonnpc getmdnpcname("倒れた国王#dk");
+			hideonnpc getmdnpcname("倒れた騎士団長#dk");
+			hideonnpc getmdnpcname("倒れた兵士#dk");
+			hideonnpc getmdnpcname("倒れた兵士#dk1");
+			hideonnpc getmdnpcname("倒れた兵士#dk2");
+			hideonnpc getmdnpcname("倒れた兵士#dk3");
+			hideonnpc getmdnpcname("倒れた兵士#dk4");
+			misceffect 904,"";
+			donpcevent getmdnpcname("#DK_NPCTimer4")+ "::OnStart";
+			end;
+		}
+	}
 	mes "[近衛兵]";
 	mes "……あなたが我が主に嘘を伝え";
 	mes "私を今回の事件の首謀者として";
@@ -964,7 +1256,7 @@ OnTalk9:
 	mes "改めて……契約成立だ。";
 	unittalk "近衛兵 : ……そうか。これで納得がいった。お前が私にいったことは正しかったようだな、魔剣タルタノス。改めて……契約成立だ。";
 	next;
-	cutin "tartanos.bmp", 3;
+	cutin "tartanos.bmp",3;
 	mes "[魔剣タルタノス]";
 	mes "……その言葉に嘘はないな？";
 	mes "貴様と我はいまこの時から魂をともにし、";
@@ -972,7 +1264,7 @@ OnTalk9:
 	mes "貴様は我に血を捧げるのだ！";
 	donpcevent getmdnpcname("魔剣タルタノス#dkt1")+ "::OnTalk1";
 	next;
-	cutin "tartanos.bmp", 255;
+	cutin "tartanos.bmp",255;
 	mes "[隣国の王子]";
 	mes "なぜだ!?";
 	mes "呪われし魔剣タルタノスよ！";
@@ -1001,10 +1293,10 @@ OnTalk9:
 	mes "僕の本当の姿を見せてやる!!";
 	donpcevent getmdnpcname("隣国の王子#dk")+ "::OnTalk6";
 	next;
-	cutin "tartanos.bmp", 255;
-	misceffect 276, getmdnpcname("隣国の王子#dk"); //68751
-	hideonnpc getmdnpcname("隣国の王子#dk"); //68751
-	hideoffnpc getmdnpcname("呪いの根源#dk"); //68752
+	cutin "tartanos.bmp",255;
+	misceffect 276,getmdnpcname("隣国の王子#dk");
+	hideonnpc getmdnpcname("隣国の王子#dk");
+	hideoffnpc getmdnpcname("呪いの根源#dk");
 	mes "[呪いの根源]";
 	mes "グオオオオ……ッ！";
 	mes "見るがいい、これが僕の";
@@ -1056,24 +1348,24 @@ OnTalk9:
 	mes "　一太刀浴びせると";
 	mes "　隣国の王子は跡形もなく";
 	mes "　消滅してしまった‐";
-	misceffect 565, getmdnpcname("呪いの根源#dk"); //68752
-	hideonnpc getmdnpcname("呪いの根源#dk"); //68752
+	misceffect 565,getmdnpcname("呪いの根源#dk");
+	hideonnpc getmdnpcname("呪いの根源#dk");
 	close2;
-	hideonnpc getmdnpcname("近衛兵#dk4"); //68760
-	hideonnpc getmdnpcname("魔剣タルタノス#dkt1"); //68750
-	hideonnpc getmdnpcname("倒れた国王#dk"); //68753
-	hideonnpc getmdnpcname("倒れた騎士団長#dk"); //68754
-	hideonnpc getmdnpcname("倒れた兵士#dk"); //68755
-	hideonnpc getmdnpcname("倒れた兵士#dk1"); //68756
-	hideonnpc getmdnpcname("倒れた兵士#dk2"); //68757
-	hideonnpc getmdnpcname("倒れた兵士#dk3"); //68758
-	hideonnpc getmdnpcname("倒れた兵士#dk4"); //68759
+	hideonnpc getmdnpcname("近衛兵#dk4");
+	hideonnpc getmdnpcname("魔剣タルタノス#dkt1");
+	hideonnpc getmdnpcname("倒れた国王#dk");
+	hideonnpc getmdnpcname("倒れた騎士団長#dk");
+	hideonnpc getmdnpcname("倒れた兵士#dk");
+	hideonnpc getmdnpcname("倒れた兵士#dk1");
+	hideonnpc getmdnpcname("倒れた兵士#dk2");
+	hideonnpc getmdnpcname("倒れた兵士#dk3");
+	hideonnpc getmdnpcname("倒れた兵士#dk4");
 	donpcevent getmdnpcname("#DK_NPCTimer4")+ "::OnStart";
 	end;
 OnStart:
 OnTimer3000:
 	initnpctimer;
-	emotion 9, getmdnpcname("近衛兵#dk4"); //60431
+	emotion 9,getmdnpcname("近衛兵#dk4");
 	end;
 }
 
@@ -1082,20 +1374,21 @@ OnStart:
 	initnpctimer;
 	end;
 OnTimer3000:
-	announce "若い男の声 : もっと力があれば、違った未来が待っていたのだろうか……。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
+	announce "若い男の声 : もっと力があれば、違った未来が待っていたのだろうか……。",0x9,0x7cfc00,0x190,20,0,0;
 	end;
 OnTimer6000:
-	announce "若い男の声 : 私は残酷な運命を、理不尽な世界を、そして無力な己を呪っていた。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
+	announce "若い男の声 : 私は残酷な運命を、理不尽な世界を、そして無力な己を呪っていた。",0x9,0x7cfc00,0x190,20,0,0;
 	end;
 OnTimer9000:
 	stopnpctimer;
-	hideoffnpc getmdnpcname("亡霊の王宮5階"); //68762
+	misceffect 35,getmdnpcname("亡霊の王宮5階");
+	hideoffnpc getmdnpcname("亡霊の王宮5階");
 	donpcevent getmdnpcname("ティアラ姫#dk1")+ "::OnStart";
-	announce "‐時間が速く流れるような感覚の後、南西で何かが開くような音がした‐", 0x9, 0xffff00, 0x190, 20, 0, 0;
+	announce "‐時間が速く流れるような感覚の後、南西で何かが開くような音がした‐",0x9,0xffff00,0x190,20,0,0;
 	end;
 }
 
-1@spa.gat,178,186,0	warp	亡霊の王宮5階	2,2,1@spa.gat,186,57 //83002 from_pos=(179, 188)
+1@spa.gat,178,186,0	warp	亡霊の王宮5階	2,2,1@spa.gat,186,57
 1@spa.gat,213,42,7	script	近衛兵#dk5	686,{/* 83003 */
 	mes "‐ティアラ姫を抱きかかえており、";
 	mes "　その表情は見えない……‐";
@@ -1132,6 +1425,20 @@ OnTalk8:
 		close;
 	}
 	stopnpctimer;
+	if(checkquest(114755)&0x8) {
+		mes "‐ティアラ姫と近衛兵が";
+		mes "　話しているのが見える‐";
+		next;
+		if(select("急ぐ","二人の会話を聞く") == 1) {
+			mes "‐時間が瞬時に流れたのを感じた‐";
+			close2;
+			hideonnpc getmdnpcname("ティアラ姫#dk1");
+			hideonnpc getmdnpcname("近衛兵#dk5");
+			misceffect 904,"";
+			donpevent getmdnpcname("#DK_BattleAnnounce")+ "::OnStart";
+			end;
+		}
+	}
 	mes "[ティアラ姫]";
 	mes "貴方の腕に抱かれる日が";
 	mes "くるなんて……";
@@ -1226,7 +1533,7 @@ OnTalk8:
 	mes "…………。";
 	unittalk "ティアラ姫 : …………。";
 	next;
-	cutin "b-tiara.BMP", 3;
+	cutin "b-tiara.BMP",3;
 	mes "[近衛兵]";
 	mes "……姫？　ティアラ姫……？";
 	mes "……私の……私の……";
@@ -1260,7 +1567,7 @@ OnTalk8:
 	mes "この世界にとっては、";
 	mes "不要だったんだよ。";
 	mes "だから死んだ。";
-	announce "謎の声 : 諦めろ。これは現実だ。貴様には必要だった姫もこの世界にとっては、不要だったんだよ。だから死んだ。", 0x9, 0xff0000, 0x190, 20, 0, 0;
+	announce "謎の声 : 諦めろ。これは現実だ。貴様には必要だった姫もこの世界にとっては、不要だったんだよ。だから死んだ。",0x9,0xff0000,0x190,20,0,0;
 	next;
 	mes "[謎の声]";
 	mes "それなのに一方で、";
@@ -1269,7 +1576,7 @@ OnTalk8:
 	mes "という大義名分で、運命を弄ぶ者。";
 	mes "強大な力を持ちながら、";
 	mes "私利私欲のために使う者……。";
-	announce "謎の声 : それなのに一方で、死んでも生まれ変わった者。世界の力の均衡を維持するという大義名分で、運命を弄ぶ者。強大な力を持ちながら、私利私欲のために使う者……。", 0x9, 0xff0000, 0x190, 20, 0, 0;
+	announce "謎の声 : それなのに一方で、死んでも生まれ変わった者。世界の力の均衡を維持するという大義名分で、運命を弄ぶ者。強大な力を持ちながら、私利私欲のために使う者……。",0x9,0xff0000,0x190,20,0,0;
 	next;
 	mes "[謎の声]";
 	mes "この世界はそんな不条理で溢れ";
@@ -1277,9 +1584,9 @@ OnTalk8:
 	mes "どうだ？　このような世界、";
 	mes "存在する意味はない。";
 	mes "そうだろう？";
-	announce "謎の声 : この世界はそんな不条理で溢れかえっているんだ。どうだ？　このような世界、存在する意味はない。そうだろう？", 0x9, 0xff0000, 0x190, 20, 0, 0;
+	announce "謎の声 : この世界はそんな不条理で溢れかえっているんだ。どうだ？　このような世界、存在する意味はない。そうだろう？",0x9,0xff0000,0x190,20,0,0;
 	close2;
-	cutin "b-tiara.BMP", 255;
+	cutin "b-tiara.BMP",255;
 	hideonnpc getmdnpcname("ティアラ姫#dk1");
 	hideonnpc getmdnpcname("近衛兵#dk5");
 	donpevent getmdnpcname("#DK_BattleAnnounce")+ "::OnStart";
@@ -1287,172 +1594,149 @@ OnTalk8:
 OnStart:
 OnTimer3000:
 	initnpctimer;
-	emotion 9, getmdnpcname("ティアラ姫#dk1"); //60431
+	emotion 9,getmdnpcname("ティアラ姫#dk1");
 	end;
 }
 
 1@spa.gat,1,1,0	script	#DK_BattleAnnounce	139,{
 OnStart:
-	announce "冷たい声 : 姫を守れない近衛兵とは。末代までの恥だな。", 0x9, 0xadd8e6, 0x190, 20, 0, 0;
+	announce "冷たい声 : 姫を守れない近衛兵とは。末代までの恥だな。",0x9,0xadd8e6,0x190,20,0,0;
 	sleep 3000;
-	announce "若い男の声 : やめろ、やめてくれ!!　私だって……私だってこれでも……。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
-	//@spawn(type: BL_MOB, ID: 41018, speed: 250, option: 0, view: 2955, pos: "1@spa.gat"(0, 0), dir: 0, name: "物欲の化身")
-	//@spawn(type: BL_MOB, ID: 41103, speed: 250, option: 0, view: 2955, pos: "1@spa.gat"(0, 0), dir: 0, name: "物欲の化身")
-	//@spawn(type: BL_MOB, ID: 41104, speed: 250, option: 0, view: 2955, pos: "1@spa.gat"(0, 0), dir: 0, name: "物欲の化身")
-	//@spawn(type: BL_MOB, ID: 41102, speed: 250, option: 0, view: 2955, pos: "1@spa.gat"(0, 0), dir: 0, name: "物欲の化身")
+	announce "若い男の声 : やめろ、やめてくれ!!　私だって……私だってこれでも……。",0x9,0x7cfc00,0x190,20,0,0;
+	set '@map$,getmdmapname("1@spa.gat");
+	set '@label$,getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled1";
+	areamonster '@map$,196,42,198,45,"物欲の化身",2955,4,'@label$;
 	end;
 OnKilled1:
 	set '@count,getmapmobs(getmdmapname("1@spa.gat"),getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled1");
 	if('@count > 0) end;
-	announce "冷たい声 : あげくに、世界を憎むのか？　悪いのは全て、弱いお前だ。", 0x9, 0xadd8e6, 0x190, 20, 0, 0;
+	announce "冷たい声 : あげくに、世界を憎むのか？　悪いのは全て、弱いお前だ。",0x9,0xadd8e6,0x190,20,0,0;
 	sleep 3000;
-	announce "若い男の声 : 私は、私は……、ただ、ただ、彼女と……。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
-	//@spawn(type: BL_MOB, ID: 41673, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 41713, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 41722, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 41764, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 40478, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 41765, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(198, 28), dir: 4, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 40235, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(197, 28), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 40485, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(202, 23), dir: 5, name: "取り戻せぬ愛")
+	announce "若い男の声 : 私は、私は……、ただ、ただ、彼女と……。",0x9,0x7cfc00,0x190,20,0,0;
+	set '@map$,getmdmapname("1@spa.gat");
+	set '@label$,getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled2";
+	areamonster '@map$,196,27,198,29,"憎しみの塊",2953,2,'@label$;
+	areamonster '@map$,196,27,198,29,"取り戻せぬ愛",2954,2,'@label$;
+	areamonster '@map$,196,52,198,54,"憎しみの塊",2953,2,'@label$;
+	areamonster '@map$,196,52,198,54,"取り戻せぬ愛",2954,2,'@label$;
 	end;
 OnKilled2:
 	set '@count,getmapmobs(getmdmapname("1@spa.gat"),getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled2");
 	if('@count > 0) end;
-	announce "冷たい声 : いつまで魔剣などにたぶらかされ、現実から逃げ続ける？", 0x9, 0xadd8e6, 0x190, 20, 0, 0;
+	announce "冷たい声 : いつまで魔剣などにたぶらかされ、現実から逃げ続ける？",0x9,0xadd8e6,0x190,20,0,0;
 	sleep 3000;
-	announce "若い男の声 : いやなんだ!!　この現実を認めてしまえば、彼女は……皆は……本当に……!!", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
-	//@spawn(type: BL_MOB, ID: 40446, speed: 150, option: 0, view: 2951, pos: "1@spa.gat"(0, 0), dir: 0, name: "嫉妬の炎")
-	//@spawn(type: BL_MOB, ID: 41927, speed: 200, option: 0, view: 2950, pos: "1@spa.gat"(0, 0), dir: 0, name: "卑屈な心")
-	//@spawn(type: BL_MOB, ID: 41958, speed: 200, option: 0, view: 2950, pos: "1@spa.gat"(0, 0), dir: 0, name: "卑屈な心")
-	//@spawn(type: BL_MOB, ID: 40452, speed: 200, option: 0, view: 2950, pos: "1@spa.gat"(0, 0), dir: 0, name: "卑屈な心")
-	//@spawn(type: BL_MOB, ID: 41135, speed: 150, option: 0, view: 2951, pos: "1@spa.gat"(0, 0), dir: 0, name: "嫉妬の炎")
-	//@spawn(type: BL_MOB, ID: 41296, speed: 150, option: 0, view: 2951, pos: "1@spa.gat"(0, 0), dir: 0, name: "嫉妬の炎")
-	//@spawn(type: BL_MOB, ID: 40453, speed: 200, option: 0, view: 2950, pos: "1@spa.gat"(0, 0), dir: 0, name: "卑屈な心")
-	//@spawn(type: BL_MOB, ID: 40448, speed: 150, option: 0, view: 2951, pos: "1@spa.gat"(0, 0), dir: 0, name: "嫉妬の炎")
-	//@spawn(type: BL_MOB, ID: 41968, speed: 200, option: 0, view: 2950, pos: "1@spa.gat"(179, 41), dir: 0, name: "卑屈な心")
-	//@spawn(type: BL_MOB, ID: 41969, speed: 150, option: 0, view: 2951, pos: "1@spa.gat"(178, 39), dir: 0, name: "嫉妬の炎")
-	//@spawn(type: BL_MOB, ID: 41993, speed: 150, option: 0, view: 2951, pos: "1@spa.gat"(178, 39), dir: 0, name: "嫉妬の炎")
-	//@spawn(type: BL_MOB, ID: 41965, speed: 200, option: 0, view: 2950, pos: "1@spa.gat"(178, 41), dir: 0, name: "卑屈な心")
+	announce "若い男の声 : いやなんだ!!　この現実を認めてしまえば、彼女は……皆は……本当に……!!",0x9,0x7cfc00,0x190,20,0,0;
+	set '@map$,getmdmapname("1@spa.gat");
+	set '@label$,getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled3";
+	areamonster '@map$,202,39,204,41,"卑屈な心",2950,2,'@label$;
+	areamonster '@map$,202,39,204,41,"嫉妬の炎",2951,2,'@label$;
+	areamonster '@map$,189,39,191,41,"卑屈な心",2950,2,'@label$;
+	areamonster '@map$,189,39,191,41,"嫉妬の炎",2951,2,'@label$;
 	end;
 OnKilled3:
 	set '@count,getmapmobs(getmdmapname("1@spa.gat"),getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled3");
 	if('@count > 0) end;
-	announce "冷たい声 : ほう？　その嘘のために、別の命が犠牲になってもいいというのか？", 0x9, 0xadd8e6, 0x190, 20, 0, 0;
+	announce "冷たい声 : ほう？　その嘘のために、別の命が犠牲になってもいいというのか？",0x9,0xadd8e6,0x190,20,0,0;
 	sleep 3000;
-	announce "若い男の声 : ……そ、それは……。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
-	//@spawn(type: BL_MOB, ID: 40183, speed: 190, option: 0, view: 2958, pos: "1@spa.gat"(0, 0), dir: 0, name: "羨望する影")
-	//@spawn(type: BL_MOB, ID: 40240, speed: 190, option: 0, view: 2958, pos: "1@spa.gat"(0, 0), dir: 0, name: "羨望する影")
-	//@spawn(type: BL_MOB, ID: 40270, speed: 190, option: 0, view: 2958, pos: "1@spa.gat"(0, 0), dir: 0, name: "羨望する影")
-	//@spawn(type: BL_MOB, ID: 40940, speed: 190, option: 0, view: 2958, pos: "1@spa.gat"(0, 0), dir: 0, name: "羨望する影")
-	//@spawn(type: BL_MOB, ID: 41111, speed: 190, option: 0, view: 2958, pos: "1@spa.gat"(0, 0), dir: 0, name: "羨望する影")
-	//@spawn(type: BL_MOB, ID: 41142, speed: 190, option: 0, view: 2958, pos: "1@spa.gat"(0, 0), dir: 0, name: "羨望する影")
-	//@spawn(type: BL_MOB, ID: 40263, speed: 150, option: 0, view: 2948, pos: "1@spa.gat"(201, 41), dir: 0, name: "臆病な心")
-	//@spawn(type: BL_MOB, ID: 41046, speed: 190, option: 0, view: 2958, pos: "1@spa.gat"(201, 41), dir: 0, name: "羨望する影")
-	//@spawn(type: BL_MOB, ID: 41048, speed: 190, option: 0, view: 2958, pos: "1@spa.gat"(201, 41), dir: 0, name: "羨望する影")
-	//@spawn(type: BL_MOB, ID: 41036, speed: 150, option: 0, view: 2948, pos: "1@spa.gat"(202, 41), dir: 0, name: "臆病な心")
-	//@spawn(type: BL_MOB, ID: 41110, speed: 150, option: 0, view: 2948, pos: "1@spa.gat"(0, 0), dir: 0, name: "臆病な心")
-	//@spawn(type: BL_MOB, ID: 40944, speed: 150, option: 0, view: 2948, pos: "1@spa.gat"(0, 0), dir: 0, name: "臆病な心")
-	//@spawn(type: BL_MOB, ID: 40177, speed: 150, option: 0, view: 2948, pos: "1@spa.gat"(0, 0), dir: 0, name: "臆病な心")
-	//@spawn(type: BL_MOB, ID: 40178, speed: 150, option: 0, view: 2948, pos: "1@spa.gat"(0, 0), dir: 0, name: "臆病な心")
-	//@spawn(type: BL_MOB, ID: 40267, speed: 150, option: 0, view: 2948, pos: "1@spa.gat"(0, 0), dir: 0, name: "臆病な心")
-	//@spawn(type: BL_MOB, ID: 40259, speed: 150, option: 0, view: 2948, pos: "1@spa.gat"(0, 0), dir: 0, name: "臆病な心")
+	announce "若い男の声 : ……そ、それは……。",0x9,0x7cfc00,0x190,20,0,0;
+	set '@map$,getmdmapname("1@spa.gat");
+	set '@label$,getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled4";
+	areamonster '@map$,183,48,185,49,"臆病な心",2948,2,'@label$;
+	areamonster '@map$,183,48,185,49,"羨望する影",2958,2,'@label$;
+	areamonster '@map$,194,38,195,40,"臆病な心",2948,2,'@label$;
+	areamonster '@map$,194,38,195,40,"羨望する影",2958,2,'@label$;
+	areamonster '@map$,178,39,178,39,"臆病な心",2948,2,'@label$;
+	areamonster '@map$,178,39,178,39,"羨望する影",2958,2,'@label$;
+	areamonster '@map$,201,41,202,42,"臆病な心",2948,2,'@label$;
+	areamonster '@map$,201,41,202,42,"羨望する影",2958,2,'@label$;
 	end;
 OnKilled4:
 	set '@count,getmapmobs(getmdmapname("1@spa.gat"),getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled4");
 	if('@count > 0) end;
-	announce "冷たい声 : お前は人を殺める。魔剣タルタノスという大義名分を盾にして……な。", 0x9, 0xadd8e6, 0x190, 20, 0, 0;
+	announce "冷たい声 : お前は人を殺める。魔剣タルタノスという大義名分を盾にして……な。",0x9,0xadd8e6,0x190,20,0,0;
 	sleep 3000;
-	announce "若い男の声 : ……。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
-	//@spawn(type: BL_MOB, ID: 35341, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 39908, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 39909, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 39910, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 39934, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 40522, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 40783, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 40807, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 40825, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 40826, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 40827, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 40828, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 41343, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 41345, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 41347, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 41352, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 42214, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 42215, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 40519, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 40520, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 42216, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 42217, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 42218, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 42219, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 41393, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 41354, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(189, 24), dir: 6, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 41404, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(195, 22), dir: 6, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 35345, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 40648, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 41367, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
+	announce "若い男の声 : ……。",0x9,0x7cfc00,0x190,20,0,0;
+	set '@map$,getmdmapname("1@spa.gat");
+	set '@label$,getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled5";
+	areamonster '@map$,198,28,200,30,"憎しみの塊",2953,3,'@label$;
+	areamonster '@map$,198,28,200,30,"取り戻せぬ愛",2954,3,'@label$;
+	areamonster '@map$,201,51,203,53,"憎しみの塊",2953,3,'@label$;
+	areamonster '@map$,201,51,203,53,"取り戻せぬ愛",2954,3,'@label$;
+	areamonster '@map$,197,48,198,49,"憎しみの塊",2953,3,'@label$;
+	areamonster '@map$,197,48,198,49,"取り戻せぬ愛",2954,3,'@label$;
+	areamonster '@map$,183,35,185,37,"憎しみの塊",2953,3,'@label$;
+	areamonster '@map$,183,35,185,37,"取り戻せぬ愛",2954,3,'@label$;
+	areamonster '@map$,188,22,190,24,"憎しみの塊",2953,3,'@label$;
+	areamonster '@map$,188,22,190,24,"取り戻せぬ愛",2954,3,'@label$;
 	end;
 OnKilled5:
 	set '@count,getmapmobs(getmdmapname("1@spa.gat"),getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled5");
 	if('@count > 0) end;
-	announce "謎の声 : ……思い出せ!!　貴様の心の底から沸きあがる憎悪を!!", 0x9, 0xff0000, 0x190, 20, 0, 0;
+	announce "謎の声 : ……思い出せ!!　貴様の心の底から沸きあがる憎悪を!!",0x9,0xff0000,0x190,20,0,0;
 	sleep 1000;
-	announce "若い男の声 : …………。", 0x9, 0x7cfc00, 0x190, 20, 0, 0;
-	//@spawn(type: BL_MOB, ID: 40660, speed: 175, option: 0, view: 2949, pos: "1@spa.gat"(0, 0), dir: 0, name: "抑えられない憤怒")
-	//@spawn(type: BL_MOB, ID: 40661, speed: 155, option: 0, view: 2957, pos: "1@spa.gat"(0, 0), dir: 0, name: "隠された自尊心")
-	//@spawn(type: BL_MOB, ID: 40662, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 40712, speed: 175, option: 0, view: 2949, pos: "1@spa.gat"(0, 0), dir: 0, name: "抑えられない憤怒")
-	//@spawn(type: BL_MOB, ID: 41534, speed: 350, option: 0, view: 2954, pos: "1@spa.gat"(0, 0), dir: 0, name: "取り戻せぬ愛")
-	//@spawn(type: BL_MOB, ID: 41664, speed: 155, option: 0, view: 2957, pos: "1@spa.gat"(0, 0), dir: 0, name: "隠された自尊心")
-	//@spawn(type: BL_MOB, ID: 41726, speed: 250, option: 0, view: 2955, pos: "1@spa.gat"(0, 0), dir: 0, name: "物欲の化身")
-	//@spawn(type: BL_MOB, ID: 41727, speed: 250, option: 0, view: 2955, pos: "1@spa.gat"(0, 0), dir: 0, name: "物欲の化身")
-	//@spawn(type: BL_MOB, ID: 42163, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(0, 0), dir: 0, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 41603, speed: 250, option: 0, view: 2955, pos: "1@spa.gat"(184, 52), dir: 0, name: "物欲の化身")
-	//@spawn(type: BL_MOB, ID: 42013, speed: 350, option: 0, view: 2956, pos: "1@spa.gat"(184, 52), dir: 0, name: "抑制した破壊衝動")
-	//@spawn(type: BL_MOB, ID: 42014, speed: 350, option: 0, view: 2956, pos: "1@spa.gat"(185, 52), dir: 0, name: "抑制した破壊衝動")
-	//@spawn(type: BL_MOB, ID: 40716, speed: 150, option: 0, view: 2951, pos: "1@spa.gat"(0, 0), dir: 0, name: "嫉妬の炎")
-	//@spawn(type: BL_MOB, ID: 40849, speed: 190, option: 0, view: 2958, pos: "1@spa.gat"(0, 0), dir: 0, name: "羨望する影")
-	//@spawn(type: BL_MOB, ID: 41721, speed: 190, option: 0, view: 2958, pos: "1@spa.gat"(0, 0), dir: 0, name: "羨望する影")
-	//@spawn(type: BL_MOB, ID: 41428, speed: 150, option: 0, view: 2951, pos: "1@spa.gat"(0, 0), dir: 0, name: "嫉妬の炎")
-	//@spawn(type: BL_MOB, ID: 41548, speed: 200, option: 0, view: 2950, pos: "1@spa.gat"(0, 0), dir: 0, name: "卑屈な心")
-	//@spawn(type: BL_MOB, ID: 41756, speed: 150, option: 0, view: 2952, pos: "1@spa.gat"(0, 0), dir: 0, name: "孤独な夢")
-	//@spawn(type: BL_MOB, ID: 41723, speed: 150, option: 0, view: 2948, pos: "1@spa.gat"(0, 0), dir: 0, name: "臆病な心")
-	//@spawn(type: BL_MOB, ID: 40731, speed: 200, option: 0, view: 2950, pos: "1@spa.gat"(0, 0), dir: 0, name: "卑屈な心")
-	//@spawn(type: BL_MOB, ID: 42015, speed: 350, option: 0, view: 2953, pos: "1@spa.gat"(189, 37), dir: 7, name: "憎しみの塊")
-	//@spawn(type: BL_MOB, ID: 41840, speed: 150, option: 0, view: 2952, pos: "1@spa.gat"(197, 19), dir: 2, name: "孤独な夢")
-	//@spawn(type: BL_MOB, ID: 41952, speed: 250, option: 0, view: 2955, pos: "1@spa.gat"(0, 0), dir: 0, name: "物欲の化身")
+	announce "若い男の声 : …………。",0x9,0x7cfc00,0x190,20,0,0;
+	set '@map$,getmdmapname("1@spa.gat");
+	set '@label$,getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled6";
+	areamonster '@map$,184,50,185,51,"物欲の化身",2955,2,'@label$;
+	areamonster '@map$,184,50,185,51,"抑制した破壊衝動",2956,2,'@label$;
+	areamonster '@map$,184,33,185,34,"憎しみの塊",2953,2,'@label$;
+	areamonster '@map$,184,33,185,34,"隠された自尊心",2957,2,'@label$;
+	areamonster '@map$,200,45,202,47,"取り戻せぬ愛",2954,2,'@label$;
+	areamonster '@map$,200,45,202,47,"抑えられない憤怒",2949,2,'@label$;
+	areamonster '@map$,198,40,199,42,"臆病な心",2948,2,'@label$;
+	areamonster '@map$,198,40,199,42,"物欲の化身",2955,2,'@label$;
+	areamonster '@map$,197,24,198,25,"卑屈な心",2950,2,'@label$;
+	areamonster '@map$,197,24,198,25,"孤独な夢",2952,2,'@label$;
+	areamonster '@map$,206,41,208,42,"嫉妬の炎",2953,2,'@label$;
+	areamonster '@map$,206,41,208,42,"羨望する影",2954,2,'@label$;
 	end;
 OnKilled6:
 	set '@count,getmapmobs(getmdmapname("1@spa.gat"),getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled6");
 	if('@count > 0) end;
-	announce "冷たい声 : もう一つ。魔剣タルタノスが欲する血。本当は……お前が欲しているんじゃないか？", 0x1, 0xadd8e6, 0x190, 20, 0, 0;
+	announce "冷たい声 : もう一つ。魔剣タルタノスが欲する血。本当は……お前が欲しているんじゃないか？",0x9,0xadd8e6,0x190,20,0,0;
 	sleep 3000;
-	announce "謎の声 : 怒りを!!　虚無を!!　これは全て最初から決められていたこと……！", 0x1, 0xff0000, 0x190, 20, 0, 0;
+	announce "謎の声 : 怒りを!!　虚無を!!　これは全て最初から決められていたこと……！",0x9,0xff0000,0x190,20,0,0;
 	sleep 3000;
-	announce "謎の声 : 貴様と共に、この世を血で染めるために……な!!", 0x1, 0xff0000, 0x190, 20, 0, 0;
+	announce "謎の声 : 貴様と共に、この世を血で染めるために……な!!",0x9,0xff0000,0x190,20,0,0;
 	sleep 3000;
-	announce "若い男の声 : ……否。タルタノスなど、決まりごとなど関係ない……私は……私の意思で……殺すのだ。", 0x1, 0x7cfc00, 0x190, 20, 0, 0;
+	announce "若い男の声 : ……否。タルタノスなど、決まりごとなど関係ない……私は……私の意思で……殺すのだ。",0x9,0x7cfc00,0x190,20,0,0;
 	sleep 3000;
-	announce "若い男の声 : 思い出した……私は呪いの剣士サクライ。自らの意思でこの世界を憎み、破壊するもの。", 0x1, 0x7cfc00, 0x190, 20, 0, 0;
+	announce "若い男の声 : 思い出した……私は呪いの剣士サクライ。自らの意思でこの世界を憎み、破壊するもの。",0x9,0x7cfc00,0x190,20,0,0;
 	sleep 3000;
-	announce "若い男の声 : ケイオスも、ロキも、サラも……私の邪魔をするものは殺すだけだ。", 0x1, 0x7cfc00, 0x190, 20, 0, 0;
-	//@spawn(type: BL_MOB, ID: 42054, speed: 200, option: 0, view: 2959, pos: "1@spa.gat"(0, 0), dir: 0, name: "呪いの根源")
+	announce "若い男の声 : ケイオスも、ロキも、サラも……私の邪魔をするものは殺すだけだ。",0x9,0x7cfc00,0x190,20,0,0;
+	set '@map$,getmdmapname("1@spa.gat");
+	set '@label$,getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled7";
+	monster '@map$,197,41,"呪いの根源",2959,1,'@label$;
 	end;
 OnKilled7:
-	hideoffnpc getmdnpcname("黒づくめの男#dk"); //83006
+	hideoffnpc getmdnpcname("黒づくめの男#dk");
 	donpevent getmdnpcname("黒づくめの男#dk")+ "::OnStart";
 	end;
 }
 
 1@spa.gat,196,44,5	script	黒づくめの男#dk	685,{/* 83006 (hide)*/
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
-		// 未調査
+		mes "‐黒づくめの男が凶々しい";
+		mes "　剣を片手に立っている‐";
 		close;
 	}
 	stopnpctimer;
+	if(checkquest(114755)&0x8) {
+		mes "‐黒づくめの男が凶々しい";
+		mes "　剣を片手に立っている‐";
+		next;
+		if(select("急ぐ","二人の会話を聞く") == 1) {
+			mes "‐時間が瞬時に流れたのを感じた‐";
+			close2;
+			hideonnpc getmdnpcname("黒づくめの男#dk");
+			announce "‐周辺の風景が歪み始めた。狭間から出なければならないようだ‐",0x9,0xffff00,0x190,20,0,0;
+			misceffect 904,"";
+			misceffect 35,getmdnpcname("亡霊の王宮出口");
+			hideoffnpc getmdnpcname("亡霊の王宮出口");
+			hideoffnpc getmdnpcname("国王#dk11");
+			end;
+		}
+	}
 	mes "[黒づくめの男]";
 	mes "まさか捨てたはずのものが";
 	mes "再度またこの世界へと";
@@ -1461,7 +1745,7 @@ OnKilled7:
 	mes "彷徨っていればよいものを。";
 	unittalk "黒づくめの男 : まさか捨てたはずのものが再度またこの世界へとノコノコ舞い戻ってくるとはな。あのままおとなしく彷徨っていればよいものを。";
 	next;
-	cutin "cry-b.bmp", 2;
+	cutin "cry-b.bmp",2;
 	mes "[黒づくめの男]";
 	mes "これで全てというわけでは";
 	mes "なさそうだが……まあいい。";
@@ -1470,7 +1754,7 @@ OnKilled7:
 	mes "変貌した者たちの血は。";
 	unittalk "黒づくめの男 : これで全てというわけではなさそうだが……まあいい。どうだ？　魔剣タルタノス。絶望と恐怖にまみれモンスターへ変貌した者たちの血は。";
 	next;
-	cutin "cry-b.bmp", 255;
+	cutin "cry-b.bmp",255;
 	mes "[魔剣タルタノス]";
 	mes "愚問だな、サクライ。";
 	mes "我が求める血はもっともっと";
@@ -1631,16 +1915,16 @@ OnKilled7:
 	mes "　一人の姫を守ろうとした";
 	mes "　近衛兵の面影はなかった……‐";
 	close2;
-	hideonnpc getmdnpcname("黒づくめの男#dk"); //83006
-	hideoffnpc getmdnpcname("#dk_tb"); //83007
-	hideoffnpc getmdnpcname("#dk_sv"); //83008
-	hideoffnpc getmdnpcname("#dk_tv"); //83009
+	hideonnpc getmdnpcname("黒づくめの男#dk");
+	hideoffnpc getmdnpcname("#dk_tb");
+	hideoffnpc getmdnpcname("#dk_sv");
+	hideoffnpc getmdnpcname("#dk_tv");
 	donpcevent getmdnpcname("#dk_tb")+ "::OnStart";
 	end;
 OnStart:
 OnTimer3000:
 	initnpctimer;
-	emotion 9, getmdnpcname("黒づくめの男#dk"); //60431
+	emotion 9,getmdnpcname("黒づくめの男#dk");
 	end;
 }
 1@spa.gat,196,46,1	script	#dk_tb	844,{/* 83007 (hide)*/
@@ -1668,13 +1952,13 @@ OnTimer25000:
 	end;
 OnTimer28000:
 	stopnpctimer;
-	hideonnpc getmdnpcname("#dk_tb"); //83007
-	hideonnpc getmdnpcname("#dk_sv"); //83008
-	hideonnpc getmdnpcname("#dk_tv"); //83009
-	announce "‐周辺の風景が歪み始めた。狭間から出なければならないようだ‐", 0x9, 0xffff00, 0x190, 20, 0, 0;
-	misceffect 35, getmdnpcname("亡霊の王宮出口"); //83011
-	hideoffnpc getmdnpcname("亡霊の王宮出口"); //83011
-	hideoffnpc getmdnpcname("国王#dk11"); //83010
+	hideonnpc getmdnpcname("#dk_tb");
+	hideonnpc getmdnpcname("#dk_sv");
+	hideonnpc getmdnpcname("#dk_tv");
+	announce "‐周辺の風景が歪み始めた。狭間から出なければならないようだ‐",0x9,0xffff00,0x190,20,0,0;
+	misceffect 35,getmdnpcname("亡霊の王宮出口");
+	hideoffnpc getmdnpcname("亡霊の王宮出口");
+	hideoffnpc getmdnpcname("国王#dk11");
 	end;
 }
 1@spa.gat,198,43,1	script	#dk_sv	844,{/* 83008 (hide)*/
@@ -1699,7 +1983,7 @@ OnTalk2:
 	end;
 }
 1@spa.gat,204,29,1	script	国王#dk11	965,{/* 83010 (hide)*/
-	if(checkquest(114755)&0x8){
+	if(checkquest(114765)&0x8){
 		mes "[国王]";
 		mes "どうかサクライを";
 		mes "救ってやってくれ……。";
@@ -1769,14 +2053,16 @@ OnTalk2:
 	mes "そなたに授けよう。";
 	mes "どうかサクライを";
 	mes "救ってやってくれ……。";
-	setquest 114755; //state=1
-	compquest 114755;
-	setquest 114765; //state=1
+	if(!checkquest(114755)) {
+		setquest 114755;
+		compquest 114755;
+	}
+	setquest 114765;
 	compquest 114765;
-	getitem 6672, 3;
-	getitem 20793, 1;
-	getexp 400000,0; //400000
-	getexp 0,0; //0
+	getitem 6672,3;
+	getitem 20793,1;
+	getexp 400000,0;
+	getexp 0,400000;
 	close;
 }
 
