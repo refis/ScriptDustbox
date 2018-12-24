@@ -377,7 +377,6 @@ moc_ruins.gat,75,170,3	script	採掘に向かう猫#prydn_out	561,{
 		mes "^ff0000グレイヴアクラウス^000000と";
 		mes "^ff0000グレイヴミノタウロス^000000を";
 		mes "倒してきてくれ。";
-		mes "頼んだぞ。";
 		if(!checkquest(118855))
 			setquest 118855;
 		if(!checkquest(97000)) {
@@ -392,6 +391,27 @@ moc_ruins.gat,75,170,3	script	採掘に向かう猫#prydn_out	561,{
 			setquest 97008;
 			setquest 97010;
 		}
+		if(checkquest(118855) && !checkquest(118860)) {
+			next;
+			mes "[採掘中の猫]";
+			mes "おっと。";
+			mes "グレイヴミノタウロス討伐は";
+			mes "お願いしたばかりのようだな。";
+			mes "これは無しにしよう。";
+			next;
+			mes "[採掘中の猫]";
+		}
+		else if(!checkquest(118855) && checkquest(118860)) {
+			next;
+			mes "[採掘中の猫]";
+			mes "おっと。";
+			mes "グレイヴアクラウス討伐は";
+			mes "お願いしたばかりのようだな。";
+			mes "これは無しにしよう。";
+			next;
+			mes "[採掘中の猫]";
+		}
+		mes "頼んだぞ。";
 		close;
 	case 2:
 		if(!checkquest(97000) && !checkquest(97006)) {

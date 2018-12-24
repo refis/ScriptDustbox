@@ -13911,12 +13911,6 @@ un_bunker.gat,69,118,0	script	A-0#b_L-1				45,1,1,{	//59742
 	warp "un_bunker.gat",53,117;
 	end;
 }
-'@hour = getarg(0)
-'@day = getarg(1)
-if gettime(3) < '@hour
-	'@d = ('@hour*60*60) - gettimetick(1) + (('@day-1)*24*60*60)
-else
-	'@d = ('@day*24*60*60) - gettimetick(1) + ('@hour*60*60)
 
 un_bunker.gat,97,124,0	script	A-0#b_ƒ‚ƒjƒ^ƒŠƒ“ƒOº	45,1,1,{	//59743
 	if(VER2_QUE >= 18) {

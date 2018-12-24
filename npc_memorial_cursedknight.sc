@@ -1,13 +1,56 @@
+/*
+憎しみの塊
+speed: 350
+
+取り戻せぬ愛
+speed: 350
+@skillcasting(src: "2954:取り戻せぬ愛:0qp1@spa.gat"(37836), dst: 4631724, skill: "防御無視攻撃"(170), pl: 0, tick: 500)
+
+@spawn(type: BL_MOB, ID: 32870, speed: 150, option: 0, view: 2951, pos: "0qp1@spa.gat"(177, 39), dir: 0, name: "嫉妬の炎")
+@spawn(type: BL_MOB, ID: 30379, speed: 200, option: 0, view: 2950, pos: "0qp1@spa.gat"(177, 40), dir: 0, name: "卑屈な心")
+
+@spawn(type: BL_MOB, ID: 21509, speed: 150, option: 0, view: 2948, pos: "0qp1@spa.gat"(195, 39), dir: 0, name: "臆病な心")
+@skillattack(src: "2948:臆病な心:0qp1@spa.gat"(19167), dst: 4631724, skill: "ダブルストレイフィング"(46), skill_lv: -1, damage: 0, sDelay: 576, dDelay: 400, tick: 385166741)
+@skillattack(src: "2948:臆病な心:0qp1@spa.gat"(32100), dst: 4631724, skill: "アローシャワー"(47), skill_lv: -1, damage: 630, sDelay: 576, dDelay: 400, tick: 385171194)
+@skillposeffect(src: "2948:臆病な心:0qp1@spa.gat"(32100), skill: "アローシャワー"(47), val: 65535, tick: 385171194)
+@skillattack(src: "2948:臆病な心:0qp1@spa.gat"(21509), dst: 4631724, skill: "暗闇攻撃"(177), skill_lv: -1, damage: 0, sDelay: 576, dDelay: 400, tick: 385178569)
+
+@spawn(type: BL_MOB, ID: 22390, speed: 190, option: 0, view: 2958, pos: "0qp1@spa.gat"(195, 38), dir: 0, name: "羨望する影")
+@skillattack(src: "2958:羨望する影:0qp1@spa.gat"(23970), dst: 4631724, skill: "グリムトゥース"(137), skill_lv: -1, damage: 591, sDelay: 384, dDelay: 400, tick: 385165500)
+
+@spawn(type: BL_MOB, ID: 31413, speed: 250, option: 0, view: 2955, pos: "0qp1@spa.gat"(185, 51), dir: 0, name: "物欲の化身")
+
+@spawn(type: BL_MOB, ID: 31415, speed: 350, option: 0, view: 2956, pos: "0qp1@spa.gat"(184, 50), dir: 0, name: "抑制した破壊衝動")
+@skillcasting(src: "2956:抑制した破壊衝動:0qp1@spa.gat"(31415), dst: 31415, skill: "マキシマイズパワー"(114), pl: 0, tick: 1000)
+@skillnodamage(src: "2956:抑制した破壊衝動:0qp1@spa.gat"(31415), dst: 31415, skill: "マキシマイズパワー"(114), val: 5)
+
+@spawn(type: BL_MOB, ID: 33331, speed: 155, option: 0, view: 2957, pos: "0qp1@spa.gat"(185, 33), dir: 0, name: "隠された自尊心")
+@skillcasting(src: "2957:隠された自尊心:0qp1@spa.gat"(33331), dst: 4631724, skill: "防御無視攻撃"(170), pl: 0, tick: 500)
+@skillattack(src: "2957:隠された自尊心:0qp1@spa.gat"(33331), dst: 4631724, skill: "防御無視攻撃"(170), skill_lv: -1, damage: 1067, sDelay: 1152, dDelay: 400, tick: 385242120)
+
+@spawn(type: BL_MOB, ID: 34774, speed: 175, option: 0, view: 2949, pos: "0qp1@spa.gat"(200, 45), dir: 0, name: "抑えられない憤怒")
+
+@spawn(type: BL_MOB, ID: 36528, speed: 150, option: 0, view: 2952, pos: "0qp1@spa.gat"(197, 25), dir: 0, name: "孤独な夢")
+@skillcasting(src: "2952:孤独な夢:0qp1@spa.gat"(37306), dst: 4631724, skill: "ユピテルサンダー"(84), pl: 4, tick: 1500)
+@skillattack(src: "2952:孤独な夢:0qp1@spa.gat"(37306), dst: 4631724, skill: "不死属性攻撃"(347), skill_lv: -1, damage: 65, sDelay: 1056, dDelay: 400, tick: 385243402)
+
+@spawn(type: BL_MOB, ID: 37207, speed: 200, option: 0, view: 2959, pos: "0qp1@spa.gat"(197, 41), dir: 0, name: "呪いの根源")
 @skillcasting(src: "2959:呪いの根源:1@spa.gat"(42054), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 2500)
 @skillposeffect(src: "2959:呪いの根源:1@spa.gat"(42054), skill: "ヘヴンズドライブ"(91), val: 65535, tick: 41817856)
 @skillcasting(src: "2959:呪いの根源:1@spa.gat"(42054), dst: 4631724, skill: "地属性攻撃"(185), pl: 2, tick: 1000)
 @skillattack(src: "2959:呪いの根源:1@spa.gat"(42054), dst: 4631724, skill: "地属性攻撃"(185), skill_lv: -1, damage: 4881, sDelay: 420, dDelay: 400, tick: 41825477)
+@skillattack(src: "2959:呪いの根源:0qp1@spa.gat"(37207), dst: 4631724, skill: "ダーククロス"(338), skill_lv: -1, damage: 0, sDelay: 420, dDelay: 400, tick: 385375117)
 @skillposeffect(src: "2959:呪いの根源:1@spa.gat"(42054), skill: "グランドダークネス"(339), val: 65535, tick: 41831545)
 @skillattack(src: "2959:呪いの根源:1@spa.gat"(42054), dst: 42054, skill: "グランドダークネス"(339), skill_lv: 10, damage: 0, sDelay: 0, dDelay: 360, tick: 41831566)
 @skillattack(src: "2959:呪いの根源:1@spa.gat"(42054), dst: 42054, skill: "グランドダークネス"(339), skill_lv: 10, damage: 0, sDelay: 0, dDelay: 360, tick: 41831881)
 @skillattack(src: "2959:呪いの根源:1@spa.gat"(42054), dst: 42054, skill: "グランドダークネス"(339), skill_lv: 10, damage: 0, sDelay: 0, dDelay: 360, tick: 41832196)
 @skillattack(src: "2959:呪いの根源:1@spa.gat"(42054), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 0, sDelay: 420, dDelay: 400, tick: 41930004)
 @nomalattack(src: "2959:呪いの根源:1@spa.gat"(42054), dst: 4631724, damage: 0, sDelay: 420, dDelay: 400, aDelay: 672)
+*/
+
+//= Auriga Script ==============================================================
+// Ragnarok Online Cursed Knight in  Script	by refis
+//==============================================================================
 
 dali02.gat,46,135,5	script	老婆#dk	846,{/* 51201 */
 	set '@f,countitem(6672);
@@ -485,6 +528,13 @@ OnStart:
 	hideonnpc getmdnpcname("近衛兵#dk3");
 	hideonnpc getmdnpcname("魔剣タルタノス#dkt");
 	hideonnpc getmdnpcname("呪いの根源#dk");
+	hideonnpc getmdnpcname("黒づくめの男#dk");
+	hideonnpc getmdnpcname("#dk_tb");
+	hideonnpc getmdnpcname("#dk_sv");
+	hideonnpc getmdnpcname("#dk_tv");
+	hideonnpc getmdnpcname("亡霊の王宮出口");
+	hideonnpc getmdnpcname("国王#dk11");
+
 	donpcevent getmdnpcname("国王#dk")+ "::OnStart";
 	end;
 }
@@ -2060,9 +2110,23 @@ OnTalk2:
 	setquest 114765;
 	compquest 114765;
 	getitem 6672,3;
-	getitem 20793,1;
-	getexp 400000,0;
-	getexp 0,400000;
+	setarray '@gain,1446,1499,1698,1840,1942,1998,2032,13458,15160,15161,16042,18136,20793,21022,22088,28013,28112,28711,28911;
+	getitem '@gain[rand(getarraysize('@gain))],1;
+	set '@user,getmapusers("this");
+	if('@user <= 1) {
+		set '@bexp,400000;
+		set '@jexp,400000;
+	}
+	else if('@user <= 5) {
+		set '@bexp,500000 * '@user;
+		set '@jexp,300000 + 100000 * '@user;
+	}
+	else {
+		set '@bexp,3000000;
+		set '@jexp,1000000;
+	}
+	getexp '@bexp,0,1;
+	getexp 0,'@jexp,0;
 	close;
 }
 

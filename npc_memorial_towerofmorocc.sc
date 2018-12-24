@@ -3052,6 +3052,11 @@ OnTimer22000:
 	mes "どうしてあんな事ができる？";
 	mes "俺としては理解出来ない行動だ。";
 	next;
+	if(TNM1_QUE < 22) {
+		mes "‐箱を開封する事により、";
+		mes "　ダンジョンの進行が可能となります‐";
+		close;
+	}
 	mes "‐考え込んでいるロキに、";
 	mes "　自分たちのことを話し、";
 	mes "　帰る方法を聞いてみた‐";
@@ -3092,6 +3097,7 @@ OnTimer22000:
 }
 
 1@tnm3.gat,92,47,3	script	箱#tnmbosang	10005,{/* 84743 (hide)*/
+	setpartyinmap TNM1_QUE,22;
 	misceffect 10, getmdnpcname("箱#tnmbosang"); //84743
 	hideonnpc getmdnpcname("箱#tnmbosang"); //84743
 	// 退魔神の杖、退魔神の弓、退魔神の両手剣、退魔神のカタール、退魔神のハンマー、退魔神の短剣
