@@ -123,6 +123,26 @@ dali02.gat,46,135,5	script	老婆#dk	846,{/* 51201 */
 		mes "ぼけているのか？";
 		mes "何も装備していないようじゃぞ。";
 		close;
+	case 1446:
+	case 1499:
+	case 1698:
+	case 1840:
+	case 1942:
+	case 1998:
+	case 2032:
+	case 13458:
+	case 15160:
+	case 15161:
+	case 16042:
+	case 18136:
+	case 20793:
+	case 21022:
+	case 22088:
+	case 28013:
+	case 28112:
+	case 28711:
+	case 28911:
+		break;
 	default:
 		mes "[老婆]";
 		mes "これはレクイエム装備では無い。";
@@ -1754,9 +1774,7 @@ OnKilled6:
 	announce "若い男の声 : 思い出した……私は呪いの剣士サクライ。自らの意思でこの世界を憎み、破壊するもの。",0x9,0x7cfc00,0x190,20,0,0;
 	sleep 3000;
 	announce "若い男の声 : ケイオスも、ロキも、サラも……私の邪魔をするものは殺すだけだ。",0x9,0x7cfc00,0x190,20,0,0;
-	set '@map$,getmdmapname("1@spa.gat");
-	set '@label$,getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled7";
-	monster '@map$,197,41,"呪いの根源",2959,1,'@label$;
+	monster getmdmapname("1@spa.gat"),197,41,"呪いの根源",2959,1,getmdnpcname("#DK_BattleAnnounce")+ "::OnKilled7";
 	end;
 OnKilled7:
 	hideoffnpc getmdnpcname("黒づくめの男#dk");

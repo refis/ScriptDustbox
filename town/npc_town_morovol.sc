@@ -722,7 +722,6 @@ moro_vol.gat,86,167,7	script	前線基地・守護者#1	415,3,3,{/* 65204 */
 	}
 	close;
 OnTouchNPC:
-	initnpctimer;
 	switch(rand(4)) {
 	case 0: unittalk "前線基地・守護者 : そこまでだ！　ここから先には行かせない！"; break;
 	case 1: unittalk "前線基地・守護者 : 基地には一歩も入れさせないぞ！"; break;
