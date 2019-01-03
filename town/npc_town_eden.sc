@@ -117,6 +117,17 @@ moc_para01.gat,27,35,5	script	事務担当ライム#eden	952,{
 		mes "失くさないように気をつけて";
 		mes "お持ち下さい。";
 		next;
+		if(checkitemblank() == 0) {
+			mes "[ライム]";
+			mes "あらあら……。";
+			mes "登録証を渡そうと思いましたが";
+			mes "アイテムの種類数が多いようです。";
+			mes "種類の数を減らしてから";
+			mes "また声をかけてください。";
+			close2;
+			cutin "laime_evenor04.bmp", 255;
+			end;
+		}
 		cutin "laime_evenor04",2;
 		mes "[ライム]";
 		mes "何せ登録者数が多いもので";
@@ -160,6 +171,17 @@ moc_para01.gat,27,35,5	script	事務担当ライム#eden	952,{
 			mes "声をかけてください。";
 			close2;
 			cutin "laime_evenor04",255;
+			end;
+		}
+		if(checkitemblank() == 0) {
+			mes "[ライム]";
+			mes "あらあら……。";
+			mes "登録証を渡そうと思いましたが";
+			mes "アイテムの種類数が多いようです。";
+			mes "種類の数を減らしてから";
+			mes "また声をかけてください。";
+			close2;
+			cutin "laime_evenor04.bmp", 255;
 			end;
 		}
 		cutin "laime_evenor04", 2;
