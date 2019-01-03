@@ -27,59 +27,59 @@ un_bunker.gat,0,0,0,0	monster	GC109	3251,10,0,0,0
 un_bunker.gat,0,0,0,0	monster	黒いきのこ	1084,1,0,0,0
 un_bunker.gat,0,0,0,0	monster	チョンチョン	1011,2,0,0,0
 
-moc_para01.gat,48,16,0	warp	#warp_2_2f		1,1,moc_para01.gat,48,164	//53970
-moc_para01.gat,47,161,0	warp	#warp_2_1f		1,1,moc_para01.gat,47,18	//53971
-moc_para01.gat,107,12,0	warp	#warp_2_din_2	1,1,moc_para01.gat,47,36	//53972
-moc_para01.gat,100,27,0	warp	#warp_2_gym		1,1,moc_para01.gat,47,85	//53973
-moc_para01.gat,49,86,0	warp	#warp_2_pass_1	1,1,moc_para01.gat,103,27	//53974
-moc_para01.gat,47,38,0	warp	#warp_2_pass	1,1,moc_para01.gat,106,14	//53975
 
-moc_para01.gat,31,14,0	script	#atnevt01	139,{/* 53978 */
-	if(VER_1QUE == 0 && checkquest(117099) & 0x8) {
-		cutin "laime_evenor01.bmp", 2;
-		mes "[ライム]";
-		mes "そういえば……";
-		mes strcharinfo(0)+ "様、";
-		mes "あの噂は聞きましたか？";
-		mes "ジュピロスで見つかった";
-		mes "新しい遺跡の噂です。";
-		next;
-		mes "[ライム]";
-		mes "その遺跡で調査を行う発掘団員を";
-		mes "募集しているそうですよ。";
-		mes "実はそれを、私たち楽園団も";
-		mes "お手伝いすることになったのです。";
-		next;
-		mes "[ライム]";
-		mes "発掘団に興味がある楽園団メンバーに、";
-		mes "私たちの団長が";
-		mes "お会いしたがっているのですが……。";
-		next;
-		menu "団長がいたの？",-;
-		cutin "laime_evenor02.bmp", 2;
-		mes "[ライム]";
-		mes "はい、そうですよ。";
-		mes "団長が珍しく";
-		mes "意欲を出している仕事なので、";
-		mes "興味があるようでしたら";
-		mes "一度団長に会って";
-		mes "話を聞いてみて下さい。";
-		next;
-		cutin "laime_evenor01.bmp", 2;
-		mes "[ライム]";
-		mes "団長室は^ff00002階の一番左^000000にあります。";
-		mes "よろしくお願いしますね。";
-		set VER_1QUE,1;
-		setquest 7607; //state=1
-		close2;
-		cutin "laime_evenor01.bmp", 255;
-		end;
+//====================================================================
+// ファンタスマゴリカ
+//====================================================================
+moc_para01.gat,31,14,0	script	#atnevt01	139,{
+	if(VER_1QUE == 0 && countitem(6219) >= 1) {	// 楽園団の証
+		if((Job >= Job_RuneKnight && job <= Job_Rebellion) || (Job == Job_Summoner && BaseLevel >= 90)) {
+			cutin "laime_evenor01",2;
+			mes "[ライム]";
+			mes "そういえば……";
+			mes strcharinfo(0)+ "様、";
+			mes "あの噂は聞きましたか？";
+			mes "ジュピロスで見つかった";
+			mes "新しい遺跡の噂です。";
+			next;
+			mes "[ライム]";
+			mes "その遺跡で調査を行う発掘団員を";
+			mes "募集しているそうですよ。";
+			mes "実はそれを、私たち楽園団も";
+			mes "お手伝いすることになったのです。";
+			next;
+			mes "[ライム]";
+			mes "発掘団に興味がある楽園団メンバーに、";
+			mes "私たちの団長が";
+			mes "お会いしたがっているのですが……。";
+			next;
+			menu "団長がいたの？",-;
+			cutin "laime_evenor02",2;
+			mes "[ライム]";
+			mes "はい、そうですよ。";
+			mes "団長が珍しく";
+			mes "意欲を出している仕事なので、";
+			mes "興味があるようでしたら";
+			mes "一度団長に会って";
+			mes "話を聞いてみて下さい。";
+			next;
+			cutin "laime_evenor01",2;
+			mes "[ライム]";
+			mes "団長室は^ff00002階の一番左^000000にあります。";
+			mes "よろしくお願いしますね。";
+			set VER_1QUE,1;
+			setquest 7607;
+			close2;
+			cutin "laime_evenor01",255;
+			end;
+		}
 	}
 	end;
 }
-moc_para01.gat,38,175,5	script	ライム#evtat01	952,{/* 53979 */
-	if(checkquest(117099) & 0x8 == 0) {
-		cutin "laime_evenor01.bmp", 2;
+
+moc_para01.gat,38,175,5	script	ライム#evtat01	952,{
+	if(countitem(6219) < 1) {	// 楽園団の証
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "楽園団へようこそ。";
 		mes "夢とロマンスを追い求める";
@@ -91,7 +91,7 @@ moc_para01.gat,38,175,5	script	ライム#evtat01	952,{/* 53979 */
 		mes "安らぎの子守唄でもない。";
 		mes "そう、ここにあるのです。";
 		next;
-		cutin "laime_evenor02.bmp", 2;
+		cutin "laime_evenor02",2;
 		mes "[ライム]";
 		mes "楽園団に加入すると";
 		mes "色々な依頼を受けることができます。";
@@ -99,19 +99,44 @@ moc_para01.gat,38,175,5	script	ライム#evtat01	952,{/* 53979 */
 		mes "一階の受付へお越しくださいね。";
 		next;
 		mes "‐^0000FFファンタスマゴリカ^000000は";
-		mes "　3次職業および限界突破した";
-		mes "　スーパーノービス、影狼、朧、";
-		mes "　リベリオンが楽園団 01の1Fに";
-		mes "　いる^ff0000ライム^000000から登録をおこない、";
-		mes "　^ff0000楽園団の証^000000を入手する事で";
-		mes "　進行が可能となります‐";
+		if(Job < Job_RuneKnight || (Job == Job_Summoner && BaseLevel < 90)) {
+			mes "　3次職業および限界突破した";
+			mes "　スーパーノービス、リベリオン、";
+			mes "　影狼、朧、BaseLv90以上のドラム族";
+			mes "　が楽園団 01の1Fにいる^ff0000ライム^000000から";
+			mes "　登録をおこない、^ff0000楽園団の証^000000を";
+			mes "　入手する事で進行が可能となります‐";
+		}
+		else {
+			mes "　楽園団 01の1Fにいる^ff0000ライム^000000から";
+			mes "　登録をおこない、";
+			mes "　^ff0000楽園団の証^000000を入手する事で";
+			mes "　進行が可能となります‐";
+		}
 		close2;
-		cutin "laime_evenor02.bmp", 255;
+		cutin "laime_evenor02",255;
 		end;
 	}
 	switch(VER_1QUE) {
 	case 0:
-		cutin "laime_evenor01.bmp", 2;
+		if(Job < Job_RuneKnight || (Job == Job_Summoner && BaseLevel < 90)) {
+			cutin "laime_evenor02",2;
+			mes "[ライム]";
+			mes "そこの真ん中の部屋が";
+			mes "私の部屋なので、";
+			mes "私もよくここに来ます。";
+			next;
+			mes "‐^0000FFファンタスマゴリカ^000000は";
+			mes "　3次職業および限界突破した";
+			mes "　スーパーノービス、";
+			mes "　影狼、朧、リベリオン、";
+			mes "　BaseLv90以上のドラム族のみ";
+			mes "　開始することができるクエストです‐";
+			close2;
+			cutin "laime_evenor02",255;
+			end;
+		}
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "そういえば……";
 		mes strcharinfo(0)+ "様、";
@@ -131,7 +156,7 @@ moc_para01.gat,38,175,5	script	ライム#evtat01	952,{/* 53979 */
 		mes "お会いしたがっているのですが……。";
 		next;
 		menu "団長がいたの？",-;
-		cutin "laime_evenor02.bmp", 2;
+		cutin "laime_evenor02",2;
 		mes "[ライム]";
 		mes "はい、そうですよ。";
 		mes "団長が珍しく";
@@ -140,47 +165,47 @@ moc_para01.gat,38,175,5	script	ライム#evtat01	952,{/* 53979 */
 		mes "一度団長に会って";
 		mes "話を聞いてみて下さい。";
 		next;
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "団長室は^ff00002階の一番左^000000にあります。";
 		mes "よろしくお願いしますね。";
 		set VER_1QUE,1;
-		setquest 7607; //state=1
+		setquest 7607;
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		end;
 	case 1:
 	case 2:
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "団長が待っていますよ。";
 		mes "団長室は^ff0000この階の一番左^000000にあります。";
 		mes "よろしくお願いしますね。";
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		end;
 	case 3:
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "団長との話は";
 		mes "うまくいったみたいですね。";
 		mes "それではお客様が待っていますから、";
 		mes "一緒に中央の部屋へ行きましょう。";
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		end;
 	case 4:
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "私はここで支援の用意をして";
 		mes "お待ちしています。";
 		mes "発掘調査で支援が必要になった場合は";
 		mes "声をかけてくださいね。";
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		end;
 	default:
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "発掘作業は順調のようですね。";
 		mes "アトナド博士が興味を見せた物は";
@@ -193,37 +218,38 @@ moc_para01.gat,38,175,5	script	ライム#evtat01	952,{/* 53979 */
 		mes strcharinfo(0) + "様のおかげです。";
 		mes "これからもよろしくお願いします！";
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		end;
 	}
 OnInit:
-	waitingroom "ファンタスマゴリカ",0; //53979
+	waitingroom "ファンタスマゴリカ",0;
 	end;
 }
-moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
+
+moc_para01.gat,174,165,3	script	ライム#atnd02	952,{
 	switch(VER_1QUE) {
 	case 0:
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "ここは私の部屋なので";
 		mes "勝手に入らないでください。";
 		mes "休む場所が必要なら";
 		mes "別の部屋を利用して下さい。";
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		end;
 	case 1:
 	case 2:
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "団長は隣の部屋にいます。";
 		mes "この部屋の左です。";
 		mes "まず団長に会ってきてください。";
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		end;
 	case 3:
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes strcharinfo(0)+ "様、";
 		mes "いらっしゃいましたね。こちらです。";
@@ -236,14 +262,14 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "発掘作業に協力する、";
 		mes strcharinfo(0)+ "です。";
 		next;
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "おお……はじめましてアウレスです。";
 		mes "志願してくれてありがとう。";
 		mes "君のような若者が協力してくれるとは";
 		mes "なんとも心強い。";
 		next;
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "団長との話は";
 		mes "うまくいったみたいですね？";
@@ -251,7 +277,7 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "アウレス様が所属する";
 		mes "アトナド発掘団に協力することです。";
 		next;
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "私たちももう歳ですしね……。";
 		mes "楽園団のみなさんが";
@@ -259,7 +285,7 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "私たちはただ入口を見るだけで";
 		mes "終わってたかもしれません。";
 		next;
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "アウレス様……。";
 		mes "あなた方ほど経験豊かな方たちは";
@@ -273,7 +299,7 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "光栄な事だと思っていますよ。";
 		mes "いずれにしてもアトナド博士は……";
 		next;
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "アトナド……か。";
 		mes "ええ、確かにアトナド博士は偉大です。";
@@ -297,7 +323,7 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "私はいつも彼らに振り回されています。";
 		mes "もちろん、尊敬もしていますがね。";
 		next;
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "……そうですね。しかし、";
 		mes "過去はどうであれ、今こうやって";
@@ -306,7 +332,7 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		next;
 		switch(select("詳しい話が気になる","簡単に説明してほしい")) {
 		case 1:
-			cutin "verus_aures.bmp", 0;
+			cutin "verus_aures",0;
 			mes "[アウレス]";
 			mes "ライム君が私たちを訪ねてきた時、";
 			mes "あなたたち楽園団が";
@@ -320,7 +346,7 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 			mes "娘の心遣いだったのでしょう……。";
 			next;
 			menu "父親？　娘？",-;
-			cutin "laime_evenor03.bmp", 2;
+			cutin "laime_evenor03",2;
 			mes "[ライム]";
 			mes "ナイル団長から聞いていませんか？";
 			mes "アトナド発掘団の団長は、";
@@ -333,14 +359,14 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 			mes "そこに楽園団員を参加させなさいと";
 			mes "団長が指示したんです。";
 			next;
-			cutin "laime_evenor04.bmp", 2;
+			cutin "laime_evenor04",2;
 			mes "[ライム]";
 			mes "しかし話を進めていくうちに";
 			mes "二人の仲の悪さが";
 			mes "支障になってきて……。";
 			mes "少し困っている状態です。";
 			next;
-			cutin "verus_aures.bmp", 0;
+			cutin "verus_aures",0;
 			mes "[アウレス]";
 			mes "そうなんです。";
 			mes "イアン……アトナドの名前なのですが、";
@@ -354,7 +380,7 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 			next;
 			break;
 		case 2:
-			cutin "laime_evenor03.bmp", 2;
+			cutin "laime_evenor03",2;
 			mes "[ライム]";
 			mes "私たちが手伝う";
 			mes "アトナド発掘団の団長は、";
@@ -367,14 +393,14 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 			mes "そこに楽園団員を参加させなさいと";
 			mes "団長が指示したんです。";
 			next;
-			cutin "laime_evenor04.bmp", 2;
+			cutin "laime_evenor04",2;
 			mes "[ライム]";
 			mes "しかし話を進めていくうちに";
 			mes "二人の仲の悪さが";
 			mes "支障になってきて……。";
 			mes "少し困っている状態です。";
 			next;
-			cutin "verus_aures.bmp", 0;
+			cutin "verus_aures",0;
 			break;
 		}
 		mes "[アウレス]";
@@ -391,7 +417,7 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "私やライム君の説得では、";
 		mes "聞く耳を持たないでしょうから。";
 		next;
-		cutin "laime_evenor04.bmp", 2;
+		cutin "laime_evenor04",2;
 		mes "[ライム]";
 		mes "今回の事をきっかけとして";
 		mes "お二人が和解してくださればと";
@@ -399,7 +425,7 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "さあ、この話はここまでにして、";
 		mes "まずは現場に行きましょう。";
 		next;
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "アウレス様とはルークが護衛として";
 		mes "一緒に現地へ行きます。";
@@ -415,14 +441,14 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "まずはジュピロスの入口へ";
 		mes "向かってください。";
 		next;
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "レッケンベル社が";
 		mes "大々的に宣伝しているから、";
 		mes "道に迷う心配はないと思います。";
 		mes "それでは、現地で会いましょう。";
 		next;
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "現地に着いたら登録を行ってください。";
 		mes "個人的に仕事を受けても構いませんが、";
@@ -445,9 +471,9 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 			mes "お送りしますよ。";
 			set VER_1QUE,4;
 			delquest 7608;
-			setquest 7609; //state=1
+			setquest 7609;
 			close2;
-			cutin "laime_evenor01.bmp", 255;
+			cutin "laime_evenor01",255;
 			end;
 		}
 		mes "[ライム]";
@@ -458,13 +484,13 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "お気をつけて！";
 		set VER_1QUE,4;
 		delquest 7608;
-		setquest 7609; //state=1
+		setquest 7609;
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		warp "yuno_fild07.gat",217,176;
 		end;
 	case 4:
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "作業を行うウェルスシティへは";
 		mes "ジュピロスから行けるそうですので、";
@@ -488,7 +514,7 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 			mes "ジュピロスの入口まで";
 			mes "お送りしますよ。";
 			close2;
-			cutin "laime_evenor01.bmp", 255;
+			cutin "laime_evenor01",255;
 			end;
 		}
 		mes "[ライム]";
@@ -496,11 +522,11 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "それではお送りしますね。";
 		mes "お気をつけて！";
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		warp "yuno_fild07.gat",217,176;
 		end;
 	default:
-		cutin "laime_evenor02.bmp", 2;
+		cutin "laime_evenor02",2;
 		mes "[ライム]";
 		mes "発掘作業の状況はどうですか？";
 		mes "楽園団の評価が良くなるよう、";
@@ -509,44 +535,45 @@ moc_para01.gat,174,165,3	script	ライム#atnd02	952,{/* 53980 */
 		mes "今回の仕事の";
 		mes "もう一つの目的でもあるのですから。";
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		end;
 	}
 }
-moc_para01.gat,172,164,5	script	考古学者アウレス#atnd02	10057,{/* 53981 */
+
+moc_para01.gat,172,164,5	script	考古学者アウレス#atnd02	10057,{
 	switch(VER_1QUE) {
 	case 0:
 	case 1:
 	case 2:
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "その方はお客さまです。";
 		mes "大事な話をしているので、";
 		mes "申し訳ありませんが";
 		mes "席を外してください。";
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		end;
 	case 3:
-		cutin "laime_evenor01.bmp", 2;
+		cutin "laime_evenor01",2;
 		mes "[ライム]";
 		mes "その方はお客さまです。";
 		mes "団長と話をしてきたようですね。";
 		mes "では私が詳しい話をしましょう。";
 		close2;
-		cutin "laime_evenor01.bmp", 255;
+		cutin "laime_evenor01",255;
 		end;
 	case 4:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "私は一足先に";
 		mes "ウェルスシティへ向かいますね。";
 		mes "それではまた、現地で会いましょう。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	default:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "君も来ていたのですね。";
 		mes "私もここには頻繁に訪れていますよ。";
@@ -559,54 +586,57 @@ moc_para01.gat,172,164,5	script	考古学者アウレス#atnd02	10057,{/* 53981 */
 		mes "聞いてもらっています。";
 		mes "それではまた、現地で会いましょう。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	}
 }
-moc_para01.gat,178,167,3	script	ルークラフェズ#atnd03	953,{/* 53982 */
+
+moc_para01.gat,178,167,3	script	ルークラフェズ#atnd03	953,{
 	if(VER_1QUE < 4) {
-		cutin "looke_rapez04.bmp", 0;
+		cutin "looke_rapez04",0;
 		mes "[ルーク]";
 		mes "おい。ライム。";
 		mes "お客様だぞ……。";
 		close2;
-		cutin "looke_rapez04.bmp", 255;
+		cutin "looke_rapez04",255;
 		end;
 	}
 	else if(VER_1QUE == 4) {
-		cutin "looke_rapez04.bmp", 0;
+		cutin "looke_rapez04",0;
 		mes "[ルーク]";
 		mes "……。";
 		mes "……特に話すことは無い。";
 		close2;
-		cutin "looke_rapez04.bmp", 255;
+		cutin "looke_rapez04",255;
 		end;
 	}
 	else {
-		cutin "looke_rapez03.bmp", 0;
+		cutin "looke_rapez03",0;
 		mes "[ルーク]";
 		mes "……。";
 		close2;
-		cutin "looke_rapez03.bmp", 255;
+		cutin "looke_rapez03",255;
 		end;
 	}
 }
-moc_para01.gat,17,187,0		warp	#warp_2_bossroom	1,1,moc_para01.gat,132,159	//53983
-moc_para01.gat,132,156,0	warp	#warp_2_2fhall_1	1,1,moc_para01.gat,17,185	//53984
-moc_para01.gat,29,187,0		warp	#warp_2_room1		1,1,moc_para01.gat,180,159	//53985
-moc_para01.gat,180,156,0	warp	#warp_2_2fhall_2	1,1,moc_para01.gat,29,185	//53986
-moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
+
+moc_para01.gat,17,187,0		warp	#warp_2_bossroom	1,1,moc_para01.gat,132,159
+moc_para01.gat,132,156,0	warp	#warp_2_2fhall_1	1,1,moc_para01.gat,17,185
+moc_para01.gat,29,187,0		warp	#warp_2_room1		1,1,moc_para01.gat,180,159
+moc_para01.gat,180,156,0	warp	#warp_2_2fhall_2	1,1,moc_para01.gat,29,185
+
+moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{
 	switch(VER_1QUE) {
 	case 0:
-		cutin "Arquien_n_atnad02.bmp", 2;
+		cutin "Arquien_n_atnad02",2;
 		mes "[団長アルクイエン]";
 		mes "誰だ？　誰だか知らないが、";
 		mes "勝手に立ち入らないでくれ。";
 		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
+		cutin "Arquien_n_atnad01",255;
 		end;
 	case 1:
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[団長アルクイエン]";
 		mes "君が" +strcharinfo(0)+ "か？";
 		mes "よくきてくれたね。";
@@ -620,7 +650,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		next;
 		switch(select("呼ばれた理由を聞く","ミドルネーム？")) {
 		case 1:
-			cutin "Arquien_n_atnad03.bmp", 2;
+			cutin "Arquien_n_atnad03",2;
 			mes "[ナイル]";
 			mes "ほう、本題にそのまま入るか。";
 			mes "仕事熱心な奴は歓迎だ。";
@@ -639,7 +669,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 			break;
 		}
 		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
+		cutin "Arquien_n_atnad03",2;
 		mes "[ナイル]";
 		mes "察したか？　そうだ。";
 		mes "ジュピロスの拡張調査の話だ。";
@@ -656,7 +686,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "今回の発掘団の目的は、";
 		mes "その発見された未知の遺跡の調査だ。";
 		next;
-		cutin "Arquien_n_atnad04.bmp", 2;
+		cutin "Arquien_n_atnad04",2;
 		mes "[ナイル]";
 		mes "プロジェクト名をなんと言ったかな……";
 		mes "そうだ、";
@@ -666,7 +696,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "行うそうだ。";
 		next;
 		menu "それで？",-;
-		cutin "Arquien_n_atnad04.bmp", 2;
+		cutin "Arquien_n_atnad04",2;
 		mes "[ナイル]";
 		mes "ふむ……大して興味がないようだな？";
 		mes "それじゃここでやめようか？";
@@ -674,7 +704,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "それなりに準備していたのだが。";
 		next;
 		if(select("続けて下さい","やめよう") == 2) {
-			cutin "Arquien_n_atnad02.bmp", 2;
+			cutin "Arquien_n_atnad02",2;
 			mes "[ナイル]";
 			mes "まあ、興味がないなら仕方がない。";
 			mes "ライムには改めて";
@@ -683,10 +713,10 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 			mes "もう行っていいぞ。";
 			set VER_1QUE,2;
 			close2;
-			cutin "Arquien_n_atnad02.bmp", 255;
+			cutin "Arquien_n_atnad02",255;
 			end;
 		}
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "そうしよう。実は私たちは";
 		mes "そのファンタスマゴリカプロジェクトの";
@@ -707,33 +737,33 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "楽園団もこのままずっと";
 		mes "モロクにいるつもりはないからな。";
 		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
+		cutin "Arquien_n_atnad03",2;
 		mes "[ナイル]";
 		mes "それにあのレッケンベル社からの";
 		mes "直々の要請だ。";
 		mes "人材が大量に必要だから仲介を頼むと";
 		mes "言われたら、受けるのがプロだろう？";
 		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "悪い提案ではない。正直いい機会だ。";
 		mes "人を紹介して私たちは金を受け取る、";
 		mes "君は仕事をして金をもらう。";
 		next;
 		menu "そのプロジェクトに参加しろと？",-;
-		cutin "Arquien_n_atnad03.bmp", 2;
+		cutin "Arquien_n_atnad03",2;
 		mes "[ナイル]";
 		mes "そういうことだ。";
 		mes "基本的には遺跡発掘作業に参加する事が";
 		mes "今回の仕事内容だ。";
 		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "もし君が発掘団に参加してくれるなら、";
 		mes "ひとつ、仕事中に";
 		mes "確認して欲しい事がある。";
 		next;
-		cutin "Arquien_n_atnad02.bmp", 2;
+		cutin "Arquien_n_atnad02",2;
 		mes "[ナイル]";
 		mes "現在、";
 		mes "ファンタスマゴリカプロジェクトには";
@@ -749,7 +779,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "ちなみに仕事についての詳しい話は";
 		mes "ライムが説明してくれる。";
 		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "ライムは隣の部屋だ。";
 		mes "何かわかったら私に報告するように。";
@@ -757,24 +787,24 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "それでは、頼んだぞ。";
 		set VER_1QUE,3;
 		delquest 7607;
-		setquest 7608; //state=1
+		setquest 7608;
 		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
+		cutin "Arquien_n_atnad01",255;
 		end;
 	case 2:
-		cutin "Arquien_n_atnad02.bmp", 2;
+		cutin "Arquien_n_atnad02",2;
 		mes "[ナイル]";
 		mes "どうした、興味が湧いてきたのか？";
 		next;
 		if(select("そうだ","違う") == 2) {
-			cutin "Arquien_n_atnad01.bmp", 2;
+			cutin "Arquien_n_atnad01",2;
 			mes "[ナイル]";
 			mes "そうか。好きにするといい。";
 			close2;
-			cutin "Arquien_n_atnad01.bmp", 255;
+			cutin "Arquien_n_atnad01",255;
 			end;
 		}
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "それでは話を続けようか。";
 		mes "実は私たちは";
@@ -794,14 +824,14 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "楽園団もこのままずっと";
 		mes "モロクにいるつもりはないから。";
 		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
+		cutin "Arquien_n_atnad03",2;
 		mes "[ナイル]";
 		mes "それにあのレッケンベル社からの";
 		mes "直々の要請だ。";
 		mes "人材が大量に必要だから仲介を頼むと";
 		mes "言われたら、受けるのがプロだろう？";
 		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "悪い提案ではない。正直いい機会だ。";
 		mes "人を紹介して私たちは金を受け取る、";
@@ -818,7 +848,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "ひとつ、仕事中に";
 		mes "確認して欲しい事がある。";
 		next;
-		cutin "Arquien_n_atnad02.bmp", 2;
+		cutin "Arquien_n_atnad02",2;
 		mes "[ナイル]";
 		mes "現在、";
 		mes "ファンタスマゴリカプロジェクトには";
@@ -834,7 +864,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "ちなみに仕事についての詳しい話は";
 		mes "ライムが説明してくれる。";
 		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "ライムは隣の部屋だ。";
 		mes "何かわかったら私に報告するように。";
@@ -842,25 +872,25 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "それでは、頼んだぞ。";
 		set VER_1QUE,3;
 		delquest 7607;
-		setquest 7608; //state=1
+		setquest 7608;
 		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
+		cutin "Arquien_n_atnad01",255;
 		end;
 	case 3:
-		cutin "Arquien_n_atnad04.bmp", 2;
+		cutin "Arquien_n_atnad04",2;
 		mes "[ナイル]";
 		mes "すぐ隣の部屋でライムが待っている。";
 		mes "詳しい事は彼に聞いてくれ。";
 		close2;
-		cutin "Arquien_n_atnad04.bmp", 255;
+		cutin "Arquien_n_atnad04",255;
 		end;
 	case 4:
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "仕事を引き受けてくれたそうだな。";
 		mes "だったら早く作業に取り掛かるといい。";
 		next;
-		cutin "Arquien_n_atnad04.bmp", 2;
+		cutin "Arquien_n_atnad04",2;
 		mes "[ナイル]";
 		mes "私の代わりに";
 		mes "あの博士が何をしているのか";
@@ -869,10 +899,10 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "[ナイル]";
 		mes "さあ、早く行くんだ。";
 		close2;
-		cutin "Arquien_n_atnad04.bmp", 255;
+		cutin "Arquien_n_atnad04",255;
 		end;
 	case 22:
-		cutin "Arquien_n_atnad03.bmp", 2;
+		cutin "Arquien_n_atnad03",2;
 		mes "[ナイル]";
 		mes "どうした、";
 		mes strcharinfo(0)+ "じゃないか。";
@@ -883,20 +913,20 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "君のお蔭で、楽園団と";
 		mes "アトナド発掘団の評価は上々だ。";
 		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "それで今日はどうしたんだ？";
 		mes "最後の探査に関して";
 		mes "何か分かったのか？";
 		next;
-		cutin "Arquien_n_atnad04.bmp", 2;
+		cutin "Arquien_n_atnad04",2;
 		mes "[ナイル]";
 		mes "違うのか？";
 		mes "なに？　親父に頼まれた？";
 		mes "何をだ？";
 		next;
 		menu "レコードプレイヤーを貸してほしい",-;
-		cutin "Arquien_n_atnad02.bmp", 2;
+		cutin "Arquien_n_atnad02",2;
 		mes "[ナイル]";
 		mes "ふむ……レコードプレイヤー？";
 		mes "そうだな、見覚えはある。";
@@ -904,18 +934,18 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "しっかり覚えてるんだな。";
 		mes "アイツらしいと言えばそうだが。";
 		next;
-		cutin "Arquien_n_atnad04.bmp", 2;
+		cutin "Arquien_n_atnad04",2;
 		mes "[ナイル]";
 		mes "レコードプレイヤーをよこせ？";
 		mes "返事はノーだ。";
 		set VER_1QUE,23;
 		delquest 7644;
-		setquest 118205; //state=1
+		setquest 118205;
 		close2;
-		cutin "Arquien_n_atnad04.bmp", 255;
+		cutin "Arquien_n_atnad04",255;
 		end;
 	case 23:
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "なんだまだいたのか。";
 		mes "レコードプレイヤーの件なら";
@@ -928,7 +958,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "何に使うんだ？";
 		next;
 		menu "今までの話を詳しく話す",-;
-		cutin "Arquien_n_atnad02.bmp", 2;
+		cutin "Arquien_n_atnad02",2;
 		mes "[ナイル]";
 		mes "ふむ……";
 		mes "メモリーレコード……か。";
@@ -938,7 +968,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "[ナイル]";
 		mes "……。";
 		mes "……そうだな……";
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		next;
 		mes "[ナイル]";
 		mes "わかった。";
@@ -955,13 +985,13 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "持っては来ていたのだが、";
 		mes "こんなところで役に立つとはな。";
 		next;
-		cutin "Arquien_n_atnad02.bmp", 2;
+		cutin "Arquien_n_atnad02",2;
 		mes "[ナイル]";
 		mes "しかしその前に";
 		mes "そのメモリーレコードと言うものを";
 		mes "見せて欲しい。";
 		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "これがメモリーレコードか？";
 		mes "なるほど、レコードプレイヤーに";
@@ -976,7 +1006,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "恐らく誰かがわざと";
 		mes "分割しておいたものなんだろう。";
 		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
+		cutin "Arquien_n_atnad03",2;
 		mes "[ナイル]";
 		mes "そうだな……";
 		mes "それじゃあこうしよう。";
@@ -996,12 +1026,12 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "ウェルスシティで会おう。";
 		set VER_1QUE,24;
 		delquest 118205;
-		setquest 7645; //state=1
+		setquest 7645;
 		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
+		cutin "Arquien_n_atnad01",255;
 		end;
 	case 24:
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "^ff0000メモリーレコードを2個";
 		mes "集めてくればいい。^000000";
@@ -1020,7 +1050,7 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 			mes "さっさと終わらせて、";
 			mes "仕事に戻るんだ。";
 			close2;
-			cutin "Arquien_n_atnad01.bmp", 255;
+			cutin "Arquien_n_atnad01",255;
 			end;
 		}
 		mes "[ナイル]";
@@ -1032,24 +1062,22 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{/* 53987 */
 		mes "それじゃあ、";
 		mes "ウェルスシティで会おう。";
 		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
+		cutin "Arquien_n_atnad01",255;
 		warp "verus04.gat",142,188;
 		end;
 	default:
-		cutin "Arquien_n_atnad01.bmp", 2;
+		cutin "Arquien_n_atnad01",2;
 		mes "[ナイル]";
 		mes "おや、" + strcharinfo(0) + "か。";
 		mes "どうだ発掘団の仕事は、";
 		mes "うまくこなせているか？";
 		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
+		cutin "Arquien_n_atnad01",255;
 		end;
 	}
 }
 
-verus04.gat,170,216,3		duplicate(3rdRentalGear)	魔導ギア管理兵#ver		105	/* 50026 */
-
-ver_eju.gat,114,40,4	script	管理者ミシェル#atnd05	868,{/* 59249 */
+ver_eju.gat,114,40,4	script	管理者ミシェル#atnd05	868,{
 	if(VER_1QUE < 4) {
 		mes "[管理者ミシェル]";
 		mes "どこの発掘団の所属ですか？";
@@ -1171,7 +1199,7 @@ ver_eju.gat,114,40,4	script	管理者ミシェル#atnd05	868,{/* 59249 */
 		mes "　参加登録は^ff0000ウェルス発掘地^000000にいる";
 		mes "　^ff0000受付ナラ^000000から、";
 		mes "　登録することができます‐";
-		setquest 7611; //state=1
+		setquest 7611;
 		close;
 	}
 	else {
@@ -1225,7 +1253,7 @@ ver_eju.gat,114,40,4	script	管理者ミシェル#atnd05	868,{/* 59249 */
 				mes "また討伐に協力してもらえると";
 				mes "助かります。";
 				chgquest 7611,7612;
-				getitem 6961, 3;
+				getitem 6961,3;
 				close;
 			}
 			if(checkquest(7612)) {
@@ -1273,28 +1301,35 @@ ver_eju.gat,114,40,4	script	管理者ミシェル#atnd05	868,{/* 59249 */
 		}
 	}
 }
-ver_eju.gat,116,43,5	script	レッケンベル傭兵#atd01	482,{/* 59250 */
+
+ver_eju.gat,116,43,5	script	レッケンベル傭兵#atd01	482,{
 	switch(rand(3)) {
-	case 0: unittalk "レッケンベル傭兵 : ……。"; end;
-	case 1: unittalk "レッケンベル傭兵 : ……気を付けて下さい。"; end;
-	case 2: unittalk "レッケンベル傭兵 : きりが無い……。"; end;
+	case 0: unittalk "レッケンベル傭兵 : ……。"; break;
+	case 1: unittalk "レッケンベル傭兵 : ……気を付けて下さい。"; break;
+	case 2: unittalk "レッケンベル傭兵 : きりが無い……。"; break;
 	}
+	end;
 }
-ver_eju.gat,125,40,1	script	レッケンベル傭兵#atd02	884,{/* 59251 */
+
+ver_eju.gat,125,40,1	script	レッケンベル傭兵#atd02	884,{
 	switch(rand(3)) {
-	case 0: unittalk "レッケンベル傭兵 : 少し休みたいな……。"; end;
-	case 1: unittalk "レッケンベル傭兵 : 増援はないのか？"; end;
-	case 2: unittalk "レッケンベル傭兵 : 懲りない奴め！"; end;
+	case 0: unittalk "レッケンベル傭兵 : 少し休みたいな……。"; break;
+	case 1: unittalk "レッケンベル傭兵 : 増援はないのか？"; break;
+	case 2: unittalk "レッケンベル傭兵 : 懲りない奴め！"; break;
 	}
+	end;
 }
-ver_eju.gat,117,35,7	script	レッケンベル傭兵#atd03	484,{/* 59252 */
+
+ver_eju.gat,117,35,7	script	レッケンベル傭兵#atd03	484,{
 	switch(rand(3)) {
-	case 0: unittalk "レッケンベル傭兵 : 退屈……。"; end;
-	case 1: unittalk "レッケンベル傭兵 : 気を付けて下さい。"; end;
-	case 2: unittalk "レッケンベル傭兵 : 発掘団員は外郭トンネルに移動して下さい。"; end;
+	case 0: unittalk "レッケンベル傭兵 : 退屈……。"; break;
+	case 1: unittalk "レッケンベル傭兵 : 気を付けて下さい。"; break;
+	case 2: unittalk "レッケンベル傭兵 : 発掘団員は外郭トンネルに移動して下さい。"; break;
 	}
+	end;
 }
-ver_eju.gat,15,151,3	script	レッケンベル警護員 #atd	868,{/* 59253 */
+
+ver_eju.gat,15,151,3	script	レッケンベル警護員	868,{
 	mes "[レッケンベル警護員]";
 	mes "発掘地まで行かれるのですか？";
 	mes "では、この道をまっすぐ行った後、";
@@ -1307,7 +1342,7 @@ ver_eju.gat,15,151,3	script	レッケンベル警護員 #atd	868,{/* 59253 */
 	mes "もし私の案内で分からない場合は";
 	mes "地図に印をつけておきますから、";
 	mes "印を頼りに、進んで下さいね。";
-	viewpoint 1, 113, 36, 0, 0x4D4DFF00; //59253
+	viewpoint 1,113,36,0,0x4DFF00;
 	next;
 	mes "[レッケンベル警護員]";
 	mes "では……";
@@ -1315,7 +1350,8 @@ ver_eju.gat,15,151,3	script	レッケンベル警護員 #atd	868,{/* 59253 */
 	mes "情報がありますので、お気をつけて！";
 	close;
 }
-juperos_01.gat,48,243,5	script	レッケンベル警護員#atd0	868,{/* 59254 */
+
+juperos_01.gat,48,243,5	script	レッケンベル警護員	868,{
 	mes "[レッケンベル警護員]";
 	mes "ファンタスマゴリカプロジェクトの";
 	mes "発掘地まで行きますか？";
@@ -1328,14 +1364,15 @@ juperos_01.gat,48,243,5	script	レッケンベル警護員#atd0	868,{/* 59254 */
 	mes "端の方に大きな銅像があります。";
 	mes "銅像を目指していただければ";
 	mes "発掘地まで辿り着けます。";
-	viewpoint 1, 242, 87, 0, 0x4D4DFF00; //59254
+	viewpoint 1,242,87,0,0x4DFF00;
 	next;
 	mes "[レッケンベル警護員]";
 	mes "モンスターが出没しているとの";
 	mes "情報がありますので、お気をつけて！";
 	close;
 }
-juperos_01.gat,242,91,3	script	レッケンベル警護員#atd0	868,{/* 59255 */
+
+juperos_01.gat,242,91,3	script	レッケンベル警護員	868,{
 	mes "[レッケンベル警護員]";
 	mes "ファンタスマゴリカプロジェクトの";
 	mes "発掘地まで行きますか？";
@@ -1353,7 +1390,8 @@ juperos_01.gat,242,91,3	script	レッケンベル警護員#atd0	868,{/* 59255 */
 	mes "情報がありますので、お気をつけて！";
 	close;
 }
-verus04.gat,182,168,5	script	受付ナラ#atnd06	893,{/* 59256 */
+
+verus04.gat,182,168,5	script	受付ナラ#atnd06	893,{
 	if(VER_1QUE < 4) {
 		mes "[ナラ]";
 		mes "こんにちは。";
@@ -1460,7 +1498,7 @@ verus04.gat,182,168,5	script	受付ナラ#atnd06	893,{/* 59256 */
 		mes "それではお気をつけて。";
 		mes "大きな成果を期待しています。";
 		set VER_1QUE,5;
-		chgquest 7609,7610; //state=1
+		chgquest 7609,7610;
 		close;
 	}
 	else if(VER_1QUE == 5) {
@@ -1485,6 +1523,7 @@ verus04.gat,182,168,5	script	受付ナラ#atnd06	893,{/* 59256 */
 		close;
 	}
 }
+
 verus04.gat,179,165,5	script	指揮長ルイス#atnd07	868,{/* 59257 */
 	if(VER_1QUE < 5) {
 		mes "[ルイス]";
@@ -1503,6 +1542,23 @@ verus04.gat,179,165,5	script	指揮長ルイス#atnd07	868,{/* 59257 */
 	next;
 	switch(select('@str$,"モンスター討伐　(デイリークエスト)","会話をする")) {
 	case 1:
+		if(VER_1QUE <= 11) {
+			mes "[ルイス]";
+			mes "成果報告ですか？";
+			mes "報告はアトナド発掘団長の印が押された";
+			mes "成果報告書を作成して提出して下さい。";
+			next;
+			mes "[ルイス]";
+			mes "準備が出来たら声をかけてくださいね。";
+			mes "おまちしています。";
+			next;
+			mes "‐成果報告書提出は";
+			mes "　^0000FF凝集されたエネルギー収集^000000と";
+			mes "　^0000FFアトナドの依頼^000000を完了し、";
+			mes "　^FF0000両方のクエストの時間制限中にのみ^000000、";
+			mes "　アウレスから受ける事ができます‐";
+			close;
+		}
 		if(VER_1QUE == 12) {
 			mes "[ルイス]";
 			mes "成果報告書の提出ですか。";
@@ -1533,8 +1589,8 @@ verus04.gat,179,165,5	script	指揮長ルイス#atnd07	868,{/* 59257 */
 			mes "急いで戻るようにとの連絡です。";
 			mes "早く行ってみて下さい。";
 			set VER_1QUE,13;
-			delitem 6748, 1;
-			setquest 7623; //state=1
+			delitem 6748,1;
+			setquest 7623;
 			delquest 7617;
 			close;
 		}
@@ -1552,13 +1608,19 @@ verus04.gat,179,165,5	script	指揮長ルイス#atnd07	868,{/* 59257 */
 				mes "発掘作業がある程度進んだら";
 				mes "きっといいことがあると思います。";
 				next;
+				if(checkitemblank() == 0) {
+					mes "‐アイテムの種類数が多くて";
+					mes "　持つことができない。";
+					mes "　種類数を減らしてから受け取ろう‐";
+					close;
+				}
 				mes "[ルイス]";
 				mes "今日もお疲れ様でした。";
 				mes "では次回も期待していますよ。";
-				delitem 6748, 1;
-				setquest 7618; //state=1
+				delitem 6748,1;
+				setquest 7618;
 				delquest 7617;
-				getitem 6962, 4;
+				getitem 6962,4;
 				close;
 			}
 			if(checkquest(7618)) {
@@ -1654,15 +1716,21 @@ verus04.gat,179,165,5	script	指揮長ルイス#atnd07	868,{/* 59257 */
 					mes "それではよろしくお願いします。";
 					close;
 				}
+				if(checkitemblank() == 0) {
+					mes "‐アイテムの種類数が多くて";
+					mes "　持つことができない。";
+					mes "　種類数を減らしてから受け取ろう‐";
+					close;
+				}
 				mes "[ルイス]";
 				mes "偵察型ウェルスギアを";
 				mes "倒してくださったみたいですね。";
 				mes "ありがとうございます。";
 				mes "また討伐に協力してもらえると";
 				mes "助かります。";
-				setquest 7612; //state=1
+				setquest 7612;
 				delquest 7611;
-				getitem 6961, 6;
+				getitem 6961,3;
 				close;
 			}
 			if(checkquest(7612)) {
@@ -1707,7 +1775,7 @@ verus04.gat,179,165,5	script	指揮長ルイス#atnd07	868,{/* 59257 */
 			mes "抜けた先にいる";
 			mes "管理者ミシェルに報告してください。";
 			mes "それではよろしくお願いします。";
-			setquest 7611; //state=1
+			setquest 7611;
 			close;
 		case 2:
 			if(checkquest(7613)) {
@@ -1738,9 +1806,9 @@ verus04.gat,179,165,5	script	指揮長ルイス#atnd07	868,{/* 59257 */
 				mes "ありがとうございます。";
 				mes "また討伐に協力してもらえると";
 				mes "助かります。";
-				setquest 7614; //state=1
+				setquest 7614;
 				delquest 7613;
-				getitem 6961, 10;
+				getitem 6961,10;
 				close;
 			}
 			if(checkquest(7614)) {
@@ -1784,7 +1852,7 @@ verus04.gat,179,165,5	script	指揮長ルイス#atnd07	868,{/* 59257 */
 			mes "討伐が終わったら";
 			mes "私に報告をしてください。";
 			mes "それではよろしくお願いします。";
-			setquest 7613; //state=1
+			setquest 7613;
 			close;
 		}
 	case 3:
@@ -1800,6 +1868,7 @@ verus04.gat,179,165,5	script	指揮長ルイス#atnd07	868,{/* 59257 */
 		close;
 	}
 }
+
 verus04.gat,117,252,5	script	治療師ミヨ#atnd08	641,{/* 59258 */
 	mes "[ミヨ]";
 	mes "こんにちは。お疲れ様です。";
@@ -1854,7 +1923,7 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "　邪魔してはならない雰囲気だ‐";
 		close;
 	case 4:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "おお、来たのですね！";
 		mes "待っていましたよ。";
@@ -1871,23 +1940,23 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "アトナド発掘団のメンバーを";
 		mes "紹介しますよ。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	case 5:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "登録は済ませましたね？";
 		mes "さあ、こちらへ。";
 		mes "彼がアトナド発掘団の団長、";
 		mes "イアン・アトナドです。";
 		next;
-		cutin "verus_ian03.bmp", 2;
+		cutin "verus_ian03",2;
 		mes "[イアン・アトナド]";
 		mes "……お前がアウレスの言う手伝いか。";
 		mes "こんなガキに……。";
 		mes "手伝いなどいらん。帰れ。";
 		next;
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "まだそんな事を……";
 		mes "年寄りだけで作業が思うように";
@@ -1899,7 +1968,7 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "アトナド発掘団全体の問題なのですよ。";
 		mes "わがままは控えてください。";
 		next;
-		cutin "verus_ian03.bmp", 2;
+		cutin "verus_ian03",2;
 		mes "[イアン・アトナド]";
 		mes "フン。何がわがままだ。";
 		mes "……おい、ガキ。";
@@ -1907,7 +1976,7 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "私を監視しに来たのか？";
 		next;
 		if(select("発掘の協力をしにきた","仲を取り持ちにきた","なんの事だかわからない") == 2) {
-			cutin "verus_ian03.bmp", 2;
+			cutin "verus_ian03",2;
 			mes "[イアン・アトナド]";
 			mes "余計なお世話だ！";
 			mes "アウレス、お前の考えることなど";
@@ -1919,7 +1988,7 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 			mes "そんなくだらない仕事をしに来たやつは";
 			mes "いらんぞ。帰るんだな。";
 			next;
-			cutin "verus_aures.bmp", 0;
+			cutin "verus_aures",0;
 			mes "[アウレス]";
 			mes "まあまあ。私はともかく、";
 			mes "わざわざお手伝いに来てくれた方に";
@@ -1927,13 +1996,13 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 			mes "発掘の手伝いはお願いしましょう？";
 			next;
 		}
-		cutin "verus_ian01.bmp", 2;
+		cutin "verus_ian01",2;
 		mes "[イアン・アトナド]";
 		mes "……フン、まあいい。";
 		mes "それじゃ今すぐ仕事をさせてやる。";
 		mes "どれほどの働きをするのか見てやろう。";
 		next;
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "やれやれ……。";
 		mes "では" + strcharinfo(0) + "さん、";
@@ -1941,24 +2010,24 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "少し危険な仕事もありますが、";
 		mes "あなたなら問題ないでしょう。";
 		next;
-		cutin "verus_ian01.bmp", 2;
+		cutin "verus_ian01",2;
 		mes "[イアン・アトナド]";
 		mes "余計なことは言わんでいい。";
 		mes "……お前はこっちだ。来い。";
 		next;
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "いや、気難しい団長で申し訳ない。";
 		mes "まずは彼の話を聞いてみてください。";
 		set VER_1QUE,6;
 		delquest 7610;
-		setquest 118200; //state=1
+		setquest 118200;
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	case 6:
 	case 7:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "イアンは口調がきついので";
 		mes "よく誤解をされるのですが、";
@@ -1967,10 +2036,10 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "ただ、初対面だと恥ずかしいので";
 		mes "意地をはっているのでしょう。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	case 8:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "お疲れ様です。調子はどうですか？";
 		mes "もし時間があるようなら、";
@@ -2002,12 +2071,12 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "気を付けて行ってきてください。";
 		set VER_1QUE,9;
 		delquest 7619;
-		setquest 7620; //state=1
+		setquest 7620;
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	case 9:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "ロイドはウェルス中央広場の";
 		mes "どこかにいるはずです。";
@@ -2018,10 +2087,10 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "[アウレス]";
 		mes "よろしくお願いしますね。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	case 10:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "ロイドはどうでした？";
 		mes "おや、彼の仕事を";
@@ -2032,10 +2101,10 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "手伝っていただいて……。";
 		mes "本当にありがとうございます。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	case 11:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "おかえりなさい。";
 		mes "ロイドは大丈夫そうですね。";
@@ -2053,19 +2122,29 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "成果報告書を提出すれば、";
 		mes "報酬を受け取ることができます。";
 		next;
+		if(checkitemblank() == 0) {
+			mes "[アウレス]";
+			mes "アイテムの種類数が多くて";
+			mes "持つことができないようです。";
+			mes "種類数を減らしてから";
+			mes "もう一度きてください。";
+			close2;
+			cutin "verus_aures.bmp", 255;
+			end;
+		}
 		mes "[アウレス]";
 		mes "ルイス氏は";
 		mes "このウェルス発掘地の入口にいます。";
 		mes "頼みましたよ。";
 		set VER_1QUE,12;
 		delquest 7622;
-		setquest 7617; //state=1
-		getitem 6748, 1;
+		setquest 7617;
+		getitem 6748,1;
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	case 12:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "あなたが持っているその成果報告書を";
 		mes "指揮所のルイス氏に渡してください。";
@@ -2076,10 +2155,10 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "このウェルス発掘地の入口にいます。";
 		mes "頼みましたよ。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	case 13:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "成果報告書を";
 		mes "渡してくださったようですね。";
@@ -2087,17 +2166,17 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "お疲れのようですし、";
 		mes "少し休んではいかがですか？";
 		next;
-		cutin "verus_ian01.bmp", 2;
+		cutin "verus_ian01",2;
 		mes "[イアン・アトナド]";
 		mes "……おい、お前。";
 		mes "まだやる事があるぞ。";
 		mes "休んでる暇などない。";
 		mes "すぐに来い。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	case 14:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "……やれやれ。";
 		mes "あなたには苦労をかけっぱなしだ。";
@@ -2121,20 +2200,20 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "なにか困ったら彼らに";
 		mes "相談してみても良いでしょうね。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
-	case 15://??
+	case 15:
 	case 16:
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "またイアンのわがままですか……。";
 		mes "苦労をかけますね……。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	default:
 		if(checkquest(7617)) {
-			cutin "verus_aures.bmp", 0;
+			cutin "verus_aures",0;
 			mes "[アウレス]";
 			mes "あなたが持っているその成果報告書を";
 			mes "指揮所のルイス氏に渡してください。";
@@ -2145,12 +2224,12 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 			mes "このウェルス発掘地の入口にいます。";
 			mes "頼みましたよ。";
 			close2;
-			cutin "verus_aures.bmp", 255;
+			cutin "verus_aures",255;
 			end;
 		}
 		if(checkquest(7618)) {
 			if(checkquest(7618) & 0x2 == 0) {
-				cutin "verus_aures.bmp", 0;
+				cutin "verus_aures",0;
 				mes "[アウレス]";
 				mes "成果報告書を";
 				mes "渡してくださったようですね。";
@@ -2162,17 +2241,17 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 				mes "次の成果報告書も出来上がったら";
 				mes "届けていただければ助かります。";
 				next;
-				cutin "verus_aures.bmp", 255;
+				cutin "verus_aures",255;
 				mes "‐成果報告書提出は";
 				mes "　^0000FF凝集されたエネルギー収集^000000と";
 				mes "　^0000FFアトナドの依頼^000000を完了し、";
 				mes "　^FF0000両方のクエストの時間制限中にのみ^000000、";
 				mes "　アウレスから受ける事ができます‐";
 				close2;
-				cutin "verus_aures.bmp", 255;
+				cutin "verus_aures",255;
 				end;
 			}
-			cutin "verus_aures.bmp", 0;
+			cutin "verus_aures",0;
 			delquest 7618;
 			mes "[アウレス]";
 			mes "イアンから聞きましたよ。";
@@ -2181,7 +2260,7 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 			mes "稼働制御装置の研究が終わったら、";
 			mes "また成果報告書を作成しますよ。";
 			next;
-			cutin "verus_aures.bmp", 255;
+			cutin "verus_aures",255;
 			mes "‐成果報告書提出は";
 			mes "　^0000FF凝集されたエネルギー収集^000000と";
 			mes "　^0000FFアトナドの依頼^000000を完了し、";
@@ -2191,7 +2270,7 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		}
 		if(checkquest(7616) && checkquest(7629)) {
 			if(checkquest(7616) & 0x2 == 0 && checkquest(7629) & 0x2 == 0) {
-				cutin "verus_aures.bmp", 0;
+				cutin "verus_aures",0;
 				mes "[アウレス]";
 				mes "ちょうど良いところに！";
 				mes "あなたが集めてきてくださった";
@@ -2203,19 +2282,29 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 				mes "一緒にまとめて、";
 				mes "新しい成果報告書を作成しましたよ。";
 				next;
+				if(checkitemblank() == 0) {
+					mes "[アウレス]";
+					mes "アイテムの種類数が多くて";
+					mes "持つことができないようです。";
+					mes "種類数を減らしてから";
+					mes "もう一度きてください。";
+					close2;
+					cutin "verus_aures.bmp", 255;
+					end;
+				}
 				mes "[アウレス]";
 				mes "さあこれを。";
 				mes "指揮所のルイス氏に渡してください。";
 				mes "きっと報告を待っていると思います。";
 				mes "よろしくお願いしますね。";
-				setquest 7617; //state=1
-				getitem 6748, 1;
+				setquest 7617;
+				getitem 6748,1;
 				close2;
-				cutin "verus_aures.bmp", 255;
+				cutin "verus_aures",255;
 				end;
 			}
 		}
-		cutin "verus_aures.bmp", 0;
+		cutin "verus_aures",0;
 		mes "[アウレス]";
 		mes "稼働制御装置については";
 		mes "主にイアンが研究しています。";
@@ -2233,13 +2322,1321 @@ verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */
 		mes "とても感謝しています。";
 		mes "これからもよろしくお願いします。";
 		close2;
-		cutin "verus_aures.bmp", 255;
+		cutin "verus_aures",255;
 		end;
 	}
 }
-verus03.gat,107,177,3	script	ルークラフェズ#atnd09	953,{/* 59260 */
+
+verus04.gat,144,193,3	script	イアン・アトナド#atnd09	10056,{
+	switch(VER_1QUE) {
+	case 0:
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+		// TODO
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……邪魔だ。";
+		next;
+		mes "‐^0000FFファンタスマゴリカ^000000は";
+		mes "　3次職業および限界突破した";
+		mes "　スーパーノービス、リベリオン、";
+		mes "　影狼、朧、BaseLv90以上のドラム族";
+		mes "　が^ff0000楽園団の証^000000を所持した状態で";
+		mes "　楽園団 01の2Fにいる^ff0000ライム^000000から";
+		mes "　開始することができるクエストです‐";
+		next;
+		mes "‐^ff0000楽園団の証^000000は";
+		mes "　楽園団 01の1Fにいる^ff0000ライム^000000から";
+		mes "　楽園団の登録をおこなう事で";
+		mes "　入手が可能です‐";
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	case 5:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "なんだ、お前は。";
+		mes "さっきから邪魔ばっかりしおって。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "イアン！";
+		mes "この若者が、先日話した";
+		mes "私たちに協力しにきてくれた人なんだ。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……お前がアウレスの言う手伝いか。";
+		mes "こんなガキに……。";
+		mes "手伝いなどいらん。帰れ。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "まだそんな事を……";
+		mes "年寄りだけで作業が思うように";
+		mes "進まない事くらい、";
+		mes "貴方もわかっているでしょう？";
+		next;
+		mes "[アウレス]";
+		mes "貴方だけの問題ではなく、";
+		mes "アトナド発掘団全体の問題なのですよ。";
+		mes "わがままは控えてください。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "フン。何がわがままだ。";
+		mes "……おい、ガキ。";
+		mes "お前は私の娘に頼まれて";
+		mes "私を監視しに来たのか？";
+		next;
+		if(select("発掘の協力をしにきた","仲を取り持ちにきた","なんの事だかわからない") == 2) {
+			cutin "verus_ian03",2;
+			mes "[イアン・アトナド]";
+			mes "余計なお世話だ！";
+			mes "アウレス、お前の考えることなど";
+			mes "このアトナドにはお見通しなんだよ。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "おい、そこのお前。";
+			mes "発掘の仕事ではなく、";
+			mes "そんなくだらない仕事をしに来たやつは";
+			mes "いらんぞ。帰るんだな。";
+			next;
+			cutin "verus_aures",0;
+			mes "[アウレス]";
+			mes "まあまあ。私はともかく、";
+			mes "わざわざお手伝いに来てくれた方に";
+			mes "そのような言い方は失礼ですよ。";
+			mes "発掘の手伝いはお願いしましょう？";
+			next;
+		}
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……フン、まあいい。";
+		mes "それじゃ今すぐ仕事をさせてやる。";
+		mes "どれほどの働きをするのか見てやろう。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "やれやれ……。";
+		mes "では" + strcharinfo(0) + "さん、";
+		mes "改めて、彼がアトナド発掘団の";
+		mes "団長、イアン・アトナドです。";
+		next;
+		mes "[アウレス]";
+		mes "来ていただいて感謝します。";
+		mes "少し危険な仕事もありますが、";
+		mes "あなたなら問題ないでしょう。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "余計なことは言わんでいい。";
+		mes "……お前はこっちだ。来い。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "いや、気難しい団長で申し訳ない。";
+		mes "まずは彼の話を聞いてみてください。";
+		set VER_1QUE,6;
+		chgquest 7610,118200;
+		close2;
+		cutin "verus_aures",255;
+		end;
+	case 6:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "手伝うと言ったからには";
+		mes "それなりの仕事ができるんだろうな？";
+		mes "期待外れだったらすぐ帰らせるからな。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "ここから少し北に行くと";
+		mes "広場のような場所がある。";
+		mes "そこには高度な文明の";
+		mes "機械がいくつかあるはずだ。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "その機械の動力源の装置を";
+		mes "私たちは^ff0000稼働制御装置^000000と呼んでいる。";
+		mes "機械を調査してその稼働制御装置を";
+		mes "^ff00002個^000000持って来い。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "いいか？　^ff0000稼働制御装置^000000を";
+		mes "^ff00002個^000000集めてくるんだぞ。";
+		mes "お前がどれほど仕事が出来るか見てやる。";
+		set VER_1QUE,7;
+		delquest 118200;
+		setquest 118201;
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	case 7:
+		if(countitem(6749) < 2) {
+			cutin "verus_ian01",2;
+			mes "[イアン・アトナド]";
+			mes "いいか？　^ff0000稼働制御装置^000000を";
+			mes "^ff00002個^000000集めてくるんだぞ。";
+			mes "お前がどれほど仕事が出来るか見てやる。";
+			close2;
+			cutin "verus_ian01",255;
+			end;
+		}
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "……ふん。集めてきたようだな。";
+		mes "これは研究に使う大事なものだ。";
+		mes "さっさと出せ。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "言われたことはできるようだな。";
+		mes "お前の実力がどの程度か";
+		mes "見ておいてやろう。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "とりあえず今は用は無い。";
+		mes "アウレスの所にでも行って";
+		mes "仕事を手伝うんだな。";
+		set VER_1QUE,8;
+		delitem 6749,2;
+		delquest 118201;
+		setquest 7619;
+		close2;
+		cutin "verus_ian03",255;
+		end;
+	case 8:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……私はまだお前を信じてはいない。";
+		mes "契約があるから";
+		mes "仕方なくここに置いているだけだ。";
+		mes "契約終了まで、大人しく";
+		mes "言われた仕事だけをしておけばいい。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "とりあえず今は用は無い。";
+		mes "アウレスの所にでも行って";
+		mes "仕事を手伝うんだな。";
+		close2;
+		cutin "verus_ian03",255;
+		end;
+	case 9:
+	case 10:
+	case 11:
+	case 12:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "もう一度言うが、";
+		mes "私はお前が純粋に協力するためだけに";
+		mes "ここへ来たとは考えていない。";
+		mes "何か企んでいるんだろう？";
+		next;
+		mes "[イアン・アトナド]";
+		mes "……まあいい。";
+		mes "今やっている仕事が終わったら";
+		mes "すぐ私のもとに来い。";
+		mes "暇なお前に仕事を与えてやろう。";
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	case 13:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "成果報告書は提出したのか？";
+		mes "だったらお前に仕事を与えてやろう。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "私は腹が空いた。";
+		mes "何か食べ物を持って来てくれ。";
+		mes "ここで支給している食料じゃなく、";
+		mes "珍しい食べ物を用意して来い。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "イアン。あなたという人は";
+		mes "またそんなことを……。";
+		mes "ここでそんな物さがしても";
+		mes "無駄だと言う事は";
+		mes "わかっているじゃないですか。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "だからこいつに頼むんだろう。";
+		mes "そうだな……";
+		mes "^4d4dff食べやすく肉汁も豊富で";
+		mes "さっぱりする珍味^000000を探して";
+		mes "持ってきてくれ。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "見つけて来ることができたら";
+		mes "お前の企みを聞いてやろう。";
+		mes "何かを望んで";
+		mes "ここにいるのは分かっている。";
+		next;
+		cutin "verus_ian01",255;
+		mes "‐イアン・アトナドの注文を叶えれば";
+		mes "　^ff0000最後の探査^000000の事が聞けそうだ‐";
+		next;
+		mes "‐^4d4dff食べやすく肉汁も豊富で";
+		mes "　さっぱりする珍味^000000を探してこよう‐";
+		set VER_1QUE,14;
+		delquest 7623;
+		setquest 7624;
+		close;
+	case 14:
+	case 15:
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "同じ事を何度も言わせるな。";
+		mes "^4d4dff食べやすく肉汁も豊富で";
+		mes "さっぱりする珍味^000000を探して";
+		mes "持ってくるんだ。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "見つけて来ることができたら";
+		mes "お前の企みを聞いてやるぞ。";
+		close2;
+		cutin "verus_ian03",255;
+		end;
+	case 16:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "ふむ……";
+		mes "……作業中に片手で簡単に";
+		mes "食べらそうな形だな。";
+		mes "確かに食べやすそうだ。";
+		mes "しかし肝心なのは味だぞ。";
+		next;
+		mes "‐イアンはビーフトーストを";
+		mes "　ゆっくり食べ始めた‐";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "……！　これは……";
+		mes "炭火で焼いた肉が細かく刻まれ、";
+		mes "香ばしい風味と豊富な肉汁が";
+		mes "口の中に広がる……！";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "更に異国の果物と野菜が";
+		mes "余分な油を抑えていて";
+		mes "さっぱりとしている！";
+		next;
+		menu "外の葉も食べてみて下さい",-;
+		cutin "verus_ian04",2;
+		mes "[イアン・アトナド]";
+		mes "なるほど……";
+		mes "これも一緒に食べるものだったのか。";
+		mes "豊富な肉汁にさっぱりしたサラダ、";
+		mes "甘い果物。";
+		mes "そしてこの食べやすい形状……。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "……ガキ……";
+		mes "なかなかやるじゃないか。";
+		mes "私が提示した条件をすべて満たすものを";
+		mes "持って来てやがったな。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "仕方ない、約束だ。";
+		mes "お前がここにきた理由をきいてやろう。";
+		mes "私に望むものはなんだ？";
+		next;
+		menu "最後の探査について",-;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……最後の探査……";
+		mes "そうか。それの話か。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "わかった。";
+		mes "……少し一人で考える時間がほしい。";
+		mes "少し一人にしてくれないか。";
+		mes "後であらためて話をしよう。";
+		set VER_1QUE,17;
+		delitem 11519,1;
+		delquest 7626;
+		setquest 7627;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 0,500000,0;
+		getexp 0,500000,0;
+		getexp 0,500000,0;
+		getexp 0,500000,0;
+		getexp 0,500000,0;
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	case 21:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "おお、やっと戻ったか。";
+		mes "それで、何か成果があったか？";
+		next;
+		mes "[イアン・アトナド]";
+		mes "何か持ち帰ってきたようだな？";
+		mes "見せてくれ。";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "……こ、これは!?";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "何をそんなに驚いているのですか？";
+		mes "私にも見せてください。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……これはだな……";
+		mes "^ff0000メモリーレコード^000000と呼ばれるものだ。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "曽祖父の遺品で";
+		mes "これと同じものを見たことがある。";
+		mes "こいつは音声や周りの音を記録する";
+		mes "一種の記録媒体だ。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "それは……魔法ですか？";
+		mes "目に見えるものをそのまま記録に残す";
+		mes "フォト魔法なら知っていますが……。";
+		mes "同じ類のものなのですか？";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "いや、違う。魔法の応用でもない。";
+		mes "純粋なる科学の産物だよ。";
+		mes "曽祖父がこれを使って";
+		mes "音声を記録するのを見たことがある。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "当時はただのおもちゃのような";
+		mes "発明品だとばかり思っていたが……";
+		mes "今となって考えてみれば、";
+		mes "なぜ曾祖父はその技術を";
+		mes "発表しなかったのか疑問だな。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "本当に小さい頃の記憶だが、";
+		mes "これと全く同じものだったよ。";
+		mes "……とすれば、あれで……";
+		mes "こいつに記録された内容を";
+		mes "知ることができるのか……。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "そうだな……あれが必要だ。";
+		mes "今すぐ探して……";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "……あ……。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "どうしました、イアン？";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "このメモリーレコードに記録された";
+		mes "内容を見るための機械があるんだ。";
+		mes "それは曽祖父が使っていた";
+		mes "^ff0000レコードプレイヤー^000000という機械だ。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "私はそれを曾祖父から、";
+		mes "遠い昔に譲り受けていたんだ。";
+		mes "価値ある古い機械だ。";
+		mes "大切に自宅に保管していたよ。";
+		mes "しかし……。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "……なるほど。";
+		mes "あなたの家は、貴方の娘";
+		mes "アルクイエンが処分してしまった。";
+		mes "そうですね？";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "そうだ、もう私の家は無い。";
+		mes "おそらく曾祖父の";
+		mes "レコードプレイヤーも……。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "いいえ、イアン。";
+		mes "あなたが大切にしていた物ならば、";
+		mes "アルクイエンは";
+		mes "処分はしていないでしょう。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "どういうことだ？";
+		mes "あの子は私を恨んでいる。";
+		mes "私の物など、とうの昔に";
+		mes "処分しているに決まっている。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "決まっているかどうか、";
+		mes strcharinfo(0) + "さんに";
+		mes "確かめていただきましょう。";
+		next;
+		mes "[アウレス]";
+		mes "イアン。";
+		mes "あなたは物事を、何でも";
+		mes "決めつけて考えてしまう。";
+		mes "あなたの悪い癖ですよ。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……";
+		next;
+		mes "[イアン・アトナド]";
+		mes "…………";
+		next;
+		mes "[イアン・アトナド]";
+		mes "………………";
+		mes "……そうだな……。";
+		mes "確かめるだけ確かめてみるか。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "……" + strcharinfo(0) + "。";
+		mes "アルクイエンの元へ行き、";
+		mes "曾祖父のレコードプレイヤーを";
+		mes "まだ処分していないか聞いてみてくれ。";
+		mes "そして、もしそれがまだあるのならば";
+		mes "ここへ持ってきて欲しい。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "私からもお願いします。";
+		mes "彼女に何かを頼むとすれば、";
+		mes "私やイアンではなく、";
+		mes "楽園団のメンバーである";
+		mes "あなたからの方が良いと思います。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "楽園団に行くのならば、";
+		mes "送ってやるぞ。";
+		mes "用意ができたら声をかけてくれ。";
+		set VER_1QUE,22;
+		delquest 7643;
+		setquest 7644;
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	case 22:
+		cutin "verus_ian01.bmp", 2;
+		mes "[イアン・アトナド]";
+		mes "アルクイエン、あの子に話して";
+		mes "^ff0000レコードプレイヤー^000000を持って来てくれ。";
+		mes "……あの子がまだそれを";
+		mes "処分していなければ、だがな。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "楽園団に行くのならば、";
+		mes "送ってやるぞ。";
+		next;
+		if(select("もう少しここにいる","送ってもらう") == 1) {
+			mes "[イアン・アトナド]";
+			mes "そうか。";
+			mes "準備ができたら声をかけてくれ。";
+			close2;
+			cutin "Arquien_n_atnad01.bmp", 255;
+			end;
+		}
+		mes "[イアン・アトナド]";
+		mes "わかった。";
+		mes "では、送ろう。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "……頼んだぞ。";
+		close2;
+		cutin "Arquien_n_atnad01.bmp", 255;
+		warp "moc_para01.gat",131,164;
+		end;
+	case 23:
+	case 24:
+	case 25:
+	case 26:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……。";
+		next;
+		cutin "verus_ian01",255;
+		mes "‐何か考え込んでいるようだ。";
+		mes "　今はそっとしておこう‐";
+		close;
+	case 27:
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "アルクイエンが？";
+		mes "あの子は一体何を考えているんだ？";
+		mes "私に不満があるのならば";
+		mes "直接来て話せばいいものを！";
+		next;
+		mes "[イアン・アトナド]";
+		mes "なぜレコードプレイヤーを";
+		mes "渡してくれないのだ……。";
+		mes "毎回お前があの子が確認した内容を";
+		mes "聞いてくるというのか？";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "……悪くないですね。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "そう、悪くない。";
+		mes "……じゃないだろう!?";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "いえいえ、これは良い事です。";
+		mes "今までそっぽを向いてた";
+		mes "あなた達親子が";
+		mes "少しでも交流するチャンスですよ。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "またお前はそうやって！";
+		mes "何がチャンスだ！";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "でもまあ、そうだな……。";
+		mes "あの子がレコードプレイヤーを";
+		mes "捨てないでいてくれただけでも……。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "わかった。仕方ない。";
+		mes "とにかくこうなってしまったからには";
+		mes strcharinfo(0)+ "。お前が";
+		mes "キッチリ内容を聞いてきて、";
+		mes "私に教えてくれ。わかったな？";
+		next;
+		mes "[イアン・アトナド]";
+		cutin "verus_ian03",2;
+		mes "……それで？";
+		mes "メモリーレコードの内容は";
+		mes "聞いたんだろう？";
+		mes "何が録音されていた？";
+		next;
+		menu "メモリーレコードの内容を話す",-;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "……なんだって!?";
+		mes "聞き間違いじゃないのか？";
+		mes "なぜ、アトナドの名が出てくる？";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "……。";
+		mes "……恐らくですが……";
+		next;
+		mes "[アウレス]";
+		mes "この地から発掘された";
+		mes "メモリーレコード、";
+		mes "それを再生することができる";
+		mes "プレイヤーがあなたの家にあった。";
+		next;
+		mes "[アウレス]";
+		mes "それはあなたの曾祖父から";
+		mes "譲り受けたもの……。";
+		mes "そしてメモリーレコードの内容に";
+		mes "アトナドの名があった……。";
+		mes "以上から推測すると……";
+		next;
+		mes "[アウレス]";
+		mes "イアン、あなたは";
+		mes "この都市の住人の";
+		mes "末裔ではないのですか？";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "私が……ウェルスシティの末裔……!?";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……確かに、なぜかこの場所を";
+		mes "懐かしいと思う感覚はあった……。";
+		mes "……だから……なのか？";
+		mes "……私がジュピロスに";
+		mes "喰らいついた理由は……。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "しかしなぜ今になってこの場所が";
+		mes "発見されたんだ？";
+		mes "もっと前から知られていても";
+		mes "良いはずだ！";
+		mes "私の先祖がこの都市の人間なら";
+		mes "なぜそれを隠したんだ……？";
+		next;
+		menu "落ち着いてください",-;
+		mes "[イアン・アトナド]";
+		mes "そ……そうだな、";
+		mes "お前に聞いても仕方のないことだ……。";
+		mes "……どうやらその^ff0000メモリーレコードを";
+		mes "もっと集める必要がありそうだ。^000000";
+		next;
+		mes "[イアン・アトナド]";
+		mes "このメモリーレコードは";
+		mes "研究棟で見つけたものだったな。";
+		mes "では今度は^ff0000実験棟^000000を";
+		mes "調べてきてくれないか。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "^ff0000実験棟^000000には地下施設があって、";
+		mes "メモリーレコードのようなものが";
+		mes "見つかるらしい。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "お前はそこに行って";
+		mes "メモリーレコードを探して欲しい。";
+		mes "他の奴らが興味を持つ前に";
+		mes "こちらで手を打とう。";
+		mes "どうせ内容の解読もできないはずだ。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "とりあえず、この事を";
+		mes "アルクイエンにも話してくれ。";
+		mes "いいな、今度は";
+		mes "^ff0000実験棟^000000のメモリーレコードだ。";
+		mes "頼んだぞ。";
+		set VER_1QUE,28;
+		delquest 7647;
+		setquest 7648;
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	case 28:
+	case 29:
+	case 30:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "^0000ff実験棟^000000は、";
+		mes "^ff0000広場から北西方面にある^000000と聞いた。";
+		mes "近くまで行けばすぐわかるだろう。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "そこから地下施設につながる道を探して";
+		mes "内部を調査してくれ。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "どうやらそこにも";
+		mes "得体の知れない機械がいて、";
+		mes "襲ってくるらしいと聞いた。";
+		mes "注意してメモリーレコードを集めてくれ。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "最低でも2個は欲しい。";
+		mes "集めたらアルクイエンの元へ行き、";
+		mes "内容を聞いて私に教えてくれ。";
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	case 31:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "アルクイエン……";
+		mes "あの子の考えている事が";
+		mes "私にはよくわからん。";
+		mes "長く離れすぎていたからな……。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "だからあの子が";
+		mes "私が大事にしていた";
+		mes "レコードプレイヤーを";
+		mes "捨てていなかったことに";
+		mes "正直驚いている。";
+		next;
+		cutin "verus_ian04",2;
+		mes "[イアン・アトナド]";
+		mes "……ゆっくり";
+		mes "あの子と話をする時間を";
+		mes "作らなければならないとは";
+		mes "思っているんだがな……。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "フン。年寄のひとり言だ。";
+		mes "さあ作業を進めるぞ。";
+		mes strcharinfo(0)+ "、";
+		mes "お前もお前の";
+		mes "やるべきことをやるんだ。";
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	case 32:
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "今回もか！";
+		mes "本当にあの子は何を考えてるんだ！";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "なんだって？　あの子も参加すると？";
+		mes "自分がメモリーレコードの解読をして";
+		mes "結果をこっちに渡すと？";
+		mes "……いきなりどうしたと言うのだ？";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "アルクイエンも何かに";
+		mes "気づいたのではないのでしょうか？";
+		mes "ともあれ、せっかく手伝ってくれると";
+		mes "言うのです。彼女の好意に";
+		mes "甘えようじゃありませんか。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……くっ";
+		mes "……仕方ないか。";
+		mes strcharinfo(0)+ "、お前が";
+		mes "キッチリ内容を聞いてきて";
+		mes "私に教えてくれ。わかったな？";
+		mes "アルクイエンの様子も見てきてほしい。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "そうですね。";
+		mes "アルクイエンからの伝達もですが、";
+		mes "メモリーレコードも";
+		mes "集めていただきたいですね。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "そうだな。そっちも頼む。";
+		mes "手間をかけさせるが";
+		mes "よろしく頼むぞ。";
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	case 33:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "ああ、お前か。";
+		mes "今ちょっと取り込んでいる。";
+		next;
+		menu "どうしたのですか？",-;
+		mes "[イアン・アトナド]";
+		mes "少し厄介な事になりそうだ。";
+		mes "それも……";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[レッケンベル主席秘書官]";
+		mes "はじめまして。";
+		mes "レッケンベル秘書室の主席秘書官、";
+		mes "W・Hと申します。";
+		mes "お待ちしておりました。";
+		next;
+		menu "レッケンベル社の秘書？",-;
+		mes "[レッケンベル主席秘書官]";
+		mes "はい。";
+		mes "レッケンベル社会長の";
+		mes "秘書を勤めております。";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "挨拶はいい。";
+		mes "それで用件はなんだ？";
+		mes "発掘状況に関する報告は";
+		mes "別ルートで行っているはずだが。";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[レッケンベル主席秘書官]";
+		mes "我が社の会長は、あなた方に";
+		mes "一度お会いしたいと言っております。";
+		mes "いつでもかまいませんので";
+		mes "リヒタルゼンの本社に";
+		mes "お越しいただきたいのです。";
+		next;
+		mes "[レッケンベル主席秘書官]";
+		mes "それと……";
+		mes "あなた方が調査をしている";
+		mes "メモリーレコードの内容について、";
+		mes "当分非公開でお願い致します。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "フン。私らがメモリーレコードを";
+		mes "調査している事にもう気が付いたか。";
+		mes "それで内容は非公開にしろと？";
+		mes "それはなぜだ？";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[レッケンベル主席秘書官]";
+		mes "そうですね……。";
+		mes "まだ時期尚早と言うべきでしょうか。";
+		next;
+		mes "[レッケンベル主席秘書官]";
+		mes "これらに関する協議も行う予定ですので";
+		mes "詳しくはレッケンベル社で";
+		mes "お話いたしましょう。";
+		mes "なるべく早く訪問してくださるよう、";
+		mes "お願いします。";
+		next;
+		mes "[レッケンベル主席秘書官]";
+		mes "それでは私はこれで。";
+		mes "ご訪問をお待ちしています。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "これは……行かざるを得ませんね。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "仕方ない。";
+		mes "ここにいても何も始まらないからな。";
+		mes "とりあえず行ってみるしかないだろう。";
+		mes strcharinfo(0)+ "。";
+		mes "お前もレッケンベル社へ行くんだ。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "なぜかお前も同席するようにと";
+		mes "やつらに言われているんだ。";
+		next;
+		cutin "Arquien_n_atnad04",2;
+		mes "[ナイル]";
+		mes "騒がしいと思ったら";
+		mes "レッケンベルが来ていたのか。";
+		mes "本社に来いだと？　私も行くぞ。";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "アルクイエン!?";
+		mes "お前も一緒に";
+		mes "レッケンベルに行くだと!?";
+		mes "どういう事だ!?";
+		next;
+		cutin "Arquien_n_atnad04",2;
+		mes "[ナイル]";
+		mes "なんだ" +strcharinfo(0)+ "、";
+		mes "まだ私が調査に参加する事を";
+		mes "伝えてなかったのか？";
+		next;
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "まあいい。というわけで、";
+		mes "この調査に関して";
+		mes "色々興味が湧いたからな。";
+		mes "私も参加するぞ。";
+		next;
+		cutin "Arquien_n_atnad03",2;
+		mes "[ナイル]";
+		mes "レコードプレイヤーも";
+		mes "私が持っているしな。";
+		mes "嫌とは言わせない。";
+		mes "まぁ、嫌と言われても、";
+		mes "勝手に参加するけどな。";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "なんだと!?";
+		mes "アルクイエン……";
+		mes "お前が何を考えているのか";
+		mes "私には全く理解できない。";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "レコードプレイヤーを";
+		mes "ただこちらに渡すだけで済む話なのに。";
+		mes "どういう風の吹き回しだ……？";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "アルクイエンも何かに";
+		mes "気づいたのではないのでしょうか？";
+		mes "ともあれ、せっかく手伝ってくれると";
+		mes "言うのです。彼女の好意に";
+		mes "甘えようじゃありませんか。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "そうだな……確かに今は";
+		mes "猫の手でも欲しい状況だ。";
+		mes "……わかった。";
+		mes "しかし、邪魔だけはするなよ。";
+		mes "調査の邪魔だと感じたら";
+		mes "すぐに追い出すからな。";
+		next;
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "この私が邪魔になんかなるものか。";
+		mes "さあ、そうと決まったら";
+		mes "さっさとレッケンベルの本社へ行こう。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……ああ、そうだな。";
+		mes strcharinfo(0)+ "、";
+		mes "お前も出かける準備をしてくれ。";
+		mes "話だけだろうから、";
+		mes "特に念入りに準備するような事も";
+		mes "ないと思うが……。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "準備ができたら声をかけてくれ。";
+		set VER_1QUE,34;
+		delquest 118210;
+		setquest 7656;
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	case 34:
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "レッケンベルの本社に行く";
+		mes "準備はできたか？";
+		mes "すぐに出発するぞ。";
+		next;
+		if(select("もう少し準備がしたい","すぐに出発する") == 1) {
+			mes "[イアン・アトナド]";
+			mes "わかった。";
+			mes "準備ができたら声をかけてくれ。";
+			mes "なるべく急げ。";
+			close2;
+			cutin "verus_ian01",255;
+			end;
+		}
+		mes "[イアン・アトナド]";
+		mes "わかった。";
+		mes "では、行くとしよう。";
+		close;
+		cutin "verus_ian01",255;
+		warp "lhz_in01.gat",275,229;
+		end;
+	default:
+		cutin "verus_ian01",2;
+		if(VER_1QUE < 37) {
+			mes "[イアン・アトナド]";
+			mes "ああ、お前か。";
+			mes "なんの用だ？";
+		}
+		else {
+			mes "[イアン・アトナド]";
+			mes "世の中とは本当に";
+			mes "分からない事ばかりだな。";
+			mes "とにかくメモリーレコードの研究は";
+			mes "続けられそうで安心した。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "それで今日は何の用だ？";
+		}
+		set '@str1$,"発掘作業を手伝う　(^FF0000クエスト受注可能^000000)";
+		if(checkquest(7615)) {
+			if(countitem(6749) < 2)
+				set '@str1$,"発掘作業を手伝う　(^FF0000受注中^000000)";
+			else
+				set '@str1$,"発掘作業を手伝う　(^FF0000報酬受け取り可能^000000)";
+		}
+		if(checkquest(7616)) {
+			set '@str1$,"発掘作業を手伝う　(デイリークエスト)";
+			if(checkquest(7616) & 0x2)
+				set '@str1$,"発掘作業を手伝う　(^FF0000クエスト受注可能^000000)";
+		}
+		set '@str2$,"話をする";
+		if(VER_1QUE == 17 || VER_1QUE == 18) {
+			set '@str2$,"話をする　(^FF0000ストーリークエスト^000000)";
+		}
+		set '@str3$,"立ち去る";
+		if(VER_1QUE == 37) {
+			set '@str3$,"";
+		}
+		next;
+		switch(select('@str1$,'@str2$,'@str3$)) {
+		case 1:
+			if(checkquest(7615)) {
+				if(countitem(6749) < 2) {
+					mes "[イアン・アトナド]";
+					mes "稼働制御装置のことだな。";
+					next;
+					mes "[イアン・アトナド]";
+					mes "なんだ、頼んだ仕事を忘れたのか？";
+					mes "^ff0000稼働制御装置^000000を";
+					mes "^ff00002個^000000集めてきてくれ。";
+					mes "頼んだぞ。";
+					close2;
+					cutin "verus_ian01",255;
+					end;
+				}
+				mes "[イアン・アトナド]";
+				mes "稼働制御装置のことだな。";
+				next;
+				mes "[イアン・アトナド]";
+				mes "今回もちゃんと持って来たな。";
+				mes "持って来たのをそこに置いて";
+				mes "帰りなさい。";
+				next;
+				mes "[イアン・アトナド]";
+				mes "……なるべく壊さないように";
+				mes "努力しているんだがな。";
+				mes "やはり古い物だから仕方ないのか……。";
+				next;
+				if(checkitemblank() == 0) {
+					cutin "verus_ian04.bmp", 255;
+					mes "‐アイテムの種類数が多くて";
+					mes "　持つことができない。";
+					mes "　種類数を減らしてから受け取ろう‐";
+					close;
+				}
+				cutin "verus_ian04",2;
+				mes "[イアン・アトナド]";
+				mes "こいつらを見てると思う。";
+				mes "歳はとりたくないものだな。";
+				delitem 6749,2;
+				setquest 7616;
+				delquest 7615;
+				getitem 6961,5;
+				close2;
+				cutin "verus_ian01",255;
+				end;
+			}
+			if(checkquest(7616)) {
+				if(checkquest(7616) & 0x2 == 0) {
+					mes "[イアン・アトナド]";
+					mes "稼働制御装置のことだな。";
+					next;
+					mes "[イアン・アトナド]";
+					mes "まだ研究中だ。";
+					mes "今のところはまだ必要ない。";
+					mes "実験で全部壊れてしまうかも";
+					mes "知れないが……。";
+					close2;
+					cutin "verus_ian01",255;
+					end;
+				}
+				mes "[イアン・アトナド]";
+				mes "稼働制御装置のことだな。";
+				next;
+				delquest 7616;
+				mes "稼働制御装置のストックが";
+				mes "なくなってしまったな。";
+				mes "研究にはまだまだ";
+				mes "数が必要なんだが……。";
+				next;
+				mes "[イアン・アトナド]";
+				mes "この間の稼働制御装置も";
+				mes "色々な実験をしていたら";
+				mes "耐えられなくて、";
+				mes "全部壊れてしまった。";
+				mes "最近の若者と同じだ。";
+				next;
+				cutin "verus_ian04",2;
+				mes "[イアン・アトナド]";
+				mes "アルクイエン……あいつもそうだ。";
+				mes "辛抱というものを知らん。";
+				close2;
+				cutin "verus_ian01",255;
+				end;
+			}
+			mes "[イアン・アトナド]";
+			mes "稼働制御装置のことだな。";
+			next;
+			cutin "verus_ian01",2;
+			mes "[イアン・アトナド]";
+			mes "稼働制御装置を用意してくるのが";
+			mes "お前の仕事だ。";
+			mes "……やりたくなければ";
+			mes "やらないでいいがな。";
+			next;
+			if(select("稼働制御装置を用意してくる","大変ですね") == 2) {
+				mes "[イアン・アトナド]";
+				mes "私に用がないのなら";
+				mes "他のメンバーの仕事でも";
+				mes "手伝ってやってくれ。";
+				close2;
+				cutin "verus_ian01",255;
+				end;
+			}
+			mes "[イアン・アトナド]";
+			mes "そうか。";
+			mes "それなら、^ff0000稼働制御装置^000000を";
+			mes "^ff00002個^000000集めてきてくれ。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "稼働制御装置……。あれは昔、";
+			mes "どこかで見たことがあるような";
+			mes "気がするんだがな。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "まあ、そんなことはどうでもいい。";
+			mes "年寄のひとり言だ。";
+			mes "さあ、お前は早く行け。";
+			mes "お前が集めて、私が研究する。";
+			mes "そうすれば時間も有効に使えるだろう。";
+			mes "頼んだぞ。";
+			setquest 7615;
+			close2;
+			cutin "verus_ian01",255;
+			end;
+		case 2:
+			break;
+		case 3:
+			cutin "verus_ian01",2;
+			mes "[イアン・アトナド]";
+			mes "古代文明に触れられる機会なんて";
+			mes "めったにあるわけじゃない。";
+			mes "仕事がなくて暇なら、";
+			mes "その辺を探索してみるといい。";
+			close2;
+			cutin "verus_ian01",255;
+			end;
+		}
+		switch(VER_1QUE) {
+		case 17:
+			cutin "verus_ian02",2;
+			mes "[イアン・アトナド]";
+			mes "ちょうどいいところに来た。";
+			mes "^ff0000実験棟^000000と^ff0000研究棟^000000への";
+			mes "立ち入り許可が下りたんだ。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "早速、調査範囲を";
+			mes "広げようと思うのだが……";
+			next;
+			menu "最後の探査の話は？",-;
+			cutin "verus_ian01",2;
+			mes "[イアン・アトナド]";
+			mes "無論、忘れてなどいない。";
+			mes "だが……最後の探査では……";
+			mes "特に何も見つからなかった。";
+			mes "探査地はジュピロスだったよ。";
+			mes "目的はいろいろあったのだろうが……";
+			next;
+			cutin "verus_ian02",2;
+			mes "[イアン・アトナド]";
+			mes "それが私の人生の";
+			mes "大きな転換になったという事だけは";
+			mes "わかっている。";
+			mes "だが、それ以外の事は";
+			mes "頭の中にもやがかかっているようで";
+			mes "よく思い出せないのだ……。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "だからこの場所を調べれば、";
+			mes "そのもやを消すことができる気がして";
+			mes "ファンタスマゴリカプロジェクトに";
+			mes "参加したのだ。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "……私の勘だがな。";
+			mes "私がずっと探していたものが";
+			mes "ここと無関係ではないと";
+			mes "感じているのだ。";
+			next;
+			cutin "verus_ian01",2;
+			mes "[イアン・アトナド]";
+			mes "……だから今は黙って";
+			mes "私を手伝ってもらえないだろうか。";
+			next;
+			menu "……仕方ないですね",-;
+			mes "[イアン・アトナド]";
+			mes "……これが最後の仕事だ。";
+			mes "アルクイエン、あの子も";
+			mes "知る必要がある。";
+			mes "私は仕事の準備を済ませるので、";
+			mes "調査の準備ができたら";
+			mes "またここに来てくれ。";
+			set VER_1QUE,18;
+			delquest 7627;
+			setquest 118204;
+			close2;
+			cutin "verus_ian01",255;
+			end;
+		case 18:
+			cutin "verus_ian01",2;
+			mes "[イアン・アトナド]";
+			mes "準備はできたか？";
+			mes "早速、閉鎖された地域の";
+			mes "探査を始めよう。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "しかし、どうやらそこは、";
+			mes "生命体に敏感に反応する";
+			mes "機械がいるようだ。";
+			mes "恐らくそれが閉鎖されていた理由だろう。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "しかも不思議なエネルギーの障壁が";
+			mes "張られている場所もあるらしい。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "まずは^ff0000研究棟^000000地域を調べてくれ。";
+			mes "気になるものがあれば知らせて欲しい。";
+			mes "一見、役に立ちそうもない物の中にこそ";
+			mes "重要なものが隠されている可能性が高い。";
+			mes "怪しげなガラクタや本の山を見つけたら";
+			mes "必ず調べてみてくれ。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "^0000ff研究棟^000000は、";
+			mes "^ff0000広場から北東方面にある^000000と聞いた。";
+			mes "近くまで行けばすぐわかるだろう。";
+			mes "研究棟の入口にいる統制員に話せば";
+			mes "研究棟へ入ることができるはずだ。";
+			set VER_1QUE,19;
+			delquest 118204;
+			setquest 7641;
+			close2;
+			cutin "verus_ian01",255;
+			end;
+		case 19:
+		case 20:
+			cutin "verus_ian01",2;
+			mes "[イアン・アトナド]";
+			mes "^0000ff研究棟^000000は、";
+			mes "^ff0000広場から北東方面にある^000000と聞いた。";
+			mes "近くまで行けばすぐわかるだろう。";
+			next;
+			mes "[イアン・アトナド]";
+			mes "とにかく、何か気になるものを発見したら、";
+			mes "ぜひ私に知らせてくれ。";
+			mes "とくに役に立ちそうもない物の中にこそ";
+			mes "重要なものが隠されている可能性が高い。";
+			mes "^ff0000怪しげなガラクタや本の山を見つけたら";
+			mes "必ず調べてみてくれ。^000000";
+			close2;
+			cutin "verus_ian01",255;
+			end;
+		case 37:
+			mes "[イアン・アトナド]";
+			mes "ウェルス、メモリーレコード、";
+			mes "曾祖父のラセ……。";
+			mes "考える事や調べる事はまだまだある。";
+			next;
+			mes "[イアン・アトナド]";
+			mes strcharinfo(0)+ "、";
+			mes "お前にもまだまだ手伝って貰いたい。";
+			mes "よろしく頼むぞ。";
+			close2;
+			cutin "verus_ian01",255;
+			end;
+		}
+	}
+OnInit:
+	waitingroom "ファンタスマゴリカ",0;
+	end;
+}
+
+verus03.gat,107,177,3	script	ルークラフェズ#atnd09	953,{
 	if(VER_1QUE == 14) {
-		cutin "looke_rapez02.bmp", 0;
+		cutin "looke_rapez02",0;
 		mes "[ルーク]";
 		mes "どうした。";
 		mes "何か困っているように見えるが。";
@@ -2250,7 +3647,7 @@ verus03.gat,107,177,3	script	ルークラフェズ#atnd09	953,{/* 59260 */
 		mes "食べやすく肉汁も豊富で";
 		mes "さっぱりする珍味……";
 		next;
-		cutin "looke_rapez03.bmp", 0;
+		cutin "looke_rapez03",0;
 		mes "[ルーク]";
 		mes "……ひとつ思い浮かぶものがある。";
 		mes "それはたぶん、";
@@ -2269,7 +3666,7 @@ verus03.gat,107,177,3	script	ルークラフェズ#atnd09	953,{/* 59260 */
 		mes "その料理は次元の向こうの";
 		mes "食べ物だからな。";
 		next;
-		cutin "looke_rapez04.bmp", 0;
+		cutin "looke_rapez04",0;
 		mes "[ルーク]";
 		mes "とりあえず材料を伝えよう。";
 		mes "^ff0000にく2個、";
@@ -2277,7 +3674,7 @@ verus03.gat,107,177,3	script	ルークラフェズ#atnd09	953,{/* 59260 */
 		mes "バナナ1個^000000……。";
 		mes "確かこんな感じだった。";
 		next;
-		cutin "looke_rapez02.bmp", 0;
+		cutin "looke_rapez02",0;
 		mes "[ルーク]";
 		mes "材料の中の果物の一部は";
 		mes "^ff0000霧の森の迷宮^000000近くで自生するものだ。";
@@ -2285,113 +3682,120 @@ verus03.gat,107,177,3	script	ルークラフェズ#atnd09	953,{/* 59260 */
 		mes "探してみてくれ。";
 		set VER_1QUE,15;
 		delquest 7624;
-		setquest 7625; //state=1
+		setquest 7625;
 		close2;
-		cutin "looke_rapez02.bmp", 255;
+		cutin "looke_rapez02",255;
 		end;
 	}
 	else if(VER_1QUE == 15) {
 		if(countitem(11519) >= 1) {
-			cutin "looke_rapez02.bmp", 0;
+			cutin "looke_rapez02",0;
 			mes "[ルーク]";
 			mes "お、ビーフトーストを持ってきたか。";
 			mes "そいつは温かい方が";
 			mes "うまいから、温めてやろう。";
 			next;
-			cutin "looke_rapez02.bmp", 255;
+			cutin "looke_rapez02",255;
 			mes "‐ルークが";
 			mes "　ビーフトーストを温めはじめると、";
 			mes "　辺りにおいしそうな香りが";
 			mes "　漂いだした‐";
 			next;
-			cutin "looke_rapez01.bmp", 0;
+			cutin "looke_rapez01",0;
 			mes "[ルーク]";
 			mes "できたぞ。";
 			mes "さあ、冷めないうちに";
 			mes "イアン氏に持っていくといい。";
 			set VER_1QUE,16;
 			delquest 7625;
-			setquest 7626; //state=1
+			setquest 7626;
 			close2;
-			cutin "looke_rapez02.bmp", 255;
+			cutin "looke_rapez02",255;
 			end;
 		}
 		if(countitem(517) < 2 || countitem(11520) < 1 || countitem(513) < 1) {
-			//??
 			cutin "looke_rapez04.bmp", 0;
 			mes "[ルーク]";
+			mes "材料の確認か？　必要な食材は";
 			mes "^ff0000にく2個、";
 			mes "モーラオレンジ1個、";
-			mes "バナナ1個^000000……。";
-			mes "確かこんな感じだった。";
+			mes "バナナ1個^000000だ。";
 			next;
-			cutin "looke_rapez02.bmp", 0;
 			mes "[ルーク]";
 			mes "材料の中の果物の一部は";
 			mes "^ff0000霧の森の迷宮^000000近くで自生するものだ。";
-			mes "少し集め辛いと思うが";
-			mes "探してみてくれ。";
+			mes "気を付けて集めてきてくれ。";
 			close2;
-			cutin "looke_rapez02.bmp", 255;
+			cutin "looke_rapez04.bmp", 255;
 			end;
 		}
-		cutin "looke_rapez04.bmp", 0;
+		cutin "looke_rapez04",0;
 		mes "[ルーク]";
 		mes "よく集めたな。";
 		mes "よし、では作るぞ。";
 		next;
-		cutin "looke_rapez02.bmp", 255;
+		cutin "looke_rapez02",255;
 		mes "‐渡した材料でルークが";
 		mes "　手際よく、料理を始めた。";
 		mes "　辺りにおいしそうな香りが漂う‐";
 		next;
-		cutin "looke_rapez04.bmp", 0;
+		cutin "looke_rapez04",0;
 		mes "[ルーク]";
 		mes "モーラ名物の^ff0000ビーフトースト^000000だ。";
 		mes "君が話した条件に";
 		mes "十分、当てはまるだろう。";
 		next;
-		cutin "looke_rapez01.bmp", 0;
+		if(checkitemblank() == 0) {
+			mes "[ルーク]";
+			mes "アイテムの種類数が多くて";
+			mes "持つことができないようだ。";
+			mes "種類数を減らしてから";
+			mes "もう一度きてくれ。";
+			close2;
+			cutin "looke_rapez02.bmp", 255;
+			end;
+		}
+		cutin "looke_rapez01",0;
 		mes "[ルーク]";
 		mes "できたぞ。";
 		mes "さあ、冷めないうちに";
 		mes "イアン氏に持っていくといい。";
 		set VER_1QUE,16;
-		delitem 517, 2;
-		delitem 11520, 1;
-		delitem 513, 1;
-		getitem 11519, 1;
+		delitem 517,2;
+		delitem 11520,1;
+		delitem 513,1;
+		getitem 11519,1;
 		delquest 7625;
-		setquest 7626; //state=1
+		setquest 7626;
 		close2;
-		cutin "looke_rapez02.bmp", 255;
+		cutin "looke_rapez02",255;
 		end;
 	}
 	else if(VER_1QUE == 16) {
-		cutin "looke_rapez01.bmp", 0;
+		cutin "looke_rapez01",0;
 		mes "[ルーク]";
 		mes "あの頑固なイアン氏も";
 		mes "気に入ってくれるだろう。";
 		mes "冷めないうちに持っていくといい。";
 		close2;
-		cutin "looke_rapez01.bmp", 255;
+		cutin "looke_rapez01",255;
 		end;
 	}
 	else if(VER_1QUE >= 17) {
-		cutin "looke_rapez02.bmp", 0;
+		cutin "looke_rapez02",0;
 		mes "[ルーク]";
 		mes "ここは暇だな。";
 		mes "もう少し強い敵はいないものか。";
 		mes "腕がなまるぜ。";
 		next;
-		cutin "looke_rapez02.bmp", 255;
+		cutin "looke_rapez02",255;
 		mes "[ロイド]";
 		mes "冗談でもそんな事言うなよ～。";
 		mes "本当にそうなったらどうするんだ！";
 		mes "僕は勇敢な猫だけど、あいつらには";
 		mes "僕の爪が通用しないんだよ～……。";
 		next;
-		cutin "looke_rapez01.bmp", 0;
+		cutin "looke_rapez01",0;
 		mes "[ルーク]";
 		mes "心配するな。";
 		mes "俺がここに居る限り、";
@@ -2403,7 +3807,7 @@ verus03.gat,107,177,3	script	ルークラフェズ#atnd09	953,{/* 59260 */
 		mes "その間に俺は";
 		mes "食事の用意でもしておこう。";
 		next;
-		cutin "looke_rapez02.bmp", 255;
+		cutin "looke_rapez02",255;
 		mes "[ロイド]";
 		mes "やった～！";
 		mes "ルーク君のごはんがあると思うと、";
@@ -2411,13 +3815,14 @@ verus03.gat,107,177,3	script	ルークラフェズ#atnd09	953,{/* 59260 */
 		mes "よぉし！　頑張るニャ!!";
 		close;
 	}
-	cutin "looke_rapez04.bmp", 0;
+	cutin "looke_rapez04",0;
 	mes "[ルーク]";
 	mes "……こいつの身辺は心配するな。";
 	close2;
-	cutin "looke_rapez04.bmp", 255;
+	cutin "looke_rapez04",255;
 	end;
 }
+
 verus03.gat,103,177,5	script	機械学者ロイド#atnd09	421,{/* 59261 */
 	if(VER_1QUE == 9) {
 		mes "[ロイド]";
@@ -2480,12 +3885,13 @@ verus03.gat,103,177,5	script	機械学者ロイド#atnd09	421,{/* 59261 */
 			mes "あっ、ありがとう～!!";
 			mes "助かるよ～！";
 			next;
+			break;
 		case 3:
 			mes "[ロイド]";
 			mes "そうなんだよ～。";
 			mes "困った、困った、どうしよう……。";
 			next;
-			cutin "looke_rapez02.bmp", 0;
+			cutin "looke_rapez02",0;
 			mes "[ルーク]";
 			mes "割り込んで悪いが、";
 			mes "君はアトナド発掘団を手伝えと言う";
@@ -2498,7 +3904,7 @@ verus03.gat,103,177,5	script	機械学者ロイド#atnd09	421,{/* 59261 */
 			mes "俺の任務はロイドの身辺警護だから";
 			mes "彼から目を離すことができなんだ。";
 			next;
-			cutin "looke_rapez02.bmp", 255;
+			cutin "looke_rapez02",255;
 			mes "[ロイド]";
 			mes "そう！それだよ～！";
 			mes "君、君、";
@@ -2512,6 +3918,7 @@ verus03.gat,103,177,5	script	機械学者ロイド#atnd09	421,{/* 59261 */
 			mes "あっ、ありがとう～!!";
 			mes "助かるよ～！";
 			next;
+			break;
 		}
 		mes "[ロイド]";
 		mes "それではすぐ本題に入ろう！";
@@ -2536,7 +3943,7 @@ verus03.gat,103,177,5	script	機械学者ロイド#atnd09	421,{/* 59261 */
 		mes "お願いだよ～、頼んだよ～!!";
 		set VER_1QUE,10;
 		delquest 7620;
-		setquest 7621; //state=1
+		setquest 7621;
 		close;
 	}
 	else if(VER_1QUE == 10) {
@@ -2594,9 +4001,9 @@ verus03.gat,103,177,5	script	機械学者ロイド#atnd09	421,{/* 59261 */
 		mes "あっ、いるんだね！";
 		mes "また良かったら手伝って～！";
 		set VER_1QUE,11;
-		delitem 6756, 2;
+		delitem 6756,2;
 		delquest 7621;
-		setquest 7622; //state=1
+		setquest 7622;
 		close;
 	}
 	else if(VER_1QUE >= 11 && VER_1QUE <= 16) {
@@ -2636,13 +4043,33 @@ verus03.gat,103,177,5	script	機械学者ロイド#atnd09	421,{/* 59261 */
 			mes "よ～し、研究に取り掛かるぞ～。";
 			mes "本当にありがとう！";
 			mes "また良かったら手伝って～！";
-			delitem 6756, 2;
-			setquest 7629; //state=1
+			delitem 6756,2;
+			setquest 7629;
 			delquest 7628;
-			getitem 6962, 2;
+			getitem 6962,2;
 			close;
 		}
 		if(checkquest(7629)) {
+			if(checkquest(7629) & 0x2) {
+				delquest 7629;
+				mes "[ロイド]";
+				mes "う～ん、難しいなぁ～……。";
+				mes "ちょっとしくじったら";
+				mes "エネルギーが消えてなくなっちゃう。";
+				mes "保管方法に問題があるのかな？";
+				next;
+				mes "[ロイド]";
+				mes "ああ、君だったのか。";
+				mes "もし時間があるなら";
+				mes "またエネルギー集めを";
+				mes "手伝ってほしいんだ～。";
+				next;
+				mes "[ロイド]";
+				mes "協力してくれるなら、準備を整えて";
+				mes "また僕に話しかけてニャ～。";
+				mes "あっ、話かけてー！";
+				close;
+			}
 			mes "[ロイド]";
 			mes "今は集めたエネルギーを";
 			mes "分析している途中だよ～。";
@@ -2670,12 +4097,12 @@ verus03.gat,103,177,5	script	機械学者ロイド#atnd09	421,{/* 59261 */
 			mes "モンスターが怖いけど、";
 			mes "ルーク君と一緒に集めに行くかぁ。";
 			next;
-			cutin "looke_rapez01.bmp", 0;
+			cutin "looke_rapez01",0;
 			mes "[ルーク]";
 			mes "それは歓迎だ。";
 			mes "暇だったからちょうどいい。";
 			close2;
-			cutin "looke_rapez01.bmp", 255;
+			cutin "looke_rapez01",255;
 			end;
 		}
 		mes "[ロイド]";
@@ -2692,7 +4119,7 @@ verus03.gat,103,177,5	script	機械学者ロイド#atnd09	421,{/* 59261 */
 		mes "[ロイド]";
 		mes "それを^ff00002個^000000持ってきてほしい。";
 		mes "お願いだよ～、頼んだよ～!!";
-		setquest 7628; //state=1
+		setquest 7628;
 		close;
 	}
 	mes "[ロイド]";
@@ -2701,8 +4128,9 @@ verus03.gat,103,177,5	script	機械学者ロイド#atnd09	421,{/* 59261 */
 	mes "外見だけで判断されちゃ困るよ～。";
 	close;
 }
+
 verus03.gat,127,145,3	script	機械の残骸#atnd01	10042,3,3,{/* 59262 */
-	if(VER_1QUE != 10 || !checkquest(7628)) {
+	if(VER_1QUE != 10 && !checkquest(7628)) {
 		mes "‐不思議な光が揺らめいている‐";
 		close;
 	}
@@ -2722,10 +4150,16 @@ verus03.gat,127,145,3	script	機械の残骸#atnd01	10042,3,3,{/* 59262 */
 	mes "　揺らめきの先に空きビンを添えれば";
 	mes "　エネルギーを集める事ができそうだ‐";
 	next;
-	progressbar 3; //color=0xffff00
+	progressbar 3;
+	if(checkitemblank() == 0) {
+		mes "‐アイテムの種類数が多くて";
+		mes "　持つことができない。";
+		mes "　種類数を減らしてから受け取ろう‐";
+		close;
+	}
 	hideonnpc;
-	delitem 713, 1;
-	getitem 6756, 1;
+	delitem 713,1;
+	getitem 6756,1;
 	mes "‐凝集されたエネルギーを採取した‐";
 	close;
 OnTouch:
@@ -2746,6 +4180,2313 @@ verus03.gat,62,120,3	duplicate(機械の残骸#atnd01)	機械の残骸#atnd12	10042,3,3	/*
 verus03.gat,44,195,3	duplicate(機械の残骸#atnd01)	機械の残骸#atnd13	10042,3,3	/* 59274 */
 verus03.gat,124,61,3	duplicate(機械の残骸#atnd01)	機械の残骸#atnd14	10042,3,3	/* 59275 */
 verus03.gat,168,229,3	duplicate(機械の残骸#atnd01)	機械の残骸#atnd15	10042,3,3	/* 59276 */
+
+verus03.gat,167,257,5	script	出入り統制員ダムハ#atnd	868,{/* 59490 */
+	if(VER_1QUE == 19) {
+		mes "[ダムハ]";
+		mes "ここは許可を得た発掘団の団員以外は";
+		mes "立ち入ることができません。";
+		mes "どちらから来た方ですか？";
+		next;
+		switch(select("アトナド発掘団です","なぜ許可がないと立ち入れない？")) {
+		case 1:
+			mes "[ダムハ]";
+			mes "アトナド発掘団の方ですね。";
+			mes "少々お待ちください。";
+			mes "……はい、確認できました。";
+			mes "アトナド発掘団は";
+			mes "立ち入りが許可されています。";
+			next;
+			menu "なぜ許可がないと立ち入れない？",-;
+			mes "[ダムハ]";
+			mes "ウェルスシティは";
+			mes "大きく４か所の地域に分かれています。";
+			next;
+			mes "[ダムハ]";
+			mes "その中で現在一般公開されている地域は";
+			mes "ウェルスタウンと";
+			mes "ウェルス中央広場です。";
+			mes "その他にも施設のような物は";
+			mes "あったのですが、";
+			mes "その地域は閉鎖されていました。";
+			next;
+			mes "[ダムハ]";
+			mes "ファンタスマゴリカプロジェクトで";
+			mes "一般発掘団を募集する前に";
+			mes "我が社でその閉鎖されていた地域を";
+			mes "調査してみた結果、";
+			mes "ウェルスは何らかの大きな爆発があった";
+			mes "地域である事がわかりました。";
+			next;
+			mes "[ダムハ]";
+			mes "現在は機械が襲ってくるという事と、";
+			mes "内部の地形が危険である事以外は";
+			mes "大きな危険は無いと判断できたため、";
+			mes "実力のある一部の発掘団に限り";
+			mes "立ち入りを許可しています。";
+			break;
+		case 2:
+			mes "[ダムハ]";
+			mes "ウェルスシティは";
+			mes "大きく４か所の地域に分かれています。";
+			next;
+			mes "[ダムハ]";
+			mes "その中で現在一般公開されている地域は";
+			mes "ウェルスタウンと";
+			mes "ウェルス中央広場です。";
+			mes "その他にも施設のような物は";
+			mes "あったのですが、";
+			mes "その地域は閉鎖されていました。";
+			next;
+			mes "[ダムハ]";
+			mes "ファンタスマゴリカプロジェクトで";
+			mes "一般発掘団を募集する前に";
+			mes "我が社でその閉鎖されていた地域を";
+			mes "調査してみた結果、";
+			mes "ウェルスは何らかの大きな爆発があった";
+			mes "地域である事がわかりました。";
+			next;
+			mes "[ダムハ]";
+			mes "現在は機械が襲ってくるという事と、";
+			mes "内部の地形が危険である事以外は";
+			mes "大きな危険は無いと判断できたため、";
+			mes "実力のある一部の発掘団に限り";
+			mes "立ち入りを許可しています。";
+			next;
+			mes "[ダムハ]";
+			mes "あなたはどこの発掘団所属の方ですか？";
+			next;
+			menu "アトナド発掘団です",-;
+			mes "[ダムハ]";
+			mes "アトナド発掘団の方ですね。";
+			mes "少々お待ちください。";
+			mes "……はい、確認できました。";
+			mes "アトナド発掘団は";
+			mes "立ち入りが許可されています。";
+			break;
+		}
+		next;
+		mes "[ダムハ]";
+		mes "アトナド発掘団には、";
+		mes "^ff0000西側にある実験棟^000000への";
+		mes "立ち入りも許可が出ていますので、";
+		mes "そちらの調査もお願いします。";
+		next;
+		mes "[ダムハ]";
+		mes "それでは良い結果を待っています。";
+		mes "お気をつけて！";
+		set VER_1QUE,20;
+		delquest 7641;
+		setquest 7642;
+		close;
+	}
+	if(VER_1QUE >= 20) {
+		mes "[ダムハ]";
+		mes "調査は進んでいますか？";
+		mes "調査地域は危険なので";
+		mes "気を付けて下さい。";
+		close;
+	}
+	mes "[ダムハ]";
+	mes "申し訳ありませんが、この先は";
+	mes "許可が下りた発掘団の方のみ";
+	mes "立ち入りが可能です。";
+	close;
+}
+
+verus03.gat,172,257,3	script	出入り統制員ギュハ#atnd	868,{/* 59491 */
+	if(VER_1QUE == 19) {
+		mes "[ギュハ]";
+		mes "ここは許可を得た発掘団の団員以外は";
+		mes "立ち入ることができません。";
+		mes "どちらから来た方ですか？";
+		next;
+		switch(select("アトナド発掘団です","なぜ許可がないと立ち入れない？")) {
+		case 1:
+			mes "[ギュハ]";
+			mes "アトナド発掘団の方ですね。";
+			mes "少々お待ちください。";
+			mes "……はい、確認できました。";
+			mes "アトナド発掘団は";
+			mes "立ち入りが許可されています。";
+			next;
+			menu "なぜ許可がないと立ち入れない？",-;
+			mes "[ギュハ]";
+			mes "ウェルスシティは";
+			mes "大きく４か所の地域に分かれています。";
+			next;
+			mes "[ギュハ]";
+			mes "その中で現在一般公開されている地域は";
+			mes "ウェルスタウンと";
+			mes "ウェルス中央広場です。";
+			mes "その他にも施設のような物は";
+			mes "あったのですが、";
+			mes "その地域は閉鎖されていました。";
+			next;
+			mes "[ギュハ]";
+			mes "ファンタスマゴリカプロジェクトで";
+			mes "一般発掘団を募集する前に";
+			mes "我が社でその閉鎖されていた地域を";
+			mes "調査してみた結果、";
+			mes "ウェルスは何らかの大きな爆発があった";
+			mes "地域である事がわかりました。";
+			next;
+			mes "[ギュハ]";
+			mes "現在は機械が襲ってくるという事と、";
+			mes "内部の地形が危険である事以外は";
+			mes "大きな危険は無いと判断できたため、";
+			mes "実力のある一部の発掘団に限り";
+			mes "立ち入りを許可しています。";
+			break;
+		case 2:
+			mes "[ギュハ]";
+			mes "ウェルスシティは";
+			mes "大きく４か所の地域に分かれています。";
+			next;
+			mes "[ギュハ]";
+			mes "その中で現在一般公開されている地域は";
+			mes "ウェルスタウンと";
+			mes "ウェルス中央広場です。";
+			mes "その他にも施設のような物は";
+			mes "あったのですが、";
+			mes "その地域は閉鎖されていました。";
+			next;
+			mes "[ギュハ]";
+			mes "ファンタスマゴリカプロジェクトで";
+			mes "一般発掘団を募集する前に";
+			mes "我が社でその閉鎖されていた地域を";
+			mes "調査してみた結果、";
+			mes "ウェルスは何らかの大きな爆発があった";
+			mes "地域である事がわかりました。";
+			next;
+			mes "[ギュハ]";
+			mes "現在は機械が襲ってくるという事と、";
+			mes "内部の地形が危険である事以外は";
+			mes "大きな危険は無いと判断できたため、";
+			mes "実力のある一部の発掘団に限り";
+			mes "立ち入りを許可しています。";
+			next;
+			mes "[ギュハ]";
+			mes "あなたはどこの発掘団所属の方ですか？";
+			next;
+			menu "アトナド発掘団です",-;
+			mes "[ギュハ]";
+			mes "アトナド発掘団の方ですね。";
+			mes "少々お待ちください。";
+			mes "……はい、確認できました。";
+			mes "アトナド発掘団は";
+			mes "立ち入りが許可されています。";
+			break;
+		}
+		next;
+		mes "[ギュハ]";
+		mes "アトナド発掘団には、";
+		mes "^ff0000西側にある実験棟^000000への";
+		mes "立ち入りも許可が出ていますので、";
+		mes "そちらの調査もお願いします。";
+		next;
+		mes "[ギュハ]";
+		mes "それでは良い結果を待っています。";
+		mes "お気をつけて！";
+		set VER_1QUE,20;
+		delquest 7641;
+		setquest 7642;
+		close;
+	}
+	if(VER_1QUE >= 20) {
+		mes "[ギュハ]";
+		mes "調査は進んでいますか？";
+		mes "調査地域は危険なので";
+		mes "気を付けて下さい。";
+		close;
+	}
+	mes "[ギュハ]";
+	mes "申し訳ありませんが、この先は";
+	mes "許可が下りた発掘団の方のみ";
+	mes "立ち入りが可能です。";
+	close;
+}
+
+verus03.gat,169,259,0	script	verus03_to_verus02	45,1,1,{/* 59492 */
+	if(VER_1QUE < 20) {
+		mes "[出入り統制員]";
+		mes "申し訳ありませんが、この先は";
+		mes "許可が下りた発掘団の方のみ";
+		mes "立ち入りが可能です。";
+		close;
+	}
+	warp "verus02.gat",72,19;
+	end;
+}
+
+verus02.gat,72,16,0	warp	verus02_to_verus03	1,1,verus03.gat,169,255
+
+verus02.gat,60,30,1	script	散らばった文書#e152a01	10043,{/* 59494 (hide)*/
+	if(VER_1QUE == 20) {
+		mes "‐色々な書類が";
+		mes "　山積みになっている。";
+		mes "　書類に記された文字は劣化し、";
+		mes "　解読は困難なようだ‐";
+		next;
+		if(select("調べる","やめる") == 2) {
+			mes "‐他の場所を調べることにした‐";
+			close;
+		}
+		progressbar 3;
+		if(checkitemblank() == 0) {
+			mes "‐アイテムの種類数が多くて";
+			mes "　持つことができない。";
+			mes "　種類数を減らしてから受け取ろう‐";
+			close;
+		}
+		hideonnpc;
+		mes "‐乱雑に散らばった書類の中に";
+		mes "　小さな円盤状の物体を見つけた‐";
+		next;
+		mes "^4d4dff‐イアン・アトナド博士に";
+		mes "　持って行って調べて貰おう‐^000000";
+		set VER_1QUE,21;
+		getitem 6757,1;
+		delquest 7642;
+		setquest 7643;
+		close;
+	}
+	if(VER_1QUE == 24) {
+		if(countitem(6757) >= 2) {
+			mes "‐メモリーレコードは十分に集まった。";
+			mes "　これ以上調べる必要はなさそうだ‐";
+			close;
+		}
+		mes "‐色々な書類が";
+		mes "　山積みになっている。";
+		mes "　書類に記された文字は劣化し、";
+		mes "　解読は困難なようだ‐";
+		next;
+		if(select("調べる","やめる") == 2) {
+			mes "‐他の場所を調べることにした‐";
+			close;
+		}
+		progressbar 3;
+		if(checkitemblank() == 0) {
+			mes "‐アイテムの種類数が多くて";
+			mes "　持つことができない。";
+			mes "　種類数を減らしてから受け取ろう‐";
+			close;
+		}
+		hideonnpc;
+		mes "‐乱雑に散らばった書類の中に";
+		mes "　大切そうに置かれた";
+		mes "　メモリーレコードを見つけた。";
+		mes "　まるで誰かが意図的に";
+		mes "　隠しておいたように感じる‐";
+		getitem 6757,1;
+		close;
+	}
+	if(checkquest(7650)) {
+		if(countitem(6757) >= 2) {
+			mes "‐メモリーレコードは十分に集まった。";
+			mes "　これ以上調べる必要はなさそうだ‐";
+			close;
+		}
+		mes "‐色々な書類が";
+		mes "　山積みになっている。";
+		mes "　書類に記された文字は劣化し、";
+		mes "　解読は困難なようだ‐";
+		next;
+		if(select("調べる","やめる") == 2) {
+			mes "‐他の場所を調べることにした‐";
+			close;
+		}
+		progressbar 3;
+		if(checkitemblank() == 0) {
+			mes "‐アイテムの種類数が多くて";
+			mes "　持つことができない。";
+			mes "　種類数を減らしてから受け取ろう‐";
+			close;
+		}
+		hideonnpc;
+		mes "‐乱雑に散らばった書類の中に";
+		mes "　メモリーレコードを見つけた‐";
+		getitem 6757,1;
+		close;
+	}
+	mes "‐特に変わったものは見当たらない‐";
+	close;
+}
+
+verus02.gat,178,32,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a02	10043	/* 59495 */
+verus02.gat,102,135,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a03	10043	/* 59496 */
+verus02.gat,42,37,3		duplicate(散らばった文書#e152a01)	散らばった文書#e152a04	10043	/* 59497 */
+verus02.gat,155,64,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a05	10043	/* 59498 */
+verus02.gat,80,129,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a06	10043	/* 59499 */
+verus02.gat,29,129,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a07	10043	/* 59500 */
+verus02.gat,125,85,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a08	10043	/* 59501 */
+verus02.gat,51,237,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a09	10043	/* 59502 */
+verus02.gat,160,150,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a10	10043	/* 59503 */
+
+verus03.gat,52,250,5	script	出入り統制員グマン#atnd	868,{/* 59483 */
+	if(VER_1QUE == 19) {
+		mes "[グマン]";
+		mes "ここは許可を得た発掘団の団員以外は";
+		mes "立ち入ることができません。";
+		mes "どちらから来た方ですか？";
+		next;
+		menu "アトナド発掘団です",-;
+		mes "[グマン]";
+		mes "アトナド発掘団の方ですね。";
+		next;
+		mes "[グマン]";
+		mes "アトナド発掘団には、";
+		mes "^ff0000北東側にある研究塔^000000への";
+		mes "立ち入り許可が出ていますので、";
+		mes "そちらの調査を先にお願いします。";
+		next;
+		mes "‐先に^ff0000北東側にある研究塔^000000の";
+		mes "　調査をしよう‐";
+		close;
+	}
+	if(VER_1QUE >= 20) {
+		mes "[グマン]";
+		mes "調査は進んでいますか？";
+		mes "調査地域は危険なので";
+		mes "気を付けて下さい。";
+		close;
+	}
+	mes "[グマン]";
+	mes "申し訳ありませんが、この先は";
+	mes "許可が下りた発掘団の方のみ";
+	mes "立ち入りが可能です。";
+	close;
+}
+
+verus03.gat,52,254,0	script	verus03_to_verus01	45,1,1,{
+	if(VER_1QUE < 20) {
+		mes "[出入り統制員]";
+		mes "申し訳ありませんが、この先は";
+		mes "許可が下りた発掘団の方のみ";
+		mes "立ち入りが可能です。";
+		close;
+	}
+	warp "verus01.gat",243,62;
+	end;
+}
+
+verus01.gat,247,58,0	warp	verus01_to_verus03	1,1,verus03.gat,55,251
+
+verus04.gat,172,149,3	script	団長アルクイエン#e152v0	951,{
+	switch(VER_1QUE) {
+	case 0:
+	case 1:
+	case 2:
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "おや、君は……。";
+		mes "ひょっとして発掘に興味があるのか？";
+		mes "もし興味があるようなら";
+		mes "楽園団へきてくれ。";
+		mes "詳しい話をしよう。";
+		close2;
+		cutin "Arquien_n_atnad01",255;
+		end;
+	case 3:
+	case 4:
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "発掘団の参加登録は済ませたか？";
+		mes "まだなら早く登録をして、";
+		mes "発掘作業を手伝ってきてくれ。";
+		close2;
+		cutin "Arquien_n_atnad01",255;
+		end;
+	case 24:
+		if(countitem(6757) < 2) {
+			cutin "Arquien_n_atnad02",2;
+			mes "[ナイル]";
+			mes "私が事務室で話した内容は";
+			mes "覚えていないのか？";
+			mes "^ff0000メモリーレコードは";
+			mes "ひとつだけじゃ動かないみたいだ。^000000";
+			mes "再生するには2個必要だと思う。";
+			next;
+			cutin "Arquien_n_atnad01",2;
+			mes "[ナイル]";
+			mes "最初のメモリーレコードを";
+			mes "見つけた場所の近くに";
+			mes "もう一度行って";
+			mes "^ff0000メモリーレコードを2個";
+			mes "集めて持ってきてくれ。^000000";
+			close2;
+			cutin "Arquien_n_atnad01",255;
+			end;
+		}
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "持って来たか？";
+		mes "よし。これをこうやって集めて……";
+		mes "ここに置く……。";
+		next;
+		cutin "Arquien_n_atnad03",2;
+		mes "[ナイル]";
+		mes "さあ、準備は出来た。";
+		mes "再生スイッチは";
+		mes "君に押してもらおうか。";
+		mes "レコードプレイヤーは、";
+		mes "私の隣に置いてある。";
+		mes "その、再生のスイッチを押すだけだ。";
+		delitem 6757,2;
+		set VER_1QUE,25;
+		delquest 7645;
+		setquest 7646;
+		emotion 0,"レコードプレイヤー#e152";
+		close2;
+		cutin "Arquien_n_atnad03",255;
+		end;
+	case 25:
+		cutin "Arquien_n_atnad03",2;
+		mes "[ナイル]";
+		mes "さあ、用意はできている。";
+		mes "メモリーレコードに記された秘密を";
+		mes "確認しようじゃないか。";
+		mes "レコードプレイヤーは、";
+		mes "私の隣に置いてある。";
+		mes "その、再生のスイッチを押すだけだ。";
+		close2;
+		cutin "Arquien_n_atnad03",255;
+		end;
+	case 26:
+		cutin "Arquien_n_atnad02",2;
+		mes "[ナイル]";
+		mes "ふむ……。";
+		mes "内容自体は大した事はないが……";
+		mes "なぜアトナドの名が出てくる？";
+		mes "親父が何か知っているのか？";
+		next;
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "いや、違う。";
+		mes "きっとこの内容は知らないはずだ。";
+		mes "それでも何かが……。";
+		next;
+		cutin "Arquien_n_atnad04",2;
+		mes "[ナイル]";
+		mes "……ああああ！　わからん!!";
+		mes "こうやって頭を使うのは私に向かない！";
+		next;
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "君が行って今の内容を";
+		mes "うまくあの親父に伝えるんだ。";
+		mes "考えるのはアイツの専門だろ？";
+		mes "そしてこのメモリーレコードは……";
+		next;
+		cutin "Arquien_n_atnad04",2;
+		mes "[ナイル]";
+		mes "……!?";
+		misceffect 234,"レコードプレイヤー#e152";
+		next;
+		menu "今、何が…",-;
+		mes "[ナイル]";
+		mes "なっ……？　静電気!?";
+		mes "それともよくある証拠隠滅ってヤツか？";
+		next;
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "まあいい。ともかく君は";
+		mes "大体の内容を親父に伝えた後、";
+		mes "どうしてアトナドの名が出たのか";
+		mes "分かることはないか聞いてみてくれ。";
+		set VER_1QUE,27;
+		delquest 118206;
+		setquest 7647;
+		close2;
+		cutin "Arquien_n_atnad01",255;
+		end;
+	case 27:
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "メモリーレコードの内容は";
+		mes "覚えているな？　君が行って内容を";
+		mes "うまくあの親父に伝えるんだ。";
+		mes "考えるのはアイツの専門だろ？";
+		close2;
+		cutin "Arquien_n_atnad01",255;
+		end;
+	case 28:
+		cutin "Arquien_n_atnad04",2;
+		mes "[ナイル]";
+		mes "はあ。あの親父、本当に……。";
+		mes "自分から話に来たりはしないのか？";
+		mes "それで今回は実験棟の";
+		mes "メモリーレコードだと？";
+		next;
+		cutin "Arquien_n_atnad03",2;
+		mes "[ナイル]";
+		mes "全く……仕方ない人だな……。";
+		mes "まあいい。協力はするよ。";
+		mes "私は寛大だからね。";
+		next;
+		mes "[ナイル]";
+		mes "それに、あの親父でも";
+		mes "わからない事があるというのも、";
+		mes "少し面白いしな。";
+		mes "あいつが分からないなら";
+		mes "私たちで調べようじゃないか。";
+		next;
+		mes "[ナイル]";
+		mes "君も協力してくれるだろう？";
+		mes "実験棟のメモリーレコードを";
+		mes "2個集めて持ってきてくれ。";
+		mes "気を付けて行ってくるんだぞ。";
+		set VER_1QUE,29;
+		delquest 7648;
+		setquest 118208;
+		close2;
+		cutin "Arquien_n_atnad03",255;
+		end;
+	case 29:
+		cutin "Arquien_n_atnad04",2;
+		mes "[ナイル]";
+		mes "はあ。あの親父、本当に……。";
+		mes "自分から話に来たりはしないのか？";
+		mes "それで今回は実験棟の";
+		mes "メモリーレコードだと？";
+		next;
+		cutin "Arquien_n_atnad03",2;
+		mes "[ナイル]";
+		mes "全く……仕方ない人だな……。";
+		mes "まあいい。協力はするよ。";
+		mes "私は寛大だからね。";
+		next;
+		mes "[ナイル]";
+		mes "それに、あの親父でも";
+		mes "わからない事があるというのも、";
+		mes "少し面白いしな。";
+		mes "あいつが分からないなら";
+		mes "私たちで調べようじゃないか。";
+		next;
+		mes "[ナイル]";
+		mes "君も協力してくれるだろう？";
+		mes "実験棟のメモリーレコードを";
+		mes "2個集めて持ってきてくれ。";
+		mes "気を付けて行ってくるんだぞ。";
+		close2;
+		cutin "Arquien_n_atnad03",255;
+		end;
+	case 30:
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "持って来たか？";
+		mes "よし。これをこうやって集めて……";
+		mes "ここに置く……。";
+		next;
+		cutin "Arquien_n_atnad03",2;
+		mes "[ナイル]";
+		mes "さあ、準備は出来た。";
+		mes "再生スイッチは";
+		mes "君に押してもらおうか。";
+		mes "内容はしっかり記憶して、";
+		mes "親父に伝えるんだぞ。";
+		delitem 6824,2;
+		set VER_1QUE,31;
+		delquest 118209;
+		setquest 7646;
+		close2;
+		cutin "Arquien_n_atnad03",255;
+		end;
+	case 31:
+		cutin "Arquien_n_atnad03",2;
+		mes "[ナイル]";
+		mes "さあ、用意はできている。";
+		mes "メモリーレコードに記された秘密を";
+		mes "確認しようじゃないか。";
+		close2;
+		cutin "Arquien_n_atnad03",255;
+		end;
+	case 32:
+		cutin "Arquien_n_atnad02",2;
+		mes "[ナイル]";
+		mes "再生後の音は、静電気ではなく";
+		mes "連結部位が割れた音だったみたいだ。";
+		mes "もう一度2個繋げると再生できるから、";
+		mes "特に問題はなさそうだが……。";
+		next;
+		mes "[ナイル]";
+		mes "……今回もただならぬ内容だな。";
+		mes "実験というのは、この場所を";
+		mes "こんな姿にした元凶なのか？";
+		next;
+		cutin "Arquien_n_atnad04",2;
+		mes "[ナイル]";
+		mes "もしかすると……内容から察するに、";
+		mes "このメモリーレコードというものは";
+		mes "この地域の秘密を解くのに";
+		mes "大きな貢献をするかも知れないな。";
+		next;
+		menu "破片を見せる",-;
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "ほう……これはまた";
+		mes "不思議なものを見つけたな。";
+		mes "レコード中央の空いていた部分に";
+		mes "入っていたものなのか？";
+		next;
+		cutin "Arquien_n_atnad02",2;
+		mes "[ナイル]";
+		mes "なるほど。この部分が壊れるのか。";
+		mes "しかしこれは……";
+		next;
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "この破片からは強力な思念を感じる。";
+		mes "気を付けて扱うようにしたほうがいい。";
+		mes "何が起きるか分からないからな。";
+		next;
+		cutin "Arquien_n_atnad03",2;
+		mes "[ナイル]";
+		mes "それとだな。この調査に関して、";
+		mes "色々話を聞いていたら興味が湧いた。";
+		mes "私もここに参加するから、";
+		mes "次からメモリーレコードは";
+		mes "私に持ってきてくれ。";
+		next;
+		mes "[ナイル]";
+		mes "とりあえずあの親父に";
+		mes "私が参加する事を伝えておいてくれ。";
+		mes "文句を言われても";
+		mes "気にしないでいいからな。";
+		next;
+		cutin "Arquien_n_atnad02",2;
+		mes "[ナイル]";
+		mes "ん……？　ちょっと待て、";
+		mes "何か異様な雰囲気がする。";
+		mes "誰か訪ねてきたのか……？";
+		mes "様子を見て来るんだ。";
+		set VER_1QUE,33;
+		delquest 118206;
+		setquest 118210;
+		close2;
+		cutin "Arquien_n_atnad03",255;
+		end;
+	case 33:
+	case 34:
+	case 35:
+	case 36:
+	case 37:
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "ああ、君か。";
+		mes "どうした？　私に用か？";
+		next;
+		switch(select("レコードの収集　(デイリークエスト)","話をする","とくに用はない")) {
+		case 1:
+			mes "[ナイル]";
+			mes "メモリーレコードの収集か？";
+			mes "どちらの場所の";
+			mes "メモリーレコードだ？";
+			next;
+			set '@str1$,"研究棟　(^FF0000クエスト受注可能^000000)";
+			set '@str2$,"実験棟　(^FF0000クエスト受注可能^000000)";
+			if(checkquest(7650))
+				set '@str1$,"研究棟　(^FF0000受注中^000000)";
+			else if(checkquest(7651) & 0x2 == 0)
+				set '@str1$,"研究棟";
+			if(checkquest(7652))
+				set '@str2$,"実験棟　(^FF0000受注中^000000)";
+			else if(checkquest(7653) & 0x2 == 0)
+				set '@str2$,"実験棟";
+			switch(select('@str1$,'@str2$)) {
+			case 1:
+				if(checkquest(7654)) {
+					cutin "Arquien_n_atnad01.bmp", 2;
+					mes "[ナイル]";
+					mes "さあ、準備は出来た。";
+					mes "再生スイッチは";
+					mes "君に押してもらおうか。";
+					next;
+					cutin "Arquien_n_atnad01.bmp", 255;
+					mes "‐隣にある";
+					mes "　レコードプレイヤーを調べて、";
+					mes "　再生しよう‐";
+					close;
+				}
+				if(checkquest(7650)) {
+					if(countitem(6757) < 2) {
+						mes "[ナイル]";
+						mes "研究棟のメモリーレコードを";
+						mes "探してきてくれ。";
+						mes "^ff0000メモリーレコードは2個必要だぞ。^000000";
+						close2;
+						cutin "Arquien_n_atnad01",255;
+						end;
+					}
+					mes "[ナイル]";
+					mes "メモリーレコードを";
+					mes "集めて来たようだな。";
+					mes "しかし、メモリーレコードは";
+					mes "一体いくつ存在するんだ？";
+					next;
+					mes "[ナイル]";
+					mes "さあ、準備は出来た。";
+					mes "再生スイッチは";
+					mes "君に押してもらおうか。";
+					delitem 6757, 2;
+					setquest 7654; //state=1
+					delquest 7650;
+					close2;
+					cutin "Arquien_n_atnad01.bmp", 255;
+					end;
+				}
+				if(checkquest(7651)) {
+					if(checkquest(7651) & 0x2) {
+						delquest 7651;
+						mes "[ナイル]";
+						mes "さあ、十分休んだようだし、";
+						mes "メモリーレコードの収集を";
+						mes "再開しようか？";
+						mes "行く気になったら";
+						mes "もう一度声をかけてくれ。";
+						close2;
+						cutin "Arquien_n_atnad01.bmp", 255;
+						end;
+					}
+					mes "[ナイル]";
+					mes "研究棟のメモリーレコードの収集は";
+					mes "一日一回だけにしてくれ。";
+					next;
+					mes "[ナイル]";
+					mes "君も疲れていると思うし。私は";
+					mes "人を酷使するタイプではないからな。";
+					mes "また時間をおいて来てくれ。";
+					close2;
+					cutin "Arquien_n_atnad01",255;
+					end;
+				}
+				mes "[ナイル]";
+				mes "研究棟のメモリーレコードを";
+				mes "再生したいのか？";
+				next;
+				mes "[ナイル]";
+				mes "オーケーわかった。";
+				mes "すぐ再生できるように";
+				mes "レコードプレイヤーは準備しておこう。";
+				mes "私もあれの内容には興味がある。";
+				mes "^ff0000メモリーレコードを2個";
+				mes "集めて持ってきてくれ。^000000";
+				next;
+				if(select("集めてくる","断る") == 2) {
+					mes "[ナイル]";
+					mes "そうか。";
+					mes "気が向いたらよろしく頼む。";
+					close2;
+					cutin "Arquien_n_atnad01",255;
+					end;
+				}
+				mes "[ナイル]";
+				mes "頼んだぞ。";
+				mes "気を付けて行ってくるんだ。";
+				setquest 7650;
+				close2;
+				cutin "Arquien_n_atnad01",255;
+				end;
+			case 2:
+				if(checkquest(7655)) {
+					cutin "Arquien_n_atnad01.bmp", 2;
+					mes "[ナイル]";
+					mes "さあ、準備は出来た。";
+					mes "再生スイッチは";
+					mes "君に押してもらおうか。";
+					next;
+					cutin "Arquien_n_atnad01.bmp", 255;
+					mes "‐隣にある";
+					mes "　レコードプレイヤーを調べて、";
+					mes "　再生しよう‐";
+					close;
+				}
+				if(checkquest(7652)) {
+					if(countitem(6824) < 2) {
+						mes "[ナイル]";
+						mes "実験棟のメモリーレコードを";
+						mes "探してきてくれ。";
+						mes "^ff0000メモリーレコードは2個必要だぞ。^000000";
+						close2;
+						cutin "Arquien_n_atnad01",255;
+						end;
+					}
+					mes "[ナイル]";
+					mes "メモリーレコードを";
+					mes "集めて来たようだな。";
+					mes "しかし、メモリーレコードは";
+					mes "一体いくつ存在するんだ？";
+					next;
+					mes "[ナイル]";
+					mes "さあ、準備は出来た。";
+					mes "再生スイッチは";
+					mes "君に押してもらおうか。";
+					delitem 6824, 2;
+					setquest 7655; //state=1
+					delquest 7652;
+					close2;
+					cutin "Arquien_n_atnad01.bmp", 255;
+					end;
+				}
+				if(checkquest(7653)) {
+					if(checkquest(7653) & 0x2) {
+						delquest 7653;
+						mes "[ナイル]";
+						mes "さあ、十分休んだようだし、";
+						mes "メモリーレコードの収集を";
+						mes "再開しようか？";
+						mes "行く気になったら";
+						mes "もう一度声をかけてくれ。";
+						close2;
+						cutin "Arquien_n_atnad01",255;
+						end;
+					}
+					cutin "Arquien_n_atnad01.bmp", 2;
+					mes "[ナイル]";
+					mes "実験棟のメモリーレコードの収集は";
+					mes "一日一回だけにしてくれ。";
+					next;
+					mes "[ナイル]";
+					mes "君も疲れていると思うし。私は";
+					mes "人を酷使するタイプではないからな。";
+					mes "また時間をおいて来てくれ。";
+					close2;
+					cutin "Arquien_n_atnad01.bmp", 255;
+					end;
+				}
+				mes "[ナイル]";
+				mes "実験棟のメモリーレコードを";
+				mes "再生したいのか？";
+				next;
+				mes "[ナイル]";
+				mes "オーケーわかった。";
+				mes "すぐ再生できるように";
+				mes "レコードプレイヤーは準備しておこう。";
+				mes "私もあれの内容には興味がある。";
+				mes "^ff0000メモリーレコードを2個";
+				mes "集めて持ってきてくれ。^000000";
+				next;
+				mes "^ff0000‐[レコードの破片]を";
+				mes "　所持してる場合は、";
+				mes "　新たに[レコードの破片]を";
+				mes "　入手する事はできません‐^000000";
+				next;
+				if(select("集めてくる","断る") == 2) {
+					mes "[ナイル]";
+					mes "そうか。";
+					mes "気が向いたらよろしく頼む。";
+					close2;
+					cutin "Arquien_n_atnad01",255;
+					end;
+				}
+				mes "[ナイル]";
+				mes "頼んだぞ。";
+				mes "気を付けて行ってくるんだ。";
+				setquest 7652;
+				close2;
+				cutin "Arquien_n_atnad01",255;
+				end;
+			}
+		case 2:
+			mes "[ナイル]";
+			mes "話だと？　どうした。";
+			next;
+			menu "最後の探査について",-;
+			cutin "Arquien_n_atnad04",2;
+			mes "[ナイル]";
+			mes "ああ、最後の探査か……。";
+			mes "それはもう聞かなくていい。";
+			mes "よく考えてたんだが、";
+			mes "私が直接訪ねた方がいいかと";
+			mes "思ったんだ。";
+			next;
+			cutin "Arquien_n_atnad01",2;
+			mes "[ナイル]";
+			mes "アウレスさんの話では";
+			mes "親父はジュピロスに盲目的に";
+			mes "しがみついていたらしいんだが……。";
+			mes "今はなぜそうだったのか";
+			mes "なんとなく理由が";
+			mes "わかるような気がするんだ。";
+			next;
+			cutin "Arquien_n_atnad02",2;
+			mes "[ナイル]";
+			mes "ウェルス、メモリーレコード、";
+			mes "うちにあったレコードプレイヤー……。";
+			mes "それに、メモリーレコードの";
+			mes "アトナドという言葉……。";
+			if(VER_1QUE >= 37)
+				mes "そしてレッケンベルでのあの話。";
+			next;
+			mes "[ナイル]";
+			mes "親父……いや、父もなんとなく";
+			mes "分かっていたんじゃないかな。";
+			mes "きっと自身のルーツを探す事に";
+			mes "執着していたんだ。";
+			next;
+			cutin "Arquien_n_atnad03",2;
+			mes "[ナイル]";
+			mes strcharinfo(0)+ "、";
+			mes "君のおかげで父と";
+			mes "話す気が少しだけ出てきたよ。";
+			mes "ありがとう。";
+			close2;
+			cutin "Arquien_n_atnad03",255;
+			end;
+		case 3:
+			cutin "Arquien_n_atnad01",2;
+			mes "[ナイル]";
+			mes "私は暇じゃないんだ。";
+			mes "お前も暇なら";
+			mes "誰かを手伝ってくるんだな。";
+			close2;
+			cutin "Arquien_n_atnad01",255;
+			end;
+		}
+	default:
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "ああ、君か。";
+		mes "私はちょっとした視察にきただけだ。";
+		mes "要件があるなら";
+		mes "楽園団の事務室で話をきこう。";
+		close2;
+		cutin "Arquien_n_atnad01",255;
+		end;
+	}
+}
+verus04.gat,170,150,3	script	レコードプレイヤー#e152	844,{/* 59505 */
+	function memoryrecordplayer {
+		mes "‐メモリーレコードに記録された";
+		mes "　音声情報を再生します‐";
+		next;
+		if(getarg(0) == 1) {
+			switch(getarg(1)) {
+			case 7:
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐爆発32日目";
+				mes "　音声記録ラセ・アトナド‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐実験棟内部のエナジー爆発は";
+				mes "　止まっていない‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐例の実験に参加した";
+				mes "　研究員たちの生死は……‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐現在、避難所と繋がったシステムの";
+				mes "　生体反応以外は分からない‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐広場と研究棟は爆発の衝撃波で";
+				mes "　一部施設が壊れたが";
+				mes "　大きな被害はない‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐……しかし、実験棟から";
+				mes "　ほど近い場所にいた";
+				mes "　研究員と市民たちは、";
+				mes "　爆発の衝撃波の影響で多数死亡‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐現在、研究棟の施設を利用して";
+				mes "　探査型ウェルスギアを";
+				mes "　製作中である‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐ウェルスシティの主動力が";
+				mes "　止まったので、";
+				mes "　補助エナジーキューブを使用して";
+				mes "　最小限の施設のみ使用中だ‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐実験棟の隔壁の向こうは";
+				mes "　相変わらずエナジーストームによって";
+				mes "　接近不可‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐都市で孤立されたことに疲れた";
+				mes "　研究員数名がタイムスリップに関する";
+				mes "　研究を開始‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐……出ることが出来ない";
+				mes "　この墓の中で、";
+				mes "　時間の回帰を夢見る‐^000000";
+				break;
+			}
+		}
+		else if(getarg(0) == 2) {
+			switch(getarg(1)) {
+			case 1:
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐あー、あ、あ！";
+				mes "　ドロシーフロレンスです。";
+				mes "　今日はモニタールームにて";
+				mes "　メモリーレコードを";
+				mes "　ひとつ拾いました‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐実験日に録音された";
+				mes "　ブラックボックスかな～？";
+				mes "　再生してみます！‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐あー、雑音がすごいなぁ……";
+				mes "　あっ？　聞こえた!?‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐他の研究員は";
+				mes "　ちゃんと逃げたかな……‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐一度も恋したことが無いのは";
+				mes "　ちょっと悔しいかな……‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐……ああ～。";
+				mes "　こんないい経験には";
+				mes "　冷たいマステラ酒と";
+				mes "　たれ付き焼き肉が欲しかったな。";
+				mes "　……ジジッ……‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐あれ？　これが全部？";
+				mes "　だけどこの声は……。";
+				mes "　あああああああ！";
+				mes "　思い出した！";
+				mes "　洗濯物を預けた";
+				mes "　アルテミアさんですね！‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐……そっか。";
+				mes "　あの日……‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐……カチャン‐^000000";
+				break;
+			case 15:
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐ドロシーフロレンスです。";
+				mes "　できる事は洗濯だけの";
+				mes "　ドロシーです‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐今日から私が持っている宝物で、";
+				mes "　ここに生きる人たちの姿を";
+				mes "　残そうと思います‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐ここには多くの人たちがいます。";
+				mes "　まだ生きています‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐たくさんの人たちの話を";
+				mes "　残せたらいいですね‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐私たちの姿を";
+				mes "　誰かが知ってくれる事を、";
+				mes "　忘れないでいてくれる事を";
+				mes "　願います‐^000000";
+				next;
+				mes "[レコードプレイヤー]";
+				mes "^0000FF‐それでは……。";
+				mes "　誰からインタビューを";
+				mes "　してみようかな？‐^000000";
+				break;
+			}
+		}
+		next;
+		mes "‐メモリーレコードに記録された";
+		mes "　すべての音声情報を再生しました‐";
+		next;
+		misceffect 234, "レコードプレイヤー#e152"; //61040
+		mes "‐メモリーレコードを";
+		mes "　取り出そうすると、小さな音と共に";
+		mes "　連結部位が壊れて";
+		mes "　分割した状態に戻ってしまった‐";
+		return;
+	}
+
+	switch(VER_1QUE) {
+	case 25:
+		mes "‐メモリーレコードに記録された";
+		mes "　音声情報を再生します‐";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐ジッ……ジジジ……‐^000000";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐ジ……おい！　何やってんだ？";
+		mes "　私の話を聞いているのか？‐^000000";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐聞いているよゼルテル。";
+		mes "　ああ！　お前の声が入って";
+		mes "　しまったじゃないか！‐^000000";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐何だ？　録音してたのか？";
+		mes "　何のために？‐^000000";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐タティオへのメッセージを……";
+		mes "　ジジ……しようと";
+		mes "　設置しているんだけど。";
+		mes "　あ……ジ……なってしまうな‐^000000";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐はははは！　そんな事をやるなんて、";
+		mes "　やっぱりアトナド……だな！‐^000000";
+		next;
+		mes "[ナイル]";
+		mes "……アトナド？";
+		cutin "Arquien_n_atnad01",2;
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐ジジッ……‐^000000";
+		cutin "Arquien_n_atnad01",255;
+		next;
+		mes "‐メモリーレコードに記録された";
+		mes "　すべての音声情報を再生しました‐";
+		set VER_1QUE,26;
+		delquest 7646;
+		setquest 7653;
+		setquest 118206;
+		close;
+	case 31:
+		if(checkitemblank() == 0) {
+			// TODO
+			mes "‐アイテムの種類数が多くて";
+			mes "　進行できません。";
+			mes "　種類数を減らしてください‐";
+			close;
+		}
+		memoryrecordplayer 2,1;
+		getitem 22691,1;
+		set VER_1QUE,32;
+		delquest 7646;
+		setquest 7651;
+		setquest 118206;
+		setquest 118150;
+		compquest 118150;
+		close;
+	default:
+		if(VER_1QUE < 33) {
+			cutin "Arquien_n_atnad01",2;
+			mes "[ナイル]";
+			mes "勝手に触るな。";
+			mes "古い機械だ、壊れたら困る。";
+			close2;
+			cutin "Arquien_n_atnad01",255;
+			end;
+		}
+		mes "‐レコードプレイヤーがある。";
+		mes "　これで集めた^ff0000メモリーレコード^000000を";
+		mes "　再生できそうだ‐";
+		set '@str$,"再生する";
+		if(checkquest(7654) || checkquest(7655))
+			set '@str$,"再生する　(^FF0000報酬受け取り可能^000000)";
+		next;
+		switch(select('@str$,"再生履歴を聞く","やめる")) {
+		case 1:
+			if(checkquest(7654)) {
+				memoryrecordplayer 1,7;
+				next;
+				cutin "Arquien_n_atnad01.bmp", 2;
+				mes "[ナイル]";
+				mes "また割れたか。";
+				mes "毎回面倒くさくさせる破片だな。";
+				mes "わざとこういう風に作ったのか？";
+				next;
+				mes "[ナイル]";
+				mes "こいつらは科学の知識も";
+				mes "それを伸ばす腕もあったのに、";
+				mes "どうしてこんなモノを作ったんだ？";
+				mes "それとたまに";
+				mes "同じ内容のものもあるが……。";
+				next;
+				mes "[ナイル]";
+				mes "誰かに過去の事を知れと";
+				mes "説得されている気分だ。";
+				next;
+				setquest 7650; //state=1
+				delquest 7650;
+				delquest 7654;
+				setquest 7651; //state=1
+				getitem 6962, 1;
+				cutin "Arquien_n_atnad03.bmp", 2;
+				mes "[ナイル]";
+				mes "とにかくこの内容は私が父に渡す。";
+				mes "今日もご苦労だった。";
+				setquest 118136; //state=1
+				compquest 118136;
+				close2;
+				cutin "Arquien_n_atnad03.bmp", 255;
+				end;
+			}
+			else if(checkquest(7655)) {
+				memoryrecordplayer 2,15;
+				next;
+				cutin "Arquien_n_atnad01.bmp", 2;
+				mes "[ナイル]";
+				mes "また割れたか。";
+				mes "毎回面倒くさくさせる破片だな。";
+				mes "わざとこういう風に作ったのか？";
+				next;
+				mes "[ナイル]";
+				mes "こいつらは科学の知識も";
+				mes "それを伸ばす腕もあったのに、";
+				mes "どうしてこんなモノを作ったんだ？";
+				mes "それとたまに";
+				mes "同じ内容のものもあるが……。";
+				next;
+				mes "[ナイル]";
+				mes "誰かに過去の事を知れと";
+				mes "説得されている気分だ。";
+				next;
+				delquest 5341;
+				delquest 5370;
+				setquest 7652; //state=1
+				delquest 7652;
+				delquest 7655;
+				setquest 7653; //state=1
+				getitem 6962, 1;
+				getitem 22692, 1;
+				cutin "Arquien_n_atnad03.bmp", 2;
+				mes "[ナイル]";
+				mes "とにかくこの内容は私が父に渡す。";
+				mes "今日もご苦労だった。";
+				setquest 118164; //state=1
+				compquest 118164;
+				close2;
+				cutin "Arquien_n_atnad03.bmp", 255;
+				end;
+			}
+			mes "‐再生する準備が出来ていない‐";
+			close;
+		case 2:
+			mes "‐どちらの^ff0000メモリーレコード^000000の";
+			mes "　再生履歴を聞こうか？‐";
+			next;
+			switch(select("研究棟のメモリーレコード","実験棟のメモリーレコード","やめる")) {
+			case 1:
+				switch(select(
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+						(checkquest(118136)&8? "^0000ffラセの記録　32日目^000000": "^808080未開放^000000"),
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"やめる"))
+				{
+				default:
+					mes "‐未開放の履歴です。";
+					mes "　他の履歴を選択してください‐";
+					close;
+				case 20:
+					mes "‐その場を離れた‐";
+					close;
+				}
+			case 2:
+				switch(select(
+						(checkquest(118150)&8? "^0000ffドロシーとメモリーレコード^000000": "^808080未開放^000000"),
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+						(checkquest(118164)&8? "^0000ffインタビュアードロシー^000000": "^808080未開放^000000"),
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"^808080未開放^000000",
+								"やめる"))
+				{
+				case 1:
+					memoryrecordplayer 1;
+					close;
+				default:
+					mes "‐未開放の履歴です。";
+					mes "　他の履歴を選択してください‐";
+					close;
+				case 24:
+					mes "‐その場を離れた‐";
+					close;
+				}
+			case 3:
+			}
+		case 3:
+			mes "‐その場を離れた‐";
+			close;
+		}
+	}
+}
+
+lhz_in01.gat,277,234,3	script	レッケンベルガード#e152	868,{/* 59959 */
+	if(VER_1QUE < 34) {
+		mes "[レッケンベルガード]";
+		mes "申し訳ございませんが、";
+		mes "許可が無い方は";
+		mes "お通しすることができません。";
+		close;
+	}
+	mes "[レッケンベルガード]";
+	mes "アトナド発掘団の方ですね。";
+	mes "中にご案内します。";
+	close2;
+	warp "lhz_in01.gat",275,241;
+	end;
+}
+lhz_in01.gat,276,238,0	warp	in_to_out#e152i02	1,1,lhz_in01.gat,276,230
+
+lhz_in01.gat,270,257,4	script	レッケンベル会長#e152i0	10085,{/* 59961 */
+	if(VER_1QUE == 34) {
+		cutin "ep15_rekenber01",0;
+		mes "[レッケンベル会長]";
+		mes "ようこそいらっしゃいました。";
+		mes "私がレッケンベルの会長です。";
+		mes "はるばるご足労いただき感謝します。";
+		next;
+		mes "[レッケンベル会長]";
+		mes "アトナド発掘団のみなさんの活躍は";
+		mes "私の耳にも届いていますよ。";
+		mes "あなた方のような発掘団に";
+		mes "協力していただけて光栄です。";
+		next;
+		mes "[レッケンベル会長]";
+		mes "私がみなさんをお呼びした理由は……";
+		mes "団長であるイアン博士は";
+		mes "お察しでしょう。";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "……。";
+		next;
+		cutin "ep15_rekenber01",0;
+		mes "[レッケンベル会長]";
+		mes "最近、みなさんが収集に力を入れている";
+		mes "メモリーレコードについてです。";
+		next;
+		mes "[レッケンベル会長]";
+		mes "メモリーレコードの調査で得た";
+		mes "一切の情報を公開せず、";
+		mes "内密にしていただきたい。";
+		next;
+		menu "どういうことですか？",-;
+		mes "[レッケンベル会長]";
+		mes "メモリーレコードの内容を";
+		mes "外部に広めないで欲しいと言う事です。";
+		mes "従っていただけるのであれば、";
+		mes "特別な待遇をお約束しましょう。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "特別な待遇？";
+		mes "……何を企んでいるんだ？";
+		next;
+		mes "[イアン・アトナド]";
+		mes "土の中に埋まっている都市の過去を";
+		mes "我々以外の人々が";
+		mes "知ってはならない理由は何なんだ？";
+		mes "納得がいくよう、説明してもらおう。";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[主席秘書官]";
+		mes "今行っている作業を";
+		mes "やめなさいという事ではありません。";
+		mes "得た情報も廃棄しなさいと";
+		mes "いう事でもありません。";
+		next;
+		mes "[主席秘書官]";
+		mes "メモリーレコードの内容……";
+		mes "お察しかと思いますが、";
+		mes "あれにはウェルスシティの";
+		mes "過去の記録が残されています。";
+		next;
+		mes "[主席秘書官]";
+		mes "その内容が過去を紐解き、";
+		mes "歴史を大きく変える内容であることは";
+		mes "間違いありません。";
+		next;
+		mes "[主席秘書官]";
+		mes "科学の発展や人類の進化のために";
+		mes "メモリーレコードの内容を";
+		mes "世間に公表する事は";
+		mes "必要な事だと思います。";
+		mes "しかし、あれは私個人にとっても、";
+		mes "大切なものなのです。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "個人的に大切なもの？";
+		mes "あのメモリーレコードが、か？";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[主席秘書官]";
+		mes "ええ。";
+		mes "メモリーレコードもですが、";
+		mes "それに記された記録が";
+		mes "私のとても大切なものなのです。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "記録が？";
+		mes "どういう事だ？";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[主席秘書官]";
+		mes "順を追ってお話しましょう。";
+		mes "まず、私とあなたは過去に";
+		mes "一度お会いしています。";
+		mes "思い出せませんか？";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "……そういえばどこかで";
+		mes "見たことあるような顔だと思ったが……";
+		mes "ジュピロスだな！";
+		mes "そう、ジュピロスで見た覚えがあるぞ！";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "その時、確か……";
+		mes "通路のように見える所で……";
+		mes "……私を攻撃してきた男！";
+		mes "お、お前の……おまえのせいで……！";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "イアン、何か思い出したのですか!?";
+		mes "あの時のあなたの怪我は";
+		mes "事故ではなかったのですか!?";
+		next;
+		menu "なにがあったの？",-;
+		mes "[アウレス]";
+		mes "私たちが以前、";
+		mes "ジュピロスを調査していた時の事です。";
+		next;
+		mes "[アウレス]";
+		mes "何かを見つけたと言って";
+		mes "出て行ったイアンが、";
+		mes "一週間を過ぎても戻らず、";
+		mes "団員みんなで必死に探した結果";
+		mes "ジュノーの旅館で傷を負って";
+		mes "休んでいるところを発見したのです。";
+		emotion 0,"団長アルクイエン#ep152i";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "なぜ自分がジュノーにいるのか、";
+		mes "どれほど時間が過ぎていたかも";
+		mes "分からなかった。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "イアンは記憶も無くしてたので、";
+		mes "事故が起き、怪我をしたイアンを";
+		mes "親切な方が旅館まで";
+		mes "運んでくださったと";
+		mes "片付けるしかなかったのです。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "明確に思い出せない";
+		mes "その時の記憶のせいで……";
+		mes "私は狂ったように";
+		mes "記憶の片隅に残った";
+		mes "ジュピロスにしがみついたよ。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "ジュピロスでなら、";
+		mes "なくした記憶を取り戻すことができる、";
+		mes "この焦燥感を抑えることができると。";
+		mes "……私に家族と";
+		mes "帰るべき家があったという事も";
+		mes "忘れるほどにな。";
+		next;
+		cutin "ep15_tatio03",0;
+		mes "[主席秘書官]";
+		mes "……それは申し訳ありませんでした。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "その時、私を攻撃してきたのが";
+		mes "お前なんだな？";
+		next;
+		cutin "Arquien_n_atnad02",0;
+		mes "[ナイル]";
+		mes "……なぜだ？";
+		mes "主席秘書官どの。";
+		mes "なぜ父を傷付ける必要があった？";
+		next;
+		cutin "ep15_tatio03",0;
+		mes "[主席秘書官]";
+		mes "それは……";
+		mes "あの時、博士は見てはならないものを";
+		mes "見てしまったからです。";
+		mes "あの時ウェルスシティは";
+		mes "まだ発見されては";
+		mes "いけませんでしたから。";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "ウェルスシティ……だと!?";
+		mes "あの時私が発見したのが";
+		mes "ウェルスシティへつながる";
+		mes "通路だったということなのか?!";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "なんという事だ……";
+		mes "私がウェルスシティを発見していた?!";
+		mes "そのせいで記憶を消された……?!";
+		mes "一体どういう事なんだ?!";
+		next;
+		mes "[イアン・アトナド]";
+		mes "駄目だ、混乱しているな。";
+		mes "少し整理する時間をくれないか？";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[主席秘書官]";
+		mes "分かりました。";
+		mes "混乱されるのも無理はありません。";
+		mes "少し休憩いたしましょう。";
+		next;
+		cutin "Arquien_n_atnad02",0;
+		mes "[ナイル]";
+		mes "……父さん。";
+		mes "私も少し話がしたい……。";
+		next;
+		cutin "Arquien_n_atnad02",255;
+		mes "‐何が起きているのか整理しよう。";
+		mes "　まずはイアンかナイルに";
+		mes "　話しかけてみよう‐";
+		set VER_1QUE,35;
+		delquest 7656;
+		setquest 118215;
+		close;
+	}
+	else if(VER_1QUE == 35) {
+		cutin "ep15_rekenber02",0;
+		mes "[レッケンベル]";
+		mes "混乱されるのも無理はありません。";
+		mes "少し休憩いたしましょう。";
+		next;
+		cutin "ep15_rekenber02",255;
+		mes "‐何が起きているのか整理しよう。";
+		mes "　まずはイアンかナイルに";
+		mes "　話しかけてみよう‐";
+		close;
+	}
+	else if(VER_1QUE == 36 || VER_1QUE == 37) {
+		cutin "ep15_rekenber01",0;
+		mes "[レッケンベル]";
+		mes "元々会長というのは";
+		mes "こういう時にじっとする職業です。";
+		mes "……そんなものです。";
+		close2;
+		cutin "ep15_rekenber01",255;
+		end;
+	}
+}
+lhz_in01.gat,267,257,5	script	主席秘書官#e152i01	10084,{/* 59962 */
+	if(VER_1QUE == 34) {
+		cutin "ep15_tatio01",0;
+		mes "[主席秘書官]";
+		mes "会長様は長い時間待っていました。";
+		mes "私もです。";
+		close2;
+		cutin "ep15_tatio01",255;
+		end;
+	}
+	else if(VER_1QUE == 35) {
+		cutin "ep15_tatio01",0;
+		mes "[主席秘書官]";
+		mes "少し休憩いたしましょう。";
+		mes "どうぞあなたも休んでください。";
+		mes "積もる話もあるでしょうし。";
+		mes "私はここでお待ちしていますね。";
+		next;
+		cutin "ep15_tatio03",255;
+		mes "‐何が起きているのか整理しよう。";
+		mes "　まずはイアンかナイルに";
+		mes "　話しかけてみよう‐";
+		close;
+	}
+	else if(VER_1QUE == 36) {
+		if(checkitemblank() == 0) {
+			mes "‐アイテムの種類数が多くて";
+			mes "　持つことができない。";
+			mes "　種類数を減らしてから受け取ろう‐";
+			close;
+		}
+		cutin "ep15_tatio01",0;
+		mes "[主席秘書官]";
+		mes "お待たせいたしました。";
+		mes "話の続きをいたしましょう。";
+		mes "……話をする為に";
+		mes "私の正体を明かします。";
+		next;
+		mes "[タティオ]";
+		mes "私はウェルスシティの";
+		mes "最後の生存者である";
+		mes "タティオ.W.00H-1と申します。";
+		mes "呼びやすいように";
+		mes "タティオと呼んでください。";
+		next;
+		mes "[タティオ]";
+		mes "メモリーレコードの内容を";
+		mes "公表したくない理由……";
+		mes "あの時、ジュピロスで";
+		mes "イアン博士を攻撃したこと。";
+		mes "すべて私が望んでやったことです。";
+		donpcevent "イアン・アトナド#ep152i::OnTalk1";
+		next;
+		cutin "ep15_tatio02",0;
+		mes "[タティオ]";
+		mes "みなさんが発見したメモリーレコードに";
+		mes "記録されているタティオはこの私です。";
+		mes "そしてメモリーレコードに";
+		mes "記録されているアトナドは、";
+		mes "イアン博士の曾祖父である";
+		mes "ラセ・アトナド氏です。";
+		next;
+		cutin "ep15_tatio03",0;
+		mes "[タティオ]";
+		mes "イアン博士、娘のアルクイエンさん、";
+		mes "あなた方はお察しの通り、";
+		mes "ウェルスの民の子孫です。";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "……やはりそうか。";
+		mes "しかしウェルスは、";
+		mes "遥か遠い過去に存在した都市だ。";
+		mes "なぜその時代の人間が生きている!?";
+		next;
+		cutin "ep15_tatio02",0;
+		mes "[タティオ]";
+		mes "私は当時のウェルスの";
+		mes "科学技術を追求する実験で";
+		mes "被験者として実験に参加していました。";
+		mes "何度も実験を繰り返した結果、";
+		mes "朽ちる事のない体となり";
+		mes "今ここに存在しています。";
+		next;
+		cutin "ep15_tatio03",0;
+		mes "[タティオ]";
+		mes "ラセは私を作った科学者の一人で、";
+		mes "私の永遠の友達です。";
+		mes "故郷であり、友達との思い出が多く残る";
+		mes "ウェルスシティを守りたくて、";
+		mes "あの時イアン博士に危害を加え";
+		mes "あの場から遠ざけたのです。";
+		next;
+		mes "[タティオ]";
+		mes "イアン博士が見たものを隠そうとして、";
+		mes "少し記憶も操作して……";
+		mes "ウェルスシティに関することを";
+		mes "忘れていただきました。";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[タティオ]";
+		mes "そのせいでイアン博士は";
+		mes "一週間の記憶を";
+		mes "失っているのだと思います。";
+		next;
+		cutin "ep15_tatio02",0;
+		mes "[タティオ]";
+		mes "あの時、イアン博士が";
+		mes "ラセの子孫だとわかっていたら";
+		mes "あんな事はしていなかったでしょう。";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[タティオ]";
+		mes "ウェルスシティは";
+		mes "とても……とても昔に";
+		mes "ジュピロスと肩を並べるほどの";
+		mes "いや、それ以上の科学文明を持った";
+		mes "巨大な科学都市でした。";
+		next;
+		mes "[タティオ]";
+		mes "不慮の事故で滅びてしまいましたが、";
+		mes "機械で作られた私は";
+		mes "死ぬことなく、";
+		mes "ただ思い出のウェルスシティを";
+		mes "守っていたのです。";
+		next;
+		cutin "ep15_tatio03",0;
+		mes "[タティオ]";
+		mes "何年も、何十年も、何百年も……。";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "……なんということだ……";
+		mes "その話、会長は知っているのか？";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "いや、言わなくていい。";
+		mes "すでに知っているのだろう。";
+		mes "だから私たちを";
+		mes "ここへ呼んだのではないのか。";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[タティオ]";
+		mes "そうです。";
+		mes "私とウェルスシティの秘密は";
+		mes "会長も知っている内容です。";
+		mes "この世でたった二人だけが";
+		mes "知っていた秘密です。";
+		next;
+		mes "[タティオ]";
+		mes "いえ、違いますね。";
+		mes "設立者の一人である、";
+		mes "ゼニット・ゼルテルリヒタルも";
+		mes "知っている内容です。";
+		mes "彼もやはり、ウェルスシティの";
+		mes "子孫の一人ですから。";
+		next;
+		cutin "ep15_tatio02",0;
+		mes "[タティオ]";
+		mes "……私がウェルスシティの詳細を、";
+		mes "メモリーレコードの内容を、";
+		mes "公開して欲しくない理由。";
+		mes "わかっていただけましたか？";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "公開されたとしても、";
+		mes "ウェルスシティは";
+		mes "君の守りたいもの……というわけか。";
+		mes "特にメモリーレコードの内容は";
+		mes "彼らから君へのメッセージだからな。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "しかし、それなら";
+		mes "都市の他の資料は問題ないのか？";
+		mes "君や私の名前が明かされて";
+		mes "取り上げられたら困る状況だから";
+		mes "隠そうとしているんだろ？";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[タティオ]";
+		mes "この世界の文明と合わない";
+		mes "飛躍的な水準の核心技術は";
+		mes "すでに廃棄された状態です。";
+		next;
+		mes "[タティオ]";
+		mes "大部分の資料は、";
+		mes "事故で焼失してしまいましたが……";
+		mes "現在残っているものだけでも";
+		mes "当時の状況を知り得る";
+		mes "十分な材料になるでしょう。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "そんなに隠しておきたいなら、";
+		mes "レッケンベルと君は";
+		mes "どうしてウェルスシティの事を";
+		mes "公開したんだ？";
+		mes "なぜ、ファンタスマゴリカ計画などと";
+		mes "人を募り、調査させたんだ。";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[タティオ]";
+		mes "正直に話しますと、つい最近まで";
+		mes "実験棟のエナジーストームのせいで";
+		mes "私も近寄る事ができなかったのです。";
+		next;
+		mes "[タティオ]";
+		mes "理由は分かりませんが、";
+		mes "なぜがそのエナジーストームが";
+		mes "消えたので、危険性が無くなったという";
+		mes "判断を下したこともあります。";
+		next;
+		mes "[タティオ]";
+		mes "そしてこの世界も";
+		mes "科学や工学への理解が進み、";
+		mes "ウェルスシティの技術を知っても";
+		mes "危険ではないと考えました。";
+		next;
+		mes "[タティオ]";
+		mes "過ぎた技術は人間を滅ぼしかねません。";
+		mes "子供の手に";
+		mes "武器を握らせないのと同じように、";
+		mes "私は機会を伺っていたのです。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "……すべて納得したわけではないが、";
+		mes "大方理解した。";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[タティオ]";
+		mes "ご理解いただき、";
+		mes "ありがとうございます。";
+		mes "お約束通り、メモリーレコードの";
+		mes "調査に対する独占権を";
+		mes "アトナド発掘団に差し上げます。";
+		next;
+		mes "[タティオ]";
+		mes "ただし情報の公開や開示内容は";
+		mes "こちらで決定致します。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "わかった。";
+		mes "メモリーレコードの調査は";
+		mes "今までと同様に報告する。";
+		mes "その情報の公開は君らに任せる。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "これでいいんだろ？";
+		next;
+		cutin "ep15_tatio01",0;
+		mes "[タティオ]";
+		mes "はい。ありがとうございます。";
+		next;
+		mes "[タティオ]";
+		mes "メモリーレコードに記録された内容は、";
+		mes "私にはすべて大事な思い出なのです。";
+		mes "そう、まるで日記を見るような……。";
+		mes "ですのでこれからも";
+		mes "報告をお待ちしていますよ。";
+		next;
+		cutin "verus_ian04",2;
+		mes "[イアン・アトナド]";
+		mes "まったく。";
+		mes "曾祖父の友人という者は";
+		mes "世話のかかるヤツだな。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "さて、話は済んだ。";
+		mes "私らは戻って作業の続きをしよう。";
+		mes "お前たち、帰るぞ。";
+		next;
+		cutin "verus_ian01",255;
+		mes "‐席を立ち、";
+		mes "　帰り支度をするイアンが";
+		mes "　小声で話しかけてきた‐";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "……納得した素振りを見せたが、";
+		mes "実は私はまだ腑に落ちない部分がある。";
+		mes "タティオ……あの男、";
+		mes "ほかにも重要な事を隠しているように";
+		mes "思えてならない。";
+		next;
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "私も同感です。";
+		mes "彼にはまだ何か……";
+		mes "秘密や、隠している野望のようなものを";
+		mes "感じます……。";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "アウレス、お前もか。";
+		mes "こういう時の";
+		mes "年寄の勘は案外当たるもんだ。";
+		next;
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "フン……。まあいい。";
+		mes "今は調査を進めることが最優先だ。";
+		mes "私らは私らの";
+		mes "やるべきことをやるだけだ。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "そうだ、" +strcharinfo(0)+ "。";
+		mes "お前にこれを渡しておこう。";
+		mes "発掘の最中に手に入れたものだが、";
+		mes "どうやら古代の燃料のようだ。";
+		mes "何かに使えるかもしれん。";
+		mes "お前はこれを調べてみろ。";
+		set VER_1QUE,37;
+		delquest 118220;
+		setquest 201765;
+		getitem 6962,20;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 0,500000,0;
+		getexp 0,500000,0;
+		getexp 0,500000,0;
+		getexp 0,500000,0;
+		getexp 0,500000,0;
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	}
+	else if(VER_1QUE == 37) {
+		cutin "ep15_tatio03",0;
+		mes "[タティオ]";
+		mes "ご協力に感謝いたします。";
+		close2;
+		cutin "ep15_tatio01",255;
+		end;
+	}
+}
+lhz_in01.gat,272,255,3	script	イアン・アトナド#ep152i	10056,{/* 59963 */
+	if(VER_1QUE == 34) {
+		cutin "verus_ian01.bmp", 2;
+		mes "[イアン・アトナド]";
+		mes "来たか。";
+		mes "みんな集まったようだな。";
+		mes "何の話かわからんが";
+		mes "ともかく話を聞いてみるか。";
+		close2;
+		cutin "verus_ian01.bmp", 255;
+		end;
+	}
+	else if(VER_1QUE == 35) {
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "話とはなんだ。";
+		mes "何が聞きたい。";
+		next;
+		cutin "Arquien_n_atnad01",0;
+		mes "[ナイル]";
+		mes "今、あの人が話したのは、";
+		mes "父さんが失踪した時の話なのか？";
+		mes "今の話の記憶喪失が、";
+		mes "何年間も勝手に";
+		mes "ほっつきまわっていた原因なのか？";
+		next;
+		cutin "Arquien_n_atnad02",0;
+		mes "[ナイル]";
+		mes "その一週間の記憶のために";
+		mes "ずっとジュピロスの研究を……";
+		mes "そのために、";
+		mes "そんな事のために、";
+		mes "私と家を捨てたのか!?";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "そんなことだと!?";
+		mes "私の研究に対する情熱を";
+		mes "そんな風に言うのはやめろ！";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "私だって一人の学者である前に";
+		mes "一人の娘の父だ。";
+		mes "何も研究にだけに";
+		mes "没頭していたわけではない。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "お前宛の手紙だって家に送った。";
+		mes "それに返信しなかったのは";
+		mes "お前じゃないか！";
+		next;
+		cutin "Arquien_n_atnad04",0;
+		mes "[ナイル]";
+		mes "何をえらそうに！";
+		mes "手紙なんてものは見ていない！";
+		mes "どうせ、私が家を処分した後に";
+		mes "送ったんだろう？";
+		mes "そんなの届くわけないじゃないか！";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "おまえが勝手に家を売ったせいだろう！";
+		mes "たかだか数年、我慢できずに";
+		mes "私が苦労して手に入れた家を売って";
+		mes "行方をくらますなんて、";
+		mes "わがままにも程があるだろう！";
+		next;
+		mes "‐平行線の言い合いが続いている。";
+		mes "　アウレスと主席秘書官が";
+		mes "　困った顔でこちらを見ている‐";
+		next;
+		menu "とりあえず話の続きを聞きませんか？",-;
+		cutin "Arquien_n_atnad02",0;
+		mes "[ナイル]";
+		mes "む……確かにそうだな……。";
+		mes "と、とにかくこの事件の原因は、";
+		mes "あそこにいる主席秘書官殿に";
+		mes "あるんだろう？";
+		mes "詳しく話を聞こうじゃないか。";
+		set VER_1QUE,36;
+		delquest 118215;
+		setquest 118220;
+		close2;
+		cutin "Arquien_n_atnad02",255;
+		end;
+	}
+	else if(VER_1QUE == 36) {
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "やれやれ……。";
+		mes "私も熱くなって大人げないな……。";
+		mes "どうして私を攻撃したのか、";
+		mes "彼に詳しく話を聞こう。";
+		mes "私たち家族の話し合いはその後だ。";
+		close2;
+		cutin "verus_ian01",255;
+		end;
+	}
+	else if(VER_1QUE == 37) {
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "やつらにはやつらの思惑が";
+		mes "あるのだろうが、";
+		mes "私らは私らの";
+		mes "やるべきことをやるだけだ。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "さあ、帰るぞ。";
+		mes "戻って作業の続きをしよう。";
+		next;
+		if(select("もう少しここにいる","帰る") == 1) {
+			mes "[イアン・アトナド]";
+			mes "なんだ？　まだここに居るのか？";
+			mes "用事があるなら";
+			mes "さっさと終わらせるんだ。";
+			close2;
+			cutin "verus_ian01",255;
+			end;
+		}
+		mes "[イアン・アトナド]";
+		mes "わかった。";
+		mes "では、帰ろう。";
+		close2;
+		cutin "verus_ian01",255;
+		warp "verus04.gat",142,188;
+		end;
+	}
+OnTalk1:
+	unittalk "イアン・アトナド : !?";
+	end;
+OnTalk2:
+	unittalk "イアン・アトナド : 護衛なんぞいらん！";
+	end;
+}
+lhz_in01.gat,267,255,7	script	アウレス#ep152i01	10057,{/* 59964 */
+	if(VER_1QUE == 34) {
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "来ましたか。";
+		mes "話が始まるまで少し待ちましょう。";
+		next;
+		mes "[アウレス]";
+		mes "あの二人が一緒にいるところを見るのは";
+		mes "久しぶりですね。";
+		mes "あの二人は本当にそっくりだ。";
+		close2;
+		cutin "verus_aures",255;
+		end;
+	}
+	else if(VER_1QUE == 35) {
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "レッケンベル社に";
+		mes "招かれる日が来るとは……。";
+		close2;
+		cutin "verus_aures",255;
+		end;
+	}
+	else if(VER_1QUE == 36) {
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "とんでもない話でしたが、";
+		mes "この一件であの親子の溝が";
+		mes "少しでも埋まれば良いですね。";
+		next;
+		mes "[アウレス]";
+		mes "イアンは本当は娘想いの父なのですよ。";
+		mes "それを表に出すのが";
+		mes "恥ずかしいだけなのです。";
+		close2;
+		cutin "verus_aures",255;
+		end;
+	}
+	else if(VER_1QUE == 37) {
+		cutin "verus_aures",0;
+		mes "[アウレス]";
+		mes "とんでもない話でしたが、";
+		mes "この一件であの親子の溝が";
+		mes "少しでも埋まれば良いですね。";
+		next;
+		mes "[アウレス]";
+		mes "イアンは本当は娘想いの父なのですよ。";
+		mes "それを表に出すのが";
+		mes "恥ずかしいだけなのです。";
+		close2;
+		cutin "verus_aures",255;
+		end;
+	}
+}
+lhz_in01.gat,272,251,3	script	団長アルクイエン#ep152i	951,{/* 59965 */
+	if(VER_1QUE == 34) {
+		cutin "Arquien_n_atnad01",2;
+		mes "[ナイル]";
+		mes "どんな大げさな話をするために";
+		mes "私たちを集めたのか";
+		mes "聞いてみようじゃないか。";
+		close2;
+		cutin "Arquien_n_atnad01",255;
+		end;
+	}
+	else if(VER_1QUE == 35) {
+		cutin "verus_ian01",2;
+		mes "[イアン・アトナド]";
+		mes "話とはなんだ。";
+		mes "何が聞きたい。";
+		next;
+		cutin "Arquien_n_atnad01",0;
+		mes "[ナイル]";
+		mes "今、あの人が話したのは、";
+		mes "父さんが失踪した時の話なのか？";
+		mes "今の話の記憶喪失が、";
+		mes "何年間も勝手に";
+		mes "ほっつきまわっていた原因なのか？";
+		next;
+		cutin "Arquien_n_atnad02",0;
+		mes "[ナイル]";
+		mes "その一週間の記憶のために";
+		mes "ずっとジュピロスの研究を……";
+		mes "そのために、";
+		mes "そんな事のために、";
+		mes "私と家を捨てたのか!?";
+		next;
+		cutin "verus_ian02",2;
+		mes "[イアン・アトナド]";
+		mes "そんなことだと!?";
+		mes "私の研究に対する情熱を";
+		mes "そんな風に言うのはやめろ！";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "私だって一人の学者である前に";
+		mes "一人の娘の父だ。";
+		mes "何も研究にだけに";
+		mes "没頭していたわけではない。";
+		next;
+		mes "[イアン・アトナド]";
+		mes "お前宛の手紙だって家に送った。";
+		mes "それに返信しなかったのは";
+		mes "お前じゃないか！";
+		next;
+		cutin "Arquien_n_atnad04",0;
+		mes "[ナイル]";
+		mes "何をえらそうに！";
+		mes "手紙なんてものは見ていない！";
+		mes "どうせ、私が家を処分した後に";
+		mes "送ったんだろう？";
+		mes "そんなの届くわけないじゃないか！";
+		next;
+		cutin "verus_ian03",2;
+		mes "[イアン・アトナド]";
+		mes "おまえが勝手に家を売ったせいだろう！";
+		mes "たかだか数年、我慢できずに";
+		mes "私が苦労して手に入れた家を売って";
+		mes "行方をくらますなんて、";
+		mes "わがままにも程があるだろう！";
+		next;
+		mes "‐平行線の言い合いが続いている。";
+		mes "　アウレスと主席秘書官が";
+		mes "　困った顔でこちらを見ている‐";
+		next;
+		menu "とりあえず話の続きを聞きませんか？",-;
+		cutin "Arquien_n_atnad02",0;
+		mes "[ナイル]";
+		mes "む……確かにそうだな……。";
+		mes "と、とにかくこの事件の原因は、";
+		mes "あそこにいる主席秘書官殿に";
+		mes "あるんだろう？";
+		mes "詳しく話を聞こうじゃないか。";
+		set VER_1QUE,36;
+		delquest 118215;
+		setquest 118220;
+		close2;
+		cutin "Arquien_n_atnad02",255;
+		end;
+	}
+	else if(VER_1QUE == 36) {
+		cutin "Arquien_n_atnad02",0;
+		mes "[ナイル]";
+		mes "あそこにいる主席秘書官殿に";
+		mes "詳しく話を聞こうじゃないか。";
+		mes "どんな理由であれ、";
+		mes "私を納得させられる内容でなければ";
+		mes "容赦はしないがな。";
+		close2;
+		cutin "Arquien_n_atnad02",255;
+		end;
+	}
+	else if(VER_1QUE == 37) {
+		cutin "Arquien_n_atnad02",2;
+		mes "[ナイル]";
+		mes "あのメモリーレコードには";
+		mes "思い出が綴られているんだな。";
+		mes "時代を超えた日記……か。";
+		next;
+		cutin "Arquien_n_atnad03",2;
+		mes "[ナイル]";
+		mes "さあ、帰るぞ。";
+		mes "遊んでる暇はないんだ。";
+		mes "さっさと仕事に戻れ。";
+		close2;
+		cutin "Arquien_n_atnad03",255;
+		end;
+	}
+}
+
+lhz_in01.gat,275,251,3	script	ルークラフェズ#ep152i01	953,{/* 59966 */
+	cutin "looke_rapez04",0;
+	mes "[ルーク]";
+	mes "ここには護衛としてきただけだ。";
+	close2;
+	cutin "looke_rapez02",255;
+	initnpctimer;
+	end;
+OnTimer200:
+	donpcevent "イアン・アトナド#ep152i::OnTalk2";
+	end;
+OnTimer700:
+	emotion 6,"団長アルクイエン#ep152i"; //59965
+	end;
+OnTimer900:
+	stopnpctimer;
+	emotion 9,"ルークラフェズ#ep152i01"; //59966
+	end;
+}
 
 verus04.gat,91,252,5	script	考古学者#tevt01	993,{/* 59277 */
 	mes "[考古学者]";
@@ -2827,7 +6568,7 @@ verus04.gat,135,213,4	script	立て札#EP15_1D中	857,{/* 59283 */
 verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 	if(checkquest(5318) & 0x2)
 		delquest 5318;
-	emotion 19, "警備隊長ケスラー#EP15_1"; //59284
+	emotion 19,"警備隊長ケスラー#EP15_1";
 	mes "[警備隊長ケスラー]";
 	mes "ようこそ。";
 	mes "ここはウェルスシティだ。";
@@ -2840,7 +6581,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 	case 1:
 		if(checkquest(5309)) {
 			if(!checkquest(5310) || !checkquest(5311) || !checkquest(5312) || !checkquest(5313)) {
-				emotion 1, "警備隊長ケスラー#EP15_1"; //59032
+				emotion 1,"警備隊長ケスラー#EP15_1"; //59032
 				mes "[警備隊長ケスラー]";
 				mes "まだ全ての隊員と";
 				mes "会っていないようだな。";
@@ -2883,7 +6624,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 			delquest 5311;
 			delquest 5312;
 			delquest 5313;
-			setquest 5318; //state=1
+			setquest 5318;
 			switch('@count) {
 			case 0:
 				getexp 250000,125000;
@@ -2916,7 +6657,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 				close;
 			}
 		}
-		emotion 23, "警備隊長ケスラー#EP15_1"; //59284
+		emotion 23,"警備隊長ケスラー#EP15_1"; //59284
 		mes "[警備隊長ケスラー]";
 		mes "……今、何と!?";
 		next;
@@ -2960,19 +6701,19 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 		mes "　^ff0000受け取る報酬が増加します^000000‐";
 		next;
 		if(select("やります","今度やります")) {
-			emotion 28, "警備隊長ケスラー#EP15_1"; //59284
+			emotion 28,"警備隊長ケスラー#EP15_1"; //59284
 			mes "[警備隊長ケスラー]";
 			mes "何……協力してくれるのでは";
 			mes "なかったのか？";
 			close;
 		}
-		setquest 5309; //state=1
+		setquest 5309;
 		mes "[警備隊長ケスラー]";
 		mes "それではよろしく頼む。 ";
 		close;
 	case 2:
 		if(countitem(6753) == 0) {
-			emotion 20, "警備隊長ケスラー#EP15_1"; //59284
+			emotion 20,"警備隊長ケスラー#EP15_1"; //59284
 			mes "[警備隊長ケスラー]";
 			mes "^4E9867ウェルスシティ警備隊^000000が";
 			mes "気になるのか？";
@@ -2989,7 +6730,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 			mes "君は^F8081E滅亡祝福教団^000000という名前を";
 			mes "聞いたことあるか？";
 			next;
-			emotion 6, "警備隊長ケスラー#EP15_1"; //59284
+			emotion 6,"警備隊長ケスラー#EP15_1"; //59284
 			mes "[警備隊長ケスラー]";
 			mes "滅亡の時が到来したと叫びながら、";
 			mes "様々な場所出没して、破壊活動を行う";
@@ -3013,7 +6754,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 			mes "^F8081E滅亡祝福教団^000000を発見したら";
 			mes "奴らを懲らしめてくれ！ ";
 			next;
-			emotion 18, "警備隊長ケスラー#EP15_1"; //59284
+			emotion 18,"警備隊長ケスラー#EP15_1"; //59284
 			mes "[警備隊長ケスラー]";
 			mes "我々も人手不足でな……。";
 			mes "よろしく頼む。";
@@ -3087,8 +6828,8 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 						// 未調査
 						close;
 					}
-					delitem 6753, '@num*5;
-					getitem 6962, '@num;
+					delitem 6753,'@num*5;
+					getitem 6962,'@num;
 					mes "[警備隊長ケスラー]";
 					mes "これが約束の品だ。";
 					mes "また、滅亡の証を手に入れたら";
@@ -3096,7 +6837,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 					mes "よろしく頼む。";
 					close;
 				case 3:
-					emotion 20, "警備隊長ケスラー#EP15_1"; //59030
+					emotion 20,"警備隊長ケスラー#EP15_1"; //59030
 					mes "[警備隊長ケスラー]";
 					mes "む？";
 					mes "先ほど滅亡の証を持って来たと";
@@ -3105,7 +6846,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 				}
 			}
 		}
-		emotion 23, "警備隊長ケスラー#EP15_1"; //59030
+		emotion 23,"警備隊長ケスラー#EP15_1"; //59030
 		mes "[警備隊長ケスラー]";
 		mes "これは滅亡祝福教団信者たちが";
 		mes "持ち歩いているという";
@@ -3115,7 +6856,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 		mes "どこで手に入れた？";
 		next;
 		menu "手に入れた場所を教える",-;
-		emotion 15, "警備隊長ケスラー#EP15_1"; //59030
+		emotion 15,"警備隊長ケスラー#EP15_1"; //59030
 		mes "[警備隊長ケスラー]";
 		mes "本当か!?";
 		mes "貴重な情報をありがとう。";
@@ -3125,7 +6866,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 		mes "これは何か謝礼をしなければ";
 		mes "いけないな……う～む。";
 		next;
-		emotion 0, "警備隊長ケスラー#EP15_1"; //59030
+		emotion 0,"警備隊長ケスラー#EP15_1"; //59030
 		mes "[警備隊長ケスラー]";
 		mes "そうだ！";
 		mes "^F8081E滅亡の証^000000を持ってくれば";
@@ -3149,7 +6890,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 		mes "もちろん、後で交換しても構わないぞ。";
 		next;
 		if(select("今交換する","後で交換する") == 2) {
-			setquest 5304; //state=1
+			setquest 5304;
 			compquest 5304;
 			mes "[警備隊長ケスラー]";
 			mes "わかった。";
@@ -3200,8 +6941,8 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 			// 未調査
 			close;
 		}
-		delitem 6753, '@num*5;
-		getitem 6962, '@num;
+		delitem 6753,'@num*5;
+		getitem 6962,'@num;
 		mes "[警備隊長ケスラー]";
 		mes "これが約束の品だ。";
 		mes "また、滅亡の証を手に入れたら";
@@ -3209,7 +6950,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 		mes "よろしく頼む。";
 		close;
 	case 3:
-		emotion 0, "警備隊長ケスラー#EP15_1"; //59284
+		emotion 0,"警備隊長ケスラー#EP15_1"; //59284
 		mes "[警備隊長ケスラー]";
 		mes "ウェルスシティに来るのは";
 		mes "初めてのようだな。";
@@ -3219,7 +6960,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 		mes "最近、発掘が開始された場所で";
 		mes "行動の制限は厳しくない。";
 		next;
-		emotion 0, "警備隊長ケスラー#EP15_1"; //59284
+		emotion 0,"警備隊長ケスラー#EP15_1"; //59284
 		mes "[警備隊長ケスラー]";
 		mes "だが、一点だけ、";
 		mes "気を付けて頂きたい事がある。";
@@ -3234,7 +6975,7 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 		mes "だから本来は全ての発掘物は";
 		mes "丁重に扱うべきなのだが……。";
 		next;
-		emotion 6, "警備隊長ケスラー#EP15_1"; //59284
+		emotion 6,"警備隊長ケスラー#EP15_1"; //59284
 		mes "[警備隊長ケスラー]";
 		mes "それを滅亡祝福教団の奴らめ！";
 		mes "滅亡祝福教団など滅びてしまえ！";
@@ -3252,14 +6993,14 @@ verus04.gat,133,212,4	script	警備隊長ケスラー#EP15_1	119,{/* 59284 */
 		mes "話が脱線してしまったな。";
 		mes "すまなかった。";
 		next;
-		emotion 33, "警備隊長ケスラー#EP15_1"; //59284
+		emotion 33,"警備隊長ケスラー#EP15_1"; //59284
 		mes "[警備隊長ケスラー]";
 		mes "まあ、ここで発掘された物が ";
 		mes "傷つかないように";
 		mes "注意しろという事だ。";
 		close;
 	case 4:
-		emotion 22, "警備隊長ケスラー#EP15_1"; //59284
+		emotion 22,"警備隊長ケスラー#EP15_1"; //59284
 		mes "[警備隊長ケスラー]";
 		mes "^F8081E滅亡祝福教団^000000を見かけたら";
 		mes "近くにいる警備隊に知らせてくれ。";
@@ -3292,11 +7033,11 @@ verus03.gat,38,114,4	script	立て札#EP15_1D東	857,{/* 59285 */
 }
 verus03.gat,36,113,4	script	警備隊員サルグラン#EP15	118,{/* 59286 */
 	if(checkquest(5309) == 0) {
-		misceffect 197, "警備隊員サルグラン#EP15"; //59286
+		misceffect 197,"警備隊員サルグラン#EP15"; //59286
 		mes "[警備隊員サルグラン]";
 		mes "ぐぅぐぅ……。";
 		next;
-		emotion 19, "警備隊員サルグラン#EP15"; //59286
+		emotion 19,"警備隊員サルグラン#EP15"; //59286
 		mes "[警備隊員サルグラン]";
 		mes "た、隊長助けて下さい。";
 		next;
@@ -3325,7 +7066,7 @@ verus03.gat,36,113,4	script	警備隊員サルグラン#EP15	118,{/* 59286 */
 		switch(select("全部撤去した","教団の目印はどこにあるの？","やめたいです","何でもない")) {
 		case 1:
 			if(checkquest(5314) & 0x4 == 0) {
-				emotion 54, "警備隊員サルグラン#EP15"; //59032
+				emotion 54,"警備隊員サルグラン#EP15"; //59032
 				mes "[警備隊員サルグラン]";
 				mes "何だ、まだじゃないか。";
 				mes "少なくとも^ff000010個^000000は";
@@ -3333,17 +7074,17 @@ verus03.gat,36,113,4	script	警備隊員サルグラン#EP15	118,{/* 59286 */
 				close;
 			}
 			if(!checkquest(5305)) {
-				setquest 5305; //state=1
+				setquest 5305;
 				compquest 5305;
 			}
 			delquest 5314;
-			setquest 5310; //state=1
+			setquest 5310;
 			mes "[警備隊員サルグラン]";
 			mes "おお！　ご苦労だった。";
 			mes "隊長も喜んでくれるだろう。";
 			close;
 		case 2:
-			emotion 23, "警備隊員サルグラン#EP15"; //59032
+			emotion 23,"警備隊員サルグラン#EP15"; //59032
 			mes "[警備隊員サルグラン]";
 			mes "ウェルスシティ中に";
 			mes "ばら撒かれているはずだが……。";
@@ -3369,17 +7110,17 @@ verus03.gat,36,113,4	script	警備隊員サルグラン#EP15	118,{/* 59286 */
 				close;
 			}
 			//未調査
-			setquest 5305; //state=1
+			setquest 5305;
 			compquest 5305;
 			delquest 5314;
-			setquest 5310; //state=1
+			setquest 5310;
 			mes "[警備隊員サルグラン]";
 			mes "そうか……急用なら仕方ないな。";
 			mes "隊長には私から伝えておく。";
 			mes "急いで行った方が良いぞ。";
 			close;
 		case 4:
-			emotion 20, "警備隊員サルグラン#EP15"; //59032
+			emotion 20,"警備隊員サルグラン#EP15"; //59032
 			mes "[警備隊員サルグラン]";
 			mes "……？";
 			mes "おかしな奴だな。";
@@ -3387,11 +7128,11 @@ verus03.gat,36,113,4	script	警備隊員サルグラン#EP15	118,{/* 59286 */
 		}
 	}
 	if(checkquest(5305)) {
-		emotion 12, "警備隊員サルグラン#EP15"; //59032
+		emotion 12,"警備隊員サルグラン#EP15"; //59032
 		mes "[警備隊員サルグラン]";
 		mes "今日も隊長の頼みで来たのか？";
 		next;
-		emotion 1, "警備隊員サルグラン#EP15"; //59032
+		emotion 1,"警備隊員サルグラン#EP15"; //59032
 		mes "[警備隊員サルグラン]";
 		mes "よかった。";
 		mes "今日も教団の目印の撤去を";
@@ -3416,8 +7157,8 @@ verus03.gat,36,113,4	script	警備隊員サルグラン#EP15	118,{/* 59286 */
 				mes "もう一度話しかけてくれよな。";
 				close;
 			}
-			emotion 54, "警備隊員サルグラン#EP15"; //59032
-			setquest 5310; //state=1
+			emotion 54,"警備隊員サルグラン#EP15"; //59032
+			setquest 5310;
 			mes "[警備隊員サルグラン]";
 			mes "忙しいならしょうがない。";
 			mes "隊長には特に変わった事はないと";
@@ -3426,15 +7167,15 @@ verus03.gat,36,113,4	script	警備隊員サルグラン#EP15	118,{/* 59286 */
 		}
 	}
 	else {
-		misceffect 197, "警備隊員サルグラン#EP15"; //59032
+		misceffect 197,"警備隊員サルグラン#EP15"; //59032
 		menu "あの……",-;
-		emotion 23, "警備隊員サルグラン#EP15"; //59032
+		emotion 23,"警備隊員サルグラン#EP15"; //59032
 		mes "[警備隊員サルグラン]";
 		mes "うわああっ!!";
 		mes "ケスラー隊長!?";
 		mes "お……私は寝ていません！";
 		next;
-		emotion 9, "警備隊員サルグラン#EP15"; //59032
+		emotion 9,"警備隊員サルグラン#EP15"; //59032
 		emotion 9,""; //self
 		mes "[警備隊員サルグラン]";
 		mes "……。";
@@ -3447,7 +7188,7 @@ verus03.gat,36,113,4	script	警備隊員サルグラン#EP15	118,{/* 59286 */
 		mes "[" +strcharinfo(0)+ "]";
 		mes "警備隊長から言われて来ました。";
 		next;
-		emotion 43, "警備隊員サルグラン#EP15"; //59032
+		emotion 43,"警備隊員サルグラン#EP15"; //59032
 		mes "[警備隊員サルグラン]";
 		mes "なるほど、隊長の代理か。";
 		mes "それならちょうど良い、";
@@ -3472,10 +7213,10 @@ verus03.gat,36,113,4	script	警備隊員サルグラン#EP15	118,{/* 59286 */
 				mes "もう一度話しかけてくれよな。";
 				close;
 			}
-			emotion 54, "警備隊員サルグラン#EP15"; //59032
-			setquest 5305; //state=1
+			emotion 54,"警備隊員サルグラン#EP15"; //59032
+			setquest 5305;
 			compquest 5305;
-			setquest 5310; //state=1
+			setquest 5310;
 			mes "[警備隊員サルグラン]";
 			mes "忙しいならしょうがない。";
 			mes "隊長には特に変わった事はないと";
@@ -3483,7 +7224,7 @@ verus03.gat,36,113,4	script	警備隊員サルグラン#EP15	118,{/* 59286 */
 			close;
 		}
 	}
-	setquest 5314; //state=1
+	setquest 5314;
 	mes "[警備隊員サルグラン]";
 	mes "いつも悪いな。";
 	mes "それじゃあ、教団の目印を";
@@ -3514,7 +7255,7 @@ verus03.gat,116,39,4	script	立て札#EP15_1D?	857,{/* 59287 */
 }
 verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 	if(checkquest(5309) == 0) {
-		emotion 57, "警備隊員ゲレフ#EP15_1D"; //59288
+		emotion 57,"警備隊員ゲレフ#EP15_1D"; //59288
 		mes "[警備隊員ゲレフ]";
 		mes "うぅ……ストレスが溜まる。";
 		mes "早くストレス解消する方法を";
@@ -3525,7 +7266,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 		close;
 	}
 	if(checkquest(5311)) {
-		emotion 2, "警備隊員ゲレフ#EP15_1D"; //59034
+		emotion 2,"警備隊員ゲレフ#EP15_1D"; //59034
 		mes "[警備隊員ゲレフ]";
 		mes "気分は少し良くなってきました。";
 		mes "ケスラー隊長には特に変わった事は";
@@ -3533,7 +7274,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 		close;
 	}
 	if(checkquest(5314) || checkquest(5316) || checkquest(5317)) {
-		emotion 19, "警備隊員ゲレフ#EP15_1D"; //59034
+		emotion 19,"警備隊員ゲレフ#EP15_1D"; //59034
 		mes "[警備隊員ゲレフ]";
 		mes "うっ……胃痛がひどい……。";
 		mes "悪いけど、少し休みたいんだ。";
@@ -3542,7 +7283,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 		close;
 	}
 	if(checkquest(5315)) {
-		emotion 23, "警備隊員ゲレフ#EP15_1D"; //59034
+		emotion 23,"警備隊員ゲレフ#EP15_1D"; //59034
 		mes "[警備隊員ゲレフ]";
 		mes "まさか……本当にもう";
 		mes "罠を撤去したのですか？";
@@ -3558,7 +7299,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 				close;
 			}
 			if(QUE3_VER < 10) {
-				emotion 57, "警備隊員ゲレフ#EP15_1D"; //59034
+				emotion 57,"警備隊員ゲレフ#EP15_1D"; //59034
 				mes "[警備隊員ゲレフ]";
 				mes "まだ^ff0000" +QUE3_VER+ "個^000000しか罠を";
 				mes "撤去していませんね。";
@@ -3567,11 +7308,11 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 				close;
 			}
 			if(checkquest(5306)) {
-				setquest 5306; //state=1
+				setquest 5306;
 				compquest 5306;
 			}
 			delquest 5315;
-			setquest 5311; //state=1
+			setquest 5311;
 			mes "[警備隊員ゲレフ]";
 			mes "ご苦労様でした。";
 			mes "罠が消えたら気分が少し";
@@ -3579,7 +7320,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 			mes "隊長への報告もよろしくお願いします。";
 			close;
 		case 2:
-			emotion 36, "警備隊員ゲレフ#EP15_1D"; //59034
+			emotion 36,"警備隊員ゲレフ#EP15_1D"; //59034
 			mes "[警備隊員ゲレフ]";
 			mes "あれ……？";
 			mes "罠が見つかりませんでしたか？";
@@ -3613,18 +7354,18 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 			}
 			//未調査
 			if(checkquest(5306)) {
-				setquest 5306; //state=1
+				setquest 5306;
 				compquest 5306;
 			}
 			delquest 5315;
-			setquest 5311; //state=1
+			setquest 5311;
 			mes "[警備隊員ゲレフ]";
 			mes "そうか……急用なら仕方ないな。";
 			mes "隊長には私から伝えておく。";
 			mes "急いで行った方が良いぞ。";
 			close;
 		case 4:
-			emotion 57, "警備隊員ゲレフ#EP15_1D"; //59034
+			emotion 57,"警備隊員ゲレフ#EP15_1D"; //59034
 			mes "[警備隊員ゲレフ]";
 			mes "そうですか……。";
 			mes "うぅ……胃が……。";
@@ -3660,7 +7401,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 				mes "もう一度話しかけてください。";
 				close;
 			}
-			setquest 5311; //state=1
+			setquest 5311;
 			mes "[警備隊員ゲレフ]";
 			mes "ふーん。";
 			mes "忙しいのに隊長の手伝いは";
@@ -3668,7 +7409,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 			mes "あ、僕が隊長じゃないから";
 			mes "手伝ってくれないんですか？";
 			next;
-			emotion 36, "警備隊員ゲレフ#EP15_1D"; //59034
+			emotion 36,"警備隊員ゲレフ#EP15_1D"; //59034
 			mes "[警備隊員ゲレフ]";
 			mes "まあ、戻ったらケスラー「隊長」には";
 			mes "特に変わった事はないと";
@@ -3677,7 +7418,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 		}
 	}
 	else {
-		emotion 53, "警備隊員ゲレフ#EP15_1D"; //59036
+		emotion 53,"警備隊員ゲレフ#EP15_1D"; //59036
 		mes "[警備隊員ゲレフ]";
 		mes "あれ？　ペンがない……。";
 		mes "さっきは確かにあったのに……。";
@@ -3686,12 +7427,12 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 		mes "[" +strcharinfo(0)+ "]";
 		mes "そこの耳に乗っかっていますよ。";
 		next;
-		emotion 23, "警備隊員ゲレフ#EP15_1D"; //59036
+		emotion 23,"警備隊員ゲレフ#EP15_1D"; //59036
 		mes "[警備隊員ゲレフ]";
 		mes "あれ!?　いつのまに……。";
 		mes "変ですね……。";
 		next;
-		emotion 1, "警備隊員ゲレフ#EP15_1D"; //59036
+		emotion 1,"警備隊員ゲレフ#EP15_1D"; //59036
 		mes "[警備隊員ゲレフ]";
 		mes "っと、失礼いたしました。";
 		mes "何か用ですか？";
@@ -3699,7 +7440,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 		mes "[" +strcharinfo(0)+ "]";
 		mes "警備隊長から言われて来ました。";
 		next;
-		emotion 6, "警備隊員ゲレフ#EP15_1D"; //59036
+		emotion 6,"警備隊員ゲレフ#EP15_1D"; //59036
 		mes "[警備隊員ゲレフ]";
 		mes "ケスラー隊長の遣いの方ですね。";
 		mes "ははは、隊長は羨ましいなあ。";
@@ -3724,9 +7465,9 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 				mes "もう一度話しかけてください。";
 				close;
 			}
-			setquest 5306; //state=1
+			setquest 5306;
 			compquest 5306;
-			setquest 5311; //state=1
+			setquest 5311;
 			mes "[警備隊員ゲレフ]";
 			mes "ふーん。";
 			mes "忙しいのに隊長の手伝いは";
@@ -3734,7 +7475,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 			mes "あ、僕が隊長じゃないから";
 			mes "手伝ってくれないんですか？";
 			next;
-			emotion 36, "警備隊員ゲレフ#EP15_1D"; //59034
+			emotion 36,"警備隊員ゲレフ#EP15_1D"; //59034
 			mes "[警備隊員ゲレフ]";
 			mes "まあ、戻ったらケスラー「隊長」には";
 			mes "特に変わった事はないと";
@@ -3742,7 +7483,7 @@ verus03.gat,116,36,6	script	警備隊員ゲレフ#EP15_1D	748,{/* 59288 */
 			close;
 		}
 	}
-	setquest 5315; //state=1
+	setquest 5315;
 	mes "[警備隊員ゲレフ]";
 	mes "ありがとうございます。";
 	mes "それではウェルスシティの";
@@ -3773,7 +7514,7 @@ verus03.gat,83,241,4	script	立て札#EP15_1D南	857,{/* 59289 */
 }
 verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 	if(checkquest(5309) == 0) {
-		emotion 29, "警備隊員スイデン#EP15_1"; //59290
+		emotion 29,"警備隊員スイデン#EP15_1"; //59290
 		mes "[警備隊員スイデン]";
 		mes "ふふふ……。";
 		mes "私はあなたを知っています……。";
@@ -3784,7 +7525,7 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 		close;
 	}
 	if(checkquest(5312)) {
-		emotion 29, "警備隊員スイデン#EP15_1"; //59038
+		emotion 29,"警備隊員スイデン#EP15_1"; //59038
 		mes "[警備隊員スイデン]";
 		mes "ふふふ……。";
 		mes "誰かの恨みを買わないように";
@@ -3792,7 +7533,7 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 		close;
 	}
 	if(checkquest(5314) || checkquest(5315) || checkquest(5317)) {
-		emotion 29, "警備隊員スイデン#EP15_1"; //59036
+		emotion 29,"警備隊員スイデン#EP15_1"; //59036
 		mes "[警備隊員スイデン]";
 		mes "ふふふ……。";
 		mes "一度に出来る仕事はひとつだけ。";
@@ -3802,7 +7543,7 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 		close;
 	}
 	if(checkquest(5316)) {
-		emotion 29, "警備隊員スイデン#EP15_1"; //59036
+		emotion 29,"警備隊員スイデン#EP15_1"; //59036
 		mes "[警備隊員スイデン]";
 		mes "ふふふ……。";
 		mes "石は全部拾いましたか？";
@@ -3810,7 +7551,7 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 		switch(select("全部拾いました","石はどこにありますか？","石を拾う時間がありません","なんでもありません")) {
 		case 1:
 			if(QUE3_VER == 0) {
-				emotion 29, "警備隊員スイデン#EP15_1"; //59036
+				emotion 29,"警備隊員スイデン#EP15_1"; //59036
 				mes "[警備隊員スイデン]";
 				mes "ふふふ……。";
 				mes "石はどこにあるんですか？";
@@ -3821,7 +7562,7 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 				close;
 			}
 			if(QUE3_VER < 10 && countitem(7049) >= 10) {
-				emotion 29, "警備隊員スイデン#EP15_1"; //59036
+				emotion 29,"警備隊員スイデン#EP15_1"; //59036
 				mes "[警備隊員スイデン]";
 				mes "ふふふ……。";
 				mes "この石はどこから拾って来ました？";
@@ -3829,14 +7570,14 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 				mes "ふふ、ふふふ……。";
 				close;
 			}
-			emotion 29, "警備隊員スイデン#EP15_1"; //59036
-			delitem 7049, 10;
+			emotion 29,"警備隊員スイデン#EP15_1"; //59036
+			delitem 7049,10;
 			if(checkquest(5307)) {
-				setquest 5307; //state=1
+				setquest 5307;
 				compquest 5307;
 			}
 			delquest 5316;
-			setquest 5312; //state=1
+			setquest 5312;
 			mes "[警備隊員スイデン]";
 			mes "ふふふ……。";
 			mes "ご苦労様でした。";
@@ -3844,7 +7585,7 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 			mes "怨念が消えていきます。";
 			close;
 		case 2:
-			emotion 29, "警備隊員スイデン#EP15_1"; //59036
+			emotion 29,"警備隊員スイデン#EP15_1"; //59036
 			mes "[警備隊員スイデン]";
 			mes "ふふふ……。";
 			mes "何故こんなことまで聞くんですか？";
@@ -3878,11 +7619,11 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 			}
 			//未調査
 			if(checkquest(5307)) {
-				setquest 5307; //state=1
+				setquest 5307;
 				compquest 5307;
 			}
 			delquest 5316;
-			setquest 5312; //state=1
+			setquest 5312;
 			mes "[警備隊員スイデン]";
 			mes "え……？";
 			mes "こういう風に言えば";
@@ -3890,7 +7631,7 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 			mes "隊長にはうまく話しておいて下さい。";
 			close;
 		case 4:
-			emotion 29, "警備隊員スイデン#EP15_1"; //59036
+			emotion 29,"警備隊員スイデン#EP15_1"; //59036
 			mes "[警備隊員スイデン]";
 			mes "ふふふ……。";
 			mes "分かりました。";
@@ -3899,7 +7640,7 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 		}
 	}
 	if(checkquest(5307)) {
-		emotion 29, "警備隊員スイデン#EP15_1"; //59036
+		emotion 29,"警備隊員スイデン#EP15_1"; //59036
 		mes "[警備隊員スイデン]";
 		mes "ふふふ……。";
 		mes "そろそろ来ると思っていました。";
@@ -3931,9 +7672,9 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 				close;
 			}
 			// 未調査
-			emotion 20, "警備隊員スイデン#EP15_1"; //59038
+			emotion 20,"警備隊員スイデン#EP15_1"; //59038
 			delquest 5307;
-			setquest 5312; //state=1
+			setquest 5312;
 			mes "[警備隊員スイデン]";
 			mes "え……？";
 			mes "こういう風に言えば";
@@ -3943,7 +7684,7 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 		}
 	}
 	else {
-		emotion 29, "警備隊員スイデン#EP15_1"; //59038
+		emotion 29,"警備隊員スイデン#EP15_1"; //59038
 		mes "[警備隊員スイデン]";
 		mes "ふふふ……。";
 		mes "隊長に言われてきた方ですね。";
@@ -3994,10 +7735,10 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 				mes "もう一度話しかけてください。";
 				close;
 			}
-			emotion 20, "警備隊員スイデン#EP15_1"; //59038
-			setquest 5307; //state=1
+			emotion 20,"警備隊員スイデン#EP15_1"; //59038
+			setquest 5307;
 			compquest 5307;
-			setquest 5312; //state=1
+			setquest 5312;
 			mes "[警備隊員スイデン]";
 			mes "え……？";
 			mes "こういう風に言えば";
@@ -4006,7 +7747,7 @@ verus03.gat,81,241,6	script	警備隊員スイデン#EP15_1	89,{/* 59290 */
 			close;
 		}
 	}
-	setquest 5316; //state=1
+	setquest 5316;
 	mes "[警備隊員スイデン]";
 	mes "ふふふ……。";
 	mes "小さな石は投げても痛くもないし、";
@@ -4037,7 +7778,7 @@ verus04.gat,204,260,4	script	立て札#EP15_1D北	857,{/* 59291 */
 }
 verus04.gat,202,258,4	script	警備隊員フィプス#EP15_1	755,{/* 59292 */
 	if(checkquest(5309) == 0) {
-		emotion 37, "警備隊員フィプス#EP15_1"; //59292
+		emotion 37,"警備隊員フィプス#EP15_1"; //59292
 		mes "[警備隊員フィプス]";
 		mes "もぐもぐ……。";
 		mes "ふむ、結構美味いじゃないか。";
@@ -4046,7 +7787,7 @@ verus04.gat,202,258,4	script	警備隊員フィプス#EP15_1	755,{/* 59292 */
 		close;
 	}
 	if(checkquest(5313)) {
-		emotion 21, "警備隊員フィプス#EP15_1"; //59040
+		emotion 21,"警備隊員フィプス#EP15_1"; //59040
 		mes "[警備隊員フィプス]";
 		mes "ここは私が責任を持って警備している。";
 		mes "心配するな。";
@@ -4057,7 +7798,7 @@ verus04.gat,202,258,4	script	警備隊員フィプス#EP15_1	755,{/* 59292 */
 		close;
 	}
 	if(checkquest(5317)) {
-		emotion 1, "警備隊員フィプス#EP15_1"; //59038
+		emotion 1,"警備隊員フィプス#EP15_1"; //59038
 		mes "[警備隊員フィプス]";
 		mes "薬草の採集は終わったか？";
 		next;
@@ -4115,11 +7856,11 @@ verus04.gat,202,258,4	script	警備隊員フィプス#EP15_1	755,{/* 59292 */
 				close;
 			}
 			if(checkquest(5308)) {
-				setquest 5308; //state=1
+				setquest 5308;
 				compquest 5308;
 			}
 			delquest 5317;
-			setquest 5313; //state=1
+			setquest 5313;
 			mes "[警備隊員フィプス]";
 			mes "そうか……急用なら仕方ないな。";
 			mes "隊長には私から伝えておく。";
@@ -4160,7 +7901,7 @@ verus04.gat,202,258,4	script	警備隊員フィプス#EP15_1	755,{/* 59292 */
 				mes "もう一度話しかけてくれ。";
 				close;
 			}
-			setquest 5313; //state=1
+			setquest 5313;
 			mes "[警備隊員フィプス]";
 			mes "そうか、仕方ないな。";
 			mes "また次の機会に頼む。";
@@ -4168,7 +7909,7 @@ verus04.gat,202,258,4	script	警備隊員フィプス#EP15_1	755,{/* 59292 */
 		}
 	}
 	else {
-		emotion 37, "警備隊員フィプス#EP15_1"; //59040
+		emotion 37,"警備隊員フィプス#EP15_1"; //59040
 		mes "[警備隊員フィプス]";
 		mes "もぐもぐ……。";
 		mes "ふむ、美味いな。";
@@ -4177,7 +7918,7 @@ verus04.gat,202,258,4	script	警備隊員フィプス#EP15_1	755,{/* 59292 */
 		mes "[" +strcharinfo(0)+ "]";
 		mes "あの……。";
 		next;
-		emotion 23, "警備隊員フィプス#EP15_1"; //59040
+		emotion 23,"警備隊員フィプス#EP15_1"; //59040
 		mes "[警備隊員フィプス]";
 		mes "ほう、気が付かなくてすまない。";
 		mes "恥ずかしい姿を見せたな。";
@@ -4191,7 +7932,7 @@ verus04.gat,202,258,4	script	警備隊員フィプス#EP15_1	755,{/* 59292 */
 		mes "隊長の遣いか？";
 		mes "ふむ、ちょうど良かった。";
 		next;
-		emotion 1, "警備隊員フィプス#EP15_1"; //59040
+		emotion 1,"警備隊員フィプス#EP15_1"; //59040
 		mes "[警備隊員フィプス]";
 		mes "そろそろ薬草の在庫が少ないんだ。";
 		mes "採りに行く時間もなく、";
@@ -4218,16 +7959,16 @@ verus04.gat,202,258,4	script	警備隊員フィプス#EP15_1	755,{/* 59292 */
 				mes "もう一度話しかけてくれ。";
 				close;
 			}
-			setquest 5308; //state=1
+			setquest 5308;
 			compquest 5308;
-			setquest 5313; //state=1
+			setquest 5313;
 			mes "[警備隊員フィプス]";
 			mes "そうか、仕方ないな。";
 			mes "また次の機会に頼む。";
 			close;
 		}
 	}
-	setquest 5317; //state=1
+	setquest 5317;
 	mes "[警備隊員フィプス]";
 	mes "ありがとう。";
 	mes "ウェルスシティにある";
@@ -4288,7 +8029,7 @@ verus03.gat,127,36,4	script	???#EP15_1D_01	550,{/* 59293 */
 			mes "　怪我はしないだろう‐";
 		}
 		else {
-			getitem 7049, 1;
+			getitem 7049,1;
 			mes "‐大きな石を拾った。";
 			mes "　人に投げたら";
 			mes "　非常に危険だろう‐";
@@ -4350,7 +8091,7 @@ verus04.gat,187,219,4	script	茂み#EP15_1D_01	527,{/* 59318 */
 			// 本家はチェックなし
 		}
 		else {
-			getitem 6754, 1;
+			getitem 6754,1;
 			mes "‐薬草の採集に成功した‐";
 		}
 		set QUE3_VER,QUE3_VER + 1;
@@ -4387,6 +8128,32 @@ verus04.gat,72,247,4	duplicate(茂み#EP15_1D_01)	茂み#EP15_1D_18	527	/* 59335 */
 verus04.gat,75,243,4	duplicate(茂み#EP15_1D_01)	茂み#EP15_1D_19	527	/* 59336 */
 verus04.gat,81,252,4	duplicate(茂み#EP15_1D_01)	茂み#EP15_1D_20	527	/* 59337 */
 
+yuno_fild07.gat,211,179,5	script	発掘地案内人#atd07	868,{/* 60509 */
+	mes "[発掘地案内人]";
+	mes "ファンタスマゴリカプロジェクトの";
+	mes "発掘地まで行く方ですか？";
+	next;
+	mes "[発掘地案内人]";
+	mes "新しく発見された遺跡、";
+	mes "^4d4dffウェルスシティ^000000は";
+	mes "ジュピロス奥の通路から";
+	mes "行くことができます。";
+	next;
+	mes "[発掘地案内人]";
+	mes "ジュピロスの入口は";
+	mes "この光の柱を抜けた先にありますよ。";
+	mes "モンスターが多数出没していますので、";
+	mes "気をつけてください。";
+	next;
+	mes "[発掘地案内人]";
+	mes "また、ここから南に行ったところには";
+	mes "ウェルス発掘地に通じる";
+	mes "エレベーターもありますよ。";
+	mes "レッケンベル社で利用者登録を行えば";
+	mes "利用が出来ます。";
+	close;
+}
+
 yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 	mes "[エリシャ]";
 	mes "はぁい♪";
@@ -4394,12 +8161,36 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 	mes "利用者登録が必要でーす。";
 	mes "ちょっと登録の確認をするので";
 	mes "名前を言ってもらえます？";
-	emotion 3, "案内員エリシャ#ep15_1bs"; //59884
+	emotion 3,"案内員エリシャ#ep15_1bs"; //59884
 	next;
 	switch(select("名前を言う","確認手続きについて聞く","話を終える")) {
 	case 1:
-		// 調査不足
-		if(VER2_QUE < 2) {
+		if(VER2_QUE == 0) {
+			mes "[エリシャ]";
+			mes "ありがとうございまーす。";
+			mes "楽園団所属、お名前は……";
+			mes strcharinfo(0)+ "様ですね。";
+			mes "では、確認してみます。";
+			next;
+			mes "[エリシャ]";
+			mes "あら……どうやらリストに";
+			mes "名前は見当たらないようですねぇ。";
+			mes "このエレベーターを使用するには";
+			mes "別途、^FF0000エレベーター使用許可登録^000000が";
+			mes "必要なのです。";
+			next;
+			mes "[エリシャ]";
+			mes "もし、レッケンベル本社で";
+			mes "^0000FFレイトナ^000000という";
+			mes "女性の敵みたいな男性に";
+			mes "会った記憶がないのであれば、";
+			mes "登録はまだのはずですよ。";
+			emotion 19, "案内員エリシャ#ep15_1bs"; //60510
+			next;
+			menu "レッケンベル本社に行けと？",-;
+			break;
+		}
+		else if(VER2_QUE == 1) {
 			mes "[エリシャ]";
 			mes "ありがとうございまーす。";
 			mes "では、確認してみますねぇ。";
@@ -4414,7 +8205,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "女性の敵みたいな男性に";
 			mes "会った記憶がないのであれば、";
 			mes "登録はまだのはずですよ。";
-			emotion 19, "案内員エリシャ#ep15_1bs"; //59884
+			emotion 19, "案内員エリシャ#ep15_1bs"; //60510
 			next;
 			menu "レッケンベル本社に行けと？",-;
 			break;
@@ -4424,7 +8215,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "はいはい。";
 			mes "お名前は……";
 			mes strcharinfo(0)+ "様っと……。";
-			emotion 3, "案内員エリシャ#ep15_1bs"; //59884
+			emotion 3,"案内員エリシャ#ep15_1bs"; //59884
 			next;
 			mes "[エリシャ]";
 			mes "それじゃあ、確認してみますね。";
@@ -4439,7 +8230,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 				mes "もしご利用の際は";
 				mes "お声をおかけください。";
 				mes "それでは良い一日を！";
-				emotion 3, "案内員エリシャ#ep15_1bs"; //59884
+				emotion 3,"案内員エリシャ#ep15_1bs"; //59884
 				close;
 			}
 			mes "[エリシャ]";
@@ -4458,7 +8249,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "それでは安全な冒険に";
 			mes "なる事を祈ります！";
 			mes "いってら……";
-			emotion 3, "案内員エリシャ#ep15_1bs"; //59884
+			emotion 3,"案内員エリシャ#ep15_1bs"; //59884
 			next;
 			mes "^FF0000‐ピーーーーッ!!‐";
 			mes "　";
@@ -4471,7 +8262,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "……。";
 			mes "……あれ？";
 			mes "待って下さい？";
-			emotion 19, "案内員エリシャ#ep15_1bs"; //59884
+			emotion 19,"案内員エリシャ#ep15_1bs"; //59884
 			next;
 			mes "^FF0000‐ピーーーーッ!!‐";
 			mes "　";
@@ -4484,7 +8275,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "あらららら!?";
 			mes "ど……どうしたんだろう！";
 			mes "ちょっとー!?　機嫌直してよ!?";
-			emotion 19, "案内員エリシャ#ep15_1bs"; //59884
+			emotion 19,"案内員エリシャ#ep15_1bs"; //59884
 			next;
 			mes "^FF0000‐ピーーーーッ!!‐";
 			mes "　";
@@ -4499,7 +8290,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "さっき、重量超過寸前の人数を";
 			mes "乗せたせいかしら……。";
 			mes "ど、どうしよ……。";
-			emotion 23, "案内員エリシャ#ep15_1bs"; //59884
+			emotion 23,"案内員エリシャ#ep15_1bs"; //59884
 			next;
 			mes "^FF0000‐ピーーーーッ!!‐";
 			mes "　";
@@ -4515,7 +8306,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "来て頂いたのに、";
 			mes "急に機械が壊れたようです。";
 			mes "こんな事、初めて……。";
-			emotion 19, "案内員エリシャ#ep15_1bs"; //59884
+			emotion 19,"案内員エリシャ#ep15_1bs"; //59884
 			emotion 23,""; //self
 			next;
 			mes "[エリシャ]";
@@ -4533,7 +8324,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "道なりに進んで頂ければ、着くはずです。";
 			mes "迷ったら警護員に道を聞いて";
 			mes "見てください。";
-			viewpoint 1, 210, 175, 1, 0xFF8000; //59884
+			viewpoint 1,210,175,1,0xFF8000; //59884
 			next;
 			mes "[エリシャ]";
 			mes "なお、ジュピロス廃墟外部にある";
@@ -4557,9 +8348,9 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "良かったら使用できない原因を、";
 			mes "確認していただけませんか？";
 			mes "本当にすみません……。";
-			emotion 28, "案内員エリシャ#ep15_1bs"; //59884
+			emotion 28,"案内員エリシャ#ep15_1bs"; //59884
 			delquest 11364;
-			setquest 11365; //state=1
+			setquest 11365;
 			set VER2_QUE,3;
 			close;
 		}
@@ -4579,7 +8370,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "道なりに進んで頂ければ、着くはずです。";
 			mes "迷ったら警護員に道を聞いて";
 			mes "見てください。";
-			viewpoint 1, 210, 175, 1, 0xFF8000; //59884
+			viewpoint 1,210,175,1,0xFF8000; //59884
 			next;
 			mes "[エリシャ]";
 			mes "ジュピロス廃墟外部にある";
@@ -4603,14 +8394,14 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "良かったら使用できない原因を、";
 			mes "確認していただけませんか？";
 			mes "本当にすみません……。";
-			emotion 28, "案内員エリシャ#ep15_1bs"; //59884
+			emotion 28,"案内員エリシャ#ep15_1bs"; //59884
 			close;
 		}
 		mes "[エリシャ]";
 		mes strcharinfo(0)+ "様。";
 		mes "登録が確認できました。";
 		mes "ウェルスシティに移動しますか？";
-		emotion 3, "案内員エリシャ#ep15_1bs"; //59884
+		emotion 3,"案内員エリシャ#ep15_1bs"; //59884
 		next;
 		if(select("移動する","移動しない") == 2) {
 			mes "[エリシャ]";
@@ -4641,7 +8432,6 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 			mes "移動するための機械で、";
 		}
 		else if(VER2_QUE == 1) {
-			mes "[エリシャ]";
 			mes "ふふふ！";
 			mes "このエレベーターは";
 			mes "^0000FFウェルスシティ^000000に";
@@ -4752,11 +8542,11 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 	mes "^0000FF‐エリシャは面倒そうに";
 	mes "　インカム型マイクの";
 	mes "　スイッチを入れた‐^0000FF";
-	emotion 23, "案内員エリシャ#ep15_1bs"; //59884
+	emotion 23,"案内員エリシャ#ep15_1bs"; //59884
 	next;
 	mes "[エリシャ]";
 	mes "はい、エリシャです……。";
-	mes "……何を言ってるんですか。";
+	mes "……何を言ってるんですか！";
 	mes "仕事中ですよ!?";
 	mes "それより今から登録のために";
 	mes "そちらにお客様が行きますから、";
@@ -4771,6 +8561,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 	next;
 	mes "^0000FF‐エリシャは何かを悟ったような";
 	mes "　表情で、こちらを振り返った‐^0000FF";
+	emotion 9, "案内員エリシャ#ep15_1bs"; //60510
 	next;
 	mes "[エリシャ]";
 	mes "……はぁ……本当、あの人は……。";
@@ -4780,8 +8571,10 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 	mes "もし宜しければ転送装置でここから";
 	mes "レッケンベル本社にお送りします……。";
 	if(checkquest(11363) == 0)
-		setquest 11363; //state=1
-	set VER2_QUE,1;
+		setquest 11363;
+	set '@flag,VER2_QUE;
+	if(VER2_QUE == 0)
+		set VER2_QUE,1;
 	next;
 	if(select("移動する","移動しない") == 2) {
 		mes "[エリシャ]";
@@ -4793,7 +8586,7 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 		close;
 	}
 	mes "[エリシャ]";
-	if(VER2_QUE == 0) {
+	if('@flag == 0) {
 		mes "はぁ……。";
 		mes "では、レッケンベル本社";
 		mes "１階へまいります。";
@@ -4812,9 +8605,93 @@ yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
 	warp "lhz_in01.gat",79,203;
 	end;
 OnInit:
-	waitingroom "地下遺跡アドベンチャー", 0; //59884
+	waitingroom "地下遺跡アドベンチャー",0; //59884
 	end;
 }
+
+yuno_fild07.gat,218,154,3	script	冒険家#ep15_1el01	937,{/* 60511 */
+	mes "[冒険家]";
+	mes "うう……。";
+	mes "私も行ってみたい!!";
+	mes "どうして私は入れて";
+	mes "くれないんだよ～！";
+	close;
+}
+
+yuno_fild07.gat,218,159,5	script	冒険家#ep15_1el02	907,{/* 60512 */
+	mes "[冒険家]";
+	mes "決めたぞ！";
+	mes "今回の現場学習課題は";
+	mes "ウェルス訪問記にする！";
+	next;
+	mes "[冒険家]";
+	mes "これならあの厳しい教授も";
+	mes "A+単位をくれるだろうしっ！";
+	close;
+}
+
+yuno_fild07.gat,221,157,3	script	冒険家#ep15_1el03	819,{/* 60513 */
+	mes "[冒険家]";
+	mes "はああああ!!";
+	mes "健康な肉体に健康な精神！";
+	mes "とてもイイ……!!";
+	mes "今日も私の肉体は輝いている!!";
+	close;
+}
+
+yuno_fild07.gat,221,155,8	script	冒険家#ep15_1el04	749,{/* 60514 */
+	mes "[冒険家]";
+	mes "ウェルスに行くなら、";
+	mes "ポーションは余裕を持って";
+	mes "用意した方が良さそうだよな？";
+	close;
+}
+
+yuno_fild07.gat,217,155,5	script	冒険家#ep15_1el05	747,{/* 60515 */
+	mes "[冒険家]";
+	mes "レッケンベル社にてここまで";
+	mes "支援してくれるとは……。";
+	mes "あの会社の資産は底なしか!?";
+	close;
+}
+
+yuno_fild07.gat,225,166,3	script	商人#ep15_1el06	553,{/* 60516 */
+	mes "[商人]";
+	mes "おほー！";
+	mes "この場所、商売に良さそうに見える!!";
+	mes "ここで何の商売をしようかニャン。";
+	close;
+}
+
+yuno_fild07.gat,225,144,1	script	冒険家#ep15_1el07	59,{/* 60517 */
+	mes "[冒険家]";
+	mes "エレベーターとは……。";
+	mes "シュバルツバルドの科学力は";
+	mes "本当に凄いですね！";
+	close;
+}
+
+yuno_fild07.gat,217,149,3	script	冒険家#ep15_1el08	726,{/* 60518 */
+	mes "[冒険家]";
+	mes "古代文明というのは、";
+	mes "本当に凄くない？ ";
+	next;
+	mes "[冒険家]";
+	mes "大体、字と語感からもう";
+	mes "ヤバイというか……。";
+	mes "女子力ならぬロマン力が";
+	mes "溢れかえってるよねぇ！";
+	close;
+}
+
+yuno_fild07.gat,224,152,3	script	冒険家#ep15_1el09	881,{/* 60519 */
+	mes "[冒険家]";
+	mes "どうしてこんなに人が";
+	mes "わらわら集まっているんだ？";
+	mes "見ているだけで、人に酔いそうだ。";
+	close;
+}
+
 lhz_in01.gat,75,209,3	script	レイトナ#ep15_1bs	865,{/* 60546 */
 	if(VER2_QUE == 0) {
 		mes "[レイトナ]";
@@ -4823,7 +8700,7 @@ lhz_in01.gat,75,209,3	script	レイトナ#ep15_1bs	865,{/* 60546 */
 		mes "お願いならいくらでも";
 		mes "聞いちゃうレイトナ";
 		mes "お兄さんだよ～！";
-		emotion 30, "レイトナ#ep15_1bs"; //60546
+		emotion 30,"レイトナ#ep15_1bs"; //60546
 		next;
 		mes "[レイトナ]";
 		mes "ごめんねぇ。";
@@ -4840,7 +8717,7 @@ lhz_in01.gat,75,209,3	script	レイトナ#ep15_1bs	865,{/* 60546 */
 		mes "お願いならいくらでも";
 		mes "聞いちゃうレイトナ";
 		mes "お兄さんだよ～！";
-		emotion 30, "レイトナ#ep15_1bs"; //60546
+		emotion 30,"レイトナ#ep15_1bs"; //60546
 		next;
 		menu "登録について聞く",-;
 		mes "[レイトナ]";
@@ -4850,7 +8727,7 @@ lhz_in01.gat,75,209,3	script	レイトナ#ep15_1bs	865,{/* 60546 */
 		mes "ウェルスに行くための";
 		mes "エレベーターを使用するために";
 		mes "名前を登録するところさ！";
-		emotion 9, "レイトナ#ep15_1bs"; //60546
+		emotion 9,"レイトナ#ep15_1bs"; //60546
 		next;
 		mes "[レイトナ]";
 		mes "この仕事を最初に頼まれた頃は、";
@@ -4870,7 +8747,7 @@ lhz_in01.gat,75,209,3	script	レイトナ#ep15_1bs	865,{/* 60546 */
 		mes "おかげで以前のように、";
 		mes "仕事中に可愛い子ちゃんたちに";
 		mes "会いに行く時間も無いよ～。";
-		emotion 26, "レイトナ#ep15_1bs"; //60546
+		emotion 26,"レイトナ#ep15_1bs"; //60546
 		next;
 		mes "[レイトナ]";
 		mes "とにかく複雑な手順はないし、";
@@ -4893,7 +8770,7 @@ lhz_in01.gat,75,209,3	script	レイトナ#ep15_1bs	865,{/* 60546 */
 		mes "　このエレベーターを使用するための";
 		mes "　メンバー登録完了‐^000000";
 		delquest 11363;
-		setquest 11364; //state=1
+		setquest 11364;
 		set VER2_QUE,2;
 		next;
 		mes "[レイトナ]";
@@ -4921,7 +8798,6 @@ lhz_in01.gat,75,209,3	script	レイトナ#ep15_1bs	865,{/* 60546 */
 			mes "会いに来てね～。";
 			close;
 		}
-		// 未調査
 		mes "[レイトナ]";
 		mes "そうこないとね♪";
 		mes "そのかわりに、";
@@ -4933,7 +8809,7 @@ lhz_in01.gat,75,209,3	script	レイトナ#ep15_1bs	865,{/* 60546 */
 		warp "yuno_fild07.gat",221,151;
 		end;
 	}
-	else {
+	else if(VER2_QUE == 2) {
 		mes "[レイトナ]";
 		mes "どうせ公開するつもりだったなら";
 		mes "登録なんてしなくてもいいように";
@@ -4974,8 +8850,17 @@ lhz_in01.gat,75,209,3	script	レイトナ#ep15_1bs	865,{/* 60546 */
 		warp "yuno_fild07.gat",221,151;
 		end;
 	}
+	mes "[レイトナ]";
+	mes "最近、使用者が多くなって";
+	mes "毎日故障をしているみたいだね～。";
+	mes "あ～あ……ナンパに行きたい……。";
+	mes "お兄さん、寂しがりだから";
+	mes "可愛い子ちゃんの笑顔を見ないと";
+	mes "死んじゃうよ～。";
+	emotion 26, "レイトナ#ep15_1bs"; //60478
+	close;
 OnInit:
-	waitingroom "エレベーター登録", 0; //60546
+	waitingroom "エレベーター登録",0; //60546
 	end;
 }
 verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
@@ -5015,7 +8900,7 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "危ないじゃないですか！";
 		mes "エレベーターの中で";
 		mes "ふざけないでください！";
-		emotion 6, "案内員スカーレット#ep15"; //59136
+		emotion 6,"案内員スカーレット#ep15"; //59136
 		next;
 		mes "[スカーレット]";
 		mes "確か乗る前に内部では";
@@ -5030,40 +8915,40 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "本当にすみません……。";
 		mes "こいつが乗る前に";
 		mes "暴れてしまって……。";
-		emotion 19, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark3.bmp", 2;
+		emotion 19,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark3",2;
 		next;
 		mes "[テューリアン]";
 		mes "この程度で壊れてしまう";
 		mes "機械をどうやって";
 		mes "信じて乗れというんだ!?";
-		emotion 23, "テューリアン#ep15_1elb"; //59138
-		cutin "bu_du3.bmp", 2;
+		emotion 23,"テューリアン#ep15_1elb"; //59138
+		cutin "bu_du3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "うるさい！";
 		mes "ほら、早くこの人に";
 		mes "すみませんでしたと謝れ！";
-		emotion 6, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark4.bmp", 2;
+		emotion 6,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark4",2;
 		next;
 		mes "[テューリアン]";
 		mes "大体おかしいだろ!!";
 		mes "こんな大人数をそんな得体のしれない";
 		mes "機械に押し込めるなんて!!";
 		mes "何かが起きた後じゃ、遅いんだぞ!?";
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "……。";
-		emotion 6, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark4.bmp", 2;
+		emotion 6,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark4",2;
 		next;
 		mes "[タマリン]";
 		mes "だからふざけないでくださいと";
 		mes "あの人も言ったのでは……。";
-		emotion 23, "タマリン#ep15_1elb"; //59140
-		cutin "ep143_taang.bmp", 2;
+		emotion 23,"タマリン#ep15_1elb"; //59140
+		cutin "ep143_taang",2;
 		next;
 		mes "[アルプオカート]";
 		mes "とりあえず今ハッキリしているのは";
@@ -5072,50 +8957,50 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "今、床がとても不安定な状態だ。";
 		mes "こんな状態では落ち着いて";
 		mes "話すこともままならない。";
-		emotion 19, "アルプオカート#ep15_1el"; //59141
-		cutin "bu_alp2.bmp", 2;
+		emotion 19,"アルプオカート#ep15_1el"; //59141
+		cutin "bu_alp2",2;
 		next;
 		mes "[スカーレット]";
 		mes "……確かにそうですね。";
 		mes "まずは降りて早く修理をしないと";
 		mes "もっと大変なことになってからじゃ";
 		mes "手遅れですし……。";
-		cutin "bu_alp2.bmp", 255;
+		cutin "bu_alp2",255;
 		next;
 		mes "^FF0000－ガクンッ……－^000000";
-		emotion 23, "案内員スカーレット#ep15"; //59136
-		emotion 23, "テューリアン#ep15_1elb"; //59138
-		emotion 23, "マークイシャ#ep15_1elb"; //59139
-		emotion 23, "タマリン#ep15_1elb"; //59140
-		emotion 23, "アルプオカート#ep15_1el"; //59141
-		emotion 23, "マギスティン#ep15_1elb"; //59142
+		emotion 23,"案内員スカーレット#ep15"; //59136
+		emotion 23,"テューリアン#ep15_1elb"; //59138
+		emotion 23,"マークイシャ#ep15_1elb"; //59139
+		emotion 23,"タマリン#ep15_1elb"; //59140
+		emotion 23,"アルプオカート#ep15_1el"; //59141
+		emotion 23,"マギスティン#ep15_1elb"; //59142
 		next;
 		mes "[マギスティン]";
 		mes "きゃああああああ！";
-		emotion 23, "マギスティン#ep15_1elb"; //59142
-		cutin "bu_maggi4.bmp", 2;
+		emotion 23,"マギスティン#ep15_1elb"; //59142
+		cutin "bu_maggi4",2;
 		next;
 		mes "[テューリアン]";
 		mes "うわああ!?";
 		mes "な、なんだ……!?";
 		mes "今、床が動いた気がするうううっ!?";
-		emotion 19, "テューリアン#ep15_1elb"; //59138
-		cutin "bu_du5.bmp", 2;
+		emotion 19,"テューリアン#ep15_1elb"; //59138
+		cutin "bu_du5",2;
 		next;
 		mes "[スカーレット]";
 		mes "ま、待ってください!!";
 		mes "とりあえず誰も動かないで!!";
 		mes "一歩間違えれば大事故に";
 		mes "つながる可能性が、あります!!";
-		emotion 23, "案内員スカーレット#ep15"; //59136
-		cutin "bu_du5.bmp", 255;
+		emotion 23,"案内員スカーレット#ep15"; //59136
+		cutin "bu_du5",255;
 		next;
 		mes "[スカーレット]";
 		mes "あっ。";
 		mes "そこの方!!";
 		mes "お名前を教えてください！";
 		mes "ちょっと助けてほしいんです！";
-		emotion 26, "案内員スカーレット#ep15"; //59136
+		emotion 26,"案内員スカーレット#ep15"; //59136
 		next;
 		menu "名前を名乗る",-;
 		mes "[スカーレット]";
@@ -5141,7 +9026,7 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "なるべく早く持ってきてください。";
 		mes "お願いします!!";
 		delquest 11365;
-		setquest 11366; //state=1
+		setquest 11366;
 		set VER2_QUE,4;
 		close;
 	}
@@ -5155,21 +9040,21 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "このまま落ちるのか……!?";
 		mes "俺は高いところは好きだが";
 		mes "足場が不安定な場所は苦手だーっ！";
-		emotion 23, "テューリアン#ep15_1elb"; //59138
-		cutin "bu_du5.bmp", 2;
+		emotion 23,"テューリアン#ep15_1elb"; //59138
+		cutin "bu_du5",2;
 		next;
 		mes "[タマリン]";
 		mes "不吉な事を言わないでください！";
 		mes "そもそもあなたのせいですからね!?";
-		emotion 6, "タマリン#ep15_1elb"; //59140
-		cutin "ep143_taang.bmp", 2;
+		emotion 6,"タマリン#ep15_1elb"; //59140
+		cutin "ep143_taang",2;
 		next;
 		mes "[スカーレット]";
 		mes "二人とも静かにしてください！";
 		mes "本当に今少しでも動いたら";
 		mes "大変な事になりますよ!?";
-		emotion 23, "案内員スカーレット#ep15"; //59136
-		cutin "ep143_taang.bmp", 255;
+		emotion 23,"案内員スカーレット#ep15"; //59136
+		cutin "ep143_taang",255;
 		next;
 		if(countitem(7319) < 30) {
 			mes "[スカーレット]";
@@ -5193,9 +9078,9 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "それではゆっくりでいいので、";
 		mes "ひとつずつ、ここに";
 		mes "入れ込んでください!!";
-		delitem 7319, 30;
+		delitem 7319,30;
 		delquest 11366;
-		setquest 118330; //state=1
+		setquest 118330;
 		set VER2_QUE,5;
 		next;
 		mes "[スカーレット]";
@@ -5218,7 +9103,7 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "さあ、マギ!";
 		mes "早く俺の手を握って";
 		mes "慌てずに下りるんだ！";
-		cutin "bu_du4.bmp", 2;
+		cutin "bu_du4",2;
 		next;
 		mes "[スカーレット]";
 		mes "みんな無事に降りれて";
@@ -5227,14 +9112,14 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "無事だったからよいですが……";
 		mes "次からは絶対今日のような事は";
 		mes "しないでくださいね!?";
-		cutin "bu_du4.bmp", 255;
+		cutin "bu_du4",255;
 		next;
 		mes "[スカーレット]";
 		mes "そして" +strcharinfo(0)+ "様、";
 		mes "本当にありがとうございます。";
 		mes "お蔭様で大きな事故にならずに";
 		mes "すみました……。";
-		emotion 15, "案内員スカーレット#ep15"; //59136
+		emotion 15,"案内員スカーレット#ep15"; //59136
 		next;
 		mes "[スカーレット]";
 		mes "そういえば先ほど";
@@ -5256,19 +9141,19 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "なったのに……。";
 		mes "まさか今回も迷惑を";
 		mes "かけてしまうとは……。";
-		emotion 15, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark2.bmp", 2;
+		emotion 15,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark2",2;
 		next;
 		mes "[マギスティン]";
 		mes "うう……";
 		mes "……ヒック。";
 		mes "怖かったです……。";
 		mes "グスッ……。";
-		emotion 28, "マギスティン#ep15_1elb"; //59142
-		cutin "bu_maggi4.bmp", 2;
+		emotion 28,"マギスティン#ep15_1elb"; //59142
+		cutin "bu_maggi4",2;
 		next;
 		if(select("マギスティンを抱きしめる","特になにもしない") == 1) {
-			cutin "bu_maggi3.bmp", 2;
+			cutin "bu_maggi3",2;
 			mes "[マギスティン]";
 			mes "あっ……。";
 			mes "　";
@@ -5276,21 +9161,21 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 			mes "　そっと体を預けてきた。";
 			mes "　小刻みに震えているのが分かる‐^000000";
 			next;
-			cutin "bu_du5.bmp", 2;
+			cutin "bu_du5",2;
 			mes "[テューリアン]";
 			mes "なんだよ、" +strcharinfo(0)+ "！";
 			mes "俺だって怖い目に";
 			mes "あったっていうのに……";
 			mes "俺にはないのか!?";
 			next;
-			cutin "bu_mark3.bmp", 2;
+			cutin "bu_mark3",2;
 			mes "[マークイシャ]";
 			mes "……お前が抱きついたら";
 			mes "犯罪になるだろ!!";
 			mes "とにかくお前は";
 			mes "マギスティンに謝れ!!";
 			next;
-			cutin "bu_maggi2.bmp", 2;
+			cutin "bu_maggi2",2;
 			mes "[マギスティン]";
 			mes strcharinfo(0)+ "さん。";
 			mes "もう大丈夫です。";
@@ -5299,18 +9184,18 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		}
 		mes "[テューリアン]";
 		mes "マギ、本当にすまない……。";
-		cutin "bu_du4.bmp", 2;
+		cutin "bu_du4",2;
 		next;
-		cutin "bu_maggi2.bmp", 2;
+		cutin "bu_maggi2",2;
 		mes "[マギスティン]";
 		mes "テュー、私は大丈夫。";
 		mes strcharinfo(0)+ "さん。";
 		mes "テューがご迷惑を";
 		mes "おかけしました。";
 		mes "そして、お久しぶりです。";
-		emotion 15, "マギスティン#ep15_1elb"; //59142
+		emotion 15,"マギスティン#ep15_1elb"; //59142
 		next;
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		mes "[テューリアン]";
 		mes strcharinfo(0)+ "……!?";
 		mes "む、無論憶えてるぞ！";
@@ -5326,16 +9211,16 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "フレイムヴァレー以来ですね。";
 		mes "お陰で友達とも合流できました。";
 		mes "ありがとうございます。";
-		emotion 15, "タマリン#ep15_1elb"; //59140
-		cutin "ep143_tasmi.bmp", 2;
+		emotion 15,"タマリン#ep15_1elb"; //59140
+		cutin "ep143_tasmi",2;
 		next;
 		mes "[アルプオカート]";
 		mes "……すまない、迷惑をかけた。";
 		mes "そして久しぶりだな。";
 		mes "あれからまたオリバーヒルベルトの";
 		mes "コレクションが増えたんだ……。";
-		cutin "bu_alp4.bmp", 2;
-		emotion 15, "アルプオカート#ep15_1el"; //59141
+		cutin "bu_alp4",2;
+		emotion 15,"アルプオカート#ep15_1el"; //59141
 		next;
 		mes "[タマリン]";
 		mes "だけどちょっと、";
@@ -5343,7 +9228,7 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "発掘がはじまったばかりなのに";
 		mes "こんな機械まで準備されていて、";
 		mes "用意周到すぎるような……。";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		next;
 		mes "[マークイシャ]";
 		mes "うーん、まあ……";
@@ -5351,7 +9236,7 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "話しだし……。";
 		mes "こんな機械くらいはあっても";
 		mes "おかしくないんじゃないかな？";
-		cutin "bu_mark1.bmp", 2;
+		cutin "bu_mark1",2;
 		next;
 		mes "[テューリアン]";
 		mes "細かいことはどうでもいい！";
@@ -5360,21 +9245,21 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "識別しにくい特別な";
 		mes "場所らしいぞ!!";
 		mes "早く行って見ようぜ！";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "……落ち着け！";
 		mes "さっきもそんな風に言って";
 		mes "慌てて乗り込んだせいで、";
 		mes "あんなことになったんだぞ!?";
-		emotion 6, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark3.bmp", 2;
+		emotion 6,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark3",2;
 		next;
 		mes "[スカーレット]";
 		mes "まったくもう！";
 		mes "まだ床は不安定なんですよ!?";
 		mes "次こそ、おとなしく乗ってください！";
-		cutin "bu_mark3.bmp", 255;
+		cutin "bu_mark3",255;
 		close;
 	}
 	mes "[スカーレット]";
@@ -5430,16 +9315,16 @@ verus04.gat,115,220,5	script	テューリアン#ep15_1elb	628,{/* 59392 */
 		mes "未知の領域を冒険できるなんて";
 		mes "滅多にないからな!!";
 		mes "俺たちが真っ先に乗り込むんだ!!";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	else if(VER2_QUE == 3) {
 		mes "[テューリアン]";
 		mes "うわああああああああああ!?";
-		emotion 23, "テューリアン#ep15_1elb"; //59138
-		cutin "bu_du5.bmp", 2;
+		emotion 23,"テューリアン#ep15_1elb"; //59138
+		cutin "bu_du5",2;
 		next;
 		mes "[テューリアン]";
 		mes "早くこれを何とかしてくれ!!";
@@ -5451,29 +9336,29 @@ verus04.gat,115,220,5	script	テューリアン#ep15_1elb	628,{/* 59392 */
 		mes "確か乗る前に内部では、";
 		mes "絶対ふざけてはならないと";
 		mes "言ったはずですが!?";
-		emotion 23, "案内員スカーレット#ep15"; //59136
-		cutin "bu_du5.bmp", 255;
+		emotion 23,"案内員スカーレット#ep15"; //59136
+		cutin "bu_du5",255;
 		close;
 	}
 	else if(VER2_QUE == 4) {
 		mes "[テューリアン]";
 		mes "うあああ!!";
 		mes "このまま落ちるのかな……。";
-		emotion 23, "テューリアン#ep15_1elb"; //59138
-		cutin "bu_du5.bmp", 2;
+		emotion 23,"テューリアン#ep15_1elb"; //59138
+		cutin "bu_du5",2;
 		next;
 		mes "[タマリン]";
 		mes "不吉な事を言わないでください！";
 		mes "そもそもあなたのせいですから!!";
-		emotion 23, "タマリン#ep15_1elb"; //59140
-		cutin "ep143_tahuk.bmp", 2;
+		emotion 23,"タマリン#ep15_1elb"; //59140
+		cutin "ep143_tahuk",2;
 		next;
 		mes "[スカーレット]";
 		mes "二人とも静かにしてください！";
 		mes "本当に今少しでも動いたら、";
 		mes "大変な事になりますよ!?";
-		emotion 23, "案内員スカーレット#ep15"; //59136
-		cutin "ep143_tahuk.bmp", 255;
+		emotion 23,"案内員スカーレット#ep15"; //59136
+		cutin "ep143_tahuk",255;
 		close;
 	}
 	else if(VER2_QUE == 5) {
@@ -5482,25 +9367,25 @@ verus04.gat,115,220,5	script	テューリアン#ep15_1elb	628,{/* 59392 */
 		mes "……。";
 		mes "う、うーん？";
 		mes "思ったより普通……だな。";
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "いったいどんなものを";
 		mes "想像していたんだ……。";
-		emotion 9, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark1.bmp", 2;
+		emotion 9,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark1",2;
 		next;
 		mes "[テューリアン]";
 		mes "何かあるだろう！";
 		mes "ここまで大規模なんだから！";
 		mes "凶悪なモンスターが";
 		mes "封印されてるとか……。";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "そんなすごいものがあるなら";
 		mes "誰かが先に見つけるだろ……。";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[アルプオカート]";
 		mes "……ぱっと見わかりにくいが、";
@@ -5508,7 +9393,7 @@ verus04.gat,115,220,5	script	テューリアン#ep15_1elb	628,{/* 59392 */
 		mes "使用した資材の資質が";
 		mes "少なくともミッドガルド大陸では";
 		mes "見たことのない物だ。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "もちろん、";
@@ -5517,13 +9402,13 @@ verus04.gat,115,220,5	script	テューリアン#ep15_1elb	628,{/* 59392 */
 		mes "[テューリアン]";
 		mes "おおっ!?";
 		mes "みんな～ここの噴水台を見てみろ!! ";
-		viewpoint 1, 116, 226, 1, 0xFF8000; //59142
-		cutin "bu_du2.bmp", 2;
+		viewpoint 1,116,226,1,0xFF8000; //59142
+		cutin "bu_du2",2;
 		delquest 118330;
-		setquest 11367; //state=1
+		setquest 11367;
 		set VER2_QUE,6;
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	else if(VER2_QUE == 6) {
@@ -5531,19 +9416,19 @@ verus04.gat,115,220,5	script	テューリアン#ep15_1elb	628,{/* 59392 */
 		mes "おお……。";
 		mes "みんな～あそこの噴水台を";
 		mes "見てみろ!! ";
-		viewpoint 1, 116, 226, 1, 0xFF8000; //59138
-		cutin "bu_du2.bmp", 2;
+		viewpoint 1,116,226,1,0xFF8000; //59138
+		cutin "bu_du2",2;
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	mes "[テューリアン]";
 	mes "冒険にはチャレンジ精神が必要なんだ！ ";
 	mes "失敗したらごめんなさいの気持ちも";
 	mes "大事だけどな！";
-	cutin "bu_du2.bmp", 2;
+	cutin "bu_du2",2;
 	close2;
-	cutin "bu_du2.bmp", 255;
+	cutin "bu_du2",255;
 	end;
 }
 verus04.gat,115,221,5	script	マークイシャ#ep15_1elb	616,{/* 59393 */
@@ -5552,28 +9437,28 @@ verus04.gat,115,221,5	script	マークイシャ#ep15_1elb	616,{/* 59393 */
 		mes "ウェルスシティ……";
 		mes "どんな場所なのか、";
 		mes "本当に気になりますね。";
-		cutin "bu_mark1.bmp", 2;
+		cutin "bu_mark1",2;
 		next;
 		mes "[マークイシャ]";
 		mes "ジュピロス近くで発見されたけど";
 		mes "ジュピロスとは違う文明を";
 		mes "持っていたらしいと";
 		mes "聞きました。";
-		cutin "bu_mark2.bmp", 2;
+		cutin "bu_mark2",2;
 		close2;
-		cutin "bu_du4.bmp", 255;
+		cutin "bu_du4",255;
 		end;
 	}
 	else if(VER2_QUE == 3) {
 		mes "[マークイシャ]";
 		mes "気を付けろ!!";
-		emotion 23, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark4.bmp", 2;
+		emotion 23,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark4",2;
 		next;
 		mes "[テューリアン]";
 		mes "うわああああああ!!";
-		emotion 23, "テューリアン#ep15_1elb"; //59138
-		cutin "bu_du5.bmp", 2;
+		emotion 23,"テューリアン#ep15_1elb"; //59138
+		cutin "bu_du5",2;
 		next;
 		mes "[スカーレット]";
 		mes "危ないじゃないですか!!";
@@ -5582,8 +9467,8 @@ verus04.gat,115,221,5	script	マークイシャ#ep15_1elb	616,{/* 59393 */
 		mes "確か乗る前に内部では絶対に";
 		mes "ふざけてはならないと";
 		mes "言ったはずですが!?";
-		emotion 23, "案内員スカーレット#ep15"; //59136
-		cutin "bu_du5.bmp", 255;
+		emotion 23,"案内員スカーレット#ep15"; //59136
+		cutin "bu_du5",255;
 		close;
 	}
 	else if(VER2_QUE == 4) {
@@ -5591,10 +9476,10 @@ verus04.gat,115,221,5	script	マークイシャ#ep15_1elb	616,{/* 59393 */
 		mes "おい！　テューリアン!!";
 		mes "お前のお蔭で私の寿命が";
 		mes "どんどん削られていく気分だ!!";
-		emotion 6, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark3.bmp", 2;
+		emotion 6,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark3",2;
 		close2;
-		cutin "bu_mark3.bmp", 255;
+		cutin "bu_mark3",255;
 		end;
 	}
 	else if(VER2_QUE == 5) {
@@ -5603,25 +9488,25 @@ verus04.gat,115,221,5	script	マークイシャ#ep15_1elb	616,{/* 59393 */
 		mes "……。";
 		mes "う、うーん？";
 		mes "思ったより普通……だな。";
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "いったいどんなものを";
 		mes "想像していたんだ……。";
-		emotion 9, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark1.bmp", 2;
+		emotion 9,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark1",2;
 		next;
 		mes "[テューリアン]";
 		mes "何かあるだろう！";
 		mes "ここまで大規模なんだから！";
 		mes "凶悪なモンスターが";
 		mes "封印されてるとか……。";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "そんなすごいものがあるなら";
 		mes "誰かが先に見つけるだろ……。";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[アルプオカート]";
 		mes "……ぱっと見わかりにくいが、";
@@ -5629,7 +9514,7 @@ verus04.gat,115,221,5	script	マークイシャ#ep15_1elb	616,{/* 59393 */
 		mes "使用した資材の資質が";
 		mes "少なくともミッドガルド大陸では";
 		mes "見たことのない物だ。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "もちろん、";
@@ -5638,23 +9523,23 @@ verus04.gat,115,221,5	script	マークイシャ#ep15_1elb	616,{/* 59393 */
 		mes "[テューリアン]";
 		mes "おおっ!?";
 		mes "みんな～ここの噴水台を見てみろ!! ";
-		viewpoint 1, 116, 226, 1, 0xFF8000; //59142
-		cutin "bu_du2.bmp", 2;
+		viewpoint 1,116,226,1,0xFF8000; //59142
+		cutin "bu_du2",2;
 		delquest 118330;
-		setquest 11367; //state=1
+		setquest 11367;
 		set VER2_QUE,6;
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	else if(VER2_QUE == 6) {
 		mes "[マークイシャ]";
 		mes "なんだ？";
 		mes "その噴水台がどうしたんだ？";
-		viewpoint 1, 116, 226, 1, 0xFF8000; //59139
-		cutin "bu_mark1.bmp", 2;
+		viewpoint 1,116,226,1,0xFF8000; //59139
+		cutin "bu_mark1",2;
 		close2;
-		cutin "bu_mark1.bmp", 255;
+		cutin "bu_mark1",255;
 		end;
 	}
 	mes "[マークイシャ]";
@@ -5663,9 +9548,9 @@ verus04.gat,115,221,5	script	マークイシャ#ep15_1elb	616,{/* 59393 */
 	mes "本当に助かりました。";
 	mes "あいつはいつになったら";
 	mes "大人しくなるのかな……。";
-	cutin "bu_mark3.bmp", 0;
+	cutin "bu_mark3",0;
 	close2;
-	cutin "bu_mark3.bmp", 255;
+	cutin "bu_mark3",255;
 	end;
 }
 verus04.gat,116,218,5	script	タマリン#ep15_1elb	10027,{/* 59394 */
@@ -5674,29 +9559,29 @@ verus04.gat,116,218,5	script	タマリン#ep15_1elb	10027,{/* 59394 */
 		mes "こんな凄い発掘作業なら";
 		mes "たくさんの人たちが";
 		mes "集まりそうですね。";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		next;
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		mes "[タマリン]";
 		mes "私はとりあえず、";
 		mes strcharinfo(0) + "様に";
 		mes "前みたいに発掘されないよう";
 		mes "気をつけます。";
 		close2;
-		cutin "ep143_tasmi.bmp", 255;
+		cutin "ep143_tasmi",255;
 		end;
 	}
 	else if(VER2_QUE == 3) {
 		mes "[タマリン]";
 		mes "だからふざけないでくださいと";
 		mes "言ったじゃないですか!?";
-		emotion 23, "タマリン#ep15_1elb"; //59140
-		cutin "ep143_tahuk.bmp", 2;
+		emotion 23,"タマリン#ep15_1elb"; //59140
+		cutin "ep143_tahuk",2;
 		next;
 		mes "[テューリアン]";
 		mes "うわあああああ!!";
-		emotion 23, "テューリアン#ep15_1elb"; //59138
-		cutin "bu_du5.bmp", 2;
+		emotion 23,"テューリアン#ep15_1elb"; //59138
+		cutin "bu_du5",2;
 		next;
 		mes "[スカーレット]";
 		mes "危ないじゃないですか!!";
@@ -5705,18 +9590,18 @@ verus04.gat,116,218,5	script	タマリン#ep15_1elb	10027,{/* 59394 */
 		mes "確か乗る前に内部では絶対";
 		mes "ふざけてはならないと";
 		mes "言ったはずですが!?";
-		emotion 23, "案内員スカーレット#ep15"; //59136
-		cutin "bu_du5.bmp", 255;
+		emotion 23,"案内員スカーレット#ep15"; //59136
+		cutin "bu_du5",255;
 		close;
 	}
 	else if(VER2_QUE == 4) {
 		mes "[タマリン]";
 		mes "うわあ……";
 		mes "最悪だ……。";
-		emotion 28, "タマリン#ep15_1elb"; //59140
-		cutin "ep143_tahuk.bmp", 2;
+		emotion 28,"タマリン#ep15_1elb"; //59140
+		cutin "ep143_tahuk",2;
 		close2;
-		cutin "ep143_tahuk.bmp", 255;
+		cutin "ep143_tahuk",255;
 		end;
 	}
 	else if(VER2_QUE == 5) {
@@ -5725,25 +9610,25 @@ verus04.gat,116,218,5	script	タマリン#ep15_1elb	10027,{/* 59394 */
 		mes "……。";
 		mes "う、うーん？";
 		mes "思ったより普通……だな。";
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "いったいどんなものを";
 		mes "想像していたんだ……。";
-		emotion 9, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark1.bmp", 2;
+		emotion 9,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark1",2;
 		next;
 		mes "[テューリアン]";
 		mes "何かあるだろう！";
 		mes "ここまで大規模なんだから！";
 		mes "凶悪なモンスターが";
 		mes "封印されてるとか……。";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "そんなすごいものがあるなら";
 		mes "誰かが先に見つけるだろ……。";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[アルプオカート]";
 		mes "……ぱっと見わかりにくいが、";
@@ -5751,7 +9636,7 @@ verus04.gat,116,218,5	script	タマリン#ep15_1elb	10027,{/* 59394 */
 		mes "使用した資材の資質が";
 		mes "少なくともミッドガルド大陸では";
 		mes "見たことのない物だ。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "もちろん、";
@@ -5760,13 +9645,13 @@ verus04.gat,116,218,5	script	タマリン#ep15_1elb	10027,{/* 59394 */
 		mes "[テューリアン]";
 		mes "おおっ!?";
 		mes "みんな～ここの噴水台を見てみろ!! ";
-		viewpoint 1, 116, 226, 1, 0xFF8000; //59142
-		cutin "bu_du2.bmp", 2;
+		viewpoint 1,116,226,1,0xFF8000; //59142
+		cutin "bu_du2",2;
 		delquest 118330;
-		setquest 11367; //state=1
+		setquest 11367;
 		set VER2_QUE,6;
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	else if(VER2_QUE == 6) {
@@ -5774,10 +9659,10 @@ verus04.gat,116,218,5	script	タマリン#ep15_1elb	10027,{/* 59394 */
 		mes "ん……？";
 		mes "テューリアンが噴水台にて";
 		mes "何かを発見したのかな？";
-		viewpoint 1, 116, 226, 1, 0xFF8000; //59140
-		cutin "ep143_tasmi.bmp", 2;
+		viewpoint 1,116,226,1,0xFF8000; //59140
+		cutin "ep143_tasmi",2;
 		close2;
-		cutin "ep143_tasmi.bmp", 255;
+		cutin "ep143_tasmi",255;
 		end;
 	}
 	mes "[タマリン]";
@@ -5786,9 +9671,9 @@ verus04.gat,116,218,5	script	タマリン#ep15_1elb	10027,{/* 59394 */
 	mes "通りかかっていなかったら";
 	mes "どうなっていたか……。";
 	mes "本当にありがとうございます。";
-	cutin "ep143_tasmi.bmp", 2;
+	cutin "ep143_tasmi",2;
 	close2;
-	cutin "ep143_tasmi.bmp", 255;
+	cutin "ep143_tasmi",255;
 	end;
 }
 verus04.gat,117,219,0	script	アルプオカート#ep15_1el	615,{/* 59395 */
@@ -5798,22 +9683,22 @@ verus04.gat,117,219,0	script	アルプオカート#ep15_1el	615,{/* 59395 */
 		mes "そういえば、オリバーヒルベルトの";
 		mes "小説でも発掘に関する話が";
 		mes "あったような気がする……。";
-		cutin "bu_alp4.bmp", 2;
+		cutin "bu_alp4",2;
 		close2;
-		cutin "bu_alp4.bmp", 255;
+		cutin "bu_alp4",255;
 		end;
 	}
 	else if(VER2_QUE == 3) {
 		mes "[アルプオカート]";
 		mes "……。";
 		mes "う……動くな……。";
-		emotion 19, "アルプオカート#ep15_1el"; //59141
-		cutin "bu_alp2.bmp", 2;
+		emotion 19,"アルプオカート#ep15_1el"; //59141
+		cutin "bu_alp2",2;
 		next;
 		mes "[テューリアン]";
 		mes "うわあああ!!";
-		emotion 23, "テューリアン#ep15_1elb"; //59138
-		cutin "bu_du5.bmp", 2;
+		emotion 23,"テューリアン#ep15_1elb"; //59138
+		cutin "bu_du5",2;
 		next;
 		mes "[スカーレット]";
 		mes "危ないじゃないですか！";
@@ -5822,18 +9707,18 @@ verus04.gat,117,219,0	script	アルプオカート#ep15_1el	615,{/* 59395 */
 		mes "確か乗る前に内部では絶対";
 		mes "ふざけてはならないと";
 		mes "言ったはずですが!?";
-		emotion 23, "案内員スカーレット#ep15"; //59136
-		cutin "bu_du5.bmp", 255;
+		emotion 23,"案内員スカーレット#ep15"; //59136
+		cutin "bu_du5",255;
 		close;
 	}
 	else if(VER2_QUE == 4) {
 		mes "[アルプオカート]";
 		mes "動くな……。";
 		mes "床……床が……。";
-		emotion 19, "アルプオカート#ep15_1el"; //59141
-		cutin "bu_alp2.bmp", 2;
+		emotion 19,"アルプオカート#ep15_1el"; //59141
+		cutin "bu_alp2",2;
 		close2;
-		cutin "bu_alp2.bmp", 255;
+		cutin "bu_alp2",255;
 		end;
 	}
 	else if(VER2_QUE == 5) {
@@ -5842,25 +9727,25 @@ verus04.gat,117,219,0	script	アルプオカート#ep15_1el	615,{/* 59395 */
 		mes "……。";
 		mes "う、うーん？";
 		mes "思ったより普通……だな。";
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "いったいどんなものを";
 		mes "想像していたんだ……。";
-		emotion 9, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark1.bmp", 2;
+		emotion 9,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark1",2;
 		next;
 		mes "[テューリアン]";
 		mes "何かあるだろう！";
 		mes "ここまで大規模なんだから！";
 		mes "凶悪なモンスターが";
 		mes "封印されてるとか……。";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "そんなすごいものがあるなら";
 		mes "誰かが先に見つけるだろ……。";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[アルプオカート]";
 		mes "……ぱっと見わかりにくいが、";
@@ -5868,7 +9753,7 @@ verus04.gat,117,219,0	script	アルプオカート#ep15_1el	615,{/* 59395 */
 		mes "使用した資材の資質が";
 		mes "少なくともミッドガルド大陸では";
 		mes "見たことのない物だ。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "もちろん、";
@@ -5877,30 +9762,30 @@ verus04.gat,117,219,0	script	アルプオカート#ep15_1el	615,{/* 59395 */
 		mes "[テューリアン]";
 		mes "おおっ!?";
 		mes "みんな～ここの噴水台を見てみろ!! ";
-		viewpoint 1, 116, 226, 1, 0xFF8000; //59142
-		cutin "bu_du2.bmp", 2;
+		viewpoint 1,116,226,1,0xFF8000; //59142
+		cutin "bu_du2",2;
 		delquest 118330;
-		setquest 11367; //state=1
+		setquest 11367;
 		set VER2_QUE,6;
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	else if(VER2_QUE == 6) {
 		mes "[アルプオカート]";
 		mes "噴水台がどうした？";
-		viewpoint 1, 116, 226, 1, 0xFF8000; //59141
-		cutin "bu_alp1.bmp", 2;
+		viewpoint 1,116,226,1,0xFF8000; //59141
+		cutin "bu_alp1",2;
 		close2;
-		cutin "bu_alp1.bmp", 255;
+		cutin "bu_alp1",255;
 		end;
 	}
 	mes "[アルプオカート]";
 	mes "……あの時は助かった。";
 	mes "皆、感謝している。";
-	cutin "bu_alp1.bmp", 2;
+	cutin "bu_alp1",2;
 	close2;
-	cutin "bu_alp1.bmp", 255;
+	cutin "bu_alp1",255;
 	end;
 }
 verus04.gat,117,220,3	script	マギスティン#ep15_1elb	612,{/* 59396 */
@@ -5910,21 +9795,21 @@ verus04.gat,117,220,3	script	マギスティン#ep15_1elb	612,{/* 59396 */
 		mes "響きが良くて綺麗だと思いません？";
 		mes "でも、エクラージュも";
 		mes "響きが良くて、私は好きです。";
-		cutin "bu_maggi2.bmp", 2;
+		cutin "bu_maggi2",2;
 		close2;
-		cutin "bu_maggi2.bmp", 255;
+		cutin "bu_maggi2",255;
 		end;
 	}
 	else if(VER2_QUE == 3) {
 		mes "[マギスティン]";
 		mes "きゃあああああ!!";
-		emotion 23, "マギスティン#ep15_1elb"; //59142
-		cutin "bu_maggi4.bmp", 2;
+		emotion 23,"マギスティン#ep15_1elb"; //59142
+		cutin "bu_maggi4",2;
 		next;
 		mes "[テューリアン]";
 		mes "うわああああああ!!";
-		emotion 23, "テューリアン#ep15_1elb"; //59138
-		cutin "bu_du5.bmp", 2;
+		emotion 23,"テューリアン#ep15_1elb"; //59138
+		cutin "bu_du5",2;
 		next;
 		mes "[スカーレット]";
 		mes "危ないじゃないですか!!";
@@ -5933,17 +9818,17 @@ verus04.gat,117,220,3	script	マギスティン#ep15_1elb	612,{/* 59396 */
 		mes "確か乗る前に内部では絶対";
 		mes "ふざけてはならないと";
 		mes "言ったはずですが!?";
-		emotion 23, "案内員スカーレット#ep15"; //59136
-		cutin "bu_du5.bmp", 255;
+		emotion 23,"案内員スカーレット#ep15"; //59136
+		cutin "bu_du5",255;
 		close;
 	}
 	else if(VER2_QUE == 4) {
 		mes "[マギスティン]";
 		mes "きゃああああああ!!";
-		emotion 23, "マギスティン#ep15_1elb"; //59142
-		cutin "bu_maggi4.bmp", 2;
+		emotion 23,"マギスティン#ep15_1elb"; //59142
+		cutin "bu_maggi4",2;
 		close2;
-		cutin "bu_maggi4.bmp", 255;
+		cutin "bu_maggi4",255;
 		end;
 	}
 	else if(VER2_QUE == 5) {
@@ -5952,25 +9837,25 @@ verus04.gat,117,220,3	script	マギスティン#ep15_1elb	612,{/* 59396 */
 		mes "……。";
 		mes "う、うーん？";
 		mes "思ったより普通……だな。";
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "いったいどんなものを";
 		mes "想像していたんだ……。";
-		emotion 9, "マークイシャ#ep15_1elb"; //59139
-		cutin "bu_mark1.bmp", 2;
+		emotion 9,"マークイシャ#ep15_1elb"; //59139
+		cutin "bu_mark1",2;
 		next;
 		mes "[テューリアン]";
 		mes "何かあるだろう！";
 		mes "ここまで大規模なんだから！";
 		mes "凶悪なモンスターが";
 		mes "封印されてるとか……。";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "そんなすごいものがあるなら";
 		mes "誰かが先に見つけるだろ……。";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[アルプオカート]";
 		mes "……ぱっと見わかりにくいが、";
@@ -5978,7 +9863,7 @@ verus04.gat,117,220,3	script	マギスティン#ep15_1elb	612,{/* 59396 */
 		mes "使用した資材の資質が";
 		mes "少なくともミッドガルド大陸では";
 		mes "見たことのない物だ。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "もちろん、";
@@ -5987,13 +9872,13 @@ verus04.gat,117,220,3	script	マギスティン#ep15_1elb	612,{/* 59396 */
 		mes "[テューリアン]";
 		mes "おおっ!?";
 		mes "みんな～ここの噴水台を見てみろ!! ";
-		viewpoint 1, 116, 226, 1, 0xFF8000; //59142
-		cutin "bu_du2.bmp", 2;
+		viewpoint 1,116,226,1,0xFF8000; //59142
+		cutin "bu_du2",2;
 		delquest 118330;
-		setquest 11367; //state=1
+		setquest 11367;
 		set VER2_QUE,6;
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	else if(VER2_QUE == 6) {
@@ -6002,20 +9887,20 @@ verus04.gat,117,220,3	script	マギスティン#ep15_1elb	612,{/* 59396 */
 		mes "元気をもらえる気がします。";
 		mes "元気すぎるのが玉にキズ";
 		mes "ですけど。";
-		viewpoint 1, 116, 226, 1, 0xFF8000; //59142
-		cutin "bu_maggi1.bmp", 2;
+		viewpoint 1,116,226,1,0xFF8000; //59142
+		cutin "bu_maggi1",2;
 		close2;
-		cutin "bu_maggi1.bmp", 255;
+		cutin "bu_maggi1",255;
 		end;
 	}
 	mes "[マギスティン]";
 	mes "テューがご迷惑をおかけしました。";
 	mes "私のほうはもう、大丈夫です。";
 	mes "本当にありがとうございました。";
-	emotion 15, "マギスティン#ep15_1elb"; //59142
-	cutin "bu_maggi2.bmp", 2;
+	emotion 15,"マギスティン#ep15_1elb"; //59142
+	cutin "bu_maggi2",2;
 	close2;
-	cutin "bu_maggi2.bmp", 255;
+	cutin "bu_maggi2",255;
 	end;
 }
 verus04.gat,116,226,0	script	噴水台 #ep15_1elb	10043,{/* 59397 */
@@ -6026,22 +9911,22 @@ verus04.gat,116,226,0	script	噴水台 #ep15_1elb	10043,{/* 59397 */
 		mes "最終兵器に違いない!!";
 		mes "どこかにきっと隠し通路か";
 		mes "何かが……。";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[アルプオカート]";
 		mes "人の話を少しは聞け……。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[タマリン]";
 		mes "ちょ……ちょっと！";
 		mes "余計な事をしないで";
 		mes "くれますか!?";
-		cutin "ep143_taang.bmp", 2;
+		cutin "ep143_taang",2;
 		next;
 		mes "[アルプオカート]";
 		mes "むっ!?";
 		mes "いや、待った……。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		mes "[アルプオカート]";
 		mes "いくら地面の深い場所に";
@@ -6049,32 +9934,32 @@ verus04.gat,116,226,0	script	噴水台 #ep15_1elb	10043,{/* 59397 */
 		mes "古代の遺跡としては";
 		mes "あまりにも状態が";
 		mes "良すぎじゃないか？ ";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[タマリン]";
 		mes "そうですね。";
 		mes "よく見てみるとほこりが";
 		mes "少し積もっているだけで、";
 		mes "あとはかなり綺麗ですね。";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		next;
 		mes "[アルプオカート]";
 		mes "どれどれ……。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "残念だ……。";
 		mes "あまりにも綺麗に保存されていて、";
 		mes "何かを知る事は";
 		mes "できないようだ……。";
-		cutin "bu_alp2.bmp", 2;
+		cutin "bu_alp2",2;
 		next;
 		mes "[アルプオカート]";
 		mes "水が溜まっていたなら";
 		mes "乾きながら何かしらの";
 		mes "跡でも残すと思うんだが、";
 		mes "なぜか何の痕跡もない。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "単純に、かなりの年月が";
@@ -6090,13 +9975,13 @@ verus04.gat,116,226,0	script	噴水台 #ep15_1elb	10043,{/* 59397 */
 		mes "それでは左に山積みにされている";
 		mes "ガラクタたちでも、";
 		mes "ちょっと調べてみますか？";
-		viewpoint 1, 95, 238, 1, 0xFF8000; //59143
-		cutin "ep143_tasta.bmp", 2;
+		viewpoint 1,95,238,1,0xFF8000; //59143
+		cutin "ep143_tasta",2;
 		delquest 11367;
-		setquest 11368; //state=1
+		setquest 11368;
 		set VER2_QUE,7;
 		close2;
-		cutin "ep143_tasta.bmp", 255;
+		cutin "ep143_tasta",255;
 		end;
 	}
 	else if(VER2_QUE == 7) {
@@ -6104,16 +9989,16 @@ verus04.gat,116,226,0	script	噴水台 #ep15_1elb	10043,{/* 59397 */
 		mes "周辺を回りながら";
 		mes "違うものをもう少しだけ";
 		mes "探してみよう……。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[タマリン]";
 		mes "それでは左に山積みされている";
 		mes "ガラクタでも、";
 		mes "ちょっと調べてみますか？";
-		viewpoint 1, 95, 238, 1, 0xFF8000; //59143
-		cutin "ep143_tasta.bmp", 2;
+		viewpoint 1,95,238,1,0xFF8000; //59143
+		cutin "ep143_tasta",2;
 		close2;
-		cutin "ep143_tasta.bmp", 255;
+		cutin "ep143_tasta",255;
 		end;
 	}
 	mes "‐平凡な噴水台で何もない‐";
@@ -6128,7 +10013,7 @@ verus04.gat,95,238,0	script	ガラクタ#ep15_1elb	10043,{/* 59398 */
 		mes "長い時間放置された";
 		mes "遺跡だという感じが";
 		mes "まったくしないほどに。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "壊れた機械が積まれている以外、";
@@ -6138,22 +10023,22 @@ verus04.gat,95,238,0	script	ガラクタ#ep15_1elb	10043,{/* 59398 */
 		mes "[アルプオカート]";
 		mes "それにあの、左側にある木を見てみろ。";
 		mes "あの木も何かひっかかる……。";
-		cutin "bu_alp3.bmp", 2;
-		viewpoint 1, 79, 249, 1, 0xFF8000; //59144
+		cutin "bu_alp3",2;
+		viewpoint 1,79,249,1,0xFF8000; //59144
 		delquest 11368;
-		setquest 11369; //state=1
+		setquest 11369;
 		set VER2_QUE,8;
 		close2;
-		cutin "bu_alp3.bmp", 255;
+		cutin "bu_alp3",255;
 		end;
 	}
 	else if(VER2_QUE == 8) {
 		mes "[アルプオカート]";
 		mes "左にある木を見てみろ。 ";
 		mes "……少し気になる点がる。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		close2;
-		cutin "bu_alp3.bmp", 255;
+		cutin "bu_alp3",255;
 		end;
 	}
 	mes "‐ガラクタがばらまかれている‐";
@@ -6167,31 +10052,31 @@ verus04.gat,79,249,0	script	木#ep15_1elb	10043,{/* 59399 */
 		mes "少し変だなと思っていた部分があるんだ。";
 		mes "木は、お日様があってこそ、";
 		mes "育つものじゃないのか？";
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		next;
 		mes "[タマリン]";
 		mes "なっ……!?";
 		mes "テューリアンが珍しく";
 		mes "まともなことを言いましたね。";
-		cutin "ep143_tahuk.bmp", 2;
+		cutin "ep143_tahuk",2;
 		next;
 		mes "[テューリアン]";
 		mes "何!?";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[マークイシャ]";
 		mes "確かに、こいつの言うとおり。";
 		mes "この木はどうやってこんな地下で";
 		mes "育ったんでしょうね……？";
 		mes "陽も当らない場所なのに……。";
-		cutin "bu_mark1.bmp", 2;
+		cutin "bu_mark1",2;
 		next;
 		mes "[マギスティン]";
 		mes "……あの。";
 		mes "少し調べてみましたが、";
 		mes "特別な魔法などは";
 		mes "かかってはいないようです。";
-		cutin "bu_maggi1.bmp", 2;
+		cutin "bu_maggi1",2;
 		next;
 		mes "[テューリアン]";
 		mes "賢くて可愛く、気のつくところが";
@@ -6199,13 +10084,13 @@ verus04.gat,79,249,0	script	木#ep15_1elb	10043,{/* 59399 */
 		mes "ところでここから見えるドアの前に";
 		mes "変なものがあるぞ！";
 		mes "気になるから見にいこうぜ!!";
-		viewpoint 1, 62, 255, 1, 0xFF8000; //59145
-		cutin "bu_du2.bmp", 2;
+		viewpoint 1,62,255,1,0xFF8000; //59145
+		cutin "bu_du2",2;
 		delquest 11369;
-		setquest 11370; //state=1
+		setquest 11370;
 		set VER2_QUE,9;
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	else if(VER2_QUE == 9) {
@@ -6213,10 +10098,10 @@ verus04.gat,79,249,0	script	木#ep15_1elb	10043,{/* 59399 */
 		mes "ここから見える";
 		mes "ドアの前に変なものがあるぞ！";
 		mes "気になるから見にいこうぜ!!";
-		viewpoint 1, 62, 255, 1, 0xFF8000; //59145
-		cutin "bu_du2.bmp", 2;
+		viewpoint 1,62,255,1,0xFF8000; //59145
+		cutin "bu_du2",2;
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	mes "‐地下で育った割には";
@@ -6233,25 +10118,25 @@ verus04.gat,62,255,0	script	表示板#ep15_1elb	10043,{/* 59400 */
 		mes "おい、テューリアン!!";
 		mes "危険かも知れないから、";
 		mes "勝手に歩き回るな！";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[テューリアン]";
 		mes "冒険者にチャレンジ精神は、";
 		mes "必須なんだぞ！";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[テューリアン]";
 		mes "こんなところでもたもたしていて、";
 		mes "他の奴らに全部奪われたら";
 		mes "どうするんだ!!";
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		next;
 		mes "[タマリン]";
 		mes "以前もそんな事を言って";
 		mes "結局は調査どころか、";
 		mes "一ヶ月も病院に世話して";
 		mes "もらったじゃないですか!!";
-		cutin "ep143_taang.bmp", 2;
+		cutin "ep143_taang",2;
 		next;
 		mes "[テューリアン]";
 		mes "その時とは違う！";
@@ -6259,21 +10144,21 @@ verus04.gat,62,255,0	script	表示板#ep15_1elb	10043,{/* 59400 */
 		mes "多少の事故で怪我なんて";
 		mes "しない体になってしまったしな！";
 		mes "わっはっはっはっはっ！";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "自慢か？　それ……。";
-		cutin "bu_mark4.bmp", 2;
+		cutin "bu_mark4",2;
 		next;
 		mes "[アルプオカート]";
 		mes "それより、見てみろ。";
 		mes "この建物の後ろ。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "よくみるとどうやら、";
 		mes "上の方に道が続いているようだ。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		mes "[テューリアン]";
 		mes "むむっ、確かに……。";
@@ -6282,48 +10167,48 @@ verus04.gat,62,255,0	script	表示板#ep15_1elb	10043,{/* 59400 */
 		mes "なぜならそこに、道があるからだ!!";
 		mes "わはっはっはっはっはっ!!";
 		mes "って事で、突撃!!";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "おい!!　止まれ!!";
 		mes "最初に言った私の話を";
 		mes "お前、聞いてないのか!?";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "ああ、もう！";
 		mes "本当に懲りないやつだ!!";
-		cutin "bu_mark4.bmp", 2;
+		cutin "bu_mark4",2;
 		next;
 		mes "[マギスティン]";
 		mes "マークさん……";
 		mes "テューがもうあっちまで……。";
-		cutin "bu_maggi1.bmp", 2;
+		cutin "bu_maggi1",2;
 		next;
 		mes "[マークイシャ]";
 		mes "前にも似たことがあったぞ!?";
 		mes "そうだ、エクラージュだ!!";
 		mes "……あんの、トラブルメーカー!!";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "もっと遠くなる前に早く、";
 		mes "追いつかなければ！";
 		mes "急ぎましょう!!";
-		cutin "bu_mark1.bmp", 2;
-		viewpoint 1, 44, 265, 1, 0xFF8000; //59146
+		cutin "bu_mark1",2;
+		viewpoint 1,44,265,1,0xFF8000; //59146
 		delquest 11370;
-		setquest 11371; //state=1
+		setquest 11371;
 		set VER2_QUE,10;
 		close2;
-		cutin "bu_mark1.bmp", 255;
+		cutin "bu_mark1",255;
 		end;
 	}
 	else if(VER2_QUE == 10) {
 		mes "[アルプオカート]";
 		mes "建物の後ろの方を少し見てみろ。";
 		mes "上の方に道がのびているようだ。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		mes "[テューリアン]";
 		mes "むむっ、確かに……。";
@@ -6332,38 +10217,38 @@ verus04.gat,62,255,0	script	表示板#ep15_1elb	10043,{/* 59400 */
 		mes "なぜならそこに、道があるからだ!!";
 		mes "わはっはっはっはっはっ!!";
 		mes "って事で、突撃!!";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "おい!!　止まれ!!";
 		mes "最初に言った私の話を";
 		mes "お前、聞いてないのか!?";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "ああ、もう！";
 		mes "本当に懲りないやつだ!!";
-		cutin "bu_mark4.bmp", 2;
+		cutin "bu_mark4",2;
 		next;
 		mes "[マギスティン]";
 		mes "マークさん……";
 		mes "テューがもうあっちまで……。";
-		cutin "bu_maggi1.bmp", 2;
+		cutin "bu_maggi1",2;
 		next;
 		mes "[マークイシャ]";
 		mes "前にも似たことがあったぞ!?";
 		mes "そうだ、エクラージュだ!!";
 		mes "……あんの、トラブルメーカー!!";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "もっと遠くなる前に早く、";
 		mes "追いつかなければ！";
 		mes "急ぎましょう!!";
-		viewpoint 1, 44, 265, 1, 0xFF8000; //59146
-		cutin "bu_mark1.bmp", 2;
+		viewpoint 1,44,265,1,0xFF8000; //59146
+		cutin "bu_mark1",2;
 		close2;
-		cutin "bu_mark1.bmp", 255;
+		cutin "bu_mark1",255;
 		end;
 	}
 	mes "‐ドアがふさがれている‐";
@@ -6377,28 +10262,28 @@ verus03.gat,46,23,3	script	テューリアン#ep15_1elb0	628,{/* 59401 */
 		mes "思っていたが……";
 		mes "良くわからない機械が";
 		mes "こっちには歩き回っているな。";
-		emotion 23, "テューリアン#ep15_1elb0"; //59147
-		cutin "bu_du5.bmp", 2;
+		emotion 23,"テューリアン#ep15_1elb0"; //59147
+		cutin "bu_du5",2;
 		next;
 		mes "[テューリアン]";
 		mes "ジュピロスに現れる奴らと";
 		mes "一緒の奴らなのか……？";
 		mes "ここはジュピロスと、";
 		mes "どういう関係だ……？";
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		next;
 		mes "[テューリアン]";
 		mes "そういえばあっちの上の方に";
 		mes "さっき見た噴水台と似た形をしている";
 		mes "噴水台がまたあるようだ。";
 		mes "行って見るかい？";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		delquest 11371;
-		setquest 11372; //state=1
+		setquest 11372;
 		set VER2_QUE,11;
-		viewpoint 1, 44, 65, 1, 0xFF8000; //59147
+		viewpoint 1,44,65,1,0xFF8000; //59147
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	else if(VER2_QUE == 11) {
@@ -6407,10 +10292,10 @@ verus03.gat,46,23,3	script	テューリアン#ep15_1elb0	628,{/* 59401 */
 		mes "さっき見た噴水台と似た形をしている";
 		mes "噴水台がまたあるようだ。";
 		mes "行って見るかい？";
-		cutin "bu_du2.bmp", 2;
-		viewpoint 1, 44, 65, 1, 0xFFFF8000; //59147
+		cutin "bu_du2",2;
+		viewpoint 1,44,65,1,0xFFFF8000; //59147
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 	mes "[テューリアン]";
@@ -6418,9 +10303,9 @@ verus03.gat,46,23,3	script	テューリアン#ep15_1elb0	628,{/* 59401 */
 	mes "なんでみんなすぐにどこかに";
 	mes "行くんだ！？";
 	mes "というかここどこだ!?";
-	cutin "bu_du5.bmp", 2;
+	cutin "bu_du5",2;
 	close2;
-	cutin "bu_du5.bmp", 255;
+	cutin "bu_du5",255;
 	end;
 }
 verus03.gat,44,65,0	script	噴水台#ep15_1elb03	10043,{/* 59402 */
@@ -6429,14 +10314,14 @@ verus03.gat,44,65,0	script	噴水台#ep15_1elb03	10043,{/* 59402 */
 		mes "ふむ……。";
 		mes "相変わらず不自然なほどに";
 		mes "綺麗だな。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[タマリン]";
 		mes "まるでここだけ時が止まったように";
 		mes "保存されている建造物群ですね……。";
 		mes "一体ここに住んでいた人たちは";
 		mes "どこに行ったのでしょうか？";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		next;
 		mes "[アルプオカート]";
 		mes "みんな死んだというには";
@@ -6444,31 +10329,31 @@ verus03.gat,44,65,0	script	噴水台#ep15_1elb03	10043,{/* 59402 */
 		mes "ここから忽然と";
 		mes "姿を消したといったほうが";
 		mes "納得できるような風景だな。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		mes "[マギスティン]";
 		mes "ここも特に魔法などは";
 		mes "かかっていないようです……。";
-		cutin "bu_maggi1.bmp", 2;
+		cutin "bu_maggi1",2;
 		next;
 		mes "[テューリアン]";
 		mes "こうして事件は迷宮に……。";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[マークイシャ]";
 		mes "……。";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		next;
 		mes "[テューリアン]";
 		mes "どうして殴るんだよ!?";
-		cutin "bu_du4.bmp", 2;
+		cutin "bu_du4",2;
 		next;
 		mes "[マークイシャ]";
 		mes "このバカは放っておいて……";
 		mes "私は先に北側の道に沿って";
 		mes "のぼってみるので、";
 		mes "ゆっくりついて来てください。";
-		cutin "bu_mark2.bmp", 2;
+		cutin "bu_mark2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "あっ、" +strcharinfo(0)+ "様。";
@@ -6476,13 +10361,13 @@ verus03.gat,44,65,0	script	噴水台#ep15_1elb03	10043,{/* 59402 */
 		mes "テューリアンの奴が";
 		mes "暴走しないように";
 		mes "よく見張っておいて下さいね……。";
-		cutin "bu_mark3.bmp", 2;
+		cutin "bu_mark3",2;
 		delquest 11372;
-		setquest 11373; //state=1
+		setquest 11373;
 		set VER2_QUE,12;
-		viewpoint 1, 88, 237, 1, 0xFF8000; //59148
+		viewpoint 1,88,237,1,0xFF8000; //59148
 		close2;
-		cutin "bu_mark4.bmp", 255;
+		cutin "bu_mark4",255;
 		end;
 	}
 	else if(VER2_QUE == 12) {
@@ -6490,7 +10375,7 @@ verus03.gat,44,65,0	script	噴水台#ep15_1elb03	10043,{/* 59402 */
 		mes "それでは私は先に北側の道に沿って";
 		mes "のぼってみるので、";
 		mes "ゆっくりついて来てください。";
-		cutin "bu_mark2.bmp", 2;
+		cutin "bu_mark2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "あっ、" +strcharinfo(0)+ "様。";
@@ -6498,10 +10383,10 @@ verus03.gat,44,65,0	script	噴水台#ep15_1elb03	10043,{/* 59402 */
 		mes "テューリアンの奴が";
 		mes "暴走しないように";
 		mes "よく見張っておいて下さいね……。";
-		cutin "bu_mark3.bmp", 2;
-		viewpoint 1, 88, 237, 1, 0xFF8000; //59148
+		cutin "bu_mark3",2;
+		viewpoint 1,88,237,1,0xFF8000; //59148
 		close2;
-		cutin "bu_mark4.bmp", 255;
+		cutin "bu_mark4",255;
 		end;
 	}
 	mes "‐平凡な噴水台だ。";
@@ -6516,7 +10401,7 @@ verus03.gat,88,237,3	script	マークイシャ#ep15_1elb0	616,{/* 59403 */
 		mes "最初に来た場所とは違って";
 		mes "ここには巨大な機械たちが";
 		mes "たくさん見えますね。";
-		cutin "bu_mark1.bmp", 2;
+		cutin "bu_mark1",2;
 		next;
 		mes "[マークイシャ]";
 		mes "建物や床に壊れた箇所も多いし……。";
@@ -6528,20 +10413,20 @@ verus03.gat,88,237,3	script	マークイシャ#ep15_1elb0	616,{/* 59403 */
 		mes "[マークイシャ]";
 		mes "何か危険な感じがするけど……";
 		mes "多分、私の気のせいでしょう……。";
-		cutin "bu_mark4.bmp", 2;
+		cutin "bu_mark4",2;
 		next;
 		mes "[マークイシャ]";
 		mes "あっ！　タマリン!!";
 		mes "そっちの方にあまり深く、";
 		mes "入らないで下さい！";
-		cutin "bu_mark1.bmp", 2;
-		emotion 23, "マークイシャ#ep15_1elb0"; //59149
-		viewpoint 1, 51, 256, 1, 0xFF8000; //59149
+		cutin "bu_mark1",2;
+		emotion 23,"マークイシャ#ep15_1elb0"; //59149
+		viewpoint 1,51,256,1,0xFF8000; //59149
 		delquest 11373;
-		setquest 11374; //state=1
+		setquest 11374;
 		set VER2_QUE,13;
 		close2;
-		cutin "bu_mark1.bmp", 255;
+		cutin "bu_mark1",255;
 		end;
 	}
 	else if(VER2_QUE == 13) {
@@ -6549,11 +10434,11 @@ verus03.gat,88,237,3	script	マークイシャ#ep15_1elb0	616,{/* 59403 */
 		mes "あっ！　タマリン!!";
 		mes "そっちの方にあまり深く、";
 		mes "入らないで下さい！";
-		cutin "bu_mark1.bmp", 2;
-		emotion 23, "マークイシャ#ep15_1elb0"; //59149
-		viewpoint 1, 51, 256, 1, 0xFF8000; //59149
+		cutin "bu_mark1",2;
+		emotion 23,"マークイシャ#ep15_1elb0"; //59149
+		viewpoint 1,51,256,1,0xFF8000; //59149
 		close2;
-		cutin "bu_mark1.bmp", 255;
+		cutin "bu_mark1",255;
 		end;
 	}
 	mes "[マークイシャ]";
@@ -6562,9 +10447,9 @@ verus03.gat,88,237,3	script	マークイシャ#ep15_1elb0	616,{/* 59403 */
 	mes "行ったんだ!?";
 	mes "探す方の身にも";
 	mes "なってくれ……。";
-	cutin "bu_mark3.bmp", 0;
+	cutin "bu_mark3",0;
 	close2;
-	cutin "bu_mark3.bmp", 255;
+	cutin "bu_mark3",255;
 	end;
 }
 verus03.gat,51,256,3	script	タマリン#ep15_1elb03	10027,{/* 59404 */
@@ -6572,42 +10457,42 @@ verus03.gat,51,256,3	script	タマリン#ep15_1elb03	10027,{/* 59404 */
 		mes "[タマリン]";
 		mes "あっちを見て下さい。";
 		mes "他の箇所に比べてかなり壊れています。";
-		cutin "ep143_tahuk.bmp", 2;
+		cutin "ep143_tahuk",2;
 		next;
 		mes "[タマリン]";
 		mes "マギスティン。";
 		mes "そっちはどうですか？";
-		cutin "ep143_tasta.bmp", 2;
-		viewpoint 1, 35, 254, 1, 0xFF8000; //59150
+		cutin "ep143_tasta",2;
+		viewpoint 1,35,254,1,0xFF8000; //59150
 		delquest 11374;
-		setquest 11375; //state=1
+		setquest 11375;
 		set VER2_QUE,14;
 		close2;
-		cutin "ep143_tasta.bmp", 255;
+		cutin "ep143_tasta",255;
 		end;
 	}
 	else if(VER2_QUE == 14) {
 		mes "[タマリン]";
 		mes "あっちを見て下さい。";
 		mes "他の箇所に比べてかなり壊れています。";
-		cutin "ep143_tahuk.bmp", 2;
+		cutin "ep143_tahuk",2;
 		next;
 		mes "[タマリン]";
 		mes "マギスティン。";
 		mes "そっちはどうですか？";
-		cutin "ep143_tasta.bmp", 2;
-		viewpoint 1, 35, 254, 1, 0xFF8000; //59150
+		cutin "ep143_tasta",2;
+		viewpoint 1,35,254,1,0xFF8000; //59150
 		close2;
-		cutin "ep143_tasta.bmp", 255;
+		cutin "ep143_tasta",255;
 		end;
 	}
 	mes "[タマリン]";
 	mes "向こうは他と比べて";
 	mes "かなり壊れていますね……。";
 	mes "一体何が……。";
-	cutin "ep143_tahuk.bmp", 2;
+	cutin "ep143_tahuk",2;
 	close2;
-	cutin "ep143_tahuk.bmp", 255;
+	cutin "ep143_tahuk",255;
 	end;
 }
 verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
@@ -6616,7 +10501,7 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "あ……。";
 		mes "こっちも道が、";
 		mes "ふさがれているようです。";
-		cutin "bu_maggi1.bmp", 2;
+		cutin "bu_maggi1",2;
 		next;
 		mes "[マギスティン]";
 		mes "タマリンさんの前にある、";
@@ -6624,14 +10509,14 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "不思議な力を";
 		mes "感じられるのですが……";
 		mes "詳しくは分かりません。";
-		cutin "bu_maggi3.bmp", 2;
+		cutin "bu_maggi3",2;
 		next;
 		mes "[テューリアン]";
 		mes "う……。";
 		mes "あそこのワープポータル、";
 		mes "何故かわからないが";
 		mes "入りたくない感じだな……。";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[タマリン]";
 		mes "!?";
@@ -6639,32 +10524,32 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "赤いイノシシという";
 		mes "あだ名までつけられた";
 		mes "テューリアンが行きたがらないとは！";
-		cutin "ep143_tahuk.bmp", 0;
+		cutin "ep143_tahuk",0;
 		next;
 		mes "[テューリアン]";
 		mes "誰が豚だと!?";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[テューリアン]";
 		mes "それじゃなくて!!";
 		mes "もっとかっこいいのがいい！";
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		next;
 		mes "[アルプオカート]";
 		mes "テューリアン。";
 		mes "豚をバカにするな。";
 		mes "頭から足まで捨てるものがない、";
 		mes "すばらしい家畜だ。";
-		cutin "bu_alp1.bmp", 0;
+		cutin "bu_alp1",0;
 		next;
 		mes "[アルプオカート]";
 		mes "それにうまい。";
-		cutin "bu_alp4.bmp", 0;
+		cutin "bu_alp4",0;
 		next;
 		mes "[テューリアン]";
 		mes "おいしいのは事実だけど!!";
 		mes "それが重要ではない!!";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[マークイシャ]";
 		mes "テューリアンは性格に難ありですけど、";
@@ -6673,7 +10558,7 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "調べる際は細心の注意が必要と、";
 		mes "いいたいようです。";
 		mes "そうだよな、イノシシテューリアン？";
-		cutin "bu_mark2.bmp", 0;
+		cutin "bu_mark2",0;
 		next;
 		mes "[テューリアン]";
 		mes "おおおい！";
@@ -6681,7 +10566,7 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "それにさりげなく、";
 		mes "イノシシテューリアンと";
 		mes "呼んだよな!?";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[アルプオカート]";
 		mes "こんなに目立つ障害物を";
@@ -6689,28 +10574,28 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "ファンタスマゴリカプロジェクト側でも";
 		mes "まだ、あまり調査できていない";
 		mes "場所のようだな……。";
-		cutin "bu_alp1.bmp", 0;
+		cutin "bu_alp1",0;
 		next;
 		mes "[テューリアン]";
 		mes "おい!!";
 		mes "俺を無視するな!?";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[タマリン]";
 		mes "あまり気は進みませんが";
 		mes "探す場所もなくなってきたし、";
 		mes "次の調査場所はあの";
 		mes "ワープポータルしかないでしょうね。";
-		cutin "ep143_tasta.bmp", 0;
+		cutin "ep143_tasta",0;
 		next;
 		mes "[マギスティン]";
 		mes "でも、あの先を調べるには";
 		mes "許可をもらう必要が";
 		mes "ありますよね……？";
-		cutin "bu_maggi3.bmp", 2;
+		cutin "bu_maggi3",2;
 		next;
 		if(select("頷く","許可？") == 2) {
-			cutin "ep143_tasta.bmp", 0;
+			cutin "ep143_tasta",0;
 			mes "[タマリン]";
 			mes "許可が下りた発掘団のみが";
 			mes "立ち入り可能だと統制員の方が";
@@ -6734,7 +10619,7 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "立ち入り許可を貰いに戻りますから";
 		mes "後ほど、ワープポータルの向こうで";
 		mes "落ち合うことにしませんか？";
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		next;
 		mes "[マークイシャ]";
 		mes "危険な場所のようですし、";
@@ -6743,36 +10628,36 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "特にあいつが暴走したときは、";
 		mes "人数が多いほうが対応できますし。";
 		mes "すいませんが、宜しくお願いします。";
-		viewpoint 2, 35, 254, 1, 0xFFFFFF; //59151
-		cutin "bu_mark2.bmp", 0;
-		setquest 11363; //state=1
+		viewpoint 2,35,254,1,0xFFFFFF; //59151
+		cutin "bu_mark2",0;
+		setquest 11363;
 		delquest 11363;
-		setquest 11364; //state=1
+		setquest 11364;
 		delquest 11364;
-		setquest 11365; //state=1
+		setquest 11365;
 		delquest 11365;
-		setquest 11366; //state=1
+		setquest 11366;
 		delquest 11366;
-		setquest 11367; //state=1
+		setquest 11367;
 		delquest 11367;
-		setquest 11368; //state=1
+		setquest 11368;
 		delquest 11368;
-		setquest 11369; //state=1
+		setquest 11369;
 		delquest 11369;
-		setquest 11370; //state=1
+		setquest 11370;
 		delquest 11370;
-		setquest 11371; //state=1
+		setquest 11371;
 		delquest 11371;
-		setquest 11372; //state=1
+		setquest 11372;
 		delquest 11372;
-		setquest 11373; //state=1
+		setquest 11373;
 		delquest 11373;
-		setquest 11374; //state=1
+		setquest 11374;
 		delquest 11374;
-		setquest 118330; //state=1
+		setquest 118330;
 		delquest 118330;
 		delquest 11375;
-		setquest 11376; //state=1
+		setquest 11376;
 		set VER2_QUE,15;
 		getexp 1000000,0; //91278582
 		getexp 1000000,0; //92278582
@@ -6785,7 +10670,7 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		getexp 0,500000; //6572610
 		getexp 0,500000; //7072610
 		close2;
-		cutin "bu_mark2.bmp", 255;
+		cutin "bu_mark2",255;
 		end;
 	}
 	else if(VER2_QUE == 15) {
@@ -6796,7 +10681,7 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "ワープポータルしかないでしょうね。";
 		mes "ただ、ワープポータル使用には";
 		mes "立ち入り許可が必要のようですけど。";
-		cutin "ep143_tasta.bmp", 0;
+		cutin "ep143_tasta",0;
 		next;
 		if(select("頷く","許可？") == 2) {
 			mes "[タマリン]";
@@ -6821,7 +10706,7 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "立ち入り許可を貰いに戻りますから";
 		mes "後ほど、ワープポータルの向こうで";
 		mes "落ち合うことにしませんか？";
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		next;
 		mes "[マークイシャ]";
 		mes "危険な場所のようですし、";
@@ -6830,17 +10715,17 @@ verus03.gat,35,254,3	script	マギスティン#ep15_1elb0	612,{/* 59405 */
 		mes "特にあいつが暴走したときは、";
 		mes "人数が多いほうが対応できますし。";
 		mes "すいませんが、宜しくお願いします。";
-		cutin "bu_mark2.bmp", 0;
+		cutin "bu_mark2",0;
 		close2;
-		cutin "bu_mark2.bmp", 255;
+		cutin "bu_mark2",255;
 		end;
 	}
 	mes "[マギスティン]";
 	mes "……何かはわかりませんが、";
 	mes "危険な気が感じられます……。";
-	cutin "bu_maggi3.bmp", 2;
+	cutin "bu_maggi3",2;
 	close2;
-	cutin "bu_maggi3.bmp", 255;
+	cutin "bu_maggi3",255;
 	end;
 }
 verus04.gat,153,193,8	script	商人#ep15_1el10	879,{/* 59406 */
@@ -6969,7 +10854,7 @@ verus03.gat,129,21,5	script	放浪バード#ep15	51,{/* 59420 */
 		mes "その話を詩にしています。";
 		mes "もし、あなたが各地で面白い物語に";
 		mes "出会ったなら私にそれを教えて下さい。";
-		setquest 4295; //state=1
+		setquest 4295;
 		compquest 4295;
 		close;
 	}
@@ -6987,12 +10872,12 @@ verus03.gat,129,21,5	script	放浪バード#ep15	51,{/* 59420 */
 	mes "[放浪バード]";
 	mes "どんな出来事について";
 	mes "教えていただけますか？";
-	set '@str1$, (QUE1_TEST >= 13? "^0000ff": "^ff0000") +"レゲンシュルム研究所　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
-	set '@str2$, (QUE1_TEST >= 13? "^0000ff": "^ff0000") +"大統領　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
-	set '@str3$, (QUE1_TEST >= 13? "^0000ff": "^ff0000") +"ジュピロス遺跡調査　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
-	set '@str4$, (QUE1_TEST >= 13? "^0000ff": "^ff0000") +"研究妨害　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
-	set '@str5$, (QUE1_TEST >= 13? "^0000ff": "^ff0000") +"薬クエスト第2部　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
-	set '@str6$, (QUE1_TEST >= 13? "^0000ff": "^ff0000") +"オーディン神殿発掘団　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
+	set '@str1$,(QUE1_TEST >= 13? "^0000ff": "^ff0000") +"レゲンシュルム研究所　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
+	set '@str2$,(QUE1_TEST >= 13? "^0000ff": "^ff0000") +"大統領　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
+	set '@str3$,(QUE1_TEST >= 13? "^0000ff": "^ff0000") +"ジュピロス遺跡調査　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
+	set '@str4$,(QUE1_TEST >= 13? "^0000ff": "^ff0000") +"研究妨害　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
+	set '@str5$,(QUE1_TEST >= 13? "^0000ff": "^ff0000") +"薬クエスト第2部　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
+	set '@str6$,(QUE1_TEST >= 13? "^0000ff": "^ff0000") +"オーディン神殿発掘団　"+ (QUE1_TEST >= 13? "報酬受取可能": "未達成") +"^000000";
 	next;
 	switch(select('@str1$,'@str2$,'@str3$,'@str4$,'@str5$,'@str6$,"やめる")) {
 	case 1:
@@ -7574,7 +11459,7 @@ verus04.gat,187,169,5	script	ウェルス案内員#01	71,{/* 59474 */
 			mes "[ウェルス案内員]";
 			mes "入口付近ですね。";
 			mes "そこでよろしいですか？";
-			viewpoint 1, 184, 161, 1, 0xFF0000; //59223
+			viewpoint 1,184,161,1,0xFF0000; //59223
 			break;
 		case 2:
 			mes "[ウェルス案内員]";
@@ -7582,13 +11467,13 @@ verus04.gat,187,169,5	script	ウェルス案内員#01	71,{/* 59474 */
 			mes "そこでよろしいですか？";
 			set '@x,142;
 			set '@y,188;
-			viewpoint 1, 142, 188, 2, 0x00FF00; //59223
+			viewpoint 1,142,188,2,0x00FF00; //59223
 			break;
 		case 3:
 			mes "[ウェルス案内員]";
 			mes "チャールストン付近ですね。";
 			mes "そこでよろしいですか？";
-			viewpoint 1, 77, 123, 3, 0x00FFFF; //59223
+			viewpoint 1,77,123,3,0x00FFFF; //59223
 			break;
 		case 4:
 			mes "[ウェルス案内員]";
@@ -7596,20 +11481,20 @@ verus04.gat,187,169,5	script	ウェルス案内員#01	71,{/* 59474 */
 			mes "そこでよろしいですか？";
 			set '@x,121;
 			set '@y,249;
-			viewpoint 1, 44, 260, 4, 0xFF00FF; //59223
+			viewpoint 1,44,260,4,0xFF00FF; //59223
 			break;
 		case 5:
 			mes "[ウェルス案内員]";
 			mes "北西側ですね。";
 			mes "そこでよろしいですか？";
-			viewpoint 1, 44, 260, 5, 0xFFFF00; //59223
+			viewpoint 1,44,260,5,0xFFFF00; //59223
 			break;
 		case 6:
-			viewpoint 2, 184, 161, 1, 0xFF0000; //59223
-			viewpoint 2, 142, 188, 2, 0x00FF00; //59223
-			viewpoint 2, 77, 123, 3, 0x00FFFF; //59223
-			viewpoint 2, 121, 249, 4, 0xFF00FF; //59223
-			viewpoint 2, 44, 260, 5, 0xFFFF00; //59223
+			viewpoint 2,184,161,1,0xFF0000; //59223
+			viewpoint 2,142,188,2,0x00FF00; //59223
+			viewpoint 2,77,123,3,0x00FFFF; //59223
+			viewpoint 2,121,249,4,0xFF00FF; //59223
+			viewpoint 2,44,260,5,0xFFFF00; //59223
 			continue;
 		case 7:
 			mes "[ウェルス案内員]";
@@ -7767,23 +11652,23 @@ OnInit:
 }
 verus04.gat,75,114,5	script	チャールストン#mcd	10054,{/* 59480 */
 	if(checkquest(13184)) {
-		cutin "nale01.bmp", 0;
+		cutin "nale01",0;
 		mes "[チャールストン]";
 		mes "そこにある機械装置を";
 		mes "利用してください。";
 		mes "入場したら慌てず落ち着いて";
 		mes "案内に従ってください。";
 		close2;
-		cutin "dalle01.bmp", 255;
+		cutin "dalle01",255;
 		end;
 	}
-	cutin "nale01.bmp", 0;
+	cutin "nale01",0;
 	mes "[チャールストン]";
 	mes "こんにちは。";
 	mes "私は自立型人工知能を持つ";
 	mes "チャールストンです。";
 	next;
-	cutin "nale03.bmp", 0;
+	cutin "nale03",0;
 	mes "[チャールストン]";
 	mes "私はどこからここに来たのか";
 	mes "どれほどの時間ここにいるのか";
@@ -7831,7 +11716,7 @@ verus04.gat,75,114,5	script	チャールストン#mcd	10054,{/* 59480 */
 		mes "そうですか。";
 		mes "無理を言ってすみませんでした。";
 		close2;
-		cutin "dalle01.bmp", 255;
+		cutin "dalle01",255;
 		end;
 	}
 	mes "[チャールストン]";
@@ -7842,9 +11727,9 @@ verus04.gat,75,114,5	script	チャールストン#mcd	10054,{/* 59480 */
 	mes "利用してください。";
 	mes "入場したら慌てず落ち着いて";
 	mes "案内に従ってください。";
-	setquest 13184; //state=1
+	setquest 13184;
 	close2;
-	cutin "dalle01.bmp", 255;
+	cutin "dalle01",255;
 	end;
 OnInit:
 	waitingroom "チャールストン工場",0; //59480
@@ -7885,12 +11770,12 @@ verus04.gat,70,113,5	script	機械装置#mcd	10007,{/* 59229 */
 	case 2:
 		switch(mdenter("charleston")) {
 		case 0:	// エラーなし
-			setquest 13185; //state=1
-			setquest 118245; //state=1
-			setquest 96452; //state=1
+			setquest 13185;
+			setquest 118245;
+			setquest 96452;
 			misceffect 316,""; //self
 			misceffect 317,""; //self
-			announce "メモリアルダンジョン[charleston] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")", 0x9, 0x00ff99, 0x190, 12, 0, 0;
+			announce "メモリアルダンジョン[charleston] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
 			warp "1@mcd.gat",127,282;
 			end;
 		case 1:	// パーティー未加入
@@ -7909,16 +11794,16 @@ verus04.gat,70,113,5	script	機械装置#mcd	10007,{/* 59229 */
 		close;
 	}
 OnInit:
-	waitingroom "工場入口", 0; //59229
+	waitingroom "工場入口",0; //59229
 	end;
 }
 verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
-	cutin "dalle03.bmp", 2;
+	cutin "dalle03",2;
 	mes "[量産型チャールストン]";
 	mes "オ客様ヲ確認シマシタ。";
 	mes "言語ヲ営業モードニ切リ替エマス。";
 	next;
-	cutin "dalle01.bmp", 2;
+	cutin "dalle01",2;
 	mes "[量産型チャールストン]";
 	mes "今！　巷で話題沸騰中！";
 	mes "チャールストン工場の技術で";
@@ -7934,7 +11819,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 		mes "[量産型チャールストン]";
 		mes "ではまたお会いしましょう。";
 		close2;
-		cutin "dalle01.bmp", 255;
+		cutin "dalle01",255;
 		end;
 	case 2:
 		mes "[量産型チャールストン]";
@@ -7948,7 +11833,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 		mes "工場を脱出する際の戦闘で";
 		mes "みんな破壊されてしまいました。";
 		close2;
-		cutin "dalle01.bmp", 255;
+		cutin "dalle01",255;
 		end;
 	case 3:
 		mes "[量産型チャールストン]";
@@ -7969,7 +11854,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 				mes "[量産型チャールストン]";
 				mes "ではまたお会いしましょう。";
 				close2;
-				cutin "dalle01.bmp", 255;
+				cutin "dalle01",255;
 				end;
 			case 2:
 				mes "【トルネードアックス[1]】";
@@ -8164,7 +12049,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 			mes "[量産型チャールストン]";
 			mes "ではまたお会いしましょう。";
 			close2;
-			cutin "dalle01.bmp", 255;
+			cutin "dalle01",255;
 			end;
 		case 2:
 			mes "[量産型チャールストン]";
@@ -8183,7 +12068,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 				mes "[量産型チャールストン]";
 				mes "慎重に決定してください。";
 				close2;
-				cutin "dalle01.bmp", 255;
+				cutin "dalle01",255;
 				end;
 			}
 			mes "[量産型チャールストン]";
@@ -8193,7 +12078,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 			mes "^ff0000透明な板（風）50個^000000";
 			mes "が必要です。";
 			close2;
-			cutin "dalle01.bmp", 255;
+			cutin "dalle01",255;
 			end;
 		case 3:
 			mes "[量産型チャールストン]";
@@ -8212,7 +12097,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 				mes "[量産型チャールストン]";
 				mes "慎重に決定してください。";
 				close2;
-				cutin "dalle01.bmp", 255;
+				cutin "dalle01",255;
 				end;
 			}
 			mes "[量産型チャールストン]";
@@ -8222,7 +12107,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 			mes "^FF0000執行人の手袋50個^000000";
 			mes "が必要です。";
 			close2;
-			cutin "dalle01.bmp", 255;
+			cutin "dalle01",255;
 			end;
 		case 4:
 			mes "[量産型チャールストン]";
@@ -8241,7 +12126,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 				mes "[量産型チャールストン]";
 				mes "慎重に決定してください。";
 				close2;
-				cutin "dalle01.bmp", 255;
+				cutin "dalle01",255;
 				end;
 			}
 			mes "[量産型チャールストン]";
@@ -8251,7 +12136,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 			mes "^FF0000紋章の欠片1　50個^000000";
 			mes "が必要です。";
 			close2;
-			cutin "dalle01.bmp", 255;
+			cutin "dalle01",255;
 			end;
 		case 5:
 			mes "[量産型チャールストン]";
@@ -8270,7 +12155,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 				mes "[量産型チャールストン]";
 				mes "慎重に決定してください。";
 				close2;
-				cutin "dalle01.bmp", 255;
+				cutin "dalle01",255;
 				end;
 			}
 			mes "[量産型チャールストン]";
@@ -8280,7 +12165,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 			mes "^FF0000紋章の欠片3　50個^000000";
 			mes "が必要です。";
 			close2;
-			cutin "dalle01.bmp", 255;
+			cutin "dalle01",255;
 			end;
 		case 6:
 			mes "[量産型チャールストン]";
@@ -8299,7 +12184,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 				mes "[量産型チャールストン]";
 				mes "慎重に決定してください。";
 				close2;
-				cutin "dalle01.bmp", 255;
+				cutin "dalle01",255;
 				end;
 			}
 			mes "[量産型チャールストン]";
@@ -8309,7 +12194,7 @@ verus04.gat,63,112,5	script	量産型チャールストン#3	10053,{/* 59481 */
 			mes "^FF0000紋章の欠片2　50個^000000";
 			mes "が必要です。";
 			close2;
-			cutin "dalle01.bmp", 255;
+			cutin "dalle01",255;
 			end;
 		}
 	}
@@ -8318,7 +12203,7 @@ OnInit:
 	end;
 }
 verus04.gat,66,109,5	script	量産型チャールストン#1	10053,{/* 59231 */
-	cutin "dalle01.bmp", 2;
+	cutin "dalle01",2;
 	mes "[量産型チャールストン]";
 	mes "どこで手に入るかはわかりませんが……";
 	next;
@@ -8329,14 +12214,14 @@ verus04.gat,66,109,5	script	量産型チャールストン#1	10053,{/* 59231 */
 	mes "^ff0000ガーディアンブースター[0]^000000";
 	mes "と交換しますよ。";
 	close2;
-	cutin "dalle01.bmp", 255;
+	cutin "dalle01",255;
 	end;
 OnInit:
-	waitingroom "パーツ交換", 0; //59231
+	waitingroom "パーツ交換",0; //59231
 	end;
 }
 verus04.gat,71,106,5	script	量産型チャールストン#2	10053,{/* 59580 */
-	cutin "dalle01.bmp", 2;
+	cutin "dalle01",2;
 	mes "[量産型チャールストン]";
 	mes "私はチャールストン工場製品の";
 	mes "能力付与と初期化をしています。";
@@ -8352,7 +12237,7 @@ verus04.gat,71,106,5	script	量産型チャールストン#2	10053,{/* 59580 */
 		mes "チャールストンパーツ1つと";
 		mes "100,000Zenyが必要です。";
 		close2;
-		cutin "dalle01.bmp", 255;
+		cutin "dalle01",255;
 		end;
 	case 2:
 		mes "[量産型チャールストン]";
@@ -8360,7 +12245,7 @@ verus04.gat,71,106,5	script	量産型チャールストン#2	10053,{/* 59580 */
 		mes "チャールストンパーツ1つと";
 		mes "100,000Zenyが必要です。";
 		close2;
-		cutin "dalle01.bmp", 255;
+		cutin "dalle01",255;
 		end;
 	case 3:
 		mes "[量産型チャールストン]";
@@ -8445,1338 +12330,14 @@ verus04.gat,71,106,5	script	量産型チャールストン#2	10053,{/* 59580 */
 		mes "是非装備を手に入れて";
 		mes "エンチャントをしてください。";
 		close2;
-		cutin "dalle01.bmp", 255;
+		cutin "dalle01",255;
 		end;
 	}
 OnInit:
-	waitingroom "エンチャント", 0; //59580
+	waitingroom "エンチャント",0; //59580
 	end;
 }
 
-verus04.gat,144,193,3	script	イアン・アトナド#atnd09	10056,{/* 59482 */
-	switch(VER_1QUE) {
-	case 0:
-	case 1:
-	case 2:
-	case 3:
-	case 4:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……邪魔だ。";
-		next;
-		mes "‐^0000FFファンタスマゴリカ^000000は";
-		mes "　3次職業および限界突破した";
-		mes "　スーパーノービス、影狼、朧が、";
-		mes "　^ff0000楽園団の証^000000を所持した状態で";
-		mes "　楽園団 01の2Fにいる^ff0000ライム^000000から";
-		mes "　開始することができるクエストです‐";
-		next;
-		mes "‐^ff0000楽園団の証^000000は";
-		mes "　楽園団 01の1Fにいる^ff0000ライム^000000から";
-		mes "　楽園団の登録をおこなう事で";
-		mes "　入手が可能です‐";
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	case 5:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "なんだ、お前は。";
-		mes "さっきから邪魔ばっかりしおって。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "イアン！";
-		mes "この若者が、先日話した";
-		mes "私たちに協力しにきてくれた人なんだ。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……お前がアウレスの言う手伝いか。";
-		mes "こんなガキに……。";
-		mes "手伝いなどいらん。帰れ。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "まだそんな事を……";
-		mes "年寄りだけで作業が思うように";
-		mes "進まない事くらい、";
-		mes "貴方もわかっているでしょう？";
-		next;
-		mes "[アウレス]";
-		mes "貴方だけの問題ではなく、";
-		mes "アトナド発掘団全体の問題なのですよ。";
-		mes "わがままは控えてください。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "フン。何がわがままだ。";
-		mes "……おい、ガキ。";
-		mes "お前は私の娘に頼まれて";
-		mes "私を監視しに来たのか？";
-		next;
-		if(select("発掘の協力をしにきた","仲を取り持ちにきた","なんの事だかわからない") == 2) {
-			//??
-			cutin "verus_ian03.bmp", 2;
-			mes "[イアン・アトナド]";
-			mes "余計なお世話だ！";
-			mes "アウレス、お前の考えることなど";
-			mes "このアトナドにはお見通しなんだよ。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "おい、そこのお前。";
-			mes "発掘の仕事ではなく、";
-			mes "そんなくだらない仕事をしに来たやつは";
-			mes "いらんぞ。帰るんだな。";
-			next;
-			cutin "verus_aures.bmp", 0;
-			mes "[アウレス]";
-			mes "まあまあ。私はともかく、";
-			mes "わざわざお手伝いに来てくれた方に";
-			mes "そのような言い方は失礼ですよ。";
-			mes "発掘の手伝いはお願いしましょう？";
-			next;
-		}
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……フン、まあいい。";
-		mes "それじゃ今すぐ仕事をさせてやる。";
-		mes "どれほどの働きをするのか見てやろう。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "やれやれ……。";
-		mes "では" + strcharinfo(0) + "さん、";
-		mes "改めて、彼がアトナド発掘団の";
-		mes "団長、イアン・アトナドです。";
-		next;
-		mes "[アウレス]";
-		mes "来ていただいて感謝します。";
-		mes "少し危険な仕事もありますが、";
-		mes "あなたなら問題ないでしょう。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "余計なことは言わんでいい。";
-		mes "……お前はこっちだ。来い。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "いや、気難しい団長で申し訳ない。";
-		mes "まずは彼の話を聞いてみてください。";
-		set VER_1QUE,6;
-		delquest 7610;
-		setquest 118200; //state=1
-		close2;
-		cutin "verus_aures.bmp", 255;
-		end;
-	case 6:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "手伝うと言ったからには";
-		mes "それなりの仕事ができるんだろうな？";
-		mes "期待外れだったらすぐ帰らせるからな。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "ここから少し北に行くと";
-		mes "広場のような場所がある。";
-		mes "そこには高度な文明の";
-		mes "機械がいくつかあるはずだ。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "その機械の動力源の装置を";
-		mes "私たちは^ff0000稼働制御装置^000000と呼んでいる。";
-		mes "機械を調査してその稼働制御装置を";
-		mes "^ff00002個^000000持って来い。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "いいか？　^ff0000稼働制御装置^000000を";
-		mes "^ff00002個^000000集めてくるんだぞ。";
-		mes "お前がどれほど仕事が出来るか見てやる。";
-		set VER_1QUE,7;
-		delquest 118200;
-		setquest 118201; //state=1
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	case 7:
-		if(countitem(6749) < 2) {
-			cutin "verus_ian01.bmp", 2;
-			mes "[イアン・アトナド]";
-			mes "いいか？　^ff0000稼働制御装置^000000を";
-			mes "^ff00002個^000000集めてくるんだぞ。";
-			mes "お前がどれほど仕事が出来るか見てやる。";
-			close2;
-			cutin "verus_ian01.bmp", 255;
-			end;
-		}
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……ふん。集めてきたようだな。";
-		mes "これは研究に使う大事なものだ。";
-		mes "さっさと出せ。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "言われたことはできるようだな。";
-		mes "お前の実力がどの程度か";
-		mes "見ておいてやろう。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "とりあえず今は用は無い。";
-		mes "アウレスの所にでも行って";
-		mes "仕事を手伝うんだな。";
-		set VER_1QUE,8;
-		delitem 6749, 2;
-		delquest 118201;
-		setquest 7619; //state=1
-		close2;
-		cutin "verus_ian03.bmp", 255;
-		end;
-	case 8:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……私はまだお前を信じてはいない。";
-		mes "契約があるから";
-		mes "仕方なくここに置いているだけだ。";
-		mes "契約終了まで、大人しく";
-		mes "言われた仕事だけをしておけばいい。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "とりあえず今は用は無い。";
-		mes "アウレスの所にでも行って";
-		mes "仕事を手伝うんだな。";
-		close2;
-		cutin "verus_ian03.bmp", 255;
-		end;
-	case 9:
-	case 10:
-	case 11:
-	case 12:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "もう一度言うが、";
-		mes "私はお前が純粋に協力するためだけに";
-		mes "ここへ来たとは考えていない。";
-		mes "何か企んでいるんだろう？";
-		next;
-		mes "[イアン・アトナド]";
-		mes "……まあいい。";
-		mes "今やっている仕事が終わったら";
-		mes "すぐ私のもとに来い。";
-		mes "暇なお前に仕事を与えてやろう。";
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	case 13:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "成果報告書は提出したのか？";
-		mes "だったらお前に仕事を与えてやろう。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "私は腹が空いた。";
-		mes "何か食べ物を持って来てくれ。";
-		mes "ここで支給している食料じゃなく、";
-		mes "珍しい食べ物を用意して来い。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "イアン。あなたという人は";
-		mes "またそんなことを……。";
-		mes "ここでそんな物さがしても";
-		mes "無駄だと言う事は";
-		mes "わかっているじゃないですか。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "だからこいつに頼むんだろう。";
-		mes "そうだな……";
-		mes "^4d4dff食べやすく肉汁も豊富で";
-		mes "さっぱりする珍味^000000を探して";
-		mes "持ってきてくれ。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "見つけて来ることができたら";
-		mes "お前の企みを聞いてやろう。";
-		mes "何かを望んで";
-		mes "ここにいるのは分かっている。";
-		next;
-		cutin "verus_ian01.bmp", 255;
-		mes "‐イアン・アトナドの注文を叶えれば";
-		mes "　^ff0000最後の探査^000000の事が聞けそうだ‐";
-		next;
-		mes "‐^4d4dff食べやすく肉汁も豊富で";
-		mes "　さっぱりする珍味^000000を探してこよう‐";
-		set VER_1QUE,14;
-		delquest 7623;
-		setquest 7624; //state=1
-		close;
-	case 14:
-	case 15://??
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "同じ事を何度も言わせるな。";
-		mes "^4d4dff食べやすく肉汁も豊富で";
-		mes "さっぱりする珍味^000000を探して";
-		mes "持ってくるんだ。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "見つけて来ることができたら";
-		mes "お前の企みを聞いてやるぞ。";
-		close2;
-		cutin "verus_ian03.bmp", 255;
-		end;
-	case 16:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "ふむ……";
-		mes "……作業中に片手で簡単に";
-		mes "食べらそうな形だな。";
-		mes "確かに食べやすそうだ。";
-		mes "しかし肝心なのは味だぞ。";
-		next;
-		mes "‐イアンはビーフトーストを";
-		mes "　ゆっくり食べ始めた‐";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……！　これは……";
-		mes "炭火で焼いた肉が細かく刻まれ、";
-		mes "香ばしい風味と豊富な肉汁が";
-		mes "口の中に広がる……！";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "更に異国の果物と野菜が";
-		mes "余分な油を抑えていて";
-		mes "さっぱりとしている！";
-		next;
-		menu "外の葉も食べてみて下さい",-;
-		cutin "verus_ian04.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "なるほど……";
-		mes "これも一緒に食べるものだったのか。";
-		mes "豊富な肉汁にさっぱりしたサラダ、";
-		mes "甘い果物。";
-		mes "そしてこの食べやすい形状……。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "……ガキ……";
-		mes "なかなかやるじゃないか。";
-		mes "私が提示した条件をすべて満たすものを";
-		mes "持って来てやがったな。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "仕方ない、約束だ。";
-		mes "お前がここにきた理由をきいてやろう。";
-		mes "私に望むものはなんだ？";
-		next;
-		menu "最後の探査について",-;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……最後の探査……";
-		mes "そうか。それの話か。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "わかった。";
-		mes "……少し一人で考える時間がほしい。";
-		mes "少し一人にしてくれないか。";
-		mes "後であらためて話をしよう。";
-		set VER_1QUE,17;
-		delitem 11519, 1;
-		delquest 7626;
-		setquest 7627; //state=1
-		getexp 1000000,0; //20410135
-		getexp 1000000,0; //21410135
-		getexp 1000000,0; //22410135
-		getexp 1000000,0; //23410135
-		getexp 1000000,0; //24410135
-		getexp 0,500000; //82589483
-		getexp 0,500000; //83089483
-		getexp 0,500000; //83589483
-		getexp 0,500000; //84089483
-		getexp 0,500000; //84589483
-		getexp 1000000,0; //25410135
-		getexp 1000000,0; //26410135
-		getexp 1000000,0; //27410135
-		getexp 1000000,0; //28410135
-		getexp 1000000,0; //29410135
-		getexp 0,500000; //85089483
-		getexp 0,500000; //85589483
-		getexp 0,500000; //86089483
-		getexp 0,500000; //86589483
-		getexp 0,500000; //87089483
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	case 21:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "おお、やっと戻ったか。";
-		mes "それで、何か成果があったか？";
-		next;
-		mes "[イアン・アトナド]";
-		mes "何か持ち帰ってきたようだな？";
-		mes "見せてくれ。";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……こ、これは!?";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "何をそんなに驚いているのですか？";
-		mes "私にも見せてください。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……これはだな……";
-		mes "^ff0000メモリーレコード^000000と呼ばれるものだ。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "曽祖父の遺品で";
-		mes "これと同じものを見たことがある。";
-		mes "こいつは音声や周りの音を記録する";
-		mes "一種の記録媒体だ。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "それは……魔法ですか？";
-		mes "目に見えるものをそのまま記録に残す";
-		mes "フォト魔法なら知っていますが……。";
-		mes "同じ類のものなのですか？";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "いや、違う。魔法の応用でもない。";
-		mes "純粋なる科学の産物だよ。";
-		mes "曽祖父がこれを使って";
-		mes "音声を記録するのを見たことがある。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "当時はただのおもちゃのような";
-		mes "発明品だとばかり思っていたが……";
-		mes "今となって考えてみれば、";
-		mes "なぜ曾祖父はその技術を";
-		mes "発表しなかったのか疑問だな。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "本当に小さい頃の記憶だが、";
-		mes "これと全く同じものだったよ。";
-		mes "……とすれば、あれで……";
-		mes "こいつに記録された内容を";
-		mes "知ることができるのか……。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "そうだな……あれが必要だ。";
-		mes "今すぐ探して……";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……あ……。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "どうしました、イアン？";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "このメモリーレコードに記録された";
-		mes "内容を見るための機械があるんだ。";
-		mes "それは曽祖父が使っていた";
-		mes "^ff0000レコードプレイヤー^000000という機械だ。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "私はそれを曾祖父から、";
-		mes "遠い昔に譲り受けていたんだ。";
-		mes "価値ある古い機械だ。";
-		mes "大切に自宅に保管していたよ。";
-		mes "しかし……。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "……なるほど。";
-		mes "あなたの家は、貴方の娘";
-		mes "アルクイエンが処分してしまった。";
-		mes "そうですね？";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "そうだ、もう私の家は無い。";
-		mes "おそらく曾祖父の";
-		mes "レコードプレイヤーも……。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "いいえ、イアン。";
-		mes "あなたが大切にしていた物ならば、";
-		mes "アルクイエンは";
-		mes "処分はしていないでしょう。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "どういうことだ？";
-		mes "あの子は私を恨んでいる。";
-		mes "私の物など、とうの昔に";
-		mes "処分しているに決まっている。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "決まっているかどうか、";
-		mes strcharinfo(0) + "さんに";
-		mes "確かめていただきましょう。";
-		next;
-		mes "[アウレス]";
-		mes "イアン。";
-		mes "あなたは物事を、何でも";
-		mes "決めつけて考えてしまう。";
-		mes "あなたの悪い癖ですよ。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……";
-		next;
-		mes "[イアン・アトナド]";
-		mes "…………";
-		next;
-		mes "[イアン・アトナド]";
-		mes "………………";
-		mes "……そうだな……。";
-		mes "確かめるだけ確かめてみるか。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "……" + strcharinfo(0) + "。";
-		mes "アルクイエンの元へ行き、";
-		mes "曾祖父のレコードプレイヤーを";
-		mes "まだ処分していないか聞いてみてくれ。";
-		mes "そして、もしそれがまだあるのならば";
-		mes "ここへ持ってきて欲しい。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "私からもお願いします。";
-		mes "彼女に何かを頼むとすれば、";
-		mes "私やイアンではなく、";
-		mes "楽園団のメンバーである";
-		mes "あなたからの方が良いと思います。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "楽園団に行くのならば、";
-		mes "送ってやるぞ。";
-		mes "用意ができたら声をかけてくれ。";
-		set VER_1QUE,22;
-		delquest 7643;
-		setquest 7644; //state=1
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	case 24:
-	case 25://??
-	case 26://??
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……。";
-		next;
-		cutin "verus_ian01.bmp", 255;
-		mes "‐何か考え込んでいるようだ。";
-		mes "　今はそっとしておこう‐";
-		close;
-	case 27:
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "アルクイエンが？";
-		mes "あの子は一体何を考えているんだ？";
-		mes "私に不満があるのならば";
-		mes "直接来て話せばいいものを！";
-		next;
-		mes "[イアン・アトナド]";
-		mes "なぜレコードプレイヤーを";
-		mes "渡してくれないのだ……。";
-		mes "毎回お前があの子が確認した内容を";
-		mes "聞いてくるというのか？";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "……悪くないですね。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "そう、悪くない。";
-		mes "……じゃないだろう!?";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "いえいえ、これは良い事です。";
-		mes "今までそっぽを向いてた";
-		mes "あなた達親子が";
-		mes "少しでも交流するチャンスですよ。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "またお前はそうやって！";
-		mes "何がチャンスだ！";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "でもまあ、そうだな……。";
-		mes "あの子がレコードプレイヤーを";
-		mes "捨てないでいてくれただけでも……。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "わかった。仕方ない。";
-		mes "とにかくこうなってしまったからには";
-		mes strcharinfo(0)+ "。お前が";
-		mes "キッチリ内容を聞いてきて、";
-		mes "私に教えてくれ。わかったな？";
-		next;
-		mes "[イアン・アトナド]";
-		cutin "verus_ian03.bmp", 2;
-		mes "……それで？";
-		mes "メモリーレコードの内容は";
-		mes "聞いたんだろう？";
-		mes "何が録音されていた？";
-		next;
-		menu "メモリーレコードの内容を話す",-;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……なんだって!?";
-		mes "聞き間違いじゃないのか？";
-		mes "なぜ、アトナドの名が出てくる？";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "……。";
-		mes "……恐らくですが……";
-		next;
-		mes "[アウレス]";
-		mes "この地から発掘された";
-		mes "メモリーレコード、";
-		mes "それを再生することができる";
-		mes "プレイヤーがあなたの家にあった。";
-		next;
-		mes "[アウレス]";
-		mes "それはあなたの曾祖父から";
-		mes "譲り受けたもの……。";
-		mes "そしてメモリーレコードの内容に";
-		mes "アトナドの名があった……。";
-		mes "以上から推測すると……";
-		next;
-		mes "[アウレス]";
-		mes "イアン、あなたは";
-		mes "この都市の住人の";
-		mes "末裔ではないのですか？";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "私が……ウェルスシティの末裔……!?";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……確かに、なぜかこの場所を";
-		mes "懐かしいと思う感覚はあった……。";
-		mes "……だから……なのか？";
-		mes "……私がジュピロスに";
-		mes "喰らいついた理由は……。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "しかしなぜ今になってこの場所が";
-		mes "発見されたんだ？";
-		mes "もっと前から知られていても";
-		mes "良いはずだ！";
-		mes "私の先祖がこの都市の人間なら";
-		mes "なぜそれを隠したんだ……？";
-		next;
-		menu "落ち着いてください",-;
-		mes "[イアン・アトナド]";
-		mes "そ……そうだな、";
-		mes "お前に聞いても仕方のないことだ……。";
-		mes "……どうやらその^ff0000メモリーレコードを";
-		mes "もっと集める必要がありそうだ。^000000";
-		next;
-		mes "[イアン・アトナド]";
-		mes "このメモリーレコードは";
-		mes "研究棟で見つけたものだったな。";
-		mes "では今度は^ff0000実験棟^000000を";
-		mes "調べてきてくれないか。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "^ff0000実験棟^000000には地下施設があって、";
-		mes "メモリーレコードのようなものが";
-		mes "見つかるらしい。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "お前はそこに行って";
-		mes "メモリーレコードを探して欲しい。";
-		mes "他の奴らが興味を持つ前に";
-		mes "こちらで手を打とう。";
-		mes "どうせ内容の解読もできないはずだ。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "とりあえず、この事を";
-		mes "アルクイエンにも話してくれ。";
-		mes "いいな、今度は";
-		mes "^ff0000実験棟^000000のメモリーレコードだ。";
-		mes "頼んだぞ。";
-		set VER_1QUE,28;
-		delquest 7647;
-		setquest 7648; //state=1
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	case 28:
-	case 29:
-	case 30:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "^0000ff実験棟^000000は、";
-		mes "^ff0000広場から北西方面にある^000000と聞いた。";
-		mes "近くまで行けばすぐわかるだろう。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "そこから地下施設につながる道を探して";
-		mes "内部を調査してくれ。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "どうやらそこにも";
-		mes "得体の知れない機械がいて、";
-		mes "襲ってくるらしいと聞いた。";
-		mes "注意してメモリーレコードを集めてくれ。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "最低でも2個は欲しい。";
-		mes "集めたらアルクイエンの元へ行き、";
-		mes "内容を聞いて私に教えてくれ。";
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	case 31:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "アルクイエン……";
-		mes "あの子の考えている事が";
-		mes "私にはよくわからん。";
-		mes "長く離れすぎていたからな……。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "だからあの子が";
-		mes "私が大事にしていた";
-		mes "レコードプレイヤーを";
-		mes "捨てていなかったことに";
-		mes "正直驚いている。";
-		next;
-		cutin "verus_ian04.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……ゆっくり";
-		mes "あの子と話をする時間を";
-		mes "作らなければならないとは";
-		mes "思っているんだがな……。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "フン。年寄のひとり言だ。";
-		mes "さあ作業を進めるぞ。";
-		mes strcharinfo(0)+ "、";
-		mes "お前もお前の";
-		mes "やるべきことをやるんだ。";
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	case 32:
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "今回もか！";
-		mes "本当にあの子は何を考えてるんだ！";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "なんだって？　あの子も参加すると？";
-		mes "自分がメモリーレコードの解読をして";
-		mes "結果をこっちに渡すと？";
-		mes "……いきなりどうしたと言うのだ？";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "アルクイエンも何かに";
-		mes "気づいたのではないのでしょうか？";
-		mes "ともあれ、せっかく手伝ってくれると";
-		mes "言うのです。彼女の好意に";
-		mes "甘えようじゃありませんか。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……くっ";
-		mes "……仕方ないか。";
-		mes strcharinfo(0)+ "、お前が";
-		mes "キッチリ内容を聞いてきて";
-		mes "私に教えてくれ。わかったな？";
-		mes "アルクイエンの様子も見てきてほしい。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "そうですね。";
-		mes "アルクイエンからの伝達もですが、";
-		mes "メモリーレコードも";
-		mes "集めていただきたいですね。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "そうだな。そっちも頼む。";
-		mes "手間をかけさせるが";
-		mes "よろしく頼むぞ。";
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	case 33:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "ああ、お前か。";
-		mes "今ちょっと取り込んでいる。";
-		next;
-		menu "どうしたのですか？",-;
-		mes "[イアン・アトナド]";
-		mes "少し厄介な事になりそうだ。";
-		mes "それも……";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[レッケンベル主席秘書官]";
-		mes "はじめまして。";
-		mes "レッケンベル秘書室の主席秘書官、";
-		mes "W・Hと申します。";
-		mes "お待ちしておりました。";
-		next;
-		menu "レッケンベル社の秘書？",-;
-		mes "[レッケンベル主席秘書官]";
-		mes "はい。";
-		mes "レッケンベル社会長の";
-		mes "秘書を勤めております。";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "挨拶はいい。";
-		mes "それで用件はなんだ？";
-		mes "発掘状況に関する報告は";
-		mes "別ルートで行っているはずだが。";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[レッケンベル主席秘書官]";
-		mes "我が社の会長は、あなた方に";
-		mes "一度お会いしたいと言っております。";
-		mes "いつでもかまいませんので";
-		mes "リヒタルゼンの本社に";
-		mes "お越しいただきたいのです。";
-		next;
-		mes "[レッケンベル主席秘書官]";
-		mes "それと……";
-		mes "あなた方が調査をしている";
-		mes "メモリーレコードの内容について、";
-		mes "当分非公開でお願い致します。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "フン。私らがメモリーレコードを";
-		mes "調査している事にもう気が付いたか。";
-		mes "それで内容は非公開にしろと？";
-		mes "それはなぜだ？";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[レッケンベル主席秘書官]";
-		mes "そうですね……。";
-		mes "まだ時期尚早と言うべきでしょうか。";
-		next;
-		mes "[レッケンベル主席秘書官]";
-		mes "これらに関する協議も行う予定ですので";
-		mes "詳しくはレッケンベル社で";
-		mes "お話いたしましょう。";
-		mes "なるべく早く訪問してくださるよう、";
-		mes "お願いします。";
-		next;
-		mes "[レッケンベル主席秘書官]";
-		mes "それでは私はこれで。";
-		mes "ご訪問をお待ちしています。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "これは……行かざるを得ませんね。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "仕方ない。";
-		mes "ここにいても何も始まらないからな。";
-		mes "とりあえず行ってみるしかないだろう。";
-		mes strcharinfo(0)+ "。";
-		mes "お前もレッケンベル社へ行くんだ。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "なぜかお前も同席するようにと";
-		mes "やつらに言われているんだ。";
-		next;
-		cutin "Arquien_n_atnad04.bmp", 2;
-		mes "[ナイル]";
-		mes "騒がしいと思ったら";
-		mes "レッケンベルが来ていたのか。";
-		mes "本社に来いだと？　私も行くぞ。";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "アルクイエン!?";
-		mes "お前も一緒に";
-		mes "レッケンベルに行くだと!?";
-		mes "どういう事だ!?";
-		next;
-		cutin "Arquien_n_atnad04.bmp", 2;
-		mes "[ナイル]";
-		mes "なんだ" +strcharinfo(0)+ "、";
-		mes "まだ私が調査に参加する事を";
-		mes "伝えてなかったのか？";
-		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "まあいい。というわけで、";
-		mes "この調査に関して";
-		mes "色々興味が湧いたからな。";
-		mes "私も参加するぞ。";
-		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
-		mes "[ナイル]";
-		mes "レコードプレイヤーも";
-		mes "私が持っているしな。";
-		mes "嫌とは言わせない。";
-		mes "まぁ、嫌と言われても、";
-		mes "勝手に参加するけどな。";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "なんだと!?";
-		mes "アルクイエン……";
-		mes "お前が何を考えているのか";
-		mes "私には全く理解できない。";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "レコードプレイヤーを";
-		mes "ただこちらに渡すだけで済む話なのに。";
-		mes "どういう風の吹き回しだ……？";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "アルクイエンも何かに";
-		mes "気づいたのではないのでしょうか？";
-		mes "ともあれ、せっかく手伝ってくれると";
-		mes "言うのです。彼女の好意に";
-		mes "甘えようじゃありませんか。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "そうだな……確かに今は";
-		mes "猫の手でも欲しい状況だ。";
-		mes "……わかった。";
-		mes "しかし、邪魔だけはするなよ。";
-		mes "調査の邪魔だと感じたら";
-		mes "すぐに追い出すからな。";
-		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "この私が邪魔になんかなるものか。";
-		mes "さあ、そうと決まったら";
-		mes "さっさとレッケンベルの本社へ行こう。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……ああ、そうだな。";
-		mes strcharinfo(0)+ "、";
-		mes "お前も出かける準備をしてくれ。";
-		mes "話だけだろうから、";
-		mes "特に念入りに準備するような事も";
-		mes "ないと思うが……。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "準備ができたら声をかけてくれ。";
-		set VER_1QUE,34;
-		delquest 118210;
-		setquest 7656; //state=1
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	case 34:
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "レッケンベルの本社に行く";
-		mes "準備はできたか？";
-		mes "すぐに出発するぞ。";
-		next;
-		if(select("もう少し準備がしたい","すぐに出発する") == 1) {
-			mes "[イアン・アトナド]";
-			mes "わかった。";
-			mes "準備ができたら声をかけてくれ。";
-			mes "なるべく急げ。";
-			close2;
-			cutin "verus_ian01.bmp", 255;
-			end;
-		}
-		mes "[イアン・アトナド]";
-		mes "わかった。";
-		mes "では、行くとしよう。";
-		close;
-		cutin "verus_ian01.bmp", 255;
-		warp "lhz_in01.gat",275,229;
-		end;
-	default:
-		cutin "verus_ian01.bmp", 2;
-		if(VER_1QUE < 37) {
-			mes "[イアン・アトナド]";
-			mes "ああ、お前か。";
-			mes "なんの用だ？";
-		}
-		else {
-			mes "[イアン・アトナド]";
-			mes "世の中とは本当に";
-			mes "分からない事ばかりだな。";
-			mes "とにかくメモリーレコードの研究は";
-			mes "続けられそうで安心した。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "それで今日は何の用だ？";
-		}
-		set '@str1$,"発掘作業を手伝う　(^FF0000クエスト受注可能^000000)";
-		if(checkquest(7615)) {
-			if(countitem(6749) < 2)
-				set '@str1$,"発掘作業を手伝う　(^FF0000受注中^000000)";
-			else
-				set '@str1$,"発掘作業を手伝う　(^FF0000報酬受け取り可能^000000)";
-		}
-		if(checkquest(7616)) {
-			set '@str1$,"発掘作業を手伝う　(デイリークエスト)";
-			if(checkquest(7616) & 0x2)
-				set '@str1$,"発掘作業を手伝う　(^FF0000クエスト受注可能^000000)";
-		}
-		set '@str2$,"話をする";
-		if(VER_1QUE == 17 || VER_1QUE == 18) {
-			set '@str2$,"話をする　(^FF0000ストーリークエスト^000000)";
-		}
-		set '@str3$,"立ち去る";
-		if(VER_1QUE == 37) {
-			set '@str3$,"";
-		}
-		next;
-		switch(select('@str1$,'@str2$,"立ち去る")) {
-		case 1:
-			if(checkquest(7615)) {
-				if(countitem(6749) < 2) {
-					mes "[イアン・アトナド]";
-					mes "稼働制御装置のことだな。";
-					next;
-					mes "[イアン・アトナド]";
-					mes "なんだ、頼んだ仕事を忘れたのか？";
-					mes "^ff0000稼働制御装置^000000を";
-					mes "^ff00002個^000000集めてきてくれ。";
-					mes "頼んだぞ。";
-					close2;
-					cutin "verus_ian01.bmp", 255;
-					end;
-				}
-				mes "[イアン・アトナド]";
-				mes "稼働制御装置のことだな。";
-				next;
-				mes "[イアン・アトナド]";
-				mes "今回もちゃんと持って来たな。";
-				mes "持って来たのをそこに置いて";
-				mes "帰りなさい。";
-				next;
-				mes "[イアン・アトナド]";
-				mes "……なるべく壊さないように";
-				mes "努力しているんだがな。";
-				mes "やはり古い物だから仕方ないのか……。";
-				next;
-				cutin "verus_ian04.bmp", 2;
-				mes "[イアン・アトナド]";
-				mes "こいつらを見てると思う。";
-				mes "歳はとりたくないものだな。";
-				delitem 6749, 2;
-				setquest 7616; //state=1
-				delquest 7615;
-				getitem 6961, 5;
-				close2;
-				cutin "verus_ian01.bmp", 255;
-				end;
-			}
-			if(checkquest(7616)) {
-				if(checkquest(7616) & 0x2 == 0) {
-					mes "[イアン・アトナド]";
-					mes "稼働制御装置のことだな。";
-					next;
-					mes "[イアン・アトナド]";
-					mes "まだ研究中だ。";
-					mes "今のところはまだ必要ない。";
-					mes "実験で全部壊れてしまうかも";
-					mes "知れないが……。";
-					close2;
-					cutin "verus_ian01.bmp", 255;
-					end;
-				}
-				mes "[イアン・アトナド]";
-				mes "稼働制御装置のことだな。";
-				next;
-				delquest 7616;
-				mes "稼働制御装置のストックが";
-				mes "なくなってしまったな。";
-				mes "研究にはまだまだ";
-				mes "数が必要なんだが……。";
-				next;
-				mes "[イアン・アトナド]";
-				mes "この間の稼働制御装置も";
-				mes "色々な実験をしていたら";
-				mes "耐えられなくて、";
-				mes "全部壊れてしまった。";
-				mes "最近の若者と同じだ。";
-				next;
-				cutin "verus_ian04.bmp", 2;
-				mes "[イアン・アトナド]";
-				mes "アルクイエン……あいつもそうだ。";
-				mes "辛抱というものを知らん。";
-				close2;
-				cutin "verus_ian01.bmp", 255;
-				end;
-			}
-			mes "[イアン・アトナド]";
-			mes "稼働制御装置のことだな。";
-			next;
-			cutin "verus_ian01.bmp", 2;
-			mes "[イアン・アトナド]";
-			mes "稼働制御装置を用意してくるのが";
-			mes "お前の仕事だ。";
-			mes "……やりたくなければ";
-			mes "やらないでいいがな。";
-			next;
-			if(select("稼働制御装置を用意してくる","大変ですね") == 2) {
-				mes "[イアン・アトナド]";
-				mes "私に用がないのなら";
-				mes "他のメンバーの仕事でも";
-				mes "手伝ってやってくれ。";
-				close2;
-				cutin "verus_ian01.bmp", 255;
-				end;
-			}
-			mes "[イアン・アトナド]";
-			mes "そうか。";
-			mes "それなら、^ff0000稼働制御装置^000000を";
-			mes "^ff00002個^000000集めてきてくれ。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "稼働制御装置……。あれは昔、";
-			mes "どこかで見たことがあるような";
-			mes "気がするんだがな。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "まあ、そんなことはどうでもいい。";
-			mes "年寄のひとり言だ。";
-			mes "さあ、お前は早く行け。";
-			mes "お前が集めて、私が研究する。";
-			mes "そうすれば時間も有効に使えるだろう。";
-			mes "頼んだぞ。";
-			setquest 7615; //state=1
-			close2;
-			cutin "verus_ian01.bmp", 255;
-			end;
-		case 2:
-			break;
-		case 3:
-			cutin "verus_ian01.bmp", 2;
-			mes "[イアン・アトナド]";
-			mes "古代文明に触れられる機会なんて";
-			mes "めったにあるわけじゃない。";
-			mes "仕事がなくて暇なら、";
-			mes "その辺を探索してみるといい。";
-			close2;
-			cutin "verus_ian01.bmp", 255;
-			end;
-		}
-		switch(VER_1QUE) {
-		case 17:
-			cutin "verus_ian02.bmp", 2;
-			mes "[イアン・アトナド]";
-			mes "ちょうどいいところに来た。";
-			mes "^ff0000実験棟^000000と^ff0000研究棟^000000への";
-			mes "立ち入り許可が下りたんだ。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "早速、調査範囲を";
-			mes "広げようと思うのだが……";
-			next;
-			menu "最後の探査の話は？",-;
-			cutin "verus_ian01.bmp", 2;
-			mes "[イアン・アトナド]";
-			mes "無論、忘れてなどいない。";
-			mes "だが……最後の探査では……";
-			mes "特に何も見つからなかった。";
-			mes "探査地はジュピロスだったよ。";
-			mes "目的はいろいろあったのだろうが……";
-			next;
-			cutin "verus_ian02.bmp", 2;
-			mes "[イアン・アトナド]";
-			mes "それが私の人生の";
-			mes "大きな転換になったという事だけは";
-			mes "わかっている。";
-			mes "だが、それ以外の事は";
-			mes "頭の中にもやがかかっているようで";
-			mes "よく思い出せないのだ……。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "だからこの場所を調べれば、";
-			mes "そのもやを消すことができる気がして";
-			mes "ファンタスマゴリカプロジェクトに";
-			mes "参加したのだ。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "……私の勘だがな。";
-			mes "私がずっと探していたものが";
-			mes "ここと無関係ではないと";
-			mes "感じているのだ。";
-			next;
-			cutin "verus_ian01.bmp", 2;
-			mes "[イアン・アトナド]";
-			mes "……だから今は黙って";
-			mes "私を手伝ってもらえないだろうか。";
-			next;
-			menu "……仕方ないですね",-;
-			mes "[イアン・アトナド]";
-			mes "……これが最後の仕事だ。";
-			mes "アルクイエン、あの子も";
-			mes "知る必要がある。";
-			mes "私は仕事の準備を済ませるので、";
-			mes "調査の準備ができたら";
-			mes "またここに来てくれ。";
-			set VER_1QUE,18;
-			delquest 7627;
-			setquest 118204; //state=1
-			close2;
-			cutin "verus_ian01.bmp", 255;
-			end;
-		case 18:
-			cutin "verus_ian01.bmp", 2;
-			mes "[イアン・アトナド]";
-			mes "準備はできたか？";
-			mes "早速、閉鎖された地域の";
-			mes "探査を始めよう。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "しかし、どうやらそこは、";
-			mes "生命体に敏感に反応する";
-			mes "機械がいるようだ。";
-			mes "恐らくそれが閉鎖されていた理由だろう。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "しかも不思議なエネルギーの障壁が";
-			mes "張られている場所もあるらしい。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "まずは^ff0000研究棟^000000地域を調べてくれ。";
-			mes "気になるものがあれば知らせて欲しい。";
-			mes "一見、役に立ちそうもない物の中にこそ";
-			mes "重要なものが隠されている可能性が高い。";
-			mes "怪しげなガラクタや本の山を見つけたら";
-			mes "必ず調べてみてくれ。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "^0000ff研究棟^000000は、";
-			mes "^ff0000広場から北東方面にある^000000と聞いた。";
-			mes "近くまで行けばすぐわかるだろう。";
-			mes "研究棟の入口にいる統制員に話せば";
-			mes "研究棟へ入ることができるはずだ。";
-			set VER_1QUE,19;
-			delquest 118204;
-			setquest 7641; //state=1
-			close2;
-			cutin "verus_ian01.bmp", 255;
-			end;
-		case 19:
-		case 20://??
-			cutin "verus_ian01.bmp", 2;
-			mes "[イアン・アトナド]";
-			mes "^0000ff研究棟^000000は、";
-			mes "^ff0000広場から北東方面にある^000000と聞いた。";
-			mes "近くまで行けばすぐわかるだろう。";
-			next;
-			mes "[イアン・アトナド]";
-			mes "とにかく、何か気になるものを発見したら、";
-			mes "ぜひ私に知らせてくれ。";
-			mes "とくに役に立ちそうもない物の中にこそ";
-			mes "重要なものが隠されている可能性が高い。";
-			mes "^ff0000怪しげなガラクタや本の山を見つけたら";
-			mes "必ず調べてみてくれ。^000000";
-			close2;
-			cutin "verus_ian01.bmp", 255;
-			end;
-		case 37:
-			mes "[イアン・アトナド]";
-			mes "ウェルス、メモリーレコード、";
-			mes "曾祖父のラセ……。";
-			mes "考える事や調べる事はまだまだある。";
-			next;
-			mes "[イアン・アトナド]";
-			mes strcharinfo(0)+ "、";
-			mes "お前にもまだまだ手伝って貰いたい。";
-			mes "よろしく頼むぞ。";
-			close2;
-			cutin "verus_ian01.bmp", 255;
-			end;
-		}
-	}
-OnInit:
-	waitingroom "ファンタスマゴリカ",0; //59482
-	end;
-}
-verus03.gat,52,250,5	script	出入り統制員グマン#atnd	868,{/* 59483 */
-	if(VER_1QUE == 19) {
-		mes "[グマン]";
-		mes "ここは許可を得た発掘団の団員以外は";
-		mes "立ち入ることができません。";
-		mes "どちらから来た方ですか？";
-		next;
-		menu "アトナド発掘団です",-;
-		mes "[グマン]";
-		mes "アトナド発掘団の方ですね。";
-		next;
-		mes "[グマン]";
-		mes "アトナド発掘団には、";
-		mes "^ff0000北東側にある研究塔^000000への";
-		mes "立ち入り許可が出ていますので、";
-		mes "そちらの調査を先にお願いします。";
-		next;
-		mes "‐先に^ff0000北東側にある研究塔^000000の";
-		mes "　調査をしよう‐";
-		close;
-	}
-	if(VER_1QUE >= 20) {
-		mes "[グマン]";
-		mes "調査は進んでいますか？";
-		mes "調査地域は危険なので";
-		mes "気を付けて下さい。";
-		close;
-	}
-	mes "[グマン]";
-	mes "申し訳ありませんが、この先は";
-	mes "許可が下りた発掘団の方のみ";
-	mes "立ち入りが可能です。";
-	close;
-}
-verus03.gat,52,254,0	script	verus03_to_verus01	45,1,1,{/* 59484 */
-	if(VER_1QUE < 20) {
-		mes "[出入り統制員]";
-		mes "申し訳ありませんが、この先は";
-		mes "許可が下りた発掘団の方のみ";
-		mes "立ち入りが可能です。";
-		close;
-	}
-	warp "verus01.gat",243,62;
-	end;
-}
-verus01.gat,247,58,0	warp	verus01_to_verus03	1,1,verus03.gat,55,251	//59485
 verus03.gat,55,245,3	script	レッケンベル学者#e152a0	121,{/* 59486 */
 	mes "[レッケンベル学者]";
 	mes "ふむ……この機械は";
@@ -9928,1821 +12489,6 @@ verus03.gat,61,250,7	script	コラル発掘団コベル#e152	750,{/* 59489 */
 	mes "[コベル]";
 	mes "秘密だね？　了解～！";
 	close;
-}
-verus03.gat,167,257,5	script	出入り統制員ダムハ#atnd	868,{/* 59490 */
-	if(VER_1QUE == 19) {
-		mes "[ダムハ]";
-		mes "ここは許可を得た発掘団の団員以外は";
-		mes "立ち入ることができません。";
-		mes "どちらから来た方ですか？";
-		next;
-		switch(select("アトナド発掘団です","なぜ許可がないと立ち入れない？")) {
-		case 1:
-			mes "[ダムハ]";
-			mes "アトナド発掘団の方ですね。";
-			mes "少々お待ちください。";
-			mes "……はい、確認できました。";
-			mes "アトナド発掘団は";
-			mes "立ち入りが許可されています。";
-			next;
-			menu "なぜ許可がないと立ち入れない？",-;
-			mes "[ダムハ]";
-			mes "ウェルスシティは";
-			mes "大きく４か所の地域に分かれています。";
-			next;
-			mes "[ダムハ]";
-			mes "その中で現在一般公開されている地域は";
-			mes "ウェルスタウンと";
-			mes "ウェルス中央広場です。";
-			mes "その他にも施設のような物は";
-			mes "あったのですが、";
-			mes "その地域は閉鎖されていました。";
-			next;
-			mes "[ダムハ]";
-			mes "ファンタスマゴリカプロジェクトで";
-			mes "一般発掘団を募集する前に";
-			mes "我が社でその閉鎖されていた地域を";
-			mes "調査してみた結果、";
-			mes "ウェルスは何らかの大きな爆発があった";
-			mes "地域である事がわかりました。";
-			next;
-			mes "[ダムハ]";
-			mes "現在は機械が襲ってくるという事と、";
-			mes "内部の地形が危険である事以外は";
-			mes "大きな危険は無いと判断できたため、";
-			mes "実力のある一部の発掘団に限り";
-			mes "立ち入りを許可しています。";
-			break;
-		case 2:
-			mes "[ダムハ]";
-			mes "ウェルスシティは";
-			mes "大きく４か所の地域に分かれています。";
-			next;
-			mes "[ダムハ]";
-			mes "その中で現在一般公開されている地域は";
-			mes "ウェルスタウンと";
-			mes "ウェルス中央広場です。";
-			mes "その他にも施設のような物は";
-			mes "あったのですが、";
-			mes "その地域は閉鎖されていました。";
-			next;
-			mes "[ダムハ]";
-			mes "ファンタスマゴリカプロジェクトで";
-			mes "一般発掘団を募集する前に";
-			mes "我が社でその閉鎖されていた地域を";
-			mes "調査してみた結果、";
-			mes "ウェルスは何らかの大きな爆発があった";
-			mes "地域である事がわかりました。";
-			next;
-			mes "[ダムハ]";
-			mes "現在は機械が襲ってくるという事と、";
-			mes "内部の地形が危険である事以外は";
-			mes "大きな危険は無いと判断できたため、";
-			mes "実力のある一部の発掘団に限り";
-			mes "立ち入りを許可しています。";
-			next;
-			mes "[ダムハ]";
-			mes "あなたはどこの発掘団所属の方ですか？";
-			next;
-			menu "アトナド発掘団です",-;
-			mes "[ダムハ]";
-			mes "アトナド発掘団の方ですね。";
-			mes "少々お待ちください。";
-			mes "……はい、確認できました。";
-			mes "アトナド発掘団は";
-			mes "立ち入りが許可されています。";
-			break;
-		}
-		next;
-		mes "[ダムハ]";
-		mes "アトナド発掘団には、";
-		mes "^ff0000西側にある実験棟^000000への";
-		mes "立ち入りも許可が出ていますので、";
-		mes "そちらの調査もお願いします。";
-		next;
-		mes "[ダムハ]";
-		mes "それでは良い結果を待っています。";
-		mes "お気をつけて！";
-		set VER_1QUE,20;
-		delquest 7641;
-		setquest 7642; //state=1
-		close;
-	}
-	if(VER_1QUE >= 20) {
-		mes "[ダムハ]";
-		mes "調査は進んでいますか？";
-		mes "調査地域は危険なので";
-		mes "気を付けて下さい。";
-		close;
-	}
-	mes "[ダムハ]";
-	mes "申し訳ありませんが、この先は";
-	mes "許可が下りた発掘団の方のみ";
-	mes "立ち入りが可能です。";
-	close;
-}
-verus03.gat,172,257,3	script	出入り統制員ギュハ#atnd	868,{/* 59491 */
-	if(VER_1QUE == 19) {
-		mes "[ギュハ]";
-		mes "ここは許可を得た発掘団の団員以外は";
-		mes "立ち入ることができません。";
-		mes "どちらから来た方ですか？";
-		next;
-		switch(select("アトナド発掘団です","なぜ許可がないと立ち入れない？")) {
-		case 1:
-			mes "[ギュハ]";
-			mes "アトナド発掘団の方ですね。";
-			mes "少々お待ちください。";
-			mes "……はい、確認できました。";
-			mes "アトナド発掘団は";
-			mes "立ち入りが許可されています。";
-			next;
-			menu "なぜ許可がないと立ち入れない？",-;
-			mes "[ギュハ]";
-			mes "ウェルスシティは";
-			mes "大きく４か所の地域に分かれています。";
-			next;
-			mes "[ギュハ]";
-			mes "その中で現在一般公開されている地域は";
-			mes "ウェルスタウンと";
-			mes "ウェルス中央広場です。";
-			mes "その他にも施設のような物は";
-			mes "あったのですが、";
-			mes "その地域は閉鎖されていました。";
-			next;
-			mes "[ギュハ]";
-			mes "ファンタスマゴリカプロジェクトで";
-			mes "一般発掘団を募集する前に";
-			mes "我が社でその閉鎖されていた地域を";
-			mes "調査してみた結果、";
-			mes "ウェルスは何らかの大きな爆発があった";
-			mes "地域である事がわかりました。";
-			next;
-			mes "[ギュハ]";
-			mes "現在は機械が襲ってくるという事と、";
-			mes "内部の地形が危険である事以外は";
-			mes "大きな危険は無いと判断できたため、";
-			mes "実力のある一部の発掘団に限り";
-			mes "立ち入りを許可しています。";
-			break;
-		case 2:
-			mes "[ギュハ]";
-			mes "ウェルスシティは";
-			mes "大きく４か所の地域に分かれています。";
-			next;
-			mes "[ギュハ]";
-			mes "その中で現在一般公開されている地域は";
-			mes "ウェルスタウンと";
-			mes "ウェルス中央広場です。";
-			mes "その他にも施設のような物は";
-			mes "あったのですが、";
-			mes "その地域は閉鎖されていました。";
-			next;
-			mes "[ギュハ]";
-			mes "ファンタスマゴリカプロジェクトで";
-			mes "一般発掘団を募集する前に";
-			mes "我が社でその閉鎖されていた地域を";
-			mes "調査してみた結果、";
-			mes "ウェルスは何らかの大きな爆発があった";
-			mes "地域である事がわかりました。";
-			next;
-			mes "[ギュハ]";
-			mes "現在は機械が襲ってくるという事と、";
-			mes "内部の地形が危険である事以外は";
-			mes "大きな危険は無いと判断できたため、";
-			mes "実力のある一部の発掘団に限り";
-			mes "立ち入りを許可しています。";
-			next;
-			mes "[ギュハ]";
-			mes "あなたはどこの発掘団所属の方ですか？";
-			next;
-			menu "アトナド発掘団です",-;
-			mes "[ギュハ]";
-			mes "アトナド発掘団の方ですね。";
-			mes "少々お待ちください。";
-			mes "……はい、確認できました。";
-			mes "アトナド発掘団は";
-			mes "立ち入りが許可されています。";
-			break;
-		}
-		next;
-		mes "[ギュハ]";
-		mes "アトナド発掘団には、";
-		mes "^ff0000西側にある実験棟^000000への";
-		mes "立ち入りも許可が出ていますので、";
-		mes "そちらの調査もお願いします。";
-		next;
-		mes "[ギュハ]";
-		mes "それでは良い結果を待っています。";
-		mes "お気をつけて！";
-		set VER_1QUE,20;
-		delquest 7641;
-		setquest 7642; //state=1
-		close;
-	}
-	if(VER_1QUE >= 20) {
-		mes "[ギュハ]";
-		mes "調査は進んでいますか？";
-		mes "調査地域は危険なので";
-		mes "気を付けて下さい。";
-		close;
-	}
-	mes "[ギュハ]";
-	mes "申し訳ありませんが、この先は";
-	mes "許可が下りた発掘団の方のみ";
-	mes "立ち入りが可能です。";
-	close;
-}
-verus03.gat,169,259,0	script	verus03_to_verus02	45,{/* 59492 */
-	if(VER_1QUE < 20) {
-		mes "[出入り統制員]";
-		mes "申し訳ありませんが、この先は";
-		mes "許可が下りた発掘団の方のみ";
-		mes "立ち入りが可能です。";
-		close;
-	}
-	warp "verus02.gat",72,19;
-	end;
-}
-verus02.gat,72,16,0	warp	verus02_to_verus03	1,1,verus03.gat,169,255	//59493
-verus02.gat,60,30,1	script	散らばった文書#e152a01	10043,{/* 59494 (hide)*/
-	if(VER_1QUE == 20) {
-		mes "‐色々な書類が";
-		mes "　山積みになっている。";
-		mes "　書類に記された文字は劣化し、";
-		mes "　解読は困難なようだ‐";
-		next;
-		if(select("調べる","やめる") == 2) {
-			mes "‐他の場所を調べることにした‐";
-			close;
-		}
-		progressbar 3; //color=0xffff00
-		hideonnpc; //59502
-		mes "‐乱雑に散らばった書類の中に";
-		mes "　小さな円盤状の物体を見つけた‐";
-		next;
-		mes "^4d4dff‐イアン・アトナド博士に";
-		mes "　持って行って調べて貰おう‐^000000";
-		set VER_1QUE,21;
-		getitem 6757, 1;
-		delquest 7642;
-		setquest 7643; //state=1
-		close;
-	}
-	if(VER_1QUE == 24) {
-		if(countitem(6757) >= 2) {
-			mes "‐メモリーレコードは十分に集まった。";
-			mes "　これ以上調べる必要はなさそうだ‐";
-			close;
-		}
-		mes "‐色々な書類が";
-		mes "　山積みになっている。";
-		mes "　書類に記された文字は劣化し、";
-		mes "　解読は困難なようだ‐";
-		next;
-		if(select("調べる","やめる") == 2) {
-			mes "‐他の場所を調べることにした‐";
-			close;
-		}
-		progressbar 3; //color=0xffff00
-		hideonnpc; //59502
-		mes "‐乱雑に散らばった書類の中に";
-		mes "　大切そうに置かれた";
-		mes "　メモリーレコードを見つけた。";
-		mes "　まるで誰かが意図的に";
-		mes "　隠しておいたように感じる‐";
-		getitem 6757, 1;
-		close;
-	}
-	mes "‐特に変わったものは見当たらない‐";
-	close;
-}
-verus02.gat,178,32,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a02	10043	/* 59495 */
-verus02.gat,102,135,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a03	10043	/* 59496 */
-verus02.gat,42,37,3		duplicate(散らばった文書#e152a01)	散らばった文書#e152a04	10043	/* 59497 */
-verus02.gat,155,64,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a05	10043	/* 59498 */
-verus02.gat,80,129,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a06	10043	/* 59499 */
-verus02.gat,29,129,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a07	10043	/* 59500 */
-verus02.gat,125,85,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a08	10043	/* 59501 */
-verus02.gat,51,237,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a09	10043	/* 59502 */
-verus02.gat,160,150,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a10	10043	/* 59503 */
-
-verus04.gat,172,149,3	script	団長アルクイエン#e152v0	951,{/* 59504 */
-	switch(VER_1QUE) {
-	case 0:
-	case 1:
-	case 2://??
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "おや、君は……。";
-		mes "ひょっとして発掘に興味があるのか？";
-		mes "もし興味があるようなら";
-		mes "楽園団へきてくれ。";
-		mes "詳しい話をしよう。";
-		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
-		end;
-	case 3:
-	case 4:
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "発掘団の参加登録は済ませたか？";
-		mes "まだなら早く登録をして、";
-		mes "発掘作業を手伝ってきてくれ。";
-		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
-		end;
-	case 24:
-		if(countitem(6757) < 2) {
-			cutin "Arquien_n_atnad02.bmp", 2;
-			mes "[ナイル]";
-			mes "私が事務室で話した内容は";
-			mes "覚えていないのか？";
-			mes "^ff0000メモリーレコードは";
-			mes "ひとつだけじゃ動かないみたいだ。^000000";
-			mes "再生するには2個必要だと思う。";
-			next;
-			cutin "Arquien_n_atnad01.bmp", 2;
-			mes "[ナイル]";
-			mes "最初のメモリーレコードを";
-			mes "見つけた場所の近くに";
-			mes "もう一度行って";
-			mes "^ff0000メモリーレコードを2個";
-			mes "集めて持ってきてくれ。^000000";
-			close2;
-			cutin "Arquien_n_atnad01.bmp", 255;
-			end;
-		}
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "持って来たか？";
-		mes "よし。これをこうやって集めて……";
-		mes "ここに置く……。";
-		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
-		mes "[ナイル]";
-		mes "さあ、準備は出来た。";
-		mes "再生スイッチは";
-		mes "君に押してもらおうか。";
-		mes "レコードプレイヤーは、";
-		mes "私の隣に置いてある。";
-		mes "その、再生のスイッチを押すだけだ。";
-		delitem 6757, 2;
-		set VER_1QUE,25;
-		delquest 7645;
-		setquest 7646; //state=1
-		emotion 0, "レコードプレイヤー#e152"; //59060
-		close2;
-		cutin "Arquien_n_atnad03.bmp", 255;
-		end;
-	case 25:
-		cutin "Arquien_n_atnad03.bmp", 2;
-		mes "[ナイル]";
-		mes "さあ、用意はできている。";
-		mes "メモリーレコードに記された秘密を";
-		mes "確認しようじゃないか。";
-		mes "レコードプレイヤーは、";
-		mes "私の隣に置いてある。";
-		mes "その、再生のスイッチを押すだけだ。";
-		close2;
-		cutin "Arquien_n_atnad03.bmp", 255;
-		end;
-	case 26:
-		cutin "Arquien_n_atnad02.bmp", 2;
-		mes "[ナイル]";
-		mes "ふむ……。";
-		mes "内容自体は大した事はないが……";
-		mes "なぜアトナドの名が出てくる？";
-		mes "親父が何か知っているのか？";
-		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "いや、違う。";
-		mes "きっとこの内容は知らないはずだ。";
-		mes "それでも何かが……。";
-		next;
-		cutin "Arquien_n_atnad04.bmp", 2;
-		mes "[ナイル]";
-		mes "……ああああ！　わからん!!";
-		mes "こうやって頭を使うのは私に向かない！";
-		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "君が行って今の内容を";
-		mes "うまくあの親父に伝えるんだ。";
-		mes "考えるのはアイツの専門だろ？";
-		mes "そしてこのメモリーレコードは……";
-		next;
-		cutin "Arquien_n_atnad04.bmp", 2;
-		mes "[ナイル]";
-		mes "……!?";
-		misceffect 234, "レコードプレイヤー#e152"; //59060
-		next;
-		menu "今、何が…",-;
-		mes "[ナイル]";
-		mes "なっ……？　静電気!?";
-		mes "それともよくある証拠隠滅ってヤツか？";
-		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "まあいい。ともかく君は";
-		mes "大体の内容を親父に伝えた後、";
-		mes "どうしてアトナドの名が出たのか";
-		mes "分かることはないか聞いてみてくれ。";
-		set VER_1QUE,27;
-		delquest 118206;
-		setquest 7647; //state=1
-		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
-		end;
-	case 27:
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "メモリーレコードの内容は";
-		mes "覚えているな？　君が行って内容を";
-		mes "うまくあの親父に伝えるんだ。";
-		mes "考えるのはアイツの専門だろ？";
-		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
-		end;
-	case 28:
-		cutin "Arquien_n_atnad04.bmp", 2;
-		mes "[ナイル]";
-		mes "はあ。あの親父、本当に……。";
-		mes "自分から話に来たりはしないのか？";
-		mes "それで今回は実験棟の";
-		mes "メモリーレコードだと？";
-		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
-		mes "[ナイル]";
-		mes "全く……仕方ない人だな……。";
-		mes "まあいい。協力はするよ。";
-		mes "私は寛大だからね。";
-		next;
-		mes "[ナイル]";
-		mes "それに、あの親父でも";
-		mes "わからない事があるというのも、";
-		mes "少し面白いしな。";
-		mes "あいつが分からないなら";
-		mes "私たちで調べようじゃないか。";
-		next;
-		mes "[ナイル]";
-		mes "君も協力してくれるだろう？";
-		mes "実験棟のメモリーレコードを";
-		mes "2個集めて持ってきてくれ。";
-		mes "気を付けて行ってくるんだぞ。";
-		set VER_1QUE,29;
-		delquest 7648;
-		setquest 118208; //state=1
-		close2;
-		cutin "Arquien_n_atnad03.bmp", 255;
-		end;
-	case 29:
-		cutin "Arquien_n_atnad04.bmp", 2;
-		mes "[ナイル]";
-		mes "はあ。あの親父、本当に……。";
-		mes "自分から話に来たりはしないのか？";
-		mes "それで今回は実験棟の";
-		mes "メモリーレコードだと？";
-		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
-		mes "[ナイル]";
-		mes "全く……仕方ない人だな……。";
-		mes "まあいい。協力はするよ。";
-		mes "私は寛大だからね。";
-		next;
-		mes "[ナイル]";
-		mes "それに、あの親父でも";
-		mes "わからない事があるというのも、";
-		mes "少し面白いしな。";
-		mes "あいつが分からないなら";
-		mes "私たちで調べようじゃないか。";
-		next;
-		mes "[ナイル]";
-		mes "君も協力してくれるだろう？";
-		mes "実験棟のメモリーレコードを";
-		mes "2個集めて持ってきてくれ。";
-		mes "気を付けて行ってくるんだぞ。";
-		close2;
-		cutin "Arquien_n_atnad03.bmp", 255;
-		end;
-	case 30:
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "持って来たか？";
-		mes "よし。これをこうやって集めて……";
-		mes "ここに置く……。";
-		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
-		mes "[ナイル]";
-		mes "さあ、準備は出来た。";
-		mes "再生スイッチは";
-		mes "君に押してもらおうか。";
-		mes "内容はしっかり記憶して、";
-		mes "親父に伝えるんだぞ。";
-		delitem 6824, 2;
-		set VER_1QUE,31;
-		delquest 118209;
-		setquest 7646; //state=1
-		close2;
-		cutin "Arquien_n_atnad03.bmp", 255;
-		end;
-	case 31:
-		cutin "Arquien_n_atnad03.bmp", 2;
-		mes "[ナイル]";
-		mes "さあ、用意はできている。";
-		mes "メモリーレコードに記された秘密を";
-		mes "確認しようじゃないか。";
-		close2;
-		cutin "Arquien_n_atnad03.bmp", 255;
-		end;
-	case 32:
-		cutin "Arquien_n_atnad02.bmp", 2;
-		mes "[ナイル]";
-		mes "再生後の音は、静電気ではなく";
-		mes "連結部位が割れた音だったみたいだ。";
-		mes "もう一度2個繋げると再生できるから、";
-		mes "特に問題はなさそうだが……。";
-		next;
-		mes "[ナイル]";
-		mes "……今回もただならぬ内容だな。";
-		mes "実験というのは、この場所を";
-		mes "こんな姿にした元凶なのか？";
-		next;
-		cutin "Arquien_n_atnad04.bmp", 2;
-		mes "[ナイル]";
-		mes "もしかすると……内容から察するに、";
-		mes "このメモリーレコードというものは";
-		mes "この地域の秘密を解くのに";
-		mes "大きな貢献をするかも知れないな。";
-		next;
-		menu "破片を見せる",-;
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "ほう……これはまた";
-		mes "不思議なものを見つけたな。";
-		mes "レコード中央の空いていた部分に";
-		mes "入っていたものなのか？";
-		next;
-		cutin "Arquien_n_atnad02.bmp", 2;
-		mes "[ナイル]";
-		mes "なるほど。この部分が壊れるのか。";
-		mes "しかしこれは……";
-		next;
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "この破片からは強力な思念を感じる。";
-		mes "気を付けて扱うようにしたほうがいい。";
-		mes "何が起きるか分からないからな。";
-		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
-		mes "[ナイル]";
-		mes "それとだな。この調査に関して、";
-		mes "色々話を聞いていたら興味が湧いた。";
-		mes "私もここに参加するから、";
-		mes "次からメモリーレコードは";
-		mes "私に持ってきてくれ。";
-		next;
-		mes "[ナイル]";
-		mes "とりあえずあの親父に";
-		mes "私が参加する事を伝えておいてくれ。";
-		mes "文句を言われても";
-		mes "気にしないでいいからな。";
-		next;
-		cutin "Arquien_n_atnad02.bmp", 2;
-		mes "[ナイル]";
-		mes "ん……？　ちょっと待て、";
-		mes "何か異様な雰囲気がする。";
-		mes "誰か訪ねてきたのか……？";
-		mes "様子を見て来るんだ。";
-		set VER_1QUE,33;
-		delquest 118206;
-		setquest 118210; //state=1
-		close2;
-		cutin "Arquien_n_atnad03.bmp", 255;
-		end;
-	case 33:
-	case 34:
-	case 35:
-	case 36:
-	case 37:
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "ああ、君か。";
-		mes "どうした？　私に用か？";
-		next;
-		switch(select("レコードの収集　(デイリークエスト)","話をする","とくに用はない")) {
-		case 1:
-			mes "[ナイル]";
-			mes "メモリーレコードの収集か？";
-			mes "どちらの場所の";
-			mes "メモリーレコードだ？";
-			next;
-			set '@str1$,"研究棟　(^FF0000クエスト受注可能^000000)";
-			set '@str2$,"実験棟　(^FF0000クエスト受注可能^000000)";
-			if(checkquest(7652))
-				set '@str2$,"実験棟　(^FF0000受注中^000000)";
-			else if(checkquest(7653) & 0x2 == 0)
-				set '@str2$,"実験棟";
-			switch(select(
-				"研究棟",
-				"実験棟　(^FF0000クエスト受注可能^000000)"
-			)) {
-			case 1:
-				mes "[ナイル]";
-				mes "研究棟のメモリーレコードの収集は";
-				mes "一日一回だけにしてくれ。";
-				next;
-				mes "[ナイル]";
-				mes "君も疲れていると思うし。私は";
-				mes "人を酷使するタイプではないからな。";
-				mes "また時間をおいて来てくれ。";
-				close2;
-				cutin "Arquien_n_atnad01.bmp", 255;
-				end;
-			case 2:
-				if(checkquest(7652)) {
-					mes "[ナイル]";
-					mes "実験棟のメモリーレコードを";
-					mes "探してきてくれ。";
-					mes "^ff0000メモリーレコードは2個必要だぞ。^000000";
-					close2;
-					cutin "Arquien_n_atnad01.bmp", 255;
-					end;
-				}
-				if(checkquest(7653)) {
-					if(checkquest(7653) & 0x2) {
-						delquest 7653;
-						mes "[ナイル]";
-						mes "さあ、十分休んだようだし、";
-						mes "メモリーレコードの収集を";
-						mes "再開しようか？";
-						mes "行く気になったら";
-						mes "もう一度声をかけてくれ。";
-						close2;
-						cutin "Arquien_n_atnad01.bmp", 255;
-						end;
-					}
-				}
-				mes "[ナイル]";
-				mes "実験棟のメモリーレコードを";
-				mes "再生したいのか？";
-				next;
-				mes "[ナイル]";
-				mes "オーケーわかった。";
-				mes "すぐ再生できるように";
-				mes "レコードプレイヤーは準備しておこう。";
-				mes "私もあれの内容には興味がある。";
-				mes "^ff0000メモリーレコードを2個";
-				mes "集めて持ってきてくれ。^000000";
-				next;
-				mes "^ff0000‐[レコードの破片]を";
-				mes "　所持してる場合は、";
-				mes "　新たに[レコードの破片]を";
-				mes "　入手する事はできません‐^000000";
-				next;
-				if(select("集めてくる","断る") == 2) {
-					mes "[ナイル]";
-					mes "そうか。";
-					mes "気が向いたらよろしく頼む。";
-					close2;
-					cutin "Arquien_n_atnad01.bmp", 255;
-					end;
-				}
-				mes "[ナイル]";
-				mes "頼んだぞ。";
-				mes "気を付けて行ってくるんだ。";
-				setquest 7652; //state=1
-				close2;
-				cutin "Arquien_n_atnad01.bmp", 255;
-				end;
-			}
-		case 2:
-			mes "[ナイル]";
-			mes "話だと？　どうした。";
-			next;
-			menu "最後の探査について",-;
-			cutin "Arquien_n_atnad04.bmp", 2;
-			mes "[ナイル]";
-			mes "ああ、最後の探査か……。";
-			mes "それはもう聞かなくていい。";
-			mes "よく考えてたんだが、";
-			mes "私が直接訪ねた方がいいかと";
-			mes "思ったんだ。";
-			next;
-			cutin "Arquien_n_atnad01.bmp", 2;
-			mes "[ナイル]";
-			mes "アウレスさんの話では";
-			mes "親父はジュピロスに盲目的に";
-			mes "しがみついていたらしいんだが……。";
-			mes "今はなぜそうだったのか";
-			mes "なんとなく理由が";
-			mes "わかるような気がするんだ。";
-			next;
-			cutin "Arquien_n_atnad02.bmp", 2;
-			mes "[ナイル]";
-			mes "ウェルス、メモリーレコード、";
-			mes "うちにあったレコードプレイヤー……。";
-			mes "それに、メモリーレコードの";
-			mes "アトナドという言葉……。";
-			if(VER_1QUE >= 37)
-				mes "そしてレッケンベルでのあの話。";
-			next;
-			mes "[ナイル]";
-			mes "親父……いや、父もなんとなく";
-			mes "分かっていたんじゃないかな。";
-			mes "きっと自身のルーツを探す事に";
-			mes "執着していたんだ。";
-			next;
-			cutin "Arquien_n_atnad03.bmp", 2;
-			mes "[ナイル]";
-			mes strcharinfo(0)+ "、";
-			mes "君のおかげで父と";
-			mes "話す気が少しだけ出てきたよ。";
-			mes "ありがとう。";
-			close2;
-			cutin "Arquien_n_atnad03.bmp", 255;
-			end;
-		case 3:
-			cutin "Arquien_n_atnad01.bmp", 2;
-			mes "[ナイル]";
-			mes "私は暇じゃないんだ。";
-			mes "お前も暇なら";
-			mes "誰かを手伝ってくるんだな。";
-			close2;
-			cutin "Arquien_n_atnad01.bmp", 255;
-			end;
-		}
-	default:
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "ああ、君か。";
-		mes "私はちょっとした視察にきただけだ。";
-		mes "要件があるなら";
-		mes "楽園団の事務室で話をきこう。";
-		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
-		end;
-	}
-}
-verus04.gat,170,150,3	script	レコードプレイヤー#e152	844,{/* 59505 */
-	function memoryrecordplayer {
-		mes "‐メモリーレコードに記録された";
-		mes "　音声情報を再生します‐";
-		next;
-		switch(getarg(0)) {
-		case 1:
-			mes "[レコードプレイヤー]";
-			mes "^0000FF‐あー、あ、あ！";
-			mes "　ドロシーフロレンスです。";
-			mes "　今日はモニタールームにて";
-			mes "　メモリーレコードを";
-			mes "　ひとつ拾いました‐^000000";
-			next;
-			mes "[レコードプレイヤー]";
-			mes "^0000FF‐実験日に録音された";
-			mes "　ブラックボックスかな～？";
-			mes "　再生してみます！‐^000000";
-			next;
-			mes "[レコードプレイヤー]";
-			mes "^0000FF‐あー、雑音がすごいなぁ……";
-			mes "　あっ？　聞こえた!?‐^000000";
-			next;
-			mes "[レコードプレイヤー]";
-			mes "^0000FF‐他の研究員は";
-			mes "　ちゃんと逃げたかな……‐^000000";
-			next;
-			mes "[レコードプレイヤー]";
-			mes "^0000FF‐一度も恋したことが無いのは";
-			mes "　ちょっと悔しいかな……‐^000000";
-			next;
-			mes "[レコードプレイヤー]";
-			mes "^0000FF‐……ああ～。";
-			mes "　こんないい経験には";
-			mes "　冷たいマステラ酒と";
-			mes "　たれ付き焼き肉が欲しかったな。";
-			mes "　……ジジッ……‐^000000";
-			next;
-			mes "[レコードプレイヤー]";
-			mes "^0000FF‐あれ？　これが全部？";
-			mes "　だけどこの声は……。";
-			mes "　あああああああ！";
-			mes "　思い出した！";
-			mes "　洗濯物を預けた";
-			mes "　アルテミアさんですね！‐^000000";
-			next;
-			mes "[レコードプレイヤー]";
-			mes "^0000FF‐……そっか。";
-			mes "　あの日……‐^000000";
-			next;
-			mes "[レコードプレイヤー]";
-			mes "^0000FF‐……カチャン‐^000000";
-			next;
-			break;
-		}
-		mes "‐メモリーレコードに記録された";
-		mes "　すべての音声情報を再生しました‐";
-		return;
-	}
-
-	switch(VER_1QUE) {
-	case 25:
-		mes "‐メモリーレコードに記録された";
-		mes "　音声情報を再生します‐";
-		next;
-		mes "[レコードプレイヤー]";
-		mes "^0000FF‐ジッ……ジジジ……‐^000000";
-		next;
-		mes "[レコードプレイヤー]";
-		mes "^0000FF‐ジ……おい！　何やってんだ？";
-		mes "　私の話を聞いているのか？‐^000000";
-		next;
-		mes "[レコードプレイヤー]";
-		mes "^0000FF‐聞いているよゼルテル。";
-		mes "　ああ！　お前の声が入って";
-		mes "　しまったじゃないか！‐^000000";
-		next;
-		mes "[レコードプレイヤー]";
-		mes "^0000FF‐何だ？　録音してたのか？";
-		mes "　何のために？‐^000000";
-		next;
-		mes "[レコードプレイヤー]";
-		mes "^0000FF‐タティオへのメッセージを……";
-		mes "　ジジ……しようと";
-		mes "　設置しているんだけど。";
-		mes "　あ……ジ……なってしまうな‐^000000";
-		next;
-		mes "[レコードプレイヤー]";
-		mes "^0000FF‐はははは！　そんな事をやるなんて、";
-		mes "　やっぱりアトナド……だな！‐^000000";
-		next;
-		mes "[ナイル]";
-		mes "……アトナド？";
-		cutin "Arquien_n_atnad01.bmp", 2;
-		next;
-		mes "[レコードプレイヤー]";
-		mes "^0000FF‐ジジッ……‐^000000";
-		cutin "Arquien_n_atnad01.bmp", 255;
-		next;
-		mes "‐メモリーレコードに記録された";
-		mes "　すべての音声情報を再生しました‐";
-		set VER_1QUE,26;
-		delquest 7646;
-		setquest 7653; //state=1
-		setquest 118206; //state=1
-		close;
-	case 31:
-		memoryrecordplayer 1;
-		next;
-		misceffect 234, "レコードプレイヤー#e152"; //59062
-		mes "‐メモリーレコードを";
-		mes "　取り出そうすると、小さな音と共に";
-		mes "　連結部位が壊れて";
-		mes "　分割した状態に戻ってしまった‐";
-		getitem 22691, 1;
-		set VER_1QUE,32;
-		delquest 7646;
-		setquest 7651; //state=1
-		setquest 118206; //state=1
-		setquest 118150; //state=1
-		delquest 118150;
-		close;
-	default:
-		if(VER_1QUE < 33) {
-			cutin "Arquien_n_atnad01.bmp", 2;
-			mes "[ナイル]";
-			mes "勝手に触るな。";
-			mes "古い機械だ、壊れたら困る。";
-			close2;
-			cutin "Arquien_n_atnad01.bmp", 255;
-			end;
-		}
-		mes "‐レコードプレイヤーがある。";
-		mes "　これで集めた^ff0000メモリーレコード^000000を";
-		mes "　再生できそうだ‐";
-		next;
-		switch(select("再生する","再生履歴を聞く","やめる")) {
-		case 1:
-			mes "‐再生する準備が出来ていない‐";
-			close;
-		case 2:
-			mes "‐どちらの^ff0000メモリーレコード^000000の";
-			mes "　再生履歴を聞こうか？‐";
-			next;
-			switch(select("研究棟のメモリーレコード","実験棟のメモリーレコード","やめる")) {
-			case 1:
-				switch(select(	"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"やめる"))
-				{
-				default:
-					mes "‐未開放の履歴です。";
-					mes "　他の履歴を選択してください‐";
-					close;
-				case 20:
-					mes "‐その場を離れた‐";
-					close;
-				}
-			case 2:
-				switch(select(	"^0000ffドロシーとメモリーレコード^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"^808080未開放^000000",
-								"やめる"))
-				{
-				case 1:
-					memoryrecordplayer 1;
-					close;
-				default:
-					mes "‐未開放の履歴です。";
-					mes "　他の履歴を選択してください‐";
-					close;
-				case 24:
-					mes "‐その場を離れた‐";
-					close;
-				}
-			case 3:
-			}
-		case 3:
-			mes "‐その場を離れた‐";
-			close;
-		}
-	}
-}
-
-lhz_in01.gat,277,234,3	script	レッケンベルガード#e152	868,{/* 59959 */
-	if(VER_1QUE < 34) {
-		// 未調査
-		close;
-	}
-	mes "[レッケンベルガード]";
-	mes "アトナド発掘団の方ですね。";
-	mes "中にご案内します。";
-	close2;
-	warp "lhz_in01.gat",275,241;
-	end;
-}
-lhz_in01.gat,276,238,0	warp	in_to_out#e152i02	1,1,lhz_in01.gat,276,230	//59960
-
-lhz_in01.gat,270,257,4	script	レッケンベル会長#e152i0	10085,{/* 59961 */
-	if(VER_1QUE == 34) {
-		cutin "ep15_rekenber01.bmp", 0;
-		mes "[レッケンベル会長]";
-		mes "ようこそいらっしゃいました。";
-		mes "私がレッケンベルの会長です。";
-		mes "はるばるご足労いただき感謝します。";
-		next;
-		mes "[レッケンベル会長]";
-		mes "アトナド発掘団のみなさんの活躍は";
-		mes "私の耳にも届いていますよ。";
-		mes "あなた方のような発掘団に";
-		mes "協力していただけて光栄です。";
-		next;
-		mes "[レッケンベル会長]";
-		mes "私がみなさんをお呼びした理由は……";
-		mes "団長であるイアン博士は";
-		mes "お察しでしょう。";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……。";
-		next;
-		cutin "ep15_rekenber01.bmp", 0;
-		mes "[レッケンベル会長]";
-		mes "最近、みなさんが収集に力を入れている";
-		mes "メモリーレコードについてです。";
-		next;
-		mes "[レッケンベル会長]";
-		mes "メモリーレコードの調査で得た";
-		mes "一切の情報を公開せず、";
-		mes "内密にしていただきたい。";
-		next;
-		menu "どういうことですか？",-;
-		mes "[レッケンベル会長]";
-		mes "メモリーレコードの内容を";
-		mes "外部に広めないで欲しいと言う事です。";
-		mes "従っていただけるのであれば、";
-		mes "特別な待遇をお約束しましょう。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "特別な待遇？";
-		mes "……何を企んでいるんだ？";
-		next;
-		mes "[イアン・アトナド]";
-		mes "土の中に埋まっている都市の過去を";
-		mes "我々以外の人々が";
-		mes "知ってはならない理由は何なんだ？";
-		mes "納得がいくよう、説明してもらおう。";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[主席秘書官]";
-		mes "今行っている作業を";
-		mes "やめなさいという事ではありません。";
-		mes "得た情報も廃棄しなさいと";
-		mes "いう事でもありません。";
-		next;
-		mes "[主席秘書官]";
-		mes "メモリーレコードの内容……";
-		mes "お察しかと思いますが、";
-		mes "あれにはウェルスシティの";
-		mes "過去の記録が残されています。";
-		next;
-		mes "[主席秘書官]";
-		mes "その内容が過去を紐解き、";
-		mes "歴史を大きく変える内容であることは";
-		mes "間違いありません。";
-		next;
-		mes "[主席秘書官]";
-		mes "科学の発展や人類の進化のために";
-		mes "メモリーレコードの内容を";
-		mes "世間に公表する事は";
-		mes "必要な事だと思います。";
-		mes "しかし、あれは私個人にとっても、";
-		mes "大切なものなのです。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "個人的に大切なもの？";
-		mes "あのメモリーレコードが、か？";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[主席秘書官]";
-		mes "ええ。";
-		mes "メモリーレコードもですが、";
-		mes "それに記された記録が";
-		mes "私のとても大切なものなのです。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "記録が？";
-		mes "どういう事だ？";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[主席秘書官]";
-		mes "順を追ってお話しましょう。";
-		mes "まず、私とあなたは過去に";
-		mes "一度お会いしています。";
-		mes "思い出せませんか？";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……そういえばどこかで";
-		mes "見たことあるような顔だと思ったが……";
-		mes "ジュピロスだな！";
-		mes "そう、ジュピロスで見た覚えがあるぞ！";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "その時、確か……";
-		mes "通路のように見える所で……";
-		mes "……私を攻撃してきた男！";
-		mes "お、お前の……おまえのせいで……！";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "イアン、何か思い出したのですか!?";
-		mes "あの時のあなたの怪我は";
-		mes "事故ではなかったのですか!?";
-		next;
-		menu "なにがあったの？",-;
-		mes "[アウレス]";
-		mes "私たちが以前、";
-		mes "ジュピロスを調査していた時の事です。";
-		next;
-		mes "[アウレス]";
-		mes "何かを見つけたと言って";
-		mes "出て行ったイアンが、";
-		mes "一週間を過ぎても戻らず、";
-		mes "団員みんなで必死に探した結果";
-		mes "ジュノーの旅館で傷を負って";
-		mes "休んでいるところを発見したのです。";
-		emotion 0, "団長アルクイエン#ep152i"; //59965
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "なぜ自分がジュノーにいるのか、";
-		mes "どれほど時間が過ぎていたかも";
-		mes "分からなかった。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "イアンは記憶も無くしてたので、";
-		mes "事故が起き、怪我をしたイアンを";
-		mes "親切な方が旅館まで";
-		mes "運んでくださったと";
-		mes "片付けるしかなかったのです。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "明確に思い出せない";
-		mes "その時の記憶のせいで……";
-		mes "私は狂ったように";
-		mes "記憶の片隅に残った";
-		mes "ジュピロスにしがみついたよ。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "ジュピロスでなら、";
-		mes "なくした記憶を取り戻すことができる、";
-		mes "この焦燥感を抑えることができると。";
-		mes "……私に家族と";
-		mes "帰るべき家があったという事も";
-		mes "忘れるほどにな。";
-		next;
-		cutin "ep15_tatio03.bmp", 0;
-		mes "[主席秘書官]";
-		mes "……それは申し訳ありませんでした。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "その時、私を攻撃してきたのが";
-		mes "お前なんだな？";
-		next;
-		cutin "Arquien_n_atnad02.bmp", 0;
-		mes "[ナイル]";
-		mes "……なぜだ？";
-		mes "主席秘書官どの。";
-		mes "なぜ父を傷付ける必要があった？";
-		next;
-		cutin "ep15_tatio03.bmp", 0;
-		mes "[主席秘書官]";
-		mes "それは……";
-		mes "あの時、博士は見てはならないものを";
-		mes "見てしまったからです。";
-		mes "あの時ウェルスシティは";
-		mes "まだ発見されては";
-		mes "いけませんでしたから。";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "ウェルスシティ……だと!?";
-		mes "あの時私が発見したのが";
-		mes "ウェルスシティへつながる";
-		mes "通路だったということなのか?!";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "なんという事だ……";
-		mes "私がウェルスシティを発見していた?!";
-		mes "そのせいで記憶を消された……?!";
-		mes "一体どういう事なんだ?!";
-		next;
-		mes "[イアン・アトナド]";
-		mes "駄目だ、混乱しているな。";
-		mes "少し整理する時間をくれないか？";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[主席秘書官]";
-		mes "分かりました。";
-		mes "混乱されるのも無理はありません。";
-		mes "少し休憩いたしましょう。";
-		next;
-		cutin "Arquien_n_atnad02.bmp", 0;
-		mes "[ナイル]";
-		mes "……父さん。";
-		mes "私も少し話がしたい……。";
-		next;
-		cutin "Arquien_n_atnad02.bmp", 255;
-		mes "‐何が起きているのか整理しよう。";
-		mes "　まずはイアンかナイルに";
-		mes "　話しかけてみよう‐";
-		set VER_1QUE,35;
-		delquest 7656;
-		setquest 118215; //state=1
-		close;
-	}
-	else if(VER_1QUE == 35) {
-		cutin "ep15_rekenber02.bmp", 0;
-		mes "[レッケンベル]";
-		mes "混乱されるのも無理はありません。";
-		mes "少し休憩いたしましょう。";
-		next;
-		cutin "ep15_rekenber02.bmp", 255;
-		mes "‐何が起きているのか整理しよう。";
-		mes "　まずはイアンかナイルに";
-		mes "　話しかけてみよう‐";
-		close;
-	}
-	else if(VER_1QUE == 36 || VER_1QUE == 37) {
-		cutin "ep15_rekenber01.bmp", 0;
-		mes "[レッケンベル]";
-		mes "元々会長というのは";
-		mes "こういう時にじっとする職業です。";
-		mes "……そんなものです。";
-		close2;
-		cutin "ep15_rekenber01.bmp", 255;
-		end;
-	}
-}
-lhz_in01.gat,267,257,5	script	主席秘書官#e152i01	10084,{/* 59962 */
-	if(VER_1QUE == 34) {
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[主席秘書官]";
-		mes "会長様は長い時間待っていました。";
-		mes "私もです。";
-		close2;
-		cutin "ep15_tatio01.bmp", 255;
-		end;
-	}
-	else if(VER_1QUE == 35) {
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[主席秘書官]";
-		mes "少し休憩いたしましょう。";
-		mes "どうぞあなたも休んでください。";
-		mes "積もる話もあるでしょうし。";
-		mes "私はここでお待ちしていますね。";
-		next;
-		cutin "ep15_tatio03.bmp", 255;
-		mes "‐何が起きているのか整理しよう。";
-		mes "　まずはイアンかナイルに";
-		mes "　話しかけてみよう‐";
-		close;
-	}
-	else if(VER_1QUE == 36) {
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[主席秘書官]";
-		mes "お待たせいたしました。";
-		mes "話の続きをいたしましょう。";
-		mes "……話をする為に";
-		mes "私の正体を明かします。";
-		next;
-		mes "[タティオ]";
-		mes "私はウェルスシティの";
-		mes "最後の生存者である";
-		mes "タティオ.W.00H-1と申します。";
-		mes "呼びやすいように";
-		mes "タティオと呼んでください。";
-		next;
-		mes "[タティオ]";
-		mes "メモリーレコードの内容を";
-		mes "公表したくない理由……";
-		mes "あの時、ジュピロスで";
-		mes "イアン博士を攻撃したこと。";
-		mes "すべて私が望んでやったことです。";
-		donpcevent "イアン・アトナド#ep152i::OnTalk1";
-		next;
-		cutin "ep15_tatio02.bmp", 0;
-		mes "[タティオ]";
-		mes "みなさんが発見したメモリーレコードに";
-		mes "記録されているタティオはこの私です。";
-		mes "そしてメモリーレコードに";
-		mes "記録されているアトナドは、";
-		mes "イアン博士の曾祖父である";
-		mes "ラセ・アトナド氏です。";
-		next;
-		cutin "ep15_tatio03.bmp", 0;
-		mes "[タティオ]";
-		mes "イアン博士、娘のアルクイエンさん、";
-		mes "あなた方はお察しの通り、";
-		mes "ウェルスの民の子孫です。";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……やはりそうか。";
-		mes "しかしウェルスは、";
-		mes "遥か遠い過去に存在した都市だ。";
-		mes "なぜその時代の人間が生きている!?";
-		next;
-		cutin "ep15_tatio02.bmp", 0;
-		mes "[タティオ]";
-		mes "私は当時のウェルスの";
-		mes "科学技術を追求する実験で";
-		mes "被験者として実験に参加していました。";
-		mes "何度も実験を繰り返した結果、";
-		mes "朽ちる事のない体となり";
-		mes "今ここに存在しています。";
-		next;
-		cutin "ep15_tatio03.bmp", 0;
-		mes "[タティオ]";
-		mes "ラセは私を作った科学者の一人で、";
-		mes "私の永遠の友達です。";
-		mes "故郷であり、友達との思い出が多く残る";
-		mes "ウェルスシティを守りたくて、";
-		mes "あの時イアン博士に危害を加え";
-		mes "あの場から遠ざけたのです。";
-		next;
-		mes "[タティオ]";
-		mes "イアン博士が見たものを隠そうとして、";
-		mes "少し記憶も操作して……";
-		mes "ウェルスシティに関することを";
-		mes "忘れていただきました。";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[タティオ]";
-		mes "そのせいでイアン博士は";
-		mes "一週間の記憶を";
-		mes "失っているのだと思います。";
-		next;
-		cutin "ep15_tatio02.bmp", 0;
-		mes "[タティオ]";
-		mes "あの時、イアン博士が";
-		mes "ラセの子孫だとわかっていたら";
-		mes "あんな事はしていなかったでしょう。";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[タティオ]";
-		mes "ウェルスシティは";
-		mes "とても……とても昔に";
-		mes "ジュピロスと肩を並べるほどの";
-		mes "いや、それ以上の科学文明を持った";
-		mes "巨大な科学都市でした。";
-		next;
-		mes "[タティオ]";
-		mes "不慮の事故で滅びてしまいましたが、";
-		mes "機械で作られた私は";
-		mes "死ぬことなく、";
-		mes "ただ思い出のウェルスシティを";
-		mes "守っていたのです。";
-		next;
-		cutin "ep15_tatio03.bmp", 0;
-		mes "[タティオ]";
-		mes "何年も、何十年も、何百年も……。";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……なんということだ……";
-		mes "その話、会長は知っているのか？";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "いや、言わなくていい。";
-		mes "すでに知っているのだろう。";
-		mes "だから私たちを";
-		mes "ここへ呼んだのではないのか。";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[タティオ]";
-		mes "そうです。";
-		mes "私とウェルスシティの秘密は";
-		mes "会長も知っている内容です。";
-		mes "この世でたった二人だけが";
-		mes "知っていた秘密です。";
-		next;
-		mes "[タティオ]";
-		mes "いえ、違いますね。";
-		mes "設立者の一人である、";
-		mes "ゼニット・ゼルテルリヒタルも";
-		mes "知っている内容です。";
-		mes "彼もやはり、ウェルスシティの";
-		mes "子孫の一人ですから。";
-		next;
-		cutin "ep15_tatio02.bmp", 0;
-		mes "[タティオ]";
-		mes "……私がウェルスシティの詳細を、";
-		mes "メモリーレコードの内容を、";
-		mes "公開して欲しくない理由。";
-		mes "わかっていただけましたか？";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "公開されたとしても、";
-		mes "ウェルスシティは";
-		mes "君の守りたいもの……というわけか。";
-		mes "特にメモリーレコードの内容は";
-		mes "彼らから君へのメッセージだからな。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "しかし、それなら";
-		mes "都市の他の資料は問題ないのか？";
-		mes "君や私の名前が明かされて";
-		mes "取り上げられたら困る状況だから";
-		mes "隠そうとしているんだろ？";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[タティオ]";
-		mes "この世界の文明と合わない";
-		mes "飛躍的な水準の核心技術は";
-		mes "すでに廃棄された状態です。";
-		next;
-		mes "[タティオ]";
-		mes "大部分の資料は、";
-		mes "事故で焼失してしまいましたが……";
-		mes "現在残っているものだけでも";
-		mes "当時の状況を知り得る";
-		mes "十分な材料になるでしょう。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "そんなに隠しておきたいなら、";
-		mes "レッケンベルと君は";
-		mes "どうしてウェルスシティの事を";
-		mes "公開したんだ？";
-		mes "なぜ、ファンタスマゴリカ計画などと";
-		mes "人を募り、調査させたんだ。";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[タティオ]";
-		mes "正直に話しますと、つい最近まで";
-		mes "実験棟のエナジーストームのせいで";
-		mes "私も近寄る事ができなかったのです。";
-		next;
-		mes "[タティオ]";
-		mes "理由は分かりませんが、";
-		mes "なぜがそのエナジーストームが";
-		mes "消えたので、危険性が無くなったという";
-		mes "判断を下したこともあります。";
-		next;
-		mes "[タティオ]";
-		mes "そしてこの世界も";
-		mes "科学や工学への理解が進み、";
-		mes "ウェルスシティの技術を知っても";
-		mes "危険ではないと考えました。";
-		next;
-		mes "[タティオ]";
-		mes "過ぎた技術は人間を滅ぼしかねません。";
-		mes "子供の手に";
-		mes "武器を握らせないのと同じように、";
-		mes "私は機会を伺っていたのです。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……すべて納得したわけではないが、";
-		mes "大方理解した。";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[タティオ]";
-		mes "ご理解いただき、";
-		mes "ありがとうございます。";
-		mes "お約束通り、メモリーレコードの";
-		mes "調査に対する独占権を";
-		mes "アトナド発掘団に差し上げます。";
-		next;
-		mes "[タティオ]";
-		mes "ただし情報の公開や開示内容は";
-		mes "こちらで決定致します。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "わかった。";
-		mes "メモリーレコードの調査は";
-		mes "今までと同様に報告する。";
-		mes "その情報の公開は君らに任せる。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "これでいいんだろ？";
-		next;
-		cutin "ep15_tatio01.bmp", 0;
-		mes "[タティオ]";
-		mes "はい。ありがとうございます。";
-		next;
-		mes "[タティオ]";
-		mes "メモリーレコードに記録された内容は、";
-		mes "私にはすべて大事な思い出なのです。";
-		mes "そう、まるで日記を見るような……。";
-		mes "ですのでこれからも";
-		mes "報告をお待ちしていますよ。";
-		next;
-		cutin "verus_ian04.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "まったく。";
-		mes "曾祖父の友人という者は";
-		mes "世話のかかるヤツだな。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "さて、話は済んだ。";
-		mes "私らは戻って作業の続きをしよう。";
-		mes "お前たち、帰るぞ。";
-		next;
-		cutin "verus_ian01.bmp", 255;
-		mes "‐席を立ち、";
-		mes "　帰り支度をするイアンが";
-		mes "　小声で話しかけてきた‐";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "……納得した素振りを見せたが、";
-		mes "実は私はまだ腑に落ちない部分がある。";
-		mes "タティオ……あの男、";
-		mes "ほかにも重要な事を隠しているように";
-		mes "思えてならない。";
-		next;
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "私も同感です。";
-		mes "彼にはまだ何か……";
-		mes "秘密や、隠している野望のようなものを";
-		mes "感じます……。";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "アウレス、お前もか。";
-		mes "こういう時の";
-		mes "年寄の勘は案外当たるもんだ。";
-		next;
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "フン……。まあいい。";
-		mes "今は調査を進めることが最優先だ。";
-		mes "私らは私らの";
-		mes "やるべきことをやるだけだ。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "そうだ、" +strcharinfo(0)+ "。";
-		mes "お前にこれを渡しておこう。";
-		mes "発掘の最中に手に入れたものだが、";
-		mes "どうやら古代の燃料のようだ。";
-		mes "何かに使えるかもしれん。";
-		mes "お前はこれを調べてみろ。";
-		set VER_1QUE,37;
-		delquest 118220;
-		setquest 201765; //state=1
-		getitem 6962, 20;
-		getexp 1000000,0; //99999999
-		getexp 1000000,0; //99999999
-		getexp 1000000,0; //99999999
-		getexp 1000000,0; //99999999
-		getexp 1000000,0; //99999999
-		getexp 0,500000; //7256174
-		getexp 0,500000; //7756174
-		getexp 0,500000; //8256174
-		getexp 0,500000; //8756174
-		getexp 0,500000; //9256174
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	}
-	else if(VER_1QUE == 37) {
-		cutin "ep15_tatio03.bmp", 0;
-		mes "[タティオ]";
-		mes "ご協力に感謝いたします。";
-		close2;
-		cutin "ep15_tatio01.bmp", 255;
-		end;
-	}
-}
-lhz_in01.gat,272,255,3	script	イアン・アトナド#ep152i	10056,{/* 59963 */
-	if(VER_1QUE == 35) {
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "話とはなんだ。";
-		mes "何が聞きたい。";
-		next;
-		cutin "Arquien_n_atnad01.bmp", 0;
-		mes "[ナイル]";
-		mes "今、あの人が話したのは、";
-		mes "父さんが失踪した時の話なのか？";
-		mes "今の話の記憶喪失が、";
-		mes "何年間も勝手に";
-		mes "ほっつきまわっていた原因なのか？";
-		next;
-		cutin "Arquien_n_atnad02.bmp", 0;
-		mes "[ナイル]";
-		mes "その一週間の記憶のために";
-		mes "ずっとジュピロスの研究を……";
-		mes "そのために、";
-		mes "そんな事のために、";
-		mes "私と家を捨てたのか!?";
-		next;
-		cutin "verus_ian02.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "そんなことだと!?";
-		mes "私の研究に対する情熱を";
-		mes "そんな風に言うのはやめろ！";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "私だって一人の学者である前に";
-		mes "一人の娘の父だ。";
-		mes "何も研究にだけに";
-		mes "没頭していたわけではない。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "お前宛の手紙だって家に送った。";
-		mes "それに返信しなかったのは";
-		mes "お前じゃないか！";
-		next;
-		cutin "Arquien_n_atnad04.bmp", 0;
-		mes "[ナイル]";
-		mes "何をえらそうに！";
-		mes "手紙なんてものは見ていない！";
-		mes "どうせ、私が家を処分した後に";
-		mes "送ったんだろう？";
-		mes "そんなの届くわけないじゃないか！";
-		next;
-		cutin "verus_ian03.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "おまえが勝手に家を売ったせいだろう！";
-		mes "たかだか数年、我慢できずに";
-		mes "私が苦労して手に入れた家を売って";
-		mes "行方をくらますなんて、";
-		mes "わがままにも程があるだろう！";
-		next;
-		mes "‐平行線の言い合いが続いている。";
-		mes "　アウレスと主席秘書官が";
-		mes "　困った顔でこちらを見ている‐";
-		next;
-		menu "とりあえず話の続きを聞きませんか？",-;
-		cutin "Arquien_n_atnad02.bmp", 0;
-		mes "[ナイル]";
-		mes "む……確かにそうだな……。";
-		mes "と、とにかくこの事件の原因は、";
-		mes "あそこにいる主席秘書官殿に";
-		mes "あるんだろう？";
-		mes "詳しく話を聞こうじゃないか。";
-		delquest 118215;
-		setquest 118220; //state=1
-		close2;
-		cutin "Arquien_n_atnad02.bmp", 255;
-		end;
-	}
-	else if(VER_1QUE == 36) {
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "やれやれ……。";
-		mes "私も熱くなって大人げないな……。";
-		mes "どうして私を攻撃したのか、";
-		mes "彼に詳しく話を聞こう。";
-		mes "私たち家族の話し合いはその後だ。";
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		end;
-	}
-	else if(VER_1QUE == 37) {
-		cutin "verus_ian01.bmp", 2;
-		mes "[イアン・アトナド]";
-		mes "やつらにはやつらの思惑が";
-		mes "あるのだろうが、";
-		mes "私らは私らの";
-		mes "やるべきことをやるだけだ。";
-		next;
-		mes "[イアン・アトナド]";
-		mes "さあ、帰るぞ。";
-		mes "戻って作業の続きをしよう。";
-		next;
-		if(select("もう少しここにいる","帰る") == 1) {
-			mes "[イアン・アトナド]";
-			mes "なんだ？　まだここに居るのか？";
-			mes "用事があるなら";
-			mes "さっさと終わらせるんだ。";
-			close2;
-			cutin "verus_ian01.bmp", 255;
-			end;
-		}
-		mes "[イアン・アトナド]";
-		mes "わかった。";
-		mes "では、帰ろう。";
-		close2;
-		cutin "verus_ian01.bmp", 255;
-		warp "verus04.gat",142,188;
-		end;
-	}
-OnTalk1:
-	unittalk "イアン・アトナド : !?";
-	end;
-OnTalk2:
-	unittalk "イアン・アトナド : 護衛なんぞいらん！";
-	end;
-}
-lhz_in01.gat,267,255,7	script	アウレス#ep152i01	10057,{/* 59964 */
-	if(VER_1QUE == 34) {
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "来ましたか。";
-		mes "話が始まるまで少し待ちましょう。";
-		next;
-		mes "[アウレス]";
-		mes "あの二人が一緒にいるところを見るのは";
-		mes "久しぶりですね。";
-		mes "あの二人は本当にそっくりだ。";
-		close2;
-		cutin "verus_aures.bmp", 255;
-		end;
-	}
-	else if(VER_1QUE == 35) {
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "レッケンベル社に";
-		mes "招かれる日が来るとは……。";
-		close2;
-		cutin "verus_aures.bmp", 255;
-		end;
-	}
-	else if(VER_1QUE == 36) {
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "とんでもない話でしたが、";
-		mes "この一件であの親子の溝が";
-		mes "少しでも埋まれば良いですね。";
-		next;
-		mes "[アウレス]";
-		mes "イアンは本当は娘想いの父なのですよ。";
-		mes "それを表に出すのが";
-		mes "恥ずかしいだけなのです。";
-		close2;
-		cutin "verus_aures.bmp", 255;
-		end;
-	}
-	else if(VER_1QUE == 37) {
-		cutin "verus_aures.bmp", 0;
-		mes "[アウレス]";
-		mes "とんでもない話でしたが、";
-		mes "この一件であの親子の溝が";
-		mes "少しでも埋まれば良いですね。";
-		next;
-		mes "[アウレス]";
-		mes "イアンは本当は娘想いの父なのですよ。";
-		mes "それを表に出すのが";
-		mes "恥ずかしいだけなのです。";
-		close2;
-		cutin "verus_aures.bmp", 255;
-		end;
-	}
-}
-lhz_in01.gat,272,251,3	script	団長アルクイエン#ep152i	951,{/* 59965 */
-	if(VER_1QUE == 34) {
-		cutin "Arquien_n_atnad01.bmp", 2;
-		mes "[ナイル]";
-		mes "どんな大げさな話をするために";
-		mes "私たちを集めたのか";
-		mes "聞いてみようじゃないか。";
-		close2;
-		cutin "Arquien_n_atnad01.bmp", 255;
-		end;
-	}
-	else if(VER_1QUE == 36) {
-		cutin "Arquien_n_atnad02.bmp", 0;
-		mes "[ナイル]";
-		mes "あそこにいる主席秘書官殿に";
-		mes "詳しく話を聞こうじゃないか。";
-		mes "どんな理由であれ、";
-		mes "私を納得させられる内容でなければ";
-		mes "容赦はしないがな。";
-		close2;
-		cutin "Arquien_n_atnad02.bmp", 255;
-		end;
-	}
-	else if(VER_1QUE == 37) {
-		cutin "Arquien_n_atnad02.bmp", 2;
-		mes "[ナイル]";
-		mes "あのメモリーレコードには";
-		mes "思い出が綴られているんだな。";
-		mes "時代を超えた日記……か。";
-		next;
-		cutin "Arquien_n_atnad03.bmp", 2;
-		mes "[ナイル]";
-		mes "さあ、帰るぞ。";
-		mes "遊んでる暇はないんだ。";
-		mes "さっさと仕事に戻れ。";
-		close2;
-		cutin "Arquien_n_atnad03.bmp", 255;
-		end;
-	}
-}
-lhz_in01.gat,275,251,3	script	ルークラフェズ#ep152i01	953,{/* 59966 */
-	cutin "looke_rapez04.bmp", 0;
-	mes "[ルーク]";
-	mes "ここには護衛としてきただけだ。";
-	close2;
-	cutin "looke_rapez02.bmp", 255;
-	initnpctimer;
-	end;
-OnTimer200:
-	donpcevent "イアン・アトナド#ep152i::OnTalk2";
-	end;
-OnTimer700:
-	emotion 6, "団長アルクイエン#ep152i"; //59965
-	end;
-OnTimer900:
-	stopnpctimer;
-	emotion 9, "ルークラフェズ#ep152i01"; //59966
-	end;
 }
 
 verus02.gat,79,31,4	script	ケロチェル#1	893,{/* 59522 */
@@ -11920,7 +12666,7 @@ verus01.gat,149,155,5	script	文明探査員#pa0829_01	865,{/* 59695 */
 		mes "[文明探査員]";
 		mes "本当ですか！";
 		mes "ご協力に感謝します!!";
-		setquest 12346; //state=1
+		setquest 12346;
 		next;
 		compquest 12346;
 		mes "[文明探査員]";
@@ -11971,12 +12717,12 @@ verus01.gat,149,155,5	script	文明探査員#pa0829_01	865,{/* 59695 */
 		}
 		delquest 118320;
 		if(checkquest(118325) & 0x8 == 0) {
-			setquest 118325; //state=1
+			setquest 118325;
 			compquest 118325;
-			getitem 6962, 10;
+			getitem 6962,10;
 		}
 		else {
-			getitem 6962, 1;
+			getitem 6962,1;
 		}
 		close;
 	}
@@ -12058,8 +12804,8 @@ verus01.gat,153,155,5	script	臨時次元移動機#pa0829_0	10007,{/* 59696 */
 	}
 	switch(mdenter("rose")) {
 	case 0:	// エラーなし
-		announce "メモリアルダンジョン[rose] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")", 0x9, 0x00ff99, 0x190, 12, 0, 0;
-		setquest 12347; //state=1
+		announce "メモリアルダンジョン[rose] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
+		setquest 12347;
 		warp "1@lab.gat",120,30;
 		close;
 	case 1:	// パーティー未加入
@@ -12083,14 +12829,14 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 		mes "まったく、やっと入れたぞ！";
 		mes "入場プロセスなんて";
 		mes "無くてもいいのにな！";
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "……お前みたいな奴のために";
 		mes "あるんだと思うぞ。";
 		mes "あ、" +strcharinfo(0)+ "様も";
 		mes "無事に来れたようですね。";
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		next;
 		mes "[マギスティン]";
 		mes "無事に合流できたのは";
@@ -12098,7 +12844,7 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 		mes "今までの場所と雰囲気が";
 		mes "かなり違っていて、";
 		mes "なんだか少し怖いです……。";
-		cutin "bu_maggi3.bmp", 2;
+		cutin "bu_maggi3",2;
 		next;
 		mes "[テューリアン]";
 		mes "確かに、こりゃひどい。";
@@ -12106,23 +12852,23 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 		mes "やっぱりここには凶悪な";
 		mes "モンスターが封印されてるんじゃ";
 		mes "ないか!?";
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		next;
 		mes "[マークイシャ]";
 		mes "……人の話を聞けよ！";
-		cutin "bu_mark3.bmp", 0;
+		cutin "bu_mark3",0;
 		next;
 		mes "[アルプオカート]";
 		mes "……。";
 		mes "無駄な事で体力を使わない方が良い。";
 		mes "早く調査を始めよう。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[タマリン]";
 		mes "それはそうと……";
 		mes "何故ここが閉鎖されていたのか";
 		mes "やっと解った気がします。";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		next;
 		mes "[タマリン]";
 		mes "まともな建物はないし、";
@@ -12131,7 +12877,7 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 		next;
 		mes "[タマリン]";
 		mes "それに、ここのモンスター……。";
-		cutin "ep143_tahuk.bmp", 2;
+		cutin "ep143_tahuk",2;
 		next;
 		mes "[タマリン]";
 		mes "他所では見ないモンスターですが";
@@ -12141,14 +12887,14 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 		mes "う～ん……？";
 		mes "難しい事はわからないけど";
 		mes "ここを調査するのが俺達の仕事だろ！";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[アルプオカート]";
 		mes "そう言えば……";
 		mes "さっき聞いた話では、";
 		mes "中央に謎の施設があると";
 		mes "言っていたな……。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		mes "[アルプオカート]";
 		mes "確かこの辺りだった。";
@@ -12156,19 +12902,19 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 		mes "^0000FF‐アルプオカートが";
 		mes "　該当する場所に印を";
 		mes "　つけてくれた‐^000000";
-		cutin "bu_alp1.bmp", 2;
-		viewpoint 1, 151, 173, 1, 0xFF8000; //59445
+		cutin "bu_alp1",2;
+		viewpoint 1,151,173,1,0xFF8000; //59445
 		next;
 		mes "[マークイシャ]";
 		mes "では、そこから調査を始めよう。";
-		cutin "bu_mark1.bmp", 0;
-		setquest 11375; //state=1
+		cutin "bu_mark1",0;
+		setquest 11375;
 		delquest 11375;
 		delquest 11376;
-		setquest 11381; //state=1
+		setquest 11381;
 		set VER2_QUE,16;
 		close2;
-		cutin "bu_mark1.bmp", 255;
+		cutin "bu_mark1",255;
 		end;
 	}
 	else if(VER2_QUE == 16) {
@@ -12176,14 +12922,14 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 		mes "う～ん……？";
 		mes "難しい事はわかんないけど";
 		mes "ここを調査するのが俺達の仕事だろ！";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[アルプオカート]";
 		mes "そう言えば……";
 		mes "さっきすれ違った人が、";
 		mes "中央には凄い装置があると";
 		mes "言っていたな……。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		mes "[アルプオカート]";
 		mes "確かこの辺りだった。";
@@ -12191,23 +12937,23 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 		mes "^0000FF‐アルプオカートが";
 		mes "　該当する場所に印を";
 		mes "　つけてくれた‐^000000";
-		cutin "bu_alp1.bmp", 2;
-		viewpoint 1, 151, 173, 1, 0xFF8000; //59445
+		cutin "bu_alp1",2;
+		viewpoint 1,151,173,1,0xFF8000; //59445
 		next;
 		mes "[マークイシャ]";
 		mes "では、そこから調査を始めよう。";
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		close2;
-		cutin "bu_mark1.bmp", 255;
+		cutin "bu_mark1",255;
 		end;
 	}
 	else if(VER2_QUE >= 17) {
 		mes "[テューリアン]";
 		mes "さあ、みんな！";
 		mes "調査をはじめようぜ！";
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		close2;
-		cutin "bu_du3.bmp", 255;
+		cutin "bu_du3",255;
 		end;
 	}
 	mes "[テューリアン]";
@@ -12215,9 +12961,9 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 	mes "みんなとはぐれて迷ってたら";
 	mes "変な場所に出たな……。";
 	mes "一旦、来た道を戻るか。";
-	cutin "bu_du5.bmp", 2;
+	cutin "bu_du5",2;
 	close2;
-	cutin "bu_du5.bmp", 255;
+	cutin "bu_du5",255;
 	end;
 }
 verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
@@ -12226,7 +12972,7 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "すっっっごーーい!!";
 		mes "これが見える？";
 		mes "ここなのよ！　ここ!!";
-		cutin "EP15_2_fru_2.bmp", 2;
+		cutin "EP15_2_fru_2",2;
 		next;
 		mes "[プルット]";
 		mes "なんかこう";
@@ -12239,14 +12985,14 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "持ち帰りたいのに……。";
 		mes "ここで見守ることしか";
 		mes "できないなんて……。";
-		cutin "EP15_2_fru_3.bmp", 2;
+		cutin "EP15_2_fru_3",2;
 		next;
 		mes "[プルット]";
 		mes "そこであなたに相談！";
 		mes "私はここを離れられなくて";
 		mes "まだ、ここの下にあるって言う";
 		mes "地下シェルターには行ってないの。";
-		cutin "EP15_2_fru_1.bmp", 2;
+		cutin "EP15_2_fru_1",2;
 		next;
 		mes "[プルット]";
 		mes "興味があるなら私の代わりに";
@@ -12254,7 +13000,7 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "もちろん、興味あるよね？";
 		mes "あるでしょ！";
 		mes "あるに決まってるよね！";
-		cutin "EP15_2_fru_2.bmp", 2;
+		cutin "EP15_2_fru_2",2;
 		next;
 		mes "[プルット]";
 		mes "こんな親切に調査ポイントまで";
@@ -12267,21 +13013,21 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "あなたにとっても損な話じゃ";
 		mes "ないと思うの。";
 		mes "というわけで！";
-		cutin "EP15_2_fru_1.bmp", 2;
+		cutin "EP15_2_fru_1",2;
 		next;
 		mes "[プルット]";
 		mes "もちろんやるよね？";
 		mes "協力してくれてありがとう！";
-		cutin "EP15_2_fru_2.bmp", 2;
+		cutin "EP15_2_fru_2",2;
 		next;
 		if(select("協力する","協力しない") == 2) {
 			mes "[プルット]";
 			mes "え……あれ？";
 			mes "嘘、やらないの？";
 			mes "……ざんねーん。";
-			cutin "EP15_2_fru_1.bmp", 2;
+			cutin "EP15_2_fru_1",2;
 			close2;
-			cutin "EP15_2_fru_1.bmp", 255;
+			cutin "EP15_2_fru_1",255;
 			end;
 		}
 		mes "[プルット]";
@@ -12290,7 +13036,7 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "中を案内してくれる人がいるよ！";
 		mes "でもあの人、いつからあそこに";
 		mes "いるんだろーー？";
-		cutin "EP15_2_fru_2.bmp", 2;
+		cutin "EP15_2_fru_2",2;
 		next;
 		mes "[プルット]";
 		mes "それにずーーっとずーーーっと";
@@ -12299,18 +13045,18 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "気がするんだけど……。";
 		mes "気のせいなのかな？";
 		mes "まっ、いいか。";
-		cutin "EP15_2_fru_1.bmp", 2;
+		cutin "EP15_2_fru_1",2;
 		next;
-		cutin "EP15_2_fru_2.bmp", 2;
+		cutin "EP15_2_fru_2",2;
 		mes "[プルット]";
 		mes "それじゃ、おもしろい話";
 		mes "いっぱい見つけてきてね～！";
-		viewpoint 2, 151, 173, 1, 0xFF8000; //59446
+		viewpoint 2,151,173,1,0xFF8000; //59446
 		delquest 11381;
-		setquest 11382; //state=1
+		setquest 11382;
 		set VER2_QUE,17;
 		close2;
-		cutin "EP15_2_fru_2.bmp", 255;
+		cutin "EP15_2_fru_2",255;
 		end;
 	}
 	else if(VER2_QUE == 17) {
@@ -12320,7 +13066,7 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "中を案内してくれる人がいるよ！";
 		mes "でもあの人、いつからあそこに";
 		mes "いるんだろーー？";
-		cutin "EP15_2_fru_2.bmp", 2;
+		cutin "EP15_2_fru_2",2;
 		next;
 		mes "[プルット]";
 		mes "それにずーーっとずーーーっと";
@@ -12329,14 +13075,14 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "気がするんだけど……。";
 		mes "気のせいなのかな？";
 		mes "まっ、いいか。";
-		cutin "EP15_2_fru_1.bmp", 2;
+		cutin "EP15_2_fru_1",2;
 		next;
-		cutin "EP15_2_fru_2.bmp", 2;
+		cutin "EP15_2_fru_2",2;
 		mes "[プルット]";
 		mes "それじゃ、おもしろい話";
 		mes "いっぱい見つけてきてね～！";
 		close2;
-		cutin "EP15_2_fru_2.bmp", 255;
+		cutin "EP15_2_fru_2",255;
 		end;
 	}
 	else if(VER2_QUE >= 18 || VER2_QUE <= 38) {
@@ -12344,12 +13090,12 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "どう？　何か進捗はあった？";
 		mes "地下シェルターと一言で言うけど";
 		mes "結構大きいらしいからね。";
-		cutin "EP15_2_fru_3.bmp", 2;
+		cutin "EP15_2_fru_3",2;
 		next;
 		mes "[プルット]";
 		mes "適当に見てたら見逃しちゃうかも♪";
 		close2;
-		cutin "EP15_2_fru_3.bmp", 255;
+		cutin "EP15_2_fru_3",255;
 		end;
 	}
 	else if(VER2_QUE >= 39) {
@@ -12359,19 +13105,19 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "うわぁ、すっごいね！";
 		mes "で？　で？　その次は？";
 		mes "どうなの？　ねえってば～！";
-		cutin "EP15_2_fru_2.bmp", 2;
+		cutin "EP15_2_fru_2",2;
 		close2;
-		cutin "EP15_2_fru_2.bmp", 255;
+		cutin "EP15_2_fru_2",255;
 		end;
 	}
 	mes "[プルット]";
 	mes "すっっっごーーい!!";
 	mes "これが見える？";
 	mes "これなんだよ！　これ!!";
-	cutin "EP15_2_fru_2.bmp", 2;
+	cutin "EP15_2_fru_2",2;
 	next;
 	menu "実験棟の地下施設について聞く",-;
-	cutin "EP15_2_fru_1.bmp", 2;
+	cutin "EP15_2_fru_1",2;
 	mes "[プルット]";
 	mes "んっ、実験棟の地下施設？";
 	mes "シェルターのこと？";
@@ -12379,7 +13125,7 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 	mes "^0000FFちょびっと左に行ったら^000000";
 	mes "入り口があるよ。";
 	next;
-	cutin "EP15_2_fru_2.bmp", 2;
+	cutin "EP15_2_fru_2",2;
 	mes "[プルット]";
 	mes "私はシェルターより今は";
 	mes "ここが大事だから……";
@@ -12387,14 +13133,14 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 	mes "いつか実験室に";
 	mes "持ち帰りたいなあ……。";
 	close2;
-	cutin "EP15_2_fru_2.bmp", 255;
+	cutin "EP15_2_fru_2",255;
 	end;
 }
 verus01.gat,123,181,3	script	ベリティ#Warper	10078,{/* 59699 */
 	mes "[ベリティ]";
 	mes "あら、いらっしゃい。";
 	mes "地下シェルターの調査に来たの？";
-	cutin "EP15_2_brt_2.bmp", 2;
+	cutin "EP15_2_brt_2",2;
 	next;
 	if(VER2_QUE >= 39 && countitem(6828))
 		set '@str$,"重力安全装置を使いたい";
@@ -12404,7 +13150,7 @@ verus01.gat,123,181,3	script	ベリティ#Warper	10078,{/* 59699 */
 			mes "[ベリティ]";
 			mes "地下はかなり危険らしいわ。";
 			mes "気をつけて行きなさい。";
-			cutin "EP15_2_brt_1.bmp", 2;
+			cutin "EP15_2_brt_1",2;
 			next;
 			mes "[ベリティ]";
 			mes "他の地域には生息していない";
@@ -12412,9 +13158,9 @@ verus01.gat,123,181,3	script	ベリティ#Warper	10078,{/* 59699 */
 			mes "　";
 			mes "……モンスターのほうが";
 			mes "まだ、マシかもね……。";
-			cutin "EP15_2_brt_3.bmp", 2;
+			cutin "EP15_2_brt_3",2;
 			close2;
-			cutin "EP15_2_brt_3.bmp", 255;
+			cutin "EP15_2_brt_3",255;
 			warp "un_bunker.gat",98,91;
 			end;
 		}
@@ -12422,24 +13168,24 @@ verus01.gat,123,181,3	script	ベリティ#Warper	10078,{/* 59699 */
 			mes "[ベリティ]";
 			mes "そう……。";
 			mes "また調べるのね。";
-			cutin "EP15_2_brt_3.bmp", 2;
+			cutin "EP15_2_brt_3",2;
 			next;
 			mes "[ベリティ]";
 			mes "とりあえずもし何か分かっても";
 			mes "私には言わないで頂戴。";
 			mes "お願いよ……。";
-			cutin "EP15_2_brt_4.bmp", 2;
+			cutin "EP15_2_brt_4",2;
 			close2;
-			cutin "EP15_2_brt_4.bmp", 255;
+			cutin "EP15_2_brt_4",255;
 			warp "un_bunker.gat",98,91;
 			end;
 		}
 	case 2:
 		mes "[ベリティ]";
 		mes "あら、そう。";
-		cutin "EP15_2_brt_1.bmp", 2;
+		cutin "EP15_2_brt_1",2;
 		close2;
-		cutin "EP15_2_brt_1.bmp", 255;
+		cutin "EP15_2_brt_1",255;
 		end;
 	case 3:
 		mes "[ベリティ]";
@@ -12447,7 +13193,7 @@ verus01.gat,123,181,3	script	ベリティ#Warper	10078,{/* 59699 */
 		mes "最深部の部屋入口まで";
 		mes "簡単に行けるけど";
 		mes "どうするの？";
-		cutin "EP15_2_brt_1.bmp", 2;
+		cutin "EP15_2_brt_1",2;
 		next;
 		switch(select("使用する","やめる","重力安全装置とは？")) {
 		case 1:
@@ -12456,14 +13202,14 @@ verus01.gat,123,181,3	script	ベリティ#Warper	10078,{/* 59699 */
 			mes "じゃあ、貸して頂戴。";
 			mes "私が操作するから。";
 			close2;
-			cutin "EP15_2_brt_1.bmp", 255;
+			cutin "EP15_2_brt_1",255;
 			warp "un_myst.gat",158,38;
 			end;
 		case 2:
 			mes "[ベリティ]";
 			mes "あら、そう。";
 			close2;
-			cutin "EP15_2_brt_1.bmp", 255;
+			cutin "EP15_2_brt_1",255;
 			end;
 		case 3:
 			mes "[ベリティ]";
@@ -12480,14 +13226,14 @@ verus01.gat,123,181,3	script	ベリティ#Warper	10078,{/* 59699 */
 			mes "操作方法が分からなくても";
 			mes "問題ないわよ。";
 			close2;
-			cutin "EP15_2_brt_1.bmp", 255;
+			cutin "EP15_2_brt_1",255;
 			end;
 		}
 	}
 }
 un_bunker.gat,100,96,3	script	マークイシャ#シェルター	616,{/* 59700 */
 	if(VER_1QUE == 29) {
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		mes "[マークイシャ]";
 		mes "おや、私たち以外にも";
 		mes "こんなところに人が……。";
@@ -12505,13 +13251,63 @@ un_bunker.gat,100,96,3	script	マークイシャ#シェルター	616,{/* 59700 */
 		mes "何かの役に立つかもしれません。";
 		mes "お渡ししておきますね。";
 		next;
+		if(checkitemblank() == 0) {
+			mes "[マークイシャ]";
+			mes "おや……。";
+			mes "渡そうとしましたが、";
+			mes "荷物が多いみたいですね。";
+			mes "種類数を減らしてから";
+			mes "声をかけてください。";
+			close2;
+			cutin "bu_mark1.bmp", 255;
+			end;
+		}
+		getitem 6824,2;
+		mes "‐実験棟のメモリーレコードを";
+		mes "　手に入れた。";
+		mes "　団長アルクイエンの元へ戻ろう‐";
+		set VER_1QUE,30;
+		delquest 118208;
+		setquest 118209;
+		close2;
+		cutin "bu_mark1",255;
+		end;
+		
+		cutin "bu_mark1.bmp", 0;
+		mes "[マークイシャ]";
+		mes "おや、私たち以外にも";
+		mes "こんなところに人が……。";
+		mes "あなたもここの調査に来た";
+		mes "冒険者ですか？";
+		next;
+		mes "[マークイシャ]";
+		mes "そうだ、ここで";
+		mes "こんなものを見つけたのですが……。";
+		next;
+		mes "[マークイシャ]";
+		mes "私にはこれが何かわかりませんが、";
+		mes "あなたなら";
+		mes "何かの役に立つかもしれません。";
+		mes "お渡ししておきますね。";
+		next;
+		if(checkitemblank() == 0) {
+			mes "[マークイシャ]";
+			mes "おや……。";
+			mes "渡そうとしましたが、";
+			mes "荷物が多いみたいですね。";
+			mes "種類数を減らしてから";
+			mes "声をかけてください。";
+			close2;
+			cutin "bu_mark1.bmp", 255;
+			end;
+		}
 		getitem 6824, 2;
 		mes "‐実験棟のメモリーレコードを";
 		mes "　手に入れた。";
 		mes "　団長アルクイエンの元へ戻ろう‐";
 		set VER_1QUE,30;
 		delquest 118208;
-		setquest 118209; //state=1
+		setquest 118209;
 		close2;
 		cutin "bu_mark1.bmp", 255;
 		end;
@@ -12523,64 +13319,64 @@ un_bunker.gat,100,96,3	script	マークイシャ#シェルター	616,{/* 59700 */
 		mes "あいつがいつものように";
 		mes "暴走したので先に中に";
 		mes "入っていました……。";
-		cutin "bu_mark3.bmp", 0;
+		cutin "bu_mark3",0;
 		next;
 		mes "[マークイシャ]";
 		mes "それにしても……";
 		mes "上に比べると、かなり綺麗だけど";
 		mes "何だろう……";
 		mes "この吐き気がする臭いは……。";
-		cutin "bu_mark4.bmp", 0;
+		cutin "bu_mark4",0;
 		next;
 		mes "[アルプオカート]";
 		mes "少し先の道を見てきたが、";
 		mes "他の地域には居なかった";
 		mes "アンデッドがいるみたいだ。";
 		mes "臭いはそのせいかもしれない。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[マークイシャ]";
 		mes "そういえばここに来る前に";
 		mes "聞いたんだけど……";
 		mes "ここは構造上、人が避難する為の";
 		mes "シェルターとして建造されたらしい。";
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		next;
 		mes "[タマリン]";
 		mes "ということは……";
 		mes "ここにいるアンデッドは……。";
-		cutin "ep143_tahuk.bmp", 2;
+		cutin "ep143_tahuk",2;
 		next;
 		mes "[マギスティン]";
 		mes "マークさん。";
 		mes "……私、怖いです……。";
 		mes "本当にここを、";
 		mes "調べるのですか……？";
-		cutin "bu_maggi4.bmp", 2;
+		cutin "bu_maggi4",2;
 		next;
 		mes "[マークイシャ]";
 		mes "ごめんごめん、落ち着いて。";
 		mes "他に気になる場所は";
 		mes "確かに幾つかあるけど……";
 		mes "まずはここをくまなく調べよう。";
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		next;
 		mes "[テューリアン]";
 		mes "そ……そ、そうだな！";
 		mes "こここ、こんなのは何とも無いぞ!!";
 		mes "ハハハ！";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[アルプオカート]";
 		mes "それでは各自で調査を行い";
 		mes "何か見つけたら合図をしよう。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[テューリアン]";
 		mes "ちょ……ちょっと待てよ!!";
 		mes "危険だから一緒に動いた方が";
 		mes "いいんじゃないか……？";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[テューリアン]";
 		mes "……おいーっ!!";
@@ -12588,32 +13384,32 @@ un_bunker.gat,100,96,3	script	マークイシャ#シェルター	616,{/* 59700 */
 		mes "……ってお前らー!!";
 		mes "歩くの早すぎだろ!?";
 		delquest 11382;
-		setquest 11383; //state=1
+		setquest 11383;
 		set VER2_QUE,18;
 		close2;
-		cutin "bu_du5.bmp", 255;
+		cutin "bu_du5",255;
 		end;
 	}
 	else if(VER2_QUE == 18) {
 		mes "[マークイシャ]";
 		mes "まずはここをくまなく調べましょう。";
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		next;
 		mes "[テューリアン]";
 		mes "そ……そ、そうだな！";
 		mes "こここ、こんなのは何とも無いぞ!!";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[アルプオカート]";
 		mes "それでは各自で調査を行い";
 		mes "何か見つけたら合図をしよう。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[テューリアン]";
 		mes "ちょ……ちょっと待てよ!!";
 		mes "危険だから一緒に動いた方が";
 		mes "いいんじゃないか……？";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[テューリアン]";
 		mes "……おいーっ!!";
@@ -12621,7 +13417,7 @@ un_bunker.gat,100,96,3	script	マークイシャ#シェルター	616,{/* 59700 */
 		mes "……ってお前らー!!";
 		mes "歩くの早すぎだろ!?";
 		close2;
-		cutin "bu_du5.bmp", 255;
+		cutin "bu_du5",255;
 		end;
 	}
 	mes "[マークイシャ]";
@@ -12629,14 +13425,14 @@ un_bunker.gat,100,96,3	script	マークイシャ#シェルター	616,{/* 59700 */
 	mes "良かったのですが……";
 	mes "何だろう……";
 	mes "この吐き気がする臭いは……。";
-	cutin "bu_mark4.bmp", 0;
+	cutin "bu_mark4",0;
 	next;
 	mes "[マークイシャ]";
 	mes "やっぱりこの場所の調査には";
 	mes "もう少し人手が居たほうが";
 	mes "良さそうだ……。";
 	close2;
-	cutin "bu_mark4.bmp", 255;
+	cutin "bu_mark4",255;
 	end;
 }
 un_bunker.gat,363,171,3	script	アルプオカート#入口	615,{/* 59701 */
@@ -12646,39 +13442,39 @@ un_bunker.gat,363,171,3	script	アルプオカート#入口	615,{/* 59701 */
 		mes "　";
 		mes "^0000FF‐アルプオカートが熱心に";
 		mes "　近くの壁を調べている‐^000000";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "来たか……。";
 		mes "テューリアンが意外にも";
 		mes "早いと思ったら……";
 		mes "そういうことか。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		mes "[テューリアン]";
 		mes "意外にもってなんだ!?";
 		mes "ところでそこの、何の変哲もない";
 		mes "壁がどうかしたのか？";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[アルプオカート]";
 		mes "この壁の向こうにどうも";
 		mes "空間があるようだ。";
 		mes "そういえば以前……";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[アルプオカート]";
 		mes "いや、なんでもない。";
 		mes "他の奴らも呼んで調査を始めよう。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		if(select("調査する","やめておく") == 2) {
 			mes "[アルプオカート]";
 			mes "調査が目的だという事を";
 			mes "忘れるな……。";
-			cutin "bu_alp1.bmp", 2;
+			cutin "bu_alp1",2;
 			close2;
-			cutin "bu_alp1.bmp", 255;
+			cutin "bu_alp1",255;
 			end;
 		}
 		mes "[アルプオカート]";
@@ -12690,7 +13486,7 @@ un_bunker.gat,363,171,3	script	アルプオカート#入口	615,{/* 59701 */
 		mes "心配していたのですが、";
 		mes "もう先に着いていたんですね。";
 		mes "良かった……。";
-		cutin "bu_maggi2.bmp", 2;
+		cutin "bu_maggi2",2;
 		next;
 		mes "[テューリアン]";
 		mes "さすがマギ！";
@@ -12699,11 +13495,11 @@ un_bunker.gat,363,171,3	script	アルプオカート#入口	615,{/* 59701 */
 		mes "俺より遅いとは。";
 		mes "お前もまだまだだな！";
 		mes "この勝負、俺の勝ちだ!!";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マークイシャ]";
 		mes "……。";
-		cutin "bu_mark3.bmp", 0;
+		cutin "bu_mark3",0;
 		next;
 		mes "[タマリン]";
 		mes "遅くなりました。";
@@ -12711,19 +13507,19 @@ un_bunker.gat,363,171,3	script	アルプオカート#入口	615,{/* 59701 */
 		mes "もう皆さん、お揃いでしたか。";
 		mes "テューリアンも今回は";
 		mes "間に合ったようですね。";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		next;
 		mes "[ベリティ]";
 		mes "ふ～ん……。";
 		mes "ここに何かあるの？";
-		cutin "EP15_2_brt_3.bmp", 2;
+		cutin "EP15_2_brt_3",2;
 		next;
 		mes "[テューリアン]";
 		mes "うおっ！";
 		mes "入口にいたお姉さんじゃないか。";
 		mes "何で来てんだよ！";
 		mes "ここは危険だぞ！";
-		cutin "bu_du4.bmp", 2;
+		cutin "bu_du4",2;
 		next;
 		mes "[ベリティ]";
 		mes "私はあなたのお姉さんに";
@@ -12731,55 +13527,55 @@ un_bunker.gat,363,171,3	script	アルプオカート#入口	615,{/* 59701 */
 		mes "……^0000FFベリティ^000000よ。";
 		mes "ところで、聞いてないの？";
 		mes "私は……。";
-		cutin "EP15_2_brt_5.bmp", 2;
+		cutin "EP15_2_brt_5",2;
 		next;
 		mes "[タマリン]";
 		mes "あ、そういえば";
 		mes "さっきの女の子が言ってましたね。";
 		mes "案内してくれる人がいるって。";
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		next;
 		mes "[アルプオカート]";
 		mes "ああ……。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		mes "[マークイシャ]";
 		mes "では、ベリティさん。";
 		mes "改めて宜しくお願いします。";
 		mes "とりあえず全員揃ったんだ。";
 		mes "中に入ってみよう。";
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		next;
 		mes "[アルプオカート]";
 		mes "嫌な予感がする。";
 		mes "気を付けよう。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		delquest 11383;
-		setquest 11384; //state=1
+		setquest 11384;
 		set VER2_QUE,19;
 		close2;
-		cutin "bu_alp1.bmp", 255;
+		cutin "bu_alp1",255;
 		warp "un_bunker.gat",385,83;
 		end;
 	}
 	else if(VER2_QUE >= 19) {
 		mes "[アルプオカート]";
 		mes "早く中を調査するぞ。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		if(select("はい","いいえ") == 2) {
 			mes "[アルプオカート]";
 			mes "調査が目的だという事を";
 			mes "忘れるな……。";
 			close2;
-			cutin "bu_alp1.bmp", 255;
+			cutin "bu_alp1",255;
 			end;
 		}
 		mes "[アルプオカート]";
 		mes "嫌な予感がする。";
 		mes "気を付けよう。";
 		close2;
-		cutin "bu_alp1.bmp", 255;
+		cutin "bu_alp1",255;
 		warp "un_bunker.gat",385,83;
 		end;
 	}
@@ -12787,9 +13583,9 @@ un_bunker.gat,363,171,3	script	アルプオカート#入口	615,{/* 59701 */
 	mes "……。";
 	mes "ここに居ても時間の無駄だと";
 	mes "思うぞ……。";
-	cutin "bu_alp3.bmp", 2;
+	cutin "bu_alp3",2;
 	close2;
-	cutin "bu_alp3.bmp", 255;
+	cutin "bu_alp3",255;
 	end;
 }
 un_bunker.gat,387,79,0	warp	#room_out	1,1,un_bunker.gat,362,167	//59702
@@ -12800,25 +13596,25 @@ un_bunker.gat,388,84,3	script	アルプオカート#入口2	615,{/* 59703 */
 		mes "隠されていただけあって";
 		mes "この部屋だけ他の部屋とは";
 		mes "構造が違うな。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		mes "[マークイシャ]";
 		mes "確かに……。";
 		mes "かなり不自然な位置に";
 		mes "扉が付いている。";
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		next;
 		mes "[タマリン]";
 		mes "やはり直接入って";
 		mes "調査するしかなさそうですね。";
-		cutin "ep143_taang.bmp", 2;
+		cutin "ep143_taang",2;
 		next;
 		mes "[マギスティン]";
 		mes "早く調べて、";
 		mes "ここから出たいです……。";
 		mes "なんだかここは空気が";
 		mes "淀んでいる気がします……。";
-		cutin "bu_maggi3.bmp", 2;
+		cutin "bu_maggi3",2;
 		next;
 		mes "[テューリアン]";
 		mes "よ～し！　突撃だ!!";
@@ -12826,12 +13622,12 @@ un_bunker.gat,388,84,3	script	アルプオカート#入口2	615,{/* 59703 */
 		mes "大丈夫だ!!";
 		mes "怖くないぞ!!";
 		mes "ふはははははははは!!";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		delquest 11384;
-		setquest 11385; //state=1
+		setquest 11385;
 		set VER2_QUE,20;
 		close2;
-		cutin "bu_du5.bmp", 255;
+		cutin "bu_du5",255;
 		warp "un_bunker.gat",11,206;
 		end;
 	}
@@ -12840,20 +13636,20 @@ un_bunker.gat,388,84,3	script	アルプオカート#入口2	615,{/* 59703 */
 		mes "不自然な部屋、";
 		mes "不自然な扉……";
 		mes "気になるな……。";
-		cutin "bu_alp1.bmp", 2;
+		cutin "bu_alp1",2;
 		next;
 		if(select("入る","留まる") == 2) {
 			mes "[アルプオカート]";
 			mes "……。";
 			mes "いつまでこうするつもりだ？";
 			close2;
-			cutin "bu_alp1.bmp", 255;
+			cutin "bu_alp1",255;
 			end;
 		}
 		mes "[アルプオカート]";
 		mes "行くぞ……。";
 		close2;
-		cutin "bu_alp1.bmp", 255;
+		cutin "bu_alp1",255;
 		warp "un_bunker.gat",11,206;
 		end;
 	}
@@ -12864,27 +13660,27 @@ un_bunker.gat,12,207,5	script	ベリティ#ミスト	10078,{/* 59704 */
 		mes "まったく……";
 		mes "ここは息が詰まるわね……。";
 		mes "んもう、頭痛くなりそう。";
-		cutin "EP15_2_brt_3.bmp", 2;
+		cutin "EP15_2_brt_3",2;
 		next;
 		mes "[タマリン]";
 		mes "この空間はいったい……。";
 		mes "シェルターにしては";
 		mes "構造が雑なようですし……。";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		next;
 		mes "[アルプオカート]";
 		mes "嫌な臭いが濃くなってきたな。";
-		cutin "bu_alp5.bmp", 2;
+		cutin "bu_alp5",2;
 		next;
 		mes "[タマリン]";
 		mes "あっちにも扉があるみたいですね、";
 		mes "行って見ましょう！";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		delquest 11385;
-		setquest 11386; //state=1
+		setquest 11386;
 		set VER2_QUE,21;
 		close2;
-		cutin "ep143_tasta.bmp", 255;
+		cutin "ep143_tasta",255;
 		end;
 	}
 	else if(VER2_QUE == 21) {
@@ -12892,17 +13688,17 @@ un_bunker.gat,12,207,5	script	ベリティ#ミスト	10078,{/* 59704 */
 		mes "まったく……";
 		mes "ここは息が詰まるわね……。";
 		mes "んもう、頭痛くなりそう。";
-		cutin "EP15_2_brt_3.bmp", 2;
+		cutin "EP15_2_brt_3",2;
 		next;
 		mes "[タマリン]";
 		mes "この空間はいったい……。";
 		mes "シェルターにしては";
 		mes "構造が雑なようですし……。";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		next;
 		mes "[アルプオカート]";
 		mes "嫌な臭いが濃くなってきたな。";
-		cutin "bu_alp5.bmp", 2;
+		cutin "bu_alp5",2;
 		next;
 		mes "[タマリン]";
 		mes "巧妙に隠されていますが";
@@ -12911,12 +13707,12 @@ un_bunker.gat,12,207,5	script	ベリティ#ミスト	10078,{/* 59704 */
 		mes "向こうにも扉があるみたいですが、";
 		mes "先に進みますか？";
 		mes "それとも一度戻りますか？";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		next;
 		if(select("離れる","扉を開けて最初の部屋に戻る") == 1) {
 			mes "‐あなたは扉から離れた‐";
 			close2;
-			cutin "ep143_tasta.bmp", 255;
+			cutin "ep143_tasta",255;
 			end;
 		}
 		mes "[タマリン]";
@@ -12926,9 +13722,9 @@ un_bunker.gat,12,207,5	script	ベリティ#ミスト	10078,{/* 59704 */
 		mes "調査するのが正しいでしょうね。";
 		mes "では一度、最初の部屋に";
 		mes "戻りましょう。";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		close2;
-		cutin "ep143_tasta.bmp", 255;
+		cutin "ep143_tasta",255;
 		warp "un_bunker.gat",385,83;
 		end;
 	}
@@ -12939,7 +13735,7 @@ un_bunker.gat,12,207,5	script	ベリティ#ミスト	10078,{/* 59704 */
 		mes "入ってきた部屋に戻るための";
 		mes "扉みたいね。";
 		mes "どうする？　戻るの？";
-		cutin "EP15_2_brt_3.bmp", 2;
+		cutin "EP15_2_brt_3",2;
 		next;
 		if(select("離れる","扉を開けて部屋に戻る") == 1) {
 			mes "[ベリティ]";
@@ -12947,9 +13743,9 @@ un_bunker.gat,12,207,5	script	ベリティ#ミスト	10078,{/* 59704 */
 			mes "なら、ここにとどまる";
 			mes "理由はないわね。";
 			mes "いきましょう。";
-			cutin "EP15_2_brt_4.bmp", 2;
+			cutin "EP15_2_brt_4",2;
 			close2;
-			cutin "EP15_2_brt_4.bmp", 255;
+			cutin "EP15_2_brt_4",255;
 			end;
 		}
 		mes "[ベリティ]";
@@ -12957,9 +13753,9 @@ un_bunker.gat,12,207,5	script	ベリティ#ミスト	10078,{/* 59704 */
 		mes "こんなところで";
 		mes "じっとしてても何も";
 		mes "変わらないでしょ。";
-		cutin "EP15_2_brt_4.bmp", 2;
+		cutin "EP15_2_brt_4",2;
 		close2;
-		cutin "EP15_2_brt_4.bmp", 255;
+		cutin "EP15_2_brt_4",255;
 		warp "un_bunker.gat",385,83;
 		end;
 	}
@@ -12971,7 +13767,7 @@ un_bunker.gat,56,206,0	script	#myst_1	45,1,1,{/* 59705 */
 		mes "　ガラクタが置いてあり";
 		mes "　簡単には通れそうにない‐";
 		next;
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		mes "[マークイシャ]";
 		mes "これは……";
 		mes "とりあえずまだベリティさんが";
@@ -12979,7 +13775,7 @@ un_bunker.gat,56,206,0	script	#myst_1	45,1,1,{/* 59705 */
 		mes "ベリティさんに声をかけてから";
 		mes "入りませんか？";
 		close2;
-		cutin "bu_mark1.bmp", 255;
+		cutin "bu_mark1",255;
 		end;
 	}
 	else if(VER2_QUE == 21) {
@@ -12995,9 +13791,9 @@ un_bunker.gat,56,206,0	script	#myst_1	45,1,1,{/* 59705 */
 			mes "チリ一つ見逃さずに";
 			mes "調べるぞ!!";
 			mes "……マドリドが。";
-			cutin "bu_du1.bmp", 2;
+			cutin "bu_du1",2;
 			close2;
-			cutin "bu_du1.bmp", 255;
+			cutin "bu_du1",255;
 			end;
 		}
 		mes "[テューリアン]";
@@ -13005,10 +13801,10 @@ un_bunker.gat,56,206,0	script	#myst_1	45,1,1,{/* 59705 */
 		mes "ここは俺に任せて、";
 		mes "みんな下がるんだっ!!";
 		mes "イグニッションブレイクッ!!";
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		next;
 		misceffect 722,""; //self
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 		mes "^0000FF‐テューリアンの放った";
 		mes "　イグニッションブレイクのお陰で";
 		mes "　ガラクタは跡形もなく";
@@ -13020,38 +13816,38 @@ un_bunker.gat,56,206,0	script	#myst_1	45,1,1,{/* 59705 */
 		mes "吹き飛ぶところですよ!?";
 		mes "今回はうまくいったから";
 		mes "良かったものの……。";
-		cutin "ep143_tahuk.bmp", 2;
+		cutin "ep143_tahuk",2;
 		next;
 		mes "[アルプオカート]";
 		mes "これがテューリアンの";
 		mes "最後の活躍に";
 		mes "ならなければいいな……。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		mes "[テューリアン]";
 		mes "なんだよそれは!?";
 		mes "その言い方だと";
 		mes "どう聞いても俺の";
 		mes "脂肪フラグだろ!?";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[マークイシャ]";
 		mes "テューリアン。";
 		mes "それを言うなら";
 		mes "死亡フラグだ……。";
-		cutin "bu_mark3.bmp", 0;
+		cutin "bu_mark3",0;
 		next;
 		mes "[マギスティン]";
 		mes "あっ。";
 		mes "テューのお陰で、";
 		mes "通れるようになった";
 		mes "みたいです。";
-		cutin "bu_maggi1.bmp", 2;
+		cutin "bu_maggi1",2;
 		delquest 11386;
-		setquest 11387; //state=1
+		setquest 11387;
 		set VER2_QUE,22;
 		close2;
-		cutin "bu_maggi1.bmp", 255;
+		cutin "bu_maggi1",255;
 		warp "un_myst.gat",81,190;
 		end;
 	}
@@ -13070,59 +13866,59 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		mes "[テューリアン]";
 		mes "うわぁ！";
 		mes "すっごい広いな！";
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		next;
 		mes "[マークイシャ]";
 		mes "何なんだここは……";
 		mes "シェルター内部に";
 		mes "こんな空間があるなんて。";
-		cutin "bu_mark1.bmp", 0;
+		cutin "bu_mark1",0;
 		next;
 		mes "[マギスティン]";
 		mes "あ……あ……。";
-		cutin "bu_maggi3.bmp", 2;
+		cutin "bu_maggi3",2;
 		next;
 		mes "[タマリン]";
 		mes "それにしては作りが雑なような……。";
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		next;
 		mes "[マギスティン]";
 		mes "と……と……。";
-		cutin "bu_maggi3.bmp", 2;
+		cutin "bu_maggi3",2;
 		next;
 		mes "[アルプオカート]";
 		mes "確かに……奇妙だな。";
-		cutin "bu_alp3.bmp", 2;
+		cutin "bu_alp3",2;
 		next;
 		mes "[マギスティン]";
 		mes "と……とび……。";
-		cutin "bu_maggi3.bmp", 2;
+		cutin "bu_maggi3",2;
 		next;
 		mes "[テューリアン]";
 		mes "マギ、どうしたんだよ。";
 		mes "さっきからおかしいぞ？";
 		mes "トビウオでも投げたく";
 		mes "なったのか？";
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		next;
 		mes "[マギスティン]";
 		mes "テュー、そうじゃなくて……";
 		mes "とび……";
 		mes "扉が……閉まってます！";
-		cutin "bu_maggi4.bmp", 2;
+		cutin "bu_maggi4",2;
 		next;
 		mes "[テューリアン]";
 		mes "は？";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[マークイシャ]";
 		mes "何っ!?";
-		cutin "bu_mark4.bmp", 0;
+		cutin "bu_mark4",0;
 		next;
 		mes "[テューリアン]";
 		mes "うげぇ！";
 		mes "ほんとに閉まってる！";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[テューリアン]";
 		mes "おいおい、ちょっと待てよ！";
@@ -13135,7 +13931,7 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		mes "合言葉で開くとか……";
 		mes "ええっと、開けマゴット！";
 		mes "ああ……駄目か……。";
-		cutin "bu_mark4.bmp", 0;
+		cutin "bu_mark4",0;
 		next;
 		mes "[ベリティ]";
 		mes "まったく……";
@@ -13143,7 +13939,7 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		mes "残念ながら引き戸でもないし、";
 		mes "合言葉で開くような扉でもないわ。";
 		mes "さて、どうしましょうね。";
-		cutin "EP15_2_brt_5.bmp", 2;
+		cutin "EP15_2_brt_5",2;
 		next;
 		mes "[アルプオカート]";
 		mes "オリバーヒルベルトの小説にも";
@@ -13151,7 +13947,7 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		mes "話があった気がする……。";
 		mes "ただその時は友人が、";
 		mes "助けに来てくれたしな……。";
-		cutin "bu_alp2.bmp", 2;
+		cutin "bu_alp2",2;
 		next;
 		mes "[ベリティ]";
 		mes "残念ながらその小説のように";
@@ -13160,13 +13956,13 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		mes "とりあえず、戻る扉は";
 		mes "封鎖されて通れないことは";
 		mes "確かよ。";
-		cutin "EP15_2_brt_4.bmp", 2;
+		cutin "EP15_2_brt_4",2;
 		next;
 		mes "[テューリアン]";
 		mes "そういえばお姉さん！";
 		mes "お姉さんは案内人なんだよな？";
 		mes "出口とか知らないのか？";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[ベリティ]";
 		mes "残念だけど……";
@@ -13174,19 +13970,19 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		mes "初めてなのよ。";
 		mes "とにかく今は先に進むしか、";
 		mes "ないでしょうね。";
-		cutin "EP15_2_brt_6.bmp", 2;
+		cutin "EP15_2_brt_6",2;
 		delquest 11387;
-		setquest 11388; //state=1
+		setquest 11388;
 		set VER2_QUE,23;
 		close2;
-		cutin "EP15_2_brt_6.bmp", 255;
+		cutin "EP15_2_brt_6",255;
 		end;
 	}
 	else if(VER2_QUE >= 23) {
 		mes "[テューリアン]";
 		mes "おいおい、ちょっと待てよ！";
 		mes "俺達閉じ込められたのかよ！";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[マークイシャ]";
 		mes "みんな、慌てないで！";
@@ -13195,17 +13991,17 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		mes "聖書を読もう！";
 		mes "ああ……重いからと";
 		mes "置いてきたんだ……。";
-		cutin "bu_mark4.bmp", 0;
+		cutin "bu_mark4",0;
 		next;
 		mes "[ベリティ]";
 		mes "どうしましょうね。";
-		cutin "EP15_2_brt_5.bmp", 2;
+		cutin "EP15_2_brt_5",2;
 		next;
 		mes "[アルプオカート]";
 		mes "こういう場合……";
 		mes "オリバーヒルベルトの";
 		mes "作品なら……。";
-		cutin "bu_alp2.bmp", 2;
+		cutin "bu_alp2",2;
 		next;
 		mes "[ベリティ]";
 		mes "残念ながらこれは現実よ。";
@@ -13214,13 +14010,13 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		mes "とりあえず、戻る扉は";
 		mes "封鎖されて通れないことだけは";
 		mes "確かよ。";
-		cutin "EP15_2_brt_4.bmp", 2;
+		cutin "EP15_2_brt_4",2;
 		next;
 		mes "[テューリアン]";
 		mes "そういえばお姉さん！";
 		mes "お姉さんは案内人なんだよな？";
 		mes "出口とか知らないのか？";
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		next;
 		mes "[ベリティ]";
 		mes "残念だけど……";
@@ -13228,9 +14024,9 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		mes "初めてなのよ。";
 		mes "とにかく今は先に進むしか、";
 		mes "ないでしょうね。";
-		cutin "EP15_2_brt_6.bmp", 2;
+		cutin "EP15_2_brt_6",2;
 		close2;
-		cutin "EP15_2_brt_6.bmp", 255;
+		cutin "EP15_2_brt_6",255;
 		end;
 	}
 }
@@ -13244,9 +14040,9 @@ un_myst.gat,124,189,0	script	#m101	45,1,1,{/* 59707 */
 		mes strcharinfo(0)+ "～！";
 		mes "先ずはみんなでこの部屋を";
 		mes "調べようぜ！";
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		next;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 		mes "‐テューリアンが呼んでいる。";
 		mes "　一旦、合流してから";
 		mes "　先に進んだほうが良いだろう‐";
@@ -13319,7 +14115,7 @@ un_myst.gat,333,206,3	script	不思議な欠片01#01	10082,{/* 59711 */
 		mes "　できるんだろう？‐";
 		close2;
 		delquest 11388;
-		setquest 11389; //state=1
+		setquest 11389;
 		set VER2_QUE,24;
 		warp "un_myst.gat",260,204;
 		end;
@@ -13462,7 +14258,7 @@ un_myst.gat,182,137,3	script	不思議な欠片02#02	10082,{/* 59715 */
 		close2;
 		if(VER2_QUE == 28) {
 			delquest 11389;
-			setquest 118225; //state=1
+			setquest 118225;
 			set VER2_QUE,29;
 		}
 		warp "un_myst.gat",14,92;
@@ -13596,7 +14392,7 @@ un_myst.gat,214,86,3	script	不思議な欠片03#03	10082,{/* 59720 */
 		close2;
 		if(VER2_QUE == 37) {
 			delquest 118225;
-			setquest 118230; //state=1
+			setquest 118230;
 			set VER2_QUE,38;
 		}
 		warp "un_myst.gat",209,37;
@@ -13610,7 +14406,7 @@ un_myst.gat,209,42,3	script	タマリン#最後の部屋入口	10027,{/* 59721 */
 		mes "そろそろこのシェルターで";
 		mes "調べられる部屋も少なく";
 		mes "なってきましたね。";
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		next;
 		mes "[タマリン]";
 		mes "そういえば私の後ろの穴から";
@@ -13625,7 +14421,7 @@ un_myst.gat,209,42,3	script	タマリン#最後の部屋入口	10027,{/* 59721 */
 		mes "さあ、行きましょう！";
 		next;
 		menu "扉を開く",-;
-		cutin "ep143_taang.bmp", 2;
+		cutin "ep143_taang",2;
 		mes "[タマリン]";
 		mes "扉を開くのですね？";
 		mes "分かりました。";
@@ -13639,10 +14435,10 @@ un_myst.gat,209,42,3	script	タマリン#最後の部屋入口	10027,{/* 59721 */
 			mes "空きが出来たらまた、";
 			mes "声をかけてくれますか？";
 			close2;
-			cutin "ep143_taang.bmp", 255;
+			cutin "ep143_taang",255;
 			end;
 		}
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		mes "[タマリン]";
 		mes "あと、これは";
 		mes strcharinfo(0)+ "様の分です。";
@@ -13650,7 +14446,7 @@ un_myst.gat,209,42,3	script	タマリン#最後の部屋入口	10027,{/* 59721 */
 		mes "道順を記録してくれたそうで、";
 		mes "簡易移動用の装置だそうです。";
 		delquest 118230;
-		setquest 201770; //state=1
+		setquest 201770;
 		set VER2_QUE,39;
 		getexp 1000000,0; //97773262
 		getexp 1000000,0; //97773262
@@ -13662,9 +14458,9 @@ un_myst.gat,209,42,3	script	タマリン#最後の部屋入口	10027,{/* 59721 */
 		getexp 0,500000; //8907119
 		getexp 0,500000; //9407119
 		getexp 0,500000; //9907119
-		getitem 6828, 1;
-		getitem 6962, 20;
-		setquest 120260; //state=1
+		getitem 6828,1;
+		getitem 6962,20;
+		setquest 120260;
 		compquest 120260;
 		next;
 		mes "[タマリン]";
@@ -13673,7 +14469,7 @@ un_myst.gat,209,42,3	script	タマリン#最後の部屋入口	10027,{/* 59721 */
 		mes "ここまで一瞬で移動する事が";
 		mes "できるそうですよ。";
 		next;
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		mes "[タマリン]";
 		mes "……すいません。";
 		mes "あの不思議な欠片に残っていた";
@@ -13682,18 +14478,18 @@ un_myst.gat,209,42,3	script	タマリン#最後の部屋入口	10027,{/* 59721 */
 		mes "なかったですね。";
 		mes "扉を開けました、いきましょう。";
 		close2;
-		cutin "ep143_taang.bmp", 255;
+		cutin "ep143_taang",255;
 		warp "un_myst.gat",111,37;
 		end;
 	default:
-		cutin "ep143_taang.bmp", 2;
+		cutin "ep143_taang",2;
 		mes "[タマリン]";
 		mes "あの欠片に残っていた";
 		mes "メッセージが事実なら……。";
 		mes "なんて、私が考えたところで";
 		mes "仕方ないですね……。";
 		next;
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		mes "[タマリン]";
 		mes "ちなみに横の扉の先は";
 		mes "マークイシャさんが調べて";
@@ -13701,13 +14497,13 @@ un_myst.gat,209,42,3	script	タマリン#最後の部屋入口	10027,{/* 59721 */
 		mes "さあ、行きましょう！";
 		next;
 		menu "扉を開く",-;
-		cutin "ep143_taang.bmp", 2;
+		cutin "ep143_taang",2;
 		mes "[タマリン]";
 		mes "何故か……切ない気持ちになります。";
 		mes "自分でもどうしてか、";
 		mes "わからないのですが……。";
 		close2;
-		cutin "ep143_taang.bmp", 255;
+		cutin "ep143_taang",255;
 		warp "un_myst.gat",111,37;
 		end;
 	}
@@ -13718,9 +14514,9 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 	mes "この扉は今までと違って";
 	mes "明らかにこちら側から";
 	mes "塞いだ痕跡がありますね……。";
-	cutin "bu_mark4.bmp", 0;
+	cutin "bu_mark4",0;
 	next;
-	cutin "bu_mark1.bmp", 0;
+	cutin "bu_mark1",0;
 	mes "[マークイシャ]";
 	mes "どうしましょう。";
 	mes "扉を開いて中に入りますか？";
@@ -13733,7 +14529,7 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 		mes "必ずパーティーを組んでから";
 		mes "中に入ってください。";
 		close2;
-		cutin "bu_mark1.bmp", 255;
+		cutin "bu_mark1",255;
 		end;
 	}
 	set '@party$,getpartyname(getcharid(1));
@@ -13745,7 +14541,7 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 			mes "パーティーリーダー名：" +'@leader$;
 			mes "^0000fflast_room ^000000-予約失敗";
 			close2;
-			cutin "bu_mark1.bmp", 255;
+			cutin "bu_mark1",255;
 			end;
 		}
 		mdcreate "last_room";
@@ -13754,15 +14550,15 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 		mes "完全に開いたら";
 		mes "中に入ってください。";
 		close2;
-		cutin "bu_mark1.bmp", 255;
+		cutin "bu_mark1",255;
 		end;
 	case 2:
 		switch(mdenter("last_room")) {
 		case 0:	// エラーなし
-			setquest 11380; //state=1
-			announce "メモリアルダンジョン[last_room] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")", 0x9, 0x00ff99, 0x190, 12, 0, 0;
-			setquest 11379; //state=1
-			cutin "bu_mark1.bmp", 255;
+			setquest 11380;
+			announce "メモリアルダンジョン[last_room] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
+			setquest 11379;
+			cutin "bu_mark1",255;
 			warp "1@uns.gat",144,36;
 			end;
 		case 1:	// パーティー未加入
@@ -13773,7 +14569,7 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 			mes "必ずパーティーを組んでから";
 			mes "中に入ってください。";
 			close2;
-			cutin "bu_mark1.bmp", 255;
+			cutin "bu_mark1",255;
 			end;
 		case 2:	// ダンジョン未作成
 			mes "[マークイシャ]";
@@ -13782,13 +14578,13 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 			mes "リーダーの方が先ず、";
 			mes "扉を開いてください。";
 			close2;
-			cutin "bu_mark1.bmp", 255;
+			cutin "bu_mark1",255;
 			end;
 		default:	// その他エラー
 			close;
 		}
 	case 3:
-		cutin "bu_mark4.bmp", 0;
+		cutin "bu_mark4",0;
 		mes "[マークイシャ]";
 		mes "そうですね。";
 		mes "何が起きるかわかりませんし";
@@ -13797,10 +14593,10 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 		mes "リーダーらしく物事を考えて";
 		mes "発言して欲しいものです……。";
 		close2;
-		cutin "bu_mark4.bmp", 255;
+		cutin "bu_mark4",255;
 		end;
 	case 4:
-		cutin "bu_mark2.bmp", 0;
+		cutin "bu_mark2",0;
 		mes "[マークイシャ]";
 		mes "そういえばタマリンが";
 		mes "誰かが掘って作ったと思われる";
@@ -13809,7 +14605,7 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 		mes "かなり暗いので気をつけて";
 		mes "進んでくださいね。";
 		close2;
-		cutin "bu_mark2.bmp", 255;
+		cutin "bu_mark2",255;
 		warp "verus01.gat",115,190;
 		end;
 	}
@@ -13817,7 +14613,7 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 un_bunker.gat,98,85,0	warp	#bunker_out	1,1,verus01.gat,115,190	//59724
 un_bunker.gat,97,100,0	script	#誘導その1	139,2,2,{/* 59725 */
 	if(VER2_QUE >= 18) {
-		cutin "bu_du5.bmp", 2;
+		cutin "bu_du5",2;
 		mes "[テューリアン]";
 		mes "なんだよみんな！";
 		mes "俺をおいてどこかに行くとか";
@@ -13825,7 +14621,7 @@ un_bunker.gat,97,100,0	script	#誘導その1	139,2,2,{/* 59725 */
 		mes "あっ！";
 		mes strcharinfo(0)+ "！";
 		next;
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "良かったら一緒に";
 		mes "行こうぜ!!";
@@ -13834,34 +14630,34 @@ un_bunker.gat,97,100,0	script	#誘導その1	139,2,2,{/* 59725 */
 		mes "みんなから連絡があった時に";
 		mes "俺がいないと困るだろ!?";
 		next;
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		mes "[テューリアン]";
 		mes "まあ……。";
 		mes "嫌がっても俺は勝手に";
 		mes "ついていくけどな!!";
 		mes "わははははははははっ!!";
 		close2;
-		cutin "bu_du2.bmp", 255;
+		cutin "bu_du2",255;
 		end;
 	}
 }
 un_bunker.gat,298,177,0	script	#誘導その2	139,3,3,{/* 59726 */
 	if(VER2_QUE >= 18) {
-		cutin "bu_du2.bmp", 2;
+		cutin "bu_du2",2;
 		mes "[テューリアン]";
 		mes "お……！";
 		mes "アルプからの連絡だ。";
 		mes "どうやらこの先に居る";
 		mes "みたいだ！";
 		next;
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "よし、いこうぜ！";
 		mes "俺たちがみんなより";
 		mes "先に到着して驚かせないとな！";
 		mes "わははははははははっ!!";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 		end;
 	}
 }
@@ -13882,7 +14678,7 @@ un_bunker.gat,40,135,0	warp	B-1#b_L-1				1,1,un_bunker.gat,50,134	//59740
 un_bunker.gat,57,118,0	warp	L-1#b_A-0				1,1,un_bunker.gat,72,117	//59741
 un_bunker.gat,69,118,0	script	A-0#b_L-1				45,1,1,{	//59742
 	if(VER2_QUE >= 18) {
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		mes "[テューリアン]";
 		mes "このワープポータルから、";
 		mes "あいつらの気配は感じないな。";
@@ -13891,22 +14687,22 @@ un_bunker.gat,69,118,0	script	A-0#b_L-1				45,1,1,{	//59742
 		mes "それでも進むのか？";
 		next;
 		if(select("進む","やめる") == 2) {
-			cutin "bu_du2.bmp", 2;
+			cutin "bu_du2",2;
 			mes "[テューリアン]";
 			mes "流石だな！";
 			mes "マドリドとは大違いだ。";
 			mes "他の道を調べようぜ！";
 			close2;
-			cutin "bu_du2.bmp", 255;
+			cutin "bu_du2",255;
 			end;
 		}
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "そこまで言うなら";
 		mes "仕方ないな……。";
 		mes "よし、行こうぜ！";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 	}
 	warp "un_bunker.gat",53,117;
 	end;
@@ -13914,7 +14710,7 @@ un_bunker.gat,69,118,0	script	A-0#b_L-1				45,1,1,{	//59742
 
 un_bunker.gat,97,124,0	script	A-0#b_モニタリング室	45,1,1,{	//59743
 	if(VER2_QUE >= 18) {
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		mes "[テューリアン]";
 		mes "このワープポータルから、";
 		mes "あいつらの気配は感じないな。";
@@ -13923,22 +14719,22 @@ un_bunker.gat,97,124,0	script	A-0#b_モニタリング室	45,1,1,{	//59743
 		mes "それでも進むのか？";
 		next;
 		if(select("進む","やめる") == 2) {
-			cutin "bu_du2.bmp", 2;
+			cutin "bu_du2",2;
 			mes "[テューリアン]";
 			mes "流石だな！";
 			mes "マドリドとは大違いだ。";
 			mes "他の道を調べようぜ！";
 			close2;
-			cutin "bu_du2.bmp", 255;
+			cutin "bu_du2",255;
 			end;
 		}
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "そこまで言うなら";
 		mes "仕方ないな……。";
 		mes "よし、行こうぜ！";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 	}
 	warp "un_bunker.gat",100,144;
 	end;
@@ -13946,7 +14742,7 @@ un_bunker.gat,97,124,0	script	A-0#b_モニタリング室	45,1,1,{	//59743
 un_bunker.gat,97,141,0	warp	モニタリング室#b_A-0	1,1,un_bunker.gat,98,121	//59744
 un_bunker.gat,128,118,0	script	A-0#b_L-2	45,1,1,{	//59745
 	if(VER2_QUE >= 18) {
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		mes "[テューリアン]";
 		mes "このワープポータルから、";
 		mes "あいつらの気配は感じないな。";
@@ -13955,22 +14751,22 @@ un_bunker.gat,128,118,0	script	A-0#b_L-2	45,1,1,{	//59745
 		mes "それでも進むのか？";
 		next;
 		if(select("進む","やめる") == 2) {
-			cutin "bu_du2.bmp", 2;
+			cutin "bu_du2",2;
 			mes "[テューリアン]";
 			mes "流石だな！";
 			mes "マドリドとは大違いだ。";
 			mes "他の道を調べようぜ！";
 			close2;
-			cutin "bu_du2.bmp", 255;
+			cutin "bu_du2",255;
 			end;
 		}
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "そこまで言うなら";
 		mes "仕方ないな……。";
 		mes "よし、行こうぜ！";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 	}
 	warp "un_bunker.gat",144,117;
 	end;
@@ -14001,7 +14797,7 @@ un_bunker.gat,230,214,0	warp	F-1#b_G-1		1,1,un_bunker.gat,248,213	//59768
 un_bunker.gat,262,200,0	warp	G-1#b_H-0		1,1,un_bunker.gat,274,199	//59769
 un_bunker.gat,271,200,0	script	H-0#b_G-1		45,1,1,{	//59770
 	if(VER2_QUE >= 18) {
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		mes "[テューリアン]";
 		mes "このワープポータルから、";
 		mes "あいつらの気配は感じないな。";
@@ -14010,22 +14806,22 @@ un_bunker.gat,271,200,0	script	H-0#b_G-1		45,1,1,{	//59770
 		mes "それでも進むのか？";
 		next;
 		if(select("進む","やめる") == 2) {
-			cutin "bu_du2.bmp", 2;
+			cutin "bu_du2",2;
 			mes "[テューリアン]";
 			mes "流石だな！";
 			mes "マドリドとは大違いだ。";
 			mes "他の道を調べようぜ！";
 			close2;
-			cutin "bu_du2.bmp", 255;
+			cutin "bu_du2",255;
 			end;
 		}
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "そこまで言うなら";
 		mes "仕方ないな……。";
 		mes "よし、行こうぜ！";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 	}
 	warp "un_bunker.gat",258,199;
 	end;
@@ -14034,7 +14830,7 @@ un_bunker.gat,75,128,0	warp	右A-0#b_右H-0	1,1,un_bunker.gat,276,196	//59771
 un_bunker.gat,275,191,0	warp	右H-0#b_右A-0	1,1,un_bunker.gat,76,121	//59772
 un_bunker.gat,119,128,0	script	左A-0#b_左H-0	45,1,1,{	//59773
 	if(VER2_QUE >= 18) {
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		mes "[テューリアン]";
 		mes "このワープポータルから、";
 		mes "あいつらの気配は感じないな。";
@@ -14043,29 +14839,29 @@ un_bunker.gat,119,128,0	script	左A-0#b_左H-0	45,1,1,{	//59773
 		mes "それでも進むのか？";
 		next;
 		if(select("進む","やめる") == 2) {
-			cutin "bu_du2.bmp", 2;
+			cutin "bu_du2",2;
 			mes "[テューリアン]";
 			mes "流石だな！";
 			mes "マドリドとは大違いだ。";
 			mes "他の道を調べようぜ！";
 			close2;
-			cutin "bu_du2.bmp", 255;
+			cutin "bu_du2",255;
 			end;
 		}
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "そこまで言うなら";
 		mes "仕方ないな……。";
 		mes "よし、行こうぜ！";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 	}
 	warp "un_bunker.gat",319,196;
 	end;
 }
 un_bunker.gat,320,191,0	script	左H-0#b_左A-0	45,1,1,{	//59774
 	if(VER2_QUE >= 18) {
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		mes "[テューリアン]";
 		mes "このワープポータルから、";
 		mes "あいつらの気配は感じないな。";
@@ -14074,29 +14870,29 @@ un_bunker.gat,320,191,0	script	左H-0#b_左A-0	45,1,1,{	//59774
 		mes "それでも進むのか？";
 		next;
 		if(select("進む","やめる") == 2) {
-			cutin "bu_du2.bmp", 2;
+			cutin "bu_du2",2;
 			mes "[テューリアン]";
 			mes "流石だな！";
 			mes "マドリドとは大違いだ。";
 			mes "他の道を調べようぜ！";
 			close2;
-			cutin "bu_du2.bmp", 255;
+			cutin "bu_du2",255;
 			end;
 		}
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "そこまで言うなら";
 		mes "仕方ないな……。";
 		mes "よし、行こうぜ！";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 	}
 	warp "un_bunker.gat",120,121;
 	end;
 }
 un_bunker.gat,297,206,0	script	H-0#b_治療室	45,1,1,{	//59775
 	if(VER2_QUE >= 18) {
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		mes "[テューリアン]";
 		mes "このワープポータルから、";
 		mes "あいつらの気配は感じないな。";
@@ -14105,22 +14901,22 @@ un_bunker.gat,297,206,0	script	H-0#b_治療室	45,1,1,{	//59775
 		mes "それでも進むのか？";
 		next;
 		if(select("進む","やめる") == 2) {
-			cutin "bu_du2.bmp", 2;
+			cutin "bu_du2",2;
 			mes "[テューリアン]";
 			mes "流石だな！";
 			mes "マドリドとは大違いだ。";
 			mes "他の道を調べようぜ！";
 			close2;
-			cutin "bu_du2.bmp", 255;
+			cutin "bu_du2",255;
 			end;
 		}
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "そこまで言うなら";
 		mes "仕方ないな……。";
 		mes "よし、行こうぜ！";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 	}
 	warp "un_bunker.gat",298,224;
 	end;
@@ -14128,7 +14924,7 @@ un_bunker.gat,297,206,0	script	H-0#b_治療室	45,1,1,{	//59775
 un_bunker.gat,297,221,0	warp	治療室#b_H-0	1,1,un_bunker.gat,298,203	//59776
 un_bunker.gat,324,200,0	script	H-0#b_G-2		45,1,1,{	//59777
 	if(VER2_QUE >= 18) {
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		mes "[テューリアン]";
 		mes "このワープポータルから、";
 		mes "あいつらの気配は感じないな。";
@@ -14137,22 +14933,22 @@ un_bunker.gat,324,200,0	script	H-0#b_G-2		45,1,1,{	//59777
 		mes "それでも進むのか？";
 		next;
 		if(select("進む","やめる") == 2) {
-			cutin "bu_du2.bmp", 2;
+			cutin "bu_du2",2;
 			mes "[テューリアン]";
 			mes "流石だな！";
 			mes "マドリドとは大違いだ。";
 			mes "他の道を調べようぜ！";
 			close2;
-			cutin "bu_du2.bmp", 255;
+			cutin "bu_du2",255;
 			end;
 		}
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "そこまで言うなら";
 		mes "仕方ないな……。";
 		mes "よし、行こうぜ！";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 	}
 	warp "un_bunker.gat",344,199;
 	end;
@@ -14176,7 +14972,7 @@ un_bunker.gat,297,192,0	warp	H-0#b_Z-0	1,1,un_bunker.gat,298,181	//59793
 un_bunker.gat,297,186,0	warp	Z-0#b_H-0	1,1,un_bunker.gat,298,196	//59794
 un_bunker.gat,229,163,0	script	Z-0#b_Z-1	45,1,1,{	//59795
 	if(VER2_QUE >= 18) {
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		mes "[テューリアン]";
 		mes "このワープポータルから、";
 		mes "あいつらの気配は感じないな。";
@@ -14185,22 +14981,22 @@ un_bunker.gat,229,163,0	script	Z-0#b_Z-1	45,1,1,{	//59795
 		mes "それでも進むのか？";
 		next;
 		if(select("進む","やめる") == 2) {
-			cutin "bu_du2.bmp", 2;
+			cutin "bu_du2",2;
 			mes "[テューリアン]";
 			mes "流石だな！";
 			mes "マドリドとは大違いだ。";
 			mes "他の道を調べようぜ！";
 			close2;
-			cutin "bu_du2.bmp", 255;
+			cutin "bu_du2",255;
 			end;
 		}
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "そこまで言うなら";
 		mes "仕方ないな……。";
 		mes "よし、行こうぜ！";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 	}
 	warp "un_bunker.gat",159,52;
 	end;
@@ -14208,7 +15004,7 @@ un_bunker.gat,229,163,0	script	Z-0#b_Z-1	45,1,1,{	//59795
 un_bunker.gat,164,51,0	warp	Z-1#b_Z-0	1,1,un_bunker.gat,233,164	//59796
 un_bunker.gat,366,164,0	script	Z-0#b_Z-2	45,1,1,{		//59797
 	if(VER2_QUE >= 18) {
-		cutin "bu_du3.bmp", 2;
+		cutin "bu_du3",2;
 		mes "[テューリアン]";
 		mes "このワープポータルから、";
 		mes "あいつらの気配は感じないな。";
@@ -14217,22 +15013,22 @@ un_bunker.gat,366,164,0	script	Z-0#b_Z-2	45,1,1,{		//59797
 		mes "それでも進むのか？";
 		next;
 		if(select("進む","やめる") == 2) {
-			cutin "bu_du2.bmp", 2;
+			cutin "bu_du2",2;
 			mes "[テューリアン]";
 			mes "流石だな！";
 			mes "マドリドとは大違いだ。";
 			mes "他の道を調べようぜ！";
 			close2;
-			cutin "bu_du2.bmp", 255;
+			cutin "bu_du2",255;
 			end;
 		}
-		cutin "bu_du1.bmp", 2;
+		cutin "bu_du1",2;
 		mes "[テューリアン]";
 		mes "そこまで言うなら";
 		mes "仕方ないな……。";
 		mes "よし、行こうぜ！";
 		close2;
-		cutin "bu_du1.bmp", 255;
+		cutin "bu_du1",255;
 	}
 	warp "un_bunker.gat",31,51;
 	end;
@@ -14324,8 +15120,8 @@ verus04.gat,161,222,4	script	屈強な老人	52,{/* 59827 */
 		mes "もう一度声をかけてくれ。";
 		close;
 	}
-	delitem 6961, '@num * 5;
-	getitem 6962, '@num;
+	delitem 6961,'@num * 5;
+	getitem 6962,'@num;
 	mes "[屈強な老人]";
 	mes "ほら、約束の古びた燃料タンクだ。";
 	mes "ありがとうな！";
@@ -14368,14 +15164,33 @@ verus04.gat,163,219,4	script	PLUTO_09#pa0829	10147,{/* 59828 */
 			mes "終了シマス。";
 			close;
 		case 2:
+			set '@gain,20773;
 			break;
 		case 3:
+			set '@gain,15128;
 			break;
 		}
+		if(countitem(6961) < 10) {
+			mes "[PLUTO_09]";
+			mes "アイテムガ不足シテイマス。";
+			mes "^0000ff古びた鉄塊10個^000000";
+			mes "必要デス。";
+			close;
+		}
+		if(checkitemblank() == 0) {
+			mes "[PLUTO_09]";
+			mes "エラーエラー。";
+			mes "アイテムガ^ff0000多イ^000000デス。";
+			mes "所持中ノアイテム数ヲ";
+			mes "減ラシテクダサイ。";
+			close;
+		}
+		misceffect 234;
+		delitem 6961,10;
+		getitem '@gain,1;
 		mes "[PLUTO_09]";
-		mes "アイテムガ不足シテイマス。";
-		mes "^0000ff古びた鉄塊10個^000000";
-		mes "必要デス。";
+		mes "ピピピーピピッ！";
+		mes "製作シマシタ。";
 		close;
 	case 2:
 		while(1) {
@@ -14386,7 +15201,7 @@ verus04.gat,163,219,4	script	PLUTO_09#pa0829	10147,{/* 59828 */
 				set '@str$,"^aaaaaa燃料不足^000000";
 			}
 			else {
-				set '@str$,"設計図生産‐^ff0000" +(2 - VER4_QUE)+ "回利用可能^000000";
+				set '@str$,"設計図生産‐^ff0000" +(countitem(6828) / 5)+ "回利用可能^000000";
 			}
 			next;
 			if(select('@str$,"やめる") == 2) {
@@ -14412,17 +15227,25 @@ verus04.gat,163,219,4	script	PLUTO_09#pa0829	10147,{/* 59828 */
 			}
 			if(rand(100) < 60) {
 				setarray '@table,998,998,999,1002,1002,7054,7054;
-				misceffect 17, "PLUTO_09#pa0829"; //59578
-				delitem 6828, 5;
-				getitem '@table[rand(getarraysize('@table))], 1;
+				misceffect 17;
+				delitem 6828,5;
+				getitem '@table[rand(getarraysize('@table))],1;
 				mes "[PLUTO_09]";
 				mes "失敗失敗！";
 				mes "設計図ノ代ワリニ";
 				mes "コレガデキマシタ……。";
-				next;
 			}
 			else {
+				setarray '@table,6973,6979,6980,6981,6982,1002,6984,6986;
+				misceffect 76;
+				delitem 6962,5;
+				getitem '@table[rand(getarraysize('@table))],1;
+				getitem 6979,1;
+				mes "[PLUTO_09]";
+				mes "成功成功。";
+				mes "設計図ガ完成シマシタ。";
 			}
+			next;
 		}
 	case 3:
 		mes "[PLUTO_09]";
@@ -14535,7 +15358,7 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 		mes "投入して下さい。";
 		mes "節電モードを解除する事が";
 		mes "できるはずです。";
-		setquest 12368; //state=1
+		setquest 12368;
 		close;
 	}
 	if(checkquest(12368) & 0x8 == 0) {
@@ -14588,7 +15411,7 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 		mes strcharinfo(0)+ "様ですね。";
 		mes "歓迎します。";
 		mes "燃料注入が完全に終了しました。";
-		delitem 6962, 1;
+		delitem 6962,1;
 		compquest 12368;
 		close;
 	}
@@ -14598,7 +15421,7 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 	mes "お役に立てれば光栄です。";
 	mes "ご用件をお伺いいたします。";
 	next;
-	switch(select("ヘルプメニュー","エクセリオンウィング強化","エクセリオンスーツ強化","エクセリオンレッグ強化","終了する")) {
+	switch(select("ヘルプメニュー","エクセリオンウィング強化","エクセリオンスーツ強化","エクセリオンレッグ強化","エクセリオンシールド強化","終了する")) {
 	case 1:
 		mes "[MARS_01]";
 		mes "私たちは";
@@ -14608,9 +15431,9 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 		mes "[MARS_01]";
 		mes "エクセリオンウィング、";
 		mes "エクセリオンスーツ、";
-		mes "エクセリオンレッグと";
-		mes "強化用設計図を";
-		mes "共に持って来てください。";
+		mes "エクセリオンレッグ、";
+		mes "エクセリオンシールドと";
+		mes "強化用設計図を共に持って来てください。";
 		mes "図面に応じたエンチャントを施します。";
 		next;
 		mes "[MARS_01]";
@@ -14680,14 +15503,15 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 		}
 		mes "[MARS_01]";
 		mes "エンチャントは大きく分けて";
-		mes "以下、5つのタイプがあります。";
+		mes "以下、6つのタイプがあります。";
 		next;
 		mes "[MARS_01]";
 		mes "Enchant･･･Type-E（属性付与）";
 		mes "Resist･･･Type-R（属性耐性）";
 		mes "Cure･･･Type-C（回復）";
 		mes "Assist･･･Type-A（補助）";
-		mes "Special･･･Type-S（特別）";
+		mes "Special･･･Type-S（特別1）";
+		mes "Zenith･･･Type-Z（特別2）";
 		next;
 		mes "[MARS_01]";
 		mes "これらは全てエンチャント可能な部位と";
@@ -14698,15 +15522,17 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 		mes "　画面のスクロールが必要です^000000‐";
 		while(1) {
 			next;
-			switch(select(	"E-Fire 鎧-1 肩-0 靴-0","E-Water 鎧-1 肩-0 靴-0","E-Ground 鎧-1 肩-0 靴-0","E-Wind 鎧-1 肩-0 靴-0",
-							"R-Fire 鎧-0 肩-3 靴-0","R-Water 鎧-0 肩-3 靴-0","R-Ground 鎧-0 肩-3 靴-0","R-Wind 鎧-0 肩-3 靴-0",
-							"C-Life 鎧-3 肩-3 靴-3","C-Soul 鎧-3 肩-3 靴-3","C-HPR 鎧-3 肩-3 靴-3","C-SPR 鎧-3 肩-3 靴-3",
-							"A-Str 鎧-1 肩-0 靴-0","A-Int 鎧-1 肩-0 靴-0","A-Def 鎧-3 肩-3 靴-3","A-Avoid 鎧-1 肩-1 靴-0",
-							"A-Atk 鎧-3 肩-3 靴-3","A-Matk 鎧-3 肩-3 靴-3","A-MaxHP 鎧-3 肩-3 靴-3","A-MaxSP 鎧-3 肩-3 靴-3",
-							"A-Frozen 鎧-1 肩-0 靴-0","A-ASPD 鎧-1 肩-1 靴-1","A-Tolerance 鎧-1 肩-1 靴-1","A-Hit 鎧-0 肩-0 靴-1",
-							"A-Flee 鎧-0 肩-0 靴-1","A-Mdef 鎧-1 肩-1 靴-1",
-							"S-Atk 鎧-0 肩-0 靴-1","S-Matk 鎧-0 肩-0 靴-1","S-Avoid 鎧-0 肩-0 靴-1",
-							"S-MaxHP 鎧-0 肩-0 靴-1","S-Quick 鎧-0 肩-0 靴-1","S-Cri 鎧-0 肩-0 靴-1",
+			switch(select(	"E-Fire 鎧-1 肩-0 靴-0 盾-0","E-Water 鎧-1 肩-0 靴-0 盾-0","E-Ground 鎧-1 肩-0 靴-0 盾-0","E-Wind 鎧-1 肩-0 靴-0 盾-0",
+							"R-Fire 鎧-0 肩-3 靴-0 盾-1","R-Water 鎧-0 肩-3 靴-0 盾-1","R-Ground 鎧-0 肩-3 靴-0 盾-1","R-Wind 鎧-0 肩-3 靴-0 盾-1",
+							"C-Life 鎧-3 肩-3 靴-3 盾-3","C-Soul 鎧-3 肩-3 靴-3 盾-3","C-HPR 鎧-3 肩-3 靴-3 盾-3","C-SPR 鎧-3 肩-3 靴-3 盾-3",
+							"A-Str 鎧-1 肩-0 靴-0 盾-0","A-Int 鎧-1 肩-0 靴-0 盾-0","A-Def 鎧-3 肩-3 靴-3 盾-0","A-Avoid 鎧-1 肩-1 靴-0 盾-0",
+							"A-Atk 鎧-3 肩-3 靴-3 盾-3","A-Matk 鎧-3 肩-3 靴-3 盾-3","A-MaxHP 鎧-3 肩-3 靴-3 盾-3","A-MaxSP 鎧-3 肩-3 靴-3 盾-3",
+							"A-Frozen 鎧-1 肩-0 靴-0 盾-0","A-ASPD 鎧-1 肩-1 靴-1 盾-0","A-Tolerance 鎧-1 肩-1 靴-1 盾-0","A-Hit 鎧-0 肩-0 靴-1 盾-1",
+							"A-Flee 鎧-0 肩-0 靴-1 盾-1","A-Mdef 鎧-1 肩-1 靴-1 盾-0",
+							"S-Atk 鎧-0 肩-0 靴-1 盾-0","S-Matk 鎧-0 肩-0 靴-1 盾-0","S-Avoid 鎧-0 肩-0 靴-1 盾-0",
+							"S-MaxHP 鎧-0 肩-0 靴-1 盾-0","S-Quick 鎧-0 肩-0 靴-1 盾-0","S-Cri 鎧-0 肩-0 靴-1 盾-0",
+							"Z-Knockback 鎧-1 肩-1 靴-1 盾-0","Z-Immortal 鎧-1 肩-0 靴-0 盾-0","Z-Killgain 鎧-1 肩-1 靴-1 盾-1","Z-Reincarnation 鎧-0 肩-0 靴-1 盾-0",
+							"Z-NoDispell 鎧-1 肩-1 靴-1 盾-0","Z-Clairvoyance 鎧-0 肩-0 靴-1 盾-0","Z-CastFixed 鎧-1 肩-1 靴-1 盾-1",
 							"見るのをやめる"
 			)) {
 			case 1:
@@ -14775,6 +15601,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィングに";
 				mes "^ff00003回^000000利用可能";
+				mes "エクセリオンシールドに";
+				mes "^ff00001回^000000利用可能";
 				break;
 			case 6:
 				mes "[R-Water]";
@@ -14790,6 +15618,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィングに";
 				mes "^ff00003回^000000利用可能";
+				mes "エクセリオンシールドに";
+				mes "^ff00001回^000000利用可能";
 				break;
 			case 7:
 				mes "[R-Ground]";
@@ -14805,6 +15635,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィングに";
 				mes "^ff00003回^000000利用可能";
+				mes "エクセリオンシールドに";
+				mes "^ff00001回^000000利用可能";
 				break;
 			case 8:
 				mes "[R-Wind]";
@@ -14820,6 +15652,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィングに";
 				mes "^ff00003回^000000利用可能";
+				mes "エクセリオンシールドに";
+				mes "^ff00001回^000000利用可能";
 				break;
 			case 9:
 				mes "[C-Life]";
@@ -14837,7 +15671,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィング、";
 				mes "エクセリオンスーツ、";
-				mes "エクセリオンレッグに";
+				mes "エクセリオンレッグ、";
+				mes "エクセリオンシールドに";
 				mes "^ff00003回^000000利用可能";
 				break;
 			case 10:
@@ -14856,7 +15691,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィング、";
 				mes "エクセリオンスーツ、";
-				mes "エクセリオンレッグに";
+				mes "エクセリオンレッグ、";
+				mes "エクセリオンシールドに";
 				mes "^ff00003回^000000利用可能";
 				break;
 			case 11:
@@ -14875,7 +15711,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィング、";
 				mes "エクセリオンスーツ、";
-				mes "エクセリオンレッグに";
+				mes "エクセリオンレッグ、";
+				mes "エクセリオンシールドに";
 				mes "^ff00003回^000000利用可能";
 				break;
 			case 12:
@@ -14894,7 +15731,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィング、";
 				mes "エクセリオンスーツ、";
-				mes "エクセリオンレッグに";
+				mes "エクセリオンレッグ、";
+				mes "エクセリオンシールドに";
 				mes "^ff00003回^000000利用可能";
 				break;
 			case 13:
@@ -15000,7 +15838,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィング、";
 				mes "エクセリオンスーツ、";
-				mes "エクセリオンレッグに";
+				mes "エクセリオンレッグ、";
+				mes "エクセリオンシールドに";
 				mes "^ff00003回^000000利用可能";
 				break;
 			case 18:
@@ -15019,7 +15858,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィング、";
 				mes "エクセリオンスーツ、";
-				mes "エクセリオンレッグに";
+				mes "エクセリオンレッグ、";
+				mes "エクセリオンシールドに";
 				mes "^ff00003回^000000利用可能";
 				break;
 			case 19:
@@ -15038,7 +15878,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィング、";
 				mes "エクセリオンスーツ、";
-				mes "エクセリオンレッグに";
+				mes "エクセリオンレッグ、";
+				mes "エクセリオンシールドに";
 				mes "^ff00003回^000000利用可能";
 				break;
 			case 20:
@@ -15057,7 +15898,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "―――――――――――――";
 				mes "エクセリオンウィング、";
 				mes "エクセリオンスーツ、";
-				mes "エクセリオンレッグに";
+				mes "エクセリオンレッグ、";
+				mes "エクセリオンシールドに";
 				mes "^ff00003回^000000利用可能";
 				break;
 			case 21:
@@ -15124,7 +15966,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "精錬値が3上がる度に追加で";
 				mes "Hit + 5";
 				mes "―――――――――――――";
-				mes "エクセリオンレッグに";
+				mes "エクセリオンレッグ、";
+				mes "エクセリオンシールドに";
 				mes "^ff00001回^000000利用可能";
 				break;
 			case 25:
@@ -15146,7 +15989,8 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "精錬値が3上がる度に追加で";
 				mes "Flee + 5";
 				mes "―――――――――――――";
-				mes "エクセリオンレッグに";
+				mes "エクセリオンレッグ、";
+				mes "エクセリオンシールドに";
 				mes "^ff00001回^000000利用可能";
 				break;
 			case 26:
@@ -15315,6 +16159,113 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 				mes "1つのみ利用可能";
 				break;
 			case 33:
+				mes "[Z-Knockback]";
+				mes "絶対にノックバックしない";
+				mes "―――――――――――――";
+				mes "[ライオットチップ]と";
+				mes "共に装備時、";
+				mes "[ライオットチップ]の";
+				mes "精錬値が2上がる度に追加で";
+				mes "MaxHP + 1%";
+				mes "―――――――――――――";
+				mes "Type-Zは同一の装備に";
+				mes "1つのみ利用可能";
+				continue;
+			case 34:
+				mes "[Z-Immortal]";
+				mes "絶対に壊れない";
+				mes "―――――――――――――";
+				mes "[ライオットチップ]と";
+				mes "共に装備時、";
+				mes "[ライオットチップ]の";
+				mes "精錬値が2上がる度に追加で";
+				mes "MaxHP + 1%";
+				mes "―――――――――――――";
+				mes "Type-Zは同一の装備に";
+				mes "1つのみ利用可能";
+				continue;
+			case 35:
+				mes "[Z-Killgain]";
+				mes "物理攻撃でモンスターを";
+				mes "倒した時、SP + 2";
+				mes "―――――――――――――";
+				mes "精錬値が7以上の時、追加で";
+				mes "物理攻撃でモンスターを";
+				mes "倒した時、SP + 3";
+				mes "―――――――――――――";
+				mes "精錬値が8以上の時、追加で";
+				mes "物理攻撃でモンスターを";
+				mes "倒した時、SP + 5";
+				mes "―――――――――――――";
+				mes "精錬値が9以上の時、追加で";
+				mes "物理攻撃でモンスターを";
+				mes "倒した時、SP + 10";
+				mes "―――――――――――――";
+				mes "[ライオットチップ]と";
+				mes "共に装備時、";
+				mes "[ライオットチップ]の";
+				mes "精錬値が2上がる度に追加で";
+				mes "MaxHP + 1%";
+				mes "―――――――――――――";
+				mes "Type-Zは同一の装備に";
+				mes "1つのみ利用可能";
+				continue;
+			case 36:
+				mes "[Z-Reincarnation]";
+				mes "戦闘不能から復活時、";
+				mes "HP・SPを100%回復する";
+				mes "―――――――――――――";
+				mes "[ライオットチップ]と";
+				mes "共に装備時、";
+				mes "[ライオットチップ]の";
+				mes "精錬値が2上がる度に追加で";
+				mes "MaxHP + 1%";
+				mes "―――――――――――――";
+				mes "Type-Zは同一の装備に";
+				mes "1つのみ利用可能";
+				continue;
+			case 37:
+				mes "[Z-NoDispell]";
+				mes "詠唱が中断されない";
+				mes "―――――――――――――";
+				mes "[ライオットチップ]と";
+				mes "共に装備時、";
+				mes "[ライオットチップ]の";
+				mes "精錬値が2上がる度に追加で";
+				mes "MaxHP + 1%";
+				mes "―――――――――――――";
+				mes "Type-Zは同一の装備に";
+				mes "1つのみ利用可能";
+				continue;
+			case 38:
+				mes "[Z-Clairvoyance]";
+				mes "[ハイディング]や";
+				mes "[クローキング]をしている";
+				mes "モンスターが見える";
+				mes "―――――――――――――";
+				mes "[ライオットチップ]と";
+				mes "共に装備時、";
+				mes "[ライオットチップ]の";
+				mes "精錬値が2上がる度に追加で";
+				mes "MaxHP + 1%";
+				mes "―――――――――――――";
+				mes "Type-Zは同一の装備に";
+				mes "1つのみ利用可能";
+				continue;
+			case 39:
+				mes "[Z-CastFixed]";
+				mes "固定詠唱時間 - 50%";
+				mes "―――――――――――――";
+				mes "[ライオットチップ]と";
+				mes "共に装備時、";
+				mes "[ライオットチップ]の";
+				mes "精錬値が2上がる度に追加で";
+				mes "MaxHP + 1%";
+				mes "―――――――――――――";
+				mes "Type-Zは同一の装備に";
+				mes "1つのみ利用可能";
+				continue;
+			case 40:
 				mes "[MARS_01]";
 				mes "終了します。";
 				mes "ご利用ありがとうございました。";
@@ -15348,6 +16299,533 @@ OnInit:
 	waitingroom "エンチャント",0; //59829
 	end;
 }
+verus04.gat,197,179,3	script	修理型チャールストン#Me	10053,{/* 59818 (hide)*/}
+verus04.gat,197,179,3	script	修理型チャールストン#Me	10053,{/* 61465 */
+	if(countitem(25785) < 1) {
+		cutin "dalle01",2;
+		mes "[修理型チャールストン]";
+		mes "どこで手に入るかはわかりませんが……";
+		next;
+		mes "[修理型チャールストン]";
+		mes "焦げた記憶媒体を入手したら";
+		mes "持ってきてください。";
+		mes "修理して^ff0000主記憶装置[1]^000000に";
+		mes "強化しますよ。";
+		close2;
+		cutin "dalle01",255;
+		end;
+	}
+	cutin "dalle01",2;
+	mes "[修理型チャールストン]";
+	mes "それは焦げた記憶媒体ですね。";
+	mes "もしよろしければ";
+	mes "修理して^ff0000主記憶装置[1]^000000に";
+	mes "強化しますよ。";
+	next;
+	mes "[修理型チャールストン]";
+	mes "私たちを作ったノウハウを";
+	mes "集約して完成させた";
+	mes "強化パーツです。";
+	mes "とてもよい品ですよ。";
+	while(1) {
+		next;
+		switch(select("修理する","主記憶装置[1]について聞く","やめる")) {
+		case 1:
+			break;
+		case 2:
+			mes "[修理型チャールストン]";
+			mes "^ff0000主記憶装置[1]^000000の詳細は";
+			mes "以下の通りです。";
+			next;
+			mes "[主記憶装置[1]]";
+			mes "Int + 3,Dex + 3";
+			mes "―――――――――――――";
+			mes "[ヴェスパーヘッドギア]と";
+			mes "共に装備時、追加で";
+			mes "詠唱時間 - 20%";
+			mes "―――――――――――――";
+			mes "^FF0000[主記憶装置]は";
+			mes "NPC売却・倉庫への移動のみ";
+			mes "可能です^000000";
+			mes "―――――――――――――";
+			mes "系列 : ^777777アクセサリー^000000";
+			mes "位置 : ^777777-^000000";
+			mes "属性 : ^777777-^000000 スロット : ^7777771^000000";
+			mes "Def : ^7777770^000000 Mdef : ^7777770^000000";
+			mes "精錬 : ^777777不可^000000 破損 : ^777777しない^000000";
+			mes "重量 : ^77777710^000000";
+			mes "要求レベル : ^777777100^000000";
+			mes "装備 : ^777777全ての職業^000000";
+			next;
+			mes "[修理型チャールストン]";
+			mes "この記憶装置に";
+			mes "特別なエンチャントを";
+			mes "施した状態で差し上げます。";
+			next;
+			mes "[修理型チャールストン]";
+			mes "エンチャントは";
+			mes "3段階選ぶ事が出来ます。";
+			mes "効果の普通な物から高い物まで";
+			mes "自分の好きなように選んでください。";
+			next;
+			mes "[修理型チャールストン]";
+			mes "しかし、良いエンチャントは";
+			mes "技術力が必要な為";
+			mes "良い効果であるほど";
+			mes "エンチャントの成功率が下がります。";
+			next;
+			mes "[修理型チャールストン]";
+			mes "より良い記憶装置が欲しければ";
+			mes "焦げた記憶媒体を沢山集めてくださいね。";
+			continue;
+		case 3:
+			mes "[修理型チャールストン]";
+			mes "ではまたお会いしましょう。";
+			close2;
+			cutin "dalle01",255;
+			end;
+		}
+		break;
+	}
+	mes "[修理型チャールストン]";
+	mes "第1エンチャント：未選択";
+	mes "第2エンチャント：未選択";
+	mes "第3エンチャント：未選択";
+	mes "　";
+	mes "まずは第1エンチャントを選んでください！";
+	next;
+	select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:大聖堂1:やっぱりやめる")
+	mes "[修理型チャールストン]";
+	mes "ではまたお会いしましょう。";
+	close2;
+	cutin "dalle01",255;
+	end;
+mes "[修理型チャールストン]";
+mes "第1エンチャント：未選択";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "まずは第1エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:大聖堂1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "次に第2エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:闘志2:先鋭2:鋭利2:魔力2:大司教2:名弓2:攻撃速度2:Mdef + 5:治癒1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：治癒1";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "最後に第3エンチャントを選んでください！";
+next;
+select("Atk1:Atk 2:Atk 3:Atk + 4%:Matk + 1%:Matk + 2%:Matk + 3%:Matk + 4%:何もつけない:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：治癒1";
+mes "第3エンチャント：Matk + 3%";
+mes "　";
+mes "これはそうですね……";
+mes "全てを駆使しても出来るかどうか……";
+next;
+mes "[修理型チャールストン]";
+mes "ではこの内容で修理しつつ強化します。";
+mes "準備はよろしいですか？";
+next;
+select("はい:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "ではまたお会いしましょう。";
+close;
+cutin "dalle01",255;
+cutin "dalle01",2;
+mes "[修理型チャールストン]";
+mes "それは焦げた記憶媒体ですね。";
+mes "もしよろしければ";
+mes "修理して^ff0000主記憶装置[1]^000000に";
+mes "強化しますよ。";
+next;
+mes "[修理型チャールストン]";
+mes "私たちを作ったノウハウを";
+mes "集約して完成させた";
+mes "強化パーツです。";
+mes "とてもよい品ですよ。";
+next;
+select("修理する:主記憶装置[1]について聞く:やめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：未選択";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "まずは第1エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:大聖堂1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "次に第2エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:闘志2:先鋭2:鋭利2:魔力2:大司教2:名弓2:攻撃速度2:Mdef + 5:治癒1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：治癒1";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "最後に第3エンチャントを選んでください！";
+next;
+select("Atk1:Atk 2:Atk 3:Atk + 4%:Matk + 1%:Matk + 2%:Matk + 3%:Matk + 4%:何もつけない:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：治癒1";
+mes "第3エンチャント：無し";
+mes "　";
+mes "これはそうですね……";
+mes "全てを駆使しても出来るかどうか……";
+next;
+mes "[修理型チャールストン]";
+mes "ではこの内容で修理しつつ強化します。";
+mes "準備はよろしいですか？";
+next;
+select("はい:やっぱりやめる")
+mes "ｴ";
+cutin "dalle01",255;
+cutin "dalle01",2;
+mes "[修理型チャールストン]";
+mes "それは焦げた記憶媒体ですね。";
+mes "もしよろしければ";
+mes "修理して^ff0000主記憶装置[1]^000000に";
+mes "強化しますよ。";
+next;
+mes "[修理型チャールストン]";
+mes "私たちを作ったノウハウを";
+mes "集約して完成させた";
+mes "強化パーツです。";
+mes "とてもよい品ですよ。";
+next;
+select("修理する:主記憶装置[1]について聞く:やめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：未選択";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "まずは第1エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:大聖堂1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "次に第2エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:闘志2:先鋭2:鋭利2:魔力2:大司教2:名弓2:攻撃速度2:Mdef + 5:治癒1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力1";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "最後に第3エンチャントを選んでください！";
+next;
+select("Atk1:Atk 2:Atk 3:Atk + 4%:Matk + 1%:Matk + 2%:Matk + 3%:Matk + 4%:何もつけない:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力1";
+mes "第3エンチャント：無し";
+mes "　";
+mes "これはそうですね……";
+mes "難易度はさほど高くないですね。";
+next;
+mes "[修理型チャールストン]";
+mes "ではこの内容で修理しつつ強化します。";
+mes "準備はよろしいですか？";
+next;
+select("はい:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "ではまたお会いしましょう。";
+close;
+cutin "dalle01",255;
+cutin "dalle01",2;
+mes "[修理型チャールストン]";
+mes "それは焦げた記憶媒体ですね。";
+mes "もしよろしければ";
+mes "修理して^ff0000主記憶装置[1]^000000に";
+mes "強化しますよ。";
+next;
+mes "[修理型チャールストン]";
+mes "私たちを作ったノウハウを";
+mes "集約して完成させた";
+mes "強化パーツです。";
+mes "とてもよい品ですよ。";
+next;
+select("修理する:主記憶装置[1]について聞く:やめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：未選択";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "まずは第1エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:大聖堂1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "次に第2エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:闘志2:先鋭2:鋭利2:魔力2:大司教2:名弓2:攻撃速度2:Mdef + 5:治癒1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力2";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "最後に第3エンチャントを選んでください！";
+next;
+select("Atk1:Atk 2:Atk 3:Atk + 4%:Matk + 1%:Matk + 2%:Matk + 3%:Matk + 4%:何もつけない:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力2";
+mes "第3エンチャント：無し";
+mes "　";
+mes "これはそうですね……";
+mes "難易度が気持ち高いですね。";
+next;
+mes "[修理型チャールストン]";
+mes "ではこの内容で修理しつつ強化します。";
+mes "準備はよろしいですか？";
+next;
+select("はい:やっぱりやめる")
+close;
+cutin "dalle01",2;
+mes "[修理型チャールストン]";
+mes "それは焦げた記憶媒体ですね。";
+mes "もしよろしければ";
+mes "修理して^ff0000主記憶装置[1]^000000に";
+mes "強化しますよ。";
+next;
+mes "[修理型チャールストン]";
+mes "私たちを作ったノウハウを";
+mes "集約して完成させた";
+mes "強化パーツです。";
+mes "とてもよい品ですよ。";
+next;
+select("修理する:主記憶装置[1]について聞く:やめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：未選択";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "まずは第1エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:大聖堂1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "次に第2エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:闘志2:先鋭2:鋭利2:魔力2:大司教2:名弓2:攻撃速度2:Mdef + 5:治癒1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力2";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "最後に第3エンチャントを選んでください！";
+next;
+select("Atk1:Atk 2:Atk 3:Atk + 4%:Matk + 1%:Matk + 2%:Matk + 3%:Matk + 4%:何もつけない:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力2";
+mes "第3エンチャント：Atk + 4%";
+mes "　";
+mes "これはそうですね……";
+mes "難易度の高さに困惑しています！";
+next;
+mes "[修理型チャールストン]";
+mes "ではこの内容で修理しつつ強化します。";
+mes "準備はよろしいですか？";
+next;
+select("はい:やっぱりやめる")
+close;
+cutin "dalle01",2;
+mes "[修理型チャールストン]";
+mes "それは焦げた記憶媒体ですね。";
+mes "もしよろしければ";
+mes "修理して^ff0000主記憶装置[1]^000000に";
+mes "強化しますよ。";
+next;
+mes "[修理型チャールストン]";
+mes "私たちを作ったノウハウを";
+mes "集約して完成させた";
+mes "強化パーツです。";
+mes "とてもよい品ですよ。";
+next;
+select("修理する:主記憶装置[1]について聞く:やめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：未選択";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "まずは第1エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:大聖堂1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "次に第2エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:闘志2:先鋭2:鋭利2:魔力2:大司教2:名弓2:攻撃速度2:Mdef + 5:治癒1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力1";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "最後に第3エンチャントを選んでください！";
+next;
+select("Atk1:Atk 2:Atk 3:Atk + 4%:Matk + 1%:Matk + 2%:Matk + 3%:Matk + 4%:何もつけない:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力1";
+mes "第3エンチャント：Matk + 4%";
+mes "　";
+mes "これはそうですね……";
+mes "難易度の高さに困惑しています！";
+next;
+mes "[修理型チャールストン]";
+mes "ではこの内容で修理しつつ強化します。";
+mes "準備はよろしいですか？";
+next;
+select("はい:やっぱりやめる")
+close;
+cutin "dalle01",2;
+mes "[修理型チャールストン]";
+mes "それは焦げた記憶媒体ですね。";
+mes "もしよろしければ";
+mes "修理して^ff0000主記憶装置[1]^000000に";
+mes "強化しますよ。";
+next;
+mes "[修理型チャールストン]";
+mes "私たちを作ったノウハウを";
+mes "集約して完成させた";
+mes "強化パーツです。";
+mes "とてもよい品ですよ。";
+next;
+select("修理する:主記憶装置[1]について聞く:やめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：未選択";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "まずは第1エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:大聖堂1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "次に第2エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:闘志2:先鋭2:鋭利2:魔力2:大司教2:名弓2:攻撃速度2:Mdef + 5:治癒1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力2";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "最後に第3エンチャントを選んでください！";
+next;
+select("Atk1:Atk 2:Atk 3:Atk + 4%:Matk + 1%:Matk + 2%:Matk + 3%:Matk + 4%:何もつけない:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力2";
+mes "第3エンチャント：Matk + 4%";
+mes "　";
+mes "これはそうですね……";
+mes "難易度の高さに困惑しています！";
+next;
+mes "[修理型チャールストン]";
+mes "ではこの内容で修理しつつ強化します。";
+mes "準備はよろしいですか？";
+next;
+select("はい:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "これ以上アイテムを";
+mes "持てないようです。";
+mes "アイテムの種類数を";
+mes "減らしてきてください。";
+close;
+cutin "dalle01",255;
+delitem 7034,1;
+cutin "dalle01",2;
+mes "[修理型チャールストン]";
+mes "それは焦げた記憶媒体ですね。";
+mes "もしよろしければ";
+mes "修理して^ff0000主記憶装置[1]^000000に";
+mes "強化しますよ。";
+next;
+mes "[修理型チャールストン]";
+mes "私たちを作ったノウハウを";
+mes "集約して完成させた";
+mes "強化パーツです。";
+mes "とてもよい品ですよ。";
+next;
+select("修理する:主記憶装置[1]について聞く:やめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：未選択";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "まずは第1エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:大聖堂1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：未選択";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "次に第2エンチャントを選んでください！";
+next;
+select("闘志1:先鋭1:鋭利1:魔力1:大司教1:名弓1:攻撃速度1:Mdef + 3:闘志2:先鋭2:鋭利2:魔力2:大司教2:名弓2:攻撃速度2:Mdef + 5:治癒1:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力2";
+mes "第3エンチャント：未選択";
+mes "　";
+mes "最後に第3エンチャントを選んでください！";
+next;
+select("Atk1:Atk 2:Atk 3:Atk + 4%:Matk + 1%:Matk + 2%:Matk + 3%:Matk + 4%:何もつけない:やっぱりやめる")
+mes "[修理型チャールストン]";
+mes "第1エンチャント：魔力1";
+mes "第2エンチャント：魔力2";
+mes "第3エンチャント：Matk + 4%";
+mes "　";
+mes "これはそうですね……";
+mes "難易度の高さに困惑しています！";
+next;
+mes "[修理型チャールストン]";
+mes "ではこの内容で修理しつつ強化します。";
+mes "準備はよろしいですか？";
+next;
+select("はい:やっぱりやめる")
+delitem 25785,1;
+misceffect 170,""; //self
+mes "[修理型チャールストン]";
+mes "失敗しました……";
+mes "申し訳ありませんでした。";
+mes "くじけず手に入れたらまた";
+mes "いらしてください。";
+close;
+cutin "dalle01",255;
+}
+
 verus04.gat,133,237,3	script	クラフト#New_Cart	851,{/* 59581 */
 	mes "[クラフト]";
 	mes "カンカンカーン。";
@@ -15361,7 +16839,7 @@ verus04.gat,133,237,3	script	クラフト#New_Cart	851,{/* 59581 */
 	mes "　進行可能なクエストです‐";
 	close;
 OnInit:
-	waitingroom "カートデコレーション", 0; //59581
+	waitingroom "カートデコレーション",0; //59581
 	end;
 }
 verus04.gat,149,231,4	script	ウェルス研究員#dayhunt	402,{/* 59582 */
@@ -15419,7 +16897,7 @@ verus04.gat,149,231,4	script	ウェルス研究員#dayhunt	402,{/* 59582 */
 		mes "それと、手伝ってくれる時には";
 		mes "私に声をかけてくれ。";
 		mes "よろしく頼むぞ。";
-		setquest 118451; //state=1
+		setquest 118451;
 		compquest 118451;
 		close;
 	}
@@ -15530,7 +17008,7 @@ verus04.gat,149,231,4	script	ウェルス研究員#dayhunt	402,{/* 59582 */
 		mes "[ウェルス研究員]";
 		mes "おお！　受けてくれるか！";
 		mes "よろしく頼むぞ。";
-		setquest 96445; //state=1
+		setquest 96445;
 		close;
 	case 2:
 		if(checkquest(96447)) {
@@ -15602,7 +17080,7 @@ verus04.gat,149,231,4	script	ウェルス研究員#dayhunt	402,{/* 59582 */
 		mes "[ウェルス研究員]";
 		mes "おお！　受けてくれるか！";
 		mes "よろしく頼むぞ。";
-		setquest 96447; //state=1
+		setquest 96447;
 		close;
 	case 3:
 		if(checkquest(96449)) {
@@ -15674,23 +17152,757 @@ verus04.gat,149,231,4	script	ウェルス研究員#dayhunt	402,{/* 59582 */
 		mes "[ウェルス研究員]";
 		mes "おお！　受けてくれるか！";
 		mes "よろしく頼むぞ。";
-		setquest 96449; //state=1
+		setquest 96449;
 		close;
 	}
 OnInit:
-	waitingroom "討伐クエスト", 0; //59582
+	waitingroom "討伐クエスト",0; //59582
 	end;
 }
 
+//====================================================================
+// 2日目　明日を生きるための調査
+//====================================================================
+/* レコード2日目 -> un_bk_q 98 143 */
+un_bk_q.gat,103,147,4	script	ヴァノクサイヒュ#EP15.2	750,{/* 61061 */
+	switch(VER_6QUE) {
+	case 0:
+		emotion 46, "ヴァノクサイヒュ#EP15.2"; //61061
+		mes "[ヴァノクサイヒュ]";
+		mes "ふうう……。";
+		mes "思い出すだけでもぞっとする。";
+		mes "このシェルターに入れて";
+		mes "本当に良かった……。";
+		next;
+		mes "[ヴァノクサイヒュ]";
+		mes "もし、あの瞬間、";
+		mes "外だったら……";
+		next;
+		mes "[ヴァノクサイヒュ]";
+		mes "…………。";
+		next;
+		mes "[ヴァノクサイヒュ]";
+		mes "君と私は運が良かった。";
+		mes "そう思わないかい？";
+		next;
+		menu "そうだと思う",-;
+		emotion 28, "ヴァノクサイヒュ#EP15.2"; //61061
+		mes "[ヴァノクサイヒュ]";
+		mes "今日を生きる事ができるのを";
+		mes "感謝しないと、ね。";
+		mes "しかし……みんなは";
+		mes "起きた爆発の責任を、一人に";
+		mes "負わせようとしているみたいなんだ。";
+		next;
+		mes "[ヴァノクサイヒュ]";
+		mes "爆発がまるでロゼ、";
+		mes "彼女の責任だと言うように";
+		mes "責め立てているんだ。";
+		next;
+		menu "ロゼ？",-;
+		emotion 1,""; //self
+		mes "[ヴァノクサイヒュ]";
+		mes "彼女、ロゼ・ベリーニは";
+		mes "この爆発を起こした実験の";
+		mes "指揮を執っていた人なんだ。";
+		next;
+		mes "[ヴァノクサイヒュ]";
+		mes "確かに実験は失敗してしまったけど、";
+		mes "彼女だけの責任じゃないと思うんだ。";
+		mes "それに、この慌ただしい状況で";
+		mes "生存者の人数を把握しようとしている。";
+		next;
+		mes "[ヴァノクサイヒュ]";
+		mes "この状況を少しでもなんとかしようと、";
+		mes "必死に考えてくれているんだろう。";
+		mes "私だったら、";
+		mes "どうすればいいのか分からなくなって";
+		mes "途方に暮れているだろうね。";
+		mes "彼女はすごいよ。";
+		next;
+		mes "[ヴァノクサイヒュ]";
+		mes "どうしよう、";
+		mes "私なんかでも協力できることはあるかな。";
+		mes "声をかけてみようと思うんだけど、";
+		mes "君も一緒に彼女を手伝わないかい？";
+		next;
+		menu "手伝う",-;
+		emotion 15, "ヴァノクサイヒュ#EP15.2"; //61061
+		mes "[ヴァノクサイヒュ]";
+		mes "本当？　よかった！";
+		mes "ひとりで協力しに行くのは";
+		mes "なんだか怖くって。";
+		next;
+		mes "[ヴァノクサイヒュ]";
+		mes "この部屋の中央に";
+		mes "冷たい感じをプンプン匂わせている";
+		mes "研究員がいるよね？";
+		next;
+		mes "[ヴァノクサイヒュ]";
+		mes "彼女が実験の総責任者である";
+		mes "ロゼ・ベリーニさんだ。";
+		mes "みんなはドクターベリーニと呼んでいる。";
+		next;
+		setquest 5341; //state=1
+		setquest 5342; //state=1
+		set VER_6QUE,1;
+		mes "[ヴァノクサイヒュ]";
+		mes "彼女のところに行って、";
+		mes "何か協力する事はないか";
+		mes "聞いてみてくれるかい？";
+		close;
+	case 1://
+	case 2:
+	case 3:
+		mes "[ヴァノクサイヒュ]";
+		mes "私は料理ができる人間が何人いるのか";
+		mes "調べほしいという頼みを受けたよ。";
+		next;
+		mes "[ヴァノクサイヒュ]";
+		mes "シェルター内部は道も複雑で広いから";
+		mes "大変だけど、頑張らないとね！";
+		close;
+	}
+}
+un_bk_q.gat,93,168,4	script	ドクターベリーニ#EP15.2	10078,{/* 61062 */
+	switch(VER_6QUE) {
+	case 0://
+	case 1:
+		emotion 17, "ドクターベリーニ#EP15.2"; //61062
+		mes "[ロゼ・ベリーニ]";
+		mes "すみません。今は忙しいので、";
+		mes "話があるのでしたら";
+		mes "後にしてもらえますか？";
+		next;
+		menu "お手伝いします",-;
+		emotion 0, "ドクターベリーニ#EP15.2"; //61062
+		mes "[ロゼ・ベリーニ]";
+		mes "えっ？";
+		mes "手伝っていただけるのですか？";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "ありがとうございます。";
+		mes "皆、パニックで右往左往しているので";
+		mes "人手がなく困っていたのです。";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "こんな状況で、";
+		mes "まともに動ける人間は";
+		mes "少ないですからね……。";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "ぜひ、協力をお願いします。";
+		mes "実を言うとちょうど";
+		mes "困っていた問題もあったので、";
+		mes "本当にたすかります。";
+		next;
+		menu "困っていた問題？",-;
+		emotion 1,""; //self
+		mes "[ロゼ・ベリーニ]";
+		mes "今、生存者の人数を把握するために";
+		mes "聞き込み調査を行っています。";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "冒険者や町の住民の方たちの人数は";
+		mes "ある程度把握できたのですが、";
+		mes "ここで働いていた職員達の";
+		mes "人数把握がまだ終わっていません。";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "恐らく、各自が属しているチームの";
+		mes "非常事態マニュアルに沿って";
+		mes "動いているはずで、あちこちに";
+		mes "散らばっているのでしょう。";
+		next;
+		emotion 20, "ドクターベリーニ#EP15.2"; //61062
+		mes "[ロゼ・ベリーニ]";
+		mes "いったい職員たちはどこにいるのか……。";
+		mes "シェルター内部を";
+		mes "隅々まで探さないといけないのですが、";
+		mes "あいにく私は";
+		mes "ここを離れることができません。";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "それでなんですけど、";
+		mes "あなたにその人数把握を";
+		mes "お願いしたいのです。";
+		next;
+		menu "わかりました",-;
+		set VER_6QUE,2;
+		setquest 5346; //state=1
+		mes "[ロゼ・ベリーニ]";
+		mes "ありがとうございます。";
+		mes "それでは……";
+		mes "^FF0000科学者^000000が何人いるのか、";
+		mes "確認して来てほしいです。";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "あちこちで作業をしている職員に";
+		mes "聞き込みをしてきてください。";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "シェルター内は道も複雑で広いので";
+		mes "大変だと思いますが、";
+		mes "よろしくお願いします。";
+		close;
+	case 2:
+	case 3:
+		emotion 0, "ドクターベリーニ#EP15.2"; //61062
+		mes "[ロゼ・ベリーニ]";
+		mes "おや、あなたでしたか。";
+		mes "もう人数の把握ができたのですか？";
+		mes "早かったですね！";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "ええと、お願いしていたのは……";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "^FF0000科学者^000000の人数把握でしたね。";
+		mes "それで、何人いましたか？";
+		next;
+		input '@num;
+		if(VER_6QUE != 3 && '@num != 10) {
+			mes "[ロゼ・ベリーニ]";
+			mes '@num+ "名ですか？";
+			next;
+			emotion 20, "ドクターベリーニ#EP15.2"; //61062
+			mes "[ロゼ・ベリーニ]";
+			mes "おかしいですね。";
+			mes "従業員リストに記載されている人数と";
+			mes "大きく離れているようですが……。";
+			next;
+			mes "[ロゼ・ベリーニ]";
+			mes "すみません、";
+			mes "もう一度確認してきてもらえますか？";
+			close;
+		}
+		mes "[ロゼ・ベリーニ]";
+		mes "なるほど……わかりました。";
+		mes "リストの人員と大体同じくらいですね。";
+		mes "ありがとうございます。";
+		next;
+		mes "[ロゼ・ベリーニ]";
+		mes "ご苦労様でした。";
+		mes "息苦しいと思いますが、";
+		mes "外の状況が安定するまで";
+		mes "シェルター内で生活してください。";
+		close2;
+		delquest 5342;
+		delquest 5346;
+		delquest 5350;
+		setquest 5370; //state=1
+		getitem 6961, 3;
+		warp "un_bunker.gat",97,91;
+		end;
+	}
+}
+un_bk_q.gat,213,303,4	script	生命工学者ツアーリン#EP	98,{/* 61063 */
+	mes "[生命工学者ツアーリン]";
+	mes "私たち生命工学者は";
+	mes "シェルター内部の人たちのために";
+	mes "食料生産に総力を注いでいます。";
+	close;
+}
+un_bk_q.gat,82,323,2	script	機械工学者アール#EP15.2	851,{/* 61064 */
+	mes "[機械工学者アール]";
+	mes "この人数で";
+	mes "シェルター内全ての設備を";
+	mes "点検するのは大変だけど頑張るよ。";
+	close;
+}
+un_bk_q.gat,347,217,4	script	設備担当者リモデリング#	855,{/* 61065 */
+	mes "[設備担当者リモデリング]";
+	mes "このシェルター……。";
+	mes "誰が作ったかは知らないけど、";
+	mes "本当に頑丈に作ってありますね。";
+	close;
+}
+un_bk_q.gat,86,121,4	script	科学者カールステン#EP15	749,{/* 61066 */
+	switch(VER_6QUE) {
+	case 0://
+	case 1://
+	case 2:
+		emotion 1, "科学者カールステン#EP15"; //61066
+		mes "[科学者カールステン]";
+		mes "おや、こんな所に……。";
+		mes "どなたですか？";
+		next;
+		menu "私は……",-;
+		emotion 0, "科学者カールステン#EP15"; //61066
+		mes "[科学者カールステン]";
+		mes "あ～！　ベリーニさん？";
+		mes "全体会議の時に何度か";
+		mes "お会いした事があります。";
+		next;
+		mes "[科学者カールステン]";
+		mes "私の記憶が間違いなければ、";
+		mes "たしか今回失敗した研究の";
+		mes "総責任者でしたよね？";
+		next;
+		mes "[科学者カールステン]";
+		mes "やはり総責任者は";
+		mes "誰でもいいわけではなさそうですね。";
+		mes "この慌ただしい状況で";
+		mes "人員チェックとはさすがだ。";
+		next;
+		emotion 19, "科学者カールステン#EP15"; //61066
+		mes "[科学者カールステン]";
+		mes "待って下さい、";
+		mes "先ほど人数をチェックして";
+		mes "どこかに書いておいたんですが……。";
+		next;
+		mes "[科学者カールステン]";
+		mes "えっと……この数字だったかな？";
+		mes "違うな。こっちの数字だったかな？";
+		mes "あ！　この数字だな！";
+		next;
+		setquest 5350; //state=1
+		set VER_6QUE,3;
+		mes "[科学者カールステン]";
+		mes "科学者は私を含めて、";
+		mes "総人員^FF000010名^000000です。";
+		mes "……気の毒に、結構減りましたね。";
+		next;
+		mes "[科学者カールステン]";
+		mes "あ！　戻ったらベリーニさんに";
+		mes "私たちは、非常マニュアルに従って";
+		mes "シェルター内部に危険物質が無いか";
+		mes "検査中だと伝えて下さい。";
+		next;
+		mes "[科学者カールステン]";
+		mes "こんな非常事態だ、";
+		mes "自分にできることは";
+		mes "どんどんやらないと。";
+		close;
+	case 3:
+		mes "[科学者カールステン]";
+		mes "科学者は私を含めて、";
+		mes "総人員^FF000010名^000000です。";
+		next;
+		mes "[科学者カールステン]";
+		mes "戻ったらベリーニさんに";
+		mes "私たちは、非常マニュアルに従って";
+		mes "シェルター内部に危険物質が無いか";
+		mes "検査中だと伝えて下さい。";
+		close;
+	}
+}
+un_bk_q.gat,56,286,4	script	機械工学者ムガシー#EP15	851,{/* 61067 */
+	mes "[機械工学者ムガシー]";
+	mes "冒険者か？　ここは機械倉庫だ。";
+	next;
+	mes "[機械工学者ムガシー]";
+	mes "元は倉庫だったけど、";
+	mes "今は同僚の機械工学者たちが";
+	mes "シェルターに必要な機械を";
+	mes "作成しているんだ。";
+	next;
+	emotion 6, "機械工学者ムガシー#EP15"; //61067
+	mes "[機械工学者ムガシー]";
+	mes "機械工学者たちの総人員が知りたい？";
+	mes "悪いが私は分からない。";
+	next;
+	mes "[機械工学者ムガシー]";
+	mes "そうだな……あの上にいる";
+	mes "アールさんなら";
+	mes "知っているかも知れないな。";
+	mes "聞いてみるといい。";
+	close;
+}
+un_bk_q.gat,212,294,6	script	C-0区域設備担当者#EP15.	854,{/* 61068 */
+	mes "[設備担当者]";
+	mes "非常事態マニュアルに従って";
+	mes "シェルター内部の施設を点検中だ。";
+	close;
+}
+un_bk_q.gat,223,217,4	script	F-1区域設備担当者#EP15.	854,{/* 61069 */
+	mes "[設備担当者]";
+	mes "非常事態マニュアルに従って";
+	mes "シェルター内部の施設を点検中です。";
+	close;
+}
+un_bk_q.gat,372,217,6	script	F-2区域設備担当者#EP15.	854,{/* 61070 */
+	mes "[設備担当者]";
+	mes "非常事態マニュアルに従って";
+	mes "シェルター内部の施設を点検中です。";
+	close;
+}
+un_bk_q.gat,389,276,6	script	I-0区域設備担当者#EP15.	854,{/* 61071 */
+	mes "[設備担当者]";
+	mes "非常事態マニュアルに従って";
+	mes "シェルター内部の施設を点検中だよ。";
+	close;
+}
+un_bk_q.gat,291,158,4	script	Z-0区域設備担当者#EP15.	854,{/* 61072 */
+	mes "[設備担当者]";
+	mes "非常事態マニュアルに従って";
+	mes "シェルター内部の施設を点検中だ。";
+	close;
+}
+////////////////////////////////////////////////////////////////////////
+un_bk_q.gat,279,294,4	script	運送責任者エルノン#EP15	869,{/* 61088 */
+	mes "[運送責任者エルノン]";
+	mes "事故の前は";
+	mes "ここに生活品や研究道具などを";
+	mes "納品する仕事をしていた。";
+	next;
+	mes "[運送責任者エルノン]";
+	mes "ここの職員ではあるけど、";
+	mes "ここより他の場所に";
+	mes "行っている事が多い。そんな仕事だ。";
+	close;
+}
+un_bk_q.gat,72,53,4	script	物流担当者アブランティ#	778,{/* 61089 */
+	emotion 54, "物流担当者アブランティ#"; //61089
+	mes "[物流担当者アブランティ]";
+	mes "シェルター内に避難できて";
+	mes "なんとか助かりました。";
+	next;
+	mes "[物流担当者アブランティ]";
+	mes "もし少しでも遅れていたら……。";
+	mes "今ここにこうして";
+	mes "立っていられなかったでしょう。";
+	close;
+}
+un_bk_q.gat,22,279,4	script	機械倉庫	858,{/* 61090 */}
+un_bk_q.gat,22,259,4	script	L-1区域#J0	858,{/* 61091 */}
+un_bk_q.gat,25,193,4	script	J-0区域#L1	858,{/* 61092 */}
+un_bk_q.gat,58,185,4	script	管制室#左側	858,{/* 61093 */}
+un_bk_q.gat,58,171,4	script	モニタールーム#L1左側	858,{/* 61094 */}
+un_bk_q.gat,49,137,4	script	B-1倉庫	858,{/* 61095 */}
+un_bk_q.gat,58,121,4	script	A-0区域#L1	858,{/* 61096 */}
+un_bk_q.gat,71,121,4	script	L-1区域#A0	858,{/* 61097 */}
+un_bk_q.gat,78,125,4	script	H-0区域#左	858,{/* 61098 */}
+un_bk_q.gat,101,122,4	script	モニタールーム#A0中央	858,{/* 61099 */}
+un_bk_q.gat,122,125,4	script	H-0区域#右	858,{/* 61100 */}
+un_bk_q.gat,126,121,4	script	L-2区域#A0	858,{/* 61101 */}
+un_bk_q.gat,141,115,4	script	A-0区域#L2	858,{/* 61102 */}
+un_bk_q.gat,139,171,4	script	モニタールーム#L2右側	858,{/* 61103 */}
+un_bk_q.gat,139,187,4	script	管制室#右側	858,{/* 61104 */}
+un_bk_q.gat,173,193,4	script	K-0区域#L2	858,{/* 61105 */}
+un_bk_q.gat,171,233,4	script	L-2区域#K0	858,{/* 61106 */}
+un_bk_q.gat,278,193,4	script	A-0区域#H0左	858,{/* 61107 */}
+un_bk_q.gat,300,194,4	script	Z-0区域#H0	858,{/* 61108 */}
+un_bk_q.gat,301,204,4	script	臨時治療所#H0	858,{/* 61109 */}
+un_bk_q.gat,317,193,4	script	A-0区域#H0右	858,{/* 61110 */}
+un_bk_q.gat,322,203,4	script	G-2区域#H0	858,{/* 61111 */}
+un_bk_q.gat,340,203,4	script	H-0区域#H0	858,{/* 61112 */}
+un_bk_q.gat,349,217,4	script	F-2区域#G2	858,{/* 61113 */}
+un_bk_q.gat,339,239,4	script	臨時治療所#G2	858,{/* 61114 */}
+un_bk_q.gat,368,267,4	script	I-0区域#G2	858,{/* 61115 */}
+un_bk_q.gat,388,266,4	script	G-2区域#I0	858,{/* 61116 */}
+un_bk_q.gat,273,203,4	script	G-1区域#H0	858,{/* 61117 */}
+un_bk_q.gat,260,203,4	script	H-0区域#G1	858,{/* 61118 */}
+un_bk_q.gat,247,217,4	script	F-1区域#G1	858,{/* 61119 */}
+un_bk_q.gat,228,217,4	script	G-1区域#F1	858,{/* 61120 */}
+un_bk_q.gat,256,239,4	script	臨時治療所#G1	858,{/* 61121 */}
+un_bk_q.gat,219,265,4	script	C-0区域#G1	858,{/* 61122 */}
+un_bk_q.gat,214,283,4	script	G-1区域#C0	858,{/* 61123 */}
+un_bk_q.gat,215,303,4	script	農場#C0	858,{/* 61124 */}
+un_bk_q.gat,300,184,4	script	H-0区域#Z0	858,{/* 61125 */}
+un_bk_q.gat,365,167,4	script	Z-2区域#Z0	858,{/* 61126 */}
+un_bk_q.gat,27,55,4		script	Z-0区域#Z2	858,{/* 61127 */}
+un_bk_q.gat,230,167,4	script	Z-1区域#Z0	858,{/* 61128 */}
+un_bk_q.gat,164,55,4	script	Z-0区域#Z1	858,{/* 61129 */}
+un_bk_q.gat,255,264,4	script	食堂#G1	858,{/* 61130 */}
+un_bk_q.gat,339,263,4	script	食堂#G2	858,{/* 61131 */}
+un_bk_q.gat,41,275,0	warp	機械倉庫#J-0	2,2,un_bk_q.gat,21,276 //61132 from_pos=(42, 275)
+un_bk_q.gat,24,276,0	warp	J-0#機械倉庫	2,2,un_bk_q.gat,45,275 //61133 from_pos=(23, 277)
+un_bk_q.gat,24,256,0	warp	J-0#L-1	2,2,un_bk_q.gat,26,190 //61134 from_pos=(24, 257)
+un_bk_q.gat,23,190,0	warp	L-1#J-0	2,2,un_bk_q.gat,21,256 //61135 from_pos=(23, 190)
+un_bk_q.gat,31,196,0	warp	L-1#D-1	2,2,un_bk_q.gat,22,378 //61136 from_pos=(31, 196)
+un_bk_q.gat,21,375,0	warp	D-1#L-1	2,2,un_bk_q.gat,32,193 //61137 from_pos=(21, 374)
+un_bk_q.gat,51,196,0	warp	L-1#D-2	2,2,un_bk_q.gat,68,378 //61138 from_pos=(51, 195)
+un_bk_q.gat,67,375,0	warp	D-2#L-1	2,2,un_bk_q.gat,52,193 //61139 from_pos=(67, 375)
+un_bk_q.gat,60,183,0	warp	L-1#管制室	2,2,un_bk_q.gat,75,235 //61140 from_pos=(60, 183)
+un_bk_q.gat,71,236,0	warp	管制室#L-1	2,2,un_bk_q.gat,57,182 //61141 from_pos=(72, 236)
+un_bk_q.gat,60,169,0	warp	L-1#モニター室	2,2,un_bk_q.gat,72,168 //61142 from_pos=(60, 169)
+un_bk_q.gat,69,167,0	warp	モニター室#L-1	2,2,un_bk_q.gat,57,168 //61143 from_pos=(69, 167)
+un_bk_q.gat,47,135,0	warp	L-1#B-1	2,2,un_bk_q.gat,37,134 //61144 from_pos=(47, 136)
+un_bk_q.gat,40,135,0	warp	B-1#L-1	2,2,un_bk_q.gat,50,134 //61145 from_pos=(40, 135)
+un_bk_q.gat,57,118,0	warp	L-1#A-0	2,2,un_bk_q.gat,72,117 //61146 from_pos=(58, 118)
+un_bk_q.gat,69,118,0	warp	A-0#L-1	2,2,un_bk_q.gat,53,117 //61147 from_pos=(70, 118)
+un_bk_q.gat,97,124,0	warp	A-0#モニター室	2,2,un_bk_q.gat,100,144 //61148 from_pos=(97, 124)
+un_bk_q.gat,97,141,0	warp	モニター室#A-0	2,2,un_bk_q.gat,98,121 //61149 from_pos=(98, 141)
+un_bk_q.gat,128,118,0	warp	A-0#L-2	2,2,un_bk_q.gat,144,117 //61150 from_pos=(127, 118)
+un_bk_q.gat,140,118,0	warp	L-2#A-0	2,2,un_bk_q.gat,125,117 //61151 from_pos=(141, 118)
+un_bk_q.gat,137,168,0	warp	L-2#モニター室	2,2,un_bk_q.gat,122,167 //61152 from_pos=(137, 168)
+un_bk_q.gat,126,168,0	warp	モニター室#L-2	2,2,un_bk_q.gat,140,167 //61153 from_pos=(126, 168)
+un_bk_q.gat,137,185,0	warp	L-2#管制室	2,2,un_bk_q.gat,120,235 //61154 from_pos=(137, 185)
+un_bk_q.gat,124,236,0	warp	管制室#L-2	2,2,un_bk_q.gat,140,184 //61155 from_pos=(124, 236)
+un_bk_q.gat,147,196,0	warp	L-2#E-1	2,2,un_bk_q.gat,106,378 //61156 from_pos=(147, 196)
+un_bk_q.gat,105,375,0	warp	E-1#L-2	2,2,un_bk_q.gat,148,193 //61157 from_pos=(105, 375)
+un_bk_q.gat,167,196,0	warp	L-2#E-2	2,2,un_bk_q.gat,152,378 //61158 from_pos=(168, 196)
+un_bk_q.gat,151,375,0	warp	E-2#L-2	2,2,un_bk_q.gat,168,193 //61159 from_pos=(150, 375)
+un_bk_q.gat,174,190,0	warp	L-2#K-0	2,2,un_bk_q.gat,172,229 //61160 from_pos=(175, 190)
+un_bk_q.gat,169,230,0	warp	K-0#L-2	2,2,un_bk_q.gat,171,189 //61161 from_pos=(170, 230)
+////////////////////////////////////////////////////////////////////////
+un_bk_q.gat,216,300,0	script	C-0#農場	45,1,1,{/* 61163 */
+	mes "[生命工学者ツアーリン]";
+	mes "すみません。";
+	mes "今は農場に入る事はできません。";
+	close;
+}
+un_bk_q.gat,216,280,0	warp	C-0#G-1	2,2,un_bk_q.gat,220,261 //61164 from_pos=(216, 281)
+un_bk_q.gat,217,262,0	warp	G-1#C-0	2,2,un_bk_q.gat,213,279 //61165 from_pos=(217, 262)
+un_bk_q.gat,249,268,0	warp	G-1#M-0	2,2,un_bk_q.gat,390,380 //61166 from_pos=(250, 268)
+un_bk_q.gat,389,377,0	warp	M-0#G-1	2,2,un_bk_q.gat,250,265 //61167 from_pos=(389, 377)
+un_bk_q.gat,258,262,0	warp	G-1#食堂	2,2,un_bk_q.gat,274,289 //61168 from_pos=(258, 260)
+un_bk_q.gat,271,290,0	warp	食堂#G-1	2,2,un_bk_q.gat,255,261 //61169 from_pos=(270, 291)
+un_bk_q.gat,269,236,0	script	治療所#G-1	45,{/* 61170 */}
+un_bk_q.gat,245,214,0	warp	G-1#F-1	2,2,un_bk_q.gat,226,213 //61171 from_pos=(245, 214)
+un_bk_q.gat,230,214,0	warp	F-1#G-1	2,2,un_bk_q.gat,248,213 //61172 from_pos=(230, 214)
+un_bk_q.gat,262,200,0	warp	G-1#H-0	2,2,un_bk_q.gat,274,199 //61173 from_pos=(261, 200)
+un_bk_q.gat,271,200,0	warp	H-0#G-1	2,2,un_bk_q.gat,258,199 //61174 from_pos=(271, 200)
+un_bk_q.gat,75,128,0	warp	左A-0#左H-0	2,2,un_bk_q.gat,276,196 //61175 from_pos=(75, 128)
+un_bk_q.gat,275,191,0	warp	左H-0#左A-0	2,2,un_bk_q.gat,76,121 //61176 from_pos=(275, 191)
+un_bk_q.gat,119,128,0	warp	右A-0#右H-0	2,2,un_bk_q.gat,319,196 //61177 from_pos=(119, 127)
+un_bk_q.gat,320,191,0	warp	右H-0#右A-0	2,2,un_bk_q.gat,120,121 //61178 from_pos=(319, 192)
+un_bk_q.gat,324,200,0	warp	H-0#G-2	2,2,un_bk_q.gat,344,199 //61179 from_pos=(324, 200)
+un_bk_q.gat,339,200,0	warp	G-2#H-0	2,2,un_bk_q.gat,321,199 //61180 from_pos=(338, 200)
+un_bk_q.gat,350,214,0	warp	G-2#F-2	2,2,un_bk_q.gat,368,213 //61181 from_pos=(350, 214)
+un_bk_q.gat,365,214,0	warp	F-2#G-2	2,2,un_bk_q.gat,347,213 //61182 from_pos=(365, 214)
+un_bk_q.gat,324,290,0	warp	食堂#G-2	2,2,un_bk_q.gat,340,261 //61183 from_pos=(324, 290)
+un_bk_q.gat,337,262,0	warp	G-2#食堂	2,2,un_bk_q.gat,321,289 //61184 from_pos=(337, 261)
+un_bk_q.gat,343,270,0	warp	G-2#N-0	2,2,un_bk_q.gat,382,328 //61185 from_pos=(343, 271)
+un_bk_q.gat,381,325,0	warp	N-0#G-2	2,2,un_bk_q.gat,344,267 //61186 from_pos=(381, 324)
+un_bk_q.gat,370,264,0	warp	G-2#I-0	2,2,un_bk_q.gat,388,263 //61187 from_pos=(370, 264)
+un_bk_q.gat,385,264,0	warp	I-0#G-2	2,2,un_bk_q.gat,367,263 //61188 from_pos=(386, 264)
+un_bk_q.gat,297,192,0	warp	H-0#Z-0	2,2,un_bk_q.gat,298,181 //61189 from_pos=(297, 193)
+un_bk_q.gat,297,186,0	warp	Z-0#H-0	2,2,un_bk_q.gat,298,196 //61190 from_pos=(297, 186)
+un_bk_q.gat,229,163,0	warp	Z-0#Z-1	2,2,un_bk_q.gat,159,52 //61191 from_pos=(228, 163)
+un_bk_q.gat,164,51,0	warp	Z-1#Z-0	2,2,un_bk_q.gat,233,164 //61192 from_pos=(164, 51)
+un_bk_q.gat,366,164,0	warp	Z-0#Z-2	2,2,un_bk_q.gat,31,51 //61193 from_pos=(367, 164)
+un_bk_q.gat,27,52,0	warp	Z-2#Z-0	2,2,un_bk_q.gat,361,163 //61194 from_pos=(27, 52)
+////////////////////////////////////////////////////////////////////////
+un_bk_q.gat,100,312,6	script	機械工学者ブカル#EP15.2	851,{/* 61196 */
+	mes "[機械工学者ブカル]";
+	mes "機械工学者の人数ですか？";
+	next;
+	mes "[機械工学者ブカル]";
+	mes "私は把握していないので、";
+	mes "あそこにいるアールさんに";
+	mes "聞いてみて下さい。";
+	close;
+}
+un_bk_q.gat,76,175,4	script	研究員グラム#EP15.2MR	982,{/* 61197 */
+	mes "[研究員グラム]";
+	mes "あの女は何を偉そうに……。";
+	mes "自分が代表にでもなった気で";
+	mes "人数を数えているんだ？";
+	next;
+	mes "[研究員グラム]";
+	mes "最初からあんな実験をしなければ、";
+	mes "爆発もなかったんじゃないか？";
+	mes "そうだろ？";
+	close;
+}
+un_bk_q.gat,297,287,6	script	冒険家ジャン#EP15.2MR	896,{/* 61198 */
+	mes "[冒険家ジャン]";
+	mes "あ！　あなたも冒険者なの？";
+	next;
+	mes "[冒険家ジャン]";
+	mes "そっか……。";
+	mes "ぼくらは本当に運が悪いね……。";
+	close;
+}
+un_bk_q.gat,318,299,2	script	食堂おばさん#EP15.2MR	979,{/* 61199 */
+	mes "[食堂おばさん]";
+	mes "すみません。";
+	mes "まだ準備中です。";
+	close;
+}
+////////////////////////////////////////////////////////////////////////
+un_bk_q.gat,313,280,8	script	出入り統制ガード#EP15.2	899,{/* 61203 */
+	mes "[出入り統制ガード]";
+	mes "ここは工事中なので";
+	mes "立ち入る事が出来ません。";
+	next;
+	mes "[出入り統制ガード]";
+	mes "設備担当者の話だと、";
+	mes "今後は治療所として";
+	mes "使用されるそうですよ。";
+	close;
+}
+un_bk_q.gat,280,280,8	script	出入り統制ガード#EP15.2	899,{/* 61204 */
+	mes "[出入り統制ガード]";
+	mes "ここは工事中なので";
+	mes "立ち入る事が出来ません。";
+	next;
+	mes "[出入り統制ガード]";
+	mes "設備担当者の話だと、";
+	mes "今後は治療所として";
+	mes "使用されるそうですよ。";
+	close;
+}
+un_bk_q.gat,255,236,2	script	出入り統制ガード#EP15.2	899,{/* 61205 */
+	mes "[出入り統制ガード]";
+	mes "ここは工事中なので";
+	mes "立ち入る事が出来ません。";
+	next;
+	mes "[出入り統制ガード]";
+	mes "設備担当者の話だと、";
+	mes "今後は治療所として";
+	mes "使用されるそうですよ。";
+	close;
+}
+un_bk_q.gat,298,203,4	script	出入り統制ガード#EP15.2	899,{/* 61206 */
+	mes "[出入り統制ガード]";
+	mes "ここは工事中なので";
+	mes "立ち入る事が出来ません。";
+	next;
+	mes "[出入り統制ガード]";
+	mes "設備担当者の話だと、";
+	mes "今後は治療所として";
+	mes "使用されるそうですよ。";
+	close;
+}
+un_bk_q.gat,340,235,6	script	出入り統制ガード#EP15.2	899,{/* 61207 */
+	mes "[出入り統制ガード]";
+	mes "ここは工事中なので";
+	mes "立ち入る事が出来ません。";
+	next;
+	mes "[出入り統制ガード]";
+	mes "設備担当者の話だと、";
+	mes "今後は治療所として";
+	mes "使用されるそうですよ。";
+	close;
+}
+un_bk_q.gat,98,246,8	script	設備担当者ジゴ#EP15.2MR	854,{/* 61208 */
+	mes "[設備担当者ジゴ]";
+	mes "ああ……。";
+	mes "管制室はかなり被害が大きく、";
+	mes "この通り、ひどいありさまです。";
+	close;
+}
+////////////////////////////////////////////////////////////////////////
+un_bk_q.gat,322,249,2	script	看護師#EP15.2MR2	569,{/* 61210 */}
+////////////////////////////////////////////////////////////////////////
+un_bk_q.gat,103,393,4	script	メモリーレコード#EP15.2	10043,{/* 61221 */
+	mes "‐誰かが録音したと思われる";
+	mes "　メモリーレコードの入った";
+	mes "　レコードプレイヤーがある‐";
+	next;
+	if(select("再生する","やめる") == 2) {
+		mes "‐あなたはその場を離れた‐";
+		close;
+	}
+	while(1) {
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐あーあ、あ。";
+		mes "　あ～、テストーテストー。‐^000000";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐シェルター内での日付けを";
+		mes "　明確にする為、";
+		mes "　実験の爆発以降は";
+		mes "　「爆発何日目」と呼ぶことにする。‐^000000";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐それでは記録を開始する。";
+		mes "　本日は爆発1日目だ。‐^000000";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐最初の爆発直後、";
+		mes "　モニターに映し出された";
+		mes "　外の状況を見て、";
+		mes "　みんなパニックになってしまった。‐^000000";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐だけど実験の責任者だった";
+		mes "　ドクターベリーニが";
+		mes "　みんなを落ち着かせて、";
+		mes "　生存者の人数を確認を始めた。‐^000000";
+		next;
+		mes "[レコードプレイヤー]";
+		mes "^0000FF‐そして先ほど、爆発の余波で";
+		mes "　外を映していたカメラが壊れた。";
+		mes "　もうこれで外の状況を";
+		mes "　確認する事はできない。‐^000000";
+		next;
+		mes "‐これ以上録音された内容はない‐";
+		next;
+		if(select("もう一度再生する","やめる") == 2) {
+			mes "‐あなたはその場を離れた‐";
+			close;
+		}
+		continue;
+	}
+}
+un_bk_q.gat,108,243,4	script	捨てられた機械装置#EP15	10043,{/* 61222 */
+	mes "‐床に捨てられた機械装置がある。";
+	mes "　動くかどうかはわからない‐";
+	close;
+}
+un_bk_q.gat,34,138,4	script	倉庫番ピック#EP15.2MR	99,{/* 61223 */
+	mes "[倉庫番ピック]";
+	mes "何の要件でいらっしゃったのかは";
+	mes "分かりませんが、";
+	mes "倉庫のものは";
+	mes "勝手に触らないでください。";
+	next;
+	mes "[倉庫番ピック]";
+	mes "まだ在庫把握も終わっていないし、";
+	mes "ものがなくなったりすると";
+	mes "大変なので。";
+	close;
+}
+un_bk_q.gat,91,283,2	script	ガード#EP15.2MR	899,{/* 61224 */
+	mes "[ガード]";
+	mes "冒険者様、こんにちは。";
+	next;
+	mes "[ガード]";
+	mes "理由は分かりませんが、";
+	mes "私はベリーニさんに";
+	mes "ここに配置されました。";
+	close;
+}
+
+un_bk_q.gat,56,192,4	script	科学者コリー#EP15.2MR	749,{/* 61225 */
+	mes "[科学者コリー]";
+	mes "非常状況時のマニュアルに沿って、";
+	mes "シェルター内に";
+	mes "危険物質があるか確認中です。";
+	next;
+	mes "[科学者コリー]";
+	mes "科学者が何人なのか";
+	mes "知りたいのですか？";
+	mes "でしたらカールステンさんを";
+	mes "探してみて下さい。";
+	mes "どこかにいると思います。";
+	close;
+}
+un_bk_q.gat,161,193,6	script	冒険家バンム#EP15.2MR	750,{/* 61226 */
+	mes "[冒険家バム]";
+	mes "シェルターを歩き回っていて";
+	mes "見つけたんだけど、これは何かな？";
+	mes "壁面にこんなものが";
+	mes "たくさんあったんだ。";
+	close;
+}
+un_bk_q.gat,248,258,2	script	冒険家ダルリー#EP15.2MR	882,{/* 61227 */
+	mes "[冒険家ダルリー]";
+	mes "もう！　腹立つ！";
+	next;
+	mes "[冒険家ダルリー]";
+	mes "姉さんー！　走って～！";
+	//4分 移動速度増加
+	close;
+}
+
+
+
+verus04.gat,170,216,3		duplicate(3rdRentalGear)	魔導ギア管理兵#ver		105	/* 50026 */
+
 
 /*
-announce "警備隊員フィプス : 隊長！　滅亡祝福教団の襲撃だ！", 0x1, 0xffff00, 0x190, 12, 0, 0;
-announce "警備隊長ケスラー : すべての警備隊員は戦闘配置につけ！　ウェルスシティを死守するのだ！", 0x1, 0xffff00, 0x190, 12, 0, 0;
-announce "滅亡祝福教団幹部 : 滅亡の時に備えよ！　破壊こそ救済の道、破壊する者だけが救われる！", 0x1, 0xffff00, 0x190, 12, 0, 0;
-announce "警備隊員サルグラン : チッ……倒しても倒しても次から次へと出てきやがる！", 0x1, 0xffff00, 0x190, 12, 0, 0;
-announce "警備隊長ケスラー ： 怯むな！　私たちが諦めたら誰がウェルスシティを守るのだ！", 0x1, 0xffff00, 0x190, 12, 0, 0;
-announce "警備隊員ゲレフ ： うっ……こんな時に胃が……。負けるわけにはいかないのに！", 0x1, 0xffff00, 0x190, 12, 0, 0;
-announce "警備隊員スイデン ： そう、それがこの戦いの結末なんだね……ふふ、ふふふ。", 0x1, 0xffff00, 0x190, 12, 0, 0;
-announce "滅亡祝福教団幹部 : おのれ……今回は分が悪い……全員撤退する！　滅亡！　祝福！", 0x1, 0xffff00, 0x190, 12, 0, 0;
-announce "警備隊長ケスラー : 滅亡祝福教団が撤退していく……助かった……のか？", 0x1, 0xffff00, 0x190, 12, 0, 0;
+announce "警備隊員フィプス : 隊長！　滅亡祝福教団の襲撃だ！",0x1,0xffff00,0x190,12,0,0;
+announce "警備隊長ケスラー : すべての警備隊員は戦闘配置につけ！　ウェルスシティを死守するのだ！",0x1,0xffff00,0x190,12,0,0;
+announce "滅亡祝福教団幹部 : 滅亡の時に備えよ！　破壊こそ救済の道、破壊する者だけが救われる！",0x1,0xffff00,0x190,12,0,0;
+announce "警備隊員サルグラン : チッ……倒しても倒しても次から次へと出てきやがる！",0x1,0xffff00,0x190,12,0,0;
+announce "警備隊長ケスラー ： 怯むな！　私たちが諦めたら誰がウェルスシティを守るのだ！",0x1,0xffff00,0x190,12,0,0;
+announce "警備隊員ゲレフ ： うっ……こんな時に胃が……。負けるわけにはいかないのに！",0x1,0xffff00,0x190,12,0,0;
+announce "警備隊員スイデン ： そう、それがこの戦いの結末なんだね……ふふ、ふふふ。",0x1,0xffff00,0x190,12,0,0;
+announce "滅亡祝福教団幹部 : おのれ……今回は分が悪い……全員撤退する！　滅亡！　祝福！",0x1,0xffff00,0x190,12,0,0;
+announce "警備隊長ケスラー : 滅亡祝福教団が撤退していく……助かった……のか？",0x1,0xffff00,0x190,12,0,0;
 */
