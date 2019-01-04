@@ -204,6 +204,29 @@ moc_para01.gat,38,175,5	script	ライム#evtat01	952,{
 		close2;
 		cutin "laime_evenor01",255;
 		end;
+	case 37:
+		cutin "laime_evenor01",2;
+		mes "[ライム]";
+		mes "発掘作業は順調のようですね。";
+		mes "　";
+		mes "必要でしたらウェルスシティまで";
+		mes "お送りしましょうか？";
+		next;
+		if(select("ウェルスシティに行く","やめる") == 2) {
+			mes "[ライム]";
+			mes "行かないんですね。";
+			mes "わかりました。";
+			close2;
+			cutin "laime_evenor01",255;
+			end;
+		}
+		mes "[ライム]";
+		mes "それではお送りします。";
+		mes "いってらっしゃい～。";
+		close2;
+		cutin "laime_evenor01",255;
+		warp "verus04.gat",142,188;
+		end;
 	default:
 		cutin "laime_evenor01",2;
 		mes "[ライム]";
@@ -1064,6 +1087,15 @@ moc_para01.gat,133,170,4	script	団長アルクイエン#e152a1	951,{
 		close2;
 		cutin "Arquien_n_atnad01",255;
 		warp "verus04.gat",142,188;
+		end;
+	case 37:
+		cutin "Arquien_n_atnad01.bmp", 2;
+		mes "[ナイル]";
+		mes "……別に気になるから";
+		mes "直接行く訳ではないぞ。";
+		mes "私も忙しい身なんだ。";
+		close2;
+		cutin "Arquien_n_atnad01.bmp", 255;
 		end;
 	default:
 		cutin "Arquien_n_atnad01",2;
