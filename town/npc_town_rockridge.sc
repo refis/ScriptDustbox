@@ -230,6 +230,15 @@ rockmi3.gat,0,0,0,0	monster	ブリライト				1211,50,5000,0,0
 //onspawn クランプ 1209,1 -> kill デビルズフィンガーズ,3
 */
 
+//= Auriga Script ==============================================================
+// Ragnarok Online Rockridge Town Script	by refis
+//==============================================================================
+
+//============================================================
+// ロックリッジ
+//- Registry -------------------------------------------------------------------
+// ROCKRIDGE_1QUE -> 0～17
+//------------------------------------------------------------
 alberta.gat,240,103,5	script	カラムプッチ#alberta	709,3,3,{/* 61481 */
 	if(ROCKRIDGE_1QUE == 0) {
 		mes "[カラムプッチ]";
@@ -333,14 +342,21 @@ OnTouch:
 		unittalk "カラムプッチ : お、そこの前途有望な冒険者さん！　ちょっと私の話を聞いてくれないか？";
 	end;
 }
-harboro2.gat,284,104,0	warp	harboro2_harboro1	2,2,harboro1.gat,318,124	//60619
 
-harboro1.gat,241,218,0	warp	harboro1_harin01_01	1,1,har_in01.gat,18,18		//59784
-har_in01.gat,18,15,0	warp	harin01_harboro1_01	1,1,harboro1.gat,241,215	//59785
-rockrdg1.gat,312,193,0	warp	harboro1_harin01_02	1,1,har_in01.gat,26,87		//59786
-har_in01.gat,26,90,0	warp	harin01_harboro1_02	1,1,harboro1.gat,312,197	//59787
+// ロックリッジ地下街 -> ロックリッジ
+harboro2.gat,284,104,0	warp	harboro2_harboro1	2,2,harboro1.gat,318,124
+harboro3.gat,284,104,0	warp	harboro2_harboro1	2,2,harboro1.gat,318,124
 
-harboro1.gat,362,206,0	script	harboro1_rockrdg1	45,1,1,{/* 59788 */
+// ロックリッジ <-> 保安官事務室
+harboro1.gat,241,218,0	warp	harboro1_harin01_01	1,1,har_in01.gat,18,18
+har_in01.gat,18,15,0	warp	harin01_harboro1_01	1,1,harboro1.gat,241,215
+
+// ロックリッジ <-> 道具屋
+harboro1.gat,312,193,0	warp	harboro1_harin01_02	1,1,har_in01.gat,26,87
+har_in01.gat,26,90,0	warp	harin01_harboro1_02	1,1,harboro1.gat,312,197
+
+// ロックリッジ <-> キワワ砂漠01
+harboro1.gat,362,206,0	script	harboro1_rockrdg1	45,1,1,{
 	if(BaseLevel < 130) {
 		donpcevent "自警団員#harboro1::OnTalk";
 		end;
@@ -348,8 +364,9 @@ harboro1.gat,362,206,0	script	harboro1_rockrdg1	45,1,1,{/* 59788 */
 	warp "rockrdg1.gat",37,246;
 	end;
 }
-rockrdg1.gat,33,246,0	warp	rockrdg1_harboro1	1,1,harboro1.gat,358,206	//59976
-harboro1.gat,360,209,3	script	自警団員#harboro1	10220,{/* 59789 */
+rockrdg1.gat,33,246,0	warp	rockrdg1_harboro1	1,1,harboro1.gat,358,206
+
+harboro1.gat,360,209,3	script	自警団員#harboro1	10220,{
 	mes "[自警団員]";
 	mes "この先は危険です。";
 	mes "BaseLv130以上の方のみ";
@@ -359,7 +376,9 @@ OnTalk:
 	unittalk "自警団員 : この先は危険です。BaseLv130以上の方のみお通ししています。";
 	end;
 }
-har_in01.gat,34,28,0	script	harin01_harin01_01	45,1,1,{/* 59790 */
+
+// 保安官事務室 <-> 留置所
+har_in01.gat,34,28,0	script	harin01_harin01_01	45,1,1,{
 	if(ROCKRIDGE_1QUE < 6) {
 		mes "[イヴォカ・スクーディー]";
 		mes "勝手に入らないでください。";
@@ -369,8 +388,9 @@ har_in01.gat,34,28,0	script	harin01_harin01_01	45,1,1,{/* 59790 */
 	warp "har_in01.gat",99,27;
 	end;
 }
-har_in01.gat,99,30,0	warp	harin01_harin01_02	1,1,har_in01.gat,34,31	//59791
-harboro1.gat,60,215,5	script	カラムプッチ#harboro1	709,{/* 59792 */
+har_in01.gat,99,30,0	warp	harin01_harin01_02	1,1,har_in01.gat,34,31
+
+harboro1.gat,60,215,5	script	カラムプッチ#harboro1	709,{
 	mes "[カラムプッチ]";
 	mes "アルベルタに戻るか？";
 	next;
@@ -900,19 +920,19 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 	case 6:
 		cutin "rock_worp",0;
 		unittalk "……どう思う？";
-		sleep2 4000;
+		if(!sleep2(4000)) end;
 		cutin "rock_iboka_all",2;
-		donpcevent "イヴォカ・スクーディー#::OnTalk1";
-		sleep2 4000;
+		donpcevent "イヴォカ#rock01::OnTalk1";
+		if(!sleep2(4000)) end;
 		cutin "rock_worp",0;
 		unittalk "アイアット・ワープ : 普通の拷問や脅迫では効果は薄いか……。";
-		sleep2 3000;
+		if(!sleep2(3000)) end;
 		cutin "rock_iboka_all",2;
-		donpcevent "イヴォカ・スクーディー#::OnTalk2";
-		sleep2 3000;
+		donpcevent "イヴォカ#rock01::OnTalk2";
+		if(!sleep2(3000)) end;
 		cutin "rock_worp",0;
 		unittalk "アイアット・ワープ : アルバートだろうな。";
-		sleep2 2000;
+		if(!sleep2(2000)) end;
 		set ROCKRIDGE_1QUE,7;
 		mes "[アイアット・ワープ]";
 		mes "おっと、来たか。";
@@ -1250,14 +1270,14 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		setquest 202040;
 		set ROCKRIDGE_1QUE,16;
 		getitem '@gain,1;
-		getexp 1000000,0;
-		getexp 1000000,0;
-		getexp 1000000,0;
-		getexp 1000000,0;
-		getexp 1000000,0;
-		getexp 1000000,0;
-		getexp 0,1000000;
-		getexp 0,1000000;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 1000000,0,1;
+		getexp 0,1000000,0;
+		getexp 0,1000000,0;
 		next;
 		mes "[アイアット・ワープ]";
 		mes "牛賊団の問題は";
@@ -1300,7 +1320,7 @@ har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{/* 59794 */
 		end;
 	}
 }
-har_in01.gat,14,24,5	script	イヴォカ・スクーディー#	10212,{/* 59795 */
+har_in01.gat,14,24,5	script	イヴォカ・スクーディー::イヴォカ#rock01	10212,{/* 59795 */
 	switch(ROCKRIDGE_1QUE) {
 	case 7:
 		cutin "rock_iboka_all",2;
@@ -1459,7 +1479,7 @@ OnTalk2:
 	unittalk "イヴォカ・スクーディー : ジョニーがいなくなったとしても、次に相手をしなければならないのは……";
 	end;
 }
-rockrdg1_q.gat,156,302,7	script	イヴォカ・スクーディー#	10212,{/* 59796 (cloaking)*/
+rockrdg1_q.gat,156,302,7	script	イヴォカ・スクーディー::イヴォカ#rock02	10212,{/* 59796 (cloaking)*/
 	end;
 OnTalk1:
 	unittalk "イヴォカ・スクーディー : 動くな！";
@@ -1472,6 +1492,9 @@ OnTalk3:
 	end;
 OnTalk4:
 	unittalk "イヴォカ・スクーディー : 行くぞ！　みんな！";
+	end;
+OnInit:
+	cloakonnpc;
 	end;
 }
 rockrdg1_q.gat,153,303,5	script	アイアット・ワープ#revt	10211,{/* 59797 */
@@ -1516,106 +1539,106 @@ rockrdg1_q.gat,153,303,5	script	アイアット・ワープ#revt	10211,{/* 59797 */
 		end;
 	}
 	unittalk "アイアット・ワープ : ここが約束の場所だ。そろそろ時間のはずだが……。";
-	sleep2 3000;
+	if(!sleep2(3000)) end;
 	cloakoffnpc "ジョニー・ジェイムス#re"; //59798
-	sleep2 1000;
+	if(!sleep2(1000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk1";
-	sleep2 4000;
+	if(!sleep2(4000)) end;
 	emotion 1,"ジョニー・ジェイムス#re"; //59798
 	donpcevent "ジョニー・ジェイムス#re::OnTalk2";
-	sleep2 4000;
+	if(!sleep2(4000)) end;
 	cloakoffnpc "アルバート・フォード#re"; //59798
 	donpcevent "アルバート・フォード#re::OnTalk1";
-	sleep2 4000;
+	if(!sleep2(4000)) end;
 	donpcevent "アルバート・フォード#re::OnTalk2";
-	sleep2 4000;
+	if(!sleep2(4000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk3";
-	sleep2 4000;
+	if(!sleep2(4000)) end;
 	unittalk "アイアット・ワープ : おいおいジョニー、うちの先生に対して口のきき方がなってないぞ？";
-	sleep2 4000;
+	if(!sleep2(4000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk4";
-	sleep2 6000;
+	if(!sleep2(6000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk5";
-	sleep2 4000;
+	if(!sleep2(4000)) end;
 	unittalk "アイアット・ワープ : 今回の交渉役はコステルではない。次期市長である先生がすることになった！";
-	sleep2 6000;
+	if(!sleep2(6000)) end;
 	emotion 5,"ジョニー・ジェイムス#re"; //59798
 	donpcevent "ジョニー・ジェイムス#re::OnTalk6";
-	sleep2 6000;
+	if(!sleep2(6000)) end;
 	emotion 9,"アルバート・フォード#re"; //59802
 	donpcevent "アルバート・フォード#re::OnTalk3";
-	sleep2 4000;
+	if(!sleep2(4000)) end;
 	unittalk "アイアット・ワープ : こんな嘘をついて何の得がある？　良いからさっさとそっちの要求を言いな。";
-	sleep2 6000;
+	if(!sleep2(6000)) end;
 	unittalk "アイアット・ワープ : 要求を本社で検討しなきゃならんのだ。ちんたらしてるといつになるかわからんぞ！";
-	sleep2 6000;
+	if(!sleep2(6000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk7";
-	sleep2 5000;
+	if(!sleep2(5000)) end;
 	unittalk "アイアット・ワープ : 今だ！";
-	sleep2 500;
+	if(!sleep2(500)) end;
 	misceffect 563,"ジョニー・ジェイムス#re"; //59798
-	cloakoffnpc "キャクター族のガンマン#"; //59799
-	cloakoffnpc "キャクター族のガンマン#"; //59800
-	cloakoffnpc "キャクター族のガンマン#"; //59801
-	cloakoffnpc "イヴォカ・スクーディー#"; //59796
-	donpcevent "イヴォカ・スクーディー#::OnTalk1";
-	sleep2 1000;
-	donpcevent "キャクター族のガンマン#::OnTalk1";	//59799
-	donpcevent "キャクター族のガンマン#::OnTalk1";	//59800
-	donpcevent "キャクター族のガンマン#::OnTalk1";	//59801
-	sleep2 2000;
+	cloakoffnpc "ガンマン#rock01"; //59799
+	cloakoffnpc "ガンマン#rock02"; //59800
+	cloakoffnpc "ガンマン#rock03"; //59801
+	cloakoffnpc "イヴォカ#rock02"; //59796
+	donpcevent "イヴォカ#rock02::OnTalk1";
+	if(!sleep2(1000)) end;
+	donpcevent "ガンマン#rock01::OnTalk1";	//59799
+	donpcevent "ガンマン#rock02::OnTalk1";	//59800
+	donpcevent "ガンマン#rock03::OnTalk1";	//59801
+	if(!sleep2(2000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk8";
-	sleep2 2000;
+	if(!sleep2(2000)) end;
 	donpcevent "アルバート・フォード#re::OnTalk4";
-	sleep2 2000;
+	if(!sleep2(2000)) end;
 	misceffect 563,"ジョニー・ジェイムス#re"; //59798
-	donpcevent "キャクター族のガンマン#::OnTalk1";	//59799
-	donpcevent "キャクター族のガンマン#::OnTalk2";	//59800
-	donpcevent "キャクター族のガンマン#::OnTalk1";	//59801
-	sleep2 2000;
+	donpcevent "ガンマン#rock01::OnTalk1";	//59799
+	donpcevent "ガンマン#rock02::OnTalk2";	//59800
+	donpcevent "ガンマン#rock03::OnTalk1";	//59801
+	if(!sleep2(2000)) end;
 	unittalk "アイアット・ワープ : くっくっく……";
-	sleep2 1000;
-	donpcevent "イヴォカ・スクーディー#::OnTalk2";
-	sleep2 2000;
+	if(!sleep2(1000)) end;
+	donpcevent "イヴォカ#rock02::OnTalk2";
+	if(!sleep2(2000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk9";
-	sleep2 3000;
+	if(!sleep2(3000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk10";
-	sleep2 3000;
+	if(!sleep2(3000)) end;
 	donpcevent "アルバート・フォード#re::OnTalk5";
-	sleep2 1000;
+	if(!sleep2(1000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk11";
 	cloakonnpc "アルバート・フォード#re"; //59798
-	sleep2 1000;
+	if(!sleep2(1000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk12";
-	sleep2 3000;
+	if(!sleep2(3000)) end;
 	unittalk "アイアット・ワープ : おいおいジョニー。　お前の部下が逃げていくぞ？";
-	//sleep2 100;
-	donpcevent "イヴォカ・スクーディー#::OnTalk3";
-	sleep2 3000;
+	//if(!sleep2(100)) end;
+	donpcevent "イヴォカ#rock02::OnTalk3";
+	if(!sleep2(3000)) end;
 	unittalk "アイアット・ワープ : みんな！　よくやってくれた！　さあ、連行だ！";
-	sleep2 1000;
-	donpcevent "キャクター族のガンマン#::OnTalk2";	//59799
-	donpcevent "キャクター族のガンマン#::OnTalk3";	//59800
-	donpcevent "キャクター族のガンマン#::OnTalk2";	//59801
-	sleep2 1000;
+	if(!sleep2(1000)) end;
+	donpcevent "ガンマン#rock01::OnTalk2";	//59799
+	donpcevent "ガンマン#rock02::OnTalk3";	//59800
+	donpcevent "ガンマン#rock03::OnTalk2";	//59801
+	if(!sleep2(1000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk13";
-	sleep2 1000;
-	donpcevent "キャクター族のガンマン#::OnTalk3";	//59799
-	sleep2 1000;
-	donpcevent "キャクター族のガンマン#::OnTalk4";	//59800
-	sleep2 1000;
-	donpcevent "キャクター族のガンマン#::OnTalk3";	//59801
-	sleep2 2000;
+	if(!sleep2(1000)) end;
+	donpcevent "ガンマン#rock01::OnTalk3";	//59799
+	if(!sleep2(1000)) end;
+	donpcevent "ガンマン#rock02::OnTalk4";	//59800
+	if(!sleep2(1000)) end;
+	donpcevent "ガンマン#rock03::OnTalk3";	//59801
+	if(!sleep2(2000)) end;
 	donpcevent "ジョニー・ジェイムス#re::OnTalk14";
-	sleep2 1000;
-	donpcevent "イヴォカ・スクーディー#::OnTalk4";
-	sleep2 2000;
-	cloakonnpc "キャクター族のガンマン#"; //59799
-	cloakonnpc "キャクター族のガンマン#"; //59800
-	cloakonnpc "キャクター族のガンマン#"; //59801
-	cloakonnpc "イヴォカ・スクーディー#"; //59796
+	if(!sleep2(1000)) end;
+	donpcevent "イヴォカ#rock02::OnTalk4";
+	if(!sleep2(2000)) end;
+	cloakonnpc "ガンマン#rock01"; //59799
+	cloakonnpc "ガンマン#rock02"; //59800
+	cloakonnpc "ガンマン#rock03"; //59801
+	cloakonnpc "イヴォカ#rock02"; //59796
 	cloakonnpc "ジョニー・ジェイムス#re"; //59798
-	sleep2 2000;
+	if(!sleep2(2000)) end;
 	unittalk "アイアット・ワープ : 作戦は成功だ。私たちも戻ろうか。";
 	delquest 7795;
 	setquest 7796;
@@ -1667,8 +1690,11 @@ OnTalk13:
 OnTalk14:
 	unittalk "ジョニー・ジェイムス : イテェ！　こら、もっと丁寧に扱え！";
 	end;
+OnInit:
+	cloakonnpc;
+	end;
 }
-rockrdg1_q.gat,156,306,5	script	キャクター族のガンマン#	10212,{/* 59799 (cloaking)*/
+rockrdg1_q.gat,156,306,5	script	キャクター族のガンマン::ガンマン#rock01	10212,{/* 59799 (cloaking)*/
 	end;
 OnTalk1:
 	unittalk "キャクター族のガンマン : 動くな！";
@@ -1679,8 +1705,11 @@ OnTalk2:
 OnTalk3:
 	unittalk "キャクター族のガンマン : そんなことは知らん！";
 	end;
+OnInit:
+	cloakonnpc;
+	end;
 }
-rockrdg1_q.gat,164,306,3	script	キャクター族のガンマン#	10212,{/* 59800 (cloaking)*/
+rockrdg1_q.gat,164,306,3	script	キャクター族のガンマン::ガンマン#rock02	10212,{/* 59800 (cloaking)*/
 	end;
 OnTalk1:
 	unittalk "キャクター族のガンマン : 君たちは完全に包囲された！";
@@ -1694,8 +1723,11 @@ OnTalk3:
 OnTalk4:
 	unittalk "キャクター族のガンマン : 私たちはただ連行するだけだ！";
 	end;
+OnInit:
+	cloakonnpc;
+	end;
 }
-rockrdg1_q.gat,161,302,1	script	キャクター族のガンマン#	10212,{/* 59801 (cloaking)*/
+rockrdg1_q.gat,161,302,1	script	キャクター族のガンマン::ガンマン#rock03	10212,{/* 59801 (cloaking)*/
 	end;
 OnTalk1:
 	unittalk "キャクター族のガンマン : 動くな！";
@@ -1705,6 +1737,9 @@ OnTalk2:
 	end;
 OnTalk3:
 	unittalk "キャクター族のガンマン : 静かにしろ！";
+	end;
+OnInit:
+	cloakonnpc;
 	end;
 }
 rockrdg1_q.gat,168,306,3	script	アルバート・フォード#re	10214,{/* 59802 (cloaking)*/
@@ -1724,6 +1759,9 @@ OnTalk4:
 OnTalk5:
 	unittalk "アルバート・フォード : な、仲間を呼んできます！";
 	end;
+OnInit:
+	cloakonnpc;
+	end;
 }
 har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 	switch(ROCKRIDGE_1QUE) {
@@ -1732,7 +1770,7 @@ har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 		mes "[ジョニー・ジェイムス]";
 		mes "汚いやつらめ！　地獄へ落ちろ！";
 		mes "よくここに面を出せたな！";
-		cloakoffnpc "イヴォカ・スクーディー#"; //59804
+		cloakoffnpc "イヴォカ#rock03"; //59804
 		next;
 		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
@@ -2004,7 +2042,7 @@ har_in01.gat,89,26,5	script	ジョニー・ジェイムス#ha	10213,{/* 59803 */
 		end;
 	}
 }
-har_in01.gat,88,22,6	script	イヴォカ・スクーディー#	10212,{/* 59804 (cloaking)*/
+har_in01.gat,88,22,6	script	イヴォカ・スクーディー::イヴォカ#rock03	10212,{/* 59804 (cloaking)*/
 	if(ROCKRIDGE_1QUE == 9) {
 		cutin "rock_iboka_all",0;
 		mes "[イヴォカ・スクーディー]";
@@ -2013,8 +2051,11 @@ har_in01.gat,88,22,6	script	イヴォカ・スクーディー#	10212,{/* 59804 (cloaking)*/
 		mes "　保安官に報告しましょう。）";
 		close2;
 	}
-	cloakonnpc "イヴォカ・スクーディー#"; //59804
+	cloakonnpc "イヴォカ#rock03"; //59804
 	cutin "rock_iboka_all",255;
+	end;
+OnInit:
+	cloakonnpc;
 	end;
 }
 harboro1.gat,288,193,5	script	ショーン・マッカーディ#	10215,{/* 59805 */
@@ -2431,7 +2472,9 @@ rockrdg2_q.gat,282,310,3	script	アルバート・フォード#ro	10214,{/* 59809 (cloakin
 		}
 		mes "‐あなたは保安官事務室に";
 		mes "　向かった‐";
-		close;
+		close2;
+		warp "har_in01.gat",18,18;
+		end;
 	}
 	if(ROCKRIDGE_1QUE == 14) {
 		mes "[アルバート・フォード]";
@@ -2460,6 +2503,9 @@ rockrdg2_q.gat,282,310,3	script	アルバート・フォード#ro	10214,{/* 59809 (cloakin
 	end;
 OnTalk1:
 	unittalk "アルバート・フォード : ボス？　戻られたんですか？";
+	end;
+OnInit:
+	cloakonnpc;
 	end;
 }
 harboro1.gat,138,157,5	script	ドノバン	854,{/* 59810 */
@@ -4021,7 +4067,7 @@ har_in01.gat,100,14,3	script	自警団員#srdg01	10220,{/* 59826 */
 }
 harboro1.gat,210,219,5	script	司祭#srdg01	110,{/* 59827 */
 	unittalk "司祭 : 辛かったり、悲しいことがあったらいつでも私の所に来てください。";
-	sleep2 1000;
+	sleep 1000;
 	unittalk "司祭 : みなさんは愛されるために生まれた大事な存在なんです。";
 	end;
 }
@@ -5800,7 +5846,7 @@ harboro1.gat,79,224,5	script	マイルスウィズナー#rock	881,{/* 59929 */
 	mes "それがロックリッジです。";
 	close;
 }
-harboro1.gat,75,211,1	script	ゼヴァーディー#rockwn13	82,{/* 59930 */
+harboro1.gat,75,211,1	script	ゼヴァーディー#rockwn13	82,5,5,{/* 59930 */
 	mes "[ゼヴァーディー]";
 	mes "ロックリッジにようこそ！";
 	mes "チャンスの地、ロックリッジで";
@@ -5812,7 +5858,7 @@ OnTouch:
 	emotion 14,"ゼヴァーディー#rockwn13"; //59930
 	end;
 }
-harboro1.gat,75,219,3	script	エイリーン#rockwn14	96,{/* 59931 */
+harboro1.gat,75,219,3	script	エイリーン#rockwn14	96,5,5,{/* 59931 */
 	mes "[エイリーン]";
 	mes "ロックリッジへいらっしゃった";
 	mes "冒険者様を歓迎しますよ～！";
