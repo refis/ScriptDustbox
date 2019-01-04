@@ -4930,7 +4930,7 @@ verus04.gat,172,149,3	script	団長アルクイエン#e152v0	951,{
 					mes "再生スイッチは";
 					mes "君に押してもらおうか。";
 					delitem 6757, 2;
-					setquest 7654; //state=1
+					setquest 7654;
 					delquest 7650;
 					close2;
 					cutin "Arquien_n_atnad01.bmp", 255;
@@ -5023,7 +5023,7 @@ verus04.gat,172,149,3	script	団長アルクイエン#e152v0	951,{
 					mes "再生スイッチは";
 					mes "君に押してもらおうか。";
 					delitem 6824, 2;
-					setquest 7655; //state=1
+					setquest 7655;
 					delquest 7652;
 					close2;
 					cutin "Arquien_n_atnad01.bmp", 255;
@@ -5304,7 +5304,7 @@ verus04.gat,170,150,3	script	レコードプレイヤー#e152	844,{/* 59505 */
 		mes "‐メモリーレコードに記録された";
 		mes "　すべての音声情報を再生しました‐";
 		next;
-		misceffect 234, "レコードプレイヤー#e152"; //61040
+		misceffect 234, "レコードプレイヤー#e152";
 		mes "‐メモリーレコードを";
 		mes "　取り出そうすると、小さな音と共に";
 		mes "　連結部位が壊れて";
@@ -5414,16 +5414,16 @@ verus04.gat,170,150,3	script	レコードプレイヤー#e152	844,{/* 59505 */
 				mes "誰かに過去の事を知れと";
 				mes "説得されている気分だ。";
 				next;
-				setquest 7650; //state=1
+				setquest 7650;
 				delquest 7650;
 				delquest 7654;
-				setquest 7651; //state=1
+				setquest 7651;
 				getitem 6962, 1;
 				cutin "Arquien_n_atnad03.bmp", 2;
 				mes "[ナイル]";
 				mes "とにかくこの内容は私が父に渡す。";
 				mes "今日もご苦労だった。";
-				setquest 118136; //state=1
+				setquest 118136;
 				compquest 118136;
 				close2;
 				cutin "Arquien_n_atnad03.bmp", 255;
@@ -5451,17 +5451,17 @@ verus04.gat,170,150,3	script	レコードプレイヤー#e152	844,{/* 59505 */
 				next;
 				delquest 5341;
 				delquest 5370;
-				setquest 7652; //state=1
+				setquest 7652;
 				delquest 7652;
 				delquest 7655;
-				setquest 7653; //state=1
+				setquest 7653;
 				getitem 6962, 1;
 				getitem 22692, 1;
 				cutin "Arquien_n_atnad03.bmp", 2;
 				mes "[ナイル]";
 				mes "とにかくこの内容は私が父に渡す。";
 				mes "今日もご苦労だった。";
-				setquest 118164; //state=1
+				setquest 118164;
 				compquest 118164;
 				close2;
 				cutin "Arquien_n_atnad03.bmp", 255;
@@ -6480,11 +6480,11 @@ OnTimer200:
 	donpcevent "イアン・アトナド#ep152i::OnTalk2";
 	end;
 OnTimer700:
-	emotion 6,"団長アルクイエン#ep152i"; //59965
+	emotion 6,"団長アルクイエン#ep152i";
 	end;
 OnTimer900:
 	stopnpctimer;
-	emotion 9,"ルークラフェズ#ep152i01"; //59966
+	emotion 9,"ルークラフェズ#ep152i01";
 	end;
 }
 
@@ -11434,7 +11434,7 @@ verus04.gat,121,267,0	warp	fr_ver04_to_ver03_1	1,1,verus03.gat,121,20	//59470
 verus03.gat,122,17,0	warp	fr_ver03_to_ver04_1	1,1,verus04.gat,121,264	//59471
 verus04.gat,44,267,0	warp	fr_ver04_to_ver03_2	1,1,verus03.gat,44,20	//59472
 verus03.gat,44,17,0		warp	fr_ver03_to_ver04_2	1,1,verus04.gat,44,264	//59473
-verus04.gat,187,169,5	script	ウェルス案内員#01	71,{/* 59474 */
+verus04.gat,187,169,5	script	ウェルス案内員#01	71,{
 	mes "[ウェルス案内員]";
 	mes "こんにちは、冒険者の方ですね。";
 	mes "もしお困りでしたら";
@@ -11459,7 +11459,7 @@ verus04.gat,187,169,5	script	ウェルス案内員#01	71,{/* 59474 */
 			mes "[ウェルス案内員]";
 			mes "入口付近ですね。";
 			mes "そこでよろしいですか？";
-			viewpoint 1,184,161,1,0xFF0000; //59223
+			viewpoint 1,184,161,1,0xFF0000;
 			break;
 		case 2:
 			mes "[ウェルス案内員]";
@@ -11467,13 +11467,13 @@ verus04.gat,187,169,5	script	ウェルス案内員#01	71,{/* 59474 */
 			mes "そこでよろしいですか？";
 			set '@x,142;
 			set '@y,188;
-			viewpoint 1,142,188,2,0x00FF00; //59223
+			viewpoint 1,142,188,2,0x00FF00;
 			break;
 		case 3:
 			mes "[ウェルス案内員]";
 			mes "チャールストン付近ですね。";
 			mes "そこでよろしいですか？";
-			viewpoint 1,77,123,3,0x00FFFF; //59223
+			viewpoint 1,77,123,3,0x00FFFF;
 			break;
 		case 4:
 			mes "[ウェルス案内員]";
@@ -11481,20 +11481,20 @@ verus04.gat,187,169,5	script	ウェルス案内員#01	71,{/* 59474 */
 			mes "そこでよろしいですか？";
 			set '@x,121;
 			set '@y,249;
-			viewpoint 1,44,260,4,0xFF00FF; //59223
+			viewpoint 1,44,260,4,0xFF00FF;
 			break;
 		case 5:
 			mes "[ウェルス案内員]";
 			mes "北西側ですね。";
 			mes "そこでよろしいですか？";
-			viewpoint 1,44,260,5,0xFFFF00; //59223
+			viewpoint 1,44,260,5,0xFFFF00;
 			break;
 		case 6:
-			viewpoint 2,184,161,1,0xFF0000; //59223
-			viewpoint 2,142,188,2,0x00FF00; //59223
-			viewpoint 2,77,123,3,0x00FFFF; //59223
-			viewpoint 2,121,249,4,0xFF00FF; //59223
-			viewpoint 2,44,260,5,0xFFFF00; //59223
+			viewpoint 2,184,161,1,0xFF0000;
+			viewpoint 2,142,188,2,0x00FF00;
+			viewpoint 2,77,123,3,0x00FFFF;
+			viewpoint 2,121,249,4,0xFF00FF;
+			viewpoint 2,44,260,5,0xFFFF00;
 			continue;
 		case 7:
 			mes "[ウェルス案内員]";
@@ -11513,7 +11513,7 @@ verus04.gat,187,169,5	script	ウェルス案内員#01	71,{/* 59474 */
 		end;
 	}
 OnInit:
-	waitingroom "ウェルス案内",0; //59474
+	waitingroom "ウェルス案内",0;
 	end;
 }
 verus04.gat,137,191,4	duplicate(ウェルス案内員#01)	ウェルス案内員#02	71
@@ -12903,7 +12903,7 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 		mes "　該当する場所に印を";
 		mes "　つけてくれた‐^000000";
 		cutin "bu_alp1",2;
-		viewpoint 1,151,173,1,0xFF8000; //59445
+		viewpoint 1,151,173,1,0xFF8000;
 		next;
 		mes "[マークイシャ]";
 		mes "では、そこから調査を始めよう。";
@@ -12938,7 +12938,7 @@ verus01.gat,231,66,5	script	テューリアン#ベルス	628,{/* 59697 */
 		mes "　該当する場所に印を";
 		mes "　つけてくれた‐^000000";
 		cutin "bu_alp1",2;
-		viewpoint 1,151,173,1,0xFF8000; //59445
+		viewpoint 1,151,173,1,0xFF8000;
 		next;
 		mes "[マークイシャ]";
 		mes "では、そこから調査を始めよう。";
@@ -13051,7 +13051,7 @@ verus01.gat,151,173,3	script	プルット#ベルス	10079,{/* 59698 */
 		mes "[プルット]";
 		mes "それじゃ、おもしろい話";
 		mes "いっぱい見つけてきてね～！";
-		viewpoint 2,151,173,1,0xFF8000; //59446
+		viewpoint 2,151,173,1,0xFF8000;
 		delquest 11381;
 		setquest 11382;
 		set VER2_QUE,17;
@@ -13803,7 +13803,7 @@ un_bunker.gat,56,206,0	script	#myst_1	45,1,1,{/* 59705 */
 		mes "イグニッションブレイクッ!!";
 		cutin "bu_du1",2;
 		next;
-		misceffect 722,""; //self
+		misceffect 722,"";
 		cutin "bu_du1",255;
 		mes "^0000FF‐テューリアンの放った";
 		mes "　イグニッションブレイクのお陰で";
@@ -14056,7 +14056,7 @@ un_myst.gat,124,189,0	script	#m101	45,1,1,{/* 59707 */
 		mes "　^0000FF不安な気持ち^000000になった。";
 		mes "　これは……";
 		mes "　この気持ちは一体……？‐";
-		misceffect 334,""; //self
+		misceffect 334,"";
 		next;
 		mes "‐そんな気持ちと裏腹に";
 		mes "　扉は静かに開いた……‐";
@@ -15130,10 +15130,10 @@ OnTalk:
 	unittalk "なんと!?";
 	end;
 OnInit:
-	waitingroom "古びた燃料交換",0; //59827
+	waitingroom "古びた燃料交換",0;
 	end;
 }
-verus04.gat,163,219,4	script	PLUTO_09#pa0829	10147,{/* 59828 */
+verus04.gat,163,219,4	script	PLUTO_09#pa0829	10147,{
 	if(checkquest(12368) & 0x8 == 0) {
 		mes "‐^0000ff微かなＬＥＤランプが点いているが";
 		mes "　動作はしないようだ。";
@@ -15322,10 +15322,10 @@ OnTalk:
 	unittalk "エナジー反応確認。正常動作が可能になりました。";
 	end;
 OnInit:
-	waitingroom "装備/設計図生産",0; //59828
+	waitingroom "装備/設計図生産",0;
 	end;
 }
-verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
+verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{
 	if(!checkquest(12368)) {
 		mes "‐淡い光を放った液晶画面が";
 		mes "　ユラユラと揺れている。";
@@ -16296,7 +16296,7 @@ verus04.gat,165,217,4	script	MARS_01#pa0829	10080,{/* 59829 */
 	mes "いずれかのみ強化が可能です。";
 	close;
 OnInit:
-	waitingroom "エンチャント",0; //59829
+	waitingroom "エンチャント",0;
 	end;
 }
 verus04.gat,197,179,3	script	修理型チャールストン#Me	10053,{/* 59818 (hide)*/}
@@ -16816,7 +16816,7 @@ mes "準備はよろしいですか？";
 next;
 select("はい:やっぱりやめる")
 delitem 25785,1;
-misceffect 170,""; //self
+misceffect 170,"";
 mes "[修理型チャールストン]";
 mes "失敗しました……";
 mes "申し訳ありませんでした。";
@@ -16911,9 +16911,9 @@ verus04.gat,133,237,3	script	クラフト#New_Cart	851,{/* 59581 */
 		mes "それじゃあ今から言う事のうち";
 		mes "どれか1つを達成して";
 		mes "僕に報告してくれないかな。";
-		setquest 96440; //state=1
-		setquest 96442; //state=1
-		setquest 118410; //state=1
+		setquest 96440;
+		setquest 96442;
+		setquest 118410;
 		next;
 		mes "‐^ff0000エンジェリングを3匹倒す^000000‐";
 		mes "‐^ff0000ポリンを3000匹倒す^000000‐";
@@ -17053,7 +17053,7 @@ verus04.gat,133,237,3	script	クラフト#New_Cart	851,{/* 59581 */
 		}
 	}
 OnInit:
-	waitingroom "カートデコレーション",0; //59581
+	waitingroom "カートデコレーション",0;
 	end;
 }
 verus04.gat,149,231,4	script	ウェルス研究員#dayhunt	402,{/* 59582 */
@@ -17370,7 +17370,7 @@ verus04.gat,149,231,4	script	ウェルス研究員#dayhunt	402,{/* 59582 */
 		close;
 	}
 OnInit:
-	waitingroom "討伐クエスト",0; //59582
+	waitingroom "討伐クエスト",0;
 	end;
 }
 
@@ -17381,7 +17381,7 @@ OnInit:
 un_bk_q.gat,103,147,4	script	ヴァノクサイヒュ#EP15.2	750,{/* 61061 */
 	switch(VER_6QUE) {
 	case 0:
-		emotion 46, "ヴァノクサイヒュ#EP15.2"; //61061
+		emotion 46, "ヴァノクサイヒュ#EP15.2";
 		mes "[ヴァノクサイヒュ]";
 		mes "ふうう……。";
 		mes "思い出すだけでもぞっとする。";
@@ -17400,7 +17400,7 @@ un_bk_q.gat,103,147,4	script	ヴァノクサイヒュ#EP15.2	750,{/* 61061 */
 		mes "そう思わないかい？";
 		next;
 		menu "そうだと思う",-;
-		emotion 28, "ヴァノクサイヒュ#EP15.2"; //61061
+		emotion 28, "ヴァノクサイヒュ#EP15.2";
 		mes "[ヴァノクサイヒュ]";
 		mes "今日を生きる事ができるのを";
 		mes "感謝しないと、ね。";
@@ -17414,7 +17414,7 @@ un_bk_q.gat,103,147,4	script	ヴァノクサイヒュ#EP15.2	750,{/* 61061 */
 		mes "責め立てているんだ。";
 		next;
 		menu "ロゼ？",-;
-		emotion 1,""; //self
+		emotion 1,"";
 		mes "[ヴァノクサイヒュ]";
 		mes "彼女、ロゼ・ベリーニは";
 		mes "この爆発を起こした実験の";
@@ -17441,7 +17441,7 @@ un_bk_q.gat,103,147,4	script	ヴァノクサイヒュ#EP15.2	750,{/* 61061 */
 		mes "君も一緒に彼女を手伝わないかい？";
 		next;
 		menu "手伝う",-;
-		emotion 15, "ヴァノクサイヒュ#EP15.2"; //61061
+		emotion 15, "ヴァノクサイヒュ#EP15.2";
 		mes "[ヴァノクサイヒュ]";
 		mes "本当？　よかった！";
 		mes "ひとりで協力しに行くのは";
@@ -17457,8 +17457,8 @@ un_bk_q.gat,103,147,4	script	ヴァノクサイヒュ#EP15.2	750,{/* 61061 */
 		mes "ロゼ・ベリーニさんだ。";
 		mes "みんなはドクターベリーニと呼んでいる。";
 		next;
-		setquest 5341; //state=1
-		setquest 5342; //state=1
+		setquest 5341;
+		setquest 5342;
 		set VER_6QUE,1;
 		mes "[ヴァノクサイヒュ]";
 		mes "彼女のところに行って、";
@@ -17482,14 +17482,14 @@ un_bk_q.gat,93,168,4	script	ドクターベリーニ#EP15.2	10078,{/* 61062 */
 	switch(VER_6QUE) {
 	case 0://
 	case 1:
-		emotion 17, "ドクターベリーニ#EP15.2"; //61062
+		emotion 17, "ドクターベリーニ#EP15.2";
 		mes "[ロゼ・ベリーニ]";
 		mes "すみません。今は忙しいので、";
 		mes "話があるのでしたら";
 		mes "後にしてもらえますか？";
 		next;
 		menu "お手伝いします",-;
-		emotion 0, "ドクターベリーニ#EP15.2"; //61062
+		emotion 0, "ドクターベリーニ#EP15.2";
 		mes "[ロゼ・ベリーニ]";
 		mes "えっ？";
 		mes "手伝っていただけるのですか？";
@@ -17511,7 +17511,7 @@ un_bk_q.gat,93,168,4	script	ドクターベリーニ#EP15.2	10078,{/* 61062 */
 		mes "本当にたすかります。";
 		next;
 		menu "困っていた問題？",-;
-		emotion 1,""; //self
+		emotion 1,"";
 		mes "[ロゼ・ベリーニ]";
 		mes "今、生存者の人数を把握するために";
 		mes "聞き込み調査を行っています。";
@@ -17528,7 +17528,7 @@ un_bk_q.gat,93,168,4	script	ドクターベリーニ#EP15.2	10078,{/* 61062 */
 		mes "動いているはずで、あちこちに";
 		mes "散らばっているのでしょう。";
 		next;
-		emotion 20, "ドクターベリーニ#EP15.2"; //61062
+		emotion 20, "ドクターベリーニ#EP15.2";
 		mes "[ロゼ・ベリーニ]";
 		mes "いったい職員たちはどこにいるのか……。";
 		mes "シェルター内部を";
@@ -17543,7 +17543,7 @@ un_bk_q.gat,93,168,4	script	ドクターベリーニ#EP15.2	10078,{/* 61062 */
 		next;
 		menu "わかりました",-;
 		set VER_6QUE,2;
-		setquest 5346; //state=1
+		setquest 5346;
 		mes "[ロゼ・ベリーニ]";
 		mes "ありがとうございます。";
 		mes "それでは……";
@@ -17561,7 +17561,7 @@ un_bk_q.gat,93,168,4	script	ドクターベリーニ#EP15.2	10078,{/* 61062 */
 		close;
 	case 2:
 	case 3:
-		emotion 0, "ドクターベリーニ#EP15.2"; //61062
+		emotion 0, "ドクターベリーニ#EP15.2";
 		mes "[ロゼ・ベリーニ]";
 		mes "おや、あなたでしたか。";
 		mes "もう人数の把握ができたのですか？";
@@ -17579,7 +17579,7 @@ un_bk_q.gat,93,168,4	script	ドクターベリーニ#EP15.2	10078,{/* 61062 */
 			mes "[ロゼ・ベリーニ]";
 			mes '@num+ "名ですか？";
 			next;
-			emotion 20, "ドクターベリーニ#EP15.2"; //61062
+			emotion 20, "ドクターベリーニ#EP15.2";
 			mes "[ロゼ・ベリーニ]";
 			mes "おかしいですね。";
 			mes "従業員リストに記載されている人数と";
@@ -17604,7 +17604,7 @@ un_bk_q.gat,93,168,4	script	ドクターベリーニ#EP15.2	10078,{/* 61062 */
 		delquest 5342;
 		delquest 5346;
 		delquest 5350;
-		setquest 5370; //state=1
+		setquest 5370;
 		getitem 6961, 3;
 		warp "un_bunker.gat",97,91;
 		end;
@@ -17636,13 +17636,13 @@ un_bk_q.gat,86,121,4	script	科学者カールステン#EP15	749,{/* 61066 */
 	case 0://
 	case 1://
 	case 2:
-		emotion 1, "科学者カールステン#EP15"; //61066
+		emotion 1, "科学者カールステン#EP15";
 		mes "[科学者カールステン]";
 		mes "おや、こんな所に……。";
 		mes "どなたですか？";
 		next;
 		menu "私は……",-;
-		emotion 0, "科学者カールステン#EP15"; //61066
+		emotion 0, "科学者カールステン#EP15";
 		mes "[科学者カールステン]";
 		mes "あ～！　ベリーニさん？";
 		mes "全体会議の時に何度か";
@@ -17659,7 +17659,7 @@ un_bk_q.gat,86,121,4	script	科学者カールステン#EP15	749,{/* 61066 */
 		mes "この慌ただしい状況で";
 		mes "人員チェックとはさすがだ。";
 		next;
-		emotion 19, "科学者カールステン#EP15"; //61066
+		emotion 19, "科学者カールステン#EP15";
 		mes "[科学者カールステン]";
 		mes "待って下さい、";
 		mes "先ほど人数をチェックして";
@@ -17670,7 +17670,7 @@ un_bk_q.gat,86,121,4	script	科学者カールステン#EP15	749,{/* 61066 */
 		mes "違うな。こっちの数字だったかな？";
 		mes "あ！　この数字だな！";
 		next;
-		setquest 5350; //state=1
+		setquest 5350;
 		set VER_6QUE,3;
 		mes "[科学者カールステン]";
 		mes "科学者は私を含めて、";
@@ -17711,7 +17711,7 @@ un_bk_q.gat,56,286,4	script	機械工学者ムガシー#EP15	851,{/* 61067 */
 	mes "シェルターに必要な機械を";
 	mes "作成しているんだ。";
 	next;
-	emotion 6, "機械工学者ムガシー#EP15"; //61067
+	emotion 6, "機械工学者ムガシー#EP15";
 	mes "[機械工学者ムガシー]";
 	mes "機械工学者たちの総人員が知りたい？";
 	mes "悪いが私は分からない。";
