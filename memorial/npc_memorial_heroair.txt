@@ -1,9 +1,103 @@
 dali02.gat,139,87,3	script	道楽裁縫師#refine	70,{/* 51025 */
+	mes "[道楽裁縫師]";
+	mes "私は裁縫師をしています。";
+	mes "私に飛行船で入手できる装備を";
+	mes "渡して頂ければ";
+	mes "装備同士を組み合わせて";
+	mes "精錬をすることができます。";
+	next;
+	mes "[道楽裁縫師]";
+	mes "装備の精錬を行いますか？";
+	next;
+	select("飛行船シリーズを精錬:ペルロックシリーズを精錬:説明を聞く:やめる")
+	mes "[道楽裁縫師]";
+	mes "どれを精錬しますか？";
+	next;
+	select("^nItemID^15158:^nItemID^20899:^nItemID^22082")
+	mes "[道楽裁縫師]";
+	mes "素材にはどれを使いますか？";
+	next;
+	select("ペルロックのスーツ:ペルロックのマント:ペルロックのブーツ")
+	mes "[道楽裁縫師]";
+	mes "それでは精錬を開始しますが";
+	mes "素材になるアイテムを";
+	mes "複数所持している場合、";
+	mes "どれが使用されるかわかりません。";
+	next;
+	mes "[道楽裁縫師]";
+	mes "大事な装備が使用されないように";
+	mes "使用したくない装備は";
+	mes "必ず倉庫に預けておいてください。";
+	next;
+	mes "[道楽裁縫師]";
+	mes "それでは精錬をしても";
+	mes "よろしいですか？";
+	next;
+	select("精錬する:やめる")
+	mes "[道楽裁縫師]";
+	mes "うりゃー！";
+	mes "うりゃりゃりゃー！";
+	next;
+	delitem 22086, 1;
+	delitem 15158, 1;
+	{
+		misceffect 154,""; //self
+		mes "[道楽裁縫師]";
+		mes "よし、完成！";
+		mes "良い物ができました！";
+		getitem 15158, 1;
+		close;
+	}
+	else {
+		misceffect 155,""; //self
+		mes "[道楽裁縫師]";
+		mes "クホホッ……";
+		mes "失敗してしまいました……。";
+		mes "申し訳ありません……。";
+		close;
+	}
 OnInit:
 	waitingroom "飛行船装備【精錬】",0; //51025
 	end;
 }
 dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{/* 51026 */
+	mes "[飛行船愛好家]";
+	mes "ここでは飛行船装備の";
+	mes "買取や交換を行っています。";
+	mes "私、好きなんです！飛行船装備！";
+	next;
+	select("買取してほしい:交換してほしい:説明を聞く")
+	mes "[飛行船愛好家]";
+	mes "飛行船装備の買取ですね。";
+	mes "飛行船装備は精錬値によって";
+	mes "買取額が増えますよ。";
+	next;
+	mes "[飛行船愛好家]";
+	mes "買い取って欲しい装備は";
+	mes "必ず装備した状態で";
+	mes "話しかけて下さいね！";
+	next;
+	mes "[飛行船愛好家]";
+	mes "さて、どれを買取ましょうか？";
+	next;
+	select("飛行船装備:ペルロック装備:やめる")
+	announce "砦 [Gloria 1] の ゲオルグ を [ぷちとかげ] ギルドが占領しました", 32;
+	mes "[飛行船愛好家]";
+	mes "どれを買取ましょう？";
+	next;
+	select("^nItemID^15158:^nItemID^20899:^nItemID^22082")
+	mes "[飛行船愛好家]";
+	mes "そちらのアイテムは";
+	mes "^0000ff4860000^000000zenyで";
+	mes "買取ます。";
+	mes "よろしいですか？";
+	next;
+	select("いいえ:はい")
+	mes "[飛行船愛好家]";
+	mes "それでは買取ます。";
+	mes "はい、どうぞ。";
+	@delitem(idx: 147(itemid: unknown), amount: 1)
+	close;
 OnInit:
 	waitingroom "飛行船装備【交換・買取】",0; //51026
 	end;
@@ -68,6 +162,11 @@ dali02.gat,142,81,3	script	次元移動機#sara	10007,{/* 51024 */
 			mes "　一人しか入ることができない‐";
 			close;
 		}
+		if(getmercinfo(0)) {
+			mes "‐次元の狭間が不安定なため";
+			mes "　傭兵と一緒に入ることができない‐";
+			close;
+		}
 		switch(mdenter("hero_air")) {
 		case 0:	// エラーなし
 			announce "メモリアルダンジョン[hero_air] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
@@ -97,9 +196,65 @@ OnInit:
 	end;
 }
 
+1@air1.gat,1,1,0	script	#HeroAirManager	139,{
+OnStart:
+	if('flag)
+		end;
+	set 'flag,1;
+	hideonnpc getmdnpcname("ワイバーン#air1"); //67057
+	hideonnpc getmdnpcname("ワイバーンキッド#1air1"); //67058
+	hideonnpc getmdnpcname("レッサーワイバーン#2air"); //67059
+	hideonnpc getmdnpcname("スカイロータージャイロ#"); //67060
+	hideonnpc getmdnpcname("スカイロータージャイロ#"); //67061
+	hideonnpc getmdnpcname("スカイグレムリン#1air1"); //67062
+	hideonnpc getmdnpcname("スカイグレムリン#2air1"); //67063
+	hideonnpc getmdnpcname("スカイグレムリン#3air1"); //67064
+	hideonnpc getmdnpcname("スカイグレムリン#4air1"); //67065
+	hideonnpc getmdnpcname("スカイグレムリン#5air1"); //67066
+	hideonnpc getmdnpcname("スカイグレムリン#6air1"); //67067
+	hideonnpc getmdnpcname("スカイグレムリン#7air1"); //67068
+	hideonnpc getmdnpcname("スカイグレムリン#8air1"); //67069
+
+	hideonnpc getmdnpcname("スカイグレムリン#2aair1");
+	hideonnpc getmdnpcname("アイリス#2air1"); //85351
+	hideonnpc getmdnpcname("ケイオス#2air1"); //85352
+	hideonnpc getmdnpcname("warp1#air1"); //85325
+	hideonnpc getmdnpcname("warp2a#air1");
+	hideonnpc getmdnpcname("warp2b#air1");
+	hideonnpc getmdnpcname("warp3a#air1"); //85332
+	hideonnpc getmdnpcname("warp3b#air1"); //85333
+
+	end;
+}
+
 1@air1.gat,217,67,3	script	船長ペルロック#air1	873,{/* 85325 */
 	switch(HEROAIR_1QUE) {
 	case 0:
+		if(checkquest(120200)&8) {
+			mes "‐ケイオスとアイリスが";
+			mes "　船長らしき人物と話をしている‐";
+			next;
+			if(select("先を急ぐ","話を聞く") == 1) {
+				mes "‐先を急ぐことにした‐";
+				close2;
+				set HEROAIR_1QUE,1:
+				hideoffnpc getmdnpcname("ワイバーン#air1"); //67057
+				hideoffnpc getmdnpcname("ワイバーンキッド#1air1"); //67058
+				hideoffnpc getmdnpcname("レッサーワイバーン#2air"); //67059
+				hideoffnpc getmdnpcname("スカイロータージャイロ#"); //67060
+				hideoffnpc getmdnpcname("スカイロータージャイロ#"); //67061
+				hideoffnpc getmdnpcname("スカイグレムリン#1air1"); //67062
+				hideoffnpc getmdnpcname("スカイグレムリン#2air1"); //67063
+				hideoffnpc getmdnpcname("スカイグレムリン#3air1"); //67064
+				hideoffnpc getmdnpcname("スカイグレムリン#4air1"); //67065
+				hideoffnpc getmdnpcname("スカイグレムリン#5air1"); //67066
+				hideoffnpc getmdnpcname("スカイグレムリン#6air1"); //67067
+				hideoffnpc getmdnpcname("スカイグレムリン#7air1"); //67068
+				hideoffnpc getmdnpcname("スカイグレムリン#8air1"); //67069
+				donpcevent getmdnpcname("船長ペルロック#air1")+ "::OnStart";
+				end;
+			}
+		}
 		cutin "h_iris02.bmp", 2;
 		mes "[アイリス]";
 		mes "うわあ～!!";
@@ -409,6 +564,7 @@ OnTimer7000:
 
 1@air1.gat,248,54,0	script	warp1#air1	45,2,2,{/* 85329 (hide)*/
 	hideonnpc getmdnpcname("warp1#air1"); //85329
+	donpcevent getmdnpcname("mob#air1")+ "::OnStart";
 	warp getmdmapname("1@air1.gat"),91,68;
 	end;
 }
@@ -704,7 +860,7 @@ OnStart:
 	@spawn(type: BL_MOB, ID: 33123, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(81, 62), dir: 0, name: "スカイビホルダー")
 	@spawn(type: BL_MOB, ID: 33323, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(82, 57), dir: 0, name: "スカイロータージャイロ")
 	@spawn(type: BL_MOB, ID: 33335, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(81, 60), dir: 0, name: "スカイロータージャイロ")
-OnKilled1
+OnKilled1:
 	announce "12時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
 	//61,77,68,85
 	@spawn(type: BL_MOB, ID: 37283, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(61, 81), dir: 0, name: "スカイビホルダー")
@@ -715,7 +871,7 @@ OnKilled1
 	@spawn(type: BL_MOB, ID: 39373, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(65, 77), dir: 0, name: "スカイロータージャイロ")
 	@spawn(type: BL_MOB, ID: 40313, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(67, 80), dir: 0, name: "スカイロータージャイロ")
 	@spawn(type: BL_MOB, ID: 40432, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(65, 84), dir: 0, name: "スカイロータージャイロ")
-OnKilled2
+OnKilled2:
 	announce "9時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
 	//20,60,28,66
 	@spawn(type: BL_MOB, ID: 40791, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(24, 63), dir: 0, name: "スカイビホルダー")
@@ -724,7 +880,7 @@ OnKilled2
 	@spawn(type: BL_MOB, ID: 43382, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(26, 63), dir: 0, name: "スカイロータージャイロ")
 	@spawn(type: BL_MOB, ID: 37425, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(23, 62), dir: 0, name: "スカイロータージャイロ")
 	@spawn(type: BL_MOB, ID: 37469, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(27, 66), dir: 0, name: "スカイロータージャイロ")
-OnKilled3
+OnKilled3:
 	announce "このフロアにはもうモンスターの気配がないようだ。下の階へ進もう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
 	hideoffnpc getmdnpcname("warp2a#air1");
 	hideoffnpc getmdnpcname("warp2b#air1");
@@ -743,7 +899,7 @@ OnStart:
 	@spawn(type: BL_MOB, ID: 42270, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(108, 192), dir: 0, name: "レッサーワイバーン")
 	@spawn(type: BL_MOB, ID: 42300, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(114, 186), dir: 0, name: "レッサーワイバーン")
 	@spawn(type: BL_MOB, ID: 42369, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(111, 185), dir: 0, name: "レッサーワイバーン")
-OnKilled1
+OnKilled1:
 	announce "9時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
 	//60,185,68,192
 	@spawn(type: BL_MOB, ID: 5244, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(68, 191), dir: 0, name: "スカイグレムリン")
@@ -752,7 +908,7 @@ OnKilled1
 	@spawn(type: BL_MOB, ID: 6323, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(67, 192), dir: 0, name: "レッサーワイバーン")
 	@spawn(type: BL_MOB, ID: 6377, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(68, 188), dir: 0, name: "レッサーワイバーン")
 	@spawn(type: BL_MOB, ID: 6406, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(67, 191), dir: 0, name: "レッサーワイバーン")
-OnKilled2
+OnKilled2:
 	announce "9時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
 	//18,185,26,191
 	@spawn(type: BL_MOB, ID: 10384, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(19, 189), dir: 0, name: "スカイグレムリン")
@@ -761,7 +917,7 @@ OnKilled2
 	@spawn(type: BL_MOB, ID: 30167, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(23, 187), dir: 0, name: "レッサーワイバーン")
 	@spawn(type: BL_MOB, ID: 81012, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(18, 188), dir: 0, name: "レッサーワイバーン")
 	@spawn(type: BL_MOB, ID: 34075, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(26, 187), dir: 0, name: "レッサーワイバーン")
-OnKilled3
+OnKilled3:
 	announce "このフロアにはもうモンスターの気配がないようだ。機関室入口へ向かおう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
 	hideoffnpc getmdnpcname("アイリス#2air1"); //67070
 	hideoffnpc getmdnpcname("ケイオス#2air1"); //67071
@@ -781,6 +937,22 @@ OnTimer4000:
 1@air1.gat,88,189,5	script	アイリス#2air1	666,{/* 85351 (hide)*/
 	switch(HEROAIR_1QUE) {
 	case 1:
+		if(checkquest(120200)&8) {
+			mes "‐ケイオスとアイリスが";
+			mes "　機関室の前で話をしている‐";
+			next;
+			if(select("先を急ぐ","話を聞く") == 1) {
+				mes "‐先を急ぐことにした‐";
+				close2;
+				hideonnpc getmdnpcname("スカイグレムリン#2aair1"); //85353
+				hideoffnpc getmdnpcname("warp3a#air1"); //85332
+				hideoffnpc getmdnpcname("warp3b#air1"); //85333
+				hideonnpc getmdnpcname("アイリス#2air1"); //85351
+				hideonnpc getmdnpcname("ケイオス#2air1"); //85352
+				announce "モンスターの気配がする。倒しながら戻ったほうがいいだろう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
+				donpcevent getmdnpcname("スカイグレムリン#2aair1")+ "::OnStart";
+			}
+		}
 		cutin "h_iris01.bmp", 2;
 		mes "[アイリス]";
 		mes "はぁ……はぁ……。";
@@ -860,7 +1032,6 @@ OnTimer4000:
 	}
 	end;
 OnStart:
-	initnpctimer;
 	hideonnpc getmdnpcname("アイリス#2air1"); //85351
 	hideonnpc getmdnpcname("ケイオス#2air1"); //85352
 	hideoffnpc getmdnpcname("warp3a#air1"); //85332
@@ -926,6 +1097,30 @@ OnKilled3
 1@air2.gat,104,72,0	script	calla#air2	139,{/* 85367 */}
 1@air2.gat,104,52,0	script	callb#air2	139,{/* 85368 */}
 
+1@air2.gat,1,1,0	script	firecontrol#air	139,{
+OnStart:
+	initnpctimer;
+	end;
+OnTimer1000:
+	misceffect 106, "fire1#air2_0oy"; //98063
+	end;
+OnTimer2000:
+	misceffect 106, "fire2#air2_0oy"; //98064
+	misceffect 106, "fire15#air2_0oy"; //99590
+	end;
+OnTimer3000:
+	misceffect 106, "fire3#air2_0oy"; //98136
+	end;
+OnTimer3300:
+	misceffect 106, "fire5#air2_0oy"; //98138
+	end;
+OnTimer5000:
+	misceffect 106, "fire4#air2_0oy"; //98137
+	end;
+OnTimer5200:
+	initnpctimer;
+	end;
+}
 1@air2.gat,113,52,0	script	fire1#air2	139,{/* 85399 */}
 1@air2.gat,115,68,0	script	fire2#air2	139,{/* 85400 */}
 1@air2.gat,96,58,0	script	fire3#air2	139,{/* 85401 */}

@@ -49,10 +49,10 @@ speed: 350
 */
 
 //= Auriga Script ==============================================================
-// Ragnarok Online Cursed Knight in  Script	by refis
+// Ragnarok Online Cursed Knight in Ghost Palace Script	by refis
 //==============================================================================
 
-dali02.gat,46,135,5	script	老婆#dk	846,{/* 51201 */
+dali02.gat,46,135,5	script	老婆#dk	846,{
 	set '@f,countitem(6672);
 	mes "[老婆]";
 	mes "強い思いは時に強い力を持つ……。";
@@ -233,7 +233,7 @@ OnInit:
 	end;
 }
 
-dali02.gat,43,129,5	script	近衛兵#dk	686,{/* 51199 */
+dali02.gat,43,129,5	script	近衛兵#dk	686,{
 	if(BaseLevel < 100) {
 		mes "[近衛兵]";
 		mes "……君は……";
@@ -261,7 +261,7 @@ dali02.gat,43,129,5	script	近衛兵#dk	686,{/* 51199 */
 		mes "　また来てみよう……‐";
 		close;
 	}
-	if(checkquest(114750) & 0x8 == 8) {
+	if(checkquest(114750) & 0x8 == 0) {
 		mes "‐一人の鎧で身を固めた男が";
 		mes "　虚ろな顔でなにかをつぶやいている‐";
 		next;
@@ -466,7 +466,7 @@ OnInit:
 	end;
 }
 
-dali02.gat,40,134,5	script	次元移動機	10007,{/* 51200 */
+dali02.gat,40,134,5	script	次元移動機	10007,{
 	if(BaseLevel < 100) {
 		mes "[近衛兵]";
 		mes "……君は……。";
@@ -559,7 +559,7 @@ OnStart:
 	end;
 }
 
-1@spa.gat,42,201,1	script	近衛兵#dk	686,{/* 68730 */
+1@spa.gat,42,201,1	script	近衛兵#dk	686,{
 	mes "‐何も反応がない……。";
 	mes "　まるで時が止まっているように";
 	mes "　微動だにしない……‐";
@@ -577,7 +577,8 @@ OnTalk4:
 	unittalk "近衛兵 : 御意。……。姫の私室は2階、急がねば……。　彼女にもしものことがあれば私は……。";
 	end;
 }
-1@spa.gat,41,207,4	script	黒づくめの男#dkf1	685,{/* 68731 */
+
+1@spa.gat,41,207,4	script	黒づくめの男#dkf1	685,{
 	mes "‐全身黒づくめの";
 	mes "　長い髪の男が";
 	mes "　大きな剣を持ち";
@@ -607,7 +608,8 @@ OnTalk7:
 	unittalk "謎の声 : 人間は他人の不幸が好きらしいからな……。蜜をたっぷり吸い込んだ頃にまた会おうじゃないか。";
 	end;
 }
-1@spa.gat,41,204,5	script	国王#dk	965,{/* 68732 */
+
+1@spa.gat,41,204,5	script	国王#dk	965,{
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		mes "‐先ほどの近衛兵が";
 		mes "　国王らしき人物と会話をしている‐";
@@ -814,7 +816,7 @@ OnTimer9000:
 
 1@spa.gat,41,217,0	warp	亡霊の王宮2階	2,2,1@spa.gat,114,120
 
-1@spa.gat,135,125,3	script	ティアラ姫#dk	640,{/* 68735 */
+1@spa.gat,135,125,3	script	ティアラ姫#dk	640,{
 	mes "‐美しい女性が佇んでいる。";
 	mes "　どこか儚げに見えるのは";
 	mes "　気のせいだろうか？‐";
@@ -835,7 +837,8 @@ OnTalk5:
 	unittalk "ティアラ姫 : ……お聞かせください。あなたにとっても私は、顔も知らない隣国の殿方と結婚の契りを交わすことが望みなのでしょうか……。私は……。私の望みはあなたと……。";
 	end;
 }
-1@spa.gat,132,122,7	script	近衛兵#dk1	686,{/* 68736 */
+
+1@spa.gat,132,122,7	script	近衛兵#dk1	686,{
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		mes "[近衛兵]";
 		mes "……姫様、ご無事でなによりです。";
@@ -969,7 +972,7 @@ OnTimer9000:
 	end;
 }
 
-1@spa.gat,111,133,5	script	隣国の王子#dk3	470,7,7,{/* 68738 (hide)*/
+1@spa.gat,111,133,5	script	隣国の王子#dk3	470,7,7,{
 	mes "‐仕立てられた上品そうな";
 	mes "　服を着た男が、不気味な笑顔を";
 	mes "　浮かべながら笑っている‐";
@@ -993,29 +996,34 @@ OnTouch:
 	}
 	end;
 }
+
 1@spa.gat,117,137,0	warp	亡霊の王宮3階	2,2,1@spa.gat,60,43
 
-1@spa.gat,28,52,7	script	騎士団長#dk	418,{/* 68740 */
+1@spa.gat,28,52,7	script	騎士団長#dk	418,{
 	mes "‐男は苦渋の色を浮かべた表情で、";
 	mes "　近衛兵を見つめている……‐";
 	close;
 }
-1@spa.gat,25,53,7	script	兵士#dk1	413,{/* 68741 */
+
+1@spa.gat,25,53,7	script	兵士#dk1	413,{
 	mes "‐男は苦渋の色を浮かべた表情で、";
 	mes "　近衛兵を見つめている……‐";
 	close;
 }
-1@spa.gat,34,53,1	script	兵士#dk2	413,{/* 68742 */
+
+1@spa.gat,34,53,1	script	兵士#dk2	413,{
 	mes "‐男は戸惑いの表情で、";
 	mes "　近衛兵を見つめている……‐";
 	close;
 }
-1@spa.gat,30,52,7	script	兵士#dk3	417,{/* 68743 */
+
+1@spa.gat,30,52,7	script	兵士#dk3	417,{
 	mes "‐男は戸惑いの表情で、";
 	mes "　近衛兵を見つめている……‐";
 	close;
 }
-1@spa.gat,30,58,5	script	近衛兵#dk2	10018,{/* 68744 */
+
+1@spa.gat,30,58,5	script	近衛兵#dk2	10018,{
 	mes "‐鎖にしっかりと繋がれ、";
 	mes "　身動きがとれないようだ‐";
 	close;
@@ -1029,7 +1037,8 @@ OnTalk3:
 	unittalk "近衛兵 : ティアラ姫……。私の者のようなもののために……。";
 	end;
 }
-1@spa.gat,32,54,1	script	国王#dk1	965,{/* 68745 */
+
+1@spa.gat,32,54,1	script	国王#dk1	965,{
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		mes "[国王]";
 		mes "ここにモンスターを呼び寄せたのが";
@@ -1161,11 +1170,13 @@ OnTimer36000:
 	end;
 }
 
-1@spa.gat,31,57,5	script	近衛兵#dk3	10018,{/* 68747 (hide)*/}
-1@spa.gat,35,56,5	script	魔剣タルタノス#dkt	844,{/* 68748 (hide)*/}
+1@spa.gat,31,57,5	script	近衛兵#dk3	10018,{}
+
+1@spa.gat,35,56,5	script	魔剣タルタノス#dkt	844,{}
+
 1@spa.gat,54,28,0	warp	亡霊の王宮4階	2,2,1@spa.gat,218,186
 
-1@spa.gat,201,214,1	script	魔剣タルタノス#dkt1	1205,{/* 68750 */
+1@spa.gat,201,214,1	script	魔剣タルタノス#dkt1	1205,{
 	end;
 OnTalk1:
 	unittalk "魔剣タルタノス : ……その言葉に嘘はないな？　貴様と我はいまこの時から魂をともにし、我は貴様に力を与えよう！　貴様は我に血を捧げるのだ！";
@@ -1174,7 +1185,8 @@ OnTalk2:
 	unittalk "魔剣タルタノス : 愛しの姫君はどうやら牢獄に幽閉されているようだぞ。";
 	end;
 }
-1@spa.gat,197,218,5	script	隣国の王子#dk	470,{/* 68751 */
+
+1@spa.gat,197,218,5	script	隣国の王子#dk	470,{
 	mes "‐不適な笑みを浮かべ";
 	mes "　近衛兵を見つめている‐";
 	close;
@@ -1206,43 +1218,52 @@ OnTalk9:
 	unittalk "呪いの根源 : あの女が悪いんだよッ!!　僕が魔物を呼び込んでるとこを見た上に、誰にも殴られたことがないこの僕を殴ったんだ……この僕を……。卑怯者っていいながらさぁ……？　許せない……許せないよ……。";
 	end;
 }
-1@spa.gat,197,218,5	script	呪いの根源#dk	2959,{/* 68752 (hide)*/}
-1@spa.gat,194,214,5	script	倒れた国王#dk	956,{/* 68753 */
+
+1@spa.gat,197,218,5	script	呪いの根源#dk	2959,{}
+
+1@spa.gat,194,214,5	script	倒れた国王#dk	956,{
+	mes "‐返事がない……。";
+	mes "　殺されて間もないようだ‐";
+	clo
+se;
+}
+1@spa.gat,211,194,3	script	倒れた騎士団長#dk	887,{
 	mes "‐返事がない……。";
 	mes "　殺されて間もないようだ‐";
 	close;
 }
-1@spa.gat,211,194,3	script	倒れた騎士団長#dk	887,{/* 68754 */
+
+1@spa.gat,201,198,1	script	倒れた兵士#dk	849,{
 	mes "‐返事がない……。";
 	mes "　殺されて間もないようだ‐";
 	close;
 }
-1@spa.gat,201,198,1	script	倒れた兵士#dk	849,{/* 68755 */
+
+1@spa.gat,197,190,1	script	倒れた兵士#dk1	849,{
 	mes "‐返事がない……。";
 	mes "　殺されて間もないようだ‐";
 	close;
 }
-1@spa.gat,197,190,1	script	倒れた兵士#dk1	849,{/* 68756 */
+
+1@spa.gat,191,207,7	script	倒れた兵士#dk2	849,{
 	mes "‐返事がない……。";
 	mes "　殺されて間もないようだ‐";
 	close;
 }
-1@spa.gat,191,207,7	script	倒れた兵士#dk2	849,{/* 68757 */
+
+1@spa.gat,206,209,7	script	倒れた兵士#dk3	849,{
 	mes "‐返事がない……。";
 	mes "　殺されて間もないようだ‐";
 	close;
 }
-1@spa.gat,206,209,7	script	倒れた兵士#dk3	849,{/* 68758 */
+
+1@spa.gat,189,195,1	script	倒れた兵士#dk4	849,{
 	mes "‐返事がない……。";
 	mes "　殺されて間もないようだ‐";
 	close;
 }
-1@spa.gat,189,195,1	script	倒れた兵士#dk4	849,{/* 68759 */
-	mes "‐返事がない……。";
-	mes "　殺されて間もないようだ‐";
-	close;
-}
-1@spa.gat,199,214,1	script	近衛兵#dk4	686,{/* 68760 */
+
+1@spa.gat,199,214,1	script	近衛兵#dk4	686,{
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		mes "‐隣国の王子と近衛兵が";
 		mes "　話しているのが見える‐";
@@ -1459,7 +1480,8 @@ OnTimer9000:
 }
 
 1@spa.gat,178,186,0	warp	亡霊の王宮5階	2,2,1@spa.gat,186,57
-1@spa.gat,213,42,7	script	近衛兵#dk5	686,{/* 83003 */
+
+1@spa.gat,213,42,7	script	近衛兵#dk5	686,{
 	mes "‐ティアラ姫を抱きかかえており、";
 	mes "　その表情は見えない……‐";
 	close;
@@ -1488,7 +1510,8 @@ OnTalk8:
 	unittalk "近衛兵 : 姫様？　ティアラ姫……？　どうして……どうして目を開けてくれないのですかッ!?　何故、笑ってくれないのですか……!?どうして……どうして……どうし……て……。";
 	end;
 }
-1@spa.gat,216,43,3	script	ティアラ姫#dk1	640,{/* 83004 */
+
+1@spa.gat,216,43,3	script	ティアラ姫#dk1	640,{
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		mes "‐ティアラ姫と近衛兵が";
 		mes "　話しているのが見える‐";
@@ -1782,7 +1805,7 @@ OnKilled7:
 	end;
 }
 
-1@spa.gat,196,44,5	script	黒づくめの男#dk	685,{/* 83006 (hide)*/
+1@spa.gat,196,44,5	script	黒づくめの男#dk	685,{
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		mes "‐黒づくめの男が凶々しい";
 		mes "　剣を片手に立っている‐";
@@ -1995,7 +2018,8 @@ OnTimer3000:
 	emotion 9,getmdnpcname("黒づくめの男#dk");
 	end;
 }
-1@spa.gat,196,46,1	script	#dk_tb	844,{/* 83007 (hide)*/
+
+1@spa.gat,196,46,1	script	#dk_tb	844,{
 	end;
 OnStart:
 	initnpctimer;
@@ -2029,7 +2053,8 @@ OnTimer28000:
 	hideoffnpc getmdnpcname("国王#dk11");
 	end;
 }
-1@spa.gat,198,43,1	script	#dk_sv	844,{/* 83008 (hide)*/
+
+1@spa.gat,198,43,1	script	#dk_sv	844,{
 	end;
 OnTalk1:
 	unittalk "若い男の声 : ご安心ください。これからはずっと、姫様の傍におります。もう一人にはしません……。";
@@ -2041,7 +2066,8 @@ OnTalk3:
 	unittalk "若い男の声 : 我が名はサクライ。我が名をゆめゆめ忘れるな。再び、相見える日までな……。";
 	end;
 }
-1@spa.gat,196,41,1	script	#dk_tv	844,{/* 83009 (hide)*/
+
+1@spa.gat,196,41,1	script	#dk_tv	844,{
 	end;
 OnTalk1:
 	unittalk "謎の声 : 忘れるな、サクライ。私と交わした血の契約を。";
@@ -2050,7 +2076,8 @@ OnTalk2:
 	unittalk "謎の声 : 私を満足させる血を見つけるまで、貴様の魂は私のモノだ。クククククク……。";
 	end;
 }
-1@spa.gat,204,29,1	script	国王#dk11	965,{/* 83010 (hide)*/
+
+1@spa.gat,204,29,1	script	国王#dk11	965,{
 	if(checkquest(114765)&0x8){
 		mes "[国王]";
 		mes "どうかサクライを";
@@ -2148,7 +2175,7 @@ OnTalk2:
 	close;
 }
 
-1@spa.gat,210,28,0	script	亡霊の王宮出口	45,2,2,{/* 83011 (hide)*/
+1@spa.gat,210,28,0	script	亡霊の王宮出口	45,2,2,{
 	mes "‐……景色が揺らいでいる。";
 	mes "　そろそろ記憶の中の世界から";
 	mes "　離れる時間のようだ‐";
