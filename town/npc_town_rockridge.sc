@@ -364,6 +364,7 @@ harboro1.gat,362,206,0	script	harboro1_rockrdg1	45,1,1,{
 	warp "rockrdg1.gat",37,246;
 	end;
 }
+
 rockrdg1.gat,33,246,0	warp	rockrdg1_harboro1	1,1,harboro1.gat,358,206
 
 harboro1.gat,360,209,3	script	自警団員#harboro1	10220,{
@@ -1479,6 +1480,7 @@ OnTalk2:
 	unittalk "イヴォカ・スクーディー : ジョニーがいなくなったとしても、次に相手をしなければならないのは……";
 	end;
 }
+
 rockrdg1_q.gat,156,302,7	script	イヴォカ・スクーディー::イヴォカ#rock02	10212,{/* 59796 (cloaking)*/
 	end;
 OnTalk1:
@@ -1497,6 +1499,7 @@ OnInit:
 	cloakonnpc;
 	end;
 }
+
 rockrdg1_q.gat,153,303,5	script	アイアット・ワープ#revt	10211,{/* 59797 */
 	if(ROCKRIDGE_1QUE != 5) {
 		cutin "rock_worp",0;
@@ -1646,6 +1649,7 @@ rockrdg1_q.gat,153,303,5	script	アイアット・ワープ#revt	10211,{/* 59797 */
 	cutin "rock_worp",255;
 	end;
 }
+
 rockrdg1_q.gat,160,306,3	script	ジョニー・ジェイムス#re	10213,{/* 59798 (cloaking)*/
 	end;
 OnTalk1:
@@ -1694,6 +1698,7 @@ OnInit:
 	cloakonnpc;
 	end;
 }
+
 rockrdg1_q.gat,156,306,5	script	キャクター族のガンマン::ガンマン#rock01	10212,{/* 59799 (cloaking)*/
 	end;
 OnTalk1:
@@ -1709,6 +1714,7 @@ OnInit:
 	cloakonnpc;
 	end;
 }
+
 rockrdg1_q.gat,164,306,3	script	キャクター族のガンマン::ガンマン#rock02	10212,{/* 59800 (cloaking)*/
 	end;
 OnTalk1:
@@ -1727,6 +1733,7 @@ OnInit:
 	cloakonnpc;
 	end;
 }
+
 rockrdg1_q.gat,161,302,1	script	キャクター族のガンマン::ガンマン#rock03	10212,{/* 59801 (cloaking)*/
 	end;
 OnTalk1:
@@ -1742,6 +1749,7 @@ OnInit:
 	cloakonnpc;
 	end;
 }
+
 rockrdg1_q.gat,168,306,3	script	アルバート・フォード#re	10214,{/* 59802 (cloaking)*/
 	end;
 OnTalk1:
@@ -2170,6 +2178,7 @@ harboro1.gat,288,193,5	script	ショーン・マッカーディ#	10215,{/* 59805 */
 		close;
 	}
 }
+
 rockrdg2_q.gat,347,216,5	script	ショーン・マッカーディ#	10215,{/* 59806 */
 	if(ROCKRIDGE_1QUE == 11) {
 		mes "[ショーン・マッカーディ]";
@@ -2211,6 +2220,7 @@ rockrdg2_q.gat,347,216,5	script	ショーン・マッカーディ#	10215,{/* 59806 */
 		end;
 	}
 }
+
 rockmi2.gat,10,86,5	script	ショーン・マッカーディ#	10215,{/* 59807 */
 	if(ROCKRIDGE_1QUE == 11) {
 		mes "[ショーン・マッカーディ]";
@@ -2284,6 +2294,7 @@ rockmi2.gat,10,86,5	script	ショーン・マッカーディ#	10215,{/* 59807 */
 		end;
 	}
 }
+
 rockrdg2_q.gat,279,313,3	script	ポッコリと穴の開いた岩#	10042,{/* 59808 */
 	if(ROCKRIDGE_1QUE == 13) {
 		mes "‐ジョニーが言っていた";
@@ -2314,6 +2325,7 @@ rockrdg2_q.gat,279,313,3	script	ポッコリと穴の開いた岩#	10042,{/* 59808 */
 	warp "har_in01.gat",18,18;
 	end;
 }
+
 rockrdg2_q.gat,282,310,3	script	アルバート・フォード#ro	10214,{/* 59809 (cloaking)*/
 	if(ROCKRIDGE_1QUE == 13) {
 		mes "[アルバート・フォード]";
@@ -2624,6 +2636,29 @@ harboro1.gat,138,157,5	script	ドノバン	854,{/* 59810 */
 	}
 	if(checkquest(9459)) {
 		if(checkquest(9459) & 0x2) {
+			mes "[ドノバン]";
+			mes "ああ、調度良いところに";
+			mes "来てくれました。";
+			mes "そろそろデビルズフィンガーズを";
+			mes "除去する頃合いかなと";
+			mes "考えていたんです。";
+			next;
+			if(select("除去をやります","今はちょっと忙しくて……") == 2) {
+				//TODO
+				mes "[ドノバン]";
+				mes "あ、そうなんですか、";
+				mes "しょうがないですね。";
+				mes "良かったら時間がある時に";
+				mes "訪ねて来て下さい。";
+				close;
+			}
+			mes "[ドノバン]";
+			mes "地下への道は既におわかりですよね？";
+			mes "それではよろしくお願いします！";
+			delquest 9459;
+			setquest 9458; //state=1
+			viewpoint 1, 324, 124, 1, 0x00FF00; //59715
+			close;
 		}
 		mes "[ドノバン]";
 		mes "またデビルズフィンガーズが";
@@ -5259,10 +5294,13 @@ harboro1.gat,334,135,6	script	淡水化施設管理所長	853,{/* 59914 */
 		close;
 	}
 	if(checkquest(12404)) {
-		mes "[淡水化施設管理所長]";
-		mes "疲れていないのか？";
-		mes "今すぐ整備する必要はないぞ。";
-		close;
+		if(checkquest(12404)&2 == 0) {
+			mes "[淡水化施設管理所長]";
+			mes "疲れていないのか？";
+			mes "今すぐ整備する必要はないぞ。";
+			close;
+		}
+		delquest 12404;
 	}
 	if(checkquest(12409)) {
 		mes "[淡水化施設管理所長]";
@@ -5305,7 +5343,7 @@ harboro1.gat,334,135,6	script	淡水化施設管理所長	853,{/* 59914 */
 		mes "わかった。";
 		mes "地下にはこの裏の建物にいる";
 		mes "ジョーに案内してもらってくれ。";
-		viewpoint 1, 324, 124, 1, 0xFF00FF00; //59836
+		viewpoint 1, 324, 124, 1, 0x00FF00; //59836
 		next;
 		mes "[淡水化施設管理所長]";
 		mes "君がやるべきことは、";
@@ -6627,16 +6665,41 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		close;
 	}
 	if(checkquest(14673)) {
+		if(checkquest(14673)&2 == 0) {
+			mes "[デモン]";
+			mes "もう来たの？";
+			mes "その気持ちはありがたいけど、";
+			mes "まだ爆弾を作っているところなんだ。";
+			next;
+			mes "[デモン]";
+			mes "手は2本しかないからな。";
+			mes "あんまり早く持って来てくれても";
+			mes "作りきれないんだ。";
+			mes "また後で来てくれ。";
+			close;
+		}
 		mes "[デモン]";
-		mes "もう来たの？";
-		mes "その気持ちはありがたいけど、";
-		mes "まだ爆弾を作っているところなんだ。";
+		mes "この前持って来てくれた分は";
+		mes "作り終わって熟成中なんだ。";
+		mes "知ってる？";
+		mes "ワインと爆弾は熟成するほど";
+		mes "味に深みが出るんだよ？";
+		next;
+		mes "[ミッドナイト]";
+		mes "古い爆弾は使えなくなるんじゃ";
+		mes "ないのか……？";
 		next;
 		mes "[デモン]";
-		mes "手は2本しかないからな。";
-		mes "あんまり早く持って来てくれても";
-		mes "作りきれないんだ。";
-		mes "また後で来てくれ。";
+		mes "言葉のあやだよ、あや。";
+		next;
+		emotion 3;
+		mes "[デモン]";
+		mes "それじゃ今回も頼むよ。";
+		mes "^0000cd猛毒の粉10個、黒色火薬1個^000000と";
+		mes "^0000cdガスターを15匹退治^000000だ。";
+		mes "頑張ってくれよ！";
+		delquest 14673;
+		setquest 14672; //state=1
 		close;
 	}
 	if(checkquest(14672)) {
@@ -7334,6 +7397,7 @@ rockrdg2.gat,304,350,0	script	rockrdg2_rockmi1_01	45,1,1,{/* 59979 */
 		close;
 	}
 }
+
 rockrdg2.gat,301,349,3	script	自警団員#rockrdg2	10220,{/* 59980 */
 	mes "[自警団員]";
 	mes "この先は危険です。";
@@ -7344,6 +7408,7 @@ OnTalk:
 	donpcevent "自警団員 : この先は危険です。BaseLv160以上の方のみお通ししています。";
 	end;
 }
+
 rockmi1.gat,247,16,0	warp	rockmi1_rockrdg2_01	1,1,rockrdg2.gat,304,344	//59512
 rockmi3.gat,247,16,0	warp	rockmi3_rockrdg2_01	1,1,rockrdg2.gat,304,344	//51122
 
@@ -7452,6 +7517,7 @@ rockrdg1.gat,262,90,7	script	うずくまった馬#rr	10217,{/* 59981 */
 		end;
 	}
 }
+
 rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 	if(ROCKRIDGE_1QUE < 16) {
 		cutin "rock_cact03",2;
@@ -7808,6 +7874,7 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 		end;
 	}
 }
+
 rockrdg1.gat,339,134,3	script	チビレクター#rrrem02	10222,{/* 59983 */
 	if(!checkquest(16079)) {
 		mes "[チビレクター]";
@@ -7825,6 +7892,7 @@ rockrdg1.gat,339,134,3	script	チビレクター#rrrem02	10222,{/* 59983 */
 	mes "アガベ味ジュースですか？";
 	close;
 }
+
 rockrdg1.gat,146,164,1	script	荒野のキャクターピン#rr	10218,{/* 59984 */
 	mes "[荒野のキャクターピン]";
 	mes "荒野を歩くキャクター族が珍しいか？";
@@ -7892,6 +7960,7 @@ rockrdg1.gat,146,164,1	script	荒野のキャクターピン#rr	10218,{/* 59984 */
 	viewpoint 2, 1, 1, 7, 0xFFFFFFFF; //59909
 	close;
 }
+
 rockrdg1.gat,305,200,3	script	キャクター少女#rrem04	10226,{/* 59985 */
 	mes "[キャクター少女]";
 	mes "……見知らぬ人、";
@@ -7934,6 +8003,7 @@ OnInsight:
 		cloakonnpc;
 	end;
 }
+
 rockrdg1.gat,195,183,3	script	好奇心旺盛なコヨーテ#rr	3739,{/* 59986 */
 	end;
 OnInsight:
@@ -7941,6 +8011,7 @@ OnInsight:
 		cloakonnpc;
 	end;
 }
+
 rockrdg1.gat,195,182,0	script	#好奇心旺盛なコヨーテ01	139,7,7,{/* 59987 */
 	end;
 OnTouch:
@@ -7979,7 +8050,9 @@ OnTouch:
 	viewpoint 1, 149, 103, 7, 0xFFFFFF00; //59912
 	close;
 }
+
 rockrdg1.gat,182,124,3	script	怪しい砂山#rrem01	557,{/* 59988 */}
+
 rockrdg1.gat,286,247,3	script	怪しい砂山#rrem02	557,{/* 59989 */
 	if(!checkquest(16078)) {
 		mes "‐何か袋が埋まっている。";
@@ -8018,6 +8091,7 @@ OnInsight:
 		cloakonnpc;
 	end;
 }
+
 rockrdg1.gat,202,246,3	script	怪しい砂山#rrem03	557,{/* 59990 */
 	if(!checkquest(16078)) {
 		mes "‐何か袋が埋まっている。";
@@ -8056,7 +8130,9 @@ OnInsight:
 		cloakonnpc;
 	end;
 }
+
 rockrdg1.gat,149,103,3	script	怪しい砂山#rrem04	557,{/* 59991 */}
+
 rockrdg2.gat,295,328,5	script	病弱なガスト#rockdaily	10231,{/* 59992 */
 	if(ROCKRIDGE_1QUE < 16) {
 		mes "[ガスト]";
@@ -8074,11 +8150,54 @@ rockrdg2.gat,295,328,5	script	病弱なガスト#rockdaily	10231,{/* 59992 */
 		close;
 	}
 	if(checkquest(1299)) {
+		if(checkquest(1299)&2 == 0) {
+			mes "[ガスト]";
+			mes "ガスター退治にはまだ少し早いかな。";
+			mes "パトロール直前に";
+			mes "退治してもらわないと";
+			mes "あまり意味がないからね。";
+			close;
+		}
 		mes "[ガスト]";
-		mes "ガスター退治にはまだ少し早いかな。";
-		mes "パトロール直前に";
-		mes "退治してもらわないと";
-		mes "あまり意味がないからね。";
+		mes "おお、よそ者さん！";
+		mes "今回も手伝ってくれるのかい？";
+		next;
+		if(select("手を貸す","断る") == 2) {
+			//TODO
+			mes "[ガスト]";
+			mes "報酬が貰えるんだよ？";
+			mes "やらないの？";
+			close;
+		}
+		mes "[ガスト]";
+		mes "ありがとう！";
+		mes "それじゃ、誰かに見つかる前に";
+		mes "早く行ってきてね。";
+		delquest 1299;
+		setquest 1298; //state=1
+		close;
+	}
+	if(checkquest(1298) & 0x4) {
+		mes "[ガスト]";
+		mes "ガスターを退治してくれたのかい？";
+		mes "ありがとう！";
+		mes "これはお礼だよ！";
+		next;
+		if(checkitemblank() == 0) {
+			mes "‐荷物をこれ以上持てません";
+			mes "　荷物に1個以上の空きを";
+			mes "　作ってください‐";
+			close;
+		}
+		delquest 1298;
+		setquest 1299; //state=1
+		getitem 25250, 3;
+		getexp 300000000,120000000;
+		mes "[ガスト]";
+		mes "さあ、また現れる前に";
+		mes "さっさとパトロールに行って来よう。";
+		mes "もし良かったら、次のパトロールの前にも";
+		mes "ガスター退治を引き受けてほしいな。";
 		close;
 	}
 	if(!checkquest(1298)) {
@@ -8168,29 +8287,6 @@ rockrdg2.gat,295,328,5	script	病弱なガスト#rockdaily	10231,{/* 59992 */
 		setquest 1298;
 		close;
 	}
-	if(checkquest(1298) & 0x4) {
-		mes "[ガスト]";
-		mes "ガスターを退治してくれたのかい？";
-		mes "ありがとう！";
-		mes "これはお礼だよ！";
-		next;
-		if(checkitemblank() == 0) {
-			mes "‐荷物をこれ以上持てません";
-			mes "　荷物に1個以上の空きを";
-			mes "　作ってください‐";
-			close;
-		}
-		delquest 1298;
-		setquest 1299; //state=1
-		getitem 25250, 3;
-		getexp 300000000,120000000;
-		mes "[ガスト]";
-		mes "さあ、また現れる前に";
-		mes "さっさとパトロールに行って来よう。";
-		mes "もし良かったら、次のパトロールの前にも";
-		mes "ガスター退治を引き受けてほしいな。";
-		close;
-	}
 	mes "[ガスト]";
 	mes "ガスターは退治してくれた？";
 	mes "もうすぐパトロールの時間だから";
@@ -8198,13 +8294,16 @@ rockrdg2.gat,295,328,5	script	病弱なガスト#rockdaily	10231,{/* 59992 */
 	mes "よそ者の君だけが頼りなんだ。";
 	close;
 }
+
 rockrdg1.gat,36,250,5	script	ミスター・マックフィー#	98,{/* 59993 */
 	if(checkquest(1321)) {
 		mes "[ミスター・マックフィー]";
 		mes "妻が言うには、";
 		mes "チョロンちゃんは家の裏口から出て";
 		mes "鉄条網を通り";
-		mes "真っすぐ^ff0000南の方^000000へ";
+		switch(ROCKRIDGE_2QUE) {
+		case 5: mes "真っすぐ^ff0000南の方^000000へ"; break;
+		}
 		mes "走っていったらしいです。";
 		next;
 		mes "[ミスター・マックフィー]";
@@ -8214,7 +8313,9 @@ rockrdg1.gat,36,250,5	script	ミスター・マックフィー#	98,{/* 59993 */
 		mes "鉄条網に沿って行き、";
 		mes "白い毛が中に落ちている穴を";
 		mes "探してくれませんか？";
-		viewpoint 1, 43, 145, 1, 0x00FF00;
+		switch(ROCKRIDGE_2QUE) {
+		case 5: viewpoint 1, 43, 145, 1, 0x00FF00; break;
+		}
 		close;
 	}
 	if(checkquest(1322)) {
@@ -8232,13 +8333,25 @@ rockrdg1.gat,36,250,5	script	ミスター・マックフィー#	98,{/* 59993 */
 	mes "驚かせないでくださいよ。";
 	close;
 }
-rockrdg1.gat,170,233,3	script	穴#rkdqgd1	550,{/* 59994 */}
-rockrdg1.gat,183,143,3	script	穴#rkdqgd2	550,{/* 59995 */}
+
+rockrdg1.gat,170,233,3	script	穴#rkdqgd1	550,{/* 59994 */
+	mes "‐穴がある。";
+	mes "　中には湿った土があるだけだ‐";
+	close;
+}
+
+rockrdg1.gat,183,143,3	script	穴#rkdqgd2	550,{/* 59995 */
+	mes "‐穴がある。";
+	mes "　中には湿った土があるだけだ‐";
+	close;
+}
+
 rockrdg1.gat,215,72,3	script	穴#rkdqgd3	550,{/* 59996 */
 	mes "‐穴がある。";
 	mes "　中には湿った土があるだけだ‐";
 	close;
 }
+
 rockrdg1.gat,43,145,3	script	穴#rkq1321	550,{/* 59997 */
 	if(checkquest(1321)) {
 		mes "‐穴がある。";
@@ -8255,13 +8368,75 @@ rockrdg1.gat,43,145,3	script	穴#rkq1321	550,{/* 59997 */
 	mes "‐穴がある。中は空っぽだ‐";
 	close;
 }
+
 rockrdg1.gat,100,230,3	script	穴#rkq1323	550,{/* 59998 */
+	if(checkquest(1327)) {
+		mes "‐穴がある。";
+		mes "　中には白い毛が少し";
+		mes "　積もっているように見える‐";
+		next;
+		mes "‐^0000ffスリッパ^000000を見つけた。";
+		mes "　確認のために";
+		mes "　夫人のところへ持っていこう‐";
+		delquest 1327;
+		setquest 1328; //state=1
+		close;
+	}
 	mes "‐穴がある。中は空っぽだ‐";
 	close;
 }
-rockrdg1.gat,58,195,3	script	穴#rkq1324	550,{/* 59999 */}
-rockrdg1.gat,71,149,3	script	穴#rkq1325	550,{/* 60000 */}
-rockrdg1.gat,109,60,3	script	穴#rkq1326	550,{/* 60001 */}
+
+rockrdg1.gat,58,195,3	script	穴#rkq1324	550,{/* 59999 */
+	if(checkquest(1327)) {
+		mes "‐穴がある。";
+		mes "　中には白い毛が少し";
+		mes "　積もっているように見える‐";
+		next;
+		mes "‐^0000ffスプーン^000000を見つけた。";
+		mes "　確認のために";
+		mes "　夫人のところへ持っていこう‐";
+		delquest 1327;
+		setquest 1328; //state=1
+		close;
+	}
+	mes "‐穴がある。中は空っぽだ‐";
+	close;
+}
+
+rockrdg1.gat,71,149,3	script	穴#rkq1325	550,{/* 60000 */
+	if(checkquest(1327)) {
+		mes "‐穴がある。";
+		mes "　中には白い毛が少し";
+		mes "　積もっているように見える‐";
+		next;
+		mes "‐^0000ff作業用の長靴^000000を見つけた。";
+		mes "　確認のために";
+		mes "　夫人のところへ持っていこう‐";
+		delquest 1327;
+		setquest 1328; //state=1
+		close;
+	}
+	mes "‐穴がある。中は空っぽだ‐";
+	close;
+}
+
+rockrdg1.gat,109,60,3	script	穴#rkq1326	550,{/* 60001 */
+	if(checkquest(1327)) {
+		mes "‐穴がある。";
+		mes "　中には白い毛が少し";
+		mes "　積もっているように見える‐";
+		next;
+		mes "‐^0000ff手袋^000000を見つけた。";
+		mes "　確認のために";
+		mes "　夫人のところへ持っていこう‐";
+		delquest 1327;
+		setquest 1328; //state=1
+		close;
+	}
+	mes "‐穴がある。中は空っぽだ‐";
+	close;
+}
+
 rockrdg1.gat,191,101,3	script	穴#rkq1327	550,{/* 60002 */
 	if(checkquest(1327)) {
 		mes "‐穴がある。";
@@ -8278,6 +8453,7 @@ rockrdg1.gat,191,101,3	script	穴#rkq1327	550,{/* 60002 */
 	mes "‐穴がある。中は空っぽだ‐";
 	close;
 }
+
 rockrdg1.gat,285,96,3	script	睨みつける鷲#rockc01	10219,{/* 60003 */
 	mes "[睨みつける鷲]";
 	mes "水害と戦っていた異邦人は";
@@ -8288,6 +8464,7 @@ rockrdg1.gat,285,96,3	script	睨みつける鷲#rockc01	10219,{/* 60003 */
 	mes "まるで雑草のように逞しい。";
 	close;
 }
+
 rockrdg1.gat,331,111,3	script	フアニタス#rockc02	10222,5,5,{/* 60004 */
 	mes "[フアニタス]";
 	mes "私はコヨーテ狩りが";
@@ -8307,12 +8484,25 @@ rockrdg1.gat,331,111,3	script	フアニタス#rockc02	10222,5,5,{/* 60004 */
 	mes "ないんだよ！";
 	close;
 OnTouch:
+	if(!getnpctimer(1,"リレンド・ウェンキンス#")) {
+		initnpctimer;
+	}
+	end;
+OnTimer1000:
 	unittalk "カリンタス : 僕は冒険者の隊長だ！　コヨーテを100匹捕まえてやる！";
+	end;
+OnTimer5000:
 	unittalk "フアニタス : それじゃ私は200匹！";
+	end;
+OnTimer9000:
 	unittalk "素早いサソリ : 私はコヨーテを狩る冒険者だ！";
+	end;
+OnTimer13000:
+	stopnpctimer;
 	unittalk "無愛想な蛇 : お前たち！　冒険者ごっこはするなと言ったでしょう！";
 	end;
 }
+
 rockrdg1.gat,327,109,5	script	素早いサソリ#rockc03	10226,{/* 60005 */
 	mes "[素早いサソリ]";
 	mes "私たちも冒険者様みたいに";
@@ -8336,6 +8526,7 @@ rockrdg1.gat,327,109,5	script	素早いサソリ#rockc03	10226,{/* 60005 */
 	mes "コヨーテを滅ぼしたいわけではない。";
 	close;
 }
+
 rockrdg1.gat,328,112,5	script	カリンタス#rockc04	10226,{/* 60006 */
 	mes "[カリンタス]";
 	mes "うちのお母さんは冒険者たちよりも";
@@ -8364,6 +8555,7 @@ rockrdg1.gat,328,112,5	script	カリンタス#rockc04	10226,{/* 60006 */
 	mes "狩りを教えてくれると思うよ。";
 	close;
 }
+
 rockrdg1.gat,330,104,3	script	無愛想な蛇#rockc05	10218,{/* 60007 */
 	mes "[無愛想な蛇]";
 	mes "最近コヨーテが町を襲撃することが";
@@ -8386,6 +8578,7 @@ rockrdg1.gat,330,104,3	script	無愛想な蛇#rockc05	10218,{/* 60007 */
 	mes "教えることが大きな宿題だな。";
 	close;
 }
+
 rockrdg1.gat,310,48,3	script	エレクター#rockc06	10222,{/* 60008 */
 	mes "[エレクター]";
 	mes "エレクターはですね、";
@@ -8404,6 +8597,7 @@ rockrdg1.gat,310,48,3	script	エレクター#rockc06	10222,{/* 60008 */
 	mes "網を作る職人になります！";
 	close;
 }
+
 rockrdg1.gat,299,82,3	script	タリアテル#rockc07	10222,{/* 60009 */
 	mes "[タリアテル]";
 	mes "私は旅がとても好きです。";
@@ -8424,6 +8618,7 @@ rockrdg1.gat,299,82,3	script	タリアテル#rockc07	10222,{/* 60009 */
 	mes "新しい楽器も大歓迎！";
 	close;
 }
+
 rockrdg1.gat,297,84,7	script	タネスカ#rockc08	549,{/* 60010 */
 	mes "[タネスカ]";
 	mes "この楽器はこれ単体でも";
@@ -8443,6 +8638,7 @@ rockrdg1.gat,297,84,7	script	タネスカ#rockc08	549,{/* 60010 */
 	mes "この前も言ったじゃありませんか！";
 	close;
 }
+
 rockrdg1.gat,308,49,5	script	柔らかい羽根#rockc09	10228,{/* 60011 */
 	mes "[柔らかい羽根]";
 	mes "ほほほ……";
@@ -8476,6 +8672,7 @@ rockrdg1.gat,308,49,5	script	柔らかい羽根#rockc09	10228,{/* 60011 */
 	mes "わーい！　友達に自慢しよう～！";
 	close;
 }
+
 rockrdg1.gat,287,95,3	script	リティス#rockc10	10227,{/* 60012 */
 	mes "[リティス]";
 	mes "お爺さんの言いたいことも";
@@ -8489,6 +8686,7 @@ rockrdg1.gat,287,95,3	script	リティス#rockc10	10227,{/* 60012 */
 	mes "やはり自然なことなのです。";
 	close;
 }
+
 rockrdg1.gat,297,111,3	script	ロイタネン#rockc10	727,{/* 60013 */
 	mes "[ロイタネン]";
 	mes "あれ、またキャクター族の町だ。";
