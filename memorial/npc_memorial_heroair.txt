@@ -951,6 +951,7 @@ OnTimer4000:
 				hideonnpc getmdnpcname("ケイオス#2air1"); //85352
 				announce "モンスターの気配がする。倒しながら戻ったほうがいいだろう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
 				donpcevent getmdnpcname("スカイグレムリン#2aair1")+ "::OnStart";
+				end;
 			}
 		}
 		cutin "h_iris01.bmp", 2;
@@ -1166,9 +1167,31 @@ OnTimer5200:
 1@air2.gat,236,48,7	script	スカイグレムリン#7air2	844,{/* 85397 (hide)*/}
 1@air2.gat,224,66,5	script	スカイグレムリン#8air2	844,{/* 85398 (hide)*/}
 
-1@air2.gat,229,56,5	script	ロキ#air2	512,{/* 85372 (hide)*/}
+1@air2.gat,229,56,5	script	ロキ#air2	512,{/* 85372 (hide)*/
+	cutin "ep14_roki02.bmp", 2;
+	mes "[ロキ]";
+	mes "次から次へと……面倒なやつらだ。";
+	close2;
+	cutin "ep14_roki02.bmp", 255;
+	end;
+}
 1@air2.gat,229,54,5	script	フェンリル#air2	664,{/* 85373 */
-	//TODO: flag
+	if(checkquest(120200)&8) {
+		mes "‐フェンリルがモンスターと";
+		mes "　戦っている‐";
+		next;
+		if(select("先を急ぐ","話を聞く") == 1) {
+			mes "‐先を急ぐことにした‐";
+			close2;
+			hideonnpc getmdnpcname("ロキ#air2"); //85372
+			hideonnpc getmdnpcname("ワイバーン#2air2"); //85385
+			hideonnpc getmdnpcname("ワイバーン#3air2"); //85386
+			hideonnpc getmdnpcname("アイリス#air2"); //85374
+			hideonnpc getmdnpcname("フェンリル#air2"); //85373
+			donpcevent getmdnpcname("mob#air4")+ "::OnStart";
+			end;
+		}
+	}
 	cutin "fenrir_a.bmp", 2;
 	mes "[フェンリル]";
 	mes "……こいつら";
@@ -1263,10 +1286,8 @@ OnTimer5200:
 	mes "　";
 	mes "‐^0000FFシヴァの放った風魔手裏剣が";
 	mes "　設備に命中し崩れた!!^000000‐";
+	donpcevent getmdnpcname("フェンリル#air2")+ "::OnEff1";
 	next;
-	misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
-	misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
-	misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
 	cutin "h_iris01.bmp", 2;
 	mes "[アイリス]";
 	mes "な、何なのこいつら！";
@@ -1307,9 +1328,8 @@ OnTimer5200:
 	cutin "fenrir_b.bmp", 2;
 	mes "[フェンリル]";
 	mes "……!!";
+	donpcevent getmdnpcname("フェンリル#air2")+ "::OnEff1";
 	next;
-	misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
-	misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
 	cutin "h_arcana02.bmp", 2;
 	mes "[アルカナ]";
 	mes "面白いものを";
@@ -1317,7 +1337,6 @@ OnTimer5200:
 	mes "これを見て少しは";
 	mes "頭を冷やしてくださいね？";
 	next;
-	misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
 	cutin "fenrir_b.bmp", 255;
 	mes "[ワイバーン]";
 	mes "クオオオオ……ッ!!";
@@ -1380,6 +1399,13 @@ OnTimer5200:
 	hideonnpc getmdnpcname("アイリス#air2"); //85374
 	hideonnpc getmdnpcname("フェンリル#air2"); //85373
 	donpcevent getmdnpcname("mob#air4")+ "::OnStart";
+	end;
+OnEff1:
+	misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
+	sleep 1000;
+	misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
+	sleep 1000;
+	misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
 	end;
 }
 1@air2.gat,241,54,3	script	アイリス#air2	666,{/* 85374 */
