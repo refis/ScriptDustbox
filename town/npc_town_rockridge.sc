@@ -2606,8 +2606,8 @@ harboro1.gat,138,157,5	script	ドノバン	854,{/* 59810 */
 		mes "私たちの間では";
 		mes "「無口なジョー」と呼ばれています。";
 		mes "ではよろしくお願いします。";
-		setquest 9458; //state=1
-		viewpoint 1, 324, 124, 1, 0xFF00FF00; //59732
+		setquest 9458;
+		viewpoint 1,324,124,1,0x00FF00; //59732
 		close;
 	}
 	if(checkquest(9458) & 0x4) {
@@ -2656,8 +2656,8 @@ harboro1.gat,138,157,5	script	ドノバン	854,{/* 59810 */
 			mes "地下への道は既におわかりですよね？";
 			mes "それではよろしくお願いします！";
 			delquest 9459;
-			setquest 9458; //state=1
-			viewpoint 1, 324, 124, 1, 0x00FF00; //59715
+			setquest 9458;
+			viewpoint 1,324,124,1,0x00FF00; //59715
 			close;
 		}
 		mes "[ドノバン]";
@@ -2671,7 +2671,7 @@ harboro1.gat,138,157,5	script	ドノバン	854,{/* 59810 */
 	mes "ジョーがいます。";
 	mes "彼が地下まで";
 	mes "案内してくれるはずです。";
-	viewpoint 1, 324, 124, 1, 0x00FF00; //59732
+	viewpoint 1,324,124,1,0x00FF00; //59732
 	close;
 }
 harboro1.gat,324,124,7	script	ジョー	571,{/* 59811 */
@@ -2999,12 +2999,19 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{/* 59821 */
 			mes "また訪ねて来て下さい。";
 			close;
 		}
+		switch(rand(5)) {
+		case 0:	set '@quest,1323; set '@name$,"スリッパ"; break;
+		case 1:	set '@quest,1324; set '@name$,"スプーン"; break;
+		case 2:	set '@quest,1325; set '@name$,"作業用の長靴"; break;
+		case 3:	set '@quest,1326; set '@name$,"手袋"; break;
+		case 4:	set '@quest,1327; set '@name$,"帽子"; break;
+		}
 		delquest 1329;
-		setquest 1327; //state=1
+		setquest '@quest;
 		mes "[ミズ・マックフィー]";
 		mes "ありがとうございます。";
 		mes "今回チョロンちゃんが持って行ったの";
-		mes "^ff0000帽子^000000です。";
+		mes "^ff0000" +'@name$+ "^000000です。";
 		next;
 		mes "[ミズ・マックフィー]";
 		mes "町を出てすぐのところに";
@@ -3037,8 +3044,8 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{/* 59821 */
 		mes "本当に感謝しています。";
 		next;
 		delquest 1328;
-		setquest 1329; //state=1
-		getitem 25250, 1;
+		setquest 1329;
+		getitem 25250,1;
 		getexp 15000000,0,1;
 		getexp 0,6000000,0;
 		mes "[ミズ・マックフィー]";
@@ -3064,10 +3071,10 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{/* 59821 */
 		mes "協力してくれた冒険者様に、";
 		mes "せめてもの感謝の気持ちです。";
 		mes "本当にありがとうございました。";
-		emotion 15, "ミズ・マックフィー#rock"; //59743
+		emotion 15,"ミズ・マックフィー#rock"; //59743
 		delquest 1322;
-		setquest 1329; //state=1
-		getitem 25250, 1;
+		setquest 1329;
+		getitem 25250,1;
 		getexp 30000000,12000000;
 		next;
 		mes "[ミズ・マックフィー]";
@@ -3088,11 +3095,11 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{/* 59821 */
 		mes "[ミズ・マックフィー]";
 		mes "ちゃんと犬の面倒を見るようにと";
 		mes "何度も言ったでしょ！";
-		emotion 6, "ミズ・マックフィー#rock"; //59743
+		emotion 6,"ミズ・マックフィー#rock"; //59743
 		next;
 		mes "[ミスター・マックフィー]";
 		mes "なんだ？　何かあったのかい？";
-		emotion 1, "ミスター・マックフィー#"; //59745
+		emotion 1,"ミスター・マックフィー#"; //59745
 		next;
 		mes "[ミズ・マックフィー]";
 		mes "もう嫌！　何とかしてよ、本当に！";
@@ -3114,7 +3121,7 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{/* 59821 */
 		mes "あの指輪か？";
 		mes "そ、それはチョロンちゃんが";
 		mes "悪いね。";
-		emotion 4, "ミスター・マックフィー#"; //59745
+		emotion 4,"ミスター・マックフィー#"; //59745
 		next;
 		mes "[ミズ・マックフィー]";
 		mes "靴も、洗濯物も咥えて土の上で";
@@ -3131,7 +3138,7 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{/* 59821 */
 		mes "水仕事以外は肌身離さずいたわよ！";
 		mes "ちょっと外した際に落としたのを";
 		mes "持っていかれちゃったのよ！";
-		emotion 36, "ミズ・マックフィー#rock"; //59743
+		emotion 36,"ミズ・マックフィー#rock"; //59743
 		next;
 		mes "[ミズ・マックフィー]";
 		mes "あなたは仕事をやめてから";
@@ -3152,7 +3159,7 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{/* 59821 */
 		mes "探しに行ったけど、";
 		mes "すぐにあきらめたのは";
 		mes "知ってるだろ！";
-		emotion 19, "ミスター・マックフィー#"; //59745
+		emotion 19,"ミスター・マックフィー#"; //59745
 		next;
 		mes "[ミズ・マックフィー]";
 		mes "私は知らないから、";
@@ -3183,7 +3190,7 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{/* 59821 */
 		mes "よく考えてみてくれ。";
 		mes "私が牛賊団のいる荒野に";
 		mes "探しに行けると思ってる？";
-		emotion 19, "ミスター・マックフィー#"; //59745
+		emotion 19,"ミスター・マックフィー#"; //59745
 		next;
 		mes "[ミスター・マックフィー]";
 		mes "他に頼める人もいないし、";
@@ -3192,7 +3199,7 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{/* 59821 */
 		next;
 		mes "[ミズ・マックフィー]";
 		mes "それはそうだけど……ふう……。";
-		emotion 9, "ミズ・マックフィー#rock"; //59743
+		emotion 9,"ミズ・マックフィー#rock"; //59743
 		next;
 		mes "[ミズ・マックフィー]";
 		mes "あの……冒険者様、";
@@ -3219,8 +3226,8 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{/* 59821 */
 		mes "[ミスター・マックフィー]";
 		mes "わ、私が!?";
 		mes "あ、おお、わかったよ……。";
-		emotion 4, "ミスター・マックフィー#"; //59745
-		setquest 1321; //state=1
+		emotion 4,"ミスター・マックフィー#"; //59745
+		setquest 1321;
 		close;
 	}
 	mes "[ミズ・マックフィー]";
@@ -3285,7 +3292,7 @@ harboro1.gat,344,61,5	script	ミスター・マックフィー#	98,{/* 59823 */
 		mes "懲らしめてやってください。";
 		mes "冒険者様だけを信じています！";
 		delquest 1332;
-		setquest 1331; //state=1
+		setquest 1331;
 		close;
 	}
 	if(checkquest(1331)) {
@@ -3317,9 +3324,9 @@ harboro1.gat,344,61,5	script	ミスター・マックフィー#	98,{/* 59823 */
 			mes "それから、これは今回のお礼です。";
 			mes "本当にありがとうございます。";
 			delquest 1331;
-			setquest 1332; //state=1
+			setquest 1332;
 			//achievement_update	//clear
-			getitem 25250, 1;
+			getitem 25250,1;
 			getexp 15000000,0,1;
 			getexp 0,6000000,0;
 			close2;
@@ -3403,12 +3410,12 @@ harboro1.gat,344,61,5	script	ミスター・マックフィー#	98,{/* 59823 */
 		mes "頭が黒い牛賊団、頭が白い牛賊団を";
 		mes "それぞれ30人ずつ";
 		mes "懲らしめてやってください。";
-		emotion 15, "ミスター・マックフィー#"; //59745
+		emotion 15,"ミスター・マックフィー#"; //59745
 		next;
 		mes "[ミスター・マックフィー]";
 		mes "冒険者様だけが頼りです。";
 		mes "よろしくお願いします。";
-		setquest 1331; //state=1
+		setquest 1331;
 		close;
 	}
 	mes "[ミスター・マックフィー]";
@@ -4436,7 +4443,7 @@ OnTouch:
 }
 harboro1.gat,352,184,5	script	空腹の労働者#6	99,{/* 59876 */}
 harboro1.gat,352,181,5	script	空腹の労働者#7	846,{/* 59877 */}
-harboro1.gat,352,178,5	script	空腹の労働者#8	100,{/* 59878 */
+harboro1.gat,352,178,5	script	空腹の労働者#8	100,5,5,{/* 59878 */
 	end;
 OnTouch:
 	unittalk "空腹の労働者 : ご飯を食べる為に3時間も並ばないといけないとは。これは酷くない？";
@@ -4444,14 +4451,14 @@ OnTouch:
 }
 harboro1.gat,352,175,5	script	空腹の労働者#9	99,{/* 59879 */}
 harboro1.gat,352,172,5	script	空腹の労働者#10	98,{/* 59880 */}
-harboro1.gat,352,169,5	script	空腹の労働者#11	855,{/* 59881 */
+harboro1.gat,352,169,5	script	空腹の労働者#11	855,5,5,{/* 59881 */
 	end;
 OnTouch:
 	unittalk "空腹の労働者 : 後もう少しで私の番だ！";
 	end;
 }
 harboro1.gat,353,166,5	script	空腹の労働者#12	99,{/* 59882 */}
-harboro1.gat,355,164,5	script	空腹の労働者#13	100,{/* 59883 */
+harboro1.gat,355,164,5	script	空腹の労働者#13	100,5,5,{/* 59883 */
 	end;
 OnTouch:
 	unittalk "空腹の労働者 : おい！　みんな並んでいるのが見えないのか？　列の後ろに並べよ！";
@@ -4548,6 +4555,7 @@ OnTalk1:
 }
 harboro1.gat,352,154,0	script	#r_q1	139,5,5,{/* 59908 */
 	//クエスト中は発生しない
+	//受注時にランダム発言
 	//switch() {
 	//	donpcevent 
 	//}
@@ -4555,6 +4563,7 @@ harboro1.gat,352,154,0	script	#r_q1	139,5,5,{/* 59908 */
 }
 harboro1.gat,341,136,0	script	#r_q2	139,5,5,{/* 59909 */
 	//クエスト中は発生しない
+	//受注時にランダム発言
 	//switch() {
 	//	donpcevent 
 	//}
@@ -4646,17 +4655,18 @@ harboro1.gat,357,163,3	script	給食担当	886,{/* 59911 */
 		next;
 		mes "[給食担当]";
 		mes "よし、できた。";
-		setquest 12381; //state=1
+		setquest 12381;
 		compquest 12381;
 		next;
 	}
 	if(checkquest(12382)) {
-		if(checkquest(12382) & 0x2) {//?
+		if(checkquest(12382)&2 == 0) {
+			mes "[給食担当]";
+			mes "とりあえずヤマは越えたようだ。";
+			mes "また頼むぞ。";
+			close;
 		}
-		mes "[給食担当]";
-		mes "とりあえずヤマは越えたようだ。";
-		mes "また頼むぞ。";
-		close;
+		delquest 12382;
 	}
 	if(checkquest(12383)) {
 		if(countitem(516) < 160) {
@@ -4668,6 +4678,26 @@ harboro1.gat,357,163,3	script	給食担当	886,{/* 59911 */
 			close;
 		}
 		delitem 516,160;
+		delquest 12383;
+		setquest 12382;
+		getitem 25250,1;
+		getexp 10000000,4000000;
+		mes "[給食担当]";
+		mes "おお、頼んでいた食材だな！";
+		mes "おかげでなんとかなりそうだ。";
+		mes "助かったよありがとう！";
+		close;
+	}
+	if(checkquest(12384)) {
+		if(countitem(516) < 50) {
+			mes "[給食担当]";
+			mes "^0000ffにく50個^000000を";
+			mes "持って来てくれ！";
+			mes "大きな都市ならだいたい";
+			mes "取り扱っているはずだ。";
+			close;
+		}
+		delitem 517,50;
 		delquest 12383;
 		setquest 12382;
 		getitem 25250,1;
@@ -4698,6 +4728,29 @@ harboro1.gat,357,163,3	script	給食担当	886,{/* 59911 */
 		mes "助かったよありがとう！";
 		close;
 	}
+	if(checkquest(12386)) {
+		//TODO
+	}
+	if(checkquest(12387)) {
+		if(countitem(535) < 160) {
+			mes "[給食担当]";
+			mes "^0000ffカボチャ160個^000000を";
+			mes "持って来てくれ！";
+			mes "大きな都市ならだいたい";
+			mes "取り扱っているはずだ。";
+			close;
+		}
+		delitem 535,160;
+		delquest 12387;
+		setquest 12382;
+		getitem 25250,1;
+		getexp 10000000,4000000;
+		mes "[給食担当]";
+		mes "おお、頼んでいた食材だな！";
+		mes "おかげでなんとかなりそうだ。";
+		mes "助かったよありがとう！";
+		close;
+	}
 	mes "[給食担当]";
 	mes "今回必要な食材のリストはこれだ。";
 	mes "できるだけ早く持ってきてくれ。";
@@ -4710,8 +4763,8 @@ harboro1.gat,357,163,3	script	給食担当	886,{/* 59911 */
 		mes "すぐにでも来てくれ。";
 		close;
 	}
-	switch(rand(2)) {
-	case 1:
+	switch(rand(5)) {
+	case 0:
 		setquest 12383;
 		mes "[給食担当]";
 		mes "今日のメニューはコロッケなんだが、";
@@ -4723,11 +4776,49 @@ harboro1.gat,357,163,3	script	給食担当	886,{/* 59911 */
 		mes "大きな都市ならだいたい";
 		mes "取り扱っているはずだ。";
 		close;
-	case 3:
-		// TODO
+	case 1:
+		setquest 12384;
+		mes "[給食担当]";
+		mes "食事のメインである肉が";
+		mes "無くなってしまった！";
+		mes "これは災いだ！";
+		next;
+		mes "[給食担当]";
+		mes "^0000ffにく50個^000000を";
+		mes "持って来てくれ！";
+		mes "大きな都市ならだいたい";
+		mes "取り扱っているはずだ。";
+		close;
+	case 2:
 		setquest 12385;
 		mes "[給食担当]";
+		mes "裏にある畑で育てている";
+		mes "ニンジンを見たか？";
+		mes "あまりにも小さくて";
+		mes "指かと思ったよ。";
+		next;
+		mes "[給食担当]";
+		mes "シチューに入れようと思ったら";
+		mes "あまりにも小さいから";
+		mes "自分の指を代わりに";
+		mes "入れそうになっちゃったよ！";
+		next;
+		mes "[給食担当]";
 		mes "^0000ffニンジン160個^000000を";
+		mes "持って来てくれ！";
+		mes "大きな都市ならだいたい";
+		mes "取り扱っているはずだ。";
+		close;
+	case 3:
+		//TODO
+	case 4:
+		setquest 12387;
+		mes "[給食担当]";
+		mes "カボチャシチューを作りたいのに";
+		mes "カボチャが無いんだ。";
+		next;
+		mes "[給食担当]";
+		mes "^0000ffカボチャ160個^000000を";
 		mes "持って来てくれ！";
 		mes "大きな都市ならだいたい";
 		mes "取り扱っているはずだ。";
@@ -4787,7 +4878,7 @@ harboro1.gat,357,155,3	script	鋼鉄自警団初級受付	880,{/* 59912 */
 		mes "[鋼鉄自警団初級受付]";
 		mes "よし、それじゃさっそく仕事を";
 		mes "依頼しよう。";
-		setquest 12389; //state=1
+		setquest 12389;
 		compquest 12389;
 		next;
 	}
@@ -4818,7 +4909,7 @@ harboro1.gat,357,155,3	script	鋼鉄自警団初級受付	880,{/* 59912 */
 			}
 			delquest 12391;
 			setquest 12390;
-			getitem 25250, 1;
+			getitem 25250,1;
 			getexp 20000000,0,1;
 			getexp 0,8000000,0;
 			mes "[鋼鉄自警団初級受付]";
@@ -4986,8 +5077,8 @@ harboro1.gat,357,152,3	script	鋼鉄自警団上級受付	884,{/* 59913 */
 				close;
 			}
 			delquest 12402;
-			setquest 12398; //state=1
-			getitem 25250, 3;
+			setquest 12398;
+			getitem 25250,3;
 			getexp 300000000,120000000;
 			mes "[鋼鉄自警団上級受付]";
 			mes "これは報酬だ。";
@@ -5289,7 +5380,7 @@ harboro1.gat,334,135,6	script	淡水化施設管理所長	853,{/* 59914 */
 		mes "今の件の対応をしないといけない。";
 		mes "もし仕事を引き受ける気になったら、";
 		mes "いつでも私を訪ねて来てくれ。";
-		setquest 12403; //state=1
+		setquest 12403;
 		compquest 12403;
 		close;
 	}
@@ -5320,7 +5411,7 @@ harboro1.gat,334,135,6	script	淡水化施設管理所長	853,{/* 59914 */
 		delquest 12408;
 		delquest 12409;
 		setquest 12404;
-		getitem 25250, 3;
+		getitem 25250,3;
 		getexp 200000000,80000000;
 		mes "[淡水化施設管理所長]";
 		mes "今回の報酬だ。";
@@ -5343,7 +5434,7 @@ harboro1.gat,334,135,6	script	淡水化施設管理所長	853,{/* 59914 */
 		mes "わかった。";
 		mes "地下にはこの裏の建物にいる";
 		mes "ジョーに案内してもらってくれ。";
-		viewpoint 1, 324, 124, 1, 0x00FF00; //59836
+		viewpoint 1,324,124,1,0x00FF00; //59836
 		next;
 		mes "[淡水化施設管理所長]";
 		mes "君がやるべきことは、";
@@ -5356,10 +5447,10 @@ harboro1.gat,334,135,6	script	淡水化施設管理所長	853,{/* 59914 */
 		mes "いけばすぐにわかると思う。";
 		mes "準備ができたら";
 		mes "そこから地下へ行ってくれ。";
-		setquest 12405; //state=1
-		setquest 12406; //state=1
-		setquest 12407; //state=1
-		setquest 12408; //state=1
+		setquest 12405;
+		setquest 12406;
+		setquest 12407;
+		setquest 12408;
 		close;
 	}
 	mes "[淡水化施設管理所長]";
@@ -5415,7 +5506,7 @@ harboro1.gat,231,254,3	script	アブラハム・フーディン	58,{/* 59915 */
 		mes "フーディンが良い値段を";
 		mes "つけてあげます。";
 		mes "いつでも歓迎します！";
-		setquest 12410; //state=1
+		setquest 12410;
 		compquest 12410;
 		close;
 	}
@@ -5516,8 +5607,8 @@ harboro1.gat,231,254,3	script	アブラハム・フーディン	58,{/* 59915 */
 		close;
 	}
 	delitem '@nameid,'@num;
-	setquest 12411; //state=1
-	getitem 25250, 1;
+	setquest 12411;
+	getitem 25250,1;
 	getexp 10000000,0;
 	getexp 0,4000000;
 	mes "[アブラハム・フーディン]";
@@ -6699,7 +6790,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		mes "^0000cdガスターを15匹退治^000000だ。";
 		mes "頑張ってくれよ！";
 		delquest 14673;
-		setquest 14672; //state=1
+		setquest 14672;
 		close;
 	}
 	if(checkquest(14672)) {
@@ -6752,7 +6843,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		delitem 6213,1;
 		delquest 14672;
 		setquest 14673;
-		getitem 25250, 3;
+		getitem 25250,3;
 		getexp 150000000,0,1; //
 		getexp 0,80000000,0;
 		close;
@@ -6786,7 +6877,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		mes "なに？";
 		mes "お前たちは区別がつくんじゃ";
 		mes "なかったのか？";
-		emotion 23, "デモン#srdg01"; //60544
+		emotion 23,"デモン#srdg01"; //60544
 		next;
 		menu "何をしているんですか？",-;
 		mes "[ミッドナイト]";
@@ -6799,7 +6890,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		mes "いや、お前がやれ。";
 		mes "お前に聞いてるだろ？";
 		next;
-		emotion 32, "デモン#srdg01"; //60544
+		emotion 32,"デモン#srdg01"; //60544
 		mes "[デモン]";
 		mes "ちっ……。";
 		mes "まあ見られちまったなら仕方ねえ。";
@@ -6836,7 +6927,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		mes "お前、俺に何か文句でもあるのか？";
 		mes "説明する気が無いなら";
 		mes "ちょっと黙ってろ！ ";
-		emotion 36, "デモン#srdg01"; //60544
+		emotion 36,"デモン#srdg01"; //60544
 		next;
 		mes "[ミッドナイト]";
 		mes "……。";
@@ -6872,7 +6963,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		mes "牛賊団に占領されちまったんだ。";
 		next;
 		menu "その話は保安官事務室で聞きました",-;
-		emotion 14, "デモン#srdg01"; //60544
+		emotion 14,"デモン#srdg01"; //60544
 		mes "[デモン]";
 		mes "お！　お前も留置場出身なのか？";
 		mes "それじゃ俺たちは同士じゃないか。";
@@ -6921,7 +7012,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		mes "だけど、思っていたようには";
 		mes "いかなかった。";
 		next;
-		emotion 32, "デモン#srdg01"; //60544
+		emotion 32,"デモン#srdg01"; //60544
 		mes "[デモン]";
 		mes "全部お前のせいだ！";
 		mes "聞いてくれよ！　";
@@ -6946,7 +7037,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		mes "[ミッドナイト]";
 		mes "私なら持ちこたえる。";
 		next;
-		emotion 6, "デモン#srdg01"; //60544
+		emotion 6,"デモン#srdg01"; //60544
 		mes "[デモン]";
 		mes "いーや絶対に無理だね。";
 		mes "あの恐怖はその場にいないと";
@@ -7012,7 +7103,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		mes "難しくなった。";
 		mes "こんな事があっていいわけがない。 ";
 		next;
-		emotion 52, "デモン#srdg01"; //60544
+		emotion 52,"デモン#srdg01"; //60544
 		mes "[デモン]";
 		mes "そこで^0000cd鉱山で花火大会^000000を開いて、";
 		mes "^0000cd牛賊団の連中を追い出してやろう^000000";
@@ -7031,7 +7122,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		mes "[ミッドナイト]";
 		mes "……。";
 		next;
-		emotion 23, "デモン#srdg01"; //60544
+		emotion 23,"デモン#srdg01"; //60544
 		mes "[デモン]";
 		mes "ん？";
 		mes "まさかまだ未練を";
@@ -7099,7 +7190,7 @@ harboro2.gat,164,80,5	script	デモン#srdg01	798,{/* 60620 */
 		mes "それじゃ頑張れよ！";
 		mes "無事に戻ってきたら、";
 		mes "それなりの報酬もくれてやるからな！";
-		setquest 14672; //state=1
+		setquest 14672;
 		close;
 	}
 }
@@ -7438,7 +7529,7 @@ rockrdg1.gat,262,90,7	script	うずくまった馬#rr	10217,{/* 59981 */
 	}
 	if(checkquest(9461)) {
 		if(checkquest(9461) & 0x2 == 0) {
-			cutin "rock_cact01.bmp", 2;
+			cutin "rock_cact01.bmp",2;
 			mes "[うずくまった馬]";
 			mes "調子はどうだ？";
 			mes "太陽と大地の祝福が";
@@ -7450,7 +7541,7 @@ rockrdg1.gat,262,90,7	script	うずくまった馬#rr	10217,{/* 59981 */
 			mes "何回か昇ったら、また必要に";
 			mes "なるかも知れないな。";
 			close2;
-			cutin "rock_cact01.bmp", 255;
+			cutin "rock_cact01.bmp",255;
 			end;
 		}
 		mes "[うずくまった馬]";
@@ -7466,16 +7557,16 @@ rockrdg1.gat,262,90,7	script	うずくまった馬#rr	10217,{/* 59981 */
 			mes "時間がある時でいいから";
 			mes "また来てくれ。";
 			close2;
-			cutin "rock_cact01.bmp", 255;
+			cutin "rock_cact01.bmp",255;
 			end;
 		}
 		mes "[うずくまった馬]";
 		mes "ありがとう。";
 		mes "やはり君は信頼できる。";
 		delquest 9461;
-		setquest 9460; //state=1
+		setquest 9460;
 		close2;
-		cutin "rock_cact01.bmp", 255;
+		cutin "rock_cact01.bmp",255;
 		end;
 	}
 	if(checkquest(9460)) {
@@ -7490,7 +7581,7 @@ rockrdg1.gat,262,90,7	script	うずくまった馬#rr	10217,{/* 59981 */
 			mes "懲らしめて、";
 			mes "鉱石の欠片を集めて来てくれ。";
 			close2;
-			cutin "rock_cact01.bmp", 255;
+			cutin "rock_cact01.bmp",255;
 			end;
 		}
 		mes "[うずくまった馬]";
@@ -7501,7 +7592,7 @@ rockrdg1.gat,262,90,7	script	うずくまった馬#rr	10217,{/* 59981 */
 		mes "それで十分なんだ。";
 		mes "10個だけ貰っておくよ。";
 		next;
-		delitem 25260, 10;
+		delitem 25260,10;
 		mes "[うずくまった馬]";
 		mes "ありがとう。";
 		mes "少ないがこれを受け取ってくれ。";
@@ -7509,11 +7600,11 @@ rockrdg1.gat,262,90,7	script	うずくまった馬#rr	10217,{/* 59981 */
 		mes "私たちにはあまり必要ないんだ。";
 		delquest 9460;
 		setquest 9461;
-		getitem 25250, 1;
+		getitem 25250,1;
 		getexp 15000000,0,1;
 		getexp 0,6000000,0;
 		close2;
-		cutin "rock_cact01.bmp", 255;
+		cutin "rock_cact01.bmp",255;
 		end;
 	}
 }
@@ -7532,7 +7623,7 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 	}
 	if(checkquest(16079)) {
 		if(checkquest(16079) & 0x2 == 0) {
-			cutin "rock_cact03.bmp", 2;
+			cutin "rock_cact03.bmp",2;
 			mes "[キャクターロン]";
 			mes "仕事には必ず休憩が必要です。";
 			mes "仕事に没頭し続けると";
@@ -7542,10 +7633,10 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 			mes "いつも助かっています。";
 			mes "でも今はもう少し休んでください。";
 			close2;
-			cutin "rock_cact03.bmp", 255;
+			cutin "rock_cact03.bmp",255;
 			end;
 		}
-		cutin "rock_cact03.bmp", 2;
+		cutin "rock_cact03.bmp",2;
 		mes "[キャクターロン]";
 		mes "冒険者さん、";
 		mes "また来てくれたんですね。";
@@ -7565,7 +7656,7 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 			mes "夜は眠る生活。";
 			emotion 2;
 			close2;
-			cutin "rock_cact03.bmp", 255;
+			cutin "rock_cact03.bmp",255;
 			end;
 		}
 		mes "[キャクターロン]";
@@ -7585,12 +7676,12 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 		mes "どうかよろしくお願いします。";
 		setquest 16080;
 		close2;
-		cutin "rock_cact03.bmp", 255;
+		cutin "rock_cact03.bmp",255;
 		end;
 	}
 	if(checkquest(16080)) {
 		if(checkquest(16080) & 0x4) {
-			cutin "rock_cact03.bmp", 2;
+			cutin "rock_cact03.bmp",2;
 			mes "[キャクターロン]";
 			mes "お疲れ様でした。";
 			mes "疲れていませんか？";
@@ -7600,12 +7691,12 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 			mes "ささやかですが、受け取ってください。";
 			mes "いつもありがとうございます。";
 			delquest 16080;
-			setquest 16079; //state=1
-			getitem 25250, 1;
+			setquest 16079;
+			getitem 25250,1;
 			getexp 20000000,0,1;
 			getexp 0,8000000,0;
 			close2;
-			cutin "rock_cact03.bmp", 255;
+			cutin "rock_cact03.bmp",255;
 			end;
 		}
 		// TODO
@@ -7614,23 +7705,23 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 		mes "[チビレクター]";
 		mes "わーい！　お母さんが帰って来た！";
 		mes "ジュースは？　ジュースは？";
-		emotion 2, "チビレクター#rrrem02"; //59908
+		emotion 2,"チビレクター#rrrem02"; //59908
 		next;
 		mes "[チビレクター]";
 		mes "あれ……？";
 		mes "お母さん、転んだの？";
 		mes "服が汚れてるよ？";
-		emotion 1, "チビレクター#rrrem02"; //59908
+		emotion 1,"チビレクター#rrrem02"; //59908
 		next;
-		cutin "rock_cact03.bmp", 2;
+		cutin "rock_cact03.bmp",2;
 		mes "[キャクターロン]";
 		mes "ただいま。";
 		mes "でもごめんね、レクター。";
 		mes "今日はいつものアガベジュースが";
 		mes "無かったの。";
-		emotion 9, "キャクターロン#rrrem01"; //59907
+		emotion 9,"キャクターロン#rrrem01"; //59907
 		next;
-		cutin "rock_cact03.bmp", 255;
+		cutin "rock_cact03.bmp",255;
 		mes "[チビレクター]";
 		mes "え？　どうして？";
 		mes "どうしてないの？";
@@ -7645,14 +7736,14 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 		if(!sleep2(1000)) end;
 		mes "うわああああああん！！";
 		next;
-		cutin "rock_cact03.bmp", 2;
+		cutin "rock_cact03.bmp",2;
 		mes "[キャクターロン]";
 		mes "泣かないでレクター。";
 		mes "キャクター族の子どもは";
 		mes "そう簡単に泣かないものなのよ。";
 		next;
 		if(select("どうかしましたか？","気にしない") == 2) {
-			cutin "rock_cact03.bmp", 255;
+			cutin "rock_cact03.bmp",255;
 			mes "‐あなたは気にせず通り過ぎた‐";
 			close;
 		}
@@ -7663,14 +7754,14 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 		mes "……それならちょっと話を";
 		mes "聞いてくれますか？";
 		next;
-		cutin "rock_cact03.bmp", 255;
+		cutin "rock_cact03.bmp",255;
 		mes "[チビレクター]";
 		mes "うわあああああん！";
 		mes "アガベ味ジュース！";
 		mes "うえええ～ん！";
-		emotion 28, "チビレクター#rrrem02"; //59908
+		emotion 28,"チビレクター#rrrem02"; //59908
 		next;
-		cutin "rock_cact03.bmp", 2;
+		cutin "rock_cact03.bmp",2;
 		mes "[キャクターロン]";
 		mes "実はロックリッジの市場に";
 		mes "買い物に行ったのですが、";
@@ -7717,7 +7808,7 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 			mes "[キャクターロン]";
 			mes "わかりました。仕方ないですね。";
 			close2;
-			cutin "rock_cact03.bmp", 255;
+			cutin "rock_cact03.bmp",255;
 			end;
 		}
 		mes "[キャクターロン]";
@@ -7736,16 +7827,16 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 		mes "コヨーテ退治をしながら";
 		mes "周辺をよく調べてみてください。";
 		mes "よろしくお願いします。";
-		viewpoint 1, 146, 164, 1, 0xFFFF00; //59907
-		viewpoint 1, 305, 200, 2, 0xFFFF00; //59907
-		viewpoint 1, 195, 183, 3, 0xFFFF00; //59907
-		viewpoint 1, 182, 124, 4, 0xFFFF00; //59907
-		viewpoint 1, 286, 247, 5, 0xFFFF00; //59907
-		viewpoint 1, 202, 246, 6, 0xFFFF00; //59907
-		viewpoint 1, 149, 103, 7, 0xFFFF00; //59907
-		setquest 16078; //state=1
+		viewpoint 1,146,164,1,0xFFFF00; //59907
+		viewpoint 1,305,200,2,0xFFFF00; //59907
+		viewpoint 1,195,183,3,0xFFFF00; //59907
+		viewpoint 1,182,124,4,0xFFFF00; //59907
+		viewpoint 1,286,247,5,0xFFFF00; //59907
+		viewpoint 1,202,246,6,0xFFFF00; //59907
+		viewpoint 1,149,103,7,0xFFFF00; //59907
+		setquest 16078;
 		close2;
-		cutin "rock_cact03.bmp", 255;
+		cutin "rock_cact03.bmp",255;
 		end;
 	}
 	if(checkquest(16078)) {
@@ -7755,21 +7846,21 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 			mes "ジュース持って来てくれたの？";
 			mes "食べる！　レクター今食べる！";
 			next;
-			cutin "rock_cact03.bmp", 2;
+			cutin "rock_cact03.bmp",2;
 			mes "[キャクターロン]";
 			mes "レクター、";
 			mes "冒険者さんに感謝の挨拶をしなさい。";
 			next;
-			cutin "rock_cact03.bmp", 255;
+			cutin "rock_cact03.bmp",255;
 			mes "[チビレクター]";
 			mes "うん！　とても美味しい！";
 			mes "へへへ、ありがとうございます～！";
-			emotion 18, "チビレクター#rrrem02"; //59908
+			emotion 18,"チビレクター#rrrem02"; //59908
 			next;
-			cutin "rock_cact03.bmp", 2;
+			cutin "rock_cact03.bmp",2;
 			mes "[キャクターロン]";
 			mes "ふう……。";
-			emotion 20, "キャクターロン#rrrem01"; //59907
+			emotion 20,"キャクターロン#rrrem01"; //59907
 			next;
 			mes "[キャクターロン]";
 			mes "アガベ味ジュース一杯で";
@@ -7813,7 +7904,7 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 			mes "余計な事を言ってしまいましたね。";
 			mes "忙しかったでしょうに、";
 			mes "本当にありがとうございます。";
-			emotion 19, "キャクターロン#rrrem01"; //59907
+			emotion 19,"キャクターロン#rrrem01"; //59907
 			next;
 			mes "[キャクターロン]";
 			mes "たいしたものではありませんが、";
@@ -7838,7 +7929,7 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 				mes "　荷物に1個以上の空きを";
 				mes "　作ってください‐";
 				close2;
-				cutin "rock_cact03.bmp", 255;
+				cutin "rock_cact03.bmp",255;
 				end;
 			}
 			mes "[キャクターロン]";
@@ -7846,31 +7937,31 @@ rockrdg1.gat,341,133,3	script	キャクターロン#rrrem01	10220,{/* 59982 */
 			mes "力を貸してくれるなら本当に嬉しいです。";
 			mes "もう少しよい生活ができるよう、";
 			mes "私ももっと努力しますね。";
-			emotion 18, "キャクターロン#rrrem01"; //59907
+			emotion 18,"キャクターロン#rrrem01"; //59907
 			delitem 25246,countitem(25246);
 			delquest 16078;
 			setquest 16079;
-			getitem 25250, 1;
+			getitem 25250,1;
 			getexp 40000000,0;
 			getexp 0,16000000;
 			close2;
-			cutin "rock_cact03.bmp", 255;
+			cutin "rock_cact03.bmp",255;
 			end;
 		}
-		cutin "rock_cact03.bmp", 2;
+		cutin "rock_cact03.bmp",2;
 		mes "[キャクターロン]";
 		mes "^0000CDアガベ味ジュースミックス5個^000000と、";
 		mes "^0000CDコヨーテ30匹^000000を退治です。";
 		mes "どうかよろしくお願いします。";
-		viewpoint 1, 146, 164, 1, 0xFFFF00; //59907
-		viewpoint 1, 305, 200, 2, 0xFFFF00; //59907
-		viewpoint 1, 195, 183, 3, 0xFFFF00; //59907
-		viewpoint 1, 182, 124, 4, 0xFFFF00; //59907
-		viewpoint 1, 286, 247, 5, 0xFFFF00; //59907
-		viewpoint 1, 202, 246, 6, 0xFFFF00; //59907
-		viewpoint 1, 149, 103, 7, 0xFFFF00; //59907
+		viewpoint 1,146,164,1,0xFFFF00; //59907
+		viewpoint 1,305,200,2,0xFFFF00; //59907
+		viewpoint 1,195,183,3,0xFFFF00; //59907
+		viewpoint 1,182,124,4,0xFFFF00; //59907
+		viewpoint 1,286,247,5,0xFFFF00; //59907
+		viewpoint 1,202,246,6,0xFFFF00; //59907
+		viewpoint 1,149,103,7,0xFFFF00; //59907
 		close2;
-		cutin "rock_cact03.bmp", 255;
+		cutin "rock_cact03.bmp",255;
 		end;
 	}
 }
@@ -7942,22 +8033,22 @@ rockrdg1.gat,146,164,1	script	荒野のキャクターピン#rr	10218,{/* 59984 */
 		mes "　作ってください‐";
 		close;
 	}
-	setquest 16083; //state=1
+	setquest 16083;
 	delquest 16083;
-	getitem 25246, 1;
+	getitem 25246,1;
 	cloakonnpc;
-	viewpoint 2, 1, 1, 1, 0xFFFFFFFF; //59909
+	viewpoint 2,1,1,1,0xFFFFFF; //59909
 	next;
 	mes "‐アガベ味ジュースを5個見つけた。";
 	mes "　コヨーテを30匹討伐したら";
 	mes "　キャクターロンに報告しよう‐";
-	viewpoint 2, 1, 1, 1, 0xFFFFFFFF; //59909
-	viewpoint 2, 1, 1, 2, 0xFFFFFFFF; //59909
-	viewpoint 2, 1, 1, 3, 0xFFFFFFFF; //59909
-	viewpoint 2, 1, 1, 4, 0xFFFFFFFF; //59909
-	viewpoint 2, 1, 1, 5, 0xFFFFFFFF; //59909
-	viewpoint 2, 1, 1, 6, 0xFFFFFFFF; //59909
-	viewpoint 2, 1, 1, 7, 0xFFFFFFFF; //59909
+	viewpoint 2,1,1,1,0xFFFFFF; //59909
+	viewpoint 2,1,1,2,0xFFFFFF; //59909
+	viewpoint 2,1,1,3,0xFFFFFF; //59909
+	viewpoint 2,1,1,4,0xFFFFFF; //59909
+	viewpoint 2,1,1,5,0xFFFFFF; //59909
+	viewpoint 2,1,1,6,0xFFFFFF; //59909
+	viewpoint 2,1,1,7,0xFFFFFF; //59909
 	close;
 }
 
@@ -7985,18 +8076,19 @@ rockrdg1.gat,305,200,3	script	キャクター少女#rrem04	10226,{/* 59985 */
 	mes "名前を知っているということは、";
 	mes "あなたの言葉は本当なのでしょう。";
 	mes "受け取ってください。";
-	emotion 1, "キャクター少女#rrem04"; //59910
+	emotion 1,"キャクター少女#rrem04"; //59910
 	setquest 16087;
 	compquest 16087;
-	getitem 25246, 1;
+	getitem 25246,1;
 	cloakonnpc;
-	viewpoint 2, 1, 1, 2, 0xFFFFFF; //59910
-	viewpoint 1, 146, 164, 1, 0xFFFF00; //59910
-	viewpoint 1, 195, 183, 3, 0xFFFF00; //59910
-	viewpoint 1, 182, 124, 4, 0xFFFF00; //59910
-	viewpoint 1, 286, 247, 5, 0xFFFF00; //59910
-	viewpoint 1, 202, 246, 6, 0xFFFF00; //59910
-	viewpoint 1, 149, 103, 7, 0xFFFF00; //59910
+	//TODO
+	viewpoint 2,1,1,2,0xFFFFFF; //59910
+	viewpoint 1,146,164,1,0xFFFF00; //59910
+	viewpoint 1,195,183,3,0xFFFF00; //59910
+	viewpoint 1,182,124,4,0xFFFF00; //59910
+	viewpoint 1,286,247,5,0xFFFF00; //59910
+	viewpoint 1,202,246,6,0xFFFF00; //59910
+	viewpoint 1,149,103,7,0xFFFF00; //59910
 	close;
 OnInsight:
 	if(checkquest(16087) & 0x8)
@@ -8037,17 +8129,18 @@ OnTouch:
 	mes "　どこかへ行ってしまった。";
 	mes "　咥えていたアガベ味ジュースを";
 	mes "　落としていった‐";
-	setquest 16085; //state=1
+	setquest 16085;
 	compquest 16085;
-	getitem 25246, 1;
+	getitem 25246,1;
 	cloakonnpc "好奇心旺盛なコヨーテ#rr";
-	viewpoint 2, 1, 1, 3, 0xFFFFFFFF; //59912
-	viewpoint 1, 146, 164, 1, 0xFFFFFF00; //59912
-	viewpoint 2, 1, 1, 2, 0xFFFFFFFF; //59912
-	viewpoint 1, 182, 124, 4, 0xFFFFFF00; //59912
-	viewpoint 2, 1, 1, 5, 0xFFFFFFFF; //59912
-	viewpoint 2, 1, 1, 6, 0xFFFFFFFF; //59912
-	viewpoint 1, 149, 103, 7, 0xFFFFFF00; //59912
+	//TODO
+	viewpoint 2,1,1,3,0xFFFFFF; //59912
+	viewpoint 1,146,164,1,0xFFFF00; //59912
+	viewpoint 2,1,1,2,0xFFFFFF; //59912
+	viewpoint 1,182,124,4,0xFFFF00; //59912
+	viewpoint 2,1,1,5,0xFFFFFF; //59912
+	viewpoint 2,1,1,6,0xFFFFFF; //59912
+	viewpoint 1,149,103,7,0xFFFF00; //59912
 	close;
 }
 
@@ -8076,15 +8169,16 @@ rockrdg1.gat,286,247,3	script	怪しい砂山#rrem02	557,{/* 59989 */
 	}
 	setquest 16084;
 	compquest 16084;
-	getitem 25246, 1;
+	getitem 25246,1;
 	cloakonnpc;
-	viewpoint 2, 1, 1, 5, 0xFFFFFF; //59914
-	viewpoint 1, 146, 164, 1, 0xFFFF00; //59914
-	viewpoint 2, 1, 1, 2, 0xFFFFFF; //59914
-	viewpoint 1, 195, 183, 3, 0xFFFF00; //59914
-	viewpoint 1, 182, 124, 4, 0xFFFF00; //59914
-	viewpoint 1, 202, 246, 6, 0xFFFF00; //59914
-	viewpoint 1, 149, 103, 7, 0xFFFF00; //59914
+	//TODO
+	viewpoint 2,1,1,5,0xFFFFFF; //59914
+	viewpoint 1,146,164,1,0xFFFF00; //59914
+	viewpoint 2,1,1,2,0xFFFFFF; //59914
+	viewpoint 1,195,183,3,0xFFFF00; //59914
+	viewpoint 1,182,124,4,0xFFFF00; //59914
+	viewpoint 1,202,246,6,0xFFFF00; //59914
+	viewpoint 1,149,103,7,0xFFFF00; //59914
 	close;
 OnInsight:
 	if(checkquest(16084) & 0x8)
@@ -8115,15 +8209,16 @@ rockrdg1.gat,202,246,3	script	怪しい砂山#rrem03	557,{/* 59990 */
 	}
 	setquest 16086;
 	compquest 16086;
-	getitem 25246, 1;
+	getitem 25246,1;
 	cloakonnpc;
-	viewpoint 2, 1, 1, 5, 0xFFFFFF; //59914
-	viewpoint 1, 146, 164, 1, 0xFFFF00; //59914
-	viewpoint 2, 1, 1, 2, 0xFFFFFF; //59914
-	viewpoint 1, 195, 183, 3, 0xFFFF00; //59914
-	viewpoint 1, 182, 124, 4, 0xFFFF00; //59914
-	viewpoint 1, 202, 246, 6, 0xFFFF00; //59914
-	viewpoint 1, 149, 103, 7, 0xFFFF00; //59914
+	//TODO
+	viewpoint 2,1,1,5,0xFFFFFF; //59914
+	viewpoint 1,146,164,1,0xFFFF00; //59914
+	viewpoint 2,1,1,2,0xFFFFFF; //59914
+	viewpoint 1,195,183,3,0xFFFF00; //59914
+	viewpoint 1,182,124,4,0xFFFF00; //59914
+	viewpoint 1,202,246,6,0xFFFF00; //59914
+	viewpoint 1,149,103,7,0xFFFF00; //59914
 	close;
 OnInsight:
 	if(checkquest(16086) & 0x8)
@@ -8174,7 +8269,7 @@ rockrdg2.gat,295,328,5	script	病弱なガスト#rockdaily	10231,{/* 59992 */
 		mes "それじゃ、誰かに見つかる前に";
 		mes "早く行ってきてね。";
 		delquest 1299;
-		setquest 1298; //state=1
+		setquest 1298;
 		close;
 	}
 	if(checkquest(1298) & 0x4) {
@@ -8190,8 +8285,8 @@ rockrdg2.gat,295,328,5	script	病弱なガスト#rockdaily	10231,{/* 59992 */
 			close;
 		}
 		delquest 1298;
-		setquest 1299; //state=1
-		getitem 25250, 3;
+		setquest 1299;
+		getitem 25250,3;
 		getexp 300000000,120000000;
 		mes "[ガスト]";
 		mes "さあ、また現れる前に";
@@ -8301,9 +8396,7 @@ rockrdg1.gat,36,250,5	script	ミスター・マックフィー#	98,{/* 59993 */
 		mes "妻が言うには、";
 		mes "チョロンちゃんは家の裏口から出て";
 		mes "鉄条網を通り";
-		switch(ROCKRIDGE_2QUE) {
-		case 5: mes "真っすぐ^ff0000南の方^000000へ"; break;
-		}
+		mes "真っすぐ^ff0000南の方^000000へ";
 		mes "走っていったらしいです。";
 		next;
 		mes "[ミスター・マックフィー]";
@@ -8313,15 +8406,35 @@ rockrdg1.gat,36,250,5	script	ミスター・マックフィー#	98,{/* 59993 */
 		mes "鉄条網に沿って行き、";
 		mes "白い毛が中に落ちている穴を";
 		mes "探してくれませんか？";
-		switch(ROCKRIDGE_2QUE) {
-		case 5: viewpoint 1, 43, 145, 1, 0x00FF00; break;
-		}
+		viewpoint 1,43,145,1,0x00FF00;
 		close;
 	}
 	if(checkquest(1322)) {
 		mes "[ミスター・マックフィー]";
 		mes "何か見つかりましたか!?";
 		mes "早く戻りましょう！";
+		close;
+	}
+	if(checkquest(1323) || checkquest(1324) || checkquest(1325) || checkquest(1326) || checkquest(1327)) {
+		mes "[ミスター・マックフィー]";
+		mes "チョロンちゃんの毛が";
+		mes "生え変わる時期らしく、";
+		mes "最近すごく毛が抜けるんです。";
+		mes "チョロンちゃんが掘った穴なら";
+		mes "近くに白い毛があるはずです。";
+		if(checkquest(1323)) viewpoint 1,100,230,1,0x00FF00;
+		else if(checkquest(1324)) viewpoint 1,58,195,1,0x00FF00;
+		else if(checkquest(1325)) viewpoint 1,71,149,1,0x00FF00;
+		else if(checkquest(1326)) viewpoint 1,109,60,1,0x00FF00;
+		else if(checkquest(1327)) viewpoint 1,191,101,1,0x00FF00;
+		}
+		next;
+		mes "[ミスター・マックフィー]";
+		mes "まだ幼いのでそれほど遠くには";
+		mes "行っていないと思います。";
+		mes "地図に怪しい場所を";
+		mes "記入しておくので、";
+		mes "その付近を調べてください。";
 		close;
 	}
 	mes "[ミスター・マックフィー]";
@@ -8362,7 +8475,7 @@ rockrdg1.gat,43,145,3	script	穴#rkq1321	550,{/* 59997 */
 		mes "　確認のために";
 		mes "　夫人のところへ持っていこう‐";
 		delquest 1321;
-		setquest 1322; //state=1
+		setquest 1322;
 		close;
 	}
 	mes "‐穴がある。中は空っぽだ‐";
@@ -8370,7 +8483,7 @@ rockrdg1.gat,43,145,3	script	穴#rkq1321	550,{/* 59997 */
 }
 
 rockrdg1.gat,100,230,3	script	穴#rkq1323	550,{/* 59998 */
-	if(checkquest(1327)) {
+	if(checkquest(1323)) {
 		mes "‐穴がある。";
 		mes "　中には白い毛が少し";
 		mes "　積もっているように見える‐";
@@ -8378,8 +8491,8 @@ rockrdg1.gat,100,230,3	script	穴#rkq1323	550,{/* 59998 */
 		mes "‐^0000ffスリッパ^000000を見つけた。";
 		mes "　確認のために";
 		mes "　夫人のところへ持っていこう‐";
-		delquest 1327;
-		setquest 1328; //state=1
+		delquest 1323;
+		setquest 1328;
 		close;
 	}
 	mes "‐穴がある。中は空っぽだ‐";
@@ -8387,7 +8500,7 @@ rockrdg1.gat,100,230,3	script	穴#rkq1323	550,{/* 59998 */
 }
 
 rockrdg1.gat,58,195,3	script	穴#rkq1324	550,{/* 59999 */
-	if(checkquest(1327)) {
+	if(checkquest(1324)) {
 		mes "‐穴がある。";
 		mes "　中には白い毛が少し";
 		mes "　積もっているように見える‐";
@@ -8395,8 +8508,8 @@ rockrdg1.gat,58,195,3	script	穴#rkq1324	550,{/* 59999 */
 		mes "‐^0000ffスプーン^000000を見つけた。";
 		mes "　確認のために";
 		mes "　夫人のところへ持っていこう‐";
-		delquest 1327;
-		setquest 1328; //state=1
+		delquest 1324;
+		setquest 1328;
 		close;
 	}
 	mes "‐穴がある。中は空っぽだ‐";
@@ -8404,7 +8517,7 @@ rockrdg1.gat,58,195,3	script	穴#rkq1324	550,{/* 59999 */
 }
 
 rockrdg1.gat,71,149,3	script	穴#rkq1325	550,{/* 60000 */
-	if(checkquest(1327)) {
+	if(checkquest(1325)) {
 		mes "‐穴がある。";
 		mes "　中には白い毛が少し";
 		mes "　積もっているように見える‐";
@@ -8412,8 +8525,8 @@ rockrdg1.gat,71,149,3	script	穴#rkq1325	550,{/* 60000 */
 		mes "‐^0000ff作業用の長靴^000000を見つけた。";
 		mes "　確認のために";
 		mes "　夫人のところへ持っていこう‐";
-		delquest 1327;
-		setquest 1328; //state=1
+		delquest 1325;
+		setquest 1328;
 		close;
 	}
 	mes "‐穴がある。中は空っぽだ‐";
@@ -8421,7 +8534,7 @@ rockrdg1.gat,71,149,3	script	穴#rkq1325	550,{/* 60000 */
 }
 
 rockrdg1.gat,109,60,3	script	穴#rkq1326	550,{/* 60001 */
-	if(checkquest(1327)) {
+	if(checkquest(1326)) {
 		mes "‐穴がある。";
 		mes "　中には白い毛が少し";
 		mes "　積もっているように見える‐";
@@ -8429,8 +8542,8 @@ rockrdg1.gat,109,60,3	script	穴#rkq1326	550,{/* 60001 */
 		mes "‐^0000ff手袋^000000を見つけた。";
 		mes "　確認のために";
 		mes "　夫人のところへ持っていこう‐";
-		delquest 1327;
-		setquest 1328; //state=1
+		delquest 1326;
+		setquest 1328;
 		close;
 	}
 	mes "‐穴がある。中は空っぽだ‐";
@@ -8447,7 +8560,7 @@ rockrdg1.gat,191,101,3	script	穴#rkq1327	550,{/* 60002 */
 		mes "　確認のために";
 		mes "　夫人のところへ持っていこう‐";
 		delquest 1327;
-		setquest 1328; //state=1
+		setquest 1328;
 		close;
 	}
 	mes "‐穴がある。中は空っぽだ‐";
@@ -8484,22 +8597,13 @@ rockrdg1.gat,331,111,3	script	フアニタス#rockc02	10222,5,5,{/* 60004 */
 	mes "ないんだよ！";
 	close;
 OnTouch:
-	if(!getnpctimer(1,"リレンド・ウェンキンス#")) {
-		initnpctimer;
-	}
+	donpcevent "カリンタス#rockc04::OnTalk";
+	donpcevent "フアニタス#rockc02::OnTalk";
+	donpcevent "素早いサソリ#rockc03::OnTalk";
+	donpcevent "無愛想な蛇#rockc05::OnTalk";
 	end;
-OnTimer1000:
-	unittalk "カリンタス : 僕は冒険者の隊長だ！　コヨーテを100匹捕まえてやる！";
-	end;
-OnTimer5000:
+OnTalk:
 	unittalk "フアニタス : それじゃ私は200匹！";
-	end;
-OnTimer9000:
-	unittalk "素早いサソリ : 私はコヨーテを狩る冒険者だ！";
-	end;
-OnTimer13000:
-	stopnpctimer;
-	unittalk "無愛想な蛇 : お前たち！　冒険者ごっこはするなと言ったでしょう！";
 	end;
 }
 
@@ -8525,6 +8629,9 @@ rockrdg1.gat,327,109,5	script	素早いサソリ#rockc03	10226,{/* 60005 */
 	mes "冒険者たちに助けを要請したのだ。";
 	mes "コヨーテを滅ぼしたいわけではない。";
 	close;
+OnTalk:
+	unittalk "素早いサソリ : 私はコヨーテを狩る冒険者だ！";
+	end;
 }
 
 rockrdg1.gat,328,112,5	script	カリンタス#rockc04	10226,{/* 60006 */
@@ -8554,6 +8661,9 @@ rockrdg1.gat,328,112,5	script	カリンタス#rockc04	10226,{/* 60006 */
 	mes "君のお母さんも";
 	mes "狩りを教えてくれると思うよ。";
 	close;
+OnTalk:
+	unittalk "カリンタス : 僕は冒険者の隊長だ！　コヨーテを100匹捕まえてやる！";
+	end;
 }
 
 rockrdg1.gat,330,104,3	script	無愛想な蛇#rockc05	10218,{/* 60007 */
@@ -8577,6 +8687,9 @@ rockrdg1.gat,330,104,3	script	無愛想な蛇#rockc05	10218,{/* 60007 */
 	mes "最近ではこの点を子どもたちに";
 	mes "教えることが大きな宿題だな。";
 	close;
+OnTalk:
+	unittalk "無愛想な蛇 : お前たち！　冒険者ごっこはするなと言ったでしょう！";
+	end;
 }
 
 rockrdg1.gat,310,48,3	script	エレクター#rockc06	10222,{/* 60008 */
@@ -8585,12 +8698,12 @@ rockrdg1.gat,310,48,3	script	エレクター#rockc06	10222,{/* 60008 */
 	mes "大きくなって町で一番頑丈な";
 	mes "網を作る職人になります！";
 	next;
-	emotion 9,"エレクター#rockc06"; //60008
+	emotion 9,"エレクター#rockc06";
 	mes "[エレクター]";
 	mes "あ……でも一番頑丈な網を編むのは";
 	mes "お婆さんなんだ……。";
 	next;
-	emotion 2,"エレクター#rockc06"; //60008
+	emotion 2,"エレクター#rockc06";
 	mes "[エレクター]";
 	mes "じゃあエレクターはですね、";
 	mes "大きくなって町で二番目に頑丈な";
@@ -8627,7 +8740,7 @@ rockrdg1.gat,297,84,7	script	タネスカ#rockc08	549,{/* 60010 */
 	mes "美しいほどのバランスと";
 	mes "豊富な音を作る共鳴部位……。";
 	next;
-	emotion 3,"タネスカ#rockc08"; //60010
+	emotion 3,"タネスカ#rockc08";
 	mes "[タネスカ]";
 	mes "ああ、今すぐに叩いてみたい！";
 	mes "あの音を聞いてみたいです！";
@@ -8692,7 +8805,7 @@ rockrdg1.gat,297,111,3	script	ロイタネン#rockc10	727,{/* 60013 */
 	mes "あれ、またキャクター族の町だ。";
 	mes "また道に迷ったみたい……。";
 	next;
-	emotion 28,"ロイタネン#rockc10"; //60013
+	emotion 28,"ロイタネン#rockc10";
 	mes "[ロイタネン]";
 	mes "キワワ砂漠はあまりに広いうえに";
 	mes "どこも地形が似ているから、";
