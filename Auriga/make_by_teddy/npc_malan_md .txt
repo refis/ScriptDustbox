@@ -1,0 +1,1825 @@
+//============================================================
+// クエスト未実装NPC(MD 地下排水路)
+//------------------------------------------------------------
+// MAL_6QUE -> 0～1
+// 
+// ビギナーはある程度形になった？
+// エキスパートは、ほぼ未調査
+// 
+//------------------------------------------------------------
+
+/*
+
+//マラン島 MD(地下排水路)
+12254,地下排水路入場時間制限,60,0,0,0,0,0,0
+71495,地下排水路入場時間制限,60,0,0,0,0,0,0
+97100,地下排水路お掃除ビギナー,0,0,0,0,0,0,0
+//暫定 報酬取得済
+71490,地下排水路お掃除,0,0,0,0,0,0,0
+
+MOB
+	2180	変異のストラウフ
+	2181	古代のソードフィッシュ
+	2182	古代のマルク
+	2183	変異のアノリアン
+	2184	古代のオボンヌ
+	2185	変異の河童
+	2191	巨大な海藻
+BOSS
+	2178	深海のお化け貝	
+	2186	暗黒のシーラカンス
+	2187	変異のシーラカンス
+	2188	異形のシーラカンス
+	2189	暴虐のシーラカンス
+	2190	暴虐のシーラカンス
+
+
+MDの番号は適当に設定下さい。
+28,Pump,3600,1@pump.gat,63,98,1@pump.gat,2@pump.gat,,,,,,
+
+*/
+
+
+malangdo.gat,135,276,0	warp	malangdowarp1043	1,1,mal_in01.gat,164,15
+mal_in01.gat,164,12,0	warp	malangdowarp1044	1,1,malangdo.gat,135,271
+
+
+mal_in01.gat,172,28,2	script	アルボ#pa0829	561,{/* 59649 */
+
+	mes "[アルボ]";
+	mes "我々はあそこに立っている";
+	mes "ミシン様の部下だった。";
+	mes "以前はこの保管庫の";
+	mes "管理を行っていたのだ。";
+	next;
+	mes "[アルボ]";
+	mes "だがある日、";
+	mes "大きな揺れとともに浸水が始まった。";
+	mes "保管庫は水浸しになり、";
+	mes "保管してあった貴重品は";
+	mes "すべて流れてしまったのだ！";
+	next;
+	mes "[アルボ]";
+	mes "流れていった先は排水路になっている。";
+	mes "浸水はそこに潜んでいる奴らの仕業に";
+	mes "違いないのだ！";
+	next;
+	mes "[アルボ]";
+	mes "さらに奴らは！";
+	mes "浸水を防ごうとしている";
+	mes "ミシン様の邪魔をし！";
+	mes "あまつさえミシン様を冒涜したのだ!!";
+	next;
+	mes "[アルボ]";
+	mes "我々は奴らを絶対に許さない！";
+	mes "あのモンスターどもは、";
+	mes "最後の一匹まで刺身にして";
+	mes "ワサビをつけて食ってやる!!";
+	next;
+	mes "^0000ff‐ニャーと言いながら全身の毛を立て、";
+	mes "　地下排水路に向け";
+	mes "　怒りを露わにしている‐^000000";
+	close;
+}
+mal_in01.gat,172,26,2	script	マデカ#pa0829	544,{/* 59650 */
+
+	mes "[マデカ]";
+	mes "ニャーニャー!!!!";
+	mes "悪い海産物は";
+	mes "茹でたり焼いたりして";
+	mes "食べちゃうニャー！";
+	close;
+}
+mal_in01.gat,160,34,4	script	保管庫の管理人ミシン	545,{/* 59699 */
+
+	//クールタイム中
+	if(checkquest(71495)){//5時以降クール71495
+		if(!(checkquest(71495)&0x2)){
+			mes "[保管庫の管理人ミシン]";
+			mes "今はお掃除しなくても大丈夫ニャ～。";
+			mes "入場してから次の";
+			mes "^ff0000午前5時以降^000000になったら";
+			mes "また来てほしいのニャ。";
+			next;
+			mes "[保管庫の管理人ミシン]";
+			mes "但し、最後の入場をしてから";
+			mes "^ff00001時間^000000経過するまでは";
+			mes "お掃除しなくても大丈夫ニャ。";
+			mes "もし、その前に来ても";
+			mes "中には入れないから注意するニャ。";
+			close;
+		}
+		delquest 71495;
+	}
+	if(checkquest(12254)){ //1時間クール12254
+		if((checkquest(12254)&0x2)){
+			//クールタイム削除なし
+			delquest 12254;
+		}
+	}
+	
+	if(MAL_6QUE==0){
+		mes "[保管庫の管理人ミシン]";
+		mes "ニャニャニャア……。";
+		mes "　";
+		mes "‐ひどく疲れている猫がいる。";
+		mes "　毛皮でわかりにくいが、";
+		mes "　血色も良くないようだ‐";
+		next;
+		if(select("ヒゲをひっぱる","どうしたのか聞く")==1){
+			mes "[保管庫の管理人ミシン]";
+			mes "ニャーーー!!!?";
+			mes "　";
+			mes "‐あなたがヒゲをひっぱると、";
+			mes "　猫は垂直に飛び上がった‐";
+			next;
+			mes "[保管庫の管理人ミシン]";
+			mes "な、何をするニャ!!";
+			mes "ミシンは一所懸命^FF0000地下排水路^000000からの";
+			mes "浸水を食い止めているニャ！";
+			mes "地下排水路は危険なのニャ！";
+			mes "邪魔するなニャ！";
+			close;
+		}
+		mes "[保管庫の管理人ミシン]";
+		mes "ついさっきまで";
+		mes "^FF0000地下排水路^000000の掃除をしてたニャ。";
+		mes "いつものことニャア。";
+		mes "　";
+		mes "‐猫はため息をついた‐";
+		emotion 54, "保管庫の管理人ミシン"; //59699
+		next;
+		menu "地下排水路？",-;
+		mes "[保管庫の管理人ミシン]";
+		mes "ニャア。";
+		mes "元々、ここは貴重品をしまう";
+		mes "保管庫だったニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "でも、ある日、";
+		mes "島が大きく揺れたと思ったら";
+		mes "地下排水路からの浸水がおきて、";
+		mes "保管庫が水浸しになったニャ。";
+		mes "水浸しじゃ物を保管できないニャ……。";
+		emotion 28, "保管庫の管理人ミシン"; //59699
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "でも、ミシンは保管庫の管理人ニャ！";
+		mes "諦めないニャ！";
+		mes "地下排水路からの浸水を防いで、";
+		mes "保管庫を復活させるために、";
+		mes "今も走り回っているニャ！";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "……でも困っていることがあるにゃ。";
+		mes "地下排水路には";
+		mes "ミシンをバカにするやつらが";
+		mes "潜んでいるのニャア……。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "ミシンはやつらと戦っているニャ！";
+		mes "得意の猫キックに猫パンチ！";
+		mes "ミシンは強いニャ負けないニャア！";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "……。";
+		mes "でも正直、戦うのに疲れてきたニャ。";
+		mes "1日に何回も何十回も戦ってきたけど";
+		mes "もう疲れが限界だニャア……。";
+		next;
+		menu "やめればいいじゃない",-;
+		mes "[保管庫の管理人ミシン]";
+		mes "それはいやニャ。";
+		mes "ミシンはやつらを追い出して、";
+		mes "浸水を止めて、";
+		mes "保管庫を復活させるんだニャア。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "それに、たまに保管庫に入れてた";
+		mes "宝物を発見できたりするニャ。";
+		mes "おいしい缶詰をゲットできるニャー。";
+		next;
+		if(select("頑張ってください。ではさようなら","自分も手伝うよ")==1){
+			mes "[保管庫の管理人ミシン]";
+			mes "ニャニャ、がんばるニャア！";
+			mes "ミシンは保管庫を復活させるニャ。";
+			close;
+		}
+		mes "[保管庫の管理人ミシン]";
+		mes "ホントニャ？";
+		mes "ウソいつわりないニャ？";
+		next;
+		if(select("はい","ごめんなさい。実は嘘です")==2){
+			mes "[保管庫の管理人ミシン]";
+			mes "嘘ニャ？";
+			mes "嘘つきはどこかへ行くニャ!!";
+			emotion 6, "保管庫の管理人ミシン"; //59699
+			close;
+		}
+		mes "[保管庫の管理人ミシン]";
+		mes "うれしいニャ!!";
+		mes "本当にありがとうニャ！";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "では、君には地下排水路での";
+		mes "掃除を手伝ってもらうニャ。";
+		mes "掃除の詳しいやり方は";
+		mes "その時になったら教えるニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "あと、地下排水路は掃除中に";
+		mes "ミシンをバカにするやつらが";
+		mes "邪魔をしてくる危険な場所ニャ。";
+		mes "入るときは^FF0000パーティーを組んで、^000000";
+		mes "ミシンと入場手続きをするニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "暗号を教えるから、";
+		mes "入場手続きをするときはミシンに";
+		mes "パーティーのボスが";
+		mes "^FF0000この暗号^000000を言うニャ。";
+		mes "　";
+		mes "^990000『缶詰食べ過ぎお腹が出るにゃ』^000000";
+		next;
+		menu "缶詰食べ過ぎお腹が出るにゃ",-;
+		mes "[保管庫の管理人ミシン]";
+		mes "パーティーのボスがその暗号を言えば";
+		mes "地下排水路の入口を開くニャ。";
+		mes "　";
+		mes "入口は開くのに少し時間がかかるニャ。";
+		mes "開いたらもう一度ミシンに話しかけて";
+		mes "ほしいニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "これを約束してくれるなら、";
+		mes "ミシンは^FF0000地下排水路^000000に";
+		mes "案内するニャア。";
+		set MAL_6QUE,1;
+		close;
+	}
+	
+	mes "[保管庫の管理人ミシン]";
+	mes "どうしたニャ？";
+	mes "ミシンにご用事？";
+	next;
+L_MENU:
+	switch(select("地下排水路の行き方を聞きたい","缶詰食べ過ぎお腹が出るにゃ","地下排水路に行く","なんでもありません")){
+	case 1:
+		mes "[保管庫の管理人ミシン]";
+		mes "地下排水路の行き方かニャ？";
+		mes "地下排水路に行くにはパーティーを";
+		mes "組んでいる必要があるニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "地下排水路の入口を開きたければ、";
+		mes "パーティーのボスが";
+		mes "ミシンに暗号を言うニャ。";
+		mes "そうしたらミシンが";
+		mes "地下排水路の入口を開くニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "あと、地下排水路は、";
+		mes "入場してから1回目の";
+		mes "^ff0000午前5時^000000を迎えると";
+		mes "もう一度入場できるようになるニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "但し、最後の入場をしてから";
+		mes "^ff00001時間^000000経過しないと";
+		mes "入場できないのニャ。";
+		mes "　";
+		mes "働きすぎは体に良くないニャ。";
+		mes "最低でも1時間はゆっくり休むニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "他になにかあるかニャ？";
+		next;
+		goto L_MENU;
+	case 2:
+		// PTリーダーじゃない
+		if(getpartyleader(getcharid(1)) != strcharinfo(0)){
+			// 未調査
+			mes "PTリーダーじゃないよ。";
+			close;
+		}
+		
+		// PTリーダーの場合
+		mdcreate "Pump";
+		mes "[保管庫の管理人ミシン]";
+		mes "パーティー名が";
+		mes "" + strcharinfo(1) + "。";
+		mes "パーティーリーダーが";
+		mes "" + strcharinfo(0) + "だニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "^FF0000地下排水路^000000への入り口を";
+		mes "開放するニャ。";
+		mes "確認したら、もう一度";
+		mes "ミシンに話しかけてニャ。";
+		close;
+	case 3:
+		if(checkquest(12254)){
+			if(!(checkquest(12254)&0x2)){
+				//未調査
+				mes "1時間のクールタイム中みたいだね。";
+				close;
+			}
+			delquest 12254;
+		}
+		
+		switch(mdenter("Pump")){
+		case 0:// エラーなし
+			//作成できたら
+			mes "‐地下排水路に入場します‐";
+			announce "メモリアルダンジョン[Pump] に入場しました　：　" +strcharinfo(1)+ " (" + strcharinfo(0) + ")", 0x1, 0x00ff99, 0x190, 12, 0, 0;
+			setquest 12254; //state=1	//入場
+			setquest 71495; //state=1	//クールタイム
+			//setquest 71490; //state=1
+			delquest 71490;
+			//@mapmoved(from: mal_in01.gat(172, 28), map: 0021@pump.gat(63, 98), addr: 211.13.241.91:5121)
+			donpcevent getmdnpcname("管理人ミシン#0")+ "::OnStart";
+			close;
+		case 1:// パーティー未加入
+			mes "[保管庫の管理人ミシン]";
+			mes "ニャニャ、";
+			mes "パーティーを作るか";
+			mes "加入してないと";
+			mes "^FF0000地下排水路^000000には入れられないニャ！";
+			close;
+		case 2://ダンジョン未作成
+			//暗号を言わずに…(MD作成前 作成中)
+			mes "‐地下排水路に入場します‐";
+			next;//close;
+			mes "[保管庫の管理人ミシン]";
+			mes "ニャニャ……";
+			mes "^FF0000地下排水路^000000の入り口が";
+			mes "うまく開かなかったニャ。";
+			mes "パーティーリーダーがまだ";
+			mes "暗号を言っていないのニャ。";
+			close;
+		default:
+			close;
+		}
+	case 4://なんでもありません
+		break;
+	}
+	mes "[保管庫の管理人ミシン]";
+	mes "なんでもないニャ？";
+	close;
+
+OnInit:
+	waitingroom "地下排水路", 0; //59699
+	end;
+}
+
+
+//============================================================
+// クエスト未実装NPC(MD 地下排水路 内部)
+//------------------------------------------------------------
+1@pump.gat,63,100,4	script	管理人ミシン#0	545,{/* 69328 */
+
+	//未調査 PTリーダーじゃない
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)){
+		mes "PTリーダーに話してもらおう。";
+		close;
+	}
+	
+	mes "[保管庫の管理人ミシン]";
+	mes "ここは仲間たちと一緒に";
+	mes "掃除をする地下排水路ニャ。";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "ところで君……";
+	mes "掃除は得意かニャ？";
+	mes "掃除のエキスパートさんなら、";
+	mes "奥の部屋の掃除が";
+	mes "できるかもしれないニャ。";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "そこは強いモンスターも出てくるし、";
+	mes "掃除する箇所も多くて";
+	mes "ちょっと難しいニャ。";
+	mes "君はどれくらいお掃除できるニャ？";
+	next;
+	switch(select("お掃除ビギナー","お掃除エキスパート(BaseLv90から選択可能)")){
+	case 1://お掃除ビギナー
+		mes "[保管庫の管理人ミシン]";
+		mes "分かったニャ。";
+		mes "それならいつも掃除をしている";
+		mes "この排水路の掃除を任せるニャ！";
+		next;
+		if(select("ちょっと待って","わかった")==1){
+			mes "[保管庫の管理人ミシン]";
+			mes "ん？まだ準備ができてないのかニャ？";
+			mes "準備ができたら";
+			mes "もう一度話しかけてほしいニャ。";
+			close;
+		}
+		announce "ミシン : マップの3時方向に移動した後、ミシンに話しかけるニャ！", 0x1, 0x00ffcc, 0x190, 15, 0, 0;
+		mes "[保管庫の管理人ミシン]";
+		mes "右端に行って準備をするから";
+		mes "ついて来るニャ！";
+		hideonnpc getmdnpcname("管理人ミシン#0"); //69328
+		hideoffnpc getmdnpcname("管理人ミシン#n");
+		close;
+		
+	case 2://お掃除エキスパート
+		mes "[保管庫の管理人ミシン]";
+		mes "腕に自信があるニャ？";
+		mes "ニャるほど、ニャるほど……。";
+		mes "君は奥の部屋に興味はあるかニャ？";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "そこは本当に長い間、";
+		mes "掃除をしていない場所だから";
+		mes "どんな恐ろしいモンスターが";
+		mes "潜んでいるかわからないニャ。";
+		mes "行ってみるかニャ？";
+		next;
+		if(select("ごめんなさい。見栄を張ってました","行ってみよう")==1){
+			mes "[保管庫の管理人ミシン]";
+			mes "ニャんだ、そうニャのか。";
+			mes "無理をする必要はニャいニャ。";
+			close;
+		}
+		mes "‐^ff0000Baseレベル90未満の";
+		mes "　パーティーメンバーがいた場合、";
+		mes "　そのメンバーは奥に進めません。";
+		mes "　また、奥へ進む通路は";
+		mes "　1分経過すると閉じ、";
+		mes "　再度開くことはできません^000000‐";
+		next;
+		mes "‐奥に進みますか？‐";
+		next;
+		if(select("いいえ","はい")==1){
+			// いいえ 未調査でした
+			
+			close;
+		}
+		announce "ミシン : ミシンが先に入るからついて来るニャ！　3時の方向の出入り口を開いておくニャ！", 0x1, 0x00ffcc, 0x190, 15, 0, 0;
+		mes "[保管庫の管理人ミシン]";
+		mes "わかったニャ！";
+		mes "それじゃあ掃除を始めるのにゃ！";
+		mes "ミシンが先に入るから";
+		mes "ついて来るニャ！";
+		hideonnpc getmdnpcname("管理人ミシン#0"); //75483
+		hideoffnpc getmdnpcname("#排水路出入り口123"); //75500
+		donpcevent getmdnpcname("#排水路強制退出")+"::OnStart";
+		
+		donpcevent getmdnpcname("管理人ミシン#h_")+"::OnStart";
+		close;
+	}
+
+OnStart:
+	hideonnpc getmdnpcname("管理人ミシン#n");
+	hideonnpc getmdnpcname("管理人ミシン#nf");
+	hideonnpc getmdnpcname("管理人ミシン#no");
+	hideonnpc getmdnpcname("#boss_comp");
+	hideonnpc getmdnpcname("#排水路出入り口123");
+	hideonnpc getmdnpcname("#排水路出口");
+//	hideonnpc getmdnpcname("#排水路出口n012");
+	hideonnpc getmdnpcname("#排水路強制退出");
+	end;
+}
+
+//ビギナー用
+1@pump.gat,83,105,4	script	管理人ミシン#n	545,{/* 69326 (hide)*/
+
+	//未調査 PTリーダーじゃない
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)){
+		mes "PTリーダーに話してもらおう。";
+		close;
+	}
+	
+	mes "[保管庫の管理人ミシン]";
+	mes "掃除方法を簡単に教えてあげるニャ。";
+	mes "周辺に排水路があるのが見えるかニャ？";
+	next;
+	if(select("排水路？","見えている")==1){
+		mes "[保管庫の管理人ミシン]";
+		mes "ん？　排水路は初めて見るニャ？";
+		mes "この周辺には排水路と呼ばれる";
+		mes "機械がいくつかあるニャ。";
+		mes "一度見て来るといいニャ。";
+		close;
+	}
+	mes "[保管庫の管理人ミシン]";
+	mes "あの排水路が重要ニャ！";
+	mes "6個ある排水路に、";
+	mes "海藻が付かないよう";
+	mes "一所懸命に掃除をするんだニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "排水路が開きそうになったら";
+	mes "ミシンが合図するから、";
+	mes "開いた排水路を探して";
+	mes "急いで掃除するニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "掃除をしているとモンスターが";
+	mes "邪魔をしてくるけど、";
+	mes "排水路を掃除している人は";
+	mes "動いたりスキルを使えないから、";
+	mes "注意するニャ。";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "排水路は全部で10回開くニャ。";
+	mes "その内、排水路を^FF0000全部で5か所";
+	mes "掃除できたら終了ニャ！^000000";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "開いた排水路は、もたもたしてると";
+	mes "海藻が詰まってしまうニャ。";
+	mes "^FF0000掃除終了までに海藻が6個付いたら";
+	mes "掃除は失敗ニャア。^000000";
+	mes "失敗したら、";
+	mes "ミシンが君達を呼び戻すニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "排水路の掃除は、失敗しても";
+	mes "^FF00002回まではやり直しができる^000000ニャ。";
+	mes "それ以上は時間がかかりすぎると";
+	mes "みんなが心配するから、";
+	mes "今日のお掃除は諦めて引き上げるニャ。";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "掃除する準備はできたのかニャ？";
+	next;
+	if(select("ちょっと待って","準備できてるよ")==1){
+		mes "[保管庫の管理人ミシン]";
+		mes "まだ準備ができてないのかニャ？";
+		mes "準備ができたら";
+		mes "もう一度話しかけてほしいニャ。";
+		close;
+	}
+	mes "[保管庫の管理人ミシン]";
+	mes "わかったニャ！　では始めるニャ！";
+	viewpoint 1, 36, 111, 1, 0xFFFF00; //69326
+	viewpoint 1, 68, 124, 2, 0xFFFF00; //69326
+	viewpoint 1, 80, 114, 3, 0xFFFF00; //69326
+	viewpoint 1, 40, 80, 4, 0xFFFF00; //69326
+	viewpoint 1, 75, 80, 5, 0xFFFF00; //69326
+	viewpoint 1, 58, 101, 6, 0xFFFF00; //69326
+	announce "ミシン : 5秒後に最初の排水路が開くニャ！　開かれた排水路を探してクリックし掃除を始めるニャ!!", 0x1, 0x00ffcc, 0x190, 15, 0, 0;
+	hideonnpc getmdnpcname("管理人ミシン#n"); //69326
+	//制限時間発生はここから
+	donpcevent getmdnpcname("#pump統制0") + "::OnStart";
+	donpcevent getmdnpcname("#pump統制1") + "::OnStart";
+	close;
+}
+
+//失敗した際に表示するミシン
+1@pump.gat,82,105,4	script	管理人ミシン#nf	545,{/* 69325 (hide)*/
+
+	//未調査 PTリーダーじゃない
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)){
+		mes "PTリーダーに話してもらおう。";
+		close;
+	}
+	
+	//掃除失敗
+	if('souji_fal==0){
+		//未調査　エキスパートの文章を転用
+		hideoffnpc getmdnpcname("#排水路出口");
+		mes "[保管庫の管理人ミシン]";
+		mes "失敗してしまったニャ……。";
+		mes "何度もあきらめずに";
+		mes "挑戦してくれて嬉しいけど、";
+		mes "そろそろ時間がマズいニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "残念だけど地上へ戻るニャ……。";
+		mes "ここまで手伝ってくれて";
+		mes "ありがとニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "帰りの出口は左のほうニャ。";
+		mes "また良かったら手伝って欲しいニャ！";
+		close;
+	}
+
+	mes "[保管庫の管理人ミシン]";
+	mes "失敗してしまったニャ……。";
+	mes "　";
+	mes "でもミシン達は諦めないニャ。";
+	mes "頑張ろうニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "素早く作業をしないと";
+	mes "海藻が巻き付いてしまうニャ。";
+	mes "グズグズしていたらすべての";
+	mes "排水路が海藻で詰まってしまうニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "元気が残っているニャら、";
+	mes "もう一度挑戦するかニャ？";
+	mes "^ff0000あと"+'souji_fal+"回、挑戦することができる^000000ニャ。";
+	next;
+	switch(select("ちょっと待って","もう一度挑戦する","あきらめて帰る")){
+	case 1:
+		mes "[保管庫の管理人ミシン]";
+		mes "あまり迷っている時間はないニャ。";
+		mes "準備ができたら声をかけてほしいニャ。";
+		close;
+	case 2:
+		set 'souji_fal,'souji_fal-1;
+		mes "[保管庫の管理人ミシン]";
+		mes "わかったニャ。では始めるニャ！";
+		viewpoint 1, 36, 111, 1, 0xFFFFFF00; //91325
+		viewpoint 1, 68, 124, 2, 0xFFFFFF00; //91325
+		viewpoint 1, 80, 114, 3, 0xFFFFFF00; //91325
+		viewpoint 1, 40, 80, 4, 0xFFFFFF00; //91325
+		viewpoint 1, 75, 80, 5, 0xFFFFFF00; //91325
+		viewpoint 1, 58, 101, 6, 0xFFFFFF00; //91325
+		hideonnpc getmdnpcname("管理人ミシン#nf"); //91346
+		donpcevent getmdnpcname("#pump統制1")+"::OnStart";
+		close;
+	case 3:
+		//未調査
+		set 'souji_fal,0;
+		mes "【未調査】では帰還しましょう";
+		hideoffnpc getmdnpcname("#排水路出口");
+		close;
+	}
+
+OnInit:
+	set 'souji_fal,2;
+	end;
+}
+
+//クリア時に表示するミシン
+1@pump.gat,84,105,4	script	管理人ミシン#no	545,{/* 69410 (hide)*/
+
+	mes "[保管庫の管理人ミシン]";
+	mes "はああ～びっくりしたニャー！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "あんな変な貝は初めて見たニャ。";
+	mes "黒くて、ザラザラしてて、";
+	mes "不気味で怖かったニャ……。";
+	mes "倒してくれてありがとニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "あとはミシンが処理をするから、";
+	mes "君達は荷物を纏めて";
+	mes "反対方向の出口から先に出ているニャ。";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "あ、それと……";
+	mes "今日ここで見たことは";
+	mes "秘密にしていてほしいニャ。";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "トーマス提督がここを閉鎖しちゃうと、";
+	mes "ミシンも君達も";
+	mes "仕事が無くなってしまうニャ。";
+	if(checkquest(71490))close;
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "あとこれは";
+	mes "手伝ってくれたお礼だニャ。";
+	mes "良かったらまた手伝って欲しいニャ。";
+	delquest 97100;
+	setquest 71490; //state=1
+	compquest 71490;
+	getitem 12636, 50;
+	viewpoint 2, 57, 108, 7, 0x0000FF; //74494
+	viewpoint 2, 84, 105, 8, 0xFF0000; //74494
+	viewpoint 1, 32, 100, 9, 0xFF0000; //74494
+	//経験値 500K
+	//ジョブ 200K
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	getexp 10000,0; //
+	
+	getexp 0,10000; //114120
+	getexp 0,10000; //124120
+	getexp 0,10000; //134120
+	getexp 0,10000; //144120
+	getexp 0,10000; //154120
+	getexp 0,10000; //164120
+	getexp 0,10000; //174120
+	getexp 0,10000; //184120
+	getexp 0,10000; //194120
+	getexp 0,10000; //204120
+	getexp 0,10000; //214120
+	getexp 0,10000; //224120
+	getexp 0,10000; //234120
+	getexp 0,10000; //244120
+	getexp 0,10000; //254120
+	getexp 0,10000; //264120
+	getexp 0,10000; //274120
+	getexp 0,10000; //284120
+	getexp 0,10000; //294120
+	getexp 0,10000; //304120
+	close;
+}
+
+
+//重に制限時間…あるのか未調査
+//ビギナーとエキスパート共用
+1@pump.gat,1,1,1	script	#pump統制0	844,{
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer600000:	//10分経過
+	end;
+OnTimer1800000:	//30分経過
+	end;
+OnTimer3600000:	//制限時間60分
+//	end;
+OnReset:
+	//失敗時のセリフなど未調査
+	killmonsterall getmdmapname("1@pump.gat");
+	killmonsterall getmdmapname("2@pump.gat");
+	mapwarp getmdmapname("1@pump.gat"),"mal_in01.gat",162,31;
+	mapwarp getmdmapname("2@pump.gat"),"mal_in01.gat",162,31;
+	end;
+}
+
+//主に排水路
+1@pump.gat,1,1,1	script	#pump統制1	844,{
+	end;
+OnStart:
+	initnpctimer;
+	set 'souji_count,0;
+	set 'souji_ng,0;
+	set 'souji_ok,0;
+	end;
+OnTimer5000:
+	set 'souji_count,'souji_count+1;
+	setarray '@hou$," ","10時方向","1時方向","2時方向","7時方向","5時方向","中央付近";
+	set 'flag,rand(1,6);
+	donpcevent getmdnpcname("#排水路n"+'flag)+"::OnStart";
+	hideoffnpc getmdnpcname("#排水路n"+'flag);
+	donpcevent getmdnpcname("#排水路n"+'flag+"ef")+"::OnStart";
+	hideoffnpc getmdnpcname("#排水路n"+'flag+"ef");
+	mapannounce getmdmapname("1@pump.gat"),"ミシン : "+'@hou$['flag]+"の排水路が開いたニャ！", 0, 0x00ffcc, 15, 0, 0;
+	end;
+OnTimer35000:
+	mapannounce getmdmapname("1@pump.gat"),"ミシン : 10秒以内に"+'souji_count+"個目の排水路の掃除を終わらせるニャ！　急ぐニャー!!",0, 0x00ffcc, 15, 0, 0;
+	end;
+OnTimer45000:
+	//掃除失敗
+	set 'souji_ng,'souji_ng+1;
+	
+	//排水路 フラグOFF エフェクトOFF
+	set getvariableofnpc('flag,getmdnpcname("#排水路n"+'flag)),0;
+	donpcevent getmdnpcname("#排水路n"+'flag+"ef")+"::OnReset";
+	
+	//mob設置 2191 巨大な海藻
+	mapannounce getmdmapname("1@pump.gat"),"ミシン : 巨大な海藻が付いてしまったニャ！　今 "+'souji_ng+"茎だニャ！", 0, 0xff3333, 15, 0, 0;
+	areamonster getmdmapname("1@pump.gat"),53,97,63,108,"巨大な海藻",2191,1,getmdnpcname("#pump統制1")+ "::OnKilled";
+	
+	//掃除失敗
+	if('souji_ng>5){
+		stopnpctimer;
+		killmonsterall getmdmapname("1@pump.gat");
+		hideoffnpc getmdnpcname("管理人ミシン#nf");
+		mapannounce getmdmapname("1@pump.gat"),"ミシン : 巨大な海藻が排水路を覆っているニャ！　掃除は失敗だニャ～。とりあえずミシンの所まで来てほしいニャ!!", 0, 0xff88ff, 15, 0, 0;
+		end;
+	}
+	
+	initnpctimer;
+	end;
+
+OnKilled:
+	end;
+OnClear:
+	//掃除成功
+	set 'souji_ok,'souji_ok+1;
+	mapannounce getmdmapname("1@pump.gat"),"ミシン : "+'souji_ok+"個目の排水路の掃除が完了したニャ～！",0, 0x00ffcc, 15, 0, 0;
+	//排水路 エフェクトOFFフラグ
+	donpcevent getmdnpcname("#排水路n"+'flag+"ef")+"::OnReset";
+	//掃除OKならボスへ
+	if('souji_ok>=5){
+		stopnpctimer;
+		donpcevent getmdnpcname("#pump統制2")+"::OnStart";
+		end;
+	}
+	initnpctimer;
+	end;
+}
+
+//主にボス
+1@pump.gat,1,1,1	script	#pump統制2	844,{
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer3000:
+	mapannounce getmdmapname("1@pump.gat"),"ミシン : なかなか良い掃除だったニャ！",0, 0x00ffcc, 15, 0, 0;
+	end;
+OnTimer8000:
+	set '@temp,getvariableofnpc('souji_ng,getmdnpcname("#pump統制1"));
+	if('@temp>0){
+		mapannounce getmdnpcname("1@pump.gat"),"ミシン : 巨大な海藻は全部で"+'@temp+"茎ニャ。掃除終了ニャ！", 0, 0x00ffcc, 15, 0, 0;
+		end;
+	}
+	end;
+OnTimer13000:
+	mapannounce getmdmapname("1@pump.gat"),"ミシン : では荷物を纏めて上に……　ニャアアア!?",0, 0x00ffcc, 15, 0, 0;
+	end;
+OnTimer18000:
+	mapannounce getmdmapname("1@pump.gat"),"ミシン : 何か変ニャ感じがする!!　バラバラだと危険ニャ！　真ん中に集まるニャ!!",0, 0x00ffcc, 15, 0, 0;
+	sleep 2000;
+	hideoffnpc getmdnpcname("#boss_comp"); //69407
+	mapwarp getmdmapname("1@pump.gat"),getmdmapname("1@pump.gat"),60,95;
+	end;
+OnTimer23000:
+	mapannounce getmdmapname("1@pump.gat"),"ミシン : 君達も緊張を解かニャいで、戦闘の準備をするニャ！",0, 0x00ffcc, 15, 0, 0;
+	hideonnpc getmdnpcname("#boss_comp"); //69407
+	end;
+OnTimer28000:
+	mapannounce getmdmapname("1@pump.gat"),"深淵の中から『深海のお化け貝』が出現！",0, 0xFF88FF, 40, 0, 0;
+	//2178 深海のお化け貝
+	areamonster getmdmapname("1@pump.gat"),61,95,61,95,"深海のお化け貝",2178,1,getmdnpcname("#pump統制2")+ "::OnKilled";
+	end;
+OnKilled:
+	mapannounce getmdmapname("1@pump.gat"),"排水路から現れた深海のお化け貝を倒しました。戦利品が周囲にばらまかれているので、地面をよく調べて見ましょう。", 0, 0xffff00, 15, 0, 0;
+	killmonsterall getmdmapname("1@pump.gat");
+	
+	//個数、座標適当
+	//マラン島特産缶詰、稀に高級武器の箱
+	for(set '@i,0;'@i<10;set '@i,'@i+1){
+		set '@x,60;
+		set '@y,100;
+		set '@x,'@x+rand(-25,25);
+		set '@y,'@y+rand(-25,25);
+		set '@ra,rand(1,100);
+		if  ('@ra<5)	set '@item,12623;//高級武器の箱
+		else 		set '@item,12636;//マラン島特産缶詰
+		dropitem getmdmapname("1@pump.gat"),'@x,'@y,'@item,1,30000;
+	}
+	sleep 5000;
+	
+	hideoffnpc getmdnpcname("#排水路出口");
+	hideoffnpc getmdnpcname("管理人ミシン#no");
+	end;
+}
+
+1@pump.gat,36,111,4	script	#排水路n1	844,{/* 69330 */
+
+	if('flag==1){
+		misceffect 247;
+		progressbar 5; //color=0xffff00
+		if('flag==1){
+			misceffect 16;
+			donpcevent getmdnpcname("#pump統制1")+"::OnClear";
+			set 'flag,0;
+		}
+		close;
+	}
+	
+	mes "‐排水路は閉じている‐";
+	close;
+
+OnStart:
+	set 'flag,1;
+	//排水路と同時にMOB設置
+	//開いた排水路とMOBのパターンは関連性がありそうだけど未調査。
+	// 出現Mobパターン1：古代のククレ(HP958)×3、深海のカナトウス(HP6588)×3
+	// Drop 貝・けっこうかたい皮・ガレット・蟲の皮・クリスタルブルー・猫型乾パン・メント等
+	// 出現Mobパターン2：深海のカニ(HP1569)×3、古代のバドン(HP4465)×3
+	// Drop ガレット・カニニッパ・カニのこうら・おいしいゼリー等
+	set '@dummy,getmapxy('@map$,'@x,'@y,1);
+	areamonster '@map$,'@x-7,'@y-7,'@x+7,'@y+7,"古代のバドン",    2174,1,getmdnpcname("#pump統制1")+"::OnKilled";
+	areamonster '@map$,'@x-7,'@y-7,'@x+7,'@y+7,"深海のカニ",      2176,1,getmdnpcname("#pump統制1")+"::OnKilled";
+	areamonster '@map$,'@x-7,'@y-7,'@x+7,'@y+7,"深海のカナトウス",2177,1,getmdnpcname("#pump統制1")+"::OnKilled";
+	areamonster '@map$,'@x-7,'@y-7,'@x+7,'@y+7,"古代のククレ",    2179,1,getmdnpcname("#pump統制1")+"::OnKilled";
+	end;
+}
+1@pump.gat,68,124,4	duplicate(#排水路n1)	#排水路n2	844
+1@pump.gat,80,114,4	duplicate(#排水路n1)	#排水路n3	844
+1@pump.gat,40,80,4	duplicate(#排水路n1)	#排水路n4	844
+1@pump.gat,75,80,4	duplicate(#排水路n1)	#排水路n5	844
+1@pump.gat,58,101,4	duplicate(#排水路n1)	#排水路n6	844
+//1@pump.gat,68,124,4	script	#排水路n2	844,{/* 69332 */}
+//1@pump.gat,80,114,4	script	#排水路n3	844,{/* 69334 */}
+//1@pump.gat,40,80,4	script	#排水路n4	844,{/* 69336 */}
+//1@pump.gat,75,80,4	script	#排水路n5	844,{/* 69402 */}
+//1@pump.gat,58,101,4	script	#排水路n6	844,{/* 69404 */}
+
+
+
+1@pump.gat,36,111,4	script	#排水路n1ef	844,{/* 69331 */
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer2000:
+	misceffect 109; //69331
+	initnpctimer;
+	end;
+OnReset:
+	stopnpctimer;
+	end;
+}
+1@pump.gat,68,124,4	duplicate(#排水路n1ef)	#排水路n2ef	844
+1@pump.gat,80,114,4	duplicate(#排水路n1ef)	#排水路n3ef	844
+1@pump.gat,40,80,4	duplicate(#排水路n1ef)	#排水路n4ef	844
+1@pump.gat,75,80,4	duplicate(#排水路n1ef)	#排水路n5ef	844
+1@pump.gat,58,101,4	duplicate(#排水路n1ef)	#排水路n6ef	844
+//1@pump.gat,68,124,4	script	#排水路n2ef	844,{/* 69333 */}
+//1@pump.gat,80,114,4	script	#排水路n3ef	844,{/* 69335 */}
+//1@pump.gat,40,80,4	script	#排水路n4ef	844,{/* 69401 */}
+//1@pump.gat,75,80,4	script	#排水路n5ef	844,{/* 69403 */}
+//1@pump.gat,58,101,4	script	#排水路n6ef	844,{/* 69405 */}
+
+
+1@pump.gat,60,95,0	script	#boss_comp	139,2,2{/* 69407 (hide)*/
+	end;
+OnTouch:
+	hideonnpc getmdnpcname("#boss_comp"); //69407
+	setquest 97100; //state=1
+	viewpoint 1, 57, 108, 7, 0x0000FF; //69407
+	end;
+}
+
+//ノーマル出口
+1@pump.gat,32,100,0	script	#排水路出口	45,2,2{/* 69411 (hide)*/
+	end;
+OnTouch:
+	mes "‐地下排水路から外に出ますか？‐";
+	next;
+	if(select("外に出ない","外に出る")==1){
+		mes "‐あなたはその場から離れた‐";
+		close;
+	}
+	mes "‐外へ出ます‐";
+	close2;
+	warp "mal_in01.gat",162,31;
+	end;
+}
+
+//ビギナー以上選択時右端のWP
+1@pump.gat,84,105,0	script	#排水路出入り口123	45,2,2{/* 69409 (hide)*/
+	end;
+OnTouch:
+	// 90以下未調査
+	if(Baselevel<90){
+		mes "エキスパート行くには力不足みたいだ。";
+		close;
+	}
+	warp getmdmapname("2@pump.gat"),38,88;
+	close;
+}
+1@pump.gat,84,105,0	script	#排水路強制退出	45,{/* 69413 (hide)*/
+	end;
+OnTimer3000:
+	mapannounce getmdmapname("1@pump.gat"),"ミシン : 奥の部屋には恐ろしいモンスターがいっぱいニャ！　1分したら出入口を閉めるから、早く移動して欲しいニャ!!", 0, 0x00ffcc, 15, 0, 0;
+	end;
+OnTimer60000:
+	hideonnpc getmdnpcname("#排水路出入り口123");
+	hideoffnpc getmdnpcname("#排水路出口");
+	end;
+OnStart:
+	initnpctimer;
+	end;
+}
+
+//未使用
+//1@pump.gat,32,100,0	script	#排水路出口n012	45,{/* 69412 (hide)*/}
+
+
+
+
+
+//エキスパート
+//初期からヒドラが散らばっている
+//（3点盛り）道中５分、ボス１０分
+//（6点盛り）道中５分、ボス１５
+//                    、ボス３分
+
+
+//最初にいる案内ミシン
+2@pump.gat,40,88,4	script	管理人ミシン#h_	545,{/* 75506 */
+
+	//未調査 PTリーダーじゃない
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)){
+		mes "PTリーダーに話してもらおう。";
+		close;
+	}
+	
+	//既に難易度を選択してた場合
+	if('diff>0){
+		setarray '@str$," ","3点","6点","ギガミックス";
+		mes "[保管庫の管理人ミシン]";
+		mes "選んだ難易度は";
+		mes ""+'@str$['diff]+"盛りだニャ！";
+		mes "掃除する準備はできたのかニャ？";
+		next;
+		if(select("ちょっと待って","準備できてるよ")==1){
+			mes "[保管庫の管理人ミシン]";
+			mes "まだ準備ができてないのかニャ？";
+			mes "準備ができたら";
+			mes "もう一度話しかけてほしいニャ。";
+			close;
+		}
+		//
+		mes "[保管庫の管理人ミシン]";
+		mes "分かったニャ！　では始めるニャ！";
+		viewpoint 1, 53, 114, 1, 0xFFFFFF00; //75506
+		viewpoint 1, 79, 109, 2, 0xFFFFFF00; //75506
+		viewpoint 1, 114, 114, 3, 0xFFFFFF00; //75506
+		viewpoint 1, 98, 98, 4, 0xFFFFFF00; //75506
+		viewpoint 1, 62, 96, 5, 0xFFFFFF00; //75506
+		viewpoint 1, 57, 70, 6, 0xFFFFFF00; //75506
+		viewpoint 1, 47, 49, 7, 0xFFFFFF00; //75506
+		viewpoint 1, 81, 63, 8, 0xFFFFFF00; //75506
+		viewpoint 1, 100, 74, 9, 0xFFFFFF00; //75506
+		viewpoint 1, 115, 50, 10, 0xFFFFFF00; //75506
+		announce "ミシン : 5秒後に最初の排水路が開くニャ！　開かれた排水路を探してクリックし掃除を始めるニャ!!", 0x1, 0x00ffcc, 0x190, 15, 0, 0;
+		hideonnpc getmdnpcname("管理人ミシン#h_"); //75506
+		//
+		donpcevent getmdnpcname("#pump統制0")+"::OnStart";
+		donpcevent getmdnpcname("#pump統制11")+"::OnStart";
+		close;
+	}
+	
+	
+	mes "[保管庫の管理人ミシン]";
+	mes "掃除方法を簡単に教えてあげるニャ。";
+	mes "周辺に排水路があるのが見えるかニャ？";
+	next;
+	if(select("排水路？","見えている")==1){
+		mes "[保管庫の管理人ミシン]";
+		mes "ん？　排水路は初めて見るニャ？";
+		mes "この周辺には排水路と呼ばれる";
+		mes "機械がいくつかあるニャ。";
+		mes "一度見て来るといいニャ。";
+		close;
+	}
+	mes "[保管庫の管理人ミシン]";
+	mes "あの排水路が重要ニャ！";
+	mes "10個ある排水路に、";
+	mes "海藻が付かないよう";
+	mes "一所懸命に掃除をするんだニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "排水路が開きそうになったら";
+	mes "ミシンが合図するから、";
+	mes "開いた排水路を探して";
+	mes "急いで掃除するニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "掃除をしているとモンスターが";
+	mes "邪魔をしてくるけど、";
+	mes "排水路を掃除している人は";
+	mes "動いたりスキルを使えないから、";
+	mes "注意するニャ。";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "排水路は全部で10回開くニャ。";
+	mes "その内、排水路を^FF0000全部で5か所";
+	mes "掃除できたら終了ニャ！^000000";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "開いた排水路は、もたもたしてると";
+	mes "海藻が詰まってしまうニャ。";
+	mes "^FF0000掃除終了までに海藻が6個付いたら";
+	mes "掃除は失敗ニャア。^000000";
+	mes "失敗したら、";
+	mes "ミシンが君達を呼び戻すニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "排水路の掃除は、失敗しても";
+	mes "^FF00002回まではやり直しができる^000000ニャ。";
+	mes "それ以上は時間がかかりすぎると";
+	mes "みんなが心配するから、";
+	mes "今日のお掃除は諦めて引き上げるニャ。";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "それと、";
+	mes "お掃除エキスパートさんには";
+	mes "難易度を選んで貰ってるニャ。";
+	mes "どれにするニャ？";
+	next;
+L_MENU:
+	switch(select("難易度：3点盛り","難易度：6点盛り","難易度：ギガミックス盛り")){
+	case 1:
+		mes "[保管庫の管理人ミシン]";
+		mes "^ff0000難易度：3点盛り^000000";
+		mes "^0000FF水属性^000000の攻撃をしてくるモンスターが";
+		mes "いる排水路を掃除するニャ。";
+		mes "^0000FF水属性^000000に有利な装備で挑んでくれニャ。";
+		mes "　";
+		mes "これでいいかニャ？";
+		next;
+		if(select("いいえ","はい")==1){
+			mes "[保管庫の管理人ミシン]";
+			mes "ニャニャ？";
+			mes "どれにするニャ？";
+			next;
+			goto L_MENU;
+		}
+		//
+		set 'diff,1;
+		break;
+	case 2:
+		mes "[保管庫の管理人ミシン]";
+		mes "^ff0000難易度：6点盛り^000000";
+		mes "^0000FF水属性^000000と^00FF00風属性^000000の";
+		mes "攻撃をしてくるモンスターがいる";
+		mes "排水路を掃除するニャ。";
+		mes "^0000FF水属性^000000と^00FF00風属性^000000に有利な";
+		mes "装備で挑んでくれニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "^ff0000難易度：6点盛り^000000でいいかニャ？";
+		next;
+		if(select("いいえ","はい")==1){
+			mes "[保管庫の管理人ミシン]";
+			mes "ニャニャ？";
+			mes "どれにするニャ？";
+			next;
+			goto L_MENU;
+		}
+		//
+		set 'diff,2;
+		break;
+	case 3:
+		mes "[保管庫の管理人ミシン]";
+		mes "^ff0000難易度：ギガミックス盛り^000000";
+		mes "^0000FF水属性^000000と^00FF00風属性^000000の";
+		mes "攻撃をしてくるモンスターがいる";
+		mes "排水路を掃除するニャ。";
+		mes "ここの主の^FF0000シーラカンスも";
+		mes "何匹か出てきそうな気がする^000000ニャ……。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "^0000FF水属性^000000と^00FF00風属性^000000に有利な";
+		mes "装備で挑んでくれニャ。";
+		mes "^ff0000難易度：ギガミックス盛り^000000";
+		mes "でいいかニャ？";
+		next;
+		if(select("いいえ","はい")==1){
+			mes "[保管庫の管理人ミシン]";
+			mes "ニャニャ？";
+			mes "どれにするニャ？";
+			next;
+			goto L_MENU;
+		}
+		//
+		set 'diff,3;
+		break;
+	}
+	
+	//共通
+	setarray '@str$," ","3点","6点","ギガミックス";
+	mes "[保管庫の管理人ミシン]";
+	mes "分かったニャ！";
+	mes "難易度は"+'@str$['diff]+"盛りでいくニャ！";
+	mes "何がどう"+'@str$['diff]+"盛りなのかは、";
+	mes "君たち自身の目で";
+	mes "確かめて欲しいニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "さあ、そろそろお掃除の時間ニャ。";
+	mes "掃除する準備はできたのかニャ？";
+	next;
+	if(select("ちょっと待って","準備できてるよ")==1){
+		mes "[保管庫の管理人ミシン]";
+		mes "まだ準備ができてないのかニャ？";
+		mes "準備ができたら";
+		mes "もう一度話しかけてほしいニャ。";
+		close;
+	}
+	//未調査…
+	mes "[保管庫の管理人ミシン]";
+	mes "それじゃあ始めるニャ！";
+	hideonnpc "保管庫の管理人ミシン#hf"; //75505
+	viewpoint 1, 53, 114, 1, 0xFFFFFF00; //75505
+	viewpoint 1, 79, 109, 2, 0xFFFFFF00; //75505
+	viewpoint 1, 114, 114, 3, 0xFFFFFF00; //75505
+	viewpoint 1, 98, 98, 4, 0xFFFFFF00; //75505
+	viewpoint 1, 62, 96, 5, 0xFFFFFF00; //75505
+	viewpoint 1, 57, 70, 6, 0xFFFFFF00; //75505
+	viewpoint 1, 47, 49, 7, 0xFFFFFF00; //75505
+	viewpoint 1, 81, 63, 8, 0xFFFFFF00; //75505
+	viewpoint 1, 100, 74, 9, 0xFFFFFF00; //75505
+	viewpoint 1, 115, 50, 10, 0xFFFFFF00; //75505
+	hideonnpc getmdnpcname("管理人ミシン#h_"); //75506
+	//
+	donpcevent getmdnpcname("#pump統制0")+"::OnStart";
+	donpcevent getmdnpcname("#pump統制11")+"::OnStart";
+	close;
+
+OnStart:
+	//初期配置消しはこちら
+	hideonnpc getmdnpcname("管理人ミシン#hf");
+	hideonnpc getmdnpcname("管理人ミシン#ho");
+	hideonnpc getmdnpcname("#boss_comp02");
+//	hideonnpc getmdnpcname("#排水路出口h");
+	hideonnpc getmdnpcname("#排水路出口h01");
+	end;
+
+OnInit:
+	set 'diff,0;
+	end;
+}
+
+//失敗時のミシン
+2@pump.gat,39,88,4	script	管理人ミシン#hf	545,{/* 75505 (hide)*/
+
+	//未調査 PTリーダーじゃない
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)){
+		mes "PTリーダーに話してもらおう。";
+		close;
+	}
+	
+	if('souji_fal==0){
+		hideoffnpc getmdnpcname("#排水路出口h01"); //75555
+		mes "[保管庫の管理人ミシン]";
+		mes "失敗してしまったニャ……。";
+		mes "何度もあきらめずに";
+		mes "挑戦してくれて嬉しいけど、";
+		mes "そろそろ時間がマズいニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "残念だけど地上へ戻るニャ……。";
+		mes "ここまで手伝ってくれて";
+		mes "ありがとニャ。";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "帰りの出口は左のほうニャ。";
+		mes "また良かったら手伝って欲しいニャ！";
+		close;
+	}
+	
+	
+	mes "[保管庫の管理人ミシン]";
+	mes "失敗してしまったニャ……。";
+	mes "　";
+	mes "でもミシン達は諦めないニャ。";
+	mes "頑張ろうニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "素早く作業をしないと";
+	mes "海藻が巻き付いてしまうニャ。";
+	mes "グズグズしていたらすべての";
+	mes "排水路が海藻で詰まってしまうニャ！";
+	next;
+	mes "[保管庫の管理人ミシン]";
+	mes "元気が残っているニャら、";
+	mes "もう一度挑戦するかニャ？";
+	mes "^ff0000あと"+'souji_fal+"回、挑戦することができる^000000ニャ。";
+	next;
+	switch(select("ちょっと待って","もう一度挑戦する","あきらめて帰る")){
+	case 1:
+		mes "[保管庫の管理人ミシン]";
+		mes "あまり迷っている時間はニャいニャ。";
+		mes "準備ができたら声をかけてほしいニャ。";
+		close;
+	case 2:
+		mes "[保管庫の管理人ミシン]";
+		mes "そうくると思ったニャ！";
+		mes "難易度はどれにするニャ？";
+		next;
+L_MENU:
+		switch(select("難易度：3点盛り","難易度：6点盛り","難易度：ギガミックス盛り")){
+		case 1:
+			//未調査
+			mes "[保管庫の管理人ミシン]";
+			mes "^ff0000難易度：3点盛り^000000";
+			mes "^0000FF水属性^000000の攻撃をしてくるモンスターが";
+			mes "いる排水路を掃除するニャ。";
+			mes "^0000FF水属性^000000に有利な装備で挑んでくれニャ。";
+			mes "　";
+			mes "これでいいかニャ？";
+			next;
+			if(select("いいえ","はい")==1){
+				//未調査
+				mes "[保管庫の管理人ミシン]";
+				mes "ニャニャ？";
+				mes "どれにするニャ？";
+				next;
+				goto L_MENU;
+			}
+			set getvariableofnpc('diff,getmdnpcname("管理人ミシン#h_")),1;
+			break;
+		case 2:
+			mes "[保管庫の管理人ミシン]";
+			mes "^ff0000難易度：6点盛り^000000";
+			mes "^0000FF水属性^000000と^00FF00風属性^000000の";
+			mes "攻撃をしてくるモンスターがいる";
+			mes "排水路を掃除するニャ。";
+			mes "^0000FF水属性^000000と^00FF00風属性^000000に有利な";
+			mes "装備で挑んでくれニャ。";
+			next;
+			mes "[保管庫の管理人ミシン]";
+			mes "^ff0000難易度：6点盛り^000000でいいかニャ？";
+			next;
+			if(select("いいえ","はい")==1){
+				//未調査
+				mes "[保管庫の管理人ミシン]";
+				mes "ニャニャ？";
+				mes "どれにするニャ？";
+				next;
+				goto L_MENU;
+			}
+			set getvariableofnpc('diff,getmdnpcname("管理人ミシン#h_")),2;
+			break;
+		case 3:
+			mes "[保管庫の管理人ミシン]";
+			mes "^ff0000難易度：ギガミックス盛り^000000";
+			mes "^0000FF水属性^000000と^00FF00風属性^000000の";
+			mes "攻撃をしてくるモンスターがいる";
+			mes "排水路を掃除するニャ。";
+			mes "ここの主の^FF0000シーラカンスも";
+			mes "何匹か出てきそうな気がする^000000ニャ……。";
+			next;
+			mes "[保管庫の管理人ミシン]";
+			mes "^0000FF水属性^000000と^00FF00風属性^000000に有利な";
+			mes "装備で挑んでくれニャ。";
+			mes "^ff0000難易度：ギガミックス盛り^000000";
+			mes "でいいかニャ？";
+			next;
+			if(select("いいえ","はい")==1){
+				//未調査
+				mes "[保管庫の管理人ミシン]";
+				mes "ニャニャ？";
+				mes "どれにするニャ？";
+				next;
+				goto L_MENU;
+			}
+			set getvariableofnpc('diff,getmdnpcname("管理人ミシン#h_")),3;
+			break;
+		}
+		
+		set 'souji_fal,'souji_fal-1;
+		set 'diff,getvariableofnpc('diff,getmdnpcname("管理人ミシン#h_"));
+		setarray '@str$," ","3点","6点","ギガミックス";
+		mes "[保管庫の管理人ミシン]";
+		mes "分かったニャ！";
+		mes "難易度は"+'@str$['diff]+"盛りでいくニャ！";
+		mes "何がどう"+'@str$['diff]+"盛りなのかは、";
+		mes "君たち自身の目で";
+		mes "確かめて欲しいニャ！";
+		next;
+		mes "[保管庫の管理人ミシン]";
+		mes "それじゃあ始めるニャ！";
+		viewpoint 1, 53, 114, 1, 0xFFFFFF00; //75505
+		viewpoint 1, 79, 109, 2, 0xFFFFFF00; //75505
+		viewpoint 1, 114, 114, 3, 0xFFFFFF00; //75505
+		viewpoint 1, 98, 98, 4, 0xFFFFFF00; //75505
+		viewpoint 1, 62, 96, 5, 0xFFFFFF00; //75505
+		viewpoint 1, 57, 70, 6, 0xFFFFFF00; //75505
+		viewpoint 1, 47, 49, 7, 0xFFFFFF00; //75505
+		viewpoint 1, 81, 63, 8, 0xFFFFFF00; //75505
+		viewpoint 1, 100, 74, 9, 0xFFFFFF00; //75505
+		viewpoint 1, 115, 50, 10, 0xFFFFFF00; //75505
+		hideonnpc getmdnpcname("管理人ミシン#hf"); //75505
+		donpcevent getmdnpcname("#pump統制11")+"::OnStart";
+		close;
+		
+	case 3://諦めて帰る
+		//未調査
+		set 'souji_fal,0;
+		mes "【未調査】では帰還しましょう";
+		hideoffnpc getmdnpcname("#排水路出口h01");
+		close;
+	}
+	
+OnInit:
+	set 'souji_fal,2;
+	end;
+}
+
+
+
+//おそらくクリア用(未調査のためビギナーを使い回しです)
+2@pump.gat,41,88,4	script	管理人ミシン#ho	545,{/* 75553 (hide)*/
+
+	if(checkquest(71490)){
+		mes "[保管庫の管理人ミシン]";
+		mes "？もう報酬渡したニャ～。";
+		close;
+	}
+
+	set 'diff,getvariableofnpc('diff,getmdnpcname("管理人ミシン#h_"));
+	
+	mes "[保管庫の管理人ミシン]";
+	mes "あとこれは";
+	mes "手伝ってくれたお礼だニャ。";
+	mes "良かったらまた手伝って欲しいニャ。";
+	
+	//報酬GET用で利用
+	setquest 71490; //state=1
+	compquest 71490;
+	
+	switch('diff){
+	case 1:
+		getitem 6423,2;
+		getexp 3000000,1500000;
+		break;
+	case 2:
+		getitem 6423,5;
+		if(Baselevel<100)
+			getexp 3000000,1500000;
+		if(Baselevel<110)
+			getexp 4000000,2000000;
+		if(Baselevel<120)
+			getexp 5000000,2500000;
+		if(Baselevel<130)
+			getexp 7000000,3500000;
+		else
+			getexp 10000000,5000000;
+		break;
+	case 3:
+		set 'count,getvariableofnpc('count,getmdnpcname("#pump統制12"));
+		setarray '@item$,3,8,12,15,30;
+		setarray '@exp$,6000000,6000000,6000000,15000000,20000000;
+		setarray '@job$,3000000,3000000,3000000,7500000,10000000;
+		/*シーラカンス未撃破 ： 3個( 6M/ 3M)
+		シーラカンス1体撃破： 8個
+		シーラカンス2体撃破：12個
+		シーラカンス3体撃破：15個(15M/ 7.5M)
+		シーラカンス4体撃破：30個(20M/10M)*/
+		getitem 6423,'@item$['count];
+		getexp '@exp$['count],'@job$['count];
+		break;
+	}
+	
+	close;
+}
+
+
+
+//2@pump.gat,38,100,0	script	#排水路出口h	45,{/* 75554 (hide)*/}
+2@pump.gat,38,100,0	script	#排水路出口h01	45,2,2{/* 75555 (hide)*/
+	end;
+OnTouch:
+	mes "‐地下排水路から外に出ますか？‐";
+	next;
+	if(select("外に出ない","外に出る")==1){
+		mes "‐あなたはその場から離れた‐";
+		close;
+	}
+	mes "‐外へ出ます‐";
+	close2;
+	warp "mal_in01.gat",161,32;//0ep2@pump.gat,38,100,0	warp	#排水路出口h_0ep	2,2,mal_in01.gat,161,32 //75554 from_pos=(39, 103)
+	end;
+}
+
+
+//排水掃除の管理
+2@pump.gat,1,1,0	script	#pump統制11	45,{
+	end;
+OnStart:
+	initnpctimer;
+	set 'souji_count,0;
+	set 'souji_ng,0;
+	set 'souji_ok,0;
+	end;
+OnTimer5000:
+	set 'souji_count,'souji_count+1;
+	setarray '@hou$," ","10時方向","12時方向","2時方向","2時方向","10時方向","8時方向","8時方向","6時方向","5時方向","5時方向";
+	set 'flag,rand(1,10);
+	donpcevent getmdnpcname("#排水路h"+'flag)+"::OnReset";
+	donpcevent getmdnpcname("#排水路h"+'flag)+"::OnStart";
+	hideoffnpc getmdnpcname("#排水路h"+'flag);
+	donpcevent getmdnpcname("#排水路h"+'flag+"ef")+"::OnStart";
+	hideoffnpc getmdnpcname("#排水路h"+'flag+"ef");
+	mapannounce getmdmapname("2@pump.gat"),"ミシン : "+'@hou$['flag]+"の排水路が開いたニャ！", 0, 0x00ffcc, 15, 0, 0;
+	end;
+OnTimer35000:
+	mapannounce getmdmapname("2@pump.gat"),"ミシン : 10秒以内に"+'souji_count+"個目の排水路の掃除を終わらせるニャ！　急ぐニャー!!",0, 0x00ffcc, 15, 0, 0;
+	end;
+OnTimer45000:
+	//掃除失敗
+	set 'souji_ng,'souji_ng+1;
+	
+	//排水路 フラグOFF エフェクトOFF
+	set getvariableofnpc('flag,getmdnpcname("#排水路h"+'flag)),0;
+	donpcevent getmdnpcname("#排水路h"+'flag+"ef")+"::OnReset";
+	
+	//mob設置 2191 巨大な海藻
+	mapannounce getmdmapname("2@pump.gat"),"ミシン : 巨大な海藻が付いてしまったニャ！　今 "+'souji_ng+"茎だニャ！", 0, 0xff3333, 15, 0, 0;
+	areamonster getmdmapname("2@pump.gat"),75,78,86,89,"巨大な海藻",2191,1,getmdnpcname("#pump統制11")+ "::OnKilled";
+	
+	//掃除失敗
+	if('souji_ng>5){
+		stopnpctimer;
+		killmonsterall getmdmapname("2@pump.gat");
+		hideoffnpc getmdnpcname("管理人ミシン#hf");
+		mapannounce getmdmapname("2@pump.gat"),"ミシン : 巨大な海藻が排水路を覆っているニャ！　掃除は失敗だニャ～。とりあえずミシンの所まで来てほしいニャ!!", 0, 0xff88ff, 15, 0, 0;
+		end;
+	}
+	
+	initnpctimer;
+	end;
+
+OnKilled:
+	end;
+OnClear:
+	//掃除成功
+	set 'souji_ok,'souji_ok+1;
+	mapannounce getmdmapname("2@pump.gat"),"ミシン : "+'souji_ok+"個目の排水路の掃除が完了したニャ～！",0, 0x00ffcc, 15, 0, 0;
+	//排水路 エフェクトOFFフラグ
+	donpcevent getmdnpcname("#排水路h"+'flag+"ef")+"::OnReset";
+	//掃除OKならボスへ
+	if('souji_ok>=5){
+		stopnpctimer;
+		donpcevent getmdnpcname("#pump統制12")+"::OnStart";
+		end;
+	}
+	initnpctimer;
+	end;
+}
+
+//ボスの管理(未調査のためビギナーを使い回しです)
+2@pump.gat,1,1,0	script	#pump統制12	45,{
+
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer3000:
+	mapannounce getmdmapname("2@pump.gat"),"ミシン : なかなか良い掃除だったニャ！",0, 0x00ffcc, 15, 0, 0;
+	end;
+OnTimer8000:
+	set '@temp,getvariableofnpc('souji_ng,getmdnpcname("#pump統制11"));
+	if('@temp>0){
+		mapannounce getmdnpcname("2@pump.gat"),"ミシン : 巨大な海藻は全部で"+'@temp+"茎ニャ。掃除終了ニャ！", 0, 0x00ffcc, 15, 0, 0;
+		end;
+	}
+	end;
+OnTimer13000:
+	mapannounce getmdmapname("2@pump.gat"),"ミシン : では荷物を纏めて上に……　ニャアアア!?",0, 0x00ffcc, 15, 0, 0;
+	end;
+OnTimer18000:
+	mapannounce getmdmapname("2@pump.gat"),"ミシン : 何か変ニャ感じがする!!　バラバラだと危険ニャ！　真ん中に集まるニャ!!",0, 0x00ffcc, 15, 0, 0;
+	sleep 2000;
+	hideoffnpc getmdnpcname("#boss_comp02"); //75530
+	mapwarp getmdmapname("2@pump.gat"),getmdmapname("2@pump.gat"),79,87;
+	end;
+OnTimer23000:
+	mapannounce getmdmapname("2@pump.gat"),"ミシン : 君達も緊張を解かニャいで、戦闘の準備をするニャ！",0, 0x00ffcc, 15, 0, 0;
+	hideonnpc getmdnpcname("#boss_comp02"); //69407
+	end;
+OnTimer28000:
+	set 'diff,getvariableofnpc('diff,getmdnpcname("管理人ミシン#h_"));
+	set 'count,0;
+	
+	setarray '@mob1$," ","暗黒のシーラカンス","暴虐のシーラカンス","4匹のシーラカンス";
+	setarray '@mob2$," ","暗黒のシーラカンス","暴虐のシーラカンス","変異のシーラカンス","異形のシーラカンス";
+	setarray '@mob_id1$," ",2186,2189;
+	setarray '@mob_id2$," ",2189,2190,2187,2188;
+	
+	mapannounce getmdmapname("2@pump.gat"),"排水路の奥底から『"+'@mob1$['diff]+"』が出現！",0, 0xFF88FF, 40, 0, 0;
+	if('diff!=3){
+		set 'count_max,1;
+		areamonster getmdmapname("2@pump.gat"),75,78,86,89,'@mob1$['diff],'@mob_id1$['diff],1,getmdnpcname("#pump統制12")+ "::OnKilled";
+	}
+	else{
+		set 'count_max,4;
+		areamonster getmdmapname("2@pump.gat"),102,108,109,115,'@mob2$['diff],'@mob_id2$[1],1,getmdnpcname("#pump統制12")+ "::OnKilled";
+		areamonster getmdmapname("2@pump.gat"),55,51,63,60,    '@mob2$['diff],'@mob_id2$[2],1,getmdnpcname("#pump統制12")+ "::OnKilled";
+		areamonster getmdmapname("2@pump.gat"),47,101,55,108,  '@mob2$['diff],'@mob_id2$[3],1,getmdnpcname("#pump統制12")+ "::OnKilled";
+		areamonster getmdmapname("2@pump.gat"),99,61,107,68,   '@mob2$['diff],'@mob_id2$[4],1,getmdnpcname("#pump統制12")+ "::OnKilled";
+	}
+	end;
+
+OnKilled:
+	set 'count,'count+1;
+	setarray '@mob1$," ","暗黒のシーラカンス","暴虐のシーラカンス","4匹のシーラカンス";
+
+	if('count>='count_max){
+		mapannounce getmdmapname("2@pump.gat"),"排水路から現れた"+'@mob1$['diff]+"を倒しました。戦利品が周囲にばらまかれているので、地面をよく調べて見ましょう。", 0, 0xffff00, 15, 0, 0;
+		killmonsterall getmdmapname("2@pump.gat");
+		
+		//個数、座標適当
+		//マラン島特産缶詰、稀に高級武器の箱
+		for(set '@i,0;'@i<10;set '@i,'@i+1){
+			set '@x,82;
+			set '@y,85;
+			set '@x,'@x+rand(-35,35);
+			set '@y,'@y+rand(-35,35);
+			set '@ra,rand(1,100);
+			if  ('@ra<10){
+				set '@num,rand(1,2);
+				set '@item,12623;//高級武器の箱
+			}else{
+				set '@num,rand(8,10);
+		 		set '@item,12636;//マラン島特産缶詰
+			}
+			dropitem getmdmapname("2@pump.gat"),'@x,'@y,'@item,'@num,30000;
+		}
+		sleep 5000;
+		
+		hideoffnpc getmdnpcname("#排水路出口h01");
+		hideoffnpc getmdnpcname("管理人ミシン#ho");
+		end;
+	}
+	end;
+}
+
+//未調査
+2@pump.gat,79,85,0	script	#boss_comp02	139,4,4{/* 75530 (hide)*/
+	end;
+OnTouch:
+	set 'diff,getvariableofnpc('diff,getmdnpcname("管理人ミシン#h_"));
+	hideonnpc getmdnpcname("#boss_comp2"); //
+	//現状では使う必要がない？ボスの時間制限でつかうのかしら？
+//	viewpoint 1, 57, 108, 7, 0x0000FF; //
+	initnpctimer;
+	end;
+OnTimer15000:
+	setarray '@str$,"","15","10","3";
+	mapannounce getmdmapname("2@pump.gat"),"制限時間は、"+'@str$['diff]+"分です！",0, 0xFF88FF, 40, 0, 0;
+	end;
+OnTimer20000:
+	mapannounce getmdmapname("2@pump.gat"),"時間内に掃除を済ませ撤退して下さい！",0, 0xFF88FF, 40, 0, 0;
+	end;
+OnTimer180000:	//3分経過
+	if('diff==3){
+		stopnpctimer;
+		killmonsterall getmdmapname("2@pump.gat");
+		hideoffnpc getmdnpcname("#排水路出口h01");
+		hideoffnpc getmdnpcname("管理人ミシン#ho");
+		mapannounce getmdmapname("2@pump.gat"),"時間だニャ！",0, 0xFF88FF, 40, 0, 0;
+		end;
+	}
+	end;
+OnTimer600000:	//10分経過
+	if('diff==2){
+		stopnpctimer;
+		killmonsterall getmdmapname("2@pump.gat");
+		hideoffnpc getmdnpcname("管理人ミシン#hf");
+		set getvariableofnpc('souji_fal,getmdnpcname("管理人ミシン#h_")),0;
+		mapannounce getmdmapname("2@pump.gat"),"時間だニャ！",0, 0xFF88FF, 40, 0, 0;
+		end;
+	}
+	end;
+OnTimer900000:	//15分経過
+	if('diff==1){
+		stopnpctimer;
+		killmonsterall getmdmapname("2@pump.gat");
+		hideoffnpc getmdnpcname("管理人ミシン#hf");
+		set getvariableofnpc('souji_fal,getmdnpcname("管理人ミシン#h_")),0;
+		mapannounce getmdmapname("2@pump.gat"),"時間だニャ！",0, 0xFF88FF, 40, 0, 0;
+		end;
+	}
+	end;
+}
+
+2@pump.gat,53,114,4	script	#排水路h1	844,{/* 75509 */
+
+	if('flag==1){
+		misceffect 247;
+		progressbar 5; //color=0xffff00
+		if('flag==1){
+			misceffect 16;
+			donpcevent getmdnpcname("#pump統制11")+"::OnClear";
+			set 'flag,0;
+		}
+		close;
+	}
+	
+	mes "‐排水路は閉じている‐";
+	close;
+OnStart:
+	set 'flag,1;
+	set 'diff,getvariableofnpc('diff,getmdnpcname("管理人ミシン#h_"));
+	
+	//排水路と同時にMOB設置
+	set '@dummy,getmapxy('@map$,'@x,'@y,1);
+	switch('diff){
+	case 1:
+		//各2匹の可能性
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"古代のソードフィッシュ",2181,2,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"古代のマルク",          2182,2,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"古代のオボンヌ",        2184,2,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		break;
+	case 2:
+		//ストラウフかソードフィッシュが2匹の可能性
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"古代のソードフィッシュ",2181,1,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"古代のマルク",          2182,1,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"古代のオボンヌ",        2184,1,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"変異のストラウフ",      2180,1,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"変異のアノリアン",      2183,1,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"変異の河童",            2185,1,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		if(rand(100)<70)
+			areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"古代のソードフィッシュ",2181,1,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		else
+			areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"変異のストラウフ",      2180,1,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		break;
+	case 3:
+		//各3匹の可能性
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"古代のソードフィッシュ",2181,3,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"古代のマルク",          2182,3,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"古代のオボンヌ",        2184,3,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"変異のストラウフ",      2180,3,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"変異のアノリアン",      2183,3,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		areamonster '@map$,'@x-5,'@y-5,'@x+5,'@y+5,"変異の河童",            2185,3,getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+		break;
+	}
+	end;
+OnReset:
+	killmonster getmdmapname("2@pump.gat"),getmdnpcname( strnpcinfo(0) )+"::OnKilled";
+	end;
+OnKilled:
+	end;
+}
+
+2@pump.gat,79,109,4	duplicate(#排水路h1)	#排水路h2	844
+2@pump.gat,114,114,4	duplicate(#排水路h1)	#排水路h3	844
+2@pump.gat,98,98,4	duplicate(#排水路h1)	#排水路h4	844
+2@pump.gat,62,96,4	duplicate(#排水路h1)	#排水路h5	844
+2@pump.gat,57,70,4	duplicate(#排水路h1)	#排水路h6	844
+2@pump.gat,47,49,4	duplicate(#排水路h1)	#排水路h7	844
+2@pump.gat,81,63,4	duplicate(#排水路h1)	#排水路h8	844
+2@pump.gat,100,74,4	duplicate(#排水路h1)	#排水路h9	844
+2@pump.gat,115,50,4	duplicate(#排水路h1)	#排水路h10	844
+//2@pump.gat,79,109,4	script	#排水路h2	844,{/* 75511 */}
+//2@pump.gat,114,114,4	script	#排水路h3	844,{/* 75513 */}
+//2@pump.gat,98,98,4	script	#排水路h4	844,{/* 75515 */}
+//2@pump.gat,62,96,4	script	#排水路h5	844,{/* 75517 */}
+//2@pump.gat,57,70,4	script	#排水路h6	844,{/* 75519 */}
+//2@pump.gat,47,49,4	script	#排水路h7	844,{/* 75521 */}
+//2@pump.gat,81,63,4	script	#排水路h8	844,{/* 75523 */}
+//2@pump.gat,100,74,4	script	#排水路h9	844,{/* 75525 */}
+//2@pump.gat,115,50,4	script	#排水路h10	844,{/* 75527 */}
+
+2@pump.gat,53,114,4	script	#排水路h1ef	844,{/* 75510 */
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer2000:
+	misceffect 109; //69331
+	initnpctimer;
+	end;
+OnReset:
+	stopnpctimer;
+	end;
+}
+2@pump.gat,79,109,4	duplicate(#排水路h1ef)	#排水路h2ef	844
+2@pump.gat,114,114,4	duplicate(#排水路h1ef)	#排水路h3ef	844
+2@pump.gat,98,98,4	duplicate(#排水路h1ef)	#排水路h4ef	844
+2@pump.gat,62,96,4	duplicate(#排水路h1ef)	#排水路h5ef	844
+2@pump.gat,57,70,4	duplicate(#排水路h1ef)	#排水路h6ef	844
+2@pump.gat,47,49,4	duplicate(#排水路h1ef)	#排水路h7ef	844
+2@pump.gat,81,63,4	duplicate(#排水路h1ef)	#排水路h8ef	844
+2@pump.gat,100,74,4	duplicate(#排水路h1ef)	#排水路h9ef	844
+2@pump.gat,115,50,4	duplicate(#排水路h1ef)	#排水路h10ef	844
+//2@pump.gat,79,109,4	script	#排水路h2ef	844,{/* 75512 */}
+//2@pump.gat,114,114,4	script	#排水路h3ef	844,{/* 75514 */}
+//2@pump.gat,98,98,4	script	#排水路h4ef	844,{/* 75516 */}
+//2@pump.gat,62,96,4	script	#排水路h5ef	844,{/* 75518 */}
+//2@pump.gat,57,70,4	script	#排水路h6ef	844,{/* 75520 */}
+//2@pump.gat,47,49,4	script	#排水路h7ef	844,{/* 75522 */}
+//2@pump.gat,81,63,4	script	#排水路h8ef	844,{/* 75524 */}
+//2@pump.gat,100,74,4	script	#排水路h9ef	844,{/* 75526 */}
+//2@pump.gat,115,50,4	script	#排水路h10ef	844,{/* 75528 */}
+
+
