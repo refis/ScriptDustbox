@@ -1,0 +1,619 @@
+m_h1,12,12,6	script	モンスター呼ぶよ！	495,{
+	switch (select("出さない","出す")) {
+	case 1:
+		close;
+	case 2:
+		switch (select("プロ","モロク","ゲフェン","ルティエ","コンロン")) {
+		case 1:set .@map$,"prontera";break;
+		case 2:set .@map$,"morocc";break;
+		case 3:set .@map$,"geffen";break;
+		case 4:set .@map$,"xmas";break;
+		case 5:set .@map$,"gonryun";break;
+		}
+		mes "モンスターID";
+		input .@id;
+		next;
+		mes "数";
+		input .@num;
+		monster .@map$,0,0,"--ja--",.@id,.@num;
+		mes "出したよ！";
+		close;
+	}
+}
+prt_in,38,107,6	script	蜜宛お手紙宅配猫	495,{
+	mes "[蜜宛お手紙宅配猫]";
+	mes "";
+	mes "GM蜜にお手紙を出しますか？";
+	next;
+	switch (select("お手紙を出す","やめる")) {
+	case 1:
+		mes "[蜜宛お手紙宅配猫]";
+		mes "メッセージを入力してください";
+		input .@cmd$;
+		mes ""+.@cmd$+ "";
+		mes "上記メッセージでよろしいですか？";
+		next;
+		if(select("はい","いいえ")==2) {
+			close;
+		}
+		logmessage "mitsu","蜜宛:"+.@cmd$;
+		close;end;
+	case 2:
+		close;
+	}
+}
+prt_in,38,104,8	script	苺宛お手紙宅配猫	496,{
+	mes "[苺宛お手紙宅配猫]";
+	mes "";
+	mes "GM苺にお手紙を出しますか？";
+	next;
+	switch (select("お手紙を出す","やめる")) {
+	case 1:
+		mes "[苺宛お手紙宅配猫]";
+		mes "メッセージを入力してください";
+		input .@cmd$;
+		mes ""+.@cmd$+ "";
+		mes "上記メッセージでよろしいですか？";
+		next;
+		if(select("はい","いいえ")==2) {
+			close;
+		}
+		logmessage "itigo","苺宛:"+.@cmd$;
+		close;end;
+	case 2:
+		close;
+	}
+}
+/*
+prt_in,45,100,2	script	不具合要望猫	495,{
+	mes "頂いた猫メの不具合要望を記載してます";
+	mes "ほぼ原文のままになっています";
+	mes "実装、修正されると削除されます";
+	mes "ここにない場合、解決済みであるか";
+	mes "またはGMが解決済みと認識しています";
+	next;
+	mes "ここにない不具合は";
+	mes "修正内容が正常適用されていないか";
+	mes "近日中に猫メした者の場合、";
+	mes "GMがまだ猫メを閲覧していません";
+	mes "メニューをどうぞ";
+	next;
+	switch (select("やめる","不具合一覧","要望一覧")) {
+	case 1:
+		close;
+	case 2:
+		if(checkfile("log/errermes.txt")){
+			set .@maxcol,getline("log/errermes.txt");
+			if(.@maxcol>1){
+				for (set .@i,0; .@i < .@maxcol-2; set .@i, .@i+1){
+					set .@mes$,readline("log/errermes.txt",.@i);
+					if(.@mes$ != "" && getstrlen(.@mes$) > 1){
+						mes .@mes$;
+						mes "--------";
+					}
+				}
+			}
+			close;
+		}
+		close;
+	case 3:
+		if(checkfile("log/youboumes.txt")){
+			set .@maxcol,getline("log/youboumes.txt");
+			if(.@maxcol>1){
+				for (set .@i,1; .@i < .@maxcol-2; set .@i, .@i+1){
+					set .@mes$,readline("log/youboumes.txt",.@i);
+					if(.@mes$ != "" && getstrlen(.@mes$) > 1){
+						mes .@mes$;
+						mes "--------";
+					}
+				}
+			}
+			close;
+		}
+		close;
+	}
+	close;
+}
+prt_in,39,115,6	script	検証MAP転送猫	421,{
+	mes "[検証MAP転送猫]";
+	mes "システムリニューアルに関する";
+	mes "スキルダメージ調査のための";
+	mes "検証MAPにご案内します";
+	next;
+	mes "[検証MAP転送猫]";
+	mes "転送の前に注意事項を";
+	mes "^FF0000必ずお読みください^000000";
+	next;
+	mes "[検証MAP転送猫]";
+	mes "まず第1点";
+	mes "^FF0000このMAPは検証目的^000000でのみ";
+	mes "利用することができます";
+	next;
+	mes "[検証MAP転送猫]";
+	mes "無意味な占領、妨害、不正利用は";
+	mes "絶対にしないようにしましょう";
+	next;
+	mes "[検証MAP転送猫]";
+	mes "次に第2点";
+	mes "^FF0000このMAPへの入場、利用状況^000000の";
+	mes "ログをとっています";
+	next;
+	mes "[検証MAP転送猫]";
+	mes "MAP内の設定は、MAP移動でリセットされますが";
+	mes "不正利用目的と判断されそうな行動は慎みましょう";
+	next;
+	mes "[検証MAP転送猫]";
+	mes "最後に第3点";
+	mes "Ratorio様での表示ダメージとゲーム内ダメージが";
+	mes "数ポイントのずれを起こすことがあります";
+	next;
+	mes "[検証MAP転送猫]";
+	mes "これは切り上げ、切捨ての位置の相違によるもので";
+	mes "別個に対処することが時間的に困難です";
+	next;
+	mes "[検証MAP転送猫]";
+	mes "ダメージが大幅に違う場合のみ、";
+	mes "Ratorio様での設定情報、ゲーム内ダメージ等を";
+	mes "報告してください";
+	mes "計算式見直しスキル候補とします";
+	next;
+	mes "[検証MAP転送猫]";
+	mes "ただし、次のスキルについては";
+	mes "現段階で、HHS独自となっています";
+	mes "このスキルにおける検証結果は";
+	mes "見直し候補と^FF0000なりません^000000";
+	next;
+	mes "[使用変更スキル]02/15時点";
+	mes "^FF0000スパイラルピアース^000000重量部影響の低下";
+	mes "^FF0000メランコリー^000000スキル倍率に加算";
+	mes "^FF0000サクリファイス^000000%UPカードが乗る";
+	next;
+	mes "[検証MAP転送猫]";
+	mes "以上の点に注意して";
+	mes "利用してください";
+	mes "　";
+	mes "これを守り、利用しますか？";
+	next;
+	switch (select("しません","します")) {
+	case 1:
+		close;
+	case 2:
+		logmessage "debug_room","デバッグルーム入場";
+		warp "m_h4", 4, 4;
+		close;
+	}
+}*/
+m_h1,11,17,5	script	手紙閲覧	421,{
+	mes "選んでください。";
+	switch (select("Read Message Log","Sleep")) {
+	case 1:
+		input .@readlog$;
+		readlog .@readlog$;close;end;
+	case 2:
+		close;
+	}
+}
+
+m_h1,2,17,5	script	各種ポイント	876,{
+	if (getgmlevel()==0) end;
+	mes "苺："+#PPOINT;
+	mes "魚："+#SAKANAPOINT;
+	mes "採掘："+SAIKUTUPOINT;
+	mes "ペット："+#PETPOINT;
+	switch (select("苺ポイント","お魚ポイント","採掘ポイント","ペットポイント","スキル習得")) {
+	case 1:
+		mes "何ポイント加算？";
+		next;
+		input .@pointup;
+		set #PPOINT,#PPOINT+.@pointup;
+		close;
+	case 2:
+		mes "何ポイント加算？";
+		next;
+		input .@pointup;
+		set #SAKANAPOINT,#SAKANAPOINT+.@pointup;
+		close;
+	case 3:
+		mes "何ポイント加算？";
+		next;
+		input .@pointup;
+		set SAIKUTUPOINT,SAIKUTUPOINT+.@pointup;
+		close;
+	case 4:
+		mes "何ポイント加算？";
+		next;
+		input .@pointup;
+		set #PETPOINT,#PETPOINT+.@pointup;
+		close;
+	case 5:
+		mes "skillid、Lvの順番で入力";
+		next;
+		input .@skillid;
+		input .@skilllv;
+		skill .@skillid,.@skilllv,0;
+		close;
+	}
+}
+
+m_h1,17,2,3	script	蜃気楼用	496,{
+	if (getgmlevel()==0) end;
+	mes "開始地点を指定";
+	next;
+	if(select("いいえ","はい")==1) {
+		close;
+	}
+	switch (select( "初期化","0F開始","1Fクリア","2Fクリア","3Fクリア","4Fクリア",
+			"5Fクリア","6Fクリア","7Fクリア","8Fクリア","9Fクリア","やめる")) {
+	case 1: donpcevent "mirage::OnReset";break;
+	case 2: donpcevent "sinkirou0::OnStart";break;
+	case 3:	enablenpc "sinkirou4013";donpcevent "sinkirou1::OnStart";enablenpc "不思議な石版#2";
+		break;
+	case 4:	enablenpc "sinkirou4014";donpcevent "sinkirou2::OnStart";enablenpc "不思議な石版#3";
+		break;
+	case 5:	enablenpc "sinkirou4015";donpcevent "sinkirou3::OnStart";
+		break;
+	case 6:	donpcevent "sinkirou4::OnStart";sleep 1000;enablenpc "sinkirou4016";
+		break;
+	case 7:	enablenpc "sinkirou4017";donpcevent "sinkirou5::OnStart";
+		break;
+	case 8:	enablenpc "sinkirou4019";enablenpc "不思議な石版#7";donpcevent "sinkirou7::OnStart";
+		break;
+	case 9: enablenpc "sinkirou4020";donpcevent "sinkirou8::OnStart";
+		if (rand(2)==0) {
+			enablenpc "不思議な石版#8a";
+		} else {
+			enablenpc "不思議な石版#8b";
+		}
+		break;
+	case 10:enablenpc "sinkirou4021";donpcevent "sinkirou9::OnStart";
+		break;
+	case 11:enablenpc "sinkirou4022";donpcevent "sinkirou10::OnStart";
+		break;
+	case 12:close;
+	}
+	mes "操作しました";
+	close;
+}
+
+/*m_h4,10,17,6	script	検証用ダメージ設定	876,{
+	mes "次の物理攻撃一度に限り";
+	mes "次の設定上ダメージが出ます";
+	mes "ただし、^FF0000ソウルブレイカー^000000等の";
+	mes "^FF0000Matkや、その他要因^000000がダメージに";
+	mes "影響するスキルの場合、";
+	mes "物理以外のダメージ部分はばらつきます";
+	next;
+	switch (select("最高ダメージを出す","最低ダメージを出す","キャンセル")) {
+	case 1:
+		mes "次の攻撃は最高ダメージになります";
+		setweaponatt 1;
+		logmessage "debug_room","最高ダメージ設定";
+		close;
+	case 2:
+		mes "次の攻撃は最低ダメージになります";
+		setweaponatt 2;
+		logmessage "debug_room","最低ダメージ設定";
+		close;
+	case 3:
+		mes "やめました";
+		setweaponatt 0;
+		close;
+	}
+}
+m_h4,17,10,4	script	検証用モブ召喚	876,{
+	if( getmapmobs("m_h4") > 0){
+		mes "呼び出されたモンスターが存在します";
+		mes "同時に複数匹出現させることはできません";
+		close;
+	}
+	mes "次の中からモンスターを呼びます";
+	mes "経験値、ドロップ等はありません";
+	next;
+	switch (select("ポリン","天下大将軍","ナイトメアテラー","銃奇兵","アイスタイタン","さすらい狼","やめる")) {
+	case 1:
+		mes "ポリンを呼びます";
+		close2;
+		monster "m_h4",15,15,"ポリン",1002,1;
+		end;
+	case 2:
+		mes "天下大将軍を呼びます";
+		close2;
+		monster "m_h4",15,15,"天下大将軍",1277,1;
+		end;
+	case 3:
+		mes "ナイトメアテラーを呼びます";
+		close2;
+		monster "m_h4",15,15,"ナイトメアテラー",1379,1;
+		end;
+	case 4:
+		mes "銃奇兵を呼びます";
+		close2;
+		monster "m_h4",15,15,"銃奇兵",1403,1;
+		end;
+	case 5:
+		mes "アイスタイタンを呼びます";
+		close2;
+		monster "m_h4",15,15,"アイスタイタン",1777,1;
+		end;
+	case 6:
+		mes "さすらい狼を呼びます";
+		close2;
+		monster "m_h4",15,15,"さすらい狼",1092,1;
+		end;
+	case 7:
+		mes "やめました";
+		close;
+	}
+}
+m_h4,17,17,5	script	倉庫カプラ#debug	117,{
+	mes "どちらを開きますか？";
+	if(select("個人倉庫","ギルド倉庫")==1) {
+		openstorage;
+		close;end;
+	}
+	if(getcharid(2) < 1) {
+		mes "ギルドへ所属していないようです。";
+		close;
+	}
+	if(getguildmaster(getcharid(2)) == strcharinfo(0)){
+		mes "ギルドマスターですね？";
+		mes "パスワードを再設定しますか？";
+		if(select("倉庫利用","パスワード再設定")==2) {
+			mes "1から9999の数値を入力してください";
+			next;
+			input .@num;
+			if(.@num<1 || .@num>9999){
+				mes "入力数値が異常です!!";
+				close;
+			}
+			query_sql "UPDATE `guild` SET `passward`= "+.@num+" WHERE `guild_id`="+getcharid(2)+"";
+			mes "パスワードが^FF0000"+.@num+"^000000に再設定されました";
+			close;
+		}
+	}else{
+		query_sql("select passward from `guild` WHERE `guild_id`="+getcharid(2)+"",@pass);
+		mes "ギルド倉庫利用パスワードを入力してください。";
+		input .@num;
+		if(.@num!=@pass){
+			mes "パスワードが間違えています";
+			close;
+		}
+	}
+	if (guildopenstorage() == 1) {
+		mes "他の人がギルド倉庫を使用しているようです。";
+		close;
+	}
+	close;
+}
+*/
+izlude,117,219,5	script	検証用ボス	837,{
+	mes "検証用ボスモンスターを呼びます。";
+	mes "Lv100。StatusAll1。";
+	mes "Def0。Mdef0。";
+	mes "Lv1無属性。無形種族。大型。";
+	next;
+	switch (select("呼ぶ","ステ設定","撤去","やめる")) {
+	case 1:
+		if(.mob_id > 0){
+			mes "召喚中は呼べません。";
+			mes "撤去してください。";
+			close;
+		}
+		set .mob_id, mobspawn("--ja--",2889,"izlude",117,218);
+		close;
+	case 2:
+		if(.mob_id > 0){
+			mes "召喚中は呼べません。";
+			mes "撤去してください。";
+			close;
+		}
+		setarray .@testst[0],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;
+		mes "Lv設定。";
+		mes "初期設定流用は0以下を入力。";
+		next;
+		input .@testst[0],0,200;
+		mes "Def設定。";
+		mes "初期設定流用は0以下を入力。";
+		next;
+		input .@testst[10],0,1000;
+		mes "Mdef設定。";
+		mes "初期設定流用は0以下を入力。";
+		next;
+		input .@testst[11],0,1000;
+		mes "サイズ設定。";
+		mes "小型は0を。";
+		mes "中型は1を。";
+		mes "大型は2を入力。";
+		next;
+		input .@testst[12],0,2;
+		mes "種族設定。";
+		mes "無形は0を。";
+		mes "不死は1を。";
+		mes "動物は2を。";
+		mes "植物は3を。";
+		mes "昆虫は4を。";
+		mes "魚貝は5を。";
+		mes "悪魔は6を。";
+		mes "人は7を。";
+		mes "天使は8を。";
+		mes "竜は9を入力。";
+		next;
+		input .@testst[13],0,9;
+		mes "属性設定。";
+		mes "無は0を。";
+		mes "水は1を。";
+		mes "地は2を。";
+		mes "火は3を。";
+		mes "風は4を。";
+		mes "毒は5を。";
+		mes "聖は6を。";
+		mes "闇は7を。";
+		mes "念は8を。";
+		mes "不死は9を入力。";
+		next;
+		input .@testst[14],0,9;
+		mes "属性レベル設定。";
+		mes "1から4までの数値を入力。";
+		next;
+		input .@testst[15],1,4;
+		mes "ステータスを設定しますか？";
+		next;
+		if(select("いいえ","はい")==2) {
+			mes "Str設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[4],0,250;
+			mes "Agi設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[5],0,250;
+			mes "Vit設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[6],0,250;
+			mes "Int設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[7],0,250;
+			mes "Dex設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[8],0,250;
+			mes "Luk設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[9],0,250;
+		}
+		set .mob_id, mobspawn("--ja--",2889,"izlude",117,218);
+		for(set .@i,0; .@i < getarraysize(.@testst);set .@i,.@i+1) {
+			if(.@testst[.@i] >= 0){
+				setmobdata2 .mob_id,.@i,.@testst[.@i];
+			}
+		}
+		close;
+	case 3:
+		if(.mob_id > 0){
+			mobremove .mob_id;
+			set .mob_id,0;
+		}
+		close;
+	case 4:
+		close;
+	}
+}
+izlude,137,219,5	script	検証用レイド	837,{
+	mes "検証用レイドモンスターを呼びます。";
+	mes "Lv100。StatusAll1。";
+	mes "Def0。Mdef0。";
+	mes "Lv1無属性。無形種族。大型。";
+	mes "ナイトレイド。近距離ヘイト。自然回復0。";
+	next;
+	switch (select("呼ぶ","ステ設定","撤去","やめる")) {
+	case 1:
+		if(.mob_id > 0){
+			mes "召喚中は呼べません。";
+			mes "撤去してください。";
+			close;
+		}
+		set .mob_id, mobspawn("--ja--",2890,"izlude",137,218);
+		close;
+	case 2:
+		if(.mob_id > 0){
+			mes "召喚中は呼べません。";
+			mes "撤去してください。";
+			close;
+		}
+		setarray .@testst[0],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;
+		mes "Lv設定。";
+		mes "初期設定流用は0以下を入力。";
+		next;
+		input .@testst[0],0,200;
+		mes "Def設定。";
+		mes "初期設定流用は0以下を入力。";
+		next;
+		input .@testst[10],0,1000;
+		mes "Mdef設定。";
+		mes "初期設定流用は0以下を入力。";
+		next;
+		input .@testst[11],0,1000;
+		mes "サイズ設定。";
+		mes "小型は0を。";
+		mes "中型は1を。";
+		mes "大型は2を入力。";
+		next;
+		input .@testst[12],0,2;
+		mes "種族設定。";
+		mes "無形は0を。";
+		mes "不死は1を。";
+		mes "動物は2を。";
+		mes "植物は3を。";
+		mes "昆虫は4を。";
+		mes "魚貝は5を。";
+		mes "悪魔は6を。";
+		mes "人は7を。";
+		mes "天使は8を。";
+		mes "竜は9を入力。";
+		next;
+		input .@testst[13],0,9;
+		mes "属性設定。";
+		mes "無は0を。";
+		mes "水は1を。";
+		mes "地は2を。";
+		mes "火は3を。";
+		mes "風は4を。";
+		mes "毒は5を。";
+		mes "聖は6を。";
+		mes "闇は7を。";
+		mes "念は8を。";
+		mes "不死は9を入力。";
+		next;
+		input .@testst[14],0,9;
+		mes "属性レベル設定。";
+		mes "1から4までの数値を入力。";
+		next;
+		input .@testst[15],1,4;
+		mes "ステータスを設定しますか？";
+		next;
+		if(select("いいえ","はい")==2) {
+			mes "Str設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[4],0,250;
+			mes "Agi設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[5],0,250;
+			mes "Vit設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[6],0,250;
+			mes "Int設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[7],0,250;
+			mes "Dex設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[8],0,250;
+			mes "Luk設定。";
+			mes "初期設定流用は0以下を入力。";
+			next;
+			input .@testst[9],0,250;
+		}
+		set .mob_id, mobspawn("--ja--",2890,"izlude",137,218);
+		for(set .@i,0; .@i < getarraysize(.@testst);set .@i,.@i+1) {
+			if(.@testst[.@i] >= 0){
+				setmobdata2 .mob_id,.@i,.@testst[.@i];
+			}
+		}
+		close;
+	case 3:
+		if(.mob_id > 0){
+			mobremove .mob_id;
+			set .mob_id,0;
+		}
+		close;
+	case 4:
+		close;
+	}
+}

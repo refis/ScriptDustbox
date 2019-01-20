@@ -1,0 +1,372 @@
+que_avan01,28,25,3	script	プリミリア	581,{
+	mes "[プリミリア]";
+	mes "大切な友人を";
+	mes "怠惰を司るコッペリアに";
+	mes "支配されてしまったのです…";
+	next;
+	mes "[プリミリア]";
+	mes "どうか彼女を";
+	mes "取り返すのを手伝ってください";
+	next;
+	mes "^FF0000'怠惰のコッペリア'はレイドクエストです。^000000";
+	mes "^FF0000最大8人まで入場することができます。^000000";
+	next;
+	if(select("手伝います","私には無理です")==2) {
+		mes "[プリミリア]";
+		mes "そうですか…";
+		close;
+	}
+	mes "[プリミリア]";
+	if($@konelia == 0){
+		if(!getcharid(1)){
+			mes "一人じゃ無謀すぎます！";
+			close;
+		}
+		getpartymember(getcharid(1));
+		if($@partymembercount > 8){
+			mes "人数が多すぎますね";
+			mes "^FF00008人までのPTを組んでください^000000";
+			close;
+		}
+		if(getmapusers("rwc01")>0){
+			mes "もう少し待ってください";
+			close;
+		}
+		set $@konelia,getcharid(1);
+		disablenpc "ヒズミ";
+		killmonsterall "rwc01";
+		announce "【レイドクエスト：怠惰のコッペリア】の遠征が開始されます。",bc_all,"0x9933CC";
+		mes "どうか彼女を取り戻して……";
+		close2;
+		donpcevent "#que_konelia::OnStart";
+		warpparty "rwc01",49,5,getcharid(1);
+		end;
+	}else{
+		if($@konelia == getcharid(1)){
+			mes "排出されてしまったのですか？";
+			mes "あの場所へ帰りますか？";
+			next;
+			if(select("帰る","止める")==2) {
+				mes "[プリミリア]";
+				mes "そうですか…";
+				close;
+			}
+			if(getmapusers("rwc01")>=8){
+				mes "今は帰れないみたいです";
+				close;
+			}
+			mes "[プリミリア]";
+			mes "お送りします……";
+			close2;
+			if(getmapusers("rwc01")>=8)
+				end;
+			warp "rwc01",49,5;
+			end;
+		}else{
+			if(getmapusers("rwc01")==0){
+				mes "彼女を救えなかった…";
+				set $@konelia,0;
+				close;
+			}
+			mes "今は他の冒険者さんが";
+			mes "手伝ってくれています";
+			mes "あなたの助力に感謝します";
+			close;
+		}
+	}
+	close;
+}
+rwc01,1,1,3	script	#que_konelia	844,{
+OnStart:
+	initnpctimer;
+	set .froacore,0;
+	set $@konelia_flag,0;
+	set $@konelia1,mobspawn("コッペリア",2734,"rwc01",50,50,"#que_konelia::OnZero");
+	set $@konelia2,mobspawn("怨霊武士",2761,"rwc01",50,50);
+	mobassist $@konelia2,$@konelia1;
+	set $@konelia3,mobspawn("怨霊武士の剣",2762,"rwc01",50,50);
+	mobassist $@konelia3,$@konelia1;
+	donpcevent "#konelia_time::OnStart";
+	end;
+OnLoad:
+	set .froacore,0;
+	set $@konelia_flag,0;
+	set $@konelia2,mobspawn("怨霊武士",2761,"rwc01",50,50);
+	mobassist $@konelia2,$@konelia1;
+	set $@konelia3,mobspawn("怨霊武士の剣",2762,"rwc01",50,50);
+	mobassist $@konelia3,$@konelia1;
+	donpcevent "#konelia_time::OnStart";
+	end;
+OnOne:
+	mapannounce "rwc01","コッペリア : みんなやられちゃったの？",bc_map,"0xdb7093";
+	sleep 4000;
+	mapannounce "rwc01","コッペリア : あらあら大変、どうしましょう？",bc_map,"0xdb7093";
+	sleep 5000;
+	set $@ko_rand,rand(1,4);
+	if($@ko_rand==1){
+		mapannounce "rwc01","ヒズミ : うっ……嫌だ……暖かな心に触れないで……",bc_map,"0x0000FF";
+	}else if($@ko_rand==2){
+		mapannounce "rwc01","ヒズミ : うっ……嫌だ……冷ややかな心に触れないで……",bc_map,"0x0000FF";
+	}else if($@ko_rand==3){
+		mapannounce "rwc01","ヒズミ : うっ……嫌だ……昇る心に触れないで……",bc_map,"0x0000FF";
+	}else if($@ko_rand==4){
+		mapannounce "rwc01","ヒズミ : うっ……嫌だ……沈む心に触れないで……",bc_map,"0x0000FF";
+	}
+	end;
+OnZero:
+	donpcevent "#konelia_time::OnEnd";
+	donpcevent "#que_konelia_c::OnEnd";
+	enablenpc "ヒズミ";
+	set $@ko_rand,0;
+	set $@konelia,0;
+	announce "【レイドクエスト：怠惰のコッペリア】の遠征が達成されました。",bc_all,"0x9933CC";
+	mapannounce "rwc01","コッペリア : もういいわ。心の弱いこの娘は、どうせまた私を頼る……んふふ",bc_map,"0xdb7093";
+	end;
+OnTimer10000:
+	mapannounce "rwc01","コッペリア : あら、誰か来たのかしら？",bc_map,"0xdb7093";
+	end;
+OnTimer14000:
+	mapannounce "rwc01","コッペリア : ふふ……臭い、臭いわ。ドブねずみの悪臭がするわ……",bc_map,"0xdb7093";
+	end;
+OnTimer18000:
+	mapannounce "rwc01","コッペリア : また私をここから追い出そうとする冒険者みたいね",bc_map,"0xdb7093";
+	end;
+OnTimer22000:
+	mapannounce "rwc01","コッペリア : 残念だけど、心の底からこの子が望まない限り、私を追い出せはしないわよ",bc_map,"0xdb7093";
+	end;
+OnTimer26000:
+	mapannounce "rwc01","コッペリア : んふふ……あはは……",bc_map,"0xdb7093";
+	end;
+OnTimer30000:
+	mapannounce "rwc01","コッペリア : どう、試して見る？",bc_map,"0xdb7093";
+	stopnpctimer;
+	end;
+}
+rwc01,1,1,3	script	#konelia_time	844,{
+OnStart:
+	initnpctimer;
+	end;
+OnEnd:
+	stopnpctimer;
+	end;
+OnTimer10000:
+OnTimer20000:
+OnTimer30000:
+OnTimer40000:
+OnTimer50000:
+	if(getmapusers("rwc01")==0){
+		set $@konelia,0;
+		killmonsterall "rwc01";
+		announce "【レイドクエスト：怠惰のコッペリア】の遠征が失敗に終わりました。",bc_all,"0x9933CC";
+		stopnpctimer;
+		end;
+	}
+	if(getmapmobs("rwc01")==0){
+		donpcevent "#que_konelia::OnZero";
+		stopnpctimer;
+	}else if(getmapmobs("rwc01")==1){
+		donpcevent "#que_konelia::OnOne";
+		stopnpctimer;
+	}
+	end;
+
+OnTimer60000:
+	if(getmapusers("rwc01")==0){
+		set $@konelia,0;
+		killmonsterall "rwc01";
+		announce "【レイドクエスト：怠惰のコッペリア】の遠征が失敗に終わりました。",bc_all,"0x9933CC";
+		stopnpctimer;
+		end;
+	}
+	if(getmapmobs("rwc01")==0){
+		donpcevent "#que_konelia::OnZero";
+		stopnpctimer;
+		end;
+	}else if(getmapmobs("rwc01")==1){
+		donpcevent "#que_konelia::OnOne";
+		stopnpctimer;
+		end;
+	}
+	initnpctimer;
+	end;
+}
+rwc01,2,2,3	script	#que_konelia_c	844,{
+OnStart:
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	set $@ko_rand,0;
+	mapannounce "rwc01","コッペリア : うぅ……小娘が……っ",bc_map,"0xdb7093";
+	areamobuseskill "rwc01",50,50,48,2734,686,1,0,0,26,0;
+	sleep 60000;
+	mapannounce "rwc01","コッペリア : いつまで私を一人にしているのです！　早く私を守りなさい!!",bc_map,"0xdb7093";
+	donpcevent "#que_konelia::OnLoad";
+	end;
+OnEnd:
+	stopnpctimer;
+	end;
+OnTimer10000:
+	stopnpctimer;
+	set $@ko_rand,0;
+	mapannounce "rwc01","コッペリア : 儚い抵抗は無意味と知りなさい!!",bc_map,"0xdb7093";
+	donpcevent "#que_konelia::OnLoad";
+	end;
+}
+rwc01,50,95,3	script	#que_konelia_k	802,{
+	if($@ko_rand == 1){
+		mes "-強烈な排斥力を感じた-";
+		close2;
+		warp "ecl_fild01",182,85;
+		end;
+	}else if($@ko_rand > 0){
+		set .@crear,getvariableofnpc(.froacore,"#que_konelia");
+		if(.@crear&1){
+			mes "-微かな嫌悪を感じた-";
+			percentheal -rand(20,50),-rand(20,50);
+			close;
+		}else{
+			set getvariableofnpc(.froacore,"#que_konelia"),.@crear|1;
+			set $@konelia_flag,$@konelia_flag+1;
+			mes "-戸惑う気配が伝わってくる-";
+			mapannounce "rwc01","-戸惑う気配が伝わってくる-",bc_map,"0x0000FF";
+			if($@konelia_flag==3){
+				donpcevent "#que_konelia_c::OnStop";
+			}else{
+				donpcevent "#que_konelia_c::OnStart";
+			}
+			close;
+		}
+	}else{
+		mes "-何も起こらない-";
+		close;
+	}
+}
+rwc01,49,4,7	script	#que_konelia_m	802,{
+	if($@ko_rand == 2){
+		mes "-強烈な排斥力を感じた-";
+		close2;
+		warp "ecl_fild01",182,85;
+		end;
+	}else if($@ko_rand > 0){
+		set .@crear,getvariableofnpc(.froacore,"#que_konelia");
+		if(.@crear&2){
+			mes "-微かな嫌悪を感じた-";
+			percentheal -rand(20,50),-rand(20,50);
+			close;
+		}else{
+			set getvariableofnpc(.froacore,"#que_konelia"),.@crear|2;
+			set $@konelia_flag,$@konelia_flag+1;
+			mes "-戸惑う気配が伝わってくる-";
+			mapannounce "rwc01","-戸惑う気配が伝わってくる-",bc_map,"0x0000FF";
+			if($@konelia_flag==3){
+				donpcevent "#que_konelia_c::OnStop";
+			}else{
+				donpcevent "#que_konelia_c::OnStart";
+			}
+			close;
+		}
+	}else{
+		mes "-何も起こらない-";
+		close;
+	}
+}
+rwc01,95,50,3	script	#que_konelia_h	802,{
+	if($@ko_rand == 3){
+		mes "-強烈な排斥力を感じた-";
+		close2;
+		warp "ecl_fild01",182,85;
+		end;
+	}else if($@ko_rand > 0){
+		set .@crear,getvariableofnpc(.froacore,"#que_konelia");
+		if(.@crear&4){
+			mes "-微かな嫌悪を感じた-";
+			percentheal -rand(20,50),-rand(20,50);
+			close;
+		}else{
+			set getvariableofnpc(.froacore,"#que_konelia"),.@crear|4;
+			set $@konelia_flag,$@konelia_flag+1;
+			mes "-戸惑う気配が伝わってくる-";
+			mapannounce "rwc01","-戸惑う気配が伝わってくる-",bc_map,"0x0000FF";
+			if($@konelia_flag==3){
+				donpcevent "#que_konelia_c::OnStop";
+			}else{
+				donpcevent "#que_konelia_c::OnStart";
+			}
+			close;
+		}
+	}else{
+		mes "-何も起こらない-";
+		close;
+	}
+}
+rwc01,4,49,5	script	#que_konelia_n	802,{
+	if($@ko_rand == 4){
+		mes "-強烈な排斥力を感じた-";
+		close2;
+		warp "ecl_fild01",182,85;
+		end;
+	}else if($@ko_rand > 0){
+		set .@crear,getvariableofnpc(.froacore,"#que_konelia");
+		if(.@crear&8){
+			mes "-微かな嫌悪を感じた-";
+			percentheal -rand(20,50),-rand(20,50);
+			close;
+		}else{
+			set getvariableofnpc(.froacore,"#que_konelia"),.@crear|8;
+			set $@konelia_flag,$@konelia_flag+1;
+			mes "-戸惑う気配が伝わってくる-";
+			mapannounce "rwc01","-戸惑う気配が伝わってくる-",bc_map,"0x0000FF";
+			if($@konelia_flag==3){
+				donpcevent "#que_konelia_c::OnStop";
+			}else{
+				donpcevent "#que_konelia_c::OnStart";
+			}
+			close;
+		}
+	}else{
+		mes "-何も起こらない-";
+		close;
+	}
+}
+rwc01,50,50,3	script	ヒズミ	583,{
+	mes "[ヒズミ]";
+	mes "……とても暗い闇の中で";
+	mes "誰かの声だけが聞こえてた……";
+	next;
+	mes "[ヒズミ]";
+	mes "……私を呼んでいたのは";
+	mes "あなただったんですね……";
+	next;
+	mes "[ヒズミ]";
+	mes "ありがとう……";
+	next;
+	mes "[ヒズミ]";
+	mes "ここは、私の心の中";
+	mes "もうすぐ世界は閉じてしまう";
+	next;
+	mes "[ヒズミ]";
+	mes "どうか、ささやかですが";
+	mes "お礼をお受け取りください";
+	next;
+	switch(select("受け取る","もう少し待って")){
+	case 1:
+		getitem 28649,1;
+		if(rand(200)==50)
+			getitem 28999,1;
+		warp "que_avan01",25,25;
+		end;
+	case 2:
+		mes "[ヒズミ]";
+		mes "そうですか……";
+		close;
+	}
+}
+rwc01	mapflag	noicewall
+rwc01	mapflag	nowarp
+rwc01	mapflag	noteleport
+rwc01	mapflag	monster_noteleport
+rwc01	mapflag	nosave
+rwc01	mapflag	nowarpto
+rwc01	mapflag	nomemo
+rwc01	mapflag	restricted	6

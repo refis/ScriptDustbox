@@ -1,0 +1,884 @@
+//=========================================================
+// 1.パーティアタッチ
+// 2.アイテム使用
+// 3.フィールドMAPセレクト
+// 4.採掘
+// 5.採掘ランキング
+// 6.冒険者ギルドメニュー
+// 7.依頼一覧
+// 8.闇闘技場敵セット
+// 9.生体4用
+//10.Zeny分割用
+//=========================================================
+//パーティアタッチ
+//引数
+//getarg(0) type
+//	    1 : PPOINT加算
+//	    2 : PPOINT減算
+//	    3 : アイテム所持確認
+//	    4 : アイテム追加
+//	    5 : アイテム消去
+//	    6 : ボス討伐ポイント
+//getarg(1) point
+//=========================================================
+function	script	func_party_control	{
+	set $@partyid,getcharid(1);
+	if($@partyid ==0){
+		dispbottom("PTに所属していません!!");
+		return 0;
+	}
+	set $@temp_GEFE1,0;
+	getpartymember($@partyid);
+	getmapxy(.@map1$,.@x1,.@y1,0,strcharinfo(0));
+
+	while($@partymembercount != $@temp_GEFE1){
+
+		if(getcharid(3,$@partymembername$[$@temp_GEFE1]) == 0){
+		}else{
+			attachrid(getcharid(3,$@partymembername$[$@temp_GEFE1]));
+			getmapxy(.@map2$,.@x2,.@y2,0,strcharinfo(0));
+			if(.@map1$ == .@map2$ && distance(.@x1,.@y1,.@x2,.@y2) <= 25){
+				if(getarg(0) == 1){
+					set #PPOINT,#PPOINT+getarg(1);
+					dispbottom(getarg(1)+"苺pointを獲得しました!");
+				}else if(getarg(0) == 2){
+					set #PPOINT,#PPOINT-getarg(1);
+					dispbottom(getarg(1)+"苺pointを消費しました!");
+				}else if(getarg(0) == 3){
+//					countitem(getarg(1))
+				}else if(getarg(0) == 4){
+					getitem getarg(1),1;
+				}else if(getarg(0) == 5){
+					delitem getarg(1),1;
+				}else if(getarg(0) == 6){
+					announce ""+strmobinfo(2,2600+getarg(1)+(getarg(1)>39?1:0))+"討伐ポイントを獲得しました",0x03;
+					callfunc("bosspset",getarg(1),1);
+				}else{
+					
+				}
+			}
+		}
+		set $@temp_GEFE1,$@temp_GEFE1+1;
+	}
+	return 0;
+
+}
+//=========================================================
+//アイテム使用
+//引数
+//getarg(0) Item ID
+//=========================================================
+function	script	item_use_func	{
+	switch(getarg(0)){
+	case 28436:	//さびたランプ
+		set @RANPE,@RANPE+10;
+		announce strcharinfo(0)+"は"+getitemname(getarg(0))+"を使った。光量が["+@RANPE+"]に上昇した。",0x03;
+		break;
+	case 28437:	//ランプ
+		set @RANPE,@RANPE+20;
+		announce strcharinfo(0)+"は"+getitemname(getarg(0))+"を使った。光量が["+@RANPE+"]に上昇した。",0x03;
+		break;
+	case 28438:	//高品質ランプ
+		set @RANPE,@RANPE+30;
+		announce strcharinfo(0)+"は"+getitemname(getarg(0))+"を使った。光量が["+@RANPE+"]に上昇した。",0x03;
+		break;
+	case 28439:	//クリスタルランプ
+		set @RANPE,@RANPE+50;
+		announce strcharinfo(0)+"は"+getitemname(getarg(0))+"を使った。光量が["+@RANPE+"]に上昇した。",0x03;
+		break;
+	case 28440:	//キングランプ
+		set @RANPE,@RANPE+100;
+		announce strcharinfo(0)+"は"+getitemname(getarg(0))+"を使った。光量が["+@RANPE+"]に上昇した。",0x03;
+		break;
+	}
+}
+//=========================================================
+//フィールドMAPセレクト
+//=========================================================
+function	script	funcbmS001_r	{
+	switch(rand(1,14)){
+		case 1:
+			setarray .@ArBossMap$[0],"ayo_fild01","ayo_fild02","cmd_fild01","cmd_fild02","cmd_fild03","cmd_fild04","cmd_fild06","cmd_fild07","cmd_fild08";
+			break;
+		case 2:
+			setarray .@ArBossMap$[0],"cmd_fild09","ein_fild03","ein_fild04","ein_fild05","ein_fild06","ein_fild07","ein_fild08","ein_fild09";
+			break;
+		case 3:
+			setarray .@ArBossMap$[0],"gef_fild00","gef_fild01","gef_fild02","gef_fild03","gef_fild04","gef_fild05","gef_fild06","gef_fild07","gef_fild08";
+			break;
+		case 4:
+			setarray .@ArBossMap$[0],"gef_fild09","gef_fild10","gef_fild11","gef_fild13","hu_fild01","hu_fild02","hu_fild03","hu_fild04";
+			break;
+		case 5:
+			setarray .@ArBossMap$[0],"hu_fild05","hu_fild06","hu_fild07","lhz_fild01","lhz_fild02","lhz_fild03","lou_fild01","mjolnir_01","mjolnir_02","mjolnir_03";
+			break;
+		case 6:
+			setarray .@ArBossMap$[0],"mjolnir_04","mjolnir_05","mjolnir_06","mjolnir_07","mjolnir_08","mjolnir_09","mjolnir_10","mjolnir_11","mjolnir_12","moc_fild01";
+			break;
+		case 7:
+			setarray .@ArBossMap$[0],"moc_fild02","moc_fild03","moc_fild07","moc_fild11";
+			break;
+		case 8:
+			setarray .@ArBossMap$[0],"moc_fild12","moc_fild13","moc_fild16","moc_fild17","moc_fild18","moc_fild20","moc_fild22","mosk_fild02";
+			break;
+		case 9:
+			setarray .@ArBossMap$[0],"niflheim","um_fild01","um_fild02","um_fild03","um_fild04","xmas_fild01","nif_fild01","nif_fild02","gon_fild01","pay_fild01";
+			break;
+		case 10:
+			setarray .@ArBossMap$[0],"pay_fild02","pay_fild03","pay_fild04","pay_fild06","pay_fild07","pay_fild08","pay_fild09","pay_fild10";
+			break;
+		case 11:
+			setarray .@ArBossMap$[0],"prt_fild00","prt_fild01","prt_fild02","prt_fild03","prt_fild04","prt_fild05","prt_fild06","prt_fild07","prt_fild08","prt_fild09";
+			break;
+		case 12:
+			setarray .@ArBossMap$[0],"prt_fild10","prt_fild11","ra_fild01","ra_fild03","ra_fild04","ra_fild05","ra_fild06","ra_fild08";
+			break;
+		case 13:
+			setarray .@ArBossMap$[0],"ra_fild12","ve_fild01","ve_fild02","ve_fild03","ve_fild04","ve_fild05";
+			break;
+		case 14:default:
+			setarray .@ArBossMap$[0],"ve_fild07","ve_fild07","yuno_fild01","yuno_fild02","yuno_fild03","yuno_fild04","yuno_fild06","yuno_fild07","yuno_fild08";
+			break;
+	}
+
+	return .@ArBossMap$[rand(getarraysize(.@ArBossMap$))];
+}
+//=========================================================
+//採掘
+//引数
+//getarg(0) 採掘場Rank
+//getarg(1) 鉱石ランク
+//getarg(2) 個数
+//=========================================================
+function	script	saikutu_item	{
+	setarray .@openitem$[0],"じゃがいも","さつまいも","子供の玩具","石器の欠片","土偶の欠片",
+				"古びた敷物","化石の欠片","古代の金貨","よくわからない物体","縄文時代の石器",
+				"立派な土偶","古代魚の化石","古代竜の化石","星が入ったビン","魔剣グラム",
+				"魔剣グラム";
+	setarray .@openpoint[0],1,2,4,6,8,
+				10,12,15,20,25,
+				30,35,40,60,100,
+				200;
+	set .@pul,getarg(2);
+	for(set .@i,0; .@i<.@pul; set .@i,.@i+1){
+		set .@sgetnum,rand(getskilllv(783)+(getarg(0)-1)+getarg(1));
+		set SAIKUTUPOINT,SAIKUTUPOINT+.@openpoint[.@sgetnum];
+		if(.@sgetnum==14){
+			if(rand(6)==0){
+				dispbottom("こ、これは……"+.@openitem$[.@sgetnum]+"!!　ボーナス"+.@openpoint[.@sgetnum]+"点が加算されます!!");
+				getitem 1192,1;	//魔剣グラムを獲得
+			}else
+				dispbottom("壊れた魔剣グラムを発見し、"+.@openpoint[.@sgetnum]+"点が加算されました!!");
+		}else if(.@sgetnum==15){
+			if(rand(2)==0){
+				dispbottom("こ、これは……"+.@openitem$[.@sgetnum]+"!!　ボーナス"+.@openpoint[.@sgetnum]+"点が加算されます!!");
+				getitem 1192,1;	//魔剣グラムを獲得
+			}else
+				dispbottom("壊れた魔剣グラムを発見し、"+.@openpoint[.@sgetnum]+"点が加算されました!!");
+		} else
+			dispbottom(.@openitem$[.@sgetnum]+"を発見し、"+.@openpoint[.@sgetnum]+"点が加算されました!!");
+	}
+	return 0;
+}
+//=========================================================
+//採掘ランキング
+//=========================================================
+function	script	saikutu_rank	{
+	for(set .@x,0; .@x < 5; set .@x,.@x+1) {
+		if($SAIKUTURANK$[.@x] == strcharinfo(0)){
+			for(set .@y,.@x; .@y < 5; set .@y,.@y+1) {
+				set $SAIKUTURANK$[.@y],$SAIKUTURANK$[.@y+1];
+				set $SAIKUTURANK[.@y],$SAIKUTURANK[.@y+1];
+			}
+			break;
+		}
+	}
+	for(set .@x,0; .@x < 5; set .@x,.@x+1) {
+		if($SAIKUTURANK[.@x] < SAIKUTUPOINT){
+			//上位のデータをバック
+			for(set .@y,.@x; .@y < 5; set .@y,.@y+1) {
+				set .@SAIKUTUback$[.@y],$SAIKUTURANK$[.@y];
+				set .@SAIKUTUback[.@y],$SAIKUTURANK[.@y];
+			}
+			//上位のデータを更新
+			set $SAIKUTURANK$[.@x],strcharinfo(0);
+			set $SAIKUTURANK[.@x],SAIKUTUPOINT;
+			//上位のデータを2位に入れる
+			for(set .@y,.@x; .@y < 5; set .@y,.@y+1) {
+				set $SAIKUTURANK$[(.@y+1)],.@SAIKUTUback$[.@y];
+				set $SAIKUTURANK[(.@y+1)],.@SAIKUTUback[.@y];
+			}
+			return .@x+1;
+		}
+	}
+	return;
+}
+//=========================================================
+//冒険者ギルドメニュー
+//引数
+//getarg(0) MenuNumber
+//	    1 : 依頼の受諾
+//	    2 : 依頼の確認
+//	    3 : 依頼の報告
+//	    4 : 依頼の破棄
+//	    5 : 状態を知りたい
+//	    6 : やめる
+//	    7 : 変数の読み込み
+//	    8 : 変数の書き込み
+//getarg(1) 7.8のとき変数の位置
+//getarg(2) 8のとき変数の内容
+//=========================================================
+function	script	talk_treasure	{
+	switch(getarg(0)){
+	case 1:
+		mes "[レイシャ]";
+		mes "依頼を受けにきたんだね？";
+		mes "ちょっと待ってな";
+		next;
+		callfunc("menu_treasure",@TREID);
+		close;
+	case 2:
+		mes "[レイシャ]";
+		mes "依頼内容の確認だね？";
+		next;
+		callfunc("menu_treasure",@TREID);
+		mes "^0000FF[請負内容："+@QUETITLE$+"]^000000";
+		mes "---------------------------";
+		mes "[依頼内容]";
+		for(set .@i,0; .@i<@ARRYMAX; set .@i,.@i+1)
+			mes @QUEMES$[.@i];
+		mes "---------------------------";
+		close;
+	case 3:
+		mes "[レイシャ]";
+		mes "依頼達成報告かい";
+		next;
+		if(callfunc("talk_treasure",7,3)!=99){
+			mes "[レイシャ]";
+			mes "ムッ";
+			mes "依頼はまだ解決してないよ？";
+			close;
+		}
+		if(callfunc("talk_treasure",7,2) != 0 && callfunc("talk_treasure",7,2)<gettimetick(2)){
+			mes "[レイシャ]";
+			mes "ムッ";
+			mes "依頼人に決められた";
+			mes "時間を守れなかったようだな？";
+			next;
+			mes "[レイシャ]";
+			mes "依頼はこなしたようだから";
+			mes "ペナルティはなしにしてやるが";
+			mes "今回のポイント加算はナシだ";
+			callfunc("talk_treasure",8,0,0);
+			set .@trecre,callfunc("talk_treasure",7,4);
+			set .@trecre,.@trecre+1;
+			callfunc("talk_treasure",8,2,0);
+			callfunc("talk_treasure",8,3,0);
+			callfunc("talk_treasure",8,4,.@trecre);
+			callfunc("talk_treasure",8,5,gettime(5));
+			close;
+		}
+		mes "[レイシャ]";
+		mes "よしっ！";
+		mes "依頼の解決を確認した！";
+		next;
+		callfunc("menu_treasure",callfunc("talk_treasure",7,0));
+		callfunc("talk_treasure",8,0,0);
+		set .@trepoint,callfunc("talk_treasure",7,1);
+		set .@trepoint,.@trepoint+@SINRAI;
+		set .@trecre,callfunc("talk_treasure",7,4);
+		set .@trecre,.@trecre+1;
+		callfunc("talk_treasure",8,1,.@trepoint);
+		callfunc("talk_treasure",8,2,0);
+		callfunc("talk_treasure",8,3,0);
+		callfunc("talk_treasure",8,4,.@trecre);
+		callfunc("talk_treasure",8,5,gettime(5));
+		mes "[レイシャ]";
+		mes "おつかれさま！";
+		mes "報酬を受け取ってくれ";
+		if(.@trecre>=(3+getskilllv(784)/3))
+			mes "今日はこれ以上紹介できないな";
+		set #PPOINT,#PPOINT+30;
+		dispbottom(@SINRAI+"評価ポイントを獲得しました!");
+		dispbottom("30苺pointを獲得しました!");
+		if(#LOGINDAY+84600 < gettimetick(2)){
+			query_sql("SELECT `last_ip` FROM `login` WHERE `account_id`="+getcharid(3),@ip$);
+			query_sql("SELECT `last_ip` FROM `login` WHERE `level`=0 AND `last_ip`='"+@ip$+"'",@ip_list$);
+			set @cashp,(1000/(getarraysize(@ip_list$)>2?2:getarraysize(@ip_list$)));
+			set #LOGINDAY,gettimetick(2);
+			set #CASHPOINTS,#CASHPOINTS+@cashp;
+			set #PPOINT,#PPOINT+50;
+			dispbottom("当日初回登頂によりキャッシュポイント"+@cashp+"、苺ポイント50が加算されました");
+		}
+		switch(getskilllv(784)){
+		case 1: if(.@trepoint>200) {skill 784,2,0;logmessage "skill_log","冒険者Lv2取得";}
+		case 2: if(.@trepoint>400) {skill 784,3,0;logmessage "skill_log","冒険者Lv3取得";}
+		case 3: if(.@trepoint>700) {skill 784,4,0;logmessage "skill_log","冒険者Lv4取得";}
+		case 4: if(.@trepoint>1000){skill 784,5,0;logmessage "skill_log","冒険者Lv5取得";}
+		case 5: if(.@trepoint>1500){skill 784,6,0;logmessage "skill_log","冒険者Lv6取得";}
+		case 6: if(.@trepoint>1800){skill 784,7,0;logmessage "skill_log","冒険者Lv7取得";}
+		case 7: if(.@trepoint>2100){skill 784,8,0;logmessage "skill_log","冒険者Lv8取得";}
+		case 8: if(.@trepoint>3000){skill 784,9,0;logmessage "skill_log","冒険者Lv9取得";}
+		}
+		close;
+	case 4:
+		mes "[レイシャ]";
+		mes "ン？";
+		mes "^FF0000依頼を取り消す^000000のか？";
+		next;
+		mes "[レイシャ]";
+		mes "^FF0000依頼の取り消し^000000ができるのは";
+		mes "^FF0000一日1回^000000のみだ。";
+		mes "本当にいいのか？";
+		next;
+		if(select("いいえ","はい")==1) {
+			mes "[レイシャ]";
+			mes "そ、そうか";
+			mes "信用に関わるからな";
+			mes "おいそれと破棄はすべきじゃないな";
+			close;
+		}
+		callfunc("talk_treasure",8,0,99);
+		set .@trepoint,callfunc("talk_treasure",7,1);
+		if(.@trepoint<=100) set .@trepoint,0;
+		else set .@trepoint,.@trepoint-100;
+		callfunc("talk_treasure",8,1,.@trepoint);
+		callfunc("talk_treasure",8,2,0);
+		callfunc("talk_treasure",8,3,0);
+		callfunc("talk_treasure",8,5,gettime(5));
+		set querand1,0;set querand2,0;set querand3,0;set querand4,0;//アトリエ初期化
+		mes "[レイシャ]";
+		mes "依頼を破棄したぞ…";
+		mes "評価が100点減点された";
+		mes "また、本日中の冒険者協会での";
+		mes "活動にペナルティが課せられたぞ";
+		if(.@trepoint<200 && getskilllv(784)>=2) {mes "ランクも降格だな";skill 784,1,0;logmessage "skill_log","冒険者Lv1低下";}
+		if(.@trepoint<400 && getskilllv(784)>=3) {mes "ランクも降格だな";skill 784,2,0;logmessage "skill_log","冒険者Lv2低下";}
+		if(.@trepoint<700 && getskilllv(784)>=4) {mes "ランクも降格だな";skill 784,3,0;logmessage "skill_log","冒険者Lv3低下";}
+		if(.@trepoint<1000 && getskilllv(784)>=5){mes "ランクも降格だな";skill 784,4,0;logmessage "skill_log","冒険者Lv4低下";}
+		if(.@trepoint<1500 && getskilllv(784)>=6){mes "ランクも降格だな";skill 784,5,0;logmessage "skill_log","冒険者Lv5低下";}
+		if(.@trepoint<1800 && getskilllv(784)>=7){mes "ランクも降格だな";skill 784,6,0;logmessage "skill_log","冒険者Lv6低下";}
+		if(.@trepoint<2100 && getskilllv(784)>=8){mes "ランクも降格だな";skill 784,7,0;logmessage "skill_log","冒険者Lv7低下";}
+		if(.@trepoint<3000 && getskilllv(784)>=9){mes "ランクも降格だな";skill 784,8,0;logmessage "skill_log","冒険者Lv8低下";}
+		close;
+	case 5:
+		setarray .@TRank$[1],"F","E","D","C","B","A","A+","S","S+","SS";
+		mes "[^0000FF" + strcharinfo(0) + "の情報^000000]";
+		mes "^FF0000"+.@TRank$[getskilllv(784)]+"^000000ランク";
+		mes callfunc("talk_treasure",7,1)+" 評価ポイント";
+		mes "本日、"+callfunc("talk_treasure",7,4)+" 回達成済み";
+		mes callfunc("talk_treasure",7,6)+" 出身";
+		mes callfunc("talk_treasure",7,7)+" 才";
+		mes "現在 : "+(@TREID==0?"未受諾":"遂行中");
+		close;
+	case 6:
+		mes "[レイシャ]";
+		mes "おつかれさま";
+		close;
+	case 7:
+		explode(.@TREID$, T_RANK$, ":");
+		if(getarg(1)==6)return .@TREID$[getarg(1)];
+		else return atoi(.@TREID$[getarg(1)]);
+	case 8:
+		explode(.@TREID$, T_RANK$, ":");
+		set .@TREID$[getarg(1)],getarg(2);
+		set T_RANK$,implode(.@TREID$, ":");
+		return;
+	}
+}
+//=========================================================
+//依頼一覧
+//変数 T_RANK$	依頼type:冒険者ポイント:制限時間:専用フラグ:達成数:cool
+//依頼type	クエスト番号。未受諾だと0が入る。
+//制限時間	指定時間有は達成報告できないとペナルティ
+//専用フラグ	それぞれのクエストのみで使うイベントフラグ
+//=========================================================
+function	script	menu_treasure	{
+	switch(getarg(0)){
+	case 0:	//依頼受諾
+		setarray .@MesQuest$
+			,"アトリエ七女の依頼","材料が足りない！","迷子の子供を捜せ","アトリエ六女の依頼"
+			,"ポニコが……","続・材料が足りない！","泥棒がっ！"
+			,"山火事の原因","最近の不穏な噂","至急！！"
+			,"アトリエ五女の依頼","アトリエ四女の依頼","続々・材料が足りない！"
+			,"人手不足で……","討伐依頼！","畑を荒らすヤツ","続々々・材料が足りない！"
+			,"盗蟲退治","兄貴の悩み解決","無くした物"
+			,"巡礼の警護依頼","アトリエ三女の依頼","だって欲しいんだもん"
+			,"虹色に光るアレ","続×３・材料が足りない！"
+			;
+		setarray .@okpk ,1,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,5,6,6,6,7,7,7,8,8,10,10;
+		set .@maxque,25;
+		set .@page,0;
+		set .@temp,0;
+		set .@timeout,0;
+		set .@skill,getskilllv(784);
+		do {
+			set .@sentaku,	select (
+				((.@page > 0)? "前へ " :""),
+				(( .@skill >= .@okpk[.@temp+0] )? ((.@skill-1 > .@okpk[.@temp+0])?"^777777 ":"^0000FF ")+.@MesQuest$[.@temp+0]+" ^000000":""),
+				(( .@skill >= .@okpk[.@temp+1] )? ((.@skill-1 > .@okpk[.@temp+1])?"^777777 ":"^0000FF ")+.@MesQuest$[.@temp+1]+" ^000000":""),
+				(( .@skill >= .@okpk[.@temp+2] )? ((.@skill-1 > .@okpk[.@temp+2])?"^777777 ":"^0000FF ")+.@MesQuest$[.@temp+2]+" ^000000":""),
+				(( .@skill >= .@okpk[.@temp+3] )? ((.@skill-1 > .@okpk[.@temp+3])?"^777777 ":"^0000FF ")+.@MesQuest$[.@temp+3]+" ^000000":""),
+				(( .@skill >= .@okpk[.@temp+4] )? ((.@skill-1 > .@okpk[.@temp+4])?"^777777 ":"^0000FF ")+.@MesQuest$[.@temp+4]+" ^000000":""),
+				(( .@skill >= .@okpk[.@temp+5] )? ((.@skill-1 > .@okpk[.@temp+5])?"^777777 ":"^0000FF ")+.@MesQuest$[.@temp+5]+" ^000000":""),
+				(( .@skill >= .@okpk[.@temp+6] )? ((.@skill-1 > .@okpk[.@temp+6])?"^777777 ":"^0000FF ")+.@MesQuest$[.@temp+6]+" ^000000":""),
+				(( .@skill >= .@okpk[.@temp+7] )? ((.@skill-1 > .@okpk[.@temp+7])?"^777777 ":"^0000FF ")+.@MesQuest$[.@temp+7]+" ^000000":""),
+				(( .@skill >= .@okpk[.@temp+8] )? ((.@skill-1 > .@okpk[.@temp+8])?"^777777 ":"^0000FF ")+.@MesQuest$[.@temp+8]+" ^000000":""),
+				(( .@skill >= .@okpk[.@temp+9] )? ((.@skill-1 > .@okpk[.@temp+9])?"^777777 ":"^0000FF ")+.@MesQuest$[.@temp+9]+" ^000000":""),
+				(( (.@page+1) <= (.@maxque/10) )? "次へ" : ""));
+
+			//『前へ』
+			if (.@sentaku ==1){
+				set .@page,.@page -1;
+				set .@temp,.@temp -10;
+			}
+			//『次へ』
+			else if (.@sentaku==12){
+				set .@page,.@page +1;
+				set .@temp,.@temp +10;
+			}
+			//受諾不可
+			else if ((.@skill != .@okpk[.@temp+.@sentaku-2])&&(.@skill != .@okpk[.@temp+.@sentaku-2]+1)){
+				mes "[レイシャ]";
+				mes "この依頼はお前にはダメだ";
+				mes "ほかのにしてくれ";
+				close;
+			}
+		} while(.@sentaku ==1 || .@sentaku ==12);
+		set .@ch, .@sentaku-1 + .@temp;
+		set @timeout,0;
+		callfunc("menu_treasure",.@ch);
+		mes "^0000FF[請負内容："+@QUETITLE$+"]^000000";
+		mes "---------------------------";
+		mes "[依頼内容]";
+		for(set .@i,0; .@i<@ARRYMAX; set .@i,.@i+1)
+			mes @QUEMES$[.@i];
+		mes "　　"+@SINRAI+"評価ポイント";
+		mes "---------------------------";
+		next;
+		mes "[レイシャ]";
+		mes "本当にこの依頼を受けるか？";
+		next;
+		if(select("いいえ","はい")==1) {
+			mes "[レイシャ]";
+			mes "そうか";
+			mes "依頼は良く考えて受けてくれよ";
+			close;
+		}
+		callfunc("talk_treasure",8,0,.@ch);			//依頼番号を格納
+		if(@timeout)
+			callfunc("talk_treasure",8,2,(gettimetick(2)+@timeout));	//時間制限がある場合は設定
+		mes "[レイシャ]";
+		mes "^0000FF"+@QUETITLE$+" ^000000を受諾したよ";
+		mes "受けたからには最後まで責任を";
+		mes "持って解決させてね";
+		close;
+	case 1:
+		set @QUETITLE$,  "アトリエ七女の依頼";
+		set @QUEMES$[0], "アトリエ家の七女からの依頼";
+		set @QUEMES$[1], "作品に使う材料が足りないらしい";
+		set @QUEMES$[2], "^FF0000アルベルタ^000000にある七女の作業場まで";
+		set @QUEMES$[3], "話を聞きに行こう";
+		set @SINRAI,40;
+		set @ARRYMAX,4;break;
+	case 2:
+		set @QUETITLE$,  "材料が足りない！";
+		set @QUEMES$[0], "プロンテラ宿屋の専属卸売り屋が";
+		set @QUEMES$[1], "最近の不漁のせいで魚が卸せなくて困っているらしい";
+		set @QUEMES$[2], "料理人に聞いて必要な魚を調達してほしい";
+		set @SINRAI,30;
+		set @ARRYMAX,3;break;
+	case 3:
+		set @QUETITLE$,  "迷子の子供を捜せ";
+		set @QUEMES$[0], "プロンテラ民のスナフ家の子供が";
+		set @QUEMES$[1], "ゲフェンの友達の家に遊びに行ったきり帰ってこない。";
+		set @QUEMES$[2], "スナフ君は今何処に？";
+		set @SINRAI,40;
+		set @ARRYMAX,3;break;
+	case 4:
+		set @QUETITLE$,  "アトリエ六女の依頼";
+		set @QUEMES$[0], "アトリエ家の六女からの依頼";
+		set @QUEMES$[1], "^FF0000プロンテラ^000000にある六女の家まで";
+		set @QUEMES$[2], "話を聞きに行こう";
+		set @SINRAI,40;
+		set @ARRYMAX,3;break;
+	case 5:
+		set @QUETITLE$,  "ポニコが……";
+		set @QUEMES$[0], "彼女のペットをうっかり逃がしてしまった！！";
+		set @QUEMES$[1], "1時間で彼女が帰ってきてしまうから";
+		set @QUEMES$[2], "詳しい話は^FF0000アルベルタ^000000の僕の家でするから";
+		set @QUEMES$[3], "すぐにきてくれないか！";
+		set @timeout,3600;
+		set @SINRAI,40;
+		set @ARRYMAX,4;break;
+	case 6:
+		set @QUETITLE$,  "続・材料が足りない！";
+		set @QUEMES$[0], "プロンテラ宿屋の専属卸売り屋が";
+		set @QUEMES$[1], "最近の不漁のせいで魚が卸せなくて困っているらしい";
+		set @QUEMES$[2], "料理人に聞いて必要な魚を調達してほしい";
+		set @SINRAI,35;
+		set @ARRYMAX,3;break;
+	case 7:
+		set @QUETITLE$,  "泥棒がっ！";
+		set @QUEMES$[0], "最近、やたらものが減って、泥棒かと思ってたら";
+		set @QUEMES$[1], "どうやら盗蟲だったらしい！";
+		set @QUEMES$[2], "プロンテラ室内にいるヤツを30匹ほど倒してくれ！";
+		set @SINRAI,25;
+		set @ARRYMAX,3;break;
+	case 8:
+		set @QUETITLE$,  "山火事の原因";
+		set @QUEMES$[0], "大きなトラのモンスター「エドガ」が";
+		set @QUEMES$[1], "デモンストレーションで山を焼いている！";
+		set @QUEMES$[2], "被害が拡大する前に討伐してほしい！";
+		set @SINRAI,35;
+		set @ARRYMAX,3;break;
+	case 9:
+		set @QUETITLE$,  "最近の不穏な噂";
+		set @QUEMES$[0], "最近夜になると怪しい人影がうろうろしてるんだ";
+		set @QUEMES$[1], "オバケだとかゾンビだとかっていう噂なんだけど";
+		set @QUEMES$[2], "アルデバランにいるから詳しい話を聞いてくれ！";
+		set @SINRAI,35;
+		set @ARRYMAX,3;break;
+	case 10:
+		set @QUETITLE$,  "至急";
+		set @QUEMES$[0], "15分以内にあるものをプロンテラ";
+		set @QUEMES$[1], "大聖堂裏に持ってきて欲しい";
+		set @QUEMES$[2], "赤くて、人のある部分の形をしたビンだ";
+		set @timeout,900;
+		set @SINRAI,40;
+		set @ARRYMAX,3;break;
+	case 11:
+		set @QUETITLE$,  "アトリエ五女の依頼";
+		set @QUEMES$[0], "これを見た若者よ";
+		set @QUEMES$[1], "ただちにゲフェンタワーへ来たまえ";
+		set @SINRAI,40;
+		set @ARRYMAX,2;break;
+	case 12:
+		set @QUETITLE$,  "アトリエ四女の依頼";
+		set @QUEMES$[0], "アイテムが足りなくて実験が出来ないの";
+		set @QUEMES$[1], "ジュノーの博物館にいるから";
+		set @QUEMES$[2], "必要なアイテムを調達してちょうだい";
+		set @SINRAI,35;
+		set @ARRYMAX,3;break;
+	case 13:
+		set @QUETITLE$,  "続々・材料が足りない！";
+		set @QUEMES$[0], "プロンテラ宿屋の専属卸売り屋が";
+		set @QUEMES$[1], "最近の不漁のせいで魚が卸せなくて困っているらしい";
+		set @QUEMES$[2], "料理人に聞いて必要な魚を調達してほしい";
+		set @SINRAI,35;
+		set @ARRYMAX,3;break;
+	case 14:
+		set @QUETITLE$,  "人手不足で……";
+		set @QUEMES$[0], "人手不足で作業効率が芳しくない";
+		set @QUEMES$[1], "アインベフまで来て、採掘作業を手伝って欲しい";
+		set @SINRAI,40;
+		set @ARRYMAX,2;break;
+	case 15:
+		set @QUETITLE$,  "討伐依頼！";
+		set @QUEMES$[0], "最近、中層ラボのやつらに変なのがいるんだ";
+		set @QUEMES$[1], "被害も出てきているからどうにかしたい";
+		set @QUEMES$[2], "生体工学研究所2FのMVPイグニゼムを";
+		set @QUEMES$[3], "討伐してほしい！";
+		set @SINRAI,40;
+		set @ARRYMAX,4;break;
+	case 16:
+		set @QUETITLE$,  "畑を荒らすヤツ";
+		set @QUEMES$[0], "モグラによる被害がひどいんだ";
+		set @QUEMES$[1], "フィゲルフィールド06にいる";
+		set @QUEMES$[2], "モルデンたちを、30匹ほど";
+		set @QUEMES$[3], "懲らしめてくれないか？";
+		set @SINRAI,30;
+		set @ARRYMAX,4;break;
+	case 17:
+		set @QUETITLE$,  "続々々・材料が足りない！";
+		set @QUEMES$[0], "プロンテラ宿屋の専属卸売り屋が";
+		set @QUEMES$[1], "最近の不漁のせいで魚が卸せなくて困っているらしい";
+		set @QUEMES$[2], "料理人に聞いて必要な魚を調達してほしい";
+		set @SINRAI,35;
+		set @ARRYMAX,3;break;
+	case 18:
+		set @QUETITLE$,  "盗蟲退治！";
+		set @QUEMES$[0], "最近、やけに盗蟲の数が多いと思ってたんだが";
+		set @QUEMES$[1], "どうやら、プロンテラの下水道で繁殖した";
+		set @QUEMES$[2], "盗蟲が原因だと思うんだ";
+		set @QUEMES$[3], "黄金色をした盗蟲を退治してきてくれないか？";
+		set @SINRAI,40;
+		set @ARRYMAX,4;break;
+	case 19:
+		set @QUETITLE$,  "兄貴の悩み解決";
+		set @QUEMES$[0], "最近さぁ、お化粧のノリが悪いのよね";
+		set @QUEMES$[1], "巷で噂の頬紅ってやつを使ってみたいんだけど";
+		set @QUEMES$[2], "すごい人気で入手困難なの";
+		set @QUEMES$[3], "ほお紅を3つほど手に入れてくれないかしら？";
+		set @QUEMES$[4], "イズルードで待ってるわよ";
+		set @SINRAI,40;
+		set @ARRYMAX,5;break;
+	case 20:
+		set @QUETITLE$,  "無くした物";
+		set @QUEMES$[0], "すごく大事なものをなくしちゃったんです！";
+		set @QUEMES$[1], "イズルードにいるから、すぐに来て！";
+		set @SINRAI,35;
+		set @ARRYMAX,2;break;
+	case 21:
+		set @QUETITLE$,  "巡礼の警護依頼";
+		set @QUEMES$[0], "モンスターの蔓延る地域へ";
+		set @QUEMES$[1], "巡礼にいくことになり、不安なので";
+		set @QUEMES$[2], "警護をお願いしたいです！";
+		set @QUEMES$[3], "ラヘルの宮殿前で待ってます！";
+		set @SINRAI,45;
+		set @ARRYMAX,4;break;
+	case 22:
+		set @QUETITLE$,  "アトリエ三女の依頼";
+		set @QUEMES$[0], "新しい装飾品に使いたいので";
+		set @QUEMES$[1], "怪しい魔力の石を5つほど";
+		set @QUEMES$[2], "コモドまで持ってきていただけますか？";
+		set @SINRAI,40;
+		set @ARRYMAX,3;break;
+	case 23:
+		set @QUETITLE$,  "だって欲しいんだもん";
+		set @QUEMES$[0], "コモドの洞窟に財宝が";
+		set @QUEMES$[1], "眠ってるらしいの";
+		set @QUEMES$[2], "詳しい説明は現地でするね！";
+		set @SINRAI,40;
+		set @ARRYMAX,3;break;
+	case 24:
+		set @QUETITLE$,  "虹色に光るアレ";
+		set @QUEMES$[0], "虹色ニンジンが欲しいラヴィ！";
+		set @QUEMES$[1], "プロンテラ東で待ってるラヴィ";
+		set @QUEMES$[2], "100本ほど持ってきて欲しいラヴィ！";
+		set @SINRAI,35;
+		set @ARRYMAX,3;break;
+	case 25:
+		set @QUETITLE$,  "続×３・材料が足りない！";
+		set @QUEMES$[0], "プロンテラ宿屋の専属卸売り屋が";
+		set @QUEMES$[1], "最近の不漁のせいで魚が卸せなくて困っているらしい";
+		set @QUEMES$[2], "料理人に聞いて必要な魚を調達してほしい";
+		set @SINRAI,35;
+		set @ARRYMAX,3;break;
+	}
+	return;
+}
+//=========================================================
+//闇闘技場敵セット
+//=========================================================
+function	script	Set_Mobs	{
+		switch (rand(1,24)){
+			case 1://小型
+				switch (rand(3)){
+					case 0:
+						setarray .@Mob_id,1008,1230,1007,1229,1232,1047,1240,1049,1063,1011,1183,1236,1097,1241,1050,1048,1051,1167,1004,1005,1091,1107,1161,1070,1175,1068,1074,1231,1174,1018,1042,1237,1095,1104,1162,1266,1238,1160,1056,1145,1066,1234,1239,1105,1176,1073,1254,1141,1114,1686;
+						break;
+					case 1:
+						setarray .@Mob_id,1141,1114,1686,1057,1627,1067,1103,1784,1001,1111,1265,1138,1613,1409,1258,1246,1142,1619,1121,1144,1415,1279,1282,1110,1185,1186,1179,1494,1129,1628,1509,1789,1586,1261,1508,1255,1256,1836,1143,1715,1035,1776,1225,1281,1214,1718,1199,1694,1697,1413;
+						break;
+					case 2:
+						setarray .@Mob_id,1255,1256,1836,1143,1715,1035,1776,1225,1281,1214,1718,1199,1694,1697,1413,1211,1383,1109,1695,1696,1838,1101,1615,1510,1738,1693,1209,1378,1614,1633,1303,1195,1869,1387,1391,1301,1293,1309,1300,1371,1774,1382,1292,1866,1622,1837,1754,1712,1707,1755;
+						break;
+				}
+				break;
+			case 2://中型
+				switch (rand(5)){
+					case 0:
+						setarray .@Mob_id,1002,1090,1062,1113,1010,1009,1012,1093,1052,1247,1076,1053,1089,1020,1024,1031,1015,1242,1025,1520,1014,1120,1088,1128,1224,1077,1054,1033,1096,1034,1058,1126,1178,1125,1030,1153,1116,1064,1092,1223,1235,1588,1123,1124,1023,1071,1227,1245,1122,1013;
+						break;
+					case 1:
+						setarray .@Mob_id,1158,1228,1139,1127,1220,1106,1152,1028,1169,1137,1400,1119,1026,1582,1016,1044,1135,1273,1134,1146,1177,1782,1188,1170,1404,1165,1417,1620,1164,1280,1248,1226,1045,1133,1041,1032,1249,1244,1130,1498,1881,1036,1277,1215,1499,1406,1495,1271,1250,1621;
+						break;
+					case 2:
+						setarray .@Mob_id,1880,1629,1037,1367,1721,1155,1102,1783,1156,1680,1402,1781,1403,1212,1108,1517,1253,1500,1189,1519,1882,1587,1493,1191,1267,1210,1257,1263,1516,1180,1196,1276,1380,1410,1197,1264,1687,1609,1514,1408,1506,1682,1778,1512,1692,1368,1375,1294,1780,1216;
+						break;
+					case 3:
+						setarray .@Mob_id,1322,1193,1652,1194,1323,1198,1260,1771,1631,1655,1308,1269,1072,1656,1388,1515,1321,1883,1207,1154,1313,1657,1206,1773,1772,1275,1513,1653,1504,1298,1200,1314,1317,1416,1884,1666,1299,1297,1698,1385,1667,1296,1384,1664,1654,1386,1665,1318,1372,1401;
+						break;
+					case 4:
+						setarray .@Mob_id,1386,1665,1318,1372,1401,1737,1770,1753,1376,1316,1752,1315,1204,1319,1676,1681,1290,1769,1208,1679,1374,1390,1865,1735,1736,1307,1864,1703,1678,1670,1148,1702,1677,1672,1701,1867,1700,1673,1638,1711,1706,1636,1370,1839,1635,1870,1671,1637,1634,1639;
+						break;
+				}
+				break;
+			case 3://大型
+				switch (rand(2)){
+					case 0:
+						setarray .@Mob_id,1094,1055,1233,1019,1060,1392,1100,1040,1221,1118,1166,1243,1069,1151,1140,1099,1616,1274,1029,1065,1061,1497,1222,1149,1163,1213,1584,1192,1632,1304,1412,1131,1369,1117,1503,1306,1699,1278,1775,1777,1311,1270,1132,1377,1405,1205,1262,1365,1310,1305;
+						break;
+					case 1:
+						setarray .@Mob_id,1699,1278,1775,1777,1311,1270,1132,1377,1405,1205,1262,1365,1310,1305,1381,1617,1717,1618,1283,1714,1201,1505,1259,1507,1202,1291,1320,1295,1098,1203,1716,1366,1302,1379,1668,1219,1022,1713,1830,1289,1268,1833,1829,1710,1705,1720,1831,1709,1704,1765;
+						break;
+				}
+				break;
+			case 4://無属性
+				switch (rand(2)){
+					case 0:
+						setarray .@Mob_id,1232,1047,1063,1236,1097,1051,1093,1265,1040,1613,1409,1400,1243,1248,1249,1715,1281,1718,1721,1274,1212,1519,1191,1614,1375,1412,1193,1195,1771,1699,1278,1313,1772,1275,1200,1314,1270,1666,1377,1698,1667,1664,1365,1665,1617,1737,1770,1622,1201,1676;
+						break;
+					case 1:
+						setarray .@Mob_id,1249,1715,1281,1718,1721,1274,1212,1519,1191,1614,1375,1412,1193,1195,1771,1699,1278,1313,1772,1275,1200,1314,1270,1666,1377,1698,1667,1664,1365,1665,1617,1737,1770,1622,1201,1676,1769,1202,1390,1735,1736,1320,1295,1148,1668,1022,1830,1700,1839,1829;
+						break;
+				}
+				break;
+			case 5://水属性
+				setarray         .@Mob_id,1002,1090,1012,1161,1089,1070,1094,1068,1074,1242,1520,1014,1066,1073,1141,1034,1126,1067,1138,1158,1228,1142,1069,1144,1044,1170,1045,1789,1406,1776,1271,1697,1108,1065,1882,1264,1778,1323,1775,1777,1515,1883,1206,1317,1319,1681,1679,1636,1671,1002;
+				break;
+			case 6://地属性
+				switch (rand(2)){
+					case 0:
+						setarray .@Mob_id,1008,1230,1007,1229,1010,1167,1052,1020,1024,1025,1237,1095,1104,1162,1055,1266,1238,1160,1056,1145,1088,1128,1234,1239,1105,1176,1686,1057,1103,1784,1125,1092,1223,1235,1588,1023,1013,1060,1139,1127,1221,1118,1166,1619,1121,1137,1273,1279,1494,1165;
+						break;
+					case 1:
+						setarray .@Mob_id,1118,1166,1619,1121,1137,1273,1279,1494,1165,1628,1586,1498,1881,1255,1880,1616,1155,1781,1695,1517,1189,1838,1615,1493,1516,1497,1380,1410,1687,1506,1368,1294,1780,1322,1306,1194,1269,1391,1207,1311,1884,1300,1405,1654,1386,1717,1316,1678,1672,1289;
+						break;
+				}
+				break;
+			case 7://火属性
+				switch (rand(2)){
+					case 0:
+						setarray .@Mob_id,1240,1049,1113,1241,1050,1107,1233,1019,1033,1058,1178,1001,1123,1220,1106,1119,1135,1282,1129,1244,1130,1836,1277,1140,1499,1495,1250,1225,1214,1694,1367,1413,1211,1383,1210,1180,1222,1149,1213,1652,1369,1387,1072,1154,1309,1385,1262,1384,1310,1318;
+						break;
+					case 1:
+						setarray .@Mob_id,1001,1123,1220,1106,1119,1135,1282,1129,1244,1130,1836,1277,1140,1499,1495,1250,1225,1214,1694,1367,1413,1211,1383,1210,1180,1222,1149,1213,1652,1369,1387,1072,1154,1309,1385,1262,1384,1310,1318,1381,1372,1283,1714,1837,1307,1366,1673,1833,1634,1831;
+						break;
+				}
+				break;
+			case 8://風属性
+				switch (rand(2)){
+					case 0:
+						setarray .@Mob_id,1011,1183,1009,1004,1091,1231,1174,1018,1042,1254,1114,1627,1227,1245,1122,1392,1782,1280,1226,1133,1261,1215,1035,1199,1629,1783,1156,1680,1253,1500,1267,1263,1609,1514,1408,1633,1303,1692,1131,1631,1308,1656,1321,1293,1513,1299,1774,1296,1376,1315;
+						break;
+					case 1:
+						setarray .@Mob_id,1174,1018,1042,1254,1114,1627,1227,1245,1122,1392,1782,1280,1226,1133,1261,1215,1035,1199,1629,1783,1156,1680,1253,1500,1267,1263,1609,1514,1408,1633,1303,1692,1131,1631,1308,1656,1321,1293,1513,1299,1774,1296,1376,1315,1259,1208,1716,1670,1677,1638;
+						break;
+				}
+				break;
+			case 9://毒属性
+				setarray         .@Mob_id,1031,1224,1077,1030,1124,1100,1258,1134,1151,1099,1621,1037,1402,1304,1209,1378,1216,1653,1305,1618,1635,1031,1224,1077,1030,1124,1100,1258,1134,1151,1099,1621,1037,1402,1304,1209,1378,1216,1653,1305,1618,1635,1031,1224,1077,1030,1124,1100,1258,1134;
+				break;
+			case 10://聖属性
+				setarray         .@Mob_id,1062,1247,1096,1246,1655,1388,1371,1703,1701,1713,1754,1755,1637,1765,1062,1247,1096,1246,1655,1388,1371,1703,1701,1713,1754,1755,1637,1765,1062,1247,1096,1246,1655,1388,1371,1703,1701,1713,1754,1755,1637,1765,1062,1247,1096,1246,1655,1388,1371,1703;
+				break;
+			case 11://闇属性
+				setarray         .@Mob_id,1005,1053,1175,1054,1111,1582,1146,1177,1110,1404,1417,1164,1256,1102,1109,1029,1696,1101,1510,1257,1276,1163,1584,1632,1738,1503,1198,1260,1301,1773,1416,1205,1382,1292,1401,1753,1752,1866,1204,1505,1507,1374,1203,1379,1702,1219,1867,1268,1370,1720;
+				break;
+			case 12://念属性
+				setarray         .@Mob_id,1120,1116,1415,1185,1186,1179,1620,1143,1061,1587,1693,1869,1657,1712,1707,1711,1706,1710,1705,1639,1709,1704,1120,1116,1415,1185,1186,1179,1620,1143,1061,1587,1693,1869,1657,1712,1707,1711,1706,1710,1705,1639,1709,1704,1120,1116,1415,1185,1186,1179;
+				break;
+			case 13://不死属性
+				setarray         .@Mob_id,1076,1015,1153,1064,1071,1152,1028,1169,1026,1016,1188,1509,1041,1032,1508,1036,1403,1196,1197,1192,1682,1512,1117,1504,1298,1132,1297,1290,1291,1865,1098,1864,1302,1870,1076,1015,1153,1064,1071,1152,1028,1169,1026,1016,1188,1509,1041,1032,1508,1036;
+				break;
+			case 14://無種族
+				switch (rand(2)){
+					case 0:
+						setarray .@Mob_id,1232,1047,1236,1097,1784,1116,1040,1392,1613,1400,1165,1129,1248,1620,1249,1789,1244,1130,1151,1836,1277,1776,1621,1694,1697,1274,1695,1696,1615,1587,1191,1516,1738,1614,1375,1412,1633,1692,1693,1193,1195,1699,1278,1775,1777,1269,1207,1270,1309,1666;
+						break;
+					case 1:
+						setarray .@Mob_id,1274,1695,1696,1615,1587,1191,1516,1738,1614,1375,1412,1633,1692,1693,1193,1195,1699,1278,1775,1777,1269,1207,1270,1309,1666,1698,1667,1774,1205,1664,1365,1665,1386,1617,1622,1204,1676,1681,1679,1203,1366,1678,1670,1672,1677,1673,1268,1833,1671,1831;
+						break;
+				}
+				break;
+			case 15://不死種族
+				setarray         .@Mob_id,1076,1015,1153,1064,1071,1152,1028,1169,1026,1016,1188,1185,1509,1041,1032,1508,1036,1616,1403,1257,1196,1197,1192,1682,1512,1117,1504,1298,1132,1297,1290,1291,1865,1864,1712,1707,1711,1706,1710,1705,1870,1709,1704,1076,1015,1153,1064,1071,1152,1028;
+				break;
+			case 16://動物種族
+				switch (rand(2)){
+					case 0:
+						setarray .@Mob_id,1063,1240,1049,1241,1050,1009,1093,1167,1005,1107,1175,1025,1104,1056,1145,1234,1233,1019,1057,1254,1103,1030,1092,1111,1013,1060,1127,1221,1166,1220,1106,1243,1119,1782,1146,1415,1417,1628,1586,1261,1255,1256,1271,1281,1225,1214,1629,1037,1783,1680;
+						break;
+					case 1:
+						setarray .@Mob_id,1221,1166,1220,1106,1243,1119,1782,1146,1415,1417,1628,1586,1261,1255,1256,1271,1281,1225,1214,1629,1037,1783,1680,1383,1402,1180,1380,1149,1687,1209,1322,1306,1369,1323,1387,1515,1391,1311,1513,1314,1317,1310,1318,1381,1372,1316,1283,1319,1259,1022;
+						break;
+				}
+				break;
+			case 17://植物種族
+				setarray         .@Mob_id,1002,1090,1113,1062,1010,1161,1247,1020,1068,1024,1031,1242,1520,1014,1162,1055,1224,1077,1033,1141,1118,1142,1881,1215,1880,1495,1199,1781,1413,1500,1493,1497,1410,1368,1780,1884,1002,1090,1113,1062,1010,1161,1247,1020,1068,1024,1031,1242,1520,1014;
+				break;
+			case 18://昆虫種族
+				setarray         .@Mob_id,1242,1520,1014,1229,1230,1183,1048,1051,1091,1004,1052,1053,1094,1231,1174,1237,1042,1238,1088,1128,1239,1054,1176,1114,1058,1627,1001,1100,1139,1619,1279,1494,1099,1035,1211,1212,1210,1304,1408,1294,1303,1194,1321,1293,1300,1305,1618,1289,1008,1007;
+				break;
+			case 19://魚貝種族
+				setarray         .@Mob_id,1012,1089,1070,1074,1266,1066,1073,1034,1067,1158,1228,1069,1144,1044,1045,1406,1108,1065,1216,1206,1012,1089,1070,1074,1266,1066,1073,1034,1067,1158,1228,1069,1144,1044,1045,1406,1108,1065,1216,1206,1012,1089,1070,1074,1266,1066,1073,1034,1067,1158;
+				break;
+			case 20://悪魔種族
+				switch (rand(2)){
+					case 0:
+						setarray .@Mob_id,1120,1138,1121,1582,1170,1110,1404,1186,1179,1143,1367,1109,1029,1517,1253,1061,1838,1101,1267,1263,1510,1276,1584,1632,1778,1506,1378,1503,1260,1072,1869,1301,1773,1416,1405,1382,1292,1753,1376,1752,1201,1866,1505,1208,1735,1736,1320,1295,1374,1837;
+						break;
+					case 1:
+						setarray .@Mob_id,1179,1143,1367,1109,1029,1517,1253,1061,1838,1101,1267,1263,1510,1276,1584,1632,1778,1506,1378,1503,1260,1072,1869,1301,1773,1416,1405,1382,1292,1753,1376,1752,1201,1866,1505,1208,1735,1736,1320,1295,1374,1837,1307,1302,1379,1148,1867,1370,1635,1634;
+						break;
+				}
+				break;
+			case 21://人間種族
+				switch (rand(2)){
+					case 0:
+						setarray .@Mob_id,1686,1126,1125,1178,1235,1588,1023,1123,1124,1265,1227,1245,1122,1409,1258,1246,1137,1273,1135,1134,1177,1282,1280,1164,1226,1133,1498,1140,1499,1250,1102,1519,1882,1189,1222,1213,1163,1264,1131,1652,1771,1631,1308,1655,1198,1656,1313,1883,1154,1657;
+						break;
+					case 1:
+						setarray .@Mob_id,1498,1140,1499,1250,1102,1519,1882,1189,1222,1213,1163,1264,1131,1652,1771,1631,1308,1655,1198,1656,1313,1883,1154,1657,1772,1275,1653,1200,1377,1299,1296,1654,1737,1770,1401,1315,1507,1769,1202,1390,1098,1668,1219,1830,1638,1636,1839,1829,1637,1639;
+						break;
+				}
+				break;
+			case 22://天使種族
+				setarray         .@Mob_id,1096,1388,1371,1703,1702,1701,1700,1754,1755,1765,1096,1388,1371,1703,1702,1701,1700,1754,1755,1765,1096,1388,1371,1703,1702,1701,1700,1754,1755,1765,1096,1388,1371,1703,1702,1701,1700,1754,1755,1765,1096,1388,1371,1703,1702,1701,1700,1754,1755,1765;
+				break;
+			case 23://竜種族
+				setarray         .@Mob_id,1715,1718,1721,1155,1156,1609,1514,1385,1262,1384,1717,1714,1716,1713,1720,1715,1718,1721,1155,1156,1609,1514,1385,1262,1384,1717,1714,1716,1713,1720,1715,1718,1721,1155,1156,1609,1514,1385,1262,1384,1717,1714,1716,1713,1720,1715,1718,1721,1155,1156;
+				break;
+			case 24://Boss
+				switch (rand(2)){
+					case 0:
+						setarray .@Mob_id,1090,1093,1091,1089,1120,1224,1096,1092,1223,1227,1221,1228,1220,1582,1226,1225,1783,1222,1388,1205,1262,1283,1204,1259,1681,1295,1320,1203,1307,1302,1703,1702,1022,1701,1830,1289,1700,1754,1706,1707,1711,1712,1755,1833,1829,1839,1705,1710,1870,1720;
+						break;
+					case 1:
+						setarray .@Mob_id,1120,1224,1096,1092,1223,1227,1221,1228,1220,1582,1226,1225,1783,1222,1388,1205,1262,1283,1204,1259,1681,1295,1320,1203,1307,1302,1703,1702,1022,1701,1830,1289,1700,1754,1706,1707,1711,1712,1755,1833,1829,1839,1705,1710,1870,1720,1831,1704,1709,1765;
+						break;
+				}
+				break;
+		}
+
+		for(set $@i,0; $@i < ((getarg(1)+1)*10);set $@i,$@i+1) {
+			set $@randam, rand(getarraysize(.@Mob_id));
+			areamonster "pvp_n_6-5.gat",80,80,119,119,"--ja--",.@Mob_id[$@randam],1,"mugen::OnKilled";
+		}
+	return;
+}
+//=========================================================
+//生体4用
+//=========================================================
+function	script	func_lhz4point	{
+	set .@partyid,getcharid(1);
+	if(.@partyid == 0){
+		set #PPOINT,#PPOINT+5;
+		return 0;
+	}
+	set .@temp_GEFE1,0;
+	getpartymember(.@partyid);
+	set .@partymembercount,$@partymembercount;
+	copyarray .@partymembername$[0],$@partymembername$[0],.@partymembercount;
+	getmapxy(.@map1$,.@x1,.@y1,0,strcharinfo(0));
+
+	while(.@partymembercount != .@temp_GEFE1){
+		if(getcharid(3,.@partymembername$[.@temp_GEFE1]) != 0){
+			attachrid(getcharid(3,.@partymembername$[.@temp_GEFE1]));
+			getmapxy(.@map2$,.@x2,.@y2,0,strcharinfo(0));
+			if(.@map1$ == .@map2$ && distance(.@x1,.@y1,.@x2,.@y2) <= 15){
+				set #PPOINT,#PPOINT+5;
+			}
+		}
+		set .@temp_GEFE1,.@temp_GEFE1+1;
+	}
+	return 0;
+}
+//=========================================================
+//Zeny分割用
+//=========================================================
+function	script	func_zeny	{
+	set .@arg$,getarg(0);
+	set .@len, getstrlen(.@arg$);
+	set .@d,0;
+	for(set .@i,.@len-1; .@i>=0; set .@i,.@i-1){
+		set .@ret$, charat(.@arg$, .@i) + .@ret$;
+		if (.@i>0 && .@d % 3 == 2) {
+			set .@ret$, "," + .@ret$;
+		}
+		set .@d,.@d+1;
+	}
+	return .@ret$;
+}

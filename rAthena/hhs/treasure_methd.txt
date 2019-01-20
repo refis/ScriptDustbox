@@ -1,0 +1,1510 @@
+//=========================================================
+// 1.プロンテラ料理人
+// 2.迷子
+// 3.アトリエ七女
+// 4.アトリエ六女
+// 5.ポニコ
+// 6.泥棒
+// 7.不穏な噂
+// 8.至急
+// 9.アトリエ五女
+//10.アトリエ四女
+//11.人手不足で……
+//12.兄貴の悩み解決
+//13.無くした物
+//14.巡礼の警護依頼
+//15.アトリエ三女の依頼
+//16.だって欲しいんだもん
+//17.虹色に光るアレ
+//=========================================================
+//プロンテラ料理人
+//=========================================================
+prt_in,58,143,5	script	料理人	729,{
+	mes "[料理人]";
+	if((callfunc("talk_treasure",7,0)==2 || callfunc("talk_treasure",7,0)==6 || callfunc("talk_treasure",7,0)==13 || callfunc("talk_treasure",7,0)==17 || callfunc("talk_treasure",7,0)==25) && callfunc("talk_treasure",7,3)==99){
+		mes "ありがとう冒険者さん！";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=2 && callfunc("talk_treasure",7,0)!=6 && callfunc("talk_treasure",7,0)!=13 && callfunc("talk_treasure",7,0)!=17 && callfunc("talk_treasure",7,0)!=25){
+		mes "あぁ、困った困った";
+		mes "魚がないんじゃ料理が作れない";
+		mes "冒険者組合に依頼するしかないわ…";
+		next;
+		mes "[料理人]";
+		mes "あら、ちょうどいいわ";
+		mes "あなた魚持ってないかしら？";
+		mes "売ってくれたら助かっちゃうなぁ";
+		next;
+		if(select("売りますよ","残念ながら…")==2) {
+			mes "[料理人]";
+			mes "そう、仕方ないね";
+			close;
+		}
+		set .@beforfish,#SAKANAPOINT;
+
+		set @FishTemp,countitem(28522);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*1;
+		delitem 28522,@FishTemp;
+		set @FishTemp,countitem(28523);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*1;
+		delitem 28523,@FishTemp;
+		set @FishTemp,countitem(28524);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*1;
+		delitem 28524,@FishTemp;
+		set @FishTemp,countitem(28513);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*2;
+		delitem 28513,@FishTemp;
+		set @FishTemp,countitem(28526);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*5;
+		delitem 28526,@FishTemp;
+		set @FishTemp,countitem(28514);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*10;
+		delitem 28514,@FishTemp;
+		set @FishTemp,countitem(28517);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*30;
+		delitem  28517,@FishTemp;
+		set @FishTemp,countitem(28515);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*80;
+		delitem  28515,@FishTemp;
+		set @FishTemp,countitem(28525);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*120;
+		delitem  28525,@FishTemp;
+		set @FishTemp,countitem(28520);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*200;
+		delitem  28520,@FishTemp;
+
+		//以降レア魚
+		set @FishTemp,countitem(28527);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*150;
+		delitem  28527,@FishTemp;
+
+		set @FishTemp,countitem(28519);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*200;
+		delitem  28519,@FishTemp;
+
+		set @FishTemp,countitem(28521);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*220;
+		delitem  28521,@FishTemp;
+
+		set @FishTemp,countitem(28512);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*250;
+		delitem  28512,@FishTemp;
+
+
+		set @FishTemp,countitem(28529);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*270;
+		delitem  28529,@FishTemp;
+
+		set @FishTemp,countitem(28516);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*290;
+		delitem  28516,@FishTemp;
+
+		set @FishTemp,countitem(28518);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*300;
+		delitem  28518,@FishTemp;
+
+		set @FishTemp,countitem(28530);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*320;
+		delitem  28530,@FishTemp;
+
+		set @FishTemp,countitem(28531);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*340;
+		delitem  28531,@FishTemp;
+
+		set @FishTemp,countitem(28528);
+		set #SAKANAPOINT,#SAKANAPOINT + @FishTemp*500;
+		delitem  28528,@FishTemp;
+
+		set .@afterfish,#SAKANAPOINT - .@beforfish;
+		set Zeny,Zeny + (.@afterfish*10);
+		dispbottom((.@afterfish*10)+"Zenyになりました");
+		dispbottom(.@beforfish +"点から"+ #SAKANAPOINT +"点に上昇しました");
+		mes "[料理人]";
+		mes "ありがとう！";
+		mes "キミ、なかなかやるね";
+		close;
+	}
+	set @evflag,callfunc("talk_treasure",7,3);
+	switch(@evflag){
+	case 0:
+		mes "おや";
+		mes "もしかしてキミ、組合の人？";
+		next;
+		mes "[料理人]";
+		mes "いやーよくきてくれた！";
+		mes "実は料理に使う魚を";
+		mes "仕入れることができなかったの";
+		next;
+		mes "[料理人]";
+		mes "そこで、キミには";
+		mes "必要な魚を調達してきてもらいたい";
+		next;
+		mes "[料理人]";
+		mes "必要な魚を言うから、ちゃんとメモ";
+		mes "取ってよね？";
+		mes "忘れたらダメだよ？";
+		next;
+		mes "[料理人]";
+		set .@querand,rand(1,15);
+		callfunc("talk_treasure",8,3,.@querand);
+		switch(.@querand){
+		case 1:	mes "^0000FF活きのいい魚：10匹^000000";break;
+		case 2:	mes "^0000FF大きな魚：10匹^000000";break;
+		case 3: mes "^0000FF鑑賞魚：10匹^000000";break;
+		case 4:	mes "^0000FF活きのいい魚：20匹^000000";break;
+		case 5:	mes "^0000FF大きな魚：20匹^000000";break;
+		case 6: mes "^0000FF鑑賞魚：20匹^000000";break;
+		case 7: mes "^0000FF骨魚：10匹^000000";mes "^FF0000prt_sewb2^000000にしかいないから注意ね";break;
+		case 8: mes "^0000FF出世魚：10匹^000000";mes "^FF0000ayothaya^000000にしかいないから注意ね";break;
+		case 9: mes "^0000FF調理用魚：10匹^000000";mes "^FF0000comodo^000000にしかいないから注意ね";break;
+		case 10:mes "^0000FF悪魔魚：10匹^000000";mes "^FF0000prontera^000000にしかいないから注意ね";break;
+		case 11:mes "^0000FF腐った魚：10匹^000000";mes "^FF0000einbroch^000000にしかいないから注意ね";break;
+		case 12:mes "^0000FF魚王子2世：10匹^000000";mes "^FF0000malangdo^000000にしかいないから注意ね";break;
+		case 13:mes "^0000FF古代魚：10匹^000000";mes "^FF0000yuno^000000にしかいないから注意ね";break;
+		case 14:mes "^0000FF宝石魚：10匹^000000";mes "^FF0000amatsu^000000にしかいないから注意ね";break;
+		case 15:mes "^0000FFラバーズフィッシュ：10匹^000000";mes "^FF0000jawaii^000000にしかいないから注意ね";break;
+		}
+		next;
+		mes "[料理人]";
+		mes "それじゃーよろしくね！";
+		mes "私ここで待ってるからね！";
+		close;
+	default:
+		mes "あ、おかえり！";
+		mes "どう？";
+		next;
+		if(select("持ってきた","必要な魚なんだっけ？")==2) {
+			mes "[レイシャ]";
+			switch(@evflag){
+			case 1:	mes "^0000FF活きのいい魚：10匹^000000";break;
+			case 2:	mes "^0000FF大きな魚：10匹^000000";break;
+			case 3: mes "^0000FF鑑賞魚：10匹^000000";break;
+			case 4:	mes "^0000FF活きのいい魚：20匹^000000";break;
+			case 5:	mes "^0000FF大きな魚：20匹^000000";break;
+			case 6: mes "^0000FF鑑賞魚：20匹^000000";break;
+			case 7: mes "^0000FF骨魚：10匹^000000";mes "^FF0000prt_sewb2^000000にしかいないから注意ね";break;
+			case 8: mes "^0000FF出世魚：10匹^000000";mes "^FF0000ayothaya^000000にしかいないから注意ね";break;
+			case 9: mes "^0000FF調理用魚：10匹^000000";mes "^FF0000comodo^000000にしかいないから注意ね";break;
+			case 10:mes "^0000FF悪魔魚：10匹^000000";mes "^FF0000prontera^000000にしかいないから注意ね";break;
+			case 11:mes "^0000FF腐った魚：10匹^000000";mes "^FF0000einbroch^000000にしかいないから注意ね";break;
+			case 12:mes "^0000FF魚王子2世：10匹^000000";mes "^FF0000malangdo^000000にしかいないから注意ね";break;
+			case 13:mes "^0000FF古代魚：10匹^000000";mes "^FF0000yuno^000000にしかいないから注意ね";break;
+			case 14:mes "^0000FF宝石魚：10匹^000000";mes "^FF0000amatsu^000000にしかいないから注意ね";break;
+			case 15:mes "^0000FFラバーズフィッシュ：10匹^000000";mes "^FF0000jawaii^000000にしかいないから注意ね";break;
+			}
+			mes "だよぅ";
+			close;
+		}
+		setarray .@selfish[1],28513,28526,28514,28513,28526,28514,28519,28521,28527,28512,28529,28516,28518,28530,28531;
+		setarray .@confish[1],10,10,10,20,20,20,10,10,10,10,10,10,10,10,10;
+		if(countitem(.@selfish[@evflag])<.@confish[@evflag]){
+			mes "[料理人]";
+			mes "あれれぇ？";
+			mes "おかしいなぁ、お魚足りないよ？";
+			close;
+		}
+		delitem .@selfish[@evflag],.@confish[@evflag];
+		callfunc("talk_treasure",8,3,99);
+		mes "[料理人]";
+		mes "うんうんっ！";
+		mes "ありがとう！すんごく助かった！";
+		next;
+		mes "[料理人]";
+		mes "またお願いするかもだけど";
+		mes "そのときはよろしくね！";
+		close;
+	}
+}
+//=========================================================
+//迷子
+//=========================================================
+geffen_in,159,49,5	script	女性	90,{
+	mes "[女性]";
+	mes "あらあらまぁまぁ";
+	mes "どういたしましょうかねぇ";
+	close;
+}
+geffen_in,170,40,3	script	男の子	896,{
+	mes "[男の子]";
+	if(callfunc("talk_treasure",7,0)==3 && callfunc("talk_treasure",7,3)==99){
+		mes "ありがとう冒険者さん！";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=3){
+		mes "どうしよう……";
+		mes "探しに行ったほうがいいのかな";
+		close;
+	}
+	mes "あ、冒険者さん！";
+	mes "お願いします！";
+	next;
+	mes "[男の子]";
+	mes "^FF0000mjolnir_09^000000までスナフを送ったんだけど";
+	mes "まだ家についてないみたいなんだ！";
+	mes "早く探してきてあげて！";
+	if(callfunc("talk_treasure",7,3)!=1){
+		donpcevent "子供#snaf::OnRude";
+		callfunc("talk_treasure",8,3,1);
+	}
+	close;
+}
+mjolnir_09	mapflag	noteleport
+mjolnir_09,286,345,3	script	子供#snaf	704,{
+	if(callfunc("talk_treasure",7,0)==3 && callfunc("talk_treasure",7,3)==99){
+		mes "[スナフ]";
+		mes "ありがとうね、宅配の人！";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=3 || callfunc("talk_treasure",7,3)<1){
+		mes "[子供]";
+		mes "うぅ";
+		mes "おなかすいた";
+		close;
+	}
+	mes "[スナフ]";
+	mes "帰り道が解らなくなってここでじっとしてたんだ";
+	next;
+	menu "そうかそうか、さぁ帰ろう",-;
+	mes "[スナフ]";	
+	mes "お腹がすいてモウ歩けないよう！";
+	mes "なにか食べるものを頂戴…";
+	next;
+	if(select("よし、食べ物を持ってきてあげよう","持ってない")==2) {
+		mes "[スナフ]";
+		mes "じゃあ持ってきてよ！";
+		close;
+	}
+	set .@have,0;
+	for(set .@i,12041; .@i<12100; set .@i,.@i+1){
+		if(countitem(.@i) > 0){set .@have,.@i;break;}
+	}
+	if(.@have > 0){
+		mes "[スナフ]";
+		mes "^0000FF"+getitemname(.@have)+"^000000"+"をくれんだね、ありがとう";
+		next;
+		mes "-子供は勝手に料理を食べ始めた…-";
+		delitem .@have,1;
+		next;
+		mes "[スナフ]";
+		mes "ふう…";
+		mes "お腹一杯になったよ！";
+		mes "これでおうちに帰れそう";
+		mes "それじゃありがとうね、宅配の人！";
+		callfunc("talk_treasure",8,3,99);
+		close;
+	}else{mes "[スナフ]";mes "食べ物が何もないじゃないか！";close;}
+OnInit:
+OnRude:
+	for(set .i,0; .i==.i; set .i,.i+1){
+		set .xrand,rand(10,350);
+		set .yrand,rand(10,350);
+		if(checkcell("mjolnir_09",.xrand,.yrand,cell_chkpass)){
+			movenpc "子供#snaf",.xrand,.yrand;
+			break;
+		}
+	}
+	end;
+}
+//=========================================================
+//アトリエ七女
+//=========================================================
+alberta_in,175,80,3	script	アトリエ七女	90,{
+	mes "[アトリエ七女]";
+	if(callfunc("talk_treasure",7,0)==1 && callfunc("talk_treasure",7,3)==99){
+		mes "ほら、いつまでここにいるの";
+		mes "作業の邪魔だから";
+		mes "とっとと出て行ってちょうだい";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=1){
+		mes "むー";
+		mes "足りない……これじゃダメ";
+		mes "私ともあろうものが";
+		mes "材料不足で作品ができないだなんて";
+		close;
+	}
+	set @evflag,callfunc("talk_treasure",7,3);
+	switch(@evflag){
+	case 0:
+		mes "あら、あなた！";
+		mes "もしかしなくても冒険者でしょう？";
+		next;
+		mes "[アトリエ七女]";
+		mes "アーティスト一家である";
+		mes "アトリエ家の七女である";
+		mes "わたくし、ナシエの頼みです";
+		next;
+		mes "[アトリエ七女]";
+		set querand1,rand(1,14);
+		set querand2,rand(1,14);
+		set querand3,rand(1,14);
+		set querand4,rand(1,14);
+		callfunc("talk_treasure",8,3,1);
+		mes "^0000FF"+getitemname(.sel1[querand1])+"^000000を^FF000020^000000個";
+		mes "^0000FF"+getitemname(.sel2[querand2])+"^000000を^FF000015^000000個";
+		mes "^0000FF"+getitemname(.sel3[querand3])+"^000000を^FF000010^000000個";
+		mes "^0000FF"+getitemname(.sel4[querand4])+"^000000を^FF00005^000000個";
+		mes "これだけ必要なの！";
+		next;
+		mes "[アトリエ七女]";
+		mes "それじゃー頼んだ！";
+		close;
+	default:
+		mes "帰ってきたね！！";
+		mes "ちゃんと集めてきた？";
+		next;
+		if(select("持ってきた","必要な物なんだっけ？")==2) {
+			mes "[アトリエ七女]";
+			mes "^0000FF"+getitemname(.sel1[querand1])+"^000000を^FF000020^000000個";
+			mes "^0000FF"+getitemname(.sel2[querand2])+"^000000を^FF000015^000000個";
+			mes "^0000FF"+getitemname(.sel3[querand3])+"^000000を^FF000010^000000個";
+			mes "^0000FF"+getitemname(.sel4[querand4])+"^000000を^FF00005^000000個";
+			mes "だよっ！バカ！";
+			close;
+		}
+		if(	(countitem(.sel1[querand1]) < 20) ||
+			(countitem(.sel2[querand2]) < 15)  ||
+			(countitem(.sel3[querand3]) < 10)  ||
+			(countitem(.sel4[querand4]) < 5)  ){
+			mes "[アトリエ七女]";
+			mes "ちょっとぉ？";
+			mes "集まってないじゃない！";
+			close;
+		}
+		delitem .sel1[querand1],20;delitem .sel2[querand2],15;
+		delitem .sel3[querand3],10; delitem .sel4[querand4],5;
+		set querand1,0;set querand2,0;set querand3,0;set querand4,0;
+		callfunc("talk_treasure",8,3,99);
+		mes "[アトリエ七女]";
+		mes "よし、集めてきたわね";
+		next;
+		mes "[アトリエ七女]";
+		mes "ほら、いつまでここにいるの";
+		mes "作業の邪魔だから";
+		mes "とっとと出て行ってちょうだい";
+		close;
+	}
+OnInit:	//sel1から順に20、15、10、5個が必要個数とする
+	setarray .sel1[1],523,539,909,903,925,930,1021,1044,1039,7104,7124,7195,7202,7266;
+	setarray .sel2[1],609,618,730,908,964,960,1005,1040,7099,7119,7121,7162,7210,7322;
+	setarray .sel3[1],632,673,707,951,970,901,1064,1095,7032,7112,7125,7172,7212,7442;
+	setarray .sel4[1],671,675,674,934,953,749,7048,7069,7072,7154,7161,7193,7225,7753;
+	end;
+}
+//=========================================================
+//アトリエ六女
+//=========================================================
+prt_in,222,42,5	script	アトリエ六女	90,{
+	mes "[アトリエ六女]";
+	if(callfunc("talk_treasure",7,0)==4 && callfunc("talk_treasure",7,3)==99){
+		mes "また何かあったらお願いするわ";
+		mes "それじゃさよなら";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=4){
+		mes "忙しいわね";
+		mes "人手が足りなすぎるわ";
+		close;
+	}
+	set @evflag,callfunc("talk_treasure",7,3);
+	switch(@evflag){
+	case 0:
+		mes "あなたが依頼を受けた";
+		mes "冒険者さん？";
+		next;
+		mes "[アトリエ六女]";
+		mes "荷物運びをしてもらおうと";
+		mes "思って呼んだのだけど";
+		next;
+		mes "-六女は大きな荷物を取り出した-";
+		next;
+		mes "[アトリエ六女]";
+		mes "これをミョルニール廃鉱2Fにいる";
+		mes "ジョニーに渡して頂戴";
+		next;
+		mes "[アトリエ六女]";
+		mes "調査を行っているから";
+		mes "どこら辺にいるかは";
+		mes "わからないけどね";
+		if(callfunc("talk_treasure",7,3)!=1){
+			donpcevent "ジョニー#zyn::OnRude";
+			callfunc("talk_treasure",8,3,1);
+		}
+		close;
+	case 2:
+		mes "ご苦労様";
+		mes "あぁ、あなたに特別報酬を差し上げますわ";
+		mes "といっても在庫処分ですけれど";
+		next;
+		switch(rand(5)){
+		case 0:getitem 579,40;getitem 1208,1;getitem 1505,1;getitem 1611,1;getitem 1705,1;break;
+		case 1:getitem 579,45;getitem 1904,1;getitem 1953,1;getitem 2102,1;getitem 2103,1;break;
+		case 2:getitem 579,35;getitem 2308,1;getitem 2330,1;getitem 2404,1;getitem 2409,1;break;
+		case 3:getitem 579,35;getitem 2504,1;getitem 2508,1;getitem 2607,1;getitem 2608,1;break;
+		case 4:getitem 563,40;getitem 568,20;getitem 673,100;break;
+		}
+		callfunc("talk_treasure",8,3,99);
+		mes "[アトリエ六女]";
+		mes "不要なものが減って届け物ができて、";
+		mes "一石二鳥だったわ";
+		mes "またよろしくね";
+		close;
+	default:
+		mes "まだですの？";
+		mes "早くしてくださらない？";
+		mes "ジョニーはミョルニール廃鉱2Fですわ";
+		close;
+	}
+}
+mjo_dun02,131,221,3	script	ジョニー#zyn	810,{
+	if(callfunc("talk_treasure",7,0)==4 && callfunc("talk_treasure",7,3)==99){
+		mes "[ジョニー]";
+		mes "早く帰りな";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=4 || callfunc("talk_treasure",7,3)<1){
+		mes "[ジョニー]";
+		mes "おい！";
+		mes "邪魔だ！話しかけてくんな";
+		close;
+	}
+	mes "[ジョニー]";
+	mes "お、やっときたか";
+	next;
+	mes "[ジョニー]";
+	mes "……よし、";
+	mes "ちゃんとあるな";
+	next;
+	mes "[ジョニー]";
+	mes "ごくろうさん";
+	mes "帰っていいぞ";
+	callfunc("talk_treasure",8,3,2);
+	close;
+OnInit:
+OnRude:
+	for(set .i,0; .i==.i; set .i,.i+1){
+		set .xrand,rand(10,350);
+		set .yrand,rand(10,350);
+		if(checkcell("mjo_dun02",.xrand,.yrand,cell_chkpass)){
+			movenpc "ジョニー#zyn",.xrand,.yrand;
+			break;
+		}
+	}
+	end;
+}
+prt_in,232,29,5	script	モニカ	90,{
+	mes "[モニカ]";
+	mes "ふわぁ…";
+	mes "忙しすぎて";
+	mes "眠って現実逃避したいわ";
+	close;
+}
+//=========================================================
+//ポニコ
+//=========================================================
+alberta_in,72,177,3	script	ジョージ	99,{
+	mes "[ジョージ]";
+	if(callfunc("talk_treasure",7,0)==5 && callfunc("talk_treasure",7,3)==99){
+		mes "助かったよ！";
+		mes "本当にありがとう！";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=5){
+		mes "どどどどうすればいいんだ！！？";
+		mes "このことがばれたら…ブルブル";
+		close;
+	}
+	set @evflag,callfunc("talk_treasure",7,3);
+	switch(@evflag){
+	case 0:
+		mes "あああああ！";
+		mes "君、依頼を受けた冒険者だろ？";
+		mes "そそ、そうなんだろうっ？！";
+		next;
+		mes "[ジョージ]";
+		mes "ううう、うわぁあっああ！";
+		mes "やったあああああ";
+		next;
+		mes "[ジョージ]";
+		mes "さっそくで悪いんだけど";
+		mes "いなくなったペットと同じ";
+		mes "ペットを捕まえてきて欲しいんだ";
+		next;
+		set .@querand,rand(1,27);
+		callfunc("talk_treasure",8,3,.@querand);
+		mes "[ジョージ]";
+		mes "1時間ほどで彼女が帰ってくるから";
+		mes "それまでに";
+		mes "^0000FF"+getitemname(9000+.@querand)+"^000000を持ってきてくれ！";
+		next;
+		mes "[ジョージ]";
+		mes "頼んだからね！";
+		close;
+	default:
+		if(countitem(callfunc("talk_treasure",7,3)+9000) < 1){
+			mes "[ジョージ]";
+			mes "はやく";
+			mes "^0000FF"+getitemname(callfunc("talk_treasure",7,3)+9000)+"^000000を持ってきてくれ！";
+			close;
+		}
+		delitem (callfunc("talk_treasure",7,3)+9000),1;
+		callfunc("talk_treasure",8,3,99);
+		mes "[ジョージ]";
+		mes "おおお";
+		next;
+		mes "[ジョージ]";
+		mes "ありがとう！";
+		mes "ほんとに捕まえてくるなんて……";
+		mes "ううっ…ありがとう……";
+		close;
+	}
+}
+//=========================================================
+//泥棒
+//=========================================================
+prt_in,0,0,0,0	monster	--ja--	1051,15,0,0,"killque::OnKilled1"
+
+-	script	killque	-1,{
+OnKilled1://ゴキ
+	if(callfunc("talk_treasure",7,0)==7 && callfunc("talk_treasure",7,3)!=99){
+		set .@goki,callfunc("talk_treasure",7,3)+1;
+		if(.@goki < 30)
+			callfunc("talk_treasure",8,3,.@goki);
+		else{
+			announce "クエストが完了しました！",0x03;
+			callfunc("talk_treasure",8,3,99);
+		}
+	}
+	end;
+OnKilled2://エドガ
+	if(callfunc("talk_treasure",7,0)==8 && callfunc("talk_treasure",7,3)!=99){
+		announce "クエストが完了しました！",0x03;
+		callfunc("talk_treasure",8,3,99);
+	}
+	end;
+OnKilled3://イグニゼム=セニア
+	if(callfunc("talk_treasure",7,0)==15 && callfunc("talk_treasure",7,3)!=99){
+		announce "クエストが完了しました！",0x03;
+		callfunc("talk_treasure",8,3,99);
+	}
+	end;
+OnKilled4://モルデン
+	if(callfunc("talk_treasure",7,0)==16 && callfunc("talk_treasure",7,3)!=99){
+		set .@moru,callfunc("talk_treasure",7,3)+1;
+		if(.@moru < 30)
+			callfunc("talk_treasure",8,3,.@moru);
+		else{
+			announce "クエストが完了しました！",0x03;
+			callfunc("talk_treasure",8,3,99);
+		}
+	}
+	end;
+OnKilled5://黄金蟲
+	if(callfunc("talk_treasure",7,0)==18 && callfunc("talk_treasure",7,3)!=99){
+		announce "クエストが完了しました！",0x03;
+		callfunc("talk_treasure",8,3,99);
+	}
+	end;
+}
+//=========================================================
+//不穏な噂
+//=========================================================
+aldebaran,132,91,3	script	ユピット	93,{
+	mes "[ユピット]";
+	if(callfunc("talk_treasure",7,0)==9 && callfunc("talk_treasure",7,3)==99){
+		mes "協力してくれてありがとう！";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=9){
+		mes "うーん・・・うーんん・・・";
+		close;
+	}
+	if(countitem(934) >= 50 && countitem(7752) >= 50){
+		delitem 934,50;delitem 7752,50;
+		callfunc("talk_treasure",8,3,99);
+		mes "おお、ありがとう！";
+		mes "へへ、これでアイツも信じるだろ……";
+		mes "これで掛け金は……ブツブツ";
+		close;
+	}
+	mes "やぁ君が冒険者かい？";
+	mes "簡単な話はもう聞いたろう？";
+	next;
+	mes "[ユピット]";
+	mes "実のところ、噂がほんとかどうかは";
+	mes "どうでもいんだよね";
+	next;
+	mes "[ユピット]";
+	mes "信じてない友達をぎゃふんと";
+	mes "言わせてやりたいだけなんだ";
+	mes "それで、そのための証拠がいるんだ";
+	next;
+	mes "[ユピット]";
+	mes "^0000FFガタガタするドクロ^000000";
+	mes "^0000FF死者の遺品^000000";
+	mes "を50個ずつもあったら";
+	mes "信用せざるを得ないよね";
+	next;
+	mes "[ユピット]";
+	mes "じゃあよろしくね";
+	close;
+}
+//=========================================================
+//至急
+//=========================================================
+prontera,257,341,3	script	怪しい人	55,{
+	mes "[怪しい人]";
+	if(callfunc("talk_treasure",7,0)==10 && callfunc("talk_treasure",7,3)==99){
+		mes "……さっさと去れ";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=10){
+		mes "…………";
+		close;
+	}
+	if(countitem(678) >= 1){
+		delitem 678,1;
+		callfunc("talk_treasure",8,3,99);
+		mes "……よし";
+		mes "……終わったなら去れ";
+		close;
+	}
+	mes "……例の物はまだか？";
+	close;
+}
+//=========================================================
+//アトリエ五女
+//=========================================================
+geffen,126,114,3	script	アトリエ五女	90,{
+	mes "[アトリエ五女]";
+	if(callfunc("talk_treasure",7,0)==11 && callfunc("talk_treasure",7,3)==99){
+		mes "……ありがとな";
+		close;
+	}
+	if(callfunc("talk_treasure",7,4)>=3){
+		mes "今日はやめておいたほうがいい";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=11){
+		mes "…………";
+		close;
+	}
+	mes "地下に潜む連中が這い出てこようとしている";
+	mes "阻止するため力を貸してくれるか？";
+	next;
+	if(select("やめる","行く")==1) {
+		mes "[アトリエ五女]";
+		mes "そうか";
+		close;
+	}
+	if($mugen==2){
+		if(getmapusers("pvp_n_6-5")>0){
+			mes "[アトリエ五女]";
+			mes "今は侵攻中のようだ";
+			mes "もう少し待ってくれるか";
+			close;
+		}
+		mes "[アトリエ五女]";
+		mes "…どうやら先の者たちは";
+		mes "阻止しきれなかったようだ";
+		next;
+	}else if($mugen==1){
+		mes "[アトリエ五女]";
+		mes "今は侵攻待機中だ";
+		mes "少し待て";
+		close;
+	}
+	mes "[アトリエ五女]";
+	mes "では開こう";
+	set .@num,callfunc("talk_treasure",7,4);
+	callfunc("talk_treasure",8,4,.@num+2);
+	callfunc("talk_treasure",8,5,gettime(5));
+	donpcevent "mugen::OnStart";
+	close;
+}
+geffen,120,103,0	script	#geffenwarp	45,2,2,{
+	end;
+OnTouch:
+	warp "pvp_n_6-5",99,100;
+	end;
+OnStart:
+	misceffect 247;
+	initnpctimer;
+	end;
+OnTimer10000:
+	misceffect 247;
+	stopnpctimer;
+	initnpctimer;
+	end;
+OnEnd:
+	stopnpctimer;
+	end;
+OnInit:
+	disablenpc "#geffenwarp";
+	end;
+}
+pvp_n_6-5,100,100,0	script	#geffenwarp2	45,1,1,{
+	end;
+OnTouch:
+	dispbottom("300苺pointを獲得しました!");
+	set #PPOINT,#PPOINT+300;
+	if(callfunc("talk_treasure",7,0)==11)
+		callfunc("talk_treasure",8,3,99);
+	warp "geffen",120,98;
+	end;
+OnInit:
+OnStart:
+	disablenpc "#geffenwarp2";
+	end;
+}
+//=========================================================
+//アトリエ四女
+//=========================================================
+yuno_in03,18,54,5	script	アトリエ四女	90,{
+	mes "[アトリエ四女]";
+	if(callfunc("talk_treasure",7,0)==12 && callfunc("talk_treasure",7,3)==99){
+		mes "実験の邪魔だよ";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=12){
+		mes "足りない……困った";
+		close;
+	}
+	set @evflag,callfunc("talk_treasure",7,3);
+	switch(@evflag){
+	case 0:
+		mes "よく来てくれた";
+		mes "さっそくだが";
+		mes "足りない材料を取ってきて欲しい";
+		next;
+		mes "[アトリエ四女]";
+		set .@querand,rand(1,14);
+		callfunc("talk_treasure",8,3,.@querand);
+		mes "^0000FF"+getitemname(.sel[.@querand])+"^000000が^FF000020^000000個";
+		mes "実験に必要なのだ";
+		next;
+		mes "[アトリエ四女]";
+		mes "キッチリ数を揃えて";
+		mes "持ってきてくれたまえ？";
+		mes "何が起きるかわからないからね……";
+		close;
+	default:
+		mes "集めてきたか？";
+		next;
+		if(select("持ってきた","必要な物なんだっけ？")==2) {
+			mes "[アトリエ四女]";
+			mes "^0000FF"+getitemname(.sel[@evflag])+"^000000を^FF000020^000000個";
+			mes "です";
+			close;
+		}
+		if(countitem(.sel[@evflag]) != 20){
+			mes "[アトリエ四女]";
+			mes "うん？";
+			mes "指定した数と違うようだ";
+			mes "数を揃えてきなさい";
+			close;
+		}
+		delitem .sel[@evflag],20;
+		callfunc("talk_treasure",8,3,99);
+		mes "[アトリエ四女]";
+		mes "よし、集めてきたね";
+		next;
+		mes "[アトリエ四女]";
+		mes "さて、実験の邪魔になるだろう";
+		mes "早々に退室してもらいたい";
+		close;
+	}
+OnInit:
+	setarray .sel[1],549,576,609,702,713,904,923,940,947,950,954,960,961,967;
+	end;
+}
+//=========================================================
+//人手不足で……
+//=========================================================
+einbech,132,246,3	script	採掘作業員#tre1	90,{
+	mes "[採掘作業員]";
+	if(callfunc("talk_treasure",7,0)==14 && callfunc("talk_treasure",7,3)==99){
+		mes "また頼む";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=14){
+		mes "おい、ちょっと話しかけないでくれ";
+		close;
+	}
+	set @evflag,callfunc("talk_treasure",7,3);
+	switch(@evflag){
+	case 0:
+		mes "やあ！";
+		mes "無駄な前置きはなしにしよう";
+		next;
+		mes "[採掘作業員]";
+		mes "君にしてもらいたいのは";
+		mes "採掘した鉱石を";
+		mes "南にいる作業員に渡してほしいんだ";
+		next;
+		mes "[採掘作業員]";
+		mes "いっぱいあるから";
+		mes "よろしくたのむよ";
+		callfunc("talk_treasure",8,3,1);
+		close;
+	case 1:
+		mes "じゃあこれを頼む！";
+		if(MaxWeight-Weight<10000){
+			mes "と思ったけど持てなさそうだ";
+			mes "重量は1000ほどあけてきてくれるかい？";
+			close;
+		}
+		getitem 7049,300;
+		callfunc("talk_treasure",8,3,2);
+		close;
+	case 3:
+		mes "じゃあこれを頼む！";
+		if(MaxWeight-Weight<10000){
+			mes "と思ったけど持てなさそうだ";
+			mes "重量は1000ほどあけてきてくれるかい？";
+			close;
+		}
+		getitem 7049,300;
+		callfunc("talk_treasure",8,3,4);
+		close;
+	case 5:
+		mes "じゃあこれを頼む！";
+		if(MaxWeight-Weight<10000){
+			mes "と思ったけど持てなさそうだ";
+			mes "重量は1000ほどあけてきてくれるかい？";
+			close;
+		}
+		getitem 7049,300;
+		callfunc("talk_treasure",8,3,6);
+		close;
+	default:
+		mes "どうした？";
+		mes "早く持っていってくれ";
+		close;
+	}
+}
+einbech,164,109,5	script	採掘作業員#tre2	90,{
+	mes "[採掘作業員]";
+	if(callfunc("talk_treasure",7,0)==14 && callfunc("talk_treasure",7,3)==99){
+		mes "どうした？";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=14){
+		mes "なんだ？";
+		close;
+	}
+	set @evflag,callfunc("talk_treasure",7,3);
+	switch(@evflag){
+	case 0:
+		mes "やあ！";
+		mes "無駄な前置きはなしにしよう";
+		next;
+		mes "[採掘作業員]";
+		mes "君にしてもらいたいのは";
+		mes "採掘した鉱石を";
+		mes "南にいる作業員に渡してほしいんだ";
+		next;
+		mes "[採掘作業員]";
+		mes "いっぱいあるから";
+		mes "よろしくたのむよ";
+		callfunc("talk_treasure",8,3,1);
+		close;
+	case 2:
+		if(countitem(7049)>=300){
+			mes "お、持ってきてくれたのか";
+			mes "ありがたい";
+			delitem 7049,300;
+			callfunc("talk_treasure",8,3,3);
+			close;
+		}
+		mes "石はどうした？";
+		close;
+	case 4:
+		if(countitem(7049)>=300){
+			mes "お、持ってきてくれたのか";
+			mes "ありがたい";
+			delitem 7049,300;
+			callfunc("talk_treasure",8,3,5);
+			close;
+		}
+		mes "石はどうした？";
+		close;
+	case 6:
+		if(countitem(7049)>=300){
+			mes "お、持ってきてくれたのか";
+			mes "ありがたい";
+			delitem 7049,300;
+			callfunc("talk_treasure",8,3,99);
+			next;
+			mes "[採掘作業員]";
+			mes "これで今回はおしまいだ";
+			mes "手伝ってくれてありがとな";
+			close;
+		}
+		mes "石はどうした？";
+		close;
+	default:
+		mes "どうした？";
+		mes "次を頼むよ";
+		close;
+	}
+}
+//=========================================================
+//兄貴の悩み解決
+//=========================================================
+izlude_in,126,165,2	script	ジョニー#iz	810,{
+	mes "[ジョニー]";
+	if(callfunc("talk_treasure",7,0)==19 && callfunc("talk_treasure",7,3)==99){
+		mes "またなくなったらお願いねぇ";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=19){
+		mes "はぁ、美を追求するのも";
+		mes "なかなか大変ね……";
+		next;
+		mes "[ジョニー]";
+		mes "それにしても……";
+		mes "あなたの顔、何処かで";
+		mes "見たような気が……";
+		next;
+		mes "[ジョニー]";
+		mes "……きっと気のせいね";
+		close;
+	}
+	mes "もう、潮風でお肌がガサガサ";
+	mes "せっかくの美貌がだいなしよ";
+	next;
+	if(select("ほお紅を渡す","ほお紅を渡さない")==2) {
+		mes "[ジョニー]";
+		mes "え、持って来てないの？";
+		mes "早くしてよね！";
+		mes "こんな格好じゃ大っぴらに歩けないじゃない！";
+		close;
+	}
+	if(countitem(5040) < 3){
+		mes "[ジョニー]";
+		mes "ほお紅が少ないわよ！";
+		mes "3個持ってきてって言ったじゃない！";
+		close;
+	}
+	mes "[ジョニー]";
+	mes "あら、ほお紅持ってきてくれたの！";
+	mes "嬉しいわありがとう♪";
+	delitem 5040,3;
+	callfunc("talk_treasure",8,3,99);
+	next;
+	mes "[ジョニー]";
+	mes "またお願いね♪";
+	set .@randid,rand(100);
+	if(.@randid < 10){
+		next;
+		mes "^FF0000-ジョニーの好感度が劇的に上昇した!!-^000000";
+	}else if(.@randid < 30){
+		next;
+		mes "^FF0000-ジョニーの好感度がすごく上昇した!!-^000000";
+	}else if(.@randid < 60){
+		next;
+		mes "^FF0000-ジョニーの好感度が上昇した!!-^000000";
+	}else{
+		next;
+		mes "^FF0000-ジョニーの好感度がちょっと上昇した!!-^000000";
+	}
+	close;
+}
+//=========================================================
+//無くした物
+//=========================================================
+izlude,65,179,2	script	小娘#iz	958,{
+	mes "[リンス]";
+	if(callfunc("talk_treasure",7,0)==20 && callfunc("talk_treasure",7,3)==99){
+		mes "ありがとう！";
+		mes "ほんとにほんとに";
+		mes "ありがとうね！";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=20){
+		mes "あわわ……";
+		mes "どうしよう……";
+		mes "このままじゃお店を";
+		mes "クビになっちゃうよぅ……";
+		close;
+	}
+	mes "い、依頼を受けてくれた人？";
+	mes "……ですか？";
+	next;
+	mes "[リンス]";
+	mes "よ、よかったぁ……";
+	mes "怖そうな人だったらどうしようと";
+	mes "思ってたんです";
+	next;
+	mes "[リンス]";
+	mes "あの、依頼なんですけど";
+	mes "実は私、仕入れの仕事を";
+	mes "初めて任せてもらったんですけど";
+	mes "商品をなくしてしまって……";
+	next;
+	mes "[リンス]";
+	mes "連絡船から降りてから";
+	mes "なくなってることに気づいて……";
+	next;
+	mes "[リンス]";
+	mes "アクセサリーが24個入ったパックを";
+	mes "いっぱいなくしたんです";
+	mes "それを探してほしいんです";
+	next;
+	set .@sel,select(	((countitem(28505) > 0)?getitemname(28505)+"かな？":""),
+				((countitem(28506) > 0)?getitemname(28506)+"かな？":""),
+				"探してきます");
+	if(.@sel == 3){
+		mes "[リンス]";
+		mes "よろしくおねがいします！！";
+		mes "あの、えっと";
+		mes "落し物の指輪とかイヤリングを";
+		mes "見かけたら";
+		mes "持ってきてください……！";
+		close;
+	}
+	mes "[リンス]";
+	mes "こ……こ、ここ……";
+	mes "こここ……!!";
+	next;
+	mes "[リンス]";
+	mes "これです!!";
+	mes "これですよ!!";
+	mes "すごいです、"+strcharinfo(0)+"さん!!";
+	next;
+	if( countitem(28504+.@sel) < 24){
+		mes "[リンス]";
+		mes "ひーふーみー……";
+		mes "あれ、でも数が足りないみたいですね";
+		next;
+		mes "[リンス]";
+		mes "24個で1パックになるので";
+		mes "最低でも24個探してきてもらえると";
+		mes "すごくありがたいっていうか、";
+		mes "なんというか……";
+		next;
+		mes "[リンス]";
+		mes "す、すみません！";
+		mes "ごめんなさい！";
+		mes "探してもらっておいて";
+		mes "そんな言い草ないですよね……";
+		mes "でもほんと……お願いします……";
+		close;
+	}
+	delitem 28504+.@sel,24;
+	callfunc("talk_treasure",8,3,99);
+	mes "[リンス]";
+	mes "ひーふーみー……";
+	mes "うん、数もぴったりです！";
+	next;
+	mes "[リンス]";
+	mes "これならすぐもっていけます！";
+	mes "ありがとうございました、"+strcharinfo(0)+"さん!!";
+	close;
+}
+//=========================================================
+//巡礼の警護依頼
+//=========================================================
+ra_temple,105,156,6	script	ポリリカ#ra	958,{
+	mes "[ポリリカ]";
+	if(callfunc("talk_treasure",7,0)==21 && callfunc("talk_treasure",7,3)==99){
+		mes "あなたも信仰しませんか？";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=21){
+		mes "早く巡礼に向かわなくては……";
+		close;
+	}
+	mes "あなたが私の護衛を";
+	mes "してくれるんですね";
+	mes "準備は出来てますか？";
+	next;
+	if(select("やめる","行く")==1) {
+		mes "[ポリリカ]";
+		mes "なるべく早くお願いします";
+		close;
+	}
+	mes "[ポリリカ]";
+	mes "参ります……！";
+	close2;
+	warp "job3_arch01",29,30;
+	end;
+}
+job3_arch01,29,35,3	script	ヴァルキリー#arch_job_02	403,{
+	mes "[アルヴヒルデ]";
+	if(callfunc("talk_treasure",7,3)==99){
+		mes "巡礼は終わった";
+		mes "元の地へ帰るが良い";
+		close;
+	}
+	if(getmapusers("job3_arch02")>0){
+		mes "誰かが巡礼中だ";
+		mes "しばらく待ってくれ";
+		close;
+	}
+	mes "用意はいいか、人の子よ";
+	mes "巡礼方法は簡単だ";
+	mes "指示に従い、我の元へ";
+	mes "向かえば良い";
+	next;
+	mes "[アルヴヒルデ]";
+	mes "順路を誤らず";
+	mes "不浄の存在は滅し";
+	mes "見事巡礼を成し遂げよ";
+	close2;
+	if(getmapusers("job3_arch02")>0)end;
+	killmonsterall "job3_arch02";
+	callfunc("talk_treasure",8,3,0);
+	initnpctimer;
+	areamonster "job3_arch02",0,0,320,350,"--ja--",1752,15;
+	areamonster "job3_arch02",0,0,320,350,"--ja--",1753,15;
+	areamonster "job3_arch02",0,0,320,350,"--ja--",1290,15;
+	areamonster "job3_arch02",0,0,320,350,"--ja--",1298,15;
+	areamonster "job3_arch02",0,0,320,350,"--ja--",1197,15;
+	areamonster "job3_arch02",0,0,320,350,"--ja--",1061,15;
+	hideonnpc "ヴァルキリー#arch_job_03";
+	hideonnpc "ヴァルキリー#arch_job_04";
+	hideonnpc "ヴァルキリー#arch_job_05";
+	hideonnpc "ヘヴンリィ#arch";
+	set $@AB_TESTER$,strcharinfo(0);
+	warp "job3_arch02",119,49;
+	end;
+
+OnTimer180000: mapannounce "job3_arch02","3分経過",0x9; end;
+OnTimer300000: mapannounce "job3_arch02","5分経過",0x9; end;
+OnTimer360000: mapannounce "job3_arch02","6分経過",0x9; end;
+OnTimer420000: mapannounce "job3_arch02","7分経過",0x9; end;
+OnTimer480000: mapannounce "job3_arch02","8分経過",0x9; end;
+OnTimer540000: mapannounce "job3_arch02","9分経過",0x9; end;
+OnTimer570000: mapannounce "job3_arch02","残り30秒",0x9; end;
+OnTimer580000: mapannounce "job3_arch02","残り20秒",0x9; end;
+OnTimer590000: mapannounce "job3_arch02","残り10秒",0x9; end;
+OnTimer600000:
+	killmonsterall "job3_arch02";
+	mapannounce "job3_arch01",$@AB_TESTER$ + "様が巡礼に失敗しました。",0x9,0x00FFFF;
+	mapwarp "job3_arch02","job3_arch01",29,29;
+	stopnpctimer;
+	stopnpctimer "AB_TEST";
+	end;
+}
+job3_arch01,29,24,0	warp	archjobwarp01	1,1,ra_temple,105,150
+job3_arch02,113,327,5	script	ヴァルキリー#arch_job_03	403,{
+	mes "[アルヴヒルデ]";
+	if(callfunc("talk_treasure",7,3)!=6){
+		mes "順路を誤ったようだな……";
+		close2;
+		warp "job3_arch01",29,30;
+		end;
+	}
+	mes "悪魔というものは恐ろしい";
+	mes "いつも心の傍に忍び寄っている";
+	mes "そなたたちはその心の輝きによって";
+	mes "悪しき誘惑を撥ね退けることだろう";
+	next;
+	mes "[アルヴヒルデ]";
+	mes "さて";
+	mes "語らいたい気持ちもあるが";
+	mes "次の巡礼地へ向かってもらおう";
+	next;
+	mes "[アルヴヒルデ]";
+	mes "次の巡礼地で待っている";
+	close2;
+	callfunc("talk_treasure",8,3,7);
+	hideonnpc "ヴァルキリー#arch_job_03";
+	end;
+OnKilled:
+	hideoffnpc "ヴァルキリー#arch_job_03";
+	viewpoint 2,113,327,1,0xFFFFFF;
+	viewpoint 1,244,46,2,0xFFFFFF;
+	end;
+}
+job3_arch02,110,82,5	script	arch_job#1	-1,2,2,{
+OnTouch:
+	set .@num,callfunc("talk_treasure",7,3);
+	if(atoi(strnpcinfo(2))==.@num+1){
+		if(atoi(strnpcinfo(2))==4){
+			viewpoint 1,113,327,1,0xFFFFFF;
+			mapannounce "job3_arch02","ポリリカ : 次の分かれ道を左に行ってください。もう少しですよ♪",bc_map,"0x00FFFF";
+		}else if(atoi(strnpcinfo(2))==6){
+			mapannounce "job3_arch02","ポリリカ : ……邪悪な気配がしますね。強力な悪魔がいるかもしれません、気をつけて",bc_map,"0x00FFFF";
+			monster "job3_arch02",113,327,"ヴァルキリーの悪夢",2109,1,"ヴァルキリー#arch_job_03::OnKilled";
+		}else if(atoi(strnpcinfo(2))==13){
+			mapannounce "job3_arch02","ポリリカ : ……邪悪な気配がしますね。強力な悪魔がいるかもしれません、気をつけて",bc_map,"0x00FFFF";
+			monster "job3_arch02",244,46,"ヴァルキリーの悪夢",2109,1,"ヴァルキリー#arch_job_04::OnKilled";
+		}else
+			mapannounce "job3_arch02","ポリリカ : 順路通りね♪　さぁ、どんどん参りましょう!!",bc_map,"0x00FFFF";
+		callfunc("talk_treasure",8,3,.@num+1);
+		end;
+	}else if(atoi(strnpcinfo(2))==.@num){
+		end;
+	}
+	mapannounce "job3_arch02","ポリリカ : あら、道を間違えているようです。戻ってください。",bc_map,"0xFF0000";
+	end;
+}
+job3_arch02,91,134,5	duplicate(arch_job#1)	arch_job#2	-1,2,2,
+job3_arch02,124,195,5	duplicate(arch_job#1)	arch_job#3	-1,2,2,
+job3_arch02,249,266,5	duplicate(arch_job#1)	arch_job#4	-1,2,2,
+job3_arch02,239,280,5	duplicate(arch_job#1)	arch_job#5	-1,2,2,
+job3_arch02,216,278,5	duplicate(arch_job#1)	arch_job#6	-1,2,2,
+
+job3_arch02,157,344,5	duplicate(arch_job#1)	arch_job#8	-1,2,2,
+job3_arch02,262,327,5	duplicate(arch_job#1)	arch_job#9	-1,2,2,
+job3_arch02,319,194,5	duplicate(arch_job#1)	arch_job#10	-1,2,2,
+job3_arch02,292,95,5	duplicate(arch_job#1)	arch_job#11	-1,2,2,
+job3_arch02,276,135,5	duplicate(arch_job#1)	arch_job#12	-1,2,2,
+job3_arch02,247,154,5	duplicate(arch_job#1)	arch_job#13	-1,2,2,
+
+job3_arch02,245,175,5	duplicate(arch_job#1)	arch_job#15	-1,2,2,
+job3_arch02,304,198,5	duplicate(arch_job#1)	arch_job#16	-1,2,2,
+job3_arch02,295,215,5	script	arch_job#17	-1,2,2,{
+OnTouch:
+	set .@num,callfunc("talk_treasure",7,3);
+	if(atoi(strnpcinfo(2))==.@num+1){
+		monster "job3_arch02",296,216,"プルス",1753,1,"ヴァルキリー#arch_job_05::OnKilled";
+		monster "job3_arch02",280,231,"レイドリックアーチャー",1276,1,"ヴァルキリー#arch_job_05::OnKilled";
+		mapannounce "job3_arch02","ポリリカ : ……!!　この悪魔を滅してはなりません！　先へ進むのです!!",bc_map,"0xFF0000";
+		callfunc("talk_treasure",8,3,.@num+1);
+		end;
+	}else if(atoi(strnpcinfo(2))==.@num){
+		end;
+	}
+	mapannounce "job3_arch02","ポリリカ : あら、道を間違えているようです。戻ってください。",bc_map,"0xFF0000";
+	end;
+}
+job3_arch02,244,46,5	script	ヴァルキリー#arch_job_04	403,{
+	mes "[アルヴヒルデ]";
+	if(callfunc("talk_treasure",7,3)!=13){
+		mes "順路を誤ったようだな……";
+		close2;
+		warp "job3_arch01",29,30;
+		end;
+	}
+	mes "来ましたね";
+	mes "よくここまで着きました";
+	next;
+	mes "[アルヴヒルデ]";
+	mes "しかし、巡礼はまだ";
+	mes "終わりではありません";
+	next;
+	mes "[アルヴヒルデ]";
+	mes "ここから先、多くの苦難が";
+	mes "待ち構えているでしょう";
+	mes "しかし、人の子よ";
+	mes "信頼できる隣人の力は";
+	mes "何にも勝るものである";
+	next;
+	mes "[アルヴヒルデ]";
+	mes "邪悪な困難に打ち勝ち";
+	mes "神聖なる巡礼を果たすが良い";
+	close2;
+	callfunc("talk_treasure",8,3,14);
+	hideonnpc "ヴァルキリー#arch_job_04";
+	end;
+OnKilled:
+	hideoffnpc "ヴァルキリー#arch_job_04";
+	viewpoint 2,244,46,2,0xFFFFFF;
+	viewpoint 1,281,232,3,0xFFFFFF;
+	end;
+}
+
+job3_arch02,281,232,1	script	ヴァルキリー#arch_job_05	403,4,4,{
+OnTouch:
+	if(callfunc("talk_treasure",7,3)!=17){
+		warp "job3_arch01",29,30;
+		end;
+	}
+	hideoffnpc "ヴァルキリー#arch_job_05";
+	killmonsterall "job3_arch02";
+	mes "[アルヴヒルデ]";
+	mes "……ここが巡礼の終着地だ";
+	mes "よくここまできた";
+	next;
+	mes "-ヴァルキリーは手のひらを";
+	mes "空へとかざした-";
+	next;
+	mes "キュ - - - -";
+	next;
+	mes "キュィイ - - -";
+	hideoffnpc "ヘヴンリィ#arch";
+	next;
+	mes "[アルヴヒルデ]";
+	mes "人の子よ";
+	mes "そなたの巡礼により";
+	mes "この神殿に聖なる力が戻り";
+	mes "暗黒を切り裂く新たな";
+	mes "ヴァルキリーが光臨した！";
+	next;
+	mes "[ヘヴンリィ]";
+	mes "よくここまで来てくれましたね";
+	mes "あなたたちの行いに感謝します";
+	next;
+	mes "[アルヴヒルデ]";
+	mes "私の役目は人の子を";
+	mes "導くこと……";
+	mes "その役目は終えた……";
+	next;
+	mes "[ヘヴンリィ]";
+	mes "ありがとう、アルヴヒルデ";
+	mes "後のことは任せてください";
+	mes "ヴァルハラで会いましょう";
+	next;
+	mes "[アルヴヒルデ]";
+	mes "あぁ！";
+	mes "ヴァルハラにて！";
+	next;
+	mes "- スゥッ -";
+	hideonnpc "ヴァルキリー#arch_job_05";
+	next;
+	mes "[ヘヴンリィ]";
+	mes "さて、あなたたちの働きは";
+	mes "とてもすばらしいものでした";
+	next;
+	mes "[ヘヴンリィ]";
+	mes "勇気と希望、それらの";
+	mes "祈りの力の結晶を";
+	mes "授けましょう";
+	next;
+	mes "[ヘヴンリィ]";
+	mes "手を伸ばしなさい";
+	next;
+	mes "[ヘヴンリィ]";
+	mes "私はもう行きます";
+	mes "他の巡礼地も浄化せねばなりません";
+	callfunc("talk_treasure",8,3,99);
+	getitem 28680,1;
+	close;
+OnKilled:
+	mapannounce "job3_arch02","ポリリカ : あぁ……何ということでしょう……",bc_map,"0xFF0000";
+	warp "job3_arch01",29,29;
+	end;
+}
+
+job3_arch02,273,235,5	script	ヘヴンリィ#arch	811,{
+	mes "[ヘヴンリィ]";
+	mes "あなたの元の地へ";
+	mes "送り届けましょう";
+	next;
+	mes "[ヘヴンリィ]";
+	mes "また何処かの巡礼地で会いましょう";
+	close2;
+	warp "job3_arch01",29,29;
+	end;
+}
+//=========================================================
+//アトリエ三女の依頼
+//=========================================================
+comodo,208,307,2	script	アトリエ三女	90,{
+	mes "[アトリエ三女]";
+	if(callfunc("talk_treasure",7,0)==22 && callfunc("talk_treasure",7,3)==99){
+		mes "またお願いすることが";
+		mes "あるかもしれません";
+		mes "そのときは是非お願いしますね";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=22){
+		mes "困ったわね……";
+		close;
+	}
+	mes "依頼を受けてくださった方かしら？";
+	next;
+	mes "[アトリエ三女]";
+	mes "怪しい魔力の石を5つ";
+	mes "持ってきてくださるんでしたわね";
+	next;
+	mes "[アトリエ三女]";
+	if(countitem(6307) < 5){
+		mes "……あらあら";
+		mes "持ってきてくださって";
+		mes "いらっしゃらないの？";
+		mes "お願いしますよ？";
+		close;
+	}
+	delitem 6307,5;
+	callfunc("talk_treasure",8,3,99);
+	mes "ひとつ";
+	mes "ふたつ…";
+	mes "みっつ……";
+	mes "よっつ………";
+	mes "いつつ…………";
+	next;
+	mes "[アトリエ三女]";
+	mes "ありがとうございます";
+	mes "また機会があればお願いしますね";
+	close;
+}
+//=========================================================
+//だって欲しいんだもん
+//=========================================================
+comodo,179,353,4	script	ラトカ#como	726,{
+	mes "[ラトカ]";
+	if(callfunc("talk_treasure",7,0)==23 && callfunc("talk_treasure",7,3)==99){
+		mes "うっとり……";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=23){
+		mes "むむむ……";
+		mes "早くしないと";
+		mes "誰かに先を越されちゃうなぁ";
+		close;
+	}
+	mes "おおお！！";
+	mes "やっと来てくれたね！";
+	next;
+	mes "[ラトカ]";
+	mes "さぁさぁ、早く行こう！";
+	mes "目指すは洞窟に眠るハズの";
+	mes "^0000FF宝石の原石^000000だよ！";
+	if(countitem(7300) < 1)
+		close;
+	next;
+	mes "[ラトカ]";
+	mes "ってもう取ってきちゃったの!!?";
+	mes "早すぎるよ!!";
+	next;
+	mes "[ラトカ]";
+	mes "これをゴニョゴニョすれば";
+	mes "綺麗な宝石が……ウフフフ";
+	delitem 7300,1;
+	callfunc("talk_treasure",8,3,99);
+	close;
+}
+//=========================================================
+//虹色に光るアレ
+//=========================================================
+prt_fild06,166,195,4	script	ラヴィ	1063,{
+	mes "[ラヴィ]";
+	if(callfunc("talk_treasure",7,0)==23 && callfunc("talk_treasure",7,3)==99){
+		mes "ラヴィッ!!";
+		close;
+	}
+	if(callfunc("talk_treasure",7,0)!=23){
+		mes "ラッヴィ……";
+		next;
+		mes "-なんだか悲しそうだ-";
+		close;
+	}
+	mes "ララランヴィ！";
+	mes "(さぁ、つべこべ言ってないで)";
+	next;
+	mes "[ラヴィ]";
+	mes "ラヴラヴィヴィ!!";
+	mes "(虹色ニンジンを寄越しなさい!!)";
+	if(countitem(622) < 100)
+		close;
+	next;
+	mes "-虹色ニンジンを差し出した-";
+	next;
+	mes "-次の瞬間、瞬く間に";
+	mes "虹色ニンジンが消えてしまった-";
+	delitem 622,100;
+	next;
+	mes "[ラヴィ]";
+	mes "……";
+	next;
+	mes "[ラヴィ]";
+	mes "……";
+	mes "……ゲプッ";
+	callfunc("talk_treasure",8,3,99);
+	close;
+}

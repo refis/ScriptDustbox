@@ -1,0 +1,1068 @@
+//=========================================================
+// 1.時刻表示
+// 2.採掘地点
+// 3.釣り
+// 4.ログインイベント
+// 5.闇闘技場ループ
+// 6.モンスターハンター
+// 7.転移門
+// 8.Equip Accent
+//=========================================================
+//時刻表示
+//=========================================================
+-	script	timerheal	-1,{
+	close;
+
+OnHour00:
+	announce "0時になりました。",0x08,0x99ffcc;
+	if($inabyss>=1){
+		set $inabyss,$inabyss-1;
+		if($inabyss==0)
+			announce "ゲート管理者 : 深淵の回廊ゲートが閉塞しました!!",0;
+	}
+	end;
+OnHour01:
+	announce "1時になりました。",0x08,0x99ffcc;
+	end;
+OnHour02:
+	announce "2時になりました。",0x08,0x99ffcc;
+	end;
+OnHour03:
+	announce "3時になりました。",0x08,0x99ffcc;
+	end;
+OnHour04:
+	announce "4時になりました。",0x08,0x99ffcc;
+	end;
+OnHour05:
+	announce "5時になりました。",0x08,0x99ffcc;
+	end;
+OnHour06:
+	announce "6時になりました。",0x08,0x99ffcc;
+	end;
+OnHour07:
+	announce "7時になりました。",0x08,0x99ffcc;
+	end;
+OnHour08:
+	announce "8時になりました。",0x08,0x99ffcc;
+	end;
+OnHour09:
+	announce "9時になりました。",0x08,0x99ffcc;
+	end;
+OnHour10:
+	announce "10時になりました。",0x08,0x99ffcc;
+	end;
+OnHour11:
+	announce "11時になりました。",0x08,0x99ffcc;
+	end;
+OnHour12:
+	announce "12時になりました。",0x08,0x99ffcc;
+	end;
+OnHour13:
+	announce "13時になりました。",0x08,0x99ffcc;
+	end;
+OnHour14:
+	announce "14時になりました。",0x08,0x99ffcc;
+	end;
+OnHour15:
+	announce "15時になりました。",0x08,0x99ffcc;
+	end;
+OnHour16:
+	announce "16時になりました。",0x08,0x99ffcc;
+	end;
+OnHour17:
+	announce "17時になりました。",0x08,0x99ffcc;
+	end;
+OnHour18:
+	announce "18時になりました。",0x08,0x99ffcc;
+	end;
+OnHour19:
+	announce "19時になりました。",0x08,0x99ffcc;
+	end;
+OnHour20:
+	announce "20時になりました。",0x08,0x99ffcc;
+	end;
+OnHour21:
+	announce "21時になりました。",0x08,0x99ffcc;
+	end;
+OnHour22:
+	announce "22時になりました。",0x08,0x99ffcc;
+	end;
+OnHour23:
+	announce "23時になりました。",0x08,0x99ffcc;
+	end;
+OnInit:
+OnMinute10:
+OnMinute30:
+OnMinute50:
+	setarray .@kid1,28685,673,1099,4001,7097,7561,7005,1033,7751,7798;
+	setarray .@kzeny1,50000,10000,25000,50000,25000,25000,25000,20000,15000,30000;
+	setarray .@kid2,28685,1095,619,7047,7126,7155,7206,7315,7442,7799;
+	setarray .@kzeny2,50000,30000,30000,35000,35000,35000,35000,35000,40000,45000;
+
+	set $selid1,0;set $selid2,0;
+	set .@randid1,rand(getarraysize(.@kid1));
+	set .@randid2,rand(getarraysize(.@kid2));
+	set $kaiid1,.@kid1[.@randid1];
+	set $kaiid2,.@kid2[.@randid2];
+	set $kaizeny1,getiteminfo($kaiid1,1)+rand((.@kzeny1[.@randid1]/2),.@kzeny1[.@randid1]);
+	set $kaizeny2,getiteminfo($kaiid2,1)+rand((.@kzeny2[.@randid2]/2),.@kzeny2[.@randid2])+(.@kzeny2[.@randid2]/4);
+	set $kainum1,700+rand(1300);
+	set $kainum2,300+rand(700);
+	end;
+}
+//=========================================================
+//採掘地点
+//=========================================================
+-	script	採掘地点	-1,{
+OnOut:
+	viewpoint 2,SITEIX,SITEIY,1,0xFF0000;
+	end;
+OnHori1:
+	if(!@picknow)set @picknow,1;
+OnHori2:
+	if(!@picknow)set @picknow,2;
+OnHori3:
+	if(!@picknow)set @picknow,3;
+OnHori4:
+	if(!@picknow)set @picknow,4;
+OnHori5:
+	if(!@picknow)set @picknow,5;
+
+	if(HAKKUTUTYUU == 0){
+		mes "発掘イベント中ではありません";
+		close;
+	}else if(HAKKUTUTYUU == 1){
+		if(HAKKUTUTIME < gettimetick(2)){
+			mes "^FF0000発掘時間切れです^000000";
+			mes "^FF0000街へお戻り下さい^000000";
+			set HAKKUTUTYUU,0;
+			set SAIKUTUMAP$,"";
+			set SITEIX,0;
+			set SITEIY,0;
+			close;
+		}
+	}
+	getmapxy(@mapname$,@mapx,@mapy,0,strcharinfo(0));
+	if( SAIKUTUMAP$ == @mapname$){
+		goto L_CURRENT;
+
+	}else{
+		announce "[採掘情報]このMAPに宝は無さそうだな・・・",3;
+		mes SAIKUTUMAP$;
+		close;
+	}
+close;end;
+L_CURRENT:
+	set @hani1,$@setpoint[@picknow*2-2];
+	set @hani2,$@setpoint[@picknow*2-1];
+	if( (SITEIX+4 >= @mapx )&&(SITEIY+4 >= @mapy )&&(SITEIX+4 >= @mapx )&&(SITEIY-4 <= @mapy )&&
+	    (SITEIX-4 <= @mapx )&&(SITEIY+4 >= @mapy )&&(SITEIX-4 <= @mapx )&&(SITEIY-4 <= @mapy )){
+		mes "鉱脈を発見！"+"[残り時間："+((HAKKUTUTIME-gettimetick(2))/60)+"分]";
+		set @picknow,0;
+		menu "Let's採掘!!",-,"いや、やめとこう",L_End;
+		next;
+	}else if( (SITEIX+@hani1 >= @mapx )&&(SITEIY+@hani1 >= @mapy )&&(SITEIX+@hani1 >= @mapx )&&(SITEIY-@hani1 <= @mapy )&&
+	          (SITEIX-@hani1 <= @mapx )&&(SITEIY+@hani1 >= @mapy )&&(SITEIX-@hani1 <= @mapx )&&(SITEIY-@hani1 <= @mapy )){
+		if(@picknow==3){announce "[採掘情報]ここから"+((SITEIX > @mapx)?((SITEIY > @mapy)?"北東":"南東"):((SITEIY > @mapy)?"北西":"南西"))+"の方角のようだ！"+"[残り時間："+((HAKKUTUTIME-gettimetick(2))/60)+"分]",3;set @picknow,0;end;}
+		else if(@picknow>=4){viewpoint 1,SITEIX,SITEIY,1,0xFF0000;if(@picknow==4){addtimer 2000,"採掘地点::OnOut";}set @picknow,0;end;}
+		else announce "[採掘情報]この近くに埋まってる！間違いない！"+"[残り時間："+((HAKKUTUTIME-gettimetick(2))/60)+"分]",3;
+		set @picknow,0;
+		end;
+	}else if( (SITEIX+@hani2>= @mapx )&&(SITEIY+@hani2 >= @mapy )&&(SITEIX+@hani2 >= @mapx )&&(SITEIY-@hani2 <= @mapy )&&
+	          (SITEIX-@hani2 <= @mapx )&&(SITEIY+@hani2 >= @mapy )&&(SITEIX-@hani2 <= @mapx )&&(SITEIY-@hani2 <= @mapy )){
+		if(@picknow==3){announce "[採掘情報]ここから"+((SITEIX > @mapx)?((SITEIY > @mapy)?"北東":"南東"):((SITEIY > @mapy)?"北西":"南西"))+"の方角のようだ！"+"[残り時間："+((HAKKUTUTIME-gettimetick(2))/60)+"分]",3;set @picknow,0;end;}
+		else if(@picknow>=4){viewpoint 1,SITEIX,SITEIY,1,0xFF0000;if(@picknow==4){addtimer 2000,"採掘地点::OnOut";}set @picknow,0;end;}
+		else announce "[採掘情報]宝物が有りそうな予感！"+"[残り時間："+((HAKKUTUTIME-gettimetick(2))/60)+"分]",3;
+		set @picknow,0;
+		end;
+	}else{
+		if(@picknow==3){announce "[採掘情報]ここから"+((SITEIX > @mapx)?((SITEIY > @mapy)?"北東":"南東"):((SITEIY > @mapy)?"北西":"南西"))+"の方角のようだ！"+"[残り時間："+((HAKKUTUTIME-gettimetick(2))/60)+"分]",3;set @picknow,0;end;}
+		else if(@picknow>=4){viewpoint 1,SITEIX,SITEIY,1,0xFF0000;if(@picknow==4){addtimer 2000,"採掘地点::OnOut";}set @picknow,0;end;}
+		else announce "[採掘情報]このMAPの何処かに宝が･･･"+"[残り時間："+((HAKKUTUTIME-gettimetick(2))/60)+"分]",3;
+		set @picknow,0;
+		end;
+	}
+
+
+	if (countitem(28426)<1 && countitem(28427)<1 && countitem(28428)<1 && countitem(28429)<1 && countitem(28430)<1) {
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "必要なアイテムが・・・ない・・・";
+		mes ">> 必要なアイテム: ^FF0000" + getitemname(28427) + " ^000000<<";
+		close;
+	}
+	
+	// Game Startup (don't change)
+	if(SAIKUTUBA==1)	set @HRock,rand(10,25);
+	else if(SAIKUTUBA==2)	set @HRock,rand(15,25);
+	else if(SAIKUTUBA==3)	set @HRock,rand(15,30);
+	else			set @HRock,rand(20,30);
+	if(countitem(28430)>0)		{set @HPick,rand(20,30);set @Picks,28430;}
+	else if(countitem(28429)>0)	{set @HPick,rand(16,24);set @Picks,28429;}
+	else if(countitem(28428)>0)	{set @HPick,rand(10,21);set @Picks,28428;}
+	else if(countitem(28427)>0)	{set @HPick,rand(12,21);set @Picks,28427;}
+	else if(countitem(28426)>0)	{set @HPick,rand(10,20);set @Picks,28426;}
+	set @HWeak,rand(9);	// 岩盤弱点設定
+	set @HWP,0;		// 弱点発見フラグ
+	
+	// ** Resistence
+	set @RESIST,0;
+	// Headgear
+	if (getequipid(5031) || getequipid(5009))
+		set @RESIST, @RESIST + 50 + getequiprefinerycnt(1);
+	else {
+		if (getequipisequiped(1)) set @RESIST, @RESIST + 15 + getequiprefinerycnt(1);
+		if (getequipisequiped(9)) set @RESIST, @RESIST + 10;
+		if (getequipisequiped(10)) set @RESIST, @RESIST + 5;
+	}
+	
+	// * Shoes
+	if (getequipid(2401) || getequipid(2402) || getequipid(2403) || getequipid(2404) || getequipid(2407) || getequipid(2416))
+		set @RESIST, @RESIST + 10 + getequiprefinerycnt(6);
+	else if (getequipisequiped(6))
+		set @RESIST, @RESIST + 20 + getequiprefinerycnt(6);
+		
+	// * Hand protectors
+	if (getequipid(7) == 2604 || getequipid(7) == 2615  || getequipid(7) == 2624 || getequipid(7) == 2667 || getequipid(7) == 2692 || getequipid(7) == 2701)
+		set @RESIST, @RESIST + 10;
+	if (getequipid(8) == 2604 || getequipid(8) == 2615  || getequipid(8) == 2624 || getequipid(8) == 2667 || getequipid(8) == 2692 || getequipid(8) == 2701)
+		set @RESIST, @RESIST + 10;
+	if (@RESIST > 100) set @RESIST, 100;
+	
+	// * Armor
+	if (getequipisequiped(2)) set @RESIST, @RESIST + 10 + getequiprefinerycnt(2);
+	
+	// * Chance to get minerals - (10 = 10%) - (20 = 5%) - (100 = 1%)
+	set @HLuck,rand(10-(getskilllv(783)/3));
+	mes "[^0000FF" + strcharinfo(0) + "^000000]";
+	mes "まずはこの岩盤を砕かないと。";
+	mes ">> 装備による抵抗力: ^FF0000" + @RESIST + "%^000000";
+	next;
+
+L_BrkRock:
+	if (@HRock > 20)
+		set @RockSt$,"^0EAE1B";
+	else if (@HRock > 15)
+		set @RockSt$,"^7CAE0E";
+	else if (@HRock > 10)
+		set @RockSt$,"^E3C521";
+	else if (@HRock > 5)
+		set @RockSt$,"^D86112";
+	else
+		set @RockSt$,"^D82412";	
+	if (@HPick > 20)
+		set @PickSt$,"^0EAE1B";
+	else if (@HPick > 15)
+		set @PickSt$,"^7CAE0E";
+	else if (@HPick > 10)
+		set @PickSt$,"^E3C521";
+	else if (@HPick > 5)
+		set @PickSt$,"^D86112";
+	else
+		set @PickSt$,"^D82412";
+	for (set @x, 0; @x < 30; set @x, @x + 1) {
+		if (@HRock > @x)
+			set @RockSt$, @RockSt$ + "■";
+		else
+			set @RockSt$, @RockSt$ + "";
+		if (@HPick > @x)
+			set @PickSt$, @PickSt$ + "■";
+		else
+			set @PickSt$, @PickSt$ + "";
+	}
+	if (@HWP)
+		mes "岩盤の弱点: ^0000FF" + $@PickLocation$[@HWeak] + "^000000";
+	else
+		mes "岩盤の弱点を探しています・・・";
+	mes "> 岩盤耐久力: ";
+	mes "[" + @RockSt$ + "^000000]";
+	mes "> " + getitemname(@Picks) + ": ";
+	mes "[" + @PickSt$ + "^000000]";
+	next;
+	set @tmpMenu$,"";
+	set @x,0;
+	set @tm1$,@tmpMenu$+$@PickLocation$[0];
+	set @tm2$,@tmpMenu$+$@PickLocation$[1];
+	set @tm3$,@tmpMenu$+$@PickLocation$[2];
+	set @tm4$,@tmpMenu$+$@PickLocation$[3];
+	set @tm5$,@tmpMenu$+$@PickLocation$[4];
+	set @tm6$,@tmpMenu$+$@PickLocation$[5];
+	set @tm7$,@tmpMenu$+$@PickLocation$[6];
+	set @tm8$,@tmpMenu$+$@PickLocation$[7];
+	set @tm9$,@tmpMenu$+$@PickLocation$[8];
+	// Select the location to break the rock
+	set @menu,select(@tm1$,@tm2$,@tm3$,@tm4$,@tm5$,@tm6$,@tm7$,@tm8$,@tm9$,"Exit")-1;
+	if (@menu == 9) goto L_Exit;
+
+	// Weak side found!
+	if (@menu == @HWeak) {
+		soundeffect "chepet_attack.wav",0;
+		set @HWP,1;
+		set @HPower1,rand(2,3);
+		set @HPower2,rand(1,2);
+	} else {
+		soundeffect "apocalips_h_move.wav",0;
+		set @HPower1,rand(2);
+		set @HPower2,rand(1,4);
+	}
+	set @HRock,@HRock-@HPower1-(@Picks>28427?1:0);
+	set @HPick,@HPick-(@HPower2==1?@HPower2:(@Picks==28428?@HPower2-1:@HPower2));
+	if (!rand(10)) {
+		// Accident!!!
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		if (@RESIST < 100 || !rand(10)) {
+			if (Sex)
+				soundeffect "die_male.wav",0;
+			else
+				soundeffect "die_merchant_female.wav",0;
+			percentheal -rand(1,rand(100-@RESIST)),0;
+			mes "^FF0000" + $@MNAccidents$[rand(getarraysize($@MNAccidents$))] + "^000000";
+		} else {
+			mes "^FF0000" + $@MNAccidents2$[rand(getarraysize($@MNAccidents2$))] + "^000000";
+		}
+		if (Hp < 1) close;
+		next;
+	} else if (!rand(50 + @RESIST)) {
+		// Earth Quake!!!
+		soundeffect "earth_quake.wav",0;
+		percentheal -100,-100;
+		announce "鉱山が崩壊してあなたは死んだ！",3;
+		end;
+	}
+	if (@HPick < 1) {
+		// Old Pick is broken!
+		misceffect 155;
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "チクショー、" + getitemname(@Picks) + "を";
+		mes "壊しちゃった！";
+		delitem @Picks,1;
+		mes ">> あと^FF0000" + countitem(@Picks) + "^000000個の " + getitemname(@Picks) + "がある。";
+		close;
+	}
+	// Give another chance while @HRock is > 0
+	if (@HRock > 0)
+		goto L_BrkRock;
+
+	soundeffect "tming_success.wav",0;
+	misceffect 266;
+	mes "[^0000FF" + strcharinfo(0) + "^000000]";
+
+	set GANBANVALUE,GANBANVALUE+1;
+	delitem @Picks,1;
+
+	if(GANBANVALUE <=20){
+		mes "イエーイ！岩盤を破壊できた～！";
+		mes "後は掘るだけだ！";
+	}else{
+		mes "どうやら掘り尽した様だ";
+
+		set .@partyid,getcharid(1);		
+		getpartymember(.@partyid);
+
+		getmapxy($@mapname1$,$@mapx,$@mapy,0,strcharinfo(0));
+
+		set $@temp_GEFE8,0;
+		while($@partymembercount != $@temp_GEFE8){
+			if(getcharid(3,$@partymembername$[$@temp_GEFE8]) == 0){
+			}else{
+				attachrid(getcharid(3,$@partymembername$[$@temp_GEFE8]));
+				getmapxy($@mapname3$,$@mapx,$@mapy,0,strcharinfo(0));
+				if(($@mapname1$ == $@mapname3$) && isloggedin(getcharid(3,$@partymembername$[$@temp_GEFE8]),getcharid(0,$@partymembername$[$@temp_GEFE8]))){
+					set GANBANVALUE,0;
+					set HAKKUTUTYUU,0;
+					set HAKKUTUTIME,0;
+					set SAIKUTUMAP$,"";
+					set SITEIX,0;
+					set SITEIY,0;
+					announce "[発掘イベントを終了します]",0x03;
+					warp "morocc", 110, 111;
+				}
+			}
+			set $@temp_GEFE8,$@temp_GEFE8+1;
+		}
+		close;
+		end;
+	}
+
+	next;
+	soundeffect "ice_titan_die.wav",0;
+L_GetMinerals:
+	if (@HPick > 20)
+		set @PickSt$,"^0EAE1B";
+	else if (@HPick > 15)
+		set @PickSt$,"^7CAE0E";
+	else if (@HPick > 10)
+		set @PickSt$,"^E3C521";
+	else if (@HPick > 5)
+		set @PickSt$,"^D86112";
+	else
+		set @PickSt$,"^D82412";
+	for (set @x, 0; @x < 30; set @x, @x + 1) {
+		if (@HPick > @x)
+			set @PickSt$, @PickSt$ + "■";
+		else
+			set @PickSt$, @PickSt$ + "";
+	}
+	mes "[^0000FF" + strcharinfo(0) + "^000000]";
+	mes "> " + getitemname(@Picks) + ": ";
+	mes " [" + @PickSt$ + "^000000]";
+	next;
+	if (select("ぶっ叩く","やめる")==2) goto L_Exit;
+	// Clang!!!
+	soundeffect "green_iguana_damage.wav",0;
+	if(@RANPE>0){
+		if(	(@RANPE < 20 && rand(100) > 90) ||
+			(@RANPE < 15 && rand(100) > 80) ||
+			(@RANPE < 10 && rand(100) > 70) ||
+			(@RANPE <  5 && rand(100) > 60)){
+			announce "ランプの光量不足で狙いが定まらない!!",0x03;
+			goto L_RanpeMiss;
+		}
+		set @Points, rand(@HLuck);
+		if (!@Points) { // 10%
+			set @IType, rand(1000);
+			if (!@IType) { // 0.1%
+				set @Message$, "神よ！ この鉱物に感謝します。";
+				set MINERAL_A,MINERAL_A + 1;
+				getmapxy(@mapname$,$@mapx,$@mapy,0,strcharinfo(0));
+				mapannounce @mapname$,strcharinfo(0)+"さんが [神の鉱物] を手に入れました",1,0x70DBDB;
+			} else if (@IType < 50) { // 5%
+				set @Message$, "[良い輝き鉱物]を得た！";
+				set MINERAL_B,MINERAL_B + 1;
+				getmapxy(@mapname$,$@mapx,$@mapy,0,strcharinfo(0));
+				mapannounce @mapname$,strcharinfo(0)+"さんが [良い輝きの鉱物] を手に入れました",1,0x70DBDB;
+			} else { // 94.9%
+				set @Message$, "[ほど良い輝きの鉱物]を得た！";
+				set MINERAL_C,MINERAL_C + 1;
+				getmapxy(@mapname$,$@mapx,$@mapy,0,strcharinfo(0));
+				mapannounce @mapname$,strcharinfo(0)+"さんが [ほど良い輝きの鉱物] を手に入れました",1,0x70DBDB;
+			}
+		} else { // 90%
+				set @Message$, "[鉱物]を得た！";
+				set MINERAL_D,MINERAL_D +1;
+				getmapxy(@mapname$,$@mapx,$@mapy,0,strcharinfo(0));
+				mapannounce @mapname$,strcharinfo(0)+"さんが [鉱物] を手に入れました",1,0x70DBDB;
+
+		}
+	}else{
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "暗くてよく見えない…";
+		mes "ランプを使って明るくしないと…。";
+		close;
+	}
+L_RanpeMiss:
+	// Calculate the Old Pick
+	set @gandam,rand(3);
+	set @HPick, @HPick - (@gandam<=1?@gandam:(@Picks==28428?@gandam-1:@gandam));
+	if (@RANPE) set @RANPE,@RANPE-1;
+	if (@HPick < 1) {
+		// Old Pick is broken!
+		misceffect 155;
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "チクショー、" + getitemname(@Picks) + "を";
+		mes "壊しちゃった！";
+		mes ">> あと^FF0000" + countitem(@Picks) + "^000000個の " + getitemname(@Picks) + "がある。";
+		close;
+	}
+	goto L_GetMinerals;
+L_Exit:
+	mes "[^0000FF" + strcharinfo(0) + "^000000]";
+	mes "疲れた～・・・ふぃ～・・・";
+	close;
+L_End:
+close;end;
+
+OnInit:
+	setarray $@setpoint[0],		10,20,15,30,20,40,20,40,20,40;
+	setarray $@PickLocation$[0],	"真ん中","上","下","左","右","左上","右上","左下","右下";
+	setarray $@MNAccidents$[0],	"イテッー！！ 目が～！！",
+					"アガー！！ 指が～！",
+					"イテッ！ 石ころが頭に落ちてきた！";
+	setarray $@MNAccidents2$[0],	"神よ！ 幸運でした！",
+					"へへへ・・・装備で防護してるよ！";
+	end;
+}
+//=========================================================
+//釣り
+//=========================================================
+-	script	fishscript	-1,{
+end;
+
+//釣り開始#---------------------------------------------------------------------------------------------
+OnFishingStart:
+
+	if(@FISH_BATTLE_TECHNIC>0)
+		end;
+
+	//装備品判#--------------------------------------------------
+	switch(getequipid(7)){
+	case 28500:	set @FISH_BATTLE_POWER,100;	break;//初心者の竿
+	case 28501:	set @FISH_BATTLE_POWER,400;	break;//中級者の竿
+	case 28502:	set @FISH_BATTLE_POWER,1000;	break;//上級者の竿
+	case 28503:	set @FISH_BATTLE_POWER,3000;	break;//名人の竿
+	default:	announce "[釣情報]釣竿を装備してください",bc_self,0x4466FF,FW_NORMAL,15; set @FISH_BATTLE_TECHNIC,0; end;
+	}
+
+	//餌判定#----------------------------------------------------
+	if(countitem(28532)>=1)		//普通な餌を先に判定
+		set @FISH_BATTLE_TECHNIC,50;
+	else if(countitem(28533)>=1)	//高級な餌を後に判定
+		set @FISH_BATTLE_TECHNIC,100;
+	else{
+		announce "[釣情報]魚の餌がありません",bc_self,0x4466FF,FW_NORMAL,15;
+		end;
+	}
+
+	//水辺か調査#------------------------------------------------
+	getmapxy(@mapname$,@mapx,@mapy,0,strcharinfo(0));
+	      if(checkcell(@mapname$,@mapx,	@mapy,		water)!= 0){set @FISHMAPOK,1;
+	}else if (checkcell(@mapname$,@mapx+1,	@mapy,		water)!= 0){set @FISHMAPOK,1;
+	}else if (checkcell(@mapname$,@mapx-1,	@mapy,		water)!= 0){set @FISHMAPOK,1;
+	}else if (checkcell(@mapname$,@mapx,	@mapy+1,	water)!= 0){set @FISHMAPOK,1;
+	}else if (checkcell(@mapname$,@mapx,	@mapy-1,	water)!= 0){set @FISHMAPOK,1;
+	}else if (checkcell(@mapname$,@mapx+1,	@mapy-1,	water)!= 0){set @FISHMAPOK,1;
+	}else if (checkcell(@mapname$,@mapx-1,	@mapy+1,	water)!= 0){set @FISHMAPOK,1;
+	}else if (checkcell(@mapname$,@mapx+1,	@mapy+1,	water)!= 0){set @FISHMAPOK,1;
+	}else if (checkcell(@mapname$,@mapx-1,	@mapy-1,	water)!= 0){set @FISHMAPOK,1;
+	}else{announce "[釣情報]魚が釣れる水辺ではありません",bc_self,0x4466FF,FW_NORMAL,15;	set @FISH_BATTLE_TECHNIC,0;end;}
+
+	//釣り座標#------------------------------------------------
+	if((callfunc("talk_treasure",7,0)==2 || callfunc("talk_treasure",7,0)==6 || callfunc("talk_treasure",7,0)==13 || callfunc("talk_treasure",7,0)==17 || callfunc("talk_treasure",7,0)==25) && (
+		(callfunc("talk_treasure",7,3)==7 && @mapname$=="prt_sewb2") ||
+		(callfunc("talk_treasure",7,3)==8 && @mapname$=="ayothaya") ||
+		(callfunc("talk_treasure",7,3)==9 && @mapname$=="comodo") ||
+		(callfunc("talk_treasure",7,3)==10&& @mapname$=="prontera") ||
+		(callfunc("talk_treasure",7,3)==11&& @mapname$=="einbroch") ||
+		(callfunc("talk_treasure",7,3)==12&& @mapname$=="malangdo") ||
+		(callfunc("talk_treasure",7,3)==13&& @mapname$=="yuno") ||
+		(callfunc("talk_treasure",7,3)==14&& @mapname$=="amatsu") ||
+		(callfunc("talk_treasure",7,3)==15&& @mapname$=="jawaii"))){}	//特定釣堀
+	else if(@mapname$ != "poring_c02"){announce "[釣情報]魚が釣れるMAPではありません",bc_self,0x4466FF,FW_NORMAL,15;	set @FISH_BATTLE_TECHNIC,0;end;}
+	set @Befor_mapx,@mapx;
+	set @Befor_mapy,@mapy;
+
+	announce "[釣情報]釣りを始めます",bc_self,0x4466FF,FW_NORMAL,15;
+	addtimer rand(100,500),"fishscript::OnFishingloop";
+
+end;
+//釣りLOOP#---------------------------------------------------------------------------------------------
+OnFishingloop:
+
+	//装備品判#--------------------------------------------------
+	if(!(getequipid(7)>=28500 && getequipid(7)<=28503)){
+		announce "[釣情報]釣竿を装備してください",bc_self,0x4466FF,FW_NORMAL,15; set @FISH_BATTLE_TECHNIC,0; end;}
+
+	//餌判定#----------------------------------------------------
+	if(countitem(28532)>=1)		//普通な餌を先に判定
+		set @FISH_BATTLE_TECHNIC,50;
+	else if(countitem(28533)>=1)	//高級な餌を後に判定
+		set @FISH_BATTLE_TECHNIC,100;
+	else{
+		announce "[釣情報]魚の餌がありません",bc_self,0x4466FF,FW_NORMAL,15;
+		set @FISH_BATTLE_TECHNIC,0;
+		end;
+	}
+	//釣り座標#------------------------------------------------
+	getmapxy(@mapname$,@mapx,@mapy,0,strcharinfo(0));
+	if(@Befor_mapx!=@mapx || @Befor_mapy!=@mapy){	announce "[釣情報]近くに魚の気配がなくなった",bc_self,0x4466FF,FW_NORMAL,15;	set @FISH_BATTLE_TECHNIC,0;	end;}
+
+	//初期化
+	if( @FISH_BATTLE_BOOK <= 0){set @FISH_BATTLE_BOOK,0;}else{set @FISH_BATTLE_BOOK,@FISH_BATTLE_BOOK-100;}
+
+	addtimer rand(30000,50000),"fishscript::OnFishselect";
+	end;
+
+//釣れる魚選択#---------------------------------------------------------------------------------------------
+OnFishselect:
+//基本処理----------------------------------------------------------------------------------------------------
+	//装備品判#--------------------------------------------------
+	if(!(getequipid(7)>=28500 && getequipid(7)<=28503)){
+		announce "[釣情報]釣竿を装備してください",bc_self,0x4466FF,FW_NORMAL,15; set @FISH_BATTLE_TECHNIC,0; end;}
+
+	//餌判定#----------------------------------------------------
+	if(countitem(28532)>=1)		//普通な餌を先に判定
+		set @FISH_BATTLE_TECHNIC,50;
+	else if(countitem(28533)>=1)	//高級な餌を後に判定
+		set @FISH_BATTLE_TECHNIC,100;
+	else{
+		announce "[釣情報]魚の餌がありません",bc_self,0x4466FF,FW_NORMAL,15;
+		set @FISH_BATTLE_TECHNIC,0;
+		end;
+	}
+	//釣り座標#------------------------------------------------
+	getmapxy(@mapname$,@mapx,@mapy,0,strcharinfo(0));
+	if(@Befor_mapx!=@mapx || @Befor_mapy!=@mapy){	announce "[釣情報]近くに魚の気配がなくなった",bc_self,0x4466FF,FW_NORMAL,15;	set @FISH_BATTLE_TECHNIC,0;	end;}
+
+//------------------------------------------------------------------------------------------------------------
+
+	//アイテム選択#------------------------------------------------
+	set @S_FISH,0;
+	if(rand(1000) < 120) {
+		//レア魚#------------------------------------------------
+		     if(@mapname$=="prt_sewb2")	{set @S_FISH,11;}
+		else if(@mapname$=="ayothaya")	{set @S_FISH,12;}
+		else if(@mapname$=="comodo")	{set @S_FISH,13;}
+		else if(@mapname$=="prontera")	{set @S_FISH,14;}
+		else if(@mapname$=="einbroch")	{set @S_FISH,15;}
+		else if(@mapname$=="malangdo")	{set @S_FISH,16;}
+		else if(@mapname$=="yuno")	{set @S_FISH,17;}
+		else if(@mapname$=="amatsu")	{set @S_FISH,18;}
+		else if(@mapname$=="jawaii")	{set @S_FISH,19;}
+		announce "[釣情報]変なものが引っかかったようだ",bc_self,0x4466FF,FW_NORMAL,15;
+		if(@S_FISH>0)
+			addtimer rand(10000,50000),"fishscript::OnFishbattle";
+		else
+			addtimer rand(40000,50000),"fishscript::OnItembattle";
+	}else{
+		//魚選択#------------------------------------------------
+
+		switch (rand(1,30)){
+			case 1:				set @S_FISH,1;				break;
+			case 2:				set @S_FISH,2;				break;
+			case 3:				set @S_FISH,3;				break;
+			case 4:				set @S_FISH,4;				break;
+			case 5:				set @S_FISH,5;				break;
+			case 6:				set @S_FISH,6;				break;
+			case 7:				set @S_FISH,7;				break;
+			case 8:				set @S_FISH,8;				break;
+			case 9:				set @S_FISH,9;				break;
+			case 10:			set @S_FISH,10;				break;
+			case 20:			set @S_FISH,20;				break;
+			default:
+				set @S_FISH,rand(1,4);
+				break;
+		}
+
+		//高級な餌じゃなかったら、雑魚に変更。
+		if(( @S_FISH >=6)&&(@ESA==1)){
+			set @S_FISH,rand(1,5);
+		}
+		//魚message#------------------------------------------------
+		announce "[釣情報]魚が食いついたようだ！",bc_self,0x4466FF,FW_NORMAL,15;
+		addtimer rand(10000,50000),"fishscript::OnFishbattle";
+	}
+	end;
+
+//魚との戦い#---------------------------------------------------------------------------------------------
+OnFishbattle:
+//基本処理----------------------------------------------------------------------------------------------------
+	//装備品判#--------------------------------------------------
+		if(!(getequipid(7)>=28500 && getequipid(7)<=28503)){
+			announce "[釣情報]釣竿を装備してください",bc_self,0x4466FF,FW_NORMAL,15; set @FISH_BATTLE_TECHNIC,0; end;}
+
+	//餌判定#----------------------------------------------------
+	if(countitem(28532)>=1)		//普通な餌を先に判定
+		set @FISH_BATTLE_TECHNIC,50;
+	else if(countitem(28533)>=1)	//高級な餌を後に判定
+		set @FISH_BATTLE_TECHNIC,100;
+	else{
+		announce "[釣情報]魚の餌がありません",bc_self,0x4466FF,FW_NORMAL,15;
+		set @FISH_BATTLE_TECHNIC,0;
+		end;
+	}
+	//釣り座標#------------------------------------------------
+	getmapxy(@mapname$,@mapx,@mapy,0,strcharinfo(0));
+	if(@Befor_mapx!=@mapx || @Befor_mapy!=@mapy){	announce "[釣情報]近くに魚の気配がなくなった",bc_self,0x4466FF,FW_NORMAL,15;	set @FISH_BATTLE_TECHNIC,0;	end;}
+
+//------------------------------------------------------------------------------------------------------------
+
+	//魚HP設定#-------------------------------------------------
+	switch(@S_FISH){
+		case 1:	set @FishHp,0;			break;
+		case 2:	set @FishHp,0;			break;
+		case 3:	set @FishHp,0;			break;
+		case 4:	set @FishHp,0;			break;
+		case 5:	set @FishHp,500;		break;
+		case 6:	set @FishHp,1000;		break;
+		case 7:	set @FishHp,2000;		break;
+		case 8:	set @FishHp,2500;		break;
+		case 9:	set @FishHp,4000;		break;
+		case 10:set @FishHp,4500;		break;
+		case 11:set @FishHp,3000;		break;
+		case 12:set @FishHp,4000;		break;
+		case 13:set @FishHp,3500;		break;
+		case 14:set @FishHp,5000;		break;
+		case 15:set @FishHp,4500;		break;
+		case 16:set @FishHp,4000;		break;
+		case 17:set @FishHp,5500;		break;
+		case 18:set @FishHp,6000;		break;
+		case 19:set @FishHp,6600;		break;
+		case 20:set @FishHp,9999;		break;
+		default:break;
+	}
+
+	if(getskilllv(782)>=3)	//捕獲率上昇効果
+		set @FISH_BATTLE_POWER,@FISH_BATTLE_POWER+200;
+
+	//魚HP- 竿POWER + 餌Technic + テクニック本*n 回
+	set @FishHp,@FishHp - (rand(@FISH_BATTLE_POWER + @FISH_BATTLE_TECHNIC + @FISH_BATTLE_BOOK));
+	if(@FishHp > 0 && @fishattack > 0){
+		announce "[釣情報]このままじゃ逃げられる！closeボタンを押そう！",bc_self,0x4466FF,FW_NORMAL,15;
+		set @nexttime,gettimetick(2)+6;
+		set @nextcnt,0;
+		while(gettimetick(2)<@nexttime) {
+			mes (@nextcnt==0)?"closeボタンを連打すると魚の釣れる確立が上がります":@nextcnt;
+			close2;
+			if(gettimetick(2)>@nexttime)break;
+			set @nextcnt,@nextcnt+1;
+		}
+		set @nexttime,0;
+		set @nextcnt,0;
+		set @FishHp,@FishHp - (@nextcnt*(getskilllv(782)*10));
+	}
+	if(@S_FISH ==20){
+		if(@FISH_BATTLE_TECHNIC!=100)
+			set @FishHp,9999;
+		switch(getequipid(7)){
+		case 28502:	break;//上級者の竿
+		case 28503:	break;//名人の竿
+		default:set @FishHp,9999;	break;
+		}
+	}
+	if(@FishHp <= 0){
+		//魚HPが0だとつれた。
+		switch(@S_FISH){
+			case 1:announce "[釣情報]小さく赤い魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28523,1;	break;
+			case 2:announce "[釣情報]小さく青い魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28522,1;	break;
+			case 3:announce "[釣情報]小さく白い魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28524,1;	break;
+			case 4:announce "[釣情報]活きの良い魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28513,1;	break;
+			case 5:announce "[釣情報]大きな魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28526,1;	break;
+			case 6:announce "[釣情報]観賞魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;		getitem 28514,1;	break;
+			case 7:announce "[釣情報]凶暴な魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28517,1;	break;
+			case 8:announce "[釣情報]巨大な魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28515,1;	break;
+			case 9:announce "[釣情報]人食い魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28525,1;	break;
+			case 10:announce "[釣情報]釣堀の主を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28520,1;	break;
+			case 11:announce "[釣情報]骨魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;		getitem 28519,1;	break;
+			case 12:announce "[釣情報]出世魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28521,1;	break;
+			case 13:announce "[釣情報]調理用魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28527,1;	break;
+			case 14:announce "[釣情報]悪魔魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28512,1;	break;
+			case 15:announce "[釣情報]腐った魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28529,1;	break;
+			case 16:announce "[釣情報]魚王子2世を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28516,1;	break;
+			case 17:announce "[釣情報]古代魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28518,1;	break;
+			case 18:announce "[釣情報]宝石魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28530,1;	break;
+			case 19:announce "[釣情報]ラバーズフィッシュを釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28531,1;	break;
+			case 20:announce "[釣情報]伝説の魚を釣り上げました",bc_self,0x4466FF,FW_NORMAL,15;	getitem 28528,1;	break;
+			default:break;
+		}
+	}else
+		announce "[釣情報]魚に逃げられてしまった",bc_self,0x4466FF,FW_NORMAL,15;
+
+	if (@FISH_BATTLE_TECHNIC == 50){delitem 28532,1;}else if(@FISH_BATTLE_TECHNIC == 100){delitem 28533,1;}	//餌削除
+
+	//LOOP処理
+	//	普通な餌を先に判定	高級な餌を後に判定
+	if(countitem(28532)>0 || countitem(28533)>0){
+		addtimer rand(30000,60000),"fishscript::OnFishingloop";
+	}else{	announce "[釣情報]魚の餌がなくなりました",bc_self,0x4466FF,FW_NORMAL,15;	set @FISH_BATTLE_TECHNIC,0;end;
+	}
+
+end;
+OnItembattle:
+//基本処理----------------------------------------------------------------------------------------------------
+	//装備品判#--------------------------------------------------
+	if(!(getequipid(7)>=28500 && getequipid(7)<=28503)){
+		announce "[釣情報]釣竿を装備してください",bc_self,0x4466FF,FW_NORMAL,15; set @FISH_BATTLE_TECHNIC,0; end;}
+
+	//餌判定#----------------------------------------------------
+	if(countitem(28532)>=1)		//普通な餌を先に判定
+		set @FISH_BATTLE_TECHNIC,50;
+	else if(countitem(28533)>=1)	//高級な餌を後に判定
+		set @FISH_BATTLE_TECHNIC,100;
+	else{
+		announce "[釣情報]魚の餌がありません",bc_self,0x4466FF,FW_NORMAL,15;
+		set @FISH_BATTLE_TECHNIC,0;
+		end;
+	}
+	//釣り座標#------------------------------------------------
+	getmapxy(@mapname$,@mapx,@mapy,0,strcharinfo(0));
+	if(@Befor_mapx!=@mapx || @Befor_mapy!=@mapy){	announce "[釣情報]近くに魚の気配がなくなった",bc_self,0x4466FF,FW_NORMAL,15;	set @FISH_BATTLE_TECHNIC,0;	end;}
+
+//------------------------------------------------------------------------------------------------------------
+
+	//MAP毎に登録アイテムされたItemが手に入る
+	switch(rand(25)){
+		case 0: set .@getitem,501;break;
+		case 1: set .@getitem,502;break;
+		case 2: set .@getitem,503;break;
+		case 3: set .@getitem,504;break;
+		case 4: set .@getitem,501;break;
+		case 5: set .@getitem,502;break;
+		case 6: set .@getitem,503;break;
+		case 7: set .@getitem,504;break;
+		case 8: set .@getitem,505;break;
+		case 9: set .@getitem,28504;break;
+		case 10:set .@getitem,28505;break;
+		case 11:set .@getitem,28506;break;
+		case 12:set .@getitem,28507;break;
+		case 13:set .@getitem,28508;break;
+		case 14:set .@getitem,28509;break;
+		default:set .@getitem,501;break;break;
+	}
+
+	announce "[釣情報]"+getitemname(.@getitem)+"が釣れました",bc_self,0x4466FF,FW_NORMAL,15;	getitem .@getitem,1;
+
+	//LOOP処理
+	//	普通な餌ESA,1を先に判定	高級な餌ESA,2を後に判定
+	if(countitem(28532)>0 || countitem(28533)>0){
+		addtimer rand(30000,60000),"fishscript::OnFishingloop";
+	}else{	announce "[釣情報]魚の餌がなくなりました",bc_self,0x4466FF,FW_NORMAL,15;	set @FISH_BATTLE_TECHNIC,0;end;
+	}
+
+end;
+
+OnFishbook2:
+	if(countitem(28511) < 1){
+		announce "[釣情報]使う高級撒き餌を持っていません!!",bc_self,0x4466FF,FW_NORMAL,15;end;
+		end;
+	}else if(getskilllv(782) >= 7){
+		set @FISH_BOOK_OLD,@FISH_BATTLE_BOOK;
+	        if(getequipid(EQI_HEAD_LOW)==29223)
+			set @FISH_BATTLE_BOOK,@FISH_BATTLE_BOOK+100;
+		else if(getequipid(EQI_HEAD_LOW)==29224)
+			set @FISH_BATTLE_BOOK,@FISH_BATTLE_BOOK+300;
+		else if(getequipid(EQI_HEAD_LOW)==29225)
+			set @FISH_BATTLE_BOOK,@FISH_BATTLE_BOOK+700;
+		set @FISH_BATTLE_BOOK,@FISH_BATTLE_BOOK+rand(15,1500);
+		announce "[釣情報]"+strcharinfo(0)+"は高級撒き餌を使った。釣りテクニックが["+@FISH_BOOK_OLD+"]から["+@FISH_BATTLE_BOOK+"]に上昇した。",bc_self,0x4466FF,FW_NORMAL,15;
+	}else{
+		announce "[釣情報]"+strcharinfo(0)+"は高級撒き餌を使った。・・・が、良く解らないので食べた",bc_self,0x4466FF,FW_NORMAL,15;
+	}
+	delitem 28511,1;
+	end;
+OnFishbook:
+	if(countitem(28510) < 1){
+		announce "[釣情報]使う撒き餌を持っていません!!",bc_self,0x4466FF,FW_NORMAL,15;end;
+		end;
+	}else if(getskilllv(782) >= 2){
+		set @FISH_BOOK_OLD,@FISH_BATTLE_BOOK;
+	        if(getequipid(EQI_HEAD_LOW)==29223)
+			set @FISH_BATTLE_BOOK,@FISH_BATTLE_BOOK+15;
+		else if(getequipid(EQI_HEAD_LOW)==29224)
+			set @FISH_BATTLE_BOOK,@FISH_BATTLE_BOOK+30;
+		else if(getequipid(EQI_HEAD_LOW)==29225)
+			set @FISH_BATTLE_BOOK,@FISH_BATTLE_BOOK+50;
+		set @FISH_BATTLE_BOOK,@FISH_BATTLE_BOOK+rand(1,100);
+		announce "[釣情報]"+strcharinfo(0)+"は撒き餌を使った。釣りテクニックが["+@FISH_BOOK_OLD+"]から["+@FISH_BATTLE_BOOK+"]に上昇した。",bc_self,0x4466FF,FW_NORMAL,15;
+	}else{
+		announce "[釣情報]"+strcharinfo(0)+"は撒き餌を使った。・・・が、良く解らないので食べた",bc_self,0x4466FF,FW_NORMAL,15;
+	}
+	delitem 28510,1;
+	end;
+}
+//=========================================================
+//ログインイベント
+//=========================================================
+-	script	PCLoginEvent	-1,{
+end;
+OnPCLoginEvent:
+	if(getcharid(3)>2006733)
+		end;
+
+	if(#CPHOTEN != 1){
+   		if (checkweight(29210,2) == 0 ){
+			mes "-プレゼントが受け取れません";
+			mes " 荷物を整理してください-";
+			close;
+			end;
+		}
+		set #CPHOTEN,1;
+		getitem 29109,1;
+		getitem 29210,1;
+		dispbottom("-GM蜜とGM苺からアフタークリスマスのプレゼントが配られました-");
+	}
+	end;
+}
+//=========================================================
+//闇闘技場ループ
+//=========================================================
+-	script	mugen	-1,{
+Oninit:
+	set $@mgencnt2,0;
+	setcell "pvp_n_6-5",0,0,140,140,cell_walkable,0;
+	setcell "pvp_n_6-5",0,0,140,140,cell_shootable,0;
+	setcell "pvp_n_6-5",80,80,119,119,cell_walkable,1;
+	setcell "pvp_n_6-5",80,80,119,119,cell_shootable,1;
+	setcell "poring_c02",116,64,121,93,cell_novending,1;
+	mapwarp "pvp_n_6-5","geffen",120,70;
+	end;
+OnStart:
+	set $@mgencnt2,0;
+	set $mugen,1;
+	mapwarp "pvp_n_6-5","geffen",120,70;
+	killmonsterall "pvp_n_6-5";
+	announce "**3分後にゲフェンタワー侵攻が行われます**",8;
+	sleep 5000;
+	announce "[アトリエ五女] 侵攻防衛に協力してくれる人はタワー前に来てください",8;
+	sleep 55000;
+	announce "**2分後にゲフェンタワー侵攻が行われます**",8;
+	sleep 5000;
+	announce "[アトリエ五女] 侵攻防衛に協力してくれる人はタワー前に来てください",8;
+	sleep 55000;
+	announce "**1分後にゲフェンタワー侵攻が行われます**",8;
+	sleep 5000;
+	announce "[アトリエ五女] 侵攻防衛に協力してくれる人はタワー前に来てください",8;
+	sleep 55000;
+	enablenpc "#geffenwarp";
+	donpcevent "#geffenwarp::OnStart";
+	announce "**ゲフェンタワー前に60秒間移動ポータルが開きます**",8;
+	sleep 60000;
+	announce "**ポータルが閉じ、ゲフェンタワー侵攻が始まりました**",8;
+	set $mugen,2;
+	callfunc "Set_Mobs","pvp_n_6-5.gat",2;
+	donpcevent "#geffenwarp::OnEnd";
+	disablenpc "#geffenwarp";
+	end;
+OnKilled:
+	if (mobcount("pvp_n_6-5","mugen::OnKilled") == 0) {
+		set $@mgencnt2,$@mgencnt2 +1;
+		if($@mgencnt2 < 10){
+			mapannounce "pvp_n_6-5.gat","[アトリエ五女] 休んでる暇はないみたい",1,0x70DBDB;
+			sleep 3000;
+			mapannounce "pvp_n_6-5.gat","[アトリエ五女] ……次、来るよ",1,0x70DBDB;
+			callfunc "Set_Mobs","pvp_n_6-5.gat",$@mgencnt2 +2;
+		}else{
+			mapannounce "pvp_n_6-5.gat","[アトリエ五女] ……侵攻を防ぎきったようだ",1,0x70DBDB;
+			sleep 4000;
+			mapannounce "pvp_n_6-5.gat","[アトリエ五女] 30秒以内に中央のポータルから帰還してください",1,0x70DBDB;
+			enablenpc "#geffenwarp2";
+			sleep 30000;
+			set $mugen,0;
+			disablenpc "#geffenwarp2";
+			mapwarp "pvp_n_6-5","geffen",120,70;
+		}
+	}
+	end;
+}
+//=========================================================
+//モンスターハンター
+//=========================================================
+-	script	monhun	-1,{
+	end;
+OnKilled:
+	if(countitem(28534)<1)end;
+	if(killedrid<2900 || killedrid>=3000)end;
+	set .@killid,killedrid;
+	enable_items;
+	set @tamasi,0;set @gettamasi,0;set .@moblv,.moblv + (.moblv*5/10);
+	if(BaseLv < .@moblv+20 && BaseLv > .@moblv-20 )set .@col$,"^00FF00";
+	else if(BaseLv > .@moblv+20)set .@col$,"^FF0000";
+	else if(BaseLv < .@moblv-20 )set .@col$,"^0000FF";
+	mes "-"+.@col$+"モンスターの魂が浮き上がった^000000-";
+	for( set .@i,0; .@i < 50; set .@i,.@i+1 ) {
+		sleep2 100;
+		if (@tamasi == 1) {
+			set @gettamasi,1;
+			break;
+		}
+	}
+	disable_items;
+	if(.@killid!=killedrid){mes "-エラーがおきました-";close;end;}
+	set .@succ,500 * @gettamasi;
+	if(getequipid(EQI_HEAD_TOP)==5383 && .@succ>0)
+		set .@succ,.@succ + (100 + getequiprefinerycnt(EQI_HEAD_TOP)*10);
+	if((getequipid(EQI_ACC_L)==2676 || getequipid(EQI_ACC_R)==2676) && .@succ>0)
+		set .@succ,.@succ + 50;
+	if((getequipid(EQI_ACC_L)==2700 || getequipid(EQI_ACC_R)==2700) && .@succ>0)
+		set .@succ,.@succ + 30;
+	if((getequipid(EQI_ACC_L)==2638 || getequipid(EQI_ACC_R)==2638) && .@succ>0)
+		set .@succ,.@succ + 40;
+	if((getequipid(EQI_ACC_L)==2639 || getequipid(EQI_ACC_R)==2639) && .@succ>0)
+		set .@succ,.@succ + 40;
+	if(countitem(7618)>0 && .@succ>0)
+		set .@succ,.@succ + countitem(7618)/2;
+	mes "-("+(.@succ/10)+"/100%)-";
+	if(rand(1000) < .@succ){
+		getitem (25636+.@killid),1;
+		mes "-魂の捕獲に成功した！-";
+	}else{
+		mes "-魂はキラキラと尾を引きながら空に昇っていった-";
+	}
+	close;end;
+}
+//=========================================================
+//転移門
+//=========================================================
+-	script	warpgate	-1,{
+OnCasting:
+	if(countitem(7710)<1){
+		getmapxy(.@mapname$,.@mapx,.@mapy,0,strcharinfo(0));
+		set .@fakeid,(mapname2index(.@mapname$)+100);
+		set .@fakex,(@gatex+100);
+		set .@fakey,(@gatey+100);
+		set .@fake$,.@fakeid+""+.@fakex+""+.@fakey;
+		for(set .@i,0; .@i < 9; set .@i,.@i+1)
+			set .@type,.@type+atoi(charat(.@fake$, .@i));
+		set .@type,(.@type * .@type) % 10;
+		set .@fake2$,getd(".param0$["+.@type+"]");
+		for(set .@i,0; .@i < 9; set .@i,.@i+1){
+			set .@fake2$,.@fake2$+getd(".param"+.@type+"$["+atoi(charat(.@fake$, .@i))+"]");
+			set .@type,.@type+3;
+			if(.@type>9)
+				set .@type,.@type-10;
+		}
+		dispbottom(.@mapname$+"("+@gatex+","+@gatey+")の転移座標は"+.@fake2$+"です。");
+		end;
+	}
+	delitem 7710,1;
+	input .@warpmap$;
+	set .@type$,charat(.@warpmap$, 0);
+	for(set .@i,0; .@i < 10; set .@i,.@i+1){
+		if(getd(".param0$["+.@i+"]") == .@type$){
+			set .@type,.@i;
+			break;
+		}
+	}
+	if(.@type < 0 || .@type > 9) end;
+	set .@d,0;
+	for(set .@i,1; .@i < 10; set .@i,.@i+1){
+		set .@fake$,charat(.@warpmap$, .@i);
+		for(set .@j,0; .@j < 10; set .@j,.@j+1){
+			if(getd(".param"+.@type+"$["+.@j+"]") == .@fake$){
+				set .@fake2$,.@fake2$+.@j;
+				set .@type,.@type+3;
+				if(.@type>9)
+					set .@type,.@type-10;
+				break;
+			}
+		}
+		if(.@d % 3 == 2)
+			set .@fake2$,.@fake2$+":";
+		set .@d,.@d+1;
+	}
+	explode(.@map$, .@fake2$, ":");
+	set .@warp,atoi(.@map$[0])-100;
+	set .@x,atoi(.@map$[1])-100;
+	set .@y,atoi(.@map$[2])-100;
+	if(.@warp <= 0 || .@x <= 0 || .@y <= 0)
+		end;
+	set .@warp$,mapindex2name(.@warp);
+	if(getmapflag(.@warp$,mf_nomemo)==1)
+		end;
+	if(!checkcell(.@warp$,.@x,.@y,cell_chkpass))
+		end;
+	if(checkcell(.@warp$,.@x,.@y,cell_chknpc))
+		end;
+	if(checkcell(.@warp$,.@x,.@y,cell_chklandprotector))
+		end;
+	warpportal @gatex,@gatey,.@warp$,.@x,.@y,@gatelv*2;
+	end;
+OnInit:
+	setarray .param0$,"A","x","w","U","S","t","r","T","q","C";
+	setarray .param1$,"z","H","d","P","v","D","j","n","t","q";
+	setarray .param2$,"F","a","s","v","u","E","B","Z","c","Y";
+	setarray .param3$,"U","G","y","c","I","j","P","v","S","Q";
+	setarray .param4$,"V","A","T","w","r","m","O","k","h","L";
+	setarray .param5$,"T","P","H","A","x","K","c","i","n","R";
+	setarray .param6$,"F","d","C","p","B","V","y","I","Q","a";
+	setarray .param7$,"S","O","h","T","J","y","R","F","N","i";
+	setarray .param8$,"x","T","y","g","L","H","f","P","F","E";
+	setarray .param9$,"D","K","J","f","E","w","h","B","m","G";
+	end;
+}
+//=========================================================
+//Equip Accent
+//=========================================================
+-	script	equipaccent	-1,{
+OnStart:
+	recalcstatus getcharid(3);
+	end;
+}

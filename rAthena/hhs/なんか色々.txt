@@ -1,0 +1,4029 @@
+/*prontera,164,232,4	script	ケルト#hall	510,{
+	mes "[ケルト]";
+	if(HALLOWIN==0){
+		mes "あれ、きみは……";
+		mes "以前にも会ったことあるような……";
+		mes "ううん、まぁいいや！";
+		next;
+		mes "[ケルト]";
+		mes "ねぇねぇ、きみ";
+		mes "あれもってない？";
+		next;
+		mes "[ケルト]";
+		mes "あれってあれよ…";
+		mes "ほら…オレンジ…";
+		next;
+		if(select("あげる","あげない")==2) {
+			mes "[ケルト]";
+			mes "そっかぁ";
+			mes "残念だなぁ";
+			close;
+		}
+		if(countitem(582)<=0){
+			mes "[ケルト]";
+			mes "持ってないみたいね…？";
+			close;
+		}
+		delitem 582,1;
+		mes "[ケルト]";
+		mes "ありがとう！";
+		next;
+		mes "[ケルト]";
+		mes "…あれ、コレじゃないよ";
+		next;
+		mes "[ケルト]";
+		mes "オレンジ色の、ほら";
+		mes "ハロウィンといえばカボチャよ！";
+		next;
+		mes "[ケルト]";
+		mes "5個くらい欲しいのよー、駄目かな？";
+		next;
+		if(select("いいよ","いやだよ")==2) {
+			mes "[ケルト]";
+			mes "そっかぁ";
+			mes "残念だなぁ";
+			close;
+		}
+		if(countitem(535)<5){
+			mes "[ケルト]";
+			mes "足りないみたいね…？";
+			close;
+		}
+		delitem 535,5;
+		set HALLOWIN,1;
+		mes "[ケルト]";
+		mes "さすが！";
+		mes "えっと……ごめんなさいもう少しいい？";
+		next;
+		if(select("いいよ、何？","お断りします")==2) {
+			mes "[ケルト]";
+			mes "えええ、ケチ！";
+			close;
+		}
+		mes "[ケルト]";
+		mes "ありがとう、ミルクとハチミツと穀物も5個ずつお願い！";
+	}else if(HALLOWIN==1){
+		if(countitem(518)<5 || countitem(519)<5 || countitem(577)<5){
+			mes "ミルクとハチミツと穀物も5個ずつお願い！";
+			close;
+		}
+		delitem 518,5;
+		delitem 519,5;
+		delitem 577,5;
+		mes "やったぁ、これでカボチャケーキが作れる♪";
+		next;
+		mes "[ケルト]";
+		mes "ﾄﾝﾄﾝ…ｶﾁｬｶﾁｬ…ﾁｰﾝ！";
+		next;
+		mes "[ケルト]";
+		mes "でーきた！";
+		next;
+		mes "[ケルト]";
+		mes "ねぇ、あなたにも";
+		mes "お裾分けしてあげるから";
+		mes "私の友達に届けてくれる？";
+		next;
+		if(select("しょうがないなぁ","付き合いきれないよ")==2) {
+			mes "[ケルト]";
+			mes "そんなぁ…おいしく出来たのに";
+			close;
+		}
+		mes "[ケルト]";
+		mes "ありがとう！";
+		next;
+		set HALLOWIN,2;
+		getitem 7488,1;
+		mes "[ケルト]";
+		mes "お友達はジャックっていうの";
+		mes "たしか仕事でニブルにいるとおもうわ";
+	}else if(HALLOWIN==2){
+		mes "お友達はジャックっていうの";
+		mes "たしか仕事でニブルにいるとおもうわ";
+	}else if(HALLOWIN==3){
+		mes "あら";
+		mes "仮装？そうね…";
+		next;
+		mes "[ケルト]";
+		mes "例えば";
+		mes "ウィスパーマスクとかがいいんじゃない？";
+	}else if(HALLOWIN==4){
+		mes "あ、届けてくれたの？";
+		mes "ありがとー！";
+		next;
+		menu "あの…",-;
+		mes "[ケルト]";
+		mes "ん？どうしたの？";
+		mes "もうお使いはないよ";
+		next;
+		switch(select("ケーキをください","ジャックさんって恋人ですか？","人遣いが荒いっていってました","^FFFFFFTrick or Treat！^000000")){
+		case 1:
+			mes "[ケルト]";
+			mes "あれ、あげなかったっけ？";
+			break;
+		case 2:
+			mes "[ケルト]";
+			mes "え、か、からかわないでよもう！";
+			break;
+		case 3:
+			mes "[ケルト]";
+			mes "ええ、嘘！？そんなぁ…";
+			break;
+		case 4:
+			set HALLOWIN,5;
+			getitem 11550,5;
+			mes "[ケルト]";
+			mes "うふふ、忘れてないわよ♪";
+			mes "はいお礼よ、ありがとうね！";
+			next;
+			getitem 18543,1;
+			mes "[ケルト]";
+			mes "それと、特別にこれもあげる♪";
+			next;
+			mes "[ケルト]";
+			mes "ジャックは普段帽子屋さんでね";
+			mes "これを作ったのもジャックなのよ";
+			next;
+			mes "[ケルト]";
+			mes "興味があれば";
+			mes "話をきいてみるといいわよ！";
+			break;
+		}
+	}else if(HALLOWIN==5){
+		mes "あら？";
+		mes "カボチャケーキが欲しいの？";
+		next;
+		if(select("作ってください","いえ別に")==2) {
+			mes "[ケルト]";
+			mes "おいしいんだけどなぁ";
+			close;
+		}
+		if(countitem(6097)<10 || countitem(577)<10 || countitem(7605)<5 || countitem(519)<5){
+			mes "[ケルト]";
+			mes "甘いカボチャパイ 10個";
+			mes "穀物 10個";
+			mes "卵 5個";
+			mes "ミルク 5個";
+			mes "で、カボチャケーキを10個";
+			mes "作ってあげるわよ";
+			next;
+			mes "[ケルト]";
+			mes "卵は^FF0000prt_fild08^000000か";
+			mes "^FF0000pay_dun03^000000にいる";
+			mes "ニワトリからとれるはずよ";
+			close;
+		}
+		delitem 6097,10;
+		delitem 577,10;
+		delitem 7605,5;
+		delitem 519,5;
+		getitem 11550,10;
+		mes "[ケルト]";
+		mes "はい、どうぞ";
+		mes "新鮮なうちに食べてね！";
+	}
+	close;
+}
+niflheim,213,202,4	script	ジャック#hall	1130,{
+	mes "[ジャック]";
+	if(HALLOWIN==2){
+		mes "ん？";
+		mes "きみは誰だい";
+		next;
+		menu "ケルトさんに頼まれて…",-;
+		mes "[ジャック]";
+		mes "ほぅ…でもこの時期に";
+		mes "こんな場所で、その格好は駄目だな";
+		next;
+		mes "[ジャック]";
+		mes "仮装のひとつでもしてきたらどうだい？";
+		next;
+		set HALLOWIN,3;
+		mes "[ジャック]";
+		mes "そうだな、すっぽり隠れてしまうのがいいな";
+	}else if(HALLOWIN==3){
+		if((!(getequipid(EQI_HEAD_TOP)==5143)) &&
+		(!(getequipid(EQI_HEAD_TOP)==5294)) &&
+		(!(getequipid(EQI_HEAD_TOP)==5131)) &&
+		(!(getequipid(EQI_HEAD_TOP)==5410)) &&
+		(!(getequipid(EQI_HEAD_TOP)==5808)) &&
+		(!(getequipid(EQI_HEAD_TOP)==5299)) &&
+		(!(getequipid(EQI_HEAD_TOP)==5304))){
+			mes "おいおい、そんなの仮装にもならないよ";
+		}else{
+			mes "やぁよく来たね。";
+			mes "僕はジャック、夜道の案内人さ";
+			next;
+			mes "[ジャック]";
+			mes "ちょっと罰ゲーム中なんだ";
+			mes "悪いねこんなところまで";
+			next;
+			menu "ケルトさんに頼まれて…",-;
+			mes "[ジャック]";
+			mes "ケルトのおつかいかい？";
+			mes "そりゃほんとに悪いことしたね…";
+			mes "彼女は人使いが荒いんだよ";
+			next;
+			menu "彼女からお届けものです",-;
+			delitem 7488,1;
+			mes "[ジャック]";
+			mes "良い香りだ、カボチャケーキだね！";
+			mes "君も貰っただろう？";
+			next;
+			menu "え…貰ってません",-;
+			mes "[ジャック]";
+			mes "え…";
+			next;
+			mes "[ジャック]";
+			mes "本当に悪いね";
+			mes "彼女は結構ぬけてるんだ…";
+			next;
+			mes "[ジャック]";
+			mes "彼女にありがとうと伝えてくれるかい？";
+			mes "ケーキを貰うのも忘れないでね";
+			set HALLOWIN,4;
+		}
+	}else if(HALLOWIN==5){
+		mes "ケルトから聞いたのかい？";
+		next;
+		mes "[ジャック]";
+		mes "そうだね、今はこんな格好だから";
+		mes "作れるものは少ないけど";
+		mes "どれがいいかな？";
+		next;
+		switch(select("ピンク縁メガネ","ドクロニット帽","黒にゃんこの尻尾","パンプキンハット","パンプキンポンチョ")){
+		case 1:
+			set .@takeitem,29240;setarray .@costitem,2201,975,982,979;
+			setarray .@costcount,1,3,3,5;break;
+		case 2:
+			set .@takeitem,29241;setarray .@costitem,7005,7038,7206,7217;
+			setarray .@costcount,50,50,1,1;break;
+		case 3:
+			set .@takeitem,29111;setarray .@costitem,7206,983,7208,7221;
+			setarray .@costcount,100,2,3,5;break;
+		case 4:
+			set .@takeitem,18535;setarray .@costitem,535,2221,7220,909;
+			setarray .@costcount,100,1,1,10;break;
+		case 5:
+			mes "[ジャック]";
+			mes "ん、パンプキンポンチョを作るのか？";
+			mes "パンプキンケーキが100個必要だよ";
+			next;
+			mes "[ジャック]";
+			mes "作ってもいいかい？";
+			next;
+			if(select("やっぱりやめます","作ってください")==1) {
+				mes "[ジャック]";
+				mes "そうかい";
+				mes "また来てくれよ";
+				close;
+			}
+			if(countitem(11550) < 100){
+				mes "[ジャック]";
+				mes "材料が足りないようだね";
+				close;
+			}
+			delitem 11550,100;
+			getitem 29098,1;
+			mes "[ジャック]";
+			mes "はい";
+			mes "出来たよ";
+			close;
+		}
+		mes "[ジャック]";
+		mes "ん、"+getitemname(.@takeitem)+"を作るのか？";
+		mes getitemname(.@costitem[0])+"を"+.@costcount[0]+"個";
+		mes getitemname(.@costitem[1])+"を"+.@costcount[1]+"個";
+		mes getitemname(.@costitem[2])+"を"+.@costcount[2]+"個";
+		mes getitemname(.@costitem[3])+"を"+.@costcount[3]+"個";
+		mes "が必要だよ";
+		next;
+		mes "[ジャック]";
+		mes "作ってもいいかい？";
+		next;
+		if(select("やっぱりやめます","作ってください")==1) {
+			mes "[ジャック]";
+			mes "そうかい";
+			mes "また来てくれよ";
+			close;
+		}
+		if( countitem(.@costitem[0]) < .@costcount[0] ||
+		    countitem(.@costitem[1]) < .@costcount[1] ||
+		    countitem(.@costitem[2]) < .@costcount[2] ||
+		    countitem(.@costitem[3]) < .@costcount[3]){
+			mes "[ジャック]";
+			mes "材料が足りないようだね";
+			close;
+		}
+		delitem .@costitem[0],.@costcount[0];
+		delitem .@costitem[1],.@costcount[1];
+		delitem .@costitem[2],.@costcount[2];
+		delitem .@costitem[3],.@costcount[3];
+		getitem .@takeitem,1;
+		mes "[ジャック]";
+		mes "はい";
+		mes "出来たよ";
+		close;
+	}else{
+		mes "やぁ";
+		mes "Trick or Treat！";
+	}
+	close;
+}
+pay_dun03.gat,0,0,0	script	ChickenGhost#pay	-1,{
+OnInit:
+	initnpctimer;
+	end;
+OnTimer30000:
+	if(rand(3) == 0) {
+		for(set .@i,0; .@i <= 39; set .@i,.@i+1)
+			hideoffnpc "ニワトリ#pay"+.@i;
+		end;
+	}
+	initnpctimer;
+	end;
+OnTimer120000:
+	for(set .@i,0; .@i <= 39; set .@i,.@i+1)
+		hideonnpc "ニワトリ#pay"+.@i;
+	initnpctimer;
+	end;
+}
+pay_dun03.gat,151,131,4	script	ニワトリ#pay0	800,{
+	hideonnpc "ニワトリ#"+strnpcinfo(2);
+	mes "ニワトリに触れようとすると、";
+	mes "まるで実体がなかったかのように";
+	mes "消えてしまった。";
+	if(rand(5))
+		close;
+	mes "ニワトリがいた所には";
+	mes "「卵」が一つ落ちていた";
+	getitem 7605,1;
+	close;
+OnInit:
+	hideonnpc "ニワトリ#"+strnpcinfo(2);
+	end;
+}
+pay_dun03.gat,152,131,4	duplicate(ニワトリ#pay0)	ニワトリ#pay1	800
+pay_dun03.gat,153,131,4	duplicate(ニワトリ#pay0)	ニワトリ#pay2	800
+pay_dun03.gat,154,131,4	duplicate(ニワトリ#pay0)	ニワトリ#pay3	800
+pay_dun03.gat,155,131,4	duplicate(ニワトリ#pay0)	ニワトリ#pay4	800
+pay_dun03.gat,156,131,4	duplicate(ニワトリ#pay0)	ニワトリ#pay5	800
+pay_dun03.gat,157,131,4	duplicate(ニワトリ#pay0)	ニワトリ#pay6	800
+pay_dun03.gat,158,131,4	duplicate(ニワトリ#pay0)	ニワトリ#pay7	800
+pay_dun03.gat,150,132,4	duplicate(ニワトリ#pay0)	ニワトリ#pay8	800
+pay_dun03.gat,153,132,4	duplicate(ニワトリ#pay0)	ニワトリ#pay9	800
+pay_dun03.gat,156,132,4	duplicate(ニワトリ#pay0)	ニワトリ#pay10	800
+pay_dun03.gat,159,132,4	duplicate(ニワトリ#pay0)	ニワトリ#pay11	800
+pay_dun03.gat,149,133,4	duplicate(ニワトリ#pay0)	ニワトリ#pay12	800
+pay_dun03.gat,160,133,4	duplicate(ニワトリ#pay0)	ニワトリ#pay13	800
+pay_dun03.gat,149,134,4	duplicate(ニワトリ#pay0)	ニワトリ#pay14	800
+pay_dun03.gat,152,134,4	duplicate(ニワトリ#pay0)	ニワトリ#pay15	800
+pay_dun03.gat,157,134,4	duplicate(ニワトリ#pay0)	ニワトリ#pay16	800
+pay_dun03.gat,160,134,4	duplicate(ニワトリ#pay0)	ニワトリ#pay17	800
+pay_dun03.gat,149,135,4	duplicate(ニワトリ#pay0)	ニワトリ#pay18	800
+pay_dun03.gat,151,135,4	duplicate(ニワトリ#pay0)	ニワトリ#pay19	800
+pay_dun03.gat,152,135,4	duplicate(ニワトリ#pay0)	ニワトリ#pay20	800
+pay_dun03.gat,153,135,4	duplicate(ニワトリ#pay0)	ニワトリ#pay21	800
+pay_dun03.gat,156,135,4	duplicate(ニワトリ#pay0)	ニワトリ#pay22	800
+pay_dun03.gat,157,135,4	duplicate(ニワトリ#pay0)	ニワトリ#pay23	800
+pay_dun03.gat,158,135,4	duplicate(ニワトリ#pay0)	ニワトリ#pay24	800
+pay_dun03.gat,160,135,4	duplicate(ニワトリ#pay0)	ニワトリ#pay25	800
+pay_dun03.gat,149,136,4	duplicate(ニワトリ#pay0)	ニワトリ#pay26	800
+pay_dun03.gat,152,136,4	duplicate(ニワトリ#pay0)	ニワトリ#pay27	800
+pay_dun03.gat,157,136,4	duplicate(ニワトリ#pay0)	ニワトリ#pay28	800
+pay_dun03.gat,160,136,4	duplicate(ニワトリ#pay0)	ニワトリ#pay29	800
+pay_dun03.gat,150,137,4	duplicate(ニワトリ#pay0)	ニワトリ#pay30	800
+pay_dun03.gat,153,137,4	duplicate(ニワトリ#pay0)	ニワトリ#pay31	800
+pay_dun03.gat,156,137,4	duplicate(ニワトリ#pay0)	ニワトリ#pay32	800
+pay_dun03.gat,159,137,4	duplicate(ニワトリ#pay0)	ニワトリ#pay33	800
+pay_dun03.gat,151,138,4	duplicate(ニワトリ#pay0)	ニワトリ#pay34	800
+pay_dun03.gat,152,138,4	duplicate(ニワトリ#pay0)	ニワトリ#pay35	800
+pay_dun03.gat,154,138,4	duplicate(ニワトリ#pay0)	ニワトリ#pay36	800
+pay_dun03.gat,155,138,4	duplicate(ニワトリ#pay0)	ニワトリ#pay37	800
+pay_dun03.gat,157,138,4	duplicate(ニワトリ#pay0)	ニワトリ#pay38	800
+pay_dun03.gat,158,138,4	duplicate(ニワトリ#pay0)	ニワトリ#pay39	800
+//------------------------------------------
+prt_fild08.gat,0,0,0	script	ChickenGhost#prt	-1,{
+OnInit:
+	initnpctimer;
+	end;
+OnTimer30000:
+	if(rand(3) == 0) {
+		for(set .@i,0; .@i <= 26; set .@i,.@i+1)
+			hideoffnpc "ニワトリ#prt"+.@i;
+		end;
+	}
+	initnpctimer;
+	end;
+OnTimer120000:
+	for(set .@i,0; .@i <= 26; set .@i,.@i+1)
+		hideonnpc "ニワトリ#prt"+.@i;
+	initnpctimer;
+	end;
+}
+prt_fild08.gat,155,350,4	script	ニワトリ#prt0	800,{
+	hideonnpc "ニワトリ#"+strnpcinfo(2);
+	mes "ニワトリに触れようとすると、";
+	mes "まるで実体がなかったかのように";
+	mes "消えてしまった。";
+	if(rand(5))
+		close;
+	mes "ニワトリがいた所には";
+	mes "「卵」が一つ落ちていた";
+	getitem 7605,1;
+	close;
+OnInit:
+	hideonnpc "ニワトリ#"+strnpcinfo(2);
+	end;
+}
+prt_fild08.gat,155,352,4	duplicate(ニワトリ#prt0)	ニワトリ#prt1	800
+prt_fild08.gat,155,354,4	duplicate(ニワトリ#prt0)	ニワトリ#prt2	800
+prt_fild08.gat,155,356,4	duplicate(ニワトリ#prt0)	ニワトリ#prt3	800
+prt_fild08.gat,155,358,4	duplicate(ニワトリ#prt0)	ニワトリ#prt4	800
+prt_fild08.gat,154,351,4	duplicate(ニワトリ#prt0)	ニワトリ#prt5	800
+prt_fild08.gat,154,353,4	duplicate(ニワトリ#prt0)	ニワトリ#prt6	800
+prt_fild08.gat,154,355,4	duplicate(ニワトリ#prt0)	ニワトリ#prt7	800
+prt_fild08.gat,154,357,4	duplicate(ニワトリ#prt0)	ニワトリ#prt8	800
+prt_fild08.gat,153,351,4	duplicate(ニワトリ#prt0)	ニワトリ#prt9	800
+prt_fild08.gat,153,357,4	duplicate(ニワトリ#prt0)	ニワトリ#prt10	800
+prt_fild08.gat,152,351,4	duplicate(ニワトリ#prt0)	ニワトリ#prt11	800
+prt_fild08.gat,152,357,4	duplicate(ニワトリ#prt0)	ニワトリ#prt12	800
+prt_fild08.gat,151,351,4	duplicate(ニワトリ#prt0)	ニワトリ#prt13	800
+prt_fild08.gat,151,353,4	duplicate(ニワトリ#prt0)	ニワトリ#prt14	800
+prt_fild08.gat,151,355,4	duplicate(ニワトリ#prt0)	ニワトリ#prt15	800
+prt_fild08.gat,151,357,4	duplicate(ニワトリ#prt0)	ニワトリ#prt16	800
+prt_fild08.gat,150,351,4	duplicate(ニワトリ#prt0)	ニワトリ#prt17	800
+prt_fild08.gat,150,357,4	duplicate(ニワトリ#prt0)	ニワトリ#prt18	800
+prt_fild08.gat,149,351,4	duplicate(ニワトリ#prt0)	ニワトリ#prt19	800
+prt_fild08.gat,149,354,4	duplicate(ニワトリ#prt0)	ニワトリ#prt20	800
+prt_fild08.gat,149,357,4	duplicate(ニワトリ#prt0)	ニワトリ#prt21	800
+prt_fild08.gat,148,352,4	duplicate(ニワトリ#prt0)	ニワトリ#prt22	800
+prt_fild08.gat,148,356,4	duplicate(ニワトリ#prt0)	ニワトリ#prt23	800
+prt_fild08.gat,147,353,4	duplicate(ニワトリ#prt0)	ニワトリ#prt24	800
+prt_fild08.gat,147,354,4	duplicate(ニワトリ#prt0)	ニワトリ#prt25	800
+prt_fild08.gat,147,355,4	duplicate(ニワトリ#prt0)	ニワトリ#prt26	800
+
+abyss_01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+abyss_02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+abyss_03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+alde_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+alde_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+alde_dun03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+alde_dun04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ama_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ama_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ama_dun03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ama_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+anthell01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+anthell02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ayo_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ayo_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ayo_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ayo_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+beach_dun.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+beach_dun2.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+beach_dun3.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+c_tower1.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+c_tower2.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+c_tower3.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+c_tower4.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+cmd_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+cmd_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+cmd_fild03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+cmd_fild04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+cmd_fild05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+cmd_fild07.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+cmd_fild08.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+cmd_fild09.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_fild03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_fild04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_fild05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_fild07.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_fild08.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_fild09.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+ein_fild10.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_dun00.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_dun03.gat,0,0,0,0	monster	楽しいルード	1812,1,0,0,0
+gef_fild00.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild06.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild07.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild08.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild09.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild10.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild11.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild12.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild13.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gef_fild14.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gefenia01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gefenia02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gefenia03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gefenia04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_cas01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_cas02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_church.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_chyard.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_in01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_knt01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_knt02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_prison.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_prison1.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_sew01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_sew02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_sew03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_sew04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gl_step.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+glast_01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gon_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gon_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gon_dun03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+gon_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+hu_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+hu_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+hu_fild03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+hu_fild04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+hu_fild05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+hu_fild06.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+hu_fild07.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+in_sphinx1.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+in_sphinx2.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+in_sphinx3.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+in_sphinx4.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+in_sphinx5.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+iz_dun00.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+iz_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+iz_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+iz_dun03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+iz_dun04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+jupe_core.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+juperos_01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+juperos_02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+kh_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+kh_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+lhz_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+lhz_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+lhz_dun03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+lhz_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+lhz_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+lhz_fild03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+lou_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+lou_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+lou_dun03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+lou_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mag_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mag_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjo_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjo_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjo_dun03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_06.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_07.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_08.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_09.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_10.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_11.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+mjolnir_12.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild06.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild07.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild08.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild09.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild10.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild11.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild12.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild13.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild14.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild15.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild16.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild17.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_fild18.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_pryd01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_pryd02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_pryd03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_pryd04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_pryd05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+moc_pryd06.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+nif_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+nif_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+niflheim.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+odin_tem01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+odin_tem02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+odin_tem03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+orcsdun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+orcsdun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_dun00.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_dun03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_dun04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild06.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild07.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild08.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild09.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild10.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+pay_fild11.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild00.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild06.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild07.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild08.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild09.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild10.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_fild11.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_maze01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_maze02.gat,0,0,0,0	monster	楽しいルード	1812,1,0,0,0
+prt_maze03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_sewb1.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_sewb2.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_sewb3.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+prt_sewb4.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+tha_t01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+tha_t02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+tha_t03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+tha_t04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+tha_t05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+tha_t06.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+tha_t07.gat,0,0,0,0	monster	楽しいルード	1812,1,0,0,0
+tha_t08.gat,0,0,0,0	monster	楽しいルード	1812,1,0,0,0
+tha_t09.gat,0,0,0,0	monster	楽しいルード	1812,1,0,0,0
+tha_t10.gat,0,0,0,0	monster	楽しいルード	1812,1,0,0,0
+tha_t11.gat,0,0,0,0	monster	楽しいルード	1812,1,0,0,0
+tha_t12.gat,0,0,0,0	monster	楽しいルード	1812,1,0,0,0
+tur_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+tur_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+tur_dun03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+tur_dun04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+um_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+um_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+um_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+um_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+um_fild03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+um_fild04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+xmas_dun01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+xmas_dun02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+xmas_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild01.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild02.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild03.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild04.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild05.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild06.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild07.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild08.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild09.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild10.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild11.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+yuno_fild12.gat,0,0,0,0	monster	楽しいルード	1812,3,0,0,0
+
+prontera,157,285,3	script	ファミリア#06_hw01::HWFamiDup	799,{
+	mes "[ファミリア]";
+	mes "キィキィ";
+	mes "ジャックとデビルチの勢力は";
+	mes "ジャック 236 対 デビルチ 236";
+	mes "となり、ルード達の活躍で";
+	mes "喧嘩が収まりました！";
+	next;
+	mes "[ファミリア]";
+	mes "いやぁ良かった！";
+	next;
+	mes "[ファミリア]";
+	mes "あ、そういえば喧嘩の最中";
+	mes "何か大事なものを落としたらしいのですが";
+	mes "箱と鍵を見ませんでしたか？";
+	next;
+	mes "[ファミリア]";
+	mes "あれは一対になっていて";
+	mes "喧嘩を止めてくれたお礼に";
+	mes "プレゼントしてくれるらしいですよ！";
+	next;
+	mes "[ファミリア]";
+	mes "どうです？";
+	mes "人間には扱えない代物でしょう？";
+	next;
+	mes "[ファミリア]";
+	mes "もしよければ";
+	mes "私が開けてあげますよ？";
+	next;
+	switch(select("鍵で箱を開ける","鍵3つと箱を交換する","箱3つと鍵を交換する","証を返す")){
+	case 1:
+		if(countitem(7781)>0 && (countitem(7782)>0 || countitem(7783)>0)){
+			set .@sec,select(
+				((countitem(7782)>0)?"金の鍵で開ける":""),
+				((countitem(7783)>0)?"銀の鍵で開ける":""),
+				"やめる");
+			if(.@sec==3){mes "[ファミリア]";mes "そうですか";close;}
+			if(.@sec==1){delitem 7781,1;delitem 7782,1;getitem groupranditem(IG_GreenBox),1;mes "[ファミリア]";mes "はい、どうぞ";close;}
+			if(.@sec==2){delitem 7781,1;delitem 7783,1;getitem groupranditem(IG_GreenBox),1;mes "[ファミリア]";mes "はい、どうぞ";close;}
+		}
+		mes "[ファミリア]";
+		mes "持っていないようですが…";
+		close;
+	case 2:
+		if(countitem(7782)>2 || countitem(7783)>2){
+			set .@sec,select(
+				((countitem(7782)>2)?"金の鍵3つと交換":""),
+				((countitem(7783)>2)?"銀の鍵3つと交換":""),
+				"やめる");
+			if(.@sec==3){mes "[ファミリア]";mes "そうですか";close;}
+			if(.@sec==1){delitem 7782,3;getitem 7781,1;mes "[ファミリア]";mes "はい、どうぞ";close;}
+			if(.@sec==2){delitem 7783,3;getitem 7781,1;mes "[ファミリア]";mes "はい、どうぞ";close;}
+		}
+		mes "[ファミリア]";
+		mes "持っていないようですが…";
+		close;
+	case 3:
+		if(countitem(7781)>2){
+			set .@sec,select(
+				((countitem(7781)>2)?"箱3つと金の鍵を交換":""),
+				((countitem(7781)>2)?"箱3つと銀の鍵を交換":""),
+				"やめる");
+			if(.@sec==3){mes "[ファミリア]";mes "そうですか";close;}
+			if(.@sec==1){delitem 7781,3;getitem 7782,1;mes "[ファミリア]";mes "はい、どうぞ";close;}
+			if(.@sec==2){delitem 7781,3;getitem 7783,1;mes "[ファミリア]";mes "はい、どうぞ";close;}
+		}
+		mes "[ファミリア]";
+		mes "持っていないようですが…";
+		close;
+	case 4:
+		if(countitem(7254)>0){
+			mes "賛成だった人ですね";
+			next;
+			mes "[ファミリア]";
+			mes "あなたにはこれを差し上げます";
+			delitem 7254,1;
+			getitem 12186,1;
+			set #PPOINT,#PPOINT+100;
+			dispbottom("100苺pointを獲得しました!");
+			next;
+			mes "[ファミリア]";
+			mes "ではごきげんよう";
+			close;
+		}else if(countitem(7227)>0){
+			mes "反対だった人ですね";
+			next;
+			mes "[ファミリア]";
+			mes "あなたの協力で";
+			mes "喧嘩をおさめることができました！";
+			mes "あなたにはこちらを差し上げます";
+			delitem 7227,1;
+			getitem 12187,1;
+			set #PPOINT,#PPOINT+200;
+			dispbottom("200苺pointを獲得しました!");
+			next;
+			mes "[ファミリア]";
+			mes "ではごきげんよう";
+			close;
+		}
+		mes "[ファミリア]";
+		mes "持っていないようですが…";
+		close;
+	}
+	close;
+}
+payon,156,231,3	duplicate(HWFamiDup)	ファミリア#06_hw02	799
+morocc,159,143,3	duplicate(HWFamiDup)	ファミリア#06_hw03	799
+geffen,120,188,3	duplicate(HWFamiDup)	ファミリア#06_hw04	799
+alberta,80,171,3	duplicate(HWFamiDup)	ファミリア#06_hw05	799
+
+prontera,251,213,3	script	コーレン	485,{
+	switch(QUEST_VALENTINE1){
+	case 0:
+		mes "[コーレン]";
+		mes "あら、あなた";
+		mes "もしかして冒険者？";
+		next;
+		menu "そうですけど、何か？",-;
+		mes "[コーレン]";
+		mes "この時期と言えば……";
+		if(Sex==0) {
+			mes "冒険者といえども";
+			mes "恋の季節ということは";
+			mes "おわかりになるでしょう？";
+			next;
+			mes "[コーレン]";
+			mes "あなたにもそんな";
+			mes "恋のパートナーの一人や二人";
+			mes "いらっしゃるんじゃないの？";
+		}
+		else {
+			mes "ウフフ……";
+			mes "言わずともわかるわね";
+		}
+		next;
+		mes "[コーレン]";
+		mes "ようするに、もうすぐ";
+		mes "バレンタインなわけです";
+		next;
+		mes "[コーレン]";
+		mes "だというのに、何処かの";
+		mes "御国事情によって";
+		mes "材料であるチョコの価格が";
+		mes "今、跳ね上がってますの";
+		next;
+		mes "[コーレン]";
+		mes "今時の風潮に任せるなら";
+		mes "あちこちにチョコを渡さないと";
+		mes "いけないでしょう？";
+		next;
+		mes "[コーレン]";
+		mes "価格上昇によって";
+		mes "お財布に大打撃なこと";
+		mes "請け合いなわけですわ！";
+		next;
+		mes "[コーレン]";
+		mes "いえ、でも";
+		mes "バレンタインにチョコを";
+		mes "あげなくてはいけない";
+		mes "わけでもないですし";
+		next;
+		mes "[コーレン]";
+		mes "クッキーとかでも";
+		mes "いいのですよねぇ";
+		mes "";
+		mes "はぁ……";
+		next;
+		menu "それで、"+Sex?"僕":"私"+"に何の用？",-;
+		mes "["+strcharinfo(0)+"]";
+		mes "-言った途端に";
+		mes "勢い良く振り向いた彼女の";
+		mes "瞳がキラリと光った気がした-";
+		next;
+		mes "[コーレン]";
+		mes "良くぞ聞いてくれた！";
+		next;
+		mes "[コーレン]";
+		mes "私には今、好いている方が";
+		mes "いらっしゃるのですが……";
+		next;
+		mes "[コーレン]";
+		mes "勤勉で、無口な方なので";
+		mes "まだ一度も話をしたことが";
+		mes "ありませんの";
+		next;
+		menu "よくそれで好きになりましたね",-;
+		mes "[コーレン]";
+		mes "ふふん";
+		mes "あなたには縁のないことかも";
+		mes "しれませんけれどね？";
+		mes "俗に言う一目惚れですわ";
+		next;
+		mes "[コーレン]";
+		mes "初めてお会いしたのは……";
+		mes "そう、忘れもしない";
+		mes "去年の生誕祭でのことです";
+		next;
+		mes "[コーレン]";
+		mes "当時私は近所の生地屋の";
+		mes "小間使いをしており、";
+		mes "生誕祭で使われる布生地を";
+		next;
+		mes "[コーレン]";
+		mes "王家に収めるために";
+		mes "一抱えもあるそれらを";
+		mes "運んでいたのでございます";
+		next;
+		mes "[コーレン]";
+		mes "そのときです！";
+		next;
+		mes "[コーレン]";
+		mes "突然、抱えていた生地が";
+		mes "なくなったのです！";
+		next;
+		mes "[コーレン]";
+		mes "泥棒かと思ったのですが";
+		mes "目の前には布生地を持った";
+		mes "騎士様がいらっしゃったのです！";
+		mes "それが彼、ローレンス様でした！";
+		next;
+		mes "[コーレン]";
+		mes "それからというもの";
+		mes "私は…………";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "-一歩間違えれば";
+		mes "ストーカー紛いの行動っぷりを";
+		mes "身振り手振りを加えながら";
+		mes "語り始めた-";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "-適当に相槌を打ちながら";
+		mes "聞き流し、1時間ほどで";
+		mes "ようやく話が終わった-";
+		next;
+		mes "[コーレン]";
+		mes "というわけなのです";
+		mes "私の彼への思いは";
+		mes "理解してくれましたか？";
+		next;
+		if(select("よ、よくわかりました！","ストーカーはマズいよ？")==2) {
+			mes "[コーレン]";
+			mes "あ、あなた……";
+			mes "私の愛の深さを";
+			mes "こともあろうに";
+			mes "ストーカーですって？！";
+			next;
+			mes "[コーレン]";
+			mes "フ、フフ……";
+			mes "どうやら私の話が";
+			mes "理解できなかったようですね……";
+			next;
+			mes "[コーレン]";
+			mes "もう一度、一から";
+			mes "話をしてあげますわ！";
+			mes "そこに正座なさい！！";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-恐ろしい拝聴会は";
+			mes "3時間近くの長さだった-";
+			close;
+		}
+		mes "[コーレン]";
+		mes "えぇ、そうでしょう";
+		mes "しかしそれでも";
+		mes "彼の好きなお菓子が";
+		mes "未だにわからないのです";
+		next;
+		mes "[コーレン]";
+		mes "そこであなたに命令します！";
+		mes "彼の身辺を探って";
+		mes "彼の好きなお菓子を探しなさい！";
+		next;
+		if(select("やらせていただきます！","他人もストーカーにさせるつもり？")==2) {
+			mes "[コーレン]";
+			mes "フン";
+			mes "私の愛の深さを";
+			mes "理解できなかったかしら？";
+			mes "いいからとっとと行きなさい！";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-彼女は手に持ったバッグで";
+			mes "殴りかかってきた-";
+			mes "-あなたは慌てて";
+			mes "その場を後にした-";
+			set QUEST_VALENTINE1,1;
+			close;
+		}
+		mes "[コーレン]";
+		mes "よろしい";
+		mes "彼はプロンテラ騎士団に";
+		mes "いつも滞在しています";
+		next;
+		mes "[コーレン]";
+		mes "可及的速やかに";
+		mes "彼の好みを聞き出しなさい";
+		mes "いいですね？";
+		set QUEST_VALENTINE1,1;
+		close;
+	case 1:
+	case 2:
+		mes "[コーレン]";
+		mes "彼はプロンテラ騎士団に";
+		mes "いつも滞在しています";
+		next;
+		mes "[コーレン]";
+		mes "可及的速やかに";
+		mes "彼の好みを聞き出しなさい";
+		mes "いいですね？";
+		close;
+	case 3:
+		mes "[コーレン]";
+		mes "そうですか";
+		mes "酒場なら多少";
+		mes "口も緩むでしょうね";
+		next;
+		mes "[コーレン]";
+		mes "しっかり彼の好みを";
+		mes "聞き出してきなさいよ";
+		close;
+	case 10:
+		mes "[コーレン]";
+		mes "冒険者さん！";
+		mes "彼の好みを聞き出したそうね";
+		mes "さぁ、早く教えて頂戴！";
+		next;
+		if(select("チョコが好きだそうです","クッキーが好きだそうです")==1) {
+			mes "[コーレン]";
+			mes "チョコが好きなのね！";
+			mes "決めたわ！";
+			mes "今年は高いけど";
+			mes "チョコレート作るわ！";
+			set QUEST_VALENTINE1,11;
+			next;
+		}else{
+			mes "[コーレン]";
+			mes "クッキーが好きなのね！";
+			mes "決めたわ！";
+			mes "今年はクッキーを焼くわ！";
+			set QUEST_VALENTINE1,12;
+			next;
+		}
+		mes "[コーレン]";
+		mes "これはお礼よ";
+		mes "受け取ってね！";
+		getitem 18548,1;
+		close;
+	case 11:
+	case 12:
+		mes "[コーレン]";
+		mes "あら、あなた";
+		mes "ちょうどいいところに";
+		mes "きたわね";
+		next;
+		mes "[コーレン]";
+		mes "今から彼のために";
+		mes (QUEST_VALENTINE1==11)?"チョコ":"クッキー"+"を作るところなの";
+		mes "もし自分で材料を用意するなら";
+		mes "あなたの分も作ってあげるわよ？";
+		next;
+		if(select("作ってもらう","いらない")==2) {
+			mes "[コーレン]";
+			mes "あっそう";
+			mes "ならいいわご自由に";
+			close;
+		}
+		mes "[コーレン]";
+		if(QUEST_VALENTINE1==11){
+			mes "チョコレートの材料は";
+			mes "カカオ 5個";
+			mes "ミルク 1個";
+			mes "乳鉢 1個";
+			mes "携帯用溶鉱炉 1個";
+		}else{
+			mes "クッキーの材料は";
+			mes "小麦粉 3個";
+			mes "卵 2個";
+			mes "ミルク 1個";
+			mes "乳鉢 1個";
+			mes "携帯用溶鉱炉 1個";
+		}
+		next;
+		mes "[コーレン]";
+		mes "これだけあれば";
+		mes "おいしいのが作れるわ";
+		next;
+		mes "[コーレン]";
+		if(QUEST_VALENTINE1==11){
+			if(countitem(7182)<5 || countitem(7134)<1 || countitem(519)<1 || countitem(612)<1) {
+				mes "材料を持ってきてね";
+				close;
+			}
+			mes "ほら、できた";
+			delitem 7182,5;
+			delitem 7134,1;
+			delitem 519,1;
+			delitem 612,1;
+			getitem (Sex)?560:559,1;
+			next;
+			mes "[コーレン]";
+			mes "あなたにもいい相手が";
+			mes "見つかるといいわね";
+			close;
+		}else{
+			if(countitem(7604)<3 || countitem(7605)<2 || countitem(7134)<1 || countitem(519)<1 || countitem(612)<1) {
+				mes "材料を持ってきてね";
+				close;
+			}
+			mes "ほら、できた";
+			delitem 7604,3;
+			delitem 7605,2;
+			delitem 7134,1;
+			delitem 519,1;
+			delitem 612,1;
+			getitem 12709,1;
+			next;
+			mes "[コーレン]";
+			mes "あなたにもいい相手が";
+			mes "見つかるといいわね";
+			close;
+		}
+	case 20:
+		mes "[コーレン]";
+		mes "あなた……";
+		mes "彼に何を言ったの？";
+		next;
+		mes "[コーレン]";
+		mes "私がどれだけ彼を";
+		mes "思っているのか";
+		mes "あなたはわかってくれてると";
+		mes "思っていたのに！";
+		next;
+		mes "-彼女は手に持っていた";
+		mes "被り物を投げつけてきた-";
+		set QUEST_VALENTINE1,21;
+		getitem 5562,1;
+		next;
+	case 21:
+		mes "[コーレン]";
+		mes "うそつき！";
+		mes "あなたの顔も見たくないわ！";
+		mes "早く消えて頂戴！！";
+		close;
+	case 30:
+		mes "[コーレン]";
+		mes "あなた……";
+		mes "昨日、彼に家まで";
+		mes "送ってもらったでしょう";
+		next;
+		mes "[コーレン]";
+		if(Sex){
+			mes "か、彼はそういう";
+			mes "趣味だったのね……";
+			next;
+			mes "[コーレン]";
+			mes "どうりで私のことを";
+			mes "気にも留めないわけね";
+			next;
+			mes "[コーレン]";
+			mes "イヤ！不潔よ！";
+			mes "近寄らないで！！";
+			set QUEST_VALENTINE1,31;
+			close;
+		}else{
+			mes "彼はこんなお粗末な";
+			mes "体型が趣味だったのね";
+			next;
+			mes "[コーレン]";
+			mes "どうりで私のことを";
+			mes "気にも留めないわけね";
+			next;
+			mes "[コーレン]";
+			mes "幻滅だわ";
+			mes "もう彼と何処にでも行けば？";
+			set QUEST_VALENTINE1,31;
+			close;
+		}
+	case 31:
+		if(Sex){
+			mes "[コーレン]";
+			mes "近寄らないでくれる？";
+			close;
+		}else{
+			mes "[コーレン]";
+			mes "何よ";
+			mes "もう彼と関係ないんだから";
+			mes "私に話しかけないで";
+			close;
+		}
+	case 40:
+		mes "[コーレン]";
+		mes "彼、お酒が好きなのね";
+		mes "アルコールにも強いって";
+		mes "素敵ね！";
+		next;
+		mes "[コーレン]";
+		mes "チョコレートにお酒を混ぜて";
+		mes "プレゼントすることにするわ";
+		mes "さぁて、何にしようかしら？";
+		set QUEST_VALENTINE1,41;
+		close;
+	case 41:
+		mes "[コーレン]";
+		mes "いいところに来たわね";
+		mes "ちょうど彼の好きそうな";
+		mes "お酒を用意したところなの";
+		next;
+		mes "[コーレン]";
+		mes "どれが一番良さそうか";
+		mes "一緒に試飲してくれない？";
+		next;
+		switch(select("飲まない","ピーチ・フルサンダー","秘酒・龍殺し","バーバリアンミックス","粋","マクシミリアン・フォン・ベベ","カクテル・ホワイトパール")){
+		case 1:
+			mes "[コーレン]";
+			mes "あら、そう";
+			mes "飲みすぎると後で困るから";
+			mes "一緒に試してくれると";
+			mes "嬉しいんだけどなぁ";
+			close;
+		case 2:
+			mes "[コーレン]";
+			mes "ピーチ・フルサンダーね";
+			mes "桃から作った…お酒…らしいわ";
+			set .@ber,1;
+			break;
+		case 3:
+			mes "[コーレン]";
+			mes "秘酒・龍殺しね";
+			mes "龍さえも酔わせるほど";
+			mes "アルコールがキツイお酒";
+			mes "みたいだわ";
+			set .@ber,2;
+			break;
+		case 4:
+			mes "[コーレン]";
+			mes "バーバリアンミックスね";
+			mes "とある民族の秘伝の方法で";
+			mes "作られた紫色のお酒ね……";
+			set .@ber,3;
+			break;
+		case 5:
+			mes "[コーレン]";
+			mes "粋ね";
+			mes "米から作った日本酒らしいわ";
+			set .@ber,4;
+			break;
+		case 6:
+			mes "[コーレン]";
+			mes "マクシミリアン・フォン・ベベね";
+			mes "とある王子が作らせたお酒で";
+			mes "大人気商品らしいわ";
+			set .@ber,5;
+			break;
+		case 7:
+			mes "[コーレン]";
+			mes "カクテル・ホワイトパールね";
+			mes "甘くて口当たり滑らかなカクテルね";
+			mes "中でキラキラ光ってるわ";
+			set .@ber,6;
+			break;
+		}
+		next;
+		mes "[コーレン]";
+		mes "どう、飲んでみる？";
+		next;
+		if(select("飲みます","やっぱやめときます")==2) {
+			mes "[コーレン]";
+			mes "またお願いね";
+			close;
+		}
+		switch(.@ber){
+		case 1:sc_start SC_LUKFood,600000,4; percentheal 30,10; break;
+		case 2:sc_start SC_AGIFood,600000,4; percentheal 30,10; break;
+		case 3:sc_start SC_STRFood,600000,4; percentheal 30,10; break;
+		case 4:sc_start SC_INTFood,600000,4; percentheal 30,10; break;
+		case 5:sc_start SC_VITFood,600000,4; percentheal 30,10; break;
+		case 6:sc_start SC_DEXFood,600000,4; percentheal 30,10; break;
+		}
+		mes "[コーレン]";
+		mes "どう？";
+		mes "これでいいかしら？";
+		next;
+		if(select("これで良いと思う","まだ飲み比べてみないと……")==2) {
+			mes "[コーレン]";
+			mes "あっ";
+			mes "そ、そうよね";
+			mes "また手伝ってね";
+			close;
+		}
+		mes "[コーレン]";
+		mes "よーし";
+		mes "じゃあこれにするわ！";
+		mes "これ、手伝ってくれた御礼！";
+		mes "ほんとにありがとね！";
+		set QUEST_VALENTINE1,42;
+		getitem 5576,1;
+		close;
+	case 42:
+		mes "[コーレン]";
+		mes "うふふ";
+		mes "今からバレンタインが";
+		mes "楽しみだわ！";
+		close;
+	}
+}
+prt_in,181,20,3	script	マスター#valt	46,{
+	mes "[マスター]";
+	mes "………………";
+	next;
+	mes "-マスターは無言で";
+	mes "グラスを磨いている-";
+	close;
+}
+prt_in,88,104,3	script	ローレンス#sun	470,{
+	switch(QUEST_VALENTINE1){
+	default:
+		mes "[ローレンス]";
+		mes "………………";
+		close;
+	case 1:
+	case 2:
+	case 3:
+		mes "[ローレンス]";
+		mes "………………";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "-そういえばコーレンは";
+		mes "彼が無口だと言っていた-";
+		next;
+		if(select("好きな食べ物は何ですか？","最近変わったことはありますか？")==1) {
+			mes "[ローレンス]";
+			mes "………………";
+			mes "プロンテラの治安維持が";
+			mes "我々の仕事内容です";
+			next;
+		}
+		mes "[ローレンス]";
+		mes "………………";
+		mes "騎士団に用がなければ";
+		mes "お引き取りください";
+		if(QUEST_VALENTINE1 == 1)
+			set QUEST_VALENTINE1,2;
+		close;
+	}
+	close;
+OnInit:
+	if(gettime(3)>3 && gettime(3)<20)
+		end;
+	disablenpc "ローレンス#sun";
+	end;
+}
+prt_in,177,22,7	script	ローレンス#night	470,{
+	switch(QUEST_VALENTINE1){
+	default:
+		mes "[ローレンス]";
+		mes "………………";
+		close;
+	case 3:
+		mes "[ローレンス]";
+		mes "………………";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "-ぐったりとカウンターに";
+		mes "もたれたローレンスさんは";
+		mes "すごい勢いでお酒を飲み干していく-";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "-飲んでいる量とは裏腹に";
+		mes "顔は酔っていないように";
+		mes "平然としている-";
+		next;
+		if(select("何かあったんですか？","好きな食べ物はなんですか？")==2) {
+			mes "[ローレンス]";
+			mes "………………";
+			mes "今は何もいらない";
+			mes "ただ、酒が欲しい……";
+			set QUEST_VALENTINE1,40;
+			close;
+		}
+		mes "[ローレンス]";
+		mes "………………";
+		mes "最近、何かおかしい";
+		mes "誰かに後をつけられたり";
+		mes "物がなくなっていたりする";
+		next;
+		mes "[ローレンス]";
+		mes "待ち伏せや罠を張ったりも";
+		mes "してはみたんだが……";
+		mes "犯人の目星もつかない……";
+		next;
+		mes "[ローレンス]";
+		mes "本当に……";
+		mes "弱っているんだ……";
+		mes "酒を飲んで忘れるしか……";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "-顔の割りにずいぶんと";
+		mes "酔っているようだ-";
+		mes "-それにしてもその話";
+		mes "何処かで聞き覚えが……-";
+		next;
+		if(select("……この女性に心当たりは？","早く解決するといいですね")==2) {
+			mes "[ローレンス]";
+			mes "……ありがとう";
+			mes ((Sex)?"君":"貴女")+"も早めに帰ったほうがいい";
+			next;
+			mes "[ローレンス]";
+			mes "それとも宿まで";
+			mes "送ろうか……";
+			next;
+			if(select("自分で帰る","好意に甘える")==1) {
+				mes "[ローレンス]";
+				mes "遅くまで出歩くことは";
+				mes "少し控えることだな……";
+				close;
+			}
+			mes "[ローレンス]";
+			mes "では宿まで送ろう";
+			set QUEST_VALENTINE1,30;
+			close2;
+			end;
+		}
+		mes "[ローレンス]";
+		mes "……あぁ";
+		mes "生誕祭のときに少し";
+		mes "手助けをしてね";
+		next;
+		mes "[ローレンス]";
+		mes "それ以来、時折";
+		mes "道端で偶然出会うことが";
+		mes "あるんだけど……それが？";
+		next;
+		if(select("適当に誤魔化す","本当のことを話す")==2) {
+			mes "[ローレンス]";
+			mes "そうだったのか……";
+			mes "そうか……";
+			next;
+			mes "[ローレンス]";
+			mes "悪いが少し一人にしてくれないか";
+			mes "彼女には、好きなものはないと";
+			mes "伝えておいてくれ……";
+			set QUEST_VALENTINE1,20;
+			close;
+		}
+		mes "["+strcharinfo(0)+"]";
+		mes "そういえばローレンスさん";
+		mes "チョコとクッキーなら";
+		mes "どちらが好きですか？";
+		next;
+		mes "[ローレンス]";
+		mes "チョコとクッキーか";
+		mes "両方嫌いではない";
+		next;
+		mes "[ローレンス]";
+		mes "……すまないが";
+		mes "疲れているんだ";
+		mes "よくわからない話をするなら";
+		mes "少し一人にしてくれないか";
+		set QUEST_VALENTINE1,10;
+		close;
+	}
+	close;
+OnInit:
+	if(gettime(3)>3 && gettime(3)<20)
+		disablenpc "ローレンス#night";
+	end;
+}
+prt_in,79,95,4	script	バッカス	469,{
+	switch(QUEST_VALENTINE1){
+	default:
+		mes "[バッカス]";
+		mes "お、騎士団へようこそ";
+		mes "君みたいな、"+(Sex?"強そうな男性":"可愛らしい女性")+"は大歓迎さ";
+		mes "邪魔にならない程度に見ていくといい";
+		close;
+	case 1:
+	case 2:
+		mes "[バッカス]";
+		mes "君、ローレンスと知り合いなの？";
+		next;
+		mes "[バッカス]";
+		mes "アイツ、最近なんか";
+		mes "悩みがあるらしいんだけど";
+		mes "全然話してくれないんだよ";
+		next;
+		mes "[バッカス]";
+		mes "今は勤務中だから";
+		mes "話しかけても無駄だよ";
+		next;
+		mes "[バッカス]";
+		mes "何か話があるなら";
+		mes "夜8時になってから";
+		mes "プロンテラ酒場に";
+		mes "行ってみるといいよ";
+		set QUEST_VALENTINE1,3;
+		close;
+	case 3:
+		mes "[バッカス]";
+		mes "ローレンスに何か話があるなら";
+		mes "夜8時になってから";
+		mes "プロンテラ酒場に";
+		mes "行ってみるといいよ";
+		close;
+	}
+}
+prt_in,161,21,3	script	ネコリン	508,{
+	mes "[ネコリン]";
+	if(countitem2(558,1,0,0,0,0,0,0)>0 && countitem(7539)>0){
+		delitem2 558,1,1,0,0,0,0,0,0;
+		delitem 7539,1;
+		getitem2 558,1,1,0,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
+		mes "できたぽ！";
+		close;
+	}
+	if(countitem2(559,1,0,0,0,0,0,0)>0 && countitem(7539)>0){
+		delitem2 559,1,1,0,0,0,0,0,0;
+		delitem 7539,1;
+		getitem2 559,1,1,0,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
+		mes "できたぽ！";
+		close;
+	}
+	if(countitem2(560,1,0,0,0,0,0,0)>0 && countitem(7539)>0){
+		delitem2 560,1,1,0,0,0,0,0,0;
+		delitem 7539,1;
+		getitem2 560,1,1,0,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
+		mes "できたぽ！";
+		close;
+	}
+	if(countitem2(561,1,0,0,0,0,0,0)>0 && countitem(7539)>0){
+		delitem2 561,1,1,0,0,0,0,0,0;
+		delitem 7539,1;
+		getitem2 561,1,1,0,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
+		mes "できたぽ！";
+		close;
+	}
+	if(countitem2(12709,1,0,0,0,0,0,0)>0 && countitem(7539)>0){
+		delitem2 12709,1,1,0,0,0,0,0,0;
+		delitem 7539,1;
+		getitem2 12709,1,1,0,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
+		mes "できたぽ！";
+		close;
+	}
+	mes "手作りチョコ 1個と";
+	mes "ポリンコイン 1枚で";
+	mes "チョコに名前を入れるぽ！";
+	close;
+}
+prontera,157,285,5	script	もっちー	1815,{
+	mes "[もっちー]";
+	mes "ぶるぶる";
+	next;
+	mes "[もっちー]";
+	mes "もうすぐ十五夜……";
+	next;
+	mes "[もっちー]";
+	mes "またあのうさぎたちに";
+	mes "踊り食いされたくないよぅ……";
+	next;
+	mes "[もっちー]";
+	mes "はっ！そうだ！";
+	mes "食べられる前に食べさせれば";
+	mes "いいんじゃないか！";
+	next;
+	mes "[もっちー]";
+	mes "ねぇきみ";
+	mes "^0000FF中秋の餠^000000を持ってない？";
+	mes "中秋の餠を30個くれるなら";
+	mes "特別な物をあげるんだけど……";
+	next;
+	switch (select("差し上げます","黙って食われろ","むしろ私が食べる","持ってない")){
+	case 1:
+		if(countitem(663)<30) {
+			mes "[もっちー]";
+			mes "僕が餅だからって";
+			mes "バカにしないでよっ!!!";
+			close;
+		}
+		delitem 663,30;
+		if(rand(100)>80)
+			getitem 19538,1;
+		else{
+			if(rand(100)>80)
+				getitem 9704,1;
+			else
+				getitem 9028,1;
+		}
+		mes "[もっちー]";
+		mes "じゃあこれあげるね！";
+		close;
+	case 2:
+		pushpc DIR_SOUTH,3;
+		specialeffect EF_MAGNUMBREAK;
+		specialeffect2 EF_BASH;
+		percentheal -5,0;
+		mes "[もっちー]";
+		mes "バカ言わないでよっ!!!";
+		close;
+	case 3:
+		mes "[もっちー]";
+		mes "は……端っこかじるだけなら";
+		mes "10,000Zenyくれるならいいよ";
+		next;
+		if(select("払います！","餅がお金持ってどうするの")==2) {
+			mes "[もっちー]";
+			mes "それは世界の神秘というもの";
+			mes "あんまりそういうこと言ってると";
+			mes "黒服の人に連れて行かれるよ？";
+			close;
+		}
+		if(Zeny < 10000) {
+			mes "[もっちー]";
+			mes "お金が足りないよ";
+			close;
+		}
+		set Zeny,Zeny-10000;
+		heal MaxHP,MaxSP;
+		specialeffect2 EF_HEAL;
+		sc_start SC_BLESSING,240000,10;
+		sc_start SC_INCREASEAGI,240000,10;
+		specialeffect2 EF_BLESSING;
+		specialeffect2 EF_INCAGILITY;
+		mes "[もっちー]";
+		mes "さぁ、僕のお○をお食べ";
+		mes "とってもおいしいよ！";
+		close;
+	case 4:
+		mes "[もっちー]";
+		mes "うぐぅ……";
+		mes "今からでも遅くないから";
+		mes "^0000FF中秋の餠^000000を集めてきてよ！";
+		next;
+		mes "[もっちー]";
+		mes "きっと月にいる餅達が";
+		mes "生贄用にたくさん作ってるよ！";
+		close;
+	}
+}
+niflheim,213,202,4	script	ジャック#hall	1130,{
+	mes "[ジャック]";
+	if(HALLOWIN==5){
+		mes "あぁ、君か";
+		mes "ちょうどいいところに来たね";
+		mes "ハロウィンも終わったし";
+		mes "そろそろ帰ろうかと思ったところさ";
+		next;
+		mes "[ジャック]";
+		mes "ケルトに魔女の帽子をもらったんだって？";
+		mes "もしパンプキンポンチョを持ってたら";
+		mes "魔女のポンチョを作ってあげるよ";
+		next;
+		mes "[ジャック]";
+		mes "必要な材料は";
+		mes "パンプキンポンチョ 1個";
+		mes "グリフォンの爪 10個";
+		mes "黒い布切れ 100個";
+		mes "だよ";
+		next;
+		mes "[ジャック]";
+		mes "作ってもいいかい？";
+		next;
+		if(select("やっぱりやめます","作ってください")==1) {
+			mes "[ジャック]";
+			mes "そうかい";
+			mes "また来てくれよ";
+			close;
+		}
+		if(countitem(29098) < 1 || countitem(7048) < 10 || countitem(7205) < 100){
+			mes "[ジャック]";
+			mes "材料が足りないようだね";
+			close;
+		}
+		delitem 29098,1;
+		delitem 7048,10;
+		delitem 7205,100;
+		getitem 29168,1;
+		mes "[ジャック]";
+		mes "はい";
+		mes "出来たよ";
+	}else{
+		mes "やぁ";
+		mes "楽しんでくれたかな？";
+	}
+	close;
+}
+prontera.gat,155,285,3	script	エンジョイ#Xmas	753,{
+	switch(XMAS_3QUE) {
+	case 0:
+		mes "[エンジョイ]";
+		mes "今年も……地獄の季節がやって来た!!";
+		mes "いてつく冷たい風が体の中を通り抜け、";
+		mes "更に体の芯まで冷やし、心の奥底まで";
+		mes "冷やされたソロたちよー！";
+		mes "クリスマスがカップルたちの日だと";
+		mes "一体誰が決めたというんだ!!!!";
+		next;
+		mes "[エンジョイ]";
+		mes "「クリスマスは家族と一緒に」という";
+		mes "美しい標語を掲げながらも、デートに";
+		mes "出かける妹を見送った長い夜。";
+		next;
+		mes "[エンジョイ]";
+		mes "寂しさと戦いながら、いっそのこと";
+		mes "ヤケ酒でもしようかと思ってしまう";
+		mes "地獄みたいな一日が、煩わしく感じる";
+		mes "悩める情けない魂たちよ！";
+		next;
+		mes "[エンジョイ]";
+		mes "俺、エンジョイが君達の代わりに";
+		mes "大声で叫ぼう！";
+		mes "今年のクリスマスは……";
+		mes "我らが主役だー!!";
+		mes "我らも楽しむぞー!!!!";
+		next;
+		switch (select("オオーッ!!","別に……","私には相手がいますので～♪")) {
+			case 1:
+				mes "[エンジョイ]";
+				mes "よし!!　我々も一度、素敵に！";
+				mes "そして楽しく遊ぶべきだ!!";
+				mes "さて、俺の計画はこうだ。";
+				mes "クリスマスだからと心が浮き足立って";
+				mes "周囲を気にしないカップルたちを";
+				mes "戒めるために街を襲う予定だ。";
+				next;
+				mes "[エンジョイ]";
+				mes "そのためには多くの仲間が必要だ。";
+				mes "街のあちらこちらに散らばっている";
+				mes "我らの同志に";
+				mes "この計画を密かに知らせてくれ。";
+				mes "後でここで落ち合おう！";
+				mes "では、健闘を祈る!!";
+				next;
+				mes "[エンジョイ]";
+				mes "我らは各自一人の連絡先だけを";
+				mes "把握している。";
+				mes "万が一、事前に計画が漏れてしまっても";
+				mes "残りの仲間たちが計画を";
+				mes "遂行するためにな！";
+				mes "私が知る連絡先は、^0000FFハッピー^000000君だ。";
+				next;
+				mes "[エンジョイ]";
+				mes "まず^0000FFハッピー^000000君を訪ね、";
+				mes "計画の始動を知らせてくれ。";
+				mes "そして残りの仲間たちを集めるのに";
+				mes "総力を尽くしてくれ!!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "ラジャー!!";
+				next;
+				emotion 29;
+				mes "[エンジョイ]";
+				mes "ここへ戻って来る時は必ず、";
+				mes "古木の枝5個を持ってこい！";
+				mes "街を襲うのに必須の品だからな。";
+				mes "フフ……フフフ……。";
+				next;
+				mes "[エンジョイ]";
+				mes "さあ、行け、同志よ！";
+				mes "但し、我らは決して";
+				mes "カップルたちが羨ましくて";
+				mes "こういうことをしているわけではない";
+				mes "ということを肝に銘じておけ!!";
+				mes "軽薄なカップルたちに天罰を!!!!";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "天罰を!!!!";
+				set XMAS_3QUE,1;
+				close;
+			case 2:
+				mes "[エンジョイ]";
+				mes "何だお前は!?";
+				mes "どっちつかずで!!";
+				mes "俺の意見に賛同しないなら、";
+				mes "とっとと消えろ!!";
+				close;
+			case 3:
+				misceffect 42;
+				mes "[エンジョイ]";
+				mes "…………";
+				next;
+				misceffect 43;
+				mes "[エンジョイ]";
+				mes "………………";
+				next;
+				misceffect 254;
+				mes "[エンジョイ]";
+				mes "……………………";
+				next;
+				misceffect 328;
+				misceffect 1,"";
+				heal -(Hp-1),0;
+				mes "[エンジョイ]";
+				mes "…………………………";
+				mes "とっとと消えろ、この悪魔め!!";
+				close;
+		}
+	default:	//1～4のとき
+		mes "[エンジョイ]";
+		mes "我らは各自一人の連絡先だけを";
+		mes "把握している。";
+		mes "万が一、事前に計画が漏れてしまっても";
+		mes "残りの仲間たちが計画を";
+		mes "遂行するためにな！";
+		mes "私が知る連絡先は、^0000FFハッピー^000000君だ。";
+		next;
+		mes "[エンジョイ]";
+		mes "まず^0000FFハッピー^000000君を訪ね、";
+		mes "計画の始動を知らせてくれ。";
+		mes "そして残りの仲間たちを集めるのに";
+		mes "総力を尽くしてくれ!!";
+		next;
+		mes "[エンジョイ]";
+		mes "ここへ戻って来る時は必ず、";
+		mes "^0000FF古木の枝5個^000000を持ってこい!!";
+		mes "絶対忘れるなよ！";
+		mes "軽薄なカップルたちに天罰を!!!!";
+		close;
+	case 5:
+		if(countitem(604)<5) {
+			mes "[エンジョイ]";
+			mes "時間はないぞ!!";
+			mes "君がためらっている今、この時も";
+			mes "カップルたちは刻一刻と自分達のための";
+			mes "楽しいクリスマスを過ごしているのだ。";
+			mes "早く^0000FF古木の枝5個^000000を";
+			mes "用意してこい！";
+			close;
+		}
+		mes "[エンジョイ]";
+		mes "任務は遂行したか!?";
+		mes "おお、古木の枝か？";
+		mes "よし、ちょっと見せてみろ！";
+		next;
+		mes "[エンジョイ]";
+		mes "おし！　準備が整ったな！";
+		mes "それでは始めるとしよう!!";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "ちょっと待ってください!!";
+		mes "まだ、他の人達が";
+		mes "来ていないようですが？";
+		next;
+		mes "[エンジョイ]";
+		mes "何の話だ？";
+		mes "彼らはとっくに……";
+		mes "ほら、";
+		next;
+		hideoffnpc "ハッピー#xmas";
+		hideoffnpc "メリー#xmas";
+		hideoffnpc "クリス#xmas";
+		hideoffnpc "マス#xmas";
+		emotion 27,"ハッピー#xmas";
+		emotion 27,"メリー#xmas";
+		emotion 27,"クリス#xmas";
+		emotion 27,"マス#xmas";
+		mes "[エンジョイ]";
+		mes "来てるではないか！";
+		mes "若いもんが……しっかりしろ！";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "確かに、四人とも！";
+		next;
+		mes "[エンジョイ]";
+		mes "歓迎する!!　諸君ら!!";
+		mes "一人身というのが";
+		mes "まるで罪であるかのように、";
+		next;
+		mes "[エンジョイ]";
+		mes "カップルたちの目を避け、";
+		mes "世間の目を避け、";
+		mes "賑やかな節目や記念日の度に";
+		mes "陰に陰に追いやられてきたソロたちよ！";
+		next;
+		mes "[エンジョイ]";
+		mes "友達に恋人ができた時……";
+		mes "道端でキスする恋人達を見た時……";
+		mes "どうして自分が目を背けなければ";
+		mes "ならないのか!?";
+		mes "怒りに身を震わせながら歯ぎしりした";
+		mes "我ら、罪のないソロたちよ!!";
+		next;
+		mes "[エンジョイ]";
+		mes "今年はカップルだけのクリスマスが";
+		mes "来たのではない!!";
+		next;
+		mes "[エンジョイ]";
+		mes "素手でピッキを殴り飛ばし、";
+		mes "化け物のエサを";
+		mes "鉄を食べるかのように噛み砕き、";
+		mes "走る飛行船から飛び降り、";
+		mes "鋼鉄のように鍛錬された";
+		mes "我らソロたちよ！";
+		next;
+		mes "[エンジョイ]";
+		mes "パーティーを眺めて、羨ましくて";
+		mes "こっそり目頭を濡らした暗鬱な時代も";
+		mes "もう終わりだ！";
+		mes "クリスマスがカップルの専有物だと";
+		mes "誰が決めたのだー!!";
+		mes "今年のクリスマスは我らが主役だ!!";
+		next;
+		mes "[一同]";
+		mes "そう、今年のクリスマスは、";
+		mes "我らが主役だ！";
+		mes "我らの心！　恨み！　怒り！　苦悩!!";
+		mes "皆、ここに集めて噴き出すぞー!!";
+		next;
+		mes "-エンジョイは、集めてきた";
+		mes "古木の枝をまとめてわしづかみにし、";
+		mes "力を加えた-";
+		next;
+		mes "[エンジョイ]";
+		mes "クリスマスだからといって、";
+		mes "思いっきり心が浮き足立っている";
+		mes "軽薄なカップルに天罰をー！";
+		mes " ";
+		mes "[一同]";
+		mes "天罰をー!!";
+		delitem 604,5;
+		misceffect 330;
+		emotion 27;
+		emotion 27,"ハッピー#xmas";
+		emotion 27,"メリー#xmas";
+		emotion 27,"クリス#xmas";
+		emotion 27,"マス#xmas";
+		hideonnpc "エンジョイ#Xmas";
+		hideonnpc "ハッピー#xmas";
+		hideonnpc "メリー#xmas";
+		hideonnpc "クリス#xmas";
+		hideonnpc "マス#xmas";
+		set XMAS_3QUE,6;
+		set .@name$,strcharinfo(0);
+		if(rand(2)==0)
+			donpcevent "XmasSoloShout::OnStart1";
+		else
+			donpcevent "XmasSoloShout::OnStart2";
+		close2;
+		if(rand(2)==0)
+			announce "ソロ軍団員 "+.@name$+"様の心の叫びが街を襲いました。",8,0x73DEDE;
+		else
+			announce "ソロ軍団員 "+.@name$+"様の心の中にある悲しみの黒い雲が、空を覆い尽くす。",9,0x73DEDE;
+		monster "prontera.gat",154,296,.@name$+"の八つ当たり",1588,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",155,296,.@name$+"の後悔",1588,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",156,296,.@name$+"の攻撃",1588,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",157,296,.@name$+"の影",1588,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",158,296,.@name$+"の悲しみ",1588,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",154,297,.@name$+"の泣き叫び",1244,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",155,297,.@name$+"の憂鬱",1244,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",156,297,.@name$+"の癇癪",1244,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",157,297,.@name$+"の囁き",1244,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",158,297,.@name$+"の嫉妬",1244,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",154,298,.@name$+"の寂しさ",1245,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",155,298,.@name$+"の裁き",1245,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",156,298,.@name$+"の闇",1245,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",157,298,.@name$+"の呪い",1245,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",158,298,.@name$+"の悪夢",1245,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",154,299,.@name$+"の妬み",1062,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",155,299,.@name$+"の爆弾",1062,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",156,299,.@name$+"の苦悩",1062,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",157,299,.@name$+"の絶望",1062,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",158,299,.@name$+"の挫折",1062,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",154,300,.@name$+"の怒り",1246,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",155,300,.@name$+"の恨み",1246,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",156,300,.@name$+"の呪い",1246,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",157,300,.@name$+"の傷心",1246,1,"エンジョイ#Xmas::OnKilled";
+		monster "prontera.gat",158,300,.@name$+"の憎悪",1246,1,"エンジョイ#Xmas::OnKilled";
+		initnpctimer;
+		end;
+	case 6:
+		mes "[エンジョイ]";
+		mes "うん……計画を実行しても、";
+		mes "まだカップルたちの猛威はすごい！";
+		mes "ソロたちも背筋をバリッと伸ばして";
+		mes "ソロの未来を建設するんだ!!";
+		mes "さあ、突き進め、同志よ!!";
+		next;
+		mes "[エンジョイ]";
+		mes "栄光をつかむその日まで！";
+		mes "ソロが心の平安を取り戻すその日まで、";
+		mes "この挑戦は果てしなく続くだろう。";
+		mes "力を出せ、戦友よ！";
+		mes "心が解放されるまで、思う存分遊べ！";
+		set XMAS_3QUE,0;
+		close;
+	}
+OnTimer180000:
+	stopnpctimer;
+	if(rand(2)==0)
+		mapannounce "prontera.gat","ソロ軍団員達が、皆、楽しいクリスマスを迎えられるよう祈ります。",0,0x73DEDE;
+	else
+		mapannounce "prontera.gat","ソロ軍団員達が、皆で楽しいクリスマスを迎えられるよう祈りました。",9,0x73DEDE;
+	killmonster "prontera.gat","エンジョイ#Xmas::OnKilled";
+	hideoffnpc "エンジョイ#Xmas";
+	end;
+OnInit:
+	hideonnpc "ハッピー#xmas";
+	hideonnpc "メリー#xmas";
+	hideonnpc "クリス#xmas";
+	hideonnpc "マス#xmas";
+	end;
+OnKilled:	//ダミーイベント
+	end;
+}
+
+prontera.gat,0,0,0	script	XmasSoloShout	-1,{
+OnStart1:
+	sleep 3000;
+	mapannounce "prontera.gat","精錬は1人で出来ちゃうぞ！",0,0x73DEDE;
+	sleep 2000;
+	mapannounce "prontera.gat","ダンジョンでパーティーは贅沢だ！",0,0x73DEDE;
+	sleep 2000;
+	mapannounce "prontera.gat","私には心に決めたNPCがいる！",0,0x73DEDE;
+	sleep 2000;
+	mapannounce "prontera.gat","生まれて転職まで独りでした！",0,0x73DEDE;
+	sleep 2000;
+	mapannounce "prontera.gat","クリスマスにはシングルベ～ル！",0,0x73DEDE;
+	sleep 2000;
+	mapannounce "prontera.gat","……私たちは無敵のソロ軍団!!",0,0x73DEDE;
+	end;
+OnStart2:
+	sleep 3000;
+	mapannounce "prontera.gat","過去に受けた傷に泣かされたりはしない!!",0,0x73DEDE;
+	sleep 2000;
+	mapannounce "prontera.gat","気まぐれな連絡なんて待ちはしない!!",0,0x73DEDE;
+	sleep 2000;
+	mapannounce "prontera.gat","散っていった心に未練なんて残さない!!",0,0x73DEDE;
+	sleep 2000;
+	mapannounce "prontera.gat","寂しくなったからといって、泣き崩れたりしない!!",0,0x73DEDE;
+	sleep 2000;
+	mapannounce "prontera.gat","不必要な記憶は思い出さない!!",0,0x73DEDE;
+	sleep 2000;
+	mapannounce "prontera.gat","私は、誇りあるソロ軍団員だ!!",0,0x73DEDE;
+	end;
+}
+
+prontera.gat,150,286,5	script	ハッピー#xmas	869,{}
+prontera.gat,161,286,3	script	メリー#xmas	875,{}
+prontera.gat,161,281,1	script	クリス#xmas	748,{}
+prontera.gat,150,281,7	script	マス#xmas	881,{}
+
+
+prontera.gat,188,177,4	script	ハッピー	869,{
+	switch(XMAS_3QUE) {
+	case 0:
+	case 1:
+		emotion 28;
+		mes "[ハッピー]";
+		mes "ウウ……シクシク……";
+		mes "ホルグレン、貴様が～!!";
+		mes "世の中が憎い！　精錬が憎い!!!!";
+		mes "クリスマスが何だーっ!!!!";
+		next;
+		if(XMAS_3QUE == 1) {
+			mes "["+strcharinfo(0)+"]";
+			mes "あの……もしもし？";
+			next;
+		}
+		mes "[ハッピー]";
+		mes "何だ？　笑いたいなら笑えばいい!!";
+		mes "誰かを頼って精錬する意気地は";
+		mes "なかったさ！";
+		mes "だから、一人で正々堂々と";
+		mes "精錬に立ち向かったんだ!!";
+		next;
+		mes "[ハッピー]";
+		mes "ブレッシングが何だ！";
+		mes "グロリアが何だ！";
+		mes "カップルが何だー!!!!";
+		if(XMAS_3QUE == 0)
+			close;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "あの……";
+		mes "あなたが、ハッピーさんですか？";
+		mes "エンジョイさんが";
+		mes "待っていらっしゃいます。";
+		mes "行きましょう!!";
+		next;
+		mes "[ハッピー]";
+		mes "……！";
+		mes "いよいよ時が来たのか？";
+		mes "去年のクリスマス、精錬に失敗して";
+		mes "無気力になっていた時、";
+		mes "私に生きる道を示してくれた方が";
+		mes "私を呼んでくださったのか?!";
+		next;
+		mes "[ハッピー]";
+		mes "よし！　今日のために一年耐えたんだ！";
+		mes "立派にクリスマスを邪魔する！";
+		mes "その思いで今日まで頑張ってきた！";
+		mes "で、どこに行けば会えるんだ？";
+		mes "エンジョイさんには？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "あそこでお待ちです。";
+		mes "私は他の仲間に";
+		mes "連絡をしてから行きます。";
+		mes "先に行ってください。";
+		next;
+		mes "[ハッピー]";
+		mes "よし！　分かった！";
+		mes "次の仲間は^0000FFメリー^000000だ！";
+		mes "彼に連絡を頼む！";
+		mes "私は準備が整ったら行く。";
+		mes "後で会おう！";
+		set XMAS_3QUE,2;
+		close;
+	default:	//2～6のとき
+		mes "[ハッピー]";
+		mes "色々と必要なものが多いんだ。";
+		mes "一年かけて準備してきたからな。";
+		mes "私は準備が整い次第、行く。";
+		mes "次の仲間は^0000FFメリー^000000だ！";
+		mes "彼に連絡を頼む！";
+		close;
+	}
+}
+
+prontera.gat,62,339,3	script	メリー	875,{
+	switch(XMAS_3QUE) {
+	case 0:
+	case 1:
+	case 2:
+		mes "[メリー]";
+		mes "フッフッフッフッ……。";
+		mes "とうとう……とうとう……";
+		mes "ペコペコに乗ることができたぞ～!!";
+		mes "プリースト連れパーティーなぞ";
+		mes "贅沢極まりない！";
+		next;
+		mes "[メリー]";
+		mes "俺には、この子さえいてくれれば";
+		mes "十分だ！";
+		mes "フフフフフ……。";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "あの……。";
+		next;
+		mes "[メリー]";
+		mes "何だ！　貴様は!!";
+		mes "俺のペコちゃんの周りをうろつくな！";
+		mes "ああ～、怖かったろう？　ペコちゃん。";
+		mes "大丈夫、大丈夫だからね～。";
+		next;
+		mes "[メリー]";
+		mes "エンジョイさんは、";
+		mes "生まれてから転職まで独りで、";
+		mes "力が全てだったみたいだけど、";
+		mes "俺にはこのペコちゃんがいるから";
+		mes "大丈夫さ……フフフッ……。";
+		next;
+		mes "[メリー]";
+		mes "ペコちゃんとクリスマスケーキを";
+		mes "分けて食べるし、";
+		mes "パーティーだってささやかながらも";
+		mes "きちんとやるさ。";
+		next;
+		mes "[メリー]";
+		mes "俺は悲しくない！";
+		mes "寂しくなんかないぞー!!";
+		mes "フハハハハハ……。";
+		if(XMAS_3QUE < 2)
+			close;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "じ、実は、そのエンジョイさんが……。";
+		next;
+		mes "[メリー]";
+		mes "何？　お前、何でエンジョイさんを";
+		mes "知っているんだ？";
+		mes "お前まさか、";
+		mes "ハッピーが送って来た奴か？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "はい、そうです。";
+		mes "ハッピーさんに言われて……。";
+		next;
+		mes "[メリー]";
+		mes "そうか……時が来たのか。";
+		mes "……うん？　ペコちゃん。";
+		mes "やっと時が来たんだよ。";
+		next;
+		mes "[メリー]";
+		mes "……カップルがいちゃつくことに対する";
+		mes "腹立たしさから解放され、";
+		mes "本当に楽しい俺のクリスマスが……。";
+		mes "とうとう……フフフ……。";
+		next;
+		mes "[メリー]";
+		mes "よし！　それじゃ、俺はペコちゃんと";
+		mes "一緒にエンジョイさんのとこへ行く！";
+		mes "お前は先に、俺の友達^0000FFクリス^000000に";
+		mes "この件を伝えてくれ！";
+		mes "じゃ、後でな！";
+		set XMAS_3QUE,3;
+		close;
+	default:	//3～6のとき
+		mes "[メリー]";
+		mes "俺はペコちゃんと一緒に";
+		mes "エンジョイさんのとこへ行く！";
+		mes "お前は先に、俺の友達^0000FFクリス^000000に";
+		mes "この件を伝えてくれ！";
+		mes "じゃ、後でな！";
+		close;
+	}
+}
+
+prontera.gat,163,66,7	script	クリス	748,{
+	switch(XMAS_3QUE) {
+	default:	//0～3のとき
+		mes "[クリス]";
+		mes "草!!　草はどこだ？　どこだ？";
+		mes "ああ～、草を集めなきゃ……。";
+		mes "頑張ってハーブを栽培して、";
+		mes "ポーションを造って、";
+		mes "ソロたちだけに売るんだ!!";
+		next;
+		mes "[クリス]";
+		mes "あああー！";
+		mes "倉庫にぎっしり一杯に積もっている";
+		mes "たくさんのハーブを見ていると、";
+		mes "どうしてか胸が一杯になって……。";
+		next;
+		mes "[クリス]";
+		mes "あ、そんなこと言ってる場合じゃない！";
+		mes "余計な事を考えている暇はない！";
+		mes "また草を集めなきゃ……";
+		mes "草を集めなきゃいけない……。";
+		if(XMAS_3QUE < 3)
+			close;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "私の話を聞いてください！";
+		mes "あなたがクリスさんですか？";
+		next;
+		mes "[クリス]";
+		mes "ああ～？　誰なんだ、君は!!";
+		mes "……はっ、そういえば、";
+		mes "誰かとまともに話をするのは、";
+		mes "いや、会うことですら";
+		mes "本当に、本当に久しぶりだ……。";
+		next;
+		mes "[クリス]";
+		mes "何か、胸のあたりがあたたか……";
+		mes "あ、しまった！";
+		mes "また余計な事を考えてしまった！";
+		mes "どいて！　私は草を採りに行く!!";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "クリスさん!!";
+		mes "ちょっと話を聞いてください!!";
+		mes "メリーさんに言われて来ました!!";
+		mes "エンジョイさんが、";
+		mes "クリスマス計画を……。";
+		next;
+		mes "[クリス]";
+		mes "何だって?!　もうそんな日か？";
+		mes "ああ、そうだ、そうだ!!";
+		mes "今年は草ばかりを集め歩いて、";
+		mes "時間を潰さなくてもいいんだ!!";
+		next;
+		mes "[クリス]";
+		mes "エンジョイさんが、";
+		mes "召集命令をかけたんだよね?!";
+		mes "よし、よし！　すぐに行こう!!";
+		mes "あ……君も一緒に行く？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "私には、まだすべきことがあります。";
+		mes "他の仲間たちに連絡を";
+		mes "しなければなりません。";
+		mes "先にエンジョイさんのところへ";
+		mes "行ってください。";
+		mes "私もすぐに行きますので。";
+		next;
+		mes "[クリス]";
+		mes "あ、そう、そう、そうだよね。";
+		mes "なら^0000FFマス^000000と言う人の";
+		mes "ところへ行ってくれ。";
+		mes "私は、先に行くよ。";
+		next;
+		mes "[クリス]";
+		mes "ハハハ……草なんか……";
+		mes "カップルなんか……。";
+		mes "今年は本当に、";
+		mes "楽しいクリスマスになりそうだ……";
+		mes "ハハハハハ……。";
+		set XMAS_3QUE,4;
+		close;
+	case 4:
+	case 5:
+	case 6:
+		mes "[クリス]";
+		mes "^0000FFマス^000000と言う人のところへ行ってくれ。";
+		mes "私は、先に行くよ。";
+		next;
+		mes "[クリス]";
+		mes "ハハハ……草なんか……";
+		mes "カップルなんか……。";
+		mes "今年は本当に、";
+		mes "楽しいクリスマスになりそうだ……";
+		mes "ハハハハハ……。";
+		close;
+	}
+}
+
+prontera.gat,35,209,5	script	マス	881,{
+	switch(XMAS_3QUE) {
+	default:	//0～4のとき
+		mes "[マス]";
+		mes "………………";
+		next;
+		if(XMAS_3QUE == 4) {
+			mes "["+strcharinfo(0)+"]";
+			mes "……あの……もしもし？";
+			next;
+		}
+		emotion 23,"";
+		mes "[マス]";
+		mes "……ああ～、愛しのカプラお姉様～!!";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "（うわ、びっくりした……）";
+		next;
+		mes "[マス]";
+		mes "うん、大丈夫だよ、ティーベ。";
+		mes "僕は寂しくないから。";
+		mes "だって僕には、熱いハートをくれる";
+		mes "バースリーお姉様と";
+		mes "オークレディお姉様がいるからね。";
+		mes "ヒヒッ、ヒヒヒヒッ……。";
+		next;
+		emotion 29;
+		mes "-彼は、自分の右手に";
+		mes "コソコソと話かけ、";
+		mes "ニヤニヤと笑った-";
+		if(XMAS_3QUE < 4)
+			close;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "あの……マスさん？";
+		mes "実はクリスさんに言われて……。";
+		mes "エンジョイさんの召集命令で……。";
+		mes "……あの、聞いていらっしゃいます？";
+		next;
+		mes "[マス]";
+		mes "……ああ。";
+		mes "聞いてるかい？　ティーベ。";
+		mes "とうとう決戦の日が来たようだ。";
+		mes "ハハハ、ハハハ……。";
+		next;
+		mes "[マス]";
+		mes "それじゃあ、カプラお姉様。";
+		mes "少しの間、寂しくなるでしょうが、";
+		mes "我慢をなさってください。";
+		mes "ええ、面白いクリスマスを";
+		mes "作って差し上げますから。";
+		mes "さあ、行こう、ティーベ。";
+		next;
+		mes "-彼は自分の右手にささやいた後、";
+		mes "カプラ職員に挨拶をし、";
+		mes "何気なく何かをしまいこんだ-";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "ふぅ～、やっと全員揃ったか。";
+		mes "私も早く^0000FF古木の枝^000000を集めて戻ろう！";
+		mes "フフフフフフ……";
+		mes "軽薄カップルに天罰を……。";
+		set XMAS_3QUE,5;
+		close;
+	case 5:
+	case 6:
+		mes "[マス]";
+		mes "カプラお姉様、少しの間、";
+		mes "寂しくなるでしょうが、";
+		mes "我慢をなさってください。";
+		mes "ええ、面白いクリスマスを";
+		mes "作って差し上げますから。";
+		mes "さあ、行こう、ティーベ。";
+		next;
+		mes "-彼は自分の右手にささやいた後、";
+		mes "カプラ職員に挨拶をし、";
+		mes "何気なく何かをしまいこんだ-";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "ふぅ～、やっと全員揃ったか。";
+		mes "私も早く古木の枝を集めて戻ろう！";
+		mes "フフフフフフ……";
+		mes "軽薄カップルに天罰を……。";
+		close;
+	}
+}
+xmas_in.gat,109,94,3	script	おもちゃ屋	556,{
+	mes "[おもちゃ屋]";
+	mes "いい物を作ってあげよう";
+	mes "欲しいものを言いたまえ";
+	next;
+	switch(select("鹿の角","トナカイの鼻","アイラブユー花火","クリスマス花火","やめる")){
+	case 1:
+		mes "[おもちゃ屋]";
+		mes "^0000FF鹿の角^000000が欲しいのかい？";
+		next;
+		mes "[おもちゃ屋]";
+		mes "^0000FF子悪魔の角^000000 20個";
+		mes "が必要だよ";
+		next;
+		if(select("作ります","やっぱやめた")==2) {
+			mes "[おもちゃ屋]";
+			mes "そうか、ふむ";
+			close;
+		}
+		if(countitem(1038)<20){
+			mes "[おもちゃ屋]";
+			mes "材料が足りないね";
+			mes "^0000FF子悪魔の角^000000 20個";
+			mes "が必要だよ";
+			close;
+		}
+		delitem 1038,20;
+		getitem 2284,1;
+		mes "[おもちゃ屋]";
+		mes "そら、これだよ";
+		close;
+	case 2:
+		mes "[おもちゃ屋]";
+		mes "^0000FFトナカイの鼻^000000が欲しいのかい？";
+		next;
+		mes "[おもちゃ屋]";
+		mes "^0000FFピエロの鼻[0]^000000 1個";
+		mes "^0000FF烈火石^000000 1個";
+		mes "^0000FFガラス玉^000000 1個";
+		mes "が必要だよ";
+		next;
+		if(select("作ります","やっぱやめた")==2) {
+			mes "[おもちゃ屋]";
+			mes "そうか、ふむ";
+			close;
+		}
+		if(countitem(2262)<1 || countitem(7521)<1 || countitem(746)<1){
+			mes "[おもちゃ屋]";
+			mes "材料が足りないね";
+			mes "^0000FFピエロの鼻[0]^000000 1個";
+			mes "^0000FF烈火石^000000 1個";
+			mes "^0000FFガラス玉^000000 1個";
+			mes "が必要だよ";
+			close;
+		}
+		delitem 2262,1;
+		delitem 7521,1;
+		delitem 746,1;
+		getitem 5204,1;
+		mes "[おもちゃ屋]";
+		mes "そら、これだよ";
+		close;
+	case 3:
+		mes "[おもちゃ屋]";
+		mes "^0000FFアイラブユー花火^000000が欲しいのかい？";
+		next;
+		mes "[おもちゃ屋]";
+		mes "^0000FF穴が開いている赤い靴下^000000 1個";
+		mes "が必要だよ";
+		next;
+		if(select("作ります","やっぱやめた")==2) {
+			mes "[おもちゃ屋]";
+			mes "そうか、ふむ";
+			close;
+		}
+		if(countitem(7034)<1){
+			mes "[おもちゃ屋]";
+			mes "材料が足りないね";
+			mes "^0000FF穴が開いている赤い靴下^000000 1個";
+			mes "が必要だよ";
+			close;
+		}
+		delitem 7034,1;
+		getitem 14546,10;
+		mes "[おもちゃ屋]";
+		mes "そら、これだよ";
+		close;
+	case 4:
+		mes "[おもちゃ屋]";
+		mes "^0000FFクリスマス花火^000000が欲しいのかい？";
+		next;
+		mes "[おもちゃ屋]";
+		mes "^0000FF穴が開いている赤い靴下^000000 1個";
+		mes "が必要だよ";
+		next;
+		if(select("作ります","やっぱやめた")==2) {
+			mes "[おもちゃ屋]";
+			mes "そうか、ふむ";
+			close;
+		}
+		if(countitem(7034)<1){
+			mes "[おもちゃ屋]";
+			mes "材料が足りないね";
+			mes "^0000FF穴が開いている赤い靴下^000000 1個";
+			mes "が必要だよ";
+			close;
+		}
+		delitem 7034,1;
+		getitem 14550,10;
+		mes "[おもちゃ屋]";
+		mes "そら、これだよ";
+		close;
+	case 5:
+		mes "[おもちゃ屋]";
+		mes "そうか、ふむ";
+		close;
+	}
+}
+xmas_in.gat,100,96,4	script	サンタジジ	718,{
+	mes "[サンタクロース]";
+	mes "ホーホーホー";
+	mes "メリークリスマス!!";
+	next;
+	mes "[サンタクロース]";
+	mes "^0000FF織女の絹手ぬぐい^000000を持ってきたら";
+	mes "みんなのクリスマスプレゼントをあげよう";
+	next;
+	switch(select("イフリートの耳","キャプテンハット","エルンスト・フォン・ヴォルフ11世",
+				"マクシミリアン・フォン・ベベ29世","ソウルレスウィング","漆黒のリボン",
+				"陰気なパンプキンハット","イグドラシルの実の箱","血塗られた古木の枝","導式エーテル","導式エーテルα",
+				"古書","赤封の書","黒書","ホーリーオルゴール","クリスマスボックス")){
+	case 1: set .@gain,5421; set .@amount,50; break;
+	case 2: set .@gain,5184; set .@amount,10; break;
+	case 3: set .@gain,18629; set .@amount,300; break;
+	case 4: set .@gain,5572; set .@amount,600; break;
+	case 5: set .@gain,5257; set .@amount,30; break;
+	case 6: set .@gain,5765; set .@amount,50; break;
+	case 7: set .@gain,18527; set .@amount,30; break;
+	case 8: set .@gain,13517; set .@amount,2; break;
+	case 9: set .@gain,12103; set .@amount,30; break;
+	case 10:set .@gain,28239; set .@amount,5; break;
+	case 11:set .@gain,28240; set .@amount,10; break;
+	case 12:set .@gain,28263; set .@amount,10; break;
+	case 13:set .@gain,28264; set .@amount,50; break;
+	case 14:set .@gain,28265; set .@amount,400; break;
+	case 15:set .@gain,2784; set .@amount,20; break;
+	case 16:set .@gain,12355; set .@amount,1; break;
+	}
+	mes "[サンタクロース]";
+	mes getitemname(.@gain)+"じゃな";
+	mes "ホーホーホー";
+	mes "織女の絹手ぬぐいを"+.@amount+"個もらおうかの";
+	next;
+	switch(select("交換しない","単品交換する","複数交換する")) {
+	case 1:
+		mes "[サンタクロース]";
+		mes "ホーホーホー";
+		mes "メリークリスマス!!";
+		close;
+	case 2:set .@num,1;break;
+	case 3:input .@num;break;
+	}
+	if(.@num < 1){
+		mes "[サンタクロース]";
+		mes "ホーホーホー";
+		mes "メリークリスマス!!";
+		close;
+	}
+	if(countitem(7579) < .@amount*.@num){
+		mes "[サンタクロース]";
+		mes "^0000FF織女の絹手ぬぐい^000000が足りぬな";
+		mes "ええい、役たたずめ!!";
+		mes "クリスマスプレゼントはお預けじゃ!!";
+		close;
+	}
+	delitem 7579,.@amount*.@num;
+	getitem .@gain,.@num;
+	mes "[サンタクロース]";
+	mes "ホーホーホー";
+	mes "これでクリスマスを楽しむと良い";
+	mes "　";
+	mes "^777777……はぁはぁ、サンタガールちゃん^000000";
+	mes "^777777……くんかくんか^000000";
+	close;
+}
+xmas_in.gat,89,92,4	script	サンタガール	714,{
+	if(#CRISTMAS$!=""){
+		mes "[サンタガール]";
+		mes "あ、また会ったわね！";
+		emotion 0;
+		next;
+		mes "[サンタガール]";
+		mes "君のお願い、";
+		mes "^FF0000"+#CRISTMAS$+"^000000";
+		mes "はちゃんとクソジジイに伝えたよ！";
+		emotion 33;
+		next;
+	}
+	mes "[サンタガール]";
+	mes "うーん……寒いわ";
+	mes "暖かい服が欲しい……";
+	emotion 26;
+	next;
+	mes "[サンタガール]";
+	mes "え？";
+	mes "着ればいいじゃないかって？";
+	next;
+	mes "[サンタガール]";
+	mes "何言ってるのよバカ！";
+	mes "サンタ服の良さがわからないの?!";
+	emotion 6;
+	next;
+	mes "[サンタガール]";
+	mes "考えても見なさい！";
+	mes "サンタ服の下にジャージを着た";
+	mes "サンタガールの姿を……";
+	next;
+	mes "[サンタガール]";
+	mes "イヤアアアァァァ!!!";
+	emotion 23;
+	next;
+	mes "[サンタガール]";
+	mes "ナンセンスよ！";
+	mes "ミニスカジャージよりも醜い！";
+	mes "今時の若者はファッションの何たるかを分かってないっ!!";
+	next;
+	mes "[サンタガール]";
+	mes "さぁ、あなたにも";
+	mes "ファッションセンスが欠片でもあるなら";
+	mes "サンタ服を着なさい！";
+	emotion 32;
+	next;
+	mes "[サンタガール]";
+	mes "コットンシャツ[0] 1個";
+	mes "包装紙 1個";
+	mes "包装リボン 1個";
+	mes "赤ポーション 3個";
+	mes "聖水 1個";
+	mes "があれば作れるわよ！";
+	next;
+	if(select("作ってください！","別に必要ない！")==2) {
+		mes "[サンタガール]";
+		mes "え、えっ？";
+		mes "サ、サンタ服よ……？";
+		mes "この時期にしか着れないのよ？";
+		emotion 23;
+		next;
+		mes "[サンタガール]";
+		mes "そ、そっか";
+		mes "必要ないなら……仕方ないか";
+		emotion 28;
+		close;
+	}
+	mes "[サンタガール]";
+	mes "わかったわ！";
+	mes "お針子仕事を始めて二週間目の";
+	mes "私に任せなさい！！";
+	emotion 32;
+	next;
+	if(countitem(2301)<1 || countitem(7174)<1 || countitem(7175)<1 || countitem(501)<3 || countitem(523)<1){
+		mes "[サンタガール]";
+		mes "っておバカ！！";
+		mes "材料くらい確認しなさいよ！";
+		emotion 6;
+		close;
+	}
+	mes "[サンタガール]";
+	mes "ふんふんふーん";
+	mes "ふふーんふんふん";
+	mes "あっ！やば！";
+	mes "……よし、これでなんとか……";
+	delitem 2301,1;
+	delitem 7174,1;
+	delitem 7175,1;
+	delitem 501,3;
+	delitem 523,1;
+	next;
+	mes "[サンタガール]";
+	mes "うは、でっきた！";
+	mes "完璧！まじ完璧だから！";
+	mes "完璧すぎて私尊敬に値すると思うよ！";
+	mes "だからとっとと使ってね！";
+	mes "使う前にじっくり見たら……^777777ｺﾛﾇ^000000";
+	getitem 12132,1;
+	emotion 29;
+	close;
+}
+xmas_in.gat,87,91,6	script	カプラディフォルテー#x	117,{
+	cutin "kafra_01",2;
+	mes "[カプラディフォルテー]";
+	mes "いらっしゃいませ";
+	mes "カプラサービスは";
+	mes "いつも皆様のそばにいます。";
+	mes "只今、クリスマス期間限定";
+	mes "「ラッピングサービス」を";
+	mes "ご提供しております。";
+	next;
+	mes "[カプラディフォルテー]";
+	mes "友達や家族、恋人に特別な贈り物を";
+	mes "したい方の為に、プレゼントボックスを";
+	mes "紙とリボンでお包みしております。";
+	mes "また包装だけでなく、贈り主の方の";
+	mes "お名前もプレゼントボックスへ";
+	mes "記入しております。";
+	next;
+	mes "[カプラディフォルテー]";
+	mes "「ラッピングサービス」はクリスマス";
+	mes "期間中に材料をご用意くだされば";
+	mes "どなたでもご利用になれます。";
+	mes "想いを伝えたい方へ心をこめた";
+	mes "贈り物をなさりたければ、是非";
+	mes "カプラ職員にお申し付けください。";
+	close2;
+	cutin "kafra_01",255;
+	end;
+}
+
+xmas_in.gat,87,89,6	script	カプラテーリング#x	116,{
+	cutin "kafra_02",2;
+	mes "[カプラテーリング]";
+	mes "クリスマス期間限定カプラサービス";
+	mes "「ラッピングサービス」です！";
+	mes "どなたが受け取ってもきっと";
+	mes "喜ばれると思います。";
+	next;
+	switch (select("プレゼントボックスを包んでください","けっこうです")) {
+	case 1:
+		if(countitem(644)<1 || countitem(7174)<1 || countitem(7175)<1) {
+			mes "[カプラテーリング]";
+			mes "ラッピングサービスのご利用には、";
+			mes "ご用意していただく物がございます。";
+			mes "私は他のお客様の包装作業が";
+			mes "ございますので申し訳ありませんが、";
+			mes "必要材料に関しては私のそばにいる";
+			mes "カプラソリンにお尋ねください。";
+			break;
+		}
+		mes "[カプラテーリング]";
+		mes "ラッピングサービスの";
+		mes "ご利用ありがとうございます。";
+		mes "お客様の心が伝わるよう";
+		mes "祈っております。では、";
+		mes "真心をこめてお包みしましょう。";
+		next;
+		mes "[カプラテーリング]";
+		mes "お待たせしました。";
+		mes "こちらになります。";
+		mes "ご持参された材料でお包みしました。";
+		mes "そしてお客様のお名前を";
+		mes "記入しましたので、温かい";
+		mes "お心が伝わると思います。";
+		delitem 644,1;
+		delitem 7174,1;
+		delitem 7175,1;
+		set Zeny,Zeny-1000;
+		if(BaseLevel<50)
+			set .@itemid,664;
+		if(BaseLevel>=50 && BaseLevel<70)
+			set .@itemid,665;
+		if(BaseLevel>=70 && BaseLevel<90)
+			set .@itemid,666;
+		if(BaseLevel>=90)
+			set .@itemid,667;
+		getitem2 .@itemid,1,1,0,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
+		next;
+		mes "[カプラテーリング]";
+		mes "また包装したい贈り物がございましたら";
+		mes "いつでもおっしゃってください。";
+		break;
+	case 2:
+		mes "[カプラテーリング]";
+		mes "お包みしたい贈り物がございましたら";
+		mes "いつでもおっしゃってください。";
+		break;
+	}
+	close2;
+	cutin "kafra_02",255;
+	end;
+}
+
+xmas_in.gat,87,87,6	script	カプラソリン#x	115,{
+	cutin "kafra_03",2;
+	mes "[カプラソリン]";
+	mes "こんにちは";
+	mes "カプラ出張スペシャルサービス";
+	mes "「ラッピングサービス！」";
+	mes "ご利用に必要な材料をお教えしますので";
+	mes "しっかり聞いて準備してください。";
+	next;
+	mes "[カプラソリン]";
+	mes "まず、お客様が包装したい";
+	mes "プレゼントボックス1箱が必要です。";
+	mes "包む贈り物自体がないと";
+	mes "何もできませんからね。";
+	next;
+	mes "[カプラソリン]";
+	mes "そして、包装リボンと包装紙が1個ずつ";
+	mes "必要になります。最初、私共は";
+	mes "それらを用意していたのですが";
+	mes "……倉庫にしまってあった材料が";
+	mes "何者かに盗まれてしまったのです。";
+	next;
+	mes "[カプラソリン]";
+	mes "ああ！私がその場にいたら……";
+	mes "そいつをバシッと捕まえて";
+	mes "思いっきり殴って";
+	mes "蹴飛ばして突き飛ばして……";
+	next;
+	mes "[カプラソリン]";
+	mes "ハッ、私は一体何を……？";
+	mes "あ、あのお客様、";
+	mes "今の話は忘れてくださいね。こほん。";
+	mes "それから包装手数料として1000Zenyが";
+	mes "必要です。これはお客様のお名前を";
+	mes "記入するための費用となります。";
+	next;
+	mes "[カプラソリン]";
+	mes "それでは必要なものを整理します。";
+	mes "^3131FFプレゼントボックス1個";
+	mes "包装リボン1個";
+	mes "包装紙1個";
+	mes "1000Zeny^000000";
+	next;
+	mes "[カプラソリン]";
+	mes "以上の材料が全て揃いましたら";
+	mes "テーリングにお申し付けください。";
+	mes "カプラサービスはクリスマスも";
+	mes "お客様のそばにいます。";
+	close2;
+	cutin "kafra_03",255;
+	end;
+}
+
+xmas_in.gat,112,86,4	script	カプラビニット#x	114,{
+	cutin "kafra_04",2;
+	mes "[カプラビニット]";
+	mes "こんにちは、カプラサービスです。";
+	mes "お客様だけに、今回の事件の秘密を";
+	mes "こっそりとおしえちゃいます。";
+	mes "たいした秘密でもないんです";
+	mes "けどね……";
+	next;
+	mes "[カプラビニット]";
+	mes "うちのカプラ倉庫を襲ったり";
+	mes "子供達の靴下に穴を開けて";
+	mes "プレゼントを盗もうとしていた";
+	mes "のは、去年も現れたアンソニという";
+	mes "サンタだといいます……";
+	next;
+	mes "[カプラビニット]";
+	mes "人々は、アンソニがサンタになる";
+	mes "ための訓練が辛くて逃げ出した";
+	mes "んだと思っていますが、";
+	mes "実はそうじゃないんですよ。";
+	mes "私が聞いた話では、アンソニの";
+	mes "幼い頃に原因があるとか……";
+	next;
+	mes "[カプラビニット]";
+	mes "クリスマスには、子供達はサンタさんに";
+	mes "プレゼントをもらいましたが、";
+	mes "アンソニのお父さんは";
+	mes "「サンタなんていない」";
+	mes "と言っていてプレゼントを";
+	mes "あげなかったみたいなんです……";
+	next;
+	mes "[カプラビニット]";
+	mes "それで、毎年この時期になると";
+	mes "幸せそうな子供がとても憎かった";
+	mes "みたいなんですよ。";
+	next;
+	mes "[カプラビニット]";
+	mes "シィーッ！";
+	mes "他の人に聞かれちゃうかも";
+	mes "しれませんから……";
+	next;
+	mes "[カプラビニット]";
+	mes "実は、アンソニのお父さんは";
+	mes "生活のためのお金で青い箱や";
+	mes "紫色の箱を買ってきては";
+	mes "自分で全部開けちゃってた";
+	mes "らしいんです……";
+	next;
+	mes "[カプラビニット]";
+	mes "そのまま不幸な幼少時代を過ごした";
+	mes "アンソニが育って、幸せそうな人を";
+	mes "憎むようになっちゃったんです。";
+	mes "アンソニのお父さんはそれでも";
+	mes "青い箱や紫色の箱の魔力に";
+	mes "取り憑かれたままだったみたいですが。";
+	next;
+	mes "[カプラビニット]";
+	mes "そして、アンソニは今、";
+	mes "ルティエで何かを企んでいる";
+	mes "みたいなんです。";
+	mes "いったい何をしようとしているの";
+	mes "かしら……";
+	next;
+	mes "[カプラビニット]";
+	mes "もしよろしければ、サンタのぼうしを";
+	mes "かぶったモンスター達を退治して";
+	mes "くれませんか？";
+	mes "私達の倉庫を襲ったのもおそらく";
+	mes "アンソニの一味でしょうから……";
+	close2;
+	cutin "kafra_04",255;
+	end;
+}
+
+xmas_in.gat,97,99,4	script	カプラグラリス#x	113,{
+	cutin "kafra_05",2;
+	mes "[カプラ職員]";
+	mes "いらっしゃいませ";
+	mes "カプラサービスは";
+	mes "いつも皆様のそばにいます。";
+	mes "何をお手伝いいたしましょう？";
+	next;
+	switch(select("倉庫サービス","終了")){
+	case 1:
+		openstorage;
+		cutin "kafra_05",255;
+		close;
+	case 2:
+		mes "[カプラ職員]";
+		mes "我々カプラサービスは、より完璧な";
+		mes "サービスと管理業務を目指し";
+		mes "お客様が安心してご利用いただけるよう";
+		mes "いつも最善を尽くしています。";
+		mes "（株）カプラサービスをご利用いただき";
+		mes "ありがとうございました。";
+		close2;
+		cutin "kafra_05",255;
+		end;
+	}
+}
+
+xmas_in.gat,87,102,0	script	カプラＷ#x	112,{
+	cutin "kafra_06",2;
+	if(countitem(2636) || countitem(2637)) {
+		mes "[カプラＷ]";
+		mes "仕事が終わったら開けますねー。";
+		mes "ありがとう！";
+		mes "メリークリスマスー！";
+		close2;
+		cutin "kafra_06",255;
+		end;
+	}
+	mes "[カプラＷ]";
+	mes "こんにちはぁー。";
+	mes "カプラサービスのご利用";
+	mes "ありがとうございます。";
+	mes "メリークリスマスー！";
+	next;
+	mes "[カプラＷ]";
+	mes "私はテーリング姉ちゃんの";
+	mes "包装作業のお手伝いをしていますー。";
+	mes "私のお仕事は包装された箱に名前を";
+	mes "書くことです。包装紙の上に書くので";
+	mes "プレゼントを開けたら、意味が";
+	mes "なくなっちゃいますけどね。";
+	next;
+	mes "[カプラＷ]";
+	mes "本当は楽しいクリスマス……";
+	mes "のはずなのに倉庫の物を";
+	mes "悪い人たちに盗まれちゃったんで";
+	mes "落ち込み気味なんですー。";
+	mes "うわ～ん……お仕事があるから";
+	mes "元気を出さなきゃいけないのに……";
+	next;
+	switch (select("プレゼントに名前を書いてください","指輪に名前を書いてください","元気を出してください！")) {
+	case 1:
+		mes "[カプラＷ]";
+		mes "プレゼントに名前を書いて欲しいなら";
+		mes "あそこにいるテーリング姉ちゃんに";
+		mes "包装を頼んでください。";
+		mes "私は包装紙に名前を書いているって";
+		mes "言ったじゃないですかー。";
+		close2;
+		cutin "kafra_06",255;
+		end;
+	case 2:
+		emotion 28;
+		mes "[カプラＷ]";
+		mes "指輪ですか～？そんな物に";
+		mes "名前を刻むサービスはしてません。";
+		mes "そうでなくても、包装紙に名前を";
+		mes "書いてばかりいるから手が痛いですー。";
+		mes "シクシク……";
+		mes "みんな幸せそうでいいな。";
+		close2;
+		cutin "kafra_06",255;
+		end;
+	}
+	//case3はfall through
+	mes "[カプラＷ]";
+	mes "うう、気持ちだけでもありがとう。";
+	mes "でも元気が出ないんです……";
+	mes "ルティエに出張ってことで";
+	mes "とても楽しみにしてたんですけどね。";
+	mes "サンタのぼうしを見ると";
+	mes "気分が沈むんですー。";
+	next;
+	if(select("私が元気にしてあげます","頑張ってください！")==2) {
+		mes "[カプラＷ]";
+		mes "ひっく、ひっく……";
+		mes "話だけでも聞いてくれてありがとう。";
+		mes "メリークリスマスー！";
+		close2;
+		cutin "kafra_06",255;
+		end;
+	}
+	emotion 28;
+	mes "[カプラＷ]";
+	mes "本当ですかー？";
+	mes "シクシク……";
+	mes "どんなことをしてくれるんですか？";
+	mes "シクシク……";
+	next;
+	switch (select("プレゼントボックスをあげます","サンタのぼうしをあげます","キャロルを歌ってあげます","愉快なダンスを踊ってあげます")) {
+	case 1:
+		//どの種類のPBoxも持ってない、もしくは金・銀いずれの指輪も持ってないならtrue
+		if((countitem(664)<1 && countitem(665)<1 && countitem(666)<1 && countitem(667)<1) ||
+									(countitem(2610)<1 && countitem(2611)<1)) {
+			mes "[カプラＷ]";
+			mes "知らない人から物をいただく";
+			mes "わけにはいかないですー。";
+			mes "お姉さんたちに怒られてしまいます。";
+			mes "大丈夫ですから、";
+			mes "気を使わないでください。";
+			break;
+		}
+		emotion 28;
+		mes "[カプラＷ]";
+		mes "シクシク……";
+		mes "きれいに包装までしてある";
+		mes "大事なプレゼントを私が";
+		mes "もらってもいいんですか？";
+		next;
+		if(select("メリークリスマス！","やっぱりあげません")==2) {
+			emotion 28;
+			mes "[カプラＷ]";
+			mes "うえ～ん……";
+			break;
+		}
+		emotion 15;
+		mes "[カプラＷ]";
+		mes "わあ～、ありがとうー！";
+		mes "すーっごく嬉しいですー。";
+		mes "こんなに大事な物をいただいたからには";
+		mes "私も何かお礼をしなきゃ";
+		mes "いけないですね。";
+		next;
+		mes "[カプラＷ]";
+		mes "あ、指輪を持っているんですか。";
+		mes "じゃあ、その指輪に名前を";
+		mes "書いてあげます。";
+		mes "えへへ……";
+		mes "遠慮なんかいらないですよー。";
+		next;
+		mes "[カプラＷ]";
+		mes "あ、金の指輪を持っている場合は";
+		mes "金の指輪に書いちゃいます。";
+		mes "もし、金の指輪と銀の指輪を";
+		mes "持っていて、銀の指輪の方に";
+		mes "名前を書いてほしかったら";
+		next;
+		mes "[カプラＷ]";
+		mes "金の指輪はどこかにあずけて";
+		mes "きてくださいね。";
+		next;
+		switch (select("金の指輪に書いて","銀の指輪に書いて","ちょっとまってて")) {
+			case 1:
+				set .@itemid,2610;
+				set .@gain,2636;
+				break;
+			case 2:
+				set .@itemid,2611;
+				set .@gain,2637;
+				break;
+			case 3:
+				mes "[カプラＷ]";
+				mes "はい、お待ちしてまーす。";
+				close2;
+				cutin "kafra_06",255;
+				end;
+		}
+		if(countitem(.@itemid)<1) {
+			mes "[カプラＷ]";
+			mes "あれ？" +getitemname(.@itemid)+ "、持っていない";
+			mes "みたいですけどー。";
+			break;
+		}
+		if(.@itemid==2611 && countitem(2610)) {
+			mes "[カプラＷ]";
+			mes "ちょっと待ってください。";
+			mes "金の指輪を持ってるみたいですよ。";
+			mes "金の指輪はあずけてきてくださいね";
+			break;
+		}
+		mes "[カプラＷ]";
+		mes "はい、じゃ書いちゃいます。";
+		mes "カキカキカキカキ……";
+		next;
+		mes "[カプラＷ]";
+		mes "はい、どうぞ。";
+		mes "プレゼント、本当にありがとう！";
+		mes "メリークリスマスー！";
+		delitem .@itemid,1;
+		if(countitem(664))
+			delitem 664,1;
+		else if(countitem(665))
+			delitem 665,1;
+		else if(countitem(666))
+			delitem 666,1;
+		else
+			delitem 667,1;
+		getitem2 .@gain,1,1,0,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
+		break;
+	case 2:
+		emotion 6;
+		mes "[カプラＷ]";
+		mes "……いじわるです!!";
+		break;
+	case 3:
+		mes "[カプラＷ]";
+		mes "……本当は歌うことが";
+		mes "得意じゃないんでしょ？";
+		mes "いいですよ、無理しなくて！";
+		break;
+	case 4:
+		emotion 9;
+		mes "[カプラＷ]";
+		mes "………";
+		next;
+		emotion 9;
+		mes "^FF0000ピョコピョコピョコ、キュッキュッ";
+		mes "タタッタタタッタ、パンパンパン！^000000";
+		next;
+		mes "[カプラＷ]";
+		mes "うう、シクシク……";
+		next;
+		emotion 28;
+		mes "[カプラＷ]";
+		mes "シクシクシクシク……";
+		break;
+
+	}
+	close2;
+	cutin "kafra_06",255;
+	end;
+}
+xmas_in,104,99,5	script	ギムレット	833,{
+	mes "[ギムレット]";
+//	mes "現在は";
+//	mes "ラグくじは販売してません";
+//	if (getgmlevel()==0)
+//		close;
+
+	mes "こちらでは";
+	mes "^ff0000RWC2011開催記念スペシャルラグくじ^000000";
+	mes "^ff0000ラグくじ2011 November^000000";
+	mes "^ff0000ラグくじ2011 December^000000";
+	mes "の販売をしております";
+	next;
+	mes "[ギムレット]";
+	mes "一回2000ショップポイントで";
+	mes "3つまでアイテムが";
+	mes "ランダムで当選します";
+	next;
+	mes "[ギムレット]";
+	mes "ラインナップについては";
+	mes "本家の特設ページを";
+	mes "ご確認になってください";
+	next;
+	if(#CASHPOINTS<2000){
+		mes "[ギムレット]";
+		mes "購入希望なら";
+		mes "2000ショップポイントまで";
+		mes "ポイントを貯めてください";
+		close;
+	}
+	mes "[ギムレット]";
+	mes "ラグくじを購入しますか？";
+	mes "^0000FF現在のショップポイント^000000 : "+#CASHPOINTS;
+	mes "^0000FF購入後のショップポイント^000000 : "+(#CASHPOINTS-2000);
+	next;
+	switch(select( "やめる","RWC2011開催記念スペシャルラグくじ","ラグくじ2011 Novemberを購入する","ラグくじ2011 Decemberを購入する","説明が聞きたい")){
+	case 1:
+		mes "[ギムレット]";
+		mes "またお越しください";
+		close;
+	case 2:
+		set .@sec,1;
+		break;
+	case 3:
+		set .@sec,2;
+		break;
+	case 4:
+		set .@sec,3;
+		break;
+	case 5:
+		mes "[ギムレット]";
+		mes "2000ショップポイントで";
+		mes "開催中のラグくじのリストから";
+		mes "抽選で3つのアイテムが当たります";
+		next;
+		mes "[ギムレット]";
+		mes "今回のアイテムリストは";
+		mes "^ff0000RWC2011開催記念スペシャルラグくじ ラインナップ^000000";
+		mes "^ff0000ラグくじ2011 November ラインナップ^000000";
+		mes "^ff0000ラグくじ2011 December ラインナップ^000000";
+		mes "の基本リストに加え、";
+		next;
+		mes "[ギムレット]";
+		mes "RWC2011開催記念スペシャルラグくじには";
+		mes "【A賞】エンジェリングリュック[0]";
+		mes "【B賞】ピアメッティ帽子[1]";
+		mes "【D賞】アルメイアの涙";
+		mes "【D賞】古い緑色の箱";
+		next;
+		mes "[ギムレット]";
+		mes "ラグくじ2011 November";
+		mes "【A賞】デビリンリュック[0]";
+		mes "【B賞】ブルーメッティ帽子[1]";
+		mes "【B賞】ピンクメッティ帽子[1]";
+		mes "【D賞】古い緑色の箱";
+		next;
+		mes "[ギムレット]";
+		mes "ラグくじ2011 December";
+		mes "【A賞】アクエンリュック[0]";
+		mes "【A賞】うさこリュック[0]";
+		mes "【D賞】古い赤色の箱";
+		next;
+		mes "[ギムレット]";
+		mes "以上が独自追加されています";
+		close;
+	}
+	if(#CASHPOINTS<2000){
+		mes "[ギムレット]";
+		mes "購入希望なら";
+		mes "2000ショップポイントまで";
+		mes "ポイントを貯めてください";
+		close;
+	}
+	if((MaxWeight - Weight) < 1500){
+		mes "[ギムレット]";
+		mes "所持品を減らしてください";
+		mes "最低1500の空きがないと";
+		mes "くじはできません";
+		close;
+	}
+	if (getgmlevel()==0)
+		set #CASHPOINTS,#CASHPOINTS-2000;
+	mes "[ギムレット]";
+	for( set .@num,0; .@num < 3; set .@num,.@num+1 ) {
+		set .@k,0;
+		set .@par,rand(1000);
+		deletearray .@drop;
+		deletearray .@item;
+		if(.@par < 400){	//40% E賞
+			if(.@sec==1){
+				if(rand(100)<50)
+					set .@itemid,5231;
+				else
+					set .@itemid,13990;
+			}else if(.@sec==2){
+				if(rand(100)<50)
+					set .@itemid,5234;
+				else
+					set .@itemid,13990;
+			}else if(.@sec==3){
+				if(rand(100)<50)
+					set .@itemid,5232;
+				else
+					set .@itemid,13990;
+			}
+		}else if(.@par < 800){	//40% D賞
+			if(.@sec==1)
+				setarray .@drop,1625,7,14240,7,5385,6,2434,3,12922,4,15040,6,12921,7,2530,3,2375,5,12900,4,5380,5,1734,3,28680,4,12187,6;
+			else if(.@sec==2)
+				setarray .@drop,1242,7,14239,7,18549,6,1631,4,14240,6,5527,6,12921,7,1164,3,5660,5,12900,4,2536,5,1636,3,12187,6;
+			else if(.@sec==3)
+				setarray .@drop,2434,4,14240,7,2530,5,15040,6,12922,4,2651,6,12921,7,2365,6,5072,5,12900,4,1636,5,1734,3,12186,6;
+			for( set .@i,0; .@i < getarraysize(.@drop); set .@i,.@i +2 ) {
+				for( set .@j,0; .@j < .@drop[.@i+1]; set .@j,.@j +1 ) {
+					set .@item[.@k],.@drop[.@i];
+					set .@k,.@k+1;
+				}
+			}
+			set .@itemid,.@item[rand(getarraysize(.@item))];
+		}else if(.@par < 960){	//15% C賞
+			if(.@sec==1)
+				setarray .@drop,12902,2,1387,6,12920,4,5430,5,2124,6,1636,4,1418,5,12911,2,1366,5,2374,2,1230,4,2744,3,2524,4,2168,1;
+			else if(.@sec==2)
+				setarray .@drop,12902,2,1422,6,12920,4,1540,4,15057,6,2115,4,2374,1,16674,4,2174,8,2000,6,12911,3,2122,4,2728,6;
+			else if(.@sec==3)
+				setarray .@drop,12902,2,5658,6,12920,4,1481,6,1271,4,18555,5,2374,1,12911,2,2175,8,2728,6,1137,5,2357,3,2524,4;
+			for( set .@i,0; .@i < getarraysize(.@drop); set .@i,.@i +2 ) {
+				for( set .@j,0; .@j < .@drop[.@i+1]; set .@j,.@j +1 ) {
+					set .@item[.@k],.@drop[.@i];
+					set .@k,.@k+1;
+				}
+			}
+			set .@itemid,.@item[rand(getarraysize(.@item))];
+		}else if(.@par < 999){	//4.5% B賞
+			if(.@sec==1)
+				setarray .@drop,2357,5,2537,7,1377,6,5532,6,2423,4,2655,4,18599,7,2729,8,2347,3,4047,2,29259,4;
+			else if(.@sec==2)
+				setarray .@drop,18577,7,1415,5,2537,6,1377,6,5532,6,2729,4,1234,5,2345,3,4254,3,13017,2,2874,2,29260,4,29261,4;
+			else if(.@sec==3)
+				setarray .@drop,15058,7,18590,4,2701,3,2423,3,2655,5,5532,6,1377,5,2729,8,2349,3,4169,2,2881,2;
+			for( set .@i,0; .@i < getarraysize(.@drop); set .@i,.@i +2 ) {
+				for( set .@j,0; .@j < .@drop[.@i+1]; set .@j,.@j +1 ) {
+					set .@item[.@k],.@drop[.@i];
+					set .@k,.@k+1;
+				}
+			}
+			set .@itemid,.@item[rand(getarraysize(.@item))];
+		}else{			//0.5% A賞
+			set .@random,rand(100);
+			if(.@sec==1){
+				if(.@random<35)
+					set .@itemid,2554;
+				else if(.@random<75)
+					set .@itemid,29262;
+				else
+					set .@itemid,4403;
+			}else if(.@sec==2){
+				if(.@random<45)
+					set .@itemid,4137;
+				else if(.@random<90)
+					set .@itemid,29248;
+				else
+					set .@itemid,4357;
+			}else if(.@sec==3){
+				if(.@random<25)
+					set .@itemid,2554;
+				else if(.@random<55)
+					set .@itemid,29244;
+				else if(.@random<90)
+					set .@itemid,29290;
+				else
+					set .@itemid,4168;
+			}
+		}
+		getitem .@itemid,1;
+		mes getitemname(.@itemid)+"";
+	}
+	mes "以上のアイテムが当選しました。";
+	close;
+}
+m_h1,17,7,5	duplicate(ギムレット)	ギムレット#gm	833,
+
+abyss_01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+abyss_02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+abyss_03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+alde_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+alde_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+alde_dun03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+alde_dun04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ama_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ama_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ama_dun03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ama_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+anthell01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+anthell02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ayo_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ayo_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ayo_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ayo_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+beach_dun.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+beach_dun2.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+beach_dun3.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+c_tower1.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+c_tower2.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+c_tower3.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+c_tower4.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+cmd_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+cmd_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+cmd_fild03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+cmd_fild04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+cmd_fild05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+cmd_fild07.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+cmd_fild08.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+cmd_fild09.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_fild03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_fild04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_fild05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_fild07.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_fild08.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_fild09.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+ein_fild10.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_dun00.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_dun03.gat,0,0,0,0	monster	シャイニングポリン	2248,1,0,0,0
+gef_fild00.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild06.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild07.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild08.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild09.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild10.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild11.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild12.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild13.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gef_fild14.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gefenia01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gefenia02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gefenia03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gefenia04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_cas01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_cas02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_church.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_chyard.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_in01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_knt01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_knt02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_prison.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_prison1.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_sew01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_sew02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_sew03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_sew04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gl_step.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+glast_01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gon_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gon_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gon_dun03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+gon_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+hu_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+hu_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+hu_fild03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+hu_fild04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+hu_fild05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+hu_fild06.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+hu_fild07.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+in_sphinx1.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+in_sphinx2.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+in_sphinx3.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+in_sphinx4.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+in_sphinx5.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+iz_dun00.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+iz_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+iz_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+iz_dun03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+iz_dun04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+jupe_core.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+juperos_01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+juperos_02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+kh_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+kh_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+lhz_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+lhz_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+lhz_dun03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+lhz_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+lhz_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+lhz_fild03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+lou_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+lou_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+lou_dun03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+lou_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mag_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mag_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjo_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjo_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjo_dun03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_06.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_07.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_08.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_09.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_10.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_11.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+mjolnir_12.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild06.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild07.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild08.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild09.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild10.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild11.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild12.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild13.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild14.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild15.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild16.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild17.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_fild18.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_pryd01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_pryd02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_pryd03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_pryd04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_pryd05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+moc_pryd06.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+nif_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+nif_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+niflheim.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+odin_tem01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+odin_tem02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+odin_tem03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+orcsdun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+orcsdun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_dun00.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_dun03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_dun04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild06.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild07.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild08.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild09.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild10.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+pay_fild11.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild00.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild06.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild07.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild08.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild09.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild10.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_fild11.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_maze01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_maze02.gat,0,0,0,0	monster	シャイニングポリン	2248,1,0,0,0
+prt_maze03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_sewb1.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_sewb2.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_sewb3.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+prt_sewb4.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+tha_t01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+tha_t02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+tha_t03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+tha_t04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+tha_t05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+tha_t06.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+tha_t07.gat,0,0,0,0	monster	シャイニングポリン	2248,1,0,0,0
+tha_t08.gat,0,0,0,0	monster	シャイニングポリン	2248,1,0,0,0
+tha_t09.gat,0,0,0,0	monster	シャイニングポリン	2248,1,0,0,0
+tha_t10.gat,0,0,0,0	monster	シャイニングポリン	2248,1,0,0,0
+tha_t11.gat,0,0,0,0	monster	シャイニングポリン	2248,1,0,0,0
+tha_t12.gat,0,0,0,0	monster	シャイニングポリン	2248,1,0,0,0
+tur_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+tur_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+tur_dun03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+tur_dun04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+um_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+um_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+um_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+um_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+um_fild03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+um_fild04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+xmas_dun01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+xmas_dun02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+xmas_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild01.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild02.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild03.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild04.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild05.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild06.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild07.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild08.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild09.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild10.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild11.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+yuno_fild12.gat,0,0,0,0	monster	シャイニングポリン	2248,2,0,0,0
+
+prontera,157,285,3	script	シャイニングポリーン	2248,{
+	mes "[シャイニングポリーン]";
+	mes "我輩はシャイニングポリンですます。";
+	mes "崇め称え奉り罵るがいい！";
+	next;
+	mes "[シャイニングポリーン]";
+	mes "くるしゅうない。";
+	mes "我輩の主食である^0000FF光輝のゼロピー^000000を奉納することを許す！";
+	next;
+	switch(select("光輝のゼロピー？","崇める","称える","奉る","罵る","会話を止める")){
+	case 1:
+		mes "[シャイニングポリーン]";
+		mes "^0000FF光輝のゼロピー^000000も知らんのか？";
+		next;
+		mes "[シャイニングポリーン]";
+		mes "では教えてしんぜよう！";
+		next;
+		mes "[シャイニングポリーン]";
+		mes "^0000FF光輝のゼロピー^000000とは、我々";
+		mes "シャイニングポリン族の体を";
+		mes "構成している食物なのだ。";
+		next;
+		mes "[シャイニングポリーン]";
+		mes "少しもちもちとした食感で";
+		mes "わたがしとは少し違った甘さで";
+		mes "後味すっきり！なのじゃ！";
+		next;
+		mes "[シャイニングポリーン]";
+		mes "うへへ……";
+		next;
+		mes "[シャイニングポリーン]";
+		mes "む？";
+		mes "食べてみたいじゃと？";
+		next;
+		mes "[シャイニングポリーン]";
+		mes "だっ、だめじゃ！";
+		next;
+		mes "[シャイニングポリーン]";
+		mes "えぇっと……";
+		mes "あ、そう、ポリン族以外が食べると";
+		mes "病気になってしまうのじゃ！";
+		next;
+		mes "[シャイニングポリーン]";
+		mes "我輩は優しいから";
+		mes "お主が手に入れた^0000FF光輝のゼロピー^000000は";
+		mes "全て代わりに食べてやろう！";
+		next;
+		mes "[シャイニングポリーン]";
+		mes "ふふん。";
+		mes "感謝することじゃな！";
+		next;
+		mes "[シャイニングポリーン]";
+		mes "……もちろんただとは言わん。";
+		mes "^0000FF光輝のゼロピー^000000の数に応じて";
+		mes "何か良いものをやろう。";
+		close;
+	case 2:
+		input .@cmd$;
+		mes "[シャイニングポリーン]";
+		mes "……何？";
+		mes "^0000FF"+.@cmd$+"^000000";
+		mes "じゃと！？";
+		next;
+		if(select("はい","いいえ")==2) {
+			mes "[シャイニングポリーン]";
+			mes "そ、そうか。";
+			mes "ふぅっ……";
+			close;
+		}
+		logmessage "porin","崇める:"+.@cmd$;
+		mes "[シャイニングポリーン]";
+		set .@num,rand(10);
+		switch(.@num){
+		case 0:mes "それは本当に褒めておるのか？";mes "怪しいのぅ……";close;
+		case 1:mes "あわわっ";mes "べ、べつに恥ずかしくて光ってるわけじゃないのじゃ！";mes "ええい、こちらを見るな！";close;
+		case 2:mes "そんなこと言われても";mes "我輩は喜んで飛び跳ねたりはしないっ！";close;
+		case 3:mes "うむ！";mes "くるしゅうないぞ！";close;
+		case 4:mes "何を言っておるのじゃ？";close;
+		case 5:mes "ち、近寄るな！";close;
+		case 6:mes "その言葉、他のシャイニングポリン達にも聞かせてやりたいわい";close;
+		case 7:mes "よくぞ言った！";mes "褒めて遣わす！";close;
+		case 8:mes "で？";close;
+		default:mes "にゅふふ……";mes "照れるのぅ……";close;
+		}
+	case 3:
+		input .@cmd$;
+		mes "[シャイニングポリーン]";
+		mes "……何？";
+		mes "^0000FF"+.@cmd$+"^000000";
+		mes "じゃと！？";
+		next;
+		if(select("はい","いいえ")==2) {
+			mes "[シャイニングポリーン]";
+			mes "そ、そうか。";
+			mes "ふぅっ……";
+			close;
+		}
+		logmessage "porin","称える:"+.@cmd$;
+		mes "[シャイニングポリーン]";
+		set .@num,rand(10);
+		switch(.@num){
+		case 0:mes "それは本当に称えるおるのか？";mes "怪しいのぅ……";close;
+		case 1:mes "お主、お世辞が上手いのぅ";close;
+		case 2:mes "それがどうした";close;
+		case 3:mes "うむうむ！";mes "褒めて遣わす！";close;
+		case 4:mes "ヤダ、どうしよう……";close;
+		case 5:mes "っぺ";close;
+		case 6:mes "そうじゃのぅ";mes "我輩がお主ほどの年の頃といえば……";next;mes "-1時間ほど話が続いた-";close;
+		case 7:mes "にやけておらぬ！";mes "断じてにやけておらぬのじゃあ～～！！";close;
+		case 8:mes "だから？";close;
+		default:mes "そんなことより我輩とバトルしようぜ！！";monster "prontera",157,285,"シャイニングポリーン",2248,1;close;
+		}
+	case 4:
+		mes "[シャイニングポリーン]";
+		mes "我輩の主食である^0000FF光輝のゼロピー^000000の数に応じて";
+		mes "アイテムを下賜してやろうではないか";
+		next;
+		switch(select("血塗られた古木の枝","バブルガム","どきどきハート","ライダーヘッド","やる気スイッチ","赤いデコリボン","くじを引く","会話を止める")){
+		case 1:
+			mes "[シャイニングポリーン]";
+			mes "^0000FF光輝のゼロピー^000000を200個で";
+			mes "^0000FF血塗られた古木の枝^000000を1個やろう！";
+			next;
+			if(select("やめる","交換しよ！")==1) {
+				mes "[シャイニングポリーン]";
+				mes "そ、そうか。";
+				mes "ふぅっ……";
+				close;
+			}
+			mes "[シャイニングポリーン]";
+			if(countitem(28667)<200){mes "もっと^0000FF光輝のゼロピー^000000ほしいのじゃあ！"; close;}
+			mes "………………";
+			mes "…………";
+			mes "……";
+			mes "さて、次のゼロピーはどこじゃ？";
+			delitem 28667,200;
+			getitem 12103,1;
+			close;
+		case 2:
+			mes "[シャイニングポリーン]";
+			mes "^0000FF光輝のゼロピー^000000を100個で";
+			mes "^0000FFバブルガム^000000を1個やろう！";
+			next;
+			if(select("やめる","交換しよ！")==1) {
+				mes "[シャイニングポリーン]";
+				mes "そ、そうか。";
+				mes "ふぅっ……";
+				close;
+			}
+			mes "[シャイニングポリーン]";
+			if(countitem(28667)<100){mes "もっと^0000FF光輝のゼロピー^000000ほしいのじゃあ！"; close;}
+			mes "………………";
+			mes "…………";
+			mes "……";
+			mes "さて、次のゼロピーはどこじゃ？";
+			delitem 28667,100;
+			getitem 12210,1;
+			close;
+		case 3:
+			mes "[シャイニングポリーン]";
+			mes "^0000FF光輝のゼロピー^000000を50個で";
+			mes "^0000FFどきどきハート^000000を1個やろう！";
+			next;
+			if(select("やめる","交換しよ！")==1) {
+				mes "[シャイニングポリーン]";
+				mes "そ、そうか。";
+				mes "ふぅっ……";
+				close;
+			}
+			mes "[シャイニングポリーン]";
+			if(countitem(28667)<50){mes "もっと^0000FF光輝のゼロピー^000000ほしいのじゃあ！"; close;}
+			mes "………………";
+			mes "…………";
+			mes "……";
+			mes "さて、次のゼロピーはどこじゃ？";
+			delitem 28667,50;
+			getitem 29138,1;
+			close;
+		case 4:
+			mes "[シャイニングポリーン]";
+			mes "^0000FF光輝のゼロピー^000000を50個で";
+			mes "^0000FFライダーヘッド^000000を1個やろう！";
+			next;
+			if(select("やめる","交換しよ！")==1) {
+				mes "[シャイニングポリーン]";
+				mes "そ、そうか。";
+				mes "ふぅっ……";
+				close;
+			}
+			mes "[シャイニングポリーン]";
+			if(countitem(28667)<50){mes "もっと^0000FF光輝のゼロピー^000000ほしいのじゃあ！"; close;}
+			mes "………………";
+			mes "…………";
+			mes "……";
+			mes "さて、次のゼロピーはどこじゃ？";
+			delitem 28667,50;
+			getitem 29299,1;
+			close;
+		case 5:
+			mes "[シャイニングポリーン]";
+			mes "^0000FF光輝のゼロピー^000000を50個で";
+			mes "^0000FFやる気スイッチ^000000を1個やろう！";
+			next;
+			if(select("やめる","交換しよ！")==1) {
+				mes "[シャイニングポリーン]";
+				mes "そ、そうか。";
+				mes "ふぅっ……";
+				close;
+			}
+			mes "[シャイニングポリーン]";
+			if(countitem(28667)<50){mes "もっと^0000FF光輝のゼロピー^000000ほしいのじゃあ！"; close;}
+			mes "………………";
+			mes "…………";
+			mes "……";
+			mes "さて、次のゼロピーはどこじゃ？";
+			delitem 28667,50;
+			getitem 29012,1;
+			close;
+		case 6:
+			mes "[シャイニングポリーン]";
+			mes "^0000FF光輝のゼロピー^000000を50個で";
+			mes "^0000FF赤いデコリボン^000000を1個やろう！";
+			next;
+			if(select("やめる","交換しよ！")==1) {
+				mes "[シャイニングポリーン]";
+				mes "そ、そうか。";
+				mes "ふぅっ……";
+				close;
+			}
+			mes "[シャイニングポリーン]";
+			if(countitem(28667)<50){mes "もっと^0000FF光輝のゼロピー^000000ほしいのじゃあ！"; close;}
+			mes "………………";
+			mes "…………";
+			mes "……";
+			mes "さて、次のゼロピーはどこじゃ？";
+			delitem 28667,50;
+			getitem 29264,1;
+			close;
+		case 7:
+			break;
+		}
+		break;
+	case 5:
+		input .@cmd$;
+		mes "[シャイニングポリーン]";
+		mes "……何？";
+		mes "^0000FF"+.@cmd$+"^000000";
+		mes "じゃと！？";
+		next;
+		if(select("はい","いいえ")==2) {
+			mes "[シャイニングポリーン]";
+			mes "そ、そうか。";
+			mes "ふぅっ……";
+			close;
+		}
+		logmessage "porin","罵る:"+.@cmd$;
+		mes "[シャイニングポリーン]";
+		set .@num,rand(10);
+		switch(.@num){
+		case 0:mes "うっうっ";mes "怖いよう……";close;
+		case 1:mes "我輩をバカにしておるのか！！";close;
+		case 2:mes "だからなんだって言うのじゃ？";mes "もうちょっと言葉を選んだほうがよいぞ？";close;
+		case 3:mes "お主……";mes "その顔は仮面じゃったのか……";next;mes "[シャイニングポリーン]";mes "今はまるで般若のようじゃ……";close;
+		case 4:mes "お、おおお！";mes "も、もう一度言ってくれい！";close;
+		case 5:mes "そんなこと言わないでよ……";close;
+		case 6:mes "か・い・か・ん";close;
+		case 7:mes "お主には、我輩の";mes "心の涙がわからぬのか……？";close;
+		case 8:mes "もうやめて！";mes "シャイニングポリーンのライフポイントは0よ！";close;
+		default:mes "我輩に喧嘩を売っておるのかっ！";next;mes "[シャイニングポリーン]";mes "その喧嘩、買った！！";monster "prontera",157,285,"シャイニングポリーン",2248,1;close;
+		}
+	case 6:
+		mes "[シャイニングポリーン]";
+		mes "も、もう行ってしまうのか？";
+		mes "もう少しくらいよいのではないか？";
+		mes "……のう？";
+		mes "………………のう？";
+		close;
+	}
+	mes "[シャイニングポリーン]";
+	mes "一回2500ショップポイントか";
+	mes "光輝のゼロピー50個で";
+	mes "3つまでアイテムが";
+	mes "ランダムで当たるぞよ";
+	next;
+	if(#CASHPOINTS<2500 && countitem(28667)<50){
+		mes "[シャイニングポリーン]";
+		mes "しかしお主は";
+		mes "2500ショップポイントも";
+		mes "光輝のゼロピーも持ってないようじゃ";
+		close;
+	}
+	switch(select("やめる","ショップポイントでくじを引きたい","光輝のゼロピーでくじを引きたい","当選アイテムが聞きたい")){
+	case 1:
+		mes "[シャイニングポリーン]";
+		mes "またくるがよい";
+		close;
+	case 2:
+		if(#CASHPOINTS<2500){
+			mes "[シャイニングポリーン]";
+			mes "しかしお主は";
+			mes "2500ショップポイントを持ってないようじゃ";
+			close;
+		}
+		if((MaxWeight - Weight) < 1500){
+			mes "[シャイニングポリーン]";
+			mes "最低1500の所持空きがないと";
+			mes "くじはできないぞよ";
+			close;
+		}
+		if (getgmlevel()==0)
+			set #CASHPOINTS,#CASHPOINTS-2500;
+		break;
+	case 3:
+		if(countitem(28667)<50){
+			mes "[シャイニングポリーン]";
+			mes "しかしお主は";
+			mes "光輝のゼロピーを持ってないようじゃ";
+			close;
+		}
+		if((MaxWeight - Weight) < 1500){
+			mes "[シャイニングポリーン]";
+			mes "最低1500の所持空きがないと";
+			mes "くじはできないぞよ";
+			close;
+		}
+		if (getgmlevel()==0)
+			delitem 28667,50;
+		break;
+	case 4:
+		mes "[A賞]";
+		mes "魔剣士タナトスの思念体カード";	//4399
+		mes "魔剣グラム";	//1192
+		mes "剛弓エルドラド";	//1747
+		mes "うさこリュック";	//29290
+		mes "アクエンリュック";	//29244
+		next;
+		mes "[B賞]";
+		mes "黒い悪魔の仮面";	//18599
+		mes "バリアントシューズ";	//2423
+		mes "大天使の羽";	//2573
+		mes "堕天使の翼";	//2589
+		mes "デビルリングカード";	//4174
+		mes "スキンオブシャドウ[1]";	//2554
+		mes "ティドゥン[1]";	//15032
+		mes "オルレアンネックレス[1]";	//2881
+		mes "大盗賊の手鎖[1]";	//2913
+		mes "エンハンスポーション30の箱";	//28465
+		next;
+		mes "[C賞]";
+		mes "騎乗用手綱";	//12622
+		mes "バブルガムの箱";	//12902
+		mes "野牛の角[1]";	//2702
+		mes "オルレアンの手袋[1]";	//2701
+		mes "濃縮エルニウムの箱";	//12920
+		mes "キラキラスティックの箱";	//12911
+		mes "エルンスト・フォン・ヴォルフ11世";	//18629
+		mes "ヴァルキリーシールド[1]";	//2115
+		mes "ディアボロスローブ[1]";	//2374
+		mes "暗殺者の手甲[1]";	//2892
+		mes "タンの盛り合わせ（大）20個の箱";	//14236
+		next;
+		mes "[D賞]";
+		mes "戦闘教範50の箱";	//12900
+		mes "死の引導者[2]";	//1186
+		mes "インプ帽子";	//5658
+		mes "ヨーヨー帽";	//5385
+		mes "スノウルリの卵";	//9694
+		mes "ジークフリードの証の箱";	//12922
+		mes "エルヴンボウ[1]";	//1746
+		mes "スタッフオブディストラクション[1]";	//2000
+		mes "死神の名簿[2]";	//1565
+		mes "カクテル・竜の吐息（大）20個の箱";	//14239
+		mes "グリーンアイズ";	//29228
+		mes "パープルアイズ";	//29229
+		mes "濃縮オリデオコンの箱";	//12921
+		next;
+		mes "[E賞]";
+		mes "巨大なハエの羽の箱";	//12910
+		mes "カプラの名刺";	//12211
+		mes "たれ猫（青）";	//5233
+		close;
+	}
+	mes "[シャイニングポリーン]";
+	for( set .@num,0; .@num < 3; set .@num,.@num+1 ) {
+		set .@k,0;
+		set .@par,rand(1000);
+		deletearray .@drop;
+		deletearray .@item;
+		if(.@par < 400){	//40% E賞
+			set .@random,rand(100);
+			if(.@random<50)
+				set .@itemid,5233;
+			else if(.@random<75)
+				set .@itemid,12211;
+			else
+				set .@itemid,12910;
+		}else if(.@par < 800){	//40% D賞
+			setarray .@drop,12900,7,1186,6,5658,7,5385,7,9694,5,12922,4,1746,6,2000,4,1565,6,14239,4,29228,5,29229,5,12921,4;
+			for( set .@i,0; .@i < getarraysize(.@drop); set .@i,.@i +2 ) {
+				for( set .@j,0; .@j < .@drop[.@i+1]; set .@j,.@j +1 ) {
+					set .@item[.@k],.@drop[.@i];
+					set .@k,.@k+1;
+				}
+			}
+			set .@itemid,.@item[rand(getarraysize(.@item))];
+		}else if(.@par < 960){	//15% C賞
+			setarray .@drop,12622,3,12902,4,2702,4,2701,5,12920,6,12911,4,18629,3,2115,5,2374,4,2892,2,14236,5;
+			for( set .@i,0; .@i < getarraysize(.@drop); set .@i,.@i +2 ) {
+				for( set .@j,0; .@j < .@drop[.@i+1]; set .@j,.@j +1 ) {
+					set .@item[.@k],.@drop[.@i];
+					set .@k,.@k+1;
+				}
+			}
+			set .@itemid,.@item[rand(getarraysize(.@item))];
+		}else if(.@par < 999){	//4.5% B賞
+			setarray .@drop,18599,6,2423,7,2573,4,2589,4,4174,3,2554,5,15032,7,2881,5,2913,4,28465,2;
+			for( set .@i,0; .@i < getarraysize(.@drop); set .@i,.@i +2 ) {
+				for( set .@j,0; .@j < .@drop[.@i+1]; set .@j,.@j +1 ) {
+					set .@item[.@k],.@drop[.@i];
+					set .@k,.@k+1;
+				}
+			}
+			set .@itemid,.@item[rand(getarraysize(.@item))];
+		}else{			//0.5% A賞
+			setarray .@drop,4399,5,1192,7,1747,7,29290,4,29244,4;
+			for( set .@i,0; .@i < getarraysize(.@drop); set .@i,.@i +2 ) {
+				for( set .@j,0; .@j < .@drop[.@i+1]; set .@j,.@j +1 ) {
+					set .@item[.@k],.@drop[.@i];
+					set .@k,.@k+1;
+				}
+			}
+			set .@itemid,.@item[rand(getarraysize(.@item))];
+		}
+		getitem .@itemid,1;
+		mes getitemname(.@itemid)+"";
+	}
+	mes "があたったぞよ！";
+	close;
+}
+*/

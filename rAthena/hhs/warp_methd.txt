@@ -1,0 +1,917 @@
+//=========================================================
+geffen,120,55,7	script	ペルメラ	938,{
+	if(getpartyleader(getcharid(1),1) != getcharid(3)){
+		mes "[ペルメラ]";
+		mes "私、PTリーダーしか相手にしないの";
+		close;
+	}
+	mes "[ペルメラ]";
+	mes "モヒモヒ";
+	mes "貴方、写本を持ってないかしら？";
+	mes "いいとこ連れてってあげるわよ";
+	next;
+	set .@coice,(select(
+				((countitem(7841))? "ごっちゃになった紙切れ":""),
+				((countitem(7845))? "ごっちゃになった紙切れの写本":""),
+				((countitem(7842))? "破れた紙切れ":""),
+				((countitem(7846))? "破れた紙切れの写本":""),
+				((countitem(7843))? "古い紙切れ":""),
+				((countitem(7847))? "古い紙切れの写本":""),
+				((countitem(7844))? "日に焼けた紙切れ":""),
+				((countitem(7848))? "日に焼けた紙切れの写本":""),"やめる"));
+	switch(.@coice){
+		case 1:delitem 7841,1; set .@coice,1; break;
+		case 2:delitem 7845,1; set .@coice,1; break;
+		case 3:delitem 7842,1; set .@coice,2; break;
+		case 4:delitem 7846,1; set .@coice,2; break;
+		case 5:delitem 7843,1; set .@coice,3; break;
+		case 6:delitem 7847,1; set .@coice,3; break;
+		case 7:delitem 7844,1; set .@coice,4; break;
+		case 8:delitem 7848,1; set .@coice,4; break;
+		case 9:
+			mes "[ペルメラ]";
+			mes "あら、そう";
+			mes "私、あの紙質じゃないと";
+			mes "食べられないのよねぇ";
+			close;
+	}
+	if(instance_id(1)){
+		if(has_instance(.@coice + "@r_b") == ""){
+			mes "別のインスタンスダンジョンを生成済みです"; 
+			close;
+		}
+		mes "[ペルメラ]";
+		mes "モグモグ……";
+		mes "ングッ";
+		mes "";
+		mes "……それじゃ、いくわよ";
+		for(set .@i,0; .@i ==.@i; set .@i,.@i+1){
+			set .@xrand,rand(20,370);
+			set .@yrand,rand(20,370);
+			if(checkcell(.@coice + "@r_b",.@xrand,.@yrand,cell_chkpass))
+				break;
+		}
+		close2;
+		warpparty .@coice + "@r_b",.@xrand,.@yrand,getcharid(1);
+		end;
+	}
+	set .@instance, instance_create("the Realize Boss", getcharid(1));
+	if (.@instance < 0)
+		end;
+	if( instance_attachmap(.@coice + "@r_b", .@instance) == "" ){
+		instance_destroy(.@instance);
+		close;
+	}
+	instance_attach(.@instance);
+	instance_set_timeout 3600,300,.@instance;
+	instance_init(.@instance);
+	switch(.@coice){
+	case 1:donpcevent instance_npcname("#BossMap1Monsters", instance_id())+"::OnMobSpawn";break;
+	case 2:donpcevent instance_npcname("#BossMap2Monsters", instance_id())+"::OnMobSpawn";break;
+	case 3:donpcevent instance_npcname("#BossMap3Monsters", instance_id())+"::OnMobSpawn";break;
+	case 4:donpcevent instance_npcname("#BossMap4Monsters", instance_id())+"::OnMobSpawn";break;
+	}
+	mes "[ペルメラ]";
+	mes "モグモグ……";
+	mes "ングッ";
+	mes "";
+	mes "……それじゃ、いくわよ";
+	for(set .@i,0; .@i ==.@i; set .@i,.@i+1){
+		set .@xrand,rand(20,370);
+		set .@yrand,rand(20,370);
+		if(checkcell(.@coice + "@r_b",.@xrand,.@yrand,cell_chkpass))
+			break;
+	}
+	close2;
+	warpparty .@coice + "@r_b",.@xrand,.@yrand,getcharid(1);
+	end;
+}
+
+poring_c02,118,119,3	script	ポリン#poring	909,{
+	mes "[ポリン]";
+	mes "ポリポリンッ";
+	mes "ボクをただのポリンと思ったら";
+	mes "大間違いだぽ！";
+	next;
+	mes "[ポリン]";
+	mes "まぁそれはどうでもいいぽ";
+	mes "ポリンコインを持っていたら";
+	mes "譲って欲しいぽ";
+	next;
+	mes "[ポリン]";
+	mes "もちろん相応の見返りは";
+	mes "用意するぽよ！";
+	next;
+	switch(select("転送サービス","景品交換","つつく","なんでもない")){
+	case 1:
+		mes "[ポリン]";
+		mes "転送するぽ？";
+		mes "ポリンコインのレート+1枚で";
+		mes "PT転送サービスも始めたぽよ！";
+		set .@pt_warp,0;
+		next;
+		switch(select("個人転送サービス","パーティ転送サービス","やめる")){
+		case 2:
+			if(getpartyleader(getcharid(1),1) != getcharid(3)){
+				mes "[ポリン]";
+				mes "PT転送はPTリーダが申請するぽ！";
+				close;
+			}
+			set .@pt_warp,1;
+		case 1:
+			mes "[ポリン]";
+			mes "どこにいくぽ？";
+			next;
+			switch(select(	(.@pt_warp==1)?"PT転送専用":"",
+					"プロンテラ/モロク","グラストヘイム","アルデバラン/ゲフェン","イズルード/アルベルタ/フェイヨン",
+					"ジュノー/天津/崑崙/龍之城","リヒタルゼン/フィゲル","ラヘル/ベインス","異世界/モスコビア/ブラジリス")){
+			case 1:
+				switch(select(	"スフィンクスD5F [5]","ピラミッドD4F [5]","地下寺院2 [5]","生体実験研究所3 [7]","生体実験研究所4 [8]","生体実験研究所5 [12]",
+						"アビスレイク地下3 [5]","オーディン神殿3 [5]","フレイヤ大神殿聖域B5F [5]",
+						"氷の洞窟3 [5]","トール火山ダンジョン3 [5]","修道院B2F [4]","修道院B3F [5]")){
+				case 1: set .@map$,"in_sphinx5";set .@x,100;set .@y,99;set .@cost,5;break;
+				case 2: set .@map$,"moc_pryd04";set .@x,12;set .@y,18;set .@cost,5;break;
+				case 3: set .@map$,"pay_dun04";set .@x,201;set .@y,204;set .@cost,5;break;
+				case 4: set .@map$,"lhz_dun03";set .@x,140;set .@y,133;set .@cost,7;break;
+				case 5: set .@map$,"lhz_dun04";set .@x,244;set .@y,59;set .@cost,8;break;
+				case 6: set .@map$,"lhz_dun04";set .@x,150;set .@y,250;set .@cost,12;break;
+				case 7: set .@map$,"abyss_03";set .@x,115;set .@y,35;set .@cost,5;break;
+				case 8: set .@map$,"odin_tem03";set .@x,247;set .@y,40;set .@cost,5;break;
+				case 9: set .@map$,"ra_san05";set .@x,282;set .@y,149;set .@cost,5;break;
+				case 10:set .@map$,"ice_dun03";set .@x,149;set .@y,24;set .@cost,5;break;
+				case 11:set .@map$,"thor_v03";set .@x,35;set .@y,262;set .@cost,5;break;
+				case 12:set .@map$,"abbey02";set .@x,149;set .@y,12;set .@cost,4;break;
+				case 13:set .@map$,"abbey03";set .@x,120;set .@y,9;set .@cost,5;break;
+				}
+				break;
+			case 2:
+				switch(select(	"地下水路B2 [2]","地下水路B3 [3]","迷宮の森2 [2]","スフィンクスD2F [2]",
+						"スフィンクスD3F [3]","スフィンクスD4F [5]","ピラミッドD2F [2]",
+						"ピラミッドD3F [3]","ピラミッドD B2F [2]")){
+				case 1:set .@map$,"prt_sewb2";set .@x,19;set .@y,19;set .@cost,2;break;
+				case 2:set .@map$,"prt_sewb3";set .@x,180;set .@y,169;set .@cost,3;break;
+				case 3:set .@map$,"prt_maze02";set .@x,94;set .@y,19;set .@cost,2;break;
+				case 4:set .@map$,"in_sphinx2";set .@x,149;set .@y,81;set .@cost,2;break;
+				case 5:set .@map$,"in_sphinx3";set .@x,210;set .@y,54;set .@cost,3;break;
+				case 6:set .@map$,"in_sphinx4";set .@x,10;set .@y,222;set .@cost,5;break;
+				case 7:set .@map$,"moc_pryd02";set .@x,10;set .@y,192;set .@cost,2;break;
+				case 8:set .@map$,"moc_pryd03";set .@x,100;set .@y,92;set .@cost,3;break;
+				case 9:set .@map$,"moc_pryd05";set .@x,94;set .@y,95;set .@cost,2;break;
+				}
+				break;
+			case 3:
+				switch(select(	"古城1F [2]","古城2F [3]","騎士団1F [2]","騎士団2F [3]","個室前 [2]",
+						"階段 [2]","地下水路B1F [2]","地下水路B2F [3]","地下水路B3F [3]",
+						"地下水路B4F [4]","最下層地下洞窟B1 [4]","最下層地下洞窟B2 [5]",
+						"監獄B1F [2]","監獄B2F [3]")){
+				case 1:set .@map$,"gl_cas01";set .@x,200;set .@y,28;set .@cost,2;break;
+				case 2:set .@map$,"gl_cas02";set .@x,110;set .@y,192;set .@cost,3;break;
+				case 3:set .@map$,"gl_knt01";set .@x,150;set .@y,15;set .@cost,2;break;
+				case 4:set .@map$,"gl_knt02";set .@x,157;set .@y,287;set .@cost,3;break;
+				case 5:set .@map$,"glast_01";set .@x,200;set .@y,336;set .@cost,2;break;
+				case 6:set .@map$,"gl_step";set .@x,12;set .@y,7;set .@cost,2;break;
+				case 7:set .@map$,"gl_sew01";set .@x,258;set .@y,274;set .@cost,2;break;
+				case 8:set .@map$,"gl_sew02";set .@x,29;set .@y,270;set .@cost,3;break;
+				case 9:set .@map$,"gl_sew03";set .@x,171;set .@y,283;set .@cost,3;break;
+				case 10:set .@map$,"gl_sew04";set .@x,68;set .@y,277;set .@cost,4;break;
+				case 11:set .@map$,"gl_dun01";set .@x,133;set .@y,271;set .@cost,4;break;
+				case 12:set .@map$,"gl_dun02";set .@x,224;set .@y,274;set .@cost,5;break;
+				case 13:set .@map$,"gl_prison";set .@x,17;set .@y,70;set .@cost,2;break;
+				case 14:set .@map$,"gl_prison1";set .@x,150;set .@y,14;set .@cost,3;break;
+				}
+				break;
+			case 4:
+				switch(select(	"時計塔2F [2]","時計塔3F [3]","時計塔4F [5]","時計塔B1 [2]",
+						"時計塔B2 [3]","時計塔B3 [4]","時計塔B4 [5]","ミョルニール廃坑B2F [2]",
+						"ミョルニール廃坑B3F [3]","オーク地下洞窟2 [2]")){
+				case 1:set .@map$,"c_tower2";set .@x,268;set .@y,26;set .@cost,2;break;
+				case 2:set .@map$,"c_tower3";set .@x,65;set .@y,147;set .@cost,3;break;
+				case 3:set .@map$,"c_tower4";set .@x,185;set .@y,44;set .@cost,5;break;
+				case 4:set .@map$,"alde_dun01";set .@x,171;set .@y,158;set .@cost,2;break;
+				case 5:set .@map$,"alde_dun02";set .@x,128;set .@y,169;set .@cost,3;break;
+				case 6:set .@map$,"alde_dun03";set .@x,277;set .@y,178;set .@cost,4;break;
+				case 7:set .@map$,"alde_dun04";set .@x,203;set .@y,220;set .@cost,5;break;
+				case 8:set .@map$,"mjo_dun02";set .@x,381;set .@y,343;set .@cost,2;break;
+				case 9:set .@map$,"mjo_dun03";set .@x,302;set .@y,262;set .@cost,3;break;
+				case 10:set .@map$,"orcsdun02";set .@x,180;set .@y,17;set .@cost,2;break;
+				}
+				break;
+			case 5:
+				switch(select(	"海底洞窟二層 [2]","海底洞窟三層 [3]","海底洞窟四層 [4]","海底神殿 [5]",
+						"亀島D1 [2]","亀島D2 [3]","地下洞窟B2F [2]","地下洞窟B3F [3]","地下寺院1 [4]")){
+				case 1:set .@map$,"iz_dun01";set .@x,41;set .@y,37;set .@cost,2;break;
+				case 2:set .@map$,"iz_dun02";set .@x,236;set .@y,204;set .@cost,3;break;
+				case 3:set .@map$,"iz_dun03";set .@x,32;set .@y,63;set .@cost,4;break;
+				case 4:set .@map$,"iz_dun04";set .@x,26;set .@y,27;set .@cost,5;break;
+				case 5:set .@map$,"tur_dun02";set .@x,148;set .@y,264;set .@cost,2;break;
+				case 6:set .@map$,"tur_dun03";set .@x,132;set .@y,189;set .@cost,3;break;
+				case 7:set .@map$,"pay_dun01";set .@x,19;set .@y,33;set .@cost,2;break;
+				case 8:set .@map$,"pay_dun02";set .@x,19;set .@y,63;set .@cost,3;break;
+				case 9:set .@map$,"pay_dun03";set .@x,155;set .@y,159;set .@cost,4;break;
+				}
+				break;
+			case 6:
+				switch(select(	"ノークロード二層 [3]","ジュピロス廃墟2 [3]",
+						"地下戦場跡 [2]","崑崙D2 [2]","王陵内部 [2]")){
+				case 1:set .@map$,"mag_dun02";set .@x,47;set .@y,30;set .@cost,3;break;
+				case 2:set .@map$,"juperos_02";set .@x,128;set .@y,278;set .@cost,3;break;
+				case 3:set .@map$,"ama_dun02";set .@x,33;set .@y,40;set .@cost,2;break;
+				case 4:set .@map$,"gon_dun02";set .@x,26;set .@y,114;set .@cost,2;break;
+				case 5:set .@map$,"lou_dun02";set .@x,285;set .@y,18;set .@cost,2;break;
+				}
+				break;
+			case 7:
+				switch(select(	"生体実験研究所2 [3]","アビスレイク地下2 [3]","タナトスタワー2F [2]",
+						"タナトスタワー3F [3]","タナトスタワー6F [4]","タナトスタワー7F [5]",
+						"オーディン神殿2 [5]")){
+				case 1:set .@map$,"lhz_dun02";set .@x,220;set .@y,6;set .@cost,3;break;
+				case 2:set .@map$,"abyss_02";set .@x,271;set .@y,270;set .@cost,3;break;
+				case 3:set .@map$,"tha_t02";set .@x,149;set .@y,130;set .@cost,2;break;
+				case 4:set .@map$,"tha_t03";set .@x,217;set .@y,160;set .@cost,3;break;
+				case 5:set .@map$,"tha_t06";set .@x,206;set .@y,11;set .@cost,4;break;
+				case 6:set .@map$,"tha_t07";set .@x,30;set .@y,166;set .@cost,5;break;
+				case 7:set .@map$,"odin_tem02";set .@x,25;set .@y,180;set .@cost,5;break;
+				}
+				break;
+			case 8:
+				switch(select(	"フレイヤ大神殿聖域B2F [3]","フレイヤ大神殿聖域B3F [3]","フレイヤ大神殿聖域B4F [3]",
+						"氷の洞窟2 [2]","トール火山ダンジョン2 [3]","修道院B1F [2]")){
+				case 1:set .@map$,"ra_san02";set .@x,284;set .@y,149;set .@cost,3;break;
+				case 2:set .@map$,"ra_san03";set .@x,10;set .@y,149;set .@cost,3;break;
+				case 3:set .@map$,"ra_san04";set .@x,35;set .@y,216;set .@cost,3;break;
+				case 4:set .@map$,"ice_dun02";set .@x,151;set .@y,139;set .@cost,2;break;
+				case 5:set .@map$,"thor_v02";set .@x,78;set .@y,203;set .@cost,3;break;
+				case 6:set .@map$,"abbey01";set .@x,51;set .@y,15;set .@cost,2;break;
+				}
+				break;
+			case 9:
+				switch(select(	"イグドラシル中心部01 [4]","カミダルトンネル [4]","森 [2]","深い森 [3]","滝の中の洞窟01 [3]")){
+				case 1:set .@map$,"nyd_dun01";set .@x,220;set .@y,69;set .@cost,4;break;
+				case 2:set .@map$,"dic_dun01";set .@x,32;set .@y,212;set .@cost,4;break;
+				case 3:set .@map$,"mosk_dun01";set .@x,201;set .@y,269;set .@cost,2;break;
+				case 4:set .@map$,"mosk_dun02";set .@x,262;set .@y,118;set .@cost,3;break;
+				case 5:set .@map$,"bra_dun01";set .@x,80;set .@y,47;set .@cost,3;break;
+				}
+				break;
+			}
+			if(BaseLevel < 90){
+				set .@cost,1;
+				mes "[ポリン]";
+				mes "ベース90以下は";
+				mes "ポリンコイン1枚でいいぽ！";
+				next;
+			}
+			if(.@pt_warp > 0){
+				set .@cost,.@cost+1;
+				mes "[ポリン]";
+				mes "PT転送は";
+				mes "ポリンコイン1枚追加ぽ！";
+				mes .@cost+"枚のポリンコインが必要ぽ！";
+				next;
+			}
+			if(countitem(7539)<.@cost){
+				mes "[ポリン]";
+				mes "コインが足りないぽ！";
+				mes .@cost+"枚のポリンコインが必要ぽ！";
+				close;
+			}
+			mes "[ポリン]";
+			mes "本当に^0000FF"+.@map$+"^000000に";
+			mes "転送していいぽ？";
+			next;
+			if(select("転送される！","やっぱりやめた")==2) {
+				mes "[ポリン]";
+				mes "ぽぽ！";
+				mes "やめるぽか";
+				close;
+			}
+			delitem 7539,.@cost;
+			set $PORICOIN,$PORICOIN+.@cost;
+			if($PORICOIN>=2222)
+				donpcevent "#poring2::OnStart";
+			if(.@pt_warp)
+				warpparty .@map$,.@x,.@y,getcharid(1);
+			else
+				warp .@map$,.@x,.@y;
+			close;end;
+		case 3:
+			mes "[ポリン]";
+			mes "今度はポリンコイン持ってくるぽよ！";
+			close;
+		}
+		close;
+	case 2:
+		mes "[ポリン]";
+		mes "景品交換ぽね？";
+		mes "どれがいいか選ぶぽ！";
+		next;
+		switch(select(	"ポリン帽","エンジェリング帽","エンジェリングヘアピン","デビルリング帽",
+				"三段ポリン帽","ポリンパーティー帽","ママの帽子","エンジェリング帽","飛び跳ねポリン",
+				"ポポリン帽","サンタポリン帽","ポリンケーキ帽子","ポリンボックス","剛弓エルドラド")){
+		case 1: set .@itemid,5035;set .@num,50;break;
+		case 2: set .@itemid,5132;set .@num,500;break;
+		case 3: set .@itemid,5153;set .@num,130;break;
+		case 4: set .@itemid,5254;set .@num,500;break;
+		case 5: set .@itemid,5255;set .@num,130;break;
+		case 6: set .@itemid,5318;set .@num,130;break;
+		case 7: set .@itemid,5319;set .@num,250;break;
+		case 8: set .@itemid,5334;set .@num,250;break;
+		case 9: set .@itemid,5335;set .@num,250;break;
+		case 10:set .@itemid,5352;set .@num,50;break;
+		case 11:set .@itemid,5381;set .@num,500;break;
+		case 12:set .@itemid,5415;set .@num,130;break;
+		case 13:set .@itemid,12109;set .@num,250;break;
+		case 14:set .@itemid,1747;set .@num,4000;break;
+		}
+		mes "[ポリン]";
+		mes getitemname(.@itemid)+"でいいぽ？";
+		mes "これはポリンコイン "+.@num+"枚ぽ！";
+		next;
+		if(select("交換する","やっぱりやめた")==2) {
+			mes "[ポリン]";
+			mes "ぽぽ！";
+			mes "やめるぽか";
+			close;
+		}
+		if(countitem(7539)<.@num){mes "[ポリン]";mes "コインが足りないぽ！";close;}
+		delitem 7539,.@num;
+		getitem .@itemid,1;
+		set $PORICOIN,$PORICOIN+.@num;
+		mes "[ポリン]";
+		mes "ありがとうぽ！";
+		mes "また頼むぽ！";
+		if($PORICOIN<4000)close;
+		next;
+		mes "[ポリン]";
+		mes "ぽぽ……";
+		mes "とうとう……集まったぽ……";
+		next;
+		mes "[ポリン]";
+		mes "これでこんな窮屈な体から";
+		mes "おさらばできるぽ！";
+		mes "礼を言うぽよ！！";
+		close2;
+		if($PORICOIN>=2222)
+			donpcevent "#poring2::OnStart";
+		end;
+	case 3:
+		mes "[ポリン]";
+		mes "や、止めるぽ！";
+		next;
+		mes "-ポリンの懐からメモが見える-";
+		mes "-集めたコインの枚数を書いているようだ-";
+		next;
+		mes "-今やっと"+$PORICOIN+"枚集まった-";
+		close;
+	case 4:
+		mes "[ポリン]";
+		mes "今度はポリンコイン持ってくるぽよ！";
+		close;
+	}
+}
+pay_fild04,0,0,3	script	#poring2	-1,{
+OnStart:
+	set $PORICOIN,0;
+	announce "ポリン : ポーッ!!",bc_all,0xFF0000,FW_NORMAL,18;
+	sleep 4000;
+	announce "ポリン : とうとう復活したぽ！長かったぽ!!",bc_all,0xFF0000,FW_NORMAL,18;
+	sleep 4000;
+	announce "ポリン : それもこれも全部人間のせいっぽ!!",bc_all,0xFF0000,FW_NORMAL,18;
+	sleep 4000;
+	announce "オーラポリン : 復讐してやるっぽ!!",bc_all,0xFF0000,FW_NORMAL,18;
+	sleep 4000;
+	announce "オーラポリン : ポリン島の仲間達よ、ポリに協力するっぽよ!!",bc_all,0xFF0000,FW_NORMAL,18;
+	sleep 4000;
+	monster "pay_fild04",0,0,"オーラポリン",1502,1,"#poring2::OnClose";
+	monster "pay_fild04",0,0,"エンジェリング",1096,4,4;
+	monster "pay_fild04",0,0,"ゴーストリング",1120,4,4;
+	monster "pay_fild04",0,0,"アークエンジェリング",1388,4,4;
+	monster "pay_fild04",0,0,"デビルリング",1582,4,4;
+	monster "pay_fild04",0,0,"エンジェリング",1766,1,4;
+	monster "pay_fild04",0,0,"デビルリング",1766,1,4;
+	end;
+OnClose:
+	killmonster "pay_fild04","All";
+	announce "オーラポリン : ぽ……ぽ",bc_all,0xFF0000,FW_NORMAL,18;
+	sleep 3000;
+	announce "オーラポリン : …ぽり……またあのポリンに…なりたくないぽ…",bc_all,0xFF0000,FW_NORMAL,18;
+	enablenpc "ポリン#poring";
+	end;
+}
+
+//----------------------------------------------------------------------
+//移動用猫
+//----------------------------------------------------------------------
+function	script	warpfunc001	{
+	getmapxy(.@mapname$,.@mapx,.@mapy,0,strcharinfo(0));
+	mes "[配達猫]";
+	mes "運ぶところは何処だい？";
+	if(.@mapname$ == "prontera"){
+		switch(select(
+				((getcharid(2)==GetCastleData("aldeg_cas01",1))?"ギルドルーム":""),
+				("プロンテラ 東"),//1
+				("プロンテラ 西"),//2
+				("プロンテラ 握手前"),//3
+				("プロンテラ城前"),//4
+				("プロンテラ 南十時"),//5
+				("プロンテラ 北東"),//6
+				("プロンテラ 北西"),//7
+				("プロンテラ 南東"),//8
+				("プロンテラ 南西"),//9
+				("プロンテラ 南南西"),//10
+				("プロンテラ 教会"),//11
+				("騎士団前"),//12
+				("やめる"))){//13
+		case 1:	warp "m_h2",5,5;		break;
+		case 2:	warp "prontera",276,212;	break;
+		case 3:	warp "prontera",33,212;		break;
+		case 4:	warp "prontera",148,304;	break;
+		case 5:	warp "prontera",160,328;	break;
+		case 6:	warp "prontera",164,111;	break;
+		case 7:	warp "prontera",201,261;	break;
+		case 8: warp "prontera",110,246;	break;
+		case 9:	warp "prontera",244,64;		break;
+		case 10:warp "prontera",57,125;		break;
+		case 11:warp "prontera",98,65;		break;
+		case 12:warp "prontera",254,310;	break;
+		case 13:warp "prontera",73,329;		break;
+		case 14:
+		}
+		close;end;
+	}else if(.@mapname$ == "morocc"){
+		switch(select(
+			((getcharid(2)==GetCastleData("aldeg_cas01",1))?"ギルドルーム":""),
+			("モロク 西"),
+			("モロク 東"),
+			("モロク 北"),
+			("やめる"))){
+		case 1:	warp "m_h2",5,5;		break;
+		case 2:	warp .@mapname$,34,174;		break;
+		case 3:	warp .@mapname$,296,211;	break;
+		case 4:	warp .@mapname$,150,289;	break;
+		case 5:
+		}
+		close;end;
+	}else if(.@mapname$ == "alberta"){
+		switch(select(
+			((getcharid(2)==GetCastleData("aldeg_cas01",1))?"ギルドルーム":""),
+			("アルベルタ 中央"),
+			("アルベルタ 北西"),
+			("アルベルタ 北"),
+			("アルベルタ 北東"),
+			("やめる"))){
+		case 1:	warp "m_h2",5,5;		break;
+		case 2:	warp .@mapname$,116,72;		break;
+		case 3:	warp .@mapname$,32,241;		break;
+		case 4:	warp .@mapname$,118,213;	break;
+		case 5:	warp .@mapname$,222,112;	break;
+		case 6:
+		}
+		close;end;
+	}else if(.@mapname$ == "geffen"){
+		switch(select(
+			((getcharid(2)==GetCastleData("aldeg_cas01",1))?"ギルドルーム":""),
+			("ゲフェン 東"),
+			("ゲフェン 北"),
+			("ゲフェン 西"),
+			("やめる"))){
+		case 1:	warp "m_h2",5,5;		break;
+		case 2:	warp .@mapname$,198,124;	break;
+		case 3:	warp .@mapname$,136,200;	break;
+		case 4:	warp .@mapname$,40,125;		break;
+		case 5:	close;end;break;
+		}
+	}else if(.@mapname$ == "payon"){
+		switch(select(
+			((getcharid(2)==GetCastleData("aldeg_cas01",1))?"ギルドルーム":""),
+			("フェイヨン 南"),
+			("フェイヨン 北"),
+			("フェイヨン 北東"),
+			("やめる"))){
+		case 1:	warp "m_h2",5,5;		break;
+		case 2:	warp .@mapname$,188,106;	break;
+		case 3:	warp .@mapname$,175,319;	break;
+		case 4:	warp .@mapname$,240,305;	break;
+		case 5:	close;end;break;
+		}
+	}
+	close;end;
+}
+//=========================================================
+//移動用ネコ
+//=========================================================
+function	script	warpfunc002	{
+	getmapxy(.@mapname$,.@mapx,.@mapy,0,strcharinfo(0));
+	if(.@mapname$=="prontera"){	warp .@mapname$,156,187; }
+	else if(.@mapname$=="morocc"){	warp .@mapname$,148,102; }
+	else if(.@mapname$=="alberta"){	warp .@mapname$,183,143; }
+	else if(.@mapname$=="geffen"){	warp .@mapname$,114,104; }
+	else if(.@mapname$=="payon"){	warp .@mapname$,168,230; }
+	end;
+}
+prontera.gat,158,192,5	script	配達猫#000	497,{	callfunc "warpfunc001";	close;	end;}
+morocc.gat,148,102,3	script	配達猫#100	497,{	callfunc "warpfunc001";	close;	end;}
+alberta.gat,183,143,3	script	配達猫#200	497,{	callfunc "warpfunc001";	close;	end;}
+geffen.gat,114,110,3	script	配達猫#400	497,{	callfunc "warpfunc001";	close;	end;}
+payon.gat,168,230,3	script	配達猫#500	497,{	callfunc "warpfunc001";	close;	end;}
+prontera.gat,276,212,3	script	猫#001	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,33,212,3	script	猫#002	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,164,111,3	script	猫#003	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,98,65,3	script	猫#004	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,244,64,3	script	猫#005	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,148,304,3	script	猫#006	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,254,310,3	script	猫#007	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,57,125,3	script	猫#008	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,201,261,3	script	猫#009	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,160,328,3	script	猫#010	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,73,329,3	script	猫#011	876,{	callfunc "warpfunc002";	close;	end;	}
+prontera.gat,110,246,3	script	猫#012	876,{	callfunc "warpfunc002";	close;	end;	}
+morocc.gat,34,174,3	script	猫#101	876,{	callfunc "warpfunc002";	close;	end;	}
+morocc.gat,296,211,3	script	猫#102	876,{	callfunc "warpfunc002";	close;	end;	}
+morocc.gat,150,289,3	script	猫#103	876,{	callfunc "warpfunc002";	close;	end;	}
+alberta.gat,116,72,3	script	猫#201	876,{	callfunc "warpfunc002";	close;	end;	}
+alberta.gat,32,241,3	script	猫#202	876,{	callfunc "warpfunc002";	close;	end;	}
+alberta.gat,118,213,3	script	猫#203	876,{	callfunc "warpfunc002";	close;	end;	}
+alberta.gat,222,112,3	script	猫#204	876,{	callfunc "warpfunc002";	close;	end;	}
+geffen.gat,198,124,3	script	猫#301	876,{	callfunc "warpfunc002";	close;	end;	}
+geffen.gat,136,200,3	script	猫#302	876,{	callfunc "warpfunc002";	close;	end;	}
+geffen.gat,40,125,3	script	猫#303	876,{	callfunc "warpfunc002";	close;	end;	}
+payon.gat,188,106,3	script	猫#401	876,{	callfunc "warpfunc002";	close;	end;	}
+payon.gat,175,319,3	script	猫#402	876,{	callfunc "warpfunc002";	close;	end;	}
+payon.gat,240,305,3	script	猫#403	876,{	callfunc "warpfunc002";	close;	end;	}
+
+prontera,158,330,3	script	GvGMAP転送	420,{
+	mes "GvGMAPへ転送しますか？";
+	if(select("はい","いいえ")==2)close;
+	set .@x,54+rand(0,2);
+	set .@y,82+rand(0,2);
+	warp "alde_gld",.@x,.@y;
+	end;
+}
+
+prontera,153,330,5	script	ゲート管理者	421,{
+	mes "[ゲート管理者]";
+	mes "現在、深淵の回廊は";
+	if($inabyss>=1){
+		mes "開放状態が維持されています";
+	}else{
+		if(70000000 <= $itemabyss*100000+$zenyabyss){
+			mes "ゲート開放の準備が整った状態です";
+			mes "ゲートを開放させますか？";
+			next;
+			if(select("はい","いいえ")==2){
+				mes "[ゲート管理者]";
+				mes "いつでもどうぞ";
+				close;
+			}
+			mes "[ゲート管理者]";
+			mes "ゲートが開放されました！";
+			set $inabyss,3;
+			set $itemabyss,0;
+			set $zenyabyss,0;
+			announce "ゲート管理者 : 深淵の回廊ゲートが三日間開放されます!!",0;
+			close;
+		}
+		mes $itemabyss+"個の資材";
+		mes callfunc("func_zeny",$zenyabyss)+"Zenyの資金";
+		mes "が投資されています";
+	}
+	next;
+	switch(select("投資を行う","深淵の回廊の利用","深淵の回廊とは？","やめる")){
+	case 1:
+		mes "[ゲート管理者]";
+		if($inabyss>=1){
+			mes "現在、投資を行うことができません";
+			close;
+		}
+		mes "投資を行いますか？";
+		next;
+		mes "[ゲート管理者]";
+		mes "投資された資材とゼニーは";
+		mes "ゲート維持のために利用され";
+		mes "返却に応じることはできません";
+		next;
+		switch(select("資材を投資する","ゼニーを投資する","投資を取り止める")){
+		case 1:
+			mes "[ゲート管理者]";
+			mes "投資してくださる資材を";
+			mes "次の中から選んでください";
+			next;
+			setarray .@itemid[1],6326,7754,7451,7020,7300,968,7169,7113,7114,7513,7018,7211,7036,750,1030,1029,7108,7109,7510,7562,7450,6091,7566;
+			setarray .@itemnum[1],2,2,2,3,5,5,5,3,3,2,3,5,5,3,1,5,3,3,3,1,1,1,2;
+			set .@sel,select(	"女王の羽の欠片 2個","壊れた王冠 2個","火竜の鱗 2個","母さんの悪夢 3個","宝石の原石 5個","オーク勇者の証 5個",
+						"羅盤 5個","壊れた錫杖 3個","ツタンカーメンマスク 3個","懐中時計 2個","小さい枝 3個","ロゼッタストーンの欠片 5個",
+						"ハティーの牙 5個","バフォメット人形 3個","虎の足裏 1個","虎の革 5個","壊れた盾の欠片 3個","輝く槍の穂先 3個",
+						"ヴァルハラの花 3個","氷の鱗 1個","骨の鎧の欠片 1個","鮮血の鱗 1個","暗闇の意志 2個");
+			mes "[ゲート管理者]";
+			mes getitemname(.@itemid[.@sel])+" "+.@itemnum[.@sel]+"個を";
+			mes "投資してくださるのですね？";
+			next;
+			if(select("はい","いいえ")==2)close;
+			if(countitem(.@itemid[.@sel])<.@itemnum[.@sel]){
+				mes "[ゲート管理者]";
+				mes "資材をお持ちでないようです";
+				close;
+			}
+			delitem .@itemid[.@sel],.@itemnum[.@sel];
+			set $itemabyss,$itemabyss+1;
+			set #PPOINT,#PPOINT+30;
+			mes "[ゲート管理者]";
+			mes "ありがとうございます";
+			mes "投資が完了しました";
+			mes "ささやかですが、お礼に";
+			mes "30苺ポイントを差し上げます";
+			emotion 15;
+			close;
+		case 2:
+			mes "[ゲート管理者]";
+			mes "ゼニーを投資は1口10kZenyで";
+			mes "一度に200口まで投資が可能です";
+			mes "何口の投資してくださいますか？";
+			next;
+			input .@num;
+			mes "[ゲート管理者]";
+			if(.@num==0){mes "投資をやめるのですね";close;}
+			if(.@num<0 || .@num>200){mes "一度に200口まででお願いします";close;}
+			if(Zeny < 10000*.@num){mes "Zenyが足りないようですね";close;}
+			set Zeny,Zeny-(10000*.@num);
+			set $zenyabyss,$zenyabyss+(10000*.@num);
+			mes "ありがとうございます";
+			mes "投資が完了しました";
+			emotion 15;
+			close;
+		case 3:
+			close;
+		}
+	case 2:
+		mes "[ゲート管理者]";
+		mes "現在、ゲートは";
+		mes ($inabyss>=1?"^0000FF入場可能^000000":"^FF0000入場不可^000000")+"の状態です";
+		if($inabyss<1) close;
+		next;
+		mes "[ゲート管理者]";
+		mes "ゲート開放状態のため";
+		mes "内部へ転送が可能です";
+		mes "砦非保有者の方は入場の際に";
+		mes "10kZenyをお支払いいただきます";
+		next;
+		switch(select("アルデバラン－英雄の涙","ゲフェン－亡者の丘","フェイヨン－太古の風","プロンテラ－戦士の道","入場しない")){
+		case 1:
+			if(getcharid(2)!=GetCastleData("aldeg_cas01",1)){
+				if(Zeny < 10000){mes "[ゲート管理者]";mes "Zenyが足りません";close;}
+				set Zeny,Zeny-10000;
+				set $zenyabyss,$zenyabyss+10000;
+			}
+			warp "gld2_ald",173,43;
+			end;
+		case 2:
+			if(getcharid(2)!=GetCastleData("aldeg_cas01",1)){
+				if(Zeny < 10000){mes "[ゲート管理者]";mes "Zenyが足りません";close;}
+				set Zeny,Zeny-10000;
+				set $zenyabyss,$zenyabyss+10000;
+			}
+			warp "gld2_gef",29,68;
+			end;
+		case 3:
+			if(getcharid(2)!=GetCastleData("aldeg_cas01",1)){
+				if(Zeny < 10000){mes "[ゲート管理者]";mes "Zenyが足りません";close;}
+				set Zeny,Zeny-10000;
+				set $zenyabyss,$zenyabyss+10000;
+			}
+			warp "gld2_pay",120,24;
+			end;
+		case 4:
+			if(getcharid(2)!=GetCastleData("aldeg_cas01",1)){
+				if(Zeny < 10000){mes "[ゲート管理者]";mes "Zenyが足りません";close;}
+				set Zeny,Zeny-10000;
+				set $zenyabyss,$zenyabyss+10000;
+			}
+			warp "gld2_prt",97,11;
+			end;
+		case 5:
+			close;
+		}
+	case 3:
+		mes "[ゲート管理者]";
+		mes "深淵の回廊とは";
+		mes "新たに新設された";
+		mes "ギルドダンジョンの名称です";
+		next;
+		mes "[ゲート管理者]";
+		mes "ダンジョンへのゲートを開放し";
+		mes "入場可能な状態を保つには";
+		mes "多くの資材とゼニーが必要です";
+		next;
+		mes "[ゲート管理者]";
+		mes "規定数の投資がされましたら";
+		mes "三日間、ゲートを開放します";
+		mes "また、入場の際に";
+		mes "砦非保有ギルドの方には";
+		mes "寄付をお願いしています";
+		next;
+		mes "[ゲート管理者]";
+		mes "この寄付は次回のゲート開放への";
+		mes "投資として当てさせていただきます";
+		close;
+	case 4:
+		close;
+	}
+}
+
+mosk_dun01.gat,170,164,0	script	石碑#mosk1	111,{
+	mes "-四角い形の岩の表面に";
+	mes "　文字が刻まれている-";
+	next;
+	mes "^3333FF-太陽に仕える者、死に";
+	mes "　至る覚悟があるのなら、";
+	mes "　北へ進むが良い-^000000";
+	close;
+}
+
+mosk_dun01.gat,207,276,0	script	石碑#mosk2	111,{
+	mes "-四角い形の岩の表面に";
+	mes "　文字が刻まれている-";
+	next;
+	mes "^3333FF-進む者、傷ついた代わりに";
+	mes "　勇気を貰う、戻る者は何時までも";
+	mes "　安全であろう。";
+	mes "　無謀な勇気を持つ者は進み、";
+	mes "　そうでない者は戻るが良い-^000000";
+	next;
+	if(select("進む","戻る") == 2){
+		mes "-戻ることを選んだ-";
+		close;
+	}
+	mes "-進むことを選んだ-";
+	close2;
+	warp "mosk_dun02.gat",165,30;
+	end;
+}
+
+mosk_dun02.gat,168,28,0	script	石碑#mosk3	111,{
+	mes "-四角い形の岩の表面に";
+	mes "　文字が刻まれている-";
+	next;
+	mes "^3333FF-進む者、傷つく代わりに";
+	mes "　勇気を貰う。";
+	mes "　戻る者は何時までも";
+	mes "　安全であろう。";
+	mes "　勇気ある者は進み、";
+	mes "　そうでない者は戻るが良い-^000000";
+	next;
+	if(select("進む","戻る") == 2){
+		mes "-戻ることを選んだ-";
+		close;
+	}
+	mes "-進むことを選んだ-";
+	close2;
+	warp "mosk_dun01.gat",201,269;
+	end;
+}
+
+mosk_dun02.gat,268,117,0	script	石碑#mosk4	111,{
+	mes "-四角い形の岩の表面に";
+	mes "　文字が刻まれている-";
+	next;
+	mes "^3333FF-進む者、死ぬ代わりに";
+	mes "　名誉を貰う。";
+	mes "　戻る者は勇気を得るが";
+	mes "　傷を負うだろう。";
+	mes "　無謀な勇気のある者は進み、";
+	mes "　そうでない者は戻るが良い-^000000";
+	next;
+	if(select("進む","戻る") == 2){
+		mes "-戻ることを選んだ-";
+		close;
+	}
+	mes "-進むことを選んだ-";
+	close2;
+	warp "mosk_dun03.gat",32,135;
+	end;
+}
+
+mosk_dun03.gat,27,131,0	script	石碑#mosk5	111,{
+	mes "-四角い形の岩の表面に";
+	mes "　文字が刻まれている-";
+	next;
+	mes "^3333FF-留まる者、傷つく代わりに";
+	mes "　名誉を貰う。";
+	mes "　戻る者は大きい傷を負い、";
+	mes "　勇気を学ぶだろう。";
+	mes "　勇気ある者は戻り、";
+	mes "　そうでない者は進むが良い-^000000";
+	next;
+	if(select("戻る","進む") == 2){
+		mes "-進むことを選んだ-";
+		close;
+	}
+	mes "-危険を感じ、戻ることを選んだ-";
+	close2;
+	warp "mosk_dun02.gat",262,118;
+	end;
+}
+
+mosk_dun01.gat,264,191,0	script	石碑#mosk6	111,{
+	mes "-四角い形の岩の表面に";
+	mes "　文字が刻まれている-";
+	next;
+	mes "^3333FF-進む者、死ぬ代わりに";
+	mes "　名誉を貰う。";
+	mes "　戻る者は何時までも";
+	mes "　安全であろう。";
+	mes "　死を恐れない者は進み、";
+	mes "　そうでない者は戻るが良い-^000000";
+	next;
+	if(select("進む","戻る") == 2){
+		mes "-戻ることを選んだ-";
+		close;
+	}
+	mes "-進むことを選んだ-";
+	close2;
+	warp "mosk_dun03.gat",117,36;
+	end;
+}
+
+mosk_dun03.gat,119,46,0	script	石碑#mosk7	111,{
+	mes "-四角い形の岩の表面に";
+	mes "　文字が刻まれている-";
+	next;
+	mes "^3333FF-留まる者、死ぬ代わりに";
+	mes "　名誉を貰う。";
+	mes "　戻る者は何時までも";
+	mes "　安全だろう。";
+	mes "　死を恐れぬ者は戻り、";
+	mes "　そうでない者は進むが良い-^000000";
+	next;
+	if(select("戻る","進む") == 2){
+		mes "-進むことを選んだ-";
+		close;
+	}
+	mes "-危険を感じ、戻ることを選んだ-";
+	close2;
+	warp "mosk_dun01.gat",257,190;
+	end;
+}
+
+lhz_in02,48,139,3	script	枝部屋	78,{
+	mes "500Zenyで枝部屋へ行きますか？";
+	set .@coice,(select(	"枝部屋01 "+getmapusers("guild_vs1")+"人",
+				"枝部屋02 "+getmapusers("guild_vs2")+"人",
+				"枝部屋03 "+getmapusers("guild_vs3")+"人",
+				"枝部屋04 "+getmapusers("guild_vs4")+"人",
+				"枝部屋05 "+getmapusers("guild_vs5")+"人","やめる"));
+	switch(.@coice){
+	case 1:
+		if(Zeny > 500){
+			set Zeny,Zeny-500;
+			warp "guild_vs1",0,0;
+		}
+		end;
+	case 2:
+		if(Zeny > 500){
+			set Zeny,Zeny-500;
+			warp "guild_vs2",0,0;
+		}
+		end;
+	case 3:
+		if(Zeny > 500){
+			set Zeny,Zeny-500;
+			warp "guild_vs3",0,0;
+		}
+		end;
+	case 4:
+		if(Zeny > 500){
+			set Zeny,Zeny-500;
+			warp "guild_vs4",0,0;
+		}
+		end;
+	case 5:
+		if(Zeny > 500){
+			set Zeny,Zeny-500;
+			warp "guild_vs5",0,0;
+		}
+		end;
+	case 6:
+		close;
+	}
+}
+lhz_dun04,144,275,5	script	奇妙な機械#lhz4	406,{
+	mes "-怪しげな機械がある-";
+	mes "-機械には二つのボタンがついている-";
+	next;
+	switch(select("上のボタンを押してみる","下のボタンを押してみる","やめる")){
+	case 1:
+		mes "-突然視界が暗転した-";
+		close2;
+		warp "ex_cry01",101,116;
+		end;
+	case 2:
+		mes "-突然視界が暗転した-";
+		close2;
+		warp "ex_cry01",101,82;
+		end;
+	case 3:
+		mes "-触れるのをやめた-";
+		close;
+	}
+}

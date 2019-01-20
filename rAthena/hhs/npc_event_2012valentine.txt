@@ -1,0 +1,2905 @@
+//==============================================================================
+// Ragnarok Online Valentine2012 Script     by refis
+//==============================================================================
+// 変数
+//	$VALENTINE2012　当日のスウィートサービス
+//　　0　実装日で該当者なし(未確認)
+//　　1　ヒュッケ - ステータス強化
+//　　2　シャイ(未確認) - 無料宿泊施設
+//　　3　怪盗アニバーサリー(未確認) - アイテムドロップ率アップ
+//　　4　ルーン - 獲得経験値アップ
+//　　5　ミッド(未確認) - 特殊転送
+//
+//	$VALENTINE2012_RANK　当日のサービスランク
+//　　$VALENTINE2012_POINTの値から算出
+//　　   0 ～ 1000　ランク1
+//　　1001 ～ 2000　ランク2
+//　　2001 ～ 3000　ランク3
+//　　3001 ～ 4000　ランク4
+//　　4001 ～ 　　　ランク5
+//
+//	$VALENTINE2012_COUNT　各キャラのカウント
+//	　[1]　ヒュッケ
+//	　[2]　シャイ
+//	　[3]　怪盗アニバーサリー
+//	　[4]　ルーン
+//	　[5]　ミッド
+//
+//	$VALENTINE2012_POINT　各キャラのポイント
+//	　[1]　ヒュッケ
+//	　[2]　シャイ
+//	　[3]　怪盗アニバーサリー
+//	　[4]　ルーン
+//	　[5]　ミッド
+//
+//　　アイテム毎に加算されるポイント
+//　　[1P]　チョコレートドリンク
+//　　[2P]　チョコタルト
+//　　[3P]　ストロベリーチョコ
+//　　[4P]　手作りチョコ
+//　　[5P]　ビターチョコ
+//--------------------------------------------------------------
+
+izlude.gat,123,97,6	script	伝説のワンダラー	485,{
+	emotion 14;	//大きいハート
+	mes "[伝説のワンダラー]";
+	mes "ただ今、プロンテラの街で";
+	mes "バレンタインイベントを";
+	mes "開催中でーす！";
+	next;
+	mes "[伝説のワンダラー]";
+	mes "イベント会場への無料転送を";
+	mes "行っています。";
+	mes "イベント会場に行きますか？";
+	next;
+	if(select("イベント会場に行く","行かない")==2) {
+		mes "[伝説のワンダラー]";
+		mes "また、おいでくださいね。";
+		close;
+	}
+	mes "[伝説のワンダラー]";
+	mes "それでは、プロンテラの街に";
+	mes "お送りします。";
+	next;
+	mes "[伝説のワンダラー]";
+	mes "プロンテラに到着したら";
+	mes "ショコラ=バシニオちゃんに";
+	mes "話しかけてくださいね。";
+	mes "それでは、いってらっしゃ～い。";
+	close2;
+	warp "prontera.gat",155,280;
+	end;
+OnInit:
+	waitingroom "バレンタインイベント開催中",0;
+	end;
+}
+geffen,127,64,4	duplicate(伝説のワンダラー)	伝説のワンダラー#gf	485,
+payon,166,103,6	duplicate(伝説のワンダラー)	伝説のワンダラー#py	485,
+alberta,128,59,4	duplicate(伝説のワンダラー)	伝説のワンダラー#ab	485,
+morocc,166,104,4	duplicate(伝説のワンダラー)	伝説のワンダラー#mc	485,
+aldebaran,134,109,4	duplicate(伝説のワンダラー)	伝説のワンダラー#ad	485,
+yuno,172,188,4	duplicate(伝説のワンダラー)	伝説のワンダラー#yn	485,
+lighthalzen,162,104,4	duplicate(伝説のワンダラー)	伝説のワンダラー#lz	485,
+hugel,100,168,4	duplicate(伝説のワンダラー)	伝説のワンダラー#hg	485,
+einbroch,239,207,4	duplicate(伝説のワンダラー)	伝説のワンダラー#eb	485,
+rachel,130,135,4	duplicate(伝説のワンダラー)	伝説のワンダラー#rc	485,
+umbala,103,158,4	duplicate(伝説のワンダラー)	伝説のワンダラー#um	485,
+mid_camp,60,137,4	duplicate(伝説のワンダラー)	伝説のワンダラー#mi	485,
+//ac_cl_area,57,140,4	duplicate(伝説のワンダラー)	伝説のワンダラー#ac	485,
+
+prontera.gat,155,284,4	script	ショコラ＝バシニオ	96,{
+	cutin "v_choco01.bmp",2;
+	mes "[ショコラ]";
+	mes "こんにちは～！";
+	mes "チョコレートの老舗";
+	mes "バシニオチョコレートが主催する";
+	mes "バレンタインイベント……";
+	next;
+	mes "[ショコラ]";
+	mes "^FF0086愛情マックス！^000000";
+	mes "^FF0086バレンタイン・スウィート・デイズ!!^000000";
+	mes "開催中で～す！";
+	next;
+	if(VALENTINE2012 > 0) {
+		mes "[ショコラ]";
+		mes "私がイベント会場まで案内します。";
+		mes "イベント会場に行きますか？";
+		next;
+		if(select("行きます","やめる")==2) {
+			cutin "v_choco02.bmp",2;
+			mes "[ショコラ]";
+			mes "う～～、つまらないです。";
+			mes "冒険者さんのためにイベントなのに。";
+			mes "来てくれないなんて～。";
+			next;
+			mes "[ショコラ]";
+			cutin "v_choco01.bmp",2;
+			mes "私はここで待ってますから";
+			mes "イベント会場に行く時は";
+			mes "声をかけてくださいね！";
+			close2;
+			cutin "v_choco01.bmp",255;
+			end;
+		}
+		mes "[ショコラ]";
+		mes "それじゃあ、案内します！";
+		mes "私について来てくださいね！";
+		close2;
+		cutin "v_choco01.bmp",255;
+		warp "jp_ev_map46.gat",57,14;
+		end;
+	}
+	mes "[ショコラ]";
+	mes "日頃、頑張っている";
+	mes "冒険者さんたちをお菓子の力で";
+	mes "応援するためのイベントです！";
+	next;
+	mes "[ショコラ]";
+	mes "ぜひ、イベントに参加してください！";
+	mes "プレゼントも用意してるんですよ。";
+	next;
+	if(select("参加する","ちょっと考えさせて")==2) {
+		cutin "v_choco02.bmp",2;
+		mes "[ショコラ]";
+		mes "ぶ～っ！";
+		mes "イベントに参加すれば";
+		mes "スウィートな思いができるのに～。";
+		next;
+		mes "[ショコラ]";
+		cutin "v_choco01.bmp",2;
+		mes "私はここで待ってますから";
+		mes "イベントに参加する時は";
+		mes "声をかけてくださいね！";
+		close2;
+		cutin "v_choco01.bmp",255;
+		end;
+	}
+	mes "[ショコラ]";
+	mes "わ～～！　参加してくれるんですね！";
+	mes "嬉しいです！";
+	mes "それでは、バレンタインにちなんだ";
+	mes "スウィートなプレゼントを";
+	mes "お渡ししますね！";
+	next;
+	mes "[ショコラ]";
+	mes "イベント会場には、皆さんのために";
+	mes "チョコレートを作ってくれる";
+	mes "人たちも集まっていますよ。";
+	getitem 18721,1;	//スウィートバレンタイン帽
+	//setquest 108660;	//バレンタイン2012
+	set VALENTINE2012,1;
+	next;
+	mes "[ショコラ]";
+	mes "愛情のいっぱい詰まった";
+	mes "チョコレートには";
+	mes "特別な効果があるんです！";
+	next;
+	mes "[ショコラ]";
+	mes "チョコレートを作ってもらったら";
+	mes "いっぱい食べて";
+	mes "もりもりパワーアップしてください！";
+	next;
+	mes "[ショコラ]";
+	mes "それじゃあ、会場に案内するので";
+	mes "もう一度、私に話しかけてください。";
+	close2;
+	cutin "v_choco01.bmp",255;
+	end;
+OnInit:
+	waitingroom "バレンタイン会場！",0;
+	end;
+}
+jp_ev_map46.gat,60,21,4	script	ショコラ＝バシニオ#main	96,{
+	cutin "v_choco01.bmp",2;
+	mes "[ショコラ]";
+	mes "^FF0086愛情マックス！^000000";
+	mes "^FF0086バレンタイン・スウィート・デイズ!!^000000";
+	mes "開催中で～す！";
+	next;
+	mes "[ショコラ]";
+	mes "案内が必要ですか？";
+	mes "私が説明しますので";
+	mes "遠慮なく聞いてくださいね！";
+	next;
+	while(1) {
+		switch(select("イベントって何してるの？","チョコレートを作りたい！","その他のサービスは？","会話をやめる")) {
+		case 1:
+			mes "[ショコラ]";
+			mes "チョコレートの老舗";
+			mes "バシニオチョコレートが";
+			mes "日頃頑張っている冒険者の";
+			mes "皆さんにお届けする";
+			mes "スウィートなイベントです！";
+			next;
+			mes "[ショコラ]";
+			mes "スウィートなチョコレートを";
+			mes "いっぱい食べれば";
+			mes "幸せな気持ちになって";
+			mes "疲れも吹き飛んじゃいますよ！";
+			next;
+			mes "[ショコラ]";
+			mes "会場には、皆さんのために";
+			mes "チョコレートを作りたいと言って";
+			mes "集まってくれた人もいるんです。";
+			next;
+			mes "[ショコラ]";
+			mes "^FF0000ヒュッケ^000000さん、^FF0000シャイ^000000さん";
+			mes "^FF0000ルーン^000000さん、^FF0000ミッド^000000さん……";
+			next;
+			mes "[ショコラ]";
+			mes "それと";
+			mes "^FF0000怪盗アニバーサリー^000000さんが";
+			mes "皆さんが来るのを待ってます。";
+			mes "材料を渡せば、チョコレートを";
+			mes "作ってもらえますよ～。";
+			next;
+			mes "[ショコラ]";
+			mes "愛情のいっぱい詰まった";
+			mes "チョコレートには";
+			mes "特別な効果があるんです！";
+			next;
+			mes "[ショコラ]";
+			mes "チョコレートを作ってもらったら";
+			mes "いっぱい食べて";
+			mes "もりもりパワーアップしてください！";
+			next;
+			mes "[ショコラ]";
+			mes "あ、ちなみにチョコレートの材料は";
+			mes "自分で用意してくださいね。";
+			mes "材料は会場内でも販売してますから";
+			mes "良かったら利用してくださいね。";
+			next;
+			mes "[ショコラ]";
+			mes "さらに皆さんのために";
+			mes "文字通りあま～い";
+			mes "『スウィートサービス』も";
+			mes "用意してます！";
+			next;
+			mes "[ショコラ]";
+			mes "詳しくは、会場にいる";
+			mes "ジョンダ職員さんに聞いてみて";
+			mes "ください。";
+			break;
+		case 2:
+			mes "[ショコラ]";
+			mes "チョコレートを作るには";
+			mes "チョコレートの材料を持って";
+			mes "会場に集まってくれた5人の方に";
+			mes "声をかけてください。";
+			next;
+			mes "[ショコラ]";
+			mes "^FF0000ヒュッケ^000000さん、^FF0000シャイ^000000さん";
+			mes "^FF0000ルーン^000000さん、^FF0000ミッド^000000さん";
+			mes "^FF0000怪盗アニバーサリー^000000さんが";
+			mes "皆さんのためにチョコレートを";
+			mes "作ってくれます！";
+			next;
+			mes "[ショコラ]";
+			mes "作成するチョコレートによって";
+			mes "必要になる材料が違うので";
+			mes "材料が不足していないか";
+			mes "よく確認してね。";
+			next;
+			mes "[ショコラ]";
+			mes "作るのが難しいチョコレートだと";
+			mes "失敗しちゃうことがあるけど……";
+			mes "それもまたご愛嬌です！";
+			next;
+			mes "[ショコラ]";
+			mes "そうそう！";
+			mes "チョコレートを作るのに必要となる";
+			mes "カカオ豆は、カカオを割ることで";
+			mes "入手できます。";
+			next;
+			mes "[ショコラ]";
+			mes "会場では、カカオは販売してますが";
+			mes "加工に手間がかかるため";
+			mes "カカオ豆は、販売していません。";
+			next;
+			mes "[ショコラ]";
+			mes "カカオ割る作業は大変ですが";
+			mes "安心してください！";
+			mes "カカオ割りの達人さんを";
+			mes "会場に招待しています！";
+			next;
+			mes "[ショコラ]";
+			mes "達人さんに頼めば";
+			mes "すぐにカカオを割って";
+			mes "カカオ豆にしてくれますよ。";
+			break;
+		case 3:
+			mes "[ショコラ]";
+			mes "まずは、出張カプラさんです。";
+			mes "必要ないアイテムは預けて";
+			mes "代わりにチョコレートを";
+			mes "カバンに詰め込んでください！";
+			next;
+			mes "[ショコラ]";
+			mes "お菓子の材料も販売しています。";
+			mes "　";
+			mes "……割引には対応していませ～ん。";
+			mes "この時期は、材料を手に入れるのが";
+			mes "大変なので、よろしくです！";
+			next;
+			mes "[ショコラ]";
+			mes "各都市へ転送してくれる";
+			mes "転送員もいます。";
+			mes "甘いものが大好きなので";
+			mes "[^FF0000チョコレート^000000]をあげると";
+			mes "好きな都市に転送してくれます。";
+			next;
+			mes "[ショコラ]";
+			mes "忘れちゃいけないのが";
+			mes "カカオ割りの達人さんです！";
+			next;
+			mes "[ショコラ]";
+			mes "カカオを渡せば、気合一閃！";
+			mes "見事に割って";
+			mes "カカオ豆にしてくれます。";
+			mes "かっこいいですよ！";
+			next;
+			mes "[ショコラ]";
+			mes "あと、象さんもいます。";
+			mes "なんでも遠い国から来たとか……";
+			mes "言葉が通じないんです。";
+			next;
+			mes "[ショコラ]";
+			mes "でも、とっても手先が器用なんです。";
+			mes "チョコレートを渡せば";
+			mes "名前をいれてくれますよ。";
+			next;
+			mes "[ショコラ]";
+			mes "名前を入れたチョコレートを";
+			mes "誰かにプレゼントしたい時には";
+			mes "象さんにお願いしてみてね！";
+			next;
+			mes "[ショコラ]";
+			mes "最後に、ジョンダ職員さんには";
+			mes "『スウィートサービス』を";
+			mes "担当してもらっています。";
+			next;
+			mes "[ショコラ]";
+			mes "スウィートサービスについては";
+			mes "説明すると長いので";
+			mes "直接、ジョンダさんに聞いてね！";
+			break;
+		case 4:
+			mes "[ショコラ]";
+			mes "いっぱいチョコレートを作って";
+			mes "スウィートな気分を味わっていってね！";
+			close2;
+			cutin "v_choco01.bmp",255;
+			end;
+		}
+		next;
+		mes "[ショコラ]";
+		mes "以上、説明でした。";
+		mes "他にも聞きたいことは";
+		mes "ありますか？";
+		next;
+		if(select("ある","特にない")==2) {
+			mes "[ショコラ]";
+			mes "いっぱいチョコレートを作って";
+			mes "スウィートな気分を味わっていってね！";
+			close2;
+			cutin "v_choco01.bmp",255;
+			end;
+		}
+		continue;
+	}
+OnInit:
+	waitingroom "会場の案内",0;
+	end;
+}
+jp_ev_map46.gat,58,34,4	script	ヒュッケ	725,{
+	cutin "job_black_hucke01.bmp",2;
+	mes "[ヒュッケ]";
+	mes "……お前が来るのを待ってた。";
+	mes "今年は、いろんなチョコを作るため";
+	mes "料理の腕を鍛えてきた。";
+	next;
+	cutin "job_black_hucke02.bmp",2;
+	mes "[ヒュッケ]";
+	mes "試しにミスティに食わせたら";
+	mes "……綺麗なお花畑が見える、と";
+	mes "……放心するほど感動してた。";
+	next;
+	cutin "job_black_hucke01.bmp",2;
+	while(1) {
+		mes "[ヒュッケ]";
+		mes "さあ……";
+		mes "どうする？";
+		next;
+		switch(select("チョコレート作って！","スウィートサービスについて聞く","会話をやめる")) {
+		case 1:
+			mes "[ヒュッケ]";
+			mes "……どれを作ればいい？";
+			next;
+			switch(select("チョコレート","手作りチョコ","ストロベリーチョコ","チョコタルト","チョコレートドリンク","ビターチョコ","やめる")) {
+			case 1: set .@gain,558; set .@pt,0; break;
+			case 2: set .@gain,559; set .@pt,3; break;
+			case 3: set .@gain,12235; set .@pt,2; break;
+			case 4: set .@gain,12236; set .@pt,4; break;
+			case 5: set .@gain,573; set .@pt,1; break;
+			case 6: set .@gain,12234; set .@pt,5; break;
+			case 7: continue;
+			}
+			while(1) {
+				mes "[ヒュッケ]";
+				if(.@gain==12236) {
+					mes getitemname(.@gain)+"(1セット5個)。";
+					setarray .@set$,"1セット(5個)作る","5セット(25個)作る","10セット(50個)作る";
+				} else {
+					mes "……"+getitemname(.@gain)+"。";
+					setarray .@set$,"1個作る","5個作る","10個作る";
+				}
+				mes "　";
+				mes "材料";
+				switch(.@gain) {
+				case 558:
+					setarray .@need,7718,519;
+					setarray .@amount,5,1;
+					mes "　カカオ豆:5個 ミルク:1個";
+					break;
+				case 559:
+					setarray .@need,12126,558;
+					setarray .@amount,1,6;
+					mes "　家庭用調理器具:1個";
+					mes "　チョコレート:6個";
+					break;
+				case 12235:
+					setarray .@need,578,558;
+					setarray .@amount,1,3;
+					mes "　イチゴ:1個 チョコレート:3個";
+					break;
+				case 12236:
+					setarray .@need,519,7605,7604,558,6095;
+					setarray .@amount,3,3,3,9,1;
+					mes "　ミルク:3個 卵:3個";
+					mes "　小麦粉:3個 チョコレート:9個";
+					mes "　香酒:1個";
+					break;
+				case 573:
+					setarray .@need,7174,519,558,12128;
+					setarray .@amount,5,1,1,1;
+					mes "　包装リボン:5個 ミルク:1個";
+					mes "　チョコレート:1個";
+					mes "　宮廷用調理器具:1個";
+					break;
+				case 12234:
+					setarray .@need,7718,519;
+					setarray .@amount,99,1;
+					mes "　カカオ豆:99個 ミルク:1個";
+					break;
+				}
+				if(.@gain > 558 && .@gain != 12234) {
+					next;
+					mes "-^0000FF名前入りと通常のチョコレートを";
+					mes " 両方持っている場合、どちらを使うか";
+					mes " 選ぶことはできません。^000000-";
+				}
+				next;
+				switch(select(.@set$[0],.@set$[1],.@set$[2],"やめる")) {
+				case 1: set .@num,1; break;
+				case 2: set .@num,5; break;
+				case 3: set .@num,10; break;
+				case 4: set .@num,0; break;
+				}
+				if(.@num==0) break;
+				mes "[ヒュッケ]";
+				if(.@gain==12236)
+					mes getitemname(.@gain)+"を"+.@num+"セット("+(.@num * 5)+"個)。";
+				else
+					mes getitemname(.@gain)+"を"+.@num+"個か……";
+				mes "　";
+				mes "材料は全部で……これだけ必要。";
+				switch(.@gain) {
+				case 558:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　カカオ豆:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					break;
+				case 559:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　家庭用調理器具:"+.@amount2[0]+"個";
+					mes "　チョコレート:"+.@amount2[1]+"個";
+					break;
+				case 12235:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　イチゴ:"+.@amount2[0]+"個 チョコレート:"+.@amount2[1]+"個";
+					break;
+				case 12236:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num,.@amount[2]*.@num,.@amount[3]*.@num,.@amount[4]*.@num;
+					mes "　ミルク:"+.@amount2[0]+"個 卵:"+.@amount2[1]+"個";
+					mes "　小麦粉:"+.@amount2[2]+"個 チョコレート:"+.@amount2[3]+"個";
+					mes "　香酒:"+.@amount2[4]+"個";
+					break;
+				case 573:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num,.@amount[2]*.@num,.@amount[3]*.@num;
+					mes "　包装リボン:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					mes "　チョコレート:"+.@amount2[2]+"個";
+					mes "　宮廷用調理器具:"+.@amount2[3]+"個";
+					break;
+				case 12234:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　カカオ豆:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					break;
+				}
+				next;
+				switch(select("作る","作る数を変える","やっぱりやめる")) {
+				case 1:
+					cutin "job_black_hucke01.bmp",255;
+					mes "[ヒュッケ]";
+					mes "……";
+					next;
+					emotion 9;	//…
+					mes "[ヒュッケ]";
+					mes "…… ……";
+					next;
+					emotion 2;	//うれしい
+					mes "[ヒュッケ]";
+					mes "…… …… ……";
+					next;
+					for(set .@i,0; .@i < getarraysize(.@amount2); set .@i,.@i+1) {
+						if(countitem(.@need[.@i]) < .@amount2[.@i]) {
+							cutin "job_black_hucke01.bmp",2;
+							mes "[ヒュッケ]";
+							mes "材料が足りてない……";
+							mes "これじゃあ、作れない……";
+							close2;
+							cutin "job_black_hucke01.bmp",255;
+							end;
+						}
+					}
+					for(set .@i,0; .@i < getarraysize(.@amount2); set .@i,.@i+1)
+						delitem .@need[.@i],.@amount2[.@i];
+					set $VALENTINE2012_COUNT[1],$VALENTINE2012_COUNT[1] + .@num;
+					set $VALENTINE2012_POINT[1],$VALENTINE2012_POINT[1] + .@pt * .@num;
+					if(rand(100) < 5) {
+						if(.@gain==12235)
+							getitem 596,.@num;
+						else if(.@gain==12236)
+							getitem 597,.@num * 5;
+						else
+							getitem 12237,.@num;
+						if(VALENTINE2012 == 1) {
+							set VALENTINE2012,2;
+							//chgquest 108660,201385;	//バレンタイン2012完了
+						}
+						cutin "job_black_hucke01.bmp",2;
+						mes "[ヒュッケ]";
+						mes "……なにかを間違った。";
+						mes "でも、次はうまくやる。";
+						close2;
+						cutin "job_black_hucke01.bmp",255;
+						end;
+					}
+					if(.@gain==12236)
+						getitem .@gain,.@num * 5;
+					else
+						getitem .@gain,.@num;
+					if(VALENTINE2012 == 1) {
+						set VALENTINE2012,2;
+						//chgquest 108660,201385;	//バレンタイン2012完了
+					}
+					cutin "job_black_hucke02.bmp",2;
+					mes "[ヒュッケ]";
+					mes "うまくできた……";
+					mes "うまくできると、やっぱり嬉しい。";
+					close2;
+					cutin "job_black_hucke02.bmp",255;
+					end;
+				case 2: continue;
+				}
+				break;
+			}
+			continue;
+		case 2:
+			mes "[ヒュッケ]";
+			mes "私の『スウィートサービス』は";
+			mes "ステータスアップの……サービス。";
+			next;
+			mes "[ヒュッケ]";
+			mes "特別に製造した、自慢の強化薬を";
+			mes "提供する……。";
+			next;
+			mes "[ヒュッケ]";
+			mes "私のところでポイントの高いチョコを";
+			mes "いっぱい作って欲しい……。";
+			mes "サービスランクが上がれば";
+			mes "より強力な強化薬を渡す……。";
+			next;
+			mes "[ヒュッケ]";
+			mes "チョコレートのポイントは……";
+			next;
+			mes "■チョコレート";
+			mes "　ポイント：【^0000FFなし^000000】";
+			mes "■チョコレートドリンク";
+			mes "　ポイント：【^006200すごく少ない^000000】";
+			mes "■ストロベリーチョコ";
+			mes "　ポイント：【^006200普通^000000】";
+			next;
+			mes "■手作りチョコ";
+			mes "　ポイント：【^FF8D00少し多い^000000】";
+			mes "■チョコタルト";
+			mes "　ポイント：【^FF8D00多い^000000】";
+			mes "■ビターチョコ";
+			mes "　ポイント：【^FF0000すごく多い^000000】";
+			next;
+			mes "[ヒュッケ]";
+			mes "……となってる。";
+			mes "　";
+			mes "「^FF0000チョコレート^000000」はポイントが";
+			mes "入らないから……注意して。";
+			next;
+			mes "[ヒュッケ]";
+			mes "次の予定サービスランクは……";
+			if($VALENTINE2012_POINT[1] <= 1000) {
+				mes "……『 ^1895FF1^000000 』。";
+				mes "まだまだ、……少ない。";
+			} else if($VALENTINE2012_POINT[1] <= 2000) {
+				mes "……『 ^0062002^000000 』。";
+				mes "その調子……で。";
+			} else if($VALENTINE2012_POINT[1] <= 3000) {
+				mes "……『 ^1895FF3^000000 』。";
+				mes "その調子……で。";
+			} else if($VALENTINE2012_POINT[1] <= 4000) {
+				mes "……『 ^1895FF4^000000 』。";
+				mes "その調子……で。";
+			} else {
+				mes "……『 ^1895FF5^000000 』。";
+				mes "その調子……で。";
+			}
+			next;
+			set .@score,$VALENTINE2012_POINT[1]%1000;
+			set .@star$,"";
+			for(set .@i,0; .@i<6; set .@i,.@i+1) {
+				if(.@score>=0) {
+					set .@star$,.@star$+"★";
+					set .@score,.@score-200;
+				} else {
+					set .@star$,.@star$+"☆";
+				}
+			}
+			mes "[ヒュッケ]";
+			mes "今のランクのポイント状況は……";
+			mes .@star$;
+			mes "……というところ。";
+			close2;
+			cutin "ep13_shy.bmp",255;
+			end;
+		case 3:
+			mes "[ヒュッケ]";
+			mes "チョコレート……作らないのか？";
+			mes "残念。";
+			next;
+			mes "[ヒュッケ]";
+			mes "チョコレート作りたいなら";
+			mes "……声をかけて欲しい。";
+			close2;
+			cutin "job_black_hucke01.bmp",255;
+			end;
+		}
+	}
+}
+jp_ev_map46.gat,52,30,4	script	シャイ	884,{
+	cutin "ep13_shy.bmp",2;
+	mes "[シャイ]";
+	mes "よう！　材料さえ持ってきてくれたら";
+	mes "チョコレートを作ってやるぞ。";
+	next;
+	mes "[シャイ]";
+	mes "酒場で料理の腕を磨いているんだ。";
+	mes "俺なら他のやつらより美味い";
+	mes "チョコレートを提供できる……かも。";
+	next;
+	while(1) {
+		mes "[シャイ]";
+		mes "……で、どうする？";
+		next;
+		switch(select("チョコレート作って！","スウィートサービスについて聞く","会話をやめる")) {
+		case 1:
+			mes "[シャイ]";
+			mes "よし。どれを作るんだ？";
+			next;
+			switch(select("チョコレート","手作りチョコ","ストロベリーチョコ","チョコタルト","チョコレートドリンク","ビターチョコ","やめる")) {
+			case 1: set .@gain,558; set .@pt,0; break;
+			case 2: set .@gain,559; set .@pt,3; break;
+			case 3: set .@gain,12235; set .@pt,2; break;
+			case 4: set .@gain,12236; set .@pt,4; break;
+			case 5: set .@gain,573; set .@pt,1; break;
+			case 6: set .@gain,12234; set .@pt,5; break;
+			case 7: continue;
+			}
+			while(1) {
+				mes "[シャイ]";
+				if(.@gain==12236) {
+					mes getitemname(.@gain)+"(1セット5個)。";
+					setarray .@set$,"1セット(5個)作る","5セット(25個)作る","10セット(50個)作る";
+				} else {
+					mes "……"+getitemname(.@gain)+"だな。";
+					setarray .@set$,"1個作る","5個作る","10個作る";
+				}
+				mes "　";
+				mes "材料";
+				switch(.@gain) {
+				case 558:
+					setarray .@need,7718,519;
+					setarray .@amount,5,1;
+					mes "　カカオ豆:5個 ミルク:1個";
+					break;
+				case 559:
+					setarray .@need,12126,558;
+					setarray .@amount,1,6;
+					mes "　家庭用調理器具:1個";
+					mes "　チョコレート:6個";
+					break;
+				case 12235:
+					setarray .@need,578,558;
+					setarray .@amount,1,3;
+					mes "　イチゴ:1個 チョコレート:3個";
+					break;
+				case 12236:
+					setarray .@need,519,7605,7604,558,6095;
+					setarray .@amount,3,3,3,9,1;
+					mes "　ミルク:3個 卵:3個";
+					mes "　小麦粉:3個 チョコレート:9個";
+					mes "　香酒:1個";
+					break;
+				case 573:
+					setarray .@need,7174,519,558,12128;
+					setarray .@amount,5,1,1,1;
+					mes "　包装リボン:5個 ミルク:1個";
+					mes "　チョコレート:1個";
+					mes "　宮廷用調理器具:1個";
+					break;
+				case 12234:
+					setarray .@need,7718,519;
+					setarray .@amount,99,1;
+					mes "　カカオ豆:99個 ミルク:1個";
+					break;
+				}
+				if(.@gain > 558) {
+					next;
+					mes "-^0000FF名前入りと通常のチョコレートを";
+					mes " 両方持っている場合、どちらを使うか";
+					mes " 選ぶことはできません。^000000-";
+				}
+				next;
+				switch(select(.@set$[0],.@set$[1],.@set$[2],"やめる")) {
+				case 1: set .@num,1; break;
+				case 2: set .@num,5; break;
+				case 3: set .@num,10; break;
+				case 4: set .@num,0; break;
+				}
+				if(.@num==0) break;
+				mes "[シャイ]";
+				if(.@gain==12236)
+					mes getitemname(.@gain)+"を"+.@num+"セット("+(.@num * 5)+"個)。";
+				else
+					mes getitemname(.@gain)+.@num+"個だと……";
+				mes "　";
+				mes "材料は全部で……これだけ必要だな。";
+				switch(.@gain) {
+				case 558:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　カカオ豆:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					break;
+				case 559:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　家庭用調理器具:"+.@amount2[0]+"個";
+					mes "　チョコレート:"+.@amount2[1]+"個";
+					break;
+				case 12235:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　イチゴ:"+.@amount2[0]+"個 チョコレート:"+.@amount2[1]+"個";
+					break;
+				case 12236:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num,.@amount[2]*.@num,.@amount[3]*.@num,.@amount[4]*.@num;
+					mes "　ミルク:"+.@amount2[0]+"個 卵:"+.@amount2[1]+"個";
+					mes "　小麦粉:"+.@amount2[2]+"個 チョコレート:"+.@amount2[3]+"個";
+					mes "　香酒:"+.@amount2[4]+"個";
+					break;
+				case 573:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num,.@amount[2]*.@num,.@amount[3]*.@num;
+					mes "　包装リボン:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					mes "　チョコレート:"+.@amount2[2]+"個";
+					mes "　宮廷用調理器具:"+.@amount2[3]+"個";
+					break;
+				case 12234:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　カカオ豆:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					break;
+				}
+				next;
+				switch(select("作る","作る数を変える","やっぱりやめる")) {
+				case 1:
+					cutin "ep13_shy.bmp",255;
+					mes "[シャイ]";
+					mes "……";
+					next;
+					emotion 9;	//…
+					mes "[シャイ]";
+					mes "…… ……";
+					next;
+					emotion 2;	//うれしい
+					mes "[シャイ]";
+					mes "…… …… ……";
+					next;
+					for(set .@i,0; .@i < getarraysize(.@amount2); set .@i,.@i+1) {
+						if(countitem(.@need[.@i]) < .@amount2[.@i]) {
+							cutin "ep13_shy.bmp",2;
+							mes "[シャイ]";
+							mes "材料が足りてないじゃないか。";
+							mes "これじゃあ、作れないぜ……";
+							close2;
+							cutin "ep13_shy.bmp",255;
+							end;
+						}
+					}
+					for(set .@i,0; .@i < getarraysize(.@amount2); set .@i,.@i+1)
+						delitem .@need[.@i],.@amount2[.@i];
+					set $VALENTINE2012_COUNT[2],$VALENTINE2012_COUNT[2] + .@num;
+					set $VALENTINE2012_POINT[2],$VALENTINE2012_POINT[2] + .@pt * .@num;
+					if(rand(100) < 5) {
+						if(.@gain==12235)
+							getitem 596,.@num;
+						else if(.@gain==12236)
+							getitem 597,.@num * 5;
+						else
+							getitem 12237,.@num;
+						if(VALENTINE2012 == 1) {
+							set VALENTINE2012,2;
+							//chgquest 108660,201385;	//バレンタイン2012完了
+						}
+						cutin "ep13_shy.bmp",2;
+						mes "[シャイ]";
+						mes "失敗したか……？";
+						mes "まあ、許してくれ。";
+						mes "次は、上手くやってみせるさ。";
+						close2;
+						cutin "ep13_shy.bmp",255;
+						end;
+					}
+					if(.@gain==12236)
+						getitem .@gain,.@num * 5;
+					else
+						getitem .@gain,.@num;
+					if(VALENTINE2012 == 1) {
+						set VALENTINE2012,2;
+						//chgquest 108660,201385;	//バレンタイン2012完了
+					}
+					cutin "ep13_shy.bmp",2;
+					mes "[シャイ]";
+					mes "うまくできたぞ！";
+					mes "さあ、持っていってくれ。";
+					close2;
+					cutin "ep13_shy.bmp",255;
+					end;
+				case 2: continue;
+				}
+				break;
+			}
+			continue;
+		case 2:
+			mes "[シャイ]";
+			mes "俺の『スウィートサービス』か？";
+			mes "俺のは、無料の宿泊施設を";
+			mes "時間制限付で開放することだ。";
+			next;
+			mes "[シャイ]";
+			mes "サービスの利用開始から";
+			mes "一定時間の間は";
+			mes "ＨＰとＳＰを回復し放題になる";
+			mes "というサービスさ。";
+			next;
+			mes "[シャイ]";
+			mes "異世界の駐屯地から";
+			mes "テントなど余ってるキャンプ用資材を";
+			mes "貸してもらえたんだ。";
+			next;
+			mes "[シャイ]";
+			mes "サービスランクが上がれば";
+			mes "長時間、宿泊施設が利用できるぞ。";
+			mes "ランクを上げたい場合は";
+			mes "ポイントの高いチョコレートを";
+			mes "たくさん作ればいい。";
+			next;
+			mes "[シャイ]";
+			mes "チョコレートのポイントは……";
+			next;
+			mes "■チョコレート";
+			mes "　ポイント：【^0000FFなし^000000】";
+			mes "■チョコレートドリンク";
+			mes "　ポイント：【^006200すごく少ない^000000】";
+			mes "■ストロベリーチョコ";
+			mes "　ポイント：【^006200普通^000000】";
+			next;
+			mes "■手作りチョコ";
+			mes "　ポイント：【^FF8D00少し多い^000000】";
+			mes "■チョコタルト";
+			mes "　ポイント：【^FF8D00多い^000000】";
+			mes "■ビターチョコ";
+			mes "　ポイント：【^FF0000すごく多い^000000】";
+			next;
+			mes "[シャイ]";
+			mes "……だ。";
+			next;
+			mes "[シャイ]";
+			mes "次の予定サービスランクは……";
+			if($VALENTINE2012_POINT[2] <= 1000) {
+				mes "……『 ^1895FF1^000000 』だな。";
+				mes "まあ、ここからがスタートだ。";
+			} else if($VALENTINE2012_POINT[2] <= 2000) {
+				mes "……『 ^0062002^000000 』だな。";
+				mes "まあ、ここからがスタートだ。";
+			} else if($VALENTINE2012_POINT[2] <= 3000) {
+				mes "……『 ^1895FF3^000000 』だな。";
+				mes "まあ、ここからがスタートだ。";
+			} else if($VALENTINE2012_POINT[2] <= 4000) {
+				mes "……『 ^1895FF4^000000 』だな。";
+				mes "まあ、ここからがスタートだ。";
+			} else {
+				mes "……『 ^1895FF5^000000 』だな。";
+				mes "まあ、ここからがスタートだ。";
+			}
+			next;
+			set .@score,$VALENTINE2012_POINT[2]%1000;
+			set .@star$,"";
+			for(set .@i,0; .@i<6; set .@i,.@i+1) {
+				if(.@score>=0) {
+					set .@star$,.@star$+"★";
+					set .@score,.@score-200;
+				} else {
+					set .@star$,.@star$+"☆";
+				}
+			}
+			mes "[シャイ]";
+			mes "今のランクのポイント状況は";
+			mes .@star$;
+			mes "……ってところだな。";
+			close2;
+			cutin "ep13_shy.bmp",255;
+			end;
+		case 3:
+			mes "[シャイ]";
+			mes "チョコレートは作らないのか？";
+			mes "まあ、気が向いたら、また来てくれ。";
+			close2;
+			cutin "ep13_shy.bmp",255;
+			end;
+		}
+	}
+}
+jp_ev_map46.gat,63,30,4	script	怪盗アニバーサリー	408,{
+	cutin "jpn_anni03.bmp",2;
+	mes "[怪盗アニバーサリー]";
+	mes "チョコレートを作るイベントなんて";
+	mes "なんかワクワクするな～。";
+	mes "うち、こういうイベント好きやで。";
+	next;
+	cutin "jpn_anni01.bmp",2;
+	mes "[怪盗アニバーサリー]";
+	mes "というわけで、材料は持って来てな。";
+	mes "作ったチョコレートはもれなく";
+	mes "プレゼントするよ。";
+	next;
+	while(1) {
+		mes "[怪盗アニバーサリー]";
+		mes "さあ、どうするん？";
+		next;
+		switch(select("チョコレート作って！","スウィートサービスについて聞く","会話をやめる")) {
+		case 1:
+			mes "[怪盗アニバーサリー]";
+			mes "どれを作ったら、ええの？";
+			next;
+			switch(select("チョコレート","手作りチョコ","ストロベリーチョコ","チョコタルト","チョコレートドリンク","ビターチョコ","やめる")) {
+			case 1: set .@gain,558; set .@pt,0; break;
+			case 2: set .@gain,559; set .@pt,3; break;
+			case 3: set .@gain,12235; set .@pt,2; break;
+			case 4: set .@gain,12236; set .@pt,4; break;
+			case 5: set .@gain,573; set .@pt,1; break;
+			case 6: set .@gain,12234; set .@pt,5; break;
+			case 7: continue;
+			}
+			while(1) {
+				mes "[怪盗アニバーサリー]";
+				if(.@gain==12236) {
+					mes getitemname(.@gain)+"(1セット5個)やな！";
+					setarray .@set$,"1セット(5個)作る","5セット(25個)作る","10セット(50個)作る";
+				} else {
+					mes getitemname(.@gain)+"やな！";
+					setarray .@set$,"1個作る","5個作る","10個作る";
+				}
+				mes "　";
+				mes "材料";
+				switch(.@gain) {
+				case 558:
+					setarray .@need,7718,519;
+					setarray .@amount,5,1;
+					mes "　カカオ豆:5個 ミルク:1個";
+					break;
+				case 559:
+					setarray .@need,12126,558;
+					setarray .@amount,1,6;
+					mes "　家庭用調理器具:1個";
+					mes "　チョコレート:6個";
+					break;
+				case 12235:
+					setarray .@need,578,558;
+					setarray .@amount,1,3;
+					mes "　イチゴ:1個 チョコレート:3個";
+					break;
+				case 12236:
+					setarray .@need,519,7605,7604,558,6095;
+					setarray .@amount,3,3,3,9,1;
+					mes "　ミルク:3個 卵:3個";
+					mes "　小麦粉:3個 チョコレート:9個";
+					mes "　香酒:1個";
+					break;
+				case 573:
+					setarray .@need,7174,519,558,12128;
+					setarray .@amount,5,1,1,1;
+					mes "　包装リボン:5個 ミルク:1個";
+					mes "　チョコレート:1個";
+					mes "　宮廷用調理器具:1個";
+					break;
+				case 12234:
+					setarray .@need,7718,519;
+					setarray .@amount,99,1;
+					mes "　カカオ豆:99個 ミルク:1個";
+					break;
+				}
+				if(.@gain > 558) {
+					next;
+					mes "-^0000FF名前入りと通常のチョコレートを";
+					mes " 両方持っている場合、どちらを使うか";
+					mes " 選ぶことはできません。^000000-";
+				}
+				next;
+				switch(select(.@set$[0],.@set$[1],.@set$[2],"やめる")) {
+				case 1: set .@num,1; break;
+				case 2: set .@num,5; break;
+				case 3: set .@num,10; break;
+				case 4: set .@num,0; break;
+				}
+				if(.@num==0) break;
+				mes "[怪盗アニバーサリー]";
+				if(.@gain==12236)
+					mes getitemname(.@gain)+.@num+"セット("+(.@num * 5)+"個)やと……";
+				else
+					mes getitemname(.@gain)+.@num+"個やと……";
+				mes "　";
+				mes "材料は全部で……これだけ必要やで。";
+				switch(.@gain) {
+				case 558:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　カカオ豆:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					break;
+				case 559:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　家庭用調理器具:"+.@amount2[0]+"個";
+					mes "　チョコレート:"+.@amount2[1]+"個";
+					break;
+				case 12235:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　イチゴ:"+.@amount2[0]+"個 チョコレート:"+.@amount2[1]+"個";
+					break;
+				case 12236:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num,.@amount[2]*.@num,.@amount[3]*.@num,.@amount[4]*.@num;
+					mes "　ミルク:"+.@amount2[0]+"個 卵:"+.@amount2[1]+"個";
+					mes "　小麦粉:"+.@amount2[2]+"個 チョコレート:"+.@amount2[3]+"個";
+					mes "　香酒:"+.@amount2[4]+"個";
+					break;
+				case 573:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num,.@amount[2]*.@num,.@amount[3]*.@num;
+					mes "　包装リボン:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					mes "　チョコレート:"+.@amount2[2]+"個";
+					mes "　宮廷用調理器具:"+.@amount2[3]+"個";
+					break;
+				case 12234:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　カカオ豆:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					break;
+				}
+				next;
+				switch(select("作る","作る数を変える","やっぱりやめる")) {
+				case 1:
+					cutin "jpn_anni01.bmp",255;
+					mes "[怪盗アニバーサリー]";
+					mes "……";
+					next;
+					emotion 9;	//…
+					mes "[怪盗アニバーサリー]";
+					mes "…… ……";
+					next;
+					emotion 2;	//うれしい
+					mes "[怪盗アニバーサリー]";
+					mes "…… …… ……";
+					next;
+					for(set .@i,0; .@i < getarraysize(.@amount2); set .@i,.@i+1) {
+						if(countitem(.@need[.@i]) < .@amount2[.@i]) {
+							cutin "jpn_anni04.bmp",2;
+							mes "[怪盗アニバーサリー]";
+							mes "材料が足りひんみたいやで？";
+							mes "材料が足りてるか、確認してな。";
+							close2;
+							cutin "jpn_anni04.bmp",255;
+							end;
+						}
+					}
+					for(set .@i,0; .@i < getarraysize(.@amount2); set .@i,.@i+1)
+						delitem .@need[.@i],.@amount2[.@i];
+					set $VALENTINE2012_COUNT[3],$VALENTINE2012_COUNT[3] + .@num;
+					set $VALENTINE2012_POINT[3],$VALENTINE2012_POINT[3] + .@pt * .@num;
+					if(rand(100) < 5) {
+						if(.@gain==12235)
+							getitem 596,.@num;
+						else if(.@gain==12236)
+							getitem 597,.@num * 5;
+						else
+							getitem 12237,.@num;
+						if(VALENTINE2012 == 1) {
+							set VALENTINE2012,2;
+							//chgquest 108660,201385;	//バレンタイン2012完了
+						}
+						cutin "jpn_anni04.bmp",2;
+						mes "[怪盗アニバーサリー]";
+						mes "うーん、レシピどおりに作った";
+						mes "はずなんやけど……。";
+						mes "油断禁物やな！";
+						next;
+						mes "[怪盗アニバーサリー]";
+						mes "はい、約束通りプレゼント。";
+						mes "もったいないから";
+						mes "ちゃんと食べてな！";
+						close2;
+						cutin "jpn_anni04.bmp",255;
+						end;
+					}
+					if(.@gain==12236)
+						getitem .@gain,.@num * 5;
+					else
+						getitem .@gain,.@num;
+					if(VALENTINE2012 == 1) {
+						set VALENTINE2012,2;
+						//chgquest 108660,201385;	//バレンタイン2012完了
+					}
+					cutin "jpn_anni03.bmp",2;
+					mes "[怪盗アニバーサリー]";
+					mes "うん、上手くできたなぁ。";
+					mes "うちの手にかかれば、こんなもんや！";
+					close2;
+					cutin "jpn_anni03.bmp",255;
+					end;
+				case 2: continue;
+				}
+				break;
+			}
+			continue;
+		case 2:
+			mes "[怪盗アニバーサリー]";
+			mes "うちの『スウィートサービス』は";
+			mes "アイテムドロップ率をアップさせる";
+			mes "効果やで。";
+			next;
+			mes "[怪盗アニバーサリー]";
+			mes "うちの盗みの極意……";
+			mes "の、ほんの一部を教えるで！";
+			next;
+			mes "[怪盗アニバーサリー]";
+			mes "うちのサービスランクを上げれば";
+			mes "敵からアイテムをいっぱい";
+			mes "もらえるようになるわけや。";
+			mes "ランクを上げたかったら";
+			mes "ポイントの高いチョコを作ってな！";
+			next;
+			mes "[怪盗アニバーサリー]";
+			mes "チョコのポイントは……";
+			next;
+			mes "■チョコレート";
+			mes "　ポイント：【^0000FFなし^000000】";
+			mes "■チョコレートドリンク";
+			mes "　ポイント：【^006200すごく少ない^000000】";
+			mes "■ストロベリーチョコ";
+			mes "　ポイント：【^006200普通^000000】";
+			next;
+			mes "■手作りチョコ";
+			mes "　ポイント：【^FF8D00少し多い^000000】";
+			mes "■チョコタルト";
+			mes "　ポイント：【^FF8D00多い^000000】";
+			mes "■ビターチョコ";
+			mes "　ポイント：【^FF0000すごく多い^000000】";
+			next;
+			mes "[怪盗アニバーサリー]";
+			mes "……やで！";
+			next;
+			mes "[怪盗アニバーサリー]";
+			mes "ちなみに次の予定サービスランクは……";
+			if($VALENTINE2012_POINT[3] <= 1000) {
+				mes "……『 ^1895FF1^000000 』や。";
+				mes "まだまだ、これからやな。";
+			} else if($VALENTINE2012_POINT[3] <= 2000) {
+				mes "……『 ^0062002^000000 』や。";
+				mes "う～ん、もう少し頑張れるんと違う？";
+			} else if($VALENTINE2012_POINT[3] <= 3000) {
+				mes "……『 ^0062003^000000 』や。";
+				mes "う～ん、もう少し頑張れるんと違う？";
+			} else if($VALENTINE2012_POINT[3] <= 4000) {
+				mes "……『 ^FF1096^000000 』や。";
+				mes "ここからが勝負やで！";
+			} else {
+				mes "……『 ^1895FF5^000000 』や。";
+				mes "う～ん、もう少し頑張れるんと違う？";
+			}
+			next;
+			set .@score,$VALENTINE2012_POINT[3]%1000;
+			set .@star$,"";
+			for(set .@i,0; .@i<6; set .@i,.@i+1) {
+				if(.@score>=0) {
+					set .@star$,.@star$+"★";
+					set .@score,.@score-200;
+				} else {
+					set .@star$,.@star$+"☆";
+				}
+			}
+			mes "[怪盗アニバーサリー]";
+			mes "今のランクのポイント状況は";
+			mes .@star$;
+			mes "……ってところやな！";
+			close2;
+			cutin "jpn_anni01.bmp",255;
+			end;
+		case 3:
+			mes "[怪盗アニバーサリー]";
+			mes "ん？　チョコレートはいらんの？";
+			mes "欲しくなったら、声かけてな！";
+			close2;
+			cutin "jpn_anni01.bmp",255;
+			end;
+		}
+	}
+}
+jp_ev_map46.gat,52,37,4	script	ルーン	430,{
+	cutin "jpn_run02.bmp",2;
+	mes "[ルーン]";
+	mes "こんにちわ！";
+	mes "私も冒険者のみんなを";
+	mes "応援しに来たの！";
+	next;
+	cutin "jpn_run01.bmp",2;
+	mes "[ルーン]";
+	mes "いつもは食べる方が専門だけど";
+	mes "今回ははりきってチョコレートを";
+	mes "作らせてもらうわよ！";
+	next;
+	while(1) {
+		mes "[ルーン]";
+		mes "さあ、チョコレートを作りましょう！";
+		mes "材料はそろってるかしら？";
+		next;
+		switch(select("チョコレート作って！","スウィートサービスについて聞く","会話をやめる")) {
+		case 1:
+			mes "[ルーン]";
+			mes "どれを作って欲しいの？";
+			next;
+			switch(select("チョコレート","手作りチョコ","ストロベリーチョコ","チョコタルト","チョコレートドリンク","ビターチョコ","やめる")) {
+			case 1: set .@gain,558; set .@pt,0; break;
+			case 2: set .@gain,559; set .@pt,3; break;
+			case 3: set .@gain,12235; set .@pt,2; break;
+			case 4: set .@gain,12236; set .@pt,4; break;
+			case 5: set .@gain,573; set .@pt,1; break;
+			case 6: set .@gain,12234; set .@pt,5; break;
+			case 7: continue;
+			}
+			while(1) {
+				mes "[ルーン]";
+				if(.@gain==12236) {
+					mes getitemname(.@gain)+"(1セット5個)ね！";
+					setarray .@set$,"1セット(5個)作る","5セット(25個)作る","10セット(50個)作る";
+				} else {
+					mes getitemname(.@gain)+"ね！";
+					setarray .@set$,"1個作る","5個作る","10個作る";
+				}
+				mes "　";
+				mes "材料";
+				switch(.@gain) {
+				case 558:
+					setarray .@need,7718,519;
+					setarray .@amount,5,1;
+					mes "　カカオ豆:5個 ミルク:1個";
+					break;
+				case 559:
+					setarray .@need,12126,558;
+					setarray .@amount,1,6;
+					mes "　家庭用調理器具:1個";
+					mes "　チョコレート:6個";
+					break;
+				case 12235:
+					setarray .@need,578,558;
+					setarray .@amount,1,3;
+					mes "　イチゴ:1個 チョコレート:3個";
+					break;
+				case 12236:
+					setarray .@need,519,7605,7604,558,6095;
+					setarray .@amount,3,3,3,9,1;
+					mes "　ミルク:3個 卵:3個";
+					mes "　小麦粉:3個 チョコレート:9個";
+					mes "　香酒:1個";
+					break;
+				case 573:
+					setarray .@need,7174,519,558,12128;
+					setarray .@amount,5,1,1,1;
+					mes "　包装リボン:5個 ミルク:1個";
+					mes "　チョコレート:1個";
+					mes "　宮廷用調理器具:1個";
+					break;
+				case 12234:
+					setarray .@need,7718,519;
+					setarray .@amount,99,1;
+					mes "　カカオ豆:99個 ミルク:1個";
+					break;
+				}
+				if(.@gain > 558) {
+					next;
+					mes "-^0000FF名前入りと通常のチョコレートを";
+					mes " 両方持っている場合、どちらを使うか";
+					mes " 選ぶことはできません。^000000-";
+				}
+				next;
+				switch(select(.@set$[0],.@set$[1],.@set$[2],"やめる")) {
+				case 1: set .@num,1; break;
+				case 2: set .@num,5; break;
+				case 3: set .@num,10; break;
+				case 4: set .@num,0; break;
+				}
+				if(.@num==0) break;
+				mes "[ルーン]";
+				if(.@gain==12236)
+					mes getitemname(.@gain)+.@num+"セット("+(.@num * 5)+"個)だと……";
+				else
+					mes getitemname(.@gain)+.@num+"個だから……";
+				mes "　";
+				mes "材料は全部で……これだけ必要だわ。";
+				switch(.@gain) {
+				case 558:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　カカオ豆:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					break;
+				case 559:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　家庭用調理器具:"+.@amount2[0]+"個";
+					mes "　チョコレート:"+.@amount2[1]+"個";
+					break;
+				case 12235:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　イチゴ:"+.@amount2[0]+"個 チョコレート:"+.@amount2[1]+"個";
+					break;
+				case 12236:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num,.@amount[2]*.@num,.@amount[3]*.@num,.@amount[4]*.@num;
+					mes "　ミルク:"+.@amount2[0]+"個 卵:"+.@amount2[1]+"個";
+					mes "　小麦粉:"+.@amount2[2]+"個 チョコレート:"+.@amount2[3]+"個";
+					mes "　香酒:"+.@amount2[4]+"個";
+					break;
+				case 573:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num,.@amount[2]*.@num,.@amount[3]*.@num;
+					mes "　包装リボン:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					mes "　チョコレート:"+.@amount2[2]+"個";
+					mes "　宮廷用調理器具:"+.@amount2[3]+"個";
+					break;
+				case 12234:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　カカオ豆:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					break;
+				}
+				next;
+				switch(select("作る","作る数を変える","やっぱりやめる")) {
+				case 1:
+					cutin "jpn_run01.bmp",255;
+					mes "[ルーン]";
+					mes "……";
+					next;
+					emotion 9;	//…
+					mes "[ルーン]";
+					mes "…… ……";
+					next;
+					emotion 2;	//うれしい
+					mes "[ルーン]";
+					mes "…… …… ……";
+					next;
+					for(set .@i,0; .@i < getarraysize(.@amount2); set .@i,.@i+1) {
+						if(countitem(.@need[.@i]) < .@amount2[.@i]) {
+							cutin "jpn_run05.bmp",2;
+							mes "[ルーン]";
+							mes "材料が不足しているみたい。";
+							mes "もう一度、ちゃんと確認してみて。";
+							close2;
+							cutin "jpn_run05.bmp",255;
+							end;
+						}
+					}
+					for(set .@i,0; .@i < getarraysize(.@amount2); set .@i,.@i+1)
+						delitem .@need[.@i],.@amount2[.@i];
+					set $VALENTINE2012_COUNT[4],$VALENTINE2012_COUNT[4] + .@num;
+					set $VALENTINE2012_POINT[4],$VALENTINE2012_POINT[4] + .@pt * .@num;
+					if(rand(100) < 5) {
+						if(.@gain==12235)
+							getitem 596,.@num;
+						else if(.@gain==12236)
+							getitem 597,.@num * 5;
+						else
+							getitem 12237,.@num;
+						if(VALENTINE2012 == 1) {
+							set VALENTINE2012,2;
+							//chgquest 108660,201385;	//バレンタイン2012完了
+						}
+						cutin "jpn_run05.bmp",2;
+						mes "[ルーン]";
+						mes "あれ、もしかして失敗？";
+						mes "う～ん、意外と難しいのね……";
+						close2;
+						cutin "jpn_run05.bmp",255;
+						end;
+					}
+					if(.@gain==12236)
+						getitem .@gain,.@num * 5;
+					else
+						getitem .@gain,.@num;
+					if(VALENTINE2012 == 1) {
+						set VALENTINE2012,2;
+						//chgquest 108660,201385;	//バレンタイン2012完了
+					}
+					cutin "jpn_run02.bmp",2;
+					mes "[ルーン]";
+					mes "よし、できた！";
+					mes "我ながら良い出来だわ！";
+					close2;
+					cutin "jpn_run02.bmp",255;
+					end;
+				case 2: continue;
+				}
+				break;
+			}
+			continue;
+		case 2:
+			mes "[ルーン]";
+			mes "私の『スウィートサービス』は";
+			mes "獲得経験値のアップよ！";
+			next;
+			mes "[ルーン]";
+			mes "効率のいいトレーニング方法を";
+			mes "ジョンダ職員さんに伝えてあるの。";
+			next;
+			mes "[ルーン]";
+			mes "サービスランクが上がれば";
+			mes "より効果的な方法が聞けるわ。";
+			mes "ポイントの高いチョコレートを";
+			mes "いっぱい作ればランクが上がるわよ！";
+			next;
+			mes "[ルーン]";
+			mes "チョコレートのポイントは……";
+			next;
+			mes "■チョコレート";
+			mes "　ポイント：【^0000FFなし^000000】";
+			mes "■チョコレートドリンク";
+			mes "　ポイント：【^006200すごく少ない^000000】";
+			mes "■ストロベリーチョコ";
+			mes "　ポイント：【^006200普通^000000】";
+			next;
+			mes "■手作りチョコ";
+			mes "　ポイント：【^FF8D00少し多い^000000】";
+			mes "■チョコタルト";
+			mes "　ポイント：【^FF8D00多い^000000】";
+			mes "■ビターチョコ";
+			mes "　ポイント：【^FF0000すごく多い^000000】";
+			next;
+			mes "[ルーン]";
+			mes "……となってるわ。";
+			next;
+			mes "[ルーン]";
+			mes "次の予定サービスランクだけど……";
+			if($VALENTINE2012_POINT[4] <= 1000) {
+				mes "……『 ^1895FF1^000000 』みたいね。";
+				mes "最初は、みんなここから始まるのよ。";
+			} else if($VALENTINE2012_POINT[4] <= 2000) {
+				mes "……『 ^0062002^000000 』みたいね。";
+				mes "この調子で行きましょう！";
+			} else if($VALENTINE2012_POINT[4] <= 3000) {
+				mes "……『 ^1895FF3^000000 』みたいね。";
+				mes "この調子で行きましょう！";
+			} else if($VALENTINE2012_POINT[4] <= 4000) {
+				mes "……『 ^1895FF4^000000 』みたいね。";
+				mes "この調子で行きましょう！";
+			} else {
+				mes "……『 ^1895FF5^000000 』みたいね。";
+				mes "この調子で行きましょう！";
+			}
+			next;
+			set .@score,$VALENTINE2012_POINT[4]%1000;
+			set .@star$,"";
+			for(set .@i,0; .@i<6; set .@i,.@i+1) {
+				if(.@score>=0) {
+					set .@star$,.@star$+"★";
+					set .@score,.@score-200;
+				} else {
+					set .@star$,.@star$+"☆";
+				}
+			}
+			mes "[ルーン]";
+			mes "今のランクのポイント状況は";
+			mes .@star$;
+			mes "……ってところよ！";
+			close2;
+			cutin "jpn_run01.bmp",255;
+			end;
+		case 3:
+			mes "[ルーン]";
+			mes "あら、もういいの？";
+			mes "チョコレートを作りたくなったら";
+			mes "声をかけてね！";
+			close2;
+			cutin "jpn_run01.bmp",255;
+			end;
+		}
+	}
+}
+jp_ev_map46.gat,63,37,4	script	ミッド	429,{
+	cutin "jpn_mid01.bmp",2;
+	mes "[ミッド]";
+	mes "やあ！　冒険者のみんなを";
+	mes "応援するイベントがあると聞いて";
+	mes "ルーンと一緒にここまで来たんだ。";
+	next;
+	cutin "jpn_mid02.bmp",2;
+	mes "[ミッド]";
+	mes "それにしても、チョコレートを";
+	mes "作らないといけないとは……";
+	mes "変わった応援の仕方だね！";
+	next;
+	cutin "jpn_mid01.bmp",2;
+	while(1) {
+		mes "[ミッド]";
+		mes "さて、それじゃあ僕も頑張って";
+		mes "チョコレートを作るとしようかな。";
+		next;
+		switch(select("チョコレート作って！","スウィートサービスについて聞く","会話をやめる")) {
+		case 1:
+			mes "[ミッド]";
+			mes "うん、どれを作るか決めてくれ。";
+			next;
+			switch(select("チョコレート","手作りチョコ","ストロベリーチョコ","チョコタルト","チョコレートドリンク","ビターチョコ","やめる")) {
+			case 1: set .@gain,558; set .@pt,0; break;
+			case 2: set .@gain,559; set .@pt,3; break;
+			case 3: set .@gain,12235; set .@pt,2; break;
+			case 4: set .@gain,12236; set .@pt,4; break;
+			case 5: set .@gain,573; set .@pt,1; break;
+			case 6: set .@gain,12234; set .@pt,5; break;
+			case 7: continue;
+			}
+			while(1) {
+				mes "[ミッド]";
+				if(.@gain==12236) {
+					mes getitemname(.@gain)+"(1セット5個)だね。";
+					setarray .@set$,"1セット(5個)作る","5セット(25個)作る","10セット(50個)作る";
+				} else {
+					mes "……"+getitemname(.@gain)+"だね。";
+					setarray .@set$,"1個作る","5個作る","10個作る";
+				}
+				mes "　";
+				mes "材料";
+				switch(.@gain) {
+				case 558:
+					setarray .@need,7718,519;
+					setarray .@amount,5,1;
+					mes "　カカオ豆:5個 ミルク:1個";
+					break;
+				case 559:
+					setarray .@need,12126,558;
+					setarray .@amount,1,6;
+					mes "　家庭用調理器具:1個";
+					mes "　チョコレート:6個";
+					break;
+				case 12235:
+					setarray .@need,578,558;
+					setarray .@amount,1,3;
+					mes "　イチゴ:1個 チョコレート:3個";
+					break;
+				case 12236:
+					setarray .@need,519,7605,7604,558,6095;
+					setarray .@amount,3,3,3,9,1;
+					mes "　ミルク:3個 卵:3個";
+					mes "　小麦粉:3個 チョコレート:9個";
+					mes "　香酒:1個";
+					break;
+				case 573:
+					setarray .@need,7174,519,558,12128;
+					setarray .@amount,5,1,1,1;
+					mes "　包装リボン:5個 ミルク:1個";
+					mes "　チョコレート:1個";
+					mes "　宮廷用調理器具:1個";
+					break;
+				case 12234:
+					setarray .@need,7718,519;
+					setarray .@amount,99,1;
+					mes "　カカオ豆:99個 ミルク:1個";
+					break;
+				}
+				if(.@gain > 558) {
+					next;
+					mes "-^0000FF名前入りと通常のチョコレートを";
+					mes " 両方持っている場合、どちらを使うか";
+					mes " 選ぶことはできません。^000000-";
+				}
+				next;
+				switch(select(.@set$[0],.@set$[1],.@set$[2],"やめる")) {
+				case 1: set .@num,1; break;
+				case 2: set .@num,5; break;
+				case 3: set .@num,10; break;
+				case 4: set .@num,0; break;
+				}
+				if(.@num==0) break;
+				mes "[ミッド]";
+				if(.@gain==12236)
+					mes getitemname(.@gain)+.@num+"セット("+(.@num * 5)+"個)だと……";
+				else
+					mes getitemname(.@gain)+.@num+"個だから……";
+				mes "　";
+				mes "材料は全部で……これだけ必要かな。";
+				switch(.@gain) {
+				case 558:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　カカオ豆:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					break;
+				case 559:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　家庭用調理器具:"+.@amount2[0]+"個";
+					mes "　チョコレート:"+.@amount2[1]+"個";
+					break;
+				case 12235:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　イチゴ:"+.@amount2[0]+"個 チョコレート:"+.@amount2[1]+"個";
+					break;
+				case 12236:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num,.@amount[2]*.@num,.@amount[3]*.@num,.@amount[4]*.@num;
+					mes "　ミルク:"+.@amount2[0]+"個 卵:"+.@amount2[1]+"個";
+					mes "　小麦粉:"+.@amount2[2]+"個 チョコレート:"+.@amount2[3]+"個";
+					mes "　香酒:"+.@amount2[4]+"個";
+					break;
+				case 573:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num,.@amount[2]*.@num,.@amount[3]*.@num;
+					mes "　包装リボン:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					mes "　チョコレート:"+.@amount2[2]+"個";
+					mes "　宮廷用調理器具:"+.@amount2[3]+"個";
+					break;
+				case 12234:
+					setarray .@amount2,.@amount[0]*.@num,.@amount[1]*.@num;
+					mes "　カカオ豆:"+.@amount2[0]+"個 ミルク:"+.@amount2[1]+"個";
+					break;
+				}
+				next;
+				switch(select("作る","作る数を変える","やっぱりやめる")) {
+				case 1:
+					cutin "jpn_mid01.bmp",255;
+					mes "[ミッド]";
+					mes "……";
+					next;
+					emotion 9;	//…
+					mes "[ミッド]";
+					mes "…… ……";
+					next;
+					emotion 2;	//うれしい
+					mes "[ミッド]";
+					mes "…… …… ……";
+					next;
+					for(set .@i,0; .@i < getarraysize(.@amount2); set .@i,.@i+1) {
+						if(countitem(.@need[.@i]) < .@amount2[.@i]) {
+							cutin "jpn_mid05.bmp",2;
+							mes "[ミッド]";
+							mes "材料が足りないみたいだ。";
+							mes "これじゃ、チョコレートは作れないよ。";
+							close2;
+							cutin "jpn_mid05.bmp",255;
+							end;
+						}
+					}
+					for(set .@i,0; .@i < getarraysize(.@amount2); set .@i,.@i+1)
+						delitem .@need[.@i],.@amount2[.@i];
+					set $VALENTINE2012_COUNT[5],$VALENTINE2012_COUNT[5] + .@num;
+					set $VALENTINE2012_POINT[5],$VALENTINE2012_POINT[5] + .@pt * .@num;
+					if(rand(100) < 5) {
+						if(.@gain==12235)
+							getitem 596,.@num;
+						else if(.@gain==12236)
+							getitem 597,.@num * 5;
+						else
+							getitem 12237,.@num;
+						if(VALENTINE2012 == 1) {
+							set VALENTINE2012,2;
+							//chgquest 108660,201385;	//バレンタイン2012完了
+						}
+						cutin "jpn_mid05.bmp",2;
+						mes "[ミッド]";
+						mes "おかしいな。予想と違うものが";
+						mes "できちゃったぞ？";
+						mes "う～ん、ごめんね。";
+						close2;
+						cutin "jpn_mid05.bmp",255;
+						end;
+					}
+					if(.@gain==12236)
+						getitem .@gain,.@num * 5;
+					else
+						getitem .@gain,.@num;
+					if(VALENTINE2012 == 1) {
+						set VALENTINE2012,2;
+						//chgquest 108660,201385;	//バレンタイン2012完了
+					}
+					cutin "jpn_mid02.bmp",2;
+					mes "[ミッド]";
+					mes "うん、出来たよ。";
+					mes "これはキミへのプレゼントだから";
+					mes "受け取ってね。";
+					close2;
+					cutin "jpn_mid02.bmp",255;
+					end;
+				case 2: continue;
+				}
+				break;
+			}
+			continue;
+		case 2:
+			mes "[ミッド]";
+			mes "僕の『スウィートサービス』は";
+			mes "フィールドやダンジョンへの";
+			mes "特殊転送サービスの提供だ。";
+			next;
+			mes "[ミッド]";
+			mes "危険な場所にも一瞬で行けるから";
+			mes "自分を鍛えるのにも便利だよ。";
+			next;
+			mes "[ミッド]";
+			mes "サービスランクが上がれば";
+			mes "転送先を増やしてあげるよ。";
+			mes "ランクを上げるには";
+			mes "ポイントの高いチョコレートを";
+			mes "たくさん作ってみてね。";
+			next;
+			mes "[ミッド]";
+			mes "チョコレートのポイントは……";
+			next;
+			mes "■チョコレート";
+			mes "　ポイント：【^0000FFなし^000000】";
+			mes "■チョコレートドリンク";
+			mes "　ポイント：【^006200すごく少ない^000000】";
+			mes "■ストロベリーチョコ";
+			mes "　ポイント：【^006200普通^000000】";
+			next;
+			mes "■手作りチョコ";
+			mes "　ポイント：【^FF8D00少し多い^000000】";
+			mes "■チョコタルト";
+			mes "　ポイント：【^FF8D00多い^000000】";
+			mes "■ビターチョコ";
+			mes "　ポイント：【^FF0000すごく多い^000000】";
+			next;
+			mes "[ミッド]";
+			mes "……だよ。";
+			next;
+			mes "[ミッド]";
+			mes "さて、次の予定サービスランクは……";
+			if($VALENTINE2012_POINT[5] <= 1000) {
+				mes "……『 ^1895FF1^000000 』だよ。";
+				mes "ここからどれだけ、頑張れるかな？";
+			} else if($VALENTINE2012_POINT[5] <= 2000) {
+				mes "……『 ^0062002^000000 』だよ。";
+				mes "ここからどれだけ、頑張れるかな？";
+			} else if($VALENTINE2012_POINT[5] <= 3000) {
+				mes "……『 ^1895FF3^000000 』だよ。";
+				mes "ここからどれだけ、頑張れるかな？";
+			} else if($VALENTINE2012_POINT[5] <= 4000) {
+				mes "……『 ^1895FF4^000000 』だよ。";
+				mes "ここからどれだけ、頑張れるかな？";
+			} else {
+				mes "……『 ^1895FF5^000000 』だよ。";
+				mes "ここからどれだけ、頑張れるかな？";
+			}
+			next;
+			set .@score,$VALENTINE2012_POINT[5]%1000;
+			set .@star$,"";
+			for(set .@i,0; .@i<6; set .@i,.@i+1) {
+				if(.@score>=0) {
+					set .@star$,.@star$+"★";
+					set .@score,.@score-200;
+				} else {
+					set .@star$,.@star$+"☆";
+				}
+			}
+			mes "[ミッド]";
+			mes "今のランクのポイント状況は";
+			mes .@star$;
+			mes "……ってところだよ！";
+			close2;
+			cutin "jpn_mid01.bmp",255;
+			end;
+		case 3:
+			mes "[ミッド]";
+			mes "チョコレートは必要ないかい？";
+			mes "チョコレートを作る場合は";
+			mes "声をかけてね！";
+			close2;
+			cutin "jpn_mid01.bmp",255;
+			end;
+		}
+	}
+}
+jp_ev_map46.gat,56,45,4	script	出張カプラ職員	112,{
+	cutin "kafra_06",2;
+	mes "[カプラ職員]";
+	mes "いらっしゃいませ。";
+	mes "何をお手伝いいたしましょう？";
+	next;
+	switch (select("位置セーブサービス","倉庫サービス","終了")) {
+	case 1:
+		savepoint "jp_ev_map46",57,40;
+		mes "[カプラ職員]";
+		mes "セーブしました。";
+		mes "ご利用ありがとうございます。";
+		close2;
+		cutin "kafra_06",255;
+		end;
+	case 2:
+		if(getskilllv(1)<6) {
+			mes "[カプラ職員]";
+			mes "倉庫は基本スキルレベル6を";
+			mes "習得してから利用可能となります。";
+		}else if(Zeny < 40) {
+			mes "[カプラ職員]";
+			mes "お客様、お金が足りません。";
+			mes "倉庫利用料金は40Zenyです。";
+		}
+		else {
+			set Zeny,Zeny-40;
+			openstorage;
+			cutin "kafra_06",255;
+			close;
+		}
+		close2;
+		cutin "kafra_06",255;
+		end;
+	case 3:
+		mes "[カプラ職員]";
+		mes "我々カプラサービスは、より完璧な";
+		mes "サービスと管理業務を目指し";
+		mes "お客様が安心してご利用いただけるよう";
+		mes "いつも最善を尽くしています。";
+		mes "（株）カプラサービスをご利用いただき";
+		mes "ありがとうございました。";
+		close2;
+		cutin "kafra_06",255;
+		end;
+	}
+OnInit:
+	waitingroom "出張カプラ",0;
+	end;
+}
+jp_ev_map46.gat,59,45,4	script	ジョンダ職員	874,{
+	cutin "zonda_01",2;
+	mes "[ジョンダ職員]";
+	mes "いらっしゃいませ。";
+	mes "（有）ジョンダイベントは、常に";
+	mes "最高のサービスを提供しております。";
+	next;
+	mes "[ジョンダ職員]";
+	mes "いかがいたしましょうか？";
+	next;
+	switch(select("スウィートサービスを受ける","スウィートサービスとは？","集計状況を教えて","やめる")) {
+	case 1:
+		if((gettime(3) == 2) && (gettime(2) >= 50) && (gettime(2) <= 59)) {
+			mes "[ジョンダ職員]";
+			mes "午前2時50分から午前3時までは";
+			mes "スウィートサービス集計中のため";
+			mes "サービスを休止しております。";
+			next;
+			mes "[ジョンダ職員]";
+			mes "申し訳ありませんが";
+			mes "午前3時以降にお越しください。";
+			mes "私のできうる限りのサービスを";
+			mes "提供させていただきます。";
+			break;
+		}
+		if(VALENTINE2012_SUB/10 != $VALENTINE2012_CLOCK) {
+			set VALENTINE2012_SUB,$VALENTINE2012_CLOCK*10;
+		}
+		if((VALENTINE2012_SUB%10) > 0) {
+			switch($VALENTINE2012) {
+			case 0:	//イベント初日
+				mes "[ジョンダ職員]";
+				mes "スウィートサービスは";
+				mes "まだ決定していません。";
+				next;
+				mes "[ジョンダ職員]";
+				mes "集計は「^FF0000午前3時^000000」に行います。";
+				mes "チョコレートの作成を";
+				mes "依頼してはいかがでしょう。";
+				next;
+				mes "[ジョンダ職員]";
+				mes "スウィートサービスを";
+				mes "ご利用になりたい場合は";
+				mes "明日、改めてお越しください。";
+				mes "お待ちしております。";
+				break;
+			case 1:
+				if((VALENTINE2012_SUB%10) >= 3) {
+					mes "[ジョンダ職員]";
+					mes "「^FF0000ステータス強化^000000」の";
+					mes "サービスは、すでに3回分";
+					mes "利用されました。";
+					next;
+					mes "[ジョンダ職員]";
+					mes "スウィートサービスを";
+					mes "ご利用になりたい場合は";
+					mes "明日、改めてお越しください。";
+					mes "お待ちしております。";
+					break;
+				}
+				mes "[ジョンダ職員]";
+				mes "「^FF0000ステータス強化^000000」を";
+				mes "付与いたしますか？";
+				mes "サービスのランクは["+$VALENTINE2012_RANK+"]です。";
+				mes "あと ^0000FF"+(3 - (VALENTINE2012_SUB%10))+"^000000 回利用できます";
+				next;
+				mes "[ジョンダ職員]";
+				mes "同様の効果があるアイテムを";
+				mes "使用している場合、効果が上書きされる";
+				mes "可能性がありますので";
+				mes "ご注意ください。";
+				next;
+				if(select("サービスを受ける","ちょっと待って")==2) {
+					mes "[ジョンダ職員]";
+					mes "了解いたしました。";
+					next;
+					mes "[ジョンダ職員]";
+					mes "（有）ジョンダイベントは、お客様に";
+					mes "常に最高のサービスを";
+					mes "提供いたしております。";
+					mes "御用がありましたら";
+					mes "お声をお掛けください";
+					break;
+				}
+				mes "[ジョンダ職員]";
+				mes "了解いたしました。";
+				specialeffect 618;
+				set VALENTINE2012_SUB,VALENTINE2012_SUB + 1;
+				sc_start SC_FOOD_STR_CASH,3900000,$VALENTINE2012_RANK*2;
+				sc_start SC_FOOD_AGI_CASH,3900000,$VALENTINE2012_RANK*2;
+				sc_start SC_FOOD_VIT_CASH,3900000,$VALENTINE2012_RANK*2;
+				sc_start SC_FOOD_INT_CASH,3900000,$VALENTINE2012_RANK*2;
+				sc_start SC_FOOD_DEX_CASH,3900000,$VALENTINE2012_RANK*2;
+				sc_start SC_FOOD_LUK_CASH,3900000,$VALENTINE2012_RANK*2;
+				break;
+			case 3:
+				if((VALENTINE2012_SUB%10) >= 3) {
+					mes "[ジョンダ職員]";
+					mes "「^FF0000アイテムドロップ率アップ^000000」の";
+					mes "サービスは、すでに3回分";
+					mes "利用されました。";
+					next;
+					mes "[ジョンダ職員]";
+					mes "スウィートサービスを";
+					mes "ご利用になりたい場合は";
+					mes "明日、改めてお越しください。";
+					mes "お待ちしております。";
+					break;
+				}
+				mes "[ジョンダ職員]";
+				mes "「^FF0000アイテムドロップ率アップ^000000」を";
+				mes "付与いたしますか？";
+				mes "サービスのランクは["+$VALENTINE2012_RANK+"]です。";
+				mes "あと ^0000FF"+(3 - (VALENTINE2012_SUB%10))+"^000000 回利用できます";
+				next;
+				mes "[ジョンダ職員]";
+				mes "同様の効果があるアイテムを";
+				mes "使用している場合、効果が上書きされる";
+				mes "可能性がありますので";
+				mes "ご注意ください。";
+				next;
+				if(select("サービスを受ける","ちょっと待って")==2) {
+					mes "[ジョンダ職員]";
+					mes "了解いたしました。";
+					next;
+					mes "[ジョンダ職員]";
+					mes "（有）ジョンダイベントは、お客様に";
+					mes "常に最高のサービスを";
+					mes "提供いたしております。";
+					mes "御用がありましたら";
+					mes "お声をお掛けください";
+					break;
+				}
+				mes "[ジョンダ職員]";
+				mes "了解いたしました。";
+				specialeffect 618;
+				set VALENTINE2012_SUB,VALENTINE2012_SUB + 1;
+				sc_start SC_ITEMBOOST,2400000,100+$VALENTINE2012_RANK*10;
+				break;
+			case 4:
+				if((VALENTINE2012_SUB%10) >= 3) {
+					mes "[ジョンダ職員]";
+					mes "「^FF0000獲得経験値アップ^000000」の";
+					mes "サービスは、すでに3回分";
+					mes "利用されました。";
+					next;
+					mes "[ジョンダ職員]";
+					mes "スウィートサービスを";
+					mes "ご利用になりたい場合は";
+					mes "明日、改めてお越しください。";
+					mes "お待ちしております。";
+					break;
+				}
+				mes "[ジョンダ職員]";
+				mes "「^FF0000獲得経験値アップ^000000」を";
+				mes "付与いたしますか？";
+				mes "サービスのランクは["+$VALENTINE2012_RANK+"]です。";
+				mes "あと ^0000FF"+(3 - (VALENTINE2012_SUB%10))+"^000000 回利用できます";
+				next;
+				mes "[ジョンダ職員]";
+				mes "同様の効果があるアイテムを";
+				mes "使用している場合、効果が上書きされる";
+				mes "可能性がありますので";
+				mes "ご注意ください。";
+				next;
+				if(select("サービスを受ける","ちょっと待って")==2) {
+					mes "[ジョンダ職員]";
+					mes "了解いたしました。";
+					next;
+					mes "[ジョンダ職員]";
+					mes "（有）ジョンダイベントは、お客様に";
+					mes "常に最高のサービスを";
+					mes "提供いたしております。";
+					mes "御用がありましたら";
+					mes "お声をお掛けください";
+					break;
+				}
+				mes "[ジョンダ職員]";
+				mes "了解いたしました。";
+				specialeffect 618;
+				set VALENTINE2012_SUB,VALENTINE2012_SUB + 1;
+				sc_start SC_EXPBOOST,2400000,$VALENTINE2012_RANK*10;
+				break;
+			}
+			close2;
+			cutin "zonda_01",255;
+			end;
+		}
+		mes "[ジョンダ職員]";
+		mes "本日のスウィートサービスは";
+		switch($VALENTINE2012) {
+		case 0:	//イベント初日
+			mes "まだ決定していません。";
+			next;
+			mes "[ジョンダ職員]";
+			mes "集計は「^FF0000午前3時^000000」に行います。";
+			mes "材料を差し上げますので";
+			mes "チョコレートの作成を";
+			mes "依頼してはいかがでしょう。";
+			set VALENTINE2012_SUB,VALENTINE2012_SUB + 1;
+			getitem 519,1;
+			getitem 7182,1;
+			next;
+			mes "[ジョンダ職員]";
+			mes "スウィートサービスを";
+			mes "ご利用になりたい場合は";
+			mes "明日、改めてお越しください。";
+			mes "お待ちしております。";
+			close2;
+			cutin "zonda_01",255;
+			end;
+		case 1: mes "「^FF0000ステータス強化^000000」と"; break;			//ヒュッケ
+		case 2: mes "「^FF0000無料宿泊サービス^000000」と"; break;			//シャイ(未確認)
+		case 3: mes "「^FF0000アイテムドロップ率アップ^000000」と"; break;	//怪盗アニバーサリー(未確認)
+		case 4: mes "「^FF0000獲得経験値アップ^000000」と"; break;			//ルーン
+		case 5: mes "「^FF0000特殊転送サービス^000000」と"; break;			//ミッド(未確認)
+		}
+		mes "なっております。";
+		switch($VALENTINE2012) {
+		case 1: mes "昨日は、^0000FFヒュッケ^000000様に"; break;			//ヒュッケ
+		case 2: mes "昨日は、^0000FFシャイ^000000様に"; break;				//シャイ(未確認)
+		case 3: mes "昨日は、^0000FF怪盗アニバーサリー^000000様に"; break;	//怪盗アニバーサリー(未確認)
+		case 4: mes "昨日は、^0000FFルーン^000000様に"; break;			//ルーン
+		case 5: mes "昨日は、^0000FFミッド^000000様に"; break;					//ミッド(未確認)
+		}
+		mes "チョコレート作成を依頼する方が";
+		mes "多かったようですね。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "また、サービスランクは";
+		mes "^FF0000ランク" +$VALENTINE2012_RANK+ "^000000となっております。";
+		next;
+		mes "[ジョンダ職員]";
+		switch($VALENTINE2012) {
+		case 1:		//ヒュッケ(未確認)
+			mes "全てのステータスが増加します。";
+			mes "効果時間は^FF000065分^000000。";
+			mes "^FF00001日3回^000000ご利用いただけます。";
+			next;
+			mes "[ジョンダ職員]";
+			mes "同様の効果があるアイテムを";
+			mes "使用している場合、効果が上書きされる";
+			mes "可能性がありますので";
+			mes "ご注意ください。";
+			break;
+		case 2:		//シャイ(未確認)
+		case 3:		//怪盗アニバーサリー(未確認)
+			mes "アイテムドロップ率が";
+			mes "少し増加します。";
+			mes "効果時間は^FF000040分^000000。";
+			mes "^FF00001日3回^000000ご利用いただけます。";
+			next;
+			mes "[ジョンダ職員]";
+			mes "同様の効果があるアイテムを";
+			mes "使用している場合、効果が上書きされる";
+			mes "可能性がありますので";
+			mes "ご注意ください。";
+			break;
+		case 4:		//ルーン
+			mes "獲得経験値が若干増加します。";
+			mes "効果時間は^FF000040分^000000。";
+			mes "^FF00001日3回^000000ご利用いただけます。";
+			next;
+			mes "[ジョンダ職員]";
+			mes "同様の効果があるアイテムを";
+			mes "使用している場合、効果が上書きされる";
+			mes "可能性がありますので";
+			mes "ご注意ください。";
+			break;
+		case 5:		//ミッド(未確認)
+		}
+		next;
+		mes "[ジョンダ職員]";
+		mes "スウィートサービスを";
+		mes "ご利用なさいますか？";
+		next;
+		if(select("サービスを受ける","ちょっと待って")==2) {
+			mes "[ジョンダ職員]";
+			mes "了解いたしました。";
+			next;
+			mes "[ジョンダ職員]";
+			mes "（有）ジョンダイベントは、お客様に";
+			mes "常に最高のサービスを";
+			mes "提供いたしております。";
+			mes "御用がありましたら";
+			mes "お声をお掛けください";
+			break;
+		}
+		mes "[ジョンダ職員]";
+		mes "了解いたしました。";
+		mes "それでは";
+		switch($VALENTINE2012) {
+		case 1: mes "「^FF0000ステータス強化^000000」を"; break;			//ヒュッケ(未確認)
+		case 3: mes "「^FF0000アイテムドロップ率アップ^000000」を"; break;	//怪盗アニバーサリー(未確認)
+		case 4: mes "「^FF0000獲得経験値アップ^000000」を"; break;			//ルーン
+		}
+		mes "付与いたします。";
+		specialeffect 618;
+		set VALENTINE2012_SUB,VALENTINE2012_SUB + 1;
+		switch($VALENTINE2012) {
+		case 1:			//ヒュッケ(未確認)
+			sc_start SC_FOOD_STR_CASH,3900000,$VALENTINE2012_RANK*2;
+			sc_start SC_FOOD_AGI_CASH,3900000,$VALENTINE2012_RANK*2;
+			sc_start SC_FOOD_VIT_CASH,3900000,$VALENTINE2012_RANK*2;
+			sc_start SC_FOOD_INT_CASH,3900000,$VALENTINE2012_RANK*2;
+			sc_start SC_FOOD_DEX_CASH,3900000,$VALENTINE2012_RANK*2;
+			sc_start SC_FOOD_LUK_CASH,3900000,$VALENTINE2012_RANK*2;
+			break;
+		case 3: sc_start SC_ITEMBOOST,2400000,100+$VALENTINE2012_RANK*10; break;	//怪盗アニバーサリー(未確認)
+		case 4: sc_start SC_EXPBOOST,2400000,$VALENTINE2012_RANK*10; break;			//ルーン
+		}
+		break;
+	case 2:
+		mes "[ジョンダ職員]";
+		mes "了解いたしました。";
+		mes "『スウィートサービス』とは";
+		mes "このイベント会場でのみ行っている";
+		mes "期間限定のサービスです。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "会場には、皆様のために";
+		mes "チョコレートを作ってくださる";
+		mes "5名の方がおられますが、";
+		mes "それぞれ異なるサービスを";
+		mes "提供していただくことになりました。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "ただし、5つのうち";
+		mes "提供するサービスは";
+		mes "1つに限らせていただきます。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "では、どのようにして";
+		mes "1つのサービスを選ぶのか？";
+		next;
+		mes "[ジョンダ職員]";
+		mes "それは、冒険者の皆様に";
+		mes "作っていただいたチョコレートの数を";
+		mes "毎日、集計して決定いたします。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "皆さんは、受けたいと思われる";
+		mes "スウィートサービスの提供者に";
+		mes "チョコレートの作成を";
+		mes "依頼してください。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "そして、一番多く皆様のために";
+		mes "チョコレートを作成した方が";
+		mes "サービスの提供者となるのです。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "決定したスウィートサービスは";
+		mes "イベント参加者全員が利用可能です。";
+		mes "希望していたサービスが";
+		mes "提供されなくても";
+		mes "気を落とされませんよう。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "次に、スウィートサービスの";
+		mes "効果について説明いたします。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "チョコレートの作成を依頼すると";
+		mes "チョコレートに応じたポイントが";
+		mes "依頼した提供者に加算されます。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "そのポイントが一定値を超えると";
+		mes "サービスのランクがアップします。";
+		mes "ランクは『1』から『5』まで";
+		mes "あります。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "スウィートサービスの決定時に";
+		mes "提供者のサービスランクが高いほど";
+		mes "サービスの効果が高くなります。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "各チョコレートのポイントは";
+		mes "次のとおりとなっております。";
+		next;
+		mes "■チョコレート";
+		mes "　ポイント：【^0000FFなし^000000】";
+		mes "■チョコレートドリンク";
+		mes "　ポイント：【^006200すごく少ない^000000】";
+		mes "■ストロベリーチョコ";
+		mes "　ポイント：【^006200普通^000000】";
+		next;
+		mes "■手作りチョコ";
+		mes "　ポイント：【^FF8D00少し多い^000000】";
+		mes "■チョコタルト";
+		mes "　ポイント：【^FF8D00多い^000000】";
+		mes "■ビターチョコ";
+		mes "　ポイント：【^FF0000すごく多い^000000】";
+		next;
+		mes "[ジョンダ職員]";
+		mes "スウィートサービスの効果を";
+		mes "高めたいのであれば";
+		mes "ポイントの高いチョコレートを";
+		mes "依頼するのが良いでしょう。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "最後に集計のタイミングですが";
+		mes "「^FF0000午前3時^000000」に行います。";
+		mes "利用できるスウィートサービスも";
+		mes "そのタイミングで変わりますので";
+		mes "ご注意ください。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "また、集計が行われると";
+		mes "チョコレート作成回数とポイント、";
+		mes "サービスのランクは";
+		mes "全てリセットされます。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "説明が長くなってしまいましたが";
+		mes "スウィートサービスの説明は";
+		mes "以上となります。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "5つのスウィートサービスの";
+		mes "詳しい説明は、直接、5人の方々に";
+		mes "お聞きになってください。";
+		break;
+	case 3:
+		mes "[ジョンダ職員]";
+		mes "集計についてですが";
+		mes "上位の方のお名前を";
+		mes "お伝えいたします。";
+		next;
+		mes "[ジョンダ職員]";
+		setarray .@charname$[1],"ヒュッケ","シャイ","怪盗アニバーサリー","ルーン","ミッド";
+		if($@valentinechar[0] != 0 && $@valentinecnt[0] == $@valentinecnt[1]) {
+			mes "^FF0000"+.@charname$[$@valentinechar[0]]+"^000000様、^FF0000"+.@charname$[$@valentinechar[1]]+"^000000様";
+			mes "^FF0000"+.@charname$[$@valentinechar[2]]+"^000000様";
+		} else {
+			mes "^FF0000"+.@charname$[$@valentinechar[0]]+"^000000様";
+			mes "^FF0000"+.@charname$[$@valentinechar[1]]+"^000000様";
+			mes "^FF0000"+.@charname$[$@valentinechar[2]]+"^000000様";
+		}
+		mes "が、^0000FF"+$@valentinetime$+"^000000の時点で";
+		mes "上位になっている方です。";
+		next;
+		mes "[ジョンダ職員]";
+		mes "集計は1時間ごとに行っておりますので";
+		mes "直近の結果では無い場合もあります。";
+		mes "その点、ご注意ください。";
+		break;
+	case 4:
+		mes "[ジョンダ職員]";
+		mes "（有）ジョンダイベントは、お客様に";
+		mes "常に最高のサービスを";
+		mes "提供いたしております。";
+		mes "御用がありましたら";
+		mes "お声をお掛けください";
+		break;
+	}
+	close2;
+	cutin "zonda_01",255;
+	end;
+OnInit:
+	waitingroom "スウィートサービス",0;
+	end;
+}
+jp_ev_map46.gat,44,49,4	script	転送員	805,{
+	mes "[転送員]";
+	mes "いらっしゃいませ。";
+	mes "チョコレートを頂ければ";
+	mes "色々な場所に転送して";
+	mes "さしあげますよ。";
+	next;
+	mes "[転送員]";
+	mes "どこへ行きますか？";
+	mes "　";
+	mes "-^0000FF名前入りのチョコレートと";
+	mes " 通常のチョコレートを";
+	mes " 両方持っている場合、どちらを渡すか";
+	mes " 選ぶことはできません。^000000-";
+	next;
+	switch(select("ルーンミッドガッツ -> 5個","シュバルツバルド   -> 5個","アルナベルツ       -> 5個","周辺都市           -> 10個","やっぱり利用しない")) {
+	case 1:
+		mes "[転送員]";
+		mes "転送先をお選びください。";
+		next;
+		switch(select("イズルード","ゲフェン","モロク","フェイヨン","アルベルタ","コモド","やっぱり止める")) {
+		case 1: set .@mapname$,"イズルード"; set .@map$,"izlude.gat"; set .@x,91; set .@y,105; break;
+		case 2: set .@mapname$,"ゲフェン"; set .@map$,"geffen.gat"; set .@x,120; set .@y,39; break;
+		case 3: set .@mapname$,"モロク"; set .@map$,"morocc.gat"; set .@x,156; set .@y,92; break;
+		case 4: set .@mapname$,"フェイヨン"; set .@map$,"payon.gat"; set .@x,160; set .@y,58; break;
+		case 5: set .@mapname$,"アルベルタ"; set .@map$,"alberta.gat"; set .@x,117; set .@y,57; break;
+		case 6: set .@mapname$,"コモド"; set .@map$,"comodo.gat"; set .@x,209; set .@y,143; break;
+		case 7:
+			mes "[転送員]";
+			mes "ご利用の際は、";
+			mes "いつでも仰ってください。";
+			close;
+		}
+		set .@num,5;
+		break;
+	case 2:
+		mes "[転送員]";
+		mes "転送先をお選びください。";
+		next;
+		switch(select("アルデバラン","ジュノー","アインブロック","アインベフ","リヒタルゼン","フィゲル","やっぱり止める")) {
+		case 1: set .@mapname$,"アルデバラン"; set .@map$,"aldebaran.gat"; set .@x,167; set .@y,112; break;
+		case 2: set .@mapname$,"ジュノー"; set .@map$,"yuno.gat"; set .@x,158; set .@y,124; break;
+		case 3: set .@mapname$,"アインブロック"; set .@map$,"einbroch.gat"; set .@x,239; set .@y,197; break;
+		case 4: set .@mapname$,"アインベフ"; set .@map$,"einbech.gat"; set .@x,181; set .@y,123; break;
+		case 5: set .@mapname$,"リヒタルゼン"; set .@map$,"lighthalzen.gat"; set .@x,159; set .@y,92; break;
+		case 6: set .@mapname$,"フィゲル"; set .@map$,"hugel.gat"; set .@x,97; set .@y,153; break;
+		case 7:
+			mes "ご利用の際は、";
+			mes "いつでも仰ってください。";
+			close;
+		}
+		set .@num,5;
+		break;
+	case 3:
+		mes "[転送員]";
+		mes "転送先をお選びください。";
+		next;
+		switch(select("ラヘル","ベインス","やっぱり止める")) {
+		case 1: set .@mapname$,"ラヘル"; set .@map$,"rachel.gat"; set .@x,115; set .@y,125; break;
+		case 2: set .@mapname$,"ベインス"; set .@map$,"veins.gat"; set .@x,205; set .@y,102; break;
+		case 3:
+			mes "ご利用の際は、";
+			mes "いつでも仰ってください。";
+			close;
+		}
+		set .@num,5;
+		break;
+	case 4:
+		mes "[転送員]";
+		mes "転送先をお選びください。";
+		next;
+		switch(select("コンロン","アユタヤ","龍之城","アマツ","ウンバラ","ニブルヘイム","モスコビア","ルティエ","ブラジリス","デワタ","やっぱり止める")) {
+		case 1: set .@mapname$,"コンロン"; set .@map$,"gonryun.gat"; set .@x,160; set .@y,62; break;
+		case 2: set .@mapname$,"アユタヤ"; set .@map$,"ayothaya.gat"; set .@x,217; set .@y,187; break;
+		case 3: set .@mapname$,"龍之城"; set .@map$,"louyang.gat"; set .@x,218; set .@y,97; break;
+		case 4: set .@mapname$,"アマツ"; set .@map$,"amatsu.gat"; set .@x,116; set .@y,94; break;
+		case 5: set .@mapname$,"ウンバラ"; set .@map$,"umbala.gat"; set .@x,100; set .@y,154; break;
+		case 6: set .@mapname$,"ニブルヘイム"; set .@map$,"nif_in"; set .@x,18; set .@y,20; break;
+		case 7: set .@mapname$,"モスコビア"; set .@map$,"moscovia.gat"; set .@x,220; set .@y,193; break;
+		case 8: set .@mapname$,"ルティエ"; set .@map$,"xmas.gat"; set .@x,149; set .@y,49; break;
+		case 9: set .@mapname$,"ブラジリス"; set .@map$,"brasilis.gat"; set .@x,195; set .@y,259; break;
+		case 10:set .@mapname$,"デワタ"; set .@map$,"dewata.gat"; set .@x,199; set .@y,177; break;
+		case 11:
+			mes "ご利用の際は、";
+			mes "いつでも仰ってください。";
+			close;
+		}
+		set .@num,10;
+		break;
+	case 5:
+		mes "ご利用の際は、";
+		mes "いつでも仰ってください。";
+		close;
+	}
+	mes "[転送員]";
+	mes .@mapname$;
+	mes "でよろしいですか？";
+	mes "チョコレート "+.@num+"個";
+//	mes "になりまfす。";
+	mes "になります。";
+	mes "　";
+	mes "チョコレート 所持数:"+countitem(558)+"個";
+	next;
+	if(select("転送してもらう","やっぱり止める")==2) {
+		mes "[転送員]";
+		mes "ご利用の際は、";
+		mes "いつでも仰ってください。";
+		close;
+	}
+	if(countitem(558) < .@num) {
+		mes "[転送員]";
+		mes "おや？";
+		mes "チョコレートが";
+		mes "足りませんよ。";
+		next;
+		mes "[転送員]";
+		mes "ご利用の際は、";
+		mes "いつでも仰ってください。";
+		close;
+	}
+	mes "[転送員]";
+	mes "チョコレート "+.@num+"個";
+	mes "確かに頂きました。";
+	mes "それでは、お送りしましょう。";
+	close2;
+	delitem 558,.@num;
+	warp .@map$,.@x,.@y;
+	end;
+OnInit:
+	waitingroom "転送サービス",0;
+	end;
+}
+jp_ev_map46.gat,40,49,4	script	タグマ＝バシニオ	712,{
+	mes "[タグマ＝バシニオ]";
+	mes "いらっしゃい、何をお求めかの？";
+	mes "お菓子の材料が欲しければ";
+	mes "売ってやるぞい。";
+	next;
+	switch(select(	"ミルク 25Zeny","カカオ 500Zeny","卵 1000Zeny","小麦粉 1000Zeny","香酒 1000Zeny","イチゴ 2500Zeny","家庭用調理器具 1000Zeny","宮廷用調理器具 3750Zeny","包装リボン 100Zeny","用はない")) {
+	case 1: set .@gain,519; set .@price,25; break;
+	case 2: set .@gain,7182; set .@price,500; break;
+	case 3: set .@gain,7605; set .@price,1000; break;
+	case 4: set .@gain,7604; set .@price,1000; break;
+	case 5: set .@gain,6095; set .@price,1000; break;
+	case 6: set .@gain,578; set .@price,2500; break;
+	case 7: set .@gain,12126; set .@price,1000; break;
+	case 8: set .@gain,12128; set .@price,3750; break;
+	case 9: set .@gain,7174; set .@price,100; break;
+	case 10:
+		mes "[タグマ＝バシニオ]";
+		mes "そうかね。";
+		mes "お菓子の材料が欲しくなったら";
+		mes "また来ると良いぞい。";
+		close;
+	}
+	mes "[タグマ＝バシニオ]";
+	mes getitemname(.@gain)+"じゃな、";
+	mes "1個"+.@price+"Zenyじゃよ。";
+	mes "いくつ買うかの？";
+	next;
+	input .@num;
+	if(.@num<0) {
+		mes "[タグマ＝バシニオ]";
+		mes "んん？";
+		mes "いくつじゃ？";
+		mes "よう聞こえんかったぞい。";
+		mes "もう一度注文してくれんかの。";
+		close;
+	}
+	if(.@num==0) {
+		mes "[タグマ＝バシニオ]";
+		mes "なんじゃ、買わないのかの？";
+		mes "お菓子の材料が欲しくなったら";
+		mes "また来ると良いぞ。";
+		close;
+	}
+	set .@price,.@price * .@num;
+	mes "[タグマ＝バシニオ]";
+	mes getitemname(.@gain)+"を"+.@num+"個で";
+	mes "合計"+.@price+"Zenyじゃな。";
+	mes "これで良いかの？";
+	next;
+	if(select("買う","やっぱりやめる")==2) {
+		mes "[タグマ＝バシニオ]";
+		mes "そうかね。";
+		mes "お菓子の材料が欲しくなったら";
+		mes "また来ると良いぞい。";
+		close;
+	}
+	if(Zeny < .@price) {
+		mes "[タグマ＝バシニオ]";
+		mes "んん？";
+		mes "お金が足りないようじゃの。";
+		mes "また来ておくれ。";
+		close;
+	}
+	set Zeny,Zeny - .@price;
+	getitem .@gain,.@num;
+	mes "[タグマ＝バシニオ]";
+	mes "まいどあり！";
+	mes "お菓子の材料が欲しくなったら";
+	mes "また来ると良いぞい。";
+	close;
+OnInit:
+	waitingroom "販売員",0;
+	end;
+}
+jp_ev_map46.gat,71,49,4	script	カカオ割りの達人	483,{
+	mes "[カカオ割りの達人]";
+	mes "おいどんはカカオ割りの達人でゴワス！";
+	mes "カカオをカカオ豆に砕きたければ";
+	mes "おいどんに任すでゴワス！";
+	next;
+	if(select("カカオを割る","やめる")==2) {
+		mes "[カカオ割りの達人]";
+		mes "そ、そうでゴワスか……";
+		mes "カカオをカカオ豆に砕きたくなったら";
+		mes "いつでもおいどんに";
+		mes "話しかけてくれでゴワス！";
+		close;
+	}
+	if(countitem(7182)<1) {
+		mes "[カカオ割りの達人]";
+		mes "カカオが足りんぜよ。";
+		mes "持ち物の確認をして";
+		mes "もう一度話しかけてくれでゴワス。";
+		close;
+	}
+	mes "[カカオ割りの達人]";
+	mes "まかせろでゴワス！";
+	mes "はぁ～～～……";
+	next;
+	mes "[カカオ割りの達人]";
+	set .@rand,rand(5,10);
+	switch(.@rand) {
+	case 5:
+		mes "ひょう！";
+		break;
+	case 6:
+	case 7:
+	case 8:
+		mes "ほあた！";
+		break;
+	case 9:
+		mes "ほぅぅぅー";
+		mes "わったぁぁ！";
+		break;
+	case 10:
+		mes "あーたたたた！";
+		mes "ほぅあったぁぁ!!!";
+		break;
+	}
+	switch(rand(6)) {
+	case 0: misceffect 1; break;
+	case 1: misceffect 115; break;
+	case 2: misceffect 329; break;
+	case 3: misceffect 376; break;
+	case 4: misceffect 377; break;
+	case 5: misceffect 623; break;
+	}
+	next;
+	mes "[カカオ割りの達人]";
+	mes "ふぅ～……";
+	mes "終わったぜよ。";
+	mes "持っていくでゴワスよ。";
+	delitem 7182,1;
+	getitem 7718,.@rand;
+	close;
+OnInit:
+	waitingroom "カカオ割りの達人",0;
+	end;
+}
+jp_ev_map46.gat,75,49,4	script	象？	509,{
+	mes "-看板に";
+	mes " 『お菓子に名前入れる？』";
+	mes " と書かれている。-";
+	next;
+	//emotion 1,"";	//?
+	emotion 1,1;	//?
+	mes "[" +strcharinfo(0)+ "]";
+	mes "何をしているの？";
+	next;
+	emotion 19;	//汗かき
+	mes "[象？]";
+	mes "…………";
+	next;
+	mes "-言葉が通じないみたいだが……";
+	mes " どうやら、手持ちのお菓子に";
+	mes " 自分の名前を入れてもらえる";
+	mes " サービスみたいだ。-";
+	next;
+	switch(select("名前を入れてほしい","今は用はない","説明を聞く")) {
+	case 1:
+		break;
+	case 2:
+		mes "[" +strcharinfo(0)+ "]";
+		mes "うーん、今はいいかな。";
+		mes "また来るから。";
+		next;
+		emotion 12;	//パー
+		mes "-絵筆を持ったまま";
+		mes " 手を振っている。-";
+		close;
+	case 3:
+		emotion 5;	//あはは
+		mes "-スケッチブックを見ると";
+		mes " 『看板を見てほしい』";
+		mes " と書かれている。-";
+		close;
+	}
+	mes "-渡されたスケッチブックには";
+	mes " 『名前を書いて』";
+	mes " と書かれている。-";
+	next;
+	emotion 33;	//うんうん
+	mes "-"+strcharinfo(0)+"";
+	mes " とサインすると";
+	mes " 彼は満足そうに頷いて";
+	mes " スケッチブックをめくった。-";
+	next;
+	mes "-『どのお菓子に名前を入れる？』";
+	mes " と書かれたページが現れた。-";
+	next;
+	switch(select("チョコレート","ストロベリーチョコ","チョコレートドリンク","ビターチョコ","手作りチョコ","チョコタルト","チョコレートの塊","微妙な形のストロベリーチョコ","微妙な味のチョコタルト","やっぱり、やめる")) {
+	case 1: set .@gain,558; break;
+	case 2: set .@gain,12235; break;
+	case 3: set .@gain,573; break;
+	case 4: set .@gain,12234; break;
+	case 5: set .@gain,559; break;
+	case 6: set .@gain,12236; break;
+	case 7: set .@gain,12237; break;
+	case 8: set .@gain,596; break;
+	case 9: set .@gain,597; break;
+	case 10:
+		emotion 6;	//怒り
+		mes "-なんだか、ガッカリ";
+		mes " させてしまったようだ。-";
+		close;
+	}
+	mes "-彼は頷いて";
+	mes " スケッチブックをめくった。";
+	mes " 『何個、名前を入れる？』";
+	mes " と書かれたページが現れた。-";
+	next;
+	input .@num;
+	if(.@num<0){
+		emotion 19;	//汗かき
+		mes "-どうやら、困らせて";
+		mes " しまったようだ。-";
+		close;
+	}
+	if(.@num==0){
+		emotion 6;	//怒り
+		mes "-なんだか、ガッカリ";
+		mes " させてしまったようだ。-";
+		close;
+	}
+	if(countitem(.@gain)<.@num) {
+		emotion 23;	//ショック
+		mes "[" +strcharinfo(0)+ "]";
+		mes "あれ？";
+		mes getitemname(.@gain);
+		mes "持ってなかった……。";
+		mes "ゴメン、ゴメン。";
+		close;
+	}
+	if(countitem2(.@gain,1,0,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff)>0) {
+		emotion 16;	//無念
+		mes "-何だか困っている。-";
+		next;
+		mes "-どうやら、既に名前入りの";
+		mes " "+getitemname(.@gain)+"を";
+		mes " 持っているので、名前を";
+		mes " 入れてもらえないみたいだ。-";
+		close;
+	}
+	mes "-"+getitemname(.@gain)+"に";
+	mes " 名前を入れてもらった。";
+	mes " 彼も満足そうだ。-";
+	misceffect 21;
+	delitem .@gain,.@num;
+	getitem2 .@gain,.@num,1,0,0,254,0,getcharid(0)&0xffff,(getcharid(0)>>16)&0xffff;
+	close;
+}
+jp_ev_map46.gat,76,48,4	script	看板	857,{
+	mes "[" +strcharinfo(0)+ "]";
+	mes "看板に何か書いてある……";
+	next;
+	mes "-あなたのお菓子に";
+	mes " 名前を入れることが出来ます。-";
+	next;
+	mes "-名前を入れたいお菓子を用意して";
+	mes " お名前を教えてください。-";
+	next;
+	mes "-既にお名前入りのお菓子を";
+	mes " 所持されている場合、";
+	mes " 同じお菓子にお名前を";
+	mes " 入れることはできません。-";
+	close;
+OnInit:
+	waitingroom "名前入れサービス",0;
+	end;
+}
+function	script	func_valentine	{
+	set $@valentinetime$,getarg(0);
+	if($@valentinetime$ == "03:00") {
+		cleararray $@valentinechar[0],0,5;
+		cleararray $@valentinecnt[0],0,5;
+		cleararray $@valentinept[0],0,5;
+		for(set .@i,1; .@i <= 5; set .@i,.@i+1) {
+			for(set .@j,0; .@j < 3; set .@j,.@j+1) {
+				if($@valentinecnt[.@j] < $VALENTINE2012_COUNT[.@i]){
+					//上位のデータをバック
+					for(set .@k,.@j; .@k < 3; set .@k,.@k+1) {
+						set .@backchar[.@k],$@valentinechar[.@k];
+						set .@backcnt[.@k],$@valentinecnt[.@k];
+						set .@backpt[.@k],$@valentinept[.@k];
+					}
+					//上位のデータを更新
+					set $@valentinechar[.@j],.@i;
+					set $@valentinecnt[.@j],$VALENTINE2012_COUNT[.@i];
+					set $@valentinept[.@j],$VALENTINE2012_POINT[.@i];
+					//上位のデータを2位に入れる
+					for(set .@k,.@j; .@k < 3; set .@k,.@k+1) {
+						set $@valentinechar[(.@k+1)],.@backchar[.@k];
+						set $@valentinecnt[(.@k+1)],.@backcnt[.@k];
+						set $@valentinept[(.@k+1)],.@backpt[.@k];
+					}
+					break;
+				}
+			}
+		}
+		set $VALENTINE2012,$@valentinechar[0];
+		set $VALENTINE2012_CLOCK,gettime(5);
+		if($@valentinept[0] <= 1000)
+			set $VALENTINE2012_RANK,1;
+		else if($@valentinept[0] <= 2000)
+			set $VALENTINE2012_RANK,2;
+		else if($@valentinept[0] <= 3000)
+			set $VALENTINE2012_RANK,3;
+		else if($@valentinept[0] <= 4000)
+			set $VALENTINE2012_RANK,4;
+		else
+			set $VALENTINE2012_RANK,5;
+		cleararray $VALENTINE2012_COUNT[0],0,10;
+		cleararray $VALENTINE2012_POINT[0],0,10;
+		setarray $@valentinechar[0],1,2,3,4,5;
+		cleararray $@valentinecnt[0],0,5;
+		cleararray $@valentinept[0],0,5;
+	} else {
+		cleararray $@valentinechar[0],0,5;
+		cleararray $@valentinecnt[0],0,5;
+		cleararray $@valentinept[0],0,5;
+		for(set .@i,1; .@i <= 5; set .@i,.@i+1) {
+			for(set .@j,0; .@j < 3; set .@j,.@j+1) {
+				if($@valentinecnt[.@j] < $VALENTINE2012_COUNT[.@i]){
+					//上位のデータをバック
+					for(set .@k,.@j; .@k < 3; set .@k,.@k+1) {
+						set .@backchar[.@k],$@valentinechar[.@k];
+						set .@backcnt[.@k],$@valentinecnt[.@k];
+						set .@backpt[.@k],$@valentinept[.@k];
+					}
+					//上位のデータを更新
+					set $@valentinechar[.@j],.@i;
+					set $@valentinecnt[.@j],$VALENTINE2012_COUNT[.@i];
+					set $@valentinept[.@j],$VALENTINE2012_POINT[.@i];
+					//上位のデータを2位に入れる
+					for(set .@k,.@j; .@k < 3; set .@k,.@k+1) {
+						set $@valentinechar[(.@k+1)],.@backchar[.@k];
+						set $@valentinecnt[(.@k+1)],.@backcnt[.@k];
+						set $@valentinept[(.@k+1)],.@backpt[.@k];
+					}
+					break;
+				}
+			}
+		}
+	}
+	end;
+}
+-	script	valentinetimer	-1,{
+OnHour00:
+	callfunc("func_valentine","00:00");
+	end;
+OnHour01:
+	callfunc("func_valentine","01:00");
+	end;
+OnHour02:
+	callfunc("func_valentine","02:00");
+	end;
+OnHour03:
+	callfunc("func_valentine","03:00");
+	end;
+OnHour04:
+	callfunc("func_valentine","04:00");
+	end;
+OnHour05:
+	callfunc("func_valentine","05:00");
+	end;
+OnHour06:
+	callfunc("func_valentine","06:00");
+	end;
+OnHour07:
+	callfunc("func_valentine","07:00");
+	end;
+OnHour08:
+	callfunc("func_valentine","08:00");
+	end;
+OnHour09:
+	callfunc("func_valentine","09:00");
+	end;
+OnHour10:
+	callfunc("func_valentine","10:00");
+	end;
+OnHour11:
+	callfunc("func_valentine","11:00");
+	end;
+OnHour12:
+	callfunc("func_valentine","12:00");
+	end;
+OnHour13:
+	callfunc("func_valentine","13:00");
+	end;
+OnHour14:
+	callfunc("func_valentine","14:00");
+	end;
+OnHour15:
+	callfunc("func_valentine","15:00");
+	end;
+OnHour16:
+	callfunc("func_valentine","16:00");
+	end;
+OnHour17:
+	callfunc("func_valentine","17:00");
+	end;
+OnHour18:
+	callfunc("func_valentine","18:00");
+	end;
+OnHour19:
+	callfunc("func_valentine","19:00");
+	end;
+OnHour20:
+	callfunc("func_valentine","20:00");
+	end;
+OnHour21:
+	callfunc("func_valentine","21:00");
+	end;
+OnHour22:
+	callfunc("func_valentine","22:00");
+	end;
+OnHour23:
+	callfunc("func_valentine","23:00");
+	end;
+}
+jp_ev_map46.gat,57,10,0	warp	v_warp0101	1,1,prontera.gat,155,280
+
+jp_ev_map46.gat	mapflag	nomemo
+jp_ev_map46.gat	mapflag	noteleport
+jp_ev_map46.gat	mapflag	noskill

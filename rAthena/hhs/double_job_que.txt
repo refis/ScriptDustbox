@@ -1,0 +1,1595 @@
+//---*---*---*---*---*---*---*---*---*---*---
+//--チェンジクラス習得クエスト　ByMitsu　Lup2010/10/03
+//---*---*---*---*---*---*---*---*---*---*---
+mora,129,176,4	script	バッフェ	521,{
+	mes "[バッフェ]";
+	if(countitem(2858)>0){
+		mes "頑張ってね";
+		close;
+	}
+	mes "初めて見る顔ね";
+	mes "これをあげましょう";
+	getitem 2858,1;
+	close;
+}
+//試練NPC
+mora,117,93,6	script	ライム	518,{
+	mes "[ライム]";
+	if(getskilllv(785)==1){
+		mes "忘れてたことがあるの";
+		mes "……知りたい？";
+		next;
+		if(select("別に知りたくない","知りたい！")==1) {
+			mes "[ライム]";
+			mes "…………。";
+			close;
+		}
+		mes "[ライム]";
+		mes "……これで";
+		mes "ダブルジョブのレベルが上がったよ";
+		skill 785,2,0;
+		close;
+	}
+	if(getskilllv(785)>0){
+		setarray .@cross_skill$,
+			"孤立奮迅","血の制圧","ダアト","かばう","転移門","アイススピナ",
+			"パラダイムシフト","ブラインドサイド","カップハウリング",
+			"パラサイトノイズ","クォーリアス","ガード","カウンター",
+			"ビナー","嚆矢","フローバックアロー","レイジュ","匂い起つ薔薇毒",
+			"アブゾアキュル","アブゾイヴェ","ティファレト","トローネ",
+			"デッドリーナチュレ","コーラルプラント","私の可愛い迷い子",
+			"アセイナ","アストニッシュ","セルフィール","ミッシングパワー",
+			"アシッドコーティング","襲撃装置製作","ドレインペースティング",
+			"ディスパージョン","聖人オペラ","楽園の歌","影葬送",
+			"流星衝","トランスティックネーブ","マッドカプセル";
+
+		for(set .@i,0; .@i <= 38; set .@i,.@i+1) {
+			if(cross_okskill(830+.@i)) {
+				set .@cross[.@j],.@i;
+				set .@j,.@j+1;
+			}
+		}
+		if(.@j==0) {
+			mes "……あなたに";
+			mes "覚えられるクロススキルはないよ";
+			close;
+		}
+		mes "……どのクロススキルを";
+		mes "覚えたいの？";
+		next;
+		switch(select(.@cross_skill$[.@cross[0]]+"を覚える",.@j==2?(.@cross_skill$[.@cross[1]]+"を覚える"):"","やめる")) {
+		case 1:
+			cross_upskill 830+.@cross[0];
+			break;
+		case 2:
+			cross_upskill 830+.@cross[1];
+			break;
+		case 3:
+			mes "……頑張って";
+			close;
+		}
+		mes "覚えられた？";
+		mes "……スキルポイントが足りなかったり";
+		mes "最高レベルまで習得してたら";
+		mes "それ以上は覚えられないよ？";
+		close;
+	}
+	if(DOUBLEJOB >= 14){
+		mes "じゃ…教えるよ？";
+		next;
+		if(select("いいえ","はい")==1) {
+			mes "[ライム]";
+			mes "…………。";
+			close;
+		}
+		mes "[ライム]";
+		mes "……うん";
+		mes "これでいいかな";
+		skill 785,2,0;
+		set DOUBLESUB,0;
+		set DOUBLEJOB,0;
+		next;
+		mes "[ライム]";
+		mes "お疲れ様";
+		mes "じゃ……またね";
+		close;
+	}
+	mes "…………。";
+	close;
+}
+prontera,164,168,4	script	ライム#pro	518,{
+	mes "[ライム]";
+	if(getskilllv(785)>0){
+		setarray .@cross_skill$,
+			"孤立奮迅","血の制圧","ダアト","かばう","転移門","アイススピナ",
+			"パラダイムシフト","ブラインドサイド","カップハウリング",
+			"パラサイトノイズ","クォーリアス","ガード","カウンター",
+			"ビナー","嚆矢","フローバックアロー","レイジュ","匂い起つ薔薇毒",
+			"アブゾアキュル","アブゾイヴェ","ティファレト","トローネ",
+			"デッドリーナチュレ","コーラルプラント","私の可愛い迷い子",
+			"アセイナ","アストニッシュ","セルフィール","ミッシングパワー",
+			"アシッドコーティング","襲撃装置製作","ドレインペースティング",
+			"ディスパージョン","聖人オペラ","楽園の歌","影葬送",
+			"流星衝","トランスティックネーブ","マッドカプセル";
+
+		for(set .@i,0; .@i <= 38; set .@i,.@i+1) {
+			if(cross_okskill(830+.@i)) {
+				set .@cross[.@j],.@i;
+				set .@j,.@j+1;
+			}
+		}
+		if(.@j==0) {
+			mes "……あなたに";
+			mes "覚えられるクロススキルはないよ";
+			close;
+		}
+		mes "……どのクロススキルを";
+		mes "覚えたいの？";
+		next;
+		switch(select(.@cross_skill$[.@cross[0]]+"を覚える",.@j==2?(.@cross_skill$[.@cross[1]]+"を覚える"):"","やめる")) {
+		case 1:
+			cross_upskill 830+.@cross[0];
+			break;
+		case 2:
+			cross_upskill 830+.@cross[1];
+			break;
+		case 3:
+			mes "……頑張って";
+			close;
+		}
+		mes "覚えられた？";
+		mes "……スキルポイントが足りなかったり";
+		mes "最高レベルまで習得してたら";
+		mes "それ以上は覚えられないよ？";
+		close;
+	}
+	mes "…………。";
+	close;
+}
+
+mora,108,178,6	script	ジーン	490,{
+	mes "[ジーン]";
+	if(getskilllv(785)>0){
+		mes "おっ";
+		mes "とうとう覚えたか";
+		close;
+	}
+	switch(DOUBLEJOB){
+	case 0:
+		mes "なんだい、君は？";
+		mes "僕は忙しいのさ";
+		mes "さぁ行った行った";
+		close;
+	case 1:
+		mes "んん？";
+		mes "レアリアに言われた？";
+		mes "ふぅん…そうかそうか";
+		next;
+		mes "[ジーン]";
+		if(BaseLevel < 110){
+			mes "残念だけど";
+			mes "僕のお眼鏡には";
+			mes "適わないようだ";
+			next;
+			mes "[ジーン]";
+			mes "最低でも";
+			mes "Lv110以上になってから";
+			mes "来るんだね";
+			close;
+		}
+		mes "ダブルジョブというのは";
+		mes "読んで字の如く、さ";
+		next;
+		mes "[ジーン]";
+		mes "つまり、君が今なっている";
+		mes "職業とは別に";
+		mes "他の職業にもなれることさ";
+		next;
+		if(select("そうですか","どうすれば？")==1) {
+			mes "[ジーン]";
+			mes "おや？";
+			mes "そうかい、それじゃまたね";
+			close;
+		}
+		mes "[ジーン]";
+		mes "もしかしてダブルジョブを";
+		mes "身につけたいのかな？";
+		next;
+		mes "[ジーン]";
+		mes "はははっ";
+		mes "これは傑作だ";
+		next;
+		mes "[ジーン]";
+		mes "余所者の分際で";
+		mes "ダブルジョブのことを";
+		mes "嗅ぎつけただけに飽き足らず";
+		mes "技術まで手に入れようって？";
+		next;
+		mes "[ジーン]";
+		mes "ふん……そうだね";
+		next;
+		mes "[ジーン]";
+		mes "本来、ダブルジョブは";
+		mes "一族を守るために";
+		mes "編み出された技術なんだよ";
+		next;
+		mes "[ジーン]";
+		mes "以前、これを流出させた際に";
+		mes "僕らは他の民族から";
+		mes "攻撃を受けたことがあってね";
+		next;
+		mes "[ジーン]";
+		mes "それ以来、ダブルジョブを";
+		mes "伝えることは禁止されてるのさ";
+		next;
+		mes "[ジーン]";
+		mes "だけど、そうだね";
+		next;
+		mes "[ジーン]";
+		mes "いくつかの条件をクリアするなら";
+		mes "チャンスをあげてもいい";
+		next;
+		if(select("お願いします！","結構です")==2) {
+			mes "[ジーン]";
+			mes "ふぅん？";
+			close;
+		}
+		mes "[ジーン]";
+		mes "うん";
+		mes "じゃあとりあえず";
+		next;
+		mes "[ジーン]";
+		mes "この瓶に水を入れてきてくれ";
+		mes "水場は街の中心部にあるよ";
+		next;
+		mes "-^0000FF大きな瓶を受け取った^000000-";
+		set DOUBLEJOB,2;
+		close;
+	case 2:
+		mes "水はまだかい？";
+		mes "水場は街の中心部にあるよ";
+		close;
+	case 3:
+		mes "お、持ってきたね";
+		mes "じゃあ悪いんだけど";
+		mes "それを霧の迷宮で";
+		mes "警備をしてる^0000FFロッジ^000000まで";
+		mes "届けてくれるかい？";
+		set DOUBLEJOB,4;
+		close;
+	case 4:
+		mes "悪いんだけど";
+		mes "それを霧の迷宮で";
+		mes "警備をしてる^0000FFロッジ^000000まで";
+		mes "届けてくれるかい？";
+		close;
+	case 5:
+		mes "ん？";
+		mes "ロッジから書類？";
+		next;
+		mes "[ジーン]";
+		mes "あぁ、報告書かな……";
+		mes "ふむふむ……ほぅ";
+		next;
+		mes "[ジーン]";
+		mes "んん……";
+		mes "……むむむ";
+		next;
+		mes "[ジーン]";
+		mes "困ったな……";
+		mes "……そうか";
+		next;
+		mes "[ジーン]";
+		mes "うーん";
+		next;
+		mes "[ジーン]";
+		mes "うぅーん……";
+		next;
+		mes "[ジーン]";
+		mes "そうだ！";
+		mes "ちょうどいい！";
+		next;
+		mes "[ジーン]";
+		mes "近々、霧の迷宮にある";
+		mes "基地付近にモンスターの";
+		mes "攻勢があるらしいんだが";
+		next;
+		mes "[ジーン]";
+		mes "基地が消耗しているらしく";
+		mes "基地の改築や武器の調達が";
+		mes "至急必要なんだよ";
+		next;
+		mes "[ジーン]";
+		mes "ただ、いくつか";
+		mes "この街にないものもある";
+		next;
+		mes "[ジーン]";
+		mes "^0000FF銀の毛皮 50個^000000";
+		mes "^0000FF丈夫に見えるつる 50個^000000";
+		mes "^0000FFブラディウムの破片 50個^000000";
+		mes "これらを集めてきてほしい";
+		next;
+		mes "[ジーン]";
+		mes "時間がない";
+		mes "大急ぎで頼む！";
+		set DOUBLEJOB,6;
+		close;
+	case 6:
+		if(countitem(6020)<50 || countitem(6041)<50 || countitem(6084)<50){
+			mes "ううぅ";
+			mes "まだ集まらないのかい！";
+			next;
+			mes "[ジーン]";
+			mes "^0000FF銀の毛皮 50個^000000";
+			mes "^0000FF丈夫に見えるつる 50個^000000";
+			mes "^0000FFブラディウムの破片 50個^000000";
+			mes "これだけ集めてきてくれ！";
+			mes "大急ぎで頼む！";
+			close;
+		}
+		mes "おぉ！";
+		mes "ありがとう！！";
+		next;
+		mes "[ジーン]";
+		mes "よし、少し待ってくれ！";
+		mes "すぐに準備する！";
+		set DOUBLEJOB,7;
+		delitem 6020,50;
+		delitem 6041,50;
+		delitem 6084,50;
+		close;
+	case 7:
+		if(rand(15)!=5){
+			mes "まだ資材が完成してないんだ";
+			mes "もう少し待ってくれないか";
+			close;
+		}
+		mes "うん、準備万端だよ！";
+		mes "これをロッジのところまで";
+		mes "届けてくれ！";
+		next;
+		mes "-補給物資を受け取った-";
+		set DOUBLEJOB,8;
+		close;
+	case 8:
+		mes "物資をロッジのところまで";
+		mes "届けてくれ！";
+		close;
+	case 9:
+	case 10:
+	case 11:
+		mes "こんなとこで油売ってる場合か！";
+		close;
+	case 12:
+		mes "そうか……";
+		mes "間に合ったのか……";
+		next;
+		mes "[ジーン]";
+		mes "報告はもらったよ";
+		mes "君がいてくれて助かった";
+		next;
+		mes "[ジーン]";
+		mes "本当にありがとう";
+		set DOUBLEJOB,13;
+		close;
+	case 13:
+		mes "そういえば君は";
+		mes "ダブルジョブを習得したいと";
+		mes "言っていたね";
+		next;
+		mes "[ジーン]";
+		mes "ライムに話をつけておいた";
+		mes "そこでスキルを教わるんだ";
+		set DOUBLEJOB,14;
+		close;
+	case 14:
+		mes "[ジーン]";
+		mes "ライムに話をつけておいた";
+		mes "そこでスキルを教わるんだ";
+		close;
+	default:
+		mes "難しい問題だ……";
+		mes "どうすれば身長が伸びるんだ……";
+		close;
+	}
+	close;
+}
+
+mora,110,83,6	script	#mora_warter	844,{
+	mes "-神秘的な水だ-";
+	mes "-透明度が高く、輝いている-";
+	if(DOUBLEJOB==2){
+		next;
+		mes "-水を汲みますか？-";
+		next;
+		if(select("はい","いいえ")==2) {
+			mes "-水を汲むのを諦めた-";
+			close;
+		}
+		set @warter,@warter + rand(10);
+		if(@warter < 100){
+			mes "-瓶に少し水が溜まった-";
+			close;
+		}
+		mes "-瓶が水で一杯になった!-";
+		set DOUBLEJOB,3;
+		close;
+	}
+	close;
+}
+
+1@mist,96,32,6	script	ロッジ	468,{
+	mes "[ロッジ]";
+	if(getskilllv(785)>0){
+		mes "この間はどうも";
+		mes "あれからずいぶん楽になったよ";
+		close;
+	}
+	switch(DOUBLEJOB){
+	case 4:
+		if((PALSE >= 10) && (ANGRA >= 10) && (LITTLE >= 10)){
+			set DOUBLEJOB,5;
+			set PALSE,0;
+			set ANGRA,0;
+			set LITTLE,0;
+			completequest 14000;
+			completequest 14001;
+			completequest 14002;
+			mes "おぉ";
+			mes "モンスターがすっかりいなくなったな";
+			mes "これなら安心して休憩できる";
+			next;
+			mes "[ロッジ]";
+			mes "水を届けに来てくれたということは";
+			mes "ジーンの奴はまたサボってるのか";
+			next;
+			mes "[ロッジ]";
+			mes "ふぅむ……";
+			mes "君、申し訳ないんだが";
+			mes "この書類をジーンに届けてくれ";
+			next;
+			mes "[ロッジ]";
+			mes "重要なものだから";
+			mes "汚さないように早く頼むよ";
+			next;
+			mes "-分厚い書類の束を受け取った-";
+			close;
+		}
+		set .@qst_cpl01,checkquest(14000,HUNTING);
+		set .@qst_cpl02,checkquest(14001,HUNTING);
+		set .@qst_cpl03,checkquest(14002,HUNTING);
+		if((.@qst_cpl01 == 0) || (.@qst_cpl02 == 0) || (.@qst_cpl03 == 0)){
+			mes "頼んだよ！";
+			close;
+		}
+		if((.@qst_cpl01 == 1) || (.@qst_cpl02 == 1) || (.@qst_cpl03 == 1)){
+			mes "頼んだよ！";
+			close;
+		}
+		mes "やや！";
+		mes "水を持ってきてくれたのか！";
+		next;
+		mes "[ロッジ]";
+		mes "有難い！";
+		mes "……と言いたいのだが";
+		next;
+		mes "[ロッジ]";
+		mes "ここは危険すぎて落ち着いて";
+		mes "休憩も出来ないな";
+		next;
+		mes "[ロッジ]";
+		mes "すまないが";
+		mes "周囲の安全を確保するために";
+		next;
+		mes "[ロッジ]";
+		mes "^FF0000パルス 10匹^000000";
+		mes "^FF0000アングラマンティス 10匹^000000";
+		mes "^FF0000リトルファートゥム 10匹^000000";
+		mes "を討伐してきてくれないか？";
+		next;
+		if(select("はい","いいえ")==2) {
+			mes "[ロッジ]";
+			mes "むぅ";
+			mes "しかしこれでは";
+			mes "安心して水も飲めないな";
+			close;
+		}
+		mes "[ロッジ]";
+		mes "よろしく頼む！";
+		setquest 14000;
+		setquest 14001;
+		setquest 14002;
+		close;
+	case 5:
+		mes "書類はジーンに届けてくれたかい？";
+		mes "汚さないように早く頼むよ";
+		close;
+	case 8:
+		mes "来たか";
+		next;
+		mes "[ロッジ]";
+		mes "すまないが、大急ぎで";
+		mes "設備の補修をするから";
+		mes "しばらく周囲の警備を頼む";
+		next;
+		mes "[ロッジ]";
+		mes "すまないが、大急ぎで";
+		mes "設備の補修をするから";
+		mes "しばらく周囲の警備を頼む";
+		if(.@partyid !=0){
+			getpartymember(.@partyid);
+			set .@partycnt,$@partymembercount;
+			copyarray .@membername$[0],$@partymembername$[0],.@partycnt;
+			for(set .@k,0; .@k < .@partycnt; set .@k,.@k+1){
+				if (isloggedin(getcharid(3,.@membername$[.@k]))){
+					getmapxy(.@map$,.@x,.@y,0,.@membername$[.@k]);
+					if(.@map$ == "1@mist"){
+						attachrid(getcharid(3,.@membername$[.@k]));
+						if(DOUBLEJOB == 8)
+							set DOUBLEJOB,9;
+					}
+				}
+			}
+		}else{
+			set DOUBLEJOB,9;
+		}
+		close;
+	case 9:
+	case 10:
+	case 11:
+		set .mobspwn,.mobspwn+1;
+		if(.mobspwn <= 3){
+			mes "まだ作業中だ";
+			mes "周囲の警備を続けてくれ";
+			close;
+		}
+		set .mobspwn,0;
+		mes "モンスターが攻めてきたみたいだ！";
+		mes "ここは任せたぞ！";
+		close2;
+		areamonster "1@mist",80,25,103,42,"--ja--",2132,rand(1,3);
+		areamonster "1@mist",80,25,103,42,"--ja--",2133,rand(2,4);
+		areamonster "1@mist",80,25,103,42,"--ja--",2137,rand(2,3);
+		set .@partyid,getcharid(1);
+		if(.@partyid !=0){
+			getpartymember(.@partyid);
+			set .@partycnt,$@partymembercount;
+			copyarray .@membername$[0],$@partymembername$[0],.@partycnt;
+			for(set .@k,0; .@k < .@partycnt; set .@k,.@k+1){
+				if (isloggedin(getcharid(3,.@membername$[.@k]))){
+					getmapxy(.@map$,.@x,.@y,0,.@membername$[.@k]);
+					if(.@map$ == "1@mist"){
+						attachrid(getcharid(3,.@membername$[.@k]));
+						if(DOUBLEJOB >= 9 && DOUBLEJOB <= 11)
+							set DOUBLEJOB,DOUBLEJOB+1;
+					}
+				}
+			}
+		}else{
+			set DOUBLEJOB,DOUBLEJOB+1;
+		}
+		end;
+	case 12:
+		mes "すまなかったね";
+		mes "もう大丈夫だ";
+		next;
+		mes "[ロッジ]";
+		mes "無事に対応が終わったと";
+		mes "ジーンに伝えてきてくれるか？";
+		close;
+	default:
+		mes "君！";
+		mes "ここは危険な区域だ！";
+		mes "すぐに立ち去りなさい！！";
+		close;
+	}
+	close;
+}
+-	script	toubatu	-1,{
+OnKilled0:
+	callfunc("func_party_control2",0);//パルス
+	end;
+OnKilled1:
+	callfunc("func_party_control2",1);//アングラマンティス
+	end;
+OnKilled2:
+	callfunc("func_party_control2",2);//リトルファートゥム
+	end;
+OnKilled3:
+	callfunc("func_party_control2",3);//レッドエルマ
+	end;
+}
+function	script	func_party_control2	{
+	set .@partyid,getcharid(1);
+	if(.@partyid ==0){
+		if(getarg(0) == 0){
+			if(DOUBLEJOB==4 && PALSE<10){
+				set PALSE,PALSE+1;
+				refreshquest 14000,2134,10,PALSE;//パルス
+			}
+		}else if(getarg(0) == 1){
+			if(DOUBLEJOB==4 && ANGRA<10){
+				set ANGRA,ANGRA+1;
+				refreshquest 14001,2133,10,ANGRA;//アングラマンティス
+			}
+		}else if(getarg(0) == 2){
+			if(DOUBLEJOB==4 && LITTLE<10){
+				set LITTLE,LITTLE+1;
+				refreshquest 14002,2136,10,LITTLE;//リトルファートゥム
+			}
+		}else if(getarg(0) == 3){
+			if(checkquest(1154) && REDELMA<20){
+				set REDELMA,REDELMA+1;
+				refreshquest 1154,2197,20,REDELMA;//レッドエルマ
+			}
+		}
+		return 0;
+	}
+	set .@temp_GEFE1,0;
+	getpartymember(.@partyid);
+	getmapxy(.@map1$,.@x1,.@y1,0,strcharinfo(0));
+
+	while($@partymembercount != .@temp_GEFE1){
+		if(getcharid(3,$@partymembername$[.@temp_GEFE1]) != 0){
+			attachrid(getcharid(3,$@partymembername$[.@temp_GEFE1]));
+			getmapxy(.@map2$,.@x2,.@y2,0,strcharinfo(0));
+			if(.@map1$ == .@map2$ && distance(.@x1,.@y1,.@x2,.@y2) <= 15){
+				if(getarg(0) == 0){
+					if(DOUBLEJOB==4 && PALSE<10){
+						set PALSE,PALSE+1;
+						refreshquest 14000,2134,10,PALSE;//パルス
+					}
+				}else if(getarg(0) == 1){
+					if(DOUBLEJOB==4 && ANGRA<10){
+						set ANGRA,ANGRA+1;
+						refreshquest 14001,2133,10,ANGRA;//アングラマンティス
+					}
+				}else if(getarg(0) == 2){
+					if(DOUBLEJOB==4 && LITTLE<10){
+						set LITTLE,LITTLE+1;
+						refreshquest 14002,2136,10,LITTLE;//リトルファートゥム
+					}
+				}else if(getarg(0) == 3){
+					if(checkquest(1154) && REDELMA<20){
+						set REDELMA,REDELMA+1;
+						refreshquest 1154,2197,20,REDELMA;//レッドエルマ
+					}
+				}
+			}
+		}
+		set .@temp_GEFE1,.@temp_GEFE1+1;
+	}
+	return 0;
+}
+
+mora,120,91,6	script	レアリア	523,{
+	mes "[レアリア]";
+	if(getskilllv(785)>0){
+		mes "うふふ";
+		mes "どう？　素敵でしょ？";
+		close;
+	}
+	switch(DOUBLEJOB){
+	case 0:
+		mes "あなた";
+		mes strcharinfo(0)+"ね？";
+		next;
+		mes "[レアリア]";
+		mes "噂には聞いてるわ";
+		mes "とても優秀な……冒険者";
+		next;
+		mes "[レアリア]";
+		mes "ふぅん…そっか";
+		next;
+		mes "[レアリア]";
+		mes "あ、なんでもないわ";
+		next;
+		mes "[レアリア]";
+		mes "それで？";
+		mes "私に何か用かしら？";
+		next;
+		switch(select("ダブルジョブについて","この街について","なんでもない")){
+		case 1:
+			mes "[レアリア]";
+			mes "何処から聞いてきたのか";
+			mes "聞き出そうとは思わないけれど";
+			mes "本当に興味があるのなら";
+			mes "礼儀があるんじゃない？";
+			next;
+			mes "[レアリア]";
+			mes "ほら、何とは言わないけど";
+			mes "例えば、私に似合いそうな";
+			mes "^FF0000ヘアピン^000000だとか……ね？";
+			if(countitem(5041)<1 && countitem(5079)<1 && countitem(5153)<1)
+				close;
+			next;
+			switch(select(
+				((countitem(5041) > 0)? "ハートのヘアピン":""),
+				((countitem(5079) > 0)? "X字ヘアピン":""),
+				((countitem(5153) > 0)? "エンジェリングヘアピン":""))){
+			case 1:
+				mes "[レアリア]";
+				mes "^0000FFハートのヘアピン^000000をくれるの？";
+				mes "まぁ！ありがとう！";
+				delitem 5041,1;
+				set .@giveok,1;
+				break;
+			case 2:
+				mes "[レアリア]";
+				mes "^0000FFX字ヘアピン^000000をくれるの？";
+				mes "まぁ！ありがとう！";
+				delitem 5079,1;
+				set .@giveok,1;
+				break;
+			case 3:
+				mes "[レアリア]";
+				mes "^0000FFエンジェリングヘアピン^000000をくれるの？";
+				mes "まぁ！ありがとう！";
+				delitem 5153,1;
+				set .@giveok,1;
+				break;
+			}
+			if(.@giveok!=1)
+				close;
+			next;
+			mes "[レアリア]";
+			mes "うふふ";
+			mes "似合うかな";
+			next;
+			mes "[レアリア]";
+			mes "あ、ダブルジョブのことだっけ";
+			mes "それなら^0000FFジーン^000000を探すことね";
+			set DOUBLEJOB,1;
+			close;
+		case 2:
+			mes "[レアリア]";
+			mes "この街には";
+			mes "特別な決まり事があるの";
+			next;
+			mes "[レアリア]";
+			mes "でもそれを他所の人に";
+			mes "言ってはいけないの";
+			next;
+			mes "[レアリア]";
+			mes "みんな、この街の";
+			mes "特異な体質について";
+			mes "誇りと畏怖を持ってるから…";
+			next;
+			mes "[レアリア]";
+			mes "昔、余所者にそれを伝えて";
+			mes "悲惨な結果になってしまった…";
+			mes "だから、みんな余所者に対して";
+			mes "厳しすぎるのよ";
+			close;
+		case 3:
+			mes "[レアリア]";
+			mes "えっ";
+			mes "何もないの？";
+			next;
+			mes "[レアリア]";
+			mes "そ、そっか";
+			mes "ううん、ごめんなさい";
+			mes "なんでもないわ";
+			next;
+			mes "[レアリア]";
+			mes "それじゃ、またね";
+			close;
+		}
+		close;
+	default:
+		mes "ヘアピンありがとうね";
+		mes "ダブルジョブのことなら";
+		mes "^0000FFジーン^000000を探してみて";
+		close;
+	}
+	close;
+}
+
+//サブジョブ転職NPC
+mora,107,91,1	script	フェズ	525,{
+	mes "[フェズ]";
+	mes "何か用か？";
+	if(checksubjob() == 1){
+		next;
+		mes "[フェズ]";
+		mes "ほう、冒険者が";
+		mes "ダブルジョブを持つとは…";
+		next;
+		mes "[フェズ]";
+		mes "もしお前がサブジョブの転職を";
+		mes "望むなら書物を持ってくることだ";
+		next;
+		mes "[フェズ]";
+		mes "1次職へは^0000FF修練と探求の書^000000";
+		mes "2次職へは^0000FF貪欲と忘却の書^000000";
+		mes "上位2次職へは^0000FF叡智と傲慢の書^000000";
+		mes "がそれぞれ必要だ";
+		if(countitem(28242)>0 && Class == Job_Novice){
+			next;
+			mes "[フェズ]";
+			mes "^0000FF修練と探求の書^000000を持ってるな";
+			mes "望むなら1次職にしてやろう";
+			next;
+			if(select("結構です","お願いします！")==1) {
+				mes "[フェズ]";
+				mes "そうか";
+				mes "必要になればまた来い";
+				close;
+			}
+			mes "[フェズ]";
+			mes "どの職業に転職するか？";
+			next;
+			set @menu,select("ソードマン",
+				"マジシャン","アーチャー",
+				"アコライト","マーチャント",
+				"シーフ","スーパーノービス",
+				"テコン","ガンスリンガー","忍者",
+				"やめる");
+			switch(@menu) {
+			case 1: //剣士
+				set @changejob,Job_Swordman;set .@giveitem,28200;
+				break;
+			case 2: //マジシャン
+				set @changejob,Job_Mage;set .@giveitem,28201;
+				break;
+			case 3: //アーチャー
+				set @changejob,Job_Archer;set .@giveitem,28202;
+				break;
+			case 4: //アコライト
+				set @changejob,Job_Acolyte;set .@giveitem,28203;
+				break;
+			case 5: //商人
+				set @changejob,Job_Merchant;set .@giveitem,28204;
+				break;
+			case 6: //シーフ
+				set @changejob,Job_Thief;set .@giveitem,28205;
+				break;
+			case 7: //スーパーノービス
+				set @changejob,Job_SuperNovice;set .@giveitem,28219;
+				break;
+			case 8: //テコン
+				set @changejob,Job_Taekwon;set .@giveitem,28222;
+				break;
+			case 9: //ガンスリンガー
+				set @changejob,Job_Gunslinger;set .@giveitem,28220;
+				break;
+			case 10://忍者
+				set @changejob,Job_Ninja;set .@giveitem,28221;
+				break;
+			case 11: close;
+			}
+			mes "[フェズ]";
+			mes "^0000FF" +jobname(@changejob)+ "^000000に転職するか？";
+			next;
+			if(select("やめる","転職する")==1){
+				mes "[フェズ]";
+				mes "ゆっくり考えろ";
+				close;
+			}
+			mes "[フェズ]";
+			mes "本当に^0000FF" +jobname(@changejob)+ "^000000でいいのか？";
+			mes "^FF0000もし間違った職になっても責任は取れないぞ^000000";
+			next;
+			if(select("やっぱやめる","これで転職する！")==1){
+				mes "[フェズ]";
+				mes "ゆっくり考えろ";
+				close;
+			}
+			if(countitem(28242)>0 && checksubjob() == 1 && (Class == Job_Novice || Class == Job_Novice_High)){
+				delitem 28242,1;
+				if(.@giveitem > 0)
+					getitem .@giveitem,10;
+				jobchange @changejob;
+				mes "[フェズ]";
+				mes "転職完了したぞ";
+				mes "必要になればまた来い";
+				close;
+			}
+			mes "[フェズ]";
+			mes "何かがおかしいな";
+		}
+		else if(countitem(28242)>0 && Class == Job_Novice_High){
+			next;
+			mes "[フェズ]";
+			mes "^0000FF修練と探求の書^000000を持ってるな";
+			mes "^0000FF修練と探求の書^000000を3冊持ってくれば";
+			mes "1次職にしてやろう";
+			next;
+			if(select("結構です","お願いします！")==1) {
+				mes "[フェズ]";
+				mes "そうか";
+				mes "必要になればまた来い";
+				close;
+			}
+			if (ADVJOB2 == Job_Lord_Knight || ADVJOB2 == Job_Paladin)
+				set @changejob,Job_Swordman_High;
+			if (ADVJOB2 == Job_High_Wizard || ADVJOB2 == Job_Professor)
+				set @changejob,Job_Mage_High;
+			if (ADVJOB2 == Job_High_Priest || ADVJOB2 == Job_Champion)
+				set @changejob,Job_Acolyte_High;
+			if (ADVJOB2 == Job_Sniper || ADVJOB2 == Job_Clown || ADVJOB2 == Job_Gypsy)
+				set @changejob,Job_Archer_high;
+			if (ADVJOB2 == Job_Whitesmith || ADVJOB2 == Job_Creator)
+				set @changejob,Job_Merchant_High;
+			if (ADVJOB2 == Job_Assassin_Cross || ADVJOB2 == Job_Stalker)
+				set @changejob,Job_Thief_High;
+			if(!@changejob) {
+				//その他の場合、終了
+				mes "[フェズ]";
+				mes "^FF0000！あなたは不当な手順で";
+				mes "転生を行ったようです";
+				mes "そのため転職は行えません！^000000";
+				close; 
+			}
+			mes "[フェズ]";
+			mes "お前は^0000FF" +jobname(@changejob)+ "^000000に転職できるな。";
+			mes "転職していいか？";
+			next;
+			if(select("転職する","やめる")==2) {
+				mes "[フェズ]";
+				mes "そうか。";
+				close;
+			}
+			if(countitem(28242)>=3 && checksubjob() == 1 && Class == Job_Novice_High){
+				delitem 28242,3;
+				jobchange @changejob;
+				//クエストスキルを取得
+				callfunc "GetQuestSkill",@changejob,0;
+				mes "[フェズ]";
+				mes jobname(@changejob)+ "に転職完了したぞ。";
+				mes "必要になればまた来い";
+				close;
+			}
+			mes "[フェズ]";
+			mes "何かがおかしいな";
+		}
+		else if(countitem(28253)>0 && (Class < Job_Knight || Class==Job_Taekwon || Class==Job_Ninja)){
+			next;
+			mes "[フェズ]";
+			mes "^0000FF貪欲と忘却の書^000000を持ってるな";
+			mes "望むなら2次職にしてやろう";
+			next;
+			if(select("結構です","お願いします！")==1) {
+				mes "[フェズ]";
+				mes "そうか";
+				mes "必要になればまた来い";
+				close;
+			}
+			switch(Class) {
+			case Job_Swordman:
+				setarray @jobid,Job_Knight,Job_Crusader;
+				setarray .@giveitem,28206,28212;
+				break;
+			case Job_Acolyte:
+				setarray @jobid,Job_Priest,Job_Monk;
+				setarray .@giveitem,28207,28213;
+				break;
+			case Job_Mage:
+				setarray @jobid,Job_Wizard,Job_Sage;
+				setarray .@giveitem,28208,28214;
+				break;
+			case Job_Merchant:
+				setarray @jobid,Job_Blacksmith,Job_Alchemist;
+				setarray .@giveitem,28209,28216;
+				break;
+			case Job_Archer:
+				if(Sex){
+					setarray @jobid,Job_Hunter,Job_Bard;
+					setarray .@giveitem,28210,28217;
+				}else{
+					setarray @jobid,Job_Hunter,Job_Dancer;
+					setarray .@giveitem,28210,28218;
+				}
+				break;
+			case Job_Thief:
+				setarray @jobid,Job_Assassin,Job_Rogue;
+				setarray .@giveitem,28211,28215;
+				break;
+			case Job_Taekwon:
+				setarray @jobid,Job_Star_Gladiator,Job_Soul_Linker;
+				setarray .@giveitem,28223,28224;
+				break;
+			case Job_Ninja:
+				mes "[フェズ]";
+				mes "^0000FF" +(Sex?"影狼":"朧")+ "^000000に転職するか？";
+				next;
+				if(select("転職する","やめる")==2){
+					mes "[フェズ]";
+					mes "ゆっくり考えろ";
+					close;
+				}
+				mes "[フェズ]";
+				mes "本当に^0000FF" +(Sex?"影狼":"朧")+ "^000000でいいのか？";
+				next;
+				if(select("やっぱやめる","これで転職する！")==1){
+					mes "[フェズ]";
+					mes "ゆっくり考えろ";
+					close;
+				}
+				if(countitem(28253)>0 && checksubjob() == 1 && Class==Job_Ninja){
+					delitem 28253,1;
+					if(Upper == 2) {
+						if(Sex)
+							set @jobid,Job_Baby_Kagerou;
+						else
+							set @jobid,Job_Baby_Oboro;
+					} else {
+						if(Sex)
+							set @jobid,Job_Kagerou;
+						else
+							set @jobid,Job_Oboro;
+					}
+					jobchange @jobid;
+					mes "[フェズ]";
+					mes "転職完了したぞ";
+					mes "必要になればまた来い";
+					close;
+				}
+				mes "[フェズ]";
+				mes "何かがおかしいな";
+			}
+			mes "[フェズ]";
+			mes "どの職業に転職するか？";
+			next;
+			set @menu1,select(jobname(@jobid[0]),jobname(@jobid[1]),"やめる");//@jobid[0]？
+			if(@menu1==3){
+				mes "[フェズ]";
+				mes "ゆっくり考えろ";
+				close;
+			}
+			mes "[フェズ]";
+			mes "^0000FF" +jobname(@jobid[@menu1 - 1])+ "^000000に転職するか？";
+			next;
+			if(select("転職する","やめる")==2){
+				mes "[フェズ]";
+				mes "ゆっくり考えろ";
+				close;
+			}
+			mes "[フェズ]";
+			mes "本当に^0000FF" +jobname(@jobid[@menu1 - 1])+ "^000000でいいのか？";
+			mes "^FF0000もし間違った職になっても責任は取れないぞ^000000";
+			next;
+			if(select("やっぱやめる","これで転職する！")==1){
+				mes "[フェズ]";
+				mes "ゆっくり考えろ";
+				close;
+			}
+			if(countitem(28253)>0 && checksubjob() == 1 && (Class < Job_Knight || Class==Job_Taekwon)){
+				delitem 28253,1;
+				if(Upper == 2)
+					jobchange @jobid[@menu1 - 1],2;
+				else 
+					jobchange @jobid[@menu1 - 1];
+				if(.@giveitem > 0)
+					getitem .@giveitem[@menu1 - 1],15;
+				mes "[フェズ]";
+				mes "転職完了したぞ";
+				mes "必要になればまた来い";
+				close;
+			}
+			mes "[フェズ]";
+			mes "何かがおかしいな";
+		}
+		else if(countitem(28259)>0 && (Class > Job_Novice_High && Class < Job_Lord_Knight)){
+			set @jobname$,jobname(ADVJOB2);
+			if(@jobname$ == "") {
+				mes "[フェズ]";
+				mes "^FF0000！あなたは不当な手順で";
+				mes "転生を行いました。";
+				mes "そのため転職は行えません！^000000";
+				close; 
+			}
+			next;
+			mes "[フェズ]";
+			mes "^0000FF叡智と傲慢の書^000000を持ってるな";
+			mes "おまえは^0000FF" +@jobname$+ "^000000に転職できるぞ。";
+			mes "転職するか？";
+			next;
+			if(select("転職する","やめる")==2) {
+				mes "[フェズ]";
+				mes "そうか。";
+				close;
+			}
+			if(countitem(28259)>0 && checksubjob() == 1 && (Class > Job_Novice_High && Class < Job_Lord_Knight)){
+				delitem 28259,1;
+				jobchange ADVJOB2;
+				switch(ADVJOB2) {
+				case 4008: set .@giveitem,28225; break;
+				case 4009: set .@giveitem,28226; break;
+				case 4010: set .@giveitem,28227; break;
+				case 4011: set .@giveitem,28228; break;
+				case 4012: set .@giveitem,28229; break;
+				case 4013: set .@giveitem,28230; break;
+				case 4015: set .@giveitem,28231; break;
+				case 4016: set .@giveitem,28232; break;
+				case 4017: set .@giveitem,28233; break;
+				case 4018: set .@giveitem,28234; break;
+				case 4019: set .@giveitem,28235; break;
+				case 4020: set .@giveitem,28236; break;
+				case 4021: set .@giveitem,28237; break;
+				}
+				if(.@giveitem > 0)
+					getitem .@giveitem,20;
+				mes "[フェズ]";
+				mes jobname(ADVJOB2)+ "に転職完了したぞ。";
+				close;
+			}
+			mes "[フェズ]";
+			mes "何かがおかしいな";
+		} else if(Class >= Job_Knight && Class != Job_Star_Gladiator && Class != Job_Soul_Linker){
+			next;
+			if(ADVJOB2) {
+				mes "[フェズ]";
+				mes "む？";
+				mes "何の用だ？";
+				close;
+			}
+			mes "[フェズ]";
+			mes "転生するつもりか？";
+			next;
+			mes "[フェズ]";
+			mes "JobLv ^0000FF50^000000 以上";
+			mes "^0000FF20,000,000 ^000000zeny以上所持";
+			mes "重量が2000未満の状態で、なおかつ";
+			mes "カート・ペコペコ・ファルコン";
+			mes "を利用していないことが条件だ";
+			next;
+			mes "[フェズ]";
+			mes "転生するか？";
+			next;
+			if(select("転生する","やめる")==2) {
+				mes "[フェズ]";
+				mes "よく考えろ。";
+				close;
+			//転生条件のチェック
+			} else if(JobLevel < 50) {
+				mes "[フェズ]";
+				mes "転生を行うためには";
+				mes "JobLv ^0000FF50^000000 以上";
+				mes "が必要だ。";
+				close;
+			} else if(Class <= Job_Thief || (Class >= Job_Novice_High && Class <= Job_Thief_High) || (Class >= Job_Taekwon && Class <= Job_Soul_Linker) || (Class >= Job_SuperNovice && Class <= Job_Ninja)) {
+				mes "[フェズ]";
+				mes "その職業では転生できない。";
+				close;
+			} else if(Zeny < 20000000) {
+				mes "[フェズ]";
+				mes "転生条件に達していない。";
+				mes "転生を行うためには";
+				mes "^0000FF20,000,000^000000 Zenyが必要だ。";
+				close;
+			} else if(Weight > 20000) {
+				mes "[フェズ]";
+				mes "重量を2000未満に減らしてから来い";
+				close;
+			} else if(checkcart() != 0 || checkfalcon() != 0 || checkriding() != 0) {
+				mes "[フェズ]";
+				mes "カート、ファルコン、ペコペコを";
+				mes "外してから来い";
+				close;
+			}
+			//転生処理
+			set Zeny ,Zeny- 20000000;
+			nude;
+			set ADVJOB2, Class + Job_Novice_High;
+			set jobchange_level3, 0;
+			//キャラクターの転生
+			if(Upper!=2)
+				jobchange 0,1;
+			else
+				jobchange 0,2;
+			set jobchange_level3, 0;
+			//ステータス・スキル・Lvのリセット
+			resetskill;
+			//クエストスキル取得
+			skill 1,9,0;
+			skill 142,1,0;
+			skill 143,1,0;
+			next;
+			mes "[フェズ]";
+			mes "転生完了しました。";
+			mes "またのご利用を、お待ちしております。";
+			close;
+		}
+	}
+	close;
+}
+
+mora,175,159,5	script	モカカ	528,{
+	openstorage;
+	end;
+}
+
+//関連交換NPC
+mora,49,126,6	script	シャンティ・ハンプティ	495,{
+	mes "[シャンティ]";
+	mes "こんな所に何の用だい？";
+	next;
+	switch (select("書の修復と作成","エーテルの練成","かえる")) {
+	case 1:
+		switch (select(
+			"古書の修復",		//1
+			"赤封の書の修復",	//2
+			"黒書の修復",		//3
+			"修練と探求の書の作成",	//4
+			"貪欲と忘却の書の作成",	//5
+			"叡智と傲慢の書の作成",	//6
+			"かえる")) {		//7
+		case 1:	
+			set .@itemid,28263;	//古書
+			set .@maxpage,10;
+			set .@per,5;
+			set .@iid,28243;
+			goto L_case1;
+			break;
+		case 2:
+			set .@itemid,28264;	//赤封の書
+			set .@maxpage,5;
+			set .@per,8;
+			set .@iid,28254;
+			goto L_case1;
+			break;
+		case 3:
+			set .@itemid,28265;	//黒書
+			set .@maxpage,3;
+			set .@per,15;
+			set .@iid,28260;
+			goto L_case1;
+			break;
+		case 4:	
+			set .@maxpage,10;
+			set .@itemid,28242;	//修練と探求の書
+
+			set .@nid[0],28243;	//修練と探求の書物のページ1
+			set .@nid[1],28244;	//修練と探求の書物のページ2
+			set .@nid[2],28245;	//修練と探求の書物のページ3
+			set .@nid[3],28246;	//修練と探求の書物のページ4
+			set .@nid[4],28247;	//修練と探求の書物のページ5
+			set .@nid[5],28248;	//修練と探求の書物のページ6
+			set .@nid[6],28249;	//修練と探求の書物のページ7
+			set .@nid[7],28250;	//修練と探求の書物のページ8
+			set .@nid[8],28251;	//修練と探求の書物のページ9
+			set .@nid[9],28252;	//修練と探求の書物のページ10
+
+			goto L_case2;
+			break;
+		case 5:
+			set .@maxpage,5;
+			set .@itemid,28253;	//貪欲と忘却の書
+
+			set .@nid[0],28254;	//貪欲と忘却の書物のページ1
+			set .@nid[1],28255;	//貪欲と忘却の書物のページ2
+			set .@nid[2],28256;	//貪欲と忘却の書物のページ3
+			set .@nid[3],28257;	//貪欲と忘却の書物のページ4
+			set .@nid[4],28258;	//貪欲と忘却の書物のページ5
+
+			goto L_case2;
+			break;
+		case 6:	
+			set .@maxpage,3;
+			set .@itemid,28259;	//叡智と傲慢の書
+
+			set .@nid[0],28260;	//叡智と傲慢の書物のページ1
+			set .@nid[1],28261;	//叡智と傲慢の書物のページ2
+			set .@nid[2],28262;	//叡智と傲慢の書物のページ3
+
+			goto L_case2;
+			break;
+		default: close; break;
+		}
+	case 2:
+		switch (select(
+			"術エーテルの練成",	//1
+			"導エーテルの練成",	//2
+			"導エーテルαの練成",	//3
+			"エーテルの分解",	//4
+			"かえる")) {		//5
+		case 1:	
+			set .@lootid,1;
+			set .@itemid,28241;	//素エーテル
+			set .@cit,2;		//必要個数
+			set .@git,1;		//成功時取得個数
+			set .@etname$,"術エーテル";
+			set .@maxcim,6;		//アイテム数
+			set .@sucper,70;	//成功確率
+
+			set .@correctvalue, 28200;
+			set .@nid[0],28200;	//剣術エーテル
+			set .@nid[1],28201;	//魔術エーテル
+			set .@nid[2],28202;	//弓術エーテル
+			set .@nid[3],28203;	//回術エーテル
+			set .@nid[4],28204;	//商術エーテル
+			set .@nid[5],28205;	//盗術エーテル
+			goto L_case3;
+			break;
+		case 2:
+			set .@lootid,2;
+			set .@itemid,28241;	//素エーテル
+			set .@cit,20;		//必要個数
+			set .@git,5;		//成功時取得個数
+			set .@etname$,"導エーテル";
+			set .@maxcim,19;		//アイテム数
+			set .@sucper,80;	//成功確率
+
+			set .@correctvalue, 28206;
+			set .@nid[0],28206;
+			set .@nid[1],28207;
+			set .@nid[2],28208;
+			set .@nid[3],28209;
+			set .@nid[4],28210;
+			set .@nid[5],28211;
+			set .@nid[6],28212;
+			set .@nid[7],28213;
+			set .@nid[8],28214;
+			set .@nid[9],28215;
+			set .@nid[10],28216;
+			set .@nid[11],28217;
+			set .@nid[12],28218;
+			set .@nid[13],28219;
+			set .@nid[14],28220;
+			set .@nid[15],28221;
+			set .@nid[16],28222;
+			set .@nid[17],28223;
+			set .@nid[18],28224;
+			goto L_case3;
+			break;
+		case 3:
+			set .@lootid,3;
+			set .@itemid,28241;	//素エーテル
+			set .@cit,50;		//必要個数
+			set .@git,5;		//成功時取得個数
+			set .@etname$,"導エーテルα";
+			set .@maxcim,13;		//アイテム数
+			set .@sucper,90;	//成功確率
+
+			set .@correctvalue, 28225;
+			set .@nid[0],28225;
+			set .@nid[1],28226;
+			set .@nid[2],28227;
+			set .@nid[3],28228;
+			set .@nid[4],28229;
+			set .@nid[5],28230;
+			set .@nid[6],28231;
+			set .@nid[7],28232;
+			set .@nid[8],28233;
+			set .@nid[9],28234;
+			set .@nid[10],28235;
+			set .@nid[11],28236;
+			set .@nid[12],28237;
+			goto L_case3;
+			break;
+		case 4:
+			goto L_case4;
+			break;
+		default: close; break;
+		}
+	default: close; break;
+	}
+	close;
+//--
+L_case1:
+	mes "[シャンティ]";
+	mes getitemname(.@itemid)+"の修復に来たのだね";
+		if(countitem(.@itemid) != 0){
+			mes "どのページの修復するんだい？";
+			next;
+			switch(.@maxpage){
+				case 10: 
+					set .@selpage,callfunc("func_djob_syanty001");
+					break;
+				case 5 :
+					set .@selpage,callfunc("func_djob_syanty002");
+					break;
+				case 3:
+					set .@selpage,callfunc("func_djob_syanty003");
+					break;
+				default:close;end;break;
+			}
+			mes "[シャンティ]";
+			mes "修復は失敗する事もあるんだ";
+			mes "本当にいいんだね？";
+			next;
+			if(select("やっぱりやめる","お願いします")==1) {
+				mes "またね";
+				close;
+			}
+
+			set .@sucper, 100-((.@selpage-1)*.@per);
+			set .@ranv,rand(1,100);
+
+			if( .@ranv <= .@sucper){				//成功
+				mes "[シャンティ]";
+				mes "おめでとう！修復は成功だ！";
+				misceffect 18;
+				delitem .@itemid,1;
+				getitem (.@iid+(.@selpage - 1)),1;
+				goto L_End;	
+			}else{
+				mes "[シャンティ]";
+				mes "すまない、";
+				mes "修復に失敗してしまったよ";
+				misceffect 32;
+				delitem .@itemid,1;
+				goto L_End;	
+			}
+		}else{
+			mes "[シャンティ]";
+			mes getitemname(.@itemid)+"がなければ何も出来ないよ";
+			goto L_End;
+		}
+	goto L_End;
+//--
+L_case2:
+	mes "[シャンティ]";
+	mes getitemname(.@itemid)+"の作成に来たのだね";
+	
+	mes "作成には";
+	for(set .@i,0; .@i<.@maxpage; set .@i,.@i+1) {
+		mes getitemname(.@nid[.@i])+"";
+	}
+	mes "が必要だ";
+	next;
+	if(select("やっぱりやめる","お願いします")==1) {
+		mes "またね";
+		close;
+	}
+	for(set .@i,0; .@i<.@maxpage; set .@i,.@i+1) {
+		if(countitem(.@nid[.@i]) == 0){
+			mes "[シャンティ]";
+			mes "うむむ";
+			mes getitemname(.@nid[.@i]);
+			mes "が足りないよ";
+			goto L_End;
+		}
+	}
+	mes "[シャンティ]";
+	mes "無事に本が完成したよ";
+	misceffect 18;
+	for(set .@i,0; .@i<.@maxpage; set .@i,.@i+1) {
+			delitem .@nid[.@i],1;
+	}
+	getitem .@itemid,1;
+	goto L_End;
+//--
+L_case3:
+	mes "[シャンティ]";
+	mes getitemname(.@itemid)+"の練成に来たのだね";
+	mes getitemname(.@itemid)+.@cit+"個で"+.@git+"個の"+.@etname$+"を";
+	mes "作成する事が出来るんだ";
+	next;
+	mes "[シャンティ]";
+	mes "練成したい"+.@etname$+"は何かな";
+	next;
+	switch(.@lootid){
+		case 1:	set .@selpage,callfunc("func_djob_syanty004");			break;
+		case 2:	set .@selpage,callfunc("func_djob_syanty005");			break;
+		case 3:	set .@selpage,callfunc("func_djob_syanty006");			break;
+		default:break;
+	}
+	mes getitemname(.@nid[(.@selpage-1)])+"の練成だね";
+	mes "練成は失敗する事もあるんだが、よいかい？";
+	next;
+	if(select("やっぱりやめる","お願いします")==1) {
+		mes "やめるんだね";
+		close;
+	}
+	//item check
+		if(countitem(.@itemid) >= .@cit){
+			delitem .@itemid,.@cit;
+			set .@ranv,rand(1,100);
+			if( .@ranv <= .@sucper){				//成功
+				mes "[シャンティ]";
+				mes "おめでとう！練成は成功だ！";
+				misceffect 18;
+				getitem (.@correctvalue + (.@selpage-1)),.@git;
+			}else{
+				mes "[シャンティ]";
+				mes "すまない、";
+				mes "練成に失敗してしまったよ";
+				misceffect 32;
+			}
+			goto L_End;
+		}else{
+			mes getitemname(.@itemid)+"が足りない様だね";
+			close;end;
+		}
+	goto L_End;
+//--
+L_case4:
+	set .@coice,(select(
+		((countitem(28200))? getitemname(28200)+"の分解":""),((countitem(28201))? getitemname(28201)+"の分解":""),
+		((countitem(28202))? getitemname(28202)+"の分解":""),((countitem(28203))? getitemname(28203)+"の分解":""),
+		((countitem(28204))? getitemname(28204)+"の分解":""),((countitem(28205))? getitemname(28205)+"の分解":""),
+		((countitem(28206))? getitemname(28206)+"の分解":""),((countitem(28207))? getitemname(28207)+"の分解":""),
+		((countitem(28208))? getitemname(28208)+"の分解":""),((countitem(28209))? getitemname(28209)+"の分解":""),
+		((countitem(28210))? getitemname(28210)+"の分解":""),((countitem(28211))? getitemname(28211)+"の分解":""),
+		((countitem(28212))? getitemname(28212)+"の分解":""),((countitem(28213))? getitemname(28213)+"の分解":""),
+		((countitem(28214))? getitemname(28214)+"の分解":""),((countitem(28215))? getitemname(28215)+"の分解":""),
+		((countitem(28216))? getitemname(28216)+"の分解":""),((countitem(28217))? getitemname(28217)+"の分解":""),
+		((countitem(28218))? getitemname(28218)+"の分解":""),((countitem(28219))? getitemname(28219)+"の分解":""),
+		((countitem(28220))? getitemname(28220)+"の分解":""),((countitem(28221))? getitemname(28221)+"の分解":""),
+		((countitem(28222))? getitemname(28222)+"の分解":""),((countitem(28223))? getitemname(28223)+"の分解":""),
+		((countitem(28224))? getitemname(28224)+"の分解":""),((countitem(28225))? getitemname(28225)+"の分解":""),
+		((countitem(28226))? getitemname(28226)+"の分解":""),((countitem(28227))? getitemname(28227)+"の分解":""),
+		((countitem(28228))? getitemname(28228)+"の分解":""),((countitem(28229))? getitemname(28229)+"の分解":""),
+		((countitem(28230))? getitemname(28230)+"の分解":""),((countitem(28231))? getitemname(28231)+"の分解":""),
+		((countitem(28232))? getitemname(28232)+"の分解":""),((countitem(28233))? getitemname(28233)+"の分解":""),
+		((countitem(28234))? getitemname(28234)+"の分解":""),((countitem(28235))? getitemname(28235)+"の分解":""),
+		((countitem(28236))? getitemname(28236)+"の分解":""),((countitem(28237))? getitemname(28237)+"の分解":""),
+		"やめる"));
+	if(.@coice >= 39)close;
+	if(.@coice >= 26)
+		set .@cnt,5;
+	else if(.@coice >= 7)
+		set .@cnt,2;
+	else
+		set .@cnt,1;
+	mes "それならひとつあたり";
+	mes .@cnt+"個のエーテルに分解できる";
+	mes "成功率は90%さ";
+	mes "さて、いくつやる？";
+	next;
+	input .@num;
+	if(.@num<=0)close;
+	if(countitem(28199+.@coice)<.@num){
+		mes "[シャンティ]";
+		mes getitemname(28199+.@coice)+"が足りない様だね";
+		close;
+	}
+	delitem 28199+.@coice,.@num;
+	if(rand(100)>10){
+		mes "[シャンティ]";
+		mes "おめでとう！分解は成功だ！";
+		misceffect 18;
+		getitem 28241,.@cnt*.@num;
+	}else{
+		mes "[シャンティ]";
+		mes "すまない、";
+		mes "分解に失敗してしまったよ";
+		misceffect 32;
+	}
+
+L_End:
+	close;
+	end;
+}
+//-----------------------------------------------------------------------------------------------------
+function	script	func_djob_syanty001	{
+	set .@selpage, (select( "1ページ目","2ページ目","3ページ目","4ページ目","5ページ目","6ページ目","7ページ目","8ページ目","9ページ目","10ページ目","かえる"));
+	if( .@selpage == 11){		close;end;	}
+	return .@selpage;
+}
+function	script	func_djob_syanty002	{
+	set .@selpage, (select( "1ページ目","2ページ目","3ページ目","4ページ目","5ページ目","かえる"));
+	if( .@selpage == 6){		close;end;	}
+	return .@selpage;
+}
+function	script	func_djob_syanty003	{
+	set .@selpage, (select( "1ページ目","2ページ目","3ページ目","かえる"));
+	if( .@selpage == 4){		close;end;	}
+	return .@selpage;
+}
+
+function	script	func_djob_syanty004	{
+	set .@selpage, (select(	 "剣術エーテル",	 "魔術エーテル",	 "弓術エーテル",	 "回術エーテル",	 "商術エーテル",	 "盗術エーテル",	 "かえる"));
+	if( .@selpage == 7){		close;end;	}
+	return .@selpage;
+}
+function	script	func_djob_syanty005	{
+	set .@selpage, (select(	 "騎導エーテル","回導エーテル","魔導エーテル","商導エーテル",
+							 "弓導エーテル","暗導エーテル","聖導エーテル","拳導エーテル",
+							 "教導エーテル","盗導エーテル","錬導エーテル","歌導エーテル",
+							 "踊導エーテル","超導エーテル","銃導エーテル","忍導エーテル",
+							 "蹴導エーテル","星導エーテル","魂導エーテル","やめる"));
+	if( .@selpage == 20){		close;end;	}
+	return .@selpage;
+}
+function	script	func_djob_syanty006	{
+	set .@selpage, (select(	 "騎導エーテルα","回導エーテルα","魔導エーテルα","商導エーテルα",
+							 "弓導エーテルα","暗導エーテルα","聖導エーテルα","拳導エーテルα",
+							 "教導エーテルα","盗導エーテルα","錬導エーテルα","歌導エーテルα",
+							 "踊導エーテルα","やめる"));
+	if( .@selpage == 14){		close;end;	}
+	return .@selpage;
+}
+

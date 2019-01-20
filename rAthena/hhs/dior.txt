@@ -1,0 +1,1803 @@
+force_1-3	mapflag	noicewall
+force_1-3	mapflag	nowarp
+force_1-3	mapflag	noteleport
+force_1-3	mapflag	monster_noteleport
+force_1-3	mapflag	nosave
+force_1-3	mapflag	nowarpto
+force_1-3	mapflag	nomemo
+force_1-3	mapflag	restricted	6
+cave	mapflag	noicewall
+cave	mapflag	nowarp
+cave	mapflag	noteleport
+cave	mapflag	nosave
+cave	mapflag	nowarpto
+cave	mapflag	nomemo
+cave	mapflag	restricted	6
+
+aldebaran,146,124,3	script	パメラ	918,{
+	if(#dieallcool == 0 || #dieallcool+1800 > gettimetick(2)){//再入場
+
+	}else if(#dieallcool+13500 > gettimetick(2)){//クールタイム
+		mes "[パメラ]";
+		set .@time,#dieallcool+13500-gettimetick(2);
+		set .@time_h,.@time/3600;
+		set .@time_min,(.@time/60) % 60;
+		mes "あなたは残り、";
+		if(.@time_h)
+			mes "^0000FF" +.@time_h+ "^000000時間 ^0000FF" +.@time_min+ "^000000分の魔力回復期間が必要ね";
+		else if(.@time_min)
+			mes "^0000FF" +.@time_min+ "^000000分 ^0000FF" +(.@time % 60)+ "^000000秒の魔力回復期間が必要ね";
+		else
+			mes "^0000FF" +(.@time % 60)+ "^000000秒の魔力回復期間が必要ね";
+		if(!(getgmlevel())){
+			close;
+		}
+	}
+	if($dieline > 0) {
+		mes "[パメラ]";
+		mes "かの地への道は閉ざされています。";
+		close;
+	}
+	if(BaseLevel < 90 || Class==Job_Novice || Class==Job_Novice_High || Class==Job_Baby) {
+		mes "[パメラ]";
+		mes "かの地はとても危険です。";
+		mes "最低でも^FF0000ベースレベル90以上^000000で、";
+		mes "^FF0000ノービス以外^000000に転職してから";
+		mes "いらしてください";
+		close;
+	}
+	mes "[パメラ]";
+	mes "かの地へ赴くのですか？";
+	mes "もちろん止めは致しませんよ。";
+	mes "しかし、よく聞いてください。";
+	next;
+	mes "[パメラ]";
+	mes "かの地では強力なモンスターが";
+	mes "徘徊しているため、非常に危険な場所です。";
+	next;
+	mes "[パメラ]";
+	mes "かの地へ赴くならば";
+	mes "^FF000050000Zeny^000000をお支払いください。";
+	next;
+	if(select("はい","嫌です")==2) {
+		mes "[パメラ]";
+		mes "臆する事がすなわち";
+		mes "恥であるとは限りませんよ。";
+		close;
+	}
+	if(Zeny < 50000){
+		mes "[パメラ]";
+		mes "所持金が足りませんね。";
+		mes "お支払いできない方は、";
+		mes "如何な理由でも受け付けません。";
+		close;
+	}
+	mes "[パメラ]";
+	mes "よろしい。";
+	mes "では転送位置を言ってください。";
+	if(!(getgmlevel())){
+		set Zeny,Zeny - 50000;
+	}
+	set @dieallwp,0;
+	set #dieallcool,gettimetick(2);
+	next;
+	switch(select("西フロア","中央フロア","東フロア")){
+	case 1:
+		warp "force_1-3",20,185;doevent "DIEALL_BUFF::OnStart"; end;
+	case 2:
+		warp "force_1-3",100,190;doevent "DIEALL_BUFF::OnStart"; end;
+	case 3:
+		warp "force_1-3",180,175;doevent "DIEALL_BUFF::OnStart"; end;
+	}
+	close;
+}
+
+force_1-3,1,1,1	script	counttimer	-1,{
+OnStart:
+	killmonsterall "force_1-3";
+	for(set .i,0; .i<40; set .i,.i+1){
+		set .downwork$,"dieall#"+.i;
+		disablenpc .downwork$;
+	}
+	set .j,1;
+	for(set .i,0; .i==.i; set .i,.i+1){
+		set .xrand,rand(20,170);
+		set .yrand,rand(20,170);
+		if(checkcell("force_1-3",.xrand,.yrand,cell_chkpass)){
+			set getd(".xrand"+.j),.xrand;
+			set getd(".yrand"+.j),.yrand;
+			set .j,.j + 1;
+			if(.j==7)break;
+		}
+	}
+	switch(rand(6)){
+	case 0:
+		setarray .mobid[1],2512,2517,2522,2527;break;
+	case 1:
+		setarray .mobid[1],2513,2518,2523,2528;break;
+	case 2:
+		setarray .mobid[1],2514,2519,2524,2529;break;
+	case 3:
+		setarray .mobid[1],2515,2520,2525,2530;break;
+	case 4:
+		setarray .mobid[1],2516,2521,2526,2531;break;
+	case 5:
+		set .@palm,1;
+		setarray .mobid[1],2512,2517,2522,2527,2513,2518,2523,2528,2514,2519,2524,2529,2515,2520,2525,2530,2516,2521,2526,2531;
+		areamonster "force_1-3",12,172,22,182,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled1";
+		areamonster "force_1-3",12,172,22,182,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled1";
+		areamonster "force_1-3",12,172,22,182,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled1";
+		areamonster "force_1-3",12,172,22,182,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled1";
+		areamonster "force_1-3",172,172,182,182,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled2";
+		areamonster "force_1-3",172,172,182,182,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled2";
+		areamonster "force_1-3",172,172,182,182,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled2";
+		areamonster "force_1-3",172,172,182,182,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled2";
+		areamonster "force_1-3",12,92,22,142,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled3";
+		areamonster "force_1-3",12,92,22,142,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled3";
+		areamonster "force_1-3",12,92,22,142,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled3";
+		areamonster "force_1-3",12,92,22,142,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled3";
+		areamonster "force_1-3",52,132,62,142,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled4";
+		areamonster "force_1-3",52,132,62,142,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled4";
+		areamonster "force_1-3",52,132,62,142,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled4";
+		areamonster "force_1-3",52,132,62,142,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled4";
+		areamonster "force_1-3",92,132,102,142,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled5";
+		areamonster "force_1-3",92,132,102,142,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled5";
+		areamonster "force_1-3",92,132,102,142,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled5";
+		areamonster "force_1-3",92,132,102,142,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled5";
+		areamonster "force_1-3",132,132,182,142,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled6";
+		areamonster "force_1-3",132,132,182,142,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled6";
+		areamonster "force_1-3",132,132,182,142,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled6";
+		areamonster "force_1-3",132,132,182,142,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled6";
+		areamonster "force_1-3",52,92,102,102,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled7";
+		areamonster "force_1-3",52,92,102,102,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled7";
+		areamonster "force_1-3",52,92,102,102,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled7";
+		areamonster "force_1-3",52,92,102,102,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled7";
+		areamonster "force_1-3",132,52,142,102,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled8";
+		areamonster "force_1-3",132,52,142,102,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled8";
+		areamonster "force_1-3",132,52,142,102,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled8";
+		areamonster "force_1-3",132,52,142,102,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled8";
+		areamonster "force_1-3",172,92,182,102,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled9";
+		areamonster "force_1-3",172,92,182,102,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled9";
+		areamonster "force_1-3",172,92,182,102,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled9";
+		areamonster "force_1-3",172,92,182,102,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled9";
+		areamonster "force_1-3",12,52,62,62,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled10";
+		areamonster "force_1-3",12,52,62,62,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled10";
+		areamonster "force_1-3",12,52,62,62,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled10";
+		areamonster "force_1-3",12,52,62,62,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled10";
+		areamonster "force_1-3",92,12,102,62,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled11";
+		areamonster "force_1-3",92,12,102,62,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled11";
+		areamonster "force_1-3",92,12,102,62,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled11";
+		areamonster "force_1-3",92,12,102,62,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled11";
+		areamonster "force_1-3",172,52,182,62,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled12";
+		areamonster "force_1-3",172,52,182,62,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled12";
+		areamonster "force_1-3",172,52,182,62,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled12";
+		areamonster "force_1-3",172,52,182,62,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled12";
+		areamonster "force_1-3",12,12,22,22,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled13";
+		areamonster "force_1-3",12,12,22,22,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled13";
+		areamonster "force_1-3",12,12,22,22,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled13";
+		areamonster "force_1-3",12,12,22,22,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled13";
+		areamonster "force_1-3",52,12,62,22,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled14";
+		areamonster "force_1-3",52,12,62,22,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled14";
+		areamonster "force_1-3",52,12,62,22,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled14";
+		areamonster "force_1-3",52,12,62,22,"--ja--",.mobid[rand(1,20)],1,"counttimer::OnKilled14";
+		areamonster "force_1-3",132,12,182,22,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled15";
+		areamonster "force_1-3",132,12,182,22,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled15";
+		areamonster "force_1-3",132,12,182,22,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled15";
+		areamonster "force_1-3",132,12,182,22,"--ja--",.mobid[rand(1,20)],2,"counttimer::OnKilled15";
+		break;
+	}
+	set .froa0,20;
+	set .froa1,4; set .froa2,4; set .froa3,8; set .froa4,4; set .froa5,4;
+	set .froa6,8; set .froa7,8; set .froa8,8; set .froa9,4; set .froa10,8;
+	set .froa11,8;set .froa12,4;set .froa13,4;set .froa14,4;set .froa15,8;
+	set .froacore,0; set $@dieallco,0;
+	donpcevent "制御装置#1::OnStart";
+	donpcevent "制御装置#2::OnStart";
+	donpcevent "制御装置#3::OnStart";
+	donpcevent "制御装置#4::OnStart";
+	donpcevent "制御装置#5::OnStart";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2512,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2513,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2514,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2515,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2516,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2517,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2518,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2519,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2520,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2521,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2522,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2523,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2524,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2525,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2526,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2527,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2528,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2529,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2530,1,"counttimer::OnKilled0";
+	areamonster "force_1-3",69,176,130,183,"--ja--",2531,1,"counttimer::OnKilled0";
+	if(.@palm!=1){
+		areamonster "force_1-3",12,172,22,182,"--ja--",.mobid[1],1,"counttimer::OnKilled1";
+		areamonster "force_1-3",12,172,22,182,"--ja--",.mobid[2],1,"counttimer::OnKilled1";
+		areamonster "force_1-3",12,172,22,182,"--ja--",.mobid[3],1,"counttimer::OnKilled1";
+		areamonster "force_1-3",12,172,22,182,"--ja--",.mobid[4],1,"counttimer::OnKilled1";
+		areamonster "force_1-3",172,172,182,182,"--ja--",.mobid[1],1,"counttimer::OnKilled2";
+		areamonster "force_1-3",172,172,182,182,"--ja--",.mobid[2],1,"counttimer::OnKilled2";
+		areamonster "force_1-3",172,172,182,182,"--ja--",.mobid[3],1,"counttimer::OnKilled2";
+		areamonster "force_1-3",172,172,182,182,"--ja--",.mobid[4],1,"counttimer::OnKilled2";
+		areamonster "force_1-3",12,92,22,142,"--ja--",.mobid[1],2,"counttimer::OnKilled3";
+		areamonster "force_1-3",12,92,22,142,"--ja--",.mobid[2],2,"counttimer::OnKilled3";
+		areamonster "force_1-3",12,92,22,142,"--ja--",.mobid[3],2,"counttimer::OnKilled3";
+		areamonster "force_1-3",12,92,22,142,"--ja--",.mobid[4],2,"counttimer::OnKilled3";
+		areamonster "force_1-3",52,132,62,142,"--ja--",.mobid[1],1,"counttimer::OnKilled4";
+		areamonster "force_1-3",52,132,62,142,"--ja--",.mobid[2],1,"counttimer::OnKilled4";
+		areamonster "force_1-3",52,132,62,142,"--ja--",.mobid[3],1,"counttimer::OnKilled4";
+		areamonster "force_1-3",52,132,62,142,"--ja--",.mobid[4],1,"counttimer::OnKilled4";
+		areamonster "force_1-3",92,132,102,142,"--ja--",.mobid[1],1,"counttimer::OnKilled5";
+		areamonster "force_1-3",92,132,102,142,"--ja--",.mobid[2],1,"counttimer::OnKilled5";
+		areamonster "force_1-3",92,132,102,142,"--ja--",.mobid[3],1,"counttimer::OnKilled5";
+		areamonster "force_1-3",92,132,102,142,"--ja--",.mobid[4],1,"counttimer::OnKilled5";
+		areamonster "force_1-3",132,132,182,142,"--ja--",.mobid[1],2,"counttimer::OnKilled6";
+		areamonster "force_1-3",132,132,182,142,"--ja--",.mobid[2],2,"counttimer::OnKilled6";
+		areamonster "force_1-3",132,132,182,142,"--ja--",.mobid[3],2,"counttimer::OnKilled6";
+		areamonster "force_1-3",132,132,182,142,"--ja--",.mobid[4],2,"counttimer::OnKilled6";
+		areamonster "force_1-3",52,92,102,102,"--ja--",.mobid[1],2,"counttimer::OnKilled7";
+		areamonster "force_1-3",52,92,102,102,"--ja--",.mobid[2],2,"counttimer::OnKilled7";
+		areamonster "force_1-3",52,92,102,102,"--ja--",.mobid[3],2,"counttimer::OnKilled7";
+		areamonster "force_1-3",52,92,102,102,"--ja--",.mobid[4],2,"counttimer::OnKilled7";
+		areamonster "force_1-3",132,52,142,102,"--ja--",.mobid[1],2,"counttimer::OnKilled8";
+		areamonster "force_1-3",132,52,142,102,"--ja--",.mobid[2],2,"counttimer::OnKilled8";
+		areamonster "force_1-3",132,52,142,102,"--ja--",.mobid[3],2,"counttimer::OnKilled8";
+		areamonster "force_1-3",132,52,142,102,"--ja--",.mobid[4],2,"counttimer::OnKilled8";
+		areamonster "force_1-3",172,92,182,102,"--ja--",.mobid[1],1,"counttimer::OnKilled9";
+		areamonster "force_1-3",172,92,182,102,"--ja--",.mobid[2],1,"counttimer::OnKilled9";
+		areamonster "force_1-3",172,92,182,102,"--ja--",.mobid[3],1,"counttimer::OnKilled9";
+		areamonster "force_1-3",172,92,182,102,"--ja--",.mobid[4],1,"counttimer::OnKilled9";
+		areamonster "force_1-3",12,52,62,62,"--ja--",.mobid[1],2,"counttimer::OnKilled10";
+		areamonster "force_1-3",12,52,62,62,"--ja--",.mobid[2],2,"counttimer::OnKilled10";
+		areamonster "force_1-3",12,52,62,62,"--ja--",.mobid[3],2,"counttimer::OnKilled10";
+		areamonster "force_1-3",12,52,62,62,"--ja--",.mobid[4],2,"counttimer::OnKilled10";
+		areamonster "force_1-3",92,12,102,62,"--ja--",.mobid[1],2,"counttimer::OnKilled11";
+		areamonster "force_1-3",92,12,102,62,"--ja--",.mobid[2],2,"counttimer::OnKilled11";
+		areamonster "force_1-3",92,12,102,62,"--ja--",.mobid[3],2,"counttimer::OnKilled11";
+		areamonster "force_1-3",92,12,102,62,"--ja--",.mobid[4],2,"counttimer::OnKilled11";
+		areamonster "force_1-3",172,52,182,62,"--ja--",.mobid[1],1,"counttimer::OnKilled12";
+		areamonster "force_1-3",172,52,182,62,"--ja--",.mobid[2],1,"counttimer::OnKilled12";
+		areamonster "force_1-3",172,52,182,62,"--ja--",.mobid[3],1,"counttimer::OnKilled12";
+		areamonster "force_1-3",172,52,182,62,"--ja--",.mobid[4],1,"counttimer::OnKilled12";
+		areamonster "force_1-3",12,12,22,22,"--ja--",.mobid[1],1,"counttimer::OnKilled13";
+		areamonster "force_1-3",12,12,22,22,"--ja--",.mobid[2],1,"counttimer::OnKilled13";
+		areamonster "force_1-3",12,12,22,22,"--ja--",.mobid[3],1,"counttimer::OnKilled13";
+		areamonster "force_1-3",12,12,22,22,"--ja--",.mobid[4],1,"counttimer::OnKilled13";
+		areamonster "force_1-3",52,12,62,22,"--ja--",.mobid[1],1,"counttimer::OnKilled14";
+		areamonster "force_1-3",52,12,62,22,"--ja--",.mobid[2],1,"counttimer::OnKilled14";
+		areamonster "force_1-3",52,12,62,22,"--ja--",.mobid[3],1,"counttimer::OnKilled14";
+		areamonster "force_1-3",52,12,62,22,"--ja--",.mobid[4],1,"counttimer::OnKilled14";
+		areamonster "force_1-3",132,12,182,22,"--ja--",.mobid[1],2,"counttimer::OnKilled15";
+		areamonster "force_1-3",132,12,182,22,"--ja--",.mobid[2],2,"counttimer::OnKilled15";
+		areamonster "force_1-3",132,12,182,22,"--ja--",.mobid[3],2,"counttimer::OnKilled15";
+		areamonster "force_1-3",132,12,182,22,"--ja--",.mobid[4],2,"counttimer::OnKilled15";
+	}
+	monster "force_1-3",.xrand1,.yrand1,"--ja--",2511,1,"counttimer::OnKilledcore1";
+	monster "force_1-3",.xrand2,.yrand2,"--ja--",2511,1,"counttimer::OnKilledcore2";
+	monster "force_1-3",.xrand3,.yrand3,"--ja--",2511,1,"counttimer::OnKilledcore3";
+	monster "force_1-3",.xrand4,.yrand4,"--ja--",2511,1,"counttimer::OnKilledcore4";
+	monster "force_1-3",.xrand5,.yrand5,"--ja--",2511,1,"counttimer::OnKilledcore5";
+	movenpc "制御装置#1",.xrand1,.yrand1;
+	movenpc "制御装置#2",.xrand2,.yrand2;
+	movenpc "制御装置#3",.xrand3,.yrand3;
+	movenpc "制御装置#4",.xrand4,.yrand4;
+	movenpc "制御装置#5",.xrand5,.yrand5;
+//	if(rand(3)==0){movenpc "ミラージュサークル",.xrand6,.yrand6;}
+//	else{movenpc "ミラージュサークル",0,0;}
+	end;
+
+OnKilled0:
+	set .froa0,.froa0 - 1;
+	if(!.froa0){enablenpc "dieall#0";
+	areascript "force_1-3",68,164,131,193,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","ディオールエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled1:
+	set .froa1,.froa1 - 1;
+	if(!.froa1){enablenpc "dieall#36";enablenpc "dieall#37";
+	areascript "force_1-3",10,170,29,189,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","レストエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled2:
+	set .froa2,.froa2 - 1;
+	if(!.froa2){enablenpc "dieall#17";enablenpc "dieall#18";
+	areascript "force_1-3",170,170,189,189,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","レストエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled3:
+	set .froa3,.froa3 - 1;
+	if(!.froa3){enablenpc "dieall#4";enablenpc "dieall#5";enablenpc "dieall#6";
+	areascript "force_1-3",10,90,29,147,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","ハニーメルトエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled4:
+	set .froa4,.froa4 - 1;
+	if(!.froa4){enablenpc "dieall#26";enablenpc "dieall#27";
+	areascript "force_1-3",50,128,69,147,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","エミュートエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled5:
+	set .froa5,.froa5 - 1;
+	if(!.froa5){enablenpc "dieall#22";enablenpc "dieall#23";enablenpc "dieall#24";enablenpc "dieall#25";
+	areascript "force_1-3",90,129,109,147,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","ソラトエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled6:
+	set .froa6,.froa6 - 1;
+	if(!.froa6){enablenpc "dieall#9";enablenpc "dieall#10";enablenpc "dieall#11";
+	areascript "force_1-3",130,128,189,147,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","ホワイシスエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled7:
+	set .froa7,.froa7 - 1;
+	if(!.froa7){enablenpc "dieall#28";enablenpc "dieall#29";enablenpc "dieall#30";
+	areascript "force_1-3",50,90,109,109,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","レメニスエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled8:
+	set .froa8,.froa8 - 1;
+	if(!.froa8){enablenpc "dieall#19";enablenpc "dieall#20";enablenpc "dieall#21";
+	areascript "force_1-3",130,50,149,109,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","トリピューンエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled9:
+	set .froa9,.froa9 - 1;
+	if(!.froa9){enablenpc "dieall#33";enablenpc "dieall#34";enablenpc "dieall#35";
+	areascript "force_1-3",170,90,189,109,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","クラディアナエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled10:
+	set .froa10,.froa10 - 1;
+	if(!.froa10){enablenpc "dieall#12";enablenpc "dieall#13";enablenpc "dieall#14";
+	areascript "force_1-3",10,50,69,69,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","メルトリアエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled11:
+	set .froa11,.froa11 - 1;
+	if(!.froa11){enablenpc "dieall#1";enablenpc "dieall#2";enablenpc "dieall#3";
+	areascript "force_1-3",90,10,109,69,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","カシスペランエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled12:
+	set .froa12,.froa12 - 1;
+	if(!.froa12){enablenpc "dieall#38";enablenpc "dieall#39";
+	areascript "force_1-3",170,50,189,69,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","スクイトスエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled13:
+	set .froa13,.froa13 - 1;
+	if(!.froa13){enablenpc "dieall#15";enablenpc "dieall#16";
+	areascript "force_1-3",10,10,29,29,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","バリトンエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled14:
+	set .froa14,.froa14 - 1;
+	if(!.froa14){enablenpc "dieall#7";enablenpc "dieall#8";
+	areascript "force_1-3",50,10,69,29,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","ファーミシアエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilled15:
+	set .froa15,.froa15 - 1;
+	if(!.froa15){enablenpc "dieall#31";enablenpc "dieall#32";
+	areascript "force_1-3",130,10,189,29,"{set #PPOINT,#PPOINT+40;dispbottom(\"40苺pointを獲得しました!\");}";
+	mapannounce "force_1-3","ニュクスエリアが開放されました!!",bc_map,"0x42B562";}
+	end;
+OnKilledcore1:
+	set .froacore,.froacore|1;
+	end;
+OnKilledcore2:
+	set .froacore,.froacore|2;
+	end;
+OnKilledcore3:
+	set .froacore,.froacore|4;
+	end;
+OnKilledcore4:
+	set .froacore,.froacore|8;
+	end;
+OnKilledcore5:
+	set .froacore,.froacore|16;
+	end;
+OnInit:
+	setarray $@dieallx[0],	100,69,139,170,179,140,170,179,130,100,109,179,19,59,90,19,20,180,130,10,109,	//0-20
+				99,100,139,68,130,59,90,130,60,59,68,179,179,29,20,19,69,108,59;		//21-39
+	setarray $@dieally[0],	147,60,147,59,91,50,99,50,20,10,137,109,29,90,59,189,51,29,179,99,99,
+				129,165,108,138,138,109,137,100,129,69,20,171,129,99,147,11,179,60,29;
+	set $dieline,1;
+	donpcevent "counttimer::OnStart";
+	donpcevent "鬼火#sicle::OnStart";
+	end;
+}
+
+force_1-3,1,2,1	script	Dieall_Manager	-1,{
+OnBossDead:
+	initnpctimer;
+	set $dieline,$dieline+1;
+	mapannounce "force_1-3","ボスモンスターが"+strcharinfo(0)+"に倒されました!!",bc_map,"0x9933CC";
+	callfunc("func_party_control",1,300);
+	monster "force_1-3",0,0,"--ja--",2512,1;
+	monster "force_1-3",0,0,"--ja--",2513,1;
+	monster "force_1-3",0,0,"--ja--",2514,1;
+	monster "force_1-3",0,0,"--ja--",2515,1;
+	monster "force_1-3",0,0,"--ja--",2516,1;
+	monster "force_1-3",0,0,"--ja--",2517,1;
+	monster "force_1-3",0,0,"--ja--",2518,1;
+	monster "force_1-3",0,0,"--ja--",2519,1;
+	monster "force_1-3",0,0,"--ja--",2520,1;
+	monster "force_1-3",0,0,"--ja--",2521,1;
+	monster "force_1-3",0,0,"--ja--",2522,1;
+	monster "force_1-3",0,0,"--ja--",2523,1;
+	monster "force_1-3",0,0,"--ja--",2524,1;
+	monster "force_1-3",0,0,"--ja--",2525,1;
+	monster "force_1-3",0,0,"--ja--",2526,1;
+	monster "force_1-3",0,0,"--ja--",2527,1;
+	monster "force_1-3",0,0,"--ja--",2528,1;
+	monster "force_1-3",0,0,"--ja--",2529,1;
+	monster "force_1-3",0,0,"--ja--",2530,1;
+	monster "force_1-3",0,0,"--ja--",2531,1;
+	if($dieline==1) donpcevent "Dieall_Manager::OnDiorEnd";
+	end;
+
+OnMinute05:
+	set $dieline,0;
+	disablenpc "#diorout";
+	donpcevent "counttimer::OnStart";
+	announce "[時計塔管理者]ディオールが開き、入場が可能になりました。",8;
+	end;
+OnMinute55:
+	mapannounce "force_1-3","[パメラ]残念だけど、これ以上は空間が持たないね",0;
+	areawarp "force_1-3",0,0,200,200,"aldebaran",140,120;
+	sleep 1000;
+	areawarp "force_1-3",0,0,200,200,"aldebaran",140,120;
+OnDiorEnd:
+	if($dieline==0)
+		announce "[時計塔管理者]ディオールが閉じ、入場できなくなりました。",8;
+	set $dieline,1;
+	end;
+OnBossSpawn:
+	set .@diorboss,2532+rand(5);
+	switch(rand(0,15)){
+	case 0: setarray .@ba,69,176,130,183; set .@areaname$,"ディオールエリア"; break;
+	case 1: setarray .@ba,12,172,22,182; set .@areaname$,"レストエリア"; break;
+	case 2: setarray .@ba,172,172,182,182; set .@areaname$,"レストエリア"; break;
+	case 3: setarray .@ba,12,92,22,142; set .@areaname$,"ハニーメルトエリア"; break;
+	case 4: setarray .@ba,52,132,62,142; set .@areaname$,"エミュートエリア"; break;
+	case 5: setarray .@ba,92,132,102,142; set .@areaname$,"ソラトエリア"; break;
+	case 6: setarray .@ba,132,132,182,142; set .@areaname$,"ホワイシスエリア"; break;
+	case 7: setarray .@ba,52,92,102,102; set .@areaname$,"レメニスエリア"; break;
+	case 8: setarray .@ba,132,52,142,102; set .@areaname$,"トリピューンエリア"; break;
+	case 9: setarray .@ba,172,92,172,102; set .@areaname$,"クラディアナエリア"; break;
+	case 10:setarray .@ba,12,52,62,62; set .@areaname$,"メルトリアエリア"; break;
+	case 11:setarray .@ba,92,12,102,62; set .@areaname$,"カシスペランエリア"; break;
+	case 12:setarray .@ba,172,52,182,62; set .@areaname$,"スクイトスエリア"; break;
+	case 13:setarray .@ba,12,12,22,22; set .@areaname$,"バリトンエリア"; break;
+	case 14:setarray .@ba,52,12,62,22; set .@areaname$,"ファーミシアエリア"; break;
+	case 15:setarray .@ba,132,12,182,22; set .@areaname$,"ニュクスエリア"; break;
+	}
+	areamonster "force_1-3",.@ba[0],.@ba[1],.@ba[2],.@ba[3],"--ja--",.@diorboss,1,"Dieall_Manager::OnBossDead";
+	mapannounce "force_1-3","全ての制御装置が失われ"+getmonsterinfo(.@diorboss,0)+"が"+.@areaname$+"に出現します!!",bc_map,"0x9933CC";
+	end;
+
+OnTimer4000:
+	if($dieline==2){
+		enablenpc "#diorout";
+		mapannounce "force_1-3","残り3分以内にディオールエリアから脱出してください。",bc_map,"0x9933CC";
+		end;
+	}
+	mapannounce "force_1-3","ボスモンスターが復活するまで残り3分です。",bc_map,"0x9933CC";
+	end;
+OnTimer60000:
+	if($dieline==2){
+		mapannounce "force_1-3","残り2分以内にディオールエリアから脱出してください。",bc_map,"0x9933CC";
+		end;
+	}
+	mapannounce "force_1-3","ボスモンスターが復活するまで残り2分です。",bc_map,"0x9933CC";
+	end;
+OnTimer120000:
+	if($dieline==2){
+		mapannounce "force_1-3","残り1分以内にディオールエリアから脱出してください。",bc_map,"0x9933CC";
+		end;
+	}
+	mapannounce "force_1-3","ボスモンスターが復活するまで残り1分です。",bc_map,"0x9933CC";
+	end;
+OnTimer180000:
+	stopnpctimer;
+	if($dieline>=2)
+		mapannounce "force_1-3","時間制限によりダンジョンが閉息します。",bc_map,"0x9933CC";
+	else
+		mapannounce "force_1-3","ボスモンスターが復活しました!!",bc_map,"0x9933CC";
+	sleep 2000;
+	killmonsterall "force_1-3";
+	if($dieline>=2){
+		set $dieline,1;
+		disablenpc "#diorout";
+		announce "[時計塔管理者]ディオールが制覇されました。",8;
+		areawarp "force_1-3",0,0,200,200,"aldebaran",140,120;
+		sleep 2000;
+		areawarp "force_1-3",0,0,200,200,"aldebaran",140,120;
+		end;
+	}
+	donpcevent "counttimer::OnStart";
+	end;
+}
+force_1-3,90,192,0	script	制御装置#1	858,{
+	set .@crear,getvariableofnpc(.froacore,"counttimer");
+	if(.@crear&1){
+		if(.hp > 0){
+			mes "[制御装置]";
+			mes "-制御装置がある-";
+			mes "^FF0000残りHP : "+.hp;
+			next;
+			if(select("攻撃する","触らない")==2) {
+				mes "[制御装置]";
+				mes "-危険そうだ-";
+				close;
+			}
+			if(.hp < 1){
+				mes "[制御装置]";
+				mes "-第一制御装置は破壊されている-";
+				close;
+			}
+			set .@damage,rand(readparam(bStr)/2,readparam(bStr));
+			set .hp,.hp-.@damage;
+			set .@rdamage,(.hp/4+.@damage*3)*rand(1,4)+rand(0,100);
+			mes "[制御装置]";
+			if(rand(10)==0){
+				set .@cdamage,.@damage+rand(20,100);
+				set .hp,.hp-.@cdamage;
+				mes "-制御装置の弱点を突いた!!!!-";
+				mes "-制御装置に"+(.@damage+.@cdamage)+"ダメージ与えた!!-";
+			}else{
+				mes "-制御装置に"+.@damage+"ダメージ与えた!!-";
+			}
+			mes "^FF0000残りHP : "+.hp;
+			next;
+			if(.hp > 0){
+				mes "[制御装置]";
+				mes "-なんと制御装置が反撃してきた!!-";
+				mes "-"+strcharinfo(0)+"は"+.@rdamage+"ダメージ受けた!!-";
+				heal -.@rdamage,0;
+				close;
+			}
+			if(.brek==0){
+				mes "[制御装置]";
+				mes "-制御装置が破壊された!!-";
+				close2;
+				if($@dieallco >= 4 && .brek==0){
+					set .brek,1;
+					callfunc("func_party_control",1,20);
+					areamonster "force_1-3",20,20,200,200,"--ja--",2132,30;
+					donpcevent "Dieall_Manager::OnBossSpawn";
+				} else if(.brek==0){
+					set .brek,1;
+					set $@dieallco,$@dieallco+1;
+					callfunc("func_party_control",1,20);
+					mapannounce "force_1-3","第一制御装置が破壊されました!!",bc_map,"0x9933CC";
+					areamonster "force_1-3",20,20,200,200,"--ja--",2132,30;
+				}
+				end;
+			}
+			close;
+		}
+		mes "[制御装置]";
+		mes "-第一制御装置は破壊されている-";
+		close;
+	}else{
+		mes "[制御装置]";
+		mes "-ダメだ、操作できない-";
+		next;
+		mes "-守護モンスターを倒さないと…-";
+		close;
+	}
+OnInit:
+OnStart:
+	set .hp,2500;
+	set .brek,0;
+	end;
+}
+force_1-3,94,192,0	script	制御装置#2	858,{
+	set .@crear,getvariableofnpc(.froacore,"counttimer");
+	if(.@crear&2){
+		if(.hp > 0){
+			mes "[制御装置]";
+			mes "-制御装置がある-";
+			mes "^FF0000残りHP : "+.hp;
+			next;
+			if(select("攻撃する","触らない")==2) {
+				mes "[制御装置]";
+				mes "-危険そうだ-";
+				close;
+			}
+			if(.hp < 1){
+				mes "[制御装置]";
+				mes "-第二制御装置は破壊されている-";
+				close;
+			}
+			set .@damage,rand(readparam(bDex)/2,readparam(bDex));
+			set .hp,.hp-.@damage;
+			set .@rdamage,(.hp/4+.@damage*3)*rand(1,4)+rand(0,100);
+			mes "[制御装置]";
+			if(rand(10)==0){
+				set .@cdamage,.@damage+rand(20,100);
+				set .hp,.hp-.@cdamage;
+				mes "-制御装置の弱点を突いた!!!!-";
+				mes "-制御装置に"+(.@damage+.@cdamage)+"ダメージ与えた!!-";
+			}else{
+				mes "-制御装置に"+.@damage+"ダメージ与えた!!-";
+			}
+			mes "^FF0000残りHP : "+.hp;
+			next;
+			if(.hp > 0){
+				mes "[制御装置]";
+				mes "-なんと制御装置が反撃してきた!!-";
+				mes "-"+strcharinfo(0)+"は"+.@rdamage+"ダメージ受けた!!-";
+				heal -.@rdamage,0;
+				close;
+			}
+			if(.brek==0){
+				mes "[制御装置]";
+				mes "-制御装置が破壊された!!-";
+				close2;
+				if($@dieallco >= 4 && .brek==0){
+					set .brek,1;
+					callfunc("func_party_control",1,20);
+					areamonster "force_1-3",20,20,200,200,"--ja--",2092,30;
+					donpcevent "Dieall_Manager::OnBossSpawn";
+				} else if(.brek==0){
+					set .brek,1;
+					set $@dieallco,$@dieallco+1;
+					callfunc("func_party_control",1,20);
+					mapannounce "force_1-3","第二制御装置が破壊されました!!",bc_map,"0x9933CC";
+					areamonster "force_1-3",20,20,200,200,"--ja--",2092,30;
+				}
+				end;
+			}
+			close;
+		}
+		mes "[制御装置]";
+		mes "-第二制御装置は破壊されている-";
+		close;
+	}else{
+		mes "[制御装置]";
+		mes "-ダメだ、操作できない-";
+		next;
+		mes "-守護モンスターを倒さないと…-";
+		close;
+	}
+OnInit:
+OnStart:
+	set .hp,2500;
+	set .brek,0;
+	end;
+}
+force_1-3,100,192,0	script	制御装置#3	858,{
+	set .@crear,getvariableofnpc(.froacore,"counttimer");
+	if(.@crear&4){
+		if(.hp > 0){
+			mes "[制御装置]";
+			mes "-制御装置がある-";
+			mes "^FF0000残りHP : "+.hp;
+			next;
+			if(select("攻撃する","触らない")==2) {
+				mes "[制御装置]";
+				mes "-危険そうだ-";
+				close;
+			}
+			if(.hp < 1){
+				mes "[制御装置]";
+				mes "-第三制御装置は破壊されている-";
+				close;
+			}
+			set .@damage,rand(readparam(bAgi)/2,readparam(bAgi));
+			set .hp,.hp-.@damage;
+			set .@rdamage,(.hp/4+.@damage*3)*rand(1,4)+rand(0,100);
+			mes "[制御装置]";
+			if(rand(10)==0){
+				set .@cdamage,.@damage+rand(20,100);
+				set .hp,.hp-.@cdamage;
+				mes "-制御装置の弱点を突いた!!!!-";
+				mes "-制御装置に"+(.@damage+.@cdamage)+"ダメージ与えた!!-";
+			}else{
+				mes "-制御装置に"+.@damage+"ダメージ与えた!!-";
+			}
+			mes "^FF0000残りHP : "+.hp;
+			next;
+			if(.hp > 0){
+				mes "[制御装置]";
+				mes "-なんと制御装置が反撃してきた!!-";
+				mes "-"+strcharinfo(0)+"は"+.@rdamage+"ダメージ受けた!!-";
+				heal -.@rdamage,0;
+				close;
+			}
+			if(.brek==0){
+				mes "[制御装置]";
+				mes "-制御装置が破壊された!!-";
+				close2;
+				if($@dieallco >= 4 && .brek==0){
+					set .brek,1;
+					callfunc("func_party_control",1,20);
+					areamonster "force_1-3",20,20,200,200,"--ja--",1974,30;
+					donpcevent "Dieall_Manager::OnBossSpawn";
+				} else if(.brek==0){
+					set .brek,1;
+					set $@dieallco,$@dieallco+1;
+					callfunc("func_party_control",1,20);
+					mapannounce "force_1-3","第三制御装置が破壊されました!!",bc_map,"0x9933CC";
+					areamonster "force_1-3",20,20,200,200,"--ja--",1974,30;
+				}
+				end;
+			}
+			close;
+		}
+		mes "[制御装置]";
+		mes "-第三制御装置は破壊されている-";
+		close;
+	}else{
+		mes "[制御装置]";
+		mes "-ダメだ、操作できない-";
+		next;
+		mes "-守護モンスターを倒さないと…-";
+		close;
+	}
+OnInit:
+OnStart:
+	set .hp,2300;
+	set .brek,0;
+	end;
+}
+force_1-3,105,192,0	script	制御装置#4	858,{
+	set .@crear,getvariableofnpc(.froacore,"counttimer");
+	if(.@crear&8){
+		if(.hp > 0){
+			mes "[制御装置]";
+			mes "-制御装置がある-";
+			mes "^FF0000残りHP : "+.hp;
+			next;
+			if(select("攻撃する","触らない")==2) {
+				mes "[制御装置]";
+				mes "-危険そうだ-";
+				close;
+			}
+			if(.hp < 1){
+				mes "[制御装置]";
+				mes "-第四制御装置は破壊されている-";
+				close;
+			}
+			set .@damage,rand(readparam(bInt)/2,readparam(bInt));
+			set .hp,.hp-.@damage;
+			set .@rdamage,(.hp/4+.@damage*3)*rand(1,4)+rand(0,100);
+			mes "[制御装置]";
+			if(rand(10)==0){
+				set .@cdamage,.@damage+rand(20,100);
+				set .hp,.hp-.@cdamage;
+				mes "-制御装置の弱点を突いた!!!!-";
+				mes "-制御装置に"+(.@damage+.@cdamage)+"ダメージ与えた!!-";
+			}else{
+				mes "-制御装置に"+.@damage+"ダメージ与えた!!-";
+			}
+			mes "^FF0000残りHP : "+.hp;
+			next;
+			if(.hp > 0){
+				mes "[制御装置]";
+				mes "-なんと制御装置が反撃してきた!!-";
+				mes "-"+strcharinfo(0)+"は"+.@rdamage+"ダメージ受けた!!-";
+				heal -.@rdamage,0;
+				close;
+			}
+			if(.brek==0){
+				mes "[制御装置]";
+				mes "-制御装置が破壊された!!-";
+				close2;
+				if($@dieallco >= 4 && .brek==0){
+					set .brek,1;
+					callfunc("func_party_control",1,20);
+					areamonster "force_1-3",20,20,200,200,"--ja--",1833,30;
+					donpcevent "Dieall_Manager::OnBossSpawn";
+				} else if(.brek==0){
+					set .brek,1;
+					set $@dieallco,$@dieallco+1;
+					callfunc("func_party_control",1,20);
+					mapannounce "force_1-3","第四制御装置が破壊されました!!",bc_map,"0x9933CC";
+					areamonster "force_1-3",20,20,200,200,"--ja--",1833,30;
+				}
+				end;
+			}
+		}
+		mes "[制御装置]";
+		mes "-第四制御装置は破壊されている-";
+		close;
+	}else{
+		mes "[制御装置]";
+		mes "-ダメだ、操作できない-";
+		next;
+		mes "-守護モンスターを倒さないと…-";
+		close;
+	}
+OnInit:
+OnStart:
+	set .hp,2300;
+	set .brek,0;
+	end;
+}
+force_1-3,109,192,0	script	制御装置#5	858,{
+	set .@crear,getvariableofnpc(.froacore,"counttimer");
+	if(.@crear&16){
+		if(.hp > 0){
+			mes "[制御装置]";
+			mes "-制御装置がある-";
+			mes "^FF0000残りHP : "+.hp;
+			next;
+			if(select("攻撃する","触らない")==2) {
+				mes "[制御装置]";
+				mes "-危険そうだ-";
+				close;
+			}
+			if(.hp < 1){
+				mes "[制御装置]";
+				mes "-第五制御装置は破壊されている-";
+				close;
+			}
+			set .@damage,rand(readparam(bLuk)/2,readparam(bLuk));
+			set .hp,.hp-.@damage;
+			set .@rdamage,(.hp/4+.@damage*3)*rand(1,4)+rand(0,100);
+			mes "[制御装置]";
+			if(rand(10)==0){
+				set .@cdamage,.@damage+rand(20,100);
+				set .hp,.hp-.@cdamage;
+				mes "-制御装置の弱点を突いた!!!!-";
+				mes "-制御装置に"+(.@damage+.@cdamage)+"ダメージ与えた!!-";
+			}else{
+				mes "-制御装置に"+.@damage+"ダメージ与えた!!-";
+			}
+			mes "^FF0000残りHP : "+.hp;
+			next;
+			if(.hp > 0){
+				mes "[制御装置]";
+				mes "-なんと制御装置が反撃してきた!!-";
+				mes "-"+strcharinfo(0)+"は"+.@rdamage+"ダメージ受けた!!-";
+				heal -.@rdamage,0;
+				close;
+			}
+			if(.brek==0){
+				mes "[制御装置]";
+				mes "-制御装置が破壊された!!-";
+				close2;
+				if($@dieallco >= 4 && .brek==0){
+					set .brek,1;
+					callfunc("func_party_control",1,20);
+					areamonster "force_1-3",20,20,200,200,"--ja--",3025,30;
+					donpcevent "Dieall_Manager::OnBossSpawn";
+				} else if(.brek==0){
+					set .brek,1;
+					set $@dieallco,$@dieallco+1;
+					callfunc("func_party_control",1,20);
+					mapannounce "force_1-3","第五制御装置が破壊されました!!",bc_map,"0x9933CC";
+					areamonster "force_1-3",20,20,200,200,"--ja--",3025,30;
+				}
+				end;
+			}
+			close;
+		}
+		mes "[制御装置]";
+		mes "-第五制御装置は破壊されている-";
+		close;
+	}else{
+		mes "[制御装置]";
+		mes "-ダメだ、操作できない-";
+		next;
+		mes "-守護モンスターを倒さないと…-";
+		close;
+	}
+OnInit:
+OnStart:
+	set .hp,2000;
+	set .brek,0;
+	end;
+}
+force_1-3,100,190,0	script	#diorout	45,1,1,{
+	end;
+OnTouch:
+	dispbottom("クリア報酬500苺pointを獲得しました!");
+	set #PPOINT,#PPOINT+500;
+	if(#LOGINDAY+84600 < gettimetick(2)){
+		query_sql("SELECT `last_ip` FROM `login` WHERE `account_id`="+getcharid(3),@ip$);
+		query_sql("SELECT `last_ip` FROM `login` WHERE `level`=0 AND `last_ip`='"+@ip$+"'",@ip_list$);
+		set @cashp,(1000/(getarraysize(@ip_list$)>2?2:getarraysize(@ip_list$)));
+		set #LOGINDAY,gettimetick(2);
+		set #CASHPOINTS,#CASHPOINTS+@cashp;
+		set #PPOINT,#PPOINT+50;
+		dispbottom("当日初回登頂によりキャッシュポイント"+@cashp+"、苺ポイント50が加算されました");
+	}
+	warp "aldebaran",140,120;
+	end;
+OnInit:
+OnStart:
+	disablenpc "#diorout";
+	end;
+}
+
+-	script	DIEALL_BUFF	-1,{
+	end;
+OnStart:
+	getmapxy(.@mapname$,.@mapx,.@mapy,0,strcharinfo(0));
+	if(countitem(28709)>0 && .@mapname$ == "force_1-3"){
+		delitem 28709,1;
+		specialeffect2 EF_BLESSING;
+		sc_start SC_DIOR,60000,0;
+		dispbottom("ミラージュクリスタルが輝きました!");
+		addtimer 60000,"DIEALL_BUFF::OnStart";
+	}
+	end;
+}
+
+force_1-3,100,165,0	script	dieall#0	45,2,2,{
+	end;
+OnTouch:
+	if(@dieallwp){set @dieallwp,0; end;}else{set @dieallwp,1;}
+	if(atoi(strnpcinfo(2)) >= 0 && atoi(strnpcinfo(2)) <= 39){
+		warp "force_1-3",$@dieallx[atoi(strnpcinfo(2))],$@dieally[atoi(strnpcinfo(2))];
+	}
+	end;
+}
+
+force_1-3,90,59,0	duplicate(dieall#0)	dieall#1	45,1,1
+force_1-3,100,10,0	duplicate(dieall#0)	dieall#2	45,1,1
+force_1-3,108,60,0	duplicate(dieall#0)	dieall#3	45,1,1
+force_1-3,20,147,0	duplicate(dieall#0)	dieall#4	45,1,1
+force_1-3,10,99,0	duplicate(dieall#0)	dieall#5	45,1,1
+force_1-3,29,99,0	duplicate(dieall#0)	dieall#6	45,1,1
+force_1-3,59,29,0	duplicate(dieall#0)	dieall#7	45,1,1
+force_1-3,68,20,0	duplicate(dieall#0)	dieall#8	45,1,1
+force_1-3,139,147,0	duplicate(dieall#0)	dieall#9	45,1,1
+force_1-3,130,137,0	duplicate(dieall#0)	dieall#10	45,1,1
+force_1-3,179,129,0	duplicate(dieall#0)	dieall#11	45,1,1
+force_1-3,20,51,0	duplicate(dieall#0)	dieall#12	45,1,1
+force_1-3,59,69,0	duplicate(dieall#0)	dieall#13	45,1,1
+force_1-3,69,60,0	duplicate(dieall#0)	dieall#14	45,1,1
+force_1-3,19,11,0	duplicate(dieall#0)	dieall#15	45,1,1
+force_1-3,19,29,0	duplicate(dieall#0)	dieall#16	45,1,1
+force_1-3,179,171,0	duplicate(dieall#0)	dieall#17	45,1,1
+force_1-3,170,179,0	duplicate(dieall#0)	dieall#18	45,1,1
+force_1-3,140,50,0	duplicate(dieall#0)	dieall#19	45,1,1
+force_1-3,130,100,0	duplicate(dieall#0)	dieall#20	45,1,1
+force_1-3,139,108,0	duplicate(dieall#0)	dieall#21	45,1,1
+force_1-3,100,147,0	duplicate(dieall#0)	dieall#22	45,1,1
+force_1-3,99,129,0	duplicate(dieall#0)	dieall#23	45,1,1
+force_1-3,90,137,0	duplicate(dieall#0)	dieall#24	45,1,1
+force_1-3,109,138,0	duplicate(dieall#0)	dieall#25	45,1,1
+force_1-3,60,129,0	duplicate(dieall#0)	dieall#26	45,1,1
+force_1-3,68,138,0	duplicate(dieall#0)	dieall#27	45,1,1
+force_1-3,109,99,0	duplicate(dieall#0)	dieall#28	45,1,1
+force_1-3,59,109,0	duplicate(dieall#0)	dieall#29	45,1,1
+force_1-3,59,90,0	duplicate(dieall#0)	dieall#30	45,1,1
+force_1-3,130,20,0	duplicate(dieall#0)	dieall#31	45,1,1
+force_1-3,180,29,0	duplicate(dieall#0)	dieall#32	45,1,1
+force_1-3,179,109,0	duplicate(dieall#0)	dieall#33	45,1,1
+force_1-3,170,99,0	duplicate(dieall#0)	dieall#34	45,1,1
+force_1-3,179,91,0	duplicate(dieall#0)	dieall#35	45,1,1
+force_1-3,19,189,0	duplicate(dieall#0)	dieall#36	45,1,1
+force_1-3,29,179,0	duplicate(dieall#0)	dieall#37	45,1,1
+force_1-3,170,59,0	duplicate(dieall#0)	dieall#38	45,1,1
+force_1-3,179,50,0	duplicate(dieall#0)	dieall#39	45,1,1
+
+//force_1-3,1,1,1	script	ミラージュサークル	45,1,1,{
+//	end;
+//OnTouch:
+//	mes "-ミラージュサークルがあり";
+//	mes "中心から強い引力が発生している-";
+//	next;
+//	if(select("抵抗しない","抵抗する")==2) {
+//		mes "-逃げなければ!!-";
+//		close;
+//	}
+//	mes "-行ってみよう-";
+//	close2;
+//	warp "cave",97,31;
+//	end;
+//}
+
+cave,97,26,0	script	dieall#40	45,2,2,{
+	end;
+OnTouch:
+	warp "aldebaran",140,120;
+	end;
+}
+
+cave,98,36,1	script	鬼火#sicle	802,{
+	mes "["+strcharinfo(0)+"]";
+	mes "怪しげな鬼火が浮いている";
+	next;
+	if(select("触れる","触れない")==2) {
+		mes "去ろう";
+		close;
+	}
+	viewpoint 2,.xsrand1,.ysrand1,1,0xFF0000;
+	viewpoint 2,.xsrand2,.ysrand2,2,0x00FF00;
+	viewpoint 2,.xsrand3,.ysrand3,3,0x0000FF;
+	if((getvariableofnpc(.hp,"亀裂#1"))==0 &&
+	   (getvariableofnpc(.hp,"亀裂#2"))==0 &&
+	   (getvariableofnpc(.hp,"亀裂#3"))==0){
+		mes "鬼火が強烈な光を放ち始めた!!";
+		donpcevent "鬼火#sicle::OnStart";
+		viewpoint 1,.xsrand1,.ysrand1,1,0xFF0000;
+		viewpoint 1,.xsrand2,.ysrand2,2,0x00FF00;
+		viewpoint 1,.xsrand3,.ysrand3,3,0x0000FF;
+		close;
+	}
+	mes "鬼火は寂しそうに震えると";
+	mes "優しい光を放ち始めた!!";
+	viewpoint 1,.xsrand1,.ysrand1,1,0xFF0000;
+	viewpoint 1,.xsrand2,.ysrand2,2,0x00FF00;
+	viewpoint 1,.xsrand3,.ysrand3,3,0x0000FF;
+	close;
+OnStart:
+	set .j,1;
+	for(set .i,0; .i==.i; set .i,.i+1){
+		set .xsrand,rand(55,142);
+		set .ysrand,rand(36,79);
+		if(checkcell("cave",.xsrand,.ysrand,cell_chkpass)){
+			set getd(".xsrand"+.j),.xsrand;
+			set getd(".ysrand"+.j),.ysrand;
+			set .j,.j + 1;
+			if(.j==4)break;
+		}
+	}
+	donpcevent "亀裂#1::OnStart";
+	donpcevent "亀裂#2::OnStart";
+	donpcevent "亀裂#3::OnStart";
+	movenpc "亀裂#1",.xsrand1,.ysrand1;
+	movenpc "亀裂#2",.xsrand2,.ysrand2;
+	movenpc "亀裂#3",.xsrand3,.ysrand3;
+	end;
+}
+
+cave,99,43,0	script	亀裂#1	550,{
+	if(.hp > 0){
+		mes "-亀裂が走っている-";
+		mes "^FF0000深さ : "+.hp;
+		next;
+		if(select("掘る","やめる")==2) {
+			mes "-危険そうだ-";
+			close;
+		}
+		set .@choise,select(
+			((countitem(2279) > 0)? "導火線":""),
+			((countitem(5031) > 0)? "鉱山ヘルメット":""),
+			((countitem(7016) > 0)? "古いスプーン":""),
+			((countitem(28426) > 0)? "古いつるはし":""),
+			((countitem(28427) > 0)? "つるはし":""),
+			((countitem(28428) > 0)? "頑丈なつるはし":""),
+			((countitem(28429) > 0)? "大きなつるはし":""),
+			((countitem(28430) > 0)? "最高級つるはし":""));
+		switch(.@choise){
+		case 1:
+			mes "["+strcharinfo(0)+"]";
+			mes "そうか！";
+			mes "この^FF0000導火線^000000で爆破すれば！";
+			next;
+			mes "-"+strcharinfo(0)+"は導火線を";
+			mes "地面に植えて火をつけた-";
+			delitem 2279,1;
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-……-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-…………-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-………………??-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes (Sex)?"俺":"私"+"は馬鹿か!!";
+			close;
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "そうか！";
+			mes "この^FF0000鉱山ヘルメット^000000があれば百人力だ！";
+			next;
+			mes "-"+strcharinfo(0)+"は鉱山ヘルメットを装備し";
+			mes "身を潜めて辺りの様子を探った-";
+			delitem 5031,1;
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-……-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-…………-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-………………??-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes (Sex)?"俺":"私"+"は何をやってるんだ!!";
+			close;
+		case 3:
+			mes "["+strcharinfo(0)+"]";
+			mes "そうか！";
+			mes "この^FF0000古いスプーン^000000があれば脱獄だって！";
+			next;
+			mes "-"+strcharinfo(0)+"は古いスプーンを両手で握ると";
+			mes "一心不乱に地面を掘り始めた-";
+			delitem 7016,1;
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-……-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-…………-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-………………??-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes (Sex)?"俺":"私"+"は何処から逃げるんだっけ??";
+			close;
+		case 4: set .@turuhasi,28426; set .@time,15;set .@gup,1; break;
+		case 5: set .@turuhasi,28427; set .@time,9; set .@gup,2; break;
+		case 6: set .@turuhasi,28428; set .@time,7; set .@gup,3; break;
+		case 7: set .@turuhasi,28429; set .@time,7; set .@gup,3; break;
+		case 8: set .@turuhasi,28430; set .@time,4; set .@gup,4; break;
+		}
+		mes "["+strcharinfo(0)+"]";
+		mes "そうか！";
+		mes "掘ると言えばこの^FF0000"+getitemname(.@turuhasi)+"^000000だね！";
+		next;
+		mes "-"+strcharinfo(0)+"は"+getitemname(.@turuhasi)+"を";
+		mes "亀裂に向けて振り下ろした!!-";
+		set .hp,.hp-1;
+		if(countitem(.@turuhasi)<1) close;
+		delitem .@turuhasi,1;
+		next;
+		progressbar "ffff00",.@time;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		set .@icy,rand(0,200);
+		if(.@icy >= 0 && .@icy <= 1){mes "しまった！！";warp "aldebaran",140,120;}
+		if(.@icy >= 2 && .@icy <= 80){mes "これは……ミラージュクリスタルだ！！";getitem 28709,rand(.@gup)+1;}
+		if(.@icy >= 81 && .@icy <= 90){mes "これは……レッドブラッドだ！！";getitem 990,rand(.@gup)+1;}
+		if(.@icy >= 91 && .@icy <= 100){mes "これは……クリスタルブルーだ！！";getitem 991,rand(.@gup)+1;}
+		if(.@icy >= 101 && .@icy <= 110){mes "これは……ウィンドオブヴェルデュールだ！！";getitem 992,rand(.@gup)+1;}
+		if(.@icy >= 111 && .@icy <= 120){mes "これは……イエローライブだ！！";getitem 993,rand(.@gup)+1;}
+		if(.@icy >= 121 && .@icy <= 200){
+			mes "これは……硬貨だ！！";
+			switch(rand(1,20)){
+				case 1:	getitem 7231,.@gup;break;
+				case 2:	getitem 7232,.@gup;break;
+				case 3:	getitem 7233,.@gup;break;
+				case 4:	getitem 7231,.@gup;break;
+				case 5:	getitem 7232,.@gup;break;
+				case 6:	getitem 7233,.@gup;break;
+				case 7:	getitem 672,1;break;
+				default:
+					getitem 673,.@gup;break;
+			}
+		}
+		close;
+	}
+	mes "["+strcharinfo(0)+"]";
+	mes "ここの亀裂の中は";
+	mes "掘り尽くしてしまったようだ";
+	close;
+OnInit:
+OnStart:
+	set .hp,12;
+	end;
+}
+cave,99,43,0	script	亀裂#2	550,{
+	if(.hp > 0){
+		mes "-亀裂が走っている-";
+		mes "^FF0000深さ : "+.hp;
+		next;
+		if(select("掘る","やめる")==2) {
+			mes "-危険そうだ-";
+			close;
+		}
+		set .@choise,select(
+			((countitem(2279) > 0)? "導火線":""),
+			((countitem(5031) > 0)? "鉱山ヘルメット":""),
+			((countitem(7016) > 0)? "古いスプーン":""),
+			((countitem(28426) > 0)? "古いつるはし":""),
+			((countitem(28427) > 0)? "つるはし":""),
+			((countitem(28428) > 0)? "頑丈なつるはし":""),
+			((countitem(28429) > 0)? "大きなつるはし":""),
+			((countitem(28430) > 0)? "最高級つるはし":""));
+		switch(.@choise){
+		case 1:
+			mes "["+strcharinfo(0)+"]";
+			mes "そうか！";
+			mes "この^FF0000導火線^000000で爆破すれば！";
+			next;
+			mes "-"+strcharinfo(0)+"は導火線を";
+			mes "地面に植えて火をつけた-";
+			delitem 2279,1;
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-……-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-…………-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-………………??-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes (Sex)?"俺":"私"+"は馬鹿か!!";
+			close;
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "そうか！";
+			mes "この^FF0000鉱山ヘルメット^000000があれば百人力だ！";
+			next;
+			mes "-"+strcharinfo(0)+"は鉱山ヘルメットを装備し";
+			mes "身を潜めて辺りの様子を探った-";
+			delitem 5031,1;
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-……-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-…………-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-………………??-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes (Sex)?"俺":"私"+"は何をやってるんだ!!";
+			close;
+		case 3:
+			mes "["+strcharinfo(0)+"]";
+			mes "そうか！";
+			mes "この^FF0000古いスプーン^000000があれば脱獄だって！";
+			next;
+			mes "-"+strcharinfo(0)+"は古いスプーンを両手で握ると";
+			mes "一心不乱に地面を掘り始めた-";
+			delitem 7016,1;
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-……-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-…………-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-………………??-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes (Sex)?"俺":"私"+"は何処から逃げるんだっけ??";
+			close;
+		case 4: set .@turuhasi,28426; set .@time,15;set .@gup,1; break;
+		case 5: set .@turuhasi,28427; set .@time,9; set .@gup,2; break;
+		case 6: set .@turuhasi,28428; set .@time,7; set .@gup,3; break;
+		case 7: set .@turuhasi,28429; set .@time,7; set .@gup,3; break;
+		case 8: set .@turuhasi,28430; set .@time,4; set .@gup,4; break;
+		}
+		mes "["+strcharinfo(0)+"]";
+		mes "そうか！";
+		mes "掘ると言えばこの^FF0000"+getitemname(.@turuhasi)+"^000000だね！";
+		next;
+		mes "-"+strcharinfo(0)+"は"+getitemname(.@turuhasi)+"を";
+		mes "亀裂に向けて振り下ろした!!-";
+		set .hp,.hp-1;
+		if(countitem(.@turuhasi)<1) close;
+		delitem .@turuhasi,1;
+		next;
+		progressbar "ffff00",.@time;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		set .@icy,rand(0,200);
+		if(.@icy >= 0 && .@icy <= 1){mes "しまった！！";warp "aldebaran",140,120;}
+		if(.@icy >= 2 && .@icy <= 80){mes "これは……ミラージュクリスタルだ！！";getitem 28709,rand(.@gup)+1;}
+		if(.@icy >= 81 && .@icy <= 90){mes "これは……レッドブラッドだ！！";getitem 990,rand(.@gup)+1;}
+		if(.@icy >= 91 && .@icy <= 100){mes "これは……クリスタルブルーだ！！";getitem 991,rand(.@gup)+1;}
+		if(.@icy >= 101 && .@icy <= 110){mes "これは……ウィンドオブヴェルデュールだ！！";getitem 992,rand(.@gup)+1;}
+		if(.@icy >= 111 && .@icy <= 120){mes "これは……イエローライブだ！！";getitem 993,rand(.@gup)+1;}
+		if(.@icy >= 121 && .@icy <= 200){
+			mes "これは……硬貨だ！！";
+			switch(rand(1,20)){
+				case 1:	getitem 7231,.@gup;break;
+				case 2:	getitem 7232,.@gup;break;
+				case 3:	getitem 7233,.@gup;break;
+				case 4:	getitem 7231,.@gup;break;
+				case 5:	getitem 7232,.@gup;break;
+				case 6:	getitem 7233,.@gup;break;
+				case 7:	getitem 672,1;break;
+				default:
+					getitem 673,.@gup;break;
+			}
+		}
+		close;
+	}
+	mes "["+strcharinfo(0)+"]";
+	mes "ここの亀裂の中は";
+	mes "掘り尽くしてしまったようだ";
+	close;
+OnInit:
+OnStart:
+	set .hp,12;
+	end;
+}
+cave,99,43,0	script	亀裂#3	550,{
+	if(.hp > 0){
+		mes "-亀裂が走っている-";
+		mes "^FF0000深さ : "+.hp;
+		next;
+		if(select("掘る","やめる")==2) {
+			mes "-危険そうだ-";
+			close;
+		}
+		set .@choise,select(
+			((countitem(2279) > 0)? "導火線":""),
+			((countitem(5031) > 0)? "鉱山ヘルメット":""),
+			((countitem(7016) > 0)? "古いスプーン":""),
+			((countitem(28426) > 0)? "古いつるはし":""),
+			((countitem(28427) > 0)? "つるはし":""),
+			((countitem(28428) > 0)? "頑丈なつるはし":""),
+			((countitem(28429) > 0)? "大きなつるはし":""),
+			((countitem(28430) > 0)? "最高級つるはし":""));
+		switch(.@choise){
+		case 1:
+			mes "["+strcharinfo(0)+"]";
+			mes "そうか！";
+			mes "この^FF0000導火線^000000で爆破すれば！";
+			next;
+			mes "-"+strcharinfo(0)+"は導火線を";
+			mes "地面に植えて火をつけた-";
+			delitem 2279,1;
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-……-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-…………-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-………………??-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes (Sex)?"俺":"私"+"は馬鹿か!!";
+			close;
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "そうか！";
+			mes "この^FF0000鉱山ヘルメット^000000があれば百人力だ！";
+			next;
+			mes "-"+strcharinfo(0)+"は鉱山ヘルメットを装備し";
+			mes "身を潜めて辺りの様子を探った-";
+			delitem 5031,1;
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-……-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-…………-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-………………??-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes (Sex)?"俺":"私"+"は何をやってるんだ!!";
+			close;
+		case 3:
+			mes "["+strcharinfo(0)+"]";
+			mes "そうか！";
+			mes "この^FF0000古いスプーン^000000があれば脱獄だって！";
+			next;
+			mes "-"+strcharinfo(0)+"は古いスプーンを両手で握ると";
+			mes "一心不乱に地面を掘り始めた-";
+			delitem 7016,1;
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-……-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-…………-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "-………………??-";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes (Sex)?"俺":"私"+"は何処から逃げるんだっけ??";
+			close;
+		case 4: set .@turuhasi,28426; set .@time,15;set .@gup,1; break;
+		case 5: set .@turuhasi,28427; set .@time,9; set .@gup,2; break;
+		case 6: set .@turuhasi,28428; set .@time,7; set .@gup,3; break;
+		case 7: set .@turuhasi,28429; set .@time,7; set .@gup,3; break;
+		case 8: set .@turuhasi,28430; set .@time,4; set .@gup,4; break;
+		}
+		mes "["+strcharinfo(0)+"]";
+		mes "そうか！";
+		mes "掘ると言えばこの^FF0000"+getitemname(.@turuhasi)+"^000000だね！";
+		next;
+		mes "-"+strcharinfo(0)+"は"+getitemname(.@turuhasi)+"を";
+		mes "亀裂に向けて振り下ろした!!-";
+		set .hp,.hp-1;
+		if(countitem(.@turuhasi)<1) close;
+		delitem .@turuhasi,1;
+		next;
+		progressbar "ffff00",.@time;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		set .@icy,rand(0,200);
+		if(.@icy >= 0 && .@icy <= 1){mes "しまった！！";warp "aldebaran",140,120;}
+		if(.@icy >= 2 && .@icy <= 80){mes "これは……ミラージュクリスタルだ！！";getitem 28709,rand(.@gup)+1;}
+		if(.@icy >= 81 && .@icy <= 90){mes "これは……レッドブラッドだ！！";getitem 990,rand(.@gup)+1;}
+		if(.@icy >= 91 && .@icy <= 100){mes "これは……クリスタルブルーだ！！";getitem 991,rand(.@gup)+1;}
+		if(.@icy >= 101 && .@icy <= 110){mes "これは……ウィンドオブヴェルデュールだ！！";getitem 992,rand(.@gup)+1;}
+		if(.@icy >= 111 && .@icy <= 120){mes "これは……イエローライブだ！！";getitem 993,rand(.@gup)+1;}
+		if(.@icy >= 121 && .@icy <= 200){
+			mes "これは……硬貨だ！！";
+			switch(rand(1,20)){
+				case 1:	getitem 7231,.@gup;break;
+				case 2:	getitem 7232,.@gup;break;
+				case 3:	getitem 7233,.@gup;break;
+				case 4:	getitem 7231,.@gup;break;
+				case 5:	getitem 7232,.@gup;break;
+				case 6:	getitem 7233,.@gup;break;
+				case 7:	getitem 672,1;break;
+				default:
+					getitem 673,.@gup;break;
+			}
+		}
+		close;
+	}
+	mes "["+strcharinfo(0)+"]";
+	mes "ここの亀裂の中は";
+	mes "掘り尽くしてしまったようだ";
+	close;
+OnInit:
+OnStart:
+	set .hp,12;
+	end;
+}
+
+function	script	ELEMENTALMIX	{
+//getarg(0)	itemid
+
+	if(countitem(974) == 0 && @mix_mat == 0){
+		announce "**混合剤がないため、クリスタルは砕け散った!!**",bc_self,"0xFF336D";
+		end;
+	}
+	if(@mix_mat == 0)
+		delitem 974,1;
+	set @mix_mat,1;
+	set @elecnt,@elecnt+1;
+	set getd("@el"+getarg(0)),getd("@el"+getarg(0))+1;
+	announce getitemname(getarg(0)+10000)+"を使用します。",bc_self,"0xFF7F8F";
+	if(@el18685>0){
+		if(@elecnt<3){
+			if(@el18681>0){getitem 28686,1;set @elecnt,5;set @mix_mat,0;announce "**合成が成功し、白の小さいクリスタルを入手しました**",bc_self,"0xFF336D";}
+			if(@el18682>0){getitem 28687,1;set @elecnt,5;set @mix_mat,0;announce "**合成が成功し、赤の小さいクリスタルを入手しました**",bc_self,"0xFF336D";}
+			if(@el18683>0){getitem 28688,1;set @elecnt,5;set @mix_mat,0;announce "**合成が成功し、青の小さいクリスタルを入手しました**",bc_self,"0xFF336D";}
+			if(@el18684>0){getitem 28689,1;set @elecnt,5;set @mix_mat,0;announce "**合成が成功し、緑の小さいクリスタルを入手しました**",bc_self,"0xFF336D";}
+		}
+		if(@elecnt>2){
+			for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+				set getd("@el"+.@i),0;
+			set @elecnt,0;
+			if(@mix_mat==1) announce "**合成に失敗しました**",bc_self,"0xFF336D";
+			set @mix_mat,0;
+		}end;
+	}
+	if(@el18690>0){
+		if(@elecnt<4){
+			if(@el18686>1 && countitem(28722)<1){set eltime,rand(160,600);set elstats$,3212;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18687>1 && countitem(28722)<1){set eltime,rand(280,430);set elstats$,1223;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18688>1 && countitem(28722)<1){set eltime,rand(500,600);set elstats$,2650;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18689>1 && countitem(28722)<1){set eltime,rand(330,500);set elstats$,0202;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+		}
+		if(@elecnt>3){
+			for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+				set getd("@el"+.@i),0;
+			set @elecnt,0;
+			if(@mix_mat==1) announce "**合成に失敗しました**",bc_self,"0xFF336D";
+			set @mix_mat,0;
+		}end;
+	}
+	if(@el18691>0){
+		if(@elecnt<4){
+			if(@el18686>1 && countitem(28722)<1){set eltime,rand(400,600);set elstats$,3221;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18687>1 && countitem(28722)<1){set eltime,rand(420,600);set elstats$,2320;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18688>1 && countitem(28722)<1){set eltime,rand(120,330);set elstats$,6240;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18689>1 && countitem(28722)<1){set eltime,rand(100,520);set elstats$,3012;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+		}
+		if(@elecnt>3){
+			for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+				set getd("@el"+.@i),0;
+			set @elecnt,0;
+			if(@mix_mat==1) announce "**合成に失敗しました**",bc_self,"0xFF336D";
+			set @mix_mat,0;
+		}end;
+	}
+	if(@el18692>0){
+		if(@elecnt<4){
+			if(@el18686>1 && countitem(28722)<1){set eltime,rand(80,600);set elstats$,7226;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18687>1 && countitem(28722)<1){set eltime,rand(360,480);set elstats$,6261;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18688>1 && countitem(28722)<1){set eltime,rand(190,260);set elstats$,2751;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18689>1 && countitem(28722)<1){set eltime,rand(160,300);set elstats$,3642;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+		}
+		if(@elecnt>3){
+			for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+				set getd("@el"+.@i),0;
+			set @elecnt,0;
+			if(@mix_mat==1) announce "**合成に失敗しました**",bc_self,"0xFF336D";
+			set @mix_mat,0;
+		}end;
+	}
+	if(@el18693>0){
+		if(@elecnt<4){
+			if(@el18686>1 && countitem(28722)<1){set eltime,rand(260,400);set elstats$,1838;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18687>1 && countitem(28722)<1){set eltime,rand(130,200);set elstats$,2154;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18688>1 && countitem(28722)<1){set eltime,rand(120,290);set elstats$,4232;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18689>1 && countitem(28722)<1){set eltime,rand(160,220);set elstats$,3146;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+		}
+		if(@elecnt>3){
+			for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+				set getd("@el"+.@i),0;
+			set @elecnt,0;
+			if(@mix_mat==1) announce "**合成に失敗しました**",bc_self,"0xFF336D";
+			set @mix_mat,0;
+		}end;
+	}
+	if(@el18694>0){
+		if(@elecnt<4){
+			if(@el18686>1 && countitem(28722)<1){set eltime,rand(60,400);set elstats$,9015;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18687>1 && countitem(28722)<1){set eltime,rand(100,250);set elstats$,3414;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18688>1 && countitem(28722)<1){set eltime,rand(100,300);set elstats$,5232;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+			if(@el18689>1 && countitem(28722)<1){set eltime,rand(60,220);set elstats$,6043;set @elecnt,@elecnt+1;set @mix_mat,0;getitem 28722,1;announce "**合成が成功し、エレメンタル原石を入手しました**",bc_self,"0xFF336D";}
+		}
+		if(@elecnt>3){
+			for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+				set getd("@el"+.@i),0;
+			set @elecnt,0;
+			if(@mix_mat==1) announce "**合成に失敗しました**",bc_self,"0xFF336D";
+			set @mix_mat,0;
+		}end;
+	}
+	if(@el18687>0){
+		if(@el18688>0 && @elecnt>=2){
+			if(@el18689>0 && @elecnt>=3){
+				if(@el18686>0 && @elecnt==4){
+					getitem 28694,1;
+					announce "**合成が成功し、黒の大きいクリスタルを入手しました**",bc_self,"0xFF336D";
+					for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+						set getd("@el"+.@i),0;
+					set @elecnt,0;
+					set @mix_mat,0;
+					end;
+				}
+			}
+		}
+		if(@el18687>=5){getitem 28691,1;set @elecnt,@elecnt+1;set @mix_mat,0;announce "**合成が成功し、赤の大きいクリスタルを入手しました**",bc_self,"0xFF336D";}
+		if(@elecnt>5){
+			for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+				set getd("@el"+.@i),0;
+			set @elecnt,0;
+			if(@mix_mat==1) announce "**合成に失敗しました**",bc_self,"0xFF336D";
+			set @mix_mat,0;
+		}end;
+	}
+	if(@el18686>0){
+		if(@el18686>=5){getitem 28690,1;set @elecnt,@elecnt+1;set @mix_mat,0;announce "**合成が成功し、白の大きいクリスタルを入手しました**",bc_self,"0xFF336D";}
+		if(@elecnt>5){
+			for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+				set getd("@el"+.@i),0;
+			set @elecnt,0;
+			if(@mix_mat==1) announce "**合成に失敗しました**",bc_self,"0xFF336D";
+			set @mix_mat,0;
+		}end;
+	}
+	if(@el18688>0){
+		if(@el18688>=5){getitem 28692,1;set @elecnt,@elecnt+1;set @mix_mat,0;announce "**合成が成功し、青の大きいクリスタルを入手しました**",bc_self,"0xFF336D";}
+		if(@elecnt>5){
+			for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+				set getd("@el"+.@i),0;
+			set @elecnt,0;
+			if(@mix_mat==1) announce "**合成に失敗しました**",bc_self,"0xFF336D";
+			set @mix_mat,0;
+		}end;
+	}
+	if(@el18689>0){
+		if(@el18689>=5){getitem 28693,1;set @elecnt,@elecnt+1;set @mix_mat,0;announce "**合成が成功し、緑の大きいクリスタルを入手しました**",bc_self,"0xFF336D";}
+		if(@elecnt>5){
+			for(set .@i,18681; .@i<18695; set .@i,.@i+1)
+				set getd("@el"+.@i),0;
+			set @elecnt,0;
+			if(@mix_mat==1) announce "**合成に失敗しました**",bc_self,"0xFF336D";
+			set @mix_mat,0;
+		}end;
+	}
+}
+function	script	ELEMENTALER	{
+//getarg(0)	status 1:equip 2:quit
+//getarg(1)	equipstatus 1:true 2:quit
+
+	if(@breakel==1){announce "**リログしてください!!**",bc_self,"0xFF0000";end;}
+	if(getarg(0) == 1){
+		if(eltime > 0){
+			if(@diecount==0) set @diecount,PC_DIE_COUNTER;
+			set eltime,eltime*1000;
+			announce "**エレメンタル原石を装着します**",bc_self,"0xD9314B";
+			addtimer eltime,"ELEMENTALER2::OnCheck";
+			set eltime,0;
+			end;
+		}
+		if(@diecount!=PC_DIE_COUNTER){
+			set @delflag,1;
+			if(getequipid(7)==28722)unequip 7;
+			if(getequipid(8)==28722)unequip 8;
+			set @delflag,0;
+			delitem 28722,1;
+			getitem 28707,1;
+		}
+		end;
+	}
+	if(getarg(0) == 2){
+		if(@delflag==1 && @eleqst==0){
+			announce "**エレメンタル原石が破損しました!!**",bc_self,"0xD9314B";
+			set @breakel,1;
+			set eltime,0;
+			set elstats$,"";
+		}else if(@delflag==0 && @eleqst==0){
+			announce "**エレメンタル原石が破損しました!!**",bc_self,"0xD9314B";
+			set @breakel,1;
+			getitem 28707,1;
+			set eltime,0;
+			set elstats$,"";
+			addtimer 1,"ELEMENTALER2::OnBreak2";
+		}
+	}
+	end;
+}
+
+-	script	ELEMENTALER2	-1,{
+	end;
+
+OnCheck:
+	if(getequipid(7)!=28722 && getequipid(8)!=28722) end;
+	if(@diecount!=PC_DIE_COUNTER){
+		announce "**エレメンタル原石が破損しました!!**",bc_self,"0xD9314B";
+		set @delflag,1;
+		if(getequipid(7)==28722)unequip 7;
+		if(getequipid(8)==28722)unequip 8;
+		set @delflag,0;
+		delitem 28722,1;
+		getitem 28707,1;
+		set eltime,0;
+		set elstats$,"";
+		end;
+	}
+	for(set .@i,0; .@i < 4; set .@i,.@i+1){
+		set @elstats[.@i],axtoi(charat(elstats$, .@i));
+	}
+	set elstats$,"";
+	set @elstats[0],5400000-((((@elstats[0]+1)*30000)*((@elstats[3]+1)/2))*rand(1,3));	//成長速度公式
+	set @elstats[1],(@elstats[1]+1)*3;	//破損確率3%~30%
+	set @elstats[2],(14400000-@elstats[0])-((@elstats[2]*60000)*((@elstats[2]+1)/2));	//暴走時間公式
+	if(@elstats[2]<=0) set @elstats[2],10000;	//最低保障時間10秒
+
+	announce "**エレメンタル原石が発光し始めました!!**",bc_self,"0xD9314B";
+	addtimer @elstats[0],"ELEMENTALER2::OnEnding";
+	end;
+
+OnEnding:
+	if(getequipid(7)!=28722 && getequipid(8)!=28722) end;
+	if(@diecount!=PC_DIE_COUNTER){
+		cleararray @elstats[0],0,4;
+		announce "**エレメンタル原石が破損しました!!**",bc_self,"0xD9314B";
+		set @delflag,1;
+		if(getequipid(7)==28722)unequip 7;
+		if(getequipid(8)==28722)unequip 8;
+		set @delflag,0;
+		delitem 28722,1;
+		getitem 28707,1;
+		set eltime,0;
+		set elstats$,"";
+		end;
+	}
+	set @elementaler,1;
+	if(@elstats[1] >= rand(1,100)){
+		cleararray @elstats[0],0,4;
+		set @delflag,2;
+		if(getequipid(7)==28722)unequip 7;
+		if(getequipid(8)==28722)unequip 8;
+		set @delflag,0;
+		delitem 28722,1;
+		set @elementaler,0;
+		announce "**エレメンタル原石が砕け散ってしまった!!**",bc_self,"0xD9314B";
+		end;
+	}
+	announce "**エレメンタル原石が薄紅色に光り始めました!!**",bc_self,"0xD9314B";
+	addtimer @elstats[2],"ELEMENTALER2::OnBreak";
+	end;
+
+OnBreak:
+	if(getequipid(7)!=28722 && getequipid(8)!=28722) end;
+	cleararray @elstats[0],0,4;
+	set @delflag,2;
+	if(getequipid(7)==28722)unequip 7;
+	if(getequipid(8)==28722)unequip 8;
+	set @delflag,0;
+	delitem 28722,1;
+	getitem 28708,1;
+	set @elementaler,0;
+	announce "**エレメンタル原石が腐ってしまった!!**",bc_self,"0xD9314B";
+	end;
+
+OnBreak2:
+	if(countitem(28722)>0)
+		delitem 28722,1;
+	end;
+}
+
+izlude,141,223,3	script	リュニィース	918,{
+	if(@elementaler!=1){
+		mes "[リュニィース]";
+		mes "エレメンタラーが欲しいのかい？";
+		mes "^FF0000パメラ^000000をお探しよ";
+		mes "彼女は在り処を知ってるだろうよ";
+		next;
+		mes "[リュニィース]";
+		mes "エレメンタル原石を手に入れたら";
+		mes "それを身につけて力を溜めるのだ";
+		mes "原石が薄紅色に光り始めれば";
+		mes "私がエレメンタラーに変えてやる";
+		close;
+	}
+	if(getequipid(7)!=28722 && getequipid(8)!=28722){
+		mes "[リュニィース]";
+		mes "おや、せっかくのエレメンタル原石を";
+		mes "何処にやってしまったんだい";
+		set @elementaler,0;
+		close;
+	}
+	mes "[リュニィース]";
+	mes "エレメンタル原石を持ってきたようだね";
+	mes "私ならそれをエレメンタラーに";
+	mes "変えてあげられるよ";
+	next;
+	mes "[リュニィース]";
+	mes "さぁ、どうする？";
+	next;
+	if(select("渡す","やめる")==2) {
+		mes "[リュニィース]";
+		mes "あまりそのままにしておくと";
+		mes "原石が力を溜めすぎて";
+		mes "腐ってしまうから気をつけてな";
+		close;
+	}
+	mes "[リュニィース]";
+	mes "よしよし、さぁよこしな";
+	set @eleqst,1;
+	if(getequipid(7)==28722)unequip 7;
+	if(getequipid(8)==28722)unequip 8;
+	delitem 28722,1;
+	set @elementaler,0;
+	set @eleqst,0;
+	next;
+	if(@elstats[3]>rand(10)){
+		mes "[リュニィース]";
+		mes "ほう、これは透明度が高く";
+		mes "すばらしい仕上がりだな";
+		next;
+		mes "[リュニィース]";
+		mes "これはサービスだ";
+		getitem 28708,1;
+		next;
+	}
+	mes "[リュニィース]";
+	mes "そら、これだ";
+	cleararray @elstats[0],0,4;
+	getitem (28695+gettime(3)/2),1;
+	next;
+	mes "[リュニィース]";
+	mes "エレメンタラーは強力だが";
+	mes "溜めた力を放出する消耗品だ";
+	mes "使い時は見誤らぬようにな";
+	close;
+}

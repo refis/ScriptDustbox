@@ -1,0 +1,1144 @@
+prontera.gat,155,188,5	script	ねこ	81,{
+	mes "test";
+	close;
+}
+-	script	露店履歴	-1,{
+	end;
+
+OnWhisperGlobal:
+	mes "[露店履歴検索NPC]";
+	mes "探したいアイテムのID";
+	mes "もしくは名称を入力してください";
+	next;
+	switch (select("アイテムIDで検索","アイテム名称で検索","販売者で検索","やめる")){
+	case 1:
+		input .@cmd;
+		if(getiteminfo(.@cmd,6)<0){
+			mes "[露店履歴検索NPC]";
+			mes "お探しのアイテムは";
+			mes "存在していないようです";
+			close;
+		}
+		break;
+	case 2:
+		input .@cmd$;
+		set .@qty, searchitem(@matches[0],.@cmd$);
+		if(.@qty<=0){
+			mes "[露店履歴検索NPC]";
+			mes "お探しのアイテムは";
+			mes "存在していないようです";
+			close;
+		}
+		for (set .@i, 0; .@i < .@qty; set .@i, .@i+1)
+			mes @matches[.@i]+": "+getitemname(@matches[.@i])+"["+getitemslots(@matches[.@i])+"]";
+		mes "^0000FF検索するIDを入力してください^000000";
+		next;
+		input .@cmd;
+		if(getiteminfo(.@cmd,6)<0){
+			mes "[露店履歴検索NPC]";
+			mes "お探しのアイテムは";
+			mes "存在していないようです";
+			close;
+		}
+		break;
+	case 3:
+		input .@cmd$;
+		mes "[露店履歴検索NPC]";
+		mes "表示する販売履歴数を";
+		mes "0～100の数値内で";
+		mes "入力してください";
+		mes "0を入れるとキャンセルされます";
+		next;
+		input .@num,0,100;
+		if(.@num==0){mes "[露店履歴検索NPC]";mes "キャンセルしました";close;}
+		set .@nb, query_logsql("select time,char_name,nameid,amount,zeny,refine,card0,card1,card2,card3,title from `vendinglog` WHERE `char_name`='"+.@cmd$+"' ORDER BY time DESC LIMIT "+.@num, .@time$,.@char_name$,.@nameid,.@amount,.@zeny,.@refine,.@card0,.@card1,.@card2,.@card3,.@title$);
+		for (set .@i, 0; .@i < .@nb; set .@i, .@i+1){
+			if(.@nameid[.@i] > 0){
+				if(.@i == 0)
+					dispbottom("■販売者:"+.@char_name$[.@i]+"の露店販売履歴");
+				set .@czeny$,callfunc("func_zeny",.@zeny[.@i]);
+				if(getiteminfo(.@nameid[.@i],2)==4 || getiteminfo(.@nameid[.@i],2)==5){
+					set .@mes$,.@time$[.@i]+"　+"+.@refine[.@i]+""+getitemname(.@nameid[.@i])+"["+getitemslots(.@nameid[.@i])+"]　"+.@amount[.@i]+"個　単価:"+.@czeny$+"Zeny ";
+					if(getitemslots(.@nameid[.@i])>=1)
+						set .@mes$,.@mes$+"["+(getitemname(.@card0[.@i])!="null"?getitemname(.@card0[.@i]):"なし")+"]";
+					if(getitemslots(.@nameid[.@i])>=2)
+						set .@mes$,.@mes$+"["+(getitemname(.@card1[.@i])!="null"?getitemname(.@card1[.@i]):"なし")+"]";
+					if(getitemslots(.@nameid[.@i])>=3)
+						set .@mes$,.@mes$+"["+(getitemname(.@card2[.@i])!="null"?getitemname(.@card2[.@i]):"なし")+"]";
+					if(getitemslots(.@nameid[.@i])>=4)
+						set .@mes$,.@mes$+"["+(getitemname(.@card3[.@i])!="null"?getitemname(.@card3[.@i]):"なし")+"]";
+				}else
+					set .@mes$,.@time$[.@i]+"　　"+getitemname(.@nameid[.@i])+"　"+.@amount[.@i]+"個　単価:"+.@czeny$+"Zeny";
+				dispbottom(.@mes$);
+			}else
+				break;
+		}
+	case 4: close;
+	}
+	mes "[露店履歴検索NPC]";
+	mes "精錬値が指定値以上のものだけを";
+	mes "指定して抽出することができます";
+	mes "いくつ以上を指定しますか？";
+	mes "全てを表示する場合や消耗品を";
+	mes "見る場合は0を指定してください";
+	next;
+	input .@ref,0,20;
+	mes "[露店履歴検索NPC]";
+	mes "表示する販売履歴数を";
+	mes "0～100の数値内で";
+	mes "入力してください";
+	mes "0を入れるとキャンセルされます";
+	next;
+	input .@num,0,100;
+	if(.@num==0){mes "[露店履歴検索NPC]";mes "キャンセルしました";close;}
+	set .@nb, query_logsql("select time,char_name,nameid,amount,zeny,refine,card0,card1,card2,card3,title from `vendinglog` WHERE `nameid`="+.@cmd+" AND `refine`>="+.@ref+" ORDER BY time DESC LIMIT "+.@num, .@time$,.@char_name$,.@nameid,.@amount,.@zeny,.@refine,.@card0,.@card1,.@card2,.@card3,.@title$);
+	for (set .@i, 0; .@i < .@nb; set .@i, .@i+1){
+		if(.@nameid[.@i] > 0){
+			if(.@i == 0)
+				dispbottom("□"+.@nameid[.@i]+":"+getitemname(.@nameid[.@i])+((getiteminfo(.@nameid[.@i],2)==4 || getiteminfo(.@nameid[.@i],2)==5)?"["+getitemslots(@matches[.@i])+"]":"")+"の販売履歴");
+			set .@czeny$,callfunc("func_zeny",.@zeny[.@i]);
+			if(getiteminfo(.@nameid[.@i],2)==4 || getiteminfo(.@nameid[.@i],2)==5){
+				set .@mes$,.@time$[.@i]+"■販売者:"+.@char_name$[.@i]+"　+"+.@refine[.@i]+"　"+.@amount[.@i]+"個　単価:"+.@czeny$+"Zeny ";
+				if(getitemslots(.@nameid[.@i])>=1 || .@card0[.@i]>0)
+					set .@mes$,.@mes$+"["+(getitemname(.@card0[.@i])!="null"?getitemname(.@card0[.@i]):"なし")+"]";
+				if(getitemslots(.@nameid[.@i])>=2 || .@card1[.@i]>0)
+					set .@mes$,.@mes$+"["+(getitemname(.@card1[.@i])!="null"?getitemname(.@card1[.@i]):"なし")+"]";
+				if(getitemslots(.@nameid[.@i])>=3 || .@card2[.@i]>0)
+					set .@mes$,.@mes$+"["+(getitemname(.@card2[.@i])!="null"?getitemname(.@card2[.@i]):"なし")+"]";
+				if(getitemslots(.@nameid[.@i])>=4 || .@card3[.@i]>0)
+					set .@mes$,.@mes$+"["+(getitemname(.@card3[.@i])!="null"?getitemname(.@card3[.@i]):"なし")+"]";
+			}else
+				set .@mes$,.@time$[.@i]+"■販売者:"+.@char_name$[.@i]+"　"+.@amount[.@i]+"個　単価:"+.@czeny$+"Zeny";
+			dispbottom(.@mes$);
+		}else
+			break;
+	}
+	close;
+}
+poring_c02,116,75,5	script	露店履歴検索NPC	495,{
+	mes "[露店履歴検索NPC]";
+	mes "探したいアイテムのID";
+	mes "もしくは名称を入力してください";
+	next;
+	switch (select("アイテムIDで検索","アイテム名称で検索","販売者で検索","やめる")){
+	case 1:
+		input .@cmd;
+		if(getiteminfo(.@cmd,6)<0){
+			mes "[露店履歴検索NPC]";
+			mes "お探しのアイテムは";
+			mes "存在していないようです";
+			close;
+		}
+		break;
+	case 2:
+		input .@cmd$;
+		set .@qty, searchitem(@matches[0],.@cmd$);
+		if(.@qty<=0){
+			mes "[露店履歴検索NPC]";
+			mes "お探しのアイテムは";
+			mes "存在していないようです";
+			close;
+		}
+		for (set .@i, 0; .@i < .@qty; set .@i, .@i+1)
+			mes @matches[.@i]+": "+getitemname(@matches[.@i])+"["+getitemslots(@matches[.@i])+"]";
+		mes "^0000FF検索するIDを入力してください^000000";
+		next;
+		input .@cmd;
+		if(getiteminfo(.@cmd,6)<0){
+			mes "[露店履歴検索NPC]";
+			mes "お探しのアイテムは";
+			mes "存在していないようです";
+			close;
+		}
+		break;
+	case 3:
+		input .@cmd$;
+		mes "[露店履歴検索NPC]";
+		mes "表示する販売履歴数を";
+		mes "0～100の数値内で";
+		mes "入力してください";
+		mes "0を入れるとキャンセルされます";
+		next;
+		input .@num,0,100;
+		if(.@num==0){mes "[露店履歴検索NPC]";mes "キャンセルしました";close;}
+		set .@nb, query_logsql("select time,char_name,nameid,amount,zeny,refine,card0,card1,card2,card3,title from `vendinglog` WHERE `char_name`='"+.@cmd$+"' ORDER BY time DESC LIMIT "+.@num, .@time$,.@char_name$,.@nameid,.@amount,.@zeny,.@refine,.@card0,.@card1,.@card2,.@card3,.@title$);
+		for (set .@i, 0; .@i < .@nb; set .@i, .@i+1){
+			if(.@nameid[.@i] > 0){
+				if(.@i == 0)
+					dispbottom("■販売者:"+.@char_name$[.@i]+"の露店販売履歴");
+				set .@czeny$,callfunc("func_zeny",.@zeny[.@i]);
+				if(getiteminfo(.@nameid[.@i],2)==4 || getiteminfo(.@nameid[.@i],2)==5){
+					set .@mes$,.@time$[.@i]+"　+"+.@refine[.@i]+""+getitemname(.@nameid[.@i])+"["+getitemslots(.@nameid[.@i])+"]　"+.@amount[.@i]+"個　単価:"+.@czeny$+"Zeny ";
+					if(getitemslots(.@nameid[.@i])>=1)
+						set .@mes$,.@mes$+"["+(getitemname(.@card0[.@i])!="null"?getitemname(.@card0[.@i]):"なし")+"]";
+					if(getitemslots(.@nameid[.@i])>=2)
+						set .@mes$,.@mes$+"["+(getitemname(.@card1[.@i])!="null"?getitemname(.@card1[.@i]):"なし")+"]";
+					if(getitemslots(.@nameid[.@i])>=3)
+						set .@mes$,.@mes$+"["+(getitemname(.@card2[.@i])!="null"?getitemname(.@card2[.@i]):"なし")+"]";
+					if(getitemslots(.@nameid[.@i])>=4)
+						set .@mes$,.@mes$+"["+(getitemname(.@card3[.@i])!="null"?getitemname(.@card3[.@i]):"なし")+"]";
+				}else
+					set .@mes$,.@time$[.@i]+"　　"+getitemname(.@nameid[.@i])+"　"+.@amount[.@i]+"個　単価:"+.@czeny$+"Zeny";
+				dispbottom(.@mes$);
+			}else
+				break;
+		}
+	case 4: close;
+	}
+	mes "[露店履歴検索NPC]";
+	mes "精錬値が指定値以上のものだけを";
+	mes "指定して抽出することができます";
+	mes "いくつ以上を指定しますか？";
+	mes "全てを表示する場合や消耗品を";
+	mes "見る場合は0を指定してください";
+	next;
+	input .@ref,0,20;
+	mes "[露店履歴検索NPC]";
+	mes "表示する販売履歴数を";
+	mes "0～100の数値内で";
+	mes "入力してください";
+	mes "0を入れるとキャンセルされます";
+	next;
+	input .@num,0,100;
+	if(.@num==0){mes "[露店履歴検索NPC]";mes "キャンセルしました";close;}
+	set .@nb, query_logsql("select time,char_name,nameid,amount,zeny,refine,card0,card1,card2,card3,title from `vendinglog` WHERE `nameid`="+.@cmd+" AND `refine`>="+.@ref+" ORDER BY time DESC LIMIT "+.@num, .@time$,.@char_name$,.@nameid,.@amount,.@zeny,.@refine,.@card0,.@card1,.@card2,.@card3,.@title$);
+	for (set .@i, 0; .@i < .@nb; set .@i, .@i+1){
+		if(.@nameid[.@i] > 0){
+			if(.@i == 0)
+				dispbottom("□"+.@nameid[.@i]+":"+getitemname(.@nameid[.@i])+((getiteminfo(.@nameid[.@i],2)==4 || getiteminfo(.@nameid[.@i],2)==5)?"["+getitemslots(@matches[.@i])+"]":"")+"の販売履歴");
+			set .@czeny$,callfunc("func_zeny",.@zeny[.@i]);
+			if(getiteminfo(.@nameid[.@i],2)==4 || getiteminfo(.@nameid[.@i],2)==5){
+				set .@mes$,.@time$[.@i]+"■販売者:"+.@char_name$[.@i]+"　+"+.@refine[.@i]+"　"+.@amount[.@i]+"個　単価:"+.@czeny$+"Zeny ";
+				if(getitemslots(.@nameid[.@i])>=1 || .@card0[.@i]>0)
+					set .@mes$,.@mes$+"["+(getitemname(.@card0[.@i])!="null"?getitemname(.@card0[.@i]):"なし")+"]";
+				if(getitemslots(.@nameid[.@i])>=2 || .@card1[.@i]>0)
+					set .@mes$,.@mes$+"["+(getitemname(.@card1[.@i])!="null"?getitemname(.@card1[.@i]):"なし")+"]";
+				if(getitemslots(.@nameid[.@i])>=3 || .@card2[.@i]>0)
+					set .@mes$,.@mes$+"["+(getitemname(.@card2[.@i])!="null"?getitemname(.@card2[.@i]):"なし")+"]";
+				if(getitemslots(.@nameid[.@i])>=4 || .@card3[.@i]>0)
+					set .@mes$,.@mes$+"["+(getitemname(.@card3[.@i])!="null"?getitemname(.@card3[.@i]):"なし")+"]";
+			}else
+				set .@mes$,.@time$[.@i]+"■販売者:"+.@char_name$[.@i]+"　"+.@amount[.@i]+"個　単価:"+.@czeny$+"Zeny";
+			dispbottom(.@mes$);
+		}else
+			break;
+	}
+	close;
+}
+mal_in01,159,213,2	script	コードブレイカー#code1	563,{
+	if(getgmlevel() > 0){
+		if(select("ロックしない","ロックする")==2) {
+			set .playok,1;
+			mes "ロックしました。";
+			close;
+		}
+		set .playok,0;
+	}
+	if(getgmlevel() == 0 && .playok == 1) {
+		mes "現在、ゲームは";
+		mes "GMによってロックされています。";
+		close;
+	}
+	if(CB_SET > 0) {
+		setarray .@name$,"エンボス","カーボン","クロアチア","クレイオルニル";
+		if(CB_SET == 1)
+			setarray .@gain2,28793,28794,28795;
+		else if(CB_SET == 2)
+			setarray .@gain2,28796,28797,28798;
+		else if(CB_SET == 3)
+			setarray .@gain2,28799,28800,28801;
+		else if(CB_SET == 4)
+			setarray .@gain2,28802,28803,28804;
+		else {
+			mes "異常なため終了します。";
+			set CB_SET,0;
+			close;
+		}
+		mes "景品は"+.@name$[CB_SET -1]+"セットの中からお選び頂けます。";
+		next;
+		switch(select(getitemname(.@gain2[0]),getitemname(.@gain2[1]),getitemname(.@gain2[2]))) {
+		case 1: set .@gain,.@gain2[0]; break;
+		case 2: set .@gain,.@gain2[1]; break;
+		case 3: set .@gain,.@gain2[2]; break;
+		}
+		mes "景品["+getitemname(.@gain)+"]を獲得しました！";
+		logmessage "code_breaker",getitemname(.@gain)+"獲得";
+		getitem .@gain,1;
+		set CB_SET,0;
+		close;
+	}
+	mes "[コードブレイカー]";
+	mes "コードブレイカーしますか？";
+	mes "コードブレイカーで遊ぶには";
+	mes "モンスターカードが一枚必要です。";
+	next;
+	switch(select("やる！","コードブレイカー？","景品リストを見る","会話をやめる")) {
+	case 1:
+		if(checkweight(1434,1) == 0 ){
+			mes "[コードブレイカー]";
+			mes "荷物を整理してね。";
+			close;
+		}
+		cleararray @inventorylist_id[0],0,100;
+		cleararray .@card_num[0],0,100;
+		getinventorylist;
+		set .@vars_kind,getarraysize(@inventorylist_id);
+		set .@j,0;
+		for(set .@i,0; .@i<.@vars_kind; set .@i,.@i+1){
+			if(	((@inventorylist_id[.@i] >= 4001) &&(@inventorylist_id[.@i] <= 4534)) ){
+				setarray .@card_num[.@j],@inventorylist_id[.@i];
+				set .@j,.@j+1;
+			}
+		}
+		mes "[コードブレイカー]";
+		if(.@j<1){
+			mes "^FF0000カードを1つも持ってないですね^000000";
+			close;
+		}
+		mes "コードブレイカーに使用するカードを選択して下さい";
+		next;
+		set .@max_page, .@j /10 - ((.@j > 9) && ((.@j %10) == 0));
+		set .@now_page,0;
+		set .@cardselect,-1;
+		do {
+			set .@choose,(select(
+				((.@now_page > 0)? "前へ":""),
+				((.@card_num[.@now_page *10 + 0] >= 4001)? getitemname(.@card_num[.@now_page *10 + 0]):""),
+				((.@card_num[.@now_page *10 + 1] >= 4001)? getitemname(.@card_num[.@now_page *10 + 1]):""),
+				((.@card_num[.@now_page *10 + 2] >= 4001)? getitemname(.@card_num[.@now_page *10 + 2]):""),
+				((.@card_num[.@now_page *10 + 3] >= 4001)? getitemname(.@card_num[.@now_page *10 + 3]):""),
+				((.@card_num[.@now_page *10 + 4] >= 4001)? getitemname(.@card_num[.@now_page *10 + 4]):""),
+				((.@card_num[.@now_page *10 + 5] >= 4001)? getitemname(.@card_num[.@now_page *10 + 5]):""),
+				((.@card_num[.@now_page *10 + 6] >= 4001)? getitemname(.@card_num[.@now_page *10 + 6]):""),
+				((.@card_num[.@now_page *10 + 7] >= 4001)? getitemname(.@card_num[.@now_page *10 + 7]):""),
+				((.@card_num[.@now_page *10 + 8] >= 4001)? getitemname(.@card_num[.@now_page *10 + 8]):""),
+				((.@card_num[.@now_page *10 + 9] >= 4001)? getitemname(.@card_num[.@now_page *10 + 9]):""),
+				(.@now_page < .@max_page)? "次へ" : ""));
+
+			if (.@choose ==1){			//『前へ』
+				set .@now_page,.@now_page -1;
+			} else if (.@choose==12){		//『次へ』
+				set .@now_page,.@now_page +1;
+			}
+		} while(.@choose ==1 || .@choose ==12);
+		set .@cardselect,.@card_num[.@now_page *10 + .@choose -2];
+		mes "[コードブレイカー]";
+		mes getitemname(.@cardselect)+"でよろしいですか？";
+		mes "^FF0000カードは消費されます。^000000";
+		next;
+		if(select("やっぱやめます","お願いします")==1){
+			mes "[コードブレイカー]";
+			mes "そうですか";
+			close;
+		}
+		if(countitem(.@cardselect)<1) {
+			mes "[コードブレイカー]";
+			mes "カードがないみたい";
+			close;
+		}
+		break;
+	case 2:
+		mes "[コードブレイカー]";
+		mes "3×3のマスにそれぞれ";
+		mes "1～9までの重複しない";
+		mes "数字が入っていて、";
+		mes "その位置と番号を";
+		mes "当てるゲームです。";
+		next;
+		mes "[コードブレイカー]";
+		mes "縦横で1つの組み合わせで、";
+		mes "計6個の組み合わせがある。";
+		mes "解答毎にその内容によって";
+		mes "ヒントが表示されます。";
+		next;
+		mes "[コードブレイカー]";
+		mes "縦（あるいは横）で";
+		mes "そのマスに来る数字が";
+		mes "ある時は「H」。";
+		next;
+		mes "[コードブレイカー]";
+		mes "そのマスではないが";
+		mes "その列（あるいは行）に";
+		mes "その数字が使われている場合、";
+		mes "「B」が表示されます。";
+		next;
+		mes "[コードブレイカー]";
+		mes "例えば……";
+		next;
+		mes "1 2 3 | 0 1";
+		mes "4 5 6 | 0 1";
+		mes "7 8 9 | 0 2";
+		mes "――――――";
+		mes "0 0 0 | B H";
+		mes "1 0 0 | H";
+		next;
+		mes "[コードブレイカー]";
+		mes "このような配置だった場合、";
+		next;
+		mes "[コードブレイカー]";
+		mes "1行目の「1」「2」「3」のうち";
+		mes "どれか一つの位置と番号が一致";
+		mes "2行目の「4」「5」「6」のうち";
+		mes "どれか一つの位置と番号が一致";
+		mes "3行目の「7」「8」「9」のうち";
+		mes "どれかニつの位置と番号が一致";
+		mes "1列目の「1」「4」「7」のうち";
+		mes "どれか一つの位置と番号が一致";
+		next;
+		mes "[コードブレイカー]";
+		mes "という風になります。";
+		next;
+		mes "[コードブレイカー]";
+		mes "この場合、「1」「4」「7」の";
+		mes "うち一つは確実に正解で、";
+		mes "その確率は「7」が最も高い";
+		mes "ということになります。";
+		next;
+		mes "[コードブレイカー]";
+		mes "もう一つのサンプルです。";
+		next;
+		mes "1 2 3 | 1 0";
+		mes "4 5 6 | 0 2";
+		mes "7 8 9 | 0 1";
+		mes "――――――";
+		mes "0 1 0 | B H";
+		mes "1 0 1 | H";
+		next;
+		mes "[コードブレイカー]";
+		mes "このような配置だった場合、";
+		next;
+		mes "[コードブレイカー]";
+		mes "1行目の「1」「2」「3」のうち";
+		mes "どれか一つの番号のみが一致";
+		mes "2行目の「4」「5」「6」のうち";
+		mes "どれかニつの位置と番号が一致";
+		mes "3行目の「7」「8」「9」のうち";
+		mes "どれか一つの位置と番号が一致";
+		mes "1列目の「1」「4」「7」のうち";
+		mes "どれか一つの位置と番号が一致";
+		mes "2列目の「2」「5」「8」のうち";
+		mes "どれか一つの番号のみが一致";
+		mes "3列目の「3」「6」「9」のうち";
+		mes "どれか一つの位置と番号が一致";
+		next;
+		mes "[コードブレイカー]";
+		mes "この場合、「4」「6」が";
+		mes "正解である確率が最も高い";
+		mes "ということになります。";
+		next;
+		mes "[コードブレイカー]";
+		mes "解答は6回まで行うことができ、";
+		mes "数値を入れ替えて正解に";
+		mes "辿り着く、というゲームです。";
+		close;
+	case 3:
+		switch(select("1回目で正解の景品","2回目で正解の景品","3回目で正解の景品","4回目で正解の景品","5回目で正解の景品","6回目で正解の景品")) {
+		case 1:
+			mes "[火龍の印]";
+			mes "スロット数 : 1";
+			mes "全ての属性レベルから";
+			mes "ダメージ5%減少";
+			mes "―――――――――――――";
+			mes "位置 : ^777777頭下段^000000";
+			mes "防御 : ^7777770^000000";
+			mes "重量 : ^77777720^000000";
+			close;
+		case 2:
+			mes "[クーペ竜の髭]";
+			mes "スロット数 : 2";
+			mes "聖属性。";
+			mes "Vit + 7。";
+			mes "ハイディングやクローキング";
+			mes "をしているモンスターが見える。";
+			mes "―――――――――――――";
+			mes "精錬値が5以上の場合、";
+			mes "精錬値が高くなる程、";
+			mes "[ドラゴンブレス]、";
+			mes "[レイオブジェネシス]の";
+			mes "ダメージが増加する。";
+			mes "―――――――――――――";
+			mes "精錬値が6以上の場合、";
+			mes "現在HPが少ないほど";
+			mes "物理ダメージが向上する。";
+			mes "―――――――――――――";
+			mes "精錬値が7以上の場合、";
+			mes "ATK+50。";
+			mes "精錬値が9以上の場合、";
+			mes "追加でATK+100。";
+			mes "―――――――――――――";
+			mes "系列 : ^777777両手槍^000000";
+			mes "攻撃 : ^777777150^000000";
+			mes "重量 : ^77777750^000000";
+			mes "武器レベル : ^7777774^000000";
+			mes "要求レベル : ^77777790^000000";
+			mes "装備 : ^777777ソードマン系^000000";
+			close;
+		case 3:
+			if($cb_pat == 0)
+				mes "[エンボスセット]";
+			else if($cb_pat == 1)
+				mes "[カーボンセット]";
+			else if($cb_pat == 2)
+				mes "[クロアチアセット]";
+			else if($cb_pat == 3)
+				mes "[クレイオルニルセット]";
+			mes "の中からどれか一つ";
+			close;
+		case 4:
+			mes "[シルバーメダリオンの袋]";
+			close;
+		case 5:
+			mes "[中秋の餠x100]";
+			close;
+		case 6:
+			mes "[40苺ポイント]";
+			close;
+		}
+	case 4:
+		mes "[コードブレイカー]";
+		mes "またどうぞ～。";
+		close;
+	}
+	//初期化
+	for(set .@i,0; .@i < 9; set .@i,.@i+1 ){
+		set .@MainStatus[.@i],.@i + 1;
+	}
+	//正解の格納
+	setarray .@list,1,2,3,4,5,6,7,8,9;
+	for(set .@i,0; .@i < 9; set .@i,.@i+1) {
+		set .@r,rand(getarraysize(.@list));
+		set .@Result[.@i],.@list[.@r];
+		deletearray .@list[.@r],1;
+	}
+	if(getgmlevel() == 99)
+		dispbottom(.@Result[0]+":"+.@Result[1]+":"+.@Result[2]+":"+.@Result[3]+":"+.@Result[4]+":"+.@Result[5]+":"+.@Result[6]+":"+.@Result[7]+":"+.@Result[8]);
+	set .@time,0;
+	//メインループ
+	while(1) {
+		mes .@MainStatus[0]+"　"+.@MainStatus[1]+"　"+.@MainStatus[2]+"　|　^FF6000"+.@SideB[0]+"　^00FF00"+.@SideH[0]+"^000000";
+		mes .@MainStatus[3]+"　"+.@MainStatus[4]+"　"+.@MainStatus[5]+"　|　^FF6000"+.@SideB[1]+"　^00FF00"+.@SideH[1]+"^000000";
+		mes .@MainStatus[6]+"　"+.@MainStatus[7]+"　"+.@MainStatus[8]+"　|　^FF6000"+.@SideB[2]+"　^00FF00"+.@SideH[2]+"^000000";
+		mes "――――――";
+		mes "^FF6000"+.@ButtomB[0]+"　"+.@ButtomB[1]+"　"+.@ButtomB[2]+"^000000　|　^FF6000B^000000　^00FF00H";
+		mes "^00FF00"+.@ButtomH[0]+"　"+.@ButtomH[1]+"　"+.@ButtomH[2]+"^000000　|　^00FF00H";
+		if(.@time == 0) {
+			if(select("Start","Exit")==2)
+				close;
+			set .@time,1;
+			delitem .@cardselect,1;
+		}
+		next;
+		switch(select(.@time+"回目の解答","ログ","やめる")) {
+		case 1:
+			input .@temp;
+			if(.@temp < 111111111 || .@temp > 999999999) {
+				mes "-入力範囲超過!!-";
+				mes " 111111111から";
+				mes " 999999999以内で入力してください。";
+				next;
+				continue;
+			}
+			set .@number$,""+.@temp;
+			setarray .@num,	substr(.@number$,0,0),substr(.@number$,1,1),substr(.@number$,2,2),
+							substr(.@number$,3,3),substr(.@number$,4,4),substr(.@number$,5,5),
+							substr(.@number$,6,6),substr(.@number$,7,7),substr(.@number$,8,8);
+			if(.@num[0] == 0 || .@num[1] == 0 || .@num[2] == 0 || .@num[3] == 0 || .@num[4] == 0 || .@num[5] == 0 || .@num[6] == 0 || .@num[7] == 0 || .@num[8] == 0) {
+				mes "-入力値に「0」あり!!-";
+				next;
+				continue;
+			}
+			setarray .@list,0,0,0,0,0,0,0,0,0;
+			set .@dnum,0;
+			for(set .@i,0; .@i < 9; set .@i,.@i+1) {
+				set .@list[.@num[.@i]-1],.@list[.@num[.@i]-1]+1;
+				if(.@list[.@num[.@i]-1] >= 3) {
+					mes "-同じ数値は3つ以上使えません!!-";
+					set .@dnum,1;
+					next;
+					break;
+				}
+			}
+			if(.@dnum>0)
+				continue;
+			copyarray .@MainStatus[0],.@num[0],9;
+			for(set .@i,0; .@i < 3; set .@i,.@i+1) {
+				set .@SideH[.@i],0;
+				set .@SideB[.@i],0;
+				set .@ButtomH[.@i],0;
+				set .@ButtomB[.@i],0;
+			}
+			set .@endcheck,0;
+			for(set .@i,0; .@i < 9; set .@i,.@i+1) {
+				if(.@num[.@i] == .@Result[.@i]) {
+					set .@SideH[.@i / 3],.@SideH[.@i / 3]+1;
+					set .@ButtomH[.@i % 3],.@ButtomH[.@i % 3]+1;
+				} else {
+					set .@endcheck,1;
+					for(set .@j,1; .@j <= 2; set .@j,.@j+1) {
+						if(((.@i % 3) + .@j) < 3) {
+							if(.@num[.@i] == .@Result[.@i + .@j])
+								set .@SideB[.@i / 3],.@SideB[.@i / 3]+1;
+						}
+						if(((.@i % 3) - .@j) >= 0) {
+							if(.@num[.@i] == .@Result[.@i - .@j])
+								set .@SideB[.@i / 3],.@SideB[.@i / 3]+1;
+						}
+						if((.@i / 3 + .@j) < 3) {
+							if(.@num[.@i] == .@Result[.@i + (.@j * 3)])
+								set .@ButtomB[.@i % 3],.@ButtomB[.@i % 3]+1;
+						}
+						if((.@i / 3 - .@j) >= 0) {
+							if(.@num[.@i] == .@Result[.@i - (.@j * 3)])
+								set .@ButtomB[.@i % 3],.@ButtomB[.@i % 3]+1;
+						}
+					}
+				}
+			}
+			if(.@endcheck==0) {
+				mes "全て一致しました!!!";
+				specialeffect2 68;
+				break;
+			}
+			set .@MainLog$[.@time],.@temp;
+
+			set .@temp,1000+.@SideH[0]*100+.@SideH[1]*10+.@SideH[2];
+			set .@SHLog$[.@time],.@temp;
+
+			set .@temp,1000+.@SideB[0]*100+.@SideB[1]*10+.@SideB[2];
+			set .@SBLog$[.@time],.@temp;
+
+			set .@temp,1000+.@ButtomH[0]*100+.@ButtomH[1]*10+.@ButtomH[2];
+			set .@BHLog$[.@time],.@temp;
+
+			set .@temp,1000+.@ButtomB[0]*100+.@ButtomB[1]*10+.@ButtomB[2];
+			set .@BBLog$[.@time],.@temp;
+
+			set .@time,.@time+1;
+			if(.@time <= 6)
+				continue;
+			mes "-Missing!!-";
+			next;
+		case 2:
+			for(set .@i,1; .@i < .@time; set .@i,.@i+1) {
+				dispbottom("―――第"+.@i+"解答―――");
+				dispbottom(substr(.@MainLog$[.@i],0,0)+"　"+substr(.@MainLog$[.@i],1,1)+"　"+substr(.@MainLog$[.@i],2,2)+"　|　"+substr(.@SBLog$[.@i],1,1)+"　"+substr(.@SHLog$[.@i],1,1));
+				dispbottom(substr(.@MainLog$[.@i],3,3)+"　"+substr(.@MainLog$[.@i],4,4)+"　"+substr(.@MainLog$[.@i],5,5)+"　|　"+substr(.@SBLog$[.@i],2,2)+"　"+substr(.@SHLog$[.@i],2,2));
+				dispbottom(substr(.@MainLog$[.@i],6,6)+"　"+substr(.@MainLog$[.@i],7,7)+"　"+substr(.@MainLog$[.@i],8,8)+"　|　"+substr(.@SBLog$[.@i],3,3)+"　"+substr(.@SHLog$[.@i],3,3));
+				dispbottom("――――――");
+				dispbottom(substr(.@BBLog$[.@i],1,1)+"　"+substr(.@BBLog$[.@i],2,2)+"　"+substr(.@BBLog$[.@i],3,3)+"　|　B　H");
+				dispbottom(substr(.@BHLog$[.@i],1,1)+"　"+substr(.@BHLog$[.@i],2,2)+"　"+substr(.@BHLog$[.@i],3,3)+"　|　H");
+				dispbottom("============");
+			}
+			if(.@time <= 6) {
+				continue;
+			}
+			mes "======正解======";
+			mes .@Result[0]+"　"+.@Result[1]+"　"+.@Result[2]+"　|　0　3";
+			mes .@Result[3]+"　"+.@Result[4]+"　"+.@Result[5]+"　|　0　3";
+			mes .@Result[6]+"　"+.@Result[7]+"　"+.@Result[8]+"　|　0　3";
+			mes "――――――";
+			mes "0　0　0　|　B　H";
+			mes "3　3　3　|　H";
+		case 3:
+			close;
+		}
+		break;
+	}
+	switch(.@time) {
+	case 1:
+		set .@gain,29162;
+		set .@num,1;
+		announce "【コードブレイカー】"+strcharinfo(0)+"様が"+getitemname(.@gain)+"を獲得しました!!",bc_all,"0x00ff00";
+		break;
+	case 2:
+		set .@gain,1434;
+		set .@num,1;
+		announce "【コードブレイカー】"+strcharinfo(0)+"様が"+getitemname(.@gain)+"を獲得しました!!",bc_map,"0x00ff00";
+		break;
+	case 3:
+		setarray .@name$,"エンボス","カーボン","クロアチア","クレイオルニル";
+		set CB_SET,$cb_pat+1;
+		if($cb_pat == 0)
+			setarray .@gain2,28793,28794,28795;
+		else if($cb_pat == 1)
+			setarray .@gain2,28796,28797,28798;
+		else if($cb_pat == 2)
+			setarray .@gain2,28799,28800,28801;
+		else
+			setarray .@gain2,28802,28803,28804;
+		mes "景品は"+.@name$[$cb_pat]+"セットの中からお選び頂けます。";
+		next;
+		switch(select(getitemname(.@gain2[0]),getitemname(.@gain2[1]),getitemname(.@gain2[2]))) {
+		case 1: set .@gain,.@gain2[0]; break;
+		case 2: set .@gain,.@gain2[1]; break;
+		case 3: set .@gain,.@gain2[2]; break;
+		}
+		set .@num,1;
+		break;
+	case 4:
+		set .@gain,28643;
+		set .@num,1;
+		break;
+	case 5:
+		set .@gain,663;
+		set .@num,100;
+		break;
+	case 6:
+		dispbottom("40苺pointを獲得しました!");
+		set #PPOINT,#PPOINT+40;
+		mes "景品[40苺ポイント]を獲得しました！";
+		close;
+	}
+	mes "景品["+getitemname(.@gain)+"]を獲得しました！";
+	logmessage "code_breaker",getitemname(.@gain)+"獲得";
+	getitem .@gain,.@num;
+	set CB_SET,0;
+	close;
+OnHour00:
+	set $cb_pat,rand(4);
+	end;
+}
+mal_in01,159,219,2	script	コードブレイカー#code2	563,{
+	if(getgmlevel() > 0){
+		if(select("ロックしない","ロックする")==2) {
+			set .playok,1;
+			mes "ロックしました。";
+			close;
+		}
+		set .playok,0;
+	}
+	if(getgmlevel() == 0 && .playok == 1) {
+		mes "現在、ゲームは";
+		mes "GMによってロックされています。";
+		close;
+	}
+	mes "[コードブレイカー]";
+	mes "コードブレイカーしますか？";
+	mes "コードブレイカーで遊ぶには";
+	mes "モンスターカードが一枚必要です。";
+	next;
+	switch(select("やる！","コードブレイカー？","景品リストを見る","会話をやめる")) {
+	case 1:
+		if(checkweight(1434,1) == 0 ){
+			mes "[コードブレイカー]";
+			mes "荷物を整理してね。";
+			close;
+		}
+		cleararray @inventorylist_id[0],0,100;
+		cleararray .@card_num[0],0,100;
+		getinventorylist;
+		set .@vars_kind,getarraysize(@inventorylist_id);
+		set .@j,0;
+		for(set .@i,0; .@i<.@vars_kind; set .@i,.@i+1){
+			if(	((@inventorylist_id[.@i] >= 4001) &&(@inventorylist_id[.@i] <= 4534)) ){
+				setarray .@card_num[.@j],@inventorylist_id[.@i];
+				set .@j,.@j+1;
+			}
+		}
+		mes "[コードブレイカー]";
+		if(.@j<1){
+			mes "^FF0000カードを1つも持ってないですね^000000";
+			close;
+		}
+		mes "コードブレイカーに使用するカードを選択して下さい";
+		next;
+		set .@max_page, .@j /10 - ((.@j > 9) && ((.@j %10) == 0));
+		set .@now_page,0;
+		set .@cardselect,-1;
+		do {
+			set .@choose,(select(
+				((.@now_page > 0)? "前へ":""),
+				((.@card_num[.@now_page *10 + 0] >= 4001)? getitemname(.@card_num[.@now_page *10 + 0]):""),
+				((.@card_num[.@now_page *10 + 1] >= 4001)? getitemname(.@card_num[.@now_page *10 + 1]):""),
+				((.@card_num[.@now_page *10 + 2] >= 4001)? getitemname(.@card_num[.@now_page *10 + 2]):""),
+				((.@card_num[.@now_page *10 + 3] >= 4001)? getitemname(.@card_num[.@now_page *10 + 3]):""),
+				((.@card_num[.@now_page *10 + 4] >= 4001)? getitemname(.@card_num[.@now_page *10 + 4]):""),
+				((.@card_num[.@now_page *10 + 5] >= 4001)? getitemname(.@card_num[.@now_page *10 + 5]):""),
+				((.@card_num[.@now_page *10 + 6] >= 4001)? getitemname(.@card_num[.@now_page *10 + 6]):""),
+				((.@card_num[.@now_page *10 + 7] >= 4001)? getitemname(.@card_num[.@now_page *10 + 7]):""),
+				((.@card_num[.@now_page *10 + 8] >= 4001)? getitemname(.@card_num[.@now_page *10 + 8]):""),
+				((.@card_num[.@now_page *10 + 9] >= 4001)? getitemname(.@card_num[.@now_page *10 + 9]):""),
+				(.@now_page < .@max_page)? "次へ" : ""));
+
+			if (.@choose ==1){			//『前へ』
+				set .@now_page,.@now_page -1;
+			} else if (.@choose==12){		//『次へ』
+				set .@now_page,.@now_page +1;
+			}
+		} while(.@choose ==1 || .@choose ==12);
+		set .@cardselect,.@card_num[.@now_page *10 + .@choose -2];
+		mes "[コードブレイカー]";
+		mes getitemname(.@cardselect)+"でよろしいですか？";
+		mes "^FF0000カードは消費されます。^000000";
+		next;
+		if(select("やっぱやめます","お願いします")==1){
+			mes "[コードブレイカー]";
+			mes "そうですか";
+			close;
+		}
+		if(countitem(.@cardselect)<1) {
+			mes "[コードブレイカー]";
+			mes "カードがないみたい";
+			close;
+		}
+		break;
+	case 2:
+		mes "[コードブレイカー]";
+		mes "3×3のマスにそれぞれ";
+		mes "1～9までの重複しない";
+		mes "数字が入っていて、";
+		mes "その位置と番号を";
+		mes "当てるゲームです。";
+		next;
+		mes "[コードブレイカー]";
+		mes "縦横で1つの組み合わせで、";
+		mes "計6個の組み合わせがある。";
+		mes "解答毎にその内容によって";
+		mes "ヒントが表示されます。";
+		next;
+		mes "[コードブレイカー]";
+		mes "縦（あるいは横）で";
+		mes "そのマスに来る数字が";
+		mes "ある時は「H」。";
+		next;
+		mes "[コードブレイカー]";
+		mes "そのマスではないが";
+		mes "その列（あるいは行）に";
+		mes "その数字が使われている場合、";
+		mes "「B」が表示されます。";
+		next;
+		mes "[コードブレイカー]";
+		mes "例えば……";
+		next;
+		mes "1 2 3 | 0 1";
+		mes "4 5 6 | 0 1";
+		mes "7 8 9 | 0 2";
+		mes "――――――";
+		mes "0 0 0 | B H";
+		mes "1 0 0 | H";
+		next;
+		mes "[コードブレイカー]";
+		mes "このような配置だった場合、";
+		next;
+		mes "[コードブレイカー]";
+		mes "1行目の「1」「2」「3」のうち";
+		mes "どれか一つの位置と番号が一致";
+		mes "2行目の「4」「5」「6」のうち";
+		mes "どれか一つの位置と番号が一致";
+		mes "3行目の「7」「8」「9」のうち";
+		mes "どれかニつの位置と番号が一致";
+		mes "1列目の「1」「4」「7」のうち";
+		mes "どれか一つの位置と番号が一致";
+		next;
+		mes "[コードブレイカー]";
+		mes "という風になります。";
+		next;
+		mes "[コードブレイカー]";
+		mes "この場合、「1」「4」「7」の";
+		mes "うち一つは確実に正解で、";
+		mes "その確率は「7」が最も高い";
+		mes "ということになります。";
+		next;
+		mes "[コードブレイカー]";
+		mes "もう一つのサンプルです。";
+		next;
+		mes "1 2 3 | 1 0";
+		mes "4 5 6 | 0 2";
+		mes "7 8 9 | 0 1";
+		mes "――――――";
+		mes "0 1 0 | B H";
+		mes "1 0 1 | H";
+		next;
+		mes "[コードブレイカー]";
+		mes "このような配置だった場合、";
+		next;
+		mes "[コードブレイカー]";
+		mes "1行目の「1」「2」「3」のうち";
+		mes "どれか一つの番号のみが一致";
+		mes "2行目の「4」「5」「6」のうち";
+		mes "どれかニつの位置と番号が一致";
+		mes "3行目の「7」「8」「9」のうち";
+		mes "どれか一つの位置と番号が一致";
+		mes "1列目の「1」「4」「7」のうち";
+		mes "どれか一つの位置と番号が一致";
+		mes "2列目の「2」「5」「8」のうち";
+		mes "どれか一つの番号のみが一致";
+		mes "3列目の「3」「6」「9」のうち";
+		mes "どれか一つの位置と番号が一致";
+		next;
+		mes "[コードブレイカー]";
+		mes "この場合、「4」「6」が";
+		mes "正解である確率が最も高い";
+		mes "ということになります。";
+		next;
+		mes "[コードブレイカー]";
+		mes "解答は6回まで行うことができ、";
+		mes "数値を入れ替えて正解に";
+		mes "辿り着く、というゲームです。";
+		close;
+	case 3:
+		switch(select("1回目で正解の景品","2回目で正解の景品","3回目で正解の景品","4回目で正解の景品","5回目で正解の景品","6回目で正解の景品")) {
+		case 1:
+			mes "[火龍の印]";
+			mes "スロット数 : 1";
+			mes "全ての属性レベルから";
+			mes "ダメージ5%減少";
+			mes "―――――――――――――";
+			mes "位置 : ^777777頭下段^000000";
+			mes "防御 : ^7777770^000000";
+			mes "重量 : ^77777720^000000";
+			close;
+		case 2:
+			mes "[クーペ竜の髭]";
+			mes "スロット数 : 2";
+			mes "聖属性。";
+			mes "Vit + 7。";
+			mes "ハイディングやクローキング";
+			mes "をしているモンスターが見える。";
+			mes "―――――――――――――";
+			mes "精錬値が5以上の場合、";
+			mes "精錬値が高くなる程、";
+			mes "[ドラゴンブレス]、";
+			mes "[レイオブジェネシス]の";
+			mes "ダメージが増加する。";
+			mes "―――――――――――――";
+			mes "精錬値が6以上の場合、";
+			mes "現在HPが少ないほど";
+			mes "物理ダメージが向上する。";
+			mes "―――――――――――――";
+			mes "精錬値が7以上の場合、";
+			mes "ATK+50。";
+			mes "精錬値が9以上の場合、";
+			mes "追加でATK+100。";
+			mes "―――――――――――――";
+			mes "系列 : ^777777両手槍^000000";
+			mes "攻撃 : ^777777150^000000";
+			mes "重量 : ^77777750^000000";
+			mes "武器レベル : ^7777774^000000";
+			mes "要求レベル : ^77777790^000000";
+			mes "装備 : ^777777ソードマン系^000000";
+			close;
+		case 3:
+			if($cb_pat == 0) {
+				mes "[アゲハの羽]";
+				mes "スロット数 : 0";
+				mes "MaxHP - 15%";
+				mes "ノックバックしない。";
+			} else if($cb_pat == 1) {
+				mes "[夜アゲハの羽]";
+				mes "スロット数 : 0";
+				mes "MaxHP - 15%";
+				mes "無限インデュア。";
+			} else {
+				mes "[黒アゲハの羽]";
+				mes "スロット数 : 0";
+				mes "MaxHP - 15%";
+				mes "ハイディングやクローキング";
+				mes "をしているモンスターが見える。";
+			}
+			mes "―――――――――――――";
+			mes "位置 : ^777777頭下段^000000";
+			mes "防御 : ^7777770^000000";
+			mes "重量 : ^77777720^000000";
+			close;
+		case 4:
+			mes "[シルバーメダリオンの袋]";
+			close;
+		case 5:
+			mes "[中秋の餠x100]";
+			close;
+		case 6:
+			mes "[40苺ポイント]";
+			close;
+		}
+	case 4:
+		mes "[コードブレイカー]";
+		mes "またどうぞ～。";
+		close;
+	}
+	//初期化
+	for(set .@i,0; .@i < 9; set .@i,.@i+1 ){
+		set .@MainStatus[.@i],.@i + 1;
+	}
+	//正解の格納
+	setarray .@list,1,2,3,4,5,6,7,8,9;
+	for(set .@i,0; .@i < 9; set .@i,.@i+1) {
+		set .@r,rand(getarraysize(.@list));
+		set .@Result[.@i],.@list[.@r];
+		deletearray .@list[.@r],1;
+	}
+	if(getgmlevel() == 99)
+		dispbottom(.@Result[0]+":"+.@Result[1]+":"+.@Result[2]+":"+.@Result[3]+":"+.@Result[4]+":"+.@Result[5]+":"+.@Result[6]+":"+.@Result[7]+":"+.@Result[8]);
+	set .@time,0;
+	//メインループ
+	while(1) {
+		mes .@MainStatus[0]+"　"+.@MainStatus[1]+"　"+.@MainStatus[2]+"　|　^FF6000"+.@SideB[0]+"　^00FF00"+.@SideH[0]+"^000000";
+		mes .@MainStatus[3]+"　"+.@MainStatus[4]+"　"+.@MainStatus[5]+"　|　^FF6000"+.@SideB[1]+"　^00FF00"+.@SideH[1]+"^000000";
+		mes .@MainStatus[6]+"　"+.@MainStatus[7]+"　"+.@MainStatus[8]+"　|　^FF6000"+.@SideB[2]+"　^00FF00"+.@SideH[2]+"^000000";
+		mes "――――――";
+		mes "^FF6000"+.@ButtomB[0]+"　"+.@ButtomB[1]+"　"+.@ButtomB[2]+"^000000　|　^FF6000B^000000　^00FF00H";
+		mes "^00FF00"+.@ButtomH[0]+"　"+.@ButtomH[1]+"　"+.@ButtomH[2]+"^000000　|　^00FF00H";
+		if(.@time == 0) {
+			if(select("Start","Exit")==2)
+				close;
+			set .@time,1;
+			delitem .@cardselect,1;
+		}
+		next;
+		switch(select(.@time+"回目の解答","ログ","やめる")) {
+		case 1:
+			input .@temp;
+			if(.@temp < 111111111 || .@temp > 999999999) {
+				mes "-入力範囲超過!!-";
+				mes " 111111111から";
+				mes " 999999999以内で入力してください。";
+				next;
+				continue;
+			}
+			set .@number$,""+.@temp;
+			setarray .@num,	substr(.@number$,0,0),substr(.@number$,1,1),substr(.@number$,2,2),
+							substr(.@number$,3,3),substr(.@number$,4,4),substr(.@number$,5,5),
+							substr(.@number$,6,6),substr(.@number$,7,7),substr(.@number$,8,8);
+			if(.@num[0] == 0 || .@num[1] == 0 || .@num[2] == 0 || .@num[3] == 0 || .@num[4] == 0 || .@num[5] == 0 || .@num[6] == 0 || .@num[7] == 0 || .@num[8] == 0) {
+				mes "-入力値に「0」あり!!-";
+				next;
+				continue;
+			}
+			setarray .@list,0,0,0,0,0,0,0,0,0;
+			set .@dnum,0;
+			for(set .@i,0; .@i < 9; set .@i,.@i+1) {
+				set .@list[.@num[.@i]-1],.@list[.@num[.@i]-1]+1;
+				if(.@list[.@num[.@i]-1] >= 3) {
+					mes "-同じ数値は3つ以上使えません!!-";
+					set .@dnum,1;
+					next;
+					break;
+				}
+			}
+			if(.@dnum>0)
+				continue;
+			copyarray .@MainStatus[0],.@num[0],9;
+			for(set .@i,0; .@i < 3; set .@i,.@i+1) {
+				set .@SideH[.@i],0;
+				set .@SideB[.@i],0;
+				set .@ButtomH[.@i],0;
+				set .@ButtomB[.@i],0;
+			}
+			set .@endcheck,0;
+			for(set .@i,0; .@i < 9; set .@i,.@i+1) {
+				if(.@num[.@i] == .@Result[.@i]) {
+					set .@SideH[.@i / 3],.@SideH[.@i / 3]+1;
+					set .@ButtomH[.@i % 3],.@ButtomH[.@i % 3]+1;
+				} else {
+					set .@endcheck,1;
+					for(set .@j,1; .@j <= 2; set .@j,.@j+1) {
+						if(((.@i % 3) + .@j) < 3) {
+							if(.@num[.@i] == .@Result[.@i + .@j])
+								set .@SideB[.@i / 3],.@SideB[.@i / 3]+1;
+						}
+						if(((.@i % 3) - .@j) >= 0) {
+							if(.@num[.@i] == .@Result[.@i - .@j])
+								set .@SideB[.@i / 3],.@SideB[.@i / 3]+1;
+						}
+						if((.@i / 3 + .@j) < 3) {
+							if(.@num[.@i] == .@Result[.@i + (.@j * 3)])
+								set .@ButtomB[.@i % 3],.@ButtomB[.@i % 3]+1;
+						}
+						if((.@i / 3 - .@j) >= 0) {
+							if(.@num[.@i] == .@Result[.@i - (.@j * 3)])
+								set .@ButtomB[.@i % 3],.@ButtomB[.@i % 3]+1;
+						}
+					}
+				}
+			}
+			if(.@endcheck==0) {
+				mes "全て一致しました!!!";
+				specialeffect2 68;
+				break;
+			}
+			set .@MainLog$[.@time],.@temp;
+
+			set .@temp,1000+.@SideH[0]*100+.@SideH[1]*10+.@SideH[2];
+			set .@SHLog$[.@time],.@temp;
+
+			set .@temp,1000+.@SideB[0]*100+.@SideB[1]*10+.@SideB[2];
+			set .@SBLog$[.@time],.@temp;
+
+			set .@temp,1000+.@ButtomH[0]*100+.@ButtomH[1]*10+.@ButtomH[2];
+			set .@BHLog$[.@time],.@temp;
+
+			set .@temp,1000+.@ButtomB[0]*100+.@ButtomB[1]*10+.@ButtomB[2];
+			set .@BBLog$[.@time],.@temp;
+
+			set .@time,.@time+1;
+			if(.@time <= 6)
+				continue;
+			mes "-Missing!!-";
+			next;
+		case 2:
+			for(set .@i,1; .@i < .@time; set .@i,.@i+1) {
+				dispbottom("―――第"+.@i+"解答―――");
+				dispbottom(substr(.@MainLog$[.@i],0,0)+"　"+substr(.@MainLog$[.@i],1,1)+"　"+substr(.@MainLog$[.@i],2,2)+"　|　"+substr(.@SBLog$[.@i],1,1)+"　"+substr(.@SHLog$[.@i],1,1));
+				dispbottom(substr(.@MainLog$[.@i],3,3)+"　"+substr(.@MainLog$[.@i],4,4)+"　"+substr(.@MainLog$[.@i],5,5)+"　|　"+substr(.@SBLog$[.@i],2,2)+"　"+substr(.@SHLog$[.@i],2,2));
+				dispbottom(substr(.@MainLog$[.@i],6,6)+"　"+substr(.@MainLog$[.@i],7,7)+"　"+substr(.@MainLog$[.@i],8,8)+"　|　"+substr(.@SBLog$[.@i],3,3)+"　"+substr(.@SHLog$[.@i],3,3));
+				dispbottom("――――――");
+				dispbottom(substr(.@BBLog$[.@i],1,1)+"　"+substr(.@BBLog$[.@i],2,2)+"　"+substr(.@BBLog$[.@i],3,3)+"　|　B　H");
+				dispbottom(substr(.@BHLog$[.@i],1,1)+"　"+substr(.@BHLog$[.@i],2,2)+"　"+substr(.@BHLog$[.@i],3,3)+"　|　H");
+				dispbottom("============");
+			}
+			if(.@time <= 6) {
+				continue;
+			}
+			mes "======正解======";
+			mes .@Result[0]+"　"+.@Result[1]+"　"+.@Result[2]+"　|　0　3";
+			mes .@Result[3]+"　"+.@Result[4]+"　"+.@Result[5]+"　|　0　3";
+			mes .@Result[6]+"　"+.@Result[7]+"　"+.@Result[8]+"　|　0　3";
+			mes "――――――";
+			mes "0　0　0　|　B　H";
+			mes "3　3　3　|　H";
+		case 3:
+			close;
+		}
+		break;
+	}
+	switch(.@time) {
+	case 1:
+		set .@gain,29162;
+		set .@num,1;
+		announce "【コードブレイカー】"+strcharinfo(0)+"様が"+getitemname(.@gain)+"を獲得しました!!",bc_all,"0x00ff00";
+		break;
+	case 2:
+		set .@gain,1434;
+		set .@num,1;
+		announce "【コードブレイカー】"+strcharinfo(0)+"様が"+getitemname(.@gain)+"を獲得しました!!",bc_map,"0x00ff00";
+		break;
+	case 3:
+		if($cb_pat == 0)
+			set .@gain,29180;
+		else if($cb_pat == 1)
+			set .@gain,29202;
+		else
+			set .@gain,29226;
+		set .@num,1;
+		announce "【コードブレイカー】"+strcharinfo(0)+"様が"+getitemname(.@gain)+"を獲得しました!!",bc_area,"0x00ff00";
+		break;
+	case 4:
+		set .@gain,28643;
+		set .@num,1;
+		break;
+	case 5:
+		set .@gain,663;
+		set .@num,100;
+		break;
+	case 6:
+		dispbottom("40苺pointを獲得しました!");
+		set #PPOINT,#PPOINT+40;
+		mes "景品[40苺ポイント]を獲得しました！";
+		close;
+	}
+	mes "景品["+getitemname(.@gain)+"]を獲得しました！";
+	logmessage "code_breaker",getitemname(.@gain)+"獲得";
+	getitem .@gain,.@num;
+	close;
+}
+

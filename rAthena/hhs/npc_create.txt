@@ -1,0 +1,1114 @@
+lhz_in02,23,146,4	script	NPC作成猫	495,{
+	mes "[NPC作成猫]";
+	if(checkfile("npc/user/map"+getcharid(3)+".txt")){
+		mes "自分のNPCをお持ちにゃん";
+		mes "NPCを作りますかにゃ？";
+		next;
+		switch (select("会話をやめる","1から作る","続きから作る","^FF0000NPCを消す^000000","NPCの確認","作成の手引き")) {
+		case 1:
+			mes "[NPC作成猫]";
+			mes "さらばにゃ！";
+			close;
+		case 2:
+			break;
+		case 3:
+			set .@maxcol,getline("npc/user/map"+getcharid(3)+".txt");
+			if(.@maxcol>2){
+				set .@j,0;
+				for (set .@i,1; .@i < .@maxcol-2; set .@i, .@i+1){
+					set .@mes$,readline("npc/user/map"+getcharid(3)+".txt",.@i);
+					if(.@mes$ != "" && getstrlen(.@mes$) > 1){
+						set .@npcmes$[.@j],delchar(.@mes$,getstrlen(.@mes$)-1);
+						set .@j,.@j+1;
+					}
+				}
+			}
+			break;
+		case 4:
+			mes "[NPC作成猫]";
+			mes "ほんとに消すかにゃ？";
+			mes "NPCを消してしまうと";
+			mes "^FF0000全ての設定が初期化されてしまい";
+			mes "NPCを復元することは不可能になるにゃ^000000";
+			next;
+			if(select("やめる","^FF0000それでも消す^000000")==1) {
+				mes "[NPC作成猫]";
+				mes "さらばにゃ！";
+				close;
+			}
+			createfile("npc/user/","map"+getcharid(3)+".txt");
+//			deletefile("npc/user/map"+getcharid(3)+".txt");
+			mes "[NPC作成猫]";
+			mes "NPCを消したにゃん……";
+			close;
+		case 5:
+			set .@maxcol,getline("npc/user/map"+getcharid(3)+".txt");
+			if(.@maxcol>2){
+				dispbottom("/*=========================*/");
+				for (set .@i,0; .@i < .@maxcol-1; set .@i, .@i+1){
+					set .@mes$,readline("npc/user/map"+getcharid(3)+".txt",.@i);
+					if(.@mes$ != "" && getstrlen(.@mes$) > 1){
+						dispbottom(delchar(.@mes$,getstrlen(.@mes$)-1));
+					}
+				}
+				dispbottom("/*=========================*/");
+			}
+			mes "[NPC作成猫]";
+			mes "/savechatすると";
+			mes "NPCがtxtで保存されます。";
+			close;
+		case 6:
+			mes "[NPC作成猫]";
+			mes "NPC作成の手引きです。";
+			mes "次の項目からお選びください。";
+			next;
+			switch (select( "作成の基礎",
+					"作成の応用",
+					"^0000FF[命令文]^000000会話の内容を入力",
+					"^0000FF[命令文]^000000次ページ送り",
+					"^0000FF[命令文]^000000会話の終了",
+					"^0000FF[命令文]^000000YES/NO分岐",
+					"^0000FF[命令文]^000000エモーション",
+					"^0000FF[命令文]^000000数値入力",
+					"^0000FF[命令文]^000000文字列入力")) {
+			case 1:
+				mes "「保存する」、もしくは";
+				mes "「保存して終了する」を";
+				mes "選択して、状態を保存しながら";
+				mes "作成を進めてください。";
+				next;
+				mes "保存しないまま会話を中断したり";
+				mes "ログアウトした場合、";
+				mes "作成した箇所が巻き戻ります。";
+				next;
+				mes "保存済みの場合、";
+				mes "NPCと会話開始のときに";
+				mes "「続きから作る」";
+				mes "を選択することで";
+				mes "前回保存時の状態から";
+				mes "続きからの作成が可能になります。";
+				next;
+				mes "「1から作る」";
+				mes "を選んでしまっても";
+				mes "保存せずに会話を終了し、";
+				mes "再度「続きから作る」";
+				mes "を選択することで";
+				mes "続きからの作成が可能になります。";
+				close;
+			case 2:
+				mes "^0000FF[命令文]^000000会話の内容を入力";
+				mes "を選択し、文章入力中に";
+				mes "様々な命令文を加えることができます。";
+				next;
+				mes "「^XXXXXX」を文中に入力";
+				mes "→記述以降の文章がXXXXXXに";
+				mes "対応する色で表示されます";
+				mes "16進数値でRRGGBBの形式です";
+				next;
+				mes "「\"+strcharinfo(0)+\"」を文中に入力";
+				mes "→プレイヤー名が表示されます";
+				mes "「\"+strcharinfo(1)+\"」を文中に入力";
+				mes "→プレイヤーの所属PT名が表示されます";
+				mes "「\"+strcharinfo(2)+\"」を文中に入力";
+				mes "→プレイヤーの所属G名が表示されます";
+				close;
+			case 3:
+				mes "文字入力ウィンドウが出現し、";
+				mes "入力した文字列";
+				mes "が出力されます。";
+				next;
+				mes "一度に長い文章を入力した場合、";
+				mes "二列に表示されることがあります。";
+				next;
+				mes "また、表示が行以上になる場合、";
+				mes "スクロールバーが出現し、";
+				mes "一度に表示しきれなくなります。";
+				next;
+				mes "そのような場合は";
+				mes "^0000FF[命令文]^000000次ページ送り";
+				mes "を配置すると見やすくなります。";
+				next;
+				mes "nextボタンが押されると";
+				mes "以降に登録されてある";
+				mes "^0000FF[命令文]^000000会話の内容を入力";
+				mes "が出力されます。";
+				next;
+				mes "^0000FF[命令文]^000000会話の内容を入力";
+				mes "が連続する場合、";
+				mes "配置すると見やすくなります。";
+				close;
+			case 4:
+				mes "next;";
+				mes "が出力されます。";
+				next;
+				mes "会話内容の更新を意味し、";
+				mes "nextボタンを表示させて";
+				mes "これが押されるまで";
+				mes "以降の処理を実行しません。";
+				next;
+				mes "nextボタンが押されると";
+				mes "以降に登録されてある";
+				mes "^0000FF[命令文]^000000会話の内容を入力";
+				mes "が出力されます。";
+				next;
+				mes "^0000FF[命令文]^000000会話の内容を入力";
+				mes "が連続する場合、";
+				mes "配置すると見やすくなります。";
+				close;
+			case 5:
+				mes "close;";
+				mes "が出力されます。";
+				next;
+				mes "会話終了の宣言を意味し、";
+				mes "closeボタンを表示させて";
+				mes "以降の処理を実行しません。";
+				next;
+				mes "文章の最後には必ず配置してください。";
+				close;
+			case 6:
+				mes "YES/NO分岐作成モード";
+				mes "になります。";
+				next;
+				mes "YES選択時の会話と";
+				mes "NO選択時の会話を設定し";
+				mes "分岐完了を選択すると";
+				mes "該当位置から以降、順番に";
+				mes "配置されていきます。";
+				next;
+				mes "どちらかの文章が終了する場合、";
+				mes "^0000FF[命令文]^000000会話の終了";
+				mes "の配置忘れに注意してください。";
+				close;
+			case 7:
+				mes "emotion n;";
+				mes "が出力されます。";
+				next;
+				mes "入力した番号nのエモーションを";
+				mes "表示させます。";
+				mes "この機能は、表示する相手を";
+				mes "会話中プレイヤーと相手NPCから";
+				mes "選択することができます。";
+				close;
+			case 8:
+				mes "input .@dummy;";
+				mes "が出力されます。";
+				next;
+				mes "数値入力窓を表示させます。";
+				mes "比較文を作成する";
+				mes "を選択すると入力された数値と";
+				mes "特定数値との比較が可能な";
+				mes "入力比較文作成モードへ";
+				mes "移行することができます。";
+				next;
+				mes "また、";
+				mes "戻る";
+				mes "を選択すると";
+				mes "数値を入力させるだけで";
+				mes "入力された数値を比較させません。";
+				close;
+			case 9:
+				mes "input .@dummy$;";
+				mes "が出力されます。";
+				next;
+				mes "文字列入力窓を表示させます。";
+				mes "比較文を作成する";
+				mes "を選択すると入力された文字列と";
+				mes "特定文字列との比較が可能な";
+				mes "入力比較文作成モードへ";
+				mes "移行することができます。";
+				next;
+				mes "また、";
+				mes "戻る";
+				mes "を選択すると";
+				mes "文字列を入力させるだけで";
+				mes "入力された文字列を比較させません。";
+				close;
+			}
+		}
+		set .@npcid,495;
+		set .@now,1;
+		do {
+			mes "[NPC作成猫]";
+			mes "NPCの設定をするにゃね";
+			next;
+			switch (select("基本設定を変更する","会話文を作成する","保存する","保存して終了する")) {
+			case 1:
+				mes "[NPC作成猫]";
+				mes "NPCの姿を設定できるにゃ";
+				mes "設定するNPC番号をいれるにゃ";
+				mes "デフォルトは495番にゃよ！";
+				next;
+				input .@npcid;
+				if(	.@npcid < 46 || .@npcid == 104 ||
+					(.@npcid >= 126 && .@npcid <= 400) ||
+					.@npcid == 722 || .@npcid == 723 || .@npcid > 999 ){
+					mes "[NPC作成猫]";
+					mes .@npcid+"番は利用することができないにゃ";
+					mes "基本は46~999の間で設定してにゃ";
+					set .@npcid,495;
+					next;
+					break;
+				}
+				mes "[NPC作成猫]";
+				mes "NPCの姿を"+.@npcid+"番に変更したにゃ";
+				next;
+				break;
+			case 2:
+				do {
+					if(.@now >= 121)set .@now,1;
+					mes "[NPC作成猫]";
+					mes "現在は"+.@now+"/120行目を編集中";
+					if(.@npcmes$[.@now-1] != ""){
+						mes "^0000FF↓現在の内容↓^000000";
+						mes ""+.@npcmes$[.@now-1];
+					}
+					next;
+					switch (select( "^0000FF[命令文]^000000会話の内容を入力","^0000FF[命令文]^000000次ページ送り","^0000FF[命令文]^000000会話の終了",
+							"^0000FF[命令文]^000000YES/NO分岐","^0000FF[命令文]^000000エモーション","^0000FF[命令文]^000000数値入力",
+							"^0000FF[命令文]^000000文字列入力","^008181[編集]^000000編集中の行数を変える","^008181[編集]^000000現在の状況を表示する","戻る")) {
+					case 1:
+						input .@mes$;
+						if(strpos(.@mes$,"\\\"")>=0){
+							mes "利用できない文字列";
+							mes "「\\\"」";
+							mes "が含まれています";
+							next;
+							continue;
+						}
+						if(strpos(.@mes$,"\"")>=0){
+							set .@j,0;
+							for (set .@i,0; .@i < getstrlen(.@mes$); set .@i, .@i+1){
+								if(strpos(.@mes$,"\"",.@i)>=0){
+									set .@i,strpos(.@mes$,"\"",.@i);
+									set .@j,.@j+1;
+								}
+							}
+							if(.@j != 0 && .@j != 2){
+								mes "「\"」の数がマッチしません！";
+								mes "必ずペアで配置してください！";
+								next;
+								continue;
+							}
+							if(strpos(.@mes$,"\"+strcharinfo(0)+\"")==-1 &&
+							   strpos(.@mes$,"\"+strcharinfo(1)+\"")==-1 &&
+							   strpos(.@mes$,"\"+strcharinfo(2)+\"")==-1 ){
+								mes "無効な命令文があります！";
+								mes "入力文を見直してください！";
+								next;
+								continue;
+							}
+						}
+						set .@npcmes$[.@now-1],"	mes \""+.@mes$+"\";";
+						set .@now,.@now+1;
+						mes (.@now-1)+"行目の文章を";
+						mes .@mes$;
+						mes "にしました";
+						next;
+						continue;
+					case 2:
+						set .@npcmes$[.@now-1],"	next;";
+						set .@now,.@now+1;
+						mes (.@now-1)+"行目を";
+						mes "^0000FF[命令文]^000000next";
+						mes "にしました";
+						next;
+						continue;
+					case 3:
+						set .@npcmes$[.@now-1],"	close;";
+						set .@now,.@now+1;
+						mes (.@now-1)+"行目を";
+						mes "^0000FF[命令文]^000000close";
+						mes "にしました";
+						next;
+						continue;
+					case 4:
+						set .@iftit1$,"YES";
+						set .@iftit2$,"NO";
+						set .@ifnow1,1;
+						set .@ifnow2,1;
+						cleararray .@ifmes1$[0],"",20;
+						cleararray .@ifmes2$[0],"",20;
+						do {
+							set .@sel,0;
+							mes "[NPC作成猫]";
+							mes "YES/NO分岐を作成中です";
+							next;
+							switch (select( "選択1表示 - "+.@iftit1$,"選択1内容編集",
+									"選択2表示 - "+.@iftit2$,"選択2内容編集",
+									"現在の状況を表示する","YES/NO分岐作成を完了する","戻る")) {
+							case 1:
+							case 3:
+								input .@mes$;
+								if(strpos(.@mes$,"\\\"")>=0){
+									mes "利用できない文字列";
+									mes "「\\\"」";
+									mes "が含まれています";
+									next;
+									continue;
+								}
+								if(strpos(.@mes$,"\"")>=0){
+									set .@j,0;
+									for (set .@i,0; .@i < getstrlen(.@mes$); set .@i, .@i+1){
+										if(strpos(.@mes$,"\"",.@i)>=0){
+											set .@i,strpos(.@mes$,"\"",.@i);
+											set .@j,.@j+1;
+										}
+									}
+									if(.@j != 0 && .@j != 2){
+										mes "「\"」の数がマッチしません！";
+										mes "必ずペアで配置してください！";
+										next;
+										continue;
+									}
+									if(strpos(.@mes$,"\"+strcharinfo(0)+\"")==-1 &&
+									   strpos(.@mes$,"\"+strcharinfo(1)+\"")==-1 &&
+									   strpos(.@mes$,"\"+strcharinfo(2)+\"")==-1 ){
+										mes "無効な命令文があります！";
+										mes "入力文を見直してください！";
+										next;
+										continue;
+									}
+								}
+								set getd(".@iftit"+((@menu+1)/2)+"$"),.@mes$;
+								mes "選択肢"+((@menu+1)/2)+"の表示を";
+								mes .@mes$;
+								mes "にしました";
+								next;
+								continue;
+							case 2:
+								if(.@sel == 0) set .@sel,1;
+							case 4:
+								if(.@sel == 0) set .@sel,2;
+								do {
+									if(.@ifnow1 >= 21)set .@ifnow1,1;
+									if(.@ifnow2 >= 21)set .@ifnow2,1;
+									mes "[NPC作成猫]";
+									mes "現在は選択肢"+.@sel+"の"+getd(".@ifnow"+.@sel)+"/20行目を編集中";
+									if(getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]") != ""){
+										mes "^0000FF↓現在の内容↓^000000";
+										mes getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]");
+									}
+									next;
+									switch (select( "^0000FF[命令文]^000000会話の内容を入力","^0000FF[命令文]^000000次ページ送り","^0000FF[命令文]^000000会話の終了",
+											"^008181[編集]^000000編集中の行数を変える","^008181[編集]^000000現在の状況を表示する","戻る")) {
+									case 1:
+										input .@mes$;
+										if(strpos(.@mes$,"\\\"")>=0){
+											mes "利用できない文字列";
+											mes "「\\\"」";
+											mes "が含まれています";
+											next;
+											continue;
+										}
+										if(strpos(.@mes$,"\"")>=0){
+											set .@j,0;
+											for (set .@i,0; .@i < getstrlen(.@mes$); set .@i, .@i+1){
+												if(strpos(.@mes$,"\"",.@i)>=0){
+													set .@i,strpos(.@mes$,"\"",.@i);
+													set .@j,.@j+1;
+												}
+											}
+											if(.@j != 0 && .@j != 2){
+												mes "「\"」の数がマッチしません！";
+												mes "必ずペアで配置してください！";
+												next;
+												continue;
+											}
+											if(strpos(.@mes$,"\"+strcharinfo(0)+\"")==-1 &&
+											   strpos(.@mes$,"\"+strcharinfo(1)+\"")==-1 &&
+											   strpos(.@mes$,"\"+strcharinfo(2)+\"")==-1 ){
+												mes "無効な命令文があります！";
+												mes "入力文を見直してください！";
+												next;
+												continue;
+											}
+										}
+										set getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]"),"		mes \""+.@mes$+"\";";
+										setd ".@ifnow"+.@sel,getd(".@ifnow"+.@sel)+1;
+										mes (getd(".@ifnow"+.@sel)-1)+"行目の文章を";
+										mes .@mes$;
+										mes "にしました";
+										next;
+										continue;
+									case 2:
+										set getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]"),"		next;";
+										setd ".@ifnow"+.@sel,getd(".@ifnow"+.@sel)+1;
+										mes (getd(".@ifnow"+.@sel)-1)+"行目を";
+										mes "^0000FF[命令文]^000000next";
+										mes "にしました";
+										next;
+										continue;
+									case 3:
+										set getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]"),"		close;";
+										setd ".@ifnow"+.@sel,getd(".@ifnow"+.@sel)+1;
+										mes (getd(".@ifnow"+.@sel)-1)+"行目を";
+										mes "^0000FF[命令文]^000000close";
+										mes "にしました";
+										next;
+										continue;
+									case 4:
+										input getd(".@ifnow"+.@sel),1,20;
+										continue;
+									case 5:
+										dispbottom("/*=========================*/");
+										for (set .@i,0; .@i < 19; set .@i, .@i+1){
+											if(getd(".@ifmes"+.@sel+"$["+.@i+"]") != ""){
+												dispbottom(getd(".@ifmes"+.@sel+"$["+.@i+"]"));
+											}
+										}
+										dispbottom("/*=========================*/");
+										continue;
+									case 6:
+										break;
+									}
+									break;
+								} while(1);
+								continue;
+							case 5:
+								dispbottom("/*=========================*/");
+								dispbottom("if(select(\""+.@iftit1$+"\",\""+.@iftit2$+"\")==1) {");
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes1$[.@i] != ""){
+										dispbottom(.@ifmes1$[.@i]);
+									}
+								}
+								dispbottom("} else {");
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes2$[.@i] != ""){
+										dispbottom(.@ifmes2$[.@i]);
+									}
+								}
+								dispbottom("}");
+								dispbottom("/*=========================*/");
+								continue;
+							case 6:
+								set .@npcmes$[.@now-1],"	if(select(\""+.@iftit1$+"\",\""+.@iftit2$+"\")==1) {";
+								set .@now,.@now+1;
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes1$[.@i] != ""){
+										set .@npcmes$[.@now-1],.@ifmes1$[.@i];
+										set .@now,.@now+1;
+									}
+								}
+								set .@npcmes$[.@now-1],"	} else {";
+								set .@now,.@now+1;
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes2$[.@i] != ""){
+										set .@npcmes$[.@now-1],.@ifmes2$[.@i];
+										set .@now,.@now+1;
+									}
+								}
+								set .@npcmes$[.@now-1],"	}";
+								set .@now,.@now+1;
+							case 7:
+								break;
+							}
+							break;
+						} while(1);
+						continue;
+					case 5:
+						input .@num,0,80;
+						set .@emo,0;
+						if(select("NPCに表示","自分に表示")==2)
+							set .@emo,1;
+						set .@npcmes$[.@now-1],"	emotion "+.@num+","+.@emo+";";
+						set .@now,.@now+1;
+						mes (.@now-1)+"行目を";
+						mes "^0000FF[命令文]^000000エモーション"+.@num+"番";
+						mes "にしました";
+						next;
+						continue;
+					case 6:
+						set .@npcmes$[.@now-1],"	input .@dummy;";
+						set .@now,.@now+1;
+						mes (.@now-1)+"行目を";
+						mes "^0000FF[命令文]^000000数値入力";
+						mes "にしました";
+						mes "入力比較文作成を続けますか？";
+						next;
+						if(select("比較文を作成する","戻る")==2)
+							continue;
+						set .@ifnow1,1;
+						set .@ifnow2,1;
+						set .@match,0;
+						cleararray .@ifmes1$[0],"",20;
+						cleararray .@ifmes2$[0],"",20;
+						do {
+							set .@sel,0;
+							mes "[NPC作成猫]";
+							mes "入力比較文を作成中です";
+							next;
+							switch (select( "比較対象 - "+.@match,"TRUE内容編集","FALSE内容編集",
+									"現在の状況を表示する","入力比較文作成を完了する","戻る")) {
+							case 1:
+								input .@match;
+								continue;
+							case 2:
+								if(.@sel == 0) set .@sel,1;
+							case 3:
+								if(.@sel == 0) set .@sel,2;
+								do {
+									if(.@ifnow1 >= 21)set .@ifnow1,1;
+									if(.@ifnow2 >= 21)set .@ifnow2,1;
+									mes "[NPC作成猫]";
+									mes "現在は"+(.@sel==1?"TRUE":"FALSE")+"の"+getd(".@ifnow"+.@sel)+"/20行目を編集中";
+									if(getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]") != ""){
+										mes "^0000FF↓現在の内容↓^000000";
+										mes getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]");
+									}
+									next;
+									switch (select( "^0000FF[命令文]^000000会話の内容を入力","^0000FF[命令文]^000000次ページ送り","^0000FF[命令文]^000000会話の終了",
+											"^008181[編集]^000000編集中の行数を変える","^008181[編集]^000000現在の状況を表示する","戻る")) {
+									case 1:
+										input .@mes$;
+										if(strpos(.@mes$,"\\\"")>=0){
+											mes "利用できない文字列";
+											mes "「\\\"」";
+											mes "が含まれています";
+											next;
+											continue;
+										}
+										if(strpos(.@mes$,"\"")>=0){
+											set .@j,0;
+											for (set .@i,0; .@i < getstrlen(.@mes$); set .@i, .@i+1){
+												if(strpos(.@mes$,"\"",.@i)>=0){
+													set .@i,strpos(.@mes$,"\"",.@i);
+													set .@j,.@j+1;
+												}
+											}
+											if(.@j != 0 && .@j != 2){
+												mes "「\"」の数がマッチしません！";
+												mes "必ずペアで配置してください！";
+												next;
+												continue;
+											}
+											if(strpos(.@mes$,"\"+strcharinfo(0)+\"")==-1 &&
+											   strpos(.@mes$,"\"+strcharinfo(1)+\"")==-1 &&
+											   strpos(.@mes$,"\"+strcharinfo(2)+\"")==-1 ){
+												mes "無効な命令文があります！";
+												mes "入力文を見直してください！";
+												next;
+												continue;
+											}
+										}
+										set getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]"),"		mes \""+.@mes$+"\";";
+										setd ".@ifnow"+.@sel,getd(".@ifnow"+.@sel)+1;
+										mes (getd(".@ifnow"+.@sel)-1)+"行目の文章を";
+										mes .@mes$;
+										mes "にしました";
+										next;
+										continue;
+									case 2:
+										set getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]"),"		next;";
+										setd ".@ifnow"+.@sel,getd(".@ifnow"+.@sel)+1;
+										mes (getd(".@ifnow"+.@sel)-1)+"行目を";
+										mes "^0000FF[命令文]^000000next";
+										mes "にしました";
+										next;
+										continue;
+									case 3:
+										set getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]"),"		close;";
+										setd ".@ifnow"+.@sel,getd(".@ifnow"+.@sel)+1;
+										mes (getd(".@ifnow"+.@sel)-1)+"行目を";
+										mes "^0000FF[命令文]^000000close";
+										mes "にしました";
+										next;
+										continue;
+									case 4:
+										input getd(".@ifnow"+.@sel),1,20;
+										continue;
+									case 5:
+										dispbottom("/*=========================*/");
+										for (set .@i,0; .@i < 19; set .@i, .@i+1){
+											if(getd(".@ifmes"+.@sel+"$["+.@i+"]") != ""){
+												dispbottom(getd(".@ifmes"+.@sel+"$["+.@i+"]"));
+											}
+										}
+										dispbottom("/*=========================*/");
+										continue;
+									case 6:
+										break;
+									}
+									break;
+								} while(1);
+								continue;
+							case 4:
+								dispbottom("/*=========================*/");
+								dispbottom("if(.@dummy=="+.@match+") {");
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes1$[.@i] != ""){
+										dispbottom(.@ifmes1$[.@i]);
+									}
+								}
+								dispbottom("} else {");
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes2$[.@i] != ""){
+										dispbottom(.@ifmes2$[.@i]);
+									}
+								}
+								dispbottom("}");
+								dispbottom("/*=========================*/");
+								continue;
+							case 5:
+								set .@npcmes$[.@now-1],"	if(.@dummy=="+.@match+") {";
+								set .@now,.@now+1;
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes1$[.@i] != ""){
+										set .@npcmes$[.@now-1],.@ifmes1$[.@i];
+										set .@now,.@now+1;
+									}
+								}
+								set .@npcmes$[.@now-1],"	} else {";
+								set .@now,.@now+1;
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes2$[.@i] != ""){
+										set .@npcmes$[.@now-1],.@ifmes2$[.@i];
+										set .@now,.@now+1;
+									}
+								}
+								set .@npcmes$[.@now-1],"	}";
+								set .@now,.@now+1;
+							case 6:
+								break;
+							}
+							break;
+						} while(1);
+						continue;
+					case 7:
+						set .@npcmes$[.@now-1],"	input .@dummy$;";
+						set .@now,.@now+1;
+						mes (.@now-1)+"行目を";
+						mes "^0000FF[命令文]^000000文字列入力";
+						mes "にしました";
+						mes "入力比較文作成を続けますか？";
+						next;
+						if(select("比較文を作成する","戻る")==2)
+							continue;
+						set .@ifnow1,1;
+						set .@ifnow2,1;
+						set .@match$,"0";
+						cleararray .@ifmes1$[0],"",20;
+						cleararray .@ifmes2$[0],"",20;
+						do {
+							set .@sel,0;
+							mes "[NPC作成猫]";
+							mes "入力比較文を作成中です";
+							next;
+							switch (select( "比較対象 - "+.@match$,"TRUE内容編集","FALSE内容編集",
+									"現在の状況を表示する","入力比較文作成を完了する","戻る")) {
+							case 1:
+								input .@match$;
+								continue;
+							case 2:
+								if(.@sel == 0) set .@sel,1;
+							case 3:
+								if(.@sel == 0) set .@sel,2;
+								do {
+									if(.@ifnow1 >= 21)set .@ifnow1,1;
+									if(.@ifnow2 >= 21)set .@ifnow2,1;
+									mes "[NPC作成猫]";
+									mes "現在は"+(.@sel==1?"TRUE":"FALSE")+"の"+getd(".@ifnow"+.@sel)+"/20行目を編集中";
+									if(getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]") != ""){
+										mes "^0000FF↓現在の内容↓^000000";
+										mes getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]");
+									}
+									next;
+									switch (select( "^0000FF[命令文]^000000会話の内容を入力","^0000FF[命令文]^000000次ページ送り","^0000FF[命令文]^000000会話の終了",
+											"^008181[編集]^000000編集中の行数を変える","^008181[編集]^000000現在の状況を表示する","戻る")) {
+									case 1:
+										input .@mes$;
+										if(strpos(.@mes$,"\\\"")>=0){
+											mes "利用できない文字列";
+											mes "「\\\"」";
+											mes "が含まれています";
+											next;
+											continue;
+										}
+										if(strpos(.@mes$,"\"")>=0){
+											set .@j,0;
+											for (set .@i,0; .@i < getstrlen(.@mes$); set .@i, .@i+1){
+												if(strpos(.@mes$,"\"",.@i)>=0){
+													set .@i,strpos(.@mes$,"\"",.@i);
+													set .@j,.@j+1;
+												}
+											}
+											if(.@j != 0 && .@j != 2){
+												mes "「\"」の数がマッチしません！";
+												mes "必ずペアで配置してください！";
+												next;
+												continue;
+											}
+											if(strpos(.@mes$,"\"+strcharinfo(0)+\"")==-1 &&
+											   strpos(.@mes$,"\"+strcharinfo(1)+\"")==-1 &&
+											   strpos(.@mes$,"\"+strcharinfo(2)+\"")==-1 ){
+												mes "無効な命令文があります！";
+												mes "入力文を見直してください！";
+												next;
+												continue;
+											}
+										}
+										set getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]"),"		mes \""+.@mes$+"\";";
+										setd ".@ifnow"+.@sel,getd(".@ifnow"+.@sel)+1;
+										mes (getd(".@ifnow"+.@sel)-1)+"行目の文章を";
+										mes .@mes$;
+										mes "にしました";
+										next;
+										continue;
+									case 2:
+										set getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]"),"		next;";
+										setd ".@ifnow"+.@sel,getd(".@ifnow"+.@sel)+1;
+										mes (getd(".@ifnow"+.@sel)-1)+"行目を";
+										mes "^0000FF[命令文]^000000next";
+										mes "にしました";
+										next;
+										continue;
+									case 3:
+										set getd(".@ifmes"+.@sel+"$["+(getd(".@ifnow"+.@sel)-1)+"]"),"		close;";
+										setd ".@ifnow"+.@sel,getd(".@ifnow"+.@sel)+1;
+										mes (getd(".@ifnow"+.@sel)-1)+"行目を";
+										mes "^0000FF[命令文]^000000close";
+										mes "にしました";
+										next;
+										continue;
+									case 4:
+										input getd(".@ifnow"+.@sel),1,20;
+										continue;
+									case 5:
+										dispbottom("/*=========================*/");
+										for (set .@i,0; .@i < 19; set .@i, .@i+1){
+											if(getd(".@ifmes"+.@sel+"$["+.@i+"]") != ""){
+												dispbottom(getd(".@ifmes"+.@sel+"$["+.@i+"]"));
+											}
+										}
+										dispbottom("/*=========================*/");
+										continue;
+									case 6:
+										break;
+									}
+									break;
+								} while(1);
+								continue;
+							case 4:
+								dispbottom("/*=========================*/");
+								dispbottom("if(.@dummy$==\""+.@match$+"\") {");
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes1$[.@i] != ""){
+										dispbottom(.@ifmes1$[.@i]);
+									}
+								}
+								dispbottom("} else {");
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes2$[.@i] != ""){
+										dispbottom(.@ifmes2$[.@i]);
+									}
+								}
+								dispbottom("}");
+								dispbottom("/*=========================*/");
+								continue;
+							case 5:
+								set .@npcmes$[.@now-1],"	if(.@dummy$==\""+.@match$+"\") {";
+								set .@now,.@now+1;
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes1$[.@i] != ""){
+										set .@npcmes$[.@now-1],.@ifmes1$[.@i];
+										set .@now,.@now+1;
+									}
+								}
+								set .@npcmes$[.@now-1],"	} else {";
+								set .@now,.@now+1;
+								for (set .@i,0; .@i < 19; set .@i, .@i+1){
+									if(.@ifmes2$[.@i] != ""){
+										set .@npcmes$[.@now-1],.@ifmes2$[.@i];
+										set .@now,.@now+1;
+									}
+								}
+								set .@npcmes$[.@now-1],"	}";
+								set .@now,.@now+1;
+							case 6:
+								break;
+							}
+							break;
+						} while(1);
+						continue;
+					case 8:
+						input .@now,1,120;
+						continue;
+					case 9:
+						dispbottom("/*=========================*/");
+						for (set .@i,0; .@i < 119; set .@i, .@i+1){
+							if(.@npcmes$[.@i] != ""){
+								dispbottom(.@npcmes$[.@i]);
+							}
+						}
+						dispbottom("/*=========================*/");
+						continue;
+					case 10:
+						break;
+					}
+					break;
+				} while(1);
+			case 3:
+				createfile("npc/user/","map"+getcharid(3)+".txt");
+				write("npc/user/map"+getcharid(3)+".txt","m_h1,12,12,4	script	テスト猫#"+(getcharid(3)-2000000)+"	"+.@npcid+",{");
+				set .@j,1;
+				for (set .@i,0; .@i < 119; set .@i, .@i+1){
+					if(.@npcmes$[.@i] != ""){
+						write("npc/user/map"+getcharid(3)+".txt",.@npcmes$[.@i]);
+						set .@j,.@j+1;
+					}
+				}
+				write("npc/user/map"+getcharid(3)+".txt","}");
+				break;
+			case 4:
+				createfile("npc/user/","map"+getcharid(3)+".txt");
+				write("npc/user/map"+getcharid(3)+".txt","m_h1,12,12,4	script	テスト猫#"+(getcharid(3)-2000000)+"	"+.@npcid+",{");
+				set .@j,1;
+				for (set .@i,0; .@i < 119; set .@i, .@i+1){
+					if(.@npcmes$[.@i] != ""){
+						write("npc/user/map"+getcharid(3)+".txt",.@npcmes$[.@i]);
+						set .@j,.@j+1;
+					}
+				}
+				write("npc/user/map"+getcharid(3)+".txt","}");
+				mes "[NPC作成猫]";
+				mes "NPCを保存したにゃん！";
+				mes "また来てにゃん";
+				close;
+			}
+		} while(1);
+	}else{
+		mes "自分のNPCがないお客様ですにゃ";
+		mes "作りますかにゃ？";
+		mes "^FF0000アカウントにつき1体までにゃ^000000";
+		next;
+		if(select("やめる","^FF0000作る^000000")==1) {
+			mes "[NPC作成猫]";
+			mes "さらばにゃ！";
+			close;
+		}
+		createfile("npc/user/","map"+getcharid(3)+".txt");
+		mes "[NPC作成猫]";
+		mes "作りましたですにゃ！";
+		mes "続けて作成する場合は";
+		mes "もう一度話しかけてにゃ！";
+		close;
+	}
+}
+lhz_in02,21,146,4	script	NPC販売猫	495,{
+	mes "[NPC販売猫]";
+	mes "ここでNPCを販売してるにゃ";
+	mes "自分が作ったNPCを販売することも";
+	mes "GMが作ったサンプルを買うことも";
+	mes "できるニャス！";
+	next;
+	mes "[NPC販売猫]";
+	mes "今日はどんな用事かにゃ？";
+	next;
+	switch (select("^0000FF注意事項^000000","サンプルNPC購入","販売NPC登録(未実装)","販売NPC購入(未実装)","戻る")){
+	case 1:
+		mes "[NPC販売猫]";
+		mes "^FF0000NPC販売の注意事項^000000";
+		mes "NPCを販売登録すると";
+		mes "それ以降、NPCを編集することが";
+		mes "出来なくなるニャ";
+		next;
+		mes "[NPC販売猫]";
+		mes "^FF0000NPC販売の注意事項^000000";
+		mes "NPCを再編集したいときは";
+		mes "販売登録を取り下げてから";
+		mes "^0000FFNPC作成猫^000000に話しかけてニャ";
+		next;
+		mes "[NPC販売猫]";
+		mes "^FF0000NPC購入の注意事項^000000";
+		mes "NPCを購入すると";
+		mes "それまで作っていた自分の";
+		mes "NPCがなくなってしまうにゃ！";
+		next;
+		mes "[NPC販売猫]";
+		mes "^FF0000NPC購入の注意事項^000000";
+		mes "購入が完了したら";
+		mes "^0000FFNPC作成猫^000000に話しかけて";
+		mes "^0000FF続きから作る^000000を選んで";
+		mes "遊んでニャん";
+		close;
+	case 2:
+		if(checkfile("npc/user/map"+getcharid(3)+".txt")){
+			mes "[NPC販売猫]";
+			mes "何番のNPCを買うかニャ？";
+			next;
+			input .@num;
+			if(.@num<=0){mes "[NPC販売猫]";mes "やめるのかにゃ……";mes "また来てにゃん！";close;}
+			if(.@num>=3){mes "[NPC販売猫]";mes "1~2番までで選んでにゃん！";close;}
+			mes "[NPC販売猫]";
+			mes .@num+"番のNPCでいいのかにゃ？";
+			mes "このNPCは100,000Zenyですにゃ";
+			next;
+			if(select("やめる","買います！")==1) {
+				mes "[NPC販売猫]";
+				mes "さらばにゃ！";
+				close;
+			}
+			if(Zeny < 100000){mes "[NPC販売猫]";mes "お金が足りてないにゃん！";close;}
+			set Zeny,Zeny-100000;
+			set .@maxcol,getline("npc/user/sample"+.@num+".txt");
+			if(.@maxcol>2){
+				set .@j,0;
+				for (set .@i,1; .@i < .@maxcol-2; set .@i, .@i+1){
+					set .@mes$,readline("npc/user/sample"+.@num+".txt",.@i);
+					if(.@mes$ != "" && getstrlen(.@mes$) > 1){
+						set .@npcmes$[.@j],delchar(.@mes$,getstrlen(.@mes$)-1);
+						set .@j,.@j+1;
+					}
+				}
+				createfile("npc/user/","map"+getcharid(3)+".txt");
+				write("npc/user/map"+getcharid(3)+".txt","m_h1,12,12,4	script	テスト猫#"+(getcharid(3)-2000000)+"	495,{");
+				set .@j,1;
+				for (set .@i,0; .@i < 119; set .@i, .@i+1){
+					if(.@npcmes$[.@i] != ""){
+						write("npc/user/map"+getcharid(3)+".txt",.@npcmes$[.@i]);
+						set .@j,.@j+1;
+					}
+				}
+				write("npc/user/map"+getcharid(3)+".txt","}");
+				mes "[NPC販売猫]";
+				mes "NPCを保存したにゃん！";
+				mes "また来てにゃん";
+				close;
+			}
+			mes "[NPC販売猫]";
+			mes "エラーだにゃん！";
+			mes "GMに報告してにゃん！";
+			close;
+		}else{
+			mes "[NPC販売猫]";
+			mes "NPCを持ってないにゃん！";
+			mes "NPC作成猫で先に作ってにゃん！";
+			close;
+		}
+	case 3:
+	case 4:
+		mes "[NPC販売猫]";
+		mes "まだ未実装にゃぁん……";
+		close;
+	case 5:
+		mes "[NPC販売猫]";
+		mes "また来てにゃ！";
+		close;
+	}
+}
+lhz_in02,22,149,4	script	sample猫	495,{
+	if(checkfile("npc/user/map"+getcharid(3)+".txt")){
+		set .@maxcol,getline("npc/user/map"+getcharid(3)+".txt");
+		if(.@maxcol>2){
+			set .@mes$,readline("npc/user/map"+getcharid(3)+".txt",0);
+			explode(.@mes2$, .@mes$, "	");
+			explode(.@mes3$, .@mes2$[3], ",");
+			if(.@mes3$[0] != "495")
+				classchange atoi(.@mes3$[0]),0;
+			set .@j,0;
+			for (set .@i,1; .@i < .@maxcol-2; set .@i, .@i+1){
+				set .@mes$,readline("npc/user/map"+getcharid(3)+".txt",.@i);
+				if(.@mes$ != "" && getstrlen(.@mes$) > 1){
+					set .@npcmes$[.@j],delchar(.@mes$,getstrlen(.@mes$)-1);
+					set .@j,.@j+1;
+				}
+			}
+			for (set .@i,0; .@i < 119; set .@i, .@i+1){
+				if(.@npcmes$[.@i] != ""){
+					if(.@sec>0){
+						if(strpos(.@npcmes$[.@i],"mes")==2 && .@if == .@sec){
+							if(strpos(.@npcmes$[.@i],"\"+strcharinfo(0)+\"")>=0){
+								set .@idnum,strpos(.@npcmes$[.@i],"\"+strcharinfo(0)+\"");
+								mes substr(.@npcmes$[.@i],7,.@idnum-1)+strcharinfo(0)+substr(.@npcmes$[.@i],.@idnum+18,getstrlen(.@npcmes$[.@i])-3);
+							}else
+							if(strpos(.@npcmes$[.@i],"\"+strcharinfo(1)+\"")>=0){
+								set .@idnum,strpos(.@npcmes$[.@i],"\"+strcharinfo(1)+\"");
+								mes substr(.@npcmes$[.@i],7,.@idnum-1)+strcharinfo(0)+substr(.@npcmes$[.@i],.@idnum+18,getstrlen(.@npcmes$[.@i])-3);
+							}else
+							if(strpos(.@npcmes$[.@i],"\"+strcharinfo(2)+\"")>=0){
+								set .@idnum,strpos(.@npcmes$[.@i],"\"+strcharinfo(2)+\"");
+								mes substr(.@npcmes$[.@i],7,.@idnum-1)+strcharinfo(0)+substr(.@npcmes$[.@i],.@idnum+18,getstrlen(.@npcmes$[.@i])-3);
+							}else
+								mes substr(.@npcmes$[.@i],7,getstrlen(.@npcmes$[.@i])-3);
+						}
+						else if(strpos(.@npcmes$[.@i],"} else {")>=0)
+							set .@if,2;
+						else if(strpos(.@npcmes$[.@i],"}")>=0){
+							set .@if,0;
+							set .@sec,0;
+						}
+						else if(strpos(.@npcmes$[.@i],"next")>=0 && .@if == .@sec)
+							next;
+						else if(strpos(.@npcmes$[.@i],"close")>=0 && .@if == .@sec)
+							close;
+					}else{
+						if(strpos(.@npcmes$[.@i],"mes")==1){
+							if(strpos(.@npcmes$[.@i],"\"+strcharinfo(0)+\"")>=0){
+								set .@idnum,strpos(.@npcmes$[.@i],"\"+strcharinfo(0)+\"");
+								mes substr(.@npcmes$[.@i],6,.@idnum-1)+strcharinfo(0)+substr(.@npcmes$[.@i],.@idnum+18,getstrlen(.@npcmes$[.@i])-3);
+							}else
+							if(strpos(.@npcmes$[.@i],"\"+strcharinfo(1)+\"")>=0){
+								set .@idnum,strpos(.@npcmes$[.@i],"\"+strcharinfo(1)+\"");
+								mes substr(.@npcmes$[.@i],6,.@idnum-1)+strcharinfo(0)+substr(.@npcmes$[.@i],.@idnum+18,getstrlen(.@npcmes$[.@i])-3);
+							}else
+							if(strpos(.@npcmes$[.@i],"\"+strcharinfo(2)+\"")>=0){
+								set .@idnum,strpos(.@npcmes$[.@i],"\"+strcharinfo(2)+\"");
+								mes substr(.@npcmes$[.@i],6,.@idnum-1)+strcharinfo(0)+substr(.@npcmes$[.@i],.@idnum+18,getstrlen(.@npcmes$[.@i])-3);
+							}else
+								mes substr(.@npcmes$[.@i],6,getstrlen(.@npcmes$[.@i])-3);
+						}
+						else if(strpos(.@npcmes$[.@i],"mes")==2){
+							if(strpos(.@npcmes$[.@i],"\"+strcharinfo(0)+\"")>=0){
+								set .@idnum,strpos(.@npcmes$[.@i],"\"+strcharinfo(0)+\"");
+								mes substr(.@npcmes$[.@i],7,.@idnum-1)+strcharinfo(0)+substr(.@npcmes$[.@i],.@idnum+18,getstrlen(.@npcmes$[.@i])-3);
+							}else
+							if(strpos(.@npcmes$[.@i],"\"+strcharinfo(1)+\"")>=0){
+								set .@idnum,strpos(.@npcmes$[.@i],"\"+strcharinfo(1)+\"");
+								mes substr(.@npcmes$[.@i],7,.@idnum-1)+strcharinfo(0)+substr(.@npcmes$[.@i],.@idnum+18,getstrlen(.@npcmes$[.@i])-3);
+							}else
+							if(strpos(.@npcmes$[.@i],"\"+strcharinfo(2)+\"")>=0){
+								set .@idnum,strpos(.@npcmes$[.@i],"\"+strcharinfo(2)+\"");
+								mes substr(.@npcmes$[.@i],7,.@idnum-1)+strcharinfo(0)+substr(.@npcmes$[.@i],.@idnum+18,getstrlen(.@npcmes$[.@i])-3);
+							}else
+								mes substr(.@npcmes$[.@i],6,getstrlen(.@npcmes$[.@i])-3);
+						}
+						else if(strpos(.@npcmes$[.@i],"if(select")>=0){
+							explode(.@mes$, substr(.@npcmes$[.@i],12,getstrlen(.@npcmes$[.@i])-9), "\",\"");
+							set .@if,1;
+							set .@sec,select(.@mes$[0],.@mes$[2]);
+						}
+						else if(strpos(.@npcmes$[.@i],"if(.@dummy$")>=0){
+							set .@mes$,substr(.@npcmes$[.@i],15,getstrlen(.@npcmes$[.@i])-5);
+							set .@if,1;
+							set .@sec,((.@dummy$ == .@mes$)?1:2);
+						}
+						else if(strpos(.@npcmes$[.@i],"if(.@dummy")>=0){
+							set .@num,atoi(substr(.@npcmes$[.@i],13,getstrlen(.@npcmes$[.@i])-4));
+							set .@if,1;
+							set .@sec,((.@dummy == .@num)?1:2);
+						}
+						else if(strpos(.@npcmes$[.@i],"next")>=0)
+							next;
+						else if(strpos(.@npcmes$[.@i],"close")>=0)
+							close;
+						else if(strpos(.@npcmes$[.@i],"emotion")>=0)
+							emotion atoi(substr(.@npcmes$[.@i],9,getstrlen(.@npcmes$[.@i])-4)),atoi(substr(.@npcmes$[.@i],getstrlen(.@npcmes$[.@i])-2,getstrlen(.@npcmes$[.@i])-1));
+						else if(strpos(.@npcmes$[.@i],"input .@dummy$")>=0)
+							input .@dummy$;
+						else if(strpos(.@npcmes$[.@i],"input .@dummy")>=0)
+							input .@dummy;
+					}
+				}
+			}
+			end;
+		}
+		mes "[sample猫]";
+		mes "あなたのNPCは内容がないため";
+		mes "表示できません";
+		close;
+	}else{
+		mes "[sample猫]";
+		mes "あなたはNPCを持っていません";
+		close;
+	}
+}

@@ -1,0 +1,948 @@
+que_qaru03,345,82,3	script	メイデン#gq_aru03	403,{
+	cutin "wish_maiden31",1;
+	mes "[ウィッシュメイデン]";
+	if(getmapusers("que_qaru03")<8 && $siz_aru03_on!=1 && !getgmlevel()){
+		mes "君たちではとても";
+		mes "彼女を止められそうにない。";
+		mes "最低でも8人は必要だ……。";
+		close2;
+		cutin "wish_maiden11",255;
+		end;
+	}
+	mes "よくぞ来た。";
+	mes "勇敢な人間たちよ。";
+	next;
+	mes "[ウィッシュメイデン]";
+	mes "準備が出来ているのなら、";
+	mes "彼女の元に送ろう。";
+	next;
+	if(select("出来てます","まだです")==2){
+		mes "[ウィッシュメイデン]";
+		mes "時間がないのだ。";
+		mes "急いでくれ。";
+		close2;
+		cutin "wish_maiden11",255;
+		end;
+	}
+	mes "[ウィッシュメイデン]";
+	mes "どうか頼む。";
+	set @wewish,0;
+	close2;
+	cutin "wish_maiden11",255;
+	set $@gqse_aru03_miro,$@gqse_aru03_miro + 1;
+	switch($@gqse_aru03_miro) {
+	case 1: warp "que_qaru03",130,116; donpcevent "#event_start_aru03::OnStart"; end;
+	case 2: warp "que_qaru03",133,116; end;
+	case 3: warp "que_qaru03",127,116; end;
+	case 4: warp "que_qaru03",136,116; end;
+	case 5: warp "que_qaru03",124,116; end;
+	case 6: warp "que_qaru03",139,116; end;
+	case 7: warp "que_qaru03",121,116; end;
+	case 8: warp "que_qaru03",142,116; end;
+	case 9: warp "que_qaru03",118,116; end;
+	case 10:warp "que_qaru03",145,116; end;
+	case 11:warp "que_qaru03",112,119; end;
+	case 12:warp "que_qaru03",151,119; end;
+	case 13:warp "que_qaru03",112,122; end;
+	case 14:warp "que_qaru03",151,122; end;
+	case 15:warp "que_qaru03",112,125; end;
+	case 16:warp "que_qaru03",151,125; end;
+	case 17:warp "que_qaru03",112,128; end;
+	case 18:warp "que_qaru03",151,128; end;
+	case 19:warp "que_qaru03",112,131; end;
+	case 20:warp "que_qaru03",151,131; end;
+	case 21:warp "que_qaru03",112,134; end;
+	case 22:warp "que_qaru03",151,134; end;
+	case 23:warp "que_qaru03",112,137; end;
+	case 24:warp "que_qaru03",151,137; end;
+	case 25:warp "que_qaru03",112,140; end;
+	case 26:warp "que_qaru03",151,140; end;
+	case 27:warp "que_qaru03",112,143; end;
+	case 28:warp "que_qaru03",151,143; end;
+	case 29:warp "que_qaru03",112,146; end;
+	case 30:warp "que_qaru03",151,146; end;
+	case 31:warp "que_qaru03",112,149; end;
+	default:warp "que_qaru03",151,149; end;
+	}
+	end;
+}
+que_qaru03,131,136,3	script	ピアメット#aru03	1930,{
+OnInit:
+	enablenpc "ピアメット#aru03";
+	end;
+}
+que_qaru03,1,1,0	script	#event_start_aru03	-1,{
+OnStart:
+	initnpctimer;
+	set $siz_aru03_on,1;
+	donpcevent "#okolnir_aru03::OnEnable";
+	end;
+
+OnTimer10000:
+	mapannounce "que_qaru03","ピアメットのつぶやき : テオ、また小鳥さんが迷い込んだみたい……",bc_map,"0xdb7093";
+	end;
+
+OnTimer14000:
+	mapannounce "que_qaru03","ピアメットのつぶやき : ねぇ、テオ。 私の小鳥さんが勝手に逃げちゃダメよねぇ？",bc_map,"0xdb7093";
+	end;
+
+OnTimer18000:
+	mapannounce "que_qaru03","ピアメットのつぶやき : どうしていつも私の思うとおりにならないのかしら？",bc_map,"0xdb7093";
+	end;
+
+OnTimer22000:
+	mapannounce "que_qaru03","ピアメットのつぶやき : あはっ、そうだわ。 足があるから逃げるし、手があるから反抗するのよ",bc_map,"0xdb7093";
+	end;
+
+OnTimer26000:
+	mapannounce "que_qaru03","ピアメットのつぶやき : 手足をもいで鳥籠に入れてしまえば、もう私のものよねぇ？",bc_map,"0xdb7093";
+	end;
+
+OnTimer30000:
+	mapannounce "que_qaru03","ピアメット : テオ、鳥を全て捕まえて！ わたしの鳥籠をいっぱいにしなさい！",bc_map,"0x00ff00";
+	donpcevent "#gd_aru03_mobctrl::OnEnable";
+	donpcevent "#gdtimer00_aru03::OnEnable";
+	stopnpctimer;
+	end;
+}
+que_qaru03,2,3,0	script	#gdtimer00_aru03	844,{
+OnEnable:
+	initnpctimer;
+	end;
+OnTimer2000:
+OnTimer4000:
+OnTimer6000:
+OnTimer8000:
+OnTimer10000:
+OnTimer12000:
+OnTimer14000:
+OnTimer16000:
+OnTimer18000:
+	areascript "que_qaru03",103,99,167,167,"{if(Hp>0 || @piam>0) end; set @piam,1; doevent \"#getspell_aru03::OnStart\"; }";
+	end;
+
+OnTimer20000:
+	initnpctimer;
+	end;
+OnDisable:
+	stopnpctimer;
+	end;
+}
+que_qaru03,2,2,0	script	#gdtimer01_aru03	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "que_qaru03","ピアメット : テオッ！ この、役立たず!! 愚図!! ノロマ!!!",bc_map,"0x00ff00";
+	end;
+OnTimer6000:
+	mapannounce "que_qaru03","ピアメット : もういい！ 削ぎ落として飾ってあげる!!",bc_map,"0x00ff00";
+	end;
+OnTimer8000:
+	disablenpc "ピアメット#aru03";
+	set $@piamet1,mobspawn("暴走するピアメット",2887,"que_qaru03",131,135);
+	donpcevent "#gdtimer02_aru03::OnEnable";
+	stopnpctimer;
+	end;
+}
+que_qaru03,2,3,0	script	#gdtimer02_aru03	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer2000:
+OnTimer4000:
+OnTimer6000:
+OnTimer8000:
+OnTimer10000:
+OnTimer12000:
+OnTimer14000:
+OnTimer16000:
+OnTimer18000:
+	getmobdata $@piamet1,.@temp;
+	if(.@temp[2] < .@temp[3]/2){
+		set $@piamet1hp,.@temp[2];
+		mobRemove $@piamet1;
+		stopnpctimer;
+		donpcevent "#gdtimer03_aru03::OnEnable";
+		donpcevent "#gdinctimer0_aru03::OnDisable";
+	}else if(.@temp[2] < .@temp[3]/4*3){
+		if(!getnpctimer(1,"#gdinctimer0_aru03"))
+			donpcevent "#gdinctimer0_aru03::OnEnable";
+	}
+	end;
+
+OnTimer20000:
+	initnpctimer;
+	end;
+OnDisable:
+	stopnpctimer;
+	end;
+}
+que_qaru03,4,4,0	script	#gdinctimer0_aru03	844,{
+OnEnable:
+OnTimer180000:
+	getmobdata $@piamet1,.@temp;
+	if(.@temp[2] < .@temp[3]/2){
+		stopnpctimer;
+	}else if(.@temp[2] < .@temp[3]/4*3){
+		switch(rand(3)){
+		case 0: areascript "que_qaru03",103,99,167,167,"{if(BaseJob==Job_Priest && @piam==0){ getmapxy(@mapname$,@mx,@my,0,strcharinfo(0)); monster \"que_qaru03\",@mx,@my,\"プリニー\",2770,1;} }"; set .@jobname$,"プリースト"; break;
+		case 1: areascript "que_qaru03",103,99,167,167,"{if(BaseJob==Job_Bard && @piam==0){ getmapxy(@mapname$,@mx,@my,0,strcharinfo(0)); monster \"que_qaru03\",@mx,@my,\"プリニー\",2770,1;} }"; set .@jobname$,"バード"; break;
+		case 2: areascript "que_qaru03",103,99,167,167,"{if(BaseJob==Job_Dancer && @piam==0){ getmapxy(@mapname$,@mx,@my,0,strcharinfo(0)); monster \"que_qaru03\",@mx,@my,\"プリニー\",2770,1;} }"; set .@jobname$,"ダンサー"; break;
+		}
+		mapannounce "que_qaru03","ピアメット : このっ！ 早くその"+.@jobname$+"やっつけちゃってよ!!",bc_map,"0x00ff00";
+		initnpctimer;
+	}
+	end;
+OnDisable:
+	stopnpctimer;
+	end;
+}
+que_qaru03,4,4,0	script	#gdinctimer1_aru03	844,{
+OnEnable:
+OnTimer180000:
+	getmobdata $@piamet2,.@temp;
+	if(.@temp[2] < .@temp[3]/2){
+		stopnpctimer;
+	}else if(.@temp[2] < .@temp[3]/4*3){
+		switch(rand(3)){
+		case 0: areascript "que_qaru03",103,99,167,167,"{if(BaseJob==Job_Priest && @piam==0){ getmapxy(@mapname$,@mx,@my,0,strcharinfo(0)); monster \"que_qaru03\",@mx,@my,\"プリニー\",2770,1;} }"; set .@jobname$,"プリースト"; break;
+		case 1: areascript "que_qaru03",103,99,167,167,"{if(BaseJob==Job_Bard && @piam==0){ getmapxy(@mapname$,@mx,@my,0,strcharinfo(0)); monster \"que_qaru03\",@mx,@my,\"プリニー\",2770,1;} }"; set .@jobname$,"バード"; break;
+		case 2: areascript "que_qaru03",103,99,167,167,"{if(BaseJob==Job_Dancer && @piam==0){ getmapxy(@mapname$,@mx,@my,0,strcharinfo(0)); monster \"que_qaru03\",@mx,@my,\"プリニー\",2770,1;} }"; set .@jobname$,"ダンサー"; break;
+		}
+		mapannounce "que_qaru03","ブルーメッテ : あら……そこの邪魔な"+.@jobname$+"を早く片付けて頂戴",bc_map,"0x00ff00";
+		initnpctimer;
+	}
+	end;
+OnDisable:
+	stopnpctimer;
+	end;
+}
+que_qaru03,6,6,0	script	#getspell_aru03	844,{
+	end;
+OnStart:
+	sc_start2 SC_Stone,300000,0,10000;
+	if (!($@gqse_aru03_gd&1)) {
+		warp "que_qaru03",103,153;
+		monster "que_qaru03",108,151,"鍵",1905,1,"#getspell_aru03::OnMyMobDead1";
+		set $@gqse_aru03_gd,$@gqse_aru03_gd|1;
+		sleep 1000;
+		mapannounce "que_qaru03","ピアメット : 新しい一羽は真っ白な羽が矢に貫かれ、地面にドサッと落ちたの。",bc_map,"0xdb7093";
+	}
+	else if (!($@gqse_aru03_gd&2)) {
+		warp "que_qaru03",102,135;
+		monster "que_qaru03",109,135,"鍵",1905,1,"#getspell_aru03::OnMyMobDead2";
+		set $@gqse_aru03_gd,$@gqse_aru03_gd|2;
+		sleep 1000;
+		mapannounce "que_qaru03","ピアメット : 新しい一羽は誰かが投げた罠にかかって、湖にバシャッと落ちたの。",bc_map,"0xdb7093";
+	}
+	else if (!($@gqse_aru03_gd&4)) {
+		warp "que_qaru03",113,111;
+		monster "que_qaru03",115,116,"鍵",1905,1,"#getspell_aru03::OnMyMobDead3";
+		set $@gqse_aru03_gd,$@gqse_aru03_gd|4;
+		sleep 1000;
+		mapannounce "que_qaru03","ピアメット : 新しい一羽は、ひとりぼっちで閉じ込められたまま放置されていたの。",bc_map,"0xdb7093";
+	}
+	else if (!($@gqse_aru03_gd&8)) {
+		warp "que_qaru03",161,105;
+		monster "que_qaru03",158,106,"鍵",1905,1,"#getspell_aru03::OnMyMobDead4";
+		set $@gqse_aru03_gd,$@gqse_aru03_gd|8;
+		sleep 1000;
+		mapannounce "que_qaru03","ピアメット : 新しい一羽は、甘ーい死の毒を食べてしまったの。",bc_map,"0xdb7093";
+	}
+	else if (!($@gqse_aru03_gd&16)) {
+		warp "que_qaru03",168,135;
+		monster "que_qaru03",163,133,"鍵",1905,1,"#getspell_aru03::OnMyMobDead5";
+		set $@gqse_aru03_gd,$@gqse_aru03_gd|16;
+		sleep 1000;
+		mapannounce "que_qaru03","ピアメット : 新しい一羽は、七日七晩歌を歌い続けて血を吐いてしまったの。",bc_map,"0xdb7093";
+	}
+	else if (!($@gqse_aru03_gd&32)) {
+		warp "que_qaru03",150,159;
+		monster "que_qaru03",150,154,"鍵",1905,1,"#getspell_aru03::OnMyMobDead6";
+		set $@gqse_aru03_gd,$@gqse_aru03_gd|32;
+		sleep 1000;
+		mapannounce "que_qaru03","ピアメット : 新しい一羽は、わたしの手の中でもがいて首が折れて投げ捨てられたの。",bc_map,"0xdb7093";
+	}
+	end;
+OnMyMobDead1:
+	enablenpc "#aru03_cage01";
+	set $@gqse_aru03_gd,$@gqse_aru03_gd^1;
+	end;
+OnMyMobDead2:
+	enablenpc "#aru03_cage02";
+	set $@gqse_aru03_gd,$@gqse_aru03_gd^2;
+	end;
+OnMyMobDead3:
+	enablenpc "#aru03_cage03";
+	set $@gqse_aru03_gd,$@gqse_aru03_gd^4;
+	end;
+OnMyMobDead4:
+	enablenpc "#aru03_cage04";
+	set $@gqse_aru03_gd,$@gqse_aru03_gd^8;
+	end;
+OnMyMobDead5:
+	enablenpc "#aru03_cage05";
+	set $@gqse_aru03_gd,$@gqse_aru03_gd^16;
+	end;
+OnMyMobDead6:
+	enablenpc "#aru03_cage06";
+	set $@gqse_aru03_gd,$@gqse_aru03_gd^32;
+	end;
+}
+que_qaru03,103,153,0	script	#aru03_cage01	-1,1,1,{
+OnInit:
+	disablenpc "#aru03_cage01";
+	end;
+
+OnTouch:
+	sc_end SC_Stone;
+	set @piam,0;
+	warp "que_qaru03",108,151;
+	disablenpc "#aru03_cage01";
+	end;
+}
+
+que_qaru03,102,135,0	script	#aru03_cage02	-1,1,1,{
+OnInit:
+	disablenpc "#aru03_cage02";
+	end;
+
+OnTouch:
+	sc_end SC_Stone;
+	set @piam,0;
+	warp "que_qaru03",108,135;
+	disablenpc "#aru03_cage02";
+	end;
+}
+
+que_qaru03,113,111,0	script	#aru03_cage03	-1,1,1,{
+OnInit:
+	disablenpc "#aru03_cage03";
+	end;
+
+OnTouch:
+	sc_end SC_Stone;
+	set @piam,0;
+	warp "que_qaru03",114,115;
+	disablenpc "#aru03_cage03";
+	end;
+}
+
+que_qaru03,161,105,0	script	#aru03_cage04	-1,1,1,{
+OnInit:
+	disablenpc "#aru03_cage04";
+	end;
+
+OnTouch:
+	sc_end SC_Stone;
+	set @piam,0;
+	warp "que_qaru03",158,106;
+	disablenpc "#aru03_cage04";
+	end;
+}
+
+que_qaru03,168,135,0	script	#aru03_cage05	-1,1,1,{
+OnInit:
+	disablenpc "#aru03_cage05";
+	end;
+
+OnTouch:
+	sc_end SC_Stone;
+	set @piam,0;
+	warp "que_qaru03",163,133;
+	disablenpc "#aru03_cage05";
+	end;
+}
+
+que_qaru03,150,159,0	script	#aru03_cage06	-1,1,1,{
+OnInit:
+	disablenpc "#aru03_cage06";
+	end;
+
+OnTouch:
+	sc_end SC_Stone;
+	set @piam,0;
+	warp "que_qaru03",150,154;
+	disablenpc "#aru03_cage06";
+	end;
+}
+que_qaru03,2,3,0	script	#gdtimer03_aru03	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "que_qaru03","ブルーメッテ : あぁ、可哀想なピアメット……こんなに傷だらけになって……",bc_map,"0x00ff00";
+	end;
+
+OnTimer6000:
+	mapannounce "que_qaru03","ブルーメッテ : 私が助けてあげますからね、いい子で待っててね",bc_map,"0x00ff00";
+	set $@piamet2,mobspawn("ブルーメッテ",2731,"que_qaru03",131,135);
+	donpcevent "#gdtimer04_aru03::OnEnable";
+	stopnpctimer;
+	end;
+}
+que_qaru03,2,3,0	script	#gdtimer04_aru03	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer2000:
+OnTimer4000:
+OnTimer6000:
+OnTimer8000:
+OnTimer10000:
+OnTimer12000:
+OnTimer14000:
+OnTimer16000:
+OnTimer18000:
+	getmobdata $@piamet2,.@temp;
+	if(.@temp[2] < .@temp[3]/2){
+		set $@piamet2hp,.@temp[2];
+		mobRemove $@piamet2;
+		stopnpctimer;
+		donpcevent "#gdtimer05_aru03::OnEnable";
+		donpcevent "#gdinctimer1_aru03::OnDisable";
+	}else if(.@temp[2] < .@temp[3]/4*3){
+		if(!getnpctimer(1,"#gdinctimer1_aru03"))
+			donpcevent "#gdinctimer1_aru03::OnEnable";
+	}
+	areascript "que_qaru03",103,99,167,167,"{if(Hp>0 || @piam>0) end; set @piam,1; doevent \"#getspell_aru03::OnStart\"; }";
+	end;
+
+OnTimer20000:
+	initnpctimer;
+	end;
+OnDisable:
+	stopnpctimer;
+	end;
+}
+que_qaru03,2,3,0	script	#gdtimer05_aru03	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer2000:
+	mapannounce "que_qaru03","ブルーメッテ : なんて凶暴な子……",bc_map,"0x00ff00";
+	end;
+
+OnTimer6000:
+	mapannounce "que_qaru03","ピアメット : 遊んであげる！",bc_map,"0x00ff00";
+	monster "que_qaru03",129+rand(6),133+rand(6),"暴走するピアメット",2887,1,"#battle1::OnDead";
+	monster "que_qaru03",129+rand(6),133+rand(6),"ブルーメッテ",2731,1,"#battle2::OnDead";
+	donpcevent "#gdtimer06_aru03::OnEnable";
+	stopnpctimer;
+	end;
+}
+que_qaru03,2,3,0	script	#gdtimer06_aru03	844,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer10000:
+OnTimer20000:
+	if (mobcount("que_qaru03","#gd_aru03_mobctrl::OnMyMobDead2") <= 10) {
+		for(set .@i,0; .@i < 6; set .@i,.@i+1)
+			monster "que_qaru03",113+rand(38),117+rand(36),"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	}
+	end;
+
+OnTimer30000:
+	initnpctimer;
+	end;
+OnEnd:
+	stopnpctimer;
+	end;
+}
+que_qaru03,3,3,0	script	#battle	-1,{
+OnWin:
+	donpcevent "#battle1::OnKilling";
+	donpcevent "#battle2::OnKilling";
+	donpcevent "#gdtimer06_aru03::OnEnd";
+	donpcevent "#gdtimer00_aru03::OnDisable";
+	donpcevent "#okolnir_aru03::Onstop";
+	set $@killpinc,0;
+	set $@killblue,0;
+	set $@gqse_aru03_miro,0;
+	set $@gqse_aru03_gd,0;
+	killmonsterall "que_qaru03";
+	enablenpc "#aru03_cage01";
+	enablenpc "#aru03_cage02";
+	enablenpc "#aru03_cage03";
+	enablenpc "#aru03_cage04";
+	enablenpc "#aru03_cage05";
+	enablenpc "#aru03_cage06";
+	enablenpc "windpath03_aru03";
+	donpcevent "#gdtimer07_aru03::OnStart";
+	end;
+}
+que_qaru03,3,4,0	script	#battle1	-1,{
+OnDead:
+	set $@killpinc,1;
+	if($@killpinc && $@killblue) {
+		mapannounce "que_qaru03","ピアメット : ひどい……私はただ、遊んで欲しかった……それだけなのに……",bc_map,"0xFF0000";
+		donpcevent "#battle::OnWin";
+		stopnpctimer;
+		end;
+	}
+	initnpctimer;
+	mapannounce "que_qaru03","ピアメット : くすくす……",bc_map,"0xFF0000";
+	for(set .@i,0; .@i ==.@i; set .@i,.@i+1){
+		set .@x,rand(113,150);
+		set .@y,rand(117,154);
+		if(checkcell("que_qaru03",.@x,.@y,cell_chkpass)){
+			monster "que_qaru03",.@x,.@y,"--ja--",1934+rand(3),1,"#gd_aru03_mobctrl::OnMyMobDead3";
+			set .@j,.@j+1;
+			if(.@j==5)break;
+		}
+	}
+	end;
+
+OnTimer60000:
+	mapannounce "que_qaru03","ピアメット : あは、楽しい。 ねぇ、もっと逃げ回って見せてよ",bc_map,"0xFF0000";
+	end;
+OnTimer180000:
+	mapannounce "que_qaru03","ピアメット : どうしたの？",bc_map,"0xFF0000";
+	end;
+OnTimer300000:
+	mapannounce "que_qaru03","ピアメット : 怒った？　ねぇ、怒った？　あは",bc_map,"0xFF0000";
+	monster "que_qaru03",131,135,"暴走するピアメット",2887,1,"#battle1::OnDead";
+	set $@killpinc,0;
+	stopnpctimer;
+	end;
+
+OnKilling:
+	stopnpctimer;
+	end;
+}
+
+que_qaru03,4,3,0	script	#battle2	-1,{
+OnDead:
+	set $@killblue,1;
+	if($@killpinc && $@killblue) {
+		mapannounce "que_qaru03","ブルーメッテ : ごめんなさい、私のピアメット……あなたを守ってあげられなくて……",bc_map,"0xFF0000";
+		donpcevent "#battle::OnWin";
+		stopnpctimer;
+		end;
+	}
+	initnpctimer;
+	mapannounce "que_qaru03","ブルーメッテ : うふふ……",bc_map,"0xFF0000";
+	for(set .@i,0; .@i ==.@i; set .@i,.@i+1){
+		set .@x,rand(113,150);
+		set .@y,rand(117,154);
+		if(checkcell("que_qaru03",.@x,.@y,cell_chkpass)){
+			monster "que_qaru03",.@x,.@y,"--ja--",1934+rand(3),1,"#gd_aru03_mobctrl::OnMyMobDead3";
+			set .@j,.@j+1;
+			if(.@j==5)break;
+		}
+	}
+	end;
+
+OnTimer60000:
+	mapannounce "que_qaru03","ブルーメッテ : 翼を落とすだけじゃすまなそうね……？",bc_map,"0xFF0000";
+	end;
+OnTimer180000:
+	mapannounce "que_qaru03","ブルーメッテ : 何をやっているの？",bc_map,"0xFF0000";
+	end;
+OnTimer300000:
+	mapannounce "que_qaru03","ブルーメッテ : 覚悟してね？",bc_map,"0xFF0000";
+	monster "que_qaru03",131,135,"ブルーメッテ",2731,1,"#battle2::OnDead";
+	set $@killblue,0;
+	stopnpctimer;
+	end;
+
+OnKilling:
+	stopnpctimer;
+	end;
+}
+que_qaru03,149,105,0	script	windpath03_aru03	45,1,1,{
+OnInit:
+	disablenpc "windpath03_aru03";
+	end;
+
+OnTouch:
+	warp "que_qaru03",119,103;
+	end;
+}
+que_qaru03,2,8,0	script	#gdtimer07_aru03	139,{
+OnStart:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	announce "【レイドクエスト：ピアメットの暴走】の遠征が達成されました。",bc_all,"0x9933CC";
+	end;
+OnTimer4000:
+	mapannounce "que_qaru03","ウィッシュメイデン : 南に向かうゲートが出現した！　走りなさい！",bc_map,"0x00ff00";
+	end;
+OnTimer8000:
+	mapannounce "que_qaru03","ウィッシュメイデン : 彼女がいなくなったことでエリアが消失しかけています！",bc_map,"0x00ff00";
+	end;
+OnTimer12000:
+	mapannounce "que_qaru03","ウィッシュメイデン : 2分以内に私の元まで辿り着くのです!!",bc_map,"0x00ff00";
+	end;
+OnTimer60000:
+	mapannounce "que_qaru03","ウィッシュメイデン : ピアメットの園が消失しました!!　急いでください!!",bc_map,"0x00ff00";
+	areawarp "que_qaru03",113,117,150,154,"prontera",156,191;
+	end;
+OnTimer90000:
+	mapannounce "que_qaru03","ウィッシュメイデン : 花道の半ばまでが消失しました!!　走りなさい!!",bc_map,"0x00ff00";
+	areawarp "que_qaru03",80,90,130,200,"prontera",156,191;
+	end;
+OnTimer120000:
+	mapannounce "que_qaru03","ウィッシュメイデン : 神殿までの道が消失しました!!",bc_map,"0x00ff00";
+	areawarp "que_qaru03",80,90,270,220,"prontera",156,191;
+	end;
+OnTimer300000:
+	mapannounce "que_qaru03","ウィッシュメイデン : そろそろオーコルニルの維持限界が来るようだ……",bc_map,"0x00ff00";
+	end;
+OnTimer304000:
+	mapannounce "que_qaru03","ウィッシュメイデン : 礼を言う",bc_map,"0x00ff00";
+	end;
+OnTimer330000:
+	mapannounce "que_qaru03","ウィッシュメイデン : …オーコルニルは再び深い睡眠に陥るでしょう…",bc_map,"0x00ff00";
+	end;
+
+OnTimer333000:
+	set $siz_aru03_on,0;
+	mapwarp "que_qaru03","prontera",156,191;
+	end;
+}
+que_qaru03,98,112,0	script	#gdtrap1_aru03	139,3,3,{
+OnTouch:
+	switch(rand(0,10)) {
+	case 0:
+	case 1:
+		end;
+	case 9:
+		percentheal -5,0;
+		misceffect 183;
+	case 3:
+		percentheal -5,-25;
+		end;
+	case 2:
+		sc_start SC_STONE,5000,0;
+		percentheal -1,-3;
+		end;
+	case 4:
+		sc_start SC_SLEEP,5000,0;
+		misceffect 109;
+		percentheal 0,-5;
+		end;
+	case 5:
+	case 6:
+		sc_start SC_FREEZE,5000,0;
+		percentheal -7,0;
+		misceffect 106;
+		emotion e_swt2,1;
+		end;
+	case 7:
+		percentheal -10,0;
+		misceffect 722;
+	case 8:
+		percentheal -2,0;
+		misceffect 183;
+		sc_start SC_STUN,5000,0;
+		end;
+	case 10:
+		sc_start SC_CURSE,5000,0;
+		end;
+	}
+}
+que_qaru03,99,175,0	duplicate(#gdtrap1_aru03)	#gdtrap2_aru03	139,3,3
+que_qaru03,153,192,0	duplicate(#gdtrap1_aru03)	#gdtrap3_aru03	139,3,3
+que_qaru03,197,178,0	duplicate(#gdtrap1_aru03)	#gdtrap4_aru03	139,3,3
+que_qaru03,235,188,0	duplicate(#gdtrap1_aru03)	#gdtrap5_aru03	139,3,3
+
+que_qaru03,1,8,0	script	#gd_aru03_mobctrl	844,{
+OnEnable:
+	monster "que_qaru03",107,152,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",109,135,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",113,116,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",157,107,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",163,133,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",149,156,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",116,128,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",118,126,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",120,124,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",122,122,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",124,120,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",147,128,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",145,126,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",143,124,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",141,122,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",139,120,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",131,139,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",135,136,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",131,132,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",128,136,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",110,145,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",129,114,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",148,114,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",155,128,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",152,145,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",131,151,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",110,130,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",116,148,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",117,149,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",118,150,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",119,151,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",147,148,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",146,149,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",145,150,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",144,151,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",133,139,"ピアメットのおもちゃ",1745,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",135,134,"ピアメットのおもちゃ",1745,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	monster "que_qaru03",127,131,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",136,131,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",127,140,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	monster "que_qaru03",136,140,"プリニー",2770,1,"#gd_aru03_mobctrl::OnMyMobDead2";
+	for(set .@i,0; .@i ==.@i; set .@i,.@i+1){
+		set .@x,rand(113,150);
+		set .@y,rand(117,154);
+		if(checkcell("que_qaru03",.@x,.@y,cell_chkpass)){
+			monster "que_qaru03",.@x,.@y,"--ja--",1934+rand(3),1,"#gd_aru03_mobctrl::OnMyMobDead3";
+			set .@j,.@j+1;
+			if(.@j==10)break;
+		}
+	}
+	end;
+
+OnMyMobDead:
+	if (mobcount("que_qaru03","#gd_aru03_mobctrl::OnMyMobDead") < 7) {
+		monster "que_qaru03",107,152,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+		monster "que_qaru03",109,135,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+		monster "que_qaru03",113,116,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+		monster "que_qaru03",157,107,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+		monster "que_qaru03",163,133,"ピアメットのおもちゃ",1937,1,"#gd_aru03_mobctrl::OnMyMobDead";
+		monster "que_qaru03",149,156,"ピアメットのおもちゃ",1745,1,"#gd_aru03_mobctrl::OnMyMobDead";
+	}
+	end;
+OnMyMobDead2:
+	if (mobcount("que_qaru03","#gd_aru03_mobctrl::OnMyMobDead2") == 0) {
+		donpcevent "#gdtimer01_aru03::OnEnable";
+	}
+	end;
+OnMyMobDead3:
+	end;
+}
+que_qaru03,252,340,3	script	メイデン#aru03_gift	403,{
+	cutin "wish_maiden11",0;
+	mes "[ウィッシュメイデン]";
+	mes "よくきましたね";
+	mes "祝福に相応しいものよ";
+	if(#LOGINDAY+84600 < gettimetick(2)){
+		query_sql("SELECT `last_ip` FROM `login` WHERE `account_id`="+getcharid(3),@ip$);
+		query_sql("SELECT `last_ip` FROM `login` WHERE `level`=0 AND `last_ip`='"+@ip$+"'",@ip_list$);
+		set @cashp,(getarraysize(@ip_list$)>=2?500:1000);
+		set #LOGINDAY,gettimetick(2);
+		set #CASHPOINTS,#CASHPOINTS+@cashp;
+		set #PPOINT,#PPOINT+50;
+		dispbottom("当日初回登頂によりキャッシュポイント"+@cashp+"、苺ポイント50が加算されました");
+	}
+	next;
+	mes "[ウィッシュメイデン]";
+	mes "汝の用意が出来ているなら";
+	mes "報酬を授けよう";
+	next;
+	switch(select("少し待ってください",(!(@wewish&1)?"あなたの祝福が欲しい":""),(!(@wewish&2)?"私の為になるものが欲しい":""),"プロンテラに帰る")){
+	case 1:
+		mes "[ウィッシュメイデン]";
+		mes "そうか。";
+		mes "ただ、残された時間は少ない。";
+		mes "それをよく心に留めておけ";
+		close2;
+		cutin "wish_maiden11",255;
+		end;
+	case 2:
+		mes "[ウィッシュメイデン]";
+		mes "汝の用意が出来ているなら";
+		mes "報酬を授けよう";
+		set @wewish,@wewish|1;
+		getitem 28649,1;
+		getitem 6079,10;
+		close2;
+		cutin "wish_maiden11",255;
+		end;
+	case 3:
+		mes "[ウィッシュメイデン]";
+		mes "汝の用意が出来ているなら";
+		mes "報酬を授けよう";
+		set @wewish,@wewish|2;
+		close2;
+		cutin "wish_maiden11",255;
+		callshop "メイデン祝福", 1;
+		end;
+	case 4:
+		mes "[ウィッシュメイデン]";
+		mes "では汝のいるべき場所へ帰そう";
+		close2;
+		cutin "wish_maiden11",255;
+		warp "prontera",156,191;
+		end;
+	}
+}
+-	cashshop	メイデン祝福	-,28463:500,28464:1000,28465:1400,28466:2800,12902:5000,28477:200,28479:500,28480:800
+
+que_qaru02,1,1,0	script	#okolnir_aru03	844,{
+OnEnable:
+	enablenpc "ピアメット#aru03";
+	disablenpc "#aru03_cage01";
+	disablenpc "#aru03_cage02";
+	disablenpc "#aru03_cage03";
+	disablenpc "#aru03_cage04";
+	disablenpc "#aru03_cage05";
+	disablenpc "#aru03_cage06";
+	disablenpc "windpath03_aru03";
+	initnpctimer;
+	end;
+
+Onstop:
+	stopnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "que_qaru03","ウィッシュメイデン : オーコルニルは45分後には消滅する。全力を尽くすのだ！",bc_map,"0x00ff00";
+	announce "【レイドクエスト：ピアメットの暴走】の遠征が開始されます。",bc_all,"0x9933CC";
+	end;
+
+OnTimer900000:
+	if(getmapusers("que_qaru03")==0){
+		donpcevent "#okolnir_aru03::OnEnd";
+		end;
+	}
+	mapannounce "que_qaru03","幻像のオーコルニル【維持限界……残り30分】",bc_map,"0xff0000";
+	end;
+
+OnTimer1800000:
+	if(getmapusers("que_qaru03")==0){
+		donpcevent "#okolnir_aru03::OnEnd";
+		end;
+	}
+	mapannounce "que_qaru03","幻像のオーコルニル【維持限界……残り15分】",bc_map,"0xff0000";
+	end;
+
+OnTimer2100000:
+	if(getmapusers("que_qaru03")==0){
+		donpcevent "#okolnir_aru03::OnEnd";
+		end;
+	}
+	mapannounce "que_qaru03","幻像のオーコルニル【維持限界……残り10分】",bc_map,"0xff0000";
+	end;
+
+OnTimer2400000:
+	if(getmapusers("que_qaru03")==0){
+		donpcevent "#okolnir_aru03::OnEnd";
+		end;
+	}
+	mapannounce "que_qaru03","幻像のオーコルニル【維持限界……残り5分】",bc_map,"0xff0000";
+	end;
+
+OnTimer2460000:
+	if(getmapusers("que_qaru03")==0){
+		donpcevent "#okolnir_aru03::OnEnd";
+		end;
+	}
+	mapannounce "que_qaru03","幻像のオーコルニル【維持限界……残り4分】",bc_map,"0xff0000";
+	end;
+
+OnTimer2520000:
+	if(getmapusers("que_qaru03")==0){
+		donpcevent "#okolnir_aru03::OnEnd";
+		end;
+	}
+	mapannounce "que_qaru03","幻像のオーコルニル【維持限界……残り3分】",bc_map,"0xff0000";
+	end;
+
+OnTimer2580000:
+	if(getmapusers("que_qaru03")==0){
+		donpcevent "#okolnir_aru03::OnEnd";
+		end;
+	}
+	mapannounce "que_qaru03","幻像のオーコルニル【維持限界……残り2分】",bc_map,"0xff0000";
+	end;
+
+OnTimer2640000:
+	if(getmapusers("que_qaru03")==0){
+		donpcevent "#okolnir_aru03::OnEnd";
+		end;
+	}
+	mapannounce "que_qaru03","幻像のオーコルニル【維持限界……残り1分】",bc_map,"0xff0000";
+	end;
+
+OnTimer2700000:
+	mapannounce "que_qaru03","幻像のオーコルニルが消滅しました",bc_map,"0x4d4dff";
+	announce "【レイドクエスト：ピアメットの暴走】の遠征が失敗に終わりました。",bc_all,"0x9933CC";
+	donpcevent "#battle1::OnKilling";
+	donpcevent "#battle2::OnKilling";
+	donpcevent "#gdtimer06_aru03::OnEnd";
+	donpcevent "#gdtimer00_aru03::OnDisable";
+	donpcevent "#gdtimer02_aru03::OnDisable";
+	donpcevent "#gdtimer04_aru03::OnDisable";
+	donpcevent "#gdinctimer0_aru03::OnDisable";
+	donpcevent "#gdinctimer1_aru03::OnDisable";
+	set $@killpinc,0;
+	set $@killblue,0;
+	set $@gqse_aru03_miro,0;
+	set $@gqse_aru03_gd,0;
+	killmonsterall "que_qaru03";
+	disablenpc "ピアメット#aru03";
+	enablenpc "#aru03_cage01";
+	enablenpc "#aru03_cage02";
+	enablenpc "#aru03_cage03";
+	enablenpc "#aru03_cage04";
+	enablenpc "#aru03_cage05";
+	enablenpc "#aru03_cage06";
+	end;
+
+OnTimer2705000:
+	mapannounce "que_qaru03","ウィッシュメイデン : …オーコルニルは再び深い睡眠に陥るでしょう…",bc_map,"0x00ff00";
+	end;
+
+OnTimer2710000:
+	set $siz_aru03_on,0;
+	mapwarp "que_qaru03","prontera",156,191;
+	end;
+
+OnTimer2711000:
+	stopnpctimer;
+	end;
+
+OnEnd:
+	announce "【レイドクエスト：ピアメットの暴走】の遠征が失敗に終わりました。",bc_all,"0x9933CC";
+	stopnpctimer;
+	donpcevent "#battle1::OnKilling";
+	donpcevent "#battle2::OnKilling";
+	donpcevent "#gdtimer06_aru03::OnEnd";
+	donpcevent "#gdtimer00_aru03::OnDisable";
+	donpcevent "#gdtimer02_aru03::OnDisable";
+	donpcevent "#gdtimer04_aru03::OnDisable";
+	donpcevent "#gdinctimer0_aru03::OnDisable";
+	donpcevent "#gdinctimer1_aru03::OnDisable";
+	set $@killpinc,0;
+	set $@killblue,0;
+	set $@gqse_aru03_miro,0;
+	set $@gqse_aru03_gd,0;
+	killmonsterall "que_qaru03";
+	disablenpc "ピアメット#aru03";
+	enablenpc "#aru03_cage01";
+	enablenpc "#aru03_cage02";
+	enablenpc "#aru03_cage03";
+	enablenpc "#aru03_cage04";
+	enablenpc "#aru03_cage05";
+	enablenpc "#aru03_cage06";
+	set $siz_aru03_on,0;
+	mapwarp "que_qaru03","prontera",156,191;
+	end;
+}
+que_qaru03	mapflag	noicewall
+que_qaru03	mapflag	nowarp
+que_qaru03	mapflag	noteleport
+que_qaru03	mapflag	monster_noteleport
+que_qaru03	mapflag	nosave
+que_qaru03	mapflag	nowarpto
+que_qaru03	mapflag	nomemo
+que_qaru03	mapflag	restricted	6

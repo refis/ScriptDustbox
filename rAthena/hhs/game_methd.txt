@@ -1,0 +1,1028 @@
+//=========================================================
+// 1.なりきり
+// 2.ペット配合
+// 3.ハンティングモンスター
+// 4.ペットテイマー
+// 5.不思議な猫
+// 6.三毛猫トチェッタ,マチェッタ
+//=========================================================
+
+payon,170,178,5	script	霊術師	124,{
+	if(killedrid>=1001 && killedrid<=2400){
+		set .@disguise,killedrid;
+		mes "[霊術師]";
+		mes "おや、君";
+		mes strmobinfo(2,.@disguise)+"の魂が取り付いているね";
+		mes "……そうだ";
+		mes "ちょっと"+strmobinfo(2,.@disguise)+"になってみない？";
+		mes "10苺ポイントくれたらやってあげるよ";
+		next;
+		if(select("しません","やります")==1) {
+			mes "[霊術師]";
+			mes "そうかい";
+			close;
+		}
+		if(#PPOINT<10){mes "[霊術師]";mes "足りないね";close;}
+		set #PPOINT,#PPOINT-10;
+		disguise .@disguise;
+		mes "[霊術師]";
+		mes "うん、意外と似合ってるね";
+		close;
+	}
+	mes "[霊術師]";
+	mes "君からは血の匂いがする";
+	close;
+}
+
+prontera,146,125,3	script	ペットブリーダー	865,{
+	mes "[ペットブリーダー]";
+	mes "こんにちは。ここでは^0000FFペットを配合^000000させる事が出来ます";
+	next;
+	if(select("お願いします","結構です")==2) {
+		mes "[ペットブリーダー]";
+		mes "じゃまたね";
+		close;
+	}
+L_PetSelct:
+	cleararray @inventorylist_id[0],0,100;
+	cleararray .@egg_num[0],0,100;
+	getinventorylist;
+	set .@vars_kind,getarraysize(@inventorylist_id);
+	set .@j,0;
+	for(set .@i,0; .@i<.@vars_kind; set .@i,.@i+1){
+		if((@inventorylist_id[.@i] >= 9001)&&(@inventorylist_id[.@i] <= 9910)){
+			setarray .@egg_num[.@j],@inventorylist_id[.@i];
+			set .@j,.@j+1;
+		}
+	}
+	mes "[ペットブリーダー]";
+	if(.@j<2){
+		mes "^FF0000ペットの卵が2つは必要です^000000";
+		close;
+	}
+	mes "血統となるペットを選択して下さい";
+	next;
+	set .@max_page, .@j /10 - ((.@j > 9) && ((.@j %10) == 0));	
+	set .@now_page,0;
+	set .@Mainselect,-1;set .@SubDselect,-1;
+	do {
+		do {
+			set .@choose,(select(
+				((.@now_page > 0)? "前へ":""),
+				((.@egg_num[.@now_page *10 + 0] >= 9001 && (.@now_page *10 + 0)!=.@Mainselect)? getitemname(.@egg_num[.@now_page *10 + 0]):""),
+				((.@egg_num[.@now_page *10 + 1] >= 9001 && (.@now_page *10 + 1)!=.@Mainselect)? getitemname(.@egg_num[.@now_page *10 + 1]):""),
+				((.@egg_num[.@now_page *10 + 2] >= 9001 && (.@now_page *10 + 2)!=.@Mainselect)? getitemname(.@egg_num[.@now_page *10 + 2]):""),
+				((.@egg_num[.@now_page *10 + 3] >= 9001 && (.@now_page *10 + 3)!=.@Mainselect)? getitemname(.@egg_num[.@now_page *10 + 3]):""),
+				((.@egg_num[.@now_page *10 + 4] >= 9001 && (.@now_page *10 + 4)!=.@Mainselect)? getitemname(.@egg_num[.@now_page *10 + 4]):""),
+				((.@egg_num[.@now_page *10 + 5] >= 9001 && (.@now_page *10 + 5)!=.@Mainselect)? getitemname(.@egg_num[.@now_page *10 + 5]):""),
+				((.@egg_num[.@now_page *10 + 6] >= 9001 && (.@now_page *10 + 6)!=.@Mainselect)? getitemname(.@egg_num[.@now_page *10 + 6]):""),
+				((.@egg_num[.@now_page *10 + 7] >= 9001 && (.@now_page *10 + 7)!=.@Mainselect)? getitemname(.@egg_num[.@now_page *10 + 7]):""),
+				((.@egg_num[.@now_page *10 + 8] >= 9001 && (.@now_page *10 + 8)!=.@Mainselect)? getitemname(.@egg_num[.@now_page *10 + 8]):""),
+				((.@egg_num[.@now_page *10 + 9] >= 9001 && (.@now_page *10 + 9)!=.@Mainselect)? getitemname(.@egg_num[.@now_page *10 + 9]):""),
+				(.@now_page < .@max_page)? "次へ" : ""));
+
+			if (.@choose ==1){			//『前へ』
+				set .@now_page,.@now_page -1;
+			} else if (.@choose==12){		//『次へ』
+				set .@now_page,.@now_page +1;
+			}
+		} while(.@choose ==1 || .@choose ==12);
+		if(.@subselect == 1){
+			set .@SubDselect,.@now_page *10 + .@choose -2;
+			set .@subselect,0;
+		}else{
+			set .@Mainselect,.@now_page *10 + .@choose -2;
+			mes "[ペットブリーダー]";
+			mes "相手を選択して下さい";
+			set .@subselect,1;
+		}
+	} while(.@subselect ==1);
+	next;
+	mes "[ペットブリーダー]";
+	mes "血統：^0000FF"+getitemname(.@egg_num[.@Mainselect])+"^000000";
+	mes "相手：^0000FF"+getitemname(.@egg_num[.@SubDselect])+"^000000";
+	mes "この組み合わせで宜しいですか？";
+	next;
+	if(select("はい","いいえ")==2) {
+		mes "[ペットブリーダー]";
+		mes "じゃまたね";
+		close;
+	}
+	mes "[ペットブリーダー]";
+	if( countitem(.@egg_num[.@Mainselect]) == 0 || countitem(.@egg_num[.@SubDselect]) == 0){
+		mes "選択されたペットの卵が見つかりません";
+		close;
+	}
+	if(.@egg_num[.@Mainselect] == .@egg_num[.@SubDselect]){
+		mes "同じ種類のペットを配合させる事は出来ません";
+		close;
+	}
+	set .@MainPETNO,searchpet(.@egg_num[.@Mainselect],0);
+	set .@SubPETNO,searchpet(.@egg_num[.@SubDselect],0);
+	set .@Main_MOB_LV   ,getmonsterinfo(.@MainPETNO,1);
+	set .@Main_MOB_RACE ,getmonsterinfo(.@MainPETNO,19);
+	set .@Main_MOB_ELEM ,getmonsterinfo(.@MainPETNO,20);
+	set .@Sub_MOB_LV   ,getmonsterinfo(.@SubPETNO,1);
+	set .@Sub_MOB_ELEM ,getmonsterinfo(.@SubPETNO,20);
+	set .@MOB_ELEM_10  ,getmonsterinfo(.@SubPETNO,22);
+	set .@Item_ELEM,0;set .@Item_RACE,0;set .@Item_EXEC,0;
+	set .@Item_Zeny,10000;set .@Item_Point,0;set .@sel,0;
+	set .@MOB_LV,(.@Main_MOB_LV+.@Sub_MOB_LV)/2;
+	mes "ペットの配合時に環境を整えることができます";
+	mes "どうしますか？";
+	next;
+	switch (select( "そのまま - [手数料：10kz]",
+			"風通しを良くする - [手数料：30kz]",
+			"小屋の清掃 - [手数料：50kz]",
+			"専用小屋の設置 - [手数料：100kz]",
+			"何か買い与える")) {
+	case 1:if(.@sel==0){set .@Item_Zeny,10000; set .@sel,1;}
+	case 2:if(.@sel==0){set .@Item_Zeny,30000; set .@MOB_LV,.@MOB_LV+10;set .@sel,1;}
+	case 3:if(.@sel==0){set .@Item_Zeny,50000; set .@MOB_LV,.@MOB_LV+20;set .@sel,1;}
+	case 4:if(.@sel==0){set .@Item_Zeny,100000;set .@MOB_LV,.@MOB_LV+30;set .@sel,1;}
+		mes "[ペットブリーダー]";
+		mes "その他にもありますよ";
+	case 5:
+		mes "何を買いますか？";
+		mes "ペットポイントでお求めいただけます";
+		next;
+		switch (select( "おやつガム - [手数料：10Point]",
+				"柔らかな藁 - [手数料：30Point]",
+				"クッション - [手数料：60Point]",
+				"赤い雫 - [手数料：10Point]",
+				"青い雫 - [手数料：15Point]",
+				"緑の雫 - [手数料：20Point]",
+				"変な黒い石 - [手数料：50Point]",
+				"変な白い石 - [手数料：50Point]",
+				"透き通った水晶 - [手数料：50Point]",
+				"買わない")) {
+		case 1:set .@Item_Point,10;set .@MOB_ELEM_10,2;break;
+		case 2:set .@Item_Point,30;set .@MOB_ELEM_10,3;break;
+		case 3:set .@Item_Point,60;set .@MOB_ELEM_10,4;break;
+		case 4:set .@Item_Point,10;set .@Item_ELEM,1;break;
+		case 5:set .@Item_Point,15;set .@Item_ELEM,2;break;
+		case 6:set .@Item_Point,20;set .@Item_ELEM,3;break;
+		case 7:set .@Item_Point,50;set .@Item_RACE,1;break;
+		case 8:set .@Item_Point,50;set .@Item_RACE,-1;break;
+		case 9:set .@Item_Point,50;set .@Item_EXEC,rand(1,3);break;
+		case 10:break;
+		}
+	}
+	set .@MOB_ELEM_1,.@Main_MOB_ELEM+.@Sub_MOB_ELEM+.@Item_ELEM;
+	set .@MOB_ELEM_1,.@MOB_ELEM_1>9?.@MOB_ELEM_1 -10:.@MOB_ELEM_1;
+	set .@Main_MOB_RACE,.@Main_MOB_RACE+.@Item_RACE;
+	set .@Main_MOB_RACE,(.@Main_MOB_RACE>9?0:(.@Main_MOB_RACE<0?9:.@Main_MOB_RACE));
+	cleararray .@mob_num[0],0,255;set .@j,0;
+	for(set .@i,9101; .@i<9301; set .@i,.@i+1){
+		set .@mobid,searchpet(.@i,0);
+		if(.@Main_MOB_RACE == getmonsterinfo(.@mobid,19)){
+			if(.@MOB_ELEM_1 == getmonsterinfo(.@mobid,20) &&
+			   .@MOB_ELEM_10>= getmonsterinfo(.@mobid,22) &&
+			   .@MOB_LV     >= getmonsterinfo(.@mobid,1)){
+				setarray .@mob_num[.@j],.@mobid;
+				set .@j,.@j+1;
+			}
+		}
+	}
+	mes "[ペットブリーダー]";
+	mes "…";
+	next;
+	for(set .@i,9301; .@i<9501; set .@i,.@i+1){
+		set .@mobid,searchpet(.@i,0);
+		if(.@Main_MOB_RACE == getmonsterinfo(.@mobid,19)){
+			if(.@MOB_ELEM_1 == getmonsterinfo(.@mobid,20) &&
+			   .@MOB_ELEM_10>= getmonsterinfo(.@mobid,22) &&
+			   .@MOB_LV     >= getmonsterinfo(.@mobid,1)){
+				setarray .@mob_num[.@j],.@mobid;
+				set .@j,.@j+1;
+			}
+		}
+	}
+	mes "[ペットブリーダー]";
+	mes "………";
+	next;
+	for(set .@i,9501; .@i<9693; set .@i,.@i+1){
+		set .@mobid,searchpet(.@i,0);
+		if(.@Main_MOB_RACE == getmonsterinfo(.@mobid,19)){
+			if(.@MOB_ELEM_1 == getmonsterinfo(.@mobid,20) &&
+			   .@MOB_ELEM_10>= getmonsterinfo(.@mobid,22) &&
+			   .@MOB_LV     >= getmonsterinfo(.@mobid,1)){
+				setarray .@mob_num[.@j],.@mobid;
+				set .@j,.@j+1;
+			}
+		}
+	}
+	for(set .@i,9706; .@i<9762; set .@i,.@i+1){
+		set .@mobid,searchpet(.@i,0);
+		if(.@Main_MOB_RACE == getmonsterinfo(.@mobid,19)){
+			if(.@MOB_ELEM_1 == getmonsterinfo(.@mobid,20) &&
+			   .@MOB_ELEM_10>= getmonsterinfo(.@mobid,22) &&
+			   .@MOB_LV     >= getmonsterinfo(.@mobid,1)){
+				setarray .@mob_num[.@j],.@mobid;
+				set .@j,.@j+1;
+			}
+		}
+	}
+	if(.@j <= 0){
+		mes "[ペットブリーダー]";
+		mes "このペット達は気が合わないようね";
+		mes "他の子で試してみる？";
+		next;
+		goto L_PetSelct;
+	}
+	set .@TableMini,100 /.@j;
+	mes "[ペットブリーダー]";
+	mes "配合結果が出たようね";
+	mes "成功確立を表示します";
+	next;
+	mes "血統：^0000FF"+getitemname(.@egg_num[.@Mainselect])+"^000000";
+	mes "相手：^0000FF"+getitemname(.@egg_num[.@SubDselect])+"^000000";
+	for(set .@i,0; .@i<.@j; set .@i,.@i+1){
+	set .@Exhosei,.@j -.@i;
+	set .@EXPASENT[.@i],.@TableMini*.@Exhosei;
+	mes "^0000FF"+strmobinfo(2,.@mob_num[.@i])+"^000000：["+.@EXPASENT[.@i]+"%]";
+	}
+	mes "この条件でペットを配合させますか？";
+	next;
+	if(select("いいえ","はい")==1) {
+		mes "[ペットブリーダー]";
+		mes "じゃまたね";
+		close;
+	}
+	if(.@Item_Zeny>Zeny){mes "[ペットブリーダー]";mes "お金が足りません";close;}
+	if(.@Item_Point>#PETPOINT){mes "[ペットブリーダー]";mes "ペットポイントが足りません";close;}
+	set Zeny,Zeny-.@Item_Zeny;
+	set #PETPOINT,#PETPOINT-.@Item_Point;
+	mes "[ペットブリーダー]";
+	mes "では・・・いきますよ・・・";
+	next;
+	mes "[ペットブリーダー]";
+	mes "・・・";
+	next;
+	if(rand(256)==0){
+		delitem searchpet(.@MainPETNO,1),1;
+		delitem searchpet(.@SubPETNO,1),1;
+		makepet rand(9001,9761);
+		mes "[ペットブリーダー]";
+		mes "…すまない";
+		mes "予想とまったく違うペットになってしまった";
+		close;
+	}
+	set .@gattai,rand(1,10000);
+	set .@i,.@j;
+	for(set .@i,.@j; .@i>=0; set .@i,.@i-1){
+		if (.@EXPASENT[.@i]*100 > .@gattai || .@i ==0){
+			next;
+			if(.@Item_EXEC==1 && .@mob_num[.@i]==1370 ){
+				switch (rand(3)){
+				case 0:set .@mob_num[.@i],2828;break;
+				case 1:set .@mob_num[.@i],2829;break;
+				case 2:set .@mob_num[.@i],2832;break;
+				}
+			}
+			if(.@Item_EXEC==1 && .@mob_num[.@i]==2013 ){
+				switch (rand(4)){
+				case 0:set .@mob_num[.@i],2796;break;
+				case 1:set .@mob_num[.@i],2797;break;
+				case 2:set .@mob_num[.@i],2798;break;
+				case 3:set .@mob_num[.@i],2830;break;
+				}
+			}
+			delitem searchpet(.@MainPETNO,1),1;
+			delitem searchpet(.@SubPETNO,1),1;
+			makepet .@mob_num[.@i];
+			mes "[ペットブリーダー]";
+			mes "おめでとうございます";
+			mes "^0F00FF"+getmonsterinfo(.@mob_num[.@i],0)+"^000000が誕生しました！";
+			mes "可愛がってあげてくださいね！";
+			close;
+		}
+	}
+	close;
+}
+
+payon,185,315,3	script	珍獣探検家	900,{
+	if(MONHAN$==""){
+		mes "[珍獣探検家]";
+		mes "あ、そこの暇人";
+		mes "おい、聞いておるのか";
+		next;
+		if(select("なんですか","無視無視")==2) {
+			mes "[珍獣探検家]";
+			mes "チッ";
+			mes "これだから最近の若いやつは……";
+			mes "ブツブツ……";
+			close;
+		}
+		mes "[珍獣探検家]";
+		mes "おぬし、暇じゃろう？";
+		mes "だったらちょっとワシの";
+		mes "手伝いをしろ！";
+		next;
+		mes "[珍獣探検家]";
+		mes "最近、オカシなモンスターが";
+		mes "増えてきておる";
+		mes "ワシはその調査をしておるんだが";
+		mes "仮にも相手はモンスターじゃろ？";
+		next;
+		mes "[珍獣探検家]";
+		mes "目には目を、歯に歯を。";
+		mes "モンスターには冒険者を、ということじゃ";
+		mes "協力してくれるならこの";
+		mes "^0000FFハンター認定書^000000をやろう";
+		next;
+		mes "[珍獣探検家]";
+		mes "最近は愛護協会やらなんやらが煩くて";
+		mes "これがないと希少なモンスターを";
+		mes "捕らえられないんじゃ";
+		next;
+		mes "[珍獣探検家]";
+		mes "どうじゃ、やってくれるか！";
+		mes "^FF0000やるを選ぶと捕獲状況が初期化されます!!^000000";
+		next;
+		if(select("無視無視","やる")==1) {
+			mes "[珍獣探検家]";
+			mes "チッ";
+			mes "これだから最近の若いやつは……";
+			mes "ブツブツ……";
+			close;
+		}
+		mes "[珍獣探検家]";
+		mes "ほれ、これじゃ！";
+		set MONHAN$,"0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+		getitem 28534,1;
+		close;
+	}
+	mes "[珍獣探検家]";
+	mes "おぉ、よく来たな";
+	mes "今日は何の用じゃ";
+	next;
+	switch (select( "今の生息地が知りたい",
+			"捕獲済みモンスターが知りたい",
+			"モンスターを捕まえてきた",
+			"説明をください",
+			"なんでもない")) {
+	case 1:
+		mes "[珍獣探検家]";
+		if($@monhanmap1$ == "" || $@monhanmap2$ == ""){
+			mes "モンスターの気配がしないな……";
+			mes "しばらく経ってから来てくれ";
+			close;
+		}
+		if(mobcount($@monhanmap1$,"monhun::OnKilled") > 0)
+			mes "^0000FF"+$@monhanmap1$+"^000000 にあと "+mobcount($@monhanmap1$,"monhun::OnKilled")+"匹";
+		if(mobcount($@monhanmap2$,"monhun::OnKilled") > 0)
+			mes "^0000FF"+$@monhanmap2$+"^000000 にあと "+mobcount($@monhanmap2$,"monhun::OnKilled")+"匹";
+		if(mobcount($@monhanmap1$,"monhun::OnKilled") == 0 && mobcount($@monhanmap2$,"monhun::OnKilled") == 0)
+			mes "目的のモンスターは居ないな";
+		else
+			mes "目的のモンスターが居そうだな";
+		if(mobcount($@monhanmap1$,"monhun::OnKilled") == 0 && mobcount($@monhanmap2$,"monhun::OnKilled") == 0){
+			if(getnpctimer(1)==0)
+				initnpctimer;
+		}
+		close;
+	case 2:
+		set .@mon_num,0;
+		for(set .@i,0; .@i < 100; set .@i,.@i+1){
+			set @MONHAN[.@i],axtoi(charat(MONHAN$,.@i));
+			if(@MONHAN[.@i]>0)
+				set .@mon_num,.@mon_num+1;
+		}
+		set .@max_page, .@i /10 - ((.@i > 9) && ((.@i %10) == 0));
+		set .@now_page,0;
+		do {
+			set .@choose,(select(
+				((.@now_page > 0)? "前へ":""),
+				((@MONHAN[.@now_page *10 + 0] > 0)? "No,"+(.@now_page *10 + 0)+getitemname(28536+(.@now_page *10 + 0)):"No,"+(.@now_page *10 + 0)+"未捕獲"),
+				((@MONHAN[.@now_page *10 + 1] > 0)? "No,"+(.@now_page *10 + 1)+getitemname(28536+(.@now_page *10 + 1)):"No,"+(.@now_page *10 + 1)+"未捕獲"),
+				((@MONHAN[.@now_page *10 + 2] > 0)? "No,"+(.@now_page *10 + 2)+getitemname(28536+(.@now_page *10 + 2)):"No,"+(.@now_page *10 + 2)+"未捕獲"),
+				((@MONHAN[.@now_page *10 + 3] > 0)? "No,"+(.@now_page *10 + 3)+getitemname(28536+(.@now_page *10 + 3)):"No,"+(.@now_page *10 + 3)+"未捕獲"),
+				((@MONHAN[.@now_page *10 + 4] > 0)? "No,"+(.@now_page *10 + 4)+getitemname(28536+(.@now_page *10 + 4)):"No,"+(.@now_page *10 + 4)+"未捕獲"),
+				((@MONHAN[.@now_page *10 + 5] > 0)? "No,"+(.@now_page *10 + 5)+getitemname(28536+(.@now_page *10 + 5)):"No,"+(.@now_page *10 + 5)+"未捕獲"),
+				((@MONHAN[.@now_page *10 + 6] > 0)? "No,"+(.@now_page *10 + 6)+getitemname(28536+(.@now_page *10 + 6)):"No,"+(.@now_page *10 + 6)+"未捕獲"),
+				((@MONHAN[.@now_page *10 + 7] > 0)? "No,"+(.@now_page *10 + 7)+getitemname(28536+(.@now_page *10 + 7)):"No,"+(.@now_page *10 + 7)+"未捕獲"),
+				((@MONHAN[.@now_page *10 + 8] > 0)? "No,"+(.@now_page *10 + 8)+getitemname(28536+(.@now_page *10 + 8)):"No,"+(.@now_page *10 + 8)+"未捕獲"),
+				((@MONHAN[.@now_page *10 + 9] > 0)? "No,"+(.@now_page *10 + 9)+getitemname(28536+(.@now_page *10 + 9)):"No,"+(.@now_page *10 + 9)+"未捕獲"),
+				(.@now_page < .@max_page)? "次へ" : ""));
+
+			if (.@choose ==1){			//『前へ』
+				set .@now_page,.@now_page -1;
+			} else if (.@choose==12){		//『次へ』
+				set .@now_page,.@now_page +1;
+			}
+		} while(.@choose ==1 || .@choose ==12);
+		mes "[情報]";
+		mes "捕獲数:"+.@mon_num+"匹";
+		mes "非捕獲数:"+(100-.@mon_num)+"匹";
+		if(.@mon_num>=100){
+			next;
+			mes "[珍獣探検家]";
+			mes "すんばらしい！";
+			mes "君は珍獣探検家としての";
+			mes "才能に満ちておる！";
+			next;
+			mes "[珍獣探検家]";
+			mes "うむむ";
+			mes "多大な協力をしてくれた";
+			mes "お礼をしたいのぅ……";
+			next;
+			mes "[珍獣探検家]";
+			mes "受け取ってくれるかの？";
+			mes "^FF0000受け取るを選ぶと捕獲状況が初期化されます!!^000000";
+			next;
+			if(select("今はちょっと…","受け取る")==1) {
+				mes "[珍獣探検家]";
+				mes "そうか";
+				mes "気が向いたらまた来てくれ";
+				close;
+			}
+			mes "[珍獣探検家]";
+			mes "ほっほ";
+			mes "協力してくれてありがとうな";
+			mes "これからも頼むぞ！";
+			set MONHAN$,"0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+			set MONHANPOINT,MONHANPOINT+rand(1000,2000);
+			getitem 1650,1;
+		}
+		close;
+	case 3:
+		cleararray @inventorylist_id[0],0,100;
+		cleararray .@soul_num[0],0,100;
+		getinventorylist;
+		set .@vars_kind,getarraysize(@inventorylist_id);
+		set .@j,0;
+		for(set .@i,0; .@i<.@vars_kind; set .@i,.@i+1){
+			if((@inventorylist_id[.@i] >= 28536)&&(@inventorylist_id[.@i] <= 28635)){
+				setarray .@soul_num[.@j],@inventorylist_id[.@i];
+				set .@j,.@j+1;
+			}
+		}
+		mes "[珍獣探検家]";
+		if(.@j<1){
+			mes "^FF0000魂がないようじゃが？^000000";
+			close;
+		}
+		mes "提供してくれる魂はどれじゃ？";
+		next;
+		set .@max_page, .@j /10 - ((.@j > 9) && ((.@j %10) == 0));
+		set .@now_page,0;
+		do {
+			set .@choose,(select(
+				((.@now_page > 0)? "前へ":""),
+				((.@soul_num[.@now_page *10 + 0] >= 28536)? getitemname(.@soul_num[.@now_page *10 + 0]):""),
+				((.@soul_num[.@now_page *10 + 1] >= 28536)? getitemname(.@soul_num[.@now_page *10 + 1]):""),
+				((.@soul_num[.@now_page *10 + 2] >= 28536)? getitemname(.@soul_num[.@now_page *10 + 2]):""),
+				((.@soul_num[.@now_page *10 + 3] >= 28536)? getitemname(.@soul_num[.@now_page *10 + 3]):""),
+				((.@soul_num[.@now_page *10 + 4] >= 28536)? getitemname(.@soul_num[.@now_page *10 + 4]):""),
+				((.@soul_num[.@now_page *10 + 5] >= 28536)? getitemname(.@soul_num[.@now_page *10 + 5]):""),
+				((.@soul_num[.@now_page *10 + 6] >= 28536)? getitemname(.@soul_num[.@now_page *10 + 6]):""),
+				((.@soul_num[.@now_page *10 + 7] >= 28536)? getitemname(.@soul_num[.@now_page *10 + 7]):""),
+				((.@soul_num[.@now_page *10 + 8] >= 28536)? getitemname(.@soul_num[.@now_page *10 + 8]):""),
+				((.@soul_num[.@now_page *10 + 9] >= 28536)? getitemname(.@soul_num[.@now_page *10 + 9]):""),
+				(.@now_page < .@max_page)? "次へ" : ""));
+
+			if (.@choose ==1){			//『前へ』
+				set .@now_page,.@now_page -1;
+			} else if (.@choose==12){		//『次へ』
+				set .@now_page,.@now_page +1;
+			}
+		} while(.@choose ==1 || .@choose ==12);
+		set .@select,.@now_page *10 + .@choose -2;
+		mes "[珍獣探検家]";
+		mes "^0000FF"+getitemname(.@soul_num[.@select])+"^000000を譲ってくれるのか？";
+		next;
+		if(select("はい","いいえ")==2) {
+			mes "[珍獣探検家]";
+			mes "そうか";
+			close;
+		}
+		mes "[珍獣探検家]";
+		if(countitem(.@soul_num[.@select]) == 0){
+			mes "おや、魂がないな";
+			close;
+		}
+		if((.@soul_num[.@select] >= 28536)&&(.@soul_num[.@select] <= 28635)){
+			set .@sec,.@soul_num[.@select] - 28536;
+			if(axtoi(charat(MONHAN$,.@sec)) == 1){
+				mes "そいつはもうもらってるの";
+				close;
+			}
+			delitem .@soul_num[.@select],1;
+			set MONHAN$,(insertchar(MONHAN$, "1", .@sec));	//対象の前に文字代入
+			set MONHAN$,(delchar(MONHAN$, .@sec+1));		//古い文字を消去
+			mes "ありがとよ！";
+			close;
+		}
+		mes "魂じゃないみたいだな";
+		close;
+	case 4:
+		mes "[珍獣探検家]";
+		mes "^0000FF魂捕獲器^000000を使って";
+		mes "モンスターどもの魂をびっしばっしと";
+		mes "捕らえてきてほしい！";
+		next;
+		mes "[珍獣探検家]";
+		mes "魂捕獲器の使い方じゃが";
+		mes "新種のモンスターを倒すと、その魂が";
+		mes "空に昇っていくのが見えるはず";
+		next;
+		mes "[珍獣探検家]";
+		mes "そのときに魂捕獲器を使うと";
+		mes "いくらかの確率で捉えることが出来る";
+		mes "捕獲率は装備によっても変化するが";
+		mes "モンスターによって捕まえやすい装備が";
+		mes "違うから一概には言えん";
+		next;
+		mes "[珍獣探検家]";
+		mes "確率によって表示の色も変化するから";
+		mes "よく見れば事前に察知もできよう";
+		next;
+		mes "[珍獣探検家]";
+		mes "捕獲器をいくつ使っても";
+		mes "捕獲率に変化はないからの";
+		mes "1つだけ使って、おとなしく";
+		mes "待つのが得策じゃ";
+		close;
+	case 5:
+		mes "[珍獣探検家]";
+		mes "頑張ってくれよ！";
+		close;
+	}
+OnTimer180000:
+	stopnpctimer;
+	killmonster $@monhanmap1$,"monhun::OnKilled";
+	killmonster $@monhanmap2$,"monhun::OnKilled";
+	set $@monhanmap1$,callfunc("funcbmS001_r");
+	for(set .@i,0; .@i < (15+rand(21));set .@i,.@i+1) {
+		areamonster $@monhanmap1$,0,0,400,400,"--ja--",rand(2900,2999),1,"monhun::OnKilled";
+	}
+	set $@monhanmap2$,callfunc("funcbmS001_r");
+	for(set .@i,0; .@i < (15+rand(21));set .@i,.@i+1) {
+		areamonster $@monhanmap2$,0,0,400,400,"--ja--",rand(2900,2999),1,"monhun::OnKilled";
+	}
+	end;
+OnMinute11:
+	killmonster $@monhanmap1$,"monhun::OnKilled";
+	killmonster $@monhanmap2$,"monhun::OnKilled";
+OnInit:
+	set $@monhanmap1$,callfunc("funcbmS001_r");
+	for(set .@i,0; .@i < (20+rand(11));set .@i,.@i+1) {
+		areamonster $@monhanmap1$,0,0,400,400,"--ja--",rand(2900,2948),1,"monhun::OnKilled";
+	}
+	set $@monhanmap2$,callfunc("funcbmS001_r");
+	for(set .@i,0; .@i < (20+rand(11));set .@i,.@i+1) {
+		areamonster $@monhanmap2$,0,0,400,400,"--ja--",rand(2900,2948),1,"monhun::OnKilled";
+	}
+	end;
+OnMinute20:
+	killmonster $@monhanmap1$,"monhun::OnKilled";
+	killmonster $@monhanmap2$,"monhun::OnKilled";
+	set $@monhanmap1$,callfunc("funcbmS001_r");
+	for(set .@i,0; .@i < (15+rand(21));set .@i,.@i+1) {
+		areamonster $@monhanmap1$,0,0,400,400,"--ja--",rand(2900,2999),1,"monhun::OnKilled";
+	}
+	set $@monhanmap2$,callfunc("funcbmS001_r");
+	for(set .@i,0; .@i < (15+rand(21));set .@i,.@i+1) {
+		areamonster $@monhanmap2$,0,0,400,400,"--ja--",rand(2900,2999),1,"monhun::OnKilled";
+	}
+	end;
+OnMinute40:
+	killmonster $@monhanmap1$,"monhun::OnKilled";
+	killmonster $@monhanmap2$,"monhun::OnKilled";
+	set $@monhanmap1$,callfunc("funcbmS001_r");
+	for(set .@i,0; .@i < (20+rand(11));set .@i,.@i+1) {
+		areamonster $@monhanmap1$,0,0,400,400,"--ja--",rand(2949,2999),1,"monhun::OnKilled";
+	}
+	set $@monhanmap2$,callfunc("funcbmS001_r");
+	for(set .@i,0; .@i < (20+rand(11));set .@i,.@i+1) {
+		areamonster $@monhanmap2$,0,0,400,400,"--ja--",rand(2949,2999),1,"monhun::OnKilled";
+	}
+	end;
+OnMinute51:
+	killmonster $@monhanmap1$,"monhun::OnKilled";
+	killmonster $@monhanmap2$,"monhun::OnKilled";
+	set $@monhanmap1$,callfunc("funcbmS001_r");
+	for(set .@i,0; .@i < (15+rand(21));set .@i,.@i+1) {
+		areamonster $@monhanmap1$,0,0,400,400,"--ja--",rand(2900,2999),1,"monhun::OnKilled";
+	}
+	set $@monhanmap2$,callfunc("funcbmS001_r");
+	for(set .@i,0; .@i < (15+rand(21));set .@i,.@i+1) {
+		areamonster $@monhanmap2$,0,0,400,400,"--ja--",rand(2900,2999),1,"monhun::OnKilled";
+	}
+	end;
+}
+payon,220,107,5	script	ペットテイマー#petpay	421,{
+	mes "[ペットテイマー]";
+	if(petstat(PET_CLASS)>0){
+		set .@egg_id,petstat(PET_EGGID);
+		if(countitem(.@egg_id) > 0){mes "連れているペットと同じ卵は持たないでください";close;}
+		set .@petclass,petstat(PET_CLASS);
+		set .@deflevel,getmonsterinfo(.@petclass,1);
+		set .@petp,((petstat(PET_LEVEL)-.@deflevel)/2) + (petstat(PET_LEVEL)==99?11:1) + (petstat(PET_INTIMATE)>=1000?10:0) + ((.@deflevel/3)>30?30:(.@deflevel/3));
+		mes "Lv"+.@deflevel+"の"+getmonsterinfo(.@petclass,0)+"を、Lv"+petstat(PET_LEVEL)+"まで育てたんだね";
+		mes "親密度は"+petstat(PET_INTIMATE)+"か……";
+		next;
+		mes "[ペットテイマー]";
+		mes "ねぇ、そのペットを僕にくれない？";
+		next;
+		if(select("いいえ","はい")==1) {
+			close;
+		}
+		pettoegg;
+		if(countitem(.@egg_id)<1){
+			mes "[ペットテイマー]";
+			mes "なんだかおかしいな";
+			mes "そのペットは引き取れないよ";
+			close;
+		}
+		delitem .@egg_id,1;
+		set #PETPOINT,#PETPOINT+.@petp;
+		dispbottom(.@petp+"PetPointを獲得しました!");
+		mes "[ペットテイマー]";
+		mes "ありがとね";
+		close;
+	}
+	mes "ペットを連れた状態で来てください";
+	close;
+}
+prontera,147,168,5	script	不思議な猫	495,{
+	if(BaseJob == Job_Rogue){
+		mes "[盗作猫]";
+		mes "盗みなら任せニャ！";
+		next;
+		mes "[盗作猫]";
+		mes "まずはどの系統に属しているか";
+		mes "選んでくださいニャ。";
+		next;
+		switch(select("剣士系","アーチャー系","マジシャン系","マーチャント系",
+		"シーフ系","アコライト系","拡張職系","特定武器専用スキル","3-1系","3-2系","やっぱりやめる")) {
+		case 1:	// 剣士系
+			setarray .@Skill_Id[0],5,7,62,250,251,253,254,1001;	// 計8種
+			setarray .@Skill_Lv[0],10,10,10,5,5,10,10,1;	// 計8種
+			setarray .@Skill_Name$[0],
+				"バッシュ","マグナムブレイク","ボウリングバッシュ","シールドチャージ","シールドブーメラン",
+				"ホーリークロス","グランドクロス","チャージアタック";
+			break;
+		case 2:	// アーチャー系
+			setarray .@Skill_Id[0],46,47,116,121,122,123,148,1009;	// 計8種
+			setarray .@Skill_Lv[0],10,10,5,5,5,5,1,1;	// 計8種
+			setarray .@Skill_Name$[0],
+				"ダブルストレイフィング","アローシャワー","ランドマイン","フリージングトラップ","ブラストマイン",
+				"クレイモアトラップ","チャージアロー","ファンタズミックアロー";
+			break;
+		case 3:	// マジシャン系
+			setarray .@Skill_Id[0],11,13,14,15,17,18,19,20,21,80,81,83,84,85,86,88,89,90,91,1006;	// 計20種
+			setarray .@Skill_Lv[0],10,10,10,10,10,10,10,10,10,10,10,10,10,10,5,10,10,5,5,1;	// 計20種
+			setarray .@Skill_Name$[0],
+				"ナパームビート","ソウルストライク","コールドボルト","フロストダイバー","ファイアーボール",
+				"ファイアーウォール","ファイアーボルト","ライトニングボルト","サンダーストーム","ファイアーピラー",
+				"サイトラッシャー","メテオストーム","ユピテルサンダー","ロードオブヴァーミリオン","ウォーターボール",
+				"フロストノヴァ","ストームガスト","アーススパイク","ヘヴンズドライブ","サイトブラスター";
+			break;
+		case 4:	// マーチャント系
+			setarray .@Skill_Id[0],42,229,230;	// 計3種
+			setarray .@Skill_Lv[0],10,5,5;	// 計3種
+			setarray .@Skill_Name$[0],
+				"メマーナイト","デモンストレーション","アシッドテラー";
+			break;
+		case 5:	// シーフ系
+			setarray .@Skill_Id[0],52,141,149,152,219,1004;	// 計6種
+			setarray .@Skill_Lv[0],10,10,1,1,5,1;	// 計6種
+			setarray .@Skill_Name$[0],
+				"インベナム","ベナムスプラッシャー","砂まき","石投げ","インティミデイト",
+				"ベナムナイフ";
+			break;
+		case 6:	// アコライト系
+			setarray .@Skill_Id[0],24,28,54,68,69,77,79,156,263,266,267,271,1016;	// 計13種
+			setarray .@Skill_Lv[0],1,10,4,5,5,10,10,1,10,5,5,5,1;	// 計13種
+			setarray .@Skill_Name$[0],
+				"ルアフ","ヒール","リザレクション","アスペルシオ","聖体降福",
+				"ターンアンデット","マグヌスエクソシズム","ホーリーライト","三段掌","発勁",
+				"指弾","阿修羅覇凰拳","寸勁";
+			break;
+		case 7:	// 拡張職系
+			setarray .@Skill_Id[0],421,501,502,503,507,526,527,528,530,534,535,536,537,539,540,541,542;	// 計17種
+			setarray .@Skill_Lv[0],7,1,1,1,1,10,5,10,5,10,10,5,10,5,10,5,5;	// 計17種
+			setarray .@Skill_Name$[0],
+				"ティオアプチャギ","フライング","トリプルアクション","ブルズアイ","マジカルバレット",
+				"銭投げ","畳返し","霞斬り","影斬り","紅炎華",
+				"火炎陣","竜炎陣","氷閃槍","氷柱落とし","風刃",
+				"雷撃砕","朔風";
+			break;
+		case 8:	// 特定武器専用スキル
+			setarray .@Skill_Id[0],337;	// 計1種
+			setarray .@Skill_Lv[0],1;	// 計1種
+			setarray .@Skill_Name$[0],
+				"トマホーク投げ";
+			break;
+		case 9:	// 3-1系
+			setarray .@Skill_Id[0],2002,2005,2006,2022,2023,2034,2038,2040,2050,2051,2054,2202,2203,2204,2210,2211,2212,2213,2214,2216,2233,2236,2239,2253,2254;
+			setarray .@Skill_Lv[0],5,5,5,5,5,1,5,10,1,5,10,5,5,5,5,5,5,5,5,5,10,10,5,5,5;	// 計25種
+			setarray .@Skill_Name$[0],
+				"ソニックウェーブ","ウィンドカッター","イグニッションブレイク","クロスインパクト","ダークイリュージョン",
+				"ファントムメナス","ジュデックス","アドラムス","レノヴァティオ","ハイネスヒール",
+				"デュプレライト","ソウルエクスパンション","フロストミスティ","ジャックフロスト","ドレインライフ",
+				"クリムゾンロック","ヘルインフェルノ","コメット","チェーンライトニング","アースストレイン",
+				"アローストーム","エイムドボルト","クラスターボム","ファイアリングトラップ","アイスバウンドトラップ";
+			break;
+		case 10:// 3-2系
+			setarray .@Skill_Id[0],2284,2288,2304,2310,2315,2316,2320,2323,2326,2327,2328,2330,2332,2336,2337,2343,2344,2517,2518,2413,2414,2418,2443,2444,2449,2450,2448,2446,2447,2454,2479,2480,2481,2482,2483,2490;
+			setarray .@Skill_Lv[0],5,10,3,5,3,5,5,5,10,5,5,10,5,5,1,10,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,10,5;	// 計36種
+			setarray .@Skill_Name$[0],
+				"フェイタルメナス","トライアングルショット","フェイントボム","シールドプレス","シールドスペル",
+				"イクシードブレイク","ムーンスラッシャー","アースドライブ","双龍脚","天羅地網",
+				"地雷震","號砲","爆気散弾","修羅身弾","旋風腿",
+				"羅刹破凰撃","点穴 -默-","獅子吼","雷光弾","メタリックサウンド",
+				"振動残響","シビアレインストーム","ファイアーウォーク","エレクトリックウォーク","サイキックウェーブ",
+				"クラウドキル","ポイズンバスター","アースグレイヴ","ダイヤモンドダスト","ヴェラチュールスピアー",
+				"ソーントラップ","ブラッドサッカー","スポアエクスプロージョン","ソーンウォール","クレイジーウィード",
+				"ヘルズプラント";
+			break;
+		default:
+			close;
+		}
+
+		// 系統ごとの最大スキル数の取得
+		set .@Lenght,getarraysize(.@Skill_Id[.@i]);
+
+		// ページ数の取得、最初に表示するページを宣言。
+		set .@Skill_Maxpage, .@Lenght / 10 - ((.@Lenght > 9) && ((.@Lenght % 10) == 0));
+		set .@Skil_Nowpage,0;
+
+		// ページ内に表示するスキル項目
+		do {
+			set .@Skill_Choose,(select(
+				((.@Skill_Nowpage > 0)? "前へ" :""),
+				.@Skill_Name$[.@Skill_Nowpage *10 + 0],
+				.@Skill_Name$[.@Skill_Nowpage *10 + 1],
+				.@Skill_Name$[.@Skill_Nowpage *10 + 2],
+				.@Skill_Name$[.@Skill_Nowpage *10 + 3],
+				.@Skill_Name$[.@Skill_Nowpage *10 + 4],
+				.@Skill_Name$[.@Skill_Nowpage *10 + 5],
+				.@Skill_Name$[.@Skill_Nowpage *10 + 6],
+				.@Skill_Name$[.@Skill_Nowpage *10 + 7],
+				.@Skill_Name$[.@Skill_Nowpage *10 + 8],
+				.@Skill_Name$[.@Skill_Nowpage *10 + 9],
+				(.@Skill_Nowpage < .@Skill_Maxpage)? "次へ" : ""));
+
+			// 『前へ』　を選択の場合
+			if(.@Skill_Choose == 1) {
+				set .@Skill_Nowpage,.@Skill_Nowpage -1;
+			}
+			// 『次へ』　を選択の場合
+			else if(.@Skill_Choose == 12) {
+				set .@Skill_Nowpage,.@Skill_Nowpage + 1;
+			}
+		// 前と次を選択した場合はそのページを表示、スキルを選択した場合はループから抜ける。
+		} while(.@Skill_Choose == 1 || .@Skill_Choose == 12);
+
+		// 選択された番号を記憶
+		set .@Select_Clone,.@Skill_Nowpage * 10 + .@Skill_Choose -2;
+		if(.@Skill_Id[.@Select_Clone]>=2000) {
+			if(getskilllv(2285)==0){
+				mes "[盗作猫]";
+				mes "覚えれないニャ…";
+				close;
+			}
+			if(getskilllv(2285)<.@Skill_Lv[.@Select_Clone])
+				set .@Skill_Lv[.@Select_Clone],getskilllv(2285);
+			set REPRODUCE_SKILL,.@Skill_Id[.@Select_Clone];
+			set REPRODUCE_SKILL_LV,.@Skill_Lv[.@Select_Clone];
+			mes "[盗作猫]";
+			mes .@Skill_Name$[.@Select_Clone]+"をLv"+.@Skill_Lv[.@Select_Clone]+"で習得したニャ！";
+			mes "リログしたら反映されるニャよ！";
+			close;
+		} else {
+			if(select("クローンスキル","リプロデュース")==1) {
+				if(getskilllv(225)==0){
+					mes "[盗作猫]";
+					mes "覚えれないニャ…";
+					close;
+				}
+				if(getskilllv(225)<.@Skill_Lv[.@Select_Clone])
+					set .@Skill_Lv[.@Select_Clone],getskilllv(225);
+				set CLONE_SKILL,.@Skill_Id[.@Select_Clone];
+				set CLONE_SKILL_LV,.@Skill_Lv[.@Select_Clone];
+			} else {
+				if(getskilllv(2285)==0){
+					mes "[盗作猫]";
+					mes "覚えれないニャ…";
+					close;
+				}
+				if(getskilllv(2285)<.@Skill_Lv[.@Select_Clone])
+					set .@Skill_Lv[.@Select_Clone],getskilllv(2285);
+				set REPRODUCE_SKILL,.@Skill_Id[.@Select_Clone];
+				set REPRODUCE_SKILL_LV,.@Skill_Lv[.@Select_Clone];
+			}
+		}
+		mes "[盗作猫]";
+		mes "リログしたら反映されるニャよ！";
+		close;
+	}else if(BaseJob == Job_Star_Gladiator){
+		mes "[昔はスターだった猫]";
+		mes "リセットなら任せニャ！";
+		next;
+		mes "[昔はスターだった猫]";
+		mes "ポリンコイン 100枚で";
+		mes "リセットしてやるニャ！";
+		next;
+		if(countitem(7539)<100){mes "[昔はスターだった猫]";mes "コインが足りないニャ！";close;}
+		switch (select( "太陽の感情","月の感情","星の感情",
+				"太陽の憎しみ","月の憎しみ","星の憎しみ","やめる")) {
+		case 1:delitem 7539,100;set PC_FEEL_SUN,0;break;
+		case 2:delitem 7539,100;set PC_FEEL_MOON,0;break;
+		case 3:delitem 7539,100;set PC_FEEL_STAR,0;break;
+		case 4:delitem 7539,100;set PC_HATE_MOB_SUN,0;break;
+		case 5:delitem 7539,100;set PC_HATE_MOB_MOON,0;break;
+		case 6:delitem 7539,100;set PC_HATE_MOB_STAR,0;break;
+		case 7:close;
+		}
+		mes "[昔はスターだった猫]";
+		mes "リログしたら反映されるニャよ！";
+		close;
+	}else{
+		mes "[不思議な猫]";
+		mes "ローグ、拳聖専用ですニャ…";
+		mes "ごめんなさいですニャ";
+		close;
+	}
+}
+
+mal_in01,151,221,5	script	三毛猫トチェッタ	555,{
+	showevent 0, 0;
+	if(.mike == getcharid(3)){
+		set .@gotime,getnpctimer(0)/10;
+		set .@gotime1,.@gotime/100;
+		set .@gotime2,.@gotime%100;
+		set .@gotime3,.@gotime/100;
+		if(.@gotime2<10)
+			set .@gotime$,"0"+.@gotime2;
+		else
+			set .@gotime$,.@gotime2;
+		set .mike,0;
+		emotion e_ho,0;
+		showdigit getcharid(3),0,.@gotime3;
+		stopnpctimer;
+		mes "[三毛猫トチェッタ]";
+		mes .@gotime1+","+.@gotime$+"秒だったにゃ";
+		next;
+		if(.@gotime==1000){
+			mes "[三毛猫トチェッタ]";
+			mes "すごいにゃん！";
+			mes "10秒ぴったりにゃん！";
+			mes "これ、景品にゃん♪";
+			emotion e_ho,1;
+			dispbottom("10苺pointを獲得しました!");
+			set #PPOINT,#PPOINT+10;
+			next;
+		}
+		mes "[三毛猫トチェッタ]";
+		mes "また来てにゃん";
+		close;
+	}
+	mes "[三毛猫トチェッタ]";
+	mes "にゃんにゃん";
+	mes "私とミニゲームをして";
+	mes "遊びませんか？";
+	next;
+	switch(select("内容を教えて","遊ぶ","やめる")){
+	case 1:
+		mes "[三毛猫トチェッタ]";
+		mes "「遊ぶ」を選ぶと";
+		mes "カウントアップが始まるにゃん";
+		mes "10秒ぴったりを目指すにゃん";
+		next;
+		mes "[三毛猫トチェッタ]";
+		mes "私とミニゲームをして";
+		mes "遊びますか？";
+		next;
+		switch(select("遊ぶ","やめる")){
+		case 2:
+			mes "[三毛猫トチェッタ]";
+			mes "にゃんにゃん";
+			mes "また来てにゃん";
+			close;
+		case 1:
+			break;
+		}
+	case 2:
+		if(.mike != 0 && .mike != getcharid(3)){mes "[三毛猫トチェッタ]";mes "他の人が遊んでるにゃん";mes "ちょっと待ってにゃん";close;}
+		sleep2 rand(500);
+		set .mike,getcharid(3);
+		set .@time,gettimetick(2);
+		showdigit getcharid(3),1,0;
+		initnpctimer;
+		showevent 2, 2;
+		emotion e_gasp,0;
+		emotion e_gasp,1;
+		mes "[三毛猫トチェッタ]";
+		mes "10秒になったら話かけてね";
+		close;
+		end;
+	case 3:
+		mes "[三毛猫トチェッタ]";
+		mes "にゃんにゃん";
+		mes "また来てにゃん";
+		close;
+	}
+OnInit:
+OnTimer15000:
+OnTimer20000:
+	set .mike,0;
+	emotion e_ho,0;
+	stopnpctimer;
+	end;
+}
+mal_in01,156,221,5	script	三毛猫マチェッタ	555,{
+	showevent 0, 0;
+	if(.mike == getcharid(3)){
+		set .@gotime,getnpctimer(0)/10;
+		set .@gotime1,.@gotime/100;
+		set .@gotime2,.@gotime%100;
+		set .@gotime3,.@gotime/100;
+		if(.@gotime2<10)
+			set .@gotime$,"0"+.@gotime2;
+		else
+			set .@gotime$,.@gotime2;
+		set .mike,0;
+		emotion e_ho,0;
+		showdigit getcharid(3),0,.@gotime3;
+		stopnpctimer;
+		mes "[三毛猫マチェッタ]";
+		mes .@gotime1+","+.@gotime$+"秒だったにゃ";
+		next;
+		if(.@gotime==1000){
+			mes "[三毛猫マチェッタ]";
+			mes "すごいにゃん！";
+			mes "10秒ぴったりにゃん！";
+			mes "これ、景品にゃん♪";
+			emotion e_ho,1;
+			dispbottom("15苺pointを獲得しました!");
+			set #PPOINT,#PPOINT+15;
+			next;
+		}
+		mes "[三毛猫マチェッタ]";
+		mes "また来てにゃん";
+		close;
+	}
+	mes "[三毛猫マチェッタ]";
+	mes "にゃんにゃん";
+	mes "私とミニゲームをして";
+	mes "遊びませんか？";
+	next;
+	switch(select("内容を教えて","遊ぶ","やめる")){
+	case 1:
+		mes "[三毛猫マチェッタ]";
+		mes "「遊ぶ」を選ぶと";
+		mes "カウントアップが始まるにゃん";
+		mes "10秒ぴったりを目指すにゃん";
+		next;
+		mes "[三毛猫マチェッタ]";
+		mes "ただし、カウント開始が";
+		mes "0秒からとは限らないにゃ!!";
+		mes "ちょっぴり難易度アップにゃ！";
+		next;
+		mes "[三毛猫マチェッタ]";
+		mes "私とミニゲームをして";
+		mes "遊びますか？";
+		next;
+		switch(select("遊ぶ","やめる")){
+		case 2:
+			mes "[三毛猫マチェッタ]";
+			mes "にゃんにゃん";
+			mes "また来てにゃん";
+			close;
+		case 1:
+			break;
+		}
+	case 2:
+		if(.mike != 0 && .mike != getcharid(3)){mes "[三毛猫マチェッタ]";mes "他の人が遊んでるにゃん";mes "ちょっと待ってにゃん";close;}
+		sleep2 rand(500);
+		set .mike,getcharid(3);
+		set .@time,rand(9);
+		showdigit getcharid(3),1,-(.@time);
+		initnpctimer;
+		if(.@time>0)
+			setnpctimer .@time*1000;
+		showevent 2, 2;
+		emotion e_gasp,0;
+		emotion e_gasp,1;
+		mes "[三毛猫マチェッタ]";
+		mes "10秒になったら話かけてね";
+		close;
+		end;
+	case 3:
+		mes "[三毛猫マチェッタ]";
+		mes "にゃんにゃん";
+		mes "また来てにゃん";
+		close;
+	}
+OnInit:
+OnTimer15000:
+OnTimer20000:
+	set .mike,0;
+	emotion e_ho,0;
+	stopnpctimer;
+	end;
+}

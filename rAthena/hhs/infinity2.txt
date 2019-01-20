@@ -1,0 +1,894 @@
+morocc,164,234,3	script	メア	920,{
+	if(BaseLevel < 90 || Class==Job_Novice || Class==Job_Novice_High || Class==Job_Baby) {
+		mes "[メア]";
+		mes "君じゃ魔素に耐えられないわ。";
+		mes "最低でも^FF0000ベースレベル90以上^000000で、";
+		mes "^FF0000ノービス以外^000000に転職してから";
+		mes "きてよね。";
+		close;
+	}
+	mes "-どこまでも深い穴が広がっている-";
+	if(getmapusers("pvp_n_7-5") > 0)
+		mes "-その奥から人の気配がする-";
+	next;
+	switch(select("入場する","やめる")){
+	case 1:
+		if(getpartyleader(getcharid(1),2) != getcharid(0)){ mes "パーティリーダーが受付に来てください"; close; }
+		if(getmapusers("pvp_n_7-5") > 0){ mes "現在入場できません"; close; }
+		announce "パーティー「"+getpartyname(getcharid(1))+"」が封印回廊へ入場しました",bc_all,0x70DBDB;
+		set $@mgenxcnt,1;
+		set $@callboss,0;
+		killmonsterall "pvp_n_7-5";
+		donpcevent "mugen3::OnStart";
+		warpparty "pvp_n_7-5",99,100,getcharid(1);
+		end;
+	case 2:
+		mes "-引き返そう-";
+		close;
+	}
+	end;
+}
+
+//=========================================================
+//闇闘技場敵セット
+//=========================================================
+function	script	Set_Mobs3	{
+	if(getarg(2)==24||getarg(2)==49||getarg(2)==74||getarg(2)==99||getarg(2)==124||getarg(2)>=149){
+		setarray .@Mob_id,1090,1093,1091,1089,1120,1096,1092,1200,1582,1783,1388,1205,1262,1283,1204,1259,1681,1295,1320,1203,1307,1302,1703,1702,1022,1701,1830,1289,1700,1754,1706,1707,1711,1712,1755,1833,1829,1839,1705,1710,1870,1720,1831,1704,1709,1765,1640,1641,1642,1643,1644,1645,1872,1918,1919,1920,1921,1930,1933,1958,1959,1960,1961,1990,2017,2161,2875,2876,2877,2878,2879,2880,2881;
+	}else{
+		switch (getarg(1)){
+		case 1://小型
+			switch (rand(3)){
+			case 0:
+				setarray .@Mob_id,1008,1230,1007,1229,1232,1047,1240,1049,1063,1011,1183,1236,1097,1241,1050,1048,1051,1167,1004,1005,1091,1107,1161,1070,1175,1068,1074,1231,1174,1018,1042,1237,1095,1104,1162,1266,1238,1160,1056,1145,1066,1234,1239,1105,1176,1073,1254,1141,1114,1686,1872,1958,1959,1960,1961,1977,1989,1999,2023,2083,2084,2134,2136,2137,2154;
+				break;
+			case 1:
+				setarray .@Mob_id,1141,1114,1686,1057,1627,1067,1103,1784,1001,1111,1265,1138,1613,1409,1258,1246,1142,1619,1121,1144,1415,1279,1282,1110,1185,1186,1179,1494,1129,1628,1509,1789,1586,1261,1508,1255,1256,1836,1143,1715,1035,1776,1225,1281,1214,1718,1199,1694,1697,1413,1872,1958,1959,1960,1961,1977,1989,1999,2023,2083,2084,2134,2136,2137,2154;
+				break;
+			case 2:
+				setarray .@Mob_id,1255,1256,1836,1143,1715,1035,1776,1225,1281,1214,1718,1199,1694,1697,1413,1211,1383,1109,1695,1696,1838,1101,1615,1510,1738,1693,1209,1378,1614,1633,1303,1195,1869,1387,1391,1301,1293,1309,1300,1371,1774,1382,1292,1866,1622,1837,1754,1712,1707,1755,1872,1958,1959,1960,1961,1977,1989,1999,2023,2083,2084,2134,2136,2137,2154;
+				break;
+			}
+			break;
+		case 2://中型
+			switch (rand(5)){
+			case 0:
+				setarray .@Mob_id,1002,1090,1062,1113,1010,1009,1012,1093,1052,1247,1076,1053,1089,1020,1024,1031,1015,1242,1025,1520,1014,1120,1088,1128,1224,1077,1054,1033,1096,1034,1058,1126,1178,1125,1030,1153,1116,1064,1092,1223,1235,1588,1123,1124,1023,1071,1227,1245,1122,1013,1919,1920,1921,1933,1976,1974,1975,1986,1992,2015,2017,2069,2085,2086,2132,2133,2151,2153,2507,2857,2858,2859,2860,2861,2862,2863;
+				break;
+			case 1:
+				setarray .@Mob_id,1158,1228,1139,1127,1220,1106,1152,1028,1169,1137,1400,1119,1026,1582,1016,1044,1135,1273,1134,1146,1177,1782,1188,1170,1404,1165,1417,1620,1164,1280,1248,1226,1045,1133,1041,1032,1249,1244,1130,1498,1881,1036,1277,1215,1499,1406,1495,1271,1250,1621,1919,1920,1921,1933,1976,1796,1797,1987,1992,2013,2020,2072,2085,2086,2132,2133,2152,2153,2508,2857,2858,2859,2860,2861,2862,2863;
+				break;
+			case 2:
+				setarray .@Mob_id,1880,1629,1037,1367,1721,1155,1102,1783,1156,1680,1402,1781,1403,1212,1108,1517,1253,1500,1189,1519,1882,1587,1493,1191,1267,1210,1257,1263,1516,1180,1196,1276,1380,1410,1197,1264,1687,1609,1514,1408,1506,1682,1778,1512,1692,1368,1375,1294,1780,1216,1919,1920,1921,1933,1976,1974,1975,1988,1995,2015,2018,2072,2074,2085,2086,2133,2152,2153,2509,2857,2858,2859,2860,2861,2862,2863;
+				break;
+			case 3:
+				setarray .@Mob_id,1322,1193,1652,1194,1323,1198,1260,1771,1631,1655,1308,1269,1072,1656,1388,1515,1321,1883,1207,1154,1313,1657,1206,1773,1772,1275,1513,1653,1504,1298,1200,1314,1317,1416,1884,1666,1299,1297,1698,1385,1667,1296,1384,1664,1654,1386,1665,1318,1372,1401,1919,1920,1921,1933,1976,1796,1797,1986,1994,2017,2021,2069,2074,2085,2086,2133,2151,2153,2510,2857,2858,2859,2860,2861,2862,2863;
+				break;
+			case 4:
+				setarray .@Mob_id,1386,1665,1318,1372,1401,1737,1770,1753,1376,1316,1752,1315,1204,1319,1676,1681,1290,1769,1208,1679,1374,1390,1865,1735,1736,1307,1864,1703,1678,1670,1148,1702,1677,1672,1701,1867,1700,1673,1638,1711,1706,1636,1370,1839,1635,1870,1671,1637,1634,1639,1919,1920,1921,1933,1976,1974,1975,1987,1994,2013,2018,2073,2085,2086,2132,2133,2152,2153,2857,2858,2859,2860,2861,2862,2863;
+				break;
+			}
+			break;
+		case 3://大型
+			switch (rand(2)){
+			case 0:
+				setarray .@Mob_id,1094,1055,1233,1019,1060,1392,1100,1040,1221,1118,1166,1243,1069,1151,1140,1099,1616,1274,1029,1065,1061,1497,1222,1149,1163,1213,1584,1192,1632,1304,1412,1131,1369,1117,1503,1306,1699,1278,1775,1777,1311,1270,1132,1377,1405,1205,1262,1365,1310,1305,1918,1978,1979,1993,2024,2019,2070,2092,2155;
+				break;
+			case 1:
+				setarray .@Mob_id,1699,1278,1775,1777,1311,1270,1132,1377,1405,1205,1262,1365,1310,1305,1381,1617,1717,1618,1283,1714,1201,1505,1259,1507,1202,1291,1320,1295,1098,1203,1716,1366,1302,1379,1668,1219,1022,1713,1830,1289,1268,1833,1829,1710,1705,1720,1831,1709,1704,1765,1918,1978,1979,1993,2016,2019,2071,2092,2155;
+				break;
+			}
+			break;
+		case 4://無属性
+			switch (rand(2)){
+			case 0:
+				setarray .@Mob_id,1232,1047,1063,1236,1097,1051,1093,1265,1040,1613,1409,1400,1243,1248,1249,1715,1281,1718,1721,1274,1212,1519,1191,1614,1375,1412,1193,1195,1771,1699,1278,1313,1772,1275,1200,1314,1270,1666,1377,1698,1667,1664,1365,1665,1617,1737,1770,1622,1201,1676,1933,1976,1977,1978,1979,1796,1797,2137,2507;
+				break;
+			case 1:
+				setarray .@Mob_id,1249,1715,1281,1718,1721,1274,1212,1519,1191,1614,1375,1412,1193,1195,1771,1699,1278,1313,1772,1275,1200,1314,1270,1666,1377,1698,1667,1664,1365,1665,1617,1737,1770,1622,1201,1676,1769,1202,1390,1735,1736,1320,1295,1148,1668,1022,1830,1700,1839,1829,1933,1976,1977,1978,1979,1796,1797,2137,2507;
+				break;
+			}
+			break;
+		case 5://水属性
+			setarray         .@Mob_id,1002,1090,1012,1161,1089,1070,1094,1068,1074,1242,1520,1014,1066,1073,1141,1034,1126,1067,1138,1158,1228,1142,1069,1144,1044,1170,1045,1789,1406,1776,1271,1697,1108,1065,1882,1264,1778,1323,1775,1777,1515,1883,1206,1317,1319,1681,1679,1636,1671,1002,2016,2020,2021,2069,2070,2092,2510,2860;
+			break;
+		case 6://地属性
+			switch (rand(2)){
+			case 0:
+				setarray .@Mob_id,1008,1230,1007,1229,1010,1167,1052,1020,1024,1025,1237,1095,1104,1162,1055,1266,1238,1160,1056,1145,1088,1128,1234,1239,1105,1176,1686,1057,1103,1784,1125,1092,1223,1235,1588,1023,1013,1060,1139,1127,1221,1118,1166,1619,1121,1137,1273,1279,1494,1165,1986,1989,1993,1995,2024,2013,2017,2019,2072,2083,2085,2132,2133,2134,2151,2508,2858;
+				break;
+			case 1:
+				setarray .@Mob_id,1118,1166,1619,1121,1137,1273,1279,1494,1165,1628,1586,1498,1881,1255,1880,1616,1155,1781,1695,1517,1189,1838,1615,1493,1516,1497,1380,1410,1687,1506,1368,1294,1780,1322,1306,1194,1269,1391,1207,1311,1884,1300,1405,1654,1386,1717,1316,1678,1672,1289,1986,1989,1993,1995,2024,2013,2018,2019,2074,2084,2086,2132,2133,2134,2151,2508,2858;
+				break;
+			}
+			break;
+		case 7://火属性
+			switch (rand(2)){
+			case 0:
+				setarray .@Mob_id,1240,1049,1113,1241,1050,1107,1233,1019,1033,1058,1178,1001,1123,1220,1106,1119,1135,1282,1129,1244,1130,1836,1277,1140,1499,1495,1250,1225,1214,1694,1367,1413,1211,1383,1210,1180,1222,1149,1213,1652,1369,1387,1072,1154,1309,1385,1262,1384,1310,1318,2071,2154,2155,2509,2859;
+				break;
+			case 1:
+				setarray .@Mob_id,1001,1123,1220,1106,1119,1135,1282,1129,1244,1130,1836,1277,1140,1499,1495,1250,1225,1214,1694,1367,1413,1211,1383,1210,1180,1222,1149,1213,1652,1369,1387,1072,1154,1309,1385,1262,1384,1310,1318,1381,1372,1283,1714,1837,1307,1366,1673,1833,1634,1831,2071,2154,2155,2509,2859;
+				break;
+			}
+			break;
+		case 8://風属性
+			switch (rand(2)){
+			case 0:
+				setarray .@Mob_id,1011,1183,1009,1004,1091,1231,1174,1018,1042,1254,1114,1627,1227,1245,1122,1392,1782,1280,1226,1133,1261,1215,1035,1199,1629,1783,1156,1680,1253,1500,1267,1263,1609,1514,1408,1633,1303,1692,1131,1631,1308,1656,1321,1293,1513,1299,1774,1296,1376,1315,1872,1975,1994,2073,2136,2153;
+				break;
+			case 1:
+				setarray .@Mob_id,1174,1018,1042,1254,1114,1627,1227,1245,1122,1392,1782,1280,1226,1133,1261,1215,1035,1199,1629,1783,1156,1680,1253,1500,1267,1263,1609,1514,1408,1633,1303,1692,1131,1631,1308,1656,1321,1293,1513,1299,1774,1296,1376,1315,1259,1208,1716,1670,1677,1638,1872,1975,1994,2073,2136,2153;
+				break;
+			}
+			break;
+		case 9://毒属性
+			setarray         .@Mob_id,1031,1224,1077,1030,1124,1100,1258,1134,1151,1099,1621,1037,1402,1304,1209,1378,1216,1653,1305,1618,1635,1031,1224,1077,1030,1124,1100,1258,1134,1151,1099,1621,1037,1402,1304,1209,1378,1216,1653,1305,1618,1635,1031,1224,1077,1030,1124,1100,1258,1134,1987,1988,1999,2015,2151,2152,2863;
+			break;
+		case 10://聖属性
+			setarray         .@Mob_id,1062,1247,1096,1246,1655,1388,1371,1703,1701,1713,1754,1755,1637,1765,1062,1247,1096,1246,1655,1388,1371,1703,1701,1713,1754,1755,1637,1765,1062,1247,1096,1246,1655,1388,1371,1703,1701,1713,1754,1755,1637,1765,1062,1247,1096,1246,1655,1388,1371,1703,1992,2857,2861;
+			break;
+		case 11://闇属性
+			setarray         .@Mob_id,1005,1053,1175,1054,1111,1582,1146,1177,1110,1404,1417,1164,1256,1102,1109,1029,1696,1101,1510,1257,1276,1163,1584,1632,1738,1503,1198,1260,1301,1773,1416,1205,1382,1292,1401,1753,1752,1866,1204,1505,1507,1374,1203,1379,1702,1219,1867,1268,1370,1720,1918,1958,1960,1961,1974,2023;
+			break;
+		case 12://念属性
+			setarray         .@Mob_id,1120,1116,1415,1185,1186,1179,1620,1143,1061,1587,1693,1869,1657,1712,1707,1711,1706,1710,1705,1639,1709,1704,1120,1116,1415,1185,1186,1179,1620,1143,1061,1587,1693,1869,1657,1712,1707,1711,1706,1710,1705,1639,1709,1704,1120,1116,1415,1185,1186,1179,1959,2862;
+			break;
+		case 13://不死属性
+			setarray         .@Mob_id,1076,1015,1153,1064,1071,1152,1028,1169,1026,1016,1188,1509,1041,1032,1508,1036,1403,1196,1197,1192,1682,1512,1117,1504,1298,1132,1297,1290,1291,1865,1098,1864,1302,1870,1076,1015,1153,1064,1071,1152,1028,1169,1026,1016,1188,1509,1041,1032,1508,1036;
+			break;
+		case 14://無種族
+			switch (rand(2)){
+			case 0:
+				setarray .@Mob_id,1232,1047,1236,1097,1784,1116,1040,1392,1613,1400,1165,1129,1248,1620,1249,1789,1244,1130,1151,1836,1277,1776,1621,1694,1697,1274,1695,1696,1615,1587,1191,1516,1738,1614,1375,1412,1633,1692,1693,1193,1195,1699,1278,1775,1777,1269,1207,1270,1309,1666,1976,1977,1978,1975,2016,2020,2023,2137,2154;
+				break;
+			case 1:
+				setarray .@Mob_id,1274,1695,1696,1615,1587,1191,1516,1738,1614,1375,1412,1633,1692,1693,1193,1195,1699,1278,1775,1777,1269,1207,1270,1309,1666,1698,1667,1774,1205,1664,1365,1665,1386,1617,1622,1204,1676,1681,1679,1203,1366,1678,1670,1672,1677,1673,1268,1833,1671,1831,1976,1977,1978,1975,2024,2021,2023,2137,2154;
+				break;
+			}
+			break;
+		case 15://不死種族
+			setarray         .@Mob_id,1076,1015,1153,1064,1071,1152,1028,1169,1026,1016,1188,1185,1509,1041,1032,1508,1036,1616,1403,1257,1196,1197,1192,1682,1512,1117,1504,1298,1132,1297,1290,1291,1865,1864,1712,1707,1711,1706,1710,1705,1870,1709,1704,1076,1015,1153,1064,1071,1152,1028;
+			break;
+		case 16://動物種族
+			switch (rand(2)){
+			case 0:
+				setarray .@Mob_id,1063,1240,1049,1241,1050,1009,1093,1167,1005,1107,1175,1025,1104,1056,1145,1234,1233,1019,1057,1254,1103,1030,1092,1111,1013,1060,1127,1221,1166,1220,1106,1243,1119,1782,1146,1415,1417,1628,1586,1261,1255,1256,1271,1281,1225,1214,1629,1037,1783,1680,1986,1989,1992,1993,2072,2073,2134,2152,2507,2508,2509,2510;
+				break;
+			case 1:
+				setarray .@Mob_id,1221,1166,1220,1106,1243,1119,1782,1146,1415,1417,1628,1586,1261,1255,1256,1271,1281,1225,1214,1629,1037,1783,1680,1383,1402,1180,1380,1149,1687,1209,1322,1306,1369,1323,1387,1515,1391,1311,1513,1314,1317,1310,1318,1381,1372,1316,1283,1319,1259,1022,1986,1989,1992,1993,2072,2073,2134,2152,2507,2508,2509,2510;
+				break;
+			}
+			break;
+		case 17://植物種族
+			setarray         .@Mob_id,1002,1090,1113,1062,1010,1161,1247,1020,1068,1024,1031,1242,1520,1014,1162,1055,1224,1077,1033,1141,1118,1142,1881,1215,1880,1495,1199,1781,1413,1500,1493,1497,1410,1368,1780,1884,1002,1090,1113,1062,1010,1161,1247,1020,1068,1024,1031,1242,1520,1014,1988,1995,2015,2019,2151;
+			break;
+		case 18://昆虫種族
+			setarray         .@Mob_id,1242,1520,1014,1229,1230,1183,1048,1051,1091,1004,1052,1053,1094,1231,1174,1237,1042,1238,1088,1128,1239,1054,1176,1114,1058,1627,1001,1100,1139,1619,1279,1494,1099,1035,1211,1212,1210,1304,1408,1294,1303,1194,1321,1293,1300,1305,1618,1289,1008,1007,1872,1987,1994,1999,2083,2084,2085,2086,2092,2132,2133;
+			break;
+		case 19://魚貝種族
+			setarray         .@Mob_id,1012,1089,1070,1074,1266,1066,1073,1034,1067,1158,1228,1069,1144,1044,1045,1406,1108,1065,1216,1206,1012,1089,1070,1074,1266,1066,1073,1034,1067,1158,1228,1069,1144,1044,1045,1406,1108,1065,1216,1206,1012,1089,1070,1074,1266,1066,1073,1034,1067,1158,2069,2070;
+			break;
+		case 20://悪魔種族
+			switch (rand(2)){
+			case 0:
+				setarray .@Mob_id,1120,1138,1121,1582,1170,1110,1404,1186,1179,1143,1367,1109,1029,1517,1253,1061,1838,1101,1267,1263,1510,1276,1584,1632,1778,1506,1378,1503,1260,1072,1869,1301,1773,1416,1405,1382,1292,1753,1376,1752,1201,1866,1505,1208,1735,1736,1320,1295,1374,1837,1958,1959,1960,1961,1974,2071,2155,2863;
+				break;
+			case 1:
+				setarray .@Mob_id,1179,1143,1367,1109,1029,1517,1253,1061,1838,1101,1267,1263,1510,1276,1584,1632,1778,1506,1378,1503,1260,1072,1869,1301,1773,1416,1405,1382,1292,1753,1376,1752,1201,1866,1505,1208,1735,1736,1320,1295,1374,1837,1307,1302,1379,1148,1867,1370,1635,1634,1958,1959,1960,1961,1974,2071,2155,2863;
+				break;
+			}
+			break;
+		case 21://人間種族
+			switch (rand(2)){
+			case 0:
+				setarray .@Mob_id,1686,1126,1125,1178,1235,1588,1023,1123,1124,1265,1227,1245,1122,1409,1258,1246,1137,1273,1135,1134,1177,1282,1280,1164,1226,1133,1498,1140,1499,1250,1102,1519,1882,1189,1222,1213,1163,1264,1131,1652,1771,1631,1308,1655,1198,1656,1313,1883,1154,1657,1979,2017,2074,2136,2857,2858,2859,2860,2862;
+				break;
+			case 1:
+				setarray .@Mob_id,1498,1140,1499,1250,1102,1519,1882,1189,1222,1213,1163,1264,1131,1652,1771,1631,1308,1655,1198,1656,1313,1883,1154,1657,1772,1275,1653,1200,1377,1299,1296,1654,1737,1770,1401,1315,1507,1769,1202,1390,1098,1668,1219,1830,1638,1636,1839,1829,1637,1639,1979,2018,2074,2136,2857,2858,2859,2860,2862;
+				break;
+			}
+			break;
+		case 22://天使種族
+			setarray         .@Mob_id,1096,1388,1371,1703,1702,1701,1700,1754,1755,1765,1096,1388,1371,1703,1702,1701,1700,1754,1755,1765,1096,1388,1371,1703,1702,1701,1700,1754,1755,1765,1096,1388,1371,1703,1702,1701,1700,1754,1755,1765,1096,1388,1371,1703,1702,1701,1700,1754,1755,1765,1918,1933,2153,2861;
+			break;
+		case 23://竜種族
+			setarray         .@Mob_id,1715,1718,1721,1155,1156,1609,1514,1385,1262,1384,1717,1714,1716,1713,1720,1715,1718,1721,1155,1156,1609,1514,1385,1262,1384,1717,1714,1716,1713,1720,1715,1718,1721,1155,1156,1609,1514,1385,1262,1384,1717,1714,1716,1713,1720,1715,1718,1721,1155,1156,2013,2014;
+			break;
+		}
+	}
+	if(getarg(0) == 0)
+		return .@Mob_id[rand(getarraysize(.@Mob_id))];
+
+	for(set .@i,0; .@i < getarg(2)/2+4;set .@i,.@i+1) {
+		set .@randam,.@Mob_id[rand(getarraysize(.@Mob_id))];
+		if(getarg(0) == .@randam)
+			set $@r_cnt,$@r_cnt+1;
+		areamonster "pvp_n_7-5",80,80,119,119,"--ja--",.@randam,1,"mugen3::OnKilled";
+	}
+	if(getarg(0) > 0){
+		set $@r_cnt,$@r_cnt+1;
+		areamonster "pvp_n_7-5",80,80,119,119,"--ja--",getarg(0),1,"mugen3::OnKilled";
+	}
+	return 0;
+}
+
+//=========================================================
+//エリア名
+//=========================================================
+function	script	Area_Name	{
+	switch (getarg(0)){
+	case 1: return "小型";
+	case 2: return "中型";
+	case 3: return "大型";
+	case 4: return "無属性";
+	case 5: return "水属性";
+	case 6: return "地属性";
+	case 7: return "火属性";
+	case 8: return "風属性";
+	case 9: return "毒属性";
+	case 10:return "聖属性";
+	case 11:return "闇属性";
+	case 12:return "念属性";
+	case 13:return "不死属性";
+	case 14:return "無形種族";
+	case 15:return "不死種族";
+	case 16:return "動物種族";
+	case 17:return "植物種族";
+	case 18:return "昆虫種族";
+	case 19:return "魚貝種族";
+	case 20:return "悪魔種族";
+	case 21:return "人間種族";
+	case 22:return "天使種族";
+	case 23:return "竜種族";
+	}
+	return "詳細不明";
+}
+
+//=========================================================
+//クリア条件判定
+//=========================================================
+function	script	Clear_Flag	{
+	switch (getarg(0)){
+	case 1: return "全ての敵を殲滅させ";
+	case 2: return "30秒間全ての敵を生存させ";
+	case 3: return strmobinfo(2,getarg(1))+"のみを殲滅させ";
+	case 4: return "30秒間"+strmobinfo(2,getarg(1))+"を生存させ";
+	case 5: return (getarg(2)+30)+"秒以内に全ての敵を殲滅させ";
+	case 6: return (getarg(2)+30)+"秒以内に"+strmobinfo(2,getarg(1))+"を殲滅させ";
+	}
+	return "";
+}
+
+//=========================================================
+//危機的状況判定
+//=========================================================
+function	script	Dead_Flag	{
+	switch (getarg(0)){
+	case 1: return "物理攻撃スキルが使えなくなる";
+	case 2: return "魔法攻撃スキルが使えなくなる";
+	case 3: return "支援スキルが使えなくなる";
+	case 4: return "アイテムが使えなくなる";
+	case 5: return "持続的にHPが減る";
+	case 6: return "持続的にSPが減る";
+	case 7: return "移動するとHPが減る";
+	case 8: return "移動するとSPが減る";
+	case 9: return "移動すると床が滑る";
+	case 10:return "石化状態になる";
+	case 11:return "凍結状態になる";
+	case 12:return "スタン状態になる";
+	case 13:return "睡眠状態になる";
+	case 14:return "毒状態になる";
+	case 15:return "呪い状態になる";
+	case 16:return "沈黙状態になる";
+	case 17:return "混乱状態になる";
+	case 18:return "暗闇状態になる";
+	case 19:return "出血状態になる";
+	case 20:return "HPが"+getarg(1)+"%になる";
+	case 21:return "SPが"+getarg(1)+"%になる";
+	case 22:return "HPがとても減少する";
+	case 23:return "SPがとても減少する";
+	}
+	return "";
+}
+
+//=========================================================
+//ペナルティ/ボーナス
+//=========================================================
+function	script	Weak_Flag	{
+	if(getarg(0)>80){
+		set .@mes1$,"なければ";
+		set .@mes2$,"ペナルティ!!";
+		set $@p_b_flag,100;
+	}else{
+		set .@mes1$,"れば";
+		set .@mes2$,"ボーナス!!";
+		set $@p_b_flag,200;
+	}
+	switch (rand(1,12)){
+	case 1: set $@p_b_flag,$@p_b_flag+1; return .@mes1$+"LV"+.@mes2$;
+	case 2: set $@p_b_flag,$@p_b_flag+2; return .@mes1$+"HP"+.@mes2$;
+	case 3: set $@p_b_flag,$@p_b_flag+3; return .@mes1$+"ATK"+.@mes2$;
+	case 4: set $@p_b_flag,$@p_b_flag+4; return .@mes1$+"MATK"+.@mes2$;
+	case 5: set $@p_b_flag,$@p_b_flag+5; return .@mes1$+"STR"+.@mes2$;
+	case 6: set $@p_b_flag,$@p_b_flag+6; return .@mes1$+"AGI"+.@mes2$;
+	case 7: set $@p_b_flag,$@p_b_flag+7; return .@mes1$+"VIT"+.@mes2$;
+	case 8: set $@p_b_flag,$@p_b_flag+8; return .@mes1$+"INT"+.@mes2$;
+	case 9: set $@p_b_flag,$@p_b_flag+9; return .@mes1$+"DEX"+.@mes2$;
+	case 10:set $@p_b_flag,$@p_b_flag+10;return .@mes1$+"LUK"+.@mes2$;
+	case 11:set $@p_b_flag,$@p_b_flag+11;return .@mes1$+"DEF"+.@mes2$;
+	case 12:set $@p_b_flag,$@p_b_flag+12;return .@mes1$+"MDEF"+.@mes2$;
+	}
+	return "";
+}
+
+//=========================================================
+//壁の再出現
+//=========================================================
+function	script	Block_Alive	{
+	set .@crear,getvariableofnpc(.froacore,"mugen3");
+	setcell "pvp_n_7-5",98,120,101,120,cell_walkable,1;
+	setcell "pvp_n_7-5",98,120,101,120,cell_shootable,1;
+	setcell "pvp_n_7-5",79,98,79,101,cell_walkable,1;
+	setcell "pvp_n_7-5",79,98,79,101,cell_shootable,1;
+	setcell "pvp_n_7-5",120,98,120,101,cell_walkable,1;
+	setcell "pvp_n_7-5",120,98,120,101,cell_shootable,1;
+	setcell "pvp_n_7-5",98,79,101,79,cell_walkable,1;
+	setcell "pvp_n_7-5",98,79,101,79,cell_shootable,1;
+	if(.@crear&1){
+		monster "pvp_n_7-5",99,119,"--ja--",1905,1,"mugen3::OnKilledcore1";
+		set getvariableofnpc(.froacore,"mugen3"),.@crear^1;
+		set .@crear,.@crear^1;
+	}
+	if(.@crear&2){
+		monster "pvp_n_7-5",100,119,"--ja--",1905,1,"mugen3::OnKilledcore2";
+		set getvariableofnpc(.froacore,"mugen3"),.@crear^2;
+		set .@crear,.@crear^2;
+	}
+	if(.@crear&4){
+		monster "pvp_n_7-5",80,99,"--ja--",1905,1,"mugen3::OnKilledcore3";
+		set getvariableofnpc(.froacore,"mugen3"),.@crear^4;
+		set .@crear,.@crear^4;
+	}
+	if(.@crear&8){
+		monster "pvp_n_7-5",80,100,"--ja--",1905,1,"mugen3::OnKilledcore4";
+		set getvariableofnpc(.froacore,"mugen3"),.@crear^8;
+		set .@crear,.@crear^8;
+	}
+	if(.@crear&16){
+		monster "pvp_n_7-5",119,99,"--ja--",1905,1,"mugen3::OnKilledcore5";
+		set getvariableofnpc(.froacore,"mugen3"),.@crear^16;
+		set .@crear,.@crear^16;
+	}
+	if(.@crear&32){
+		monster "pvp_n_7-5",119,100,"--ja--",1905,1,"mugen3::OnKilledcore6";
+		set getvariableofnpc(.froacore,"mugen3"),.@crear^32;
+		set .@crear,.@crear^32;
+	}
+	if(.@crear&64){
+		monster "pvp_n_7-5",99,80,"--ja--",1905,1,"mugen3::OnKilledcore7";
+		set getvariableofnpc(.froacore,"mugen3"),.@crear^64;
+		set .@crear,.@crear^64;
+	}
+	if(.@crear&128){
+		monster "pvp_n_7-5",100,80,"--ja--",1905,1,"mugen3::OnKilledcore8";
+		set getvariableofnpc(.froacore,"mugen3"),.@crear^128;
+		set .@crear,.@crear^128;
+	}
+	setcell "pvp_n_7-5",98,120,101,120,cell_walkable,0;
+	setcell "pvp_n_7-5",98,120,101,120,cell_shootable,0;
+	setcell "pvp_n_7-5",79,98,79,101,cell_walkable,0;
+	setcell "pvp_n_7-5",79,98,79,101,cell_shootable,0;
+	setcell "pvp_n_7-5",120,98,120,101,cell_walkable,0;
+	setcell "pvp_n_7-5",120,98,120,101,cell_shootable,0;
+	setcell "pvp_n_7-5",98,79,101,79,cell_walkable,0;
+	setcell "pvp_n_7-5",98,79,101,79,cell_shootable,0;
+	return;
+}
+
+//=========================================================
+//ペナルティの施行
+//=========================================================
+function	script	Penalty_find	{
+	if($@p_b_flag == 999)
+		return;
+	if($@p_b_flag > 200){
+		set .@mes$,"ボーナスが施行されます!!";
+		set .@color$,"0x00FFFF";
+		set $@p_b_flag,$@p_b_flag-200;
+		set .@num,-1;
+	}else if($@p_b_flag > 100){
+		set .@mes$,"ペナルティが施行されます!!";
+		set .@color$,"0xFF0000";
+		set $@p_b_flag,$@p_b_flag-100;
+		set .@num,1;
+	}else
+		return;
+	switch ($@p_b_flag){
+	case 1: mapannounce "pvp_n_7-5","LV"+.@mes$,1,.@color$; set $@r_bosst[0],$@r_bosst[0]+.@num; return;
+	case 2: mapannounce "pvp_n_7-5","HP"+.@mes$,1,.@color$; set $@r_bosst[1],$@r_bosst[1]+.@num; return;
+	case 3: mapannounce "pvp_n_7-5","ATK"+.@mes$,1,.@color$; set $@r_bosst[2],$@r_bosst[2]+.@num; return;
+	case 4: mapannounce "pvp_n_7-5","MATK"+.@mes$,1,.@color$; set $@r_bosst[3],$@r_bosst[3]+.@num; return;
+	case 5: mapannounce "pvp_n_7-5","STR"+.@mes$,1,.@color$; set $@r_bosst[4],$@r_bosst[4]+.@num; return;
+	case 6: mapannounce "pvp_n_7-5","AGI"+.@mes$,1,.@color$; set $@r_bosst[5],$@r_bosst[5]+.@num; return;
+	case 7: mapannounce "pvp_n_7-5","VIT"+.@mes$,1,.@color$; set $@r_bosst[6],$@r_bosst[6]+.@num; return;
+	case 8: mapannounce "pvp_n_7-5","INT"+.@mes$,1,.@color$; set $@r_bosst[7],$@r_bosst[7]+.@num; return;
+	case 9: mapannounce "pvp_n_7-5","DEX"+.@mes$,1,.@color$; set $@r_bosst[8],$@r_bosst[8]+.@num; return;
+	case 10:mapannounce "pvp_n_7-5","LUK"+.@mes$,1,.@color$; set $@r_bosst[9],$@r_bosst[9]+.@num; return;
+	case 11:mapannounce "pvp_n_7-5","DEF"+.@mes$,1,.@color$; set $@r_bosst[10],$@r_bosst[10]+.@num; return;
+	case 12:mapannounce "pvp_n_7-5","MDEF"+.@mes$,1,.@color$; set $@r_bosst[11],$@r_bosst[11]+.@num; return;
+	}
+	return;
+}
+
+//=========================================================
+//危機的状況の施行
+//=========================================================
+function	script	Deadflag_find	{
+	setmapflag "pvp_n_7-5",mf_r_dead,0;
+	donpcevent "r_counter::OnStop";
+	switch (getarg(0)){
+	case 1: setmapflag "pvp_n_7-5",mf_r_dead,1; break;	//物理攻撃スキルが使えなくなる
+	case 2: setmapflag "pvp_n_7-5",mf_r_dead,2; break;	//魔法攻撃スキルが使えなくなる
+	case 3: setmapflag "pvp_n_7-5",mf_r_dead,3; break;	//支援スキルが使えなくなる
+	case 4: setmapflag "pvp_n_7-5",mf_r_dead,4; break;	//アイテムが使えなくなる
+	case 5: donpcevent "r_counter::OnStart1"; break;		//持続的にHPが減る
+	case 6: donpcevent "r_counter::OnStart2"; break;		//持続的にSPが減る
+	case 7: setmapflag "pvp_n_7-5",mf_r_dead,5; break;	//移動するとHPが減る
+	case 8: setmapflag "pvp_n_7-5",mf_r_dead,6; break;	//移動するとSPが減る
+	case 9: setmapflag "pvp_n_7-5",mf_r_dead,7; break;	//移動すると床が滑る
+	case 10:donpcevent "r_counter::OnStart3"; break;		//石化状態になる
+	case 11:donpcevent "r_counter::OnStart4"; break;		//凍結状態になる
+	case 12:donpcevent "r_counter::OnStart5"; break;		//スタン状態になる
+	case 13:donpcevent "r_counter::OnStart6"; break;		//睡眠状態になる
+	case 14:donpcevent "r_counter::OnStart7"; break;		//毒状態になる
+	case 15:donpcevent "r_counter::OnStart8"; break;		//呪い状態になる
+	case 16:donpcevent "r_counter::OnStart9"; break;		//沈黙状態になる
+	case 17:donpcevent "r_counter::OnStart10"; break;		//混乱状態になる
+	case 18:donpcevent "r_counter::OnStart11"; break;		//暗闇状態になる
+	case 19:donpcevent "r_counter::OnStart12"; break;		//出血状態になる
+	case 20:setmapflag "pvp_n_7-5",mf_r_dead,8; areascript "pvp_n_7-5",50,50,150,150,"{sc_start SC_FIXHP,60000,"+getarg(1)+";}"; break;//HPが%になる
+	case 21:setmapflag "pvp_n_7-5",mf_r_dead,9; areascript "pvp_n_7-5",50,50,150,150,"{sc_start SC_FIXSP,60000,"+getarg(1)+";}"; break;//SPが%になる
+	case 22:donpcevent "r_counter::OnStart1"; setmapflag "pvp_n_7-5",mf_r_dead,5; break;
+	case 23:donpcevent "r_counter::OnStart2"; setmapflag "pvp_n_7-5",mf_r_dead,6; break;
+	}
+	return;
+}
+
+//=========================================================
+//闇闘技場ループ
+//=========================================================
+-	script	mugen3	-1,{
+Oninit:
+	mapwarp "pvp_n_7-5","morocc",160,240;
+	end;
+OnStart:
+	sleep 10000;
+	set .froacore,.froacore|255;
+	setarray $@r_bosst[0],20,150,150,150,10,10,10,10,10,10,10,10;
+OnStart2:
+	if($@callboss != 0)end;
+	set $@clear_flag,0;
+	set $@r_cnt,0;
+	set .@r1,rand(1,23);
+	set .@area$,callfunc("Area_Name",.@r1);
+	if($@mgenxcnt==24||$@mgenxcnt==49||$@mgenxcnt==74||$@mgenxcnt==99||$@mgenxcnt==124||$@mgenxcnt>=149)
+		set .@area$,"ボス属性";
+	set .@r2,rand(1,10);
+	set .@id,-1;set .@clear$,"";set .@weak$,"";
+	set .count,0;
+	if($@p_b_flag == 999)
+		set .@r4,22+rand(2);
+	else
+		set .@r4,rand(22);
+	set $@p_b_flag,0;
+	if(.@r2 <= 6){
+		set $@clear_flag,.@r2;
+		set .@id,callfunc("Set_Mobs3",0,.@r1,$@mgenxcnt);
+		set .@clear$,callfunc("Clear_Flag",.@r2,.@id,$@mgenxcnt/2);
+		set .@r3,rand(100);
+		if(.@r3 >= 25)
+			set .@weak$,callfunc("Weak_Flag",.@r3);
+		else
+			set .@weak$,"てください!!";
+	}
+	set .@r5,rand(50,150);
+	set .@dead$,callfunc("Dead_Flag",.@r4,.@r5);
+	if($@callboss != 0)end;
+	mapannounce "pvp_n_7-5","第"+$@mgenxcnt+"階層、"+.@area$+"部屋です!"+.@clear$+.@weak$,1,0x70DBDB;
+	sleep 1000;
+	if($@callboss != 0)end;
+	mapannounce "pvp_n_7-5","- 2 -",1,0x70DBDB;
+	sleep 1000;
+	if($@callboss != 0)end;
+	mapannounce "pvp_n_7-5","- 1 -",1,0x70DBDB;
+	sleep 1000;
+	if($@callboss != 0)end;
+	if(.@r4 != 0){
+		setmapflag "pvp_n_7-5",mf_r_dead,0;
+		mapannounce "pvp_n_7-5","大変!! この階層では"+.@dead$+"わ!!",1,0x70DBDB;
+	}
+	set $@m_c_flag,0;
+	if(.@r2 == 2){
+		set .count,30;
+		initnpctimer;
+	}
+	if(.@r2 == 3)
+		set $@m_c_flag,.@id;
+	if(.@r2 == 4){
+		set $@m_c_flag,.@id;
+		set .count,30;
+		initnpctimer;
+	}
+	if(.@r2 == 5){
+		set .count,30+$@mgenxcnt/2;
+		initnpctimer;
+	}
+	if(.@r2 == 6){
+		set $@m_c_flag,.@id;
+		set .count,30+$@mgenxcnt/2;
+		initnpctimer;
+	}
+	if(($@mgenxcnt%5) == 0)
+		callfunc "Block_Alive";
+	callfunc "Deadflag_find",.@r4,.@r5;
+	callfunc "Set_Mobs3",.@id,.@r1,$@mgenxcnt;
+	end;
+OnKilled:
+	set .@killmob,killedrid;
+	if($@clear_flag == 1){ //全ての敵を殲滅させ
+		if(mobcount("pvp_n_7-5","mugen3::OnKilled") == 0 && $@p_b_flag > 200) //ればボーナス
+			callfunc "Penalty_find";
+	}else if($@clear_flag == 2){ //30秒間全ての敵を生存させ
+		if($@p_b_flag > 200){ //ればボーナス
+			mapannounce "pvp_n_7-5","クリア条件違反のため次階層がペナルティエリアになります!!",1,0xFF0000;
+			set $@p_b_flag,999;
+		}else if($@p_b_flag > 100) //なければペナルティ
+			callfunc "Penalty_find";
+		else{ //てください
+			mapannounce "pvp_n_7-5","クリア条件違反のため次階層がペナルティエリアになります!!",1,0xFF0000;
+			set $@p_b_flag,999;
+		}
+		areamonster "pvp_n_7-5",80,80,119,119,"--ja--",.@killmob,1,"mugen3::OnKilled";
+		end;
+	}else if($@clear_flag == 3){//~のみを殲滅させ
+		if(.@killmob != $@m_c_flag && $@p_b_flag > 200){
+			mapannounce "pvp_n_7-5","クリア条件違反のため次階層がペナルティエリアになります!!",1,0xFF0000;
+			areamonster "pvp_n_7-5",80,80,119,119,"--ja--",.@killmob,1,"mugen3::OnKilled";
+			set $@p_b_flag,999;
+			end;
+		}else if(.@killmob != $@m_c_flag && $@p_b_flag > 100){
+			callfunc "Penalty_find";
+			areamonster "pvp_n_7-5",80,80,119,119,"--ja--",.@killmob,1,"mugen3::OnKilled";
+			end;
+		}else if(.@killmob != $@m_c_flag){
+			mapannounce "pvp_n_7-5","クリア条件違反のため次階層がペナルティエリアになります!!",1,0xFF0000;
+			areamonster "pvp_n_7-5",80,80,119,119,"--ja--",.@killmob,1,"mugen3::OnKilled";
+			set $@p_b_flag,999;
+			end;
+		}else if(.@killmob == $@m_c_flag){//目標を討伐したらカウンタを下げる
+			set $@r_cnt,$@r_cnt-1;
+			if($@r_cnt == 0){
+				if($@p_b_flag > 200)
+					callfunc "Penalty_find";
+				set $@r_cnt,-1;
+			}
+		}
+	}else if($@clear_flag == 4){//30秒間~を生存させ
+		if(.@killmob == $@m_c_flag && $@p_b_flag > 200){
+			mapannounce "pvp_n_7-5","クリア条件違反のため次階層がペナルティエリアになります!!",1,0xFF0000;
+			set $@p_b_flag,999;
+		}else if(.@killmob == $@m_c_flag && $@p_b_flag > 100)
+			callfunc "Penalty_find";
+		else if(.@killmob == $@m_c_flag){
+			mapannounce "pvp_n_7-5","クリア条件違反のため次階層がペナルティエリアになります!!",1,0xFF0000;
+			set $@p_b_flag,999;
+		}
+	}else if($@clear_flag == 5){//秒以内に全ての敵を殲滅させ
+		if(mobcount("pvp_n_7-5","mugen3::OnKilled") == 0){
+			if($@p_b_flag > 200)
+				callfunc "Penalty_find";
+			set $@r_cnt,-1;
+			set .count,0;
+		}
+	}else if($@clear_flag == 6){//秒以内に~を殲滅させ
+		if(.@killmob == $@m_c_flag){//目標を討伐したらカウンタを下げる
+			set $@r_cnt,$@r_cnt-1;
+			if($@r_cnt == 0){
+				if($@p_b_flag > 200)
+					callfunc "Penalty_find";
+				set $@r_cnt,-1;
+				set .count,0;
+			}
+		}
+	}
+	if(mobcount("pvp_n_7-5","mugen3::OnKilled") == 0 || $@r_cnt == -1){
+		killmonster "pvp_n_7-5","mugen3::OnKilled";
+		set $@mgenxcnt,$@mgenxcnt+1;
+		set $@clear_flag,0;
+		set $@r_cnt,0;
+		set .@r1,rand(1,23);
+		set .@area$,callfunc("Area_Name",.@r1);
+		if($@mgenxcnt==24||$@mgenxcnt==49||$@mgenxcnt==74||$@mgenxcnt==99||$@mgenxcnt==124||$@mgenxcnt>=149)
+			set .@area$,"ボス属性";
+		set .@r2,rand(1,10);
+		set .@id,-1;set .@clear$,"";set .@weak$,"";
+		set .count,0;
+		if($@p_b_flag == 999)
+			set .@r4,22+rand(2);
+		else
+			set .@r4,rand(22);
+		set $@p_b_flag,0;
+		if(.@r2 <= 6){
+			set $@clear_flag,.@r2;
+			set .@id,callfunc("Set_Mobs3",0,.@r1,$@mgenxcnt);
+			set .@clear$,callfunc("Clear_Flag",.@r2,.@id,$@mgenxcnt/2);
+			set .@r3,rand(100);
+			if(.@r3 >= 25)
+				set .@weak$,callfunc("Weak_Flag",.@r3);
+			else
+				set .@weak$,"てください!!";
+		}
+		set .@r5,rand(50,150);
+		set .@dead$,callfunc("Dead_Flag",.@r4,.@r5);
+		mapannounce "pvp_n_7-5","第"+$@mgenxcnt+"階層、"+.@area$+"部屋です!"+.@clear$+.@weak$,1,0x70DBDB;
+		sleep 1000;
+		mapannounce "pvp_n_7-5","- 2 -",1,0x70DBDB;
+		sleep 1000;
+		mapannounce "pvp_n_7-5","- 1 -",1,0x70DBDB;
+		sleep 1000;
+		if(.@r4 != 0){
+			setmapflag "pvp_n_7-5",mf_r_dead,0;
+			mapannounce "pvp_n_7-5","大変!! この階層では"+.@dead$+"わ!!",1,0x70DBDB;
+		}
+		set $@m_c_flag,0;
+		if(.@r2 == 2){
+			set .count,30;
+			initnpctimer;
+		}
+		if(.@r2 == 3)
+			set $@m_c_flag,.@id;
+		if(.@r2 == 4){
+			set $@m_c_flag,.@id;
+			set .count,30;
+			initnpctimer;
+		}
+		if(.@r2 == 5){
+			set .count,30+$@mgenxcnt/2;
+			initnpctimer;
+		}
+		if(.@r2 == 6){
+			set $@m_c_flag,.@id;
+			set .count,30+$@mgenxcnt/2;
+			initnpctimer;
+		}
+		if(($@mgenxcnt%5) == 0)
+			callfunc "Block_Alive";
+		callfunc "Deadflag_find",.@r4,.@r5;
+		callfunc "Set_Mobs3",.@id,.@r1,$@mgenxcnt;
+	}
+	end;
+OnCntEnd:
+	if($@clear_flag == 5){//~秒以内に全ての敵を殲滅させ
+		if($@p_b_flag > 100 && mobcount("pvp_n_7-5","mugen3::OnKilled") > 0)//なければペナルティ
+			callfunc "Penalty_find";
+		else if(mobcount("pvp_n_7-5","mugen3::OnKilled") > 0){
+			mapannounce "pvp_n_7-5","クリア条件違反のため次階層がペナルティエリアになります!!",1,0xFF0000;
+			set $@p_b_flag,999;
+		}
+	}else if($@clear_flag == 6){//秒以内に~を殲滅させ
+		if($@p_b_flag > 100 && $@r_cnt > 0)
+			callfunc "Penalty_find";
+		else if($@r_cnt > 0){
+			mapannounce "pvp_n_7-5","クリア条件違反のため次階層がペナルティエリアになります!!",1,0xFF0000;
+			set $@p_b_flag,999;
+		}
+	}else if($@p_b_flag > 200)
+		callfunc "Penalty_find";
+	killmonster "pvp_n_7-5","mugen3::OnKilled";
+	set $@mgenxcnt,$@mgenxcnt+1;
+	donpcevent "mugen3::OnStart2";
+	end;
+OnKilledcore1:
+	set .froacore,.froacore|1;
+	if(.froacore&1 && .froacore&2){
+		setcell "pvp_n_7-5",98,120,101,120,cell_walkable,1;
+		setcell "pvp_n_7-5",98,120,101,120,cell_shootable,1;
+	}
+	end;
+OnKilledcore2:
+	set .froacore,.froacore|2;
+	if(.froacore&1 && .froacore&2){
+		setcell "pvp_n_7-5",98,120,101,120,cell_walkable,1;
+		setcell "pvp_n_7-5",98,120,101,120,cell_shootable,1;
+	}
+	end;
+OnKilledcore3:
+	set .froacore,.froacore|4;
+	if(.froacore&4 && .froacore&8){
+		setcell "pvp_n_7-5",79,98,79,101,cell_walkable,1;
+		setcell "pvp_n_7-5",79,98,79,101,cell_shootable,1;
+	}
+	end;
+OnKilledcore4:
+	set .froacore,.froacore|8;
+	if(.froacore&4 && .froacore&8){
+		setcell "pvp_n_7-5",79,98,79,101,cell_walkable,1;
+		setcell "pvp_n_7-5",79,98,79,101,cell_shootable,1;
+	}
+	end;
+OnKilledcore5:
+	set .froacore,.froacore|16;
+	if(.froacore&16 && .froacore&32){
+		setcell "pvp_n_7-5",120,98,120,101,cell_walkable,1;
+		setcell "pvp_n_7-5",120,98,120,101,cell_shootable,1;
+	}
+	end;
+OnKilledcore6:
+	set .froacore,.froacore|32;
+	if(.froacore&16 && .froacore&32){
+		setcell "pvp_n_7-5",120,98,120,101,cell_walkable,1;
+		setcell "pvp_n_7-5",120,98,120,101,cell_shootable,1;
+	}
+	end;
+OnKilledcore7:
+	set .froacore,.froacore|64;
+	if(.froacore&64 && .froacore&128){
+		setcell "pvp_n_7-5",98,79,101,79,cell_walkable,1;
+		setcell "pvp_n_7-5",98,79,101,79,cell_shootable,1;
+	}
+	end;
+OnKilledcore8:
+	set .froacore,.froacore|128;
+	if(.froacore&64 && .froacore&128){
+		setcell "pvp_n_7-5",98,79,101,79,cell_walkable,1;
+		setcell "pvp_n_7-5",98,79,101,79,cell_shootable,1;
+	}
+	end;
+Oncorereset:
+	stopnpctimer;
+	set .froacore,.froacore|255;
+	callfunc "Block_Alive";
+	end;
+OnTimer1000:OnTimer2000:OnTimer3000:OnTimer4000:OnTimer5000:
+OnTimer6000:OnTimer7000:OnTimer8000:OnTimer9000:
+	set .count,.count-1;
+	if(.count==0){
+		stopnpctimer;
+		donpcevent "mugen3::OnCntEnd";
+	}
+	end;
+OnTimer10000:
+	set .count,.count-1;
+	if(.count==0){
+		stopnpctimer;
+		donpcevent "mugen3::OnCntEnd";
+		end;
+	}
+	if(.count>0)
+		initnpctimer;
+	end;
+}
+-	script	r_counter	-1,{
+OnStart1: set .sctype,-1; initnpctimer; end;
+OnStart2: set .sctype,-2; initnpctimer; end;
+OnStart3: set .sctype,0; initnpctimer; end;
+OnStart4: set .sctype,1; initnpctimer; end;
+OnStart5: set .sctype,2; initnpctimer; end;
+OnStart6: set .sctype,3; initnpctimer; end;
+OnStart7: set .sctype,4; initnpctimer; end;
+OnStart8: set .sctype,5; initnpctimer; end;
+OnStart9: set .sctype,6; initnpctimer; end;
+OnStart10:set .sctype,7; initnpctimer; end;
+OnStart11:set .sctype,8; initnpctimer; end;
+OnStart12:set .sctype,9; initnpctimer; end;
+OnStop:
+	stopnpctimer;
+	end;
+OnEnd:
+	set $@callboss,2;
+	mapannounce "pvp_n_7-5","-脅威の気配を感じなくなった……-",1,0x70DBDB;
+	switch($@mgenxcnt/10){
+	case 0:	areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+100;set #CASHPOINTS,#CASHPOINTS+100;dispbottom(\"キャッシュポイント100、100苺pointを獲得しました!\");}";break;
+	case 1:	areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+500;set #CASHPOINTS,#CASHPOINTS+500;dispbottom(\"キャッシュポイント500、500苺pointを獲得しました!\");}";break;
+	case 2:	areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+1000;set #CASHPOINTS,#CASHPOINTS+1000;dispbottom(\"キャッシュポイント1000、1000苺pointを獲得しました!\");}";break;
+	case 3:	areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+3000;set #CASHPOINTS,#CASHPOINTS+2000;dispbottom(\"キャッシュポイント2000、3000苺pointを獲得しました!\");}";break;
+	case 4:	areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+5000;set #CASHPOINTS,#CASHPOINTS+3000;dispbottom(\"キャッシュポイント3000、5000苺pointを獲得しました!\");}";break;
+	case 5:	areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+8000;set #CASHPOINTS,#CASHPOINTS+5000;dispbottom(\"キャッシュポイント5000、8000苺pointを獲得しました!\");}";break;
+	case 6:	areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+10000;set #CASHPOINTS,#CASHPOINTS+10000;dispbottom(\"キャッシュポイント10000、10000苺pointを獲得しました!\");}";break;
+	case 7:	areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+20000;set #CASHPOINTS,#CASHPOINTS+15000;dispbottom(\"キャッシュポイント15000、20000苺pointを獲得しました!\");}";break;
+	case 8:	areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+60000;set #CASHPOINTS,#CASHPOINTS+30000;dispbottom(\"キャッシュポイント30000、60000苺pointを獲得しました!\");}";break;
+	case 9:	areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+80000;set #CASHPOINTS,#CASHPOINTS+40000;dispbottom(\"キャッシュポイント40000、80000苺pointを獲得しました!\");}";break;
+	case 10:areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+100000;set #CASHPOINTS,#CASHPOINTS+80000;dispbottom(\"キャッシュポイント80000、100000苺pointを獲得しました!\");}";break;
+	case 11:areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+400000;set #CASHPOINTS,#CASHPOINTS+90000;dispbottom(\"キャッシュポイント90000、400000苺pointを獲得しました!\");}";break;
+	case 12:areascript "pvp_n_7-5",50,50,150,150,"{set #PPOINT,#PPOINT+800000;set #CASHPOINTS,#CASHPOINTS+100000;dispbottom(\"キャッシュポイント100000、800000苺pointを獲得しました!\");}";break;
+	}
+	end;
+OnTimer5000:OnTimer10000:OnTimer15000:OnTimer20000:
+	if(.sctype >= 0)
+		areascript "pvp_n_7-5",50,50,150,150,"{sc_start "+.sctype+",30000,0;}";
+	else if(.sctype == -1)
+		areascript "pvp_n_7-5",50,50,150,150,"{heal -(MaxHp*10/100),0;}";
+	else if(.sctype == -2)
+		areascript "pvp_n_7-5",50,50,150,150,"{heal -(MaxSp*10/100),0;}";
+	end;
+OnTimer25000:
+	if(.sctype >= 0)
+		areascript "pvp_n_7-5",50,50,150,150,"{sc_start "+.sctype+",30000,0;}";
+	else if(.sctype == -1)
+		areascript "pvp_n_7-5",50,50,150,150,"{heal -(MaxHp*10/100),0;}";
+	else if(.sctype == -2)
+		areascript "pvp_n_7-5",50,50,150,150,"{heal -(MaxSp*10/100),0;}";
+	initnpctimer;
+	end;
+}
+//=========================================================
+//リタイヤNPC
+//=========================================================
+pvp_n_7-5,80,80,5	script	墓標#r1	565,{
+	mes "-墓標がある-";
+	if($@r_bosst[0] != 0) mes "LV　"+$@r_bosst[0];
+	if($@r_bosst[1] != 100) mes "HP　"+$@r_bosst[1]+"%";
+	if($@r_bosst[2] != 100) mes "ATK　"+$@r_bosst[2]+"%";
+	if($@r_bosst[3] != 100) mes "MATK　"+$@r_bosst[3]+"%";
+	if($@r_bosst[4] != 0) mes "STR　"+$@r_bosst[4];
+	if($@r_bosst[5] != 0) mes "AGI　"+$@r_bosst[5];
+	if($@r_bosst[6] != 0) mes "VIT　"+$@r_bosst[6];
+	if($@r_bosst[7] != 0) mes "INT　"+$@r_bosst[7];
+	if($@r_bosst[8] != 0) mes "DEX　"+$@r_bosst[8];
+	if($@r_bosst[9] != 0) mes "LUK　"+$@r_bosst[9];
+	if($@r_bosst[10] != 0) mes "DEF　"+$@r_bosst[10];
+	if($@r_bosst[11] != 0) mes "MDEF　"+$@r_bosst[11];
+	next;
+	switch(select("-この場所を出る-","-墓標の魂を呼び覚ます-","-やめる-")){
+	case 1:
+		mes "-脱出しよう-";
+		close2;
+		if($@callboss != 1 && getcharid(1)>0)
+			warpparty "SavePointAll",0,0,getcharid(1);
+		end;
+	case 2:
+		mes "-禍々しい気配がする-";
+		close2;
+		if($@callboss == 0) {
+			set $@callboss,1;
+			killmonsterall "pvp_n_7-5";
+			donpcevent "r_counter::OnStop";
+			donpcevent "mugen3::Oncorereset";
+			mapannounce "pvp_n_7-5","ボスモンスターが出現するわ。戦闘に備えて!!",1,0x70DBDB;
+			sleep 1000;
+			mapannounce "pvp_n_7-5","- 2 -",1,0x70DBDB;
+			sleep 1000;
+			mapannounce "pvp_n_7-5","- 1 -",1,0x70DBDB;
+			sleep 1000;
+			setarray .@Mob,	1115,	//01-エドガ
+					1159,	//10-フリオニ
+					1039,	//20-バフォメット
+					1190,	//30-オークロード
+					1685,	//40-ヴェスパー
+					1785,	//50-アトロス
+					1734,	//60-キエル-D-01
+					1832,	//70-イフリート
+					1708,	//80-魔剣士タナトスの思念体
+					1751,	//90-ランドグリス
+					2822,	//100-紫ニーズヘッグ
+					2823,	//110-青ニーズヘッグ
+					2824;	//120-緑ニーズヘッグ
+			set .mob_id, mobspawn("--ja--",.@Mob[$@mgenxcnt/10],"pvp_n_7-5",100,100,"r_counter::OnEnd");
+			getmobdata2 .mob_id,.@pram;
+			for(set .@i,0; .@i < getarraysize($@r_bosst);set .@i,.@i+1) {
+				if(.@i>=1 && .@i<=3 && $@r_bosst[.@i] != 100){
+					setmobdata2 .mob_id,.@i,.@pram[.@i]*$@r_bosst[.@i]/100;
+				}else if($@r_bosst[.@i] != 0){
+					setmobdata2 .mob_id,.@i,.@pram[.@i]+$@r_bosst[.@i];
+				}
+			}
+		}
+		end;
+	case 3:
+		close;
+	}
+}
+pvp_n_7-5,80,119,7	duplicate(墓標#r1)	墓標#r2	565,
+pvp_n_7-5,119,80,3	duplicate(墓標#r1)	墓標#r3	565,
+pvp_n_7-5,119,119,1	duplicate(墓標#r1)	墓標#r4	565,

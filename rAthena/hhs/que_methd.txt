@@ -1,0 +1,2560 @@
+//=========================================================
+// 1.初心者クエスト
+// 2.採掘
+// 3.魚釣り
+// 4.ペット育成
+// 5.刀細工師
+// 6.トレジャーハント
+// 7.お転婆クラリアスのお使い
+// 8.ルーフィス
+//=========================================================
+prontera,145,231,5	script	初心者支援所長 	807,{
+	if(ADVJOB > 0 || (NEWWEAPON&2)){
+		switch(rand(5)){
+		case 0:
+			mes "[所長]";
+			mes "最近は暖かいね";
+			mes "ぽかぽかしてて";
+			mes "昼寝でもしたいくらいだよ";
+			close;
+		case 1:
+			mes "[所長]";
+			mes "最近は涼しくて過ごしやすいね";
+			mes "こんなときは";
+			mes "体を動かしたくなるよね";
+			close;
+		case 2:
+			mes "[所長]";
+			mes "風が冷たいね";
+			mes "風邪をひかないようにね";
+			close;
+		default:
+			mes "[所長]";
+			mes "やぁ、元気かな？";
+			mes "冒険、がんばってるみたいだね";
+			mes "頼もしい限りだよ";
+			close;
+		}
+	}
+	cleararray @inventorylist_id[0],0,100;
+	getinventorylist;
+	set .@vars_kind,getarraysize(@inventorylist_id);
+	if(.@vars_kind>80){
+		mes "荷物を整理してください";
+		close;
+	}
+	mes "[所長]";
+	mes "やぁ。キミはもしかして";
+	mes "新人冒険者かな？";
+	mes "冒険に大切なものが必要だろう";
+	mes "よければ力になろうか？";
+	next;
+	if(select("お願いします","結構です")==2) {
+		mes "[所長]";
+		mes "そうかい";
+		mes "ならまた来てくれ";
+		close;
+	}
+	mes "[所長]";
+	mes "そうか、よし！";
+	mes "では初心者に最適なアイテムを";
+	mes "無料奉仕しよう！";
+	next;
+	set NEWWEAPON,NEWWEAPON|2;
+	if ((BaseClass&EAJ_BASEMASK) == EAJ_SWORDMAN){
+		getitem 13041,1;
+		getitem 13415,1;
+	}
+	if ((BaseClass&EAJ_BASEMASK) == EAJ_MAGE){
+		getitem 13041,1;
+		getitem 1639,1;
+	}
+	if ((BaseClass&EAJ_BASEMASK) == EAJ_ARCHER){
+		getitem 13041,1;
+		getitem 1742,1;
+	}
+	if ((BaseClass&EAJ_BASEMASK) == EAJ_ACOLYTE){
+		getitem 1545,1;
+		getitem 1639,1;
+	}
+	if ((BaseClass&EAJ_BASEMASK) == EAJ_MERCHANT){
+		getitem 13041,1;
+		getitem 1381,1;
+	}
+	if ((BaseClass&EAJ_BASEMASK) == EAJ_THIEF){
+		getitem 13041,1;
+	}
+	if (Class >= Job_Taekwon && Class <= Job_Soul_Linker){
+		getitem 13041,1;
+		getitem 1639,1;
+	}
+	getitem 2393,1;
+	getitem 569,100;
+	getitem 12323,40;
+	getitem 12324,5;
+	next;
+	mes "[所長]";
+	mes "これからのキミの頑張りを願って";
+	mes "新たな新人冒険者に乾杯！";
+	close;
+}
+
+morocc.gat,126,112,5	script	鉱石精製所 	807,{
+		mes "採掘した鉱石を精錬してあげよう";
+		mes "^0000FF[神の鉱物]：["+SAIKUT_A+"]個";
+		mes "[良い輝きの鉱物]：["+SAIKUT_B+"]個";
+		mes "[ほど良い輝きの鉱物]：["+SAIKUT_C+"]個";
+		mes "[鉱物]：["+SAIKUT_D+"]個";
+		next;
+		set .@coice,(select(
+			((SAIKUT_A >= 1)? "[神の鉱物]を精製してください":""),
+			((SAIKUT_B >= 1)? "[良い輝きの鉱物]を精製してください":""),
+			((SAIKUT_C >= 1)? "[ほど良い輝きの鉱物]を精製してください":""),
+			((SAIKUT_D >= 1)? "[鉱物]を精製してください":"")));
+	switch(.@coice){
+		case 1:
+				switch(rand(1,6)){
+					case 1:	getitem 672,1;break;
+					case 2:	getitem 672,1;break;
+					case 3:	getitem 676,1;break;
+					case 4:	getitem 670,1;break;
+					case 5:	getitem 674,1;break;
+					case 6:	callfunc("saikutu_item",SAIKUTUBA,3,1);break;
+					default:
+						getitem 672,1;break;
+				}
+				set SAIKUT_A,SAIKUT_A-1;
+				close;end;
+				break;
+		case 2:
+		if(SAIKUT_B >= 1 && (MaxWeight - Weight) > 310){
+			mes "君の所持量から可能なだけから";
+			mes "最大100まで精錬してやるぞ";
+			if(select("お願いします","結構です")==2) {
+				mes "では1つだけ精錬しよう";
+				switch(rand(1,12)){
+					case 1:	getitem 7231,1;break;
+					case 2:	getitem 7232,1;break;
+					case 3:	getitem 7233,1;break;
+					case 4:	getitem 7231,1;break;
+					case 5:	getitem 7232,1;break;
+					case 6:	getitem 7233,1;break;
+					case 7:	getitem 673,1;break;
+					case 8:	getitem 7231,1;break;
+					case 9:	getitem 7232,1;break;
+					case 10:getitem 7233,1;break;
+					case 11:callfunc("saikutu_item",SAIKUTUBA,2,1);break;
+					case 12:callfunc("saikutu_item",SAIKUTUBA,2,1);break;
+					default:
+						getitem 673,1;break;
+				}
+				set SAIKUT_B,SAIKUT_B-1;
+				close;end;
+				break;
+			}
+			mes "では可能なだけ精錬しよう";
+			set .@tempWeight,0;
+
+			for(set .@i,0; .@i < 100; set .@i,.@i+1){
+				switch(rand(1,12)){
+					case 1:		set .@c1, .@c1+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7231,6);break;
+					case 2:		set .@c2, .@c2+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7232,6);break;
+					case 3:		set .@c3, .@c3+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7233,6);break;
+					case 4:		set .@c1, .@c1+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7231,6);break;
+					case 5:		set .@c2, .@c2+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7232,6);break;
+					case 6:		set .@c3, .@c3+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7233,6);break;
+					case 7:		set .@c4, .@c4+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(673,6);break;
+					case 8:		set .@c1, .@c1+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7231,6);break;
+					case 9:		set .@c2, .@c2+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7232,6);break;
+					case 10:	set .@c3, .@c3+1;	set .@tempWeight,.@tempWeight + getiteminfo(7233,6);break;
+					case 11:	set .@c5, .@c5+1;break;
+					case 12:	set .@c5, .@c5+1;break;
+					default:
+						getitem 673,1;break;
+				}
+				set SAIKUT_B,SAIKUT_B-1;
+				if( (SAIKUT_B < 1) ||
+				    ((MaxWeight - (Weight+.@tempWeight) ) < 310) ||
+				    (.@i == 99)
+				  ) {
+						if( .@c1 != 0)	{	getitem 7231,.@c1;  set .@c1,0;		}
+						if( .@c2 != 0)	{	getitem 7232,.@c2;  set .@c2,0;		}
+						if( .@c3 != 0)	{	getitem 7233,.@c3;  set .@c3,0;		}
+						if( .@c4 != 0)	{	getitem 673, .@c4;  set .@c4,0;		}
+						if( .@c5 != 0)	{	callfunc("saikutu_item",SAIKUTUBA,2,.@c5);  set .@c5,0;	}
+						close;end;
+					}
+			}
+			close;end;
+		}
+		case 3:
+		if(SAIKUT_C >= 1 && (MaxWeight - Weight) > 310){
+			mes "君の所持量から可能なだけから";
+			mes "最大100まで精錬してやるぞ";
+			if(select("お願いします","結構です")==2) {
+				mes "では1つだけ精錬しよう";
+				switch(rand(1,7)){
+					case 1:	getitem 7231,1;break;
+					case 2:	getitem 7232,1;break;
+					case 3:	getitem 7233,1;break;
+					case 4:	getitem 673,1;break;
+					case 5:	getitem 673,1;break;
+					case 6:	getitem 673,1;break;
+					case 7:	callfunc("saikutu_item",SAIKUTUBA,1,1);break;
+					default:
+						getitem 673,1;break;
+				}
+				set SAIKUT_C,SAIKUT_C-1;
+				close;end;
+				break;
+			}
+			mes "では可能なだけ精錬しよう";
+			set .@tempWeight,0;
+
+			for(set .@i,0; .@i < 100; set .@i,.@i+1){
+				switch(rand(1,7)){
+					case 1:		set .@c1, .@c1+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7231,6);break;
+					case 2:		set .@c2, .@c2+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7232,6);break;
+					case 3:		set .@c3, .@c3+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7233,6);break;
+					case 4:		set .@c4, .@c4+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(673,6);break;
+					case 5:		set .@c4, .@c4+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(673,6);break;
+					case 6:		set .@c4, .@c4+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(673,6);break;
+					case 7:		set .@c5, .@c5+1 ;	break;
+					default:
+						getitem 673,1;break;
+				}
+				set SAIKUT_C,SAIKUT_C-1;
+				if( (SAIKUT_C < 1) ||
+				    ((MaxWeight - (Weight+.@tempWeight) ) < 310) ||
+				    (.@i == 99)
+				  ) {
+						if( .@c1 != 0)	{	getitem 7231,.@c1;  set .@c1,0;		}
+						if( .@c2 != 0)	{	getitem 7232,.@c2;  set .@c2,0;		}
+						if( .@c3 != 0)	{	getitem 7233,.@c3;  set .@c3,0;		}
+						if( .@c4 != 0)	{	getitem 673, .@c4;  set .@c4,0;		}
+						if( .@c5 != 0)	{	callfunc("saikutu_item",SAIKUTUBA,1,.@c5);  set .@c5,0;	}
+						 close;end;
+					}
+			}
+			close;end;
+		}
+		case 4:
+		if(SAIKUT_D >= 1 && (MaxWeight - Weight) > 310){
+			mes "君の所持量から可能なだけから";
+			mes "最大100まで精錬してやろうか？";
+			if(select("お願いします","結構です")==2) {
+				mes "では1つだけ精錬しよう";
+				switch(rand(1,7)){
+					case 1:	getitem 7231,1;break;
+					case 2:	getitem 7232,1;break;
+					case 3:	getitem 7233,1;break;
+					case 4:	getitem 673,1;break;
+					case 5:	getitem 673,1;break;
+					case 6:	getitem 673,1;break;
+					case 7:	getitem 673,1;break;
+					default:
+						getitem 673,1;break;
+				}
+				set SAIKUT_D,SAIKUT_D-1;
+				close;end;
+				break;
+			}
+			mes "では可能なだけ精錬しよう";
+			set .@tempWeight,0;
+
+			for(set .@i,0; .@i < 100; set .@i,.@i+1){
+				switch(rand(1,7)){
+					case 1:		set .@c1, .@c1+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7231,6);break;
+					case 2:		set .@c2, .@c2+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7232,6);break;
+					case 3:		set .@c3, .@c3+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(7233,6);break;
+					case 4:		set .@c4, .@c4+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(673,6);break;
+					case 5:		set .@c4, .@c4+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(673,6);break;
+					case 6:		set .@c4, .@c4+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(673,6);break;
+					case 7:		set .@c4, .@c4+1 ;	set .@tempWeight,.@tempWeight + getiteminfo(673,6);break;
+					default:
+						getitem 673,1;break;
+				}
+				set SAIKUT_D,SAIKUT_D-1;
+				if( (SAIKUT_D < 1) ||
+				    ((MaxWeight - (Weight+.@tempWeight) ) < 310) ||
+				    (.@i == 99)
+				  ) {
+						if( .@c1 != 0)	{	getitem 7231,.@c1;  set .@c1,0;		}
+						if( .@c2 != 0)	{	getitem 7232,.@c2;  set .@c2,0;		}
+						if( .@c3 != 0)	{	getitem 7233,.@c3;  set .@c3,0;		}
+						if( .@c4 != 0)	{	getitem 673, .@c4;  set .@c4,0;		}
+						 close;end;
+					}
+			}
+			close;end;
+		}
+
+	}
+close;end;
+}
+
+morocc.gat,133,111,3	script	コイン精製屋	731,{
+	set @waru,3;
+	mes "[コイン精製屋]";
+	mes "何か用かな";
+	mes "各種鉱石を"+@waru+"個用意すれば";
+	mes "貨幣に換えてやるぞ";
+	next;
+	switch(select(
+			  "金鉱石を金貨に変えてください",
+			  "銀鉱石を銀貨に変えてください",
+			  "ミスリル鉱石をミスリル貨に変えてください",
+			  "また来ます")){
+		case 1:	
+				set @getcoinID,671;
+				set @coinID,7231;
+			break;
+		case 2: 
+				set @getcoinID,675;
+				set @coinID,7232;
+			break;
+		case 3:
+				set @getcoinID,674;
+				set @coinID,7233;
+			break;
+		default: goto L_End;break;
+	}
+
+	if(countitem(@coinID) >= @waru) {
+		set @kinka,countitem(@coinID);
+		set @get,@kinka / @waru;
+		delitem @coinID,@get * @waru;
+		getitem @getcoinID,@get;
+	}else{
+		next;
+		mes "[コイン精製屋]";
+		mes "アイテムが足らない様だ";
+		next;
+	}
+L_End:
+	mes "[コイン精製屋]";
+	mes "じゃあな";
+	close;
+}
+
+morocc.gat,123,107,5	script	鉱石清算係 	809,{
+		if((KANTEI == 2)&&($@KOUKANTYUU == getcharid(3))){
+			set .@partyid,getcharid(1);		
+			getpartymember(.@partyid);
+
+			set KANTEI,0;
+				set $@temp_GEFE8,0;
+
+				while($@partymembercount != $@temp_GEFE8){
+					if(getcharid(3,$@partymembername$[$@temp_GEFE8]) == 0){
+					}else{
+						attachrid(getcharid(3,$@partymembername$[$@temp_GEFE8]));
+						if(SAIKUTUPARTY == .@partyid){
+							if( SAIKOUKAN == 1){
+								announce "鉱石が分配されました",0x03;
+								set SAIKUT_A,SAIKUT_A+$@SAIKUT_A;
+								set SAIKUT_B,SAIKUT_B+$@SAIKUT_B;
+								set SAIKUT_C,SAIKUT_C+$@SAIKUT_C;
+								set SAIKUT_D,SAIKUT_D+$@SAIKUT_D;
+								set SAIKOUKAN,0;
+								set SAIKUTUPARTY,0;
+								set GANBANVALUE,0;
+								set HAKKUTUTIME,0;
+								set HAKKUTUTYUU,0;
+								set SAIKUTUMAP$,"";
+								set SITEIX,0;
+								set SITEIY,0;
+							}
+						}
+					}
+					set $@temp_GEFE8,$@temp_GEFE8+1;
+				}
+		set $@SAIKUT_A,0;
+		set $@SAIKUT_B,0;
+		set $@SAIKUT_C,0;
+		set $@SAIKUT_D,0;
+		set $@KOUKANTYUU,0;
+		close;end;
+		}
+	
+		
+		if((KANTEI == 1)&&($@KOUKANTYUU == getcharid(3))){
+			set .@partyid,getcharid(1);		
+			getpartymember(.@partyid);
+
+			set KANTEI,2;
+				set $@temp_GEFE8,0;
+				while($@partymembercount != $@temp_GEFE8){
+					if(getcharid(3,$@partymembername$[$@temp_GEFE8]) == 0){
+					}else{
+						attachrid(getcharid(3,$@partymembername$[$@temp_GEFE8]));
+						if(SAIKUTUPARTY == .@partyid){
+						if( SAIKOUKAN == 1){
+						announce "採掘したものが回収されました",0x03;
+						set $@SAIKUT_A,$@SAIKUT_A+MINERAL_A;
+						set MINERAL_A,0;
+						set $@SAIKUT_B,$@SAIKUT_B+MINERAL_B;
+						set MINERAL_B,0;
+						set $@SAIKUT_C,$@SAIKUT_C+MINERAL_C;
+						set MINERAL_C,0;
+						set $@SAIKUT_D,$@SAIKUT_D+MINERAL_D;
+						set MINERAL_D,0;
+						}
+						}
+						if($@temp_GEFE8 == 0){
+							announce "鉱石清算係に再度話しかけてください",0x03;
+						}
+					}
+					set $@temp_GEFE8,$@temp_GEFE8+1;
+				}
+		close;end;
+		}
+
+
+	if(KANTEIKYOKA ==1) {
+	set .@partyid,getcharid(1);		
+	mes getpartyname(.@partyid)+"探検隊だね";
+	mes "採掘が終ったようだね、鑑定をしてあげようか";
+	mes "鑑定の為にはまず、皆から一度鉱石を回収をするよ";
+
+	menu "はい",-,"いいえ",L_End;
+		if($@KOUKANTYUU != 0){
+			mes "すまないね、他のPartyの鑑定中だったよ";
+				if( $@SAIKUTUTMR < gettimetick(2)){
+					set $@KOUKANTYUU,0;
+					mes "他のPartyの交換時間が過ぎたよ";
+					mes "もう一度話しかけてくれるかい";
+				}
+			close;end;
+		}
+		if(getpartyleader(.@partyid,1) == getcharid(3)){
+			set $@KOUKANTYUU,getcharid(3);
+			mes "もう一度話しかけてね";
+			mes "^0000FF※3分以内に行ってください^000000";
+			mes "^0000FF※交換権利が失われます^000000";
+			set $@SAIKUTUTMR,gettimetick(2)+180;
+			set KANTEI,1;
+			set KANTEIKYOKA,0;
+			close;
+			end;
+
+		}else{
+			mes "Partyリーダーが代表で話しかけて";
+			goto L_End;
+		}
+
+		}else{
+			mes "採掘が終ったら私のところへ。";
+			mes "皆が掘った鉱石を分配してあげるよ";
+		}
+L_End:
+close;end;
+}
+
+morocc.gat,132,107,3	script	採掘のプロ 	848,{
+	mes "採掘のプロとは俺の事だ";
+	set .@partyid,getcharid(1);		
+	mes getpartyname(.@partyid)+"探検隊だな";
+	mes "採掘に挑戦するか？";
+	next;
+	menu "はい",-,"いいえ",L_End;
+	if(getskilllv(783)==0){
+		mes "採掘協会に登録してください";
+		goto L_End;
+	}
+	if($@KOUKANTYUU == getcharid(3)){
+		mes "君の探検隊はまだ鑑定途中じゃないか";
+		mes "きちんと報告を終えてからにしてくれないか";
+		goto L_End;
+	}
+	if(getpartyleader(.@partyid,1) == getcharid(3)){
+		getpartymember(.@partyid);
+			set .@pcnt,$@partymembercount;
+			if(.@pcnt >= 1){
+
+			}else{
+				mes "最低5人は居ないと探検隊とは言えないな";
+				goto L_End;
+			}
+	}else{
+		mes "Partyリーダーが交渉に来てくれ";
+		goto L_End;
+	}
+
+	mes "どのランクの採掘場にいくんだ？";
+	next;
+	switch(select("ランク1","ランク2","ランク3","ランク4","やめる")){
+	case 1:set $@SAIKUTUBA,1;break;
+	case 2:if(getskilllv(783)>1)set $@SAIKUTUBA,2;else {mes "その採掘場に挑戦するには採掘ランク2以上が必要です";close;}break;
+	case 3:if(getskilllv(783)>4)set $@SAIKUTUBA,3;else {mes "その採掘場に挑戦するには採掘ランク5以上が必要です";close;}break;
+	case 4:if(getskilllv(783)>7)set $@SAIKUTUBA,4;else {mes "その採掘場に挑戦するには採掘ランク8以上が必要です";close;}break;
+	default:
+		goto L_End;
+	}
+	set $@saikutumap$,callfunc("funcbmS001_r");
+
+	set $@xSAIKUTU,rand(50,350);
+	set $@ySAIKUTU,rand(50,350);
+
+L_RETRY:
+	if( !checkcell($@saikutumap$,$@xSAIKUTU,$@ySAIKUTU,cell_chkpass) )
+	{
+		set .@CNTRY,.@CNTRY+1;
+		if( .@CNTRY <= 10){
+			goto L_RETRY;
+		}else{
+			mes "そうだな・・・";
+			mes "ちょっと直ぐには見つからない様だ";
+			mes "悪いが出直してくれ";
+			close;end;
+		}
+		close;
+	}else{
+
+		mes "よし、";
+		mes "^0000FF["+$@saikutumap$+"]^000000";
+		mes "にお宝センサーが反応している";
+		next;
+		mes "採掘許時間は今から";
+		mes "^FF000015分間だ！";
+		mes "頑張ってこい！";
+		next;
+	set KANTEIKYOKA,1;
+	set $@partysaikutu,.@partyid;
+	set $@temp_GEFE8t,0;
+
+		while($@partymembercount != $@temp_GEFE8t){
+			if(getcharid(3,$@partymembername$[$@temp_GEFE8t]) == 0){
+			}else{
+				if(isloggedin(getcharid(3,$@partymembername$[$@temp_GEFE8t]),getcharid(0,$@partymembername$[$@temp_GEFE8t]))){
+					attachrid(getcharid(3,$@partymembername$[$@temp_GEFE8t]));
+
+					getmapxy($@mapname5$,$@mapx,$@mapy,0,strcharinfo(0));
+					if( $@mapname5$ == "morocc"){
+						if(getskilllv(783)==0){
+							announce "採掘協会に登録されていません！",0x03;
+						}else if(SAIKUT_A>0||SAIKUT_B>0||SAIKUT_C>0||SAIKUT_D>0){
+							announce "鉱石を交換してください！",0x03;
+						}else{
+							set MINERAL_A,0;
+							set MINERAL_B,0;
+							set MINERAL_C,0;
+							set MINERAL_D,0;
+							set SAIKUTUPARTY,$@partysaikutu;
+							set GANBANVALUE,0;
+							set HAKKUTUTIME,gettimetick(2)+900;
+							set HAKKUTUTYUU,1;
+							set SAIKUTUMAP$,$@saikutumap$;
+							set SITEIX,$@xSAIKUTU;
+							set SITEIY,$@ySAIKUTU;
+							set SAIKOUKAN,1;
+							set SAIKUTUBA,$@SAIKUTUBA;
+							announce "[発掘イベント中になりました]",0x03;
+							warp $@saikutumap$, 0,0;
+						}
+					}
+				}
+			}
+			set $@temp_GEFE8t,$@temp_GEFE8t+1;
+		}
+	}
+L_End:
+	close;
+	end;
+}
+
+morocc.gat,120,100,5	script	採掘協会員	869,{
+	mes "[採掘協会員]";
+	if(getskilllv(783)==0){
+		mes "おや？";
+		mes "もしかして採掘協会に";
+		mes "登録にいらっしゃったのですか？";
+		next;
+		if(select("はい","いいえ")==2) {
+			mes "[採掘協会員]";
+			mes "そうですか……";
+			mes "またお願いしますね";
+			close;
+		}
+		mes "[採掘協会員]";
+		mes "ではこちらに名前を……はい";
+		next;
+		mes "[採掘協会員]";
+		mes "ありがとうございます";
+		mes "これで登録されました";
+		next;
+		mes "[採掘協会員]";
+		mes "採掘時に発見した出土品に応じて";
+		mes "採掘ポイントを加算いたします";
+		mes "この採掘ポイントは採掘ランクや";
+		mes "採掘ポイント交換で使用できます";
+		next;
+		mes "[採掘協会員]";
+		mes "それでは良い採掘ライフを！";
+		skill 783,1,0;
+		close;
+	}
+	mes "採掘に関することは";
+	mes "ボクに聞いてくれ";
+	next;
+	switch(select("採掘セット購入","採掘ポイント確認","採掘ポイント交換","ランキングを見る","やめる")){
+	case 1:
+		callshop "採掘セット", 1;close;end;
+	case 2:
+		mes "[採掘協会員]";
+		mes strcharinfo(0)+"様の採掘ポイントは";
+		mes SAIKUTUPOINT+"点です";
+		switch(getskilllv(783)){
+		case 1: if(SAIKUTUPOINT>50) {mes "50点を越えたのでランクアップしました。";skill 783,2,0;logmessage "skill_log","採掘Lv2取得";}
+		case 2: if(SAIKUTUPOINT>250){mes "250点を越えたのでランクアップしました。";skill 783,3,0;logmessage "skill_log","採掘Lv3取得";}
+		case 3: if(SAIKUTUPOINT>500){mes "500点を越えたのでランクアップしました。";skill 783,4,0;logmessage "skill_log","採掘Lv4取得";}
+		case 4: if(SAIKUTUPOINT>1000){mes "1000点を越えたのでランクアップしました。";skill 783,5,0;logmessage "skill_log","採掘Lv5取得";}
+		case 5: if(SAIKUTUPOINT>2000){mes "2000点を越えたのでランクアップしました。";skill 783,6,0;logmessage "skill_log","採掘Lv6取得";}
+		case 6: if(SAIKUTUPOINT>3000){mes "3000点を越えたのでランクアップしました。";skill 783,7,0;logmessage "skill_log","採掘Lv7取得";}
+		case 7: if(SAIKUTUPOINT>5000){mes "5000点を越えたのでランクアップしました。";skill 783,8,0;logmessage "skill_log","採掘Lv8取得";}
+		case 8: if(SAIKUTUPOINT>9000){mes "9000点を越えたのでランクアップしました。";skill 783,9,0;logmessage "skill_log","採掘Lv9取得";}
+		case 9: if(SAIKUTUPOINT>15000){mes "15000点を越えたのでランクアップしました。";skill 783,10,0;logmessage "skill_log","採掘Lv10取得";}break;
+		case 10: mes "現在最高ランクですね";
+		}
+		close;
+	case 3:
+		mes "[採掘協会員]";
+		mes strcharinfo(0)+"様は";
+		mes "現在、ランク"+getskilllv(783)+"ですね";
+		mes "提供できる商品を紹介します";
+		next;
+		set .@srank,getskilllv(783);
+		set .@sec,select(
+			((.@srank >= 2)?"つるはし - 2P":""),
+			((.@srank >= 3)?"頑丈なつるはし - 15P":""),
+			((.@srank >= 5)?"大きなつるはし - 20P":""),
+			((.@srank >= 8)?"最高級つるはし - 45P":""),
+			((.@srank >= 2)?"サーチャー - 10P":""),
+			((.@srank >= 3)?"ディスカバリー - 50P":""),
+			((.@srank >= 6)?"ダウジングマシン - 200P":""),
+			((.@srank >= 9)?"エクスプローラー - 400P":""),
+			((.@srank >= 2)?"ランプ - 5P":""),
+			((.@srank >= 3)?"高品質ランプ - 15P":""),
+			((.@srank >= 5)?"クリスタルランプ - 40P":""),
+			((.@srank >= 7)?"キングランプ - 80P":""),
+			((.@srank >= 2)?"素エーテル - 10P":""),
+			((.@srank >= 2)?"古書 - 50P":""),
+			((.@srank >= 9)?"魔剣グラム - 10000P":""),
+			"やめる");
+		if(.@sec==16){mes "[採掘協会員]";mes "ありがとうございました";close;}
+		switch(.@sec){
+		case 1: set .@itemid,28427;set .@itempoint,2;break;
+		case 2: set .@itemid,28428;set .@itempoint,15;break;
+		case 3: set .@itemid,28429;set .@itempoint,20;break;
+		case 4: set .@itemid,28430;set .@itempoint,45;break;
+		case 5: set .@itemid,28432;set .@itempoint,10;break;
+		case 6: set .@itemid,28433;set .@itempoint,50;break;
+		case 7: set .@itemid,28434;set .@itempoint,200;break;
+		case 8: set .@itemid,28435;set .@itempoint,400;break;
+		case 9: set .@itemid,28437;set .@itempoint,5;break;
+		case 10:set .@itemid,28438;set .@itempoint,15;break;
+		case 11:set .@itemid,28439;set .@itempoint,40;break;
+		case 12:set .@itemid,28440;set .@itempoint,80;break;
+		case 13:set .@itemid,28241;set .@itempoint,10;break;
+		case 14:set .@itemid,28263;set .@itempoint,50;break;
+		case 15:set .@itemid,1192;set .@itempoint,10000;break;
+		}
+		set .@oknum,SAIKUTUPOINT/.@itempoint;
+		mes "[採掘協会員]";
+		mes getitemname(.@itemid)+"ですね？";
+		mes .@itempoint+"点/"+.@oknum+"個まで交換できます";
+		mes "いくつ交換しますか？";
+		next;
+		input .@baynum;
+		if(.@baynum>.@oknum || .@baynum < 0){
+			mes "[採掘協会員]";
+			mes getitemname(.@itemid)+"を"+.@baynum+"個交換できません";
+			mes .@itempoint+"点/"+.@oknum+"個まで交換できます";
+			close;
+		} else if(.@baynum==0){mes "[採掘協会員]";mes "中止しました";close;}
+		set SAIKUTUPOINT,SAIKUTUPOINT-(.@baynum * .@itempoint);
+		getitem .@itemid,.@baynum;
+		mes "[採掘協会員]";
+		mes "取引いたしました";
+		if(SAIKUTUPOINT<50) {mes "50点を下回ったのでランクダウンしました。";skill 783,1,0;logmessage "skill_log","採掘Lv1に低下";}
+		else if(SAIKUTUPOINT<250){mes "250点を下回ったのでランクダウンしました。";skill 783,2,0;logmessage "skill_log","採掘Lv2に低下";}
+		else if(SAIKUTUPOINT<500){mes "500点を下回ったのでランクダウンしました。";skill 783,3,0;logmessage "skill_log","採掘Lv3に低下";}
+		else if(SAIKUTUPOINT<1000){mes "1000点を下回ったのでランクダウンしました。";skill 783,4,0;logmessage "skill_log","採掘Lv4に低下";}
+		else if(SAIKUTUPOINT<2000){mes "2000点を下回ったのでランクダウンしました。";skill 783,5,0;logmessage "skill_log","採掘Lv5に低下";}
+		else if(SAIKUTUPOINT<3000){mes "3000点を下回ったのでランクダウンしました。";skill 783,6,0;logmessage "skill_log","採掘Lv6に低下";}
+		else if(SAIKUTUPOINT<5000){mes "5000点を下回ったのでランクダウンしました。";skill 783,7,0;logmessage "skill_log","採掘Lv7に低下";}
+		else if(SAIKUTUPOINT<9000){mes "9000点を下回ったのでランクダウンしました。";skill 783,8,0;logmessage "skill_log","採掘Lv8に低下";}
+		else if(SAIKUTUPOINT<15000){mes "15000点を下回ったのでランクダウンしました。";skill 783,9,0;logmessage "skill_log","採掘Lv9に低下";}
+		mes "またご利用ください";
+		close;
+	case 4:
+		mes "[採掘協会員]";
+		mes "採掘ポイントランキングの上位5名を";
+		mes "提示いたしております。";
+		next;
+		callfunc("saikutu_rank");
+		for(set .@x,0; .@x < 5; set .@x,.@x+1) {
+			if($SAIKUTURANK$[.@x]!="")
+				mes "第"+(.@x+1)+"位 "+$SAIKUTURANK$[.@x]+"様 "+$SAIKUTURANK[.@x]+"点";
+		}
+		close;
+	default:
+		mes "[採掘協会員]";
+		mes "ありがとうございました";
+		close;
+	}
+}
+
+//Fishing
+poring_c02,121,90,5	script	釣具店員	960,{
+	if(select("買いに来た","交換に来た")==1) {
+		callshop "釣具販売", 1;close;end;
+	}
+	set .@sec,select(
+		((#SAKANAPOINT >= 5)?"おいしい魚 - 5P":""),
+		((#SAKANAPOINT >= 10)?"黄ポーション - 10P":""),
+		((#SAKANAPOINT >= 20)?"白ポーション - 20P":""),
+		((#SAKANAPOINT >= 55)?"青ポーション - 55P":""),
+		((#SAKANAPOINT >= 5)?"万能薬 - 5P":""),
+		((#SAKANAPOINT >= 32)?"ヒナレの葉 - 32P":""),
+		((#SAKANAPOINT >= 48)?"アロエの葉 - 48P":""),
+		((#SAKANAPOINT >= 150)?"ローヤルゼリー - 150P":""),
+		((#SAKANAPOINT >= 35)?"イエロースリムポーション - 35P":""),
+		((#SAKANAPOINT >= 85)?"ホワイトスリムポーション - 85P":""),
+		((#SAKANAPOINT >= 75)?"おもち - 75P":""),
+		((#SAKANAPOINT >= 45)?"魂捕獲器 - 45P":""),
+		((#SAKANAPOINT >= 1000)?"ピンクの釣竿 - 1000P":""),
+		((#SAKANAPOINT >= 5000)?"青い釣竿 - 5000P":""),
+		((#SAKANAPOINT >= 15000)?"赤い釣竿 - 15000P":""),
+		((#SAKANAPOINT >= 50000)?"緑の釣竿 - 50000P":""),
+		"やめる");
+	if(.@sec==17)close;
+	mes "[釣具店員]";
+	switch(.@sec){
+	case 1: set .@itemid,579;set .@itempoint,5;break;
+	case 2: set .@itemid,503;set .@itempoint,10;break;
+	case 3: set .@itemid,504;set .@itempoint,20;break;
+	case 4: set .@itemid,505;set .@itempoint,55;break;
+	case 5: set .@itemid,525;set .@itempoint,5;break;
+	case 6: set .@itemid,520;set .@itempoint,32;break;
+	case 7: set .@itemid,521;set .@itempoint,48;break;
+	case 8: set .@itemid,526;set .@itempoint,150;break;
+	case 9: set .@itemid,546;set .@itempoint,35;break;
+	case 10:set .@itemid,547;set .@itempoint,85;break;
+	case 11:set .@itemid,554;set .@itempoint,75;break;
+	case 12:set .@itemid,28535;set .@itempoint,45;break;
+	case 13:set .@itemid,29222;set .@itempoint,1000;mes "^0000FF釣りスキル詠唱-15%^000000よ…";break;
+	case 14:set .@itemid,29223;set .@itempoint,5000;mes "^0000FF釣りスキル詠唱-25%、テクニック上昇率増加^000000よ…";break;
+	case 15:set .@itemid,29224;set .@itempoint,15000;mes "^0000FF釣りスキル詠唱-40%、テクニック上昇率増加、待機時間減少^000000よ…";break;
+	case 16:set .@itemid,29225;set .@itempoint,50000;mes "^0000FF釣りスキル詠唱-65%、テクニック上昇率増加、待機時間減少^000000よ…";break;
+	}
+	mes getitemname(.@itemid)+"でいいの？";
+	next;
+	switch(select("一個もらう","複数もらう","いいえ")){
+	case 1:set .@itemnum,1;break;
+	case 2:input .@itemnum;break;
+	case 3:close;
+	}
+	if(.@itemnum<1 || (.@itemnum * .@itempoint) > #SAKANAPOINT)close;
+	set #SAKANAPOINT,#SAKANAPOINT - (.@itempoint * .@itemnum);
+	getitem .@itemid,.@itemnum;
+	mes "[釣具店員]";
+	mes "……ありがと…した";
+	close;
+}
+
+poring_c02,116,90,5	script	釣り仙人	712,{
+	if(countitem(28500) == 0 && getskilllv(782) > 0){
+		mes "[釣り仙人]";
+		mes "竿をなくしたのか？";
+		next;
+		if(select("はい","いいえ")==1) {
+			mes "[釣り仙人]";
+			mes "では私のお古の竿だが";
+			mes "こいつを持っていくといい";
+			getitem 28500,1;
+			close;
+		}
+	}
+	if(getskilllv(782) > 0){
+		mes "^FF0000 釣りの腕前["+#SAKANAPOINT+"]^000000";
+		mes "------------------------------";
+		mes "^0000FF■習得スキル^000000";
+		if(getskilllv(782) >= 2){	mes "^0000FF - 撒き餌";				}
+		if(getskilllv(782) >= 3){	mes "^0000FF - 捕獲率上昇";			}
+		if(getskilllv(782) >= 4){	mes "^0000FF - 魚捕獲体勢";		}
+		if(getskilllv(782) >= 6){	mes "^0000FF - 大物遭遇率上昇";		}
+		if(getskilllv(782) >= 7){	mes "^0000FF - 高級撒き餌";		}
+		if(getskilllv(782) >= 9){	mes "^0000FF - 待機時間減少";		}
+		next;
+		mes "[釣り仙人]";
+		mes "どうじゃ？";
+		mes "釣りは楽しかろう？";
+		mes "望むならレベルをあげてやるぞ";
+		next;
+		if(select("お願いします！","結構です")==2) {
+			mes "[釣り仙人]";
+			mes "釣りの楽しみ方は人それぞれじゃ";
+			mes "好きにするが良い";
+			close;
+		}
+		switch(getskilllv(782)){
+		case 1:	
+			if((countitem(28522) >= 50 )&&(countitem(28523) >= 50 )&&(countitem(28524) >= 50 )){
+				mes "[釣り仙人]";
+				mes "釣ってきたようじゃな";
+				mes "よし、これでお主のレベルが";
+				mes "上がっているはずじゃ！";
+				delitem 28522,50;delitem 28523,50;delitem 28524,50;
+				skill 782,2,0;logmessage "skill_log","釣りLv2取得";
+				next;
+				mes "^0000FF釣りスキル";
+				mes "<撒き餌>を習得しました^000000";
+				mes "^0000FF釣り中に撒き餌が使えます^000000";
+			}else{
+				mes "[釣り仙人]";
+				mes "^0000FF小さく青い魚：50匹^000000";
+				mes "^0000FF小さく赤い魚：50匹^000000";
+				mes "^0000FF小さく白い魚：50匹^000000";
+				mes "を釣って来るのじゃ";
+			}
+			close;
+		case 2:	
+			if((countitem(28513) >= 50 )&&(countitem(28526) >= 50 )&&(countitem(28514) >= 50 )){
+				mes "[釣り仙人]";
+				mes "釣ってきたようじゃな";
+				mes "よし、これでお主のレベルが";
+				mes "上がっているはずじゃ！";
+				delitem 28513,50;delitem 28526,50;delitem 28514,50;
+				skill 782,3,0;logmessage "skill_log","釣りLv3取得";
+				next;
+				mes "^0000FF釣りスキル";
+				mes "<捕獲率上昇>を習得しました^000000";
+				mes "^0000FF釣りの捕獲率が上昇しました^000000";
+			}else{
+				mes "[釣り仙人]";
+				mes "^0000FF活きのいい魚：50匹^000000";
+				mes "^0000FF大きな魚：50匹^000000";
+				mes "^0000FF鑑賞魚：50匹^000000";
+				mes "を釣って来るのじゃ";
+			}
+			close;
+		case 3:	
+			if((countitem(28517) >= 50 )&&(countitem(28515) >= 50 )&&(countitem(28519) >= 20 )){
+				mes "[釣り仙人]";
+				mes "釣ってきたようじゃな";
+				mes "よし、これでお主のレベルが";
+				mes "上がっているはずじゃ！";
+				delitem 28517,50;delitem 28515,50;delitem 28519,20;
+				skill 782,4,0;logmessage "skill_log","釣りLv4取得";
+				next;
+				mes "^0000FF釣りスキル";
+				mes "<魚捕獲体勢>を習得しました^000000";
+				mes "^0000FF'close'を多く押すと魚が逃げ難くなります^000000";
+			}else{
+				mes "[釣り仙人]";
+				mes "^0000FF凶暴魚：50匹^000000";
+				mes "^0000FF巨大魚：50匹^000000";
+				mes "^0000FF骨魚：20匹^000000";
+				mes "を釣って来るのじゃ";
+			}
+			close;
+		case 4:	
+			if((countitem(28525) >= 50 )&&(countitem(28521) >= 20 )&&(countitem(28527) >= 20 )){
+				mes "[釣り仙人]";
+				mes "釣ってきたようじゃな";
+				mes "よし、これでお主のレベルが";
+				mes "上がっているはずじゃ！";
+				delitem 28525,50;delitem 28521,20;delitem 28527,20;
+				skill 782,5,0;logmessage "skill_log","釣りLv5取得";
+				next;
+				mes "^0000FF釣り道具";
+				mes "<中級者の竿>を手に入れました^000000";
+				getitem 28501,1;
+			}else{
+				mes "[釣り仙人]";
+				mes "^0000FF人喰い魚：50匹^000000";
+				mes "^0000FF出世魚：20匹^000000";
+				mes "^0000FF調理用魚：20匹^000000";
+				mes "を釣って来るのじゃ";
+			}
+			close;
+		case 5:	
+			if(countitem(28520) >= 200 ){
+				mes "[釣り仙人]";
+				mes "釣ってきたようじゃな";
+				mes "よし、これでお主のレベルが";
+				mes "上がっているはずじゃ！";
+				delitem 28520,200;
+				skill 782,6,0;logmessage "skill_log","釣りLv6取得";
+				next;
+				mes "^0000FF釣りスキル";
+				mes "<大物遭遇率上昇>を習得しました^000000";
+				mes "レアな魚を見つけやすくなります^000000";
+			}else{
+				mes "[釣り仙人]";
+				mes "^0000FF沼の主：200匹^000000";
+				mes "を釣って来るのじゃ";
+			}
+			close;
+		case 6:	
+			if((countitem(28507) >= 25 )&&(countitem(28508) >= 25 )&&(countitem(28509) >= 25 )){
+				mes "[釣り仙人]";
+				mes "釣ってきたようじゃな";
+				mes "よし、これでお主のレベルが";
+				mes "上がっているはずじゃ！";
+				delitem 28507,25;delitem 28508,25;delitem 28509,25;
+				skill 782,7,0;logmessage "skill_log","釣りLv7取得";
+				next;
+				mes "^0000FF釣りスキル";
+				mes "<高級撒き餌>を習得しました^000000";
+				mes "^0000FF釣り中に高級撒き餌が使えます^000000";
+			}else{
+				mes "[釣り仙人]";
+				mes "最近、釣堀に異常繁殖している";
+				mes "不届きな輩がおる！";
+				mes "嘆かわしい！";
+				next;
+				mes "[釣り仙人]";
+				mes "^0000FF青臭いイカ：25匹^000000";
+				mes "^0000FF生臭いタコ：25匹^000000";
+				mes "^0000FF塩臭いクラゲ：25匹^000000";
+				mes "を釣って来るのじゃ";
+			}
+			close;
+		case 7:	
+			if((countitem(28512) >= 25 )&&(countitem(28516) >= 25 )&&(countitem(28529) >= 25 )){
+				mes "[釣り仙人]";
+				mes "釣ってきたようじゃな";
+				mes "よし、これでお主のレベルが";
+				mes "上がっているはずじゃ！";
+				delitem 28512,25;delitem 28516,25;delitem 28529,25;
+				skill 782,8,0;logmessage "skill_log","釣りLv8取得";
+				next;
+				mes "^0000FF釣り道具";
+				mes "<上級者の竿>を手に入れました^000000";
+				getitem 28502,1;
+			}else{
+				mes "[釣り仙人]";
+				mes "^0000FF悪魔魚：25匹^000000";
+				mes "^0000FF魚王子2世：25匹^000000";
+				mes "^0000FF腐った魚：25匹^000000";
+				mes "を釣って来るのじゃ";
+			}
+			close;
+		case 8:	
+			if((countitem(28518) >= 50 )&&(countitem(28530) >= 50 )&&(countitem(28531) >= 50 )){
+				mes "[釣り仙人]";
+				mes "釣ってきたようじゃな";
+				mes "よし、これでお主のレベルが";
+				mes "上がっているはずじゃ！";
+				delitem 28518,50;delitem 28530,50;delitem 28531,50;
+				skill 782,9,0;logmessage "skill_log","釣りLv9取得";
+				next;
+				mes "^0000FF釣りスキル";
+				mes "<待機時間減少>を習得しました^000000";
+				mes "^0000FF魚が早く食いつくようになります^000000";
+			}else{
+				mes "[釣り仙人]";
+				mes "^0000FF古代魚：50匹^000000";
+				mes "^0000FF宝石魚：50匹^000000";
+				mes "^0000FFラバーズフィッシュ：50匹^000000";
+				mes "を釣って来るのじゃ";
+			}
+			close;
+		case 9:	
+			if(countitem(28528) >= 300 ){
+				mes "[釣り仙人]";
+				mes "とうとうやったな……";
+				mes "もう何も言うことはない！";
+				mes "お主は釣りの名人じゃ！";
+				delitem 28528,300;
+				skill 782,10,0;logmessage "skill_log","釣りLv10取得";
+				next;
+				mes "[釣り仙人]";
+				mes "さぁ……";
+				mes "これを受け取るがいい！";
+				next;
+				mes "^0000FF釣り道具";
+				mes "<名人の竿>を手に入れました^000000";
+				getitem 28503,1;
+			}else{
+				mes "[釣り仙人]";
+				mes "とうとうここまで来てしまったか……";
+				mes "実はな、この釣堀には";
+				mes "伝説の魚がいるのじゃ……";
+				next;
+				mes "[釣り仙人]";
+				mes "高級魚の餌と上級者の竿を";
+				mes "装備しているものしか食いつかない";
+				mes "幻の魚なのじゃ";
+				next;
+				mes "[釣り仙人]";
+				mes "ワシでも滅多に釣れんし、この年では";
+				mes "釣り上げるのも困難じゃ……";
+				mes "だからこそ食べ…見てみたい！";
+				next;
+				mes "[釣り仙人]";
+				mes "最後の試練じゃ！！";
+				mes "^0000FF伝説の魚：300匹^000000";
+				mes "を釣って来るのじゃ！";
+			}
+			close;
+		case 10:
+			mes "[釣り仙人]";
+			mes "やぁ、元気に釣りしとるかの？";
+			mes "ほっほ";
+			mes "お主ほど釣りのうまいものは";
+			mes "もはやおらんじゃろうのぅ";
+			close;
+		default:
+			mes "[釣り仙人]";
+			mes "ム？";
+			mes "早く次の条件を言え？";
+			mes "まぁ待て、慌てるでない";
+			mes "今はお腹がいっぱいなのじゃ";
+			close;
+		}
+	}
+	mes "[釣り仙人]";
+	mes "むむぅ";
+	mes "最近の糞餓鬼…若者というのは";
+	mes "インドア派ばかりになったのぅ";
+	next;
+	mes "[釣り仙人]";
+	mes "外の世界には楽しいことに";
+	mes "満ちているというのに";
+	mes "そうは思わんか？";
+	next;
+	if(select("思います","思いませんね")==2) {
+		mes "[釣り仙人]";
+		mes "なんじゃと！";
+		mes "ふっ…お主も最近の若者か…";
+		close;
+	}
+	mes "[釣り仙人]";
+	mes "そうかそうか。";
+	mes "アウトドアといえば……";
+	mes "1に魚釣り、2に魚釣り！";
+	mes "3、4がなくて5に魚釣り！";
+	next;
+	mes "[釣り仙人]";
+	mes "お主にはこの釣竿をやろう";
+	getitem 28500,1;
+	getitem 28532,100;
+	skill 782,1,0;
+	next;
+	mes "[釣り仙人]";
+	mes "^0000FF魚の餌^000000を持って";
+	mes "^0000FF水辺に立って竿を装備する^000000";
+	mes "そして^0000FF釣りスキルLv1を使う！^000000";
+	mes "それで釣りが楽しめるぞ！";
+	next;
+	mes "[釣り仙人]";
+	mes "但し、一歩でも動いたり、竿を外したり餌がなくなった場合は釣りは終了となる";
+	mes "気をつけてな";
+	close;
+}
+
+//-----------------------------------------------
+
+payon,145,168,5	script	刀細工師	412,{
+	mes "[刀細工師]";
+	mes "おい！オマエさん！";
+	mes "ちょっとこれを見てくれ！";
+	next;
+	mes "-刀細工師はそう言うと";
+	mes "背後から見事な刀を取り出した-";
+	next;
+	mes "[刀細工師]";
+	mes "どうだい";
+	mes "すばらしい出来だろう？";
+	next;
+	mes "[刀細工師]";
+	mes "特殊な材料を使用したからこそ";
+	mes "ここまでの物を作ることが出来た…。";
+	next;
+	mes "[刀細工師]";
+	mes "しかしなぁ……材料が特殊すぎて";
+	mes "ここまですばらしいものは";
+	mes "もう作れんかもしれんのだ……";
+	next;
+	menu "なんて材料ですか？",-;
+	mes "[刀細工師]";
+	mes "そうか";
+	mes "冒険者なら知ってるかもしれんな";
+	mes "^0000FFアルメイラの涙^000000というもので";
+	next;
+	mes "[刀細工師]";
+	mes "剣を鍛えながらかけていくと";
+	mes "様々な力を宿すようになるのじゃ";
+	next;
+	if(select("作ってください","残念ですね")==2) {
+		mes "[刀細工師]";
+		mes "すまんな……";
+		close;
+	}
+	if(countitem(28680)<1){
+		mes "[刀細工師]";
+		mes "^0000FFアルメイラの涙^000000を持ってくれば";
+		mes "作ってやっても良いぞ";
+		mes "何処にあるかはわからんがな";
+		close;
+	}
+	mes "[刀細工師]";
+	mes "1から作る必要があるからのぅ";
+	mes "時期を置いて鍛えることで";
+	mes "最大3回まで強化できるのじゃ";
+	next;
+	mes "[刀細工師]";
+	mes "さて、どうするかの？";
+	next;
+	switch(select("武器の作成をしてください","武器を強化してください","やめる")){
+	case 1:
+		mes "[刀細工師]";
+		mes "^0000FFアルメイラの涙^000000を^FF000015^000000個";	//28680
+		mes "^0000FF鋼鉄^000000を^FF000050^000000個";		//999
+		mes "^0000FF濃縮オリデオコン^000000を^FF000010^000000個";	//7620
+		mes "^0000FF闇に沈んだ刃^000000を^FF00005^000000個";	//7023
+		mes "^0000FF血に染まった刃^000000を^FF00002^000000個";	//7024
+		mes "^FF0000500,000^000000zeny";
+		mes "これだけあれば作れるぞ";
+		next;
+		if(countitem(28680)<15||countitem(999)<50||countitem(7620)<10||countitem(7023)<5||countitem(7024)<2||Zeny<500000){
+			mes "[刀細工師]";
+			mes "容易く得られるものではなかろう";
+			mes "ゆっくり待っておるぞ";
+			close;
+		}
+		mes "[刀細工師]";
+		mes "っと……";
+		mes "オマエさんが使う武器はなんじゃ？";
+		next;
+		if ((BaseClass&EAJ_BASEMASK) == EAJ_NOVICE){
+			switch(select("短剣","片手剣","杖","鈍器","片手斧")){
+			case 1:set @c_weapon,1;break; case 2:set @c_weapon,2;break; case 3:set @c_weapon,10;
+			break;case 4:set @c_weapon,8;break; case 5:set @c_weapon,6;break; }
+		}
+		if ((BaseClass&EAJ_BASEMASK) == EAJ_SWORDMAN){
+			switch(select("短剣","片手剣","両手剣","鈍器","片手斧","両手斧","片手槍","両手槍")){
+			case 1:set @c_weapon,1;break; case 2:set @c_weapon,2;break;
+			case 3:set @c_weapon,3;break; case 4:set @c_weapon,8;break;
+			case 5:set @c_weapon,6;break; case 6:set @c_weapon,7;break;
+			case 7:set @c_weapon,4;break; case 8:set @c_weapon,5;break;}
+		}
+		if ((BaseClass&EAJ_BASEMASK) == EAJ_MAGE){
+			switch(select("短剣","杖","本")){
+			case 1:set @c_weapon,1;break; case 2:set @c_weapon,10;break; case 3:set @c_weapon,15;break;}
+		}
+		if ((BaseClass&EAJ_BASEMASK) == EAJ_ARCHER){
+			switch(select("短剣","弓","楽器","鞭")){
+			case 1:set @c_weapon,1;break;  case 2:set @c_weapon,11;break;
+			case 3:set @c_weapon,13;break; case 4:set @c_weapon,14;break;}
+		}
+		if ((BaseClass&EAJ_BASEMASK) == EAJ_ACOLYTE){
+			switch(select("杖","鈍器","ナックル")){
+			case 1:set @c_weapon,10;break;case 2:set @c_weapon,8;break;
+			case 3:set @c_weapon,12;break;}
+		}
+		if ((BaseClass&EAJ_BASEMASK) == EAJ_MERCHANT){
+			switch(select("短剣","片手剣","鈍器","片手斧","両手斧")){
+			case 1:set @c_weapon,1;break;case 2:set @c_weapon,2;break;
+			case 3:set @c_weapon,8;break;case 4:set @c_weapon,6;break;
+			case 5:set @c_weapon,7;break;}
+		}
+		if ((BaseClass&EAJ_BASEMASK) == EAJ_THIEF){
+			switch(select("短剣","片手剣","片手斧","カタール","弓")){
+			case 1:set @c_weapon,1;break;case 2:set @c_weapon,2;break;
+			case 3:set @c_weapon,6;break;case 4:set @c_weapon,16;break;
+			case 5:set @c_weapon,11;break;}
+		}
+		if (Class >= Job_Taekwon && Class <= Job_Soul_Linker){
+			switch(select("短剣","杖","本")){
+			case 1:set @c_weapon,1;break;case 2:set @c_weapon,10;break;
+			case 3:set @c_weapon,15;break;}
+		}
+		if (Class == Job_Gunslinger){
+			switch(select("ハンドガン","ライフル","ショットガン","ガトリングガン","グレネードランチャー")){
+			case 1:set @c_weapon,17;break;case 2:set @c_weapon,18;break;
+			case 3:set @c_weapon,19;break;case 4:set @c_weapon,20;break;
+			case 5:set @c_weapon,21;break;}
+		}
+		if (Class == Job_Ninja){
+			switch(select("短剣","手裏剣")){
+			case 1:set @c_weapon,1;break;case 2:set @c_weapon,22;break;}
+		}
+		if(@c_weapon==0){mes "^FF0000エラーが発生しました。";close;}
+		setarray .@name$[1],	"短剣","片手剣","両手剣","片手槍","両手槍","片手斧","両手斧","鈍器",
+					"両手鈍器","杖","弓","ナックル","楽器","鞭","本","カタール","ハンドガン",
+					"ライフル","ショットガン","ガトリングガン","グレネードランチャー","手裏剣";
+
+
+		setarray .@cid[1],	13042,13416,1187,1426,1486,1310,1382,1546,
+					1546,1640,1743,1826,1927,1981,1576,1281,13110,
+					13176,13178,13177,13179,13307;
+		mes "[刀細工師]";
+		mes "ほう……";
+		mes "^FF0000"+.@name$[@c_weapon]+"^000000で本当にいいんじゃな？";
+		next;
+		if(select("やっぱりやめた","おっけー！")==1){
+			mes "[刀細工師]";
+			mes "そうか。";
+			mes "またきなさい。";
+			close;
+		}
+		if(countitem(28680)<15||countitem(999)<50||countitem(7620)<10||countitem(7023)<5||countitem(7024)<2||Zeny<500000){
+			mes "[刀細工師]";
+			mes "必要なアイテムが足りんのぅ";
+			close;
+		}
+		delitem 28680,15;delitem 999,50;delitem 7620,10;delitem 7023,5;delitem 7024,2;
+		set Zeny,Zeny-500000;
+		getitem2 .@cid[@c_weapon],1,1,0,0,0,0,0,rand(28300,28342);
+		mes "[刀細工師]";
+		mes "ほれ、これじゃ";
+		close;
+	case 2:
+		if(getequipcardid(4,1)>0){mes "[刀細工師]";mes "これ以上強化できんぞ";close;}
+		if(getequipcardid(4,2)>0){
+			mes "[刀細工師]";
+			mes "3回目の強化か…";
+			next;
+			mes "[刀細工師]";
+			mes "^0000FFアルメイラの涙^000000を^FF000030^000000個";		//28680
+			mes "^0000FF濃縮オリデオコン^000000を^FF000010^000000個";	//7620
+			mes "^FF00005,000,000^000000zeny";
+			mes "これで強化をしてやろう";
+			if(countitem(28680)<30||countitem(7620)<10||Zeny<5000000)close;
+			next;
+			if(select("強化してください","やっぱやめます")==2){
+				mes "[刀細工師]";
+				mes "そうか。";
+				mes "またきなさい。";
+				close;
+			}
+			delitem 28680,30;delitem 7620,10;
+			set Zeny,Zeny-5000000;
+			set @equipweapon,getequipid(4);
+			set @equipcard3,getequipcardid(4,2);
+			set @equipcard4,getequipcardid(4,3);
+			set @refine,getequiprefinerycnt(4);
+			unequip 4;
+			delitem2 @equipweapon,1,1,@refine,0,0,0,@equipcard3,@equipcard4;
+			getitem2 @equipweapon,1,1,@refine,0,0,rand(28395,28425),@equipcard3,@equipcard4;
+			equip @equipweapon;
+			mes "[刀細工師]";
+			mes "ほれ、これじゃ";
+			close;
+		}
+		if(getequipcardid(4,3)>0){
+			mes "[刀細工師]";
+			mes "2回目の強化か…";
+			next;
+			mes "[刀細工師]";
+			mes "^0000FFアルメイラの涙^000000を^FF000020^000000個";		//28680
+			mes "^0000FF濃縮オリデオコン^000000を^FF000010^000000個";	//7620
+			mes "^FF00002,000,000^000000zeny";
+			mes "これで強化をしてやろう";
+			if(countitem(28680)<20||countitem(7620)<10||Zeny<2000000)close;
+			next;
+			if(select("強化してください","やっぱやめます")==2){
+				mes "[刀細工師]";
+				mes "そうか。";
+				mes "またきなさい。";
+				close;
+			}
+			delitem 28680,20;delitem 7620,10;
+			set Zeny,Zeny-2000000;
+			set @equipweapon,getequipid(4);
+			set @equipcard4,getequipcardid(4,3);
+			set @refine,getequiprefinerycnt(4);
+			unequip 4;
+			delitem2 @equipweapon,1,1,@refine,0,0,0,0,@equipcard4;
+			getitem2 @equipweapon,1,1,@refine,0,0,0,rand(28343,28394),@equipcard4;
+			equip @equipweapon;
+			mes "[刀細工師]";
+			mes "ほれ、これじゃ";
+			close;
+		}
+		mes "[刀細工師]";
+		mes "既に強化済みの武器を装備しないと";
+		mes "更なる強化はできないよ";
+		close;
+	case 3:
+		mes "[刀細工師]";
+		mes "またきなさい";
+		close;
+	}
+}
+payon,147,150,0	script	弟子細工師	85,{
+	mes "[刀細工師]";
+	mes "師匠は作ることしか";
+	mes "興味がないから";
+	mes "俺が武器の手直しを担当するよ！";
+	next;
+	mes "[刀細工師]";
+	mes "ただ、^FF0000カードを挿しちまった武器は";
+	mes "手直しすることはできない^000000から";
+	mes "注意してくれよな！";
+	next;
+	mes "[刀細工師]";
+	mes "さぁて、どうする？";
+	next;
+	switch(select("武器を再強化してください","カードを装着する","能力が知りたい","やめる")){
+	case 1:
+		if(getequipcardid(4,0)>0){mes "[刀細工師]";mes "この装備はもう手直しできないな";close;}
+		switch(select(
+			(getequipcardid(4,1)>0)?getitemname(getequipcardid(4,1))+"の再強化":"",
+			(getequipcardid(4,2)>0)?getitemname(getequipcardid(4,2))+"の再強化":"",
+			(getequipcardid(4,3)>0)?getitemname(getequipcardid(4,3))+"の再強化":"",
+			"やめる")){
+		case 1:
+			mes "[刀細工師]";
+			mes getitemname(getequipcardid(4,1))+"を再強化するのか？";
+			mes "今付いてる強化が解除されて";
+			mes "新しく強化するぞ？";
+			next;
+			mes "[刀細工師]";
+			mes "アルメイラの涙を3個";
+			mes "濃縮オリデオコンを3個";
+			mes "それから2500KZeny用意してくれ！";
+			if(countitem(28680)<3||countitem(7620)<3||Zeny<2500000)close;
+			next;
+			if(select("お願いします","やっぱやめます")==2){
+				mes "[刀細工師]";
+				mes "おう、やめるかい";
+				close;
+			}
+			delitem 28680,3;delitem 7620,3;
+			set Zeny,Zeny-2500000;
+			set @equipweapon,getequipid(4);
+			set @equipcard2,getequipcardid(4,1);
+			set @equipcard3,getequipcardid(4,2);
+			set @equipcard4,getequipcardid(4,3);
+			set @refine,getequiprefinerycnt(4);
+			set .@randid,rand(28395,28425);
+			if(.@randid == @equipcard2){
+				if(.@randid == 28395)
+					set .@randid,.@randid+rand(1,15);
+				else if(.@randid == 28425)
+					set .@randid,.@randid-rand(1,15);
+				else if(rand(1,2) == 1)
+					set .@randid,.@randid+1;
+				else
+					set .@randid,.@randid-1;
+			}
+			unequip 4;
+			delitem2 @equipweapon,1,1,@refine,0,0,@equipcard2,@equipcard3,@equipcard4;
+			getitem2 @equipweapon,1,1,@refine,0,0,.@randid,@equipcard3,@equipcard4;
+			equip @equipweapon;
+			mes "[刀細工師]";
+			mes "ほら、出来上がったぜ！";
+			close;
+		case 2:
+			mes "[刀細工師]";
+			mes getitemname(getequipcardid(4,2))+"を再強化するのか？";
+			mes "今付いてる強化が解除されて";
+			mes "新しく強化するぞ？";
+			next;
+			mes "[刀細工師]";
+			mes "アルメイラの涙を3個";
+			mes "濃縮オリデオコンを3個";
+			mes "それから2500KZeny用意してくれ！";
+			if(countitem(28680)<3||countitem(7620)<3||Zeny<2500000)close;
+			next;
+			if(select("お願いします","やっぱやめます")==2){
+				mes "[刀細工師]";
+				mes "おう、やめるかい";
+				close;
+			}
+			delitem 28680,3;delitem 7620,3;
+			set Zeny,Zeny-2500000;
+			set @equipweapon,getequipid(4);
+			set @equipcard2,getequipcardid(4,1);
+			set @equipcard3,getequipcardid(4,2);
+			set @equipcard4,getequipcardid(4,3);
+			set @refine,getequiprefinerycnt(4);
+			set .@randid,rand(28343,28394);
+			if(.@randid == @equipcard3){
+				if(.@randid == 28343)
+					set .@randid,.@randid+rand(1,30);
+				else if(.@randid == 28394)
+					set .@randid,.@randid-rand(1,30);
+				else if(rand(1,2) == 1)
+					set .@randid,.@randid+1;
+				else
+					set .@randid,.@randid-1;
+			}
+			unequip 4;
+			delitem2 @equipweapon,1,1,@refine,0,0,@equipcard2,@equipcard3,@equipcard4;
+			getitem2 @equipweapon,1,1,@refine,0,0,@equipcard2,.@randid,@equipcard4;
+			equip @equipweapon;
+			mes "[刀細工師]";
+			mes "ほら、出来上がったぜ！";
+			close;
+		case 3:
+			mes "[刀細工師]";
+			mes getitemname(getequipcardid(4,3))+"を再強化するのか？";
+			mes "今付いてる強化が解除されて";
+			mes "新しく強化するぞ？";
+			next;
+			mes "[刀細工師]";
+			mes "アルメイラの涙を3個";
+			mes "濃縮オリデオコンを3個";
+			mes "それから2500KZeny用意してくれ！";
+			if(countitem(28680)<3||countitem(7620)<3||Zeny<2500000)close;
+			next;
+			if(select("お願いします","やっぱやめます")==2){
+				mes "[刀細工師]";
+				mes "おう、やめるかい";
+				close;
+			}
+			delitem 28680,3;delitem 7620,3;
+			set Zeny,Zeny-2500000;
+			set @equipweapon,getequipid(4);
+			set @equipcard2,getequipcardid(4,1);
+			set @equipcard3,getequipcardid(4,2);
+			set @equipcard4,getequipcardid(4,3);
+			set @refine,getequiprefinerycnt(4);
+			set .@randid,rand(28300,28342);
+			if(.@randid == @equipcard4){
+				if(.@randid == 28300)
+					set .@randid,.@randid+rand(1,30);
+				else if(.@randid == 28342)
+					set .@randid,.@randid-rand(1,30);
+				else if(rand(1,2) == 1)
+					set .@randid,.@randid+1;
+				else
+					set .@randid,.@randid-1;
+			}
+			unequip 4;
+			delitem2 @equipweapon,1,1,@refine,0,0,@equipcard2,@equipcard3,@equipcard4;
+			getitem2 @equipweapon,1,1,@refine,0,0,@equipcard2,@equipcard3,.@randid;
+			equip @equipweapon;
+			mes "[刀細工師]";
+			mes "ほら、出来上がったぜ！";
+			close;
+		case 4:
+			mes "[刀細工師]";
+			mes "おう、やめるかい";
+			close;
+		}
+		close;
+	case 2:
+		mes "[刀細工師]";
+		mes "武器カードを作成した武器に挿してやる";
+		mes "もしLv2武器カードを3枚持ってくるなら";
+		mes "さらに強化されたLv3武器カードにして挿してやる";
+		next;
+		mes "[刀細工師]";
+		mes "あと、カードを挿す場合の注意点だが";
+		mes "^FF00003段階まで強化されたクリエイト武器^000000が必要で";
+		mes "^FF0000カードを挿すと再強化できなくなる^000000から注意しろ";
+		next;
+		switch(select("武器カードを挿す","Lv3.武器カードを挿す","武器カードを剥がす","Lv3.武器カードを剥がす","やめる")){
+		case 1:
+			if(getequipcardid(4,0)>0){mes "[刀細工師]";mes "この装備はもう手直しできないな";close;}
+			if(getequipcardid(4,1)>0){
+				cleararray @inventorylist_id[0],0,100;
+				cleararray .@card_num[0],0,100;
+				getinventorylist;
+				set .@vars_kind,getarraysize(@inventorylist_id);
+				set .@j,0;
+				for(set .@i,0; .@i<.@vars_kind; set .@i,.@i+1){
+					if(	((@inventorylist_id[.@i] >= 4001) &&(@inventorylist_id[.@i] <= 4477)) ||
+						((@inventorylist_id[.@i] >= 28901)&&(@inventorylist_id[.@i] <= 28993))	){
+						setarray .@card_num[.@j],@inventorylist_id[.@i];
+						set .@j,.@j+1;
+					}
+				}
+				mes "[刀細工師]";
+				if(.@j<1){
+					mes "^FF0000カードを1つも持ってないですね^000000";
+					close;
+				}
+				mes "武器に装着するカードを選択して下さい";
+				next;
+				set .@max_page, .@j /10 - ((.@j > 9) && ((.@j %10) == 0));
+				set .@now_page,0;
+				set .@cardselect,-1;
+				do {
+					set .@choose,(select(
+						((.@now_page > 0)? "前へ":""),
+						((.@card_num[.@now_page *10 + 0] >= 4001 && checkequip(.@card_num[.@now_page *10 + 0])==2)? getitemname(.@card_num[.@now_page *10 + 0]):""),
+						((.@card_num[.@now_page *10 + 1] >= 4001 && checkequip(.@card_num[.@now_page *10 + 1])==2)? getitemname(.@card_num[.@now_page *10 + 1]):""),
+						((.@card_num[.@now_page *10 + 2] >= 4001 && checkequip(.@card_num[.@now_page *10 + 2])==2)? getitemname(.@card_num[.@now_page *10 + 2]):""),
+						((.@card_num[.@now_page *10 + 3] >= 4001 && checkequip(.@card_num[.@now_page *10 + 3])==2)? getitemname(.@card_num[.@now_page *10 + 3]):""),
+						((.@card_num[.@now_page *10 + 4] >= 4001 && checkequip(.@card_num[.@now_page *10 + 4])==2)? getitemname(.@card_num[.@now_page *10 + 4]):""),
+						((.@card_num[.@now_page *10 + 5] >= 4001 && checkequip(.@card_num[.@now_page *10 + 5])==2)? getitemname(.@card_num[.@now_page *10 + 5]):""),
+						((.@card_num[.@now_page *10 + 6] >= 4001 && checkequip(.@card_num[.@now_page *10 + 6])==2)? getitemname(.@card_num[.@now_page *10 + 6]):""),
+						((.@card_num[.@now_page *10 + 7] >= 4001 && checkequip(.@card_num[.@now_page *10 + 7])==2)? getitemname(.@card_num[.@now_page *10 + 7]):""),
+						((.@card_num[.@now_page *10 + 8] >= 4001 && checkequip(.@card_num[.@now_page *10 + 8])==2)? getitemname(.@card_num[.@now_page *10 + 8]):""),
+						((.@card_num[.@now_page *10 + 9] >= 4001 && checkequip(.@card_num[.@now_page *10 + 9])==2)? getitemname(.@card_num[.@now_page *10 + 9]):""),
+						(.@now_page < .@max_page)? "次へ" : ""));
+
+					if (.@choose ==1){			//『前へ』
+						set .@now_page,.@now_page -1;
+					} else if (.@choose==12){		//『次へ』
+						set .@now_page,.@now_page +1;
+					}
+				} while(.@choose ==1 || .@choose ==12);
+				set .@cardselect,.@card_num[.@now_page *10 + .@choose -2];
+				mes "[刀細工師]";
+				mes getitemname(.@cardselect)+"を武器に装着しますか？";
+				next;
+				if(select("お願いします","やっぱやめます")==2){
+					mes "[刀細工師]";
+					mes "おう、やめるかい";
+					close;
+				}
+				if(countitem(.@cardselect)<1){mes "[刀細工師]";mes "カードがないみたいだな";close;}
+				if(checkequip(.@cardselect)!=2){mes "[刀細工師]";mes "武器カードじゃないみたいだな";close;}
+				delitem .@cardselect,1;
+				set @equipweapon,getequipid(4);
+				set @equipcard2,getequipcardid(4,1);
+				set @equipcard3,getequipcardid(4,2);
+				set @equipcard4,getequipcardid(4,3);
+				set @refine,getequiprefinerycnt(4);
+				unequip 4;
+				delitem2 @equipweapon,1,1,@refine,0,0,@equipcard2,@equipcard3,@equipcard4;
+				getitem2 @equipweapon,1,1,@refine,0,.@cardselect,@equipcard2,@equipcard3,@equipcard4;
+				equip @equipweapon;
+				mes "[刀細工師]";
+				mes "ほら、出来上がったぜ！";
+				close;
+			}
+			break;
+		case 2:
+			if(getequipcardid(4,0)>0){mes "[刀細工師]";mes "この装備はもう手直しできないな";close;}
+			if(getequipcardid(4,1)>0){
+				set .@choose,(select(
+					((countitem(28901)>2)? getitemname(28901):""),
+					((countitem(28902)>2)? getitemname(28902):""),
+					((countitem(28903)>2)? getitemname(28903):""),
+					((countitem(28904)>2)? getitemname(28904):""),
+					((countitem(28905)>2)? getitemname(28905):""),
+					((countitem(28906)>2)? getitemname(28906):""),
+					((countitem(28907)>2)? getitemname(28907):""),
+					((countitem(28908)>2)? getitemname(28908):""),
+					((countitem(28909)>2)? getitemname(28909):""),
+					((countitem(28910)>2)? getitemname(28910):""),
+					((countitem(28911)>2)? getitemname(28911):""),
+					((countitem(28912)>2)? getitemname(28912):""),
+					((countitem(28913)>2)? getitemname(28913):""),
+					((countitem(28914)>2)? getitemname(28914):""),
+					((countitem(28915)>2)? getitemname(28915):""),
+					((countitem(28916)>2)? getitemname(28916):""),
+					((countitem(28917)>2)? getitemname(28917):""),
+					((countitem(28918)>2)? getitemname(28918):""),
+					((countitem(28919)>2)? getitemname(28919):""),
+					((countitem(28920)>2)? getitemname(28920):""),
+					((countitem(28921)>2)? getitemname(28921):""),
+					((countitem(28948)>2)? getitemname(28948):""),
+
+					((countitem(29801)>2)? getitemname(29801):""),
+					((countitem(29802)>2)? getitemname(29802):""),
+					((countitem(29803)>2)? getitemname(29803):""),
+					((countitem(29804)>2)? getitemname(29804):""),
+					((countitem(29805)>2)? getitemname(29805):""),
+					((countitem(29806)>2)? getitemname(29806):""),
+					((countitem(29807)>2)? getitemname(29807):""),
+					((countitem(29808)>2)? getitemname(29808):""),
+					((countitem(29809)>2)? getitemname(29809):""),
+					"やめる"));
+				if(.@choose==32){mes "[刀細工師]";mes "またきてくれよ";close;}
+				if(.@choose>=23){
+					set .@revitem,29810+(.@choose-23);
+					set .@killitem,29801+(.@choose-23);
+				}else{
+					set .@revitem,(.@choose==22?28949:(28921+.@choose));
+					set .@killitem,(.@choose==22?28948:(28900+.@choose));
+				}
+				mes "[刀細工師]";
+				mes getitemname(.@killitem)+" 3枚を使って、";
+				mes getitemname(.@revitem)+"を武器に装着しますか？";
+				next;
+				if(select("お願いします","やっぱやめます")==2){
+					mes "[刀細工師]";
+					mes "おう、やめるかい";
+					close;
+				}
+				if(countitem(.@killitem)<3){mes "[刀細工師]";mes "カードがないみたいだな";close;}
+				delitem .@killitem,3;
+				set @equipweapon,getequipid(4);
+				set @equipcard2,getequipcardid(4,1);
+				set @equipcard3,getequipcardid(4,2);
+				set @equipcard4,getequipcardid(4,3);
+				set @refine,getequiprefinerycnt(4);
+				unequip 4;
+				delitem2 @equipweapon,1,1,@refine,0,0,@equipcard2,@equipcard3,@equipcard4;
+				getitem2 @equipweapon,1,1,@refine,0,.@revitem,@equipcard2,@equipcard3,@equipcard4;
+				equip @equipweapon;
+				mes "[刀細工師]";
+				mes "ほら、出来上がったぜ！";
+				close;
+			}
+			break;
+		case 3:
+			set @equipweapon,getequipid(4);
+			setarray .@cid[0],	13042,13416,1187,1426,1486,1310,1382,1546,
+						1546,1640,1743,1826,1927,1981,1576,1281,13110,
+						13176,13178,13177,13179,13307;
+			for(set .@i,0; .@i<getarraysize(.@cid); set .@i,.@i+1){
+				if(@equipweapon==.@cid[.@i]){
+					set .@ok,1;
+					break;
+				}
+			}
+			if(.@ok == 1){
+				mes "武器カードを剥がすとき";
+				mes "^FF000010%の確率で精錬値が半減^000000する";
+				mes "それでも剥がすか？";
+				mes "5MZenyが必要だ";
+				next;
+				if(select("やっぱやめます","お願いします")==1){
+					mes "[刀細工師]";
+					mes "おう、やめるかい";
+					close;
+				}
+				if(Zeny < 5000000){mes "[刀細工師]";mes "金が足りんな";close;}
+				set Zeny,Zeny-5000000;
+				set @equipcard1,getequipcardid(4,0);
+				set @equipcard2,getequipcardid(4,1);
+				set @equipcard3,getequipcardid(4,2);
+				set @equipcard4,getequipcardid(4,3);
+				if(rand(100) < 10)
+					set @refine,getequiprefinerycnt(4)/2;
+				else
+					set @refine,getequiprefinerycnt(4);
+				unequip 4;
+				delitem2 @equipweapon,1,1,@refine,0,@equipcard1,@equipcard2,@equipcard3,@equipcard4;
+				getitem2 @equipweapon,1,1,@refine,0,0,@equipcard2,@equipcard3,@equipcard4;
+				getitem @equipcard1,1;
+				equip @equipweapon;
+				mes "[刀細工師]";
+				mes "ほら、出来上がったぜ！";
+				close;
+			}
+			mes "お？";
+			mes "何言ってんだお前";
+			close;
+		case 4:
+			mes "[刀細工師]";
+			if((getequipcardid(4,0)>=28922 && getequipcardid(4,0)<=28942) || getequipcardid(4,0)==28949 || (getequipcardid(4,0)>=29810 && getequipcardid(4,0)<=29818)){
+				mes "Lv3.武器カードを剥がすとき";
+				mes "^FF000010%の確率で精錬値が半減^000000する";
+				mes "それでも剥がすか？";
+				mes "5MZenyが必要だ";
+				next;
+				if(select("やっぱやめます","お願いします")==1){
+					mes "[刀細工師]";
+					mes "おう、やめるかい";
+					close;
+				}
+				if(Zeny < 5000000){mes "[刀細工師]";mes "金が足りんな";close;}
+				set Zeny,Zeny-5000000;
+				set @equipweapon,getequipid(4);
+				set @equipcard1,getequipcardid(4,0);
+				set @equipcard2,getequipcardid(4,1);
+				set @equipcard3,getequipcardid(4,2);
+				set @equipcard4,getequipcardid(4,3);
+				if(rand(100) < 10)
+					set @refine,getequiprefinerycnt(4)/2;
+				else
+					set @refine,getequiprefinerycnt(4);
+				unequip 4;
+				delitem2 @equipweapon,1,1,@refine,0,@equipcard1,@equipcard2,@equipcard3,@equipcard4;
+				getitem2 @equipweapon,1,1,@refine,0,0,@equipcard2,@equipcard3,@equipcard4;
+				if(@equipcard1 == 28949)
+					getitem 28948,3;
+				else if(@equipcard1 >= 29810)
+					getitem (@equipcard1 - 9),3;
+				else
+					getitem (@equipcard1 - 21),3;
+				equip @equipweapon;
+				mes "[刀細工師]";
+				mes "ほら、出来上がったぜ！";
+				close;
+			}
+			mes "お？";
+			mes "何言ってんだお前";
+			close;
+		case 5:
+			mes "[刀細工師]";
+			mes "またきてくれよ";
+			close;
+		}
+		mes "[刀細工師]";
+		mes "条件を満たしていないな";
+		mes "対象武器は装備してきてくれよ";
+		close;
+	case 3:
+		mes "[刀細工師]";
+		mes "今装備してる武器の効果を";
+		mes "調べることができるぞ";
+		mes "鑑定するには1MZenyが必要だ";
+		next;
+		if(select("お願いします","やっぱやめます")==2){
+			mes "[刀細工師]";
+			mes "おう、やめるかい";
+			close;
+		}
+		mes "[刀細工師]";
+		mes "どれの効果が知りたいんだい？";
+		next;
+		switch(select(
+			(getequipcardid(4,1)>0)?getitemname(getequipcardid(4,1))+"の判定":"",
+			(getequipcardid(4,2)>0)?getitemname(getequipcardid(4,2))+"の判定":"",
+			(getequipcardid(4,3)>0)?getitemname(getequipcardid(4,3))+"の判定":"",
+			"やめる")){
+		case 1:set .@cardid,getequipcardid(4,1);break;
+		case 2:set .@cardid,getequipcardid(4,2);break;
+		case 3:set .@cardid,getequipcardid(4,3);break;
+		case 4:
+			mes "[刀細工師]";
+			mes "またきてくれよ";
+			close;
+		}
+		mes "[刀細工師]";
+		mes getitemname(.@cardid)+"の判定をしていいかな？";
+		next;
+		if(select("お願いします","やっぱやめます")==2){
+			mes "[刀細工師]";
+			mes "おう、やめるかい";
+			close;
+		}
+		if(Zeny < 1000000){mes "[刀細工師]";mes "1MZenyが必要だよ";close;}
+		mes "[刀細工師]";
+		switch(.@cardid){
+		case 28300: mes "Aspd+10%"; break;					//バタフライ	bonus bAspdRate,10;
+		case 28301: mes "クリティカル防御+13%"; break;				//ジャック	bonus bCriticalDef,13;
+		case 28302: mes "Str+4 SPが10秒ごとに50減少"; break;			//ブッチャー	bonus2 bSPLossRate,50,10000;bonus bStr,4;
+		case 28303: mes "Luk+15"; break;					//ソムリエ	bonus bLuk,15;
+		case 28304: mes "クリティカルダメージ+50% クリティカル率-30%"; break;	//ハンティング	bonus bCritAtkRate,50;bonus bCriticalRate,-30;
+		case 28305: mes "ASマキシマイズパワーLv2"; break;			//ダマスカス	bonus3 bAutoSpell,"BS_MAXIMIZE",2,1;
+		case 28306: mes "ASイムポシティオマヌスLv3 最低ダメージ+5"; break;	//ブッシュ	bonus3 bAutoSpell,"PR_IMPOSITIO",3,3;bonus bAtk2,5;
+		case 28307: mes "攻撃範囲+2"; break;					//ロング	bonus bAtkRange,2;
+		case 28308: mes "武器が聖属性になる"; break;				//グラマラス	bonus bAtkEle,Ele_Holy;
+		case 28309: mes "最低ダメージ+25"; break;				//グレート	bonus bAtk2,25;
+		case 28310: mes "Vit+4"; break;						//バトル	bonus bVit,4;
+		case 28311: mes "ASトゥルーサイトLv2"; break;				//グラマラス	bonus3 bAutoSpell,"SN_SIGHT",2,1;
+		case 28312: mes "Int+4 Dex+2 MaxHP-10%"; break;				//フェリング	bonus bInt,4;bonus bDex,2;bonus bMaxHPrate,-10;
+		case 28313: mes "Matk+8%"; break;					//スプリング	bonus bMatkRate,8;
+		case 28314: mes "遠距離攻撃ダメージ+20%"; break;			//ブロード	bonus bLongAtkRate,20;
+		case 28315: mes "クリティカル率+20% 大型に+10%追加ダメージ"; break;	//リカーブ	bonus bCriticalRate,20;bonus2 bSubSize,2,10;
+		case 28316: mes "ダブルアタック確率+10%"; break;			//タクト	bonus bDoubleAddRate,10;
+		case 28317: mes "武器が念属性になる 最低ダメージ+10"; break;		//アストラル	bonus bAtkEle,Ele_Ghost;bonus bAtk2,10;
+		case 28318: mes "Atk+30 Str+1"; break;					//オリハルコン	bonus bBaseAtk,30;bonus bStr,1;
+		case 28319: mes "攻撃が3*3スプラッシュになる Atk-2%"; break;		//デス		bonus bSplashRange,1;bonus bAtkRate,-2;
+		case 28320: mes "1%の確率で5%をHP吸収、2%の確率で3%をSP吸収"; break;	//デモンズ	bonus2 bHPDrainRate,1,5;bonus2 bSPDrainRate,2,3;
+		case 28321: mes "変動詠唱+5% 不死種族に魔法ダメージ+5%"; break;		//ミスティック	bonus bCastrate,5;bonus2 bMagicAddRace,1,5;
+		case 28322: mes "Agi+6 Flee+4"; break;					//フェアリー	bonus bAgi,6;bonus bFlee,4;
+		case 28323: mes "Hit+10"; break;					//フォース	bonus bHit,10;
+		case 28324: mes "SP回復力+100%"; break;					//クレセント	bonus bSPrecovRate,100;
+		case 28325: mes "Atk+100 最低ダメージ+20"; break;			//アーク	bonus bAtk,100;bonus bAtk2,20;
+		case 28326: mes "攻撃時、確率で敵を猛毒にする"; break;			//デストロイヤーbonus2 bAddEff,Eff_DPoison,100;
+		case 28327: mes "攻撃時、確率で敵を沈黙にする"; break;			//ワルーン	bonus2 bAddEff,Eff_Silence,200;
+		case 28328: mes "ボス以外の敵に対して錐効果になる"; break;		//ヴォーパル	bonus bDefRatioAtkRace,11;
+		case 28329: mes "被弾時ASサイトラッシャーLv3"; break;			//ギア		bonus4 bAutoSpellWhenHit,"WZ_SIGHTRASHER",3,2,0;
+		case 28330: mes "MaxSP+7%"; break;					//アクセス	bonus bMaxSPrate,7;
+		case 28331: mes "ボス以外のMdefを無視する"; break;			//ディメンションbonus bIgnoreMDefRace,11;
+		case 28332: mes "ヒールLv1習得、被弾時ASハイネスヒールLv1"; break;	//トレント	bonus4 bAutoSpellWhenHit,"AB_HIGHNESSHEAL",1,1,0;
+		case 28333: mes "ヒール系スキルの効果+20% SPが自然回復しない"; break;	//ミラージュ	bonus bHealPower,20;bonus bNoRegen,2;
+		case 28334: mes "クリティカルダメージ+20%"; break;			//ヒエロス	bonus bCritAtkRate,20;
+		case 28335: mes "ボス以外のDefを無視する"; break;			//アサルト	bonus bIgnoreDefRace,11;
+		case 28336: mes "Matk+15%"; break;					//ジハード	bonus bMatkRate,15;
+		case 28337: mes "Atk+15%"; break;					//ナイトメア	bonus bAtkRate,15;
+		case 28338: mes "ヒール系スキルを受けた時の効果+5% Atk+2%"; break;	//ミステリー	bonus bHealPower2,5;bonus bAtkRate,2;
+		case 28339: mes "Atk+7% 武器が不死属性になる"; break;			//バンパイア	bonus bAtkRate,7;bonus bAtkEle,Ele_Undead;
+		case 28340: mes "Aspd+1 マグヌスエクソシズムLv2使用可"; break;		//ジ		bonus bAspd,1;skill 79,2;
+		case 28341: mes "AllStatus+2"; break;					//ボンクラ	bonus bAllStats,2;
+		case 28342: mes "Atk+5% Hit+3%"; break;					//パルサー	bonus bAtkRate,5;bonus bHitRate,3;
+		case 28343: mes "ノービスの場合、MaxHP+2000、MaxSP+200"; break;					//初心者,6,20,,10,,,,,,,,2,,,,,{if(BaseClass == Job_Novice){bonus bMaxHP,2000;bonus bMaxSP,200;} },{},{}
+		case 28344: mes "ナイト系の場合、Atk+50、遠距離物理反射10%"; break;				//騎士,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Knight){bonus bAtk,50;bonus bLongWeaponDamageReturn,10;} },{},{}
+		case 28345: mes "プリースト系の場合、変動詠唱-10%、ディレイ-10%"; break;			//聖職者,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Priest){bonus bCastrate,10;bonus bDelayRate,10;} },{},{}
+		case 28346: mes "ウィザード系の場合、Matk+50、MaxSP+100"; break;				//魔術師,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Wizard){bonus bMatk,50;bonus bMaxSP,100;} },{},{}
+		case 28347: mes "ブラックスミス系の場合、物理攻撃時に確率でダメージ+50%、MaxSP+5%"; break;	//鍛冶師,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Blacksmith){bonus2 bRandomAttackIncrease,50,15;bonus bMaxSPrate,5;} },{},{}
+		case 28348: mes "ハンター系の場合、クリティカル+6%、遠距離物理攻撃+15%"; break;			//狩人,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Hunter){bonus bCriticalRate,6;bonus bLongAtkRate,15;} },{},{}
+		case 28349: mes "アサシン系の場合、Aspd+7%、クリティカルダメージ+15%%"; break;				//暗殺者,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Assassin){bonus bAspdRate,7;bonus bCritAtkRate,15;} },{},{}
+		case 28350: mes "クルセイダー系の場合、HPとSPが自然回復しない。回復スキルを受けた時の効果+15%"; break;	//聖騎士,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Crusader){bonus bNoRegen,1;bonus bNoRegen,2;bonus bHealPower2,15;} },{},{}
+		case 28351: mes "モンク系の場合、SP消費量-10%、被弾時、敵を確率で睡眠か凍結させる"; break;		//僧兵,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Monk){bonus bUseSPrate,-10;bonus2 bResEff,Eff_Sleep,200;bonus2 bResEff,Eff_Freeze,200;} },{},{}
+		case 28352: mes "セージ系の場合、Aspd+7%、変動詠唱-10%"; break;						//学者,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Sage){bonus bAspdRate,7;bonus bCastrate,-10;} },{},{}
+		case 28353: mes "ローグ系の場合、スティール成功率+10%、敵を倒したときHP30、SP10回復"; break;		//悪漢,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Rogue){bonus bAddStealRate,10;bonus bHPGainValue,30;bonus bSPGainValue,10;} },{},{}
+		case 28354: mes "アルケミスト系の場合、Atk+15%、Matk+15%、必中攻撃+20%"; break;				//錬金術師,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Alchemist){bonus bAtkRate,15;bonus bMatkRate,15;bonus bPerfectHitRate,20;} },{},{}
+		case 28355: mes "バード系の場合、変動詠唱-10%、近接物理反射+5%、被弾時敵を暗闇にする"; break;		//吟遊詩人,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Bard){bonus bCastrate,10;bonus bShortWeaponDamageReturn,5;bonus2 bAddEffWhenHit,Eff_Blind,5;} },{},{}
+		case 28356: mes "ダンサー系の場合、変動詠唱-10%、遠距離物理反射+5%、被弾時敵をスタンにする"; break;	//踊子,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Dancer){bonus bCastrate,10;bonus bLongWeaponDamageReturn,5;bonus2 bAddEffWhenHit,Eff_Stan,5;} },{},{}
+		case 28357: mes "テコン系の場合、Atk+50、Matk+50、Flee+10%"; break;					//拳闘師,6,20,,10,,,,,,,,2,,,,,{if(BaseClass == Job_Taekwon){bonus bAtk,50;bonus bMatk,50;bonus bFleeRate,10;} },{},{}
+		case 28358: mes "ガンスリンガーの場合、MaxHP+300、SP消費-10%、遠距離物理攻撃+5%"; break;		//銃闘師,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Gunslinger){bonus bMaxHP,300;bonus bUseSPrate,-10;bonus bLongAtkRate,5;} },{},{}
+		case 28359: mes "忍者の場合、Atk+6%、Matk+6%、MaxSP+100"; break;					//忍,6,20,,10,,,,,,,,2,,,,,{if(BaseJob == Job_Ninja){bonus bAtkRate,6;bonus bMatkRate,6;bonus bMaxSP,100;} },{},{}
+		case 28360: mes "精錬値に応じてAtkが上昇する"; break;					//伝説,6,20,,10,,,,,,,,2,,,,,{bonus bAtk,(getrefine()>=10?10:getrefine())*(getrefine()>=10?10:getrefine());},{},{}
+		case 28361: mes "無形種族、竜種族に錐効果"; break;					//古風,6,20,,10,,,,,,,,2,,,,,{bonus bDefRatioAtkRace,0;bonus bDefRatioAtkRace,9;},{},{}
+		case 28362: mes "遠距離物理攻撃+50%、MaxHP-50%、SPが持続的に減少する"; break;		//栄光,6,20,,10,,,,,,,,2,,,,,{bonus bLongAtkRate,50;bonus bMaxHPrate,-50;bonus2 bSPLossRate,500,5000;},{},{}
+		case 28363: mes "MaxHP+50%、HP自然回復-100%、HPが持続的に減少する"; break;		//破滅を呼ぶ,6,20,,10,,,,,,,,2,,,,,{bonus bMaxHPrate,50;bonus bHPrecovRate,-100; bonus2 bHPLossRate,1500,5000;},{},{}
+		case 28364: mes "装備中混乱になる"; break;						//愚者,6,20,,10,,,,,,,,2,,,,,{},{sc_start SC_Confusion,10000,0;},{}
+		case 28365: mes "AllStatus+3"; break;							//虹色,6,20,,10,,,,,,,,2,,,,,{bonus bAllStats,3;},{},{}
+		case 28366: mes "攻撃が5*5スプラッシュになる Atk-10%"; break;				//暴食,6,20,,10,,,,,,,,2,,,,,{bonus bSplashAddRange,2;bonus bAtkRate,-10;},{},{}
+		case 28367: mes "HP自然回復+100%、SP自然回復+100%"; break;				//色欲,6,20,,10,,,,,,,,2,,,,,{bonus bHPrecovRate,100;bonus bSPrecovRate,100;},{},{}
+		case 28368: mes "敵を倒したときZenyが手に入る"; break;					//強欲,6,20,,10,,,,,,,,2,,,,,{bonus2 bAddGetZenyNum,500,10;},{},{}
+		case 28369: mes "AllStatus-2、Matk+11%"; break;						//憂鬱,6,20,,10,,,,,,,,2,,,,,{bonus bAllStats,-2;bonus bMatkRate,11;},{},{}
+		case 28370: mes "MaxHP-95%、Atk+25%"; break;						//憤怒,6,20,,10,,,,,,,,2,,,,,{bonus bMaxHPrate,-95;bonus bAtkRate,25;},{},{}
+		case 28371: mes "移動速度低下"; break;							//怠惰,6,20,,10,,,,,,,,2,,,,,{bonus bSpeedAddRate,-50;},{},{}
+		case 28372: mes "被弾時、敵を石化、呪い、凍結する"; break;				//嫉妬,6,20,,10,,,,,,,,2,,,,,{bonus2 bResEff,Eff_Stone,200;bonus2 bResEff,Eff_Curse,200;bonus2 bResEff,Eff_Freeze,200;},{},{}
+		case 28373: mes "変動詠唱-20%"; break;							//傲慢,6,20,,10,,,,,,,,2,,,,,{bonus bCastrate,-20;},{},{}
+		case 28374: mes "ASターンアンデットLv5"; break;						//浄化,6,20,,10,,,,,,,,2,,,,,{bonus3 bAutoSpell,"PR_TURNUNDEAD",5,200;},{},{}
+		case 28375: mes "精錬値が7以上ならクリティカル+40"; break;				//練磨,6,20,,10,,,,,,,,2,,,,,{if(getrefine()>6)bonus bCritical,40;},{},{}
+		case 28376: mes "ボウリングバッシュLv2使用可能"; break;					//源氏,6,20,,10,,,,,,,,2,,,,,{skill "KN_BOWLINGBASH",2;},{},{}
+		case 28377: mes "被弾時、ASマジックロッドLv3"; break;					//メモリ,6,20,,10,,,,,,,,2,,,,,{bonus3 bAutoSpellWhenHit,"SA_MAGICROD",3,2;},{},{}
+		case 28378: mes "攻撃が3*3スプラッシュになる"; break;					//パラベラム,6,20,,10,,,,,,,,2,,,,,{bonus bSplashAddRange,1;},{},{}
+		case 28379: mes "Aspd-10%"; break;							//エアリー,6,20,,10,,,,,,,,2,,,,,{bonus bAspdRate,10;},{},{}
+		case 28380: mes "物理攻撃時、確率で6秒間錐効果になる"; break;				//ノヴァ,6,20,,10,,,,,,,,2,,,,,{autobonus "{ bonus bDefRatioAtkRace,RC_Boss; bonus bDefRatioAtkRace,RC_NonBoss; }",10,6000,BF_WEAPON,"{ specialeffect2 EF_HASTEUP; }";},{},{}
+		case 28381: mes "ASシャープシューティングLv3"; break;					//オメガ,6,20,,10,,,,,,,,2,,,,,{bonus3 bAutoSpell,"SN_SHARPSHOOTING",3,2;},{},{}
+		case 28382: mes "Matk+50"; break;							//カオス,6,20,,10,,,,,,,,2,,,,,{bonus bMatk,50;},{},{}
+		case 28383: mes "物理攻撃時、確率で6秒間確率で敵に毒効果"; break;			//クラスター,6,20,,10,,,,,,,,2,,,,,{autobonus "{ bonus2 bAddEff,Eff_Poison,2000; }",10,6000,BF_WEAPON,"{ specialeffect2 EF_HASTEUP; }";},{},{}
+		case 28384: mes "Hit-10、動物種族にダメージ+30%"; break;				//ベア,6,20,,10,,,,,,,,2,,,,,{bonus bHit,-10;bonus2 bAddRace,2,30;},{},{}
+		case 28385: mes "不死種族にダメージ+30%、魚類種族にダメージ+25%"; break;		//レイン,6,20,,10,,,,,,,,2,,,,,{bonus2 bAddEle,1,30;bonus2 bAddRace,5,25;},{},{}
+		case 28386: mes "サイズ補正を受けない。全てのサイズにダメージ+10%"; break;		//ハイエンド,6,20,,10,,,,,,,,2,,,,,{bonus bNoSizeFix,n;bonus2 bAddSize,0,15;bonus2 bAddSize,1,15;bonus2 bAddSize,2,15;},{},{}
+		case 28387: mes "確率で10秒間、鎧の属性が聖属性になる"; break;				//ワンダー,6,20,,10,,,,,,,,2,,,,,{autobonus2 "{ bonus bDefEle,Ele_Holy; }",15,10000,BF_WEAPON,"{ specialeffect2 EF_ENERGYCOAT; }";},{},{}
+		case 28388: mes "確率で10秒間、鎧の属性が念属性になる"; break;				//ハニー,6,20,,10,,,,,,,,2,,,,,{autobonus2 "{ bonus bDefEle,Ele_Ghost; }",15,10000,BF_WEAPON,"{ specialeffect2 EF_ENERGYCOAT; }";},{},{}
+		case 28389: mes "敵を倒したときZenyが手に入る"; break;					//ニャーゴ,6,20,,10,,,,,,,,2,,,,,{bonus2 bAddGetZenyNum,1000,10;},{},{}
+		case 28390: mes "ASインティミデイトLv1"; break;						//バイパー,6,20,,10,,,,,,,,2,,,,,{bonus3 bAutoSpell,"RG_INTIMIDATE",1,10;},{},{}
+		case 28391: mes "回復スキルを受けた時の効果+25%"; break;				//ヘル,6,20,,10,,,,,,,,2,,,,,{bonus bHealPower2,25;},{},{}
+		case 28392: mes "確率で10秒間、物理攻撃時に敵のSPを消す"; break;			//ジェネシス,6,20,,10,,,,,,,,2,,,,,{autobonus "{ bonus2 bSPVanishRate,5,10; }",10,10000,BF_WEAPON,"{ specialeffect2 EF_HASTEUP; }";},{},{}
+		case 28393: mes "確率で10秒間、AllStatus+10"; break;					//ヒヒイロカネ,6,20,,10,,,,,,,,2,,,,,{autobonus "{ bonus bAllStats,10; }",5,10000,0,"{ specialeffect2 EF_POTION_BERSERK; }";},{},{}
+		case 28394: mes "移動速度増加"; break;							//アイリス,6,20,,10,,,,,,,,2,,,,,{bonus bSpeedAddRate,10;},{},{}
+		case 28395: mes "ボスにダメージ+30%、一般MOBにダメージ+40%"; break;		//苛烈,6,20,,10,,,,,,,,2,,,,,{bonus2 bAddRace,10,30;bonus2 bAddRace,11,40;},{},{}
+		case 28396: mes "一般MOBにダメージ+45%"; break;					//激烈,6,20,,10,,,,,,,,2,,,,,{bonus2 bAddRace,11,45;},{},{}
+		case 28397: mes "ボスに魔法ダメージ+30%、一般MOBに魔法ダメージ+40%"; break;	//鮮烈,6,20,,10,,,,,,,,2,,,,,{bonus2 bMagicAddRace,10,30;bonus2 bMagicAddRace,11,40;},{},{}
+		case 28398: mes "一般MOBに魔法ダメージ+50%"; break;				//強力,6,20,,10,,,,,,,,2,,,,,{bonus2 bMagicAddRace,11,50;},{},{}
+		case 28399: mes "一般MOBにダメージ+50%"; break;					//凶悪,6,20,,10,,,,,,,,2,,,,,{bonus2 bAddRace,11,50;},{},{}
+		case 28400: mes "Aspd+15%"; break;						//軽量,6,20,,10,,,,,,,,2,,,,,{bonus bAspdRate,15;},{},{}
+		case 28401: mes "クリティカル率+20%"; break;					//星屑纏う,6,20,,10,,,,,,,,2,,,,,{bonus bCriticalRate,20;},{},{}
+		case 28402: mes "移動速度増加"; break;						//俊敏,6,20,,10,,,,,,,,2,,,,,{bonus bSpeedAddRate,15;},{},{}
+		case 28403: mes "ASコンセントレーションLv1"; break;				//勇猛,6,20,,10,,,,,,,,2,,,,,{bonus3 bAutoSpell,"LK_CONCENTRATION",1,5;},{},{}
+		case 28404: mes "武器と盾をストリップされない"; break;				//魅力的,6,20,,10,,,,,,,,2,,,,,{bonus bUnstripableWeapon,n;bonus bUnstripableShield,n;},{},{}
+		case 28405: mes "武器と鎧をストリップされない"; break;				//蟲惑的,6,20,,10,,,,,,,,2,,,,,{bonus bUnstripableWeapon,n;bonus bUnstripableArmor,n;},{},{}
+		case 28406: mes "AtkとMatkが精錬値に応じて上昇"; break;				//古典的,6,20,,10,,,,,,,,2,,,,,{bonus bAtkRate,5+getrefine();bonus bMatkRate,5+getrefine();},{},{}
+		case 28407: mes "小型と大型モンスターにダメージ+25%"; break;			//巨大,6,20,,10,,,,,,,,2,,,,,{bonus2 bAddSize,0,25;bonus2 bAddSize,2,25;},{},{}
+		case 28408: mes "遠距離物理攻撃+30%"; break;					//長大,6,20,,10,,,,,,,,2,,,,,{bonus bLongAtkRate,30;},{},{}
+		case 28409: mes "スティール成功率が精錬値に応じて増加"; break;			//下賤,6,20,,10,,,,,,,,2,,,,,{bonus bAddStealRate,getrefine();},{},{}
+		case 28410: mes "武器が火属性になる、サイズ補正無視"; break;			//火精霊,6,20,,10,,,,,,,,2,,,,,{bonus bAtkEle,3;bonus bNoSizeFix,n;},{},{}
+		case 28411: mes "武器が水属性になる、サイズ補正無視"; break;			//水精霊,6,20,,10,,,,,,,,2,,,,,{bonus bAtkEle,1;bonus bNoSizeFix,n;},{},{}
+		case 28412: mes "武器が風属性になる、サイズ補正無視"; break;			//風精霊,6,20,,10,,,,,,,,2,,,,,{bonus bAtkEle,4;bonus bNoSizeFix,n;},{},{}
+		case 28413: mes "武器が地属性になる、サイズ補正無視"; break;			//地精霊,6,20,,10,,,,,,,,2,,,,,{bonus bAtkEle,2;bonus bNoSizeFix,n;},{},{}
+		case 28414: mes "武器が聖属性になる、サイズ補正無視"; break;			//聖精霊,6,20,,10,,,,,,,,2,,,,,{bonus bAtkEle,6;bonus bNoSizeFix,n;},{},{}
+		case 28415: mes "武器が闇属性になる、サイズ補正無視"; break;			//闇精霊,6,20,,10,,,,,,,,2,,,,,{bonus bAtkEle,7;bonus bNoSizeFix,n;},{},{}
+		case 28416: mes "Hit-50%"; break;						//油まみれ,6,20,,10,,,,,,,,2,,,,,{bonus bHitRate,-50;},{},{}
+		case 28417: mes "Luk+15"; break;						//芸術的,6,20,,10,,,,,,,,2,,,,,{bonus bLuk,15;},{},{}
+		case 28418: mes "回復スキル効果+25%、消費SP+50%"; break;			//草臥れた,6,20,,10,,,,,,,,2,,,,,{bonus bHealPower,25;bonus bUseSPrate,50;},{},{}
+		case 28419: mes "武器が重くなる"; break;					//ゴージャス,6,20,,1000,,,,,,,,2,,,,,{},{},{}
+		case 28420: mes "Atk+50、Matk+50"; break;					//祈祷済み,6,20,,10,,,,,,,,2,,,,,{bonus bBaseAtk,50;bonus bMatk2,50;},{},{}
+		case 28421: mes "武器と兜がストリップされない"; break;				//プリティー,6,20,,10,,,,,,,,2,,,,,{bonus bUnstripableWeapon,n;bonus bUnstripableHelm,n;},{},{}
+		case 28422: mes "被弾時、高確率でAS応急手当"; break;				//カラクリ,6,20,,10,,,,,,,,2,,,,,{bonus4 bAutoSpellWhenHit,"NV_FIRSTAID",1,200,0;},{},{}
+		case 28423: mes "魔法クリティカル率+30"; break;					//ベスト,6,20,,10,,,,,,,,2,,,,,{bonus bMagicCriRate,30;},{},{}
+		case 28424: mes "攻撃時、敵のSPを消す"; break;					//レア,6,20,,10,,,,,,,,2,,,,,{bonus2 bSPVanishRate,2,10;},{},{}
+		case 28425: mes "自身が無形種族になる"; break;					//クリスタル,6,20,,10,,,,,,,,2,,,,,{bonus bRace,RC_Formless;},{},{}
+		default:
+			mes "このカードは判定できないな";
+			close;
+		}
+		mes "以上だ。";
+		set Zeny,Zeny-1000000;
+		close;
+	case 4:
+		mes "[刀細工師]";
+		mes "またきてくれよ";
+		close;
+	}
+}
+geffen_in,28,134,5	script	冒険者ギルド受付	971,{
+	mes "[レイシャ]";
+	if(getskilllv(784)==0){
+		mes "いらっしゃい";
+		mes "初めて見る顔だね";
+		mes "依頼を受けるなら登録が必要だよ";
+		next;
+		if(select("登録しない","登録する","肌の色が…？")!=2) {
+			mes "[レイシャ]";
+			mes "フンッ";
+			mes "邪魔しにきただけなら帰りな";
+			close;
+		}
+		mes "[レイシャ]";
+		mes "じゃあここに名前書いて";
+		mes "出身地と年齢も";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "出身地は……";
+		input .@syussin$;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "年齢は……";
+		input .@age;
+		next;
+		mes "[レイシャ]";
+		mes "ほぅ";
+		next;
+		mes "[レイシャ]";
+		mes "なるほど……";
+		next;
+		mes "[レイシャ]";
+		mes "あ、いやなんでもない";
+		next;
+		mes "[レイシャ]";
+		mes "よし、全部書いたな";
+		mes "これで登録は完了だ";
+		skill 784,1,0;
+		set T_RANK$,"0:0:0:0:0:0:"+.@syussin$+":"+.@age;
+		next;
+		mes "[レイシャ]";
+		mes "依頼は決めたからには";
+		mes "確実にこなしてもらう";
+		next;
+		mes "[レイシャ]";
+		mes "破棄は可能だが、無断で期限を";
+		mes "破るなどすれば";
+		mes "厳しい処罰があるからな";
+		next;
+		mes "[レイシャ]";
+		mes "とりあえずは以上だ";
+		mes "あとは勘でなんとかしな";
+		close;
+	}
+	set @TREID,callfunc("talk_treasure",7,0);
+	if(@TREID==99){
+		if(gettime(5)==(callfunc("talk_treasure",7,5))){
+			mes "あんたはまだ依頼破棄の";
+			mes "ペナルティ期間中だろ？";
+			mes "また明日くるんだね";
+		}else{
+			mes "依頼破棄のペナルティは";
+			mes "終わったようだね";
+			next;
+			mes "[レイシャ]";
+			mes "これに懲りたら";
+			mes "依頼の受諾と破棄は良く考えてくれよ？";
+			callfunc("talk_treasure",8,0,0);
+			callfunc("talk_treasure",8,4,0);
+			callfunc("talk_treasure",8,5,0);
+		}
+		close;
+	}else if(callfunc("talk_treasure",7,4)){
+		if(callfunc("talk_treasure",7,4)>=(3+getskilllv(784)/3) && gettime(5)==(callfunc("talk_treasure",7,5))){
+			if(callfunc("talk_treasure",7,0)==11 && callfunc("talk_treasure",7,3)==99){
+			}else{
+				mes "今日はこれ以上";
+				mes "仕事の紹介はできないんだ";
+				mes "これも規則でね";
+				close;
+			}
+		}else if(gettime(5)!=(callfunc("talk_treasure",7,5))){
+			callfunc("talk_treasure",8,4,0);
+			callfunc("talk_treasure",8,5,0);
+		}
+	}
+	mes "良く来たね！";
+	mes "仕事は順調かい？";
+	next;
+	set .@choise,select(
+		((@TREID == 0)? "^0000FF依頼の受諾^000000":""),
+		((@TREID > 0)? "^0000FF依頼の確認^000000":""),
+		((@TREID > 0)? "^0000FF依頼の報告^000000":""),
+		((@TREID > 0)? "^FF0000依頼の破棄^000000":""),
+		"^0000FF状態を知りたい^000000","やめる");
+	callfunc("talk_treasure",.@choise);
+	close;end;
+}
+
+pvp_y_8-2	mapflag	noloot
+izlude,100,139,5	script	カナベル	53,{
+	mes "[カナベル]";
+	if ($kuraris >= 1){
+		if(getmapusers("pvp_y_8-2") != 0){
+			mes "今は何処かの冒険者さんが";
+			mes "手伝ってくれているようです";
+			close;
+		}
+	}
+	mes "あぁ！冒険者さん！";
+	mes "娘をお使いに行かせたんですが";
+	mes "どうもお転婆すぎて心配なんです";
+	next;
+	mes "[カナベル]";
+	mes "最近はまれにモンスターが出たり";
+	mes "どうにも不安で……";
+	mes "どうか娘のクラリアスを手伝って";
+	mes "あげてくれませんか？";
+	next;
+	if(select("手伝う","嫌だ")==2){
+		mes "[カナベル]";
+		mes "そう…ですか。";
+		mes "あぁ、クラリアス……";
+		close;
+	}
+	if(!getcharid(1)){
+		mes "[カナベル]";
+		mes "せめてPTを組んできてもらえます？";
+		close;
+	}
+	getpartymember(getcharid(1));
+	if($@partymembercount > 3){
+		mes "[カナベル]";
+		mes "ちょっとPTの人数が多すぎないかしら？";
+		close;
+	}
+	mes "[カナベル]";
+	mes "ありがとうございます！";
+	mes "じゃあクラリアスの元へ";
+	mes "お送りしますね！";
+	close2;
+	movenpc "クラリアス#otukai",130,119;
+	donpcevent "otukai::OnStart";
+	warpparty "pvp_y_8-2",128,117,getcharid(1);
+	end;
+}
+pvp_y_8-2,130,119,5	script	クラリアス#otukai	62,{
+	mes "[クラリアス]";
+	if($kuraris<=1){
+		mes "もう！せっかちね！";
+		mes "話を聞きなさい！";
+		close;
+	}
+	if($kuraris==6){
+		mes "ありがとう！";
+		mes "実は結構不安だったの……";
+		next;
+		mes "[クラリアス]";
+		mes "えへへ";
+		mes "また何かあったら";
+		mes "あなたに頼むからね！";
+		next;
+		mes "[クラリアス]";
+		mes "これ、お礼！";
+		mes "大事に使ってね";
+		close2;
+		dispbottom("20苺pointを獲得しました!");
+		set #PPOINT,#PPOINT+20;
+		warp "SavePoint",0,0;
+		end;
+	}
+	mes "どっちに何歩行けばいいの？";
+	input .@walk;
+	if(.@walk>49 || .@walk<11){
+		mes "指示がよくわからないわ";
+		close;
+	}
+	mes "[クラリアス]";
+	mes "わかったわ！";
+	mes "じゃあ行くわよ！";
+	close2;
+	set .@walk2$,""+.@walk+"";
+	set .@muki,charat(.@walk2$,0);
+	set .@go,charat(.@walk2$,1);
+	switch(.@muki){
+	case 1:setarray .@retsu,0,.@go;break;
+	case 2:setarray .@retsu,(-1*.@go),0;break;
+	case 3:setarray .@retsu,.@go,0;break;
+	case 4:setarray .@retsu,0,(-1*.@go);break;
+	}
+ 	npcspeed 100;
+	getmapxy(.@otumap$,.@otux,.@otuy,1,"クラリアス#otukai");
+	npcwalkto .@otux+.@retsu[0],.@otuy+.@retsu[1];
+	end;
+}
+pvp_y_8-2,0,0,1	script	otukai	-1,{
+	end;
+OnStart:
+	set $kuraris,1;
+	sleep 9000;
+	mapannounce "pvp_y_8-2","クラリアス : あなたが私のサポートしてくれるのね？",bc_map,"0x00FF00";
+	sleep 3000;
+	mapannounce "pvp_y_8-2","クラリアス : なら、私の言うことをよく聞いて、指示を頂戴！",bc_map,"0x00FF00";
+	sleep 3000;
+	mapannounce "pvp_y_8-2","クラリアス : まず10の位で方向を指示するのよ！",bc_map,"0x00FF00";
+	sleep 3000;
+	mapannounce "pvp_y_8-2","クラリアス : 10は北、20は西、30は東、40は南よ！",bc_map,"0x00FF00";
+	donpcevent "otukai2::OnStart";
+	sleep 3000;
+	mapannounce "pvp_y_8-2","クラリアス : それから1の位で歩く歩数をお願いね！",bc_map,"0x00FF00";
+	sleep 3000;
+	mapannounce "pvp_y_8-2","クラリアス : 例えば北に7歩なら、「17」と指示を頂戴",bc_map,"0x00FF00";
+	sleep 3000;
+	mapannounce "pvp_y_8-2","クラリアス : 一度に歩けるのは9歩までだから注意してね？",bc_map,"0x00FF00";
+	sleep 4000;
+	set .randam,rand(4);
+	switch(.randam){
+	case 0:	set .gox,50+rand(4);set .goy,132+rand(4);break;
+	case 1:	set .gox,50+rand(5);set .goy,73+rand(5);break;
+	case 2:	set .gox,206+rand(6);set .goy,118+rand(6);break;
+	case 3:	set .gox,104+rand(5);set .goy,223+rand(6);break;
+	}
+	switch(.randam){
+	case 0:	mapannounce "pvp_y_8-2","クラリアス : それじゃあまず、剣士ギルド前("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+	case 1:	mapannounce "pvp_y_8-2","クラリアス : それじゃあまず、イズ入り口島("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+	case 2:	mapannounce "pvp_y_8-2","クラリアス : それじゃあまず、東島("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+	case 3:	mapannounce "pvp_y_8-2","クラリアス : それじゃあまず、アリーナ前("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+	}
+	sleep 2000;
+	set $kuraris,2;
+	mapannounce "pvp_y_8-2","クラリアス : 2分以内にお願いねー！",bc_map,"0x00FF00";
+	initnpctimer;
+	end;
+
+OnTimer120000:
+	getmapxy(.@otumap$,.@otux2,.@otuy2,1,"クラリアス#otukai");
+	if(.gox==.@otux2 && .goy==.@otuy2){
+		mapannounce "pvp_y_8-2","クラリアス : さすが冒険者ね！じゃあ、次の用事はねぇ……",bc_map,"0x00FF00";
+		set $kuraris,3;
+		sleep 2000;
+		set .oldrandam,.randam;
+		for(set .i,0; .i==.i; set .i,.i+1){
+			set .randam,rand(4);
+			if(.randam != .oldrandam)
+				break;
+		}
+		switch(.randam){
+		case 0:	set .gox,50+rand(4);set .goy,132+rand(4);break;
+		case 1:	set .gox,50+rand(5);set .goy,73+rand(5);break;
+		case 2:	set .gox,206+rand(6);set .goy,118+rand(6);break;
+		case 3:	set .gox,104+rand(5);set .goy,223+rand(6);break;
+		}
+		switch(.randam){
+		case 0:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、剣士ギルド前("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		case 1:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、イズ入り口島("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		case 2:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、東島("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		case 3:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、アリーナ前("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		}
+		sleep 2000;
+		mapannounce "pvp_y_8-2","クラリアス : 2分以内にお願いねー！",bc_map,"0x00FF00";
+		end;
+	}
+	stopnpctimer;
+	mapannounce "pvp_y_8-2","クラリアス : あぁっ！間に合わなかったじゃない！！どうしてくれるのよ！",bc_map,"0x00FF00";
+	sleep 4000;
+	areawarp "pvp_y_8-2",0,0,400,400,"SavePoint",0,0;
+	end;
+OnTimer240000:
+	getmapxy(.@otumap$,.@otux2,.@otuy2,1,"クラリアス#otukai");
+	if(.gox==.@otux2 && .goy==.@otuy2){
+		mapannounce "pvp_y_8-2","クラリアス : さすが冒険者ね！じゃあ、次の用事はねぇ……",bc_map,"0x00FF00";
+		set $kuraris,4;
+		sleep 2000;
+		set .oldrandam,.randam;
+		for(set .i,0; .i==.i; set .i,.i+1){
+			set .randam,rand(4);
+			if(.randam != .oldrandam)
+				break;
+		}
+		switch(.randam){
+		case 0:	set .gox,50+rand(4);set .goy,132+rand(4);break;
+		case 1:	set .gox,50+rand(5);set .goy,73+rand(5);break;
+		case 2:	set .gox,206+rand(6);set .goy,118+rand(6);break;
+		case 3:	set .gox,104+rand(5);set .goy,223+rand(6);break;
+		}
+		switch(.randam){
+		case 0:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、剣士ギルド前("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		case 1:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、イズ入り口島("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		case 2:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、東島("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		case 3:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、アリーナ前("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		}
+		sleep 2000;
+		mapannounce "pvp_y_8-2","クラリアス : 2分以内にお願いねー！",bc_map,"0x00FF00";
+		end;
+	}
+	stopnpctimer;
+	mapannounce "pvp_y_8-2","クラリアス : あぁっ！間に合わなかったじゃない！！どうしてくれるのよ！",bc_map,"0x00FF00";
+	sleep 4000;
+	areawarp "pvp_y_8-2",0,0,400,400,"SavePoint",0,0;
+	end;
+OnTimer360000:
+	getmapxy(.@otumap$,.@otux2,.@otuy2,1,"クラリアス#otukai");
+	if(.gox==.@otux2 && .goy==.@otuy2){
+		mapannounce "pvp_y_8-2","クラリアス : さすが冒険者ね！じゃあ、次の用事はねぇ……",bc_map,"0x00FF00";
+		set $kuraris,5;
+		sleep 2000;
+		set .oldrandam,.randam;
+		for(set .i,0; .i==.i; set .i,.i+1){
+			set .randam,rand(4);
+			if(.randam != .oldrandam)
+				break;
+		}
+		switch(.randam){
+		case 0:	set .gox,50+rand(4);set .goy,132+rand(4);break;
+		case 1:	set .gox,50+rand(5);set .goy,73+rand(5);break;
+		case 2:	set .gox,206+rand(6);set .goy,118+rand(6);break;
+		case 3:	set .gox,104+rand(5);set .goy,223+rand(6);break;
+		}
+		switch(.randam){
+		case 0:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、剣士ギルド前("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		case 1:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、イズ入り口島("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		case 2:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、東島("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		case 3:	mapannounce "pvp_y_8-2","クラリアス : じゃあ、アリーナ前("+.gox+","+.goy+")に連れて行って！",bc_map,"0x00FF00";break;
+		}
+		sleep 2000;
+		mapannounce "pvp_y_8-2","クラリアス : 2分以内にお願いねー！",bc_map,"0x00FF00";
+		end;
+	}
+	stopnpctimer;
+	mapannounce "pvp_y_8-2","クラリアス : あぁっ！間に合わなかったじゃない！！どうしてくれるのよ！",bc_map,"0x00FF00";
+	sleep 4000;
+	areawarp "pvp_y_8-2",0,0,400,400,"SavePoint",0,0;
+	end;
+OnTimer480000:
+	getmapxy(.@otumap$,.@otux2,.@otuy2,1,"クラリアス#otukai");
+	if(.gox==.@otux2 && .goy==.@otuy2){
+		mapannounce "pvp_y_8-2","クラリアス : さすが冒険者ね！これで頼まれてた用事はおしまいよ！",bc_map,"0x00FF00";
+		set $kuraris,6;
+		sleep 2000;
+		mapannounce "pvp_y_8-2","クラリアス : ありがとね！結構、ううん、すごい助かったわ！",bc_map,"0x00FF00";
+		end;
+	}
+	stopnpctimer;
+	mapannounce "pvp_y_8-2","クラリアス : あぁっ！間に合わなかったじゃない！！どうしてくれるのよ！",bc_map,"0x00FF00";
+	sleep 4000;
+	areawarp "pvp_y_8-2",0,0,400,400,"SavePoint",0,0;
+	end;
+OnTimer500000:
+	stopnpctimer;
+	areawarp "pvp_y_8-2",0,0,400,400,"SavePoint",0,0;
+	end;
+}
+pvp_y_8-2,0,0,1	script	otukai2	-1,{
+	end;
+OnStart:
+	initnpctimer;
+	set .kurarishp,50;
+	end;
+OnTimer20000:
+	getmapxy(.@otumap$,.otukamx,.otukamy,1,"クラリアス#otukai");
+	areamonster "pvp_y_8-2",.otukamx-7,.otukamy-7,.otukamx+7,.otukamy+7,"--ja--",1508,2,"otukai2::OnMyMobDead";
+	areamonster "pvp_y_8-2",.otukamx-7,.otukamy-7,.otukamx+7,.otukamy+7,"--ja--",1509,2,"otukai2::OnMyMobDead";
+	areamonster "pvp_y_8-2",.otukamx-7,.otukamy-7,.otukamx+7,.otukamy+7,"--ja--",1510,2,"otukai2::OnMyMobDead";
+	end;
+OnTimer40000:
+OnTimer60000:
+OnTimer80000:
+OnTimer100000:
+OnTimer120000:
+OnTimer140000:
+OnTimer160000:
+OnTimer180000:
+OnTimer200000:
+OnTimer220000:
+OnTimer240000:
+OnTimer260000:
+OnTimer280000:
+OnTimer300000:
+OnTimer320000:
+OnTimer340000:
+OnTimer360000:
+OnTimer380000:
+OnTimer400000:
+OnTimer420000:
+OnTimer440000:
+OnTimer460000:
+	set .alivemob,mobcount("pvp_y_8-2","otukai2::OnMyMobDead");
+	killmonster "pvp_y_8-2","otukai2::OnMyMobDead";
+	if(.alivemob>0){
+		mapannounce "pvp_y_8-2","クラリアス : きゃぁっ！も、モンスターが……痛い……",bc_map,"0x00FF00";
+		set .kurarishp,.kurarishp-.alivemob;
+	}
+	if(.kurarishp<1){
+		sleep 4000;
+		stopnpctimer;
+		mapannounce "pvp_y_8-2","クラリアス : も、もうだめ……助けて…………",bc_map,"0x00FF00";
+		sleep 4000;
+		areawarp "pvp_y_8-2",0,0,400,400,"SavePoint",0,0;
+		end;
+	}
+	sleep 2000;
+	getmapxy(.@otumap$,.otukamx,.otukamy,1,"クラリアス#otukai");
+	areamonster "pvp_y_8-2",.otukamx-7,.otukamy-7,.otukamx+7,.otukamy+7,"--ja--",1508,2,"otukai2::OnMyMobDead";
+	areamonster "pvp_y_8-2",.otukamx-7,.otukamy-7,.otukamx+7,.otukamy+7,"--ja--",1509,2,"otukai2::OnMyMobDead";
+	areamonster "pvp_y_8-2",.otukamx-7,.otukamy-7,.otukamx+7,.otukamy+7,"--ja--",1510,2,"otukai2::OnMyMobDead";
+	end;
+OnTimer480000:
+	stopnpctimer;
+OnMyMobDead:
+	end;
+}
+prontera,165,125,3	script	ルーフィス#1	532,{
+	mes "[ルーフィス]";
+	mes "宝箱ハンティングへ";
+	mes "連れて行ってあげようか？";
+	next;
+	if(select("いいえ","お願い")==1){
+		mes "[ルーフィス]";
+		mes "またきなさい。";
+		close;
+	}
+	warp "n_castle",104,98;
+	end;
+}
+n_castle,103,105,3	script	ルーフィス#2	532,{
+	mes "[ルーフィス]";
+	mes "こんにちは。";
+	mes "ハントするかい？";
+	next;
+	switch(select("ハント？","鍵を購入する","交換する","外へ出る","なんでもない")){
+	case 1:
+		mes "[ルーフィス]";
+		mes "ルールは簡単だよ。";
+		mes "僕の販売してる鍵を持って";
+		mes "^FF0000宝箱^000000を倒すだけさ。";
+		next;
+		mes "[ルーフィス]";
+		mes "ただし！";
+		mes "^FF0000宝箱という名前じゃない物^000000は";
+		mes "開けようとしてはいけない。";
+		next;
+		mes "[ルーフィス]";
+		mes "宝箱を開けようとすれば";
+		mes "いくつかの障害を乗り越えなければ";
+		mes "いけないから注意してね。";
+		close;
+	case 2:
+		mes "[ルーフィス]";
+		mes "鍵は1個 1,000Zenyだよ。";
+		mes "一度に20個まで持てるよ。";
+		mes "何個必要だい？";
+		next;
+		input .@num;
+		mes "[ルーフィス]";
+		if(.@num<0 || .@num>20){
+			mes "一度に20枚迄と言っただろ？";
+			close;
+		}
+		if(.@num==0){
+			mes "必要ないかい？";
+			close;
+		}
+		if(countitem(7493)+.@num > 20){
+			mes "20個以上は持てないよ";
+			mes "君は後"+(20-countitem(7493))+"個持てるよ";
+			close;
+		}
+     		if(checkweight(7493,1) == 0){
+			mes "荷物を整理してください";
+			close;
+		}
+		if(Zeny < .@num*1000){
+			mes "お金が足りないかい？";
+			close;
+		}
+		set Zeny,Zeny-.@num*1000;
+		getitem 7493,.@num;
+		mes "ほら、これだ。";
+		mes "頑張ってくれよ。";
+		close;
+	case 3:
+		if(countitem(7361)==0) {set .@having,.@having+1;}
+		if(countitem(7362)==0) {set .@having,.@having+1;}
+		if(countitem(7363)==0) {set .@having,.@having+1;}
+		if(countitem(7364)==0) {set .@having,.@having+1;}
+		if(countitem(7365)==0) {set .@having,.@having+1;}
+		if(countitem(7366)==0) {set .@having,.@having+1;}
+		if(countitem(7367)==0) {set .@having,.@having+1;}
+		if(countitem(7368)==0) {set .@having,.@having+1;}
+		if(countitem(7369)==0) {set .@having,.@having+1;}
+		if(countitem(7370)==0) {set .@having,.@having+1;}
+		if(countitem(7371)==0) {set .@having,.@having+1;}
+		if(countitem(7372)==0) {set .@having,.@having+1;}
+		if(countitem(7373)==0) {set .@having,.@having+1;}
+		if(countitem(7374)==0) {set .@having,.@having+1;}
+		if(countitem(7375)==0) {set .@having,.@having+1;}
+		if(countitem(7376)==0) {set .@having,.@having+1;}
+		if(countitem(7377)==0) {set .@having,.@having+1;}
+		if(countitem(7378)==0) {set .@having,.@having+1;}
+		if(countitem(7379)==0) {set .@having,.@having+1;}
+		if(countitem(7380)==0) {set .@having,.@having+1;}
+		if(countitem(7381)==0) {set .@having,.@having+1;}
+		if(countitem(7382)==0) {set .@having,.@having+1;}
+		if(countitem(7383)==0) {set .@having,.@having+1;}
+		if(countitem(7384)==0) {set .@having,.@having+1;}
+		if(countitem(7385)==0) {set .@having,.@having+1;}
+		if(countitem(7386)==0) {set .@having,.@having+1;}
+		if(countitem(7387)==0) {set .@having,.@having+1;}
+		if(countitem(7388)==0) {set .@having,.@having+1;}
+		if(countitem(7389)==0) {set .@having,.@having+1;}
+		if(countitem(7390)==0) {set .@having,.@having+1;}
+		if(countitem(7391)==0) {set .@having,.@having+1;}
+		if(countitem(7392)==0) {set .@having,.@having+1;}
+		if(countitem(7393)==0) {set .@having,.@having+1;}
+		if(countitem(7394)==0) {set .@having,.@having+1;}
+		if(countitem(7395)==0) {set .@having,.@having+1;}
+		if(countitem(7396)==0) {set .@having,.@having+1;}
+		if(countitem(7397)==0) {set .@having,.@having+1;}
+		if(countitem(7398)==0) {set .@having,.@having+1;}
+		if(countitem(7540)==0) {set .@having,.@having+1;}
+		if(countitem(7541)==0) {set .@having,.@having+1;}
+		if(countitem(7542)==0) {set .@having,.@having+1;}
+		if(countitem(7543)==0) {set .@having,.@having+1;}
+		if(countitem(7544)==0) {set .@having,.@having+1;}
+		if(countitem(7545)==0) {set .@having,.@having+1;}
+		if(countitem(7546)==0) {set .@having,.@having+1;}
+		mes "[ルーフィス]";
+		if(.@having == 0){
+			mes "お、集まったのか";
+			mes "さぁ、ほしいものはどれだい？";
+			next;
+			switch(select("高級武器の箱","ねこパンチ","ディアボロスローブ","ディアボロスアーマー","ディアボロスブーツ")){
+			case 1:getitem 12623,1;break;
+			case 2:getitem 1289,1;break;
+			case 3:getitem 2374,1;break;
+			case 4:getitem 2375,1;break;
+			case 5:getitem 2433,1;break;
+			}
+			delitem 7361,1;delitem 7362,1;delitem 7363,1;delitem 7364,1;delitem 7365,1;
+			delitem 7366,1;delitem 7367,1;delitem 7368,1;delitem 7369,1;delitem 7370,1;
+			delitem 7371,1;delitem 7372,1;delitem 7373,1;delitem 7374,1;delitem 7375,1;
+			delitem 7376,1;delitem 7377,1;delitem 7378,1;delitem 7379,1;delitem 7380,1;
+			delitem 7381,1;delitem 7382,1;delitem 7383,1;delitem 7384,1;delitem 7385,1;
+			delitem 7386,1;delitem 7387,1;delitem 7388,1;delitem 7389,1;delitem 7390,1;
+			delitem 7391,1;delitem 7392,1;delitem 7393,1;delitem 7394,1;delitem 7395,1;
+			delitem 7396,1;delitem 7397,1;delitem 7398,1;delitem 7540,1;delitem 7541,1;
+			delitem 7542,1;delitem 7543,1;delitem 7544,1;delitem 7545,1;delitem 7546,1;
+			mes "[ルーフィス]";
+			mes "ほら、これだよ";
+		}else{
+			mes "宝箱から出たアイテムは";
+			mes "全部で45種類あるんだ。";
+			next;
+			mes "[ルーフィス]";
+			mes "もし全部集めてきたら";
+			mes "いいものと交換してあげるよ";
+		}
+		close;
+	case 4:
+		warp "prontera",156,195;
+		close;
+	case 5:
+		mes "[ルーフィス]";
+		mes "そうかい？";
+		close;
+	}
+}
+//正解
+n_castle,0,0,0,0	monster	蜜の宝箱	1360,1,60000,60000,"castlemap::OnKilled"
+n_castle,0,0,0,0	monster	苺の宝箱	1360,1,60000,60000,"castlemap::OnKilled"
+n_castle,0,0,0,0	monster	柚の宝箱	1360,1,60000,60000,"castlemap::OnKilled"
+n_castle,0,0,0,0	monster	輝いてる宝箱	1360,4,0,10000,"castlemap::OnKilled"
+n_castle,0,0,0,0	monster	虚飾の宝箱	1360,4,0,10000,"castlemap::OnKilled"
+n_castle,0,0,0,0	monster	豪華な宝箱	1360,4,0,10000,"castlemap::OnKilled"
+n_castle,0,0,0,0	monster	神秘的な宝箱	1360,4,0,10000,"castlemap::OnKilled"
+n_castle,0,0,0,0	monster	ただの宝箱	1360,4,0,10000,"castlemap::OnKilled"
+n_castle,0,0,0,0	monster	繊細な宝箱	1360,4,0,10000,"castlemap::OnKilled"
+//ハズレ
+n_castle,0,0,0,0	monster	大きな宝物	1360,1,0,0,"castlemap::OnKilled1"
+n_castle,0,0,0,0	monster	たからだから	1360,1,0,0,"castlemap::OnKilled1"
+n_castle,0,0,0,0	monster	豪華な宝相	1360,1,0,0,"castlemap::OnKilled1"
+n_castle,0,0,0,0	monster	たからばこ	1360,1,0,0,"castlemap::OnKilled1"
+n_castle,0,0,0,0	monster	ただの玉箱	1360,1,0,0,"castlemap::OnKilled1"
+-	script	castlemap	-1,{
+OnKilled:
+	if(countitem(7493) < 1) end;
+	delitem 7493,1;
+	set .@random,rand(4);
+	mes "-鍵を鍵穴に差し込むと紙が現れた-";
+	if(.@random==0){
+		set .@param1,rand(11,99);
+		set .@param2,rand(11,99);
+		mes "-式[^FF0000"+.@param1+"＋"+.@param2+"^000000]を計算せよ-";
+		next;
+		input .@param;
+		if(.@param1+.@param2 == .@param){
+			switch(rand(5)){
+			case 0: getitem 12035,1; break;
+			case 1: getitem 12036,1; break;
+			case 2: getitem 12037,1; break;
+			case 3: getitem 12038,1; break;
+			case 4: getitem 12039,1; break;
+			}
+			mes "-宝箱が開いた-";
+		}else{
+			switch(rand(3)){
+			case 0: percentheal -rand(1,50),0; break;
+			case 1: heal -500,0; break;
+			case 2: heal -rand(100,1000),-100; break;
+			}
+			mes "-宝箱が爆発した-";
+		}
+	}else if(.@random==1){
+		set .@param1,rand(11,99);
+		set .@param2,rand(10,.@param1);
+		mes "-式[^FF0000"+.@param1+"－"+.@param2+"^000000]を計算せよ-";
+		next;
+		input .@param;
+		if(.@param1-.@param2 == .@param){
+			switch(rand(5)){
+			case 0: getitem 12035,1; break;
+			case 1: getitem 12036,1; break;
+			case 2: getitem 12037,1; break;
+			case 3: getitem 12038,1; break;
+			case 4: getitem 12039,1; break;
+			}
+			mes "-宝箱が開いた-";
+		}else{
+			switch(rand(3)){
+			case 0: percentheal -rand(1,50),0; break;
+			case 1: heal -500,0; break;
+			case 2: heal -rand(100,1000),-100; break;
+			}
+			mes "-宝箱が爆発した-";
+		}
+	}else if(.@random==2){
+		set .@param1,rand(2,90);
+		set .@param2,rand(2,90);
+		mes "-式[^FF0000"+.@param1+"×"+.@param2+"^000000]を計算せよ-";
+		next;
+		input .@param;
+		if(.@param1*.@param2 == .@param){
+			switch(rand(5)){
+			case 0: getitem 12035,1; break;
+			case 1: getitem 12036,1; break;
+			case 2: getitem 12037,1; break;
+			case 3: getitem 12038,1; break;
+			case 4: getitem 12039,1; break;
+			}
+			mes "-宝箱が開いた-";
+		}else{
+			switch(rand(3)){
+			case 0: percentheal -rand(1,50),0; break;
+			case 1: heal -500,0; break;
+			case 2: heal -rand(100,1000),-100; break;
+			}
+			mes "-宝箱が爆発した-";
+		}
+	}else{
+		set .@param2,rand(2,30);
+		set .@param1,.@param2 * rand(2,30);
+		mes "-式[^FF0000"+.@param1+"÷"+.@param2+"^000000]を計算せよ-";
+		next;
+		input .@param;
+		if(.@param1/.@param2 == .@param){
+			switch(rand(5)){
+			case 0: getitem 12035,1; break;
+			case 1: getitem 12036,1; break;
+			case 2: getitem 12037,1; break;
+			case 3: getitem 12038,1; break;
+			case 4: getitem 12039,1; break;
+			}
+			mes "-宝箱が開いた-";
+		}else{
+			switch(rand(3)){
+			case 0: percentheal -rand(1,50),0; break;
+			case 1: heal -500,0; break;
+			case 2: heal -rand(100,1000),-100; break;
+			}
+			mes "-宝箱が爆発した-";
+		}
+	}
+	close;
+OnKilled1:
+	if(countitem(7493) < 1) end;
+	delitem 7493,1;
+	if(rand(2))
+		mes "-偽物だ！-";
+	else
+		mes "-贋物だ！-";
+	percentheal -rand(1,50),-rand(1,50);
+	close;
+}
