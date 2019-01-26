@@ -4,5 +4,6 @@ script edit by refis
 Community:  
 [Official HP](http://auriga.moe.hm/)  
 
-Special thanks
-[Rocco di Forte]'‚Ý‚Ì‚è'(http://dianaeleven.blog134.fc2.com/)
+Special thanks:
+'minori'
+[Rocco di Forte](http://dianaeleven.blog134.fc2.com/)
