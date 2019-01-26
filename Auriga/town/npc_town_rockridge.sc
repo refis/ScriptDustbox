@@ -5664,7 +5664,13 @@ OnTalk1:
 	end;
 }
 
-harboro1.gat,347,155,6	script	労働意欲に溢れる求職者::rockridge_ev02	733,{}
+harboro1.gat,347,155,6	script	労働意欲に溢れる求職者::rockridge_ev02	733,{
+	end;
+OnTalk1:
+	// 初級受諾
+	unittalk "労働意欲に溢れる求職者 : 酷過ぎじゃないか！";
+	end;
+}
 
 harboro1.gat,349,157,6	script	労働意欲に溢れる求職者::rockridge_ev03	734,{
 	end;
@@ -5673,7 +5679,13 @@ OnTalk1:
 	end;
 }
 
-harboro1.gat,351,154,7	script	労働意欲に溢れる求職者::rockridge_ev04	735,{}
+harboro1.gat,351,154,7	script	労働意欲に溢れる求職者::rockridge_ev04	735,{
+	end;
+OnTalk1:
+	// 初級受諾
+	unittalk "労働意欲に溢れる求職者 : おい！　私たちはどうしろと！";
+	end;
+}
 
 harboro1.gat,348,148,7	script	労働意欲に溢れる求職者::rockridge_ev05	753,{
 	end;
@@ -5689,6 +5701,10 @@ harboro1.gat,347,151,7	script	労働意欲に溢れる求職者::rockridge_ev07	732,{
 OnTalk1:
 	unittalk "労働意欲に溢れる求職者 : ミッドガルドから来た田舎者なのか？　あっちこっちうろちょろしていて目障りだ。";
 	end;
+OnTalk2:
+	// 初級受諾
+	unittalk "労働意欲に溢れる求職者 : 私にも仕事をくれよ、仕事を！";
+	end;
 }
 
 harboro1.gat,354,149,7	script	労働意欲に溢れる求職者::rockridge_ev08	733,{}
@@ -5698,6 +5714,10 @@ harboro1.gat,345,149,7	script	労働意欲に溢れる求職者::rockridge_ev09	734,{
 OnTalk1:
 	unittalk "労働意欲に溢れる求職者 : どうして私はダメなんだ？　外にいるコヨーテくらいは余裕で倒すことができるんだよ！";
 	end;
+OnTalk2:
+	// 初級受諾
+	unittalk "労働意欲に溢れる求職者 : 人を選んで仕事を与えているのか!?";
+	end;
 }
 
 harboro1.gat,352,150,7	script	労働意欲に溢れる求職者::rockridge_ev10	735,{}
@@ -5706,6 +5726,12 @@ harboro1.gat,350,149,7	script	労働意欲に溢れる求職者::rockridge_ev11	753,{
 	end;
 OnTalk1:
 	unittalk "労働意欲に溢れる求職者 : 牛賊団、コヨーテ討伐パーティーを募集します。";
+	end;
+OnTalk2:
+	unittalk "労働意欲に溢れる求職者 : 牛賊団狩りに空きがあったら私も……";
+	end;
+OnTalk3:
+	unittalk "労働意欲に溢れる求職者 : ガスター狩りに空きがあったら私も……";
 	end;
 }
 
@@ -5901,7 +5927,7 @@ harboro1.gat,357,163,3	script	給食担当	886,{
 		close;
 	}
 	if(checkquest(12384)) {
-		if(countitem(516) < 50) {
+		if(countitem(517) < 50) {
 			mes "[給食担当]";
 			mes "^0000ffにく50個^000000を";
 			mes "持って来てくれ！";
@@ -5963,6 +5989,26 @@ harboro1.gat,357,163,3	script	給食担当	886,{
 		mes "助かったよありがとう！";
 		close;
 	}
+	if(checkquest(12388)) {
+		if(countitem(581) < 60) {
+			mes "[給食担当]";
+			mes "^0000ff食用キノコ60個^000000を";
+			mes "持って来てくれ！";
+			mes "大きな都市ならだいたい";
+			mes "取り扱っているはずだ。";
+			close;
+		}
+		delitem 581,60;
+		delquest 12388;
+		setquest 12382;
+		getitem 25250,1;
+		getexp 10000000,4000000;
+		mes "[給食担当]";
+		mes "おお、頼んでいた食材だな！";
+		mes "おかげでなんとかなりそうだ。";
+		mes "助かったよありがとう！";
+		close;
+	}
 	mes "[給食担当]";
 	mes "今回必要な食材のリストはこれだ。";
 	mes "できるだけ早く持ってきてくれ。";
@@ -5975,7 +6021,7 @@ harboro1.gat,357,163,3	script	給食担当	886,{
 		mes "すぐにでも来てくれ。";
 		close;
 	}
-	switch(rand(5)) {
+	switch(rand(6)) {
 	case 0:
 		setquest 12383;
 		mes "[給食担当]";
@@ -6031,6 +6077,20 @@ harboro1.gat,357,163,3	script	給食担当	886,{
 		next;
 		mes "[給食担当]";
 		mes "^0000ffカボチャ160個^000000を";
+		mes "持って来てくれ！";
+		mes "大きな都市ならだいたい";
+		mes "取り扱っているはずだ。";
+		close;
+	case 5:
+		setquest 12388;
+		mes "[給食担当]";
+		mes "今、残っている食材で作れるのは";
+		mes "キノコスープくらいなんだが、";
+		mes "キノコがない。";
+		mes "食用キノコを持って来てくれないか？";
+		next;
+		mes "[給食担当]";
+		mes "^0000ff食用キノコ60個^000000を";
 		mes "持って来てくれ！";
 		mes "大きな都市ならだいたい";
 		mes "取り扱っているはずだ。";
@@ -6665,6 +6725,7 @@ harboro1.gat,334,135,6	script	淡水化施設管理所長	853,{
 		mes "しっかりと締め付ける。";
 		mes "これだけだ。簡単だろう？";
 		next;
+		donpcevent "おびえている熟練工#1::OnTalk1";
 		mes "[淡水化施設管理所長]";
 		mes "配管は色で区分されているから、";
 		mes "いけばすぐにわかると思う。";
@@ -7178,89 +7239,118 @@ harboro2.gat,164,78,5	script	作業道具#srdg02	10025,{}
 
 harboro2.gat,166,78,5	script	作業道具#srdg03	10026,{}
 
-//TODO
-harboro2.gat,52,261,3	script	赤い配管#1	10042,{}
-
-harboro2.gat,54,216,3	script	青い配管#2	10043,{}
-
-harboro2.gat,59,243,3	script	黄色い配管#3	10044,{}
-
-harboro2.gat,71,200,3	script	白い配管#4	10046,{}
-
-harboro2.gat,73,102,3	script	赤い配管#5	10042,{}
-
-harboro2.gat,74,173,3	script	青い配管#6	10043,{}
-
-harboro2.gat,86,160,3	script	黄色い配管#7	10044,{}
-
-harboro2.gat,89,213,3	script	白い配管#8	10046,{}
-
-harboro2.gat,89,223,3	script	赤い配管#9	10042,{}
-
-harboro2.gat,89,234,3	script	青い配管#10	10043,{}
-
-harboro2.gat,92,124,3	script	黄色い配管#11	10044,{}
-
-harboro2.gat,94,106,3	script	白い配管#12	10046,{}
-
-harboro2.gat,97,209,3	script	赤い配管#13	10042,{}
-
-harboro2.gat,106,233,3	script	青い配管#14	10043,{}
-
-harboro2.gat,108,112,3	script	黄色い配管#15	10044,{}
-
-harboro2.gat,117,197,3	script	白い配管#16	10046,{}
-
-harboro2.gat,120,116,3	script	赤い配管#17	10042,{}
-
-harboro2.gat,121,157,3	script	青い配管#18	10043,{}
-
-harboro2.gat,140,115,3	script	黄色い配管#19	10044,{}
-
-harboro2.gat,146,95,3	script	白い配管#20	10046,{}
-
-harboro2.gat,148,128,3	script	赤い配管#21	10042,{}
-
-harboro2.gat,151,123,3	script	青い配管#22	10043,{}
-
-harboro2.gat,158,151,3	script	黄色い配管#23	10044,{}
-
-harboro2.gat,161,163,3	script	白い配管#24	10046,{}
-
-harboro2.gat,169,125,3	script	赤い配管#25	10042,{}
-
-harboro2.gat,170,224,3	script	青い配管#26	10043,{}
-
-harboro2.gat,177,134,3	script	黄色い配管#27	10044,{}
-
-harboro2.gat,180,114,3	script	白い配管#28	10046,{}
-
-harboro2.gat,181,155,3	script	赤い配管#29	10042,{}
-
-harboro2.gat,187,113,3	script	青い配管#30	10043,{}
-
-harboro2.gat,207,121,3	script	黄色い配管#31	10044,{}
-
-harboro2.gat,211,49,3	script	白い配管#32	10046,{}
-
-harboro2.gat,221,234,3	script	赤い配管#33	10042,{}
-
-harboro2.gat,224,199,3	script	青い配管#34	10043,{}
-
-harboro2.gat,226,69,3	script	黄色い配管#35	10044,{}
-
-harboro2.gat,230,102,3	script	白い配管#36	10046,{}
-
-harboro2.gat,240,83,3	script	赤い配管#37	10042,{}
-
-harboro2.gat,244,161,3	script	青い配管#38	10043,{}
-
-harboro2.gat,266,129,3	script	黄色い配管#39	10044,{}
-
-harboro2.gat,291,44,3	script	白い配管#40	10046,{
+harboro2.gat,52,261,3	script	赤い配管#rockridge1	10042,{
+	if(checkquest(12405)&1 && checkquest(12405)&8 == 0) {
+		misceffect 101;
+		progressbar 3;
+		misceffect 18;
+		compquest 12405;
+		initnpctimer;
+		hideonnpc;
+		if(checkquest(12405)&8 && checkquest(12406)&8 && checkquest(12407)&8 && checkquest(12408)&8)
+			setquest 12409;
+		end;
+	}
 	mes "‐整備された配管がある‐";
 	close;
+OnTimer30000:
+	hideoffnpc;
+	end;
 }
+
+harboro2.gat,54,216,3	script	青い配管#rockridge2	10043,{
+	if(checkquest(12406)&1 && checkquest(12406)&8 == 0) {
+		misceffect 101;
+		progressbar 3;
+		misceffect 18;
+		compquest 12406;
+		initnpctimer;
+		hideonnpc;
+		if(checkquest(12405)&8 && checkquest(12406)&8 && checkquest(12407)&8 && checkquest(12408)&8)
+			setquest 12409;
+		end;
+	}
+	mes "‐整備された配管がある‐";
+	close;
+OnTimer30000:
+	hideoffnpc;
+	end;
+}
+
+harboro2.gat,59,243,3	script	黄色い配管#rockridge3	10044,{
+	if(checkquest(12407)&1 && checkquest(12407)&8 == 0) {
+		misceffect 101;
+		progressbar 3;
+		misceffect 18;
+		compquest 12407;
+		initnpctimer;
+		hideonnpc;
+		if(checkquest(12405)&8 && checkquest(12406)&8 && checkquest(12407)&8 && checkquest(12408)&8)
+			setquest 12409;
+		end;
+	}
+	mes "‐整備された配管がある‐";
+	close;
+OnTimer30000:
+	hideoffnpc;
+	end;
+}
+
+harboro2.gat,71,200,3	script	白い配管#rockridge4	10046,{
+	if(checkquest(12408)&1 && checkquest(12408)&8 == 0) {
+		misceffect 101;
+		progressbar 3;
+		misceffect 18;
+		compquest 12408;
+		initnpctimer;
+		hideonnpc;
+		if(checkquest(12405)&8 && checkquest(12406)&8 && checkquest(12407)&8 && checkquest(12408)&8)
+			setquest 12409;
+		end;
+	}
+	mes "‐整備された配管がある‐";
+	close;
+OnTimer30000:
+	hideoffnpc;
+	end;
+}
+
+harboro2.gat,73,102,3	duplicate(赤い配管#rockridge1)	赤い配管#rockridge5	10042
+harboro2.gat,74,173,3	duplicate(青い配管#rockridge2)	青い配管#rockridge6	10043
+harboro2.gat,86,160,3	duplicate(黄色い配管#rockridge3)	黄色い配管#rockridge7	10044
+harboro2.gat,89,213,3	duplicate(白い配管#rockridge4)	白い配管#rockridge8	10046
+harboro2.gat,89,223,3	duplicate(赤い配管#rockridge1)	赤い配管#rockridge9	10042
+harboro2.gat,89,234,3	duplicate(青い配管#rockridge2)	青い配管#rockridge10	10043
+harboro2.gat,92,124,3	duplicate(黄色い配管#rockridge3)	黄色い配管#rockridge11	10044
+harboro2.gat,94,106,3	duplicate(白い配管#rockridge4)	白い配管#rockridge12	10046
+harboro2.gat,97,209,3	duplicate(赤い配管#rockridge1)	赤い配管#rockridge13	10042
+harboro2.gat,106,233,3	duplicate(青い配管#rockridge2)	青い配管#rockridge14	10043
+harboro2.gat,108,112,3	duplicate(黄色い配管#rockridge3)	黄色い配管#rockridge15	10044
+harboro2.gat,117,197,3	duplicate(白い配管#rockridge4)	白い配管#rockridge16	10046
+harboro2.gat,120,116,3	duplicate(赤い配管#rockridge1)	赤い配管#rockridge17	10042
+harboro2.gat,121,157,3	duplicate(青い配管#rockridge2)	青い配管#rockridge18	10043
+harboro2.gat,140,115,3	duplicate(黄色い配管#rockridge3)	黄色い配管#rockridge19	10044
+harboro2.gat,146,95,3	duplicate(白い配管#rockridge4)	白い配管#rockridge20	10046
+harboro2.gat,148,128,3	duplicate(赤い配管#rockridge1)	赤い配管#rockridge21	10042
+harboro2.gat,151,123,3	duplicate(青い配管#rockridge2)	青い配管#rockridge22	10043
+harboro2.gat,158,151,3	duplicate(黄色い配管#rockridge3)	黄色い配管#rockridge23	10044
+harboro2.gat,161,163,3	duplicate(白い配管#rockridge4)	白い配管#rockridge24	10046
+harboro2.gat,169,125,3	duplicate(赤い配管#rockridge1)	赤い配管#rockridge25	10042
+harboro2.gat,170,224,3	duplicate(青い配管#rockridge2)	青い配管#rockridge26	10043
+harboro2.gat,177,134,3	duplicate(黄色い配管#rockridge3)	黄色い配管#rockridge27	10044
+harboro2.gat,180,114,3	duplicate(白い配管#rockridge4)	白い配管#rockridge28	10046
+harboro2.gat,181,155,3	duplicate(赤い配管#rockridge1)	赤い配管#rockridge29	10042
+harboro2.gat,187,113,3	duplicate(青い配管#rockridge2)	青い配管#rockridge30	10043
+harboro2.gat,207,121,3	duplicate(黄色い配管#rockridge3)	黄色い配管#rockridge31	10044
+harboro2.gat,211,49,3	duplicate(白い配管#rockridge4)	白い配管#rockridge32	10046
+harboro2.gat,221,234,3	duplicate(赤い配管#rockridge1)	赤い配管#rockridge33	10042
+harboro2.gat,224,199,3	duplicate(青い配管#rockridge2)	青い配管#rockridge34	10043
+harboro2.gat,226,69,3	duplicate(黄色い配管#rockridge3)	黄色い配管#rockridge35	10044
+harboro2.gat,230,102,3	duplicate(白い配管#rockridge4)	白い配管#rockridge36	10046
+harboro2.gat,240,83,3	duplicate(赤い配管#rockridge1)	赤い配管#rockridge37	10042
+harboro2.gat,244,161,3	duplicate(青い配管#rockridge2)	青い配管#rockridge38	10043
+harboro2.gat,266,129,3	duplicate(黄色い配管#rockridge3)	黄色い配管#rockridge39	10044
+harboro2.gat,291,44,3	duplicate(白い配管#rockridge4)	白い配管#rockridge40	10046
 
 rockrdg1.gat,262,90,7	script	うずくまった馬#rr	10217,{
 	cutin "rock_cact01",2;
