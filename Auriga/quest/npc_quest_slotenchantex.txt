@@ -1,0 +1,193 @@
+prontera.gat,110,191,4	script	エヴォルツィオーネ#prt1	893,{/* 51219 (hide)*/}
+prontera.gat,110,191,4	script	エヴォルツィオーネ#prt2	893,{/* 51220 */}
+	mes "[エヴォルツィオーネ]";
+	mes "アタシはエヴォルツィオーネ。";
+	mes "特別なスロットエンチャントの";
+	mes "研究をしているの。";
+	mes "その名も";
+	mes "「^FF0000スロットエンチャント-EX級^000000」";
+	next;
+	mes "[エヴォルツィオーネ]";
+	mes "ん？キミ、いい匂いさせてるね。";
+	mes "……ハスハス。";
+	mes "アタシにはわかるよー！";
+	mes "キミっていい人でしょ？";
+	next;
+	switch(select("エンチャントを依頼する","説明を聞く","会話をやめる")) {
+	case 1:
+		if(countitem(6941) < 50) {
+			mes "[エヴォルツィオーネ]";
+			mes "エンチャントには";
+			mes "「^FF0000ヴァルキリーの力の破片^000000」が";
+			mes "50個必要だよ～。";
+			mes "ふふふ、真理を解き明かすには";
+			mes "それなりの代償がいるのだ。";
+			close;
+		}
+		break;
+	case 2:
+		mes "[エヴォルツィオーネ]";
+		mes "ここでは対象装備の";
+		mes "精錬値が8以上の時に";
+		mes "「^FF0000スロットエンチャント-EX級^000000」を";
+		mes "してあげてるの。";
+		next;
+		mes "[エヴォルツィオーネ]";
+		mes "今取り扱ってる";
+		mes "対象の装備は";
+		mes "次の通りだよ～。";
+		next;
+		mes "[対象装備]";
+		mes "　";
+		mes "<靴>";
+		mes "悪魔崇拝者の靴[0]";
+		mes "インペリアルブーツ[0]";
+		mes "サバイバルシューズ[0]";
+		mes "裁きの靴[0]";
+		mes "執行者のシューズ[0]";
+		mes "スナイピングシューズ[0]";
+		mes "ふわふわタンポポシューズ[0]";
+		mes "もこもこお魚シューズ[0]";
+		next;
+		mes "[エヴォルツィオーネ]";
+		mes "これを「^FF0000ヴァルキリーの力の破片^000000」50個と";
+		mes "混ぜると起こる化学変化で";
+		mes "新しい武具をつくってるんだよ。";
+		mes "できた時の匂いが";
+		mes "たまらにゃ～い♪";
+		next;
+		mes "[エヴォルツィオーネ]";
+		mes "精錬値やカードについては";
+		mes "元の装備のまま維持してあげるね。";
+		mes "その方が嬉しいでしょ？";
+		mes "ジーニアスにまかせなさ～い。";
+		next;
+		mes "[エヴォルツィオーネ]";
+		mes "あれ？アタシの胸が";
+		mes "高鳴ってる……？";
+		mes "これって、誰かさんが";
+		mes "また来てくれるのを";
+		mes "期待しているのかも。";
+		close;
+	case 3:
+		mes "[エヴォルツィオーネ]";
+		mes "にゃはは、もう飽きちゃった？";
+		mes "ざんねーん。";
+		mes "キミがまた来てくれるのを";
+		mes "期待してるよ。";
+		mes "これって依存症かも。";
+		close;
+	}
+	mes "[エヴォルツィオーネ]";
+	mes "どれにエンチャントをしたいの？";
+	mes "　";
+	mes "どんな化学変化が起こるのか。";
+	mes "アタシのキョーミは";
+	mes "止められないっ！";
+	next;
+	// 不装着メッセージは未調査
+	set '@menu,select(
+			(getequipid(1)!=0? "^nItemID^" +getequipid(1): "頭上段‐[装着していない]"),
+			(getequipid(2)!=0? "^nItemID^" +getequipid(2): "鎧‐[装着していない]"),
+			(getequipid(3)!=0? "^nItemID^" +getequipid(3): "左手‐[装着していない]")),
+			(getequipid(4)!=0? "^nItemID^" +getequipid(4): "右手‐[装着していない]"),
+			(getequipid(5)!=0? "^nItemID^" +getequipid(5): "肩にかける物-[装着していない]"),
+			(getequipid(6)!=0? "^nItemID^" +getequipid(6): "靴‐[装着していない]"),
+			(getequipid(7)!=0? "^nItemID^" +getequipid(7): "アクセサリー1‐[装着していない]"),
+			(getequipid(8)!=0? "^nItemID^" +getequipid(8): "アクセサリー2‐[装着していない]"),
+			(getequipid(9)!=0? "^nItemID^" +getequipid(9): "頭中段‐[装着していない]"),
+			(getequipid(10)!=0? "^nItemID^" +getequipid(10): "頭下段‐[装着していない]"),
+			"やっぱりやめる"
+	);
+	if('@menu == 11) {
+		// 未調査
+		mes "[エヴォルツィオーネ]";
+		mes "にゃはは、もう飽きちゃった？";
+		mes "ざんねーん。";
+		mes "キミがまた来てくれるのを";
+		mes "期待してるよ。";
+		mes "これって依存症かも。";
+		close;
+	}
+	set '@itemid,getequipid('@menu);
+	if('@itemid == 0) {
+		// 未調査
+		mes "[エヴォルツィオーネ]";
+		mes "ん～ダメダメ。";
+		mes "装備してないじゃな～い。";
+		mes "ちゃんと持ってきて～。";
+		close;
+	}
+	setarray '@artifact,22138,22207,22170,22120,22134,470006,470008,22210;
+	for(set '@i,0; '@i < getarraysize('@artifact); set '@i,'@i+1) {
+		if('@itemid == '@artifact['@i])
+			break;
+	}
+	if('@i == getarraysize('@artifact)) {
+		mes "[エヴォルツィオーネ]";
+		mes "んん～。この装備からは";
+		mes "いい匂いがしないな～。";
+		mes "次来るときは";
+		mes "もっと刺激的な物を";
+		mes "持ってきてくれると";
+		mes "ウレシイな。";
+		close;
+	}
+	set '@refine,getequiprefinerycnt('@menu);
+	if('@refine < 8) {
+		mes "[エヴォルツィオーネ]";
+		mes "ん～ダメダメ。全然";
+		mes "強化が足りな～い。";
+		mes "精錬値8以上にしてから";
+		mes "持ってきて～。";
+		close;
+	}
+	mes "[エヴォルツィオーネ]";
+	mes "「" +getitemname('@itemid)+ "[" +getiteminfo('@itemid,10)+ "]」に";
+	mes "スロットエンチャント";
+	mes "してもいいのかな？";
+	next;
+	if(select("お願いする","やめる") == 2) {
+		mes "[エヴォルツィオーネ]";
+		mes "にゃはは、もう飽きちゃった？";
+		mes "ざんねーん。";
+		mes "キミがまた来てくれるのを";
+		mes "期待してるよ。";
+		mes "これって依存症かも。";
+		close;
+	}
+	if(getitemblank() == 0) {
+		mes "[エヴォルツィオーネ]";
+		mes "キミ、荷物持ちすぎ～。";
+		mes "そのままじゃ";
+		mes "多すぎて持てないかも。";
+		mes "いーよ、待っててあげる。";
+		mes "特別に許そう♪";
+		close;
+	}
+	if(MaxWeight - Weight > 50) {	// 50以上98以下の空きが必要(要検証)
+		mes "[エヴォルツィオーネ]";
+		mes "キミ、荷物持ちすぎ～。";
+		mes "そのままじゃ";
+		mes "重すぎて持てないかも。";
+		mes "いーよ、待っててあげる。";
+		mes "特別に許そう♪";
+		close;
+	}
+	set '@card1,getequipcardid('@menu,0);
+	set '@card2,getequipcardid('@menu,1);
+	set '@card3,getequipcardid('@menu,2);
+	set '@card4,getequipcardid('@menu,3);
+	delitem 6941,50;	// ヴァルキリーの力の破片
+	delequip '@menu;
+	getitem2 '@itemid,1,1,'@refine,0,'@card1,'@card2,'@card3,'@card4;
+	misceffect 574,""; //self
+	misceffect 593,""; //self
+	misceffect 305,""; //self
+	mes "[エヴォルツィオーネ]";
+	mes "できあがり～。";
+	mes "エンドルフィン出ちゃった？";
+	mes "この香りがたまらないよね。";
+	mes "いいフレーバーでしょー？";
+	close;
+}
