@@ -1,0 +1,2662 @@
+//= Auriga Script ==============================================================
+// Ragnarok Online Edda: Laboratory Script	by refis
+//==============================================================================
+
+yuno.gat,216,345,3	script	シエラ#blab	982,{/* 59588 */
+	if(BaseLevel < 100) {
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "こんにちは、僕はシエラ。";
+		mes "シエラ・モーリスです。";
+		mes "そのうち、またお会い出来そうな";
+		mes "予感がしますね。";
+		next;
+		mes " - このクエストを進行するには";
+		mes "　BaseLv100が必要です‐";
+		close2;
+		cutin "3rd_gn_demi01", 255;
+		end;
+	}
+	if(!checkquest(16388)) {
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "こんにちは、僕はシエラ。";
+		mes "シエラ・モーリスです。";
+		mes strcharinfo(0)+ "さんの";
+		mes "噂はいろいろ伺っていますよ。";
+		next;
+		mes "[シエラ]";
+		mes "こちらは通信担当の";
+		mes "ナイナーさんです。";
+		next;
+		menu "私を知っているんですか？",-;
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "もちろんです。";
+		mes "レイジーと同じく";
+		mes "僕も^0000CD秘密の羽^000000所属の研究員なんです。";
+		mes "彼と一緒に行動するのは";
+		mes "大変だったでしょう？";
+		next;
+		mes "[シエラ]";
+		mes "彼はあなたのことを";
+		mes "認めていましたよ。";
+		mes "僕が良い協力者がいないか聞いた時、";
+		mes "彼があそこまで他人を褒めたのは";
+		mes "初めてのことでしたから。";
+		next;
+		mes "[シエラ]";
+		mes "お会いできて嬉しいです。";
+		mes "さっそくですが私からの依頼について";
+		mes "お話しましょう。";
+		next;
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "僕たちは今、";
+		mes "^0000CDレゲンシュルム^000000で";
+		mes "^0000CD不法な研究^000000を";
+		mes "行っていた者たちの";
+		mes "情報を集めています。";
+		next;
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "僕たちは調査団を立ち上げ、";
+		mes "企業の目を盗んで設立された";
+		mes "不法な研究所を探していました。";
+		mes "そんなとき、リヒタルゼンの";
+		mes "^0000CD生体工学研究所^000000で";
+		mes "新しい発見がありました。";
+		next;
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "生体工学研究所の進入可能区域の下、";
+		mes "完全に埋もれて進入不可能な";
+		mes "地下層の存在です。";
+		next;
+		mes "[シエラ]";
+		mes "同じ時期に、生体工学研究所を";
+		mes "探検していた冒険者が";
+		mes "^FF0000これ^000000を見つけました。";
+		next;
+		menu "これは？",-;
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "まだ公式発表されていない物です。";
+		mes "きっとこれからもされないでしょう。";
+		mes "調査団では^0000CDバーチャルレコード^000000と";
+		mes "呼んでいます。";
+		next;
+		menu "バーチャルレコード？",-;
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "似たようなものを知っていますか？";
+		mes "例えば^0000CDメモリーレコード^000000とか。";
+		next;
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "もちろんバーチャルレコードは、";
+		mes "メモリーレコードと";
+		mes "全く異なる技術で作られたものです。";
+		next;
+		mes "[シエラ]";
+		mes "バーチャルレコードは";
+		mes "生体工学研究所で";
+		mes "発見された記憶媒体です。";
+		next;
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "つまり^FF0000使ってはいけない技術^000000が";
+		mes "含まれている可能性があります。";
+		mes "^0000CD人間の記憶や身体、";
+		mes "もし実在するなら魂までも^000000";
+		mes "実験材料とするのに";
+		mes "何のためらいもない連中ですからね。";
+		next;
+		mes "[シエラ]";
+		mes "しかし、";
+		mes "^FF0000重要な真実^000000を解き明かすためなら、";
+		mes "使わざるを得ません。";
+		next;
+		menu "重要な真実？",-;
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "生体工学研究所に存在する";
+		mes "思念体に関する真実です。";
+		next;
+		mes "[シエラ]";
+		mes "このバーチャルレコードには";
+		mes "^0000CDセイレン=ウィンザー^000000ら";
+		mes "^0000CDルーンミッドガッツ王国の";
+		mes "非公式派遣隊^000000の";
+		mes "メモリーデータが含まれています。";
+		next;
+		mes "[シエラ]";
+		mes "解析装置を使用すると";
+		mes "仮想現実の形で再生され、";
+		mes "まだ解明されていない部分の";
+		mes "解析が可能になります。";
+		next;
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "つまり非公式派遣隊が何故、";
+		mes "生体工学研究所に彷徨う";
+		mes "思念体に成り果てたのか……";
+		mes "その真実に迫ることができます。";
+		next;
+		mes "[シエラ]";
+		mes "僕たちもその内容は";
+		mes "気になりましたが、なにより";
+		mes "ルーンミッドガッツ王国の";
+		mes "王家の方たちからも";
+		mes "解析を要請されました。";
+		next;
+		menu "私のやることは？",-;
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "メモリーを仮想現実として";
+		mes "解析するということは、";
+		mes "彼らと同様の経験を";
+		mes "するということです。";
+		mes "そしてそれは大きな危険も";
+		mes "経験することを意味します。";
+		next;
+		mes "[シエラ]";
+		mes "彼らの経験した結果こそが、";
+		mes "生体工学研究所を彷徨う";
+		mes "^FF0000あの無数にある思念体^000000なんです。";
+		next;
+		cutin "3rd_gn_demi01", 255;
+		mes "[ナイナー]";
+		mes "少しでも危険を抑えるように、";
+		mes "解析された部分は少し調整したよ。";
+		mes "ただ調整し過ぎると、";
+		mes "彼らが経験した事実から";
+		mes "大きく外れてしまうんで、";
+		mes "ほどほどにしているけどね。";
+		next;
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "僕たちはその危険を";
+		mes "乗り越えられる人を探していました。";
+		mes "調整をしたバーチャルレコードでも、";
+		mes "普通の人には危険過ぎます。";
+		next;
+		mes "[シエラ]";
+		mes "そこで、冒険者としての経験豊富な";
+		mes strcharinfo(0)+ "さんなら";
+		mes "無事最後まで解析できると";
+		mes "判断したわけです。";
+		next;
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "もちろん、";
+		mes strcharinfo(0)+ "さんの";
+		mes "善意に頼るだけではありません。";
+		mes "仮想現実を体験し、";
+		mes "解析を進めてくれれば";
+		mes "それに応じた報酬を差し上げます。";
+		next;
+		cutin "3rd_gn_demi01", 255;
+		mes "[ナイナー]";
+		mes "一回では完全に解析できません。";
+		mes "何度も繰り返し仮想現実を";
+		mes "体験することで、";
+		mes "新たな解析資料が得られます。";
+		next;
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "僕からの依頼についての説明は";
+		mes "おわかりになりましたか？";
+		mes "僕たちと契約し、";
+		mes "バーチャルレコードの解析に";
+		mes "協力してもらえますか？";
+		next;
+		if(select("協力する","協力しない")) {
+			cutin "3rd_gn_demi02", 2;
+			mes "[シエラ]";
+			mes "そうですか……";
+			mes "仕方ありません。";
+			mes "他の適合者を探すことにします。";
+			close2;
+			cutin "3rd_gn_demi01", 255;
+			end;
+		}
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "ありがとうございます。";
+		mes "解析する方法は会話モードと";
+		mes "^0000ff会話モードと";
+		mes "戦闘モードの^000000";
+		mes "ふたつがあります。";
+		next;
+		mes "[シエラ]";
+		mes "^0000ff会話モード^000000は非公式派遣隊が";
+		mes "経験した事件を中心に";
+		mes "解析できるようにしました。";
+		mes "各人物との会話部分を重点的に";
+		mes "再現しているため、";
+		mes "^0000ff戦闘での危険性は低く^000000なっています。";
+		next;
+		mes "[シエラ]";
+		mes "なお、会話モードを利用できるのは";
+		mes "^ff0000一人だけ^000000になります。";
+		mes "派遣隊の会話や行動が発生する";
+		mes "会話モードは人数が増えると";
+		mes "同期化が難しく、";
+		mes "正常なデータが取れないんです。";
+		next;
+		mes "[シエラ]";
+		mes "^ff0000戦闘モード^000000は人物以外の部分を";
+		mes "再現するようにしました。";
+		mes "そのため戦闘が多く、";
+		mes "^ff0000危険性は高く^000000なります。";
+		next;
+		mes "[シエラ]";
+		mes "こちらは複数人でも利用できますが、";
+		mes "^ff0000BaseLv170以上^000000の";
+		mes "冒険者さんのみ、";
+		mes "利用を許可しています。";
+		next;
+		mes "^FF0000[インフォメーション]";
+		mes "‐戦闘モードに入場できる";
+		mes "　キャラクター数は";
+		mes "　「1」アカウントにつき";
+		mes "　一日「5」体までです。";
+		mes "　入場できるキャラクター数制限は";
+		mes "　午前5時にリセットされます‐^000000";
+		next;
+		mes "^FF0000[インフォメーション]";
+		mes "‐なお、キャラクターを削除して";
+		mes "　新しいキャラクターを";
+		mes "　作成した場合でも、";
+		mes "　入場することはできませんので";
+		mes "　ご注意ください‐^000000";
+		next;
+		mes "[シエラ]";
+		mes "会話モードは僕に、";
+		mes "戦闘モードはナイナーさんに";
+		mes "話しかけて利用してください。";
+		next;
+		mes "[シエラ]";
+		mes "さあ、行動するなら";
+		mes "早いほど良いです。";
+		mes "^0000CDパーティーを作成^000000し、";
+		mes "準備が整ったらまた来てください。";
+		setquest 16388; //state=1
+		close2;
+		cutin "3rd_gn_demi01", 255;
+		end;
+	}
+	cutin "3rd_gn_demi01", 2;
+	mes "[シエラ]";
+	mes "バーチャルレコードの同期化を";
+	mes "進行します。";
+	mes "同期化が終わったら";
+	mes "もう一度僕に話しかけて";
+	mes "解析を初めてください。";
+	next;
+	switch(select("会話モードの同期化(ダンジョン作成)","会話モードの解析開始(ダンジョン入場)","説明を聞く","やめる")) {
+	case 1:
+		if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+			mes "[シエラ]";
+			mes "すみませんが、";
+			mes "パーティーリーダー以外の方は";
+			mes "ご遠慮いただけますか。";
+			close2;
+			cutin "3rd_gn_demi01", 255;
+			end;
+		}
+		mdcreate "a journey of expedition";
+		mes "[シエラ]";
+		mes "同期化が完了したら";
+		mes "^0000CDもう一度声をかけてください。";
+		mes "解析を開始^000000します。";
+		close2;
+		cutin "3rd_gn_demi01", 255;
+		end;
+	case 2:
+		if(checkquest(127315)) {
+			cutin "3rd_gn_demi02", 2;
+			mes "[シエラ]";
+			mes "バーチャルレコードの解析に";
+			mes "参加してからまだ大して時間が";
+			mes "経ってないじゃないですか！";
+			mes "次の午前5時を過ぎてから";
+			mes "来てください。";
+			next;
+			mes "[シエラ]";
+			mes "それから、^ff0000最後に入場してから1時間^000000は";
+			mes "休んでくださいね。";
+			mes "そうじゃなければ";
+			mes "使用は許可できません。";
+			close2;
+			cutin "3rd_gn_demi01", 255;
+			end;
+		}
+		mes "[シエラ]";
+		mes "わかりました！";
+		mes "これから会話モードでの";
+		mes "解析を始めます！";
+		next;
+		switch(mdenter("a journey of expedition")) {
+		case 0:	// エラーなし
+			mes "[シエラ]";
+			mes "わかりました！";
+			mes "これから会話モードでの";
+			mes "解析を始めます！";
+			next;
+			setquest 16390; //state=1
+			setquest 127309; //state=1
+			setquest 127315; //state=1
+			announce "メモリアルダンジョン[a journey of expedition] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
+			close2;
+			//warp "1@gol1.gat",198,35;
+			end;
+		case 1:	// パーティー未加入
+			cutin "3rd_gn_demi02", 2;
+			mes "[シエラ]";
+			mes "すみません、";
+			mes "パーティーリーダー以外の方は";
+			mes "ご遠慮いただけますか。";
+			close2;
+			cutin "3rd_gn_demi01", 255;
+			end;
+		case 2:	// ダンジョン未作成
+			cutin "3rd_gn_demi02", 2;
+			mes "[シエラ]";
+			mes "あれ？　おかしいですね？";
+			mes "ちゃんと同期化しているか";
+			mes "確認してください。";
+			close2;
+			cutin "3rd_gn_demi01", 255;
+			end;
+		default:	// その他エラー
+			close;
+		}
+	case 3:
+		mes "[シエラ]";
+		mes "^0000ff会話モード^000000は非公式派遣隊が";
+		mes "経験した事件を中心に";
+		mes "解析できるようにしました。";
+		mes "各人物との会話部分を重点的に";
+		mes "再現しているため、";
+		mes "^0000ff戦闘での危険性は低く^000000なっています。";
+		next;
+		mes "[シエラ]";
+		mes "なお、会話モードを利用できるのは";
+		mes "^ff0000一人だけ^000000になります。";
+		mes "派遣隊の会話や行動が発生する";
+		mes "会話モードは人数が増えると";
+		mes "同期化が難しく、";
+		mes "正常なデータが取れないんです。";
+		next;
+		mes "[シエラ]";
+		mes "^ff0000戦闘モード^000000は人物以外の部分を";
+		mes "再現するようにしました。";
+		mes "そのため戦闘が多く、";
+		mes "^ff0000危険性は高く^000000なります。";
+		next;
+		mes "[シエラ]";
+		mes "こちらは複数人でも利用できますが、";
+		mes "^ff0000BaseLv170以上^000000の";
+		mes "冒険者さんのみ、";
+		mes "利用を許可しています。";
+		next;
+		mes "^FF0000[インフォメーション]";
+		mes "‐戦闘モードに入場できる";
+		mes "　キャラクター数は";
+		mes "　「1」アカウントにつき";
+		mes "　一日「5」体までです。";
+		mes "　入場できるキャラクター数制限は";
+		mes "　午前5時にリセットされます‐^000000";
+		next;
+		mes "^FF0000[インフォメーション]";
+		mes "‐なお、キャラクターを削除して";
+		mes "　新しいキャラクターを";
+		mes "　作成した場合でも、";
+		mes "　入場することはできませんので";
+		mes "　ご注意ください‐^000000";
+		next;
+		mes "[シエラ]";
+		mes "会話モードは僕に、";
+		mes "戦闘モードはナイナーさんに";
+		mes "話しかけて利用してください。";
+		close2;
+		cutin "3rd_gn_demi01", 255;
+		end;
+	case 4:
+		mes "[シエラ]";
+		mes "忘れ物ですか？";
+		mes "準備が出来たら";
+		mes "声をかけてください。";
+		close2;
+		cutin "3rd_gn_demi01", 255;
+		end;
+	}
+}
+yuno.gat,213,348,5	script	ナイナー#blab	10165,{/* 59589 */
+	if(!checkquest(16388)) {
+		mes "[ナイナー]";
+		mes "私は通信担当者のナイナーです。";
+		mes "シエラさんから話は聞きましたか？";
+		next;
+		mes "[ナイナー]";
+		mes "まずは";
+		mes "シエラに話しかけてください。";
+		close;
+	}
+	// missing base lv
+	mes "[ナイナー]";
+	mes "私は通信担当者のナイナーです。";
+	mes "戦闘モードは非常に危険です。";
+	mes "もう少し強くなってから";
+	mes "また来てください。";
+	next;
+	mes "‐このクエストを進行するには";
+	mes "　BaseLv170が必要です‐";
+	close;
+}
+yuno.gat,220,352,3	script	ラビアン#enc	10166,{/* 59590 */
+	mes "[ラビアン]";
+	mes "『思念体武器エンチャント』";
+	mes "やってるニャ～。";
+	mes "「エネルギーの集合体」5個で";
+	mes "アイテムに思念体の力を";
+	mes "宿すニャ～！";
+	mes "エネルギーの集合体：0個";
+	next;
+	switch(select("エンチャントする","詳細を聞く","立ち去る")) {
+	case 1:
+		break;
+	case 2:
+		mes "[ラビアン]";
+		mes "思念体武器エンチャントの";
+		mes "ルール説明ニャ～！";
+		mes "　";
+		mes "消費する材料は1回につき";
+		mes "「エネルギーの集合体」5個ニャ";
+		next;
+		mes "[ラビアン]";
+		mes "すでに何かエンチャントが";
+		mes "されている場合は";
+		mes "思念体武器エンチャントは";
+		mes "出来ないニャ";
+		next;
+		mes "[ラビアン]";
+		mes "思念体武器エンチャントをすると";
+		mes "精錬値は「0」になっちゃうニャ！";
+		mes "気を付けるニャン。";
+		next;
+		mes "[ラビアン]";
+		mes "そうそう、カードは据え置きニャン。";
+		mes "外れたり無くなったりしないから";
+		mes "安心するニャン。";
+		next;
+		mes "[ラビアン]";
+		mes "1回のエンチャントで";
+		mes "スロット2,3,4にそれぞれ、";
+		mes "自分で選択した物が付与されるニャ";
+		mes "ちなみに、成功率100%ニャ！";
+		next;
+		mes "[ラビアン]";
+		mes "第1エンチャントは";
+		mes "スロット2に";
+		mes "「火」「水」「風」「地」";
+		mes "「聖」「闇」「念」「毒」の";
+		mes "どれかの属性を付与できるニャ。";
+		next;
+		mes "[ラビアン]";
+		mes "第2エンチャントは";
+		mes "スロット3に";
+		mes "「強撃5」「増幅5」の";
+		mes "どれかを付与できるニャ。";
+		next;
+		mes "[ラビアン]";
+		mes "第3エンチャントは";
+		mes "スロット4に";
+		mes "「大鷲の眼光」「熊の力」";
+		mes "「暴走した魔力」の";
+		mes "どれかを付与できるニャ。";
+		next;
+		mes "[ラビアン]";
+		mes "わかったかニャ？";
+		mes "さらに詳しく知りたいなら";
+		mes "これを熟読すると良いニャ！";
+		mes "　";
+		mes "<URL>[生体EDDA公式HP]<INFO>https://ragnarokonline.gungho.jp/special/episode/bio-labo-edda/#enchant</INFO></URL>";
+		close;
+	case 3:
+		mes "[ラビアン]";
+		mes "また来るニャ～";
+		close;
+	}
+	// missing
+	mes "[ラビアン]";
+	mes "思念体武器エンチャントの";
+	mes "対象装備を装備してないニャン！";
+	mes "出直すニャ～";
+	close;
+}
+yuno.gat,223,343,4	script	エレロ#blab	83,{/* 59591 */
+	mes "[エレロ]";
+	mes "いきなりだが、そこの君ぃ～！";
+	mes "精錬していかないかいぃ？";
+	next;
+	switch(select("精錬サービス","各種説明を聞く","貴方は？","立ち去る")) {
+	case 1:
+		mes "[エレロ]";
+		mes "思念体武器シリーズのぉ～精錬をぉ～";
+		mes "「エネルギーの集合体」1個でぇ～";
+		mes "1回ぃ～やってくかいぃ～";
+		next;
+		mes "[エレロ]";
+		mes "失敗してもォ～";
+		mes "装備は破壊されないィ～";
+		mes "んだぜェ～";
+		next;
+		mes "[エレロ]";
+		mes "まぁ～、失敗したらぁ～";
+		mes "大抵、精錬値が下がるぅ～";
+		mes "けどなぁ～";
+		mes "　";
+		mes "エネルギーの集合体：0個";
+		next;
+		mes "[エレロ]";
+		mes "思念体武器をぉ～";
+		mes "装備してないぜぇ～";
+		close;
+	case 2:
+		mes "[エレロ]";
+		mes "思念体武器シリーズのぉ～精錬をぉ～";
+		mes "「エネルギーの集合体」1個でぇ～";
+		mes "やってるぜぇ～";
+		next;
+		mes "[エレロ]";
+		mes "装備の精錬値がぁ～";
+		mes "3以下ならぁ～";
+		mes "普通の精錬でも良いけどぉ～";
+		mes "それ以上ならぁ～";
+		mes "失敗すればぁ～";
+		mes "装備が破壊されるだろぉ～";
+		next;
+		mes "[エレロ]";
+		mes "でもぉ～オイラに任せればぁ～";
+		mes "失敗してもォ～";
+		mes "装備は破壊されないぃ～";
+		mes "んだぜェ～";
+		next;
+		mes "[エレロ]";
+		mes "まぁ～、失敗したらぁ～";
+		mes "大抵、精錬値が下がるぅ～";
+		mes "けどなぁ～";
+		close;
+	case 3:
+		mes "[エレロ]";
+		mes "オイラはぁ～";
+		mes "思念体武器の研究をぉ～";
+		mes "しているんだぜぇ～";
+		next;
+		mes "[エレロ]";
+		mes "思念体の武器もぉ～";
+		mes "思念体のはずだろぉ～？";
+		mes "本体が消えたらぁ～";
+		mes "装備も消えるはずだよねぇ～";
+		next;
+		mes "[エレロ]";
+		mes "でも時々装備が残るのはぁ～";
+		mes "何らかの理由でぇ～";
+		mes "その装備のぉ～エネルギーがぁ～";
+		mes "安定しているからだとぉ～";
+		mes "思うんだぜぇ～";
+		next;
+		mes "[エレロ]";
+		mes "実体化ぁ～しているからぁ～";
+		mes "普通の装備のようにぃ～";
+		mes "精錬とかもぉ～";
+		mes "できるんだがぁ～";
+		mes "元々はぁ～思念体だよなぁ～";
+		next;
+		mes "[エレロ]";
+		mes "という事はぁ～思念にぃ～";
+		mes "エネルギーをぉ～";
+		mes "注入してやればぁ～";
+		mes "思念の強化がぁ～";
+		mes "できるはずだぜぇ～";
+		next;
+		mes "[エレロ]";
+		mes "つまりぃ～";
+		mes "「エネルギーの結晶体」をぉ～";
+		mes "オイラが使ってぇ～";
+		mes "思念体武器にぃ～気合を注入するぅ～";
+		mes "研究をしているんだぜぇ～";
+		close;
+	case 4:
+		mes "[エレロ]";
+		mes "やる気になったらぁ～";
+		mes "また来いなぁ～";
+		close;
+	}
+}
+
+
+1@gol1.gat,196,38,5	script	シエラ#blab1	982,{/* 57605 */
+	cutin "3rd_gn_demi01", 2;
+	mes "[シエラ]";
+	mes "無事に入れましたね。";
+	mes "少しお待ちください。";
+	mes "ナイナーさんが最終調整中です。";
+	next;
+	announce "ナイナー : 最終調整完了しました。ここからはシエラさんと解析を進行してください！", 0x9, 0xffff99, 0x190, 24, 0, 0;
+	mes "[シエラ]";
+	mes "これからバーチャルレコードに";
+	mes "残っている、非公式派遣隊の";
+	mes "記録を解析します。";
+	mes "解析を始める前に、";
+	mes "いくつかの注意事項を説明します。";
+	next;
+	mes "[シエラ]";
+	mes "まず、ナイナーさんが調整した通り、";
+	mes "非公式派遣隊のメンバーは";
+	mes "この解析への参加者を";
+	mes "同じ派遣隊の一員として認識します。";
+	mes "会話や行動はできるだけ";
+	mes "隊員のように振る舞ってください。";
+	next;
+	mes "[シエラ]";
+	mes "度を過ぎた突発的な行動を取ると、";
+	mes "同期化率が落ちて、解析結果の";
+	mes "信頼度も落ちてしまいます。";
+	next;
+	mes "[シエラ]";
+	mes "しかし、必要だと判断された場合は、";
+	mes "突発的な行動も許可します。";
+	mes "すべては記録の中での";
+	mes "出来事ですからね。";
+	mes "失敗したとしても、";
+	mes "また次回挑戦すればいいんです。";
+	next;
+	mes "[シエラ]";
+	mes "もし解析中に参加者の精神に";
+	mes "悪い影響を与えると判断される事件が";
+	mes "起きた場合、僕が直接介入して";
+	mes "ここに呼び戻します。";
+	next;
+	cutin "3rd_gn_demi02", 2;
+	mes "[シエラ]";
+	mes "そして最後に、これは仮想現実です。";
+	mes "このことを忘れないでください。";
+	mes "仮に彼らを救えたとしても";
+	mes "現実の彼らは既に死亡していて、";
+	mes "生体工学研究所の地下で";
+	mes "無数の思念体となっています。";
+	next;
+	mes "[シエラ]";
+	mes "僕たちがやるべきことは";
+	mes "より多くの真実を";
+	mes "解き明かすことです。";
+	mes "そのことを忘れないでください。";
+	next;
+	cutin "3rd_gn_demi01", 2;
+	mes "[シエラ]";
+	mes "では、非公式派遣隊がいる";
+	mes "待合室に接続します。";
+	mes "繋がったら、^FF0000まずは派遣隊の";
+	mes "みなさんと話をしてみてください。^000000";
+	next;
+	mes "[シエラ]";
+	mes "あなたが生体工学研究所の";
+	mes "真実を解き明かすことが";
+	mes "できるよう祈ります。";
+	close2;
+	cutin "3rd_gn_demi01", 255;
+	warp "1@gol1.gat",171,188;
+	end;
+}
+
+00t1@gol1.gat,170,200,5	script	マーガレッタ=ソリン#be1	10321,{/* 59834 */
+	if(QUE_GOL1 == 100) {
+		cutin "bio_sorin02", 1;
+		mes "[マーガレッタ=ソリン]";
+		mes "どうして、こんなに眠く……";
+		close2;
+		cutin "bio_sorin01", 255;
+		end;
+	}
+	if(QUE_GOL1 & 1) {
+		//missing
+	}
+	cutin "bio_sorin01", 1;
+	mes "[マーガレッタ=ソリン]";
+	mes "不安じゃないか、ですか？";
+	mes "こんな大きな仕事は";
+	mes "初めてですから、";
+	mes "むしろ胸が躍りますね。";
+	next;
+	mes "[マーガレッタ=ソリン]";
+	mes "私もそれなりの修羅場を";
+	mes "経験してきたんですよ。";
+	mes "プリーストの時代とか……";
+	mes "いえ、この話はまた今度に";
+	mes "しましょう。";
+	next;
+	mes "[マーガレッタ=ソリン]";
+	mes "例え不安だとしても、";
+	mes "セイレンの重要な任務ですから";
+	mes "私が傍にいてあげなきゃ。";
+	next;
+	cutin "bio_seyren02", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "そんなに頼りないかな？";
+	next;
+	cutin "bio_sorin01", 1;
+	mes "[マーガレッタ=ソリン]";
+	mes "うーん……";
+	mes "そういうわけじゃないんだけど……。";
+	next;
+	mes "[マーガレッタ=ソリン]";
+	mes "（彼は純粋すぎるし、";
+	mes "ちょっと抜けてるんです。";
+	mes "ひとりにできると思います？）";
+	next;
+	cutin "bio_seyren02", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "何が違うんだ？";
+	mes "こそこそ話してないで";
+	mes "教えてくれよ。";
+	set QUE_GOL1,QUE_GOL1|0x1;
+	close2;
+	if(QUE_GOL1 & 3F) {
+		set QUE_GOL1,100;
+		donpcevent getmdnpcname("gol1_event1") +"::OnStart";
+	}
+	cutin "bio_sorin01", 255;
+	end;
+}
+00t1@gol1.gat,172,207,3	script	エレメス=ガイル#be_1	10319,{/* 59835 */
+	if(QUE_GOL1 & 2) {
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes "俺の任務はケイロンの護衛だ。";
+		mes "護衛が武器を手放すものか。";
+		close2;
+		cutin "bio_eremes01", 255;
+		end;
+	}
+	cutin "bio_eremes01", 2;
+	mes "[エレメス=ガイル]";
+	mes "俺の任務はケイロンの護衛だ。";
+	mes "護衛が武器を手放すものか。";
+	next;
+	cutin "bio_katrinn02", 0;
+	mes "[カトリーヌ=ケイロン]";
+	mes "エレメス兄さんもバカ兄と同じよ。";
+	mes "本当に、いつまで子ども扱い";
+	mes "するつもりなのかな。";
+	mes "あたしはもうカトリーヌなのに。";
+	mes "魔術師ギルドが認めた";
+	mes "大魔法使いなのに！";
+	next;
+	cutin "bio_eremes01", 2;
+	mes "[エレメス=ガイル]";
+	mes "そんなことは関係ない。";
+	mes "お前がカトリーヌだろうが、";
+	mes "ただのケイロンだろうが、";
+	mes "お前を守るのが俺の任務だ。";
+	next;
+	cutin "bio_katrinn02", 0;
+	mes "[カトリーヌ=ケイロン]";
+	mes "エレメス兄さんはいつもそう。";
+	mes "本当、つまんない。";
+	set QUE_GOL1,QUE_GOL1|0x2;
+	close2;
+	if(QUE_GOL1 & 3F) {
+		set QUE_GOL1,100;
+		donpcevent getmdnpcname("gol1_event1") +"::OnStart";
+	}
+	cutin "bio_eremes01", 255;
+	end;
+OnTalk1:
+	unittalk "エレメス : 気をつけろ、様子がおかしい。";
+	end;
+OnTalk2:
+	unittalk "エレメス : くそっ！";
+	end;
+OnTalk3:
+	unittalk "エレメス : ケイロンを安全な場所に置いてくる。少しだけ耐えてくれ、セイレン！";
+	end;
+}
+00t1@gol1.gat,175,204,3	script	カトリーヌ=ケイロン#be_	10323,{/* 59836 */
+	if(QUE_GOL1 & 4) {
+		cutin "bio_katrinn01", 0;
+		mes "[カトリーヌ=ケイロン]";
+		mes "あなたも武器を取られました？";
+		mes "非公式とはいえあたしたちは";
+		mes "使節団なのに、";
+		mes "まるで暗殺団扱いですね。";
+		close2;
+		cutin "bio_katrinn01", 255;
+		end;
+	}
+	cutin "bio_katrinn02", 0;
+	mes "[カトリーヌ=ケイロン]";
+	mes "あなたも武器を取られたんですか？";
+	mes "非公式とはいえあたしたちは";
+	mes "使節団なのに、";
+	mes "まるで暗殺団扱いですね。";
+	next;
+	cutin "bio_katrinn01", 0;
+	mes "[カトリーヌ=ケイロン]";
+	mes "こんなことされたら、";
+	mes "逆に期待に";
+	mes "応えたくなりません？";
+	next;
+	mes "[カトリーヌ=ケイロン]";
+	mes "結局エレメス兄さんは";
+	mes "武器を渡さなかったけど、";
+	mes "あたしにはさっさと渡すべきだと";
+	mes "言ってるんです、このバカ兄は。";
+	next;
+	cutin "bio_seyren01", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "物騒なことを言うんじゃない。";
+	mes "お前の言った通り、";
+	mes "私たちは使節団じゃないか。";
+	mes "小さな摩擦でも避けなくちゃ。";
+	next;
+	cutin "bio_seyren03", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "エレメスさんは";
+	mes "止められなかったけど、";
+	mes "私の妹は素直だから";
+	mes "ちゃんと聞いてくれると";
+	mes "信じていたよ。";
+	next;
+	cutin "bio_katrinn02", 0;
+	mes "[カトリーヌ=ケイロン]";
+	mes "バカ兄にゴマすりを教えたのは誰？";
+	set QUE_GOL1,QUE_GOL1|0x4;
+	close2;
+	if(QUE_GOL1 & 3F) {
+		set QUE_GOL1,100;
+		donpcevent getmdnpcname("gol1_event1") +"::OnStart";
+	}
+	cutin "bio_katrinn01", 255;
+	end;
+OnTalk1:
+	unittalk "ケイロン : なんだろう……すごく……眠い……";
+	end;
+}
+00t1@gol1.gat,177,197,3	script	ハワード=アルトアイゼン	10320,{/* 59837 */
+	if(QUE_GOL1 == 100) {
+		cutin "bio_harword01", 2;
+		mes "[ハワード=アルトアイゼン]";
+		mes "今、変な音がしなかったか？";
+		mes "ガス漏れみたいな……";
+		mes "音……が……。";
+		close2;
+		cutin "bio_katrinn01", 255;
+		end;
+	}
+	if(QUE_GOL1 & 8) {
+		cutin "bio_harword02", 2;
+		mes "[ハワード=アルトアイゼン]";
+		mes "工房に篭もっていたから、";
+		mes "旨い物の食べ歩きも";
+		mes "できなかったんだ。";
+		mes "任務が終わったら行きたいな。";
+		mes "姉御と一緒に行きたいな～。";
+		close2;
+		cutin "bio_katrinn01", 255;
+		end;
+	}
+	cutin "bio_harword02", 2;
+	mes "[ハワード=アルトアイゼン]";
+	mes "姉御、お茶入れますか？";
+	mes "それともお菓子？";
+	mes "これは初めて見ますね、";
+	mes "旨そうだなあ。";
+	next;
+	cutin "bio_shecil03", 2;
+	mes "[セシル=ディモン]";
+	mes "食べないよ。";
+	mes "あんたもうかつに口にするな、バカ。";
+	mes "初めて来たところなんて";
+	mes "何も信用できるものか。";
+	next;
+	cutin "bio_harword01", 2;
+	mes "[ハワード=アルトアイゼン]";
+	mes "まさか大統領の接見室で、";
+	mes "毒なんて盛りますか？";
+	mes "美味しい物を食べるのも";
+	mes "経験じゃないですかね？";
+	next;
+	cutin "bio_harword02", 2;
+	mes "[ハワード=アルトアイゼン]";
+	mes "工房に篭もっていたから、";
+	mes "こんなに旨い物は";
+	mes "食べたことがないや。";
+	next;
+	cutin "bio_shecil02", 2;
+	mes "[セシル=ディモン]";
+	mes "……バカね……。";
+	set QUE_GOL1,QUE_GOL1|0x8;
+	close2;
+	if(QUE_GOL1 & 3F) {
+		set QUE_GOL1,100;
+		donpcevent getmdnpcname("gol1_event1") +"::OnStart";
+	}
+	cutin "bio_shecil02", 255;
+	end;
+}
+00t1@gol1.gat,176,194,7	script	セシル=ディモン#be_1_00	10322,{/* 59838 */
+	if(QUE_GOL1 & 10) {
+		cutin "bio_shecil01", 2;
+		mes "[セシル=ディモン]";
+		mes "確かにソリンの言う通りだ。";
+		mes "でも私には出来ない。";
+		mes "解ってくれとは言わないさ。";
+		close2;
+		cutin "bio_shecil01", 255;
+		end;
+	}
+	cutin "bio_shecil01", 2;
+	mes "[セシル=ディモン]";
+	mes "武器を押収されなかったのかって？";
+	mes "初めての場所でそうやすやすと";
+	mes "武器を手放すと思うかい？";
+	next;
+	cutin "bio_shecil03", 2;
+	mes "[セシル=ディモン]";
+	mes "まさか素直に武器を";
+	mes "渡したりしてないよね？";
+	next;
+	cutin "bio_sorin01", 1;
+	mes "[マーガレッタ=ソリン]";
+	mes "でも、他国の大統領と";
+	mes "接見する場じゃないですか。";
+	mes "セシルさんが心配するのも";
+	mes "わかりますが……。";
+	next;
+	cutin "bio_shecil01", 2;
+	mes "[セシル=ディモン]";
+	mes "そうだね。";
+	mes "確かにその通りだ。";
+	mes "でも私には出来ない。";
+	mes "解ってくれとは言わないさ。";
+	set QUE_GOL1,QUE_GOL1|0x10;
+	close2;
+	if(QUE_GOL1 & 3F) {
+		set QUE_GOL1,100;
+		donpcevent getmdnpcname("gol1_event1") +"::OnStart";
+	}
+	cutin "bio_shecil01", 255;
+	end;
+OnTalk1:
+	unittalk "セシル : くそっ……。";
+	end;
+}
+
+00t1@gol1.gat,168,207,3	script	シュバルツバルド兵士#be	852,{/* 59846 */
+	mes "[シュバルツバルド兵士]";
+	mes "いつ合図が来るんだ。";
+	mes "待ちくたびれたぞ……";
+	next;
+	cutin "bio_eremes01", 2;
+	mes "[エレメス=ガイル]";
+	mes "なんの合図だ？";
+	next;
+	cutin "bio_eremes01", 255;
+	mes "[シュバルツバルド兵士]";
+	mes "はっ！　なんでもありません！";
+	next;
+	cutin "bio_eremes01", 2;
+	mes "[エレメス=ガイル]";
+	mes "……。";
+	next;
+	cutin "bio_eremes01", 255;
+	mes "[大統領ボディーガード]";
+	mes "大統領閣下到着の合図のことです！";
+	mes "それまでゆっくりと";
+	mes "休んでいてください！　ハハハ！";
+	close;
+}
+00t1@gol1.gat,169,205,3	script	シュバルツバルド兵士#be	852,{/* 59847 */
+	mes "[シュバルツバルド兵士]";
+	mes "何か必要でしょうか？";
+	mes "何でも言ってください。";
+	next;
+	cutin "bio_katrinn01", 0;
+	mes "[カトリーヌ=ケイロン]";
+	mes "本当？";
+	mes "ならあたしの杖を返して。";
+	next;
+	cutin "bio_katrinn01", 255;
+	mes "[シュバルツバルド兵士]";
+	mes "そ、それは困ります……。";
+	next;
+	cutin "bio_seyren03", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "ケイロン、不安なのはわかるけど、";
+	mes "彼を困らせるんじゃないよ。";
+	next;
+	cutin "bio_katrinn02", 0;
+	mes "[カトリーヌ=ケイロン]";
+	mes "別に……不安だからって";
+	mes "困らせてる訳じゃないからね？";
+	close2;
+	cutin "bio_seyren03", 255;
+	end;
+}
+00t1@gol1.gat,162,206,5	script	大統領ボディーガード#be	899,{/* 59848 */
+	mes "[大統領ボディーガード]";
+	mes "大統領閣下がいらっしゃるまで";
+	mes "くつろいでいてください。";
+	mes "簡単なお菓子も用意しました。";
+	next;
+	mes "[大統領ボディーガード]";
+	mes "（……どういうことだ。";
+	mes "6名と聞いていたが？）";
+	close;
+}
+00t1@gol1.gat,160,206,5	script	レッケンベル警備兵#be_1	868,{/* 59849 (hide)*/}
+00t1@gol1.gat,160,204,5	script	レッケンベル警備兵#be_2	868,{/* 59850 (hide)*/
+OnTalk1:
+	unittalk "レッケンベル警備兵 : なんであいつは起きてるんだ？";
+	end;
+OnTalk2:
+	unittalk "レッケンベル警備兵 : 捕まえろ！　眠ったやつらも早く縛れ！";
+	end;
+}
+00t1@gol1.gat,160,202,5	script	レッケンベル警備兵#be_3	868,{/* 59851 (hide)*/}
+00t1@gol1.gat,163,205,5	script	レッケンベル警備兵#be_4	868,{/* 59852 (hide)*/
+OnTalk1:
+	unittalk "レッケンベル警備兵 : 捕まえろ！　ひとりも逃がすな！";
+	end;
+}
+00t1@gol1.gat,163,203,5	script	レッケンベル警備兵長#be	20541,{/* 59853 (hide)*/
+OnTalk1:
+	unittalk "レッケンベル警備兵長 : うわぁ！";
+	end;
+}
+
+00t1@gol1.gat,172,198,1	script	セイレン=ウィンザー#be1	10318,{/* 57950 */
+	if(QUE_GOL1 == 100) {
+		cutin "bio_seyren02", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "くっ……なぜだ……";
+		close2;
+		cutin "bio_seyren02", 255;
+		end;
+	}
+	if(QUE_GOL1 & 20) {
+		cutin "bio_seyren01", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "失踪中の陛下を探すため、";
+		mes "他国の大統領との会談。";
+		mes "こんな大きな仕事は初めてなので、";
+		mes "ちょっと緊張します。";
+		close2;
+		cutin "bio_seyren02", 255;
+		end;
+	}
+	cutin "bio_seyren03", 1;
+	mes "[セイレン=ウィンザー]";
+	mes strcharinfo(0)+ "さん、";
+	mes "連絡が遅れてすいません。";
+	mes "約束の場所が";
+	mes "急に変更になったんです。";
+	mes "間に合って良かった。";
+	next;
+	cutin "bio_sorin01", 1;
+	mes "[マーガレッタ=ソリン]";
+	mes "セイレンのペコペコが";
+	mes "手縄を切って逃げ出したせいで";
+	mes "さらに遅れたんですよ。";
+	mes "今度はきちんと結んだよね？";
+	next;
+	cutin "bio_seyren01", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "最初からちゃんと";
+	mes "結んでたんだけど……";
+	mes "今度は大丈夫だよ。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "国王陛下探索のため";
+	mes "アルナベツル教国に潜入するには、";
+	mes "シュバルツバルド共和国の";
+	mes "大統領の協力が必要です。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "こんな大きな仕事は初めてなので、";
+	mes "ちょっと緊張します。";
+	next;
+	cutin "bio_sorin01", 1;
+	mes "[マーガレッタ=ソリン]";
+	mes "大丈夫、";
+	mes "あなたなら出来るわ。";
+	set QUE_GOL1,QUE_GOL1|0x20;
+	close2;
+	if(QUE_GOL1 & 3F) {
+		set QUE_GOL1,100;
+		donpcevent getmdnpcname("gol1_event1") +"::OnStart";
+	}
+	cutin "bio_seyren01", 255;
+	end;
+OnTalk1:
+	unittalk "セイレン : ……さっきまでいた兵士たちは？";
+	end;
+OnTalk2:
+	unittalk "セイレン : だ、だめだ。私がみんなを……護らなきゃ……。";
+	end;
+}
+1@gol1.gat,1,1,1	script	gol1_event1	139,{
+OnStart:
+	misceffect 744, "シュバルツバルド兵士#be"; //59846
+	misceffect 744, "シュバルツバルド兵士#be"; //59847
+	misceffect 744, "大統領ボディーガード#be"; //59848
+	misceffect 515, "セイレン=ウィンザー#be1"; //57950
+	initnpctimer;
+	end;
+OnTimer2000:
+	announce "エレメス : 気をつけろ、様子がおかしい。", 0x1, 0xcc99ff, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("エレメス=ガイル#be_1") +"::OnTalk1";
+	end;
+OnTimer4000:
+	announce "セイレン : ……さっきまでいた兵士たちは？", 0x1, 0xcccccc, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("セイレン=ウィンザー#be1") +"::OnTalk1";
+	end;
+OnTimer6000:
+	announce "ケイロン : なんだろう……すごく……眠い……", 0x1, 0xffff99, 0x190, 12, 0, 0;
+	setnpcdisplay "カトリーヌ=ケイロン#be1",10335;
+	donpcevent getmdnpcname("カトリーヌ=ケイロン#be1") +"::OnTalk1";
+	misceffect 197, "カトリーヌ=ケイロン#be1"; //59836
+	setnpcdisplay "マーガレッタ=ソリン#be1",10333;
+	setnpcdisplay "ハワード=アルトアイゼン",10332;
+	misceffect 197, "ハワード=アルトアイゼン"; //59837
+	end;
+OnTimer8000:
+	announce "レッケンベル警備兵 : 全員眠ったか？　連れて行け！", 0x1, 0xccffcc, 0x190, 12, 0, 0;
+	hideoffnpc "レッケンベル警備兵#be_1"; //59849
+	hideoffnpc "レッケンベル警備兵#be_2"; //59850
+	donpcevent getmdnpcname("レッケンベル警備兵#be_2") +"::OnTalk1";
+	hideoffnpc "レッケンベル警備兵#be_3"; //59851
+	hideoffnpc "レッケンベル警備兵#be_4"; //59852
+	donpcevent getmdnpcname("レッケンベル警備兵#be_4") +"::OnTalk1";
+	hideoffnpc "レッケンベル警備兵長#be"; //59853
+	end;
+OnTimer10000:
+	announce "エレメス : くそっ！", 0x1, 0xcc99ff, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("エレメス=ガイル#be_1") +"::OnTalk2";
+	misceffect 361, "エレメス=ガイル#be_1_00"; //59835
+	donpcevent getmdnpcname("レッケンベル警備兵長#be") +"::OnTalk1";
+	misceffect 1054, "レッケンベル警備兵長#be"; //59853
+	end;
+OnTimer12000:
+	announce "エレメス : ケイロンを安全な場所に置いてくる。少しだけ耐えてくれ、セイレン！", 0x1, 0xcc99ff, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("エレメス=ガイル#be_1") +"::OnTalk3";
+	hideonnpc "エレメス=ガイル#be_1_00"; //59835
+	hideonnpc "カトリーヌ=ケイロン#be_"; //59836
+	donpcevent getmdnpcname("レッケンベル警備兵#be_2") +"::OnTalk2";
+	//removeeffect getmdnpcname("レッケンベル警備兵長#be"),1054;	//0d 0b cd e9 00 00 1e 04 00 00		len=10
+	donpcevent getmdnpcname("セシル=ディモン#be_1") +"::OnTalk1";
+	setnpcdisplay "セシル=ディモン#be_1",10334;
+	end;
+OnTimer14000:
+	announce "セイレン : だ、だめだ。私がみんなを……護らなきゃ……。", 0x1, 0xcccccc, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("セイレン=ウィンザー#be1") +"::OnTalk2";
+	setnpcdisplay "セイレン=ウィンザー#be1",10330;
+	misceffect 197, "セイレン=ウィンザー#be1"; //57950
+	end;
+OnTimer16000:
+	hideonnpc "セイレン=ウィンザー#be1"; //57950
+	hideonnpc "マーガレッタ=ソリン#be1"; //59834
+	hideonnpc "ハワード=アルトアイゼン"; //59837
+	hideonnpc "セシル=ディモン#be_1"; //59838
+	hideonnpc "シュバルツバルド兵士#be"; //59846
+	hideonnpc "シュバルツバルド兵士#be"; //59847
+	hideonnpc "大統領ボディーガード#be"; //59848
+	hideonnpc "レッケンベル警備兵#be_1"; //59849
+	hideonnpc "レッケンベル警備兵#be_2"; //59850
+	hideonnpc "レッケンベル警備兵#be_3"; //59851
+	hideonnpc "レッケンベル警備兵#be_4"; //59852
+	hideonnpc "レッケンベル警備兵長#be"; //59853
+	hideoffnpc "シエラ#be_1"; //60159
+	misceffect 673, "シエラ#be_1"; //60159
+	end;
+OnTimer18000:
+	announce "シエラ : 落ち着いてください。僕がちょっと介入しました。", 0x1, 0x99ccff, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("シエラ#be_1") +"::OnTalk1";
+	end;
+OnTimer19000:
+	announce "シエラ : 僕に話しかけてください。管理室に繋げます。", 0x1, 0x99ccff, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("シエラ#be_1") +"::OnTalk2";
+	hideonnpc "シエラ#blab1"; //57605
+	hideoffnpc "シエラ#be_2"; //60161
+	end;
+OnTimer20000:
+	stopnpctimer;
+	end;
+}
+
+00t1@gol1.gat,166,203,3	script	シエラ#be_1	982,{/* 60159 (hide)*/
+	cutin "3rd_gn_demi02", 2;
+	mes "[シエラ]";
+	mes "こんな風に、僕が解析中の";
+	mes "バーチャルレコードに介入できます。";
+	mes "詳しいことは管理室でお話しします。";
+	close2;
+	cutin "3rd_gn_demi01", 255;
+	warp "1@gol1.gat",201, 42;
+	end;
+OnTalk1:
+	unittalk "シエラ : 落ち着いてください。僕がちょっと介入しました。";
+	end;
+OnTalk2:
+	unittalk "シエラ : 僕に話しかけてください。管理室に繋げます。";
+	end;
+}
+
+1@gol1.gat,202,44,3	script	シエラ#be_2	982,{/* 60161 (hide)*/
+	if(QUE_GOL1 == 100) {
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "バーチャルレコードの";
+		mes "記録が途切れたので";
+		mes "僕が介入してあなたを";
+		mes "管理室へ呼び戻しました。";
+		next;
+		mes "[シエラ]";
+		mes "この後、メンバーはそれぞれ";
+		mes "別の場所で意識を取り戻します。";
+		mes "それぞれの記憶を調査するために、";
+		mes "これから行き先が分かれます。";
+		next;
+		mes "[シエラ]";
+		mes "誰の記憶を調査するのか";
+		mes "選んでください。";
+		mes "今回の解析で調査できるのは";
+		mes "ひとりだけです。";
+		mes "他のメンバーを調査したい場合は";
+		mes "次回以降にしてください。";
+		next;
+		mes "[シエラ]";
+		mes "あなたがメンバーのもとに行くことで";
+		mes "本来とは多少違った動きになります。";
+		mes "そのため他のメンバーを選んだ時とは";
+		mes "異なる行動に違和感を覚えるかも";
+		mes "しれませんが、誤差の範囲です。";
+		mes "最終的な結果は変わりません。";
+		next;
+		mes "[シエラ]";
+		mes "調査を行うために、";
+		mes "この同期化調整機を使用します。";
+		mes "とりあえず触れてみてください。";
+		hideoffnpc "同期化調整機#be"; //57136
+		set QUE_GOL1,101;
+		close2;
+		cutin "3rd_gn_demi01", 255;
+		end;
+	}
+	else if(QUE_GOL1 == 101) {
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "同期化調整機を使用し、";
+		mes "記憶を辿ってください。";
+		mes "調査が終わったら、";
+		mes "また僕に話しかけてください。";
+		close2;
+		cutin "3rd_gn_demi01", 255;
+		end;
+	}
+	else if(QUE_GOL1 == 102) {
+		cutin "3rd_gn_demi02", 2;
+		mes "[シエラ]";
+		mes "同期化調整が終わりました。";
+		mes "現在は派遣隊の全員の意識が";
+		mes "途切れているようです。";
+		mes "ところで体調の方は大丈夫ですか？";
+		next;
+		select("大丈夫です:何も変えられないのですか？")	//??
+		mes "[シエラ]";
+		mes "僕が落ち込んでないかって？";
+		mes "そうですね……";
+		mes "多少はあるかもしれません。";
+		mes "記録とはいえやはりつらいものです。";
+		next;
+		mes "[シエラ]";
+		mes "彼らに対し僕たちが出来ることは";
+		mes "何もありません。";
+		mes "既にこの世にはいない者たちの";
+		mes "記憶なんです。";
+		next;
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "僕たちに出来ることは、";
+		mes "わずかなデータでも正確に解析し、";
+		mes "真実を解き明かすことです。";
+		next;
+		mes "[シエラ]";
+		mes "では次の記憶の解析に移りましょう。";
+		mes "次のレコードには";
+		mes "セイレン=ウィンザーの記憶が";
+		mes "残されています。";
+		next;
+		mes "[シエラ]";
+		mes "レコードの一部が破損していたため、";
+		mes "その部分以降の記憶となります。";
+		close2;
+		cutin "3rd_gn_demi01", 255;
+		warp "1@gol1.gat",42, 156;
+		end;
+	}
+}
+1@gol1.gat,199,44,5	script	同期化調整機#be	10082,{/* 60162 (hide)*/
+	if(QUE_GOL1 >= 102) {
+		mes "[同期化調整機]";
+		mes "解析が終了しました。";
+		mes "この後はシエラさんと";
+		mes "解析を進めてください。";
+		next;
+		cutin "3rd_gn_demi01", 2;
+		mes "[シエラ]";
+		mes "同期化調整機の";
+		mes "仕事は終わりです。";
+		mes "僕とこの後の話をしましょう。";
+		close2;
+		cutin "3rd_gn_demi01", 255;
+		end;
+	}
+	mes "[同期化調整機]";
+	mes "こんにちは！";
+	mes "私は同期化調整機です！";
+	mes "あなたには選択した場所へ移動し、";
+	mes "バーチャルレコードの解析を";
+	mes "進めてもらいます！";
+	next;
+	mes "[同期化調整機]";
+	mes "それでは行きたい場所を";
+	mes "選んでください！";
+	next;
+	switch(select("ソードマン実験室:アコライト実験室:シーフ実験室:マジシャン実験室:マーチャント実験室:アーチャー実験室:キャンセル")) {
+	case 1:
+		set '@msg,"ソードマン";
+		set '@x,67;
+		set '@y,276;
+		break;
+	case 7:
+		close;
+	}
+	mes "[同期化調整機]";
+	mes '@msg+ "実験室へ行きます！";
+	next;
+	if(select("行く","行かない") == 2) {
+		mes "[同期化調整機]";
+		mes "気が変わりましたか？";
+		close;
+	}
+	mes "[同期化調整機]";
+	mes "では移動します！";
+	close2;
+	warp "1@gol1.gat",'@x,'@y;
+	end;
+}
+
+
+1@gol1.gat,66,273,5	script	セイレン=ウィンザー#be1	10330,{/* 57137 */
+	cutin "bio_seyren02", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "うぅ……。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "目まいがする……。";
+	next;
+	cutin "bio_seyren01", 1;
+	mes "[セイレン=ウィンザー]";
+	mes strcharinfo(0)+ "さん……";
+	mes "ここはどこですか？";
+	mes "他のみんなは？";
+	next;
+	cutin "bio_seyren02", 255;
+	hideoffnpc "レッケンベル警備兵#be1_"; //57138
+	mes "[レッケンベル警備兵]";
+	mes "眠っているうちに、";
+	mes "実験の準備だけ";
+	mes "やっておけばいいんだよな？";
+	next;
+	hideoffnpc "レッケンベル警備兵#be1_"; //57139
+	mes "[レッケンベル警備兵]";
+	mes "ああ。";
+	mes "あれだけの睡眠ガスだ。";
+	mes "当分は寝てるだろう。";
+	next;
+	cutin "bio_seyren02", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "あれは……";
+	mes "レッケンベルの私兵ですね。";
+	mes "うぅ……";
+	mes "大統領に会うはずだったのに、";
+	mes "どうして？";
+	next;
+	cutin "bio_seyren01", 255;
+	mes "[レッケンベル警備兵]";
+	mes "なに!?";
+	mes "なんで起きてるんだ!?";
+	mes "しかもひとりじゃないぞ！";
+	next;
+	mes "[レッケンベル警備兵]";
+	mes "どうなってるんだ？";
+	mes "話が違うじゃないか！";
+	next;
+	cutin "bio_seyren01", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "あいつらはさっき";
+	mes "あの場所にいました！";
+	mes "くそっ！";
+	mes "戦わなきゃならないのに……";
+	mes "体に力が……。";
+	next;
+	cutin "bio_seyren01", 255;
+	menu "セイレンの代わりに戦う",-;
+	mes "[レッケンベル警備兵]";
+	mes "生きてればいいんだろ？";
+	mes "やっちまえ！";
+	next;
+	cutin "bio_seyren02", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "まだ睡眠ガスの影響が";
+	mes "残っていてまともに体が";
+	mes "動かせません……。";
+	mes "すいません、あいつらを……";
+	mes "お願いします！";
+	close2;
+	cutin "bio_seyren01", 255;
+	donpcevent "::OnStart";
+	end;
+OnStart:
+	hideonnpc "レッケンベル警備兵#be1_"; //57138
+	hideonnpc "レッケンベル警備兵#be1_"; //57139
+	@spawn(type: BL_MOB, ID: 15810, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(64, 277), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 17158, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(61, 274), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 17860, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(72, 274), dir: 0, name: "レッケンベル警備兵")
+	end;
+OnKilled:
+	hideonnpc "セイレン=ウィンザー#be1"; //57137
+	hideoffnpc "セイレン=ウィンザー#be1"; //57140
+	donpcevent "セイレン=ウィンザー#be1")+ "::OnTalk1";  //57140
+	end;
+}
+1@gol1.gat,64,277,5	script	レッケンベル警備兵#be1_	868,{/* 57138 (hide)*/}
+1@gol1.gat,61,274,5	script	レッケンベル警備兵#be1_	868,{/* 57139 (hide)*/}
+1@gol1.gat,66,273,7	script	セイレン=ウィンザー#be1	10318,{/* 57140 (hide)*/
+	cutin "bio_seyren02", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "ありがとうございます。";
+	mes "なんとか動けそうです。";
+	next;
+	cutin "bio_seyren01", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "みんなを助けるためにも";
+	mes "まずは情報を集める必要が";
+	mes "ありますね。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "どうしてここにいるのか、";
+	mes "ここが何処で、";
+	mes "どうすれば出られるのか……";
+	mes "いったい誰がこんなことを";
+	mes "したのか……。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "ここは何かの研究所のようですね。";
+	mes "私を……";
+	mes "研究材料にしようとしていたなら、";
+	mes "なにか資料があるかもしれません。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "幸い、今倒した私兵以外に";
+	mes "人の気配はありません。";
+	mes "何か役に立つものがないか、";
+	mes "調べてみましょう。";
+	mes "私は奥の方を探してみます。";
+	next;
+	cutin "bio_seyren02", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "重要な手掛かりが見つかったら、";
+	mes "私に声をかけてください。";
+	close2;
+	viewpoint 1, 12, 324, 1, 0x00FF00; //57140
+	hideonnpc "セイレン=ウィンザー#be1"; //57140
+	hideoffnpc "セイレン=ウィンザー#be1"; //57141
+	hideoffnpc "実験報告書#b1"; //54398
+	cutin "bio_seyren01", 255;
+	end;
+OnTalk1:
+	unittalk "セイレン : はぁ、はぁ……少しずつ体が動くようになってきました。";
+	end;
+}
+1@gol1.gat,12,324,5	script	セイレン=ウィンザー#be1	10318,{/* 57141 (hide)*/
+	cutin "bio_seyren01", 1;
+	mes "[セイレン=ウィンザー]";
+	mes strcharinfo(0)+ "さん、";
+	mes "こちらです！";
+	mes "上へと続く道を見つけました！";
+	next;
+	cutin "bio_seyren01", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "壁の隙間から";
+	mes "風の音が聞こえません。";
+	mes "おそらくここは地下なのでしょう。";
+	mes "ともかく、上の階を目指していけば";
+	mes "外に出られるかもしれません。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "この先が出口に繋がっているかは";
+	mes "わかりませんが、今はできることを";
+	mes "するしかありません。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes strcharinfo(0)+ "さん、";
+	mes "あなたはここで集めた情報を持って、";
+	mes "先にここから脱出してください。";
+	mes "そしてここのことを王国に伝えて";
+	mes "欲しいのです。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "私はみんなを探してから脱出します。";
+	mes "リーダーとして、";
+	mes "仲間を助けなくてはなりません。";
+	next;
+	menu "自分も手伝う",-;
+	mes "[セイレン=ウィンザー]";
+	mes "お気持ちは嬉しいです。";
+	mes "しかし、誰かがこのことを";
+	mes "世間に知らせなくてはなりません。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "誰もここから抜け出せず、";
+	mes "なかったことにされるのだけは";
+	mes "避けなければならないんです。";
+	mes "お願いします。";
+	mes "わかってください。";
+	next;
+	cutin "bio_seyren01", 255;
+	hideoffnpc "レッケンベル警備兵#be1_"; //57142
+	hideoffnpc "レッケンベル警備兵長#be"; //57143
+	hideoffnpc "レッケンベル警備兵#be1_"; //96788
+	mes "[レッケンベル警備兵]";
+	mes "そこを動くな！";
+	mes "誰だ！　貴様らは！";
+	next;
+	mes "[レッケンベル警備兵]";
+	mes "その格好は……";
+	mes "見つけました！";
+	mes "逃げ出した実験体です！";
+	next;
+	cutin "bio_seyren01", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "……見つかってしまいましたか。";
+	mes "あなただけでも先に";
+	mes "行って欲しかったのですが……。";
+	next;
+	cutin "bio_seyren01", 255;
+	mes "[レッケンベル警備兵]";
+	mes "何をしている！";
+	mes "早く捕まえろ！";
+	next;
+	mes "[レッケンベル警備兵]";
+	mes "全員、生け捕りにしろ！";
+	close2;
+	hideonnpc "レッケンベル警備兵#be1_"; //57142
+	hideonnpc "レッケンベル警備兵長#be"; //57143
+	hideonnpc "レッケンベル警備兵#be1_"; //96788
+	hideonnpc "セイレン=ウィンザー#be1"; //57141
+	cutin "bio_seyren01", 255;
+	@spawn(type: BL_MOB, ID: 31989, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(8, 320), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 32523, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(12, 319), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 43873, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(15, 320), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 32628, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(8, 315), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 32691, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(11, 314), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 32899, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(15, 315), dir: 0, name: "レッケンベル警備兵")
+	end;
+OnTalk1:
+	unittalk "セイレン : こんなところで……！　みんなを助けるんだ！　みんなを！";
+	end;
+}
+1@gol1.gat,8,319,7	script	レッケンベル警備兵#be1_	868,{/* 57142 (hide)*/
+OnTalk1:
+	unittalk "レッケンベル警備兵 : はぁ…はぁ……もっと増援を！";
+	end;
+OnTalk2:
+	unittalk "レッケンベル警備兵 : はい！";
+	end;
+}
+1@gol1.gat,15,319,1	script	レッケンベル警備兵長#be	20541,{/* 57143 (hide)*/
+OnTalk1:
+	unittalk "レッケンベル警備兵長 : ネズミどもめ……これまでだ！　全員、かかれ！";
+	end;
+}
+
+{
+OnStart:
+	@spawn(type: BL_MOB, ID: 31989, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(8, 320), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 32523, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(12, 319), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 43873, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(15, 320), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 32628, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(8, 315), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 32691, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(11, 314), dir: 0, name: "レッケンベル警備兵")
+	@spawn(type: BL_MOB, ID: 32899, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(15, 315), dir: 0, name: "レッケンベル警備兵")
+	end;
+OnKilled:
+	donpcevent 
+	end;
+}
+{
+OnStart:
+	initnpctimer;
+	hideoffnpc "セイレン=ウィンザー#be1"; //57141
+	hideoffnpc "レッケンベル警備兵#be1_"; //57142
+	donpcevent getmdnpcname("レッケンベル警備兵#be1_")+ "::OnTalk1"; //57142
+	hideoffnpc "レッケンベル警備兵長#be"; //57143
+	donpcevent getmdnpcname("レッケンベル警備兵長#be")+ "::OnTalk1"; //57143
+	hideoffnpc "レッケンベル警備兵#be1_"; //96788
+	end;
+OnTimer2000:
+	donpcevent getmdnpcname("レッケンベル警備兵#be1_")+ "::OnTalk2"; //57142
+	donpcevent getmdnpcname("レッケンベル警備兵#be1_")+ "::OnTalk1"; //96788
+	hideoffnpc "レッケンベル警備兵#be1_"; //96789
+	donpcevent getmdnpcname("レッケンベル警備兵#be1_")+ "::OnTalk1"; //96789
+	hideoffnpc "レッケンベル警備兵#be1_"; //96790
+	donpcevent getmdnpcname("レッケンベル警備兵#be1_")+ "::OnTalk1"; //96790
+	hideoffnpc "レッケンベル警備兵#be1_"; //96791
+	donpcevent getmdnpcname("レッケンベル警備兵#be1_")+ "::OnTalk1"; //96791
+	end;
+OnTimer4000:
+	donpcevent getmdnpcname("セイレン=ウィンザー#be1")+ "::OnTalk1"; //57141
+	misceffect 11, "セイレン=ウィンザー#be1"; //57141
+	end;
+OnTimer5000:
+	misceffect 17, "セイレン=ウィンザー#be1"; //57141
+	misceffect 339, "セイレン=ウィンザー#be1"; //57141
+	misceffect 339, "セイレン=ウィンザー#be1"; //57141
+	misceffect 637, "セイレン=ウィンザー#be1"; //57141
+	end;
+OnTimer7000:
+	misceffect 637, "セイレン=ウィンザー#be1"; //57141
+	setnpcdisplay "セイレン=ウィンザー#be1",10330; //57141
+	end;
+OnTimer8000:
+	misceffect 744, "セイレン=ウィンザー#be1"; //57141
+	misceffect 744, "レッケンベル警備兵#be1_"; //57142
+	misceffect 744, "レッケンベル警備兵長#be"; //57143
+	misceffect 744, "レッケンベル警備兵#be1_"; //96788
+	misceffect 744, "レッケンベル警備兵#be1_"; //96789
+	misceffect 744, "レッケンベル警備兵#be1_"; //96790
+	misceffect 744, "レッケンベル警備兵#be1_"; //96791
+	misceffect 673, "レッケンベル警備兵#be1_"; //96791
+	end;
+OnTimer9000:
+	hideonnpc "セイレン=ウィンザー#be1"; //57141
+	hideonnpc "レッケンベル警備兵#be1_"; //57142
+	hideonnpc "レッケンベル警備兵長#be"; //57143
+	hideonnpc "レッケンベル警備兵#be1_"; //96788
+	hideonnpc "レッケンベル警備兵#be1_"; //96789
+	hideonnpc "レッケンベル警備兵#be1_"; //96790
+	hideonnpc "レッケンベル警備兵#be1_"; //96791
+	hideoffnpc "シエラ#be1_1"; //96792
+	donpcevent getmdnpcname("シエラ#be1_1")+ "::OnTalk1"; //96792
+	end;
+OnTimer11000:
+	donpcevent getmdnpcname("シエラ#be1_1")+ "::OnTalk2"; //96792
+	end;
+OnTimer13000:
+	stopnpctimer;
+	donpcevent getmdnpcname("シエラ#be1_1")+ "::OnTalk3"; //96792
+	end;
+}
+1@gol1.gat,12,317,1	script	レッケンベル警備兵#be1_	868,{/* 96788 (hide)*/
+OnTalk1:
+	unittalk "レッケンベル警備兵 : はっ！";
+	end;
+}
+1@gol1.gat,8,317,7	script	レッケンベル警備兵#be1_	868,{/* 96789 (hide)*/
+OnTalk1:
+	unittalk "レッケンベル警備兵 : 了解です！";
+	end;
+}
+1@gol1.gat,15,317,1	script	レッケンベル警備兵#be1_	868,{/* 96790 (hide)*/
+OnTalk1:
+	unittalk "レッケンベル警備兵 : はいっ！";
+	end;
+}
+1@gol1.gat,12,315,1	script	レッケンベル警備兵#be1_	868,{/* 96791 (hide)*/
+OnTalk1:
+	unittalk "レッケンベル警備兵 : はいッ！";
+	end;
+}
+
+1@gol1.gat,12,322,3	script	シエラ#be1_1	982,{/* 96792 (hide)*/
+	set QUE_GOL1,102;
+	warp "1@gol1.gat",201, 42;
+	end;
+OnTalk1:
+	unittalk "シエラ : 記録はここで途絶えています。";
+	end;
+OnTalk2:
+	unittalk "シエラ : あなたが助けてもセイレン=ウィンザーは、ここから出ることはできません。";
+	end;
+OnTalk3:
+	unittalk "シエラ : 僕に話しかけてください。管理室に繋げます。";
+	end;
+}
+
+1@gol1.gat,56,317,7	script	実験報告書#b1	844,{/* 54398 */}
+
+1@gol1.gat,45,156,3	script	セイレン=ウィンザー#be_	10318,3,3,{/* 51109 */
+	cutin "bio_seyren03", 1;
+	mes "[セイレン=ウィンザー]";
+	mes strcharinfo(0)+ "さん！";
+	mes "ご無事で何よりです。";
+	next;
+	cutin "bio_seyren01", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "私は……気がつけば、";
+	mes "知らない場所にいました。";
+	mes "幸い警備兵はいなかったので";
+	mes "すぐ抜け出せましたが……";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "他のみんなを探していたところです。";
+	mes "合流できて良かった。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "ここに来るまで、";
+	mes "途中にあった部屋を調べて、";
+	mes "実験に関する手掛かりを";
+	mes "少し発見しました。";
+	mes "コアとユミルの心臓の";
+	mes "欠片について……";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "こんな非人道的な実験を";
+	mes "シュバルツバルドの大統領が";
+	mes "認めているとは思えません。";
+	mes "おそらく何者かの陰謀でしょう。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "仲間のみんなが";
+	mes "実験に巻き込まれる前に、";
+	mes "早く探しましょう。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "みんなが無事ならいいんですが……。";
+	mes "時間がありません。";
+	mes "手分けして情報を集めましょう。";
+	close2;
+	cutin "bio_seyren01", 255;
+	viewpoint 1, 78, 120, 1, 0x00FF00; //51109
+	hideonnpc "セイレン=ウィンザー#be_"; //51109
+	end;
+OnTouch:
+	emotion 0, "セイレン=ウィンザー#be_"; //51109
+	end;
+}
+
+0op1@gol1.gat,45,156,3	script	セイレン=ウィンザー#be_	10318,3,3,{/* 51109 */
+	cutin "bio_seyren03", 1;
+	mes "[セイレン=ウィンザー]";
+	mes strcharinfo(0)+ "さん！";
+	mes "ご無事で何よりです。";
+	next;
+	cutin "bio_seyren01", 1;
+	mes "[セイレン=ウィンザー]";
+	mes "私は……気がつけば、";
+	mes "知らない場所にいました。";
+	mes "幸い警備兵はいなかったので";
+	mes "すぐ抜け出せましたが……";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "他のみんなを探していたところです。";
+	mes "合流できて良かった。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "ここに来るまで、";
+	mes "途中にあった部屋を調べて、";
+	mes "実験に関する手掛かりを";
+	mes "少し発見しました。";
+	mes "コアとユミルの心臓の";
+	mes "欠片について……";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "こんな非人道的な実験を";
+	mes "シュバルツバルドの大統領が";
+	mes "認めているとは思えません。";
+	mes "おそらく何者かの陰謀でしょう。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "仲間のみんなが";
+	mes "実験に巻き込まれる前に、";
+	mes "早く探しましょう。";
+	next;
+	mes "[セイレン=ウィンザー]";
+	mes "みんなが無事ならいいんですが……。";
+	mes "時間がありません。";
+	mes "手分けして情報を集めましょう。";
+	close2;
+	cutin "bio_seyren01", 255;
+	viewpoint 1, 78, 120, 1, 0x00FF00; //51109
+	hideonnpc "セイレン=ウィンザー#be_"; //51109
+	hideoffnpc "エレメス=ガイル#be_2"; //51110
+	hideoffnpc "セイレン=ウィンザー#be_"; //51111
+@spawn(type: BL_MOB, ID: 47344, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(60, 136), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 27167, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(59, 135), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 4827, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(72, 136), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 9288, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(73, 138), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 4918, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(74, 136), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 5068, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(72, 133), dir: 0, name: "レッケンベル警備兵")
+
+@spawn(type: BL_MOB, ID: 5248, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(92, 120), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 5384, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(93, 122), dir: 0, name: "レッケンベル警備兵")
+
+@spawn(type: BL_MOB, ID: 5543, speed: 150, option: 0, view: 20541, pos: "0op1@gol1.gat"(99, 159), dir: 0, name: "レッケンベル警備兵長")
+@spawn(type: BL_MOB, ID: 5465, speed: 150, option: 0, view: 20541, pos: "0op1@gol1.gat"(98, 164), dir: 0, name: "レッケンベル警備兵長")
+
+	end;
+OnTouch:
+	emotion 0, "セイレン=ウィンザー#be_"; //51109
+	end;
+}
+
+0op1@gol1.gat,78,120,5	script	エレメス=ガイル#be_2	10319,3,3,{/* 51110 (hide)*/
+	if(QUE_GOL1 == 102) {
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes "……。";
+		next;
+		cutin "bio_seyren01", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "エレメスさん！";
+		mes "ご無事でしたか！";
+		mes "ひとりですか？";
+		mes "他のみんなは";
+		mes "見つけましたか？";
+		next;
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes "……。";
+		next;
+		cutin "bio_seyren01", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "エレメスさん？";
+		mes "私です、セイレンです！";
+		mes "どうしました？";
+		mes "私のことがわからないんですか？";
+		next;
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes "……。";
+		next;
+		cutin "bio_seyren01", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "エレメスさんの様子が";
+		mes "変なんです。";
+		mes "まるで別人みたいで……。";
+		mes "それに、この荒らされた";
+		mes "実験室はいったい……。";
+		next;
+		cutin "bio_eremes02", 2;
+		mes "[エレメス=ガイル]";
+		mes "！";
+		unittalk "エレメス : ！";
+		misceffect 769, "エレメス=ガイル#be_2_0o"; //51110
+		next;
+		cutin "bio_seyren01", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "うっ！";
+		mes "何をするんですか！";
+		next;
+		cutin "bio_seyren01", 255;
+		menu "正気を失っている？",-;
+		cutin "bio_seyren01", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "今のエレメスさんは";
+		mes "普通じゃありません。";
+		mes "まるで何かに操られているような……";
+		mes "とにかくまずは動きを止めましょう！";
+		mes "一緒に戦ってください！";
+		close;
+		cutin "bio_seyren01", 255;
+		hideonnpc "エレメス=ガイル#be_2_0o"; //51110
+		set QUE_GOL1,103;
+		@spawn(type: BL_MOB, ID: 37391, speed: 180, option: 0, view: 20540, pos: "0op1@gol1.gat"(79, 120), dir: 0, name: "エレメス=ガイル")
+		end;
+	}
+	else if(QUE_GOL1 == 104) {
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes strcharinfo(0)+ "、";
+		mes "殴るのをやめろ。";
+		mes "もう正気に戻っている。";
+		next;
+		cutin "bio_seyren01", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "エレメスさん！";
+		mes "よかった、心配しましたよ！";
+		mes "大丈夫ですか？";
+		next;
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes "ああ、少し頭が痛いな。";
+		mes "調子も悪い。";
+		mes "お前は大丈夫か？";
+		next;
+		cutin "bio_seyren01", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "実は自分の記憶が……曖昧です。";
+		mes "エレメスさん、";
+		mes "何か思い出せますか？";
+		next;
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes "ああ、たしか……。";
+		next;
+		cutin "bio_eremes02", 2;
+		mes "[エレメス=ガイル]";
+		mes "!!";
+		next;
+		mes "[エレメス=ガイル]";
+		mes "セイレン！";
+		mes "こんなことをしている";
+		mes "場合じゃない！";
+		mes "ケイロンが……";
+		mes "お前の妹が危ない！";
+		next;
+		cutin "bio_seyren02", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "ケイロンが？";
+		mes "まさか……ケイロンも実験に!?";
+		next;
+		mes "[セイレン=ウィンザー]";
+		mes "私がいた実験室に、";
+		mes "コアに関する記録がありました。";
+		mes "人体に移植することで";
+		mes "潜在能力を極限まで";
+		mes "引き出せるようにすると……。";
+		next;
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes "レッケンベルほどの巨大企業が";
+		mes "裏ではこんな禁忌を";
+		mes "犯していたとはな。";
+		next;
+		mes "[エレメス=ガイル]";
+		mes "実験台にされたのは";
+		mes "彼女だけじゃない。";
+		mes "実験は俺の体にも施されている。";
+		mes "多分、お前も同じだろう。";
+		next;
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes "すまない、セイレン。";
+		mes "ケイロンを護りきれなかった……。";
+		mes "一刻も早く、彼女を探さなくては。";
+		next;
+		mes "[エレメス=ガイル]";
+		mes "ここを出て右手方向に進み、";
+		mes "扉の先に進め。";
+		mes "実験室の近くで合流するぞ！";
+		next;
+		cutin "bio_seyren01", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "はい！";
+		mes "急ぎましょう、";
+		mes "ケイロンが心配です。";
+		hideonnpc "セイレン=ウィンザー#be_"; //51111
+		next;
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes strcharinfo(0)+ "、";
+		mes "俺たちも急ぐ……くっ！";
+		next;
+		cutin "bio_eremes01", 255;
+		menu "黒い血？",-;
+		cutin "bio_eremes01", 2;
+		mes "[エレメス=ガイル]";
+		mes "……。";
+		next;
+		mes "[エレメス=ガイル]";
+		mes "……このことはセイレンには";
+		mes "黙っていてくれ。";
+		mes "　";
+		mes "行くぞ。";
+		close2;
+		viewpoint 1, 94, 84, 1, 0x00FF00; //51110
+		cutin "bio_eremes01", 255;
+		hideonnpc "エレメス=ガイル#be_2_0o"; //51110
+		hideoffnpc "#bew1_0op"; //54395
+		end;
+	}
+OnTouch:
+	emotion 0, "エレメス=ガイル#be_2"; //51110
+	end;
+OnTalk1:
+	unittalk "エレメス : 殴るのをやめろ。もう正気に戻っている。";
+	end;
+}
+0op1@gol1.gat,81,116,1	script	セイレン=ウィンザー#be_	10318,{/* 51111 (hide)*/
+	if(QUE_GOL1 == 102) {
+		cutin "bio_seyren01", 1;
+		mes "[セイレン=ウィンザー]";
+		mes "エレメスさんの様子が";
+		mes "変なんです。";
+		mes "まるで別人みたいで……。";
+		next;
+		mes "[セイレン=ウィンザー]";
+		mes strcharinfo(0)+ "さんも";
+		mes "話しかけてみてください。";
+		close2;
+		cutin "bio_seyren01", 255;
+		end;
+	}
+	else if(QUE_GOL1 == 103) {
+		unittalk "セイレン : エレメスさん！　私がわからないんですか？";
+		end;
+	}
+	else if(QUE_GOL1 == 104) {
+		unittalk "セイレン : よかった、心配しましたよ！";
+		end;
+	}
+OnStart:
+	@spawn(type: BL_MOB, ID: 37391, speed: 180, option: 0, view: 20540, pos: "0op1@gol1.gat"(79, 120), dir: 0, name: "エレメス=ガイル")
+	end;
+OnKilled:
+	hideoffnpc "エレメス=ガイル#be_2"; //51110
+	donpcevent getmdnpcname("エレメス=ガイル#be_2")+ "::OnTalk1"; //51110
+	set QUE_GOL1,104;
+	end;
+}
+0op1@gol1.gat,94,76,0	script	#compass02_0op	139,1,1,{/* 51112 */
+	viewpoint 1, 110, 11, 1, 0x00FF00; //51112
+	donpcevent "#b2_hw1_0op::OnStart";
+	end;
+}
+0op1@gol1.gat,94,77,0	script	#b2_hw1_0op	139,{/* 51113 */
+OnStart:
+	announce "レゲンシュルム研究員 : バカ野郎！　何をやってるんだ！", 0x1, 0xffcccc, 0x190, 12, 0, 0;
+	initnpctimer;
+	end;
+OnTimer2000:
+	announce "レッケンベル警備兵 : でも、また起きて魔法を撃ってきたらどうするんだ？　俺は死にたくない！", 0x1, 0xccffcc, 0x190, 12, 0, 0;
+	end;
+OnTimer4000:
+	announce "レゲンシュルム研究員 : 睡眠薬はすでに限界まで投与した。まだ黒血反応も出ていない。貴重な実験体を殺すつもりか？", 0x1, 0xffcccc, 0x190, 12, 0, 0;
+	end;
+OnTimer6000:
+	announce "レッケンベル警備兵 : 今そんなことが大事か？　この実験体を眠らせておくのがあんたらの仕事だろう？　なのに何で何度も目覚めて魔法を使うんだよ！", 0x1, 0xccffcc, 0x190, 12, 0, 0;
+	end;
+OnTimer8000:
+	announce "レッケンベル警備兵 : あんたらに俺の命をどうこうする権利はないだろう！　実験体がまた起きたら俺たちは死ぬんだぞ！", 0x1, 0xccffcc, 0x190, 12, 0, 0;
+	end;
+OnTimer10000:
+	announce "レゲンシュルム研究員 : もし起きなかったら、今度は私たちがボルセブ博士に殺される！", 0x1, 0xffcccc, 0x190, 12, 0, 0;
+	end;
+OnTimer12000:
+	announce "レゲンシュルム研究員 : いかん、実験体のバイタルに異常が……数値が……!!", 0x1, 0xccffff, 0x190, 12, 0, 0;
+	end;
+OnTimer14000:
+	stopnpctimer;
+	announce "セイレン : 突入しましょう！　ケイロンを助けないと!!", 0x1, 0xcccccc, 0x190, 12, 0, 0;
+	end;
+}
+
+0op1@gol1.gat,37,148,7	script	エレメス=ガイル#be3_1_0	10319,{/* 98341 (hide)*/}
+0op1@gol1.gat,35,147,7	script	カトリーヌ=ケイロン#be3	10323,{/* 98342 (hide)*/}
+0op1@gol1.gat,48,155,3	script	レッケンベル警備兵#be3_	868,{/* 98343 (hide)*/}
+0op1@gol1.gat,46,152,3	script	レッケンベル警備兵#be3_	868,{/* 98344 (hide)*/}
+
+0op1@gol1.gat,94,84,0	warp	#bew1_0op	2,2,1@gol1.gat,94,76	//54395 from_pos=(94, 86)
+
+0op1@gol1.gat,62,88,1	script	レッケンベル警備兵#be3_	868,{/* 98541 (hide)*/}
+0op1@gol1.gat,62,91,1	script	レッケンベル警備兵#be3_	868,{/* 98542 (hide)*/}
+0op1@gol1.gat,61,94,3	script	レッケンベル警備兵#be3_	868,{/* 98543 (hide)*/}
+0op1@gol1.gat,61,86,1	script	レッケンベル警備兵#be3_	868,{/* 98544 (hide)*/}
+
+0op1@gol1.gat,59,92,3	script	レッケンベル警備兵#be3_	868,{/* 98476 (hide)*/}
+0op1@gol1.gat,59,87,1	script	レッケンベル警備兵#be3_	849,{/* 98477 (hide)*/}
+0op1@gol1.gat,56,93,5	script	シエラ#be3_1_0op	982,{/* 98545 (hide)*/}
+0op1@gol1.gat,54,90,5	script	エレメス=ガイル#be3_2_0	10319,{/* 98345 (hide)*/}
+
+0op1@gol1.gat,73,113,7	script	実験報告書#b3_0op	844,{/* 54400 */}
+0op1@gol1.gat,112,77,7	script	実験報告書#b4_0op	844,{/* 50578 */}
+
+0op1@gol1.gat,37,148,0	script	#compass01_0op	139,{/* 98707 (hide)*/}
+
+0op1@gol1.gat,113,55,1	script	カトリーヌ=ケイロン#be4	10323,{/* 98709 (hide)*/}
+
+
+
+//
+@spawn(type: BL_MOB, ID: 15810, speed: 175, option: 0, view: 20542, pos: "1@gol1.gat"(64, 277), dir: 0, name: "レッケンベル警備兵")
+
+//attack
+@nomalattack(src: "20542:レッケンベル警備兵:1@gol1.gat"(15810), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 408, aDelay: 1280)
+
+@skillattack(src: "20542:レッケンベル警備兵:1@gol1.gat"(32523), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 1200, sDelay: 1268, dDelay: 408, tick: 431334247)
+@skillattack(src: "20542:レッケンベル警備兵:1@gol1.gat"(32691), dst: 4631724, skill: "火属性攻撃"(186), skill_lv: -1, damage: 3014, sDelay: 1268, dDelay: 408, tick: 431337922)
+@skillattack(src: "20542:レッケンベル警備兵:1@gol1.gat"(31989), dst: 4631724, skill: "マグナムブレイク"(7), skill_lv: -1, damage: 1029, sDelay: 1268, dDelay: 408, tick: 431334919)
+@skillnodamage(src: "20542:レッケンベル警備兵:1@gol1.gat"(17860), dst: 17860, skill: "マグナムブレイク"(7), val: 5)
+
+//chase
+@skillnodamage(src: "20542:レッケンベル警備兵:1@gol1.gat"(31989), dst: 4631724, skill: "プロボック"(6), val: 10)
+
+getitem 7347, 1;
+
+//
+@spawn(type: BL_MOB, ID: 5543, speed: 150, option: 0, view: 20541, pos: "0op1@gol1.gat"(99, 159), dir: 0, name: "レッケンベル警備兵長")
+
+//attack
+@nomalattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5465), dst: 4631724, damage: 0, sDelay: 432, dDelay: 400, aDelay: 882)
+
+@skillcasting(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5543), dst: 4631724, skill: "ガイデッドアタック"(172), pl: 0, tick: 500)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5543), dst: 4631724, skill: "ガイデッドアタック"(172), skill_lv: -1, damage: 546, sDelay: 432, dDelay: 400, tick: 431724433)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5543), dst: 4631724, skill: "チャージアロー"(148), skill_lv: -1, damage: 962, sDelay: 432, dDelay: 400, tick: 431725315)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5465), dst: 4631724, skill: "ダブルストレイフィング"(46), skill_lv: -1, damage: 2300, sDelay: 432, dDelay: 400, tick: 431742115)
+@skillcasting(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5543), dst: 4631724, skill: "シャープシューティング"(382), pl: 0, tick: 500)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5543), dst: 4631724, skill: "シャープシューティング"(382), skill_lv: -1, damage: -30000, sDelay: 432, dDelay: 0, tick: 431726701)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5543), dst: 4631724, skill: "シャープシューティング"(382), skill_lv: -1, damage: 5203, sDelay: 432, dDelay: 400, tick: 431726701)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5465), dst: 4631724, skill: "防御無視攻撃"(170), skill_lv: -1, damage: 1200, sDelay: 432, dDelay: 400, tick: 431727457)
+@skillcasting(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5543), dst: 4631724, skill: "多段攻撃"(171), pl: 0, tick: 500)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5543), dst: 4631724, skill: "多段攻撃"(171), skill_lv: -1, damage: 552, sDelay: 432, dDelay: 400, tick: 431728087)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(5465), dst: 4631724, skill: "スタン攻撃"(179), skill_lv: -1, damage: 0, sDelay: 432, dDelay: 0, tick: 431747911)
+
+//
+@spawn(type: BL_MOB, ID: 37391, speed: 180, option: 0, view: 20540, pos: "0op1@gol1.gat"(79, 120), dir: 0, name: "エレメス=ガイル")
+
+//attack
+@nomalattack(src: "20540:エレメス=ガイル:0op1@gol1.gat"(37391), dst: 4631724, damage: 0, sDelay: 384, dDelay: 400, aDelay: 396)
+
+@skillattack(src: "20540:エレメス=ガイル:0op1@gol1.gat"(37391), dst: 4631724, skill: "メテオアサルト"(406), skill_lv: -1, damage: 0, sDelay: 384, dDelay: 400, tick: 431800856)
+@skillnodamage(src: "20540:エレメス=ガイル:0op1@gol1.gat"(37391), dst: 37391, skill: "メテオアサルト"(406), val: 1)
+@nomalattack(src: "20540:エレメス=ガイル:0op1@gol1.gat"(37391), dst: 4631724, damage: 0, sDelay: 384, dDelay: 400, aDelay: 798)
+@skillcasting(src: "20540:エレメス=ガイル:0op1@gol1.gat"(37391), dst: 37391, skill: "クローキング"(135), pl: 0, tick: 200)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0op1@gol1.gat,113,55,1	script	カトリーヌ=ケイロン#be4	10323,{/* 98709 (hide)*/}
+announce "レッケンベル警備兵 : あんたらに俺の命をどうこうする権利はないだろう！　実験体がまた起きたら俺たちは死ぬんだぞ！", 0x1, 0xccffcc, 0x190, 12, 0, 0;
+announce "レゲンシュルム研究員 : もし起きなかったら、今度は私たちがボルセブ博士に殺される！", 0x1, 0xffcccc, 0x190, 12, 0, 0;
+announce "レゲンシュルム研究員 : いかん、実験体のバイタルに異常が……数値が……!!", 0x1, 0xccffff, 0x190, 12, 0, 0;
+announce "セイレン : 突入しましょう！　ケイロンを助けないと!!", 0x1, 0xcccccc, 0x190, 12, 0, 0;
+0op1@gol1.gat,90,21,5	script	レッケンベル警備兵#be4_	868,{/* 98967 (hide)*/}
+0op1@gol1.gat,90,19,5	script	レッケンベル警備兵#be4_	868,{/* 98716 (hide)*/}
+0op1@gol1.gat,87,19,5	script	レッケンベル警備兵#be4_	868,{/* 98968 (hide)*/}
+0op1@gol1.gat,93,19,3	script	レッケンベル警備兵#be4_	868,{/* 99111 (hide)*/}
+0op1@gol1.gat,87,16,5	script	レッケンベル警備兵#be4_	868,{/* 98717 (hide)*/}
+0op1@gol1.gat,93,16,3	script	レッケンベル警備兵#be4_	868,{/* 98966 (hide)*/}
+0op1@gol1.gat,90,13,7	script	エレメス=ガイル#be4_1_0	10319,{/* 98715 (hide)*/}
+0op1@gol1.gat,93,13,3	script	シエラ#be4_1_0op	982,{/* 99435 (hide)*/}
+0op1@gol1.gat,90,10,7	script	カトリーヌ=ケイロン#be4	10323,{/* 98714 (hide)*/}
+@spawn(type: BL_MOB, ID: 13831, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(114, 26), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 14882, speed: 200, option: 0, view: 20543, pos: "0op1@gol1.gat"(117, 28), dir: 0, name: "レゲンシュルム科学者")
+@spawn(type: BL_MOB, ID: 17727, speed: 200, option: 0, view: 20543, pos: "0op1@gol1.gat"(116, 26), dir: 6, name: "レゲンシュルム科学者")
+@spawn(type: BL_MOB, ID: 13346, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(118, 27), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 14812, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(115, 25), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 17285, speed: 200, option: 0, view: 20543, pos: "0op1@gol1.gat"(118, 26), dir: 0, name: "レゲンシュルム科学者")
+@spawn(type: BL_MOB, ID: 17630, speed: 200, option: 0, view: 20543, pos: "0op1@gol1.gat"(114, 25), dir: 0, name: "レゲンシュルム科学者")
+@spawn(type: BL_MOB, ID: 11997, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(118, 24), dir: 0, name: "レッケンベル警備兵")
+0op1@gol1.gat,128,41,5	script	セイレン=ウィンザー#be_	10318,{/* 51114 (hide)*/}
+0op1@gol1.gat,130,38,0	script	#b2_hw2_0op	139,{/* 51118 */}
+0op1@gol1.gat,130,40,3	script	エレメス=ガイル#be_3_0o	10319,{/* 51115 (hide)*/}
+0op1@gol1.gat,142,81,0	script	#bew2_0op	45,{/* 54396 (hide)*/}
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 431909061)
+0op1@gol1.gat,113,15,3	script	エレメス=ガイル#be_4_0o	10319,{/* 51117 */}
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 431909732)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, skill: "睡眠攻撃"(182), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431910339)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1279)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13346), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 431912643)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 3666)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13831), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 431913274)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "睡眠攻撃"(182), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431913295)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 4631724, damage: 465, sDelay: 1268, dDelay: 400, tick: 431913379)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(11997), dst: 4631724, damage: 514, sDelay: 1268, dDelay: 400, tick: 431913820)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13346), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1282)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13831), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431914555)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431914660)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 373, sDelay: 1268, dDelay: 400, aDelay: 3733)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 1440, sDelay: 1268, dDelay: 400, tick: 431915016)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(11997), dst: 4631724, damage: 374, sDelay: 1268, dDelay: 400, aDelay: 1280)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13346), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431915205)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13831), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 2561)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 4631724, skill: "マグナムブレイク"(7), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431915939)
+@skillnodamage(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 14812, skill: "マグナムブレイク"(7), val: 5)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 378, sDelay: 1268, dDelay: 400, aDelay: 3569)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(11997), dst: 4631724, skill: "火属性攻撃"(186), skill_lv: -1, damage: 3116, sDelay: 1268, dDelay: 400, tick: 431916380)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13346), dst: 4631724, skill: "火属性攻撃"(186), skill_lv: -1, damage: 3566, sDelay: 1268, dDelay: 400, tick: 431916485)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13831), dst: 4631724, damage: 425, sDelay: 1268, dDelay: 400, aDelay: 1280)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 4631724, skill: "火属性攻撃"(186), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431917220)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 472, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(11997), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431917661)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13346), dst: 4631724, damage: 430, sDelay: 1268, dDelay: 400, aDelay: 3841)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 364, sDelay: 1268, dDelay: 400, aDelay: 3106)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13831), dst: 4631724, damage: 424, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 5122)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 500)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(11997), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 3842)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13346), dst: 4631724, damage: 496, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillposeffect(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), skill: "ヘヴンズドライブ"(91), val: 65535, tick: 431919363)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13831), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(11997), dst: 4631724, damage: 480, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1722)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13346), dst: 4631724, damage: 508, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 500)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 433, sDelay: 1268, dDelay: 400, aDelay: 3067)
+0400 len=0: Please check PacketLength.txt. (prev: 0000)
+@skillposeffect(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), skill: "ヘヴンズドライブ"(91), val: 65535, tick: 431920916)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13831), dst: 4631724, damage: 475, sDelay: 1268, dDelay: 400, aDelay: 1281)
+0400 len=0: Please check PacketLength.txt. (prev: 0000)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(11997), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 4631724, damage: 378, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13346), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 1238, sDelay: 1268, dDelay: 400, tick: 431921609)
+0400 len=0: Please check PacketLength.txt. (prev: 0000)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1280)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13831), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(11997), dst: 4631724, damage: 474, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13346), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 2562)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 1980, sDelay: 1268, dDelay: 400, tick: 431923205)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13831), dst: 4631724, skill: "火属性攻撃"(186), skill_lv: -1, damage: 2875, sDelay: 1268, dDelay: 400, tick: 431923520)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(11997), dst: 4631724, damage: 426, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 4631724, skill: "マグナムブレイク"(7), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431924066)
+@skillnodamage(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(14812), dst: 14812, skill: "マグナムブレイク"(7), val: 5)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(13346), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@mob_defeated("20542:レッケンベル警備兵:0op1@gol1.gat"(11997))
+@mob_defeated("20542:レッケンベル警備兵:0op1@gol1.gat"(13346))
+@mob_defeated("20542:レッケンベル警備兵:0op1@gol1.gat"(13831))
+@mob_defeated("20542:レッケンベル警備兵:0op1@gol1.gat"(14812))
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 351, sDelay: 1268, dDelay: 400, aDelay: 5355)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 2205, sDelay: 1268, dDelay: 400, tick: 431925494)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "睡眠攻撃"(182), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431925767)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, skill: "睡眠攻撃"(182), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431926775)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 2562)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 431928455)
+0op1@gol1.gat,110,11,5	script	セイレン=ウィンザー#be_	10318,{/* 51116 */}
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 500)
+0op1@gol1.gat,111,10,7	script	カトリーヌ=ケイロン#be_	10323,{/* 51120 (hide)*/}
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 500)
+@skillposeffect(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), skill: "ヘヴンズドライブ"(91), val: 65535, tick: 431930241)
+@skillposeffect(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), skill: "ヘヴンズドライブ"(91), val: 65535, tick: 431930577)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 4222)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 8821)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 1490, sDelay: 1268, dDelay: 400, tick: 431932530)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 500)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+0op1@gol1.gat,111,7,7	script	カトリーヌ=ケイロン#be_	10323,{/* 51119 */}
+@skillposeffect(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), skill: "ヘヴンズドライブ"(91), val: 65535, tick: 431933055)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 1795, sDelay: 1268, dDelay: 400, tick: 431933601)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 5502)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1994)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 1820, sDelay: 1268, dDelay: 400, tick: 431935343)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1995)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1995)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 431936497)
+0400 len=0: Please check PacketLength.txt. (prev: 0000)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1280)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 7264)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 385, sDelay: 1268, dDelay: 400, aDelay: 1280)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 1540, sDelay: 1268, dDelay: 400, tick: 431939521)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 1650, sDelay: 1268, dDelay: 400, tick: 431940067)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 3570)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 500)
+@skillposeffect(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), skill: "ヘヴンズドライブ"(91), val: 65535, tick: 431941852)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 413, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 5355)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 500)
+@skillposeffect(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), skill: "ヘヴンズドライブ"(91), val: 65535, tick: 431944161)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 2350)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 500)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1720)
+@skillposeffect(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), skill: "ヘヴンズドライブ"(91), val: 65535, tick: 431945210)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 1975, sDelay: 1268, dDelay: 400, tick: 431946449)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 4198)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 5644)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, skill: "睡眠攻撃"(182), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431948273)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 1380, sDelay: 1268, dDelay: 400, tick: 431948420)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, skill: "ファイアーボルト"(19), skill_lv: -1, damage: 1395, sDelay: 1268, dDelay: 400, tick: 431948903)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 500)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1596)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 3714)
+@skillposeffect(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), skill: "ヘヴンズドライブ"(91), val: 65535, tick: 431950058)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "睡眠攻撃"(182), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431950898)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 426, sDelay: 1268, dDelay: 400, aDelay: 4281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1722)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 5058)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 391, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, skill: "睡眠攻撃"(182), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431952851)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 308, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 3738)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1283)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 3726)
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(14882), dst: 0, skill: "ヘヴンズドライブ"(91), pl: 2, tick: 500)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1280)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 2879)
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17630), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, aDelay: 1274)
+@mob_defeated("20543:レゲンシュルム科学者:0op1@gol1.gat"(14882))
+@skillcasting(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17285), dst: 4631724, skill: "ファイアーボルト"(19), pl: 3, tick: 1000)
+@skillattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, skill: "睡眠攻撃"(182), skill_lv: -1, damage: 0, sDelay: 1268, dDelay: 400, tick: 431957497)
+@mob_defeated("20543:レゲンシュルム科学者:0op1@gol1.gat"(17285))
+@nomalattack(src: "20543:レゲンシュルム科学者:0op1@gol1.gat"(17727), dst: 4631724, damage: 438, sDelay: 1268, dDelay: 400, aDelay: 2565)
+@mob_defeated("20543:レゲンシュルム科学者:0op1@gol1.gat"(17727))
+announce "セイレン : ケイロン、聞こえるか？　私だ！", 0x1, 0xcccccc, 0x190, 24, 0, 0;
+getitem 7347, 1;
+getitem 7347, 1;
+cutin "bio_katrinn03", 0;
+mes "[カトリーヌ=ケイロン]";
+mes "お兄ちゃん……。";
+close;
+cutin "bio_katrinn03", 255;
+emotion 0, "セイレン=ウィンザー#be_"; //51116
+cutin "bio_eremes01", 2;
+mes "[エレメス=ガイル]";
+mes "セイレンに話をさせてやれ……。";
+close;
+cutin "bio_eremes01", 255;
+cutin "bio_seyren02", 1;
+mes "[セイレン=ウィンザー]";
+mes "ケイロン、聞こえるか？";
+mes "私だ！";
+next;
+cutin "bio_seyren01", 1;
+mes "[セイレン=ウィンザー]";
+mes "ケイロンを助けだします！";
+mes strcharinfo(0)+ "さん、";
+mes "エレメスさん、";
+mes "下がっていてください！";
+next;
+misceffect 0, "カトリーヌ=ケイロン#be_"; //51119
+misceffect 135, "カトリーヌ=ケイロン#be_"; //51119
+misceffect 907, "カトリーヌ=ケイロン#be_"; //51119
+hideonnpc "カトリーヌ=ケイロン#be_"; //51119
+hideoffnpc "カトリーヌ=ケイロン#be_"; //51120
+cutin "bio_katrinn03", 0;
+mes "[カトリーヌ=ケイロン]";
+mes "お……兄ちゃん……？";
+next;
+cutin "bio_seyren02", 1;
+mes "[セイレン=ウィンザー]";
+mes "ケイロン、大丈夫か！";
+next;
+cutin "bio_katrinn03", 0;
+mes "[カトリーヌ=ケイロン]";
+mes "夢を見たの……";
+mes "あの日……";
+mes "あたしが子どもの頃の……";
+mes "あたしのせいでお母さんが……";
+mes "お兄ちゃんが……";
+mes "あたしを守って……。";
+next;
+cutin "bio_seyren02", 1;
+mes "[セイレン=ウィンザー]";
+mes "何を……";
+mes "あれはお前のせいじゃない！";
+mes "待ってろ、今助けてやる！";
+next;
+cutin "bio_katrinn03", 0;
+mes "[カトリーヌ=ケイロン]";
+mes "今度は上手くやれると思ったのに……";
+mes "もうお兄ちゃんの後ろに";
+mes "隠れてばかりの子どもじゃないと、";
+mes "証明したかったのに……。";
+next;
+mes "[カトリーヌ=ケイロン]";
+mes "ふん……。バカ、兄……。";
+next;
+mes "[カトリーヌ=ケイロン]";
+mes "ううん、バカは……あたしだった……。";
+next;
+mes "[カトリーヌ=ケイロン]";
+mes "最後まで役立たずの……";
+mes "出来損ないの妹で……";
+next;
+mes "[カトリーヌ=ケイロン]";
+mes "ごめんね……お兄ちゃん。";
+next;
+cutin "bio_seyren02", 1;
+mes "[セイレン=ウィンザー]";
+mes "ケイロン、ケイロン！!";
+mes "駄目だ！　ケイロン!!";
+next;
+cutin "bio_eremes02", 2;
+mes "[エレメス=ガイル]";
+mes "…………。";
+close;
+cutin "bio_eremes01", 255;
+emotion 0, "エレメス=ガイル#be_4_0o"; //51117
+cutin "bio_eremes01", 2;
+mes "[エレメス=ガイル]";
+mes "……。";
+next;
+cutin "bio_seyren01", 1;
+mes "[セイレン=ウィンザー]";
+mes "殺してやる……";
+mes "ボルセブとかいうやつも……";
+mes "この実験に関わったやつらを";
+mes "すべて……";
+next;
+mes "[セイレン=ウィンザー]";
+mes "ひとり残らず……";
+mes "全員！";
+misceffect 400, "セイレン=ウィンザー#be_"; //51116
+misceffect 668, "セイレン=ウィンザー#be_"; //51116
+next;
+cutin "bio_eremes01", 2;
+mes "[エレメス=ガイル]";
+mes "バカなことを考えるな。";
+mes "冷静になれセイレン。";
+mes "お前は俺たちのリーダーだ。";
+next;
+cutin "bio_seyren01", 1;
+mes "[セイレン=ウィンザー]";
+mes "し……しかし、エレメスさん！";
+next;
+cutin "bio_eremes01", 2;
+mes "[エレメス=ガイル]";
+mes "まずは残りの仲間を探し出し";
+mes "ここから脱出することを考えろ。";
+next;
+mes "[エレメス=ガイル]";
+mes "復讐は……その後だ。";
+next;
+cutin "bio_seyren01", 1;
+mes "[セイレン=ウィンザー]";
+mes "……。";
+next;
+cutin "bio_eremes01", 2;
+mes "[エレメス=ガイル]";
+mes "……わかったなら早く行け。";
+mes "時間がない。";
+next;
+cutin "bio_seyren01", 1;
+mes "[セイレン=ウィンザー]";
+mes "エレメスさんは……？";
+next;
+cutin "bio_eremes01", 2;
+mes "[エレメス=ガイル]";
+mes "ケイロンをこのままにしておけない。";
+next;
+cutin "bio_eremes01", 2;
+mes "[エレメス=ガイル]";
+mes "俺に任せて先に行け。";
+mes "すぐに追いつく。";
+next;
+cutin "bio_seyren01", 1;
+mes "[セイレン=ウィンザー]";
+mes "エレメスさん……。";
+next;
+cutin "bio_eremes01", 2;
+mes "[エレメス=ガイル]";
+mes "心配するな。";
+mes "俺はアサシンだ。";
+mes "こういうことには……";
+mes "慣れている。";
+next;
+cutin "bio_seyren01", 1;
+mes "[セイレン=ウィンザー]";
+mes "…………";
+next;
+mes "[セイレン=ウィンザー]";
+mes "わかりました。";
+mes "妹を……ケイロンを";
+mes "よろしくお願いします。";
+next;
+mes "[セイレン=ウィンザー]";
+mes "出来るだけ早く";
+mes "合流してください……。";
+next;
+hideonnpc "セイレン=ウィンザー#be_"; //51116
+cutin "bio_eremes01", 2;
+mes "[エレメス=ガイル]";
+mes strcharinfo(0)+ "、";
+mes "……お前は行かないのか？";
+next;
+mes "[エレメス=ガイル]";
+mes "……。";
+next;
+mes "[エレメス=ガイル]";
+mes "気づいていたか。";
+mes "俺の吐いた黒い血の意味を。";
+next;
+mes "[エレメス=ガイル]";
+mes "これは黒血反応だ。";
+mes "コアが被験者の体を";
+mes "侵食している証拠……";
+next;
+cutin "bio_eremes04", 2;
+mes "[エレメス=ガイル]";
+mes "ぐはっ！";
+next;
+mes "[エレメス=ガイル]";
+mes "もう……";
+mes "俺は……長くはもたない。";
+next;
+mes "[エレメス=ガイル]";
+mes "ケイロンが目の前で死んだ今、";
+mes "俺まで死んだらセイレンは";
+mes "きっと耐えられなかっただろう。";
+next;
+mes "[エレメス=ガイル]";
+mes "それだけは避けなければ";
+mes "ならなかった。";
+mes "あいつは俺たちの希望なんだ。";
+next;
+mes "[エレメス=ガイル]";
+mes "お前に頼みが……ある。";
+mes "あいつを……助けてやってくれ。";
+next;
+mes "[エレメス=ガイル]";
+mes "次の実験室は";
+mes "右の突き当たりを左方向だ。";
+mes "セイレンを……頼んだぞ……。";
+close;
+viewpoint 1, 142, 81, 1, 0xFF00FF00; //51117
+cutin "bio_eremes01", 255;
+@spawn(type: BL_MOB, ID: 31981, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(127, 42), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 31784, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(129, 44), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 32665, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(138, 50), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 32553, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(141, 52), dir: 0, name: "レッケンベル警備兵")
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(31981), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 432049050)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(31784), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 432049071)
+@spawn(type: BL_MOB, ID: 35288, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(143, 57), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 35681, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(138, 57), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 34166, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(141, 58), dir: 0, name: "レッケンベル警備兵")
+@spawn(type: BL_MOB, ID: 34162, speed: 175, option: 0, view: 20542, pos: "0op1@gol1.gat"(142, 61), dir: 0, name: "レッケンベル警備兵")
+@skillnodamage(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34166), dst: 4631724, skill: "プロボック"(6), val: 10)
+@spawn(type: BL_MOB, ID: 40721, speed: 150, option: 0, view: 20541, pos: "0op1@gol1.gat"(129, 78), dir: 0, name: "レッケンベル警備兵長")
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(32553), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 432056209)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34166), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 432056314)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34162), dst: 4631724, damage: 0, sDelay: 1268, dDelay: 400, tick: 432056482)
+@spawn(type: BL_MOB, ID: 38988, speed: 150, option: 0, view: 20541, pos: "0op1@gol1.gat"(123, 70), dir: 0, name: "レッケンベル警備兵長")
+@nomalattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(40721), dst: 4631724, damage: 669, sDelay: 432, dDelay: 400, tick: 432056798)
+@nomalattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(38988), dst: 4631724, damage: 800, sDelay: 432, dDelay: 400, tick: 432057442)
+@skillnodamage(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(32553), dst: 32553, skill: "マグナムブレイク"(7), val: 5)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(40721), dst: 4631724, skill: "チャージアロー"(148), skill_lv: -1, damage: 1106, sDelay: 432, dDelay: 400, tick: 432057681)
+pushpc 1, 6;
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(35681), dst: 4631724, damage: 581, sDelay: 1268, dDelay: 400, tick: 432057703)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(31784), dst: 4631724, damage: 581, sDelay: 1268, dDelay: 400, aDelay: 8653)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(35288), dst: 4631724, damage: 636, sDelay: 1268, dDelay: 400, tick: 432058144)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(32665), dst: 4631724, damage: 549, sDelay: 1268, dDelay: 400, tick: 432058186)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(31981), dst: 4631724, damage: 548, sDelay: 1268, dDelay: 400, aDelay: 9346)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34166), dst: 4631724, damage: 519, sDelay: 1268, dDelay: 400, aDelay: 2250)
+@skillcasting(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(40721), dst: 4631724, skill: "ガイデッドアタック"(172), pl: 0, tick: 500)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34162), dst: 4631724, damage: 527, sDelay: 1268, dDelay: 400, aDelay: 2187)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(35681), dst: 4631724, damage: 530, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(31784), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 1531, sDelay: 1268, dDelay: 400, tick: 432059005)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(40721), dst: 4631724, skill: "ガイデッドアタック"(172), skill_lv: -1, damage: 647, sDelay: 432, dDelay: 400, tick: 432059068)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(32553), dst: 4631724, damage: 620, sDelay: 1268, dDelay: 400, aDelay: 3195)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(35288), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 1761, sDelay: 1268, dDelay: 400, tick: 432059426)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(32665), dst: 4631724, damage: 471, sDelay: 1268, dDelay: 400, aDelay: 1282)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34166), dst: 4631724, damage: 576, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34162), dst: 4631724, damage: 622, sDelay: 1268, dDelay: 400, aDelay: 1281)
+@skillattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(40721), dst: 4631724, skill: "ダブルストレイフィング"(46), skill_lv: -1, damage: 3058, sDelay: 432, dDelay: 400, tick: 432059950)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(31981), dst: 4631724, damage: 542, sDelay: 1268, dDelay: 400, aDelay: 1722)
+@nomalattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(38988), dst: 4631724, damage: 770, sDelay: 432, dDelay: 400, aDelay: 2907)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(35681), dst: 4631724, damage: 516, sDelay: 1268, dDelay: 400, aDelay: 1387)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(31784), dst: 4631724, damage: 610, sDelay: 1268, dDelay: 400, aDelay: 2689)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(32553), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 1373, sDelay: 1268, dDelay: 400, tick: 432060685)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(35288), dst: 4631724, skill: "火属性攻撃"(186), skill_lv: -1, damage: 3398, sDelay: 1268, dDelay: 400, tick: 432060706)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(32665), dst: 4631724, skill: "火属性攻撃"(186), skill_lv: -1, damage: 3893, sDelay: 1268, dDelay: 400, tick: 432060748)
+@nomalattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(40721), dst: 4631724, damage: 631, sDelay: 432, dDelay: 400, aDelay: 4034)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34162), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 1403, sDelay: 1268, dDelay: 400, tick: 432061231)
+@nomalattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(38988), dst: 4631724, damage: 743, sDelay: 432, dDelay: 400, aDelay: 882)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34166), dst: 4631724, damage: 611, sDelay: 1268, dDelay: 400, aDelay: 1408)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(31981), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 1348, sDelay: 1268, dDelay: 400, tick: 432061399)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(35681), dst: 4631724, skill: "バッシュ"(5), skill_lv: -1, damage: 1303, sDelay: 1268, dDelay: 400, tick: 432061651)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(31784), dst: 4631724, damage: 545, sDelay: 1268, dDelay: 400, aDelay: 1280)
+@nomalattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(40721), dst: 4631724, damage: 834, sDelay: 432, dDelay: 400, aDelay: 882)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(32553), dst: 4631724, skill: "火属性攻撃"(186), skill_lv: -1, damage: 4133, sDelay: 1268, dDelay: 400, tick: 432061966)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(35288), dst: 4631724, damage: 486, sDelay: 1268, dDelay: 400, aDelay: 3969)
+@nomalattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(38988), dst: 4631724, damage: 826, sDelay: 432, dDelay: 400, aDelay: 882)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(32665), dst: 4631724, damage: 476, sDelay: 1268, dDelay: 400, aDelay: 2687)
+@skillattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34162), dst: 4631724, skill: "火属性攻撃"(186), skill_lv: -1, damage: 3523, sDelay: 1268, dDelay: 400, tick: 432062512)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(34166), dst: 4631724, damage: 488, sDelay: 1268, dDelay: 400, aDelay: 1280)
+@nomalattack(src: "20541:レッケンベル警備兵長:0op1@gol1.gat"(40721), dst: 4631724, damage: 698, sDelay: 432, dDelay: 400, aDelay: 883)
+@nomalattack(src: "20542:レッケンベル警備兵:0op1@gol1.gat"(31981), dst: 4631724, damage: 667, sDelay: 1268, dDelay: 400, aDelay: 2562)
