@@ -2642,7 +2642,8 @@ harboro1.gat,60,215,5	script	カラムプッチ#harboro1	709,{
 harboro1.gat,80,218,5	script	コステル#harboro1	10210,{
 	switch(ROCKRIDGE_1QUE) {
 	case 0:
-		// 未調査
+		unittalk "コステル : 困ったなぁ……。ちゃんとアルベルタで冒険者が見つかるかな……。";
+		end;
 	case 1:
 		mes "[コステル]";
 		mes "うわ！";
@@ -2957,7 +2958,6 @@ harboro1.gat,80,218,5	script	コステル#harboro1	10210,{
 har_in01.gat,20,30,5	script	アイアット・ワープ#har_	10211,{
 	switch(ROCKRIDGE_1QUE) {
 	case 0:
-		// 未調査
 	case 1:
 		cutin "rock_worp",0;
 		mes "[アイアット・ワープ]";
