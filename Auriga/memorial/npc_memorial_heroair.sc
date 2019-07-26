@@ -1,4 +1,4 @@
-/*
+
 dali02.gat,139,87,3	script	道楽裁縫師#refine	70,{
 	mes "[道楽裁縫師]";
 	mes "私は裁縫師をしています。";
@@ -10,15 +10,134 @@ dali02.gat,139,87,3	script	道楽裁縫師#refine	70,{
 	mes "[道楽裁縫師]";
 	mes "装備の精錬を行いますか？";
 	next;
-	select("飛行船シリーズを精錬:ペルロックシリーズを精錬:説明を聞く:やめる")
+	switch(select("飛行船シリーズを精錬","ペルロックシリーズを精錬","説明を聞く","やめる")) {
+	case 1:
+		setarray '@target,15159,20792,22087;
+		break;
+	case 2:
+		setarray '@target,15158,20791,22086;
+		break;
+	case 3:
+		mes "[道楽裁縫師]";
+		mes "メモリアルダンジョン「飛行船襲撃」。";
+		mes "ここで入手できる";
+		mes "^0000ff飛行船シリーズ^000000こと";
+		mes "^0000ff飛行船スーツ^000000、^0000ff飛行船マント^000000、";
+		mes "^0000ff飛行船ブーツ^000000。";
+		next;
+		mes "[道楽裁縫師]";
+		mes "そして、^ff0000ペルロックシリーズ^000000である";
+		mes "^ff0000ペルロックのスーツ^000000、";
+		mes "^ff0000ペルロックのマント^000000、";
+		mes "^ff0000ペルロックのブーツ^000000。";
+		next;
+		mes "[道楽裁縫師]";
+		mes "この装備は通常の精錬はできませんが、";
+		mes "私ならば精錬できるのです！";
+		mes "もし、精錬したい場合は";
+		mes "是非、持ってきてください。";
+		next;
+		mes "[道楽裁縫師]";
+		mes "やり方は簡単！";
+		mes "まず、精錬したい対象装備を";
+		mes "装備してください。";
+		next;
+		mes "[道楽裁縫師]";
+		mes "対象装備が飛行船シリーズであれば、";
+		mes "素材として";
+		mes "飛行船シリーズのどれかの装備1個";
+		mes "を持ってきてください。";
+		mes "その装備1個を消費して、";
+		mes "精錬して差し上げましょう。";
+		next;
+		mes "[道楽裁縫師]";
+		mes "すなわち、もし";
+		mes "飛行船スーツを精錬したい場合は、";
+		mes "飛行船スーツ、飛行船マント、";
+		mes "飛行船ブーツのいずれか1個消費して";
+		mes "精錬できるということです。";
+		next;
+		mes "[道楽裁縫師]";
+		mes "同様に、";
+		mes "対象装備がペルロックシリーズであれば、";
+		mes "素材として";
+		mes "ペルロックシリーズのいずれかを";
+		mes "1個持ってきてください。";
+		next;
+		mes "[道楽裁縫師]";
+		mes "注意して頂きたいことは、";
+		mes "素材にした装備の^ff0000精錬値は引き継がれず";
+		mes "素材に挿さっていたカードも消滅する^000000";
+		mes "という事です。";
+		next;
+		mes "[道楽裁縫師]";
+		mes "ちなみに私、ホルグレンさんと違って、";
+		mes "^0000ff精錬1から失敗して";
+		mes "破壊してしまう事がある女^000000なので";
+		mes "そこのところはご了承くださいね。";
+		next;
+		mes "[道楽裁縫師]";
+		mes "それではいつでも";
+		mes "精錬しにきてください！";
+		close;
+	case 4:
+		mes "[道楽裁縫師]";
+		mes "そうですか。";
+		mes "また、ご入用の時は";
+		mes "いつでも来てください。";
+		close;
+	}
 	mes "[道楽裁縫師]";
 	mes "どれを精錬しますか？";
 	next;
-	select("^nItemID^15158:^nItemID^20899:^nItemID^22082")
+	switch(select(
+		(getequipid(2)!=0? "^nItemID^" +getequipid(2): "体-[装備していない]"),
+		(getequipid(5)!=0? "^nItemID^" +getequipid(5): "肩にかける物-[装備していない]")
+		(getequipid(6)!=0? "^nItemID^" +getequipid(6): "靴-[装備していない]")
+	)) {
+	case 1: set '@itemid,getequipid(2); set '@menu,2; break;
+	case 2: set '@itemid,getequipid(5); set '@menu,5; break;
+	case 3: set '@itemid,getequipid(6); set '@menu,6; break;
+	}
+	if('@itemid == 0) {
+		mes "[道楽裁縫師]";
+		mes "何も装備していませんよ？";
+		mes "必ず、精錬したい装備を";
+		mes "装備した状態で話しかけてください。";
+		close;
+	}
+	set '@len,getarraysize('@target);
+	for(set '@i,0; '@i < '@len; set '@i,'@i+1) {
+		if('@itemid == '@target['@i])
+			break;
+	}
+	if('@i == '@len) {
+		mes "[道楽裁縫師]";
+		mes "対象装備を装備していません。";
+		mes "必ず飛行船で入手した装備を";
+		mes "装備してくださいね。";
+		close;
+	}
+	set '@refine,getequiprefinerycnt('@menu);
+	if('@refine>=10) {
+		mes "[道楽裁縫師]";
+		mes "これ以上は精練できませんね。";
+		close;
+	}
+	set '@card1,getequipcardid('@menu,0);
 	mes "[道楽裁縫師]";
 	mes "素材にはどれを使いますか？";
 	next;
-	select("ペルロックのスーツ:ペルロックのマント:ペルロックのブーツ")
+	set '@rec,select(getitemname('@target[0]),getitemname('@target[1]),getitemname('@target[2]));
+	if(countitem('@target['@rec-1]) == 0) {
+		mes "[道楽裁縫師]";
+		mes "素材になる装備を";
+		mes "持っていないようです。";
+		mes "お手持ちの装備品を";
+		mes "確認してから、";
+		mes "また来てください。";
+		close;
+	}
 	mes "[道楽裁縫師]";
 	mes "それでは精錬を開始しますが";
 	mes "素材になるアイテムを";
@@ -34,23 +153,30 @@ dali02.gat,139,87,3	script	道楽裁縫師#refine	70,{
 	mes "それでは精錬をしても";
 	mes "よろしいですか？";
 	next;
-	select("精錬する:やめる")
+	if(select("精錬する","やめる") == 2) {
+		mes "[道楽裁縫師]";
+		mes "そうですか。";
+		mes "また、ご入用の時は";
+		mes "いつでも来てください。";
+		close;
+	}
 	mes "[道楽裁縫師]";
 	mes "うりゃー！";
 	mes "うりゃりゃりゃー！";
 	next;
-	delitem 22086, 1;
-	delitem 15158, 1;
-	{
-		misceffect 154,""; //self
+	delequip '@menu;
+	delitem '@target['@rec-1],1;
+	setarray '@rate,9000,7000,5000,3000,1000,500,300,100,50,10;
+	if(rand(10000) < '@rate['@refine]) {
+		misceffect 154,"";
 		mes "[道楽裁縫師]";
 		mes "よし、完成！";
 		mes "良い物ができました！";
-		getitem 15158, 1;
+		getitem2 '@itemid,1,1,'@refine+1,0,'@card1,0,0,0;
 		close;
 	}
 	else {
-		misceffect 155,""; //self
+		misceffect 155,"";
 		mes "[道楽裁縫師]";
 		mes "クホホッ……";
 		mes "失敗してしまいました……。";
@@ -58,16 +184,138 @@ dali02.gat,139,87,3	script	道楽裁縫師#refine	70,{
 		close;
 	}
 OnInit:
-	waitingroom "飛行船装備【精錬】",0; //51025
+	waitingroom "飛行船装備【精錬】",0;
 	end;
 }
+
+
 dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{
 	mes "[飛行船愛好家]";
 	mes "ここでは飛行船装備の";
 	mes "買取や交換を行っています。";
 	mes "私、好きなんです！飛行船装備！";
 	next;
-	select("買取してほしい:交換してほしい:説明を聞く")
+	switch(select("買取してほしい","交換してほしい","説明を聞く")) {
+	case 1:
+		break;
+	case 2:
+		mes "[飛行船愛好家]";
+		mes "飛行船装備の交換ですね。";
+		mes "交換を行う場合は";
+		mes "必ず交換したい装備を";
+		mes "装備した状態で";
+		mes "話しかけて下さいね！";
+		next;
+		mes "[飛行船愛好家]";
+		mes "さて、何と交換しましょうか？";
+		next;
+		switch(select("ペルロックの帽子[1]","エクソダスジョーカーXIII[1]","やめる")) {
+		case 1:
+			mes "[飛行船愛好家]";
+			mes "ふむ。";
+			mes "ペルロックの帽子ですね。";
+			next;
+			mes "[飛行船愛好家]";
+			mes "そちらのアイテムだと";
+			mes "^ff0000[衣装]ペルロックの帽子^000000と";
+			mes "交換ではどうでしょうか？";
+			break;
+		case 2:
+			mes "[飛行船愛好家]";
+			mes "ふむ。";
+			mes "エクソダスジョーカーXIIIですね。";
+			next;
+			mes "[飛行船愛好家]";
+			mes "そちらのアイテムだと";
+			mes "^ff0000+7以上の";
+			mes "ペルロック系装備^000000と";
+			mes "交換ではどうでしょうか？";
+			break;
+		case 3:
+			mes "[飛行船愛好家]";
+			mes "そうですか。";
+			mes "気が変わったら";
+			mes "またいつでも来てください。";
+			close;
+		}
+		next;
+		mes "[飛行船愛好家]";
+		mes "交換上の注意ですが";
+		mes "こちらの要求以上のアイテムを";
+		mes "交換対象にされても取引内容に";
+		mes "変化はありませんので";
+		mes "ご注意ください。";
+		next;
+		mes "[飛行船愛好家]";
+		mes "では、どれと交換しましょう？";
+		next;
+		set '@menu,select("体-[装備していない]","肩にかける物-[装備していない]","靴-[装備していない]","衣装‐上‐[装備していない]");
+		mes "[飛行船愛好家]";
+		mes "対象装備を装備していません。";
+		mes "必ず飛行船で入手した装備を";
+		mes "装備してくださいね。";
+		close;
+	case 3:
+		mes "[飛行船愛好家]";
+		mes "私は飛行船シリーズと";
+		mes "ペルロックシリーズを";
+		mes "買取ったり交換したりしています。";
+		mes "精錬値が高いほど";
+		mes "高く査定させていただきます。";
+		next;
+		mes "[飛行船愛好家]";
+		mes "なお、引き取る装備に";
+		mes "カードが挿さっていた場合、";
+		mes "^ff0000カードはお返しできません。^000000";
+		mes "また、どのようなカードであっても";
+		mes "^ff0000買取額に変更はありません^000000ので";
+		mes "ご注意ください。";
+		next;
+		mes "[飛行船愛好家]";
+		mes "これが買取表ですよ！";
+		next;
+		mes "‐買取表‐";
+		mes "　^0000ff飛行船シリーズ^000000の場合！";
+		mes "　（飛行船スーツ、飛行船マント";
+		mes "　飛行船ブーツのいずれか）";
+		mes "　";
+		mes "　未精錬　　10,000zeny";
+		mes "　精錬値+1　30,000zeny";
+		mes "　精錬値+2　90,000zeny";
+		mes "　精錬値+3　270,000zeny";
+		mes "　精錬値+4　810,000zeny";
+		mes "　精錬値+5　2,430,000zeny";
+		mes "　精錬値+6　7,290,000zeny";
+		mes "　精錬値+7　21,870,000zeny";
+		mes "　精錬値+8　65,610,000zeny";
+		mes "　精錬値+9　196,830,000zeny";
+		mes "　精錬値+10　590,490,000zeny";
+		next;
+		mes "‐買取表‐";
+		mes "　^ff0000ペルロックシリーズ^000000の場合！";
+		mes "　（ペルロックスーツ、";
+		mes "　ペルロックマント、";
+		mes "　ペルロックブーツのいずれか）";
+		mes "　";
+		mes "　未精錬　　20,000zeny";
+		mes "　精錬値+1　60,000zeny";
+		mes "　精錬値+2　180,000zeny";
+		mes "　精錬値+3　540,000zeny";
+		mes "　精錬値+4　1,620,000zeny";
+		mes "　精錬値+5　4,860,000zeny";
+		mes "　精錬値+6　14,580,000zeny";
+		mes "　精錬値+7　43,740,000zeny";
+		mes "　精錬値+8　131,220,000zeny";
+		mes "　精錬値+9　393,660,000zeny";
+		mes "　精錬値+10　1,180,980,000zeny";
+		next;
+		mes "[飛行船愛好家]";
+		mes "あと、交換対象アイテムは";
+		mes "その時々で対象となる";
+		mes "アイテムが異なりますので";
+		mes "ご注意ください。";
+		close;
+	}
 	mes "[飛行船愛好家]";
 	mes "飛行船装備の買取ですね。";
 	mes "飛行船装備は精錬値によって";
@@ -81,29 +329,85 @@ dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{
 	mes "[飛行船愛好家]";
 	mes "さて、どれを買取ましょうか？";
 	next;
-	select("飛行船装備:ペルロック装備:やめる")
+	switch(select("飛行船装備","ペルロック装備","やめる")) {
+	case 1:
+		setarray '@target,15159,20792,22087;
+		set '@zeny,10000;
+		break;
+	case 2:
+		setarray '@target,15158,20791,22086;
+		set '@zeny,20000;
+		break;
+	case 3:
+		mes "[飛行船愛好家]";
+		mes "そうですか。";
+		mes "気が変わったら";
+		mes "またいつでも来てください。";
+		close;
+	}
 	mes "[飛行船愛好家]";
 	mes "どれを買取ましょう？";
 	next;
-	select("^nItemID^15158:^nItemID^20899:^nItemID^22082")
+	switch(select(
+		(getequipid(2)!=0? "^nItemID^" +getequipid(2): "体-[装備していない]"),
+		(getequipid(5)!=0? "^nItemID^" +getequipid(5): "肩にかける物-[装備していない]")
+		(getequipid(6)!=0? "^nItemID^" +getequipid(6): "靴-[装備していない]")
+	)) {
+	case 1: set '@itemid,getequipid(2); set '@menu,2; break;
+	case 2: set '@itemid,getequipid(5); set '@menu,5; break;
+	case 3: set '@itemid,getequipid(6); set '@menu,6; break;
+	}
+	if('@itemid == 0) {
+		mes "[飛行船愛好家]";
+		mes "何も装備していませんよ？";
+		mes "必ず、買い取って欲しい装備を";
+		mes "装備した状態で話しかけてください。";
+		close;
+	}
+	set '@len,getarraysize('@target);
+	for(set '@i,0; '@i < '@len; set '@i,'@i+1) {
+		if('@itemid == '@target['@i])
+			break;
+	}
+	if('@i == '@len) {
+		mes "[飛行船愛好家]";
+		mes "対象装備を装備していません。";
+		mes "必ず飛行船で入手した装備を";
+		mes "装備してくださいね。";
+		close;
+	}
+	set '@refine,getequiprefinerycnt('@menu);
+	set '@price,'@zeny * 3 ** '@refine;
 	mes "[飛行船愛好家]";
 	mes "そちらのアイテムは";
-	mes "^0000ff4860000^000000zenyで";
+	mes "^0000ff" +'@price+ "^000000zenyで";
 	mes "買取ます。";
 	mes "よろしいですか？";
 	next;
-	select("いいえ:はい")
+	if(select("いいえ","はい") == 1) {
+		mes "[飛行船愛好家]";
+		mes "そうですか。";
+		mes "残念です。";
+		close;
+	}
+	if(2147483647 - Zeny < '@price) {
+		mes "[飛行船愛好家]";
+		mes "所持金が多すぎますね。";
+		mes "少し減らしてから来てください。";
+		close;
+	}
 	mes "[飛行船愛好家]";
 	mes "それでは買取ます。";
 	mes "はい、どうぞ。";
-	@delitem(idx: 147(itemid: unknown), amount: 1)
+	delequip '@menu;
+	set Zeny,Zeny+'@price;
 	close;
 OnInit:
-	waitingroom "飛行船装備【交換・買取】",0; //51026
+	waitingroom "飛行船装備【交換・買取】",0;
 	end;
 }
-*/
-dali02.gat,136,79,3	script	探検家リオン#air1	945,{/* 51023 */
+
+dali02.gat,136,79,3	script	探検家リオン#air1	945,{
 	mes "[探検家リオン]";
 	mes "私がここ数日間";
 	mes "この場所を調べてみた結果、";
@@ -125,7 +429,7 @@ dali02.gat,136,79,3	script	探検家リオン#air1	945,{/* 51023 */
 	close;
 }
 
-dali02.gat,142,81,3	script	次元移動機#sara	10007,{/* 51024 */
+dali02.gat,142,81,3	script	次元移動機#sara	10007,{
 	if(getonlinepartymember() < 1) {
 		mes "^ff0000‐次元の狭間に入場するためには";
 		mes "　パーティーを結成してください‐^000000";
@@ -182,8 +486,8 @@ dali02.gat,142,81,3	script	次元移動機#sara	10007,{/* 51024 */
 		switch(mdenter("hero_air")) {
 		case 0:	// エラーなし
 			announce "メモリアルダンジョン[hero_air] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
-			setquest 15050; //state=1
-			setquest 120205; //state=1
+			setquest 15050;
+			setquest 120205;
 			set HEROAIR_1QUE,0;
 			donpcevent getmdnpcname("#HeroAirManager")+ "::OnStart";
 			close2;
@@ -206,7 +510,7 @@ dali02.gat,142,81,3	script	次元移動機#sara	10007,{/* 51024 */
 		close;
 	}
 OnInit:
-	waitingroom "飛行船襲撃",0; //51024
+	waitingroom "飛行船襲撃",0;
 	end;
 }
 
@@ -1987,7 +2291,7 @@ OnKilled:
 					mes "重量 : ^777777100^000000";
 					mes "要求レベル : ^77777750^000000";
 					mes "装備 : ^777777全ての職業^000000";
-					set '@gain,15158;
+					set '@gain,15159;
 					break;
 				case 2:
 					cutin "fly_felrock2.bmp", 255;
@@ -2030,7 +2334,7 @@ OnKilled:
 					mes "重量 : ^777777100^000000";
 					mes "要求レベル : ^77777750^000000";
 					mes "装備 : ^777777全ての職業^000000";
-					set '@gain,15158;	//TODO
+					set '@gain,20792;
 					break;
 				case 3:
 					cutin "fly_felrock2.bmp", 255;
@@ -2073,7 +2377,7 @@ OnKilled:
 					mes "重量 : ^777777100^000000";
 					mes "要求レベル : ^77777750^000000";
 					mes "装備 : ^777777全ての職業^000000";
-					set '@gain,15158;	//TODO
+					set '@gain,22087;
 					break;
 				}
 				next;
@@ -2199,7 +2503,7 @@ OnKilled:
 					mes "重量 : ^777777100^000000";
 					mes "要求レベル : ^77777750^000000";
 					mes "装備 : ^777777全ての職業^000000";
-					set '@gain,15158;	//TODO
+					set '@gain,20791;
 					break;
 				case 3:
 					cutin "fly_felrock2.bmp", 255;
@@ -2242,7 +2546,7 @@ OnKilled:
 					mes "重量 : ^777777100^000000";
 					mes "要求レベル : ^77777750^000000";
 					mes "装備 : ^777777全ての職業^000000";
-					set '@gain,15158;	//TODO
+					set '@gain,22086;
 					break;
 				}
 				next;
