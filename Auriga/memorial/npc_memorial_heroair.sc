@@ -1,4 +1,5 @@
-dali02.gat,139,87,3	script	道楽裁縫師#refine	70,{/* 51025 */
+/*
+dali02.gat,139,87,3	script	道楽裁縫師#refine	70,{
 	mes "[道楽裁縫師]";
 	mes "私は裁縫師をしています。";
 	mes "私に飛行船で入手できる装備を";
@@ -60,7 +61,7 @@ OnInit:
 	waitingroom "飛行船装備【精錬】",0; //51025
 	end;
 }
-dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{/* 51026 */
+dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{
 	mes "[飛行船愛好家]";
 	mes "ここでは飛行船装備の";
 	mes "買取や交換を行っています。";
@@ -81,7 +82,6 @@ dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{/* 51026 */
 	mes "さて、どれを買取ましょうか？";
 	next;
 	select("飛行船装備:ペルロック装備:やめる")
-	announce "砦 [Gloria 1] の ゲオルグ を [ぷちとかげ] ギルドが占領しました", 32;
 	mes "[飛行船愛好家]";
 	mes "どれを買取ましょう？";
 	next;
@@ -102,7 +102,7 @@ OnInit:
 	waitingroom "飛行船装備【交換・買取】",0; //51026
 	end;
 }
-
+*/
 dali02.gat,136,79,3	script	探検家リオン#air1	945,{/* 51023 */
 	mes "[探検家リオン]";
 	mes "私がここ数日間";
@@ -138,6 +138,18 @@ dali02.gat,142,81,3	script	次元移動機#sara	10007,{/* 51024 */
 		mes "　入場が可能です‐^000000";
 		close;
 	}
+	if(checkquest(15050)) {
+		if(!(checkquest(15050)&2) || !(checkquest(120205)&2)) {
+			mes "‐この先は入場してから1回目の";
+			mes "　^ff0000午前5時以降^000000に進行可能です。";
+			mes "　但し、最後の入場をしてから";
+			mes "　^ff00001時間^000000経過するまでは";
+			mes "　進行できませんのでご注意ください‐";
+			close;
+		}
+		delquest 15050;
+		delquest 120205;
+	}
 	mes "‐次元移動機がある‐";
 	set '@party$,strcharinfo(1);
 	set '@leader$,strcharinfo(0);
@@ -172,6 +184,8 @@ dali02.gat,142,81,3	script	次元移動機#sara	10007,{/* 51024 */
 			announce "メモリアルダンジョン[hero_air] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
 			setquest 15050; //state=1
 			setquest 120205; //state=1
+			set HEROAIR_1QUE,0;
+			donpcevent getmdnpcname("#HeroAirManager")+ "::OnStart";
 			close2;
 			//warp "1@air1.gat",244,73;
 			end;
@@ -203,9 +217,9 @@ OnStart:
 	set 'flag,1;
 	hideonnpc getmdnpcname("ワイバーン#air1"); //67057
 	hideonnpc getmdnpcname("ワイバーンキッド#1air1"); //67058
-	hideonnpc getmdnpcname("レッサーワイバーン#2air"); //67059
-	hideonnpc getmdnpcname("スカイロータージャイロ#"); //67060
-	hideonnpc getmdnpcname("スカイロータージャイロ#"); //67061
+	hideonnpc getmdnpcname("レッサーワイバーン#1air"); //67059
+	hideonnpc getmdnpcname("スカイジャイロ#1air1"); //67060
+	hideonnpc getmdnpcname("スカイジャイロ#1air1"); //67061
 	hideonnpc getmdnpcname("スカイグレムリン#1air1"); //67062
 	hideonnpc getmdnpcname("スカイグレムリン#2air1"); //67063
 	hideonnpc getmdnpcname("スカイグレムリン#3air1"); //67064
@@ -218,11 +232,19 @@ OnStart:
 	hideonnpc getmdnpcname("スカイグレムリン#2aair1");
 	hideonnpc getmdnpcname("アイリス#2air1"); //85351
 	hideonnpc getmdnpcname("ケイオス#2air1"); //85352
+	hideonnpc getmdnpcname("ロキ#air2"); //85372
+
+	hideonnpc getmdnpcname("アイリス#2air2"); //85352
+	hideonnpc getmdnpcname("船長ペルロック#air2"); //85352
+	hideonnpc getmdnpcname("船長ペルロック#2air2"); //85352
+	hideonnpc getmdnpcname("ケイオス#air2"); //85352
 	hideonnpc getmdnpcname("warp1#air1"); //85325
 	hideonnpc getmdnpcname("warp2a#air1");
 	hideonnpc getmdnpcname("warp2b#air1");
 	hideonnpc getmdnpcname("warp3a#air1"); //85332
 	hideonnpc getmdnpcname("warp3b#air1"); //85333
+	hideonnpc getmdnpcname("warp4a#air2"); //85332
+	hideonnpc getmdnpcname("warp5a#air2"); //85332
 
 	end;
 }
@@ -237,12 +259,12 @@ OnStart:
 			if(select("先を急ぐ","話を聞く") == 1) {
 				mes "‐先を急ぐことにした‐";
 				close2;
-				set HEROAIR_1QUE,1:
+				set HEROAIR_1QUE,1;
 				hideoffnpc getmdnpcname("ワイバーン#air1"); //67057
 				hideoffnpc getmdnpcname("ワイバーンキッド#1air1"); //67058
-				hideoffnpc getmdnpcname("レッサーワイバーン#2air"); //67059
-				hideoffnpc getmdnpcname("スカイロータージャイロ#"); //67060
-				hideoffnpc getmdnpcname("スカイロータージャイロ#"); //67061
+				hideoffnpc getmdnpcname("レッサーワイバーン#1air"); //67059
+				hideoffnpc getmdnpcname("スカイジャイロ#1air1"); //67060
+				hideoffnpc getmdnpcname("スカイジャイロ#1air1"); //67061
 				hideoffnpc getmdnpcname("スカイグレムリン#1air1"); //67062
 				hideoffnpc getmdnpcname("スカイグレムリン#2air1"); //67063
 				hideoffnpc getmdnpcname("スカイグレムリン#3air1"); //67064
@@ -429,12 +451,12 @@ OnStart:
 		mes "スカイグレムリンだ!!";
 		mes "ワイバーンからスカイグレムリンが";
 		mes "降りてきましたーっ!!";
-		set HEROAIR_1QUE,1:
+		set HEROAIR_1QUE,1;
 		hideoffnpc getmdnpcname("ワイバーン#air1"); //67057
 		hideoffnpc getmdnpcname("ワイバーンキッド#1air1"); //67058
-		hideoffnpc getmdnpcname("レッサーワイバーン#2air"); //67059
-		hideoffnpc getmdnpcname("スカイロータージャイロ#"); //67060
-		hideoffnpc getmdnpcname("スカイロータージャイロ#"); //67061
+		hideoffnpc getmdnpcname("レッサーワイバーン#1air"); //67059
+		hideoffnpc getmdnpcname("スカイジャイロ#1air1"); //67060
+		hideoffnpc getmdnpcname("スカイジャイロ#1air1"); //67061
 		hideoffnpc getmdnpcname("スカイグレムリン#1air1"); //67062
 		hideoffnpc getmdnpcname("スカイグレムリン#2air1"); //67063
 		hideoffnpc getmdnpcname("スカイグレムリン#3air1"); //67064
@@ -658,9 +680,9 @@ OnTimer7000:
 
 1@air1.gat,213,75,5	script	ワイバーン#air1	2146,{/* 85338 (hide)*/}
 1@air1.gat,218,78,3	script	ワイバーンキッド#1air1	3185,{/* 85339 (hide)*/}
-1@air1.gat,208,78,5	script	レッサーワイバーン#2air	3186,{/* 85340 (hide)*/}
-1@air1.gat,200,78,5	script	スカイロータージャイロ#	1392,{/* 85341 (hide)*/}
-1@air1.gat,223,78,3	script	スカイロータージャイロ#	1392,{/* 85342 (hide)*/}
+1@air1.gat,208,78,5	script	レッサーワイバーン#1air	3186,{/* 85340 (hide)*/}
+1@air1.gat,200,78,5	script	スカイロータージャイロ#::スカイジャイロ#1air1	1392,{/* 85341 (hide)*/}
+1@air1.gat,223,78,3	script	スカイロータージャイロ#::スカイジャイロ#1air2	1392,{/* 85342 (hide)*/}
 1@air1.gat,236,57,3	script	スカイグレムリン#1air1	844,{/* 85343 (hide)*/}
 1@air1.gat,239,57,5	script	スカイグレムリン#2air1	844,{/* 85344 (hide)*/}
 1@air1.gat,230,50,5	script	スカイグレムリン#3air1	844,{/* 85345 (hide)*/}
@@ -1031,6 +1053,7 @@ OnStart:
 	hideonnpc getmdnpcname("ケイオス#2air1"); //85352
 	hideoffnpc getmdnpcname("warp3a#air1"); //85332
 	hideoffnpc getmdnpcname("warp3b#air1"); //85333
+	donpcevent getmdnpcname("mob#air3")+ "::OnStart";
 	announce "モンスターの気配を感じる!!　モンスターを倒しながら戻ろう!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
 	end;
 }
@@ -1055,29 +1078,29 @@ OnStart:
 	end;
 }
 
-1@air1.gat,1,1,0	script	mob#air3	139,{
+1@air2.gat,1,1,0	script	mob#air3	139,{
 OnStart:
-	areamonster getmdmapname("1@air1.gat"),109,59,115,66,"ワイバーンキッド",3185,3,getmdnpcname("mob#air3")+ "::OnKilled1";
-	areamonster getmdmapname("1@air1.gat"),109,59,115,66,"スカイビホルダー",3184,3,getmdnpcname("mob#air3")+ "::OnKilled1";
+	areamonster getmdmapname("1@air2.gat"),109,59,115,66,"ワイバーンキッド",3185,3,getmdnpcname("mob#air3")+ "::OnKilled1";
+	areamonster getmdmapname("1@air2.gat"),109,59,115,66,"スカイビホルダー",3184,3,getmdnpcname("mob#air3")+ "::OnKilled1";
 	end;
 OnKilled1:
-	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air3")+ "::OnKilled1");
+	set '@count,getmapmobs(getmdmapname("1@air2.gat"),getmdnpcname("mob#air3")+ "::OnKilled1");
 	if('@count > 0)
 		end;
 	announce "6時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
-	areamonster getmdmapname("1@air1.gat"),60,35,70,45,"ワイバーンキッド",3185,3,getmdnpcname("mob#air3")+ "::OnKilled2";
-	areamonster getmdmapname("1@air1.gat"),60,35,70,45,"スカイビホルダー",3184,3,getmdnpcname("mob#air3")+ "::OnKilled2";
+	areamonster getmdmapname("1@air2.gat"),60,35,70,45,"ワイバーンキッド",3185,3,getmdnpcname("mob#air3")+ "::OnKilled2";
+	areamonster getmdmapname("1@air2.gat"),60,35,70,45,"スカイビホルダー",3184,3,getmdnpcname("mob#air3")+ "::OnKilled2";
 	end;
-OnKilled2
-	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air3")+ "::OnKilled2");
+OnKilled2:
+	set '@count,getmapmobs(getmdmapname("1@air2.gat"),getmdnpcname("mob#air3")+ "::OnKilled2");
 	if('@count > 0)
 		end;
 	announce "9時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
-	areamonster getmdmapname("1@air1.gat"),20,60,30,70,"ワイバーンキッド",3185,3,getmdnpcname("mob#air3")+ "::OnKilled3";
-	areamonster getmdmapname("1@air1.gat"),20,60,30,70,"スカイビホルダー",3184,3,getmdnpcname("mob#air3")+ "::OnKilled3";
+	areamonster getmdmapname("1@air2.gat"),20,60,30,70,"ワイバーンキッド",3185,3,getmdnpcname("mob#air3")+ "::OnKilled3";
+	areamonster getmdmapname("1@air2.gat"),20,60,30,70,"スカイビホルダー",3184,3,getmdnpcname("mob#air3")+ "::OnKilled3";
 	end;
-OnKilled3
-	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air3")+ "::OnKilled3");
+OnKilled3:
+	set '@count,getmapmobs(getmdmapname("1@air2.gat"),getmdnpcname("mob#air3")+ "::OnKilled3");
 	if('@count > 0)
 		end;
 	announce "この階にはもうモンスターの気配がないようだ。デッキまで上がろう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
@@ -1096,20 +1119,20 @@ OnStart:
 	initnpctimer;
 	end;
 OnTimer1000:
-	misceffect 106, "fire1#air2_0oy"; //98063
+	misceffect 106, "fire1#air2"; //98063
 	end;
 OnTimer2000:
-	misceffect 106, "fire2#air2_0oy"; //98064
-	misceffect 106, "fire15#air2_0oy"; //99590
+	misceffect 106, "fire2#air2"; //98064
+	misceffect 106, "fire15#air2"; //99590
 	end;
 OnTimer3000:
-	misceffect 106, "fire3#air2_0oy"; //98136
+	misceffect 106, "fire3#air2"; //98136
 	end;
 OnTimer3300:
-	misceffect 106, "fire5#air2_0oy"; //98138
+	misceffect 106, "fire5#air2"; //98138
 	end;
 OnTimer5000:
-	misceffect 106, "fire4#air2_0oy"; //98137
+	misceffect 106, "fire4#air2"; //98137
 	end;
 OnTimer5200:
 	initnpctimer;
