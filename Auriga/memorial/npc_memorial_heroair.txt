@@ -854,34 +854,31 @@ OnTimer7000:
 
 1@air1.gat,1,1,0	script	mob#air1	139,{
 OnStart:
-	//77,57,82,65
-	@spawn(type: BL_MOB, ID: 39339, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(81, 65), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 39747, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(82, 64), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 33123, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(81, 62), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 33323, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(82, 57), dir: 0, name: "スカイロータージャイロ")
-	@spawn(type: BL_MOB, ID: 33335, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(81, 60), dir: 0, name: "スカイロータージャイロ")
+	areamonster getmdmapname("1@air1.gat"),77,57,82,65,"スカイビホルダー",3184,3,getmdnpcname("mob#air1")+ "::OnKilled1";
+	areamonster getmdmapname("1@air1.gat"),77,57,82,65,"スカイロータージャイロ",3182,2,getmdnpcname("mob#air1")+ "::OnKilled1";
+	end;
 OnKilled1:
+	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air1")+ "::OnKilled1");
+	if('@count > 0)
+		end;
 	announce "12時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
-	//61,77,68,85
-	@spawn(type: BL_MOB, ID: 37283, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(61, 81), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 37860, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(68, 77), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 38505, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(65, 79), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 39260, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(68, 77), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 39296, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(65, 79), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 39373, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(65, 77), dir: 0, name: "スカイロータージャイロ")
-	@spawn(type: BL_MOB, ID: 40313, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(67, 80), dir: 0, name: "スカイロータージャイロ")
-	@spawn(type: BL_MOB, ID: 40432, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(65, 84), dir: 0, name: "スカイロータージャイロ")
+	areamonster getmdmapname("1@air1.gat"),61,77,68,85,"スカイビホルダー",3184,5,getmdnpcname("mob#air1")+ "::OnKilled2";
+	areamonster getmdmapname("1@air1.gat"),61,77,68,85,"スカイロータージャイロ",3182,3,getmdnpcname("mob#air1")+ "::OnKilled2";
+	end;
 OnKilled2:
+	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air1")+ "::OnKilled2");
+	if('@count > 0)
+		end;
 	announce "9時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
-	//20,60,28,66
-	@spawn(type: BL_MOB, ID: 40791, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(24, 63), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 37347, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(23, 63), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 42185, speed: 140, option: 0, view: 3184, pos: "1@air1.gat"(25, 62), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 43382, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(26, 63), dir: 0, name: "スカイロータージャイロ")
-	@spawn(type: BL_MOB, ID: 37425, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(23, 62), dir: 0, name: "スカイロータージャイロ")
-	@spawn(type: BL_MOB, ID: 37469, speed: 155, option: 0, view: 3182, pos: "1@air1.gat"(27, 66), dir: 0, name: "スカイロータージャイロ")
+	areamonster getmdmapname("1@air1.gat"),20,60,28,66,"スカイビホルダー",3184,3,getmdnpcname("mob#air1")+ "::OnKilled3";
+	areamonster getmdmapname("1@air1.gat"),20,60,28,66,"スカイロータージャイロ",3182,3,getmdnpcname("mob#air1")+ "::OnKilled3";
+	end;
 OnKilled3:
+	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air1")+ "::OnKilled3");
+	if('@count > 0)
+		end;
 	announce "このフロアにはもうモンスターの気配がないようだ。下の階へ進もう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	donpcevent getmdnpcname("mob#air2")+ "::OnStart";
 	hideoffnpc getmdnpcname("warp2a#air1");
 	hideoffnpc getmdnpcname("warp2b#air1");
 	end;
@@ -892,32 +889,29 @@ OnKilled3:
 
 1@air1.gat,1,1,0	script	mob#air2	139,{
 OnStart:
-	//108,185,114,192
-	@spawn(type: BL_MOB, ID: 41846, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(110, 188), dir: 0, name: "スカイグレムリン")
-	@spawn(type: BL_MOB, ID: 42107, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(110, 191), dir: 0, name: "スカイグレムリン")
-	@spawn(type: BL_MOB, ID: 42226, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(112, 188), dir: 0, name: "スカイグレムリン")
-	@spawn(type: BL_MOB, ID: 42270, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(108, 192), dir: 0, name: "レッサーワイバーン")
-	@spawn(type: BL_MOB, ID: 42300, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(114, 186), dir: 0, name: "レッサーワイバーン")
-	@spawn(type: BL_MOB, ID: 42369, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(111, 185), dir: 0, name: "レッサーワイバーン")
+	areamonster getmdmapname("1@air1.gat"),108,185,114,192,"スカイグレムリン",3183,3,getmdnpcname("mob#air2")+ "::OnKilled1";
+	areamonster getmdmapname("1@air1.gat"),108,185,114,192,"レッサーワイバーン",3186,3,getmdnpcname("mob#air2")+ "::OnKilled1";
+	end;
 OnKilled1:
+	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air2")+ "::OnKilled1");
+	if('@count > 0)
+		end;
 	announce "9時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
-	//60,185,68,192
-	@spawn(type: BL_MOB, ID: 5244, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(68, 191), dir: 0, name: "スカイグレムリン")
-	@spawn(type: BL_MOB, ID: 5604, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(64, 192), dir: 0, name: "スカイグレムリン")
-	@spawn(type: BL_MOB, ID: 6084, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(60, 188), dir: 0, name: "スカイグレムリン")
-	@spawn(type: BL_MOB, ID: 6323, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(67, 192), dir: 0, name: "レッサーワイバーン")
-	@spawn(type: BL_MOB, ID: 6377, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(68, 188), dir: 0, name: "レッサーワイバーン")
-	@spawn(type: BL_MOB, ID: 6406, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(67, 191), dir: 0, name: "レッサーワイバーン")
+	areamonster getmdmapname("1@air1.gat"),60,185,68,192,"スカイグレムリン",3183,3,getmdnpcname("mob#air2")+ "::OnKilled2";
+	areamonster getmdmapname("1@air1.gat"),60,185,68,192,"レッサーワイバーン",3186,3,getmdnpcname("mob#air2")+ "::OnKilled2";
+	end;
 OnKilled2:
+	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air2")+ "::OnKilled2");
+	if('@count > 0)
+		end;
 	announce "9時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
-	//18,185,26,191
-	@spawn(type: BL_MOB, ID: 10384, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(19, 189), dir: 0, name: "スカイグレムリン")
-	@spawn(type: BL_MOB, ID: 29212, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(26, 190), dir: 0, name: "スカイグレムリン")
-	@spawn(type: BL_MOB, ID: 30146, speed: 140, option: 0, view: 3183, pos: "1@air1.gat"(24, 190), dir: 0, name: "スカイグレムリン")
-	@spawn(type: BL_MOB, ID: 30167, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(23, 187), dir: 0, name: "レッサーワイバーン")
-	@spawn(type: BL_MOB, ID: 81012, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(18, 188), dir: 0, name: "レッサーワイバーン")
-	@spawn(type: BL_MOB, ID: 34075, speed: 180, option: 0, view: 3186, pos: "1@air1.gat"(26, 187), dir: 0, name: "レッサーワイバーン")
+	areamonster getmdmapname("1@air1.gat"),18,185,26,191,"スカイグレムリン",3183,3,getmdnpcname("mob#air2")+ "::OnKilled3";
+	areamonster getmdmapname("1@air1.gat"),18,185,26,191,"レッサーワイバーン",3186,3,getmdnpcname("mob#air2")+ "::OnKilled3";
+	end;
 OnKilled3:
+	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air2")+ "::OnKilled3");
+	if('@count > 0)
+		end;
 	announce "このフロアにはもうモンスターの気配がないようだ。機関室入口へ向かおう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
 	hideoffnpc getmdnpcname("アイリス#2air1"); //67070
 	hideoffnpc getmdnpcname("ケイオス#2air1"); //67071
@@ -1063,30 +1057,29 @@ OnStart:
 
 1@air1.gat,1,1,0	script	mob#air3	139,{
 OnStart:
-	//109,59,115,66
-	@spawn(type: BL_MOB, ID: 25312, speed: 170, option: 0, view: 3185, pos: "1@air2.gat"(114, 61), dir: 0, name: "ワイバーンキッド")
-	@spawn(type: BL_MOB, ID: 45237, speed: 170, option: 0, view: 3185, pos: "1@air2.gat"(111, 65), dir: 0, name: "ワイバーンキッド")
-	@spawn(type: BL_MOB, ID: 45524, speed: 170, option: 0, view: 3185, pos: "1@air2.gat"(114, 63), dir: 0, name: "ワイバーンキッド")
-	@spawn(type: BL_MOB, ID: 49554, speed: 140, option: 0, view: 3184, pos: "1@air2.gat"(110, 64), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 49626, speed: 140, option: 0, view: 3184, pos: "1@air2.gat"(109, 60), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 49669, speed: 140, option: 0, view: 3184, pos: "1@air2.gat"(109, 62), dir: 0, name: "スカイビホルダー")
-OnKilled1
+	areamonster getmdmapname("1@air1.gat"),109,59,115,66,"ワイバーンキッド",3185,3,getmdnpcname("mob#air3")+ "::OnKilled1";
+	areamonster getmdmapname("1@air1.gat"),109,59,115,66,"スカイビホルダー",3184,3,getmdnpcname("mob#air3")+ "::OnKilled1";
+	end;
+OnKilled1:
+	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air3")+ "::OnKilled1");
+	if('@count > 0)
+		end;
 	announce "6時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
-	@spawn(type: BL_MOB, ID: 10877, speed: 170, option: 0, view: 3185, pos: "1@air2.gat"(64, 41), dir: 0, name: "ワイバーンキッド")
-	@spawn(type: BL_MOB, ID: 10303, speed: 170, option: 0, view: 3185, pos: "1@air2.gat"(65, 40), dir: 0, name: "ワイバーンキッド")
-	@spawn(type: BL_MOB, ID: 11604, speed: 140, option: 0, view: 3184, pos: "1@air2.gat"(62, 37), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 11180, speed: 140, option: 0, view: 3184, pos: "1@air2.gat"(61, 36), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 11060, speed: 170, option: 0, view: 3185, pos: "1@air2.gat"(69, 35), dir: 0, name: "ワイバーンキッド")
-	@spawn(type: BL_MOB, ID: 11577, speed: 140, option: 0, view: 3184, pos: "1@air2.gat"(61, 35), dir: 0, name: "スカイビホルダー")
+	areamonster getmdmapname("1@air1.gat"),60,35,70,45,"ワイバーンキッド",3185,3,getmdnpcname("mob#air3")+ "::OnKilled2";
+	areamonster getmdmapname("1@air1.gat"),60,35,70,45,"スカイビホルダー",3184,3,getmdnpcname("mob#air3")+ "::OnKilled2";
+	end;
 OnKilled2
+	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air3")+ "::OnKilled2");
+	if('@count > 0)
+		end;
 	announce "9時方向に敵の気配を感じた!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
-	@spawn(type: BL_MOB, ID: 8754, speed: 140, option: 0, view: 3184, pos: "1@air2.gat"(27, 67), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 8627, speed: 170, option: 0, view: 3185, pos: "1@air2.gat"(25, 63), dir: 0, name: "ワイバーンキッド")
-	@spawn(type: BL_MOB, ID: 8700, speed: 140, option: 0, view: 3184, pos: "1@air2.gat"(25, 62), dir: 0, name: "スカイビホルダー")
-	@spawn(type: BL_MOB, ID: 3355, speed: 170, option: 0, view: 3185, pos: "1@air2.gat"(24, 61), dir: 0, name: "ワイバーンキッド")
-	@spawn(type: BL_MOB, ID: 8686, speed: 170, option: 0, view: 3185, pos: "1@air2.gat"(22, 63), dir: 0, name: "ワイバーンキッド")
-	@spawn(type: BL_MOB, ID: 8830, speed: 140, option: 0, view: 3184, pos: "1@air2.gat"(20, 63), dir: 0, name: "スカイビホルダー")
+	areamonster getmdmapname("1@air1.gat"),20,60,30,70,"ワイバーンキッド",3185,3,getmdnpcname("mob#air3")+ "::OnKilled3";
+	areamonster getmdmapname("1@air1.gat"),20,60,30,70,"スカイビホルダー",3184,3,getmdnpcname("mob#air3")+ "::OnKilled3";
+	end;
 OnKilled3
+	set '@count,getmapmobs(getmdmapname("1@air1.gat"),getmdnpcname("mob#air3")+ "::OnKilled3");
+	if('@count > 0)
+		end;
 	announce "この階にはもうモンスターの気配がないようだ。デッキまで上がろう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
 	hideoffnpc getmdnpcname("warp4a#air2"); //85332
 	end;
@@ -1418,7 +1411,65 @@ OnEff1:
 	end;
 }
 1@air2.gat,232,51,5	script	アイリス#2air2	666,{/* 85375 (hide)*/
-	//TODO: flag
+	if(checkquest(120200)&8) {
+		mes "‐アイリスがスカイグレムリンと";
+		mes "　戦っている‐";
+		next;
+		if(select("先を急ぐ","話を聞く") == 1) {
+			mes "‐船長が暴れているようだ。";
+			mes "　どうしようか……‐";
+			while(1) {
+				next;
+				switch(select("離れて落ち着くのを待つ",
+							"^0000ff説得する(戦闘なし)^000000",
+							"^ff0000怒りの船長と戦闘！^000000(難易度：^0000ff低^000000)",
+							"^ff0000暴走した船長と戦闘！^000000(難易度：^ff0000高^000000)"
+				)) {
+				case 1:
+					mes "‐船長は暴れ続けている。";
+					mes "　どうしようか……‐";
+					continue;
+				case 2:
+					mes "‐あなたは船長に呼びかけ、";
+					mes "　説得を試みた。";
+					mes "　船長は我に返り、攻撃の手を止めた‐";
+					close2;
+					set HEROAIR_1QUE,4;
+					hideonnpc getmdnpcname("船長ペルロック#air2"); //85384
+					hideonnpc getmdnpcname("アイリス#2air2"); //85375
+					hideonnpc getmdnpcname("スカイグレムリン#1air2"); //99361
+					hideonnpc getmdnpcname("スカイグレムリン#2air2"); //99362
+					hideonnpc getmdnpcname("スカイグレムリン#3air2"); //99363
+					hideonnpc getmdnpcname("スカイグレムリン#4air2"); //85394
+					hideonnpc getmdnpcname("スカイグレムリン#5air2"); //85395
+					hideonnpc getmdnpcname("スカイグレムリン#6air2"); //85396
+					hideonnpc getmdnpcname("スカイグレムリン#7air2"); //85397
+					hideonnpc getmdnpcname("スカイグレムリン#8air2"); //85398
+					hideoffnpc getmdnpcname("ケイオス#air2"); //92826
+					hideoffnpc getmdnpcname("船長ペルロック#2air2"); //99360
+					end;
+				case 3:
+					mes "‐あなたは武器を構え、";
+					mes "　怒りの船長へ向かって行った！‐";
+					close2;
+					set HEROAIR_1QUE,5;
+					cutin "h_iris01.bmp", 255;
+					donpcevent getmdnpcname("アイリス#2air2")+ "::OnStart";
+					donpcevent getmdnpcname("callboss#air")+ "::OnStart1";
+					end;
+				case 4:
+					mes "‐あなたは武器を構え、";
+					mes "　暴走した船長へ向かって行った！‐";
+					close2;
+					set HEROAIR_1QUE,6;
+					cutin "h_iris01.bmp", 255;
+					donpcevent getmdnpcname("アイリス#2air2")+ "::OnStart";
+					donpcevent getmdnpcname("callboss#air")+ "::OnStart2";
+					end;
+				}
+			}
+		}
+	}
 	mes "[スカイグレムリン]";
 	mes "キイイイッ……";
 	mes "クワアアアア～ッ!!";
@@ -1517,38 +1568,73 @@ OnEff1:
 	mes "死なない程度に衝撃を与えれば";
 	mes "正気に戻るかも……。";
 	mes "飛行船が壊れる前に、お願い！";
-	next;
-	switch(select("離れて落ち着くのを待つ",
-				"^0000ff説得する(戦闘なし)^000000",
-				"^ff0000怒りの船長と戦闘！^000000(難易度：^0000ff低^000000)",
-				"^ff0000暴走した船長と戦闘！^000000(難易度：^ff0000高^000000)"
-	)) {
-	case 1:
-	case 2:
-	case 3:
-	case 4:
-		mes "‐あなたは武器を構え、";
-		mes "　暴走した船長へ向かって行った！‐";
-		close2;
-		cutin "h_iris01.bmp", 255;
-		donpcevent getmdnpcname("アイリス#2air2")+ "::OnStart";
-		donpcevent getmdnpcname("callboss#air")+ "::OnStart2";
-		end;
+	while(1) {
+		next;
+		switch(select("離れて落ち着くのを待つ",
+					"^0000ff説得する(戦闘なし)^000000",
+					"^ff0000怒りの船長と戦闘！^000000(難易度：^0000ff低^000000)",
+					"^ff0000暴走した船長と戦闘！^000000(難易度：^ff0000高^000000)"
+		)) {
+		case 1:
+			mes "‐船長は暴れ続けている。";
+			mes "　どうしようか……‐";
+			continue;
+		case 2:
+			mes "‐あなたは船長に呼びかけ、";
+			mes "　説得を試みた。";
+			mes "　船長は我に返り、攻撃の手を止めた‐";
+			close2;
+			set HEROAIR_1QUE,4;
+			hideonnpc getmdnpcname("船長ペルロック#air2"); //85384
+			hideonnpc getmdnpcname("アイリス#2air2"); //85375
+			hideonnpc getmdnpcname("スカイグレムリン#1air2"); //99361
+			hideonnpc getmdnpcname("スカイグレムリン#2air2"); //99362
+			hideonnpc getmdnpcname("スカイグレムリン#3air2"); //99363
+			hideonnpc getmdnpcname("スカイグレムリン#4air2"); //85394
+			hideonnpc getmdnpcname("スカイグレムリン#5air2"); //85395
+			hideonnpc getmdnpcname("スカイグレムリン#6air2"); //85396
+			hideonnpc getmdnpcname("スカイグレムリン#7air2"); //85397
+			hideonnpc getmdnpcname("スカイグレムリン#8air2"); //85398
+			hideoffnpc getmdnpcname("ケイオス#air2"); //92826
+			hideoffnpc getmdnpcname("船長ペルロック#2air2"); //99360
+			end;
+		case 3:
+			mes "‐あなたは武器を構え、";
+			mes "　怒りの船長へ向かって行った！‐";
+			close2;
+			set HEROAIR_1QUE,5;
+			cutin "h_iris01.bmp", 255;
+			donpcevent getmdnpcname("アイリス#2air2")+ "::OnStart";
+			donpcevent getmdnpcname("callboss#air")+ "::OnStart1";
+			end;
+		case 4:
+			mes "‐あなたは武器を構え、";
+			mes "　暴走した船長へ向かって行った！‐";
+			close2;
+			set HEROAIR_1QUE,6;
+			cutin "h_iris01.bmp", 255;
+			donpcevent getmdnpcname("アイリス#2air2")+ "::OnStart";
+			donpcevent getmdnpcname("callboss#air")+ "::OnStart2";
+			end;
+		}
 	}
 OnStart:
 	hideonnpc getmdnpcname("船長ペルロック#air2"); //85384
 	hideonnpc getmdnpcname("アイリス#2air2"); //85375
+	hideonnpc getmdnpcname("スカイグレムリン#1air2"); //99361
+	hideonnpc getmdnpcname("スカイグレムリン#2air2"); //99362
+	hideonnpc getmdnpcname("スカイグレムリン#3air2"); //99363
 	hideonnpc getmdnpcname("スカイグレムリン#4air2"); //85394
-	hideonnpc getmdnpcname(スカイグレムリン#5air2"); //85395
+	hideonnpc getmdnpcname("スカイグレムリン#5air2"); //85395
 	hideonnpc getmdnpcname("スカイグレムリン#6air2"); //85396
 	hideonnpc getmdnpcname("スカイグレムリン#7air2"); //85397
 	hideonnpc getmdnpcname("スカイグレムリン#8air2"); //85398
 	end;
 }
 
-1@air1.gat,1,1,0	script	mob#air4	139,{
+1@air2.gat,1,1,0	script	mob#air4	139,{
 OnStart:
-	@spawn(type: BL_MOB, ID: 3635, speed: 150, option: 0, view: 3187, pos: "1@air2.gat"(235, 49), dir: 0, name: "ワイバーン")
+	monster getmdmapname("1@air2.gat"),235,49,"ワイバーン",3187,1,getmdnpcname("mob#air4")+ "::OnKilled";
 	end;
 OnKilled:
 	hideoffnpc getmdnpcname("アイリス#2air2"); //85375
@@ -1564,10 +1650,13 @@ OnKilled:
 	end;
 }
 
-1@air1.gat,1,1,0	script	callboss#air	139,{
+1@air2.gat,1,1,0	script	callboss#air	139,{
 OnStart1:
+	monster getmdmapname("1@air2.gat"),247,51,"怒りの船長ペルロック",3188,1,getmdnpcname("callboss#air")+ "::OnKilled";
+	end;
 OnStart2:
-	@spawn(type: BL_MOB, ID: 4936, speed: 130, option: 0, view: 3181, pos: "1@air2.gat"(247, 51), dir: 0, name: "暴走した船長ペルロック")
+	monster getmdmapname("1@air2.gat"),247,51,"暴走した船長ペルロック",3181,1,getmdnpcname("callboss#air")+ "::OnKilled";
+	end;
 OnKilled:
 	hideoffnpc getmdnpcname("ケイオス#air2"); //85381
 	hideoffnpc getmdnpcname("船長ペルロック#2air2"); //85380
@@ -1594,416 +1683,590 @@ OnKilled:
 	end;
 }
 1@air2.gat,239,58,5	script	ケイオス#air2	683,{/* 85381 (hide)*/
-	//TODO: flag
-	switch(HEROAIR_1QUE) {
-	case 4:
-		cutin "fly_felrock2.bmp", 2;
-		mes "[船長ペルロック]";
-		mes "クッ、無駄に撃ち過ぎてしまった。";
-		mes "おかげでスカイグレムリンが";
-		mes "かなり消えたようだけどな。";
-		mes "フフフフフフ……。";
-		next;
-		cutin "h_iris01.bmp", 2;
-		mes "[アイリス]";
-		mes "ちょっと!!";
-		mes "大体は船長のせいで";
-		mes "船が壊れたのよ!?";
-		next;
-		cutin "h_arcana02.bmp", 2;
-		mes "[アルカナ]";
-		mes "私の代わりに船を壊してくれて";
-		mes "助かりました。";
-		mes "ふむ、まあ……";
-		mes "このくらいでいいでしょう。";
-		next;
-		mes "[アルカナ]";
-		mes "それでは、私たちはこの辺で。";
-		next;
-		cutin "h_guardian1.bmp", 1;
-		mes "[ラクシュミー]";
-		mes "あら……。";
-		mes "ねえ、バサラ。";
-		mes "あの人たち、";
-		mes "撤収するみたいですわよ？";
-		next;
-		mes "[バサラ]";
-		mes "ふーん。";
-		mes "奴らやっと私たちの実力に";
-		mes "気が付いたようね!!";
-		mes "おほほほほ!!";
-		next;
-		mes "[シヴァ]";
-		mes "それじゃあ……";
-		mes "最後の風魔手裏剣ってな!!";
-		next;
-		cutin "fly_felrock2.bmp", 255;
-		mes "‐シュッ！　カカカカッ！";
-		mes "　";
-		mes "　シヴァの投げた風魔手裏剣は";
-		mes "　フェンリルの居た足場を、";
-		mes "　崩壊させた!!‐";
-		next;
-		misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
-		misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
-		misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
-		cutin "fenrir_b.bmp", 2;
-		mes "[フェンリル]";
-		mes "……!!";
-		next;
-		mes "[フェンリル]";
-		mes "くっ……！　落ちるッ!!";
-		mes "あと少しなのに手が……";
-		mes "届かない……!!";
-		next;
-		mes "[フェンリル]";
-		mes "……ここで終わってしまうの？";
-		mes "あの時のように……";
-		mes "また届かない場所に";
-		mes "いってしまうの……？";
-		mes "…ケイオス……。";
-		next;
-		cutin "ep14_roki02.bmp", 2;
-		mes "[ロキ]";
-		mes "……世話が焼ける。";
-		next;
-		cutin "ep14_roki02.bmp", 255;
-		mes "‐足場が崩れ、";
-		mes "　空中に投げ出されたフェンリルの手を";
-		mes "　ロキがつかんだ‐";
-		next;
-		cutin "fenrir_b.bmp", 2;
-		mes "[フェンリル]";
-		mes "ロ……キ……？";
-		next;
-		cutin "ep14_roki02.bmp", 2;
-		mes "[ロキ]";
-		mes "何をしている。さあ、早く登れ。";
-		next;
-		cutin "fly_felrock2.bmp", 255;
-		mes "[飛行船乗務員]";
-		mes "直にこの船は墜落します！";
-		mes "幸い、墜落まで、猶予がありますので";
-		mes "落ち着いて脱出してください!!";
-		next;
-		cutin "fly_felrock2.bmp", 2;
-		mes "[船長ペルロック]";
-		mes "あいつら！　覚えてろよ!!";
-		mes "みんな、救命艇に搭乗するんだ！";
-		mes "乗客を最優先だ!!";
-		mes "搭乗が完了した救命艇は";
-		mes "船から出発させろ!!";
-		next;
-		cutin "fly_felrock2.bmp", 255;
-		mes "[飛行船乗務員]";
-		mes "はい、船長!!";
-		mes "さあ乗客のみなさん、こちらです！";
-		mes "救命艇へ移動してください！";
-		next;
-		cutin "h_chaos01.bmp", 2;
-		mes "[ケイオス]";
-		mes "これが本当の";
-		mes "乗りかかった船ってヤツか？";
-		mes "モンスターは俺たちが何とかする！";
-		mes "みんな慌てず、";
-		mes "落ち着いて移動してくれよ！";
-		next;
-		cutin "h_guardian1.bmp", 1;
-		mes "[バサラ]";
-		mes "私たちもスカイグレムリンの";
-		mes "相手をしている場合じゃないな。";
-		next;
-		mes "[バサラ]";
-		mes "さらに大きな悪の波動を感じる。";
-		mes "後はこいつらに任せる事にしよう。";
-		mes "みんな行くぞ！";
-		next;
-		mes "[ラクシュミー＆シヴァ]";
-		mes "了解!!　レンジャー飛行形態!!";
-		next;
-		cutin "h_iris01.bmp", 2;
-		mes "[アイリス]";
-		mes "ちょ……ちょっと!!";
-		mes "あんたたち船をこんな状態にして";
-		mes "逃げる気なの!?";
-		next;
-		mes "[アイリス]";
-		mes "次にどこかで会ったら本気で";
-		mes "許さないから覚悟しときなさいよ!?";
-		mes "この田舎者の英雄気取りっ!!";
-		next;
-		cutin "h_guardian3.bmp", 1;
-		mes "[ガーディアンヒロインズ]";
-		mes "……田舎者の英雄気取り……？";
-		next;
-		mes "[ガーディアンヒロインズ]";
-		mes "正義の道をけなす者に……";
-		mes "私たちは正義の審判を";
-		mes "下さなければ、いけないようね。";
-		next;
-		mes "[ガーディアンヒロインズ]";
-		mes "悪党め!!　くらえ風魔手裏剣!!";
-		next;
-		cutin "h_iris01.bmp", 255;
-		mes "‐シュッ！　カカカカッ！";
-		mes "　";
-		mes "　ガーディアンヒロインズの";
-		mes "　投げた風魔手裏剣はアイリスの";
-		mes "　足場を崩壊させた!!‐";
-		next;
-		misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
-		misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
-		misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
-		cutin "h_iris01.bmp", 2;
-		mes "[アイリス]";
-		mes "きゃあああああ!!";
-		next;
-		cutin "h_guardian1.bmp", 1;
-		mes "[ガーディアンヒロインズ]";
-		mes "あははははははははっ!!";
-		mes "ざまあみろ!!　行くよ!!";
-		next;
-		cutin "h_iris01.bmp", 2;
-		mes "[アイリス]";
-		mes "あ～い～つ～ら～!!";
-		mes "なんてヤツらなのっ！";
-		next;
-		cutin "h_chaos02.bmp", 2;
-		mes "[ケイオス]";
-		mes "アイリス!!　こっちに来い!!";
-		mes "早くここを片付けて、";
-		mes "俺たちも脱出するぞ！";
-		next;
-		cutin "h_iris02.bmp", 2;
-		mes "[アイリス]";
-		mes "確か、こういう時は";
-		mes "「おかし」が大事なんだよね！";
-		next;
-		cutin "h_chaos02.bmp", 2;
-		mes "[ケイオス]";
-		mes "……お菓子？";
-		mes "今は別に腹は空いてないぞ？";
-		next;
-		cutin "h_iris02.bmp", 2;
-		mes "[アイリス]";
-		mes "お菓子じゃなくて「おかし」！";
-		mes "避難をする時に大事な行動の";
-		mes "おさない、かけない、しゃべらない！";
-		mes "３つの頭文字を取った言葉だよ。";
-		mes "小さい頃に教わらなかった？";
-		next;
-		cutin "h_chaos02.bmp", 2;
-		mes "[ケイオス]";
-		mes "それなら……";
-		mes "おさない、はしらない、しゃべらない";
-		mes "で、「おはし」じゃなかったか？";
-		next;
-		cutin "fly_felrock2.bmp", 2;
-		mes "[船長ペルロック]";
-		mes "名前なんてどちらでも良い！";
-		mes "くだらない事を話す暇があるなら";
-		mes "脱出するんだ！";
-		next;
-		cutin "h_chaos02.bmp", 2;
-		mes "[ケイオス]";
-		mes "わ、悪かった……。";
-		next;
-		cutin "fly_felrock2.bmp", 2;
-		mes "[船長ペルロック]";
-		mes "そこの君はちょっと待ってくれ。";
-		mes "君には助けられてしまったからな。";
-		mes "心ばかりだが礼をさせてくれ。";
-		next;
-		mes "[船長ペルロック]";
-		mes "いくつか用意したのだが、";
-		mes "どれがいいかね？";
-		mes "一つ選んでくれ。";
-		while(1) {
+	if(HEROAIR_1QUE >= 4 && HEROAIR_1QUE <= 6) {
+		if(checkquest(120200)&8) {
+			mes "‐船長は正気を取り戻したようで";
+			mes "　ケイオスと話をしている‐";
 			next;
-			switch(select("ペルロックのスーツ","ペルロックのマント","ペルロックのブーツ")) {
-			case 1:
-				cutin "fly_felrock2.bmp", 255;
-				mes "^ff0000ペルロックのスーツ^000000";
-				mes "Mdef + 10";
-				mes "―――――――――――――";
-				mes "MaxHP + 500";
-				mes "―――――――――――――";
-				mes "[ペルロックのブーツ]、";
-				mes "[ペルロックのマント]と";
-				mes "共に装備時、追加で";
-				mes "Def + 200 , Mdef + 20";
-				mes "MaxHP + 500 , MaxSP + 50";
-				mes "[ペルロックのスーツ]、";
-				mes "[ペルロックのブーツ]、";
-				mes "[ペルロックのマント]の";
-				mes "精錬値合計が15以上の時、";
-				mes "追加で";
-				mes "MaxHP + 1000";
-				mes "MaxSP + 30";
-				mes "精錬値合計が20以上の時、";
-				mes "追加で";
-				mes "MaxHP + 1500";
-				mes "MaxSP + 100";
-				mes "精錬値合計が25以上の時、";
-				mes "追加で";
-				mes "MaxHP + 2000";
-				mes "MaxSP + 200";
-				mes "―――――――――――――";
-				mes "精錬不可";
-				mes "―――――――――――――";
-				mes "^ff0000[ペルロックのスーツ]は";
-				mes "NPC「道楽裁縫師」でのみ";
-				mes "精錬が可能です。^000000";
-				mes "―――――――――――――";
-				mes "^ff0000[ペルロックのスーツ]は";
-				mes "NPC売却・倉庫への";
-				mes "移動が可能です。^000000";
-				mes "―――――――――――――";
-				mes "系列 : ^777777鎧^000000";
-				mes "防御 : ^7777770^000000";
-				mes "重量 : ^777777100^000000";
-				mes "要求レベル : ^77777750^000000";
-				mes "装備 : ^777777全ての職業^000000";
-				set '@gain,15158;
-				break;
-			case 2:
-				cutin "fly_felrock2.bmp", 255;
-				mes "^ff0000ペルロックのマント^000000";
-				mes "MaxHP + 300";
-				mes "―――――――――――――";
-				mes "[ペルロックのスーツ]、";
-				mes "[ペルロックのブーツ]と";
-				mes "共に装備時、追加で";
-				mes "Def + 200 , Mdef + 20";
-				mes "MaxHP + 500 , MaxSP + 50";
-				mes "[ペルロックのスーツ]、";
-				mes "[ペルロックのブーツ]、";
-				mes "[ペルロックのマント]の";
-				mes "精錬値合計が15以上の時、";
-				mes "追加で";
-				mes "MaxHP + 1000";
-				mes "MaxSP + 30";
-				mes "精錬値合計が20以上の時、";
-				mes "追加で";
-				mes "MaxHP + 1500";
-				mes "MaxSP + 100";
-				mes "精錬値合計が25以上の時、";
-				mes "追加で";
-				mes "MaxHP + 2000";
-				mes "MaxSP + 200";
-				mes "―――――――――――――";
-				mes "精錬不可";
-				mes "―――――――――――――";
-				mes "^ff0000[ペルロックのマント]は";
-				mes "NPC「道楽裁縫師」でのみ";
-				mes "精錬が可能です。^000000";
-				mes "―――――――――――――";
-				mes "^ff0000[ペルロックのマント]は";
-				mes "NPC売却・倉庫への";
-				mes "移動が可能です。^000000";
-				mes "―――――――――――――";
-				mes "系列 : ^777777肩にかける物^000000";
-				mes "防御 : ^777777100^000000";
-				mes "重量 : ^777777100^000000";
-				mes "要求レベル : ^77777750^000000";
-				mes "装備 : ^777777全ての職業^000000";
-				set '@gain,15158;	//TODO
-				break;
-			case 3:
-				cutin "fly_felrock2.bmp", 255;
-				mes "^ff0000ペルロックのブーツ^000000";
-				mes "MaxHP + 200 , MaxSP + 20";
-				mes "―――――――――――――";
-				mes "[ペルロックのスーツ]、";
-				mes "[ペルロックのマント]と";
-				mes "共に装備時、追加で";
-				mes "Def + 200 , Mdef + 20";
-				mes "MaxHP + 500 , MaxSP + 50";
-				mes "[ペルロックのスーツ]、";
-				mes "[ペルロックのブーツ]、";
-				mes "[ペルロックのマント]の";
-				mes "精錬値合計が15以上の時、";
-				mes "追加で";
-				mes "MaxHP + 1000";
-				mes "MaxSP + 30";
-				mes "精錬値合計が20以上の時、";
-				mes "追加で";
-				mes "MaxHP + 1500";
-				mes "MaxSP + 100";
-				mes "精錬値合計が25以上の時、";
-				mes "追加で";
-				mes "MaxHP + 2000";
-				mes "MaxSP + 200";
-				mes "―――――――――――――";
-				mes "精錬不可";
-				mes "―――――――――――――";
-				mes "^ff0000[ペルロックのブーツ]は";
-				mes "NPC「道楽裁縫師」でのみ";
-				mes "精錬が可能です。^000000";
-				mes "―――――――――――――";
-				mes "^ff0000[ペルロックのブーツ]は";
-				mes "NPC売却・倉庫への";
-				mes "移動が可能です。^000000";
-				mes "―――――――――――――";
-				mes "系列 : ^777777靴^000000";
-				mes "防御 : ^7777770^000000";
-				mes "重量 : ^777777100^000000";
-				mes "要求レベル : ^77777750^000000";
-				mes "装備 : ^777777全ての職業^000000";
-				set '@gain,15158;	//TODO
-				break;
+			if(select("先を急ぐ","話を聞く") == 1) {
+				mes "‐先を急ぐことにした‐";
+				close2;
+				set '@skip,1;
 			}
+		}
+		if('@skip == 0) {
+			cutin "fly_felrock2.bmp", 2;
+			mes "[船長ペルロック]";
+			mes "クッ、無駄に撃ち過ぎてしまった。";
+			mes "おかげでスカイグレムリンが";
+			mes "かなり消えたようだけどな。";
+			mes "フフフフフフ……。";
+			next;
+			cutin "h_iris01.bmp", 2;
+			mes "[アイリス]";
+			mes "ちょっと!!";
+			mes "大体は船長のせいで";
+			mes "船が壊れたのよ!?";
+			next;
+			cutin "h_arcana02.bmp", 2;
+			mes "[アルカナ]";
+			mes "私の代わりに船を壊してくれて";
+			mes "助かりました。";
+			mes "ふむ、まあ……";
+			mes "このくらいでいいでしょう。";
+			next;
+			mes "[アルカナ]";
+			mes "それでは、私たちはこの辺で。";
+			next;
+			cutin "h_guardian1.bmp", 1;
+			mes "[ラクシュミー]";
+			mes "あら……。";
+			mes "ねえ、バサラ。";
+			mes "あの人たち、";
+			mes "撤収するみたいですわよ？";
+			next;
+			mes "[バサラ]";
+			mes "ふーん。";
+			mes "奴らやっと私たちの実力に";
+			mes "気が付いたようね!!";
+			mes "おほほほほ!!";
+			next;
+			mes "[シヴァ]";
+			mes "それじゃあ……";
+			mes "最後の風魔手裏剣ってな!!";
+			next;
+			cutin "fly_felrock2.bmp", 255;
+			mes "‐シュッ！　カカカカッ！";
+			mes "　";
+			mes "　シヴァの投げた風魔手裏剣は";
+			mes "　フェンリルの居た足場を、";
+			mes "　崩壊させた!!‐";
+			next;
+			misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
+			misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
+			misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
+			cutin "fenrir_b.bmp", 2;
+			mes "[フェンリル]";
+			mes "……!!";
+			next;
+			mes "[フェンリル]";
+			mes "くっ……！　落ちるッ!!";
+			mes "あと少しなのに手が……";
+			mes "届かない……!!";
+			next;
+			mes "[フェンリル]";
+			mes "……ここで終わってしまうの？";
+			mes "あの時のように……";
+			mes "また届かない場所に";
+			mes "いってしまうの……？";
+			mes "…ケイオス……。";
+			next;
+			cutin "ep14_roki02.bmp", 2;
+			mes "[ロキ]";
+			mes "……世話が焼ける。";
+			next;
+			cutin "ep14_roki02.bmp", 255;
+			mes "‐足場が崩れ、";
+			mes "　空中に投げ出されたフェンリルの手を";
+			mes "　ロキがつかんだ‐";
+			next;
+			cutin "fenrir_b.bmp", 2;
+			mes "[フェンリル]";
+			mes "ロ……キ……？";
+			next;
+			cutin "ep14_roki02.bmp", 2;
+			mes "[ロキ]";
+			mes "何をしている。さあ、早く登れ。";
+			next;
+			cutin "fly_felrock2.bmp", 255;
+			mes "[飛行船乗務員]";
+			mes "直にこの船は墜落します！";
+			mes "幸い、墜落まで、猶予がありますので";
+			mes "落ち着いて脱出してください!!";
 			next;
 			cutin "fly_felrock2.bmp", 2;
 			mes "[船長ペルロック]";
-			mes "これでいいか？";
+			mes "あいつら！　覚えてろよ!!";
+			mes "みんな、救命艇に搭乗するんだ！";
+			mes "乗客を最優先だ!!";
+			mes "搭乗が完了した救命艇は";
+			mes "船から出発させろ!!";
 			next;
-			if(select("他のアイテムも見てみる","これにする") == 1) {
-				mes "[船長ペルロック]";
-				mes "どれにする？";
-				continue;
-			}
-			break;
+			cutin "fly_felrock2.bmp", 255;
+			mes "[飛行船乗務員]";
+			mes "はい、船長!!";
+			mes "さあ乗客のみなさん、こちらです！";
+			mes "救命艇へ移動してください！";
+			next;
+			cutin "h_chaos01.bmp", 2;
+			mes "[ケイオス]";
+			mes "これが本当の";
+			mes "乗りかかった船ってヤツか？";
+			mes "モンスターは俺たちが何とかする！";
+			mes "みんな慌てず、";
+			mes "落ち着いて移動してくれよ！";
+			next;
+			cutin "h_guardian1.bmp", 1;
+			mes "[バサラ]";
+			mes "私たちもスカイグレムリンの";
+			mes "相手をしている場合じゃないな。";
+			next;
+			mes "[バサラ]";
+			mes "さらに大きな悪の波動を感じる。";
+			mes "後はこいつらに任せる事にしよう。";
+			mes "みんな行くぞ！";
+			next;
+			mes "[ラクシュミー＆シヴァ]";
+			mes "了解!!　レンジャー飛行形態!!";
+			next;
+			cutin "h_iris01.bmp", 2;
+			mes "[アイリス]";
+			mes "ちょ……ちょっと!!";
+			mes "あんたたち船をこんな状態にして";
+			mes "逃げる気なの!?";
+			next;
+			mes "[アイリス]";
+			mes "次にどこかで会ったら本気で";
+			mes "許さないから覚悟しときなさいよ!?";
+			mes "この田舎者の英雄気取りっ!!";
+			next;
+			cutin "h_guardian3.bmp", 1;
+			mes "[ガーディアンヒロインズ]";
+			mes "……田舎者の英雄気取り……？";
+			next;
+			mes "[ガーディアンヒロインズ]";
+			mes "正義の道をけなす者に……";
+			mes "私たちは正義の審判を";
+			mes "下さなければ、いけないようね。";
+			next;
+			mes "[ガーディアンヒロインズ]";
+			mes "悪党め!!　くらえ風魔手裏剣!!";
+			next;
+			cutin "h_iris01.bmp", 255;
+			mes "‐シュッ！　カカカカッ！";
+			mes "　";
+			mes "　ガーディアンヒロインズの";
+			mes "　投げた風魔手裏剣はアイリスの";
+			mes "　足場を崩壊させた!!‐";
+			next;
+			misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
+			misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
+			misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
+			cutin "h_iris01.bmp", 2;
+			mes "[アイリス]";
+			mes "きゃあああああ!!";
+			next;
+			cutin "h_guardian1.bmp", 1;
+			mes "[ガーディアンヒロインズ]";
+			mes "あははははははははっ!!";
+			mes "ざまあみろ!!　行くよ!!";
+			next;
+			cutin "h_iris01.bmp", 2;
+			mes "[アイリス]";
+			mes "あ～い～つ～ら～!!";
+			mes "なんてヤツらなのっ！";
+			next;
+			cutin "h_chaos02.bmp", 2;
+			mes "[ケイオス]";
+			mes "アイリス!!　こっちに来い!!";
+			mes "早くここを片付けて、";
+			mes "俺たちも脱出するぞ！";
+			next;
+			cutin "h_iris02.bmp", 2;
+			mes "[アイリス]";
+			mes "確か、こういう時は";
+			mes "「おかし」が大事なんだよね！";
+			next;
+			cutin "h_chaos02.bmp", 2;
+			mes "[ケイオス]";
+			mes "……お菓子？";
+			mes "今は別に腹は空いてないぞ？";
+			next;
+			cutin "h_iris02.bmp", 2;
+			mes "[アイリス]";
+			mes "お菓子じゃなくて「おかし」！";
+			mes "避難をする時に大事な行動の";
+			mes "おさない、かけない、しゃべらない！";
+			mes "３つの頭文字を取った言葉だよ。";
+			mes "小さい頃に教わらなかった？";
+			next;
+			cutin "h_chaos02.bmp", 2;
+			mes "[ケイオス]";
+			mes "それなら……";
+			mes "おさない、はしらない、しゃべらない";
+			mes "で、「おはし」じゃなかったか？";
+			next;
+			cutin "fly_felrock2.bmp", 2;
+			mes "[船長ペルロック]";
+			mes "名前なんてどちらでも良い！";
+			mes "くだらない事を話す暇があるなら";
+			mes "脱出するんだ！";
+			next;
+			cutin "h_chaos02.bmp", 2;
+			mes "[ケイオス]";
+			mes "わ、悪かった……。";
+			next;
 		}
-		mes "[船長ペルロック]";
-		mes "わかった。";
-		mes "それではこれを渡そう。";
-		next;
-		cutin "h_chaos02.bmp", 2;
-		mes "[ケイオス]";
-		mes "話は済んだか？";
-		mes "船の高度も下がってきている。";
-		mes "俺たちも脱出しよう！";
-		next;
+		if(HEROAIR_1QUE == 5) {
+			cutin "fly_felrock2.bmp", 2;
+			mes "[船長ペルロック]";
+			mes "そこの君はちょっと待ってくれ。";
+			mes "君には助けられてしまったからな。";
+			mes "心ばかりだが礼をさせてくれ。";
+			next;
+			mes "[船長ペルロック]";
+			mes "いくつか用意したのだが、";
+			mes "どれがいいかね？";
+			mes "一つ選んでくれ。";
+			while(1) {
+				next;
+				switch(select("飛行船スーツ","飛行船マント","飛行船ブーツ")) {
+				case 1:
+					cutin "fly_felrock2.bmp", 255;
+					mes "^0000FF飛行船スーツ^000000";
+					mes "Mdef + 10";
+					mes "―――――――――――――";
+					mes "MaxHP + 500";
+					mes "―――――――――――――";
+					mes "[飛行船ブーツ]、";
+					mes "[飛行船マント]と";
+					mes "共に装備時、追加で";
+					mes "Def + 200 , Mdef + 20";
+					mes "MaxHP + 500 , MaxSP + 50";
+					mes "[飛行船スーツ]、";
+					mes "[飛行船ブーツ]、";
+					mes "[飛行船マント]の";
+					mes "精錬値合計が15以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1000";
+					mes "MaxSP + 30";
+					mes "精錬値合計が20以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1500";
+					mes "MaxSP + 100";
+					mes "精錬値合計が25以上の時、";
+					mes "追加で";
+					mes "MaxHP + 2000";
+					mes "MaxSP + 200";
+					mes "―――――――――――――";
+					mes "精錬不可";
+					mes "―――――――――――――";
+					mes "^ff0000[飛行船スーツ]は";
+					mes "NPC「道楽裁縫師」でのみ";
+					mes "精錬が可能です。^000000";
+					mes "―――――――――――――";
+					mes "^ff0000[飛行船スーツ]は";
+					mes "NPC売却・倉庫への";
+					mes "移動が可能です。^000000";
+					mes "―――――――――――――";
+					mes "系列 : ^777777鎧^000000";
+					mes "防御 : ^7777770^000000";
+					mes "重量 : ^777777100^000000";
+					mes "要求レベル : ^77777750^000000";
+					mes "装備 : ^777777全ての職業^000000";
+					set '@gain,15158;
+					break;
+				case 2:
+					cutin "fly_felrock2.bmp", 255;
+					mes "^0000FF飛行船マント^000000";
+					mes "MaxHP + 300";
+					mes "―――――――――――――";
+					mes "[飛行船スーツ]、";
+					mes "[飛行船ブーツ]と";
+					mes "共に装備時、追加で";
+					mes "Def + 200 , Mdef + 20";
+					mes "MaxHP + 500 , MaxSP + 50";
+					mes "[飛行船スーツ]、";
+					mes "[飛行船ブーツ]、";
+					mes "[飛行船マント]の";
+					mes "精錬値合計が15以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1000";
+					mes "MaxSP + 30";
+					mes "精錬値合計が20以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1500";
+					mes "MaxSP + 100";
+					mes "精錬値合計が25以上の時、";
+					mes "追加で";
+					mes "MaxHP + 2000";
+					mes "MaxSP + 200";
+					mes "―――――――――――――";
+					mes "精錬不可";
+					mes "―――――――――――――";
+					mes "^ff0000[飛行船マント]は";
+					mes "NPC「道楽裁縫師」でのみ";
+					mes "精錬が可能です。^000000";
+					mes "―――――――――――――";
+					mes "^ff0000[飛行船マント]は";
+					mes "NPC売却・倉庫への";
+					mes "移動が可能です。^000000";
+					mes "―――――――――――――";
+					mes "系列 : ^777777肩にかける物^000000";
+					mes "防御 : ^777777100^000000";
+					mes "重量 : ^777777100^000000";
+					mes "要求レベル : ^77777750^000000";
+					mes "装備 : ^777777全ての職業^000000";
+					set '@gain,15158;	//TODO
+					break;
+				case 3:
+					cutin "fly_felrock2.bmp", 255;
+					mes "^0000FF飛行船ブーツ^000000";
+					mes "MaxHP + 200 , MaxSP + 20";
+					mes "―――――――――――――";
+					mes "[飛行船スーツ]、";
+					mes "[飛行船マント]と";
+					mes "共に装備時、追加で";
+					mes "Def + 200 , Mdef + 20";
+					mes "MaxHP + 500 , MaxSP + 50";
+					mes "[飛行船スーツ]、";
+					mes "[飛行船ブーツ]、";
+					mes "[飛行船マント]の";
+					mes "精錬値合計が15以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1000";
+					mes "MaxSP + 30";
+					mes "精錬値合計が20以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1500";
+					mes "MaxSP + 100";
+					mes "精錬値合計が25以上の時、";
+					mes "追加で";
+					mes "MaxHP + 2000";
+					mes "MaxSP + 200";
+					mes "―――――――――――――";
+					mes "精錬不可";
+					mes "―――――――――――――";
+					mes "^ff0000[飛行船ブーツ]は";
+					mes "NPC「道楽裁縫師」でのみ";
+					mes "精錬が可能です。^000000";
+					mes "―――――――――――――";
+					mes "^ff0000[飛行船ブーツ]は";
+					mes "NPC売却・倉庫への";
+					mes "移動が可能です。^000000";
+					mes "―――――――――――――";
+					mes "系列 : ^777777靴^000000";
+					mes "防御 : ^7777770^000000";
+					mes "重量 : ^777777100^000000";
+					mes "要求レベル : ^77777750^000000";
+					mes "装備 : ^777777全ての職業^000000";
+					set '@gain,15158;	//TODO
+					break;
+				}
+				next;
+				cutin "fly_felrock2.bmp", 2;
+				mes "[船長ペルロック]";
+				mes "これでいいか？";
+				next;
+				if(select("他のアイテムも見てみる","これにする") == 1) {
+					mes "[船長ペルロック]";
+					mes "どれにする？";
+					continue;
+				}
+				break;
+			}
+			mes "[船長ペルロック]";
+			mes "わかった。";
+			mes "それではこれを渡そう。";
+			next;
+			cutin "h_chaos02.bmp", 2;
+			mes "[ケイオス]";
+			mes "話は済んだか？";
+			mes "船の高度も下がってきている。";
+			mes "俺たちも脱出しよう！";
+			next;
+		}
+		else if(HEROAIR_1QUE == 6) {
+			cutin "fly_felrock2.bmp", 2;
+			mes "[船長ペルロック]";
+			mes "そこの君はちょっと待ってくれ。";
+			mes "君には助けられてしまったからな。";
+			mes "心ばかりだが礼をさせてくれ。";
+			next;
+			mes "[船長ペルロック]";
+			mes "いくつか用意したのだが、";
+			mes "どれがいいかね？";
+			mes "一つ選んでくれ。";
+			while(1) {
+				next;
+				switch(select("ペルロックのスーツ","ペルロックのマント","ペルロックのブーツ")) {
+				case 1:
+					cutin "fly_felrock2.bmp", 255;
+					mes "^ff0000ペルロックのスーツ^000000";
+					mes "Mdef + 10";
+					mes "―――――――――――――";
+					mes "MaxHP + 500";
+					mes "―――――――――――――";
+					mes "[ペルロックのブーツ]、";
+					mes "[ペルロックのマント]と";
+					mes "共に装備時、追加で";
+					mes "Def + 200 , Mdef + 20";
+					mes "MaxHP + 500 , MaxSP + 50";
+					mes "[ペルロックのスーツ]、";
+					mes "[ペルロックのブーツ]、";
+					mes "[ペルロックのマント]の";
+					mes "精錬値合計が15以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1000";
+					mes "MaxSP + 30";
+					mes "精錬値合計が20以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1500";
+					mes "MaxSP + 100";
+					mes "精錬値合計が25以上の時、";
+					mes "追加で";
+					mes "MaxHP + 2000";
+					mes "MaxSP + 200";
+					mes "―――――――――――――";
+					mes "精錬不可";
+					mes "―――――――――――――";
+					mes "^ff0000[ペルロックのスーツ]は";
+					mes "NPC「道楽裁縫師」でのみ";
+					mes "精錬が可能です。^000000";
+					mes "―――――――――――――";
+					mes "^ff0000[ペルロックのスーツ]は";
+					mes "NPC売却・倉庫への";
+					mes "移動が可能です。^000000";
+					mes "―――――――――――――";
+					mes "系列 : ^777777鎧^000000";
+					mes "防御 : ^7777770^000000";
+					mes "重量 : ^777777100^000000";
+					mes "要求レベル : ^77777750^000000";
+					mes "装備 : ^777777全ての職業^000000";
+					set '@gain,15158;
+					break;
+				case 2:
+					cutin "fly_felrock2.bmp", 255;
+					mes "^ff0000ペルロックのマント^000000";
+					mes "MaxHP + 300";
+					mes "―――――――――――――";
+					mes "[ペルロックのスーツ]、";
+					mes "[ペルロックのブーツ]と";
+					mes "共に装備時、追加で";
+					mes "Def + 200 , Mdef + 20";
+					mes "MaxHP + 500 , MaxSP + 50";
+					mes "[ペルロックのスーツ]、";
+					mes "[ペルロックのブーツ]、";
+					mes "[ペルロックのマント]の";
+					mes "精錬値合計が15以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1000";
+					mes "MaxSP + 30";
+					mes "精錬値合計が20以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1500";
+					mes "MaxSP + 100";
+					mes "精錬値合計が25以上の時、";
+					mes "追加で";
+					mes "MaxHP + 2000";
+					mes "MaxSP + 200";
+					mes "―――――――――――――";
+					mes "精錬不可";
+					mes "―――――――――――――";
+					mes "^ff0000[ペルロックのマント]は";
+					mes "NPC「道楽裁縫師」でのみ";
+					mes "精錬が可能です。^000000";
+					mes "―――――――――――――";
+					mes "^ff0000[ペルロックのマント]は";
+					mes "NPC売却・倉庫への";
+					mes "移動が可能です。^000000";
+					mes "―――――――――――――";
+					mes "系列 : ^777777肩にかける物^000000";
+					mes "防御 : ^777777100^000000";
+					mes "重量 : ^777777100^000000";
+					mes "要求レベル : ^77777750^000000";
+					mes "装備 : ^777777全ての職業^000000";
+					set '@gain,15158;	//TODO
+					break;
+				case 3:
+					cutin "fly_felrock2.bmp", 255;
+					mes "^ff0000ペルロックのブーツ^000000";
+					mes "MaxHP + 200 , MaxSP + 20";
+					mes "―――――――――――――";
+					mes "[ペルロックのスーツ]、";
+					mes "[ペルロックのマント]と";
+					mes "共に装備時、追加で";
+					mes "Def + 200 , Mdef + 20";
+					mes "MaxHP + 500 , MaxSP + 50";
+					mes "[ペルロックのスーツ]、";
+					mes "[ペルロックのブーツ]、";
+					mes "[ペルロックのマント]の";
+					mes "精錬値合計が15以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1000";
+					mes "MaxSP + 30";
+					mes "精錬値合計が20以上の時、";
+					mes "追加で";
+					mes "MaxHP + 1500";
+					mes "MaxSP + 100";
+					mes "精錬値合計が25以上の時、";
+					mes "追加で";
+					mes "MaxHP + 2000";
+					mes "MaxSP + 200";
+					mes "―――――――――――――";
+					mes "精錬不可";
+					mes "―――――――――――――";
+					mes "^ff0000[ペルロックのブーツ]は";
+					mes "NPC「道楽裁縫師」でのみ";
+					mes "精錬が可能です。^000000";
+					mes "―――――――――――――";
+					mes "^ff0000[ペルロックのブーツ]は";
+					mes "NPC売却・倉庫への";
+					mes "移動が可能です。^000000";
+					mes "―――――――――――――";
+					mes "系列 : ^777777靴^000000";
+					mes "防御 : ^7777770^000000";
+					mes "重量 : ^777777100^000000";
+					mes "要求レベル : ^77777750^000000";
+					mes "装備 : ^777777全ての職業^000000";
+					set '@gain,15158;	//TODO
+					break;
+				}
+				next;
+				cutin "fly_felrock2.bmp", 2;
+				mes "[船長ペルロック]";
+				mes "これでいいか？";
+				next;
+				if(select("他のアイテムも見てみる","これにする") == 1) {
+					mes "[船長ペルロック]";
+					mes "どれにする？";
+					continue;
+				}
+				break;
+			}
+			mes "[船長ペルロック]";
+			mes "わかった。";
+			mes "それではこれを渡そう。";
+			next;
+			cutin "h_chaos02.bmp", 2;
+			mes "[ケイオス]";
+			mes "話は済んだか？";
+			mes "船の高度も下がってきている。";
+			mes "俺たちも脱出しよう！";
+			next;
+		}
 		cutin "h_chaos02.bmp", 2;
 		mes "[ケイオス]";
 		mes "あんたは先に脱出してくれ！";
 		mes "俺たちもここを片付けたら";
 		mes "すぐ脱出する！";
 		hideoffnpc getmdnpcname("warp5a#air2"); //85382
-		getexp 100000,0,1;
-		getexp 100000,0,1;
-		getexp 100000,0,1;
-		getexp 100000,0,1;
-		getexp 100000,0,1;
-		getexp 100000,0,1;
-		getexp 100000,0,1;
-		getexp 100000,0,1;
-		getexp 100000,0,1;
-		getexp 100000,0,1;
-		getexp 0,50000,0;
-		getexp 0,50000,0;
-		getexp 0,50000,0;
-		getexp 0,50000,0;
-		getexp 0,50000,0;
-		getexp 0,50000,0;
-		getexp 0,50000,0;
-		getexp 0,50000,0;
-		getexp 0,50000,0;
-		getexp 0,50000,0;
+		if(HEROAIR_1QUE == 5)
+			set '@num,5;
+		else if(HEROAIR_1QUE == 6)
+			set '@num,10;
+		else
+			set '@num,3;
+		for(set '@i,0;'@i<'@num;set '@i,'@i+1)
+			getexp 100000,0,1;
+		for(set '@i,0;'@i<'@num;set '@i,'@i+1)
+			getexp 0,50000,0;
 		getitem '@gain, 1;
-		setquest 120200;
-		compquest 120200;
+		set HEROAIR_1QUE,7;
+		if(!checkquest(120200)) {
+			setquest 120200;
+			compquest 120200;
+		}
 		close2;
 		cutin "h_chaos02.bmp", 255;
 		end;

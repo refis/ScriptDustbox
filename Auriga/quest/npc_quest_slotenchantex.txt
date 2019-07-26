@@ -165,7 +165,7 @@ prontera.gat,110,191,4	script	エヴォルツィオーネ#prt2	893,{/* 51220 */}
 		mes "特別に許そう♪";
 		close;
 	}
-	if(MaxWeight - Weight > 50) {	// 50以上98以下の空きが必要(要検証)
+	if(MaxWeight - Weight < 50) {	// 50以上98以下の空きが必要(要検証)
 		mes "[エヴォルツィオーネ]";
 		mes "キミ、荷物持ちすぎ～。";
 		mes "そのままじゃ";

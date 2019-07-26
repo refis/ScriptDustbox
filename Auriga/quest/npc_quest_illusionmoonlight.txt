@@ -8,7 +8,14 @@ pay_d03_i.gat,0,0,0,0	monster	怨恨のAスケルトン	3763,10,5000,0,0
 
 payon.gat,164,229,5	script	元老サンユル#ilp01	78,{/* 59894 */
 	if(BaseLevel < 170) {
-		// 未調査
+		mes "[サンユル]";
+		mes "何か怪しい事が";
+		mes "起きている予感がします。";
+		mes "君がもう少し強い冒険者なら";
+		mes "話をしてみるが……残念だ。";
+		next;
+		mes "- ^4d4dffBaseLv170以上の時";
+		mes "  進行可能なクエストです。^000000 -";
 		close;
 	}
 	if(IL_MOON_QUE == 0) {
