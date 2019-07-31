@@ -1,0 +1,520 @@
+-	script	ジョンダノービス#dynami	10145,{
+	set '@npcname$,strnpcinfo(1);
+	misceffect 7,""; //self
+	misceffect 14,""; //self
+	cutin "zonda_n01.bmp", 2;
+	mes '@npcname$;
+	mes "お呼びですか、お嬢様。";
+	mes "ジョンダパスをお持ちのようですね。";
+	mes "各種サービスをご用意しておりますので";
+	mes "お好きなサービスを";
+	mes "ご自由にお選びください。";
+	next;
+	switch(select("倉庫サービス","転送サービス","属性付与サービス","装備解除サービス","売却サービス","やめておく")) {
+	case 1:
+		mes '@npcname$;
+		mes "かしこまりました。";
+		//mes "どの倉庫を開きましょうか？";
+		//next;
+		//select("^0000FFメイン倉庫^000000を開く","^FF0000サブ倉庫1^000000を開く","^FF0000サブ倉庫2^000000を開く","^FF0000サブ倉庫3^000000を開く","終了")
+		//mes '@npcname$;
+		//mes "かしこまりました、お嬢様";
+		//mes "改めてサービスをご利用の際は";
+		//mes "私にお声掛けください。";
+		//mes "ご利用ありがとうございました。";
+		//close2;
+		//cutin "zonda_n01.bmp", 255;
+		//end;
+		close2;
+		openstorage;
+		cutin "zonda_n01.bmp", 255;
+		end;
+	case 2:
+		break;
+	case 3:
+		mes '@npcname$;
+		mes "^0000FF属性付与サービス^000000でございますね。";
+		mes "『^FF0000火^000000』『^1E90FF水^000000』『^800000地^000000』『^006400風^000000』の四属性の";
+		mes "いずれか1つを武器に付与いたします。";
+		next;
+		switch(select("^FF0000火属性^000000を付与してもらう","^1E90FF水属性^000000を付与してもらう","^800000地属性^000000を付与してもらう","^006400風属性^000000を付与してもらう")) {
+		case 1:
+			set '@eff,255;
+			set '@val1,3;
+			break;
+		case 2:
+			set '@eff,256;
+			set '@val1,1;
+			break;
+		case 3:
+			set '@eff,258;
+			set '@val1,2;
+			break;
+		case 4:
+			set '@eff,257;
+			set '@val1,4;
+			break;
+		}
+		misceffect '@eff,""; //self
+		//sc_end SI_WEAPONPROPERTY
+		//SI_WEAPONPROPERTY	'@val1
+		mes '@npcname$;
+		mes "いかがでしょうか、お嬢様。";
+		mes "改めてサービスをご利用の際は";
+		mes "私にお声掛けください。";
+		mes "ご利用ありがとうございました。";
+		close2;
+		cutin "zonda_n01.bmp", 255;
+		end;
+	case 4:
+		misceffect 389,""; //self
+		misceffect 411,""; //self
+		unequip -2;
+		mes '@npcname$;
+		mes "装備アイテムを解除いたしました。";
+		mes "ご利用ありがとうございます。";
+		close2;
+		cutin "zonda_n01.bmp", 255;
+		end;
+	case 5:
+		mes '@npcname$;
+		mes "かしこまりました。";
+		mes "お売りになりたいものを";
+		mes "お選びください。";
+		mes "^FF0000[インフォメーション]";
+		mes "‐ジョンダノービス帰還後は";
+		mes "　アイテム売却がキャンセルされます‐^000000";
+		close2;
+		cutin "zonda_n01.bmp", 255;
+		callshop "",2;
+		end;
+	case 6:
+		mes '@npcname$;
+		mes "かしこまりました、お嬢様";
+		mes "改めてサービスをご利用の際は";
+		mes "私にお声掛けください。";
+		mes "ご利用ありがとうございました。";
+		close2;
+		cutin "zonda_n01.bmp", 255;
+		end;
+	}
+	// 以下転送サービス
+	while(1) {
+		mes '@npcname$;
+		mes "^0000FF転送サービス^000000でございますね。";
+		mes "では、転送の種類をお選びください。";
+		next;
+		switch(select("^FF0000都市転送^000000","^0000FFダンジョン転送^000000")) {
+		case 1:	// 都市転送
+			while(1) {
+				mes '@npcname$;
+				mes "都市転送、承知いたしました。";
+				mes "続いて、行き先をお選びください。";
+				next;
+				switch(select(	"^FF0000ルーンミッドガッツ^000000",
+								"^0000FFシュバルツバルド^000000",
+								"^006400アルナベルツ^000000",
+								"^FF6400異世界^000000",
+								"^8B008B周辺都市^000000",
+								"^8B008Bパースタ大陸^000000",
+								"カテゴリ選択に戻る"
+				)) {
+				case 1:	// ルーンミッドガッツ
+					mes '@npcname$;
+					mes "^FF0000ルーンミッドガッツ^000000の";
+					mes "どこに向かわれますか？";
+					next;
+					switch(select(	"プロンテラ",
+									"イズルード",
+									"ゲフェン",
+									"モロク",
+									"フェイヨン",
+									"アルベルタ",
+									"コモド",
+									"都市選択に戻る"
+					)) {
+					case 1: set '@map$,"prontera.gat";	set '@x,118;	set '@y,80;		break;
+					case 2: set '@map$,"izlude.gat";	set '@x,128;	set '@y,91;		break;
+					case 3: set '@map$,"geffen.gat";	set '@x,120;	set '@y,69;		break;
+					case 4: set '@map$,"morocc.gat";	set '@x,156;	set '@y,92;		break;
+					case 5: set '@map$,"payon.gat";		set '@x,183;	set '@y,100;	break;
+					case 6: set '@map$,"alberta.gat";	set '@x,117;	set '@y,56;		break;
+					case 7: set '@map$,"comodo.gat";	set '@x,209;	set '@y,143;	break;
+					case 8:
+						continue;
+					}
+					mes '@npcname$;
+					mes "承知いたしました。";
+					mes "それではお送りいたしますが";
+					mes "よろしいですか？";
+					next;
+					if(select("出発する","やめる") == 2) {
+						mes '@npcname$;
+						mes "かしこまりました、お嬢様";
+						mes "改めてサービスをご利用の際は";
+						mes "私にお声掛けください。";
+						mes "ご利用ありがとうございました。";
+						close2;
+						cutin "zonda_n01.bmp", 255;
+						end;
+					}
+					misceffect 35,"";
+					mes '@npcname$;
+					mes "いってらっしゃいませ、お嬢様。";
+					mes "どうかお気をつけて。";
+					close2;
+					cutin "zonda_n01.bmp", 255;
+					warp '@map$,'@x,'@y;
+					end;
+				case 2:	// シュバルツバルド
+					mes '@npcname$;
+					mes "^0000FFシュバルツバルド^000000の";
+					mes "どこに向かわれますか？";
+					next;
+					switch(select(	"アルデバラン",
+									"ジュノー",
+									"アインブロック",
+									"アインベフ",
+									"リヒタルゼン",
+									"フィゲル",
+									"ウェルス発掘地",
+									"都市選択に戻る"
+					)) {
+					case 1: set '@map$,"aldebaran.gat";		set '@x,140;	set '@y,113;	break;
+					case 2: set '@map$,"yuno.gat";			set '@x,157;	set '@y,196;	break;
+					case 3: set '@map$,"einbroch.gat";		set '@x,242;	set '@y,197;	break;
+					case 4: set '@map$,"einbech.gat";		set '@x,173;	set '@y,129;	break;
+					case 5: set '@map$,"lighthalzen.gat";	set '@x,159;	set '@y,92;		break;
+					case 6: set '@map$,"hugel.gat";			set '@x,96;		set '@y,160;	break;
+					case 7: set '@map$,"verus04.gat";		set '@x,123;	set '@y,249;	break;
+					case 8:
+						continue;
+					}
+					mes '@npcname$;
+					mes "承知いたしました。";
+					mes "それではお送りいたしますが";
+					mes "よろしいですか？";
+					next;
+					if(select("出発する","やめる") == 2) {
+						mes '@npcname$;
+						mes "かしこまりました、お嬢様";
+						mes "改めてサービスをご利用の際は";
+						mes "私にお声掛けください。";
+						mes "ご利用ありがとうございました。";
+						close2;
+						cutin "zonda_n01.bmp", 255;
+						end;
+					}
+					misceffect 35,"";
+					mes '@npcname$;
+					mes "いってらっしゃいませ、お嬢様。";
+					mes "どうかお気をつけて。";
+					close2;
+					cutin "zonda_n01.bmp", 255;
+					warp '@map$,'@x,'@y;
+					end;
+				case 3:	// アルナベルツ
+					mes '@npcname$;
+					mes "^006400アルナベルツ^000000の";
+					mes "どこに向かわれますか？";
+					next;
+					switch(select(	"ラヘル",
+									"ベインス",
+									"都市選択に戻る"
+					)) {
+					case 1: set '@map$,"rachel.gat";		set '@x,139;	set '@y,134;	break;
+					case 2: set '@map$,"veins.gat";			set '@x,204;	set '@y,124;	break;
+					case 3:
+						continue;
+					}
+					mes '@npcname$;
+					mes "承知いたしました。";
+					mes "それではお送りいたしますが";
+					mes "よろしいですか？";
+					next;
+					if(select("出発する","やめる") == 2) {
+						mes '@npcname$;
+						mes "かしこまりました、お嬢様";
+						mes "改めてサービスをご利用の際は";
+						mes "私にお声掛けください。";
+						mes "ご利用ありがとうございました。";
+						close2;
+						cutin "zonda_n01.bmp", 255;
+						end;
+					}
+					misceffect 35,"";
+					mes '@npcname$;
+					mes "いってらっしゃいませ、お嬢様。";
+					mes "どうかお気をつけて。";
+					close2;
+					cutin "zonda_n01.bmp", 255;
+					warp '@map$,'@x,'@y;
+					end;
+				case 4:	// 異世界
+					mes '@npcname$;
+					mes "^FF6400異世界^000000の";
+					mes "どこに向かわれますか？";
+					next;
+					switch(select(	"ミッドガルド連合軍駐屯地",
+									"スプレンディッド",
+									"マヌク",
+									"エルディカスティス",
+									"モーラ",
+									"エクラージュ",
+									"フレイムヴァレー",
+									"次元の狭間 時の通路01",
+									"次元の狭間 時の通路02",
+									"都市選択に戻る"
+					)) {
+					case 1: set '@map$,"mid_camp.gat";		set '@x,46;		set '@y,120;	break;
+					case 2: set '@map$,".gat";			set '@x,157;	set '@y,196;	set '@flag,1;	break;
+					case 3: set '@map$,".gat";		set '@x,242;	set '@y,197;	set '@flag,1;	break;
+					case 4: set '@map$,"dicastes01.gat";	set '@x,197;	set '@y,145;	break;
+					case 5: set '@map$,"mora.gat";			set '@x,113;	set '@y,109;	break;
+					case 6: set '@map$,"eclage.gat";		set '@x,109;	set '@y,37;		break;
+					case 7: set '@map$,".gat";		set '@x,123;	set '@y,249;	break;
+					case 8: set '@map$,"dali.gat";			set '@x,107;	set '@y,89;	break;
+					case 9: set '@map$,"dali02.gat";		set '@x,107;	set '@y,89;	break;
+					case 10:
+						continue;
+					}
+					if('@flag) {
+						mes '@npcname$;
+						mes "お嬢様はまだ、そこに行く";
+						mes "資格をお持ちでないようです。";
+						mes "ご希望に添うことができず";
+						mes "申し訳ありません。";
+						mes "またのご利用をお待ちしております。";
+						close2;
+						cutin "zonda_n01.bmp", 255;
+						end;
+					}
+					mes '@npcname$;
+					mes "承知いたしました。";
+					mes "それではお送りいたしますが";
+					mes "よろしいですか？";
+					next;
+					if(select("出発する","やめる") == 2) {
+						mes '@npcname$;
+						mes "かしこまりました、お嬢様";
+						mes "改めてサービスをご利用の際は";
+						mes "私にお声掛けください。";
+						mes "ご利用ありがとうございました。";
+						close2;
+						cutin "zonda_n01.bmp", 255;
+						end;
+					}
+					misceffect 35,"";
+					mes '@npcname$;
+					mes "いってらっしゃいませ、お嬢様。";
+					mes "どうかお気をつけて。";
+					close2;
+					cutin "zonda_n01.bmp", 255;
+					warp '@map$,'@x,'@y;
+					end;
+				case 5:	// 周辺都市
+					mes '@npcname$;
+					mes "^8B008B周辺都市^000000の";
+					mes "どこに向かわれますか？";
+					next;
+					switch(select(	"コンロン",
+									"アユタヤ",
+									"龍之城",
+									"アマツ",
+									"ウンバラ",
+									"ニブルヘイム",
+									"モスコビア",
+									"ルティエ",
+									"ブラジリス",
+									"デワタ",
+									"マラン島",
+									"ポートマラヤ",
+									"ロックリッジ",
+									"都市選択に戻る"
+					)) {
+					case 1: set '@map$,"gonryun.gat";		set '@x,161;	set '@y,117;	break;
+					case 2: set '@map$,"ayothaya.gat";		set '@x,216;	set '@y,167;	break;
+					case 3: set '@map$,"louyang.gat";		set '@x,218;	set '@y,114;	break;
+					case 4: set '@map$,"amatsu.gat";		set '@x,109;	set '@y,149;	break;
+					case 5: set '@map$,"umbala.gat";		set '@x,88;		set '@y,153;	break;
+					case 6: set '@map$,"nif_in.gat";		set '@x,18;		set '@y,20;		break;
+					case 7: set '@map$,"moscovia.gat";		set '@x,229;	set '@y,194;	break;
+					case 8: set '@map$,"xmas.gat";			set '@x,143;	set '@y,299;	break;
+					case 9: set '@map$,"brasilis.gat";		set '@x,225;	set '@y,192;	break;
+					case 10: set '@map$,"dewata.gat";		set '@x,190;	set '@y,190;	break;
+					case 11: set '@map$,"malangdo.gat";		set '@x,184;	set '@y,132;	break;
+					case 12: set '@map$,"malaya.gat";		set '@x,242;	set '@y,211;	break;
+					case 13: set '@map$,"harboro1.gat";		set '@x,297;	set '@y,203;	break;
+					case 14:
+						continue;
+					}
+					if('@flag) {
+						mes '@npcname$;
+						mes "お嬢様はまだ、そこに行く";
+						mes "資格をお持ちでないようです。";
+						mes "ご希望に添うことができず";
+						mes "申し訳ありません。";
+						mes "またのご利用をお待ちしております。";
+						close2;
+						cutin "zonda_n01.bmp", 255;
+						end;
+					}
+					mes '@npcname$;
+					mes "承知いたしました。";
+					mes "それではお送りいたしますが";
+					mes "よろしいですか？";
+					next;
+					if(select("出発する","やめる") == 2) {
+						mes '@npcname$;
+						mes "かしこまりました、お嬢様";
+						mes "改めてサービスをご利用の際は";
+						mes "私にお声掛けください。";
+						mes "ご利用ありがとうございました。";
+						close2;
+						cutin "zonda_n01.bmp", 255;
+						end;
+					}
+					misceffect 35,"";
+					mes '@npcname$;
+					mes "いってらっしゃいませ、お嬢様。";
+					mes "どうかお気をつけて。";
+					close2;
+					cutin "zonda_n01.bmp", 255;
+					warp '@map$,'@x,'@y;
+					end;
+				case 6:	// パースタ大陸
+					mes '@npcname$;
+					mes "^8B008Bパースタ大陸^000000の";
+					mes "どこに向かわれますか？";
+					next;
+					switch(select(	"ラヘル",
+									"都市選択に戻る"
+					)) {
+					case 1: set '@map$,"lasagna.gat";		set '@x,298;	set '@y,238;	break;
+					case 2:
+						continue;
+					}
+					mes '@npcname$;
+					mes "承知いたしました。";
+					mes "それではお送りいたしますが";
+					mes "よろしいですか？";
+					next;
+					if(select("出発する","やめる") == 2) {
+						mes '@npcname$;
+						mes "かしこまりました、お嬢様";
+						mes "改めてサービスをご利用の際は";
+						mes "私にお声掛けください。";
+						mes "ご利用ありがとうございました。";
+						close2;
+						cutin "zonda_n01.bmp", 255;
+						end;
+					}
+					misceffect 35,"";
+					mes '@npcname$;
+					mes "いってらっしゃいませ、お嬢様。";
+					mes "どうかお気をつけて。";
+					close2;
+					cutin "zonda_n01.bmp", 255;
+					warp '@map$,'@x,'@y;
+					end;
+				default:
+					break;
+				}
+				break;
+			}
+			continue;
+		case 2:	// ダンジョン転送
+			while(1) {
+				mes '@npcname$;
+				mes "ダンジョン転送、承知いたしました。";
+				mes "続いて、行き先をお選びください。";
+				next;
+				switch(select(	"^FF0000ダンジョン【ア行】^000000",
+								"^8B008Bダンジョン【カ行】^000000",
+								"^0000FFダンジョン【サ～タ行】^000000",
+								"^005566ダンジョン【ナ～ハ行】^000000",
+								"^006400ダンジョン【マ～ワ行】^000000",
+								"^DE1039イリュージョンダンジョン^000000",
+								"^FF6400異世界^000000",
+								"^8B008Bその他^000000",
+								"^640000メモリアルダンジョン^000000",
+								"カテゴリ選択に戻る"
+				)) {
+				case 1:	// ダンジョン【ア行】
+mes '@npcname$;
+mes "かしこまりました。";
+mes "^FF0000ダンジョン【ア行】^000000から始まる";
+mes "ダンジョンは、こちらになります。";
+next;
+select("アビスレイク","アマツダンジョン","蟻地獄ダンジョン","アユタヤダンジョン","イズルード海底洞窟","ヴェルナー研究所","おもちゃ工場","オーク地下洞窟","オーディン神殿","ダンジョン選択に戻る")
+				case 2:	// ダンジョン【カ行】
+mes '@npcname$;
+mes "かしこまりました。";
+mes "^8B008Bダンジョン【カ行】^000000から始まる";
+mes "ダンジョンは、こちらになります。";
+next;
+select("機械人形工場","グラストヘイム","ゲフェニア","ゲフェン地下ダンジョン","氷の洞窟","コンロンダンジョン","ダンジョン選択に戻る")
+				case 3:	// ダンジョン【サ～タ行】
+mes '@npcname$;
+mes "かしこまりました。";
+mes "^0000FFダンジョン【サ～タ行】^000000から始まる";
+mes "ダンジョンは、こちらになります。";
+next;
+select("ジュピロス廃墟","侵攻されたプロンテラ","スフィンクスダンジョン","生体工学研究所","戦死者の墓","タナトスタワー","タートルアイランド","沈没船付近の島","デワタダンジョン","時計塔","トール火山","ダンジョン選択に戻る")
+				case 4:	// ダンジョン【ナ～ハ行】
+mes '@npcname$;
+mes "かしこまりました。";
+mes "^005566ダンジョン【ナ～ハ行】^000000から始まる";
+mes "ダンジョンは、こちらになります。";
+next;
+select("名もなき島","ノーグロード","ピラミッドダンジョン","フェイヨン地下洞窟","ブラジリスダンジョン","フレイヤ大神殿聖域","プロンテラ地下監獄","プロンテラ地下水路","ダンジョン選択に戻る")
+				case 5:	// ダンジョン【マ～ワ行】
+mes '@npcname$;
+mes "かしこまりました。";
+mes "^006400ダンジョン【マ～ワ行】^000000から始まる";
+mes "ダンジョンは、こちらになります。";
+next;
+select("ミョルニール廃鉱","迷宮の森","モスコビアダンジョン","龍之城ダンジョン","龍の巣","ロックリッジダンジョン","ダンジョン選択に戻る")
+				case 6:	// イリュージョンダンジョン
+mes '@npcname$;
+mes "^DE1039イリュージョンダンジョン^000000でございますね。";
+mes "ご希望の場所をお選びください。";
+next;
+select("月夜花の悪夢","フローズンメモリー","250 ページ","悲しみの陽居村","ネジリアン帝国","幻想の北洞窟ルワンダ","ダンジョン選択に戻る")
+				case 7:	// 異世界
+mes '@npcname$;
+mes "^FF6400異世界^000000でございますね。";
+mes "ご希望の場所をお選びください。";
+next;
+select("イグドラシル中心部","エクラージュ","カミダルトンネル","ダンジョン選択に戻る")
+				case 8:	// その他
+mes '@npcname$;
+mes "^8B008Bその他^000000でございますね。";
+mes "ご希望の場所をお選びください。";
+next;
+select("聖カピトーリナ修道院","フェイヨン迷いの森 04","アサシンギルド内","ファロス燈台島","ココモビーチ","アインブロックフィールド 04","ジュノーフィールド 06","ダンジョン選択に戻る")
+				case 9:	// メモリアルダンジョン
+mes '@npcname$;
+mes "^640000メモリアルダンジョン^000000でございますね。";
+mes "ご希望の場所をお選びください。";
+next;
+select("悪夢のジターバグ","暗黒時代の記憶","古のグラストヘイム","ヴェルナー研究所中央室","永劫の戦","英雄の痕跡","エンドレスタワー","オークの記憶","過去の儀式の間","霧の森","禁忌の研究所","空中要塞","最後の部屋","生体工学研究所の記録","地下排水路","チャールストン工場","中央実験室","ニーズヘッグの巣","ネコリンの秘密研究所","ハートハンター軍事基地","バコナワの棲み処","封印された神殿","フレイムケイブ","ブワヤの巣","暴窟王の洞窟","ホラーおもちゃ工場","真昼の弦月","闇のビョンウンゴ病院","ダンジョン選択に戻る")
+				default:
+					break;
+				}
+				break;
+			}
+			continue;
+		}
+	}
+}
+// char_xy ±2セル	dir 6
+
+// 10145	zonda_n01.bmp	ジョンダノービス
+// prontera	morocc	payon	comodo	aldebaran	einbroch	lighthalzen	rachel	mid_camp	dicastes01	eclage	dali02	louyang	amatsu	moscovia	xmas	dewata	malangdo	lasagna
+
+// 10146	zonda_n02.bmp	ジョンダノービス
+// izlude	geffen	alberta	yuno	einbech	hugel	verus04	veins	mora	dali	gonryun	ayothaya	umbala	nif_in	brasilis	malaya	harboro1
+
+// 10243	zonda_do01.bmp	ジョンダバルサミコ
+// イベントMAP用特殊
