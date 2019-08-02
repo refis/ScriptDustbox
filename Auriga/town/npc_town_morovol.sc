@@ -71,8 +71,8 @@ speed 100
 //============================================================
 // フレイムヴァレーへの道クエスト
 //------------------------------------------------------------
-morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
-	switch(EP143_PARA) {
+morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{
+	switch(FVOL_1QUE) {
 	case 0:
 		mes "‐人が倒れている。行き倒れだろうか‐";
 		next;
@@ -105,7 +105,7 @@ morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
 		mes "‐力尽きたのか気絶してしまった。";
 		mes "　^0000FF化け物のエサ^000000を手に入れて";
 		mes "　食べさせてみよう‐";
-		set EP143_PARA,1;
+		set FVOL_1QUE,1;
 		setquest 11349;
 		close;
 	case 1:
@@ -123,12 +123,12 @@ morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
 			mes "うう……助けて……。";
 			close;
 		}
-		cutin "ep143_tadir.bmp",2;
+		cutin "ep143_tadir",2;
 		mes "[？？？]";
 		mes "ううう……";
 		mes "不味い！";
 		delitem 528,1;
-		set EP143_PARA,2;
+		set FVOL_1QUE,2;
 		chgquest 11349,11350;
 		next;
 		mes "[？？？]";
@@ -140,7 +140,7 @@ morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
 		mes "……ふう……。";
 		next;
 	case 2:
-		cutin "ep143_tadir.bmp",2;
+		cutin "ep143_tadir",2;
 		mes "[？？？]";
 		mes "うっぷ……";
 		mes "……あ、ありがとうございます。";
@@ -203,7 +203,7 @@ morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
 		mes "素敵な名前ですね。";
 		next;
 	case 3:
-		if(EP143_PARA != 3) {
+		if(FVOL_1QUE != 3) {
 			mes "[タマリン]";
 			mes "あ！";
 			mes "こんな汚れた姿のまま";
@@ -214,7 +214,7 @@ morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
 			mes "体を洗えそうな場所はありませんか？";
 		}
 		else {
-			cutin "ep143_tadir.bmp", 2;
+			cutin "ep143_tadir",2;
 			mes "[タマリン]";
 			mes "やはりこんな汚れた姿で";
 			mes "命の恩人とお話しするのは";
@@ -229,13 +229,13 @@ morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
 			mes "[タマリン]";
 			mes "やはり、砂漠都市なので";
 			mes "水が貴重なのでしょうか？";
-			set EP143_PARA,3;
+			set FVOL_1QUE,3;
 			close2;
-			cutin "ep143_tadir.bmp", 255;
+			cutin "ep143_tadir",255;
 			end;
 		}
 	case 4:
-		cutin "ep143_tadir.bmp", 2;
+		cutin "ep143_tadir",2;
 		mes "[タマリン]";
 		mes "ああ！";
 		mes "^0000FF北西のピラミッド近くの水辺^000000";
@@ -264,13 +264,13 @@ morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
 			next;
 			mes "[タマリン]";
 			mes "あれれれれ……。";
-			set EP143_PARA,4;
+			set FVOL_1QUE,4;
 			close2;
-			cutin "ep143_tadir.bmp", 255;
+			cutin "ep143_tadir",255;
 			end;
 		}
 	case 5:
-		cutin "ep143_tadir.bmp", 2;
+		cutin "ep143_tadir",2;
 		mes "[タマリン]";
 		mes "い、いいんですか？";
 		mes "見ず知らずの私に対して";
@@ -282,8 +282,8 @@ morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
 		mes "では";
 		mes "^0000FF北西側にあるピラミッド近くの水辺^000000に";
 		mes "一緒に行きましょう。";
-		if(EP143_PARA != 5) {
-			set EP143_PARA,5;
+		if(FVOL_1QUE != 5) {
+			set FVOL_1QUE,5;
 			chgquest 11350,11351;
 		}
 		close2;
@@ -296,14 +296,14 @@ morocc.gat,138,238,4	script	倒れている男性#ep14bs	849,{/* 64352 */
 		close;
 	}
 OnInit:
-	waitingroom "フレイムヴァレーへの道",0; //64352
+	waitingroom "フレイムヴァレーへの道",0;
 	end;
 }
 
-moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
-	switch(EP143_PARA) {
+moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{
+	switch(FVOL_1QUE) {
 	case 5:
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		mes "[タマリン]";
 		mes "ぷはあ！";
 		mes "冷たくて気持ちいい！";
@@ -327,33 +327,33 @@ moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
 		mes "^0000FF真の冒険家なら興味を持つような話^000000を";
 		mes "聞かせて差し上げます！";
 		next;
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		mes "[タマリン]";
 		mes "それは以前、私が行った";
 		mes "不思議な場所の話です。";
 		next;
 		if(select("興味を見せる","興味ない") == 2) {
-			cutin "ep143_tahuk.bmp", 2;
+			cutin "ep143_tahuk",2;
 			mes "[タマリン]";
 			mes "興味ないですか？";
 			mes "なかなか良い話だと";
 			mes "思っているのですが……。";
 			next;
-			cutin "ep143_tasta.bmp", 2;
+			cutin "ep143_tasta",2;
 			mes "[タマリン]";
 			mes "では……";
 			mes "私が受けた恩の代わりとして";
 			mes "差し上げるものは……";
 			mes "化け物のエサでも返しましょうか？";
 			next;
-			cutin "ep143_taang.bmp", 2;
+			cutin "ep143_taang",2;
 			mes "[タマリン]";
 			mes "うえええ……。";
 			close2;
-			cutin "ep143_taang.bmp", 255;
+			cutin "ep143_taang",255;
 			end;
 		}
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		mes "[タマリン]";
 		mes "やっぱり！";
 		mes "不思議な場所と言われて";
@@ -375,12 +375,12 @@ moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
 		mes "行く道は険しかったが～";
 		mes "彼らは勇気を失わなかった～！";
 		next;
-		cutin "ep143_tahuk.bmp", 2;
+		cutin "ep143_tahuk",2;
 		mes "[タマリン]";
 		mes "ん？　どうして急に";
 		mes "変なしゃべりになったかですって？";
 		next;
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		mes "[タマリン]";
 		mes "実を言うと私、歌が得意で、";
 		mes "バードになろうと修行中だったのですが";
@@ -394,12 +394,12 @@ moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
 		mes "経緯をお話ししようかと～！";
 		next;
 		menu "普通にお願いします",-;
-		cutin "ep143_tahuk.bmp", 2;
+		cutin "ep143_tahuk",2;
 		mes "[タマリン]";
 		mes "そうですか？";
 		mes "普通にお話した方がいいですか？";
 		next;
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		mes "[タマリン]";
 		mes "では普通に……";
 		mes "私はつい先日、仲間たちと";
@@ -412,7 +412,7 @@ moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
 		mes "見て回っていたのですが、";
 		mes "仲間の一人が興奮して暴れてしまって。";
 		next;
-		cutin "ep143_taang.bmp", 2;
+		cutin "ep143_taang",2;
 		mes "[タマリン]";
 		mes "暴れる仲間を止めようとした私は、";
 		mes "次元の狭間にあるひびに気付かず、";
@@ -436,7 +436,7 @@ moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
 		mes "わかりませんが、かなり長い間";
 		mes "一人で彷徨っていたと思います。";
 		next;
-		cutin "ep143_taang.bmp", 2;
+		cutin "ep143_taang",2;
 		mes "[タマリン]";
 		mes "何日か過ぎてからはあまりにも";
 		mes "お腹が空いて、いろいろ拾ったものを";
@@ -471,21 +471,21 @@ moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
 		mes "モロクに通じる次元移動機に入って、";
 		mes "ここモロクに帰ってきたのです……。";
 		next;
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		mes "[タマリン]";
 		mes "はぐれた仲間たちが心配です……。";
 		mes "今どこで何をしているんでしょう……。";
 		next;
 	case 6:
-		if(EP143_PARA == 6)
-			cutin "ep143_tasmi.bmp", 2;
+		if(FVOL_1QUE == 6)
+			cutin "ep143_tasmi",2;
 		mes "[タマリン]";
 		mes "みんなを探さないといけないし、";
 		mes "私はある程度体が回復したら、";
 		mes "もう一度あの場所へ行くつもりです。";
 		next;
 		if(select("一緒に行くと言う","励みの言葉を言う") == 2) {
-			cutin "ep143_tasmi.bmp", 2;
+			cutin "ep143_tasmi",2;
 			mes "[タマリン]";
 			mes "はい！";
 			mes "助けていただいて、";
@@ -503,19 +503,19 @@ moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
 			mes "つもりです。";
 			mes "モロクにいる間はまた会うことも";
 			mes "あるでしょう。";
-			set EP143_PARA,6;
+			set FVOL_1QUE,6;
 			close2;
-			cutin "ep143_tasmi.bmp", 255;
+			cutin "ep143_tasmi",255;
 			end;
 		}
-		cutin "ep143_tahuk.bmp", 2;
+		cutin "ep143_tahuk",2;
 		mes "[タマリン]";
 		mes "!!";
 		next;
 		mes "[タマリン]";
 		mes "ほ、本当ですか？！";
 		next;
-		cutin "ep143_taang.bmp", 2;
+		cutin "ep143_taang",2;
 		mes "[タマリン]";
 		mes "ありがとうございます!!";
 		mes "私は本当に運が良いです。";
@@ -523,7 +523,7 @@ moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
 		mes "心細かったので……。";
 		next;
 	case 7:
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		mes "[タマリン]";
 		mes "では、少し休んでから";
 		mes "必要な物を用意してくるので、";
@@ -533,37 +533,37 @@ moc_ruins.gat,106,140,4	script	タマリン#ep14bs_ru	10027,{/* 57915 */
 		mes "準備に時間がかかるかもしれないので、";
 		mes "他に用があるなら済ましてきて下さい。";
 		next;
-		cutin "ep143_tasmi.bmp", 255;
+		cutin "ep143_tasmi",255;
 		mes "‐次元の狭間への入場は";
 		mes "　^0000FF異世界クエスト^000000を完了している";
 		mes "　必要があります‐";
-		if(EP143_PARA != 7) {
-			set EP143_PARA,7;
+		if(FVOL_1QUE != 7) {
+			set FVOL_1QUE,7;
 			chgquest 11351,11352;
 		}
 		close;
 	default:
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		mes "[？？？]";
 		mes "ぷはあ！";
 		mes "冷たくて気持ちいい！";
 		close2;
-		cutin "ep143_tasmi.bmp", 255;
+		cutin "ep143_tasmi",255;
 		end;
 	}
 }
 
-dali.gat,112,69,4	script	タマリン#ep14bs_cha	10027,{/* 57916 */
-	switch(EP143_PARA) {
+dali.gat,112,69,4	script	タマリン#ep14bs_cha	10027,{
+	switch(FVOL_1QUE) {
 	case 7:
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		mes "[タマリン]";
 		mes strcharinfo(0)+ "様、";
 		mes "ここです、ここです！";
 		mes "早かったですね！";
 		mes "それでは早速……！";
 		next;
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		mes "[タマリン]";
 		mes "と言いたいところですが、";
 		mes "あの時はあまりにもパニック状態";
@@ -576,13 +576,13 @@ dali.gat,112,69,4	script	タマリン#ep14bs_cha	10027,{/* 57916 */
 		mes "少し探してみてもらえますか？";
 		mes "^0000FFその場所は小さなひびがあるので";
 		mes "よく探せばわかるはずです。^000000";
-		set EP143_PARA,8;
+		set FVOL_1QUE,8;
 		chgquest 11352,11353;
 		close2;
-		cutin "ep143_tasta.bmp", 255;
+		cutin "ep143_tasta",255;
 		end;
 	case 8:
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		mes "[タマリン]";
 		mes "あの時はあまりにもパニック状態";
 		mes "だったので、はっきりとした";
@@ -595,19 +595,19 @@ dali.gat,112,69,4	script	タマリン#ep14bs_cha	10027,{/* 57916 */
 		mes "^0000FFその場所は小さなひびがあるので";
 		mes "よく探せばわかるはずです。^000000";
 		close2;
-		cutin "ep143_tasta.bmp", 255;
+		cutin "ep143_tasta",255;
 		end;
 	default:
-		if(EP143_PARA < 7) {
-			cutin "ep143_tasta.bmp", 2;
+		if(FVOL_1QUE < 7) {
+			cutin "ep143_tasta",2;
 			mes "[？？？]";
 			mes "通路から足を踏み外さないように";
 			mes "気を付けてくださいね。";
 			close2;
-			cutin "ep143_tasta.bmp", 255;
+			cutin "ep143_tasta",255;
 			end;
 		}
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		mes "[タマリン]";
 		mes strcharinfo(0)+ "様、";
 		mes "あのひびを通る際は";
@@ -619,46 +619,46 @@ dali.gat,112,69,4	script	タマリン#ep14bs_cha	10027,{/* 57916 */
 		mes "あのひびを通っているのですが、";
 		mes "狭くておでこをぶつけてしまいます。";
 		close2;
-		cutin "ep143_tasta.bmp", 255;
+		cutin "ep143_tasta",255;
 		end;
 	}
 }
 
-dali.gat,64,98,0	script	ひび#ep14bs	550,{/* 57917 */
-	switch(EP143_PARA) {
+dali.gat,64,98,0	script	ひび#ep14bs	550,{
+	switch(FVOL_1QUE) {
 	case 8:
 		mes "‐この場所には似合わない";
 		mes "　ひびがある‐";
 		next;
-		cutin "ep143_tasmi.bmp", 2;
+		cutin "ep143_tasmi",2;
 		mes "[タマリン]";
 		mes "ふう！";
 		mes "無事見つかりましたね。";
 		next;
-		cutin "ep143_tasta.bmp", 2;
+		cutin "ep143_tasta",2;
 		mes "[タマリン]";
 		mes "ではさっそく行きましょう。";
 		mes "入口が少し狭いので気をつけて下さい。";
 		next;
 		if(select("入口に入る","やめる") == 2) {
-			cutin "ep143_tahuk.bmp", 2;
+			cutin "ep143_tahuk",2;
 			mes "[タマリン]";
 			mes "入らないんですか？";
 			close2;
-			cutin "ep143_tahuk.bmp", 255;
+			cutin "ep143_tahuk",255;
 			end;
 		}
 		mes "‐中は一人がやっと通れるくらいに狭く";
 		mes "　暗かった‐";
 		close2;
-		cutin "ep143_tasta.bmp", 255;
-		set EP143_PARA,9;
+		cutin "ep143_tasta",255;
+		set FVOL_1QUE,9;
 		warp "moro_vol.gat",136,135;
 		end;
 	default:
 		mes "‐この場所には似合わない";
 		mes "　ひびがある‐";
-		if(EP143_PARA < 8)
+		if(FVOL_1QUE < 8)
 			close;
 		next;
 		if(select("入口に入る","やめる") == 2) {
@@ -673,9 +673,986 @@ dali.gat,64,98,0	script	ひび#ep14bs	550,{/* 57917 */
 	}
 }
 
-moro_vol.gat,95,96,6	shop	道具商人	553,717,611,504,525,610,645,656,657,601,602,1065	//65203
+moro_vol.gat,137,136,0	script	ひび	550,{
+	mes "‐この場所には似合わない";
+	mes "　ひびがある‐";
+	next;
+	if(select("次元の狭間に戻る","やめる") == 2) {
+		mes "‐戻らないことにした‐";
+		close;
+	}
+	mes "‐中は一人がやっと通れるくらいに狭く";
+	mes "　暗かった‐";
+	close2;
+	warp "dali.gat",64,103;
+	end;
+OnInit:
+	waitingroom "次元の狭間",0;
+	end;
+}
 
-moro_vol.gat,86,167,7	script	前線基地・守護者#1	415,3,3,{/* 65204 */
+moro_vol.gat,132,140,4	script	タマリン#ep14bs_ju	10027,{
+	viewpoint 2,1,1,1,0xFFFFFF;
+	switch(FVOL_1QUE) {
+	case 9:
+		cutin "ep143_tahuk",2;
+		mes "[タマリン]";
+		mes "うわー、いつの間にこんなに多くの人が";
+		mes "集まったんでしょう。";
+		mes "以前は全然人の気配がなかったのに。";
+		next;
+		cutin "ep143_taang",2;
+		mes "[タマリン]";
+		mes "武装した人もいるし……。";
+		mes "もしかして私を助けてくれた";
+		mes "あのアサシンの男性が呼んだのかな？";
+		mes "なんだか雰囲気が怪しいですね……。";
+		next;
+		mes "[タマリン]";
+		mes "人の姿じゃない人（？）達も";
+		mes "多く見られますね……。";
+		mes "これはもしかすると、";
+		mes "私が思っていたよりも";
+		mes "凄い場所なのかもしれません!!";
+		next;
+		cutin "ep143_tahuk",2;
+		mes "[タマリン]";
+		mes "それに、これだけ多くの人がいれば";
+		mes "私の仲間を見かけた人が";
+		mes "いるかもしれません！";
+		next;
+		if(checkquest(200875)) {	// 三ヶ国への報告書クエスト？
+			cutin "ep13_captin_edq",2;
+			mes "[司令官アジフ]";
+			mes "お？";
+			mes strcharinfo(0)+ "じゃないか！";
+			mes "お前も来てくれたのか！";
+			next;
+			mes "[司令官アジフ]";
+			mes "ここは先遣隊のひとりが発見した";
+			mes "^0000FF魔王モロクが潜む地、";
+			mes "フレイムヴァレー^000000だ。";
+			mes "現在各所を調査中でな、";
+			mes "少しずつだが";
+			mes "わかってきたこともある。";
+			next;
+			mes "[司令官アジフ]";
+			mes "早いとこ調査を進めて";
+			mes "魔王とご対面、と行きたい所なんだが。";
+			mes "まあ、焦りは禁物ってヤツだな。";
+			next;
+			mes "[司令官アジフ]";
+			mes "ところでこの人の数を見てくれ！";
+			mes "打倒モロクの旗印の下、";
+			mes "サファ族もラフィネ族も";
+			mes "種族間のわだかまりを超えて";
+			mes "これだけの数が集まってくれたんだ！";
+			next;
+			mes "[司令官アジフ]";
+			mes "これだけの規模の連合軍が";
+			mes "結成されたんだ。";
+			mes "いよいよ魔王モロクも";
+			mes "年貢の納め時、ってとこだな！";
+			next;
+			mes "[司令官アジフ]";
+			mes "俺はここから西の方角に";
+			mes "本部を構えているから、";
+			mes "何かあったら訪ねてくるといい。";
+			mes "ここは危険な場所も多いから";
+			mes "あまり無茶はするなよ。";
+			next;
+			cutin "ep13_captin_edq",255;
+			mes "[バゼット]";
+			mes "!?　そこのあなたたち!!";
+			mes "何をしているんですか!!";
+			next;
+			cutin "ep13_captin_edq",2;
+			mes "[司令官アジフ]";
+			mes "おっと！";
+			mes "怖い博士に見つかってしまった。";
+			mes "俺は本部に戻る。";
+			mes "くれぐれも無茶はするなよ！";
+			next;
+			cutin "ep13_captin_edq",255;
+			mes "[バゼット]";
+			mes "……今のはアジフ司令官？";
+			mes "全く、油を売っている暇があるなら";
+			mes "こちらを手伝ってほしいものですね！";
+			mes "そして……そこのあなた達！";
+			mes "あなた達は何をしているのですか！";
+		}
+		else {
+			emotion 6,"バゼット#ep14bs";
+			cutin "ep143_tahuk",255;
+			mes "[バゼット]";
+			mes "!?　そこのあなたたち!!";
+			mes "何をしているんですか!!";
+		}
+		viewpoint 1,142,131,0,0xFF0000;
+		set FVOL_1QUE,10;
+		chgquest 11353,11354;
+		close;
+	case 10:
+		cutin "ep143_tahuk",2;
+		mes "[タマリン]";
+		mes "そういえば私を助けてくれた";
+		mes "あのアサシンの男性が";
+		mes "^0000FFモロクの痕跡をみつけた^000000と";
+		mes "言っていました。";
+		next;
+		mes "[タマリン]";
+		mes "ここは何か";
+		mes "モロクと関係する地なのでしょうか。";
+		next;
+		cutin "ep143_tahuk",255;
+		emotion 6,"バゼット#ep14bs";
+		mes "[バゼット]";
+		mes "そこのあなたたち!!";
+		mes "ちょっとこちらにきなさい！";
+		close;
+	case 11:
+		cutin "ep143_taang",2;
+		mes "[タマリン]";
+		mes "こっそり来た事がばれると";
+		mes "追い出されるかもしれません。";
+		mes "まずは言う通りにした方が";
+		mes "良さそうですね。";
+		close2;
+		cutin "ep143_taang",255;
+		end;
+	case 12:
+		cutin "ep143_tasta",2;
+		mes "[タマリン]";
+		mes "植物標本を採集するだけなら、";
+		mes "そこまで大変そうでもないので";
+		mes "半分ずつ集めることにしましょう。";
+		next;
+		mes "[タマリン]";
+		mes "^0000FFソニアの茎を1個集めたら、";
+		mes "ここの中央にある大きな岩の前で";
+		mes "待ち合わせて一緒に戻りましょう。^000000";
+		viewpoint 1,198,179,2,0xFF0000;
+		set FVOL_1QUE,13;
+		chgquest 11356,11357;
+		close2;
+		cutin "ep143_tasta",255;
+		end;
+	case 13:
+		cutin "ep143_tasta",2;
+		mes "[タマリン]";
+		mes "植物標本を採集するだけなら、";
+		mes "そこまで大変そうでもないので";
+		mes "半分ずつ集めることにしましょう。";
+		next;
+		mes "[タマリン]";
+		mes "^0000FFソニアの茎を1個集めたら、";
+		mes "ここの中央にある大きな岩の前で";
+		mes "待ち合わせて一緒に戻りましょう。^000000";
+		viewpoint 1,198,179,2,0xFF0000;
+		close2;
+		cutin "ep143_tasta",255;
+		end;
+	case 14:
+		cutin "ep143_tasta",2;
+		mes "[タマリン]";
+		mes "まずはバゼットさんに報告しませんか？";
+		close2;
+		cutin "ep143_tahuk",255;
+		end;
+	case 15:
+		cutin "ep143_tahuk",2;
+		mes "[タマリン]";
+		mes "急いで^0000FFルーゲン教官^000000の所に";
+		mes "向かいましょう！";
+		mes "一刻を争います!!";
+		close2;
+		cutin "ep143_tahuk",255;
+		end;
+	case 16:
+		cutin "ep143_tahuk",2;
+		mes "[タマリン]";
+		mes "^0000FFソニアの茎を";
+		mes "患者に食べさせてみましょう！^000000";
+		close2;
+		cutin "ep143_tahuk",255;
+		end;
+	case 17:
+		cutin "ep143_tahuk",2;
+		mes "[タマリン]";
+		mes "ソニアの茎は患者の様態を";
+		mes "落ち着かせる効果があるみたいですね。";
+		mes "^0000FFルーゲン教官^000000に";
+		mes "報告しましょう。";
+		close2;
+		cutin "ep143_tahuk",255;
+		end;
+	case 18:
+		cutin "ep143_tasmi",2;
+		mes "[タマリン]";
+		mes "空腹のあまりに食べた";
+		mes "植物がこんな形で役に立つとは！";
+		mes "急いでバゼットさんに報告しましょう！";
+		close2;
+		cutin "ep143_tasmi",255;
+		end;
+	case 100:
+		cutin "ep143_tasmi",2;
+		mes "[タマリン]";
+		mes "ここには人もたくさんいますし、";
+		mes "ここからはもう一人でも大丈夫です。";
+		mes "今まで本当にありがとうございました！";
+		next;
+		mes "[タマリン]";
+		mes "もし中央の岩にあるという";
+		mes "洞窟に入ることがあったら、";
+		mes "私にひと声かけてくださいね。";
+		close2;
+		cutin "ep143_tasmi",255;
+		end;
+	}
+}
+
+moro_vol.gat,142,131,5	script	バゼット#ep14bs	883,{
+	viewpoint 2,1,1,0,0xFFFFFF;
+	switch(FVOL_1QUE) {
+	case 10:
+		mes "[バゼット]";
+		mes "ああ、あなた達！";
+		mes "そこを踏み荒らさないでください！";
+		mes "せっかく集めておいたサンプルが";
+		mes "メチャクチャになってしまったじゃ";
+		mes "ありませんか！";
+		next;
+		mes "[バゼット]";
+		mes "キャンプ側の調査もまだ完全に";
+		mes "終えてないのに……。";
+		mes "作業中の地域では気を付けて下さい！";
+		mes "私の仕事を増やす気ですか!?";
+		next;
+		mes "[バゼット]";
+		mes "こんなことになるとわかっていたら";
+		mes "もっと助手を用意して欲しいと";
+		mes "言うべきだった……。";
+		mes "圧倒的に人手が足りなすぎる！";
+		next;
+		mes "[バゼット]";
+		mes "ハッ……!!";
+		mes "すみません、忙しさのあまり";
+		mes "取り乱してしまいました……。";
+		mes "私は軍の先遣隊が発見した";
+		mes "ここ、フレイムヴァレーの調査を";
+		mes "担当しているバゼットといいます。";
+		next;
+		mes "[バゼット]";
+		mes "私たちの軍の先遣隊の多くは、";
+		mes "次元移動機を通って、";
+		mes "このフレイムヴァレーにきました。";
+		next;
+		mes "[バゼット]";
+		mes "しかし……。";
+		mes "一つの軍隊ほどの人数が調査に出たのに、";
+		mes "戻ってきたのはたった数名で、";
+		mes "しかも彼らはひどく弱っていました。";
+		next;
+		mes "[バゼット]";
+		mes "先遣隊の調査結果で";
+		mes "ここが魔王モロクに関係する地なのは";
+		mes "間違いないとのことでしたが……。";
+		mes "……この地は何かがおかしい。";
+		next;
+		mes "[バゼット]";
+		mes "弱って帰ってきた先遣隊のように";
+		mes "今ここにいる者たちを";
+		mes "危険な目にあわすことのないよう";
+		mes "急いで調査を進めているのです。";
+		next;
+		mes "[バゼット]";
+		mes "そうだあなた達。見ない顔ですが、";
+		mes "見るからに暇そうですね。";
+		mes "サンプルを集める仕事を";
+		mes "手伝って下さいよ！";
+		next;
+		mes "[バゼット]";
+		mes "あなた達が研究用のサンプルを";
+		mes "踏み荒らしたせいで、";
+		mes "メチャクチャなってしまったので";
+		mes "責任を取ってもらわないと！";
+		mes "嫌とは言わせませんよ！";
+		next;
+		mes "[バゼット]";
+		mes "まずは虫の標本を集めてください。";
+		mes "この地域では変形している生物が";
+		mes "たくさん見つかっていますが、";
+		mes "その中から^0000FF完全に新しい種^000000が";
+		mes "ひとつだけ見つかりました。";
+		next;
+		mes "[バゼット]";
+		mes "^0000FF燃える虫のような姿をしているので、";
+		mes "フレイムバグと呼んでいます。";
+		mes "他の虫に比べちょっと変わっているのは";
+		mes "フレイムピットと呼ばれる火の穴に";
+		mes "住んでいる^000000という事です。";
+		next;
+		mes "[バゼット]";
+		mes "時々外に出ている奴らもいますが、";
+		mes "火の穴の外に出てしまうと";
+		mes "すぐ死んでしまいます。";
+		next;
+		mes "[バゼット]";
+		mes "そこで^0000FFフレイムピットを2個調査し、";
+		mes "破壊した後、^000000";
+		mes "フレイムバグを探し出して倒し、";
+		mes "^0000FFフレイムバグの皮を1個";
+		mes "採取して来て下さい。^000000";
+		next;
+		emotion 6,"バゼット#ep14bs";
+		mes "[バゼット]";
+		mes "熱いかもしれないので";
+		mes "十分気を付けてくださいね。";
+		set FVOL_1QUE,11;
+		chgquest 11354,11355;
+		close;
+	case 11:
+		if(checkquest(11355)&0x4 == 0 || countitem(6689) == 0) {
+			mes "[バゼット]";
+			mes "まずは虫の標本を集めてください。";
+			mes "この地域では変形している生物が";
+			mes "たくさん見つかっていますが、";
+			mes "その中から^0000FF完全に新しい種^000000が";
+			mes "ひとつだけ見つかりました。";
+			next;
+			mes "[バゼット]";
+			mes "^0000FF燃える虫のような姿をしているので、";
+			mes "フレイムバグと呼んでいます。";
+			mes "他の虫に比べちょっと変わっているのは";
+			mes "フレイムピットと呼ばれる火の穴に";
+			mes "住んでいる^000000という事です。";
+			next;
+			mes "[バゼット]";
+			mes "時々外に出ている奴らもいますが、";
+			mes "火の穴の外に出てしまうと";
+			mes "すぐ死んでしまいます。";
+			next;
+			mes "[バゼット]";
+			mes "そこで^0000FFフレイムピットを2個調査し、";
+			mes "破壊した後、^000000";
+			mes "フレイムバグを探し出して倒し、";
+			mes "^0000FFフレイムバグの皮を1個";
+			mes "採取して来て下さい。^000000";
+			next;
+			mes "[バゼット]";
+			mes "熱いかもしれないので";
+			mes "十分気を付けてくださいね。";
+			close;
+		}
+		viewpoint 2,1,1,0,0xFFFFFF;
+		mes "[バゼット]";
+		mes "お！　帰ってきましたね！";
+		mes "ご苦労様でした！";
+		mes "思っていたより";
+		mes "早かったですね。";
+		delitem 6689,1;
+		set FVOL_1QUE,12;
+		chgquest 11355,11356;
+		next;
+		mes "[バゼット]";
+		mes "うわ！　あっちっち!!";
+		mes "ふー！　ふー!!!!";
+		mes "これは冷める前にうまく保存して";
+		mes "実験室に送っといて……。";
+		next;
+		mes "[バゼット]";
+		mes "次は植物標本を集めてください。";
+		mes "採取しなければならない植物は、";
+		mes "^FF0000ソニア^000000というとても原始的な姿を";
+		mes "している植物です。";
+		next;
+		mes "[バゼット]";
+		mes "パッと見た感じでは植物というよりは、";
+		mes "プラスチックでつくったホースに";
+		mes "見えますが、植物が備えておくべき";
+		mes "一番基本的な構造をしています。";
+		next;
+		mes "[バゼット]";
+		mes "ソニアを倒すと";
+		mes "^0000FFソニアの茎^000000を落とします。";
+		mes "その^0000FFソニアの茎を2個^000000";
+		mes "持って来て下さい。";
+		next;
+		mes "[バゼット]";
+		mes "ソニアの標本を採集すれば";
+		mes "標本を集める仕事は終わりなので、";
+		mes "もし作業中に^0000FF珍しい物でも発見^000000したら";
+		mes "教えて下さい。";
+		next;
+		mes "[バゼット]";
+		mes "危ないかもしれないので、本拠地から";
+		mes "あまり遠くには行かないで下さい。";
+		mes "気を付けて行ってきて下さいね。";
+		mes "よろしくお願いします。";
+		next;
+		cutin "ep143_tasta",2;
+		mes "[タマリン]";
+		mes "ふむ……";
+		mes strcharinfo(0)+ "様、";
+		mes "良い案を思いついたので";
+		mes "ちょっと待って下さい！";
+		viewpoint 1,132,140,1,0xFF0000;
+		close2;
+		cutin "ep143_tasta",255;
+		end;
+	case 12:
+	case 13:
+		mes "[バゼット]";
+		mes "次は植物標本を集めてください。";
+		mes "採取しなければならない植物は、";
+		mes "^FF0000ソニア^000000というとても原始的な姿を";
+		mes "している植物です。";
+		next;
+		mes "[バゼット]";
+		mes "パッと見た感じでは植物というよりは、";
+		mes "プラスチックでつくったホースに";
+		mes "見えますが、植物が備えておくべき";
+		mes "一番基本的な構造をしています。";
+		next;
+		mes "[バゼット]";
+		mes "ソニアを倒すと";
+		mes "^0000FFソニアの茎^000000を落とします。";
+		mes "その^0000FFソニアの茎を2個^000000";
+		mes "持って来て下さい。";
+		next;
+		mes "[バゼット]";
+		mes "ソニアの標本を採集すれば";
+		mes "標本を集める仕事は終わりなので、";
+		mes "もし作業中に^0000FF珍しい物でも発見^000000したら";
+		mes "教えて下さい。";
+		next;
+		mes "[バゼット]";
+		mes "危ないかもしれないので、本拠地から";
+		mes "あまり遠くには行かないで下さい。";
+		mes "気を付けて行ってきて下さいね。";
+		mes "よろしくお願いします。";
+		next;
+		cutin "ep143_tasta",2;
+		mes "[タマリン]";
+		mes "ふむ……";
+		mes strcharinfo(0)+ "様、";
+		mes "良い案を思いついたので";
+		mes "ちょっと待って下さい！";
+		viewpoint 1,132,140,1,0xFF0000;
+		close2;
+		cutin "ep143_tasta",255;
+		end;
+	case 14:
+		mes "[バゼット]";
+		mes "おかえりなさい！";
+		mes "無事に戻ったのですね！";
+		mes "よかったです。あわてていて、";
+		mes "^0000FF中央にある岩の近くに行ってはならない^000000";
+		mes "と言うのを忘れていました。";
+		next;
+		mes "[バゼット]";
+		mes "念のため救助隊を手配したのですが、";
+		mes "無事に戻って来れて";
+		mes "よかったです。";
+		next;
+		mes "[バゼット]";
+		mes "危険な場所を伝え忘れて";
+		mes "本当にすみません。";
+		mes "殺人的な調査スケジュールに追われ、";
+		mes "大事な事を失念してしまったばかりか、";
+		mes "あなた方を危険に晒してしまいました。";
+		next;
+		mes "[バゼット]";
+		mes "まだ処理しなければならない仕事も";
+		mes "山のように積もっているし……";
+		mes "ふう……。";
+		next;
+		menu "中央にある岩について話す",-;
+		mes "[バゼット]";
+		mes "なんですって!?";
+		mes "あそこに行ったんですか？";
+		mes "なんという事だ!!";
+		mes "しかし、それが事実なら";
+		mes "なぜあなた方は無事なのですか？";
+		next;
+		mes "[バゼット]";
+		mes "あの場所を調査していた人は皆、";
+		mes "^0000FF岩から出る毒ガスのせいで昏睡状態^000000に";
+		mes "陥ったのに！";
+		next;
+		mes "[バゼット]";
+		mes "どういう事だ……？";
+		mes "……何か特別な事をしましたか？";
+		mes "何か食べたとか、飲んだとか……";
+		next;
+		menu "ソニアの茎を食べた",-;
+		mes "[バゼット]";
+		mes "ソニアの茎を食べた？";
+		mes "毒性がないのはわかっていたのですが、";
+		mes "まだ調査が終わっていない植物の茎を";
+		mes "食べて体に何か異常は起きていませんか？";
+		next;
+		menu "なんともない",-;
+		mes "[バゼット]";
+		mes "な、なんという事だ!!";
+		mes "これは本当に素晴らしい発見だ!!";
+		next;
+		mes "[バゼット]";
+		mes "早く研究を……";
+		mes "いや、それより今は^0000FF体調が悪い患者が";
+		mes "南の方に集まっているので、";
+		mes "急いでソニアの茎を届けるのが先です！^000000";
+		next;
+		mes "[バゼット]";
+		mes "もしかしたら患者の症状が";
+		mes "治まるかもしれません。";
+		next;
+		mes "[バゼット]";
+		mes "^0000FFルーゲン教官^000000が看病しているので";
+		mes "あの方に茎を渡してください。";
+		mes "この手紙に私が経緯を書いておくので";
+		mes "これも一緒に渡してください。";
+		next;
+		mes "[バゼット]";
+		mes "私はここで";
+		mes "研究を始められるようにします！";
+		mes "あと、今回は運よく無事でしたが、";
+		mes "今後は何でも口に入れたりしないで";
+		mes "下さいね！";
+		viewpoint 1,105,71,3,0xFFFF0000;
+		set FVOL_1QUE,15;
+		chgquest 11358,11359;
+		close;
+	case 15:
+		mes "[バゼット]";
+		mes "早く研究を……";
+		mes "いや、それより今は^0000FF体調が悪い患者が";
+		mes "南の方に集まっているので、";
+		mes "急いでソニアの茎を届けるのが先です！^000000";
+		next;
+		mes "[バゼット]";
+		mes "もしかしたら患者の症状が";
+		mes "治まるかもしれません。";
+		next;
+		mes "[バゼット]";
+		mes "^0000FFルーゲン教官^000000が看病しているので";
+		mes "あの方に茎を渡してください。";
+		mes "この手紙に私が経緯を書いておくので";
+		mes "これも一緒に渡してください。";
+		next;
+		mes "[バゼット]";
+		mes "私はここで";
+		mes "研究を始められるようにします！";
+		mes "あと、今回は運よく無事でしたが、";
+		mes "今後は何でも口に入れたりしないで";
+		mes "下さいね！";
+		viewpoint 1,105,71,3,0xFF0000;
+		close;
+	case 16:
+	case 17:
+		mes "[バゼット]";
+		mes "ルーゲン教官の所には行って来ました？";
+		close;
+	case 18:
+		mes "[バゼット]";
+		mes "ふふふふふ!!!!";
+		mes "どうでした?!";
+		mes "やはり効果はありましたよね？";
+		next;
+		mes "[バゼット]";
+		mes "研究の方もかなり良い結果が";
+		mes "出ると思います！";
+		mes "無謀な行動でしたが、";
+		mes "おかげで多くの命を";
+		mes "救うことができました!!";
+		next;
+		mes "[バゼット]";
+		mes "これであの^0000FF怪しい洞窟^000000を";
+		mes "隅から隅まで調査できそうです！";
+		next;
+		menu "洞窟？",-;
+		mes "[バゼット]";
+		mes "毒ガスが漏れている岩があるでしょう？";
+		mes "あの岩には洞窟があるのです。";
+		mes "^0000FFガスがあまりにも濃く出過ぎて";
+		mes "入口がよく見えない程^000000ですが。";
+		next;
+		mes "[バゼット]";
+		mes "しかしこのソニアの茎があれば";
+		mes "毒ガスに臆することもなく、";
+		mes "洞窟を調査することができます！";
+		next;
+		mes "[バゼット]";
+		mes "お二人がいなければ、";
+		mes "まだ頭を抱えていたことでしょう。";
+		mes "本当にありがとうございました！";
+		next;
+		mes "[バゼット]";
+		mes "調査に協力してもらったり";
+		mes "ソニアの茎を届けてもらったり、";
+		mes "いろいろあって疲れているでしょう。";
+		mes "しばらくここで休んでいてください。";
+		next;
+		mes "[バゼット]";
+		mes "私はその間にワクチンを作って";
+		mes "みんなに配ってきます。";
+		next;
+		mes "……";
+		next;
+		mes "…………";
+		next;
+		mes "………………";
+		next;
+		mes "[バゼット]";
+		mes "少しは休めましたか？";
+		next;
+		mes "[バゼット]";
+		mes "お二人が休んでいる間に、";
+		mes "ワクチンを投与した部隊が";
+		mes "洞窟へと向かいました。";
+		mes "問題が発生したという連絡も";
+		mes "ありませんし、ワクチンの効果が";
+		mes "効いているようですね。";
+		next;
+		mes "[バゼット]";
+		mes "お二人は既に抗体ができていますから、";
+		mes "ワクチンを接種しなくても";
+		mes "あの洞窟に入れるでしょう。";
+		mes "安心して調査してきてください。";
+		next;
+		mes "[バゼット]";
+		mes "あと、ここから西に行った場所に";
+		mes "我々の本部があります。";
+		mes "何か困ったことがあったら";
+		mes "行ってみてください。";
+		next;
+		cutin "ep143_tasta",2;
+		mes "[タマリン]";
+		mes strcharinfo(0) + "様、";
+		mes "一段落ついたようですし、";
+		mes "私はこれから別れた仲間を";
+		mes "探したいと思います。";
+		next;
+		cutin "ep143_tasmi",2;
+		mes "[タマリン]";
+		mes "ここには人もたくさんいますし、";
+		mes "ここからはもう一人でも大丈夫です。";
+		mes "今まで本当にありがとうございました！";
+		next;
+		mes "[タマリン]";
+		mes "その中央の岩にあるという";
+		mes "洞窟付近を中心に探すつもりなので、";
+		mes "洞窟に入ることがあったら";
+		mes "ひと声かけてくださいね。";
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		set FVOL_1QUE,19;
+		chgquest 11362,201705;
+		close2;
+		cutin "ep143_tasmi",255;
+		end;
+	case 100:
+		mes "[バゼット]";
+		mes "本当にお二人がいなければ、";
+		mes "まだ頭を抱えていたことでしょう。";
+		mes "本当にありがとうございました！";
+		next;
+		mes "[バゼット]";
+		mes "ここから西に行った場所に";
+		mes "我々の本部がありますから、";
+		mes "何か困ったことがあったら";
+		mes "行ってみてください。";
+		close;
+	default:
+		mes "[バゼット]";
+		mes "ああ……疲れた。";
+		mes "いくら急ぎの仕事だとしても、";
+		mes "働かせすぎじゃないか？";
+		close;
+	}
+}
+
+moro_vol.gat,198,179,4	script	タマリン#ep14bs_st	10027,{
+	viewpoint 2,1,1,2,0xFFFFFF;
+	switch(FVOL_1QUE) {
+	case 13:
+		cutin "ep143_tasta",2;
+		mes "[タマリン]";
+		mes "そういえばこの前に来た時には、";
+		mes "この石はここまで大きくなかったような";
+		mes "気がするんだけど……。";
+		mes "周りにいた変な生き物も";
+		mes "やけに成長していますね。";
+		mes "^0000FF怪しい煙^000000も出ていますし……。";
+		next;
+		mes "[タマリン]";
+		mes "それに……";
+		mes "^0000FFあの時は変わった生き物たちも";
+		mes "こんなに多くなかったような……^000000";
+		mes "ソニアだったかな、これもこんなに多く";
+		mes "生えていませんでした。";
+		next;
+		cutin "ep143_taang",2;
+		mes "[タマリン]";
+		mes "ここで食べた物の中では毒もなく、";
+		mes "一番美味しかったのが";
+		mes "このソニアだったのですが……";
+		mes "その時はここまで多くなかったので、";
+		mes "空腹を満たす事は難しかったんです。";
+		next;
+		cutin "ep143_tasmi",2;
+		mes "[タマリン]";
+		mes strcharinfo(0)+ "様も食べてみますか？";
+		mes "少し多めに持って来たので……。";
+		next;
+		cutin "ep143_tasmi",255;
+		mes "‐ソニアの味、";
+		mes "　暖かくて弾力のある茎から、";
+		mes "　恍惚な自然の味が広がり……";
+		mes "　おいしい‐";
+		next;
+		cutin "ep143_tasmi",2;
+		mes "[タマリン]";
+		mes "どうですか？";
+		mes "なかなか美味しいでしょう！";
+		next;
+		mes "[タマリン]";
+		mes "っと、うっかり渡す分まで";
+		mes "食べちゃいそうなので、";
+		mes "早くバゼットさんのところに";
+		mes "戻りましょう。";
+		cutin "ep143_tasmi",2;
+		set FVOL_1QUE,14;
+		chgquest 11357,11358;
+		viewpoint 1,142,131,0,0xFF0000;
+		close2;
+		cutin "ep143_tasmi",255;
+		end;
+	case 14:
+		mes "[タマリン]";
+		mes "っと、うっかり渡す分まで";
+		mes "食べちゃいそうなので、";
+		mes "早くバゼットさんのところに";
+		mes "戻りましょう。";
+		cutin "ep143_tasmi",2;
+		viewpoint 1,142,131,0,0xFF0000;
+		close2;
+		cutin "ep143_tasmi",255;
+		end;
+	case 100:
+		cutin "ep143_tasmi",2;
+		mes "[タマリン]";
+		mes "あ、" +strcharinfo(0)+ "様、";
+		mes "これだけ人が多いと";
+		mes "逆に探すのが大変ですね！";
+		mes "洞窟に入るなら案内しましょうか？";
+		next;
+		if(select("入る","入らない") == 2) {
+			cutin "ep143_tasta",2;
+			mes "[タマリン]";
+			mes "そうですか。";
+			mes "では私は仲間探しに戻りますね。";
+			close2;
+			cutin "ep143_tasmi",255;
+			end;
+		}
+		mes "[タマリン]";
+		mes "地面が良く見えないので";
+		mes "足元に気を付けて下さいね！";
+		close2;
+		cutin "ep143_tasmi",255;
+		warp "moro_cav.gat",59,14;
+		end;
+	default:
+		cutin "ep143_taang",2;
+		mes "[タマリン]";
+		mes "うむ……";
+		mes "今はこんな事をしている場合じゃ";
+		mes "ありません！";
+		close2;
+		cutin "ep143_taang",255;
+		end;
+	}
+}
+
+moro_vol.gat,105,71,5	script	ルーゲン教官#ep14bs	405,{
+	viewpoint 2,1,1,3,0xFFFFFF;
+	switch(FVOL_1QUE) {
+	case 15:
+		mes "[ルーゲン教官]";
+		mes "大丈夫か？";
+		mes "気をしっかり持つんだ。";
+		next;
+		mes "[ルーゲン教官]";
+		mes "バゼット博士が";
+		mes "色々調べてくれているから、";
+		mes "もう少しだけ、頑張ってくれ……。";
+		next;
+		if(select("話しかけてみる","深刻そうにみえるのでやめておく") == 2) {
+			mes "[ルーゲン教官]";
+			mes "もう少しだ、もう少しの辛抱だ。";
+			mes "頑張ってくれ……。";
+			close;
+		}
+		mes "[ルーゲン教官]";
+		mes "どうしましたか？";
+		mes "痛めている所があれば受付に";
+		mes "症状を話して待っていて下さい。";
+		next;
+		menu "ソニアの茎と手紙を渡す",-;
+		mes "[ルーゲン教官]";
+		mes "!!　それは本当ですか？";
+		mes "なになに、ふむふむ……";
+		mes "手紙にも茎の事が書いてあります！";
+		mes "さっそく患者たちに";
+		mes "食べさせてみましょう！";
+		delitem 6690,1;
+		set FVOL_1QUE,16;
+		chgquest 11359,11360;
+		close;
+	case 16:
+		mes "[ルーゲン教官]";
+		mes "!!　それは本当ですか？";
+		mes "なになに、ふむふむ……";
+		mes "手紙にも茎の事が書いてあります！";
+		mes "さっそく患者たちに";
+		mes "食べさせてみましょう！";
+		close;
+	case 17:
+		mes "[ルーゲン教官]";
+		mes "おお！";
+		mes "オトゥ！";
+		mes "どうだ？　大丈夫か!?";
+		next;
+		mes "[オトゥ]";
+		mes "はぁ……あ……";
+		mes "……ルーゲン……教官……";
+		next;
+		mes "[ルーゲン教官]";
+		mes "ああ……意識が戻ったか！";
+		mes "よかった、本当に良かった!!";
+		next;
+		mes "[ルーゲン教官]";
+		mes "まだ完全に回復はしてないようですが、";
+		mes "患者の状態が";
+		mes "かなり良くなったようです。";
+		mes "まずは症状の重い患者に茎を与え、";
+		mes "残りはバゼット博士の研究結果が";
+		mes "出るのを待った方が良さそうです。";
+		next;
+		mes "[ルーゲン教官]";
+		mes "効果がとても良かったと";
+		mes "手紙に書きましたので、";
+		mes "^0000FFバゼット博士^000000に渡して下さい。";
+		mes "本当に助かりました。";
+		mes "ありがとうございます。";
+		viewpoint 1,142,131,0,0xFF0000;
+		set FVOL_1QUE,18;
+		chgquest 11361,11362;
+		close;
+	case 18:
+		mes "[ルーゲン教官]";
+		mes "まだ完全に回復はしてないようですが、";
+		mes "患者の状態が";
+		mes "かなり良くなったようです。";
+		mes "まずは症状の重い患者に茎を与え、";
+		mes "残りはバゼット博士の研究結果が";
+		mes "出るのを待った方が良さそうです。";
+		next;
+		mes "[ルーゲン教官]";
+		mes "効果がとても良かったと";
+		mes "手紙に書きましたので、";
+		mes "^0000FFバゼット博士^000000に渡して下さい。";
+		mes "本当に助かりました。";
+		mes "ありがとうございます。";
+		viewpoint 1,142,131,0,0xFFFF0000;
+		close;
+	case 100:
+		mes "[ルーゲン教官]";
+		mes "私の仲間たちもおかげ様で";
+		mes "状態が良くなりました。";
+		mes "ありがとうございます。";
+		close;
+	default:
+		mes "[ルーゲン教官]";
+		mes "大丈夫か？";
+		mes "気をしっかり持つんだ。";
+		next;
+		mes "[ルーゲン教官]";
+		mes "バゼット博士が";
+		mes "色々調べてくれているから、";
+		mes "もう少しだけ、頑張ってくれ……。";
+		close;
+	}
+}
+
+moro_vol.gat,104,70,4	script	中毒になった患者#ep14bs	887,{
+	if(FVOL_1QUE > 16) {
+		mes "[中毒になった患者]";
+		mes "ふぅ……ふぅ……。";
+		next;
+		mes "‐今は落ち着いて眠っている‐";
+		close;
+	}
+	mes "[中毒になった患者]";
+	mes "う……うぅ……";
+	if(FVOL_1QUE != 16)
+		close;
+	next;
+	mes "‐中毒になった患者に";
+	mes "　ソニアの茎を食べさせたら、";
+	mes "　顔色がよくなった‐";
+	set FVOL_1QUE,17;
+	chgquest 11360,11361;
+	close;
+}
+
+moro_vol.gat,101,72,4	script	患者#ep14bs1	585,{
+	mes "[患者]";
+	mes "う……ううう……";
+	close;
+}
+
+moro_vol.gat,101,74,4	script	患者#ep14bs2	441,{
+	mes "[患者]";
+	mes "くううう……";
+	close;
+}
+
+moro_vol.gat,103,71,6	script	患者 #ep14bs3	584,{
+	mes "[患者]";
+	mes "くう……うう……";
+	close;
+}
+
+moro_vol.gat,106,69,4	script	患者 #ep14bs4	585,{
+	mes "[患者]";
+	mes "ああ……う……";
+	close;
+}
+
+moro_vol.gat,95,96,6	shop	道具商人	553,717,611,504,525,610,645,656,657,601,602,1065
+
+moro_vol.gat,86,167,7	script	前線基地・守護者#1	415,3,3,{
 	mes "[前線基地・守護者]";
 	switch(strnpcinfo(2)%10) {
 	case 0:
@@ -755,30 +1732,30 @@ OnTouchNPC:
 	end;
 }
 
-moro_vol.gat,93,166,7	duplicate(前線基地・守護者#1)	前線基地・守護者#2	414,3,3	/* 65205 */
-moro_vol.gat,100,165,7	duplicate(前線基地・守護者#1)	前線基地・守護者#3	413,3,3	/* 65206 */
-moro_vol.gat,107,164,7	duplicate(前線基地・守護者#1)	前線基地・守護者#4	419,3,3	/* 65207 */
-moro_vol.gat,114,162,7	duplicate(前線基地・守護者#1)	前線基地・守護者#5	420,3,3	/* 65208 */
-moro_vol.gat,121,160,7	duplicate(前線基地・守護者#1)	前線基地・守護者#6	418	/* 65209 */
-moro_vol.gat,128,158,7	duplicate(前線基地・守護者#1)	前線基地・守護者#7	415	/* 65210 */
-moro_vol.gat,135,155,7	duplicate(前線基地・守護者#1)	前線基地・守護者#8	414	/* 65211 */
-moro_vol.gat,142,152,7	duplicate(前線基地・守護者#1)	前線基地・守護者#9	413	/* 65212 */
-moro_vol.gat,149,148,7	duplicate(前線基地・守護者#1)	前線基地・守護者#10	419	/* 65213 */
-moro_vol.gat,156,144,7	duplicate(前線基地・守護者#1)	前線基地・守護者#11	420	/* 65214 */
-moro_vol.gat,162,137,6	duplicate(前線基地・守護者#1)	前線基地・守護者#12	418	/* 65215 */
-moro_vol.gat,168,130,6	duplicate(前線基地・守護者#1)	前線基地・守護者#13	415	/* 65216 */
-moro_vol.gat,174,123,6	duplicate(前線基地・守護者#1)	前線基地・守護者#14	414	/* 65217 */
-moro_vol.gat,178,116,6	duplicate(前線基地・守護者#1)	前線基地・守護者#15	413	/* 65218 */
-moro_vol.gat,182,109,6	duplicate(前線基地・守護者#1)	前線基地・守護者#16	419	/* 65219 */
-moro_vol.gat,185,102,6	duplicate(前線基地・守護者#1)	前線基地・守護者#17	420	/* 65220 */
-moro_vol.gat,187,95,6	duplicate(前線基地・守護者#1)	前線基地・守護者#18	418	/* 65221 */
-moro_vol.gat,189,88,6	duplicate(前線基地・守護者#1)	前線基地・守護者#19	415	/* 65222 */
-moro_vol.gat,191,81,6	duplicate(前線基地・守護者#1)	前線基地・守護者#20	414	/* 65223 */
+moro_vol.gat,93,166,7	duplicate(前線基地・守護者#1)	前線基地・守護者#2	414,3,3
+moro_vol.gat,100,165,7	duplicate(前線基地・守護者#1)	前線基地・守護者#3	413,3,3
+moro_vol.gat,107,164,7	duplicate(前線基地・守護者#1)	前線基地・守護者#4	419,3,3
+moro_vol.gat,114,162,7	duplicate(前線基地・守護者#1)	前線基地・守護者#5	420,3,3
+moro_vol.gat,121,160,7	duplicate(前線基地・守護者#1)	前線基地・守護者#6	418,3,3
+moro_vol.gat,128,158,7	duplicate(前線基地・守護者#1)	前線基地・守護者#7	415,3,3
+moro_vol.gat,135,155,7	duplicate(前線基地・守護者#1)	前線基地・守護者#8	414,3,3
+moro_vol.gat,142,152,7	duplicate(前線基地・守護者#1)	前線基地・守護者#9	413,3,3
+moro_vol.gat,149,148,7	duplicate(前線基地・守護者#1)	前線基地・守護者#10	419,3,3
+moro_vol.gat,156,144,7	duplicate(前線基地・守護者#1)	前線基地・守護者#11	420,3,3
+moro_vol.gat,162,137,6	duplicate(前線基地・守護者#1)	前線基地・守護者#12	418,3,3
+moro_vol.gat,168,130,6	duplicate(前線基地・守護者#1)	前線基地・守護者#13	415,3,3
+moro_vol.gat,174,123,6	duplicate(前線基地・守護者#1)	前線基地・守護者#14	414,3,3
+moro_vol.gat,178,116,6	duplicate(前線基地・守護者#1)	前線基地・守護者#15	413,3,3
+moro_vol.gat,182,109,6	duplicate(前線基地・守護者#1)	前線基地・守護者#16	419,3,3
+moro_vol.gat,185,102,6	duplicate(前線基地・守護者#1)	前線基地・守護者#17	420,3,3
+moro_vol.gat,187,95,6	duplicate(前線基地・守護者#1)	前線基地・守護者#18	418,3,3
+moro_vol.gat,189,88,6	duplicate(前線基地・守護者#1)	前線基地・守護者#19	415,3,3
+moro_vol.gat,191,81,6	duplicate(前線基地・守護者#1)	前線基地・守護者#20	414,3,3
 
-moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
+moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{
 	if(ECL_3QUE < 33) {	// エクラージュの王
 		if(checkquest(201730)) {	// 魔神殿攻略済み？
-			cutin "hisie01.bmp", 2;
+			cutin "hisie01",2;
 			mes "[ヒシエ]";
 			mes "果してここで";
 			mes "魔王の実体を探し出すことが";
@@ -791,10 +1768,10 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 			mes "見ていていい気分に";
 			mes "なれるものではないな……。";
 			close2;
-			cutin "hisie01.bmp", 255;
+			cutin "hisie01",255;
 			end;
 		}
-		cutin "hisie01.bmp", 2;
+		cutin "hisie01",2;
 		mes "[ヒシエ]";
 		mes "人間連合からの者か？";
 		mes "特に連合に協力を";
@@ -806,12 +1783,12 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 		mes "そこにいる総司令官、";
 		mes "アジフに知らせよう。";
 		close2;
-		cutin "hisie01.bmp", 255;
+		cutin "hisie01",255;
 		end;
 	}
 	switch(EP143_hisie) {
 	case 0:
-		cutin "hisie01.bmp", 2;
+		cutin "hisie01",2;
 		mes "[ヒシエ]";
 		mes "全ての元凶がここに";
 		mes "隠れているというのだな？";
@@ -843,7 +1820,7 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 		mes "見掛け倒しの地位だ。";
 		next;
 		menu "エイヴァントはどうなった？",-;
-		cutin "hisie02.bmp", 2;
+		cutin "hisie02",2;
 		mes "[ヒシエ]";
 		mes "エイヴァントか……。";
 		mes "今は、あいつの知識を";
@@ -894,11 +1871,11 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 		mes "聞きたいことがあれば";
 		mes "直接聞くといい。";
 		close2;
-		cutin "hisie01.bmp", 255;
+		cutin "hisie01",255;
 		end;
 	case 1:
 		if(checkquest(7593) == 0) {
-			cutin "hisie02.bmp", 2;
+			cutin "hisie02",2;
 			mes "[ヒシエ]";
 			mes "オーブの魔力に関しては";
 			mes "エイヴァントが良く知っている。";
@@ -921,12 +1898,12 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 			mes "私とカルの面子を立てるためにも";
 			mes "助けてほしい。";
 			close2;
-			cutin "hisie01.bmp", 255;
+			cutin "hisie01",255;
 			end;
 		}
 		if(checkquest(7600)) {
 			if(checkquest(7600)&0x2 == 0) {
-				cutin "hisie01.bmp", 2;
+				cutin "hisie01",2;
 				mes "[ヒシエ]";
 				mes "まだ回収されてない";
 				mes "オーブの魔力が多い。";
@@ -934,10 +1911,10 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 				mes "マシになってきたが……";
 				mes "できれば明日も手伝ってほしい。";
 				close2;
-				cutin "hisie01.bmp", 255;
+				cutin "hisie01",255;
 				end;
 			}
-			cutin "hisie01.bmp", 2;
+			cutin "hisie01",2;
 			delquest 7600;
 			mes "[ヒシエ]";
 			mes "もし魔神殿にまた挑戦するなら";
@@ -950,12 +1927,12 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 			mes "手伝う気があるなら";
 			mes "また話しかけてほしい。";
 			close2;
-			cutin "hisie01.bmp", 255;
+			cutin "hisie01",255;
 			end;
 		}
 		if(checkquest(7595)) {
 			if(checkquest(7595)&0x4 == 0) {
-				cutin "hisie01.bmp", 2;
+				cutin "hisie01",2;
 				mes "[ヒシエ]";
 				mes "魔神殿でうごめいている";
 				mes "オーブの魔力を見つけたら、";
@@ -976,10 +1953,10 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 				mes "魔族を相手にするときに";
 				mes "有効に使ってほしい。";
 				close2;
-				cutin "hisie01.bmp", 255;
+				cutin "hisie01",255;
 				end;
 			}
-			cutin "hisie04.bmp", 2;
+			cutin "hisie04",2;
 			mes "[ヒシエ]";
 			mes "すごいぞ！　よくやってくれた！";
 			mes "君が魔力の結晶を壊してくれたおかげで";
@@ -987,7 +1964,7 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 			mes "感じられる。";
 			mes "カルもきっと、喜ぶだろう！";
 			next;
-			cutin "hisie01.bmp", 2;
+			cutin "hisie01",2;
 			mes "[ヒシエ]";
 			mes "大したものではないが";
 			mes "受け取ってほしい。";
@@ -1000,14 +1977,14 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 			mes "魔神殿に行くことになれば";
 			mes "その時も頼みたい。";
 			mes "まずはゆっくり休んでくれ。";
-			setquest 7600; //state=1
+			setquest 7600;
 			delquest 7595;
-			getitem 607, 1;
+			getitem 607,1;
 			close2;
-			cutin "hisie01.bmp", 255;
+			cutin "hisie01",255;
 			end;
 		}
-		cutin "hisie01.bmp", 2;
+		cutin "hisie01",2;
 		mes "[ヒシエ]";
 		mes "魔神殿か……。";
 		mes "ついでで構わないのだが、";
@@ -1023,12 +2000,12 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 		mes "頼まれてくれるか？";
 		next;
 		if(select("よろこんで","力になれない") == 2) {
-			cutin "hisie02.bmp", 2;
+			cutin "hisie02",2;
 			mes "[ヒシエ]";
 			mes "そうか、無理することはない。";
 			mes "気にするな。";
 			close2;
-			cutin "hisie01.bmp", 255;
+			cutin "hisie01",255;
 			end;
 		}
 		mes "[ヒシエ]";
@@ -1046,17 +2023,17 @@ moro_vol.gat,95,108,7	script	ヒシエ#143hisie01	623,{/* 65224 */
 		mes "[ヒシエ]";
 		mes "とはいえ、無理はしなくていい。";
 		mes "無事に帰ることを優先してくれ。";
-		setquest 7595; //state=1
+		setquest 7595;
 		close2;
-		cutin "hisie01.bmp", 255;
+		cutin "hisie01",255;
 		end;
 	}
 OnInit:
-	waitingroom "オーブの魔力回収", 0; //65224
+	waitingroom "オーブの魔力回収",0;
 	end;
 }
 
-moro_vol.gat,94,110,5	script	守護者ニーズヘッグ#143n	510,{/* 65225 */
+moro_vol.gat,94,110,5	script	守護者ニーズヘッグ#143n	510,{
 	if(checkquest(201730)) {	// 魔神殿攻略済み？
 		mes "[守護者ニーズヘッグ]";
 		mes "不思議です……。";
@@ -1065,7 +2042,7 @@ moro_vol.gat,94,110,5	script	守護者ニーズヘッグ#143n	510,{/* 65225 */
 		mes "そして、その願いは叶いました……。";
 		mes "……ですが、なぜこんなにも";
 		mes "気持ちが落ち着かないのでしょう？";
-		cutin "ep14_nyd02.bmp", 2;
+		cutin "ep14_nyd02",2;
 		next;
 		mes "[守護者ニーズヘッグ]";
 		mes "分かりません……。";
@@ -1073,7 +2050,7 @@ moro_vol.gat,94,110,5	script	守護者ニーズヘッグ#143n	510,{/* 65225 */
 		mes "果たせたから……でしょうか。";
 		mes "もしかしますとまだ、実感が";
 		mes "沸かないからかもしれませんね……。";
-		cutin "ep14_nyd01.bmp", 2;
+		cutin "ep14_nyd01",2;
 		next;
 		mes "[守護者ニーズヘッグ]";
 		mes "でも……。";
@@ -1082,12 +2059,12 @@ moro_vol.gat,94,110,5	script	守護者ニーズヘッグ#143n	510,{/* 65225 */
 		mes "助けていただいた";
 		mes "この日のことを思い出して、";
 		mes "笑える日がくると思っています。";
-		cutin "ep14_nyd04.bmp", 2;
+		cutin "ep14_nyd04",2;
 		close2;
-		cutin "ep14_nyd01.bmp", 255;
+		cutin "ep14_nyd01",255;
 		end;
 	}
-	cutin "ep14_nyd03.bmp", 2;
+	cutin "ep14_nyd03",2;
 	mes "[守護者ニーズヘッグ]";
 	mes "もうすぐ決戦の日が";
 	mes "やってきます。";
@@ -1095,41 +2072,41 @@ moro_vol.gat,94,110,5	script	守護者ニーズヘッグ#143n	510,{/* 65225 */
 	mes "守護者としての義務を";
 	mes "遂行しましょう。";
 	next;
-	cutin "ep14_nyd04.bmp", 2;
+	cutin "ep14_nyd04",2;
 	mes "[守護者ニーズヘッグ]";
 	mes "私はかつて過ちを犯してしまいました。";
 	mes "その償いというわけではありませんが、";
 	mes "出来る限りの力を尽くしましょう。";
 	close2;
-	cutin "ep14_nyd04.bmp", 255;
+	cutin "ep14_nyd04",255;
 	end;
 }
 
-moro_vol.gat,97,110,3	script	ロキ#1432loki01	512,{/* 65226 */
-	cutin "ep14_roki01.bmp", 2;
+moro_vol.gat,97,110,3	script	ロキ#1432loki01	512,{
+	cutin "ep14_roki01",2;
 	mes "[ロキ]";
 	mes "これはまだ前哨戦だ。";
 	mes "あいつの真の姿が現れた時。";
 	mes "そこからが本当の始まりだ。";
 	close2;
-	cutin "ep14_roki01.bmp", 255;
+	cutin "ep14_roki01",255;
 	end;
 }
 
-moro_vol.gat,98,107,3	script	魔学者#143avt01	618,{/* 65227 */
+moro_vol.gat,98,107,3	script	魔学者#143avt01	618,{
 	if(ECL_3QUE < 33) {	// エクラージュの王
-		cutin "avant01.bmp", 1;
+		cutin "avant01",1;
 		mes "[魔学者]";
 		mes "……邪魔だ。";
 		mes "私の実験材料になりたいのか？";
 		mes "手伝う気が無いならここから去れ。";
 		close2;
-		cutin "avant01.bmp", 255;
+		cutin "avant01",255;
 		end;
 	}
 	switch(EP143_hisie) {
 	case 0:
-		cutin "avant01.bmp", 1;
+		cutin "avant01",1;
 		mes "[エイヴァント]";
 		mes "ここには何の用だ？";
 		mes "君も私をあざ笑いに来たのか？";
@@ -1142,7 +2119,7 @@ moro_vol.gat,98,107,3	script	魔学者#143avt01	618,{/* 65227 */
 		mes "さらしかけたことは";
 		mes "認めよう。";
 		next;
-		cutin "avant02.bmp", 1;
+		cutin "avant02",1;
 		mes "[エイヴァント]";
 		mes "今回の協力は、";
 		mes "それに対する贖罪ともいえるだろう。";
@@ -1165,30 +2142,30 @@ moro_vol.gat,98,107,3	script	魔学者#143avt01	618,{/* 65227 */
 		mes "ハハハハハハハハ！";
 		set EP143_hisie,1;
 		close2;
-		cutin "avant01.bmp", 255;
+		cutin "avant01",255;
 		end;
 	case 1:
 		if(checkquest(7581) == 0) {
-			cutin "avant01.bmp", 1;
+			cutin "avant01",1;
 			mes "[エイヴァント]";
 			mes "……ふん、極小の魔力でも";
 			mes "あのような運用が可能とはな……。";
 			mes "盗んだ魔力で強くなろうとは……";
 			mes "汚らわしいやつらめ！";
 			close2;
-			cutin "avant01.bmp", 255;
+			cutin "avant01",255;
 			end;
 		}
 		if(checkquest(7584)) {
 			if(checkquest(7584)&0x2 == 0) {
-				cutin "avant01.bmp", 1;
+				cutin "avant01",1;
 				mes "[エイヴァント]";
 				mes "……次の討伐の時も頼むぞ。";
 				close2;
-				cutin "avant01.bmp", 255;
+				cutin "avant01",255;
 				end;
 			}
-			cutin "avant01.bmp", 1;
+			cutin "avant01",1;
 			mes "[エイヴァント]";
 			mes "もうすぐ人間連合から";
 			mes "再度魔族討伐に出るはずだ。";
@@ -1197,12 +2174,12 @@ moro_vol.gat,98,107,3	script	魔学者#143avt01	618,{/* 65227 */
 			mes "必要があるからな。";
 			delquest 7584;
 			close2;
-			cutin "avant01.bmp", 255;
+			cutin "avant01",255;
 			end;
 		}
 		if(checkquest(7583)) {
 			if(countitem(6708) < 3) {
-				cutin "avant01.bmp", 1;
+				cutin "avant01",1;
 				mes "[エイヴァント]";
 				mes "お前があの強大な魔族を";
 				mes "倒せば^ff0000マナクリスタル^000000が";
@@ -1211,25 +2188,25 @@ moro_vol.gat,98,107,3	script	魔学者#143avt01	618,{/* 65227 */
 				mes "最低3つ、分かったな？";
 				mes "3つ以上だ。";
 				close2;
-				cutin "avant01.bmp", 255;
+				cutin "avant01",255;
 				end;
 			}
-			cutin "avant01.bmp", 1;
+			cutin "avant01",1;
 			mes "[エイヴァント]";
 			mes "……フン、やるな。";
 			mes "^ff0000マナクリスタル^000000はもらうぞ。";
-			delitem 6708, 3;
-			chgquest 7583,7584; //state=1
-			getexp 500000,0; //98894576
-			getexp 500000,0; //99394576
-			getexp 500000,0; //99894576
-			getexp 500000,0; //99999999
-			getexp 500000,0; //99999999
+			delitem 6708,3;
+			chgquest 7583,7584;
+			getexp 500000,0;
+			getexp 500000,0;
+			getexp 500000,0;
+			getexp 500000,0;
+			getexp 500000,0;
 			close2;
-			cutin "avant01.bmp", 255;
+			cutin "avant01",255;
 			end;
 		}
-		cutin "avant01.bmp", 1;
+		cutin "avant01",1;
 		mes "[エイヴァント]";
 		mes "おい、お前。";
 		mes "そうだ、お前だ。";
@@ -1266,17 +2243,17 @@ moro_vol.gat,98,107,3	script	魔学者#143avt01	618,{/* 65227 */
 		mes "^ff0000マナクリスタル^000000も当然3つだ。";
 		mes "……エクラージュ……ひいては";
 		mes "カルデュイのためにもな……。";
-		setquest 7583; //state=1
+		setquest 7583;
 		close2;
-		cutin "avant01.bmp", 255;
+		cutin "avant01",255;
 		end;
 	}
 OnInit:
-	waitingroom "マナクリスタル回収", 0; //65227
+	waitingroom "マナクリスタル回収",0;
 	end;
 }
 
-moro_vol.gat,91,105,1	script	次元移動機#143_1	10007,{/* 65228 */
+moro_vol.gat,91,105,1	script	次元移動機#143_1	10007,{
 	mes "[ドフィ]";
 	mes "それはエクラージュに";
 	mes "繋がっている次元移動機です。";
@@ -1296,7 +2273,7 @@ moro_vol.gat,91,105,1	script	次元移動機#143_1	10007,{/* 65228 */
 	end;
 }
 
-moro_vol.gat,88,107,5	script	魔学者ドフィ#143vol01	440,{/* 65229 */
+moro_vol.gat,88,107,5	script	魔学者ドフィ#143vol01	440,{
 	mes "[ドフィ]";
 	mes "……ほう。";
 	mes "人間ですか。";
@@ -1346,7 +2323,7 @@ moro_vol.gat,88,107,5	script	魔学者ドフィ#143vol01	440,{/* 65229 */
 	close;
 }
 
-moro_vol.gat,87,104,5	script	魔学者コンパーナ#143vol	446,{/* 65230 */
+moro_vol.gat,87,104,5	script	魔学者コンパーナ#143vol	446,{
 	mes "[コンパーナ]";
 	mes "なんとか派遣員として";
 	mes "ここまでは来ましたけど……";
@@ -1356,7 +2333,7 @@ moro_vol.gat,87,104,5	script	魔学者コンパーナ#143vol	446,{/* 65230 */
 	close;
 }
 
-moro_vol.gat,88,102,6	script	魔学者マキア#143vol03	444,{/* 65231 */
+moro_vol.gat,88,102,6	script	魔学者マキア#143vol03	444,{
 	mes "[マキア]";
 	mes "始めて見る生態系ですね。";
 	mes "すごく熱そうに見えて意外と";
@@ -1365,7 +2342,7 @@ moro_vol.gat,88,102,6	script	魔学者マキア#143vol03	444,{/* 65231 */
 	close;
 }
 
-moro_vol.gat,104,109,0	script	戦士ラフィネ#sol01	447,{/* 65232 */
+moro_vol.gat,104,109,0	script	戦士ラフィネ#sol01	447,{
 	end;
 OnTalk1:
 	unittalk "我らは!!";
@@ -1375,7 +2352,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,106,109,0	script	戦士ラフィネ#sol02	447,{/* 65233 */
+moro_vol.gat,106,109,0	script	戦士ラフィネ#sol02	447,{
 	end;
 OnTalk1:
 	unittalk "我らは!!";
@@ -1385,7 +2362,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,108,109,0	script	戦士ラフィネ#sol03	447,{/* 65234 */
+moro_vol.gat,108,109,0	script	戦士ラフィネ#sol03	447,{
 	end;
 OnTalk1:
 	unittalk "我らは!!";
@@ -1395,7 +2372,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,104,107,0	script	戦士ラフィネ#sol04	447,{/* 65235 */
+moro_vol.gat,104,107,0	script	戦士ラフィネ#sol04	447,{
 	end;
 OnTalk1:
 	unittalk "誇り高き!!";
@@ -1405,7 +2382,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,106,107,0	script	戦士ラフィネ#sol05	447,{/* 65236 */
+moro_vol.gat,106,107,0	script	戦士ラフィネ#sol05	447,{
 	end;
 OnTalk1:
 	unittalk "誇り高き!!";
@@ -1415,7 +2392,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,108,107,0	script	戦士ラフィネ#sol06	447,{/* 65237 */
+moro_vol.gat,108,107,0	script	戦士ラフィネ#sol06	447,{
 	end;
 OnTalk1:
 	unittalk "誇り高き!!";
@@ -1425,7 +2402,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,104,105,0	script	戦士ラフィネ#sol07	447,{/* 65238 */
+moro_vol.gat,104,105,0	script	戦士ラフィネ#sol07	447,{
 	end;
 OnTalk1:
 	unittalk "ラフィネ族!!";
@@ -1435,7 +2412,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,106,105,0	script	戦士ラフィネ#sol08	447,{/* 65239 */
+moro_vol.gat,106,105,0	script	戦士ラフィネ#sol08	447,{
 	end;
 OnTalk1:
 	unittalk "ラフィネ族!!";
@@ -1445,7 +2422,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,108,105,0	script	戦士ラフィネ#sol09	447,{/* 65240 */
+moro_vol.gat,108,105,0	script	戦士ラフィネ#sol09	447,{
 	end;
 OnTalk1:
 	unittalk "ラフィネ族!!";
@@ -1455,7 +2432,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,106,111,3	script	戦場指揮官#sol10	447,3,3,{/* 65241 */
+moro_vol.gat,106,111,3	script	戦場指揮官#sol10	447,3,3,{
 	mes "[ラフィネ指揮官]";
 	mes "本格的な戦闘を前に";
 	mes "部隊を整備中である。";
@@ -1505,7 +2482,7 @@ OnTimer30000:
 	end;
 }
 
-moro_vol.gat,101,102,0	script	ラフィネ魔道師#wsol01	611,{/* 65243 */
+moro_vol.gat,101,102,0	script	ラフィネ魔道師#wsol01	611,{
 	switch(rand(5)) {
 	case 0: unittalk "守護者様が見ていらっしゃるんだわ……がんばる……。"; end;
 	case 1: unittalk "……敵に、慈悲は無用……。"; end;
@@ -1515,7 +2492,7 @@ moro_vol.gat,101,102,0	script	ラフィネ魔道師#wsol01	611,{/* 65243 */
 	}
 }
 
-moro_vol.gat,103,102,0	script	ラフィネ魔道師#wsol02	520,{/* 65244 */
+moro_vol.gat,103,102,0	script	ラフィネ魔道師#wsol02	520,{
 	switch(rand(5)) {
 	case 0: unittalk "道具のお手入れ、ふんふふーん♪"; end;
 	case 1: unittalk "……あれ、魔法書どこに置いたかな。"; end;
@@ -1525,7 +2502,7 @@ moro_vol.gat,103,102,0	script	ラフィネ魔道師#wsol02	520,{/* 65244 */
 	}
 }
 
-moro_vol.gat,105,102,0	script	ラフィネ魔道師#wsol03	446,{/* 65245 */
+moro_vol.gat,105,102,0	script	ラフィネ魔道師#wsol03	446,{
 	switch(rand(5)) {
 	case 0: unittalk "……俺達はいつまで待機なんだ……。"; end;
 	case 1: unittalk "…なんで俺はここに来たんだ……俺のヤイで眠りたい……。"; end;
@@ -1535,7 +2512,7 @@ moro_vol.gat,105,102,0	script	ラフィネ魔道師#wsol03	446,{/* 65245 */
 	}
 }
 
-moro_vol.gat,107,102,0	script	ラフィネ魔道師#wsol04	440,{/* 65246 */
+moro_vol.gat,107,102,0	script	ラフィネ魔道師#wsol04	440,{
 	switch(rand(5)) {
 	case 0: unittalk "一応、ハーブも持っていくかな。"; end;
 	case 1: unittalk "うまくいくのかなあ、少し心配だわ。"; end;
@@ -1545,7 +2522,7 @@ moro_vol.gat,107,102,0	script	ラフィネ魔道師#wsol04	440,{/* 65246 */
 	}
 }
 
-moro_vol.gat,109,102,0	script	ラフィネ魔道師#wsol05	446,{/* 65247 */
+moro_vol.gat,109,102,0	script	ラフィネ魔道師#wsol05	446,{
 	switch(rand(5)) {
 	case 0: unittalk "……緊張するな……。"; end;
 	case 1: unittalk "こんな緊張感……悪くないな……ふふふ……。"; end;
@@ -1555,7 +2532,7 @@ moro_vol.gat,109,102,0	script	ラフィネ魔道師#wsol05	446,{/* 65247 */
 	}
 }
 
-moro_vol.gat,93,128,1	script	戦士ラフィネ#line01	461,3,3,{/* 65248 */
+moro_vol.gat,93,128,1	script	戦士ラフィネ#line01	461,3,3,{
 	switch(rand(4)) {
 	case 0: unittalk "気をつけてください！"; end;
 	case 1: unittalk "危険なので後ろに下がってください！"; end;
@@ -1565,12 +2542,12 @@ moro_vol.gat,93,128,1	script	戦士ラフィネ#line01	461,3,3,{/* 65248 */
 OnTouchNPC:
 	unittalk "敵発見!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,96,130,1	script	戦士ラフィネ#line02	461,{/* 65249 */
+moro_vol.gat,96,130,1	script	戦士ラフィネ#line02	461,{
 	switch(rand(4)) {
 	case 0: unittalk "危険なほどに燃えるっすよ！"; end;
 	case 1: unittalk "うっす、うっす！"; end;
@@ -1579,7 +2556,7 @@ moro_vol.gat,96,130,1	script	戦士ラフィネ#line02	461,{/* 65249 */
 	}
 }
 
-moro_vol.gat,99,131,1	script	戦士ラフィネ#line03	461,3,3,{/* 65250 */
+moro_vol.gat,99,131,1	script	戦士ラフィネ#line03	461,3,3,{
 	switch(rand(4)) {
 	case 0: unittalk "元気があれば、ごはんがうまい。"; end;
 	case 1: unittalk "……出番きちゃった!?"; end;
@@ -1589,12 +2566,12 @@ moro_vol.gat,99,131,1	script	戦士ラフィネ#line03	461,3,3,{/* 65250 */
 OnTouchNPC:
 	unittalk "く……くるな!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,102,132,7	script	戦士ラフィネ#line04	447,{/* 65251 */
+moro_vol.gat,102,132,7	script	戦士ラフィネ#line04	447,{
 	switch(rand(4)) {
 	case 0: unittalk "武器の手入れも万全です。"; end;
 	case 1: unittalk "危ないので、ここはお任せください！"; end;
@@ -1603,7 +2580,7 @@ moro_vol.gat,102,132,7	script	戦士ラフィネ#line04	447,{/* 65251 */
 	}
 }
 
-moro_vol.gat,105,132,7	script	戦士ラフィネ#line05	462,3,3,{/* 65252 */
+moro_vol.gat,105,132,7	script	戦士ラフィネ#line05	462,3,3,{
 	switch(rand(4)) {
 	case 0: unittalk "どうかお下がりください。"; end;
 	case 1: unittalk "緊張します……。"; end;
@@ -1613,12 +2590,12 @@ moro_vol.gat,105,132,7	script	戦士ラフィネ#line05	462,3,3,{/* 65252 */
 OnTouchNPC:
 	unittalk "ここは通さない！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,108,131,7	script	戦士ラフィネ#line06	461,{/* 65253 */
+moro_vol.gat,108,131,7	script	戦士ラフィネ#line06	461,{
 	switch(rand(4)) {
 	case 0: unittalk "命あってこそですから、気をつけてください。"; end;
 	case 1: unittalk "ふーむ……。"; end;
@@ -1627,7 +2604,7 @@ moro_vol.gat,108,131,7	script	戦士ラフィネ#line06	461,{/* 65253 */
 	}
 }
 
-moro_vol.gat,111,129,7	script	戦士ラフィネ#line07	447,3,3,{/* 65254 */
+moro_vol.gat,111,129,7	script	戦士ラフィネ#line07	447,3,3,{
 	switch(rand(4)) {
 	case 0: unittalk "異常はありません!!"; end;
 	case 1: unittalk "どうぞ、ここは任せてください！"; end;
@@ -1637,12 +2614,12 @@ moro_vol.gat,111,129,7	script	戦士ラフィネ#line07	447,3,3,{/* 65254 */
 OnTouchNPC:
 	unittalk "敵だ!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,85,117,1	script	戦士ラフィネ#line11	462,3,3,{/* 65255 */
+moro_vol.gat,85,117,1	script	戦士ラフィネ#line11	462,3,3,{
 	switch(rand(4)) {
 	case 0: unittalk "油断は禁物ですっ！"; end;
 	case 1: unittalk "前衛に比べればマシなんでしょうけど……。"; end;
@@ -1652,12 +2629,12 @@ moro_vol.gat,85,117,1	script	戦士ラフィネ#line11	462,3,3,{/* 65255 */
 OnTouchNPC:
 	unittalk "ここまで来るなんて！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,89,118,1	script	戦士ラフィネ#line12	447,{/* 65256 */
+moro_vol.gat,89,118,1	script	戦士ラフィネ#line12	447,{
 	switch(rand(4)) {
 	case 0: unittalk "逃げちゃだめだぞ！　逃げちゃ～……！"; end;
 	case 1: unittalk "敵がこうきたら、こう動いて……。"; end;
@@ -1666,7 +2643,7 @@ moro_vol.gat,89,118,1	script	戦士ラフィネ#line12	447,{/* 65256 */
 	}
 }
 
-moro_vol.gat,92,119,7	script	戦士ラフィネ#line13	447,3,3,{/* 65257 */
+moro_vol.gat,92,119,7	script	戦士ラフィネ#line13	447,3,3,{
 	switch(rand(4)) {
 	case 0: unittalk "些細なことでも、ご注意ください！"; end;
 	case 1: unittalk "必ず、やり遂げます！"; end;
@@ -1676,12 +2653,12 @@ moro_vol.gat,92,119,7	script	戦士ラフィネ#line13	447,3,3,{/* 65257 */
 OnTouchNPC:
 	unittalk "敵襲だぞ!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,96,119,7	script	戦士ラフィネ#line14	461,{/* 65258 */
+moro_vol.gat,96,119,7	script	戦士ラフィネ#line14	461,{
 	switch(rand(4)) {
 	case 0: unittalk "緊張感を維持するのは、大変です……。"; end;
 	case 1: unittalk "みんな無事に帰れたら良いな……。"; end;
@@ -1690,7 +2667,7 @@ moro_vol.gat,96,119,7	script	戦士ラフィネ#line14	461,{/* 65258 */
 	}
 }
 
-moro_vol.gat,100,117,7	script	戦士ラフィネ#line15	447,3,3,{/* 65259 */
+moro_vol.gat,100,117,7	script	戦士ラフィネ#line15	447,3,3,{
 	switch(rand(4)) {
 	case 0: unittalk "前衛の動向が見えないのが辛いですね……。"; end;
 	case 1: unittalk "敵の動向が気になりますね……。"; end;
@@ -1700,12 +2677,12 @@ moro_vol.gat,100,117,7	script	戦士ラフィネ#line15	447,3,3,{/* 65259 */
 OnTouchNPC:
 	unittalk "倒してやる!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,103,118,1	script	戦士ラフィネ#line16	462,{/* 65260 */
+moro_vol.gat,103,118,1	script	戦士ラフィネ#line16	462,{
 	switch(rand(4)) {
 	case 0: unittalk "前方に友人がいるので、前方が気になります。"; end;
 	case 1: unittalk "とりあえず今のところ、何もありません。"; end;
@@ -1714,7 +2691,7 @@ moro_vol.gat,103,118,1	script	戦士ラフィネ#line16	462,{/* 65260 */
 	}
 }
 
-moro_vol.gat,107,118,7	script	戦士ラフィネ#line17	462,3,3,{/* 65261 */
+moro_vol.gat,107,118,7	script	戦士ラフィネ#line17	462,3,3,{
 	switch(rand(4)) {
 	case 0: unittalk "いつ敵襲がきてもいいように、スマイルの練習♪"; end;
 	case 1: unittalk "はふ～……。"; end;
@@ -1724,12 +2701,12 @@ moro_vol.gat,107,118,7	script	戦士ラフィネ#line17	462,3,3,{/* 65261 */
 OnTouchNPC:
 	unittalk "いきま～すっ♪";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,110,117,7	script	戦士ラフィネ#line18	461,{/* 65262 */
+moro_vol.gat,110,117,7	script	戦士ラフィネ#line18	461,{
 	switch(rand(4)) {
 	case 0: unittalk "木の橋を飛んで渡るくらい、慎重に行かねば……。"; end;
 	case 1: unittalk "見えない前のメンバーにも注意しておこう。"; end;
@@ -1738,7 +2715,7 @@ moro_vol.gat,110,117,7	script	戦士ラフィネ#line18	461,{/* 65262 */
 	}
 }
 
-moro_vol.gat,114,114,7	script	戦士ラフィネ#line19	461,3,3,{/* 65263 */
+moro_vol.gat,114,114,7	script	戦士ラフィネ#line19	461,3,3,{
 	switch(rand(4)) {
 	case 0: unittalk "サファ族のやつらと一緒だと、多少不安っす……。"; end;
 	case 1: unittalk "注意を怠らないようにがんばるっす！"; end;
@@ -1748,13 +2725,13 @@ moro_vol.gat,114,114,7	script	戦士ラフィネ#line19	461,3,3,{/* 65263 */
 OnTouchNPC:
 	unittalk "敵っす！　敵っすよー！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
-	cutin "ep13_captin_edq.bmp", 2;
+moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{
+	cutin "ep13_captin_edq",2;
 	if(checkquest(7598)) {
 		if(checkquest(7598)&0x2 == 0) {
 			mes "[司令官アジフ]";
@@ -1763,7 +2740,7 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 			mes "その間、おまえは少し休んだ方がいい。";
 			mes "残りはこっちにも任せてくれ。";
 			close2;
-			cutin "ep13_captin_edq.bmp", 255;
+			cutin "ep13_captin_edq",255;
 			end;
 		}
 		delquest 7598;
@@ -1787,7 +2764,7 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 		mes "調べに行く必要はない。";
 		mes "俺たちも働かないとな！";
 		close2;
-		cutin "ep13_captin_edq.bmp", 255;
+		cutin "ep13_captin_edq",255;
 		end;
 	}
 	if(checkquest(7593)) {
@@ -1801,7 +2778,7 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 		mes "お嬢さんも行くそうだ。";
 		mes "そのお嬢さんを探せばいいだろう。";
 		close2;
-		cutin "ep13_captin_edq.bmp", 255;
+		cutin "ep13_captin_edq",255;
 		end;
 	}
 	if(checkquest(7597)) {
@@ -1818,7 +2795,7 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 		mes "ヒバ・アジフからおまえに";
 		mes "感謝を言わせてくれ。";
 		next;
-		cutin "ep13_captin_edq.bmp", 255;
+		cutin "ep13_captin_edq",255;
 		mes "[アビダル]";
 		mes "本当に素晴らしい働きですよ。";
 		mes "あなたはこの世界を救ったも";
@@ -1826,7 +2803,7 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 		mes "これで私の肩の荷も";
 		mes "下りそうですね……。";
 		next;
-		cutin "ep13_captin_edq.bmp", 2;
+		cutin "ep13_captin_edq",2;
 		mes "[司令官アジフ]";
 		mes "アビダル!";
 		mes "そこまでだ！";
@@ -1862,12 +2839,12 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 		mes "たまらんからな！";
 		mes "よろしく頼んだぞ！";
 		delquest 7597;
-		setquest 7598; //state=1
+		setquest 7598;
 		if(checkquest(201730) == 0)
-			setquest 201730; //state=1
-		getitem 7444, 2;
+			setquest 201730;
+		getitem 7444,2;
 		close2;
-		cutin "ep13_captin_edq.bmp", 255;
+		cutin "ep13_captin_edq",255;
 		end;
 	}
 	if(checkquest(201730)) {
@@ -1895,7 +2872,7 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 			mes "うむ、仕方あるまい。";
 			mes "他の人に頼むとしよう。";
 			close2;
-			cutin "ep13_captin_edq.bmp", 255;
+			cutin "ep13_captin_edq",255;
 			end;
 		}
 		mes "[司令官アジフ]";
@@ -1927,9 +2904,9 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 		mes "気を抜かずに、対応しろよ。";
 		mes "では、健闘を祈る。";
 		if(checkquest(7593) == 0)
-			setquest 7593; //state=1
+			setquest 7593;
 		close2;
-		cutin "ep13_captin_edq.bmp", 255;
+		cutin "ep13_captin_edq",255;
 		end;
 	}
 	if(checkquest(201720) && checkquest(201725)) {	// ビオスの島、モルスの洞窟クリア済み
@@ -2002,7 +2979,7 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 			mes "ここまで協力してくれただけでも";
 			mes "ありがたかったぜ。";
 			close2;
-			cutin "ep13_captin_edq.bmp", 255;
+			cutin "ep13_captin_edq",255;
 			end;
 		}
 		mes "[司令官アジフ]";
@@ -2019,9 +2996,9 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 		mes "とはいえ、俺たちにとっては";
 		mes "その方が好都合な部分もある。";
 		mes "……健闘を祈る。";
-		setquest 7593; //state=1
+		setquest 7593;
 		close2;
-		cutin "ep13_captin_edq.bmp", 255;
+		cutin "ep13_captin_edq",255;
 		end;
 	}
 	mes "[司令官アジフ]";
@@ -2055,14 +3032,14 @@ moro_vol.gat,108,88,5	script	司令官アジフ#14301	459,{/* 65264 */
 	mes "頼むかもしれないからな。";
 	mes "それまで生き延びてくれよ。";
 	close2;
-	cutin "ep13_captin_edq.bmp", 255;
+	cutin "ep13_captin_edq",255;
 	end;
 OnInit:
-	waitingroom "魔神殿", 0; //65264
+	waitingroom "魔神殿",0;
 	end;
 }
 
-moro_vol.gat,110,90,3	script	参謀アビダル#14302	755,{/* 65265 */
+moro_vol.gat,110,90,3	script	参謀アビダル#14302	755,{
 	if(checkquest(7593)) {
 		if(checkquest(7599)) {
 			if(checkquest(7599)&0x2 == 0) {
@@ -2121,7 +3098,7 @@ moro_vol.gat,110,90,3	script	参謀アビダル#14302	755,{/* 65265 */
 			mes "お疲れ様でした。";
 			mes "こちらが報酬となります。";
 			mes "ゆっくり体を休めてください。";
-			setquest 7599; //state=1
+			setquest 7599;
 			if(checkquest(96435))
 				delquest 96435;
 			if(checkquest(96436))
@@ -2130,10 +3107,10 @@ moro_vol.gat,110,90,3	script	参謀アビダル#14302	755,{/* 65265 */
 				delquest 96437;
 			if(checkquest(96438))
 				delquest 96438;
-			getitem 7228, 1;
-			getitem 7229, 1;
-			getitem 22567, 1;
-			getitem 7444, 3;
+			getitem 7228,1;
+			getitem 7229,1;
+			getitem 22567,1;
+			getitem 7444,3;
 			close;
 		}
 		mes "[アビダル]";
@@ -2163,11 +3140,11 @@ moro_vol.gat,110,90,3	script	参謀アビダル#14302	755,{/* 65265 */
 	mes "注意を怠らないでくださいね。";
 	close;
 OnInit:
-	waitingroom "魔神殿討伐報告", 0; //65265
+	waitingroom "魔神殿討伐報告",0;
 	end;
 }
 
-moro_vol.gat,111,87,1	script	教官長イグリド#14303	751,{/* 65266 */
+moro_vol.gat,111,87,1	script	教官長イグリド#14303	751,{
 	if(checkquest(7582)) {
 		if(checkquest(7582)&0x2 == 0) {
 			mes "[イグリド]";
@@ -2211,12 +3188,12 @@ moro_vol.gat,111,87,1	script	教官長イグリド#14303	751,{/* 65266 */
 		mes "また討伐に参加して欲しい。";
 		mes "帰るときにはみんな一緒に";
 		mes "帰りたいからな。";
-		chgquest 7581,7582; //state=1
-		getexp 500000,0; //99444446
-		getexp 500000,0; //99944446
-		getexp 500000,0; //99999999
-		getexp 500000,0; //99999999
-		getexp 500000,0; //99999999
+		chgquest 7581,7582;
+		getexp 500000,0;
+		getexp 500000,0;
+		getexp 500000,0;
+		getexp 500000,0;
+		getexp 500000,0;
 		close;
 	}
 	mes "[イグリド]";
@@ -2274,14 +3251,14 @@ moro_vol.gat,111,87,1	script	教官長イグリド#14303	751,{/* 65266 */
 	mes "冷気のモロクの現身^000000を";
 	mes "討伐してきてほしい。";
 	mes "すまんが、頼む。";
-	setquest 7581; //state=1
+	setquest 7581;
 	close;
 OnInit:
-	waitingroom "変異した現身退治", 0; //65266
+	waitingroom "変異した現身退治",0;
 	end;
 }
 
-moro_vol.gat,104,86,3	script	リョースン#14304	748,{/* 65267 */
+moro_vol.gat,104,86,3	script	リョースン#14304	748,{
 	mes "[リョースン]";
 	mes "き、緊……緊張してます。";
 	mes "……事務官殿は何故";
@@ -2302,7 +3279,7 @@ moro_vol.gat,104,86,3	script	リョースン#14304	748,{/* 65267 */
 	close;
 }
 
-moro_vol.gat,101,87,5	script	ルーンミッドガッツ騎士#	468,{/* 65268 */
+moro_vol.gat,101,87,5	script	ルーンミッドガッツ騎士#	468,{
 	switch(rand(4)) {
 	case 0: unittalk "……。"; end;
 	case 1: unittalk "ここは静かだな。"; end;
@@ -2311,7 +3288,7 @@ moro_vol.gat,101,87,5	script	ルーンミッドガッツ騎士#	468,{/* 65268 */
 	}
 }
 
-moro_vol.gat,101,85,5	script	ルーンミッドガッツ騎士#	469,{/* 65269 */
+moro_vol.gat,101,85,5	script	ルーンミッドガッツ騎士#	469,{
 	switch(rand(5)) {
 	case 0: unittalk "自分の任務はこちらの要人警備となります！"; end;
 	case 1: unittalk "あまり怖がらないでください。その恐怖感は全体に広がります。"; end;
@@ -2321,7 +3298,7 @@ moro_vol.gat,101,85,5	script	ルーンミッドガッツ騎士#	469,{/* 65269 */
 	}
 }
 
-moro_vol.gat,103,83,1	script	ルーンミッドガッツ騎士#	470,{/* 65270 */
+moro_vol.gat,103,83,1	script	ルーンミッドガッツ騎士#	470,{
 	switch(rand(5)) {
 	case 0: unittalk "魔王と戦うのは騎士のロマン！　だが現実となると……。"; end;
 	case 1: unittalk "戦場の緊張感は心地よい。"; end;
@@ -2331,7 +3308,7 @@ moro_vol.gat,103,83,1	script	ルーンミッドガッツ騎士#	470,{/* 65270 */
 	}
 }
 
-moro_vol.gat,110,83,3	script	ヒュー#14305	868,{/* 65271 */
+moro_vol.gat,110,83,3	script	ヒュー#14305	868,{
 	mes "[ヒュー]";
 	mes "ついにはここまで";
 	mes "辿りついてしまいましたね。";
@@ -2362,7 +3339,7 @@ moro_vol.gat,110,83,3	script	ヒュー#14305	868,{/* 65271 */
 	close;
 }
 
-moro_vol.gat,108,81,7	script	シュバルツバルド精鋭軍#	852,{/* 65272 */
+moro_vol.gat,108,81,7	script	シュバルツバルド精鋭軍#	852,{
 	switch(rand(5)) {
 	case 0: unittalk "アインブロックもここも、空気がいいとは、いえませんね。"; end;
 	case 1: unittalk "……へーくしょい！　鼻がむずむずします……。"; end;
@@ -2372,7 +3349,7 @@ moro_vol.gat,108,81,7	script	シュバルツバルド精鋭軍#	852,{/* 65272 */
 	}
 }
 
-moro_vol.gat,111,80,1	script	シュバルツバルド精鋭軍#	852,{/* 65273 */
+moro_vol.gat,111,80,1	script	シュバルツバルド精鋭軍#	852,{
 	switch(rand(5)) {
 	case 0: unittalk "シュバルツバルド産おやつが食べたい……。"; end;
 	case 1: unittalk "……寝ていない。瞑想していただけだ。"; end;
@@ -2382,7 +3359,7 @@ moro_vol.gat,111,80,1	script	シュバルツバルド精鋭軍#	852,{/* 65273 */
 	}
 }
 
-moro_vol.gat,113,81,3	script	シュバルツバルド精鋭軍#	852,{/* 65274 */
+moro_vol.gat,113,81,3	script	シュバルツバルド精鋭軍#	852,{
 	switch(rand(5)) {
 	case 0: unittalk "魔王との戦闘とアインブロックでマスクなしで警備48時間……どっちがきついですかね？"; end;
 	case 1: unittalk "……勝ちます……勝ちに行きます。"; end;
@@ -2392,7 +3369,7 @@ moro_vol.gat,113,81,3	script	シュバルツバルド精鋭軍#	852,{/* 65274 */
 	}
 }
 
-moro_vol.gat,118,86,5	script	ヘンジヌ#14306	931,{/* 65275 */
+moro_vol.gat,118,86,5	script	ヘンジヌ#14306	931,{
 	mes "[ヘンジヌ]";
 	mes "予想を裏切られるどころか";
 	mes "予想以上に素晴らしい！";
@@ -2407,7 +3384,7 @@ moro_vol.gat,118,86,5	script	ヘンジヌ#14306	931,{/* 65275 */
 	close;
 }
 
-moro_vol.gat,116,84,7	script	アルナベルツ聖徒団#aru0	935,{/* 65276 */
+moro_vol.gat,116,84,7	script	アルナベルツ聖徒団#aru0	935,{
 	switch(rand(5)) {
 	case 0: unittalk "ここには邪悪な者が群れ成していますね……。"; end;
 	case 1: unittalk "……。"; end;
@@ -2417,7 +3394,7 @@ moro_vol.gat,116,84,7	script	アルナベルツ聖徒団#aru0	935,{/* 65276 */
 	}
 }
 
-moro_vol.gat,118,83,7	script	アルナベルツ聖徒団#aru0	917,{/* 65277 */
+moro_vol.gat,118,83,7	script	アルナベルツ聖徒団#aru0	917,{
 	switch(rand(5)) {
 	case 0: unittalk "終わりなき戦いほど虚しいものはありません……。"; end;
 	case 1: unittalk "ここの空気には馴染めそうにありません。"; end;
@@ -2427,7 +3404,7 @@ moro_vol.gat,118,83,7	script	アルナベルツ聖徒団#aru0	917,{/* 65277 */
 	}
 }
 
-moro_vol.gat,121,84,1	script	アルナベルツ聖徒団#aru0	920,{/* 65278 */
+moro_vol.gat,121,84,1	script	アルナベルツ聖徒団#aru0	920,{
 	switch(rand(5)) {
 	case 0: unittalk "……今は祈ることしか出来ません。"; end;
 	case 1: unittalk "女神様が見守っていてくれるはず……。"; end;
@@ -2437,7 +3414,7 @@ moro_vol.gat,121,84,1	script	アルナベルツ聖徒団#aru0	920,{/* 65278 */
 	}
 }
 
-moro_vol.gat,119,106,3	script	教官ジャケン#h_sol01	405,3,3,{/* 65279 */
+moro_vol.gat,119,106,3	script	教官ジャケン#h_sol01	405,3,3,{
 	mes "[教官ジャケン]";
 	mes "アッシュバキューム遠征に";
 	mes "申し込んだとき、";
@@ -2514,7 +3491,7 @@ OnTimer40000:
 	end;
 }
 
-moro_vol.gat,117,104,1	script	ミッドガルド連合軍#so01	707,{/* 65281 */
+moro_vol.gat,117,104,1	script	ミッドガルド連合軍#so01	707,{
 	end;
 OnTalk1:
 	unittalk "曙の太陽の中で～";
@@ -2524,7 +3501,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,117,102,1	script	ミッドガルド連合軍#so02	707,{/* 65282 */
+moro_vol.gat,117,102,1	script	ミッドガルド連合軍#so02	707,{
 	end;
 OnTalk1:
 	unittalk "守るために～";
@@ -2534,7 +3511,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,117,100,1	script	ミッドガルド連合軍#so03	707,{/* 65283 */
+moro_vol.gat,117,100,1	script	ミッドガルド連合軍#so03	707,{
 	end;
 OnTalk1:
 	unittalk "両手に～";
@@ -2544,7 +3521,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,117,98,1	script	ミッドガルド連合軍#so04	707,{/* 65284 */
+moro_vol.gat,117,98,1	script	ミッドガルド連合軍#so04	707,{
 	end;
 OnTalk1:
 	unittalk "顔を上げ～";
@@ -2554,7 +3531,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,119,104,1	script	ミッドガルド連合軍#so05	852,{/* 65285 */
+moro_vol.gat,119,104,1	script	ミッドガルド連合軍#so05	852,{
 	end;
 OnTalk1:
 	unittalk "夢に見た～";
@@ -2564,7 +3541,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,119,102,1	script	ミッドガルド連合軍#so06	852,{/* 65286 */
+moro_vol.gat,119,102,1	script	ミッドガルド連合軍#so06	852,{
 	end;
 OnTalk1:
 	unittalk "兜の緒を締める～";
@@ -2574,7 +3551,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,119,100,1	script	ミッドガルド連合軍#so07	868,{/* 65287 */
+moro_vol.gat,119,100,1	script	ミッドガルド連合軍#so07	868,{
 	end;
 OnTalk1:
 	unittalk "構えし剣～";
@@ -2584,7 +3561,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,119,98,1	script	ミッドガルド連合軍#so08	868,{/* 65288 */
+moro_vol.gat,119,98,1	script	ミッドガルド連合軍#so08	868,{
 	end;
 OnTalk1:
 	unittalk "目を開け～";
@@ -2594,7 +3571,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,121,104,1	script	ミッドガルド連合軍#so09	934,{/* 65289 */
+moro_vol.gat,121,104,1	script	ミッドガルド連合軍#so09	934,{
 	end;
 OnTalk1:
 	unittalk "故郷を～";
@@ -2604,7 +3581,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,121,102,1	script	ミッドガルド連合軍#so10	934,{/* 65290 */
+moro_vol.gat,121,102,1	script	ミッドガルド連合軍#so10	934,{
 	end;
 OnTalk1:
 	unittalk "心も熱く～";
@@ -2614,7 +3591,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,121,100,1	script	ミッドガルド連合軍#so11	939,{/* 65291 */
+moro_vol.gat,121,100,1	script	ミッドガルド連合軍#so11	939,{
 	end;
 OnTalk1:
 	unittalk "進め前へ～";
@@ -2624,7 +3601,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,121,98,1	script	ミッドガルド連合軍#so12	939,{/* 65292 */
+moro_vol.gat,121,98,1	script	ミッドガルド連合軍#so12	939,{
 	end;
 OnTalk1:
 	unittalk "まっすぐ前を見て～";
@@ -2634,7 +3611,7 @@ OnTalk2:
 	end;
 }
 
-moro_vol.gat,105,97,3	script	遠征隊アサシン#ass01	884,{/* 65293 */
+moro_vol.gat,105,97,3	script	遠征隊アサシン#ass01	884,{
 	mes "[遠征隊アサシン]";
 	mes "……間もなく";
 	mes "新しい任務が下る予定だ……。";
@@ -2653,7 +3630,7 @@ moro_vol.gat,105,97,3	script	遠征隊アサシン#ass01	884,{/* 65293 */
 	close;
 }
 
-moro_vol.gat,103,96,5	script	遠征隊アサシン#ass02	885,{/* 65294 */
+moro_vol.gat,103,96,5	script	遠征隊アサシン#ass02	885,{
 	mes "[遠征隊アサシン]";
 	mes "……ここは……そうだな……。";
 	mes "私のルートの追加しよう……。";
@@ -2664,7 +3641,7 @@ moro_vol.gat,103,96,5	script	遠征隊アサシン#ass02	885,{/* 65294 */
 	close;
 }
 
-moro_vol.gat,105,95,1	script	遠征隊アサシン#ass03	10002,{/* 65295 */
+moro_vol.gat,105,95,1	script	遠征隊アサシン#ass03	10002,{
 	mes "[遠征隊アサシン]";
 	mes "………。";
 	mes "………いや俺は新入りだから。";
@@ -2673,7 +3650,7 @@ moro_vol.gat,105,95,1	script	遠征隊アサシン#ass03	10002,{/* 65295 */
 	close;
 }
 
-moro_vol.gat,114,128,1	script	コンチネンタルガード::morovol_con01	997,3,3,{/* 65296 */
+moro_vol.gat,114,128,1	script	コンチネンタルガード::morovol_con01	997,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "異常ありません。"; end;
 	case 1: unittalk "お気をつけて。"; end;
@@ -2682,12 +3659,12 @@ moro_vol.gat,114,128,1	script	コンチネンタルガード::morovol_con01	997,3,3,{/* 65
 OnTouchNPC:
 	unittalk "ここは通さん!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,119,130,1	script	コンチネンタルガード::morovol_con02	998,{/* 65297 */
+moro_vol.gat,119,130,1	script	コンチネンタルガード::morovol_con02	998,{
 	switch(rand(3)) {
 	case 0: unittalk "はい、今のところ異常はありません。"; end;
 	case 1: unittalk "お気をつけください。"; end;
@@ -2695,7 +3672,7 @@ moro_vol.gat,119,130,1	script	コンチネンタルガード::morovol_con02	998,{/* 65297 
 	}
 }
 
-moro_vol.gat,122,130,7	script	コンチネンタルガード::morovol_con03	997,3,3,{/* 65298 */
+moro_vol.gat,122,130,7	script	コンチネンタルガード::morovol_con03	997,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "危険な場所です。あまり前に出ないでください。"; end;
 	case 1: unittalk "お気をつけて。"; end;
@@ -2704,12 +3681,12 @@ moro_vol.gat,122,130,7	script	コンチネンタルガード::morovol_con03	997,3,3,{/* 65
 OnTouchNPC:
 	unittalk "ここは通さんぞ!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,125,129,7	script	コンチネンタルガード::morovol_con04	997,{/* 65299 */
+moro_vol.gat,125,129,7	script	コンチネンタルガード::morovol_con04	997,{
 	switch(rand(3)) {
 	case 0: unittalk "何かあってからでは遅いので、下がってください。"; end;
 	case 1: unittalk "どうぞお気をつけて。"; end;
@@ -2717,7 +3694,7 @@ moro_vol.gat,125,129,7	script	コンチネンタルガード::morovol_con04	997,{/* 65299 
 	}
 }
 
-moro_vol.gat,127,127,7	script	コンチネンタルガード::morovol_con05	998,{/* 65300 */
+moro_vol.gat,127,127,7	script	コンチネンタルガード::morovol_con05	998,{
 	switch(rand(3)) {
 	case 0: unittalk "危険な場所ですから、気を抜かないようにしてください。"; end;
 	case 1: unittalk "この場所は特に危険です。単独行動はなるべくお控えください"; end;
@@ -2725,7 +3702,7 @@ moro_vol.gat,127,127,7	script	コンチネンタルガード::morovol_con05	998,{/* 65300 
 	}
 }
 
-moro_vol.gat,135,123,1	script	ミッドガルド連合軍::morovol_mid01	753,3,3,{/* 65301 */
+moro_vol.gat,135,123,1	script	ミッドガルド連合軍::morovol_mid01	753,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "……アルナベルツの連中は前に出ないのか？"; end;
 	case 1: unittalk "どんな奴だろうと倒してやる！"; end;
@@ -2734,12 +3711,12 @@ moro_vol.gat,135,123,1	script	ミッドガルド連合軍::morovol_mid01	753,3,3,{/* 6530
 OnTouchNPC:
 	unittalk "おっと!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,139,124,1	script	ミッドガルド連合軍::morovol_mid02	745,{/* 65302 */
+moro_vol.gat,139,124,1	script	ミッドガルド連合軍::morovol_mid02	745,{
 	switch(rand(3)) {
 	case 0: unittalk "……フン。"; end;
 	case 1: unittalk "きりが無いな……。"; end;
@@ -2747,7 +3724,7 @@ moro_vol.gat,139,124,1	script	ミッドガルド連合軍::morovol_mid02	745,{/* 65302 */
 	}
 }
 
-moro_vol.gat,143,124,1	script	ミッドガルド連合軍::morovol_mid03	735,{/* 65303 */
+moro_vol.gat,143,124,1	script	ミッドガルド連合軍::morovol_mid03	735,{
 	switch(rand(3)) {
 	case 0: unittalk "ふう……。"; end;
 	case 1: unittalk "……守護者達のおかげで戦いやすいな。"; end;
@@ -2755,7 +3732,7 @@ moro_vol.gat,143,124,1	script	ミッドガルド連合軍::morovol_mid03	735,{/* 65303 */
 	}
 }
 
-moro_vol.gat,147,124,7	script	ミッドガルド連合軍::morovol_mid04	707,3,3,{/* 65304 */
+moro_vol.gat,147,124,7	script	ミッドガルド連合軍::morovol_mid04	707,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "どんな相手だろうと、逃げませんよ。"; end;
 	case 1: unittalk "……いつ、この戦いは終わるのだろうか。"; end;
@@ -2764,12 +3741,12 @@ moro_vol.gat,147,124,7	script	ミッドガルド連合軍::morovol_mid04	707,3,3,{/* 6530
 OnTouchNPC:
 	unittalk "敵襲!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,150,121,7	script	ミッドガルド連合軍::morovol_mid05	707,{/* 65305 */
+moro_vol.gat,150,121,7	script	ミッドガルド連合軍::morovol_mid05	707,{
 	switch(rand(3)) {
 	case 0: unittalk "なんでいつも前衛に配置されるんだろう……。"; end;
 	case 1: unittalk "……く……来るな！　って、人だったか。"; end;
@@ -2777,7 +3754,7 @@ moro_vol.gat,150,121,7	script	ミッドガルド連合軍::morovol_mid05	707,{/* 65305 */
 	}
 }
 
-moro_vol.gat,151,119,7	script	ミッドガルド連合軍::morovol_mid06	852,{/* 65306 */
+moro_vol.gat,151,119,7	script	ミッドガルド連合軍::morovol_mid06	852,{
 	switch(rand(3)) {
 	case 0: unittalk "明日の朝には交代か……。"; end;
 	case 1: unittalk "……おっと、ここから前には出ない方がいい。"; end;
@@ -2785,7 +3762,7 @@ moro_vol.gat,151,119,7	script	ミッドガルド連合軍::morovol_mid06	852,{/* 65306 */
 	}
 }
 
-moro_vol.gat,153,116,7	script	ミッドガルド連合軍::morovol_mid07	852,3,3,{/* 65307 */
+moro_vol.gat,153,116,7	script	ミッドガルド連合軍::morovol_mid07	852,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "何もないのは良いが、精神的に疲れる……。"; end;
 	case 1: unittalk "……モロク果実酒が飲みたい。"; end;
@@ -2794,12 +3771,12 @@ moro_vol.gat,153,116,7	script	ミッドガルド連合軍::morovol_mid07	852,3,3,{/* 6530
 OnTouchNPC:
 	unittalk "立ち去れ!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,118,115,1	script	ミッドガルド連合軍::morovol_mid08	735,3,3,{/* 65308 */
+moro_vol.gat,118,115,1	script	ミッドガルド連合軍::morovol_mid08	735,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "あの異端って話いつまで続けるんだ……。"; end;
 	case 1: unittalk "……あれ？　並ぶ列間違えたか？"; end;
@@ -2808,12 +3785,12 @@ moro_vol.gat,118,115,1	script	ミッドガルド連合軍::morovol_mid08	735,3,3,{/* 6530
 OnTouchNPC:
 	unittalk "あっちに行け!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,121,115,1	script	ミッドガルド連合軍::morovol_mid09	852,{/* 65309 */
+moro_vol.gat,121,115,1	script	ミッドガルド連合軍::morovol_mid09	852,{
 	switch(rand(3)) {
 	case 0: unittalk "……前衛は非常に危険です。"; end;
 	case 1: unittalk "……ここもうるさいな。"; end;
@@ -2821,7 +3798,7 @@ moro_vol.gat,121,115,1	script	ミッドガルド連合軍::morovol_mid09	852,{/* 65309 */
 	}
 }
 
-moro_vol.gat,124,116,1	script	ミッドガルド連合軍::morovol_mid10	852,3,3,{/* 65310 */
+moro_vol.gat,124,116,1	script	ミッドガルド連合軍::morovol_mid10	852,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "お互い、気をつけましょう。"; end;
 	case 1: unittalk "異常ありません。"; end;
@@ -2830,12 +3807,12 @@ moro_vol.gat,124,116,1	script	ミッドガルド連合軍::morovol_mid10	852,3,3,{/* 6531
 OnTouchNPC:
 	unittalk "魔族め！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,128,116,1	script	ミッドガルド連合軍::morovol_mid11	852,{/* 65311 */
+moro_vol.gat,128,116,1	script	ミッドガルド連合軍::morovol_mid11	852,{
 	switch(rand(3)) {
 	case 0: unittalk "……へぇ、異常ないっす。"; end;
 	case 1: unittalk "……異常ありやせん……ZZz……。"; end;
@@ -2843,7 +3820,7 @@ moro_vol.gat,128,116,1	script	ミッドガルド連合軍::morovol_mid11	852,{/* 65311 */
 	}
 }
 
-moro_vol.gat,131,115,7	script	ミッドガルド連合軍::morovol_mid12	934,{/* 65312 */
+moro_vol.gat,131,115,7	script	ミッドガルド連合軍::morovol_mid12	934,{
 	switch(rand(3)) {
 	case 0: unittalk "異端者共と一緒になるとは……。"; end;
 	case 1: unittalk "仕方がないとはいえ、やはり気分は良くないです。"; end;
@@ -2851,7 +3828,7 @@ moro_vol.gat,131,115,7	script	ミッドガルド連合軍::morovol_mid12	934,{/* 65312 */
 	}
 }
 
-moro_vol.gat,133,113,7	script	ミッドガルド連合軍::morovol_mid13	939,{/* 65313 */
+moro_vol.gat,133,113,7	script	ミッドガルド連合軍::morovol_mid13	939,{
 	switch(rand(3)) {
 	case 0: unittalk "おいおい、あまりうろつくと危険だ。"; end;
 	case 1: unittalk "疲れたな……。"; end;
@@ -2859,7 +3836,7 @@ moro_vol.gat,133,113,7	script	ミッドガルド連合軍::morovol_mid13	939,{/* 65313 */
 	}
 }
 
-moro_vol.gat,136,111,7	script	ミッドガルド連合軍::morovol_mid14	934,3,3,{/* 65314 */
+moro_vol.gat,136,111,7	script	ミッドガルド連合軍::morovol_mid14	934,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "防衛線には異常ありません。"; end;
 	case 1: unittalk "お気をつけて。"; end;
@@ -2868,12 +3845,12 @@ moro_vol.gat,136,111,7	script	ミッドガルド連合軍::morovol_mid14	934,3,3,{/* 6531
 OnTouchNPC:
 	unittalk "敵襲！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,138,108,7	script	ミッドガルド連合軍::morovol_mid15	939,{/* 65315 */
+moro_vol.gat,138,108,7	script	ミッドガルド連合軍::morovol_mid15	939,{
 	switch(rand(3)) {
 	case 0: unittalk "特に異常はありません。"; end;
 	case 1: unittalk "前方監視中！　異常な～し！"; end;
@@ -2881,11 +3858,11 @@ moro_vol.gat,138,108,7	script	ミッドガルド連合軍::morovol_mid15	939,{/* 65315 */
 	}
 }
 
-moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
+moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{
 	switch(EP143_BOX) {
 	case 0:
 		if(DIC_2QUE < 23) {
-			cutin "ep13_heslanta.bmp", 2;
+			cutin "ep13_heslanta",2;
 			mes "[ヘスランタ]";
 			mes "サファ族代表として戦場の";
 			mes "指揮を取るヘスランタと申します。";
@@ -2893,10 +3870,10 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 			mes "戦闘を共にしますので、";
 			mes "お見知りおきを。";
 			close2;
-			cutin "ep13_heslanta.bmp", 255;
+			cutin "ep13_heslanta",255;
 			end;
 		}
-		cutin "ep13_heslanta.bmp", 2;
+		cutin "ep13_heslanta",2;
 		mes "[ヘスランタ]";
 		mes "これはこれは、お久しぶりです。";
 		mes "私を覚えていますか？";
@@ -2955,10 +3932,10 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 		mes "それまではお気をつけて。";
 		set EP143_BOX,1;
 		close2;
-		cutin "ep13_heslanta.bmp", 255;
+		cutin "ep13_heslanta",255;
 		end;
 	case 1:
-		cutin "ep13_heslanta.bmp", 2;
+		cutin "ep13_heslanta",2;
 		mes "[ヘスランタ]";
 		mes "以前、チェシャーに関する話を";
 		mes "したことを覚えていますか？";
@@ -3017,21 +3994,21 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 		mes "教えてください。";
 		mes "お待ちしています。";
 		set EP143_BOX,2;
-		setquest 7578; //state=1
+		setquest 7578;
 		close2;
-		cutin "ep13_heslanta.bmp", 255;
+		cutin "ep13_heslanta",255;
 		end;
 	case 2:
 		if(checkquest(7578)&0x4 == 0 || countitem(6392) == 0) {
-			cutin "ep13_heslanta.bmp", 2;
+			cutin "ep13_heslanta",2;
 			mes "[ヘスランタ]";
 			mes "^4d4dff暴虐の箱^000000を退治して獲得したものを";
 			mes "持ち帰ってきてください。";
 			close2;
-			cutin "ep13_heslanta.bmp", 255;
+			cutin "ep13_heslanta",255;
 			end;
 		}
-		cutin "ep13_heslanta.bmp", 2;
+		cutin "ep13_heslanta",2;
 		mes "[ヘスランタ]";
 		mes "これは……予想通りではありますが……";
 		mes "無機物である箱がどうやって";
@@ -3063,20 +4040,20 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 		mes "そうですね、では早速お願いします。";
 		mes "^4d4dff暴虐の箱^000000を退治し、";
 		mes "^4d4dffブラディウムの箱を10個回収^000000してください。";
-		delitem 6392, 1;
+		delitem 6392,1;
 		set EP143_BOX,3;
-		chgquest 7578,7579; //state=1
+		chgquest 7578,7579;
 		getexp 1000000,0;
 		getexp 1000000,0;
 		getexp 1000000,0;
 		getexp 1000000,0;
 		getexp 1000000,0;
 		close2;
-		cutin "ep13_heslanta.bmp", 255;
+		cutin "ep13_heslanta",255;
 		end;
 	case 3:
 		if(checkquest(7579)&0x4 == 0 || countitem(6392) < 10) {
-			cutin "ep13_heslanta.bmp", 2;
+			cutin "ep13_heslanta",2;
 			mes "[ヘスランタ]";
 			mes "暴虐の箱はそんなに";
 			mes "危険ではないですが……";
@@ -3086,10 +4063,10 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 			mes "[ヘスランタ]";
 			mes "ではよろしくお願いします。";
 			close2;
-			cutin "ep13_heslanta.bmp", 255;
+			cutin "ep13_heslanta",255;
 			end;
 		}
-		cutin "ep13_heslanta.bmp", 2;
+		cutin "ep13_heslanta",2;
 		mes "[ヘスランタ]";
 		mes "お疲れ様です。";
 		mes "ありがとうございました。";
@@ -3099,21 +4076,21 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 		mes "[ヘスランタ]";
 		mes "おっと……周りの視線がありますね。";
 		mes "ではまたお願いします。";
-		delitem 6392, countitem(6392);
+		delitem 6392,countitem(6392);
 		set EP143_BOX,4;
-		chgquest 7579,7580; //state=1
+		chgquest 7579,7580;
 		getexp 1000000,0;
 		getexp 1000000,0;
 		getexp 1000000,0;
 		getexp 1000000,0;
 		getexp 1000000,0;
 		close2;
-		cutin "ep13_heslanta.bmp", 255;
+		cutin "ep13_heslanta",255;
 		end;
 	case 4:
 		if(checkquest(7579)) {
 			if(checkquest(7579)&0x4 == 0 || countitem(6392) < 10) {
-				cutin "ep13_heslanta.bmp", 2;
+				cutin "ep13_heslanta",2;
 				mes "[ヘスランタ]";
 				mes "暴虐の箱はそんなに";
 				mes "危険ではないですが……";
@@ -3123,10 +4100,10 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 				mes "[ヘスランタ]";
 				mes "ではよろしくお願いします。";
 				close2;
-				cutin "ep13_heslanta.bmp", 255;
+				cutin "ep13_heslanta",255;
 				end;
 			}
-			cutin "ep13_heslanta.bmp", 2;
+			cutin "ep13_heslanta",2;
 			mes "[ヘスランタ]";
 			mes "お疲れ様です。";
 			mes "ありがとうございました。";
@@ -3136,20 +4113,20 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 			mes "[ヘスランタ]";
 			mes "おっと……周りの視線がありますね。";
 			mes "ではまたお願いします。";
-			delitem 6392, countitem(6392);
-			chgquest 7579,7580; //state=1
+			delitem 6392,countitem(6392);
+			chgquest 7579,7580;
 			getexp 1000000,0;
 			getexp 1000000,0;
 			getexp 1000000,0;
 			getexp 1000000,0;
 			getexp 1000000,0;
 			close2;
-			cutin "ep13_heslanta.bmp", 255;
+			cutin "ep13_heslanta",255;
 			end;
 		}
 		if(checkquest(7580)) {
 			if(checkquest(7580)&0x2 == 0) {
-				cutin "ep13_heslanta.bmp", 2;
+				cutin "ep13_heslanta",2;
 				mes "[ヘスランタ]";
 				mes "ふふふ……まだまだ余裕がありますね。";
 				mes "チェシャーは自分がかすめた";
@@ -3164,10 +4141,10 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 				mes "ブラディウムの箱の回収を";
 				mes "お願いします。";
 				close2;
-				cutin "ep13_heslanta.bmp", 255;
+				cutin "ep13_heslanta",255;
 				end;
 			}
-			cutin "ep13_heslanta.bmp", 2;
+			cutin "ep13_heslanta",2;
 			mes "[ヘスランタ]";
 			mes "そういえばもうこんな時間ですね。";
 			mes "また箱の回収をお願いします。";
@@ -3182,11 +4159,11 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 				mes "いつもありがとうございます。";
 				mes "それではまた。";
 				close2;
-				cutin "ep13_heslanta.bmp", 255;
+				cutin "ep13_heslanta",255;
 				end;
 			}
 		}
-		cutin "ep13_heslanta.bmp", 2;
+		cutin "ep13_heslanta",2;
 		mes "[ヘスランタ]";
 		mes "おいでになりましたか。";
 		mes "……では、今日もお願いしても？";
@@ -3200,24 +4177,24 @@ moro_vol.gat,136,84,3	script	大臣ヘスランタ#ep143	451,{/* 65316 */
 			mes "いつもありがとうございます。";
 			mes "それではまた。";
 			close2;
-			cutin "ep13_heslanta.bmp", 255;
+			cutin "ep13_heslanta",255;
 			end;
 		}
 		mes "[ヘスランタ]";
 		mes "それでは今日もよろしくお願いします。";
 		mes "^4d4dff暴虐の箱^000000を退治し、";
 		mes "^4d4dffブラディウムの箱を10個回収^000000してください。";
-		setquest 7579; //state=1
+		setquest 7579;
 		close2;
-		cutin "ep13_heslanta.bmp", 255;
+		cutin "ep13_heslanta",255;
 		end;
 	}
 OnInit:
-	waitingroom "暴虐の箱", 0; //65316
+	waitingroom "暴虐の箱",0;
 	end;
 }
 
-moro_vol.gat,134,83,5	script	ビハヌス#ep143	451,{/* 65317 */
+moro_vol.gat,134,83,5	script	ビハヌス#ep143	451,{
 	mes "[ビハヌス]";
 	mes "あなたもここに来ましたか。";
 	mes "……そういえばここでは";
@@ -3243,7 +4220,7 @@ moro_vol.gat,134,83,5	script	ビハヌス#ep143	451,{/* 65317 */
 	close;
 }
 
-moro_vol.gat,138,84,3	script	補佐官ティエラ#ep143	453,{/* 65318 */
+moro_vol.gat,138,84,3	script	補佐官ティエラ#ep143	453,{
 	mes "[ティエラ]";
 	mes "ディエルにいた多くの";
 	mes "ゼルートとニットは、";
@@ -3269,7 +4246,7 @@ moro_vol.gat,138,84,3	script	補佐官ティエラ#ep143	453,{/* 65318 */
 	close;
 }
 
-moro_vol.gat,134,87,1	script	先発隊長アバランチェ#ep	450,{/* 65319 */
+moro_vol.gat,134,87,1	script	先発隊長アバランチェ#ep	450,{
 	mes "[アバランチェ]";
 	mes "例え数は少なくとも";
 	mes "我々ガルトン部隊は精鋭中の精鋭だ。";
@@ -3282,7 +4259,7 @@ moro_vol.gat,134,87,1	script	先発隊長アバランチェ#ep	450,{/* 65319 */
 	close;
 }
 
-moro_vol.gat,131,86,1	script	ガルトン#gal01	492,{/* 65320 */
+moro_vol.gat,131,86,1	script	ガルトン#gal01	492,{
 	mes "[ガルトン]";
 	mes "戦闘はいつだ！";
 	mes "いつ始まるのか！";
@@ -3296,7 +4273,7 @@ moro_vol.gat,131,86,1	script	ガルトン#gal01	492,{/* 65320 */
 	close;
 }
 
-moro_vol.gat,138,87,7	script	ガルトン#gal02	492,{/* 65321 */
+moro_vol.gat,138,87,7	script	ガルトン#gal02	492,{
 	mes "[ガルトン]";
 	mes "我が任務は";
 	mes "ゼルート・ヘスランタ様の護衛。";
@@ -3305,21 +4282,21 @@ moro_vol.gat,138,87,7	script	ガルトン#gal02	492,{/* 65321 */
 	close;
 }
 
-moro_vol.gat,140,97,1	script	精鋭部隊#gal11	492,{/* 65322 */}
-moro_vol.gat,143,97,1	script	精鋭部隊#gal12	492,{/* 65323 */}
-moro_vol.gat,146,97,1	script	精鋭部隊#gal13	492,{/* 65324 */}
-moro_vol.gat,140,94,1	script	精鋭部隊#gal14	450,{/* 65325 */}
-moro_vol.gat,143,94,1	script	精鋭部隊#gal15	450,{/* 65326 */}
-moro_vol.gat,146,94,1	script	精鋭部隊#gal16	450,{/* 65327 */}
+moro_vol.gat,140,97,1	script	精鋭部隊#gal11	492,{}
+moro_vol.gat,143,97,1	script	精鋭部隊#gal12	492,{}
+moro_vol.gat,146,97,1	script	精鋭部隊#gal13	492,{}
+moro_vol.gat,140,94,1	script	精鋭部隊#gal14	450,{}
+moro_vol.gat,143,94,1	script	精鋭部隊#gal15	450,{}
+moro_vol.gat,146,94,1	script	精鋭部隊#gal16	450,{}
 
-moro_vol.gat,150,86,1	script	精鋭部隊#gal21	492,{/* 65328 */}
-moro_vol.gat,153,86,1	script	精鋭部隊#gal22	492,{/* 65329 */}
-moro_vol.gat,156,86,1	script	精鋭部隊#gal23	492,{/* 65330 */}
-moro_vol.gat,150,83,1	script	精鋭部隊#gal24	450,{/* 65331 */}
-moro_vol.gat,153,83,1	script	精鋭部隊#gal25	450,{/* 65332 */}
-moro_vol.gat,156,83,1	script	精鋭部隊#gal26	450,{/* 65333 */}
+moro_vol.gat,150,86,1	script	精鋭部隊#gal21	492,{}
+moro_vol.gat,153,86,1	script	精鋭部隊#gal22	492,{}
+moro_vol.gat,156,86,1	script	精鋭部隊#gal23	492,{}
+moro_vol.gat,150,83,1	script	精鋭部隊#gal24	450,{}
+moro_vol.gat,153,83,1	script	精鋭部隊#gal25	450,{}
+moro_vol.gat,156,83,1	script	精鋭部隊#gal26	450,{}
 
-moro_vol.gat,139,104,1	script	マヌク守護隊#line01	492,3,3,{/* 65334 */
+moro_vol.gat,139,104,1	script	マヌク守護隊#line01	492,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "ふむ！"; end;
 	case 1: unittalk "異常なし。"; end;
@@ -3328,12 +4305,12 @@ moro_vol.gat,139,104,1	script	マヌク守護隊#line01	492,3,3,{/* 65334 */
 OnTouchNPC:
 	unittalk "小ざかしい！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,143,106,1	script	マヌク守護隊#line02	492,3,3,{/* 65335 */
+moro_vol.gat,143,106,1	script	マヌク守護隊#line02	492,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "俺様の目が黒いうちは、何もさせん！"; end;
 	case 1: unittalk "うむ！　今日も絶好調だ！"; end;
@@ -3342,12 +4319,12 @@ moro_vol.gat,143,106,1	script	マヌク守護隊#line02	492,3,3,{/* 65335 */
 OnTouchNPC:
 	unittalk "敵だ！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,147,108,1	script	マヌク守護隊#line03	492,{/* 65336 */
+moro_vol.gat,147,108,1	script	マヌク守護隊#line03	492,{
 	switch(rand(3)) {
 	case 0: unittalk "……ふん。"; end;
 	case 1: unittalk "異常はない。"; end;
@@ -3355,7 +4332,7 @@ moro_vol.gat,147,108,1	script	マヌク守護隊#line03	492,{/* 65336 */
 	}
 }
 
-moro_vol.gat,152,109,1	script	マヌク守護隊#line04	492,3,3,{/* 65337 */
+moro_vol.gat,152,109,1	script	マヌク守護隊#line04	492,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "異常なし。"; end;
 	case 1: unittalk "ここは問題ないぞ！"; end;
@@ -3364,12 +4341,12 @@ moro_vol.gat,152,109,1	script	マヌク守護隊#line04	492,3,3,{/* 65337 */
 OnTouchNPC:
 	unittalk "通さぬ!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,156,110,1	script	マヌク守護隊#line05	492,{/* 65338 */
+moro_vol.gat,156,110,1	script	マヌク守護隊#line05	492,{
 	switch(rand(3)) {
 	case 0: unittalk "……なぜラフィネ族なんかと……。"; end;
 	case 1: unittalk "……羽根つきとは違うのだ、羽根つきとは。"; end;
@@ -3377,7 +4354,7 @@ moro_vol.gat,156,110,1	script	マヌク守護隊#line05	492,{/* 65338 */
 	}
 }
 
-moro_vol.gat,160,110,7	script	マヌク守護隊#line06	492,3,3,{/* 65339 */
+moro_vol.gat,160,110,7	script	マヌク守護隊#line06	492,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "異常なーし！"; end;
 	case 1: unittalk "うぬうぬ！"; end;
@@ -3386,12 +4363,12 @@ moro_vol.gat,160,110,7	script	マヌク守護隊#line06	492,3,3,{/* 65339 */
 OnTouchNPC:
 	unittalk "笑わせるな！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,164,109,7	script	マヌク守護隊#line07	492,{/* 65340 */
+moro_vol.gat,164,109,7	script	マヌク守護隊#line07	492,{
 	switch(rand(3)) {
 	case 0: unittalk "くっくっくっく！"; end;
 	case 1: unittalk "異常？　ないぞ。"; end;
@@ -3399,7 +4376,7 @@ moro_vol.gat,164,109,7	script	マヌク守護隊#line07	492,{/* 65340 */
 	}
 }
 
-moro_vol.gat,167,107,7	script	マヌク守護隊#line08	492,3,3,{/* 65341 */
+moro_vol.gat,167,107,7	script	マヌク守護隊#line08	492,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "ふんっ！　ふんっ！　ふーんっ！"; end;
 	case 1: unittalk "やることがない時は、鍛錬に限るのだ！"; end;
@@ -3408,12 +4385,12 @@ moro_vol.gat,167,107,7	script	マヌク守護隊#line08	492,3,3,{/* 65341 */
 OnTouchNPC:
 	unittalk "敵か！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,169,104,7	script	マヌク守護隊#line09	492,{/* 65342 */
+moro_vol.gat,169,104,7	script	マヌク守護隊#line09	492,{
 	switch(rand(3)) {
 	case 0: unittalk "ううむ、手持ち無沙汰だ。"; end;
 	case 1: unittalk "……なにか斬るものをくれ。"; end;
@@ -3421,7 +4398,7 @@ moro_vol.gat,169,104,7	script	マヌク守護隊#line09	492,{/* 65342 */
 	}
 }
 
-moro_vol.gat,171,100,5	script	マヌク守護隊#line10	492,3,3,{/* 65343 */
+moro_vol.gat,171,100,5	script	マヌク守護隊#line10	492,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "こう見えて、手先は器用なのだぞ。"; end;
 	case 1: unittalk "扱うだけが武器じゃない。手入れも忘れずにな。"; end;
@@ -3430,12 +4407,12 @@ moro_vol.gat,171,100,5	script	マヌク守護隊#line10	492,3,3,{/* 65343 */
 OnTouchNPC:
 	unittalk "なめるんじゃねーぞ!!";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,172,95,5	script	マヌク守護隊#line11	492,{/* 65344 */
+moro_vol.gat,172,95,5	script	マヌク守護隊#line11	492,{
 	switch(rand(3)) {
 	case 0: unittalk "今日もハズレのようだな。"; end;
 	case 1: unittalk "血沸き肉踊る戦いはいつ始まるんだ……。"; end;
@@ -3443,7 +4420,7 @@ moro_vol.gat,172,95,5	script	マヌク守護隊#line11	492,{/* 65344 */
 	}
 }
 
-moro_vol.gat,173,89,5	script	マヌク守護隊#line12	492,3,3,{/* 65345 */
+moro_vol.gat,173,89,5	script	マヌク守護隊#line12	492,3,3,{
 	switch(rand(3)) {
 	case 0: unittalk "体が鈍るな……。"; end;
 	case 1: unittalk "酒でも飲みたい気分だぜ……。"; end;
@@ -3452,12 +4429,12 @@ moro_vol.gat,173,89,5	script	マヌク守護隊#line12	492,3,3,{/* 65345 */
 OnTouchNPC:
 	unittalk "うおーっ！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,144,140,3	script	案内兵#line12	469,{/* 65346 */
+moro_vol.gat,144,140,3	script	案内兵#line12	469,{
 	mes "[案内兵]";
 	mes "魔王モロクを倒そうと、";
 	mes "このフレイムヴァレーに";
@@ -3539,12 +4516,12 @@ moro_vol.gat,144,140,3	script	案内兵#line12	469,{/* 65346 */
 	warp "moro_vol.gat",'@x,'@y;
 	end;
 OnInit:
-	waitingroom "フレイムヴァレー案内", 0; //65346
+	waitingroom "フレイムヴァレー案内",0;
 	end;
 }
 
-moro_vol.gat,131,103,3	script	駐屯地調査官#bl	419,{/* 65347 */
-	viewpoint 2, 1, 1, 4, 0xFFFFFF; //65347
+moro_vol.gat,131,103,3	script	駐屯地調査官#bl	419,{
+	viewpoint 2,1,1,4,0xFFFFFF;
 	switch(EP143_bl) {
 	case 0:
 		mes "[駐屯地調査官]";
@@ -3657,7 +4634,7 @@ moro_vol.gat,131,103,3	script	駐屯地調査官#bl	419,{/* 65347 */
 		mes "[駐屯地調査官]";
 		mes "何よりも、火を点けることが";
 		mes "出来るようになったことが嬉しいです。";
-		emotion 21; //65347
+		emotion 21;
 		next;
 		mes "[駐屯地調査官]";
 		mes "あなた……";
@@ -3702,10 +4679,10 @@ moro_vol.gat,131,103,3	script	駐屯地調査官#bl	419,{/* 65347 */
 		mes "向かったはずです。";
 		mes "周りをよく調べながら偵察兵を";
 		mes "見つけて下さい。";
-		delitem 6691, 15;
+		delitem 6691,15;
 		set EP143_bl,2;
-		chgquest 1264,1265; //state=1
-		viewpoint 1, 234, 301, 5, 0xFF0000; //65347
+		chgquest 1264,1265;
+		viewpoint 1,234,301,5,0xFF0000;
 		close;
 	case 2:
 	case 3:
@@ -3719,7 +4696,7 @@ moro_vol.gat,131,103,3	script	駐屯地調査官#bl	419,{/* 65347 */
 		mes "モンスターが密集している地域に";
 		mes "向かったはずです。";
 		mes "よろしくお願いしますね。";
-		viewpoint 1, 234, 301, 5, 0xFF0000; //65347
+		viewpoint 1,234,301,5,0xFF0000;
 		close;
 	case 4:
 		mes "[駐屯地調査官]";
@@ -3735,8 +4712,8 @@ moro_vol.gat,131,103,3	script	駐屯地調査官#bl	419,{/* 65347 */
 		mes "それにしても、負傷しているのに";
 		mes "すぐに日誌をまとめているなんて……。";
 		mes "なんて出来た部下なんだ……!!";
-		emotion 21; //65347
-		emotion 4,""; //self
+		emotion 21;
+		emotion 4,"";
 		next;
 		mes "[駐屯地調査官]";
 		mes "偵察兵の問題は解決したので、";
@@ -3773,7 +4750,7 @@ moro_vol.gat,131,103,3	script	駐屯地調査官#bl	419,{/* 65347 */
 			mes "私は調査担当なのです。";
 			mes "戦闘にも不向きなもので……。";
 			mes "指示しかできないのです。";
-			emotion 19,""; //self
+			emotion 19,"";
 			close;
 		}
 		mes "[駐屯地調査官]";
@@ -3781,8 +4758,8 @@ moro_vol.gat,131,103,3	script	駐屯地調査官#bl	419,{/* 65347 */
 		mes "こうしている間にも";
 		mes "モンスター達は増えています。";
 		set EP143_bl,5;
-		chgquest 1267,1268; //state=1
-		setquest 1269; //state=1
+		chgquest 1267,1268;
+		setquest 1269;
 		close;
 	case 5:
 		if(!(checkquest(1269) & 0x4)) {
@@ -3820,17 +4797,17 @@ moro_vol.gat,131,103,3	script	駐屯地調査官#bl	419,{/* 65347 */
 		mes "集まって来たんだろう……？";
 		mes "どうしてあんな集団まで";
 		mes "私たちを苦しめるんでしょう。";
-		emotion 28; //65347
+		emotion 28;
 		set EP143_bl,6;
 		delquest 1268;
 		delquest 1269;
-		setquest 1297; //state=1
-		getexp 1000000,0; //6604643
-		getexp 1000000,0; //7604643
-		getexp 1000000,0; //8604643
-		getexp 1000000,0; //9604643
-		getexp 1000000,0; //10604643
-		viewpoint 1, 91, 197, 6, 0xFF0000; //65347
+		setquest 1297;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		viewpoint 1,91,197,6,0xFF0000;
 		close;
 	case 13:
 		mes "[駐屯地調査官]";
@@ -3852,17 +4829,17 @@ moro_vol.gat,131,103,3	script	駐屯地調査官#bl	419,{/* 65347 */
 		mes "集まって来たんだろう……？";
 		mes "どうしてあんな集団まで";
 		mes "私たちを苦しめるんでしょう。";
-		emotion 28; //65347
-		viewpoint 1, 91, 197, 6, 0xFF0000; //65347
+		emotion 28;
+		viewpoint 1,91,197,6,0xFF0000;
 		close;
 	}
 OnInit:
-	waitingroom "滅亡祝福教団", 0; //65347
+	waitingroom "滅亡祝福教団",0;
 	end;
 }
 
-moro_vol.gat,234,301,3	script	偵察兵#bl	413,{/* 65348 */
-	viewpoint 2, 1, 1, 5, 0xFFFFFF; //65348
+moro_vol.gat,234,301,3	script	偵察兵#bl	413,{
+	viewpoint 2,1,1,5,0xFFFFFF;
 	switch(EP143_bl) {
 	case 2:
 		mes "[偵察兵]";
@@ -3916,7 +4893,7 @@ moro_vol.gat,234,301,3	script	偵察兵#bl	413,{/* 65348 */
 		mes "^FF0000パトロール日誌^00000020枚程度";
 		mes "集めてきて下さい。";
 		set EP143_bl,3;
-		chgquest 1265,1266; //state=1
+		chgquest 1265,1266;
 		close;
 	case 3:
 		if(countitem(6692) < 20) {
@@ -3943,15 +4920,15 @@ moro_vol.gat,234,301,3	script	偵察兵#bl	413,{/* 65348 */
 		mes "行くので、調査官様には";
 		mes "事情を伝えて下さい。";
 		mes "あっ、日誌を取られた事は内緒ですよ！";
-		delitem 6692, 20;
+		delitem 6692,20;
 		set EP143_bl,4;
-		chgquest 1266,1267; //state=1
-		getexp 1000000,0; //1083230
-		getexp 1000000,0; //2083230
-		getexp 1000000,0; //3083230
-		getexp 1000000,0; //4083230
-		getexp 1000000,0; //5083230
-		viewpoint 1, 131, 103, 4, 0xFF0000; //65348
+		chgquest 1266,1267;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		viewpoint 1,131,103,4,0xFF0000;
 		close;
 	case 4:
 		mes "[偵察兵]";
@@ -3959,7 +4936,7 @@ moro_vol.gat,234,301,3	script	偵察兵#bl	413,{/* 65348 */
 		mes "行くので、調査官様には";
 		mes "事情を伝えて下さい。";
 		mes "あっ、日誌を取られた事は内緒ですよ！";
-		viewpoint 1, 131, 103, 4, 0xFF0000; //65348
+		viewpoint 1,131,103,4,0xFF0000;
 		close;
 	default:
 		mes "[偵察兵]";
@@ -3970,8 +4947,8 @@ moro_vol.gat,234,301,3	script	偵察兵#bl	413,{/* 65348 */
 	}
 }
 
-moro_vol.gat,91,197,3	script	滅亡祝福教団教主#bl	10021,{/* 65349 */
-	viewpoint 2, 1, 1, 6, 0xFFFFFF; //65349
+moro_vol.gat,91,197,3	script	滅亡祝福教団教主#bl	10021,{
+	viewpoint 2,1,1,6,0xFFFFFF;
 	switch(EP143_bl) {
 	case 6:
 		mes "[滅亡祝福教団教主]";
@@ -4091,7 +5068,7 @@ moro_vol.gat,91,197,3	script	滅亡祝福教団教主#bl	10021,{/* 65349 */
 		mes "滅亡祝福教団の信者になりたいと";
 		mes "言うだろう！";
 		set EP143_bl,7;
-		chgquest 1297,1270; //state=1
+		chgquest 1297,1270;
 		close;
 	case 7:
 		if(countitem(6693) < 40) {
@@ -4132,44 +5109,44 @@ moro_vol.gat,91,197,3	script	滅亡祝福教団教主#bl	10021,{/* 65349 */
 		next;
 		mes "[滅亡祝福教団信者]";
 		mes "うわっ！";
-		emotion 19, "滅亡祝福教団教主#bl"; //65349
-		emotion 19, "滅亡祝福教団副教主#bl"; //65350
-		emotion 28, "滅亡祝福教団信者#bl1"; //65356
-		emotion 19, "滅亡祝福教団信者#bl2"; //65357
-		emotion 19, "滅亡祝福教団信者#bl3"; //65358
-		emotion 28, "滅亡祝福教団信者#bl4"; //65359
+		emotion 19,"滅亡祝福教団教主#bl";
+		emotion 19,"滅亡祝福教団副教主#bl";
+		emotion 28,"滅亡祝福教団信者#bl1";
+		emotion 19,"滅亡祝福教団信者#bl2";
+		emotion 19,"滅亡祝福教団信者#bl3";
+		emotion 28,"滅亡祝福教団信者#bl4";
 		next;
 		mes "[滅亡祝福教団信者]";
 		mes "うわっ！";
 		mes "くわああ！";
-		emotion 19, "滅亡祝福教団教主#bl"; //65349
-		emotion 19, "滅亡祝福教団副教主#bl"; //65350
-		emotion 28, "滅亡祝福教団信者#bl1"; //65356
-		emotion 19, "滅亡祝福教団信者#bl3"; //65358
-		emotion 28, "滅亡祝福教団信者#bl4"; //65359
-		emotion 19, "滅亡祝福教団信者#bl6"; //65361
-		emotion 28, "滅亡祝福教団信者#bl7"; //65362
-		emotion 19, "滅亡祝福教団信者#bl9"; //65364
-		emotion 28, "滅亡祝福教団信者#bl0"; //65365
-		emotion 19, "滅亡祝福教団信者#bl12"; //65367
+		emotion 19,"滅亡祝福教団教主#bl";
+		emotion 19,"滅亡祝福教団副教主#bl";
+		emotion 28,"滅亡祝福教団信者#bl1";
+		emotion 19,"滅亡祝福教団信者#bl3";
+		emotion 28,"滅亡祝福教団信者#bl4";
+		emotion 19,"滅亡祝福教団信者#bl6";
+		emotion 28,"滅亡祝福教団信者#bl7";
+		emotion 19,"滅亡祝福教団信者#bl9";
+		emotion 28,"滅亡祝福教団信者#bl0";
+		emotion 19,"滅亡祝福教団信者#bl12";
 		next;
 		mes "[滅亡祝福教団信者]";
 		mes "うえええ！";
 		mes "ヒイイ、ヒイホー！";
-		emotion 19, "滅亡祝福教団教主#bl"; //65349
-		emotion 19, "滅亡祝福教団副教主#bl"; //65350
-		emotion 28, "滅亡祝福教団信者#bl1"; //65356
-		emotion 4, "滅亡祝福教団信者#bl2"; //65357
-		emotion 19, "滅亡祝福教団信者#bl3"; //65358
-		emotion 28, "滅亡祝福教団信者#bl4"; //65359
-		emotion 4, "滅亡祝福教団信者#bl5"; //65360
-		emotion 19, "滅亡祝福教団信者#bl6"; //65361
-		emotion 28, "滅亡祝福教団信者#bl7"; //65362
-		emotion 19, "滅亡祝福教団信者#bl8"; //65363
-		emotion 19, "滅亡祝福教団信者#bl9"; //65364
-		emotion 28, "滅亡祝福教団信者#bl0"; //65365
-		emotion 19, "滅亡祝福教団信者#bl11"; //65366
-		emotion 19, "滅亡祝福教団信者#bl12"; //65367
+		emotion 19,"滅亡祝福教団教主#bl";
+		emotion 19,"滅亡祝福教団副教主#bl";
+		emotion 28,"滅亡祝福教団信者#bl1";
+		emotion 4,"滅亡祝福教団信者#bl2";
+		emotion 19,"滅亡祝福教団信者#bl3";
+		emotion 28,"滅亡祝福教団信者#bl4";
+		emotion 4,"滅亡祝福教団信者#bl5";
+		emotion 19,"滅亡祝福教団信者#bl6";
+		emotion 28,"滅亡祝福教団信者#bl7";
+		emotion 19,"滅亡祝福教団信者#bl8";
+		emotion 19,"滅亡祝福教団信者#bl9";
+		emotion 28,"滅亡祝福教団信者#bl0";
+		emotion 19,"滅亡祝福教団信者#bl11";
+		emotion 19,"滅亡祝福教団信者#bl12";
 		next;
 		mes "[滅亡祝福教団教主]";
 		mes "痛い！";
@@ -4185,9 +5162,9 @@ moro_vol.gat,91,197,3	script	滅亡祝福教団教主#bl	10021,{/* 65349 */
 			mes "　うわっ！　という悲鳴だけが";
 			mes "　辺りに鳴り響いた。";
 			mes "　石投げをやめよう‐";
-			delitem 6693, 40;
+			delitem 6693,40;
 			set EP143_bl,8;
-			chgquest 1270,1271; //state=1
+			chgquest 1270,1271;
 			close;
 		}
 	case 8:
@@ -4203,20 +5180,20 @@ moro_vol.gat,91,197,3	script	滅亡祝福教団教主#bl	10021,{/* 65349 */
 		mes "[滅亡祝福教団信者]";
 		mes "う～";
 		mes "う～";
-		emotion 32, "滅亡祝福教団教主#bl"; //65349
-		emotion 32, "滅亡祝福教団副教主#bl"; //65350
-		emotion 6, "滅亡祝福教団信者#bl1"; //65356
-		emotion 6, "滅亡祝福教団信者#bl2"; //65357
-		emotion 6, "滅亡祝福教団信者#bl3"; //65358
-		emotion 6, "滅亡祝福教団信者#bl4"; //65359
-		emotion 6, "滅亡祝福教団信者#bl5"; //65360
-		emotion 6, "滅亡祝福教団信者#bl6"; //65361
-		emotion 6, "滅亡祝福教団信者#bl7"; //65362
-		emotion 6, "滅亡祝福教団信者#bl8"; //65363
-		emotion 6, "滅亡祝福教団信者#bl9"; //65364
-		emotion 6, "滅亡祝福教団信者#bl0"; //65365
-		emotion 6, "滅亡祝福教団信者#bl11"; //65366
-		emotion 6, "滅亡祝福教団信者#bl12"; //65367
+		emotion 32,"滅亡祝福教団教主#bl";
+		emotion 32,"滅亡祝福教団副教主#bl";
+		emotion 6,"滅亡祝福教団信者#bl1";
+		emotion 6,"滅亡祝福教団信者#bl2";
+		emotion 6,"滅亡祝福教団信者#bl3";
+		emotion 6,"滅亡祝福教団信者#bl4";
+		emotion 6,"滅亡祝福教団信者#bl5";
+		emotion 6,"滅亡祝福教団信者#bl6";
+		emotion 6,"滅亡祝福教団信者#bl7";
+		emotion 6,"滅亡祝福教団信者#bl8";
+		emotion 6,"滅亡祝福教団信者#bl9";
+		emotion 6,"滅亡祝福教団信者#bl0";
+		emotion 6,"滅亡祝福教団信者#bl11";
+		emotion 6,"滅亡祝福教団信者#bl12";
 		next;
 		mes "[滅亡祝福教団信者]";
 		mes "滅亡！　祝福！";
@@ -4267,7 +5244,7 @@ moro_vol.gat,91,197,3	script	滅亡祝福教団教主#bl	10021,{/* 65349 */
 		mes "なくなってしまったな！";
 		mes "わはははは……。";
 		set EP143_bl,9;
-		chgquest 1271,1272; //state=1
+		chgquest 1271,1272;
 		close;
 	case 9:
 		if(countitem(6694) < 30) {
@@ -4317,16 +5294,16 @@ moro_vol.gat,91,197,3	script	滅亡祝福教団教主#bl	10021,{/* 65349 */
 		mes "[滅亡祝福教団教主]";
 		mes "……";
 		mes "うううっ……！";
-		emotion 4, "滅亡祝福教団教主#bl"; //65930
+		emotion 4,"滅亡祝福教団教主#bl";
 		next;
 		mes "‐滅亡祝福教団教主の顔色が";
 		mes "　白くなって行き、彼から";
 		mes "　酷い悪臭が漂ってきた……";
 		mes "　教主が沈黙する‐";
-		emotion 28, "滅亡祝福教団教主#bl"; //65930
-		delitem 6694, 30;
+		emotion 28,"滅亡祝福教団教主#bl";
+		delitem 6694,30;
 		set EP143_bl,10;
-		chgquest 1272,1273; //state=1
+		chgquest 1272,1273;
 		close;
 	case 10:
 	case 11:
@@ -4364,17 +5341,17 @@ moro_vol.gat,91,197,3	script	滅亡祝福教団教主#bl	10021,{/* 65349 */
 		mes "今日のような怪奇現象を";
 		mes "もう一度起こしてくれ。頼むぞ！";
 		set EP143_bl,13;
-		chgquest 1275,201710; //state=1
-		getexp 1000000,0; //63848335
-		getexp 1000000,0; //64848335
-		getexp 1000000,0; //65848335
-		getexp 1000000,0; //66848335
-		getexp 1000000,0; //67848335
-		getexp 1000000,0; //68848335
-		getexp 1000000,0; //69848335
-		getexp 1000000,0; //70848335
-		getexp 1000000,0; //71848335
-		getexp 1000000,0; //72848335
+		chgquest 1275,201710;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
+		getexp 1000000,0;
 		close;
 	case 13:
 		mes "[滅亡祝福教団教主]";
@@ -4406,7 +5383,7 @@ moro_vol.gat,91,197,3	script	滅亡祝福教団教主#bl	10021,{/* 65349 */
 	}
 }
 
-moro_vol.gat,95,195,3	script	滅亡祝福教団副教主#bl	10022,{/* 65350 */
+moro_vol.gat,95,195,3	script	滅亡祝福教団副教主#bl	10022,{
 	switch(EP143_bl) {
 	case 10:
 		mes "[滅亡祝福教団副教主]";
@@ -4468,7 +5445,7 @@ moro_vol.gat,95,195,3	script	滅亡祝福教団副教主#bl	10022,{/* 65350 */
 			mes "怖い？　戦えない？";
 			mes "扉を開くために犠牲はつきものです。";
 			mes "恐れずに行きなさい！";
-			emotion 19,""; //self
+			emotion 19,"";
 			close;
 		}
 		mes "[滅亡祝福教団副教主]";
@@ -4483,7 +5460,7 @@ moro_vol.gat,95,195,3	script	滅亡祝福教団副教主#bl	10022,{/* 65350 */
 		mes "それぞれ30個ずつ私の前に";
 		mes "持ってきなさい！";
 		set EP143_bl,11;
-		chgquest 1273,1274; //state=1
+		chgquest 1273,1274;
 		close;
 	case 11:
 		if(countitem(6695) < 30 || countitem(6696) < 30) {
@@ -4521,49 +5498,49 @@ moro_vol.gat,95,195,3	script	滅亡祝福教団副教主#bl	10022,{/* 65350 */
 		mes "[滅亡祝福教団信者]";
 		mes "きゃあああ！";
 		mes "ひゃっほ、ひーほ！";
-		misceffect 183, "滅亡祝福教団教主#bl"; //65930
-		misceffect 183, "滅亡祝福教団副教主#bl"; //65931
-		misceffect 183, "滅亡祝福教団信者#bl1"; //65937
-		misceffect 183, "滅亡祝福教団信者#bl2"; //65938
-		misceffect 183, "滅亡祝福教団信者#bl3"; //65939
-		misceffect 183, "滅亡祝福教団信者#bl4"; //65940
-		misceffect 183, "滅亡祝福教団信者#bl5"; //65941
-		misceffect 183, "滅亡祝福教団信者#bl6"; //65942
-		misceffect 183, "滅亡祝福教団信者#bl7"; //65943
-		misceffect 183, "滅亡祝福教団信者#bl8"; //65944
-		misceffect 183, "滅亡祝福教団信者#bl9"; //65945
-		misceffect 183, "滅亡祝福教団信者#bl0"; //65946
-		misceffect 183, "滅亡祝福教団信者#bl11"; //65947
-		misceffect 183, "滅亡祝福教団信者#bl12"; //65948
+		misceffect 183,"滅亡祝福教団教主#bl";
+		misceffect 183,"滅亡祝福教団副教主#bl";
+		misceffect 183,"滅亡祝福教団信者#bl1";
+		misceffect 183,"滅亡祝福教団信者#bl2";
+		misceffect 183,"滅亡祝福教団信者#bl3";
+		misceffect 183,"滅亡祝福教団信者#bl4";
+		misceffect 183,"滅亡祝福教団信者#bl5";
+		misceffect 183,"滅亡祝福教団信者#bl6";
+		misceffect 183,"滅亡祝福教団信者#bl7";
+		misceffect 183,"滅亡祝福教団信者#bl8";
+		misceffect 183,"滅亡祝福教団信者#bl9";
+		misceffect 183,"滅亡祝福教団信者#bl0";
+		misceffect 183,"滅亡祝福教団信者#bl11";
+		misceffect 183,"滅亡祝福教団信者#bl12";
 		next;
 		mes "[滅亡祝福教団信者]";
 		mes "きゃあ！";
 		mes "本当の滅亡だ！";
 		mes "みんな死んでしまう！　きゃああ！";
-		misceffect 183, "滅亡祝福教団教主#bl"; //65930
-		misceffect 183, "滅亡祝福教団副教主#bl"; //65931
-		misceffect 183, "滅亡祝福教団信者#bl1"; //65937
-		misceffect 183, "滅亡祝福教団信者#bl2"; //65938
-		misceffect 183, "滅亡祝福教団信者#bl3"; //65939
-		misceffect 183, "滅亡祝福教団信者#bl4"; //65940
-		misceffect 183, "滅亡祝福教団信者#bl5"; //65941
-		misceffect 183, "滅亡祝福教団信者#bl6"; //65942
-		misceffect 183, "滅亡祝福教団信者#bl7"; //65943
-		misceffect 183, "滅亡祝福教団信者#bl8"; //65944
-		misceffect 183, "滅亡祝福教団信者#bl9"; //65945
-		misceffect 183, "滅亡祝福教団信者#bl0"; //65946
-		misceffect 183, "滅亡祝福教団信者#bl11"; //65947
-		misceffect 183, "滅亡祝福教団信者#bl12"; //65948
+		misceffect 183,"滅亡祝福教団教主#bl";
+		misceffect 183,"滅亡祝福教団副教主#bl";
+		misceffect 183,"滅亡祝福教団信者#bl1";
+		misceffect 183,"滅亡祝福教団信者#bl2";
+		misceffect 183,"滅亡祝福教団信者#bl3";
+		misceffect 183,"滅亡祝福教団信者#bl4";
+		misceffect 183,"滅亡祝福教団信者#bl5";
+		misceffect 183,"滅亡祝福教団信者#bl6";
+		misceffect 183,"滅亡祝福教団信者#bl7";
+		misceffect 183,"滅亡祝福教団信者#bl8";
+		misceffect 183,"滅亡祝福教団信者#bl9";
+		misceffect 183,"滅亡祝福教団信者#bl0";
+		misceffect 183,"滅亡祝福教団信者#bl11";
+		misceffect 183,"滅亡祝福教団信者#bl12";
 		next;
 		mes "‐滅亡の神がいるかはわからないが、";
 		mes "　彼らだけが選ばれて祝福を";
 		mes "　受けたのではなさそうだ。";
 		mes "　滅亡祝福教団教主と";
 		mes "　もう一度話をしてみよう‐";
-		delitem 6695, 30;
-		delitem 6696, 30;
+		delitem 6695,30;
+		delitem 6696,30;
 		set EP143_bl,12;
-		chgquest 1274,1275; //state=1
+		chgquest 1274,1275;
 		close;
 	case 12:
 	case 13:
@@ -4587,7 +5564,7 @@ moro_vol.gat,95,195,3	script	滅亡祝福教団副教主#bl	10022,{/* 65350 */
 	}
 }
 
-moro_vol.gat,100,183,1	script	駐屯地 番卒#bl	417,{/* 65351 */
+moro_vol.gat,100,183,1	script	駐屯地 番卒#bl	417,{
 	mes "[駐屯地 番卒]";
 	mes "ここは危険地域です。";
 	mes "勝手に歩き回っては";
@@ -4596,12 +5573,12 @@ moro_vol.gat,100,183,1	script	駐屯地 番卒#bl	417,{/* 65351 */
 OnTouchNPC:
 	unittalk "あっちへ行け！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,102,188,1	script	駐屯地 番卒#bl1	417,{/* 65352 */
+moro_vol.gat,102,188,1	script	駐屯地 番卒#bl1	417,{
 	mes "[駐屯地 番卒]";
 	mes "ここは危険地域です。";
 	mes "勝手に歩き回っては";
@@ -4610,12 +5587,12 @@ moro_vol.gat,102,188,1	script	駐屯地 番卒#bl1	417,{/* 65352 */
 OnTouchNPC:
 	unittalk "敵襲だ！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,104,193,1	script	駐屯地 番卒#bl2	417,{/* 65353 */
+moro_vol.gat,104,193,1	script	駐屯地 番卒#bl2	417,{
 	mes "[駐屯地 番卒]";
 	mes "ここは危険地域です。";
 	mes "勝手に歩き回っては";
@@ -4624,12 +5601,12 @@ moro_vol.gat,104,193,1	script	駐屯地 番卒#bl2	417,{/* 65353 */
 OnTouchNPC:
 	unittalk "くらえ！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,95,182,1	script	駐屯地 番卒#bl3	417,{/* 65354 */
+moro_vol.gat,95,182,1	script	駐屯地 番卒#bl3	417,{
 	mes "[駐屯地 番卒]";
 	mes "ここは危険地域です。";
 	mes "勝手に歩き回っては";
@@ -4638,12 +5615,12 @@ moro_vol.gat,95,182,1	script	駐屯地 番卒#bl3	417,{/* 65354 */
 OnTouchNPC:
 	unittalk "魔物どもめ！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,90,181,7	script	駐屯地 番卒#bl4	417,{/* 65355 */
+moro_vol.gat,90,181,7	script	駐屯地 番卒#bl4	417,{
 	mes "[駐屯地 番卒]";
 	mes "ここは危険地域です。";
 	mes "勝手に歩き回っては";
@@ -4652,12 +5629,12 @@ moro_vol.gat,90,181,7	script	駐屯地 番卒#bl4	417,{/* 65355 */
 OnTouchNPC:
 	unittalk "通さんぞ！";
 	misceffect 92;
-	//sleep2 2000;
+	sleep2 2000;
 	warp "Random",0,0;
 	end;
 }
 
-moro_vol.gat,85,196,7	script	滅亡祝福教団信者#bl1	10023,{/* 65356 */
+moro_vol.gat,85,196,7	script	滅亡祝福教団信者#bl1	10023,{
 	if(EP143_bl < 12) {		//12未確認
 		mes "[滅亡祝福教団信者]";
 		mes "滅亡！　祝福！";
@@ -4670,7 +5647,7 @@ moro_vol.gat,85,196,7	script	滅亡祝福教団信者#bl1	10023,{/* 65356 */
 	close;
 }
 
-moro_vol.gat,87,193,7	script	滅亡祝福教団信者#bl2	10023,{/* 65357 */
+moro_vol.gat,87,193,7	script	滅亡祝福教団信者#bl2	10023,{
 	if(EP143_bl < 12) {		//12未確認
 		mes "[滅亡祝福教団信者]";
 		mes "亡！　亡！　滅亡滅亡！";
@@ -4683,7 +5660,7 @@ moro_vol.gat,87,193,7	script	滅亡祝福教団信者#bl2	10023,{/* 65357 */
 	close;
 }
 
-moro_vol.gat,90,191,7	script	滅亡祝福教団信者#bl3	10023,{/* 65358 */
+moro_vol.gat,90,191,7	script	滅亡祝福教団信者#bl3	10023,{
 	if(EP143_bl < 12) {		//12未確認
 		mes "[滅亡祝福教団信者]";
 		mes "滅亡！　祝福！";
@@ -4700,7 +5677,7 @@ moro_vol.gat,90,191,7	script	滅亡祝福教団信者#bl3	10023,{/* 65358 */
 	close;
 }
 
-moro_vol.gat,93,189,7	script	滅亡祝福教団信者#bl4	10023,{/* 65359 */
+moro_vol.gat,93,189,7	script	滅亡祝福教団信者#bl4	10023,{
 	if(EP143_bl < 12) {		//11未確認
 		mes "[滅亡祝福教団信者]";
 		mes "亡！　亡！　滅亡滅亡！";
@@ -4713,7 +5690,7 @@ moro_vol.gat,93,189,7	script	滅亡祝福教団信者#bl4	10023,{/* 65359 */
 	close;
 }
 
-moro_vol.gat,83,193,7	script	滅亡祝福教団信者#bl5	10023,{/* 65360 */
+moro_vol.gat,83,193,7	script	滅亡祝福教団信者#bl5	10023,{
 	if(EP143_bl < 12) {		//11未確認
 		mes "[滅亡祝福教団信者]";
 		mes "滅亡！　祝福！";
@@ -4726,7 +5703,7 @@ moro_vol.gat,83,193,7	script	滅亡祝福教団信者#bl5	10023,{/* 65360 */
 	close;
 }
 
-moro_vol.gat,86,190,7	script	滅亡祝福教団信者#bl6	10023,{/* 65361 */
+moro_vol.gat,86,190,7	script	滅亡祝福教団信者#bl6	10023,{
 	if(EP143_bl < 12) {		//11未確認
 		mes "[滅亡祝福教団信者]";
 		mes "滅亡！　祝福！";
@@ -4739,7 +5716,7 @@ moro_vol.gat,86,190,7	script	滅亡祝福教団信者#bl6	10023,{/* 65361 */
 	close;
 }
 
-moro_vol.gat,89,188,7	script	滅亡祝福教団信者#bl7	10023,{/* 65362 */
+moro_vol.gat,89,188,7	script	滅亡祝福教団信者#bl7	10023,{
 	if(EP143_bl < 12) {		//11未確認
 		mes "[滅亡祝福教団信者]";
 		mes "亡！　亡！　滅亡滅亡！";
@@ -4752,7 +5729,7 @@ moro_vol.gat,89,188,7	script	滅亡祝福教団信者#bl7	10023,{/* 65362 */
 	close;
 }
 
-moro_vol.gat,93,185,7	script	滅亡祝福教団信者#bl8	10023,{/* 65363 */
+moro_vol.gat,93,185,7	script	滅亡祝福教団信者#bl8	10023,{
 	if(EP143_bl < 12) {		//11未確認
 		mes "[滅亡祝福教団信者]";
 		mes "滅亡！　祝福！";
@@ -4766,7 +5743,7 @@ moro_vol.gat,93,185,7	script	滅亡祝福教団信者#bl8	10023,{/* 65363 */
 	close;
 }
 
-moro_vol.gat,81,197,7	script	滅亡祝福教団信者#bl9	10023,{/* 65364 */
+moro_vol.gat,81,197,7	script	滅亡祝福教団信者#bl9	10023,{
 	if(EP143_bl < 12) {		//11未確認
 		mes "[滅亡祝福教団信者]";
 		mes "亡！　亡！　滅亡滅亡！";
@@ -4780,7 +5757,7 @@ moro_vol.gat,81,197,7	script	滅亡祝福教団信者#bl9	10023,{/* 65364 */
 	close;
 }
 
-moro_vol.gat,84,201,5	script	滅亡祝福教団信者#bl0	10023,{/* 65365 */
+moro_vol.gat,84,201,5	script	滅亡祝福教団信者#bl0	10023,{
 	if(EP143_bl < 12) {		//11未確認
 		mes "[滅亡祝福教団信者]";
 		mes "滅亡！　祝福！";
@@ -4793,7 +5770,7 @@ moro_vol.gat,84,201,5	script	滅亡祝福教団信者#bl0	10023,{/* 65365 */
 	close;
 }
 
-moro_vol.gat,97,187,5	script	滅亡祝福教団信者#bl11	10023,{/* 65366 */
+moro_vol.gat,97,187,5	script	滅亡祝福教団信者#bl11	10023,{
 	if(EP143_bl < 12) {		//11未確認
 		mes "[滅亡祝福教団信者]";
 		mes "亡！　亡！　滅亡滅亡！";
@@ -4807,7 +5784,7 @@ moro_vol.gat,97,187,5	script	滅亡祝福教団信者#bl11	10023,{/* 65366 */
 	close;
 }
 
-moro_vol.gat,82,189,7	script	滅亡祝福教団信者#bl12	10023,{/* 65367 */
+moro_vol.gat,82,189,7	script	滅亡祝福教団信者#bl12	10023,{
 	if(EP143_bl < 12) {		//11未確認
 		mes "[滅亡祝福教団信者]";
 		mes "おお、滅亡の神よ！";
@@ -4822,988 +5799,9 @@ moro_vol.gat,82,189,7	script	滅亡祝福教団信者#bl12	10023,{/* 65367 */
 	close;
 }
 
-moro_vol.gat,137,136,0	script	ひび#ep14bs_	550,{/* 65368 */
-	mes "‐この場所には似合わない";
-	mes "　ひびがある‐";
-	next;
-	if(select("次元の狭間に戻る","やめる") == 2) {
-		mes "‐戻らないことにした‐";
-		close;
-	}
-	mes "‐中は一人がやっと通れるくらいに狭く";
-	mes "　暗かった‐";
-	close2;
-	warp "dali.gat",64,103;
-	end;
-OnInit:
-	waitingroom "次元の狭間", 0; //65368
-	end;
-}
+moro_cav.gat,64,13,0	warp	#ep14_3洞窟出口	1,1,moro_vol.gat,198,176
 
-moro_vol.gat,132,140,4	script	タマリン#ep14bs_ju	10027,{/* 65369 */
-	viewpoint 2, 1, 1, 1, 0xFFFFFF; //65369
-	switch(EP143_PARA) {
-	case 9:
-		cutin "ep143_tahuk.bmp", 2;
-		mes "[タマリン]";
-		mes "うわー、いつの間にこんなに多くの人が";
-		mes "集まったんでしょう。";
-		mes "以前は全然人の気配がなかったのに。";
-		next;
-		cutin "ep143_taang.bmp", 2;
-		mes "[タマリン]";
-		mes "武装した人もいるし……。";
-		mes "もしかして私を助けてくれた";
-		mes "あのアサシンの男性が呼んだのかな？";
-		mes "なんだか雰囲気が怪しいですね……。";
-		next;
-		mes "[タマリン]";
-		mes "人の姿じゃない人（？）達も";
-		mes "多く見られますね……。";
-		mes "これはもしかすると、";
-		mes "私が思っていたよりも";
-		mes "凄い場所なのかもしれません!!";
-		next;
-		cutin "ep143_tahuk.bmp", 2;
-		mes "[タマリン]";
-		mes "それに、これだけ多くの人がいれば";
-		mes "私の仲間を見かけた人が";
-		mes "いるかもしれません！";
-		next;
-		if(checkquest(200875)) {	// 三ヶ国への報告書クエスト？
-			cutin "ep13_captin_edq.bmp", 2;
-			mes "[司令官アジフ]";
-			mes "お？";
-			mes strcharinfo(0)+ "じゃないか！";
-			mes "お前も来てくれたのか！";
-			next;
-			mes "[司令官アジフ]";
-			mes "ここは先遣隊のひとりが発見した";
-			mes "^0000FF魔王モロクが潜む地、";
-			mes "フレイムヴァレー^000000だ。";
-			mes "現在各所を調査中でな、";
-			mes "少しずつだが";
-			mes "わかってきたこともある。";
-			next;
-			mes "[司令官アジフ]";
-			mes "早いとこ調査を進めて";
-			mes "魔王とご対面、と行きたい所なんだが。";
-			mes "まあ、焦りは禁物ってヤツだな。";
-			next;
-			mes "[司令官アジフ]";
-			mes "ところでこの人の数を見てくれ！";
-			mes "打倒モロクの旗印の下、";
-			mes "サファ族もラフィネ族も";
-			mes "種族間のわだかまりを超えて";
-			mes "これだけの数が集まってくれたんだ！";
-			next;
-			mes "[司令官アジフ]";
-			mes "これだけの規模の連合軍が";
-			mes "結成されたんだ。";
-			mes "いよいよ魔王モロクも";
-			mes "年貢の納め時、ってとこだな！";
-			next;
-			mes "[司令官アジフ]";
-			mes "俺はここから西の方角に";
-			mes "本部を構えているから、";
-			mes "何かあったら訪ねてくるといい。";
-			mes "ここは危険な場所も多いから";
-			mes "あまり無茶はするなよ。";
-			next;
-			cutin "ep13_captin_edq.bmp", 255;
-			mes "[バゼット]";
-			mes "!?　そこのあなたたち!!";
-			mes "何をしているんですか!!";
-			next;
-			cutin "ep13_captin_edq.bmp", 2;
-			mes "[司令官アジフ]";
-			mes "おっと！";
-			mes "怖い博士に見つかってしまった。";
-			mes "俺は本部に戻る。";
-			mes "くれぐれも無茶はするなよ！";
-			next;
-			cutin "ep13_captin_edq.bmp", 255;
-			mes "[バゼット]";
-			mes "……今のはアジフ司令官？";
-			mes "全く、油を売っている暇があるなら";
-			mes "こちらを手伝ってほしいものですね！";
-			mes "そして……そこのあなた達！";
-			mes "あなた達は何をしているのですか！";
-		}
-		else {
-			emotion 6, "バゼット#ep14bs"; //65370
-			cutin "ep143_tahuk.bmp", 255;
-			mes "[バゼット]";
-			mes "!?　そこのあなたたち!!";
-			mes "何をしているんですか!!";
-		}
-		viewpoint 1, 142, 131, 0, 0xFF0000; //65369
-		set EP143_PARA,10;
-		chgquest 11353,11354; //state=1
-		close;
-	case 10:
-		cutin "ep143_tahuk.bmp", 2;
-		mes "[タマリン]";
-		mes "そういえば私を助けてくれた";
-		mes "あのアサシンの男性が";
-		mes "^0000FFモロクの痕跡をみつけた^000000と";
-		mes "言っていました。";
-		next;
-		mes "[タマリン]";
-		mes "ここは何か";
-		mes "モロクと関係する地なのでしょうか。";
-		next;
-		cutin "ep143_tahuk.bmp", 255;
-		emotion 6, "バゼット#ep14bs"; //65370
-		mes "[バゼット]";
-		mes "そこのあなたたち!!";
-		mes "ちょっとこちらにきなさい！";
-		close;
-	case 11:
-		cutin "ep143_taang.bmp", 2;
-		mes "[タマリン]";
-		mes "こっそり来た事がばれると";
-		mes "追い出されるかもしれません。";
-		mes "まずは言う通りにした方が";
-		mes "良さそうですね。";
-		close2;
-		cutin "ep143_taang.bmp", 255;
-		end;
-	case 12:
-		cutin "ep143_tasta.bmp", 2;
-		mes "[タマリン]";
-		mes "植物標本を採集するだけなら、";
-		mes "そこまで大変そうでもないので";
-		mes "半分ずつ集めることにしましょう。";
-		next;
-		mes "[タマリン]";
-		mes "^0000FFソニアの茎を1個集めたら、";
-		mes "ここの中央にある大きな岩の前で";
-		mes "待ち合わせて一緒に戻りましょう。^000000";
-		viewpoint 1, 198, 179, 2, 0xFF0000; //65369
-		set EP143_PARA,13;
-		chgquest 11356,11357; //state=1
-		close2;
-		cutin "ep143_tasta.bmp", 255;
-		end;
-	case 13:
-		cutin "ep143_tasta.bmp", 2;
-		mes "[タマリン]";
-		mes "植物標本を採集するだけなら、";
-		mes "そこまで大変そうでもないので";
-		mes "半分ずつ集めることにしましょう。";
-		next;
-		mes "[タマリン]";
-		mes "^0000FFソニアの茎を1個集めたら、";
-		mes "ここの中央にある大きな岩の前で";
-		mes "待ち合わせて一緒に戻りましょう。^000000";
-		viewpoint 1, 198, 179, 2, 0xFF0000; //65369
-		close2;
-		cutin "ep143_tasta.bmp", 255;
-		end;
-	case 14:
-		cutin "ep143_tasta.bmp", 2;
-		mes "[タマリン]";
-		mes "まずはバゼットさんに報告しませんか？";
-		close2;
-		cutin "ep143_tahuk.bmp", 255;
-		end;
-	case 15:
-		cutin "ep143_tahuk.bmp", 2;
-		mes "[タマリン]";
-		mes "急いで^0000FFルーゲン教官^000000の所に";
-		mes "向かいましょう！";
-		mes "一刻を争います!!";
-		close2;
-		cutin "ep143_tahuk.bmp", 255;
-		end;
-	case 16:
-	case 17://?
-		cutin "ep143_tahuk.bmp", 2;
-		mes "[タマリン]";
-		mes "^0000FFソニアの茎を";
-		mes "患者に食べさせてみましょう！^000000";
-		close2;
-		cutin "ep143_tahuk.bmp", 255;
-		end;
-	case 18:
-		cutin "ep143_tasmi.bmp", 2;
-		mes "[タマリン]";
-		mes "空腹のあまりに食べた";
-		mes "植物がこんな形で役に立つとは！";
-		mes "急いでバゼットさんに報告しましょう！";
-		close2;
-		cutin "ep143_tasmi.bmp", 255;
-		end;
-	case 19:
-		cutin "ep143_tasmi.bmp", 2;
-		mes "[タマリン]";
-		mes "ここには人もたくさんいますし、";
-		mes "ここからはもう一人でも大丈夫です。";
-		mes "今まで本当にありがとうございました！";
-		next;
-		mes "[タマリン]";
-		mes "もし中央の岩にあるという";
-		mes "洞窟に入ることがあったら、";
-		mes "私にひと声かけてくださいね。";
-		close2;
-		cutin "ep143_tasmi.bmp", 255;
-		end;
-	}
-}
-
-moro_vol.gat,142,131,5	script	バゼット#ep14bs	883,{/* 65370 */
-	viewpoint 2, 1, 1, 0, 0xFFFFFF; //65370
-	switch(EP143_PARA) {
-	case 10:
-		mes "[バゼット]";
-		mes "ああ、あなた達！";
-		mes "そこを踏み荒らさないでください！";
-		mes "せっかく集めておいたサンプルが";
-		mes "メチャクチャになってしまったじゃ";
-		mes "ありませんか！";
-		next;
-		mes "[バゼット]";
-		mes "キャンプ側の調査もまだ完全に";
-		mes "終えてないのに……。";
-		mes "作業中の地域では気を付けて下さい！";
-		mes "私の仕事を増やす気ですか!?";
-		next;
-		mes "[バゼット]";
-		mes "こんなことになるとわかっていたら";
-		mes "もっと助手を用意して欲しいと";
-		mes "言うべきだった……。";
-		mes "圧倒的に人手が足りなすぎる！";
-		next;
-		mes "[バゼット]";
-		mes "ハッ……!!";
-		mes "すみません、忙しさのあまり";
-		mes "取り乱してしまいました……。";
-		mes "私は軍の先遣隊が発見した";
-		mes "ここ、フレイムヴァレーの調査を";
-		mes "担当しているバゼットといいます。";
-		next;
-		mes "[バゼット]";
-		mes "私たちの軍の先遣隊の多くは、";
-		mes "次元移動機を通って、";
-		mes "このフレイムヴァレーにきました。";
-		next;
-		mes "[バゼット]";
-		mes "しかし……。";
-		mes "一つの軍隊ほどの人数が調査に出たのに、";
-		mes "戻ってきたのはたった数名で、";
-		mes "しかも彼らはひどく弱っていました。";
-		next;
-		mes "[バゼット]";
-		mes "先遣隊の調査結果で";
-		mes "ここが魔王モロクに関係する地なのは";
-		mes "間違いないとのことでしたが……。";
-		mes "……この地は何かがおかしい。";
-		next;
-		mes "[バゼット]";
-		mes "弱って帰ってきた先遣隊のように";
-		mes "今ここにいる者たちを";
-		mes "危険な目にあわすことのないよう";
-		mes "急いで調査を進めているのです。";
-		next;
-		mes "[バゼット]";
-		mes "そうだあなた達。見ない顔ですが、";
-		mes "見るからに暇そうですね。";
-		mes "サンプルを集める仕事を";
-		mes "手伝って下さいよ！";
-		next;
-		mes "[バゼット]";
-		mes "あなた達が研究用のサンプルを";
-		mes "踏み荒らしたせいで、";
-		mes "メチャクチャなってしまったので";
-		mes "責任を取ってもらわないと！";
-		mes "嫌とは言わせませんよ！";
-		next;
-		mes "[バゼット]";
-		mes "まずは虫の標本を集めてください。";
-		mes "この地域では変形している生物が";
-		mes "たくさん見つかっていますが、";
-		mes "その中から^0000FF完全に新しい種^000000が";
-		mes "ひとつだけ見つかりました。";
-		next;
-		mes "[バゼット]";
-		mes "^0000FF燃える虫のような姿をしているので、";
-		mes "フレイムバグと呼んでいます。";
-		mes "他の虫に比べちょっと変わっているのは";
-		mes "フレイムピットと呼ばれる火の穴に";
-		mes "住んでいる^000000という事です。";
-		next;
-		mes "[バゼット]";
-		mes "時々外に出ている奴らもいますが、";
-		mes "火の穴の外に出てしまうと";
-		mes "すぐ死んでしまいます。";
-		next;
-		mes "[バゼット]";
-		mes "そこで^0000FFフレイムピットを2個調査し、";
-		mes "破壊した後、^000000";
-		mes "フレイムバグを探し出して倒し、";
-		mes "^0000FFフレイムバグの皮を1個";
-		mes "採取して来て下さい。^000000";
-		next;
-		emotion 6, "バゼット#ep14bs"; //65370
-		mes "[バゼット]";
-		mes "熱いかもしれないので";
-		mes "十分気を付けてくださいね。";
-		set EP143_PARA,11;
-		chgquest 11354,11355; //state=1
-		close;
-	case 11:
-		if(checkquest(11355)&0x4 == 0 || countitem(6689) == 0) {
-			mes "[バゼット]";
-			mes "まずは虫の標本を集めてください。";
-			mes "この地域では変形している生物が";
-			mes "たくさん見つかっていますが、";
-			mes "その中から^0000FF完全に新しい種^000000が";
-			mes "ひとつだけ見つかりました。";
-			next;
-			mes "[バゼット]";
-			mes "^0000FF燃える虫のような姿をしているので、";
-			mes "フレイムバグと呼んでいます。";
-			mes "他の虫に比べちょっと変わっているのは";
-			mes "フレイムピットと呼ばれる火の穴に";
-			mes "住んでいる^000000という事です。";
-			next;
-			mes "[バゼット]";
-			mes "時々外に出ている奴らもいますが、";
-			mes "火の穴の外に出てしまうと";
-			mes "すぐ死んでしまいます。";
-			next;
-			mes "[バゼット]";
-			mes "そこで^0000FFフレイムピットを2個調査し、";
-			mes "破壊した後、^000000";
-			mes "フレイムバグを探し出して倒し、";
-			mes "^0000FFフレイムバグの皮を1個";
-			mes "採取して来て下さい。^000000";
-			next;
-			mes "[バゼット]";
-			mes "熱いかもしれないので";
-			mes "十分気を付けてくださいね。";
-			close;
-		}
-		viewpoint 2, 1, 1, 0, 0xFFFFFF; //60454
-		mes "[バゼット]";
-		mes "お！　帰ってきましたね！";
-		mes "ご苦労様でした！";
-		mes "思っていたより";
-		mes "早かったですね。";
-		delitem 6689, 1;
-		set EP143_PARA,12;
-		chgquest 11355,11356; //state=1
-		next;
-		mes "[バゼット]";
-		mes "うわ！　あっちっち!!";
-		mes "ふー！　ふー!!!!";
-		mes "これは冷める前にうまく保存して";
-		mes "実験室に送っといて……。";
-		next;
-		mes "[バゼット]";
-		mes "次は植物標本を集めてください。";
-		mes "採取しなければならない植物は、";
-		mes "^FF0000ソニア^000000というとても原始的な姿を";
-		mes "している植物です。";
-		next;
-		mes "[バゼット]";
-		mes "パッと見た感じでは植物というよりは、";
-		mes "プラスチックでつくったホースに";
-		mes "見えますが、植物が備えておくべき";
-		mes "一番基本的な構造をしています。";
-		next;
-		mes "[バゼット]";
-		mes "ソニアを倒すと";
-		mes "^0000FFソニアの茎^000000を落とします。";
-		mes "その^0000FFソニアの茎を2個^000000";
-		mes "持って来て下さい。";
-		next;
-		mes "[バゼット]";
-		mes "ソニアの標本を採集すれば";
-		mes "標本を集める仕事は終わりなので、";
-		mes "もし作業中に^0000FF珍しい物でも発見^000000したら";
-		mes "教えて下さい。";
-		next;
-		mes "[バゼット]";
-		mes "危ないかもしれないので、本拠地から";
-		mes "あまり遠くには行かないで下さい。";
-		mes "気を付けて行ってきて下さいね。";
-		mes "よろしくお願いします。";
-		next;
-		cutin "ep143_tasta.bmp", 2;
-		mes "[タマリン]";
-		mes "ふむ……";
-		mes strcharinfo(0)+ "様、";
-		mes "良い案を思いついたので";
-		mes "ちょっと待って下さい！";
-		viewpoint 1, 132, 140, 1, 0xFF0000; //65370
-		close2;
-		cutin "ep143_tasta.bmp", 255;
-		end;
-	case 12:
-	case 13:
-		mes "[バゼット]";
-		mes "次は植物標本を集めてください。";
-		mes "採取しなければならない植物は、";
-		mes "^FF0000ソニア^000000というとても原始的な姿を";
-		mes "している植物です。";
-		next;
-		mes "[バゼット]";
-		mes "パッと見た感じでは植物というよりは、";
-		mes "プラスチックでつくったホースに";
-		mes "見えますが、植物が備えておくべき";
-		mes "一番基本的な構造をしています。";
-		next;
-		mes "[バゼット]";
-		mes "ソニアを倒すと";
-		mes "^0000FFソニアの茎^000000を落とします。";
-		mes "その^0000FFソニアの茎を2個^000000";
-		mes "持って来て下さい。";
-		next;
-		mes "[バゼット]";
-		mes "ソニアの標本を採集すれば";
-		mes "標本を集める仕事は終わりなので、";
-		mes "もし作業中に^0000FF珍しい物でも発見^000000したら";
-		mes "教えて下さい。";
-		next;
-		mes "[バゼット]";
-		mes "危ないかもしれないので、本拠地から";
-		mes "あまり遠くには行かないで下さい。";
-		mes "気を付けて行ってきて下さいね。";
-		mes "よろしくお願いします。";
-		next;
-		cutin "ep143_tasta.bmp", 2;
-		mes "[タマリン]";
-		mes "ふむ……";
-		mes strcharinfo(0)+ "様、";
-		mes "良い案を思いついたので";
-		mes "ちょっと待って下さい！";
-		viewpoint 1, 132, 140, 1, 0xFF0000; //65370
-		close2;
-		cutin "ep143_tasta.bmp", 255;
-		end;
-	case 14:
-		mes "[バゼット]";
-		mes "おかえりなさい！";
-		mes "無事に戻ったのですね！";
-		mes "よかったです。あわてていて、";
-		mes "^0000FF中央にある岩の近くに行ってはならない^000000";
-		mes "と言うのを忘れていました。";
-		next;
-		mes "[バゼット]";
-		mes "念のため救助隊を手配したのですが、";
-		mes "無事に戻って来れて";
-		mes "よかったです。";
-		next;
-		mes "[バゼット]";
-		mes "危険な場所を伝え忘れて";
-		mes "本当にすみません。";
-		mes "殺人的な調査スケジュールに追われ、";
-		mes "大事な事を失念してしまったばかりか、";
-		mes "あなた方を危険に晒してしまいました。";
-		next;
-		mes "[バゼット]";
-		mes "まだ処理しなければならない仕事も";
-		mes "山のように積もっているし……";
-		mes "ふう……。";
-		next;
-		menu "中央にある岩について話す",-;
-		mes "[バゼット]";
-		mes "なんですって!?";
-		mes "あそこに行ったんですか？";
-		mes "なんという事だ!!";
-		mes "しかし、それが事実なら";
-		mes "なぜあなた方は無事なのですか？";
-		next;
-		mes "[バゼット]";
-		mes "あの場所を調査していた人は皆、";
-		mes "^0000FF岩から出る毒ガスのせいで昏睡状態^000000に";
-		mes "陥ったのに！";
-		next;
-		mes "[バゼット]";
-		mes "どういう事だ……？";
-		mes "……何か特別な事をしましたか？";
-		mes "何か食べたとか、飲んだとか……";
-		next;
-		menu "ソニアの茎を食べた",-;
-		mes "[バゼット]";
-		mes "ソニアの茎を食べた？";
-		mes "毒性がないのはわかっていたのですが、";
-		mes "まだ調査が終わっていない植物の茎を";
-		mes "食べて体に何か異常は起きていませんか？";
-		next;
-		menu "なんともない",-;
-		mes "[バゼット]";
-		mes "な、なんという事だ!!";
-		mes "これは本当に素晴らしい発見だ!!";
-		next;
-		mes "[バゼット]";
-		mes "早く研究を……";
-		mes "いや、それより今は^0000FF体調が悪い患者が";
-		mes "南の方に集まっているので、";
-		mes "急いでソニアの茎を届けるのが先です！^000000";
-		next;
-		mes "[バゼット]";
-		mes "もしかしたら患者の症状が";
-		mes "治まるかもしれません。";
-		next;
-		mes "[バゼット]";
-		mes "^0000FFルーゲン教官^000000が看病しているので";
-		mes "あの方に茎を渡してください。";
-		mes "この手紙に私が経緯を書いておくので";
-		mes "これも一緒に渡してください。";
-		next;
-		mes "[バゼット]";
-		mes "私はここで";
-		mes "研究を始められるようにします！";
-		mes "あと、今回は運よく無事でしたが、";
-		mes "今後は何でも口に入れたりしないで";
-		mes "下さいね！";
-		viewpoint 1, 105, 71, 3, 0xFFFF0000; //65370
-		set EP143_PARA,15;
-		chgquest 11358,11359; //state=1
-		close;
-	case 15:
-		mes "[バゼット]";
-		mes "早く研究を……";
-		mes "いや、それより今は^0000FF体調が悪い患者が";
-		mes "南の方に集まっているので、";
-		mes "急いでソニアの茎を届けるのが先です！^000000";
-		next;
-		mes "[バゼット]";
-		mes "もしかしたら患者の症状が";
-		mes "治まるかもしれません。";
-		next;
-		mes "[バゼット]";
-		mes "^0000FFルーゲン教官^000000が看病しているので";
-		mes "あの方に茎を渡してください。";
-		mes "この手紙に私が経緯を書いておくので";
-		mes "これも一緒に渡してください。";
-		next;
-		mes "[バゼット]";
-		mes "私はここで";
-		mes "研究を始められるようにします！";
-		mes "あと、今回は運よく無事でしたが、";
-		mes "今後は何でも口に入れたりしないで";
-		mes "下さいね！";
-		viewpoint 1, 105, 71, 3, 0xFF0000; //65370
-		close;
-	case 16:
-	case 17://?
-		mes "[バゼット]";
-		mes "ルーゲン教官の所には行って来ました？";
-		close;
-	case 18:
-		mes "[バゼット]";
-		mes "ふふふふふ!!!!";
-		mes "どうでした?!";
-		mes "やはり効果はありましたよね？";
-		next;
-		mes "[バゼット]";
-		mes "研究の方もかなり良い結果が";
-		mes "出ると思います！";
-		mes "無謀な行動でしたが、";
-		mes "おかげで多くの命を";
-		mes "救うことができました!!";
-		next;
-		mes "[バゼット]";
-		mes "これであの^0000FF怪しい洞窟^000000を";
-		mes "隅から隅まで調査できそうです！";
-		next;
-		menu "洞窟？",-;
-		mes "[バゼット]";
-		mes "毒ガスが漏れている岩があるでしょう？";
-		mes "あの岩には洞窟があるのです。";
-		mes "^0000FFガスがあまりにも濃く出過ぎて";
-		mes "入口がよく見えない程^000000ですが。";
-		next;
-		mes "[バゼット]";
-		mes "しかしこのソニアの茎があれば";
-		mes "毒ガスに臆することもなく、";
-		mes "洞窟を調査することができます！";
-		next;
-		mes "[バゼット]";
-		mes "お二人がいなければ、";
-		mes "まだ頭を抱えていたことでしょう。";
-		mes "本当にありがとうございました！";
-		next;
-		mes "[バゼット]";
-		mes "調査に協力してもらったり";
-		mes "ソニアの茎を届けてもらったり、";
-		mes "いろいろあって疲れているでしょう。";
-		mes "しばらくここで休んでいてください。";
-		next;
-		mes "[バゼット]";
-		mes "私はその間にワクチンを作って";
-		mes "みんなに配ってきます。";
-		next;
-		mes "……";
-		next;
-		mes "…………";
-		next;
-		mes "………………";
-		next;
-		mes "[バゼット]";
-		mes "少しは休めましたか？";
-		next;
-		mes "[バゼット]";
-		mes "お二人が休んでいる間に、";
-		mes "ワクチンを投与した部隊が";
-		mes "洞窟へと向かいました。";
-		mes "問題が発生したという連絡も";
-		mes "ありませんし、ワクチンの効果が";
-		mes "効いているようですね。";
-		next;
-		mes "[バゼット]";
-		mes "お二人は既に抗体ができていますから、";
-		mes "ワクチンを接種しなくても";
-		mes "あの洞窟に入れるでしょう。";
-		mes "安心して調査してきてください。";
-		next;
-		mes "[バゼット]";
-		mes "あと、ここから西に行った場所に";
-		mes "我々の本部があります。";
-		mes "何か困ったことがあったら";
-		mes "行ってみてください。";
-		next;
-		cutin "ep143_tasta.bmp", 2;
-		mes "[タマリン]";
-		mes strcharinfo(0) + "様、";
-		mes "一段落ついたようですし、";
-		mes "私はこれから別れた仲間を";
-		mes "探したいと思います。";
-		next;
-		cutin "ep143_tasmi.bmp", 2;
-		mes "[タマリン]";
-		mes "ここには人もたくさんいますし、";
-		mes "ここからはもう一人でも大丈夫です。";
-		mes "今まで本当にありがとうございました！";
-		next;
-		mes "[タマリン]";
-		mes "その中央の岩にあるという";
-		mes "洞窟付近を中心に探すつもりなので、";
-		mes "洞窟に入ることがあったら";
-		mes "ひと声かけてくださいね。";
-		getexp 1000000,0; //19389909
-		getexp 1000000,0; //20389909
-		getexp 1000000,0; //21389909
-		getexp 1000000,0; //22389909
-		getexp 1000000,0; //23389909
-		getexp 1000000,0; //24389909
-		getexp 1000000,0; //25389909
-		getexp 1000000,0; //26389909
-		getexp 1000000,0; //27389909
-		getexp 1000000,0; //28389909
-		getexp 1000000,0; //29389909
-		getexp 1000000,0; //30389909
-		getexp 1000000,0; //31389909
-		getexp 1000000,0; //32389909
-		getexp 1000000,0; //33389909
-		getexp 1000000,0; //34389909
-		getexp 1000000,0; //35389909
-		getexp 1000000,0; //36389909
-		getexp 1000000,0; //37389909
-		getexp 1000000,0; //38389909
-		set EP143_PARA,19;
-		chgquest 11362,201705; //state=1
-		close2;
-		cutin "ep143_tasmi.bmp", 255;
-		end;
-	case 19:
-		mes "[バゼット]";
-		mes "本当にお二人がいなければ、";
-		mes "まだ頭を抱えていたことでしょう。";
-		mes "本当にありがとうございました！";
-		next;
-		mes "[バゼット]";
-		mes "ここから西に行った場所に";
-		mes "我々の本部がありますから、";
-		mes "何か困ったことがあったら";
-		mes "行ってみてください。";
-		close;
-	default:
-		mes "[バゼット]";
-		mes "ああ……疲れた。";
-		mes "いくら急ぎの仕事だとしても、";
-		mes "働かせすぎじゃないか？";
-		close;
-	}
-}
-
-moro_vol.gat,198,179,4	script	タマリン#ep14bs_st	10027,{/* 65371 */
-	viewpoint 2, 1, 1, 2, 0xFFFFFF; //65371
-	switch(EP143_PARA) {
-	case 11:
-	case 12://?
-		cutin "ep143_taang.bmp", 2;
-		mes "[タマリン]";
-		mes "うむ……";
-		mes "今はこんな事をしている場合じゃ";
-		mes "ありません！";
-		close2;
-		cutin "ep143_taang.bmp", 255;
-		end;
-	case 13:
-		if() {
-		}
-		cutin "ep143_tasta.bmp", 2;
-		mes "[タマリン]";
-		mes "そういえばこの前に来た時には、";
-		mes "この石はここまで大きくなかったような";
-		mes "気がするんだけど……。";
-		mes "周りにいた変な生き物も";
-		mes "やけに成長していますね。";
-		mes "^0000FF怪しい煙^000000も出ていますし……。";
-		next;
-		mes "[タマリン]";
-		mes "それに……";
-		mes "^0000FFあの時は変わった生き物たちも";
-		mes "こんなに多くなかったような……^000000";
-		mes "ソニアだったかな、これもこんなに多く";
-		mes "生えていませんでした。";
-		next;
-		cutin "ep143_taang.bmp", 2;
-		mes "[タマリン]";
-		mes "ここで食べた物の中では毒もなく、";
-		mes "一番美味しかったのが";
-		mes "このソニアだったのですが……";
-		mes "その時はここまで多くなかったので、";
-		mes "空腹を満たす事は難しかったんです。";
-		next;
-		cutin "ep143_tasmi.bmp", 2;
-		mes "[タマリン]";
-		mes strcharinfo(0)+ "様も食べてみますか？";
-		mes "少し多めに持って来たので……。";
-		next;
-		cutin "ep143_tasmi.bmp", 255;
-		mes "‐ソニアの味、";
-		mes "　暖かくて弾力のある茎から、";
-		mes "　恍惚な自然の味が広がり……";
-		mes "　おいしい‐";
-		next;
-		cutin "ep143_tasmi.bmp", 2;
-		mes "[タマリン]";
-		mes "どうですか？";
-		mes "なかなか美味しいでしょう！";
-		next;
-		mes "[タマリン]";
-		mes "っと、うっかり渡す分まで";
-		mes "食べちゃいそうなので、";
-		mes "早くバゼットさんのところに";
-		mes "戻りましょう。";
-		cutin "ep143_tasmi.bmp", 2;
-		set EP143_PARA,14;
-		chgquest 11357,11358; //state=1
-		viewpoint 1, 142, 131, 0, 0xFF0000; //65371
-		close2;
-		cutin "ep143_tasmi.bmp", 255;
-		end;
-	case 14:
-		mes "[タマリン]";
-		mes "っと、うっかり渡す分まで";
-		mes "食べちゃいそうなので、";
-		mes "早くバゼットさんのところに";
-		mes "戻りましょう。";
-		cutin "ep143_tasmi.bmp", 2;
-		viewpoint 1, 142, 131, 0, 0xFF0000; //65371
-		close2;
-		cutin "ep143_tasmi.bmp", 255;
-		end;
-	case 19:
-		cutin "ep143_tasmi.bmp", 2;
-		mes "[タマリン]";
-		mes "あ、" +strcharinfo(0)+ "様、";
-		mes "これだけ人が多いと";
-		mes "逆に探すのが大変ですね！";
-		mes "洞窟に入るなら案内しましょうか？";
-		next;
-		if(select("入る","入らない") == 2) {
-			cutin "ep143_tasta.bmp", 2;
-			mes "[タマリン]";
-			mes "そうですか。";
-			mes "では私は仲間探しに戻りますね。";
-			close2;
-			cutin "ep143_tasmi.bmp", 255;
-			end;
-		}
-		mes "[タマリン]";
-		mes "地面が良く見えないので";
-		mes "足元に気を付けて下さいね！";
-		close2;
-		cutin "ep143_tasmi.bmp", 255;
-		warp "moro_cav.gat",59,14;
-		end;
-	default:
-		// 未調査
-	}
-}
-
-moro_vol.gat,105,71,5	script	ルーゲン教官#ep14bs	405,{/* 65372 */
-	viewpoint 2, 1, 1, 3, 0xFFFFFF; //65372
-	switch(EP143_PARA) {
-	case 15:
-		mes "[ルーゲン教官]";
-		mes "大丈夫か？";
-		mes "気をしっかり持つんだ。";
-		next;
-		mes "[ルーゲン教官]";
-		mes "バゼット博士が";
-		mes "色々調べてくれているから、";
-		mes "もう少しだけ、頑張ってくれ……。";
-		next;
-		if(select("話しかけてみる","深刻そうにみえるのでやめておく") == 2) {
-			mes "[ルーゲン教官]";
-			mes "もう少しだ、もう少しの辛抱だ。";
-			mes "頑張ってくれ……。";
-			close;
-		}
-		mes "[ルーゲン教官]";
-		mes "どうしましたか？";
-		mes "痛めている所があれば受付に";
-		mes "症状を話して待っていて下さい。";
-		next;
-		menu "ソニアの茎と手紙を渡す",-;
-		mes "[ルーゲン教官]";
-		mes "!!　それは本当ですか？";
-		mes "なになに、ふむふむ……";
-		mes "手紙にも茎の事が書いてあります！";
-		mes "さっそく患者たちに";
-		mes "食べさせてみましょう！";
-		delitem 6690, 1;
-		set EP143_PARA,16;
-		chgquest 11359,11360; //state=1
-		close;
-	case 16:
-		mes "[ルーゲン教官]";
-		mes "!!　それは本当ですか？";
-		mes "なになに、ふむふむ……";
-		mes "手紙にも茎の事が書いてあります！";
-		mes "さっそく患者たちに";
-		mes "食べさせてみましょう！";
-		close;
-	case 17:
-		mes "[ルーゲン教官]";
-		mes "おお！";
-		mes "オトゥ！";
-		mes "どうだ？　大丈夫か!?";
-		next;
-		mes "[オトゥ]";
-		mes "はぁ……あ……";
-		mes "……ルーゲン……教官……";
-		next;
-		mes "[ルーゲン教官]";
-		mes "ああ……意識が戻ったか！";
-		mes "よかった、本当に良かった!!";
-		next;
-		mes "[ルーゲン教官]";
-		mes "まだ完全に回復はしてないようですが、";
-		mes "患者の状態が";
-		mes "かなり良くなったようです。";
-		mes "まずは症状の重い患者に茎を与え、";
-		mes "残りはバゼット博士の研究結果が";
-		mes "出るのを待った方が良さそうです。";
-		next;
-		mes "[ルーゲン教官]";
-		mes "効果がとても良かったと";
-		mes "手紙に書きましたので、";
-		mes "^0000FFバゼット博士^000000に渡して下さい。";
-		mes "本当に助かりました。";
-		mes "ありがとうございます。";
-		viewpoint 1, 142, 131, 0, 0xFF0000; //65372
-		set EP143_PARA,18;
-		chgquest 11361,11362; //state=1
-		close;
-	case 18:
-		mes "[ルーゲン教官]";
-		mes "まだ完全に回復はしてないようですが、";
-		mes "患者の状態が";
-		mes "かなり良くなったようです。";
-		mes "まずは症状の重い患者に茎を与え、";
-		mes "残りはバゼット博士の研究結果が";
-		mes "出るのを待った方が良さそうです。";
-		next;
-		mes "[ルーゲン教官]";
-		mes "効果がとても良かったと";
-		mes "手紙に書きましたので、";
-		mes "^0000FFバゼット博士^000000に渡して下さい。";
-		mes "本当に助かりました。";
-		mes "ありがとうございます。";
-		viewpoint 1, 142, 131, 0, 0xFFFF0000; //65372
-		close;
-	case 19:
-		mes "[ルーゲン教官]";
-		mes "私の仲間たちもおかげ様で";
-		mes "状態が良くなりました。";
-		mes "ありがとうございます。";
-		close;
-	default:
-		mes "[ルーゲン教官]";
-		mes "大丈夫か？";
-		mes "気をしっかり持つんだ。";
-		next;
-		mes "[ルーゲン教官]";
-		mes "バゼット博士が";
-		mes "色々調べてくれているから、";
-		mes "もう少しだけ、頑張ってくれ……。";
-		close;
-	}
-}
-
-moro_vol.gat,104,70,4	script	中毒になった患者#ep14bs	887,{/* 65373 */
-	switch(EP143_PARA) {
-	case 16:
-		mes "[中毒になった患者]";
-		mes "う……うぅ……";
-		next;
-		mes "‐中毒になった患者に";
-		mes "　ソニアの茎を食べさせたら、";
-		mes "　顔色がよくなった‐";
-		set EP143_PARA,17;
-		chgquest 11360,11361; //state=1
-		close;
-	case 17:
-	case 18:
-	case 19:
-		mes "[中毒になった患者]";
-		mes "ふぅ……ふぅ……。";
-		next;
-		mes "‐今は落ち着いて眠っている‐";
-		close;
-	default:
-		mes "[中毒になった患者]";
-		mes "う……うぅ……";
-		close;
-	}
-}
-
-moro_vol.gat,101,72,4	script	患者#ep14bs1	585,{/* 65374 */
-	mes "[患者]";
-	mes "う……ううう……";
-	close;
-}
-
-moro_vol.gat,101,74,4	script	患者#ep14bs2	441,{/* 65375 */
-	mes "[患者]";
-	mes "くううう……";
-	close;
-}
-
-moro_vol.gat,103,71,6	script	患者 #ep14bs3	584,{/* 65376 */
-	mes "[患者]";
-	mes "くう……うう……";
-	close;
-}
-
-moro_vol.gat,106,69,4	script	患者 #ep14bs4	585,{/* 65377 */
-	mes "[患者]";
-	mes "ああ……う……";
-	close;
-}
-
-moro_cav.gat,64,13,0	warp	#ep14_3洞窟出口	1,1,moro_vol.gat,198,176	//65378
-
-moro_cav.gat,34,65,5	script	バンズ#morocav	49,{/* 65383 */
+moro_cav.gat,34,65,5	script	バンズ#morocav	49,{
 	if(!(checkquest(116510) & 0x8)) {
 		mes "[バンズ]";
 		mes "君、もしかして、";
@@ -5850,9 +5848,9 @@ moro_cav.gat,34,65,5	script	バンズ#morocav	49,{/* 65383 */
 		mes "ほら。これだ。";
 		mes "この指輪の力が";
 		mes "きっと君の役に立つはずだ。";
-		setquest 116510; //state=1
+		setquest 116510;
 		compquest 116510;
-		getitem 2981, 1;
+		getitem 2981,1;
 		next;
 		mes "[バンズ]";
 		mes "もしも2つ目以降を欲しい場合は";
@@ -5973,12 +5971,12 @@ moro_cav.gat,34,65,5	script	バンズ#morocav	49,{/* 65383 */
 		mes "[バンズ]";
 		mes "ふうう……！";
 		next;
-		misceffect 182,""; //self
-		misceffect 205,""; //self
-		misceffect 102,""; //self
-		misceffect 104,""; //self
+		misceffect 182,"";
+		misceffect 205,"";
+		misceffect 102,"";
+		misceffect 104,"";
 		delequip '@menu;
-		getitem 2981, 1;
+		getitem 2981,1;
 		mes "[バンズ]";
 		mes "エンチャントが完了したぞ！";
 		close;
@@ -6036,11 +6034,11 @@ moro_cav.gat,34,65,5	script	バンズ#morocav	49,{/* 65383 */
 		close;
 	}
 OnInit:
-	waitingroom "勇者の指輪", 0; //65383
+	waitingroom "勇者の指輪",0;
 	end;
 }
 
-moro_cav.gat,32,73,5	script	チェイコ#1	482,{/* 65384 */
+moro_cav.gat,32,73,5	script	チェイコ#1	482,{
 	mes "[チェイコ]";
 	mes "^ff0000魔神エンチャント^000000って";
 	mes "知ってる？";
@@ -6189,11 +6187,11 @@ moro_cav.gat,32,73,5	script	チェイコ#1	482,{/* 65384 */
 	mes "3個、必要よ。";
 	close;
 OnInit:
-	waitingroom "魔神エンチャント", 0; //65384
+	waitingroom "魔神エンチャント",0;
 	end;
 }
 
-moro_cav.gat,36,57,5	script	先遣隊兵士#moro	707,{/* 65385 */
+moro_cav.gat,36,57,5	script	先遣隊兵士#moro	707,{
 	mes "[兵士]";
 	mes "私はモロク討伐に向かう";
 	mes "冒険者達から";
@@ -6214,15 +6212,15 @@ moro_cav.gat,36,57,5	script	先遣隊兵士#moro	707,{/* 65385 */
 	mes "‐^ff0000繰り返し可能な依頼です。^000000‐";
 	close;
 OnInit:
-	waitingroom "ビオスの島・モルスの洞窟報酬", 0; //65385
+	waitingroom "ビオスの島・モルスの洞窟報酬",0;
 	end;
 }
 
-ecl_in01.gat,38,98,1	script	次元移動機#143_1	10007,{/* 62697 */
+ecl_in01.gat,38,98,1	script	次元移動機#143_1	10007,{
 	mes "[エクラージュガード]";
 	mes "最近発見された魔王の隠れ家、";
 	mes "^FF0000フレイムヴァレー^000000に";
-	if(EP143_PARA < 9) {
+	if(FVOL_1QUE < 9) {
 		mes "移動できる次元移動機です。";
 		mes "が、現在調整中ですので";
 		mes "利用することができません。";
@@ -6246,7 +6244,7 @@ ecl_in01.gat,38,98,1	script	次元移動機#143_1	10007,{/* 62697 */
 	end;
 }
 
-ecl_in01.gat,35,89,6	script	魔学者アマンディー#143_	620,{/* 62698 */
+ecl_in01.gat,35,89,6	script	魔学者アマンディー#143_	620,{
 	mes "[アマンディー]";
 	mes "次元の狭間というものが";
 	mes "この世界に大きな打撃を";
@@ -6288,7 +6286,7 @@ ecl_in01.gat,35,89,6	script	魔学者アマンディー#143_	620,{/* 62698 */
 	close;
 }
 
-ecl_in01.gat,37,90,3	script	魔学者レモニー#143_3	611,{/* 62699 */
+ecl_in01.gat,37,90,3	script	魔学者レモニー#143_3	611,{
 	mes "[レモニー]";
 	mes "今回の月刊心理の扉は読んだか？";
 	mes "エイヴァントが新しく作った";
@@ -6331,7 +6329,7 @@ ecl_in01.gat,37,90,3	script	魔学者レモニー#143_3	611,{/* 62699 */
 	close;
 }
 
-ecl_in01.gat,44,99,1	script	ラフィネ兵士#143_4	461,{/* 62700 */
+ecl_in01.gat,44,99,1	script	ラフィネ兵士#143_4	461,{
 	mes "[ラフィネ兵士]";
 	mes "……緊張してきましたね。";
 	close;
@@ -6343,7 +6341,7 @@ OnTalk2:
 	end;
 }
 
-ecl_in01.gat,46,99,1	script	ラフィネ兵士#143_5	461,{/* 62701 */
+ecl_in01.gat,46,99,1	script	ラフィネ兵士#143_5	461,{
 	mes "[ラフィネ兵士]";
 	mes "無事に戻って来られるかな。";
 	close;
@@ -6355,7 +6353,7 @@ OnTalk2:
 	end;
 }
 
-ecl_in01.gat,48,99,1	script	ラフィネ兵士#143_6	461,{/* 62702 */
+ecl_in01.gat,48,99,1	script	ラフィネ兵士#143_6	461,{
 	mes "[ラフィネ兵士]";
 	mes "ふむ……。";
 	close;
@@ -6367,7 +6365,7 @@ OnTalk2:
 	end;
 }
 
-ecl_in01.gat,44,97,1	script	ラフィネ兵士#143_7	462,{/* 62703 */
+ecl_in01.gat,44,97,1	script	ラフィネ兵士#143_7	462,{
 	mes "[ラフィネ兵士]";
 	mes "静かに。";
 	close;
@@ -6379,7 +6377,7 @@ OnTalk2:
 	end;
 }
 
-ecl_in01.gat,46,97,1	script	ラフィネ兵士#143_8	462,{/* 62704 */
+ecl_in01.gat,46,97,1	script	ラフィネ兵士#143_8	462,{
 	mes "[ラフィネ兵士]";
 	mes "やっと私が優れていることを";
 	mes "お見せするチャンスが来たか。";
@@ -6392,7 +6390,7 @@ OnTalk2:
 	end;
 }
 
-ecl_in01.gat,48,97,1	script	ラフィネ兵士#143_9	462,{/* 62705 */
+ecl_in01.gat,48,97,1	script	ラフィネ兵士#143_9	462,{
 	mes "[ラフィネ兵士]";
 	mes "私がどうして兵士に志願したか";
 	mes "わかりますか？";
@@ -6408,7 +6406,7 @@ OnTalk2:
 	end;
 }
 
-ecl_in01.gat,46,102,6	script	指揮官ラフィネ#143_10	447,5,5,{/* 62706 */
+ecl_in01.gat,46,102,6	script	指揮官ラフィネ#143_10	447,5,5,{
 	mes "[指揮官ラフィネ]";
 	mes "闇の種は発見したら";
 	mes "消してしまったほうがいいです。";
@@ -6461,7 +6459,7 @@ OnTimer24000:
 	end;
 }
 
-ecl_in01.gat,40,96,3	script	エクラージュガード#143_	447,{/* 62708 */
+ecl_in01.gat,40,96,3	script	エクラージュガード#143_	447,{
 	mes "[エクラージュガード]";
 	mes "なんの用ですか？";
 	next;
@@ -6536,52 +6534,52 @@ ecl_in01.gat,40,96,3	script	エクラージュガード#143_	447,{/* 62708 */
 	}
 }
 
-ecl_in01.gat,47,106,6	script	カルデュイ#14301	624,{/* 62709 */
+ecl_in01.gat,47,106,6	script	カルデュイ#14301	624,{
 OnTimer6000000:
-	announce "カルデュイ : エクラージュのすべての民よ。", 0x9, 0x00ff00;
+	announce "カルデュイ : エクラージュのすべての民よ。",0x9,0x00ff00;
 	end;
 OnTimer6003000:
-	announce "カルデュイ : 世界樹イグドラシルの守護者としてオーブの魔力を解放して力を捧げる。", 0x9, 0x00ff00;
+	announce "カルデュイ : 世界樹イグドラシルの守護者としてオーブの魔力を解放して力を捧げる。",0x9,0x00ff00;
 	end;
 OnTimer6006000:
-	hideoffnpc "#ecl_buff_N"; //62831
-	hideoffnpc "#ecl_buff_E"; //62831
-	hideoffnpc "#ecl_buff_S"; //62831
-	hideoffnpc "#ecl_buff_W"; //62831
+	hideoffnpc "#ecl_buff_N";
+	hideoffnpc "#ecl_buff_E";
+	hideoffnpc "#ecl_buff_S";
+	hideoffnpc "#ecl_buff_W";
 	end;
 OnTimer6009000:
-	announce "カルデュイ : イグドラシルの力で次元の狭間を乱している闇と戦ってください。", 0x9, 0x00ff00;
-	hideonnpc "#ecl_buff_N"; //62831
-	hideonnpc "#ecl_buff_E"; //62831
-	hideonnpc "#ecl_buff_S"; //62831
-	hideonnpc "#ecl_buff_W"; //62831
+	announce "カルデュイ : イグドラシルの力で次元の狭間を乱している闇と戦ってください。",0x9,0x00ff00;
+	hideonnpc "#ecl_buff_N";
+	hideonnpc "#ecl_buff_E";
+	hideonnpc "#ecl_buff_S";
+	hideonnpc "#ecl_buff_W";
 	end;
 OnTimer6012000:
-	announce "カルデュイ : オーブの魔力はしばらく解放しておきます。", 0x9, 0x00ff00;
+	announce "カルデュイ : オーブの魔力はしばらく解放しておきます。",0x9,0x00ff00;
 	end;
 OnTimer6015000:
-	announce "カルデュイ : 真の平和を……", 0x9, 0x00ff00;
+	announce "カルデュイ : 真の平和を……",0x9,0x00ff00;
 	end;
 OnTimer6600000:
-	announce "カルデュイ : 解放していたオーブの魔力を封印します。", 0x9, 0x00ff00;
+	announce "カルデュイ : 解放していたオーブの魔力を封印します。",0x9,0x00ff00;
 	end;
 OnTimer6603000:
-	hideonnpc "#ecl_orb_buff"; //62710
+	hideonnpc "#ecl_orb_buff";
 	end;
 OnTimer6606000:
-	announce "カルデュイ : 闇を追い払うまで……どうか良い夢が見れますように……。", 0x9, 0x00ff00;
+	announce "カルデュイ : 闇を追い払うまで……どうか良い夢が見れますように……。",0x9,0x00ff00;
 	end;
 OnTimer6609000:
 	initnpctimer;
-	misceffect 313, "カルデュイ#14301"; //62709
-	hideonnpc "カルデュイ#14301"; //62709
+	misceffect 313,"カルデュイ#14301";
+	hideonnpc "カルデュイ#14301";
 	end;
 OnInit:
 	initnpctimer;
 	end;
 }
 
-ecl_in01.gat,48,67,0	script	#ecl_orb_buff	139,10,10,{/* 62710 */
+ecl_in01.gat,48,67,0	script	#ecl_orb_buff	139,10,10,{
 OnTouch:
 	sc_start SC_ATKPOTION,5400000,24;
 	sc_start SC_MATKPOTION,5400000,24;
@@ -6591,12 +6589,12 @@ OnTouch:
 	sc_start SC_MINT,5400000,6;
 	sc_start SC_MDEX,5400000,6;
 	sc_start SC_MLUK,5400000,6;
-	misceffect 313,""; //self
-	misceffect 362,""; //self
+	misceffect 313,"";
+	misceffect 362,"";
 	end;
 }
 
-ecl_in01.gat,48,67,0	script	オーブ#orb	844,{/* 62711 */
+ecl_in01.gat,48,67,0	script	オーブ#orb	844,{
 	mes "‐オーブの魔力が感じられる‐";
 	close;
 }
