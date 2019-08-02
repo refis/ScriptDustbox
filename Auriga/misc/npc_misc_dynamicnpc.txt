@@ -267,14 +267,14 @@
 									"“ss‘I‘ğ‚É–ß‚é"
 					)) {
 					case 1: set '@map$,"mid_camp.gat";		set '@x,46;		set '@y,120;	break;
-					case 2: set '@map$,".gat";			set '@x,157;	set '@y,196;	set '@flag,1;	break;
-					case 3: set '@map$,".gat";		set '@x,242;	set '@y,197;	set '@flag,1;	break;
+					case 2: set '@map$,"splendide.gat";		set '@x,232;	set '@y,151;	if(ASH_1QUE < 100) set '@flag,1;	break;	// ˆÙ¢ŠEƒNƒGƒXƒg
+					case 3: set '@map$,"manuk.gat";			set '@x,293;	set '@y,141;	if(ASH_1QUE < 100) set '@flag,1;	break;	// ˆÙ¢ŠEƒNƒGƒXƒg
 					case 4: set '@map$,"dicastes01.gat";	set '@x,197;	set '@y,145;	break;
 					case 5: set '@map$,"mora.gat";			set '@x,113;	set '@y,109;	break;
 					case 6: set '@map$,"eclage.gat";		set '@x,109;	set '@y,37;		break;
-					case 7: set '@map$,".gat";		set '@x,123;	set '@y,249;	break;
-					case 8: set '@map$,"dali.gat";			set '@x,107;	set '@y,89;	break;
-					case 9: set '@map$,"dali02.gat";		set '@x,107;	set '@y,89;	break;
+					case 7: set '@map$,"moro_vol.gat";		set '@x,93;		set '@y,99;		if(FVOL_1QUE < 100) set '@flag,1;	break;	// ƒtƒŒƒCƒ€ƒ”ƒ@ƒŒ[‚Ö‚Ì“¹ƒNƒGƒXƒg
+					case 8: set '@map$,"dali.gat";			set '@x,107;	set '@y,89;		break;
+					case 9: set '@map$,"dali02.gat";		set '@x,107;	set '@y,89;		break;
 					case 10:
 						continue;
 					}
@@ -514,7 +514,7 @@ select("ˆ«–²‚ÌƒWƒ^[ƒoƒO","ˆÃ•‘ã‚Ì‹L‰¯","ŒÃ‚ÌƒOƒ‰ƒXƒgƒwƒCƒ€","ƒ”ƒFƒ‹ƒi[Œ¤‹†
 // prontera	morocc	payon	comodo	aldebaran	einbroch	lighthalzen	rachel	mid_camp	dicastes01	eclage	dali02	louyang	amatsu	moscovia	xmas	dewata	malangdo	lasagna
 
 // 10146	zonda_n02.bmp	ƒWƒ‡ƒ“ƒ_ƒm[ƒrƒX
-// izlude	geffen	alberta	yuno	einbech	hugel	verus04	veins	mora	dali	gonryun	ayothaya	umbala	nif_in	brasilis	malaya	harboro1
+// izlude	geffen	alberta	yuno	einbech	hugel	verus04	veins	mora	moro_vol	dali	gonryun	ayothaya	umbala	nif_in	brasilis	malaya	harboro1
 
 // 10243	zonda_do01.bmp	ƒWƒ‡ƒ“ƒ_ƒoƒ‹ƒTƒ~ƒR
 // ƒCƒxƒ“ƒgMAP—p“Áê
