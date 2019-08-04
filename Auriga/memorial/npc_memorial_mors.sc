@@ -87,12 +87,38 @@ moro_cav.gat,61,69,3	script	先任追跡隊員#a1	730,{/* 65381 */
 	mes "1人では危険なので";
 	mes "必ず^ff0000パーティーを組んで^000000";
 	mes "挑んでください。";
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		next;
+		mes "[先任追跡隊員]";
+		mes "赤い花へ通じる道は私が開いています。";
+		mes "もし、先に進むようでしたら";
+		mes "パーティーリーダーの方に";
+		mes "私に話しかけるよう、伝えてください。";
+		close;
+	}
+	mes "では赤い花に入ってみますか？";
 	next;
+	if(select("はい","いいえ") == 2) {
+		mes "[先任追跡隊員]";
+		mes "気が変わったら";
+		mes "また訪ねて来て下さい！";
+		close;
+	}
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		mes "[先任追跡隊員]";
+		mes "まだ赤い花に";
+		mes "入れる扉が";
+		mes "開いていません。";
+		mes "少し待って下さい。";
+		close;
+	}
+	mdcreate "mors";
 	mes "[先任追跡隊員]";
-	mes "赤い花へ通じる道は私が開いています。";
-	mes "もし、先に進むようでしたら";
-	mes "パーティーリーダーの方に";
-	mes "私に話しかけるよう、伝えてください。";
+	mes "さあ、赤い花に";
+	mes "通じる道を開けました。";
+	mes "この道を開ける時間は";
+	mes "制限されているので";
+	mes "早く入って下さい。";
 	close;
 OnInit:
 	waitingroom "モルスの洞窟生成",0; //65381
