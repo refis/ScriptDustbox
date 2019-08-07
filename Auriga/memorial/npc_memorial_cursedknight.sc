@@ -52,7 +52,7 @@ speed: 350
 // Ragnarok Online Cursed Knight in Ghost Palace Script	by refis
 //==============================================================================
 
-dali02.gat,58,122,3	script	DŠïS‰ ·‚È‹Rm#cr	418,{/* 51669 */
+dali02.gat,58,122,3	script	DŠïS‰ ·‚È‹Rm#cr	418,{
 	mes "[DŠïS‰ ·‚È‹Rm]";
 	mes "‹ß‚­‚É‚¢‚é‹ß‰q•º‚©‚ç";
 	mes "•‚¯‚ğ‹‚ß‚ç‚ê‚½‚æB";
@@ -68,6 +68,7 @@ dali02.gat,58,122,3	script	DŠïS‰ ·‚È‹Rm#cr	418,{/* 51669 */
 	mes "‰½‚©–î‚ª‚ ‚è‚»‚¤‚¾‚©‚ç‚ËB";
 	close;
 }
+
 dali02.gat,46,135,5	script	˜V”k#dk	846,{
 	set '@f,countitem(6672);
 	mes "[˜V”k]";
@@ -1240,8 +1241,7 @@ OnTalk9:
 1@spa.gat,194,214,5	script	“|‚ê‚½‘‰¤#dk	956,{
 	mes "]•Ô–‚ª‚È‚¢ccB";
 	mes "@E‚³‚ê‚ÄŠÔ‚à‚È‚¢‚æ‚¤‚¾]";
-	clo
-se;
+	close;
 }
 1@spa.gat,211,194,3	script	“|‚ê‚½‹Rm’c’·#dk	887,{
 	mes "]•Ô–‚ª‚È‚¢ccB";
@@ -1544,7 +1544,7 @@ OnTalk8:
 			hideonnpc getmdnpcname("ƒeƒBƒAƒ‰•P#dk1");
 			hideonnpc getmdnpcname("‹ß‰q•º#dk5");
 			misceffect 904,"";
-			donpevent getmdnpcname("#DK_BattleAnnounce")+ "::OnStart";
+			donpcevent getmdnpcname("#DK_BattleAnnounce")+ "::OnStart";
 			end;
 		}
 	}
@@ -1698,7 +1698,7 @@ OnTalk8:
 	cutin "b-tiara.BMP",255;
 	hideonnpc getmdnpcname("ƒeƒBƒAƒ‰•P#dk1");
 	hideonnpc getmdnpcname("‹ß‰q•º#dk5");
-	donpevent getmdnpcname("#DK_BattleAnnounce")+ "::OnStart";
+	donpcevent getmdnpcname("#DK_BattleAnnounce")+ "::OnStart";
 	end;
 OnStart:
 OnTimer3000:
@@ -1817,7 +1817,7 @@ OnKilled6:
 	end;
 OnKilled7:
 	hideoffnpc getmdnpcname("•‚Ã‚­‚ß‚Ì’j#dk");
-	donpevent getmdnpcname("•‚Ã‚­‚ß‚Ì’j#dk")+ "::OnStart";
+	donpcevent getmdnpcname("•‚Ã‚­‚ß‚Ì’j#dk")+ "::OnStart";
 	end;
 }
 
