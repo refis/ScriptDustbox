@@ -6,7 +6,7 @@
 @spawn(type: BL_MOB, ID: 26817, speed: 150, option: 0, view: 3015, pos: "dali.gat"(143, 130), dir: 0, name: "生者のフェン")
 
 moro_cav.gat,45,60,5	script	調査隊員 #sara	419,{/* 65379 */
-	if(!(checkquest(15006) & 0x8)) {
+	if(!(checkquest(15006) & 0x8)) {	// 初回会話
 		mes "[調査隊員]";
 		mes "ここはモロク復活を防ぐ連合軍の";
 		mes "最前線です。";
@@ -52,7 +52,7 @@ moro_cav.gat,45,60,5	script	調査隊員 #sara	419,{/* 65379 */
 	close;
 }
 moro_cav.gat,50,63,5	script	黄色い種#bios	844,{/* 65380 */
-	if(!(checkquest(15006) & 0x8)) {
+	if(!(checkquest(15006) & 0x8)) {	// 初回会話
 		mes "[調査隊員]";
 		mes "ここはモロク復活を防ぐ連合軍の";
 		mes "最前線です。";
@@ -95,7 +95,7 @@ moro_cav.gat,50,63,5	script	黄色い種#bios	844,{/* 65380 */
 		mes "　加入している必要がある‐^000000";
 		close;
 	}
-	if(checkquest(15005) == 0 || checkquest(118927) == 0) {
+	if(checkquest(15005)&0x2 == 0 || checkquest(118927)&0x2 == 0) {
 		mes "‐この先は入場してから1回目の";
 		mes "　^ff0000午前5時以降^000000に進行可能です。";
 		mes "　但し、最後の入場をしてから";
@@ -142,12 +142,13 @@ moro_cav.gat,50,63,5	script	黄色い種#bios	844,{/* 65380 */
 			setquest 15005; //state=1
 			setquest 15007; //state=1
 			//if(!(checkquest(116535) & 0x8)) { // 2週目??
-				setquest 116535; //state=1
-				compquest 116535;
+			//	setquest 116535; //state=1
+			//	compquest 116535;
 			//}
-			//setquest 118927; //state=1
+			setquest 118927; //state=1
+			donpcevent getmdnpcname("#bios1_mobdead")+ "::OnStart";
 			close2;
-			warp "1@dth1.gat",17,93;
+			//warp "1@dth1.gat",17,93;
 			end;
 		case 1:	// パーティー未加入
 			mes "‐パーティー員のみ、";
@@ -167,7 +168,7 @@ moro_cav.gat,50,63,5	script	黄色い種#bios	844,{/* 65380 */
 		close;
 	}
 OnInit:
-	waitingroom "ビオスの島", 20; //65380
+	waitingroom "ビオスの島",0; //65380
 	end;
 }
 
@@ -180,6 +181,7 @@ OnInit:
 1@dth1.gat,84,95,0	script	#BARRICADE1_6	1905,{/* 69835 */}
 1@dth1.gat,84,96,0	script	#BARRICADE1_7	1905,{/* 69836 */}
 1@dth1.gat,84,97,0	script	#BARRICADE1_8	1905,{/* 69837 */}
+
 1@dth1.gat,1,1,0	script	#bios1_mobdead	139,{
 OnStart:
 	hideonnpc getmdnpcname("死神アンク#bios1");
@@ -368,11 +370,14 @@ OnTalk9:
 		case 1:
 			mes "‐アジフ、イグリドと合流した‐";
 			break;
+		default:
+			mes "‐誰とも合流しなかった‐";
+			break;
 		}
 		close2;
 		hideonnpc getmdnpcname("ブリド#bios1"); //71400
 		hideonnpc getmdnpcname("ジェイス#bios1"); //71398
-		donpcevent getmdnpcname("ジェイス#bios1")+ "::OnStart2";
+		donpcevent getmdnpcname("ブリド#bios1")+ "::OnStart";
 		end;
 	}
 	mes "‐見慣れない男性二人組が居る‐";
@@ -428,6 +433,21 @@ OnTalk7:
 OnTalk8:
 	unittalk "ブリド : 奴を追うぞ！　ジェイス急げ！";
 	end;
+OnStart:
+	hideonnpc getmdnpcname("#BARRICADE1_1"); //79284
+	hideonnpc getmdnpcname("#BARRICADE1_2"); //79285
+	hideonnpc getmdnpcname("#BARRICADE1_3"); //79286
+	hideonnpc getmdnpcname("#BARRICADE1_4"); //79287
+	hideonnpc getmdnpcname("#BARRICADE1_5"); //79288
+	hideonnpc getmdnpcname("#BARRICADE1_6"); //79289
+	hideonnpc getmdnpcname("#BARRICADE1_7"); //79290
+	hideonnpc getmdnpcname("#BARRICADE1_8"); //79291
+	areasetcell getmdmapname("1@dth1.gat"),84,90,85,97,0;
+	sleep 3000;
+	announce "死神アンク : 死、それは生ある者のみに訪れる恐怖。すべてはここから始まるのです……", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	sleep 3000;
+	announce "ブリド : 待てアンク！　くそっ、東に逃げたようだな。奴を追うぞ！", 0x9, 0xffff00, 0x190, 12, 0, 0;
+	end;
 }
 1@dth1.gat,67,97,0	script	#会話用ダミー1	139,10,10,{/* 69842 (hide)*/
 	mes "‐誰が来ている？‐";
@@ -437,6 +457,13 @@ OnTalk8:
 		mes "‐振り向くと、アジフとイグリドが居た‐";
 		close2;
 		donpcevent getmdnpcname("司令官アジフ#bios1")+ "::OnStart";
+		end;
+	default:
+		mes "‐誰とも合流しなかった‐";
+		close2;
+		hideonnpc getmdnpcname("ブリド#bios1"); //71400
+		hideonnpc getmdnpcname("ジェイス#bios1"); //71398
+		donpcevent getmdnpcname("ジェイス#bios1")+ "::OnStart2";
 		end;
 	}
 }
@@ -545,9 +572,7 @@ OnTimer86000:
 OnTimer89000:
 	hideonnpc getmdnpcname("司令官アジフ#bios1"); //79297
 	hideonnpc getmdnpcname("教官長イグリド#bios1"); //79298
-OnStart2:
-	initnpctimer;
-	setnpctimer 89500;
+OnTimer89500:
 	hideonnpc getmdnpcname("#BARRICADE1_1"); //79284
 	hideonnpc getmdnpcname("#BARRICADE1_2"); //79285
 	hideonnpc getmdnpcname("#BARRICADE1_3"); //79286
@@ -606,6 +631,7 @@ OnTalk3:
 1@dth2.gat,150,131,0	script	#BARRICADE2_6	1905,{/* 69864 */}
 1@dth2.gat,150,132,0	script	#BARRICADE2_7	1905,{/* 69865 */}
 1@dth2.gat,150,133,0	script	#BARRICADE2_8	1905,{/* 69866 */}
+
 1@dth2.gat,1,1,0	script	#bios2_mobdead1	139,{
 OnStart:
 	monster getmdmapname("1@dth2.gat"),145,130,"生者のオークウォリアー",3013,5,getmdnpcname("#bios2_mobdead1")+ "::OnKilled";
@@ -619,6 +645,10 @@ OnStart:
 	monster getmdmapname("1@dth2.gat"),117,160,"生者のフェン",3015,4,getmdnpcname("#bios2_mobdead1")+ "::OnKilled";
 	end;
 OnKilled:
+	initnpctimer;
+	end;
+OnTimer500:
+	stopnpctimer;
 	set '@count,getmapmobs(getmdmapname("1@dth2.gat"),getmdnpcname("#bios2_mobdead1")+ "::OnKilled");
 	if('@count == 10)
 		announce "ブリド : まだ10匹のモンスターが残っているぞ！", 0x9, 0xffff00, 0x190, 12, 0, 0;
@@ -666,7 +696,10 @@ OnStart:
 	monster getmdmapname("1@dth2.gat"),281,104,"生者のオークウォリアー",3013,1,getmdnpcname("#bios2_mobdead2")+ "::OnKilled";
 	end;
 OnKilled:
-	// 未調査
+	initnpctimer;
+	end;
+OnTimer500:
+	stopnpctimer;
 	set '@count,getmapmobs(getmdmapname("1@dth2.gat"),getmdnpcname("#bios2_mobdead2")+ "::OnKilled");
 	if('@count == 10)
 		announce "ブリド : まだ10匹のモンスターが残っているぞ！", 0x9, 0xffff00, 0x190, 12, 0, 0;
@@ -773,6 +806,10 @@ OnTimer24000:
 1@dth3.gat,70,67,3	script	死神アンク#bios3	3029,{/* 69900 (hide)*/}
 1@dth3.gat,64,74,5	script	ブリド#bios3	468,{/* 69901 */
 	{
+		if(select("先を急ぐ","会話をする") ==1) {
+			donpcevent getmdnpcname("#talkshow管理")+ "::OnStart";
+			end;
+		}
 	}
 	{
 		mes "[ブリド]";
@@ -792,18 +829,110 @@ OnTimer24000:
 	mes "出ようぜ!!";
 	close2;
 	delquest 96430;
-	getexp 998144,0; //99999999
-	getexp 0,3600000; //21593386
+	getexp 10000000,0;
+	getexp 10000000,0;
+	getexp 2000000,0;
 	setquest 116513; //state=1
 	compquest 116513;
 	getitem 6684, 1;
-	setquest 201720; //state=1
+	if(checkquest(201720)==0)
+		setquest 201720; //state=1
 	warp "moro_cav.gat",45,63;
 	end;
 }
-1@dth3.gat,66,72,0	script	#増援判定用1	139,{/* 69905 (hide)*/}
+1@dth3.gat,66,72,0	script	#増援判定用1	139,{/* 69905 (hide)*/
+OnStart:
+	set '@mdmap$,getmdmapname("1@dth3.gat");
+	set '@mdnpc$,getmdnpcname("#増援判定用1")+ "::OnKilled1";
+	for(set '@y,80;'@y<=92;set '@y,'@y+6) {
+		for(set '@x,62;'@x<=78;set '@x,'@x+2) {
+			monster '@mdmap$,'@x,'@y,"死者のオークゾンビ",3016,1,'@mdnpc$;
+		}
+	}
+	end;
+OnKilled1:
+	set '@count,getmapmobs(getmdmapname("1@dth3.gat"),getmdnpcname("#増援判定用1")+ "::OnKilled1");
+	if('@count > 0) end;
+	sleep 500;
+	npctalk "ブリド : 凄いな！　全部倒したのか？",getmdnpcname("ブリド#bios3");
+	sleep 500;
+	npctalk "ジェイス : まだだ……気を付けろ！",getmdnpcname("ジェイス#bios3");
+	sleep 1000;
+	set '@mdmap$,getmdmapname("1@dth3.gat");
+	set '@mdnpc$,getmdnpcname("#増援判定用1")+ "::OnKilled2";
+	for(set '@y,80;'@y<=92;set '@y,'@y+6) {
+		for(set '@x,62;'@x<=78;set '@x,'@x+2) {
+			monster '@mdmap$,'@x,'@y,"死者のベリット",3017,1,'@mdnpc$;
+		}
+	}
+	end;
+OnKilled2:
+	set '@count,getmapmobs(getmdmapname("1@dth3.gat"),getmdnpcname("#増援判定用1")+ "::OnKilled2");
+	if('@count > 0) end;
+	sleep 500;
+	npctalk "ブリド : 今度こそ全部倒したんだよな？",getmdnpcname("ブリド#bios3");
+	sleep 500;
+	npctalk "ジェイス : 残念ながらまだのようだ……！",getmdnpcname("ジェイス#bios3");
+	sleep 1000;
+	set '@mdmap$,getmdmapname("1@dth3.gat");
+	set '@mdnpc$,getmdnpcname("#増援判定用1")+ "::OnKilled3";
+	for(set '@y,80;'@y<=92;set '@y,'@y+6) {
+		for(set '@x,62;'@x<=78;set '@x,'@x+2) {
+			monster '@mdmap$,'@x,'@y,"死者のメガロドン",3018,1,'@mdnpc$;
+		}
+	}
+	end;
+OnKilled3:
+	set '@count,getmapmobs(getmdmapname("1@dth3.gat"),getmdnpcname("#増援判定用1")+ "::OnKilled3");
+	if('@count > 0) end;
+	sleep 1000;
+	//hideonnpc "#増援判定用1"; //97031
+	hideoffnpc getmdnpcname("死神アンク#bios3"); //97026
+	sleep 500;
+	npctalk "死神アンク : あなたは久しぶりに楽しめそうな方ですね。",getmdnpcname("死神アンク#bios3");
+	sleep 2000;
+	npctalk "死神アンク : 特別に、私が直接お相手しましょう!!",getmdnpcname("死神アンク#bios3");
+	sleep 500;
+	monster getmdmapname("1@dth3.gat"),70,67,"死神アンク",3029,1,getmdnpcname("#増援判定用1")+ "::OnBossKilled";
+	end;
+OnBossKilled:
+	sleep 1500;
+	hideoffnpc getmdnpcname("死神アンク#bios3"); //97026
+	npctalk "死神アンク : くっ……なるほど。人間には……強い者もいるのですね。",getmdnpcname("死神アンク#bios3");
+	sleep 2000;
+	npctalk "死神アンク : しかし……これで終わりだと思わない方がいいですよ。",getmdnpcname("死神アンク#bios3");
+	sleep 1000;
+	npctalk "死神アンク : モロク様の復活は目の前まで来ているのです!!　ククク……!!",getmdnpcname("死神アンク#bios3");
+	sleep 2000;
+	hideonnpc getmdnpcname("死神アンク#bios3"); //97026
+	misceffect 135, getmdnpcname("ブリド#bios3"); //97027
+	misceffect 135, getmdnpcname("ジェイス#bios3"); //97025
+	setnpcdisplay getmdnpcname("ブリド#bios3"),468; //97027
+	setnpcdisplay getmdnpcname("ジェイス#bios3"),467; //97025
+	sleep 2500;
+	npctalk "ブリド : ……あっ!!　やっと体が！",getmdnpcname("ブリド#bios3");
+	sleep 2500;
+	npctalk "ジェイス : くっ……。",getmdnpcname("ジェイス#bios3");
+	sleep 2500;
+	npctalk "ブリド : ふぅ……あの死神の魔力は私とジェイスでは太刀打ちできないほど強力だった。",getmdnpcname("ブリド#bios3");
+	sleep 2500;
+	npctalk "ブリド : 君がいなければ何もできないままやられていただろう。",getmdnpcname("ブリド#bios3");
+	sleep 2500;
+	npctalk "ブリド : 感謝の気持ちとして渡したい物がある。受け取る準備が出来たら話しかけてくれ。",getmdnpcname("ブリド#bios3");
+	end;
+}
 1@dth3.gat,66,72,0	script	#talkshow管理	139,{/* 69906 */
 //setpartyinmap BIOS_1QUE,1;
+OnStart2:
+	setnpcdisplay getmdnpcname("ジェイス#bios3"),10035;
+	setnpcdisplay getmdnpcname("ブリド#bios3"),10036;
+	hideoffnpc getmdnpcname("死神アンク#bios3"); //97026
+	sleep 1500;
+	npctalk "死神アンク : それでは、愚かな冒険者様。冥府への旅路に憂い無きよう……。ククク。",getmdnpcname("死神アンク#bios3");
+	sleep 3000;
+	hideonnpc getmdnpcname("死神アンク#bios3"); //97026
+	donpcevent getmdnpcname("#増援判定用1")+ "::OnStart";
+	end;
 }
 1@dth3.gat,66,72,5	script	司令官アジフ#bios3	459,{/* 69907 (hide)*/
 	{
