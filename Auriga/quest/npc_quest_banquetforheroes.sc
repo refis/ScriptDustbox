@@ -137,7 +137,7 @@ prontera.gat,121,72,3	script	王室急使#e16_prt	833,5,5,{/* 51186 */
 		mes "王家主催で行われています。";
 		next;
 		mes "[急使]";
-		if(checkquest(201730)) {
+		if(checkquest(201730)) {	// 魔神殿攻略済み
 			mes "その祝宴に";
 			mes strcharinfo(0)+ "様を";
 			mes "^4d4dff貴賓としてご招待^000000したいのです。";
@@ -322,7 +322,7 @@ prt_pri00.gat,51,116,8	script	エルロンド・ロレンス#EP	751,{/* 60522 */
 		mes "　進行することが出来ます^000000‐";
 		close;
 	}
-	if(!(checkquest(5415) & 0x8)) {
+	if(!(checkquest(5415) & 0x8)) {		// プロンテラ地下監獄入場許可
 		mes "[エルロンド・ロレンス]";
 		mes "こんにちは。";
 		next;
@@ -487,7 +487,7 @@ prt_pri00.gat,51,116,8	script	エルロンド・ロレンス#EP	751,{/* 60522 */
 	mes "それともなにか……";
 	mes "気になることでも？";
 	next;
-	switch(select("地下監獄に行く:地下監獄について:囚人について:似たような奴らを見たような気がする")) {
+	switch(select("地下監獄に行く","地下監獄について","囚人について","似たような奴らを見たような気がする")) {
 	case 1:
 		mes "[エルロンド・ロレンス]";
 		mes "わかりました。";
@@ -627,7 +627,12 @@ prt_cas_q.gat,80,80,4	script	リハルト家執事#EP161GAM	57,{/* 60566 */
 		mes "リハルト家が滞在しています。";
 		next;
 		mes "[執事]";
-		mes "モロク討伐に貢献したという";
+		if(checkquest(201730)) {	// 魔神殿攻略済み
+			mes "あの魔王モロクを";
+			mes "討伐されたという";
+		}
+		else
+			mes "モロク討伐に貢献したという";
 		mes strcharinfo(0)+ "様の名声は";
 		mes "日々、耳にしております。";
 		mes "お会いできて光栄です。";
@@ -702,8 +707,14 @@ prt_cas_q.gat,93,74,4	script	ポー・リハルト#EP161GAM	993,{/* 60567 */
 	case 1:
 		emotion 52, "ポー・リハルト#EP161GAM"; //60595
 		mes "[ポー]";
-		mes "やあ。キミが魔王モロクの";
-		mes "討伐に貢献したという";
+		if(checkquest(201730)) {	// 魔神殿攻略済み
+			mes "やあ。キミが魔王モロクを";
+			mes "討伐したという";
+		}
+		else {
+			mes "やあ。キミが魔王モロクの";
+			mes "討伐に貢献したという";
+		}
 		mes "冒険者なんだね？";
 		mes "その名声は王室にも";
 		mes "広く知られているよ。";
@@ -865,22 +876,46 @@ prt_cas_q.gat,93,74,4	script	ポー・リハルト#EP161GAM	993,{/* 60567 */
 		mes "どのような戦略と戦術が";
 		mes "必要になるのか。";
 		next;
-		switch(select("彼らは敵じゃないです！","そんなことを考えなければ……")) {
-		case 1:
+		if(select("彼らは敵じゃないです！","そんなことを考えなければ……") == 1) {
+			mes "[ポー]";
+			mes "気を悪くしないでくれ。";
+			mes "彼らを敵とは思ってはいない。";
+			mes "ただ、リハルト家の長としては、";
+			mes "考えなくてはいけないのだよ。";
+			next;
+			mes "[ポー]";
+			mes "それでは戦闘訓練を頼むよ。";
+			mes "詳しくは執事に聞いてくれ。";
+			setquest 5403; //state=1
+			set EP16_SUB2,3;
+			close2;
+			cutin "richard_po02.BMP", 255;
+			end;
+		}
 		mes "[ポー]";
-		mes "気を悪くしないでくれ。";
-		mes "彼らを敵とは思ってはいない。";
-		mes "ただ、リハルト家の長としては、";
-		mes "考えなくてはいけないのだよ。";
+		mes "……";
+		mes "意外だな。";
+		mes "大抵、";
+		mes "このような考えをする私には";
+		mes "嫌悪感を抱く者が多いのだが。";
 		next;
 		mes "[ポー]";
-		mes "それでは戦闘訓練を頼むよ。";
-		mes "詳しくは執事に聞いてくれ。";
-		setquest 5403; //state=1
-		set EP16_SUB2,3;
-		close2;
-		cutin "richard_po02.BMP", 255;
-		end;
+		mes "そういわれると悪い気はしない。";
+		mes "フフフ、";
+		mes "キミが気に入ったよ。";
+		next;
+		if(select("いえいえ","どれくらい気に入った？") == 1) {
+			mes "[ポー]";
+			mes "それでは戦闘訓練を頼むよ。";
+			mes "詳しくは執事に聞いてくれ。";
+			setquest 5403; //state=1
+			set EP16_SUB2,3;
+			close2;
+			cutin "richard_po02.BMP", 255;
+			end;
+		}
+		// 未調査
+		close;
 	case 3:
 	case 4:
 		mes "[ポー]";
@@ -1010,15 +1045,12 @@ prt_pri00.gat,54,139,0	warp	prt_pri_to_prt_cas	1,1,prt_cas.gat,182,258	//60576
 prt_cas.gat,188,258,0	script	prt_cas_to_prt_pri00	45,1,1,{/* 60577 */
 OnTouch:
 	if(EP16_1QUE < 2) {
-		initnpctimer;
-		pcblockmove 1;
 		donpcevent "守護騎士#ep16_prigate01::OnTalk1";
+		set '@dummy,sleep2(3000);
+		warp "prt_cas.gat",182,258;
+		end;
 	}
 	warp "prt_pri00.gat",54,134;
-	end;
-OnTimer3000:
-	pcblockmove 0;
-	warp "prt_cas.gat",182,258;
 	end;
 }
 prt_cas.gat,180,264,3	script	守護騎士#ep16_prigate01	751,{/* 60578 */
@@ -1029,11 +1061,8 @@ OnTalk1:
 	end;
 }
 prt_cas.gat,180,251,3	script	守護騎士#ep16_prigate02	751,{/* 60579 */
-	initnpctimer;
 	unittalk "守護騎士 : 勤務中、異常なし……";
-	end;
-OnTimer3000:
-	stopnpctimer;
+	set '@dummy,sleep2(3000);
 	unittalk "守護騎士 : ああ、早く交替時間になって……";
 	end;
 }
@@ -1153,8 +1182,7 @@ prt_cas.gat,215,146,0	script	#ep16_evt_01_on	139,1,1,{/* 60583 */
 }
 
 prt_cas.gat,217,150,3	script	侍従ベル#ep16_01	967,{/* 60584 (cloaking)*/
-	switch(EP16_1QUE) {
-	case 1:
+	if(EP16_1QUE == 1) {
 		mes "[侍従ベル]";
 		mes strcharinfo(0)+ "様";
 		mes "お待ちしておりました。";
@@ -1184,11 +1212,13 @@ prt_cas.gat,217,150,3	script	侍従ベル#ep16_01	967,{/* 60584 (cloaking)*/
 		mes "ゆっくりとお越しください。";
 		close2;
 		cloakonnpc "侍従ベル#ep16_01";
-		end;
 	}
 	end;
 OnTalk1:
 	unittalk "侍従ベル : お待ちしていました。" +strcharinfo(0)+ " 様。";
+	end;
+OnInit:
+	cloakonnpc "侍従ベル#ep16_01";
 	end;
 }
 prt_cas.gat,163,163,0	script	#ep16_evt_02_on	139,3,3,{/* 60585 */
@@ -1199,8 +1229,7 @@ prt_cas.gat,163,163,0	script	#ep16_evt_02_on	139,3,3,{/* 60585 */
 	end;
 }
 prt_cas.gat,155,165,4	script	侍従ベル#ep16_02	967,{/* 60586 (cloaking)*/
-	switch(EP16_1QUE) {
-	case 1:
+	if(EP16_1QUE == 1) {
 		mes "[侍従ベル]";
 		mes "貴賓用の客室は";
 		mes "こちらに用意されています。";
@@ -1214,7 +1243,6 @@ prt_cas.gat,155,165,4	script	侍従ベル#ep16_02	967,{/* 60586 (cloaking)*/
 		mes "こちらまでお越しください。";
 		close2;
 		cloakonnpc "侍従ベル#ep16_02";
-		end;
 	}
 	end;
 OnTalk1:
@@ -1229,8 +1257,7 @@ prt_cas_q.gat,146,8,0	script	#ep16_evt_03_on	139,1,1,{/* 60587 */
 	end;
 }
 prt_cas_q.gat,135,10,4	script	侍従ベル#ep16_03	967,{/* 60588 (cloaking)*/
-	switch(EP16_1QUE) {
-	case 1:
+	if(EP16_1QUE == 1) {
 		mes "[侍従ベル]";
 		mes "詳しい内容につきましては";
 		mes "ご入室後に";
@@ -1238,7 +1265,6 @@ prt_cas_q.gat,135,10,4	script	侍従ベル#ep16_03	967,{/* 60588 (cloaking)*/
 		mes "どうぞ、お入りください。";
 		close2;
 		cloakonnpc "侍従ベル#ep16_03";
-		end;
 	}
 	end;
 OnTalk1:
@@ -1337,7 +1363,7 @@ prt_cas_q.gat,26,30,3	script	侍従ベル#ep16_main	967,{/* 60589 */
 		mes "輝かしい功績を立てた英雄に";
 		mes "その資格を与えることにしたそうです。";
 		next;
-		if(checkquest(201730)) {
+		if(checkquest(201730)) {	// 魔神殿攻略済み
 			mes "[侍従ベル]";
 			mes "あなたは";
 			mes "魔王モロクを討伐された英雄ですから";
@@ -5361,37 +5387,29 @@ OnTalk1:
 prt_cas.gat,152,163,0	script	way_to_qroom_L_qroom_L_	45,1,1,{/* 60765 */
 OnTouch:
 	if(EP16_1QUE < 1) {
-		initnpctimer;
-		pcblockmove 1;
 		donpcevent "王室守護騎士#02::OnTalk1";
+		set '@dummy,sleep2(3000);
+		donpcevent "王室守護騎士#02::OnTalk2";
 		end;
 	}
 	warp "prt_cas_q.gat",150,8;
 	end;
-OnTimer3000:
-	pcblockmove 0;
-	donpcevent "王室守護騎士#02::OnTalk2";
-	end;
 }
-
 prt_cas_q.gat,154,8,0	warp	qroom_L_to_way_way_to_q	1,1,prt_cas.gat,156,163	//60766
 
 prt_cas.gat,278,163,0	script	way_to_qroom_R_qroom_R_	45,1,1,{/* 60767 */
 OnTouch:
-	if(EP16_1QUE < 1) {
-		initnpctimer;
-		pcblockmove 1;
+	if(EP16_1QUE < 2) {
 		donpcevent "王室守護騎士#03::OnTalk1";
+		set '@dummy,sleep2(3000);
+		donpcevent "王室守護騎士#03::OnTalk2";
 		end;
 	}
-	warp "prt_cas_q.gat",150,8;
-	end;
-OnTimer3000:
-	pcblockmove 0;
-	donpcevent "王室守護騎士#03::OnTalk2";
+	warp "prt_cas_q.gat",135,119;
 	end;
 }
 prt_cas_q.gat,132,119,0	warp	qroom_R_to_way_way_to_q	1,1,prt_castle.gat,274,163	//60768
+
 prt_cas_q.gat,130,8,0	warp	qroom_vip_in_qroom_vip_	1,1,prt_cas_q.gat,30,28	//60769
 prt_cas_q.gat,34,28,0	warp	qroom_vip_out_qroom_vip	1,1,prt_cas_q.gat,134,8	//60770
 prt_cas_q.gat,130,32,0	warp	qroom_heine_in_qroom_he	1,1,prt_cas_q.gat,30,78	//60771
@@ -5537,10 +5555,6 @@ prt_cas.gat,15,33,4	script	リハルト家訓練官#ep16jp	47,{/* 60814 */
 			mes "王家貢献の証　5個";
 			mes "　";
 			mes "== ^32cd32魔神殿^000000 ==";
-			mes "・^0000ffブリナラネア　1体^000000";
-			mes "王家貢献の証　10個";
-			mes "・^0000ffムスペルスコール　1体^000000";
-			mes "王家貢献の証　10個";
 			mes "・^0000ff絶望の神モロク　1体^000000";
 			mes "王家貢献の証　20個";
 			mes "　";
@@ -5597,6 +5611,7 @@ prt_cas.gat,15,33,4	script	リハルト家訓練官#ep16jp	47,{/* 60814 */
 		setquest 97612; //state=1
 		setquest 97613; //state=1
 		setquest 97614; //state=1
+		setquest 97615; //state=1
 		setquest 97616; //state=1
 		setquest 97617; //state=1
 		setquest 97618; //state=1
