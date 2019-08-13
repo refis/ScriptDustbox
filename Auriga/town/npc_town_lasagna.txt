@@ -2,6 +2,82 @@
 //Ragnarok Online - lasagna Town Script	by refis
 //====================================================================
 
+//------------------------------------------------------------
+// Spawn data
+//------------------------------------------------------------
+// lasa_fild01.gat
+lasa_fild01.gat,100,320,75,55	monster	エッグリン			3495,15,5000,0,1
+lasa_fild01.gat,100,320,75,55	monster	グラスファブル		3497,6,5000,0,1
+lasa_fild01.gat,100,320,75,55	monster	リーフルナティック	3496,6,5000,0,1
+lasa_fild01.gat,0,0,0,0		monster	エッグリン			3495,80,5000,0,1
+lasa_fild01.gat,0,0,0,0		monster	グラスファブル		3497,110,5000,0,1
+lasa_fild01.gat,0,0,0,0		monster	リーフルナティック	3496,110,5000,0,1
+lasa_fild01.gat,0,0,0,0		monster	ビッグエッグリン	3505,1,5400000,1800000,1
+//------------------------------------------------------------
+// lasa_fild02.gat
+lasa_fild02.gat,0,0,0,0	monster	ワイルドホーネット	3498,90,5000,0,0
+lasa_fild02.gat,0,0,0,0	monster	スウィートフロッグ	3499,100,5000,0,0
+lasa_fild02.gat,0,0,0,0	monster	ハンターウルフ		3500,100,5000,0,0
+lasa_fild02.gat,0,0,0,0,monster	偵察バジルリスク	3502,10,5000,0,0
+//------------------------------------------------------------
+// lasa_dun01.gat
+lasa_dun01.gat,0,0,0,0	monster	トランススポア		3501,30,5000,0,0
+lasa_dun01.gat,0,0,0,0	monster	偵察バジルリスク	3502,60,5000,0,0
+//------------------------------------------------------------
+// lasa_dun02.gat
+lasa_dun02.gat,0,0,0,0	monster	突撃赤バジルリスク	3503,195,5000,0,0
+lasa_dun02.gat,0,0,0,0	monster	ジャングルマンドラゴラ	3506,30,5000,0,0
+//------------------------------------------------------------
+// lasa_dun03.gat
+lasa_dun03.gat,0,0,0,0	monster	突撃緑バジルリスク	3504,240,5000,0,0
+lasa_dun03.gat,0,0,0,0	monster	フルーツポムスパイダー	3507,60,5000,0,0
+
+//------------------------------------------------------------
+// Monster data
+//------------------------------------------------------------
+// name: "エッグリン" speed: 400, view: 3495
+// noskill
+// name: "リーフルナティック" speed: 200, view: 3496
+// noskill
+// name: "グラスファブル" speed: 400, view: 3497
+// noskill
+// name: "ワイルドホーネット" speed: 150, view: 3498
+// unfinish skill
+// name: "スウィートフロッグ" speed: 200, view: 3499
+// unfinish skill
+// name: "ハンターウルフ" speed: 300, view: 3500
+// unfinish skill
+// name: "トランススポア" speed: 200, view: 3501
+// unfinish skill
+// 3501,トランススポア＠スリープアタック,attack,182,1,500,0,5000,yes,target,always,0,,,,,,
+// name: "偵察バジルリスク" speed: 300, view: 3502
+// noskill
+// name: "突撃赤バジルリスク" speed: 250, view: 3503 amotion: 2245
+// 3503,突撃赤バジルリスク＠ラッシュアタック,idle,349,2,1000,0,30000,yes,self,always,0,,,,,,32
+// 3503,突撃赤バジルリスク＠コンボアタック,attack,171,3,500,0,5000,yes,target,always,0,,,,,,
+// 3503,突撃赤バジルリスク＠スタンアタック,attack,179,2,500,700,5000,no,target,always,0,,,,,,
+// name: "突撃緑バジルリスク" speed: 250, view: 3504
+// 3504,突撃緑バジルリスク＠ラッシュアタック,idle,349,2,1000,0,30000,yes,self,always,0,,,,,,32
+// 3504,突撃緑バジルリスク＠コンボアタック,attack,171,3,500,0,5000,yes,target,always,0,,,,,,
+// 3504,突撃緑バジルリスク＠スタンアタック,attack,179,2,500,700,5000,no,target,always,0,,,,,,
+// name: "ビッグエッグリン" 400,1889,672,462
+// 3505,ビッグエッグリン＠ブラッドドレイン,attack,199,1,2000,0,5000,yes,target,always,0,,,,,,
+// 3505,ビッグエッグリン＠エモーション,idle,197,1,500,0,30000,yes,self,always,0,2,,,,,
+// 3505,ビッグエッグリン＠アジリティアップ,idle,350,4,10000,0,10000,yes,self,always,0,,,,,,
+// 3505,ビッグエッグリン＠サモンスレイブ,attack,196,4,10000,2000,60000,no,self,slavele,0,3508,,,,,
+// 3505,ビッグエッグリン＠サモンスレイブ,idle,196,4,10000,2000,60000,no,self,slavele,0,3508,,,,,
+// name: "ジャングルマンドラゴラ" speed: 1000, view: 3506
+// 3506,ジャングルマンドラゴラ＠グラウンドアタック,attack,185,1,2000,0,5000,yes,target,always,0,,,,,,
+// name: "フルーツポムスパイダー" speed: 250, view: 3507
+// 3507,フルーツポムスパイダー＠ポイズンブロー,attack,176,2,500,800,5000,no,target,always,0,,,,,,
+// 3507,フルーツポムスパイダー＠スパイダーウェブ,idle,405,1,3000,0,10000,yes,anothertarget,always,0,,,,,,
+// 3507,フルーツポムスパイダー＠スパイダーウェブ,attack,405,1,2000,0,10000,yes,target,always,0,,,,,,
+// 3507,フルーツポムスパイダー＠ポイズンアタック,attack,188,1,500,0,5000,yes,target,always,0,,,,,,
+// 3507,フルーツポムスパイダー＠ベナムダスト,angry,140,1,500,1500,5000,no,target,always,0,,,,,,
+// 3507,フルーツポムスパイダー＠クァグマイア,chase,92,5,500,700,5000,yes,target,always,0,,,,,,12
+// 3507,フルーツポムスパイダー＠ブリーディングアタック,attack,660,2,1000,0,3000,yes,target,always,0,,,,,,32
+// name: "エッグリン" speed: 400, view: 3508
+
 lasagna.gat,141,249,4	script	武器商人ブルート#blutnp	10158,{/* 53559 */
 	if(!checkquest(98999)) {
 		mes "[武器商人ブルート]";
@@ -1764,5 +1840,66 @@ lasagna.gat,302,323,3	script	ジャワイブ#wedd	10159,{/* 53691 */
 	mes "[ジャワイブ]";
 	mes "代わりに心躍る冒険の旅へ";
 	mes "出かけるのは如何ですか？";
+	close;
+}
+
+lasa_fild01.gat,35,288,3	script	自警団員アジェニャー#la	10162,{/* 61390 */
+	mes "[自警団員アジェニャー]";
+	mes "お、無事に入団出来たか。";
+	mes "これからよろしくな！";
+	close;
+}
+lasa_fild01.gat,60,322,3	script	自警団員アリオ#lasa_fil	10154,{/* 61391 */
+	mes "[自警団員アリオ]";
+	mes "ミッドガルドには行けたか？";
+	mes "大丈夫、君なら何が来ても";
+	mes "乗り越えていけるさ。";
+	close;
+}
+
+lasa_fild01.gat,134,381,0	warp	warp01#lasa_fild01	2,2,lasagna.gat,153,58
+lasagna.gat,150,54,0		warp	warp01#lasagna	2,2,lasa_fild01.gat,131,378
+
+lasa_fild01.gat,341,375,0	warp	lasagna_in02	2,2,lasagna.gat,327,56
+lasagna.gat,327,51,0		warp	lasagna_out02	2,2,lasa_fild01.gat,344,371
+
+lasagna.gat,358,91,0		warp	warp02#lasagna	2,2,lasa_fild02.gat,20,98
+lasa_fild02.gat,16,98,0		warp	warp01#lasa_fild02	2,2,lasagna.gat,355,92
+
+lasa_fild02.gat,348,244,0	warp	warp02#lasa_fild02	2,2,lasa_dun01.gat,24,143
+lasa_dun01.gat,18,143,0		warp	warp01#lasa_dun01	2,2,lasa_fild02.gat,344,243
+
+lasa_dun01.gat,157,98,0	warp	warp02#lasa_dun01	2,2,lasa_dun02.gat,22,171
+lasa_dun02.gat,18,171,0	warp	warp01#lasa_dun02	2,2,lasa_dun01.gat,153,98
+
+lasa_dun02.gat,146,58,0	warp	warp02#lasa_dun02	2,2,lasa_dun03.gat,190,18
+lasa_dun03.gat,190,15,0	warp	warp01#lasa_dun03	2,2,lasa_dun02.gat,146,54
+
+lasa_dun01.gat,29,146,5	script	自警団員#lasa_dun01	10162,{/* 62150 */
+	mes "[自警団員]";
+	if(Job == Job_Summoner) {
+		mes "おや、冒険者さん。";
+		mes "タルトゥーフィに";
+		mes "会いに来たんですか？";
+	}
+	else {
+		mes "おや、新大陸の冒険者さんが";
+		mes "こんなところに何の用ですか？";
+	}
+	close;
+}
+
+lasa_dun03.gat,247,194,0	script	object02#lasa_dun03	139,{/*,62152,*/}
+
+lasa_dun03.gat,162,158,3	script	タルトゥーフィ#lasa_dun	10161,{/* 61393 */
+	mes "[タルトゥーフィ]";
+	mes "やあ、この前は世話になったね。";
+	mes "もうミッドガルドには";
+	mes "行ったのかい？";
+	next;
+	mes "[タルトゥーフィ]";
+	mes "こっちはバジルリスクのやつらが";
+	mes "また騒ぎ出したみたいなんだ。";
+	mes "まったくうっとおしい連中だよ。";
 	close;
 }
