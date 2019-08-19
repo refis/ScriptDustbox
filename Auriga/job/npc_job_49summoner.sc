@@ -1146,7 +1146,7 @@ do_tu01a.gat,60,322,3	script	自警団員アリオ#do_tu01a	10154,{
 			cutin "do_su_002.bmp", 255;
 			end;
 		case 6:
-			if(equipditem(26135) == 0) {
+			if(getequipid(4) != 26135) {
 				mes "[自警団員アリオ]";
 				mes "違うものを身につけてるな。";
 				mes "私が渡した「初心者用猫じゃらし」を";
@@ -2083,7 +2083,7 @@ do_tu01a.gat,60,322,3	script	自警団員アリオ#do_tu01a	10154,{
 			mes "ふむ、それでは次は……";
 			next;
 			cloakoffnpc "道具屋の末っ子#do_tu01a";
-			dopcevent "道具屋の末っ子#do_tu01a::OnTalk1";
+			donpcevent "道具屋の末っ子#do_tu01a::OnTalk1";
 			next;
 			mes "[自警団員アリオ]";
 			mes "驚かせやがって、何の用だ？";
@@ -2769,13 +2769,6 @@ OnInit:
 	end;
 }
 
-do_tu02a.gat,237,197,3	script	自警団員アリオ#do_tu02a	10154,{
-	end;
-OnInit:
-	cloakonnpc;
-	end;
-}
-
 do_tu02a.gat,235,198,3	script	ペロン団長#do_tu02a	10152,{
 	if(distance(getcharid(3)) > 5) {
 		showmessage "‐もっと近づいてから話しかけよう‐","";
@@ -2934,7 +2927,7 @@ do_tu02a.gat,235,198,3	script	ペロン団長#do_tu02a	10152,{
 		mes "次のテストを行います。";
 		close2;
 		setquest 98417;
-		warp "do_tu03e.gat",61,94;
+		warp "do_tu03a.gat",61,94;
 		end;
 	case 29:
 	case 30:
@@ -3229,7 +3222,7 @@ do_tu02a.gat,203,324,5	script	エッグリン#do_tu02a	10157,{
 	}
 }
 
-do_tu03e.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{
+do_tu03a.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{
 	switch(DORAM_1QUE) {
 	case 29:
 		if(checkquest(98417)) {
@@ -3461,7 +3454,7 @@ do_tu03e.gat,59,90,5	script	ペロン団長#do_tu03e	10152,{
 	}
 }
 
-do_tu03e.gat,64,92,3	script	ジンドウ#do_tu03e	10159,{
+do_tu03a.gat,64,92,3	script	ジンドウ#do_tu03e	10159,{
 	if(DORAM_1QUE == 30) {
 		setquest 98454;
 		delquest 98454;
@@ -3491,7 +3484,7 @@ do_tu03e.gat,64,92,3	script	ジンドウ#do_tu03e	10159,{
 	close;
 }
 
-do_tu03e.gat,61,91,5	script	バジルリスク捕虜#do_tu0	10158,{
+do_tu03a.gat,61,91,5	script	バジルリスク捕虜#do_tu0	10158,{
 	emotion 9;
 	mes "[バジルリスク捕虜]";
 	mes "……。";
@@ -4405,7 +4398,7 @@ do_tu06a.gat,153,103,3	script	自警団員#do_tu06a_2	10162,5,5,{
 		end;
 	}
 	if(DORAM_1QUE == 39) {
-		if(chackquest(98426)) {
+		if(checkquest(98426)) {
 			delquest 98426;
 			getexp 475,6000;
 		}
@@ -4431,7 +4424,7 @@ do_tu06a.gat,153,103,3	script	自警団員#do_tu06a_2	10162,5,5,{
 			warp "do_tu05a.gat",26, 62;
 			end;
 		}
-		if(!chackquest(98427))
+		if(!checkquest(98427))
 			setquest 98427;
 		warp "do_tu07a.gat",190,20;
 		end;
@@ -4529,7 +4522,7 @@ OnTouchNPC:
 
 do_tu07a.gat,162,158,3	script	タルトゥーフィ#do_tu07a	10161,5,5,{
 	if(DORAM_1QUE == 39) {
-		if(chackquest(98427)) {
+		if(checkquest(98427)) {
 			delquest 98427;
 			getexp 524,8000;
 		}
@@ -4586,7 +4579,7 @@ do_tu07a.gat,162,158,3	script	タルトゥーフィ#do_tu07a	10161,5,5,{
 		mes "なるほど……。";
 		mes "君は何か知っているかい？";
 		next;
-		menu "いいえ",-,"知りません",-,"心当たりはありません"-;
+		menu "いいえ",-,"知りません",-,"心当たりはありません",-;
 		mes "[自警団員]";
 		mes "そうだよな。";
 		mes "冒険者になりたての君が";

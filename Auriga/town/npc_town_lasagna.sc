@@ -18,7 +18,7 @@ lasa_fild01.gat,0,0,0,0		monster	ビッグエッグリン	3505,1,5400000,1800000,1
 lasa_fild02.gat,0,0,0,0	monster	ワイルドホーネット	3498,90,5000,0,0
 lasa_fild02.gat,0,0,0,0	monster	スウィートフロッグ	3499,100,5000,0,0
 lasa_fild02.gat,0,0,0,0	monster	ハンターウルフ		3500,100,5000,0,0
-lasa_fild02.gat,0,0,0,0,monster	偵察バジルリスク	3502,10,5000,0,0
+lasa_fild02.gat,0,0,0,0	monster	偵察バジルリスク	3502,10,5000,0,0
 //------------------------------------------------------------
 // lasa_dun01.gat
 lasa_dun01.gat,0,0,0,0	monster	トランススポア		3501,30,5000,0,0
@@ -82,6 +82,7 @@ lasa_dun03.gat,0,0,0,0	monster	フルーツポムスパイダー	3507,60,5000,0,0
 // 3507,フルーツポムスパイダー＠ブリーディングアタック,attack,660,2,1000,0,3000,yes,target,always,0,,,,,,32
 // name: "エッグリン" speed: 400, view: 3508
 
+/*
 lasagna.gat,141,249,4	script	武器商人ブルート#blutnp	10158,{
 	if(!checkquest(98999)) {
 		mes "[武器商人ブルート]";
@@ -160,6 +161,8 @@ lasagna.gat,141,249,4	script	武器商人ブルート#blutnp	10158,{
 		close;
 	}
 }
+*/
+
 lasagna.gat,323,229,4	script	自警団員オリオ#do_su01	10155,{}
 lasagna.gat,318,229,4	script	ジンドウ#do_su02	10159,{}
 lasagna.gat,313,229,3	script	術師ゼロ#do_su02	735,{}
@@ -296,11 +299,11 @@ lasagna.gat,298,289,5	script	加工職人#do_su03	555,{}
 lasagna.gat,289,287,5	script	鍛冶職人#lasagna	561,{}
 lasagna.gat,346,244,6	script	スペシャルアイテム販売	73,{}
 lasagna.gat,321,242,4	script	看板#1lasagna	835,7,7,{
-	npctalk "北西側：道具商人　／　東側：髪型変更・スペシャルアイテム販売員",1;
+	unittalk "北西側：道具商人　／　東側：髪型変更・スペシャルアイテム販売員",1;
 	end;
 }
 lasagna.gat,312,251,4	script	看板#2lasagna	835,7,7,{
-	npctalk "北西側：精錬・修理・ドラム武具販売・アップグレード",1;
+	unittalk "北西側：精錬・修理・ドラム武具販売・アップグレード",1;
 	end;
 }
 lasagna.gat,297,229,4	script	チュートリアル掲示板#01	857,{
@@ -1069,24 +1072,24 @@ lasagna.gat,232,181,5	script	リンギュイーネ#lasagna	559,{
 	close;
 }
 lasagna.gat,190,239,5	script	幼いニャンコ#lasagna_01	559,{
-	npctalk "幼いニャンコ : 私はこの遊び場の隊長だにゃ～。";
+	unittalk "幼いニャンコ : 私はこの遊び場の隊長だにゃ～。";
 	end;
 }
 lasagna.gat,180,230,7	script	幼いニャンコ#lasagna_02	560,{
-	npctalk "幼いニャンコ : ハァ……こんな幼稚なやつらとは一緒に遊べないにゃ～。";
+	unittalk "幼いニャンコ : ハァ……こんな幼稚なやつらとは一緒に遊べないにゃ～。";
 	end;
 }
 lasagna.gat,192,245,7	script	幼いニャンコ#lasagna_03	554,{
-	npctalk "幼いニャンコ : 毛糸の塊がひとつ、ななつ、ふたつ、むっつ……多いにゃ!!";
+	unittalk "幼いニャンコ : 毛糸の塊がひとつ、ななつ、ふたつ、むっつ……多いにゃ!!";
 	end;
 }
 lasagna.gat,184,234,5	script	幼いニャンコ#lasagna_04	422,{
-	npctalk "幼いニャンコ : これどうして転がらないにゃ～？転がるようにしてにゃ～。";
+	unittalk "幼いニャンコ : これどうして転がらないにゃ～？転がるようにしてにゃ～。";
 	end;
 }
 lasagna.gat,186,231,3	script	幼いニャンコ#lasagna_05	10167,{
 	emotion 28, "幼いニャンコ#lasagna_05";
-	npctalk "幼いニャンコ : シーソーに乗りながら一緒に遊びたいやつは集まれ～。";
+	unittalk "幼いニャンコ : シーソーに乗りながら一緒に遊びたいやつは集まれ～。";
 	end;
 }
 lasagna.gat,211,186,5	script	乗船案内員#lasagna	559,{
@@ -1254,12 +1257,12 @@ lasagna.gat,342,261,4	script	ジンドウ#do_su99	10159,{}
 lasagna.gat,337,261,3	script	術師ゼロ#do_su99	735,{}
 lasagna.gat,352,261,4	script	シバ#do_su99	10160,{}
 
-lasagna.gat,205,327,0	warp	warp03#lasagna	2,2,conch_in.gat,55,61 from_pos=(205, 326)
-conch_in.gat,59,62,0	warp	warp01#conch_in	2,2,lasagna.gat,205,324 from_pos=(59, 62)
-conch_in.gat,50,60,0	warp	warp02#conch_in	2,2,conch_in.gat,30,60 from_pos=(52, 60)
-conch_in.gat,36,60,0	warp	warp03#conch_in	2,2,conch_in.gat,54,60 from_pos=(35, 60)
-conch_in.gat,143,60,0	warp	warp04#conch_in	2,2,conch_in.gat,165,60 from_pos=(143, 60)
-conch_in.gat,159,60,0	warp	warp05#conch_in	2,2,conch_in.gat,138,60 from_pos=(158, 59)
+lasagna.gat,205,327,0	warp	warp03#lasagna	2,2,conch_in.gat,55,61
+conch_in.gat,59,62,0	warp	warp01#conch_in	2,2,lasagna.gat,205,324
+conch_in.gat,50,60,0	warp	warp02#conch_in	2,2,conch_in.gat,30,60
+conch_in.gat,36,60,0	warp	warp03#conch_in	2,2,conch_in.gat,54,60
+conch_in.gat,143,60,0	warp	warp04#conch_in	2,2,conch_in.gat,165,60
+conch_in.gat,159,60,0	warp	warp05#conch_in	2,2,conch_in.gat,138,60
 lasagna.gat,203,324,5	script	エッグリン#do_tu02	10157,{
 	mes "[エッグリン]";
 	if(Job == Job_Summoner) {
@@ -1511,6 +1514,7 @@ lasagna.gat,335,248,3	script	結婚コンパニオン#wedd	10162,{
 		mes "お話相手が必要でしたら、";
 		mes "またいらしてください！";
 		close;
+	}
 }
 lasagna.gat,332,277,3	script	司式者#wedd02	10152,{
 	mes "[ペペロンチーノ]";
@@ -1967,105 +1971,3 @@ lasa_dun03.gat,162,158,3	script	タルトゥーフィ#lasa_dun	10161,{
 	}
 	close;
 }
-
-/*
-lasagna.gat,293,289,5	script	武具商人#do_su03	10162,{}
-lasagna.gat,298,289,5	script	加工職人#do_su03	555,{}
-lasagna.gat,289,287,5	script	鍛冶職人#lasagna	561,{}
-mes "[武具商人]";
-mes "いらっしゃい。";
-mes "うちの品物は一級品ばかりだよ。";
-mes "何を見ていくんだい？";
-next;
-select("武器:防具:アクセサリー:消耗品:やめる")
-select("物理タイプ:魔法タイプ:支援回復タイプ:やめる")
-select("魔力の草のネックレス[1]:光る枝のお守り[1]:葉のお守り[1]:高級葉のお守り[1]:特選葉のお守り[1]:やめる")
-mes "[武具商人]";
-mes "特選葉のお守り[1]は";
-mes "Zenyかドラムポイントで購入可能だ。";
-mes "^ff0000所持ドラムポイント : 5000^000000";
-next;
-select("500000000Zenyで買う:5000ドラムポイントで買う:やめる")
-mes "[武具商人]";
-mes "確認だけど、";
-mes "特選葉のお守り[1]を";
-mes "500000000Zenyで買う";
-mes "で良いんだね。";
-next;
-select("はい:いいえ")
-mes "[武具商人]";
-mes "Zenyが足りないみたいだよ。";
-mes "もう一度確認してもらえるかな。";
-close;
-mes "[武具商人]";
-mes "いらっしゃい。";
-mes "うちの品物は一級品ばかりだよ。";
-mes "何を見ていくんだい？";
-next;
-select("武器:防具:アクセサリー:消耗品:やめる")
-select("物理タイプ:魔法タイプ:支援回復タイプ:やめる")
-select("魔力の草のネックレス[1]:光る枝のお守り[1]:葉のお守り[1]:高級葉のお守り[1]:特選葉のお守り[1]:やめる")
-mes "[武具商人]";
-mes "魔力の草のネックレス[1]は";
-mes "Zenyかドラムポイントで購入可能だ。";
-mes "^ff0000所持ドラムポイント : 5000^000000";
-next;
-select("100000000Zenyで買う:2000ドラムポイントで買う:やめる")
-mes "[武具商人]";
-mes "わかった。";
-mes "気が変わったらまた来てね。";
-close;
-mes "[武具商人]";
-mes "いらっしゃい。";
-mes "うちの品物は一級品ばかりだよ。";
-mes "何を見ていくんだい？";
-next;
-select("武器:防具:アクセサリー:消耗品:やめる")
-select("物理タイプ:魔法タイプ:支援回復タイプ:やめる")
-select("魔力の草のネックレス[1]:光る枝のお守り[1]:葉のお守り[1]:高級葉のお守り[1]:特選葉のお守り[1]:やめる")
-mes "[武具商人]";
-mes "特選葉のお守り[1]は";
-mes "Zenyかドラムポイントで購入可能だ。";
-mes "^ff0000所持ドラムポイント : 5000^000000";
-next;
-select("500000000Zenyで買う:5000ドラムポイントで買う:やめる")
-mes "[武具商人]";
-mes "確認だけど、";
-mes "特選葉のお守り[1]を";
-mes "5000ドラムポイントで買う";
-mes "で良いんだね。";
-next;
-select("はい:いいえ")
-@delitem(idx: 6(itemid: unknown), amount: 5000)
-getitem 28585, 1;
-mes "[武具商人]";
-mes "お買い上げありがとうございます。";
-mes "また来てくださいね。";
-close;
-mes "[武具商人]";
-mes "いらっしゃい。";
-mes "うちの品物は一級品ばかりだよ。";
-mes "何を見ていくんだい？";
-next;
-select("武器:防具:アクセサリー:消耗品:やめる")
-select("物理タイプ:魔法タイプ:支援回復タイプ:やめる")
-select("魔力の草のネックレス[1]:光る枝のお守り[1]:葉のお守り[1]:高級葉のお守り[1]:特選葉のお守り[1]:やめる")
-mes "[武具商人]";
-mes "特選葉のお守り[1]は";
-mes "Zenyかドラムポイントで購入可能だ。";
-mes "^ff0000所持ドラムポイント : 0^000000";
-next;
-select("500000000Zenyで買う:5000ドラムポイントで買う:やめる")
-mes "[武具商人]";
-mes "確認だけど、";
-mes "特選葉のお守り[1]を";
-mes "5000ドラムポイントで買う";
-mes "で良いんだね。";
-next;
-select("はい:いいえ")
-mes "[武具商人]";
-mes "ドラムポイントが";
-mes "足りないみたいだよ。";
-mes "もう一度確認してもらえるかな。";
-close;
-*/
