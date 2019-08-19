@@ -3036,6 +3036,26 @@ OnCheck:
 }
 
 1@xm_d.gat,155,98,3		script	作業員#xm_d1	10020,{
+	if('alert) {
+		mes "[作業員]";
+		mes "……ガクガク……ブルブル……";
+		next;
+		mes "‐今は話を聞ける状態ではないようだ。";
+		mes "　作業服に着替えて、";
+		mes "　少し経ってから話しかけよう‐";
+		close;
+	}
+	if(sc_onparam(SC_MONSTER_TRANSFORM,1) != 1246) {
+		mes "[作業員]";
+		mes "何だ!?";
+		mes "俺達の仲間じゃないじゃないか!!";
+		mes "むしろ敵じゃないか!!";
+		unittalk "作業員 : こら！　警備兵！　仕事しろ！　敵のお出ましだぞ！";
+		set 'alert,1;
+		initnpctimer;
+		setnpctimer 20000;
+		close;
+	}
 	mes "[作業員]";
 	mes "ふむ？　新入りかい？";
 	next;
@@ -3062,12 +3082,27 @@ OnTimer10000:
 	unittalk "作業員 : というかあの爺さんのこと忘れてた……？　あれ……？";
 	end;
 OnTimer13000:
+	stopnpctimer;
 	donpcevent getmdnpcname("#fac2wpc")+ "::OnCount";
 	hideonnpc getmdnpcname("作業員#xm_d1");
+	end;
+OnTimer23000:
+	set '@dummy,getmapxy('@map$,'@x,'@y,1,getmdnpcname(strnpcinfo(0)));
+	areamonster '@map$,'@x-7,'@y-7,'@x+7,'@y+7,"おもちゃ工場警備兵",2990,20,getmdnpcname(strnpcinfo(0))+"::OnKilled";
+	end;
+OnTimer38000:
+	unittalk "作業員 : ふう……危うく人間に破壊されるところだった。人間は怖いな……。";
+	end;
+OnTimer83000:
+	stopnpctimer;
+	set 'alert,0;
 	end;
 OnCheck:
 	if('flag)
 		viewpoint 2,1,1,1,0xFFFFFF;
+	end;
+OnKilled:
+	//dummy
 	end;
 }
 
@@ -3100,6 +3135,7 @@ OnTimer10000:
 	unittalk "作業員 : あ、こうしちゃいられない。私も職人のお爺ちゃんに会いに行こう。";
 	end;
 OnTimer13000:
+	stopnpctimer;
 	donpcevent getmdnpcname("#fac2wpc")+ "::OnCount";
 	hideonnpc getmdnpcname("作業員#xm_d2");
 	end;
@@ -3134,6 +3170,7 @@ OnTimer7000:
 	unittalk "作業員 : そういやあ、自分も稼働するのやめたはずなのに。ボケたかなあ……。";
 	end;
 OnTimer10000:
+	stopnpctimer;
 	donpcevent getmdnpcname("#fac2wpc")+ "::OnCount";
 	hideonnpc getmdnpcname("作業員#xm_d3");
 	end;
@@ -3171,6 +3208,7 @@ OnTimer10000:
 	unittalk "作業員 : ……あれ？　人形職人のお爺さんのこと忘れてた！　いけない！";
 	end;
 OnTimer13000:
+	stopnpctimer;
 	donpcevent getmdnpcname("#fac2wpc")+ "::OnCount";
 	hideonnpc getmdnpcname("作業員#xm_d4");
 	end;
@@ -3209,6 +3247,7 @@ OnTimer10000:
 	unittalk "作業員 : でもおかげで、あのお爺さんを思い出せてよかった。ありがとう。";
 	end;
 OnTimer13000:
+	stopnpctimer;
 	donpcevent getmdnpcname("#fac2wpc")+ "::OnCount";
 	hideonnpc getmdnpcname("作業員#xm_d5");
 	end;
@@ -3219,6 +3258,25 @@ OnCheck:
 }
 
 1@xm_d.gat,203,55,3		script	作業員#xm_d6	10020,{
+	if('alert) {
+		mes "[作業員]";
+		mes "……ガクガク……ブルブル……";
+		next;
+		mes "‐今は話を聞ける状態ではないようだ。";
+		mes "　作業服に着替えて、";
+		mes "　少し経ってから話しかけよう‐";
+		close;
+	}
+	if(sc_onparam(SC_MONSTER_TRANSFORM,1) != 1246) {
+		mes "[作業員]";
+		mes "何だ!?";
+		mes "私達の仲間じゃないじゃないか!!";
+		unittalk "作業員 : 警備兵はなにをしてる？　人間が紛れ込んでるのに……っ！";
+		set 'alert,1;
+		initnpctimer;
+		setnpctimer 20000;
+		close;
+	}
 	mes "[作業員]";
 	mes "あ～調子悪い。";
 	mes "動力源の不調なのかね。";
@@ -3243,12 +3301,27 @@ OnTimer7000:
 	unittalk "作業員 : さて、爺さんもいないし、このままだと寂しいから、いくとしようかな。";
 	end;
 OnTimer10000:
+	stopnpctimer;
 	donpcevent getmdnpcname("#fac2wpc")+ "::OnCount";
 	hideonnpc getmdnpcname("作業員#xm_d6");
+	end;
+OnTimer23000:
+	set '@dummy,getmapxy('@map$,'@x,'@y,1,getmdnpcname(strnpcinfo(0)));
+	areamonster '@map$,'@x-7,'@y-7,'@x+7,'@y+7,"おもちゃ工場警備兵",2990,20,getmdnpcname(strnpcinfo(0))+"::OnKilled";
+	end;
+OnTimer38000:
+	unittalk "作業員 : こんな状態で人間に会うとか、勘弁してくれ。";
+	end;
+OnTimer83000:
+	stopnpctimer;
+	set 'alert,0;
 	end;
 OnCheck:
 	if('flag)
 		viewpoint 2,1,1,6,0xFFFFFF;
+	end;
+OnKilled:
+	//dummy
 	end;
 }
 
@@ -3280,6 +3353,7 @@ OnTimer10000:
 	unittalk "作業員 : 手紙かあ。……僕も爺ちゃんに、手紙を書こうかな。";
 	end;
 OnTimer13000:
+	stopnpctimer;
 	donpcevent getmdnpcname("#fac2wpc")+ "::OnCount";
 	hideonnpc getmdnpcname("作業員#xm_d7");
 	end;
@@ -3313,6 +3387,7 @@ OnTimer7000:
 	unittalk "作業員 : 私、おじいさん探してくる。いってくる。";
 	end;
 OnTimer10000:
+	stopnpctimer;
 	donpcevent getmdnpcname("#fac2wpc")+ "::OnCount";
 	hideonnpc getmdnpcname("作業員#xm_d8");
 	end;
@@ -3355,6 +3430,7 @@ OnTimer10000:
 	unittalk "作業員 : え？　今からでも遅くない……ですか。……会えるでしょうか。私も……。";
 	end;
 OnTimer13000:
+	stopnpctimer;
 	donpcevent getmdnpcname("#fac2wpc")+ "::OnCount";
 	hideonnpc getmdnpcname("作業員#xm_d9");
 	end;
@@ -3390,6 +3466,7 @@ OnTimer7000:
 	unittalk "作業員 : ところでお爺さん、どこにいるのかなー……。";
 	end;
 OnTimer10000:
+	stopnpctimer;
 	donpcevent getmdnpcname("#fac2wpc")+ "::OnCount";
 	hideonnpc getmdnpcname("作業員#xm_d10");
 	end;
