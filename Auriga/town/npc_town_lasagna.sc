@@ -167,14 +167,22 @@ lasagna.gat,323,229,4	script	自警団員オリオ#do_su01	10155,{}
 lasagna.gat,318,229,4	script	ジンドウ#do_su02	10159,{}
 lasagna.gat,313,229,3	script	術師ゼロ#do_su02	735,{}
 lasagna.gat,328,229,4	script	シバ#do_su02	10160,{}
-lasagna.gat,300,242,4	script	カプラ職員#lasagna	117,{
-	if(DORAM_0QUE == 100) {
+lasagna.gat,300,242,4	script	カプラ職員#lasagna	117,5,5,{
+	cutin "kafra_01",2;
+	setarray '@code,1,2,20;
+	setarray '@price,0,0,0;
+	callfunc "KafraMain",1,0x1df,"lasagna.gat",298,239,"NULL",0,0,0,800,'@code,'@price;
+	close2;
+	cutin "kafra_01",255;
+	end;
+OnTouch:
+	if(DORAM_1QUE == 100) {
 		cutin "kafra_01.bmp", 2;
 		mes "[カプラ職員]";
 		mes "ドラムの新米冒険者さん、";
 		mes "こんにちは。";
 		mes "こちらはカプラサービスです。";
-		set DORAM_0QUE,0;
+		set DORAM_1QUE,0;
 		next;
 		cutin "kafra_01.bmp", 255;
 		mes "^009eff【インフォメーション】";
@@ -226,12 +234,6 @@ lasagna.gat,300,242,4	script	カプラ職員#lasagna	117,{
 		viewpoint 1, 323, 229, 1, 0xFF0000;
 		close;
 	}
-	cutin "kafra_01",2;
-	setarray '@code,1,2,20;
-	setarray '@price,0,0,0;
-	callfunc "KafraMain",1,0x1df,"lasagna.gat",298,239,"NULL",0,0,0,800,'@code,'@price;
-	close2;
-	cutin "kafra_01",255;
 	end;
 }
 lasagna.gat,305,242,4	script	治療師ハル#lasagna	10164,{

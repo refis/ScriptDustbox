@@ -32,7 +32,7 @@ new_do1.gat,90,247,0	script	object01#new_do1	139,30,3,{
 }
 
 new_do1.gat,95,264,4	script	シェレ#new_do1	10165,{
-	if(DORAM_0QUE) {
+	if(DORAM_1QUE == 100) {
 		mes "^ff0000【インフォメーション】";
 		mes "スキップ処理を実行中です。";
 		mes "クライアントを終了しないでください。";
@@ -48,7 +48,6 @@ new_do1.gat,95,264,4	script	シェレ#new_do1	10165,{
 		mes "それじゃそのように";
 		mes "手配しておくわ。";
 		mes "あなたの活躍、期待してるわ！";
-		set DORAM_0QUE,0;
 		set DORAM_1QUE,100;
 		savepoint "lasagna.gat",299,239;
 		warp "lasagna.gat",298,238;
@@ -144,7 +143,6 @@ new_do1.gat,95,264,4	script	シェレ#new_do1	10165,{
 			mes "一部のアイテムや経験値を";
 			mes "受け取れない場合があります。^000000";
 			next;
-			set DORAM_0QUE,1;
 			setquest 98499;
 			compquest 98499;
 			if(DORAM_1QUE <= 4){
@@ -310,12 +308,16 @@ new_do1.gat,95,264,4	script	シェレ#new_do1	10165,{
 				getexp 0,2600;
 			}
 			if(DORAM_1QUE <= 32) {
+				setquest 98419;
+				delquest 98419;
+				getexp 214,0;
+				getexp 0,2800;
 				setquest 98420;
 				delquest 98420;
 				getexp 239,0;
 				getexp 0,3000;
 			}
-			if(DORAM_1QUE <= 32) {
+			if(DORAM_1QUE <= 33) {
 				setquest 98421;
 				delquest 98421;
 				getexp 267,0;
@@ -366,6 +368,7 @@ new_do1.gat,95,264,4	script	シェレ#new_do1	10165,{
 				delquest 98429;
 				getexp 0,25000;
 			}
+			set DORAM_1QUE,100;
 			mes "^ff0000【インフォメーション】^000000";
 			mes "^0000ff[next] をクリックしてください。^000000";
 			next;
@@ -374,8 +377,6 @@ new_do1.gat,95,264,4	script	シェレ#new_do1	10165,{
 			mes "それじゃそのように";
 			mes "手配しておくわ。";
 			mes "あなたの活躍、期待してるわ！";
-			set DORAM_0QUE,0;
-			set DORAM_1QUE,100;
 			savepoint "lasagna.gat",299,239;
 			warp "lasagna.gat",298,238;
 			end;
@@ -447,7 +448,7 @@ do_tu05a.gat,137,98,4	script	シェレ#do_tu01a	10165,{
 		mes "受け取れない場合があります。^000000";
 		next;
 		setquest 98499;
-		delquest 98499;
+		compquest 98499;
 		if(DORAM_1QUE <= 4){
 			setquest 98451;
 			delquest 98451;
@@ -611,12 +612,16 @@ do_tu05a.gat,137,98,4	script	シェレ#do_tu01a	10165,{
 			getexp 0,2600;
 		}
 		if(DORAM_1QUE <= 32) {
+			setquest 98419;
+			delquest 98419;
+			getexp 214,0;
+			getexp 0,2800;
 			setquest 98420;
 			delquest 98420;
 			getexp 239,0;
 			getexp 0,3000;
 		}
-		if(DORAM_1QUE <= 32) {
+		if(DORAM_1QUE <= 33) {
 			setquest 98421;
 			delquest 98421;
 			getexp 267,0;
@@ -673,7 +678,6 @@ do_tu05a.gat,137,98,4	script	シェレ#do_tu01a	10165,{
 		mes "それじゃそのように";
 		mes "手配しておくわ。";
 		mes "あなたの活躍、期待してるわ！";
-		set DORAM_0QUE,0;
 		set DORAM_1QUE,100;
 		savepoint "lasagna.gat",299,239;
 		warp "lasagna.gat",298,238;
@@ -2212,7 +2216,7 @@ do_tu01a.gat,60,322,3	script	自警団員アリオ#do_tu01a	10154,{
 			mes "ワープリンクに触れれば、";
 			mes "ラザーニャの町に";
 			mes "移動することができます。^000000";
-			close;
+			close2;
 			viewpoint 1, 134, 381, 1, 0xFF0000;
 			cutin "do_su_002.bmp", 255;
 			setquest 98452;
@@ -2934,8 +2938,10 @@ do_tu02a.gat,235,198,3	script	ペロン団長#do_tu02a	10152,{
 	case 31:
 		close;
 	case 32:
-		delquest 98419;
-		getexp 214,2800;
+		if(checkquest(98419)) {
+			delquest 98419;
+			getexp 214,2800;
+		}
 		mes "[ペロン団長]";
 		mes "お疲れ様でした。";
 		mes "テストはこれで終わりです。";
@@ -3821,6 +3827,7 @@ do_tu05a.gat,26,64,5	script	ガムベリー船長#do_tu05a	10153,{
 			delquest 98429;
 			getexp 0,25000;
 			set DORAM_1QUE,100;
+			savepoint "lasagna.gat",299,239;
 			mes "^009eff【インフォメーション】";
 			mes "お疲れ様でした。";
 			mes "すべてのチュートリアルが";
