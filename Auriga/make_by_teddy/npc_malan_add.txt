@@ -349,7 +349,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		emotion 0, "団長#gamer"; //59651
 		next;
 		mes "[" + strcharinfo(0) + "]";
-		mes "" + strcharinfo(0) + "と言います。";
+		mes strcharinfo(0) + "と言います。";
 		next;
 		mes "[団長]";
 		mes "^0000FF" + strcharinfo(0) + "^000000様ですね。";
@@ -379,7 +379,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		mes "使ってみます。";
 		next;
 		mes "[団長]";
-		mes "" + strcharinfo(0) + "様のことが";
+		mes strcharinfo(0) + "様のことが";
 		mes "気に入りました。";
 		mes "10連敗をしている";
 		mes "私達「ニャンゲーマーズ」を";
@@ -494,7 +494,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		mes "…………。";
 		next;
 		mes "[団長]";
-		mes "" + strcharinfo(0) + "様";
+		mes strcharinfo(0) + "様";
 		mes "先日チームから練習が厳しいと言って";
 		mes "出て行った奴らが4匹いるのですが、";
 		mes "私の言うことが理解できなくて";
@@ -519,7 +519,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		mes "4匹に話を聞いたら";
 		mes "私のところに戻ってきてください。";
 		mes "お願いします。";
-		mes "" + strcharinfo(0) + "様～。";
+		mes strcharinfo(0) + "様～。";
 		delquest 5060;
 		setquest 5061; //state=1
 		set MAL_3QUE,6;
@@ -542,7 +542,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		next;
 		mes "[団長]";
 		mes "ではお願いします。";
-		mes "" + strcharinfo(0) + "様～。";
+		mes strcharinfo(0) + "様～。";
 		close;
 	case 7:
 		mes "[団長]";
@@ -613,7 +613,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		next;
 		mes "[団長]";
 		mes "では、お願いします。";
-		mes "" + strcharinfo(0) + "様～。";
+		mes strcharinfo(0) + "様～。";
 		delquest 5060;
 		setquest 5066; //state=1
 		set MAL_3QUE,9;
@@ -627,7 +627,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		next;
 		mes "[団長]";
 		mes "では、お願いします。";
-		mes "" + strcharinfo(0) + "様～。";
+		mes strcharinfo(0) + "様～。";
 		close;
 	case 10:
 		mes "[団長]";
@@ -648,7 +648,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		next;
 		mes "[団長]";
 		mes "実は……。";
-		mes "" + strcharinfo(0) + "様が監督に";
+		mes strcharinfo(0) + "様が監督に";
 		mes "聞きに行くときに";
 		mes "隠れてついていきました。";
 		emotion 18, "団長#gamer"; //59651
@@ -754,7 +754,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		mes "　見て見ぬふりをしているようだ‐";
 		next;
 		mes "[団長]";
-		mes "" + strcharinfo(0) + "様、";
+		mes strcharinfo(0) + "様、";
 		mes "何か言いましたか？";
 		next;
 		mes "[" + strcharinfo(0) + "]";
@@ -763,7 +763,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		next;
 		mes "[団長]";
 		mes "選手達が要請したものもあるので……。";
-		mes "" + strcharinfo(0) + "様に";
+		mes strcharinfo(0) + "様に";
 		mes "お願いしたい事があります。";
 		next;
 		mes "[" + strcharinfo(0) + "]";
@@ -771,7 +771,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		next;
 		mes "[団長]";
 		mes "あいつらの練習相手になって下さい。";
-		mes "" + strcharinfo(0) + "様なら";
+		mes strcharinfo(0) + "様なら";
 		mes "信じてお任せできそうです。";
 		next;
 		if(select("断る","引き受ける")==1){
@@ -780,7 +780,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 			next;
 			mes "[団長]";
 			mes "悲しいですよ～";
-			mes "" + strcharinfo(0) + "様が断るとは……。";
+			mes strcharinfo(0) + "様が断るとは……。";
 			emotion 28, "団長#gamer"; //59651
 			next;
 			mes "[団長]";
@@ -792,7 +792,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 			set MAL_3QUE,12;
 			next;
 			mes "[団長]";
-			mes "" + strcharinfo(0) + "様ならいつでも";
+			mes strcharinfo(0) + "様ならいつでも";
 			mes "ニャンゲーマーズの名誉会員として";
 			mes "受け入れますよ……。";
 			next;
@@ -830,7 +830,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 	case 12:
 		mes "[団長]";
 		mes "あれ!!";
-		mes "" + strcharinfo(0) + "様ではありませんか？";
+		mes strcharinfo(0) + "様ではありませんか？";
 		mes "選手達の練習相手をしてくれる";
 		mes "気になったんですか？";
 		next;
@@ -838,14 +838,14 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 			mes "[団長]";
 			mes "そうですか。";
 			mes "もう一度いいますけど";
-			mes "" + strcharinfo(0) + "様ならいつでも";
+			mes strcharinfo(0) + "様ならいつでも";
 			mes "「ニャンゲーマーズの名誉会員」として";
 			mes "受け入れます～。";
 			close;
 		}
 		mes "[団長]";
 		mes "いよいよ!!";
-		mes "" + strcharinfo(0) + "様が名誉会員として";
+		mes strcharinfo(0) + "様が名誉会員として";
 		mes "入団してくれるんですね!!";
 		mes "すぐに「^0000FFニャンゲーマーズの証^000000」を";
 		mes "作らなければ。";
@@ -1038,7 +1038,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		case 2:
 			mes "[団長]";
 			mes "こんにちは～";
-			mes "" + strcharinfo(0) + "様は";
+			mes strcharinfo(0) + "様は";
 			mes "礼儀正しいですね。";
 			next;
 			mes "[団長]";
@@ -1051,7 +1051,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 			mes "いるので心配です。";
 			next;
 			mes "[団長]";
-			mes "" + strcharinfo(0) + "様のような";
+			mes strcharinfo(0) + "様のような";
 			mes "人間と猫が増えればいいですね。";
 			next;
 			mes "[団長]";
@@ -1067,7 +1067,7 @@ mal_in01.gat,31,210,2	script	団長#gamer	549,{/* 59651 */
 		case 3:
 			mes "[団長]";
 			mes "お疲れ様でした。";
-			mes "" + strcharinfo(0) + "様～";
+			mes strcharinfo(0) + "様～";
 			mes "これからも頑張って下さい。";
 			emotion 15, "団長#gamer"; //59651
 			close;
@@ -1280,7 +1280,7 @@ malangdo.gat,127,111,4	script	変な猫#gamer	547,{/* 59652 */
 		mes "団長が技術チームに";
 		mes "ニャンゲーマーズの証を";
 		mes "注文したと聞いたにゃん。";
-		mes "" + strcharinfo(0) + "のではないにゃん？";
+		mes strcharinfo(0) + "のではないにゃん？";
 		next;
 		mes "[監督]";
 		mes "練習相手をするには";
@@ -2357,7 +2357,7 @@ L_HIKIWAKE:
 				mes "　"+'@j_str$[@npc_jya]+"";
 				next;
 				mes "[セル]";
-				mes "" + strcharinfo(0) + "様が"+'@j_str$[@ply_jya]+"を出して、";
+				mes strcharinfo(0) + "様が"+'@j_str$[@ply_jya]+"を出して、";
 				mes "私が"+'@j_str$[@npc_jya]+"を出したので……。";
 				switch(@katimake){
 				case 1://勝ち
@@ -2403,7 +2403,7 @@ L_HIKIWAKE:
 			mes "[セル]";
 			mes "では……見てみようかな……。";
 			mes "私が"+'@temp+"回勝利して、";
-			mes "" + strcharinfo(0) + "様が"+'@num_kati+"回勝利したから";
+			mes strcharinfo(0) + "様が"+'@num_kati+"回勝利したから";
 			next;
 			if('@num_kati==5){
 				//未調査 全勝した場合
@@ -2412,7 +2412,7 @@ L_HIKIWAKE:
 				close;
 			}else if('@num_kati>=3){
 				mes "[セル]";
-				mes "" + strcharinfo(0) + "様が勝ちました。";
+				mes strcharinfo(0) + "様が勝ちました。";
 				next;
 				mes "‐セルが急におとなしくなった‐";
 				next;
@@ -2446,7 +2446,7 @@ L_HIKIWAKE:
 				}
 			}else{
 				mes "[セル]";
-				mes "" + strcharinfo(0) + "様の負けですね。";
+				mes strcharinfo(0) + "様の負けですね。";
 				next;
 				mes "‐セルの態度が急にデカくなった‐";
 				next;
@@ -2668,7 +2668,7 @@ mal_in01.gat,91,222,4	script	クカ#gamer	422,{/* 59659 */
 					}
 					
 					mes "[クカ]";
-					mes "" + strcharinfo(0) + "は今"+'@num_kati+"勝している～";
+					mes strcharinfo(0) + "は今"+'@num_kati+"勝している～";
 					mes "次のゲームを始めるよ～。";
 					mes "　";
 					mes "現在の獲得コイン：^ff0000"+'@temp+"^000000枚";
@@ -2722,14 +2722,14 @@ L_MAKE:
 			mes "現在のあっち向いてニャアの1位は";
 			mes "^DE2B21"+$ATI_MAX_WIN+"^000000連勝をした";
 			mes "^0000FF"+$ATI_MAX_WIN_NAME$+"^000000だよ～";
-			mes "" + strcharinfo(0) + "が^0000FF"+$ATI_MAX_WIN_NAME$+"^000000の記録を";
+			mes strcharinfo(0) + "が^0000FF"+$ATI_MAX_WIN_NAME$+"^000000の記録を";
 			mes "超える事を期待している～。";
 			close;
 		case 3:
 			mes "[クカ]";
 			mes "あっち向いてニャアの";
 			mes "ルールは簡単だよ～";
-			mes "" + strcharinfo(0) + "は私が振り向く方向と";
+			mes strcharinfo(0) + "は私が振り向く方向と";
 			mes "同じ方向に手を動かせればいいよ～。";
 			next;
 			cutin "g_cat_01.bmp", 4;
@@ -2906,7 +2906,7 @@ L_SENSEI:
 			while(1){
 				switch('@sensei){
 				case 0://後攻
-					mes "" + strcharinfo(0) + "(^FF0000"+'@ply_hp+"^000000/30)";
+					mes strcharinfo(0) + "(^FF0000"+'@ply_hp+"^000000/30)";
 					mes "--------------------------------";
 					mes "クンクン (^FF0000"+'@npc_hp+"^000000/30)";
 					next;
@@ -2969,7 +2969,7 @@ L_SENSEI:
 					}
 					break;
 				case 1://先制
-					mes "" + strcharinfo(0) + "(^FF0000"+'@ply_hp+"^000000/30)";
+					mes strcharinfo(0) + "(^FF0000"+'@ply_hp+"^000000/30)";
 					mes "--------------------------------";
 					mes "クンクン (^FF0000"+'@npc_hp+"^000000/30)";
 					next;
