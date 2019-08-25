@@ -2,86 +2,6 @@
 //Ragnarok Online - lasagna Town Script	by refis
 //====================================================================
 
-//------------------------------------------------------------
-// Spawn data
-//------------------------------------------------------------
-// lasa_fild01.gat
-lasa_fild01.gat,100,320,75,55	monster	エッグリン			3495,15,5000,0,1
-lasa_fild01.gat,100,320,75,55	monster	グラスファブル		3497,6,5000,0,1
-lasa_fild01.gat,100,320,75,55	monster	リーフルナティック	3496,6,5000,0,1
-lasa_fild01.gat,0,0,0,0		monster	エッグリン			3495,80,5000,0,1
-lasa_fild01.gat,0,0,0,0		monster	グラスファブル		3497,110,5000,0,1
-lasa_fild01.gat,0,0,0,0		monster	リーフルナティック	3496,110,5000,0,1
-lasa_fild01.gat,0,0,0,0		monster	ビッグエッグリン	3505,1,5400000,1800000,1
-//------------------------------------------------------------
-// lasa_fild02.gat
-lasa_fild02.gat,0,0,0,0	monster	ワイルドホーネット	3498,90,5000,0,0
-lasa_fild02.gat,0,0,0,0	monster	スウィートフロッグ	3499,100,5000,0,0
-lasa_fild02.gat,0,0,0,0	monster	ハンターウルフ		3500,100,5000,0,0
-lasa_fild02.gat,0,0,0,0	monster	偵察バジルリスク	3502,10,5000,0,0
-//------------------------------------------------------------
-// lasa_dun01.gat
-lasa_dun01.gat,0,0,0,0	monster	トランススポア		3501,30,5000,0,0
-lasa_dun01.gat,0,0,0,0	monster	偵察バジルリスク	3502,60,5000,0,0
-//------------------------------------------------------------
-// lasa_dun02.gat
-lasa_dun02.gat,0,0,0,0	monster	突撃赤バジルリスク	3503,195,5000,0,0
-lasa_dun02.gat,0,0,0,0	monster	ジャングルマンドラゴラ	3506,30,5000,0,0
-//------------------------------------------------------------
-// lasa_dun03.gat
-lasa_dun03.gat,0,0,0,0	monster	突撃緑バジルリスク	3504,240,5000,0,0
-lasa_dun03.gat,0,0,0,0	monster	フルーツポムスパイダー	3507,60,5000,0,0
-
-//------------------------------------------------------------
-// Monster data
-//------------------------------------------------------------
-// name: "エッグリン" speed: 400, view: 3495
-// noskill
-// name: "リーフルナティック" speed: 200, view: 3496
-// noskill
-// name: "グラスファブル" speed: 400, view: 3497
-// noskill
-// name: "ワイルドホーネット" speed: 150, view: 3498
-// 3498,ワイルドホーネット＠ピアーシングアタック,attack,158,2,500,0,5000,yes,target,always,0,,,,,,6
-// 3498,ワイルドホーネット＠ウィンドアタック,attack,187,2,2000,0,5000,yes,target,always,0,,,,,,
-// name: "スウィートフロッグ" speed: 200, view: 3499
-// 3499,スウィートフロッグ＠ウォーターアタック,attack,184,2,2000,0,5000,yes,target,always,0,,,,,,
-// name: "ハンターウルフ" speed: 300, view: 3500
-// 3500,ハンターウルフ＠エモーション,walk,197,1,2000,0,5000,yes,self,always,0,2,,,,,
-// 3500,ハンターウルフ＠ファイアーアタック,attack,186,1,2000,0,5000,yes,target,always,0,,,,,,
-// name: "トランススポア" speed: 200, view: 3501
-// 3501,トランススポア＠エモーション,idle,197,1,2000,0,5000,yes,self,always,0,1,,,,,
-// 3501,トランススポア＠プロボケイション,chase,194,1,200,0,5000,yes,self,always,0,,,,,,19
-// 3501,トランススポア＠スリープアタック,attack,182,1,500,0,5000,yes,target,always,0,,,,,,
-// 3501,トランススポア＠ウォーターアタック,attack,184,1,2000,0,5000,yes,target,always,0,,,,,,
-// name: "偵察バジルリスク" speed: 300, view: 3502
-// noskill
-// name: "突撃赤バジルリスク" speed: 250, view: 3503 amotion: 2245
-// 3503,突撃赤バジルリスク＠ラッシュアタック,idle,349,2,1000,0,30000,yes,self,always,0,,,,,,32
-// 3503,突撃赤バジルリスク＠コンボアタック,attack,171,3,500,0,5000,yes,target,always,0,,,,,,
-// 3503,突撃赤バジルリスク＠スタンアタック,attack,179,2,500,700,5000,no,target,always,0,,,,,,
-// name: "突撃緑バジルリスク" speed: 250, view: 3504
-// 3504,突撃緑バジルリスク＠ラッシュアタック,idle,349,2,1000,0,30000,yes,self,always,0,,,,,,32
-// 3504,突撃緑バジルリスク＠コンボアタック,attack,171,3,500,0,5000,yes,target,always,0,,,,,,
-// 3504,突撃緑バジルリスク＠スタンアタック,attack,179,2,500,700,5000,no,target,always,0,,,,,,
-// name: "ビッグエッグリン" 400,1889,672,462
-// 3505,ビッグエッグリン＠ブラッドドレイン,attack,199,1,2000,0,5000,yes,target,always,0,,,,,,
-// 3505,ビッグエッグリン＠エモーション,idle,197,1,500,0,30000,yes,self,always,0,2,,,,,
-// 3505,ビッグエッグリン＠アジリティアップ,idle,350,4,10000,0,10000,yes,self,always,0,,,,,,
-// 3505,ビッグエッグリン＠サモンスレイブ,attack,196,4,10000,2000,60000,no,self,slavele,0,3508,,,,,
-// 3505,ビッグエッグリン＠サモンスレイブ,idle,196,4,10000,2000,60000,no,self,slavele,0,3508,,,,,
-// name: "ジャングルマンドラゴラ" speed: 1000, view: 3506
-// 3506,ジャングルマンドラゴラ＠グラウンドアタック,attack,185,1,2000,0,5000,yes,target,always,0,,,,,,
-// name: "フルーツポムスパイダー" speed: 250, view: 3507
-// 3507,フルーツポムスパイダー＠ポイズンブロー,attack,176,2,500,800,5000,no,target,always,0,,,,,,
-// 3507,フルーツポムスパイダー＠スパイダーウェブ,idle,405,1,3000,0,10000,yes,anothertarget,always,0,,,,,,
-// 3507,フルーツポムスパイダー＠スパイダーウェブ,attack,405,1,2000,0,10000,yes,target,always,0,,,,,,
-// 3507,フルーツポムスパイダー＠ポイズンアタック,attack,188,1,500,0,5000,yes,target,always,0,,,,,,
-// 3507,フルーツポムスパイダー＠ベナムダスト,angry,140,1,500,1500,5000,no,target,always,0,,,,,,
-// 3507,フルーツポムスパイダー＠クァグマイア,chase,92,5,500,700,5000,yes,target,always,0,,,,,,12
-// 3507,フルーツポムスパイダー＠ブリーディングアタック,attack,660,2,1000,0,3000,yes,target,always,0,,,,,,32
-// name: "エッグリン" speed: 400, view: 3508
-
 /*
 lasagna.gat,141,249,4	script	武器商人ブルート#blutnp	10158,{
 	if(!checkquest(98999)) {
@@ -163,80 +83,10 @@ lasagna.gat,141,249,4	script	武器商人ブルート#blutnp	10158,{
 }
 */
 
-lasagna.gat,323,229,4	script	自警団員オリオ#do_su01	10155,{}
-lasagna.gat,318,229,4	script	ジンドウ#do_su02	10159,{}
-lasagna.gat,313,229,3	script	術師ゼロ#do_su02	735,{}
-lasagna.gat,328,229,4	script	シバ#do_su02	10160,{}
-lasagna.gat,300,242,4	script	カプラ職員#lasagna	117,5,5,{
-	cutin "kafra_01",2;
-	setarray '@code,1,2,20;
-	setarray '@price,0,0,0;
-	callfunc "KafraMain",1,0x1df,"lasagna.gat",298,239,"NULL",0,0,0,800,'@code,'@price;
-	close2;
-	cutin "kafra_01",255;
-	end;
-OnTouch:
-	if(DORAM_1QUE == 100) {
-		cutin "kafra_01.bmp", 2;
-		mes "[カプラ職員]";
-		mes "ドラムの新米冒険者さん、";
-		mes "こんにちは。";
-		mes "こちらはカプラサービスです。";
-		set DORAM_1QUE,0;
-		next;
-		cutin "kafra_01.bmp", 255;
-		mes "^009eff【インフォメーション】";
-		mes "各地にいるカプラサービスでは";
-		mes "位置セーブサービスや";
-		mes "倉庫サービス、";
-		mes "空間移動サービスなど、";
-		mes "冒険に必要なサポートを";
-		mes "受けることができます。^000000";
-		next;
-		cutin "do_su_025.bmp", 3;
-		mes "^009eff【インフォメーション】";
-		mes "倉庫サービスは所持している";
-		mes "アイテムを倉庫に預けることが";
-		mes "できます。";
-		mes "預けたアイテムは種別ごとの";
-		mes "タブに分けられて保管されます。^000000";
-		next;
-		cutin "do_su_026.bmp", 3;
-		mes "^009eff【インフォメーション】";
-		mes "倉庫に預けたアイテムは";
-		mes "別の場所の倉庫からも";
-		mes "取り出すことができます。";
-		mes "また、同じアカウント内の";
-		mes "別のキャラクターで";
-		mes "取り出すこともできます。^000000";
-		next;
-		cutin "kafra_01.bmp", 2;
-		mes "[カプラ職員]";
-		mes "自警団のオリオさんが";
-		mes "新米冒険者さんが来たら";
-		mes "自分のところに来るように";
-		mes "伝えて欲しいと言っていました。";
-		next;
-		mes "[カプラ職員]";
-		mes "オリオさんは";
-		mes "ここから南東の広場にいます。";
-		mes "今後の冒険の方法について";
-		mes "レクチャーするとのことですので、";
-		mes "直接会ってお話を聞いてみては";
-		mes "いかがでしょうか？";
-		next;
-		cutin "kafra_01.bmp", 255;
-		mes "^009eff【インフォメーション】";
-		mes "南東の広場にいる";
-		mes "オリオに話しかけましょう！^000000";
-		//setquest 98440;
-		//compquest 98440;
-		viewpoint 1, 323, 229, 1, 0xFF0000;
-		close;
-	}
-	end;
-}
-lasagna.gat,305,242,4	script	治療師ハル#lasagna	10164,{
+//============================================================
+// 治療師
+//============================================================
+lasagna.gat,305,242,4	script	治療師ハル	10164,{
 	set '@price,5000;
 
 	mes "[治療師ハル]";
@@ -289,25 +139,502 @@ lasagna.gat,305,242,4	script	治療師ハル#lasagna	10164,{
 	}
 	close;
 }
-lasagna.gat,346,249,4	script	美容師ロンカー#lasagna	10166,{
-	mes "[美容師ロンカー]";
-	mes "私のハサミはドラム専用よ！";
-	mes "人間は専門の人にお願いして頂戴～。";
+
+//============================================================
+// 転送NPC
+//============================================================
+lasagna.gat,203,324,5	script	エッグリン#do_tu02	10157,{
+	mes "[エッグリン]";
+	if(Job == Job_Summoner) {
+		mes "料理長から罰として";
+		mes "大量の雑用を押し付けられたんだ。";
+		mes "サボらなきゃやってられないよね。";
+	}
+	else {
+		mes "あー";
+		mes "良い天気だなー。";
+		mes "絶好のサボり日和だねえ。";
+	}
+	next;
+	mes "[エッグリン]";
+	mes "ん？";
+	mes "どこかに行きたいの？";
+	next;
+	switch(select("イズルード -> 0 z","マラン島 -> 0 z","行かない")) {
+	case 1:
+		warp "izlude.gat",194,180;
+		end;
+	case 2:
+		warp "malangdo.gat",217,85;
+		end;
+	case 3:
+		mes "[エッグリン]";
+		mes "あー眠いなあ。";
+		close;
+	}
+}
+
+//============================================================
+// Shop
+//============================================================
+lasagna.gat,312,259,5	shop	道具商人#lasagna	553,11602,515,567,601,602,610,656,525,611
+lasagna.gat,339,248,3	shop	婚礼品商人#lasagna	10163,744,745,2338,2206,7170,2613
+
+lasagna.gat,293,289,5	script	武具商人#do_su03	10162,{
+	mes "[武具商人]";
+	mes "いらっしゃい。";
+	mes "うちの品物は一級品ばかりだよ。";
+	mes "何を見ていくんだい？";
+	next;
+	switch(select("武器","防具","アクセサリー","消耗品","やめる")) {
+	case 1:
+		switch(select("物理タイプ","魔法タイプ","支援回復タイプ","やめる")) {
+		case 1:
+			switch(select("猫じゃらしの模型[1]","大きな猫じゃらしの模型[1]","繊細な猫じゃらしの模型[1]","精巧な猫じゃらしの模型[1]","黄色い猫じゃらしの模型[0]","やめる")) {
+			case 1: set '@itemid,26133; set '@price,500000; set '@dpoint,50; break;
+			case 2: set '@itemid,26127; set '@price,500000; set '@dpoint,50; break;
+			case 3: set '@itemid,26134; set '@price,1500000; set '@dpoint,100; break;
+			case 4: set '@itemid,26136; set '@price,15000000; set '@dpoint,150; break;
+			case 5: set '@itemid,26137; set '@price,100000000; set '@dpoint,1000; break;
+			case 6:
+				mes "[武具商人]";
+				mes "わかった。";
+				mes "気が変わったらまた来てね。";
+				close;
+			}
+			break;
+		case 2:
+			switch(select("トンボがとまった猫じゃらし[1]","トンボがとまった妙なる猫じゃらし[1]","トンボがとまった神妙な猫じゃらし[1]","トンボがとまった魔力の猫じゃらし[1]","トンボがとまった黄色い猫じゃらし[0]","やめる")) {
+			case 1: set '@itemid,26126; set '@price,500000; set '@dpoint,50; break;
+			case 2: set '@itemid,26129; set '@price,500000; set '@dpoint,50; break;
+			case 3: set '@itemid,26130; set '@price,1500000; set '@dpoint,100; break;
+			case 4: set '@itemid,26131; set '@price,15000000; set '@dpoint,150; break;
+			case 5: set '@itemid,26132; set '@price,100000000; set '@dpoint,1000; break;
+			case 6:
+				mes "[武具商人]";
+				mes "わかった。";
+				mes "気が変わったらまた来てね。";
+				close;
+			}
+			break;
+		case 3:
+			switch(select("長い回復の猫じゃらし[1]","豊富な回復の猫じゃらし[1]","やめる")) {
+			case 1: set '@itemid,26125; set '@price,500000; set '@dpoint,50; break;
+			case 2: set '@itemid,26124; set '@price,15000000; set '@dpoint,150; break;
+			case 3:
+				mes "[武具商人]";
+				mes "わかった。";
+				mes "気が変わったらまた来てね。";
+				close;
+			}
+			break;
+		case 4:
+			mes "[武具商人]";
+			mes "わかった。";
+			mes "気が変わったらまた来てね。";
+			close;
+		}
+		break;
+	case 2:
+		switch(select("ドラムスーツ[1]","高級ドラムスーツ[1]","特選ドラムスーツ[1]","ドラムシューズ[1]","高級ドラムシューズ[1]","特選ドラムシューズ[1]","ドラムケープ[1]","高級ドラムケープ[1]","特選ドラムケープ[1]","ドラムシールド[0]","やめる")) {
+		case 1: set '@itemid,15275; set '@price,1000000; set '@dpoint,100; break;
+		case 2: set '@itemid,15276; set '@price,10000000; set '@dpoint,1000; break;
+		case 3: set '@itemid,15277; set '@price,150000000; set '@dpoint,1500; break;
+		case 4: set '@itemid,22185; set '@price,1000000; set '@dpoint,100; break;
+		case 5: set '@itemid,22186; set '@price,10000000; set '@dpoint,1000; break;
+		case 6: set '@itemid,22187; set '@price,150000000; set '@dpoint,1500; break;
+		case 7: set '@itemid,20915; set '@price,1000000; set '@dpoint,100; break;
+		case 8: set '@itemid,20916; set '@price,10000000; set '@dpoint,1000; break;
+		case 9: set '@itemid,20917; set '@price,150000000; set '@dpoint,1500; break;
+		case 10: set '@itemid,28948; set '@price,10000000; set '@dpoint,1000; break;
+		case 11:
+			mes "[武具商人]";
+			mes "わかった。";
+			mes "気が変わったらまた来てね。";
+			close;
+		}
+		break;
+	case 3:
+		switch(select("物理タイプ","魔法タイプ","支援回復タイプ","やめる")) {
+		case 1:
+			switch(select("新鮮な草のネックレス[1]","ぽっちゃりミミズのお守り[1]","ウサギのお守り[1]","高級ウサギのお守り[1]","特選ウサギのお守り[1]","やめる")) {
+			case 1: set '@itemid,28577; set '@price,100000000; set '@dpoint,2000; break;
+			case 2: set '@itemid,28591; set '@price,300000000; set '@dpoint,2000; break;
+			case 3: set '@itemid,28586; set '@price,1000000; set '@dpoint,100; break;
+			case 4: set '@itemid,28587; set '@price,10000000; set '@dpoint,1000; break;
+			case 5: set '@itemid,28588; set '@price,500000000; set '@dpoint,5000; break;
+			case 6:
+				mes "[武具商人]";
+				mes "わかった。";
+				mes "気が変わったらまた来てね。";
+				close;
+			}
+			break;
+		case 2:
+			switch(select("魔力の草のネックレス[1]","光る枝のお守り[1]","葉のお守り[1]","高級葉のお守り[1]","特選葉のお守り[1]","やめる")) {
+			case 1: set '@itemid,28579; set '@price,100000000; set '@dpoint,2000; break;
+			case 2: set '@itemid,28589; set '@price,300000000; set '@dpoint,2000; break;
+			case 3: set '@itemid,28583; set '@price,1000000; set '@dpoint,100; break;
+			case 4: set '@itemid,28584; set '@price,10000000; set '@dpoint,1000; break;
+			case 5: set '@itemid,28585; set '@price,500000000; set '@dpoint,5000; break;
+			case 6:
+				mes "[武具商人]";
+				mes "わかった。";
+				mes "気が変わったらまた来てね。";
+				close;
+			}
+			break;
+		case 3:
+			switch(select("可愛い草のネックレス[1]","新鮮なマグロのお守り[1]","アジのお守り[1]","高級アジのお守り[1]","特選アジのお守り[1]","やめる")) {
+			case 1: set '@itemid,28578; set '@price,100000000; set '@dpoint,2000; break;
+			case 2: set '@itemid,28590; set '@price,300000000; set '@dpoint,2000; break;
+			case 3: set '@itemid,28580; set '@price,1000000; set '@dpoint,100; break;
+			case 4: set '@itemid,28581; set '@price,10000000; set '@dpoint,1000; break;
+			case 5: set '@itemid,28582; set '@price,500000000; set '@dpoint,5000; break;
+			case 6:
+				mes "[武具商人]";
+				mes "わかった。";
+				mes "気が変わったらまた来てね。";
+				close;
+			}
+			break;
+		case 4:
+			mes "[武具商人]";
+			mes "わかった。";
+			mes "気が変わったらまた来てね。";
+			close;
+		}
+		break;
+	case 4:
+		setarray '@itemname$[1],"おいしいイワシ 100個","カルーニャミルク","バジル","ラザーニャ特産缶詰","やめる";
+		set '@menu,select(printarray('@itemname$));
+		switch('@menu) {
+		case 1: set '@itemid,11601; set '@price,1000000; set '@dpoint,15; set '@num,100; break;
+		case 2: set '@itemid,22984; set '@price,100000; set '@dpoint,5; set '@num,1; break;
+		case 3: set '@itemid,22985; set '@price,100000; set '@dpoint,5; set '@num,1; break;
+		case 4: set '@itemid,23705; set '@price,100000; set '@dpoint,5; set '@num,1; break;
+		case 5:
+			mes "[武具商人]";
+			mes "わかった。";
+			mes "気が変わったらまた来てね。";
+			close;
+		}
+		mes "[武具商人]";
+		mes '@itemname$['@menu]+ "は";
+		mes "Zenyかドラムポイントで購入可能だ。";
+		if('@menu == 1) {
+			mes "ちなみに、^0000ffおいしいイワシ^000000だけは";
+			mes "^0000ff100個で1セット^000000の販売になるよ。";
+		}
+		mes "^ff0000所持ドラムポイント : " +DORAM_POINT+ "^000000";
+		next;
+		switch(select('@price+"Zenyで買う",'@dpoint+"ドラムポイントで買う","やめる")) {
+		case 1:
+			set '@dpoint,0;
+			break;
+		case 2:
+			set '@price,0;
+			break;
+		case 3:
+			mes "[武具商人]";
+			mes "わかった。";
+			mes "気が変わったらまた来てね。";
+			close;
+		}
+		mes "[武具商人]";
+		mes "了解した。";
+		mes '@itemname$['@menu]+ "を";
+		mes "何個（セット）購入するんだい？";
+		mes "止めたいときは「0」を入れてね。";
+		while(1) {
+			next;
+			input '@set;
+			if('@set == 0) {
+				mes "[武具商人]";
+				mes "了解したよ。";
+				mes "気が変わったらまた来てね。";
+				close;
+			}
+			if('@set < 0 || '@set > 1000) {
+				mes "[武具商人]";
+				mes "申し訳ないけど、1回の取引は";
+				mes "1000個以下にしてもらえるかな。";
+				continue;
+			}
+			break;
+		}
+		mes "[武具商人]";
+		mes "確認だけど、";
+		mes '@itemname$['@menu]+ "を";
+		mes '@set +"個（セット）";
+		if('@price)
+			mes ('@price*'@set) +"Zenyで買う";
+		else
+			mes ('@dpoint*'@set) +"ドラムポイントで買う";
+		mes "で良いんだね。";
+		next;
+		if(select("はい","いいえ") == 2) {
+			mes "[武具商人]";
+			mes "わかった。";
+			mes "気が変わったらまた来てね。";
+			close;
+		}
+		if('@price && '@price*'@set > Zeny) {
+			mes "[武具商人]";
+			mes "Zenyが足りないみたいだよ。";
+			mes "もう一度確認してもらえるかな。";
+			close;
+		}
+		if('@dpoint && '@dpoint*'@set > DORAM_POINT) {
+			mes "[武具商人]";
+			mes "ドラムポイントが";
+			mes "足りないみたいだよ。";
+			mes "もう一度確認してもらえるかな。";
+			close;
+		}
+		if(checkitemblank() == 0) {
+			mes "^009eff【インフォメーション】";
+			mes "これ以上多くの種類の";
+			mes "荷物を持つことが出来ません。";
+			mes "1個以上の空きを作ってください。^000000";
+			close;
+		}
+		if(checkweight('@itemid,'@num*'@set) == 0) {
+			set '@weight,getiteminfo('@itemid,6)/10 * '@num * '@set + 1;
+			mes "^009eff【インフォメーション】";
+			mes "これ以上多くの";
+			mes "荷物を持つことが出来ません。";
+			mes '@weight +"以上の";
+			mes "重量の空きを作ってください。^000000";
+			close;
+		}
+		if('@price)
+			set Zeny,Zeny - '@price*'@set;
+		if('@dpoint)
+			set DORAM_POINT,DORAM_POINT - '@dpoint*'@set;
+		getitem '@itemid,'@num*'@set;
+		mes "[武具商人]";
+		mes "お買い上げありがとうございます。";
+		mes "また来てくださいね。";
+		close;
+	case 5:
+		mes "[武具商人]";
+		mes "わかった。";
+		mes "気が変わったらまた来てね。";
+		close;
+	}
+	mes "[武具商人]";
+	mes getitemname('@itemid)+ "[" +getiteminfo('@itemid,10)+ "]は";
+	mes "Zenyかドラムポイントで購入可能だ。";
+	mes "^ff0000所持ドラムポイント : " +DORAM_POINT+ "^000000";
+	next;
+	switch(select('@price+"Zenyで買う",'@dpoint+"ドラムポイントで買う","やめる")) {
+	case 1:
+		set '@dpoint,0;
+		break;
+	case 2:
+		set '@price,0;
+		break;
+	case 3:
+		mes "[武具商人]";
+		mes "わかった。";
+		mes "気が変わったらまた来てね。";
+		close;
+	}
+	mes "[武具商人]";
+	mes "確認だけど、";
+	mes getitemname('@itemid)+ "[" +getiteminfo('@itemid,10)+ "]を";
+	if('@price)
+		mes '@price+"Zenyで買う";
+	else
+		mes '@dpoint+"ドラムポイントで買う";
+	mes "で良いんだね。";
+	next;
+	if(select("はい","いいえ") == 2) {
+		mes "[武具商人]";
+		mes "わかった。";
+		mes "気が変わったらまた来てね。";
+		close;
+	}
+	if('@price && '@price > Zeny) {
+		mes "[武具商人]";
+		mes "Zenyが足りないみたいだよ。";
+		mes "もう一度確認してもらえるかな。";
+		close;
+	}
+	if('@dpoint && '@dpoint > DORAM_POINT) {
+		mes "[武具商人]";
+		mes "ドラムポイントが";
+		mes "足りないみたいだよ。";
+		mes "もう一度確認してもらえるかな。";
+		close;
+	}
+	if(checkitemblank() == 0) {
+		mes "^009eff【インフォメーション】";
+		mes "これ以上多くの種類の";
+		mes "荷物を持つことが出来ません。";
+		mes "1個以上の空きを作ってください。^000000";
+		close;
+	}
+	if(checkweight('@itemid,1) == 0) {
+		set '@weight,getiteminfo('@itemid,6)/10 + 1;
+		mes "^009eff【インフォメーション】";
+		mes "これ以上多くの";
+		mes "荷物を持つことが出来ません。";
+		mes '@weight +"以上の";
+		mes "重量の空きを作ってください。^000000";
+		close;
+	}
+	if('@price)
+		set Zeny,Zeny - '@price;
+	if('@dpoint)
+		set DORAM_POINT,DORAM_POINT - '@dpoint;
+	getitem '@itemid, 1;
+	mes "[武具商人]";
+	mes "お買い上げありがとうございます。";
+	mes "また来てくださいね。";
 	close;
 }
-lasagna.gat,312,259,5	shop	道具商人#lasagna	553,11602,515,567,601,602,610,656,525,611
-lasagna.gat,293,289,5	script	武具商人#do_su03	10162,{}
-lasagna.gat,298,289,5	script	加工職人#do_su03	555,{}
-lasagna.gat,289,287,5	script	鍛冶職人#lasagna	561,{}
-lasagna.gat,346,244,6	script	スペシャルアイテム販売	73,{}
+
+lasagna.gat,298,289,5	script	加工職人#do_su03	555,{
+	mes "[加工職人]";
+	mes "いらっしゃい。";
+	mes "今日はどうしたんだい？";
+	next;
+	switch(select("アップグレード","アップグレード対応のリストを見る","やめる")) {
+	case 1:
+		mes "[加工職人]";
+		mes "アップグレードをご希望だね。";
+		mes "まずは説明をするよ。";
+		next;
+		mes "[加工職人]";
+		mes "君の装着している装備を";
+		mes "一段階上の装備に";
+		mes "アップグレードして渡すよ。";
+		mes "その際の注意点だけど、";
+		mes "精錬値が「0」に戻ってしまうから";
+		mes "よく考えてから利用してね。";
+		next;
+		mes "[加工職人]";
+		mes "^0000ff装着されているカードは";
+		mes "アップグレード後に対応する";
+		mes "スロットがあればそのまま";
+		mes "維持できるよ。^000000これが";
+		mes "僕の提供するアップグレードの";
+		mes "メリットさ。";
+		next;
+		mes "[加工職人]";
+		mes "ちなみに、アップグレードすると";
+		mes "元の装備に戻すことは";
+		mes "決してできないので、注意してね。";
+		next;
+		mes "[加工職人]";
+		mes "後、アップグレードの際に";
+		mes "手数料として相応のZenyか";
+		mes "ドラムポイントを頂くよ。";
+		while(1) {
+			next;
+			mes "[加工職人]";
+			mes "では、アップグレードしたい";
+			mes "装備を選んでくれるかな。";
+			next;
+			switch(select("少し考える","やめる")) {
+			case 1:
+				continue;
+			case 2:
+				mes "[加工職人]";
+				mes "そうかい。";
+				mes "必要になったら";
+				mes "また来てくれよな。";
+				close;
+			}
+		}
+	case 2:
+		mes "＜アップグレード交換対応リスト＞";
+		mes "ドラムスーツ[1]";
+		mes "→　高級ドラムスーツ[1]";
+		mes "　";
+		mes "高級ドラムスーツ[1]";
+		mes "→　特選ドラムスーツ[1]";
+		mes "　";
+		mes "ドラムシューズ[1]";
+		mes "→　高級ドラムシューズ[1]";
+		mes "　";
+		mes "高級ドラムシューズ[1]";
+		mes "→　特選ドラムシューズ[1]";
+		mes "　";
+		mes "ドラムケープ[1]";
+		mes "→　高級ドラムケープ[1]";
+		mes "　";
+		mes "高級ドラムケープ[1]";
+		mes "→　特選ドラムケープ[1]";
+		mes "　";
+		mes "アジのお守り[1]";
+		mes "→　高級アジのお守り[1]";
+		mes "　";
+		mes "高級アジのお守り[1]";
+		mes "→　特選アジのお守り[1]";
+		mes "　";
+		mes "葉のお守り[1]";
+		mes "→　高級葉のお守り[1]";
+		mes "　";
+		mes "高級葉のお守り[1]";
+		mes "→　特選葉のお守り[1]";
+		mes "　";
+		mes "ウサギのお守り[1]";
+		mes "→　高級ウサギのお守り[1]";
+		mes "　";
+		mes "高級ウサギのお守り[1]";
+		mes "→　特選ウサギのお守り[1]";
+		mes "　";
+		mes "繊細な猫じゃらしの模型[1]";
+		mes "→　精巧な猫じゃらしの模型[1]";
+		mes "　";
+		mes "長い回復の猫じゃらし[1]";
+		mes "→　豊富な回復の猫じゃらし[1]";
+		mes "　";
+		mes "トンボがとまった猫じゃらし[1]";
+		mes "→　トンボがとまった妙なる猫じゃらし[1]";
+		mes "　";
+		mes "大きな猫じゃらしの模型[1]";
+		mes "→　繊細な猫じゃらしの模型[1]";
+		mes "　";
+		mes "トンボがとまった妙なる猫じゃらし[1]";
+		mes "→　トンボがとまった神妙な猫じゃらし[1]";
+		mes "　";
+		mes "トンボがとまった神妙な猫じゃらし[1]";
+		mes "→　トンボがとまった魔力の猫じゃらし[1]";
+		mes "　";
+		mes "猫じゃらしの模型[1]";
+		mes "→　大きな猫じゃらしの模型[1]";
+		close;
+	case 3:
+		mes "[加工職人]";
+		mes "そうかい、残念だね。";
+		mes "また必要になったら";
+		mes "声をかけておくれ。";
+		close;
+	}
+}
+
+lasagna.gat,289,287,5	script	鍛冶職人#lasagna	561,{
+	callfunc "BlackSmith","鍛冶職人",21,23;
+	close;
+}
+
+//============================================================
+// 看板
+//============================================================
 lasagna.gat,321,242,4	script	看板#1lasagna	835,7,7,{
 	unittalk "北西側：道具商人　／　東側：髪型変更・スペシャルアイテム販売員",1;
 	end;
 }
+
 lasagna.gat,312,251,4	script	看板#2lasagna	835,7,7,{
 	unittalk "北西側：精錬・修理・ドラム武具販売・アップグレード",1;
 	end;
 }
+
 lasagna.gat,297,229,4	script	チュートリアル掲示板#01	857,{
 	mes "‐チュートリアルで学んだことが";
 	mes "　確認できる掲示板だ。";
@@ -720,7 +1047,72 @@ lasagna.gat,297,229,4	script	チュートリアル掲示板#01	857,{
 		}
 	}
 }
-lasagna.gat,235,198,5	script	ペロン団長#lasagna	10152,{
+
+//============================================================
+// 住民
+//============================================================
+lasa_fild01.gat,35,288,3	script	自警団員アジェニャー#la	10162,{
+	mes "[自警団員アジェニャー]";
+	if(Job == Job_Summoner) {
+		mes "お、無事に入団出来たか。";
+		mes "これからよろしくな！";
+	}
+	else {
+		mes "新大陸発見以来、";
+		mes "ラザーニャの町はお祭り騒ぎだ。";
+	}
+	close;
+}
+
+lasa_fild01.gat,60,322,3	script	自警団員アリオ#lasa_fil	10154,{
+	mes "[自警団員アリオ]";
+	if(Job == Job_Summoner) {
+		mes "ミッドガルドには行けたか？";
+		mes "大丈夫、君なら何が来ても";
+		mes "乗り越えていけるさ。";
+	}
+	else {
+		mes "私はアリオ。ここで自警団への";
+		mes "入団希望者のレクチャーをしている。";
+	}
+	close;
+}
+
+lasa_dun01.gat,29,146,5	script	自警団員#lasa_dun01	10162,{
+	mes "[自警団員]";
+	if(Job == Job_Summoner) {
+		mes "おや、冒険者さん。";
+		mes "タルトゥーフィに";
+		mes "会いに来たんですか？";
+	}
+	else {
+		mes "おや、新大陸の冒険者さんが";
+		mes "こんなところに何の用ですか？";
+	}
+	close;
+}
+
+lasa_dun03.gat,162,158,3	script	タルトゥーフィ	10161,{
+	mes "[タルトゥーフィ]";
+	if(Job == Job_Summoner) {
+		mes "やあ、この前は世話になったね。";
+		mes "もうミッドガルドには";
+		mes "行ったのかい？";
+		next;
+		mes "[タルトゥーフィ]";
+		mes "こっちはバジルリスクのやつらが";
+		mes "また騒ぎ出したみたいなんだ。";
+		mes "まったくうっとおしい連中だよ。";
+	}
+	else {
+		mes "君はミッドガルド大陸の冒険者？";
+		mes "良かったら面白い話でも";
+		mes "聞かせてよ。";
+	}
+	close;
+}
+
+lasagna.gat,235,198,5	script	ペロン団長	10152,{
 	mes "[ペロン団長]";
 	if(Job == Job_Summoner) {
 		mes "ミッドガルド大陸は";
@@ -735,7 +1127,8 @@ lasagna.gat,235,198,5	script	ペロン団長#lasagna	10152,{
 	}
 	close;
 }
-conch_in.gat,26,64,5	script	ガムベリー船長#conch_in	10153,{
+
+conch_in.gat,26,64,5	script	ガムベリー船長	10153,{
 	mes "[ガムベリー船長]";
 	if(Job == Job_Summoner) {
 		mes "そろそろ出航だ。";
@@ -747,7 +1140,8 @@ conch_in.gat,26,64,5	script	ガムベリー船長#conch_in	10153,{
 	}
 	close;
 }
-conch_in.gat,24,62,5	script	ステルロー#conch_in	10156,{
+
+conch_in.gat,24,62,5	script	ステルロー	10156,{
 	mes "[ステルロー]";
 	if(Job == Job_Summoner) {
 		mes "なんだ？";
@@ -759,7 +1153,8 @@ conch_in.gat,24,62,5	script	ステルロー#conch_in	10156,{
 	}
 	close;
 }
-conch_in.gat,181,61,5	script	甲板長#conch_in	421,{
+
+conch_in.gat,181,61,5	script	甲板長	421,{
 	mes "[甲板長]";
 	if(Job == Job_Summoner) {
 		mes "もう積み荷は全部片付いたぜ。";
@@ -772,7 +1167,8 @@ conch_in.gat,181,61,5	script	甲板長#conch_in	421,{
 	}
 	close;
 }
-conch_in.gat,181,58,3	script	操舵手#conch_in	561,{
+
+conch_in.gat,181,58,3	script	操舵手	561,{
 	mes "[操舵手]";
 	if(Job == Job_Summoner) {
 		mes "いよいよ出航か。";
@@ -785,7 +1181,8 @@ conch_in.gat,181,58,3	script	操舵手#conch_in	561,{
 	}
 	close;
 }
-conch_in.gat,186,57,3	script	料理長#conch_in	548,{
+
+conch_in.gat,186,57,3	script	料理長	548,{
 	mes "[料理長]";
 	if(Job == Job_Summoner) {
 		mes "もう腹が減ったのか？";
@@ -797,7 +1194,8 @@ conch_in.gat,186,57,3	script	料理長#conch_in	548,{
 	}
 	close;
 }
-conch_in.gat,122,61,5	script	船員#conch_in_01	559,{
+
+conch_in.gat,122,61,5	script	船員	559,{
 	mes "[船員]";
 	mes "新大陸には初めてですか？";
 	mes "一度も行って見たことない場所に";
@@ -810,7 +1208,8 @@ conch_in.gat,122,61,5	script	船員#conch_in_01	559,{
 	mes "そう感じます。";
 	close;
 }
-conch_in.gat,169,70,3	script	船員#conch_in_02	545,{
+
+conch_in.gat,169,70,3	script	船員	545,{
 	mes "[船員]";
 	mes "ステルロー一等航海士なら";
 	mes "地図にもない新大陸への航路を";
@@ -823,7 +1222,8 @@ conch_in.gat,169,70,3	script	船員#conch_in_02	545,{
 	mes "この船に乗っていなきゃ。";
 	close;
 }
-conch_in.gat,166,68,6	script	船員#conch_in_03	544,{
+
+conch_in.gat,166,68,6	script	船員	544,{
 	mes "[船員]";
 	mes "ミッドガルドも発見されたけど、";
 	mes "他にもあるかな？";
@@ -832,7 +1232,8 @@ conch_in.gat,166,68,6	script	船員#conch_in_03	544,{
 	mes "そんな場所あるかな？";
 	close;
 }
-lasagna.gat,226,181,3	script	カルルー#lasagna	548,{
+
+lasagna.gat,226,181,3	script	カルルー	548,{
 	mes "[カルルー]";
 	mes "カルーニャミルクの";
 	mes "主な材料を知っているか？";
@@ -847,7 +1248,8 @@ lasagna.gat,226,181,3	script	カルルー#lasagna	548,{
 	mes "カルーニャミルクになるんだ。";
 	close;
 }
-lasagna.gat,225,290,5	script	作業班長#lasagna	421,{
+
+lasagna.gat,225,290,5	script	作業班長	421,{
 	mes "[作業班長]";
 	mes "この仕事をやったことある？";
 	mes "すぐに覚えられる簡単な事だ。";
@@ -855,14 +1257,16 @@ lasagna.gat,225,290,5	script	作業班長#lasagna	421,{
 	mes "特に上手かったな。";
 	close;
 }
-lasagna.gat,139,299,3	script	イワシ漁船船長#lasagna	561,{
+
+lasagna.gat,139,299,3	script	イワシ漁船船長	561,{
 	mes "[イワシ漁船船長]";
 	mes "イワシ産業が";
 	mes "以前より落ち込んでいても";
 	mes "人手は常に不足している。";
 	close;
 }
-lasagna.gat,263,156,5	script	おばあちゃん#lasagna	554,{
+
+lasagna.gat,263,156,5	script	おばあちゃん	554,{
 	mes "[おばあちゃん]";
 	mes "昔のラザーニャは凄かった。";
 	mes "道も住民もボロボロ。";
@@ -884,7 +1288,8 @@ lasagna.gat,263,156,5	script	おばあちゃん#lasagna	554,{
 	mes "全部あの子たちが作ったんだ。";
 	close;
 }
-lasagna.gat,244,231,3	script	イワシ漁船員#lasagna	544,{
+
+lasagna.gat,244,231,3	script	イワシ漁船員	544,{
 	mes "[イワシ漁船員]";
 	mes "この黄色いチーズ道に沿って";
 	mes "歩いて行けば、";
@@ -892,7 +1297,8 @@ lasagna.gat,244,231,3	script	イワシ漁船員#lasagna	544,{
 	mes "いつかは戻りたい。";
 	close;
 }
-lasagna.gat,260,134,3	script	ラスムス#lasagna	546,{
+
+lasagna.gat,260,134,3	script	ラスムス	546,{
 	mes "[ラスムス]";
 	mes "この黄色いチーズ道は";
 	mes "自警団と猫の手サービスが";
@@ -902,7 +1308,8 @@ lasagna.gat,260,134,3	script	ラスムス#lasagna	546,{
 	mes "ラザーニャへ帰って来れる。";
 	close;
 }
-lasagna.gat,141,166,5	script	クルメ#lasagna	555,{
+
+lasagna.gat,141,166,5	script	クルメ	555,{
 	mes "[クルメ]";
 	mes "道を歩いていると悟ることがある。";
 	mes "この世界のどこからでも";
@@ -910,7 +1317,8 @@ lasagna.gat,141,166,5	script	クルメ#lasagna	555,{
 	mes "するということを。";
 	close;
 }
-lasagna.gat,233,174,5	script	酔っ払い#lasagna_01	561,{
+
+lasagna.gat,233,174,5	script	酔っ払い	561,{
 	mes "[飲み手]";
 	mes "カルーニャミルクは";
 	mes "ゆっくり混ぜてから飲まなきゃ。";
@@ -919,7 +1327,8 @@ lasagna.gat,233,174,5	script	酔っ払い#lasagna_01	561,{
 	mes "それはお子ちゃまのやることさ。";
 	close;
 }
-lasagna.gat,236,173,3	script	酔っ払い#lasagna_02	561,{
+
+lasagna.gat,236,173,3	script	酔っ払い	561,{
 	mes "[飲み手]";
 	mes "カルーニャミルクは";
 	mes "よく振ってから飲むのが一番だ。";
@@ -928,7 +1337,8 @@ lasagna.gat,236,173,3	script	酔っ払い#lasagna_02	561,{
 	mes "繊細な味を感じることができる。";
 	close;
 }
-lasagna.gat,200,278,5	script	心配そうなドラム#lasagn	559,{
+
+lasagna.gat,200,278,5	script	心配そうなドラム	559,{
 	emotion 54, "心配そうなドラム#lasagn";
 	mes "[心配そうなドラム]";
 	mes "最近、不法にイワシを獲る漁船に";
@@ -938,7 +1348,8 @@ lasagna.gat,200,278,5	script	心配そうなドラム#lasagn	559,{
 	mes "探しまわっているらしいですよ。";
 	close;
 }
-lasagna.gat,202,276,5	script	浮かれたドラム#lasagna	560,{
+
+lasagna.gat,202,276,5	script	浮かれたドラム	560,{
 	emotion 18, "浮かれたドラム#lasagna";
 	mes "[浮かれたドラム]";
 	mes "やった！";
@@ -948,40 +1359,46 @@ lasagna.gat,202,276,5	script	浮かれたドラム#lasagna	560,{
 	mes "イワシ漁船前に行かなきゃ！";
 	close;
 }
-lasagna.gat,209,301,3	script	ムスタチ#lasagna	10167,{
+
+lasagna.gat,209,301,3	script	ムスタチ	10167,{
 	mes "[ムスタチ]";
 	mes "新大陸に旅立つ前に";
 	mes "身だしなみを整えてみては？";
 	close;
 }
-lasagna.gat,236,179,5	script	ニャンクン#lasagna	10163,{
+
+lasagna.gat,236,179,5	script	ニャンクン	10163,{
 	mes "[ニャンクン]";
 	mes "困った事があるなら";
 	mes "自警団に頼んでみたら？";
 	close;
 }
-lasagna.gat,229,197,5	script	トス#lasagna	10164,{
-	emotion 22, "トス#lasagna";
+
+lasagna.gat,229,197,5	script	トス	10164,{
+	emotion 22;
 	mes "[トス]";
 	mes "やはり有名な場所だから人が多いな。";
 	close;
 }
-lasagna.gat,228,193,5	script	ポルト#lasagna	10163,{
-	emotion 32, "ポルト#lasagna";
+
+lasagna.gat,228,193,5	script	ポルト	10163,{
+	emotion 32;
 	mes "[ポルト]";
 	mes "ここに来たなら";
 	mes "カルーニャミルクは";
 	mes "飲んでおかないとな！";
 	close;
 }
-lasagna.gat,226,196,5	script	アラム#lasagna	10166,{
-	emotion 7, "アラム#lasagna";
+
+lasagna.gat,226,196,5	script	アラム	10166,{
+	emotion 7;
 	mes "[アラム]";
 	mes "きょろきょろしないの！";
 	mes "田舎者丸出しじゃない！";
 	close;
 }
-lasagna.gat,227,187,1	script	ヴォンゴロ#lasagna	544,{
+
+lasagna.gat,227,187,1	script	ヴォンゴロ	544,{
 	mes "[ヴォンゴロ]";
 	mes "こんにちは。";
 	mes "パブ「オーブン」へようこそ。";
@@ -1010,12 +1427,13 @@ lasagna.gat,227,187,1	script	ヴォンゴロ#lasagna	544,{
 	mes "魚屋さんまで走って";
 	mes "買いに行くんです。";
 	next;
-	emotion 54, "ヴォンゴロ#lasagna";
+	emotion 54;
 	mes "[ヴォンゴロ]";
 	mes "あーあ、本当に美味しいのに……。";
 	close;
 }
-lasagna.gat,232,187,6	script	フェットゥチーニャ#lasa	545,{
+
+lasagna.gat,232,187,6	script	フェットゥチーニャ	545,{
 	mes "[フェットゥチーニャ]";
 	mes "ここで働いてそれなりに経つけど、";
 	mes "未だに下っ端なので皿洗いは";
@@ -1035,13 +1453,14 @@ lasagna.gat,232,187,6	script	フェットゥチーニャ#lasa	545,{
 	mes "自警団と猫の手職員たちの泣き言、";
 	mes "新米冒険者たちからの相談等々……";
 	next;
-	emotion 28, "フェットゥチーニャ#lasa";
+	emotion 28;
 	mes "[フェットゥチーニャ]";
 	mes "24時間じゃ足りないです。";
 	mes "従業員を増やせばいいのに！";
 	close;
 }
-lasagna.gat,232,181,5	script	リンギュイーネ#lasagna	559,{
+
+lasagna.gat,232,181,5	script	リンギュイーネ	559,{
 	mes "[リンギュイーネ]";
 	mes "ここは自警団本部ですが、";
 	mes "冒険者が立ち寄っていく";
@@ -1073,41 +1492,49 @@ lasagna.gat,232,181,5	script	リンギュイーネ#lasagna	559,{
 	mes "冒険者も多いんですよ。";
 	close;
 }
+
 lasagna.gat,190,239,5	script	幼いニャンコ#lasagna_01	559,{
 	unittalk "幼いニャンコ : 私はこの遊び場の隊長だにゃ～。";
 	end;
 }
+
 lasagna.gat,180,230,7	script	幼いニャンコ#lasagna_02	560,{
 	unittalk "幼いニャンコ : ハァ……こんな幼稚なやつらとは一緒に遊べないにゃ～。";
 	end;
 }
+
 lasagna.gat,192,245,7	script	幼いニャンコ#lasagna_03	554,{
 	unittalk "幼いニャンコ : 毛糸の塊がひとつ、ななつ、ふたつ、むっつ……多いにゃ!!";
 	end;
 }
+
 lasagna.gat,184,234,5	script	幼いニャンコ#lasagna_04	422,{
 	unittalk "幼いニャンコ : これどうして転がらないにゃ～？転がるようにしてにゃ～。";
 	end;
 }
+
 lasagna.gat,186,231,3	script	幼いニャンコ#lasagna_05	10167,{
-	emotion 28, "幼いニャンコ#lasagna_05";
+	emotion 28;
 	unittalk "幼いニャンコ : シーソーに乗りながら一緒に遊びたいやつは集まれ～。";
 	end;
 }
-lasagna.gat,211,186,5	script	乗船案内員#lasagna	559,{
+
+lasagna.gat,211,186,5	script	乗船案内員	559,{
 	mes "[乗船案内員]";
 	mes "こんにちは！";
 	mes "新大陸に旅立つ船はここから北の";
 	mes "船着き場に停泊していますよ。";
 	close;
 }
-lasagna.gat,222,187,3	script	ボス#lasagna	548,{
+
+lasagna.gat,222,187,3	script	ボス	548,{
 	mes "[ボス]";
 	mes "なんだ？";
 	mes "あんたもカルーニャミルクかい？";
 	close;
 }
-lasagna.gat,202,291,3	script	自警団案内員#lasagna01	10162,{
+
+lasagna.gat,202,291,3	script	自警団案内員	10162,{
 	mes "[自警団案内員]";
 	mes "港町ラザーニャへようこそ！";
 	mes "助けが必要な時は";
@@ -1115,57 +1542,66 @@ lasagna.gat,202,291,3	script	自警団案内員#lasagna01	10162,{
 	mes "訪ねて下さい。";
 	close;
 }
-lasagna.gat,174,160,3	script	自警団案内員#lasagna02	10162,{
+
+lasagna.gat,174,160,3	script	自警団案内員	10162,{
 	mes "[自警団案内員]";
 	mes "こんにちは。";
 	mes "良い天気ですにゃ。";
 	close;
 }
-lasagna.gat,233,197,5	script	自警団員オリオ#lasagna	10155,{
+
+lasagna.gat,233,197,5	script	自警団員オリオ	10155,{
 	mes "[自警団員オリオ]";
 	mes "この方はファルファーレ自警団の";
 	mes "団長であるペロン様だ！";
 	close;
 }
-lasagna.gat,77,263,5	script	タルリー#lasagna	10166,{
+
+lasagna.gat,77,263,5	script	タルリー	10166,{
 	mes "[タルリー]";
 	mes "早く仕事を仕上げないと……";
 	mes "待ち合わせに間に合わないわ。";
 	close;
 }
-lasagna.gat,191,174,3	script	ゴルリ#lasagna	547,{
+
+lasagna.gat,191,174,3	script	ゴルリ	547,{
 	emotion 45, "ゴルリ#lasagna";
 	mes "[ゴルリ]";
 	mes "良い天気だにゃあ。";
 	close;
 }
-lasagna.gat,165,125,5	script	道具商人#lasagna	10163,{
+
+lasagna.gat,165,125,5	script	道具商人	10163,{
 	mes "[道具商人]";
 	mes "うちの息子はいったいどこまで";
 	mes "配達に行ったっていうんだ？";
 	close;
 }
-lasagna.gat,175,209,3	script	小物売り#lasagna	547,{
+
+lasagna.gat,175,209,3	script	小物売り	547,{
 	mes "[小物売り]";
 	mes "みんなバーで飲んでて誰も来ない。";
 	mes "暇だ……。";
 	close;
 }
-lasagna.gat,73,237,5	script	落ち着きたいドラム#lasa	544,{
+
+lasagna.gat,73,237,5	script	落ち着きたいドラム	544,{
 	mes "[落ち着きたいドラム]";
 	mes "この辺りは静かでいい……。";
 	mes "中心部は旅行者や酔っ払いが";
 	mes "うるさくてたまらん。";
 	close;
 }
-lasagna.gat,71,200,3	script	困っているドラム#lasagn	546,{
+
+lasagna.gat,71,200,3	script	困っているドラム	546,{
 	mes "[困っているドラム]";
 	mes "あれ？";
 	mes "今日は休みか。";
 	mes "どうしよう……。";
 	close;
 }
-lasagna.gat,61,115,3	script	快活なドラム#lasagna	560,{
+
+lasagna.gat,61,115,3	script	快活なドラム	560,{
 	mes "[快活なドラム]";
 	mes "俺は気になる物は";
 	mes "片っ端から調べる性格なんだ。";
@@ -1173,19 +1609,22 @@ lasagna.gat,61,115,3	script	快活なドラム#lasagna	560,{
 	mes "片っ端から調べちゃうぜ！";
 	close;
 }
-lasagna.gat,88,91,3	script	旅に出るドラム#lasagna	555,{
+
+lasagna.gat,88,91,3	script	旅に出るドラム	555,{
 	mes "[旅に出るドラム]";
 	mes "早く新大陸に行かないと！";
 	mes "野菜作ってる場合じゃねえ！";
 	close;
 }
-lasagna.gat,186,193,3	script	外から来たドラム#lasagn	553,{
+
+lasagna.gat,186,193,3	script	外から来たドラム	553,{
 	mes "[外から来たドラム]";
 	mes "ここがラザーニャかぁ！";
 	mes "よーし、やってやるぞー！";
 	close;
 }
-lasagna.gat,103,119,5	script	賢いドラム#lasagna	545,{
+
+lasagna.gat,103,119,5	script	賢いドラム	545,{
 	mes "[賢いドラム]";
 	mes "この世のすべての生命体は";
 	mes "属性を持っている。";
@@ -1197,26 +1636,28 @@ lasagna.gat,103,119,5	script	賢いドラム#lasagna	545,{
 	mes "ほう、そうきたか……。";
 	close;
 }
-lasagna.gat,140,269,3	script	繊細な長女#lasagna	10166,{
+
+lasagna.gat,140,269,3	script	繊細な長女	10166,{
 	mes "[ゴマー]";
 	mes "ねえ、ヨター！";
 	mes "ちゃんと片づけなさい！";
 	mes "そこに呪符の破片が落ちてるわよ！";
 	next;
-	emotion 6, "繊細な長女#lasagna";
+	emotion 6;
 	mes "[ゴマー]";
 	mes "ジョギー、";
 	mes "タンディが泣きそうじゃない！";
 	mes "少しはじっとしていられないの？";
 	next;
-	emotion 7, "繊細な長女#lasagna";
+	emotion 7;
 	mes "[ゴマー]";
 	mes "ああもう、集中できない！";
 	mes "弟たちの面倒を見ていると";
 	mes "一日があっという間に過ぎちゃうわ！";
 	close;
 }
-lasagna.gat,131,269,5	script	誠実な次男#lasagna	555,{
+
+lasagna.gat,131,269,5	script	誠実な次男	555,{
 	mes "[ヨター]";
 	mes "お父さん、お母さん、";
 	mes "無事に戻って来て下さい。";
@@ -1224,14 +1665,16 @@ lasagna.gat,131,269,5	script	誠実な次男#lasagna	555,{
 	mes "‐呟きながら何かを作っている‐";
 	close;
 }
-lasagna.gat,131,274,5	script	勇敢な三男#lasagna	10164,{
+
+lasagna.gat,131,274,5	script	勇敢な三男	10164,{
 	mes "[ジョギー]";
 	mes "ウィィィィン！";
 	mes "イヌハッカ爆撃のジョギーだぞ！";
 	mes "武器を捨てて投降しろ！";
 	close;
 }
-lasagna.gat,140,274,3	script	弱気な四男#lasagna	546,{
+
+lasagna.gat,140,274,3	script	弱気な四男	546,{
 	mes "[タンディ]";
 	mes "お姉ちゃんはよく怒るけど、";
 	mes "いつも綺麗にいられるように";
@@ -1243,7 +1686,7 @@ lasagna.gat,140,274,3	script	弱気な四男#lasagna	546,{
 	mes "タンディ言われた事は";
 	mes "ちゃんと聞くように努力してます。";
 	next;
-	emotion 28, "弱気な四男#lasagna";
+	emotion 28;
 	mes "[タンディ]";
 	mes "それでもヨター兄ちゃんは";
 	mes "笑顔を見せないし、";
@@ -1252,50 +1695,10 @@ lasagna.gat,140,274,3	script	弱気な四男#lasagna	546,{
 	mes "泣きたいです……。";
 	close;
 }
-lasagna.gat,339,248,3	shop	婚礼品商人#lasagna	10163,744,745,2338,2206,7170,2613
 
-lasagna.gat,347,261,4	script	自警団員オリオ#do_su99	10155,{}
-lasagna.gat,342,261,4	script	ジンドウ#do_su99	10159,{}
-lasagna.gat,337,261,3	script	術師ゼロ#do_su99	735,{}
-lasagna.gat,352,261,4	script	シバ#do_su99	10160,{}
-
-lasagna.gat,205,327,0	warp	warp03#lasagna	2,2,conch_in.gat,55,61
-conch_in.gat,59,62,0	warp	warp01#conch_in	2,2,lasagna.gat,205,324
-conch_in.gat,50,60,0	warp	warp02#conch_in	2,2,conch_in.gat,30,60
-conch_in.gat,36,60,0	warp	warp03#conch_in	2,2,conch_in.gat,54,60
-conch_in.gat,143,60,0	warp	warp04#conch_in	2,2,conch_in.gat,165,60
-conch_in.gat,159,60,0	warp	warp05#conch_in	2,2,conch_in.gat,138,60
-lasagna.gat,203,324,5	script	エッグリン#do_tu02	10157,{
-	mes "[エッグリン]";
-	if(Job == Job_Summoner) {
-		mes "料理長から罰として";
-		mes "大量の雑用を押し付けられたんだ。";
-		mes "サボらなきゃやってられないよね。";
-	}
-	else {
-		mes "あー";
-		mes "良い天気だなー。";
-		mes "絶好のサボり日和だねえ。";
-	}
-	next;
-	mes "[エッグリン]";
-	mes "ん？";
-	mes "どこかに行きたいの？";
-	next;
-	switch(select("イズルード -> 0 z","マラン島 -> 0 z","行かない")) {
-	case 1:
-		warp "izlude.gat",194,180;
-		end;
-	case 2:
-		warp "malangdo.gat",217,85;
-		end;
-	case 3:
-		mes "[エッグリン]";
-		mes "あー眠いなあ。";
-		close;
-	}
-}
-
+//============================================================
+// 住民
+//============================================================
 lasagna.gat,335,248,3	script	結婚コンパニオン#wedd	10162,{
 	mes "[アルコバレーノ]";
 	mes "こんにちは！";
@@ -1518,6 +1921,7 @@ lasagna.gat,335,248,3	script	結婚コンパニオン#wedd	10162,{
 		close;
 	}
 }
+
 lasagna.gat,332,277,3	script	司式者#wedd02	10152,{
 	mes "[ペペロンチーノ]";
 	mes "結婚される";
@@ -1527,20 +1931,32 @@ lasagna.gat,332,277,3	script	司式者#wedd02	10152,{
 	mes "神聖な儀式ですから。";
 	close;
 }
+
 lasagna.gat,334,277,3	script	リングボーイ#wedd01	546,{}
+
 lasagna.gat,329,250,5	script	フラワーガール#wedd02	546,{}
+
 lasagna.gat,334,250,3	script	子供#wedd03	546,{}
+
 lasagna.gat,331,270,0	script	#wedd01	139,{}
+
 lasagna.gat,331,262,0	script	#wedd02	139,{}
+
 lasagna.gat,331,254,0	script	#wedd03	139,{}
+
 lasagna.gat,329,272,5	script	子供#wedd04	546,{}
+
 lasagna.gat,334,272,3	script	子供#wedd05	546,{}
+
 lasagna.gat,329,267,5	script	子供#wedd06	546,{}
+
 lasagna.gat,334,267,3	script	子供#wedd07	546,{}
+
 lasagna.gat,329,262,5	script	子供#wedd08	546,{}
+
 lasagna.gat,334,262,3	script	子供#wedd09	546,{}
-lasagna.gat,200,300,3	script	結婚式場の案内#wedd01	10162,{}
-lasagna.gat,163,84,3	script	結婚式場の案内#wedd02	10162,{
+
+lasagna.gat,200,300,3	script	結婚式場の案内#wedd01	10162,{
 	mes "[結婚式場の案内]";
 	mes "こんにちは！　いい天気ですよね？";
 	mes "気持ちのいい日差しです。";
@@ -1615,6 +2031,8 @@ lasagna.gat,163,84,3	script	結婚式場の案内#wedd02	10162,{
 	warp "lasagna.gat",335,246;
 	end;
 }
+lasagna.gat,163,84,3	duplicate(結婚式場の案内#wedd01)	結婚式場の案内#wedd02	10162
+
 lasagna.gat,344,275,3	script	フローリン#wedd	10163,{
 	mes "[フローリン]";
 	mes "お花の香りがいいでしょう？";
@@ -1629,6 +2047,7 @@ lasagna.gat,344,275,3	script	フローリン#wedd	10163,{
 	mes "私の願いを込めたお花です。";
 	close;
 }
+
 lasagna.gat,320,268,7	script	シト#wedd	10166,{
 	mes "[シト]";
 	mes "新しい門出を迎える二人は、";
@@ -1640,6 +2059,7 @@ lasagna.gat,320,268,7	script	シト#wedd	10166,{
 	mes "幸福感に浸ってくれたら嬉しいです。";
 	close;
 }
+
 lasagna.gat,319,290,1	script	女性#wedd01	882,{
 	mes "[女性]";
 	mes "もし人生で一番の出来事が";
@@ -1671,6 +2091,7 @@ lasagna.gat,319,290,1	script	女性#wedd01	882,{
 	mes "永遠に一緒だよ。";
 	close;
 }
+
 lasagna.gat,320,291,3	script	男性#wedd01	881,{
 	mes "[女性]";
 	mes "ここの結婚式場、すっごくいいよね？";
@@ -1710,6 +2131,7 @@ lasagna.gat,320,291,3	script	男性#wedd01	881,{
 	mes "今すぐ行こう！　はやく！";
 	close;
 }
+
 lasagna.gat,316,206,5	script	女性#wedd02	958,{
 	mes "[女性]";
 	mes "ダーリンはどうして";
@@ -1739,6 +2161,7 @@ lasagna.gat,316,206,5	script	女性#wedd02	958,{
 	emotion 31, "男性#wedd02";
 	close;
 }
+
 lasagna.gat,317,205,1	script	男性#wedd02	962,{
 	mes "[男性]";
 	mes "ここが結婚式場らしい。";
@@ -1775,6 +2198,7 @@ lasagna.gat,317,205,1	script	男性#wedd02	962,{
 	misceffect 343, "男性#wedd02";
 	close;
 }
+
 lasagna.gat,346,237,5	script	父さん#wedd01	10164,{
 	mes "[父さん]";
 	mes "ジャジャーン!!";
@@ -1838,18 +2262,21 @@ lasagna.gat,346,237,5	script	父さん#wedd01	10164,{
 	emotion 28, "父さん#wedd01";
 	close;
 }
+
 lasagna.gat,347,235,7	script	母さん#wedd01	10148,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
+
 lasagna.gat,349,237,1	script	子ども#wedd01	10167,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
+
 lasagna.gat,302,323,3	script	ジャワイブ#wedd	10159,{
 	mes "[ジャワイブ]";
 	mes "新婚さんも、結婚された2人も、";
@@ -1891,85 +2318,5 @@ lasagna.gat,302,323,3	script	ジャワイブ#wedd	10159,{
 	mes "[ジャワイブ]";
 	mes "代わりに心躍る冒険の旅へ";
 	mes "出かけるのは如何ですか？";
-	close;
-}
-
-lasa_fild01.gat,35,288,3	script	自警団員アジェニャー#la	10162,{
-	mes "[自警団員アジェニャー]";
-	if(Job == Job_Summoner) {
-		mes "お、無事に入団出来たか。";
-		mes "これからよろしくな！";
-	}
-	else {
-		mes "新大陸発見以来、";
-		mes "ラザーニャの町はお祭り騒ぎだ。";
-	}
-	close;
-}
-lasa_fild01.gat,60,322,3	script	自警団員アリオ#lasa_fil	10154,{
-	mes "[自警団員アリオ]";
-	if(Job == Job_Summoner) {
-		mes "ミッドガルドには行けたか？";
-		mes "大丈夫、君なら何が来ても";
-		mes "乗り越えていけるさ。";
-	}
-	else {
-		mes "私はアリオ。ここで自警団への";
-		mes "入団希望者のレクチャーをしている。";
-	}
-	close;
-}
-
-lasa_fild01.gat,134,381,0	warp	warp01#lasa_fild01	2,2,lasagna.gat,153,58
-lasagna.gat,150,54,0		warp	warp01#lasagna	2,2,lasa_fild01.gat,131,378
-
-lasa_fild01.gat,341,375,0	warp	lasagna_in02	2,2,lasagna.gat,327,56
-lasagna.gat,327,51,0		warp	lasagna_out02	2,2,lasa_fild01.gat,344,371
-
-lasagna.gat,358,91,0		warp	warp02#lasagna	2,2,lasa_fild02.gat,20,98
-lasa_fild02.gat,16,98,0		warp	warp01#lasa_fild02	2,2,lasagna.gat,355,92
-
-lasa_fild02.gat,348,244,0	warp	warp02#lasa_fild02	2,2,lasa_dun01.gat,24,143
-lasa_dun01.gat,18,143,0		warp	warp01#lasa_dun01	2,2,lasa_fild02.gat,344,243
-
-lasa_dun01.gat,157,98,0	warp	warp02#lasa_dun01	2,2,lasa_dun02.gat,22,171
-lasa_dun02.gat,18,171,0	warp	warp01#lasa_dun02	2,2,lasa_dun01.gat,153,98
-
-lasa_dun02.gat,146,58,0	warp	warp02#lasa_dun02	2,2,lasa_dun03.gat,190,18
-lasa_dun03.gat,190,15,0	warp	warp01#lasa_dun03	2,2,lasa_dun02.gat,146,54
-
-lasa_dun01.gat,29,146,5	script	自警団員#lasa_dun01	10162,{
-	mes "[自警団員]";
-	if(Job == Job_Summoner) {
-		mes "おや、冒険者さん。";
-		mes "タルトゥーフィに";
-		mes "会いに来たんですか？";
-	}
-	else {
-		mes "おや、新大陸の冒険者さんが";
-		mes "こんなところに何の用ですか？";
-	}
-	close;
-}
-
-lasa_dun03.gat,247,194,0	script	object02#lasa_dun03	139,{}
-
-lasa_dun03.gat,162,158,3	script	タルトゥーフィ#lasa_dun	10161,{
-	mes "[タルトゥーフィ]";
-	if(Job == Job_Summoner) {
-		mes "やあ、この前は世話になったね。";
-		mes "もうミッドガルドには";
-		mes "行ったのかい？";
-		next;
-		mes "[タルトゥーフィ]";
-		mes "こっちはバジルリスクのやつらが";
-		mes "また騒ぎ出したみたいなんだ。";
-		mes "まったくうっとおしい連中だよ。";
-	}
-	else {
-		mes "君はミッドガルド大陸の冒険者？";
-		mes "良かったら面白い話でも";
-		mes "聞かせてよ。";
-	}
 	close;
 }
