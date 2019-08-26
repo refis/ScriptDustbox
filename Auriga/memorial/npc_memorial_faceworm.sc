@@ -2,6 +2,8 @@
 // Ragnarok Online Nest of Faceworm Script	by refis
 //==============================================================================
 
+22507,Old_Scroll,フェイヨン移動スクロール,2,1000,,10,,,,,2074075135,2,,,,,,{ switch(rand(8)){ case 0: warp "pay_dun04.gat",120,116; end; case 1: warp "payon_in03.gat",99,182; end; case 2: warp "payon_in02.gat",17,62; end; case 3: warp "payon_in01.gat",144,15; end; case 4: warp "pay_fild01.gat",141,211; end; case 5: warp "pay_fild04.gat",348,333; end; case 6: warp "pay_fild07.gat",200,186; end; case 7: warp "pay_fild10.gat",147,267; end; } },{}
+
 //============================================================
 // NPC
 //------------------------------------------------------------
@@ -29,47 +31,57 @@ payon.gat,157,54,5	script	年配の女性#pa0829	103,{/* 60507 */
 		mes "　なにかに喜ぶように";
 		mes "　小さく一瞬輝いた‐";
 		next;
-		mes "^0000ff‐指輪には小さな文字が書かれている。";
-		mes "[大切な君へ]‐^000000";
-		next;
-		mes "[年配の女性]";
-		mes "これは……！";
-		mes "あの人が私に贈ろうとしてくれた";
-		mes "指輪……。";
-		mes "名前は書いていないけれど";
-		mes "私が好きだった宝石ばかり";
-		mes "ちりばめられているわ。";
-		next;
-		mes "[年配の女性]";
-		mes "あの人、いなくなる前に";
-		mes "私の誕生石や私が好きな宝石をそりゃあ";
-		mes "うんざりするほど聞いてきたの。";
-		mes "だから、この指輪は";
-		mes "あの人が私のためにと用意してくれた";
-		mes "指輪に間違いないわ……。";
-		next;
-		mes "[年配の女性]";
-		mes "でもよく見つかったわね……？";
-		mes "ほぼ諦めかけていたくらいに";
-		mes "月日は経過していたはずよ。";
-		next;
-		mes "‐あなたは黙って頷いた‐";
-		next;
-		mes "[年配の女性]";
-		mes "あら……何か特別な";
-		mes "事情があるのかしら。";
-		mes "いいわ。";
-		mes "あなたは指輪を持ってきてくれた。";
-		mes "それだけで充分だわ。";
-		mes "本当に、ありがとう。";
-		next;
-		mes "[年配の女性]";
-		mes "これからは私……";
-		mes "あの人との思い出を大切にして";
-		mes "楽しく生きる事にするわ。";
-		next;
-		mes "‐^0000ffどこからか温かい気が感じられる^000000‐";
-		misceffect 72; //60051
+		if(checkquest(114655)&8) {
+			mes "[年配の女性]";
+			mes "あの人の指輪ね……。";
+			mes "この指輪が戻るとまるで";
+			mes "あの人がただいまって";
+			mes "いってくれている気がするのよ。";
+			mes "いつもありがとう。";
+		}
+		else {
+			mes "^0000ff‐指輪には小さな文字が書かれている。";
+			mes "[大切な君へ]‐^000000";
+			next;
+			mes "[年配の女性]";
+			mes "これは……！";
+			mes "あの人が私に贈ろうとしてくれた";
+			mes "指輪……。";
+			mes "名前は書いていないけれど";
+			mes "私が好きだった宝石ばかり";
+			mes "ちりばめられているわ。";
+			next;
+			mes "[年配の女性]";
+			mes "あの人、いなくなる前に";
+			mes "私の誕生石や私が好きな宝石をそりゃあ";
+			mes "うんざりするほど聞いてきたの。";
+			mes "だから、この指輪は";
+			mes "あの人が私のためにと用意してくれた";
+			mes "指輪に間違いないわ……。";
+			next;
+			mes "[年配の女性]";
+			mes "でもよく見つかったわね……？";
+			mes "ほぼ諦めかけていたくらいに";
+			mes "月日は経過していたはずよ。";
+			next;
+			mes "‐あなたは黙って頷いた‐";
+			next;
+			mes "[年配の女性]";
+			mes "あら……何か特別な";
+			mes "事情があるのかしら。";
+			mes "いいわ。";
+			mes "あなたは指輪を持ってきてくれた。";
+			mes "それだけで充分だわ。";
+			mes "本当に、ありがとう。";
+			next;
+			mes "[年配の女性]";
+			mes "これからは私……";
+			mes "あの人との思い出を大切にして";
+			mes "楽しく生きる事にするわ。";
+			next;
+			mes "‐^0000ffどこからか温かい気が感じられる^000000‐";
+			misceffect 72; //60051
+		}
 		next;
 		mes "[年配の女性]";
 		mes "あなたにもちゃんとした";
@@ -195,40 +207,60 @@ payon.gat,161,54,3	script	異国的な商人#pa0829	99,{/* 60508 */
 			mes "　声をかけるのをやめた‐";
 			close;
 		}
-		mes "[セルジオ]";
-		mes "このアルバムは……";
-		mes "まさか親父の？";
-		next;
-		mes "[セルジオ]";
-		mes "ああ、思い出しました。";
-		mes "これは親父と一緒に";
-		mes "仕事をしていた方です。";
-		next;
-		mes "[セルジオ]";
-		mes "おお、他の人たちも見覚えがある。";
-		mes "ありがとうございます。";
-		mes "大事にさせていただきます……。";
-		next;
-		mes "[セルジオ]";
-		mes "ですが……。";
-		mes "親父は交流が広かったので";
-		mes "ほかにもまだこのアルバムに";
-		mes "載っていない人がいるかも";
-		mes "しれません。";
-		next;
-		mes "[セルジオ]";
-		mes "もしまたアルバムを拾ったら";
-		mes "持ってきてくれませんか。";
-		mes "親父のことです。";
-		mes "他の人も撮影しているに";
-		mes "違いないですし。";
-		next;
-		mes "‐^0000ffアルバムを眺めていたセルジオの顔に";
-		mes "　寂しさと嬉しさが混ざった";
-		mes "　微笑みが広がった^000000‐";
-		next;
-		mes "‐^0000ff優しい気を感じる^000000‐";
-		misceffect 72; //60052
+		if(checkquest(114660)&8) {
+			mes "‐セルジオにまだ渡していない";
+			mes "　新しく見つかったアルバムを";
+			mes "　手渡した‐";
+			next;
+			mes "‐アルバムは少し色あせているが";
+			mes "　そこに写っている人の笑顔は";
+			mes "　色あせることなく写っている‐";
+			next;
+			mes "[セルジオ]";
+			mes "あなたのお陰でまた";
+			mes "親父との思い出を";
+			mes "取り戻すことができました。";
+			mes "ありがとうございます。";
+			next;
+			mes "‐優しい気があなたに力を";
+			mes "　吹き込んでくれた‐";
+		}
+		else {
+			mes "[セルジオ]";
+			mes "このアルバムは……";
+			mes "まさか親父の？";
+			next;
+			mes "[セルジオ]";
+			mes "ああ、思い出しました。";
+			mes "これは親父と一緒に";
+			mes "仕事をしていた方です。";
+			next;
+			mes "[セルジオ]";
+			mes "おお、他の人たちも見覚えがある。";
+			mes "ありがとうございます。";
+			mes "大事にさせていただきます……。";
+			next;
+			mes "[セルジオ]";
+			mes "ですが……。";
+			mes "親父は交流が広かったので";
+			mes "ほかにもまだこのアルバムに";
+			mes "載っていない人がいるかも";
+			mes "しれません。";
+			next;
+			mes "[セルジオ]";
+			mes "もしまたアルバムを拾ったら";
+			mes "持ってきてくれませんか。";
+			mes "親父のことです。";
+			mes "他の人も撮影しているに";
+			mes "違いないですし。";
+			next;
+			mes "‐^0000ffアルバムを眺めていたセルジオの顔に";
+			mes "　寂しさと嬉しさが混ざった";
+			mes "　微笑みが広がった^000000‐";
+			next;
+			mes "‐^0000ff優しい気を感じる^000000‐";
+			misceffect 72; //60052
+		}
 		next;
 		mes "[セルジオ]";
 		mes "本当にありがとうございました。";
@@ -294,7 +326,7 @@ payon.gat,161,50,1	script	強そうに見える男#pa0829	88,{/* 60509 */
 			mes "‐声をかけるのをやめた‐";
 			close;
 		}
-		if(checkquest(114665) & 0x8) {
+		if(checkquest(114665)&8) {
 			mes "‐強そうに見える男に";
 			mes "　新しく入手した薬袋を";
 			mes "　手渡した‐";
@@ -310,59 +342,53 @@ payon.gat,161,50,1	script	強そうに見える男#pa0829	88,{/* 60509 */
 			mes "届けていただいた薬袋の存在は";
 			mes "私にとって前に進むための";
 			mes "特効薬になりそうです。";
+		}
+		else {
+			mes "‐少し袋がくたびれた";
+			mes "　薬袋を強そうに見える男に";
+			mes "　錠剤がこぼれないように";
+			mes "　気をつけながら渡した‐";
 			next;
 			mes "[強そうに見える男]";
-			mes "それと……こんなものしかありませんが";
-			mes "ぜひ、憎き蛇を倒す為に";
-			mes "お役立てください。";
-			delitem 6653,1;
-			getitem RAND_FOOD,3;
-			close;
+			mes "これはまさか……!?";
+			mes "間違いない。";
+			mes "薬袋に見覚えのある字で";
+			mes "メモが書かれている……。";
+			mes "これをどうやって";
+			mes "入手したのですか？";
+			next;
+			mes "‐あなたは事情を伝えた‐";
+			next;
+			mes "[強そうに見える男]";
+			mes "この薬……この薬さえあったら……。";
+			next;
+			mes "‐^0000ff薬袋を握ったまま悲しんでいる。";
+			mes "　主従の関係を超えた何かが";
+			mes "　彼から感じ取られる^000000‐";
+			next;
+			mes "[強そうに見える男]";
+			mes "もし、また薬袋を手に入れたら";
+			mes "私の元に持ってきてください。";
+			mes "薬袋が届けば、あの蛇の数が";
+			mes "少しでも減った証になります。";
+			next;
+			mes "[強そうに見える男]";
+			mes "死んだあの方はもう戻りません。";
+			mes "ですが蛇が減れば、私と同じ";
+			mes "気持ちの方が減るかもしれない。";
+			mes "きっとそれがあの方への";
+			mes "供養にもなると思うのです。";
+			next;
+			mes "[強そうに見える男]";
+			mes "……そう考えたら少し";
+			mes "気持ちが楽になりました。";
+			mes "本当に、この薬袋をわざわざ";
+			mes "届けていただき、";
+			mes "ありがとうございました。";
+			next;
+			mes "‐^0000ff穏やかな気が感じられる^000000‐";
+			misceffect 72; //60053
 		}
-		mes "‐少し袋がくたびれた";
-		mes "　薬袋を強そうに見える男に";
-		mes "　錠剤がこぼれないように";
-		mes "　気をつけながら渡した‐";
-		next;
-		mes "[強そうに見える男]";
-		mes "これはまさか……!?";
-		mes "間違いない。";
-		mes "薬袋に見覚えのある字で";
-		mes "メモが書かれている……。";
-		mes "これをどうやって";
-		mes "入手したのですか？";
-		next;
-		mes "‐あなたは事情を伝えた‐";
-		next;
-		mes "[強そうに見える男]";
-		mes "この薬……この薬さえあったら……。";
-		next;
-		mes "‐^0000ff薬袋を握ったまま悲しんでいる。";
-		mes "　主従の関係を超えた何かが";
-		mes "　彼から感じ取られる^000000‐";
-		next;
-		mes "[強そうに見える男]";
-		mes "もし、また薬袋を手に入れたら";
-		mes "私の元に持ってきてください。";
-		mes "薬袋が届けば、あの蛇の数が";
-		mes "少しでも減った証になります。";
-		next;
-		mes "[強そうに見える男]";
-		mes "死んだあの方はもう戻りません。";
-		mes "ですが蛇が減れば、私と同じ";
-		mes "気持ちの方が減るかもしれない。";
-		mes "きっとそれがあの方への";
-		mes "供養にもなると思うのです。";
-		next;
-		mes "[強そうに見える男]";
-		mes "……そう考えたら少し";
-		mes "気持ちが楽になりました。";
-		mes "本当に、この薬袋をわざわざ";
-		mes "届けていただき、";
-		mes "ありがとうございました。";
-		next;
-		mes "‐^0000ff穏やかな気が感じられる^000000‐";
-		misceffect 72; //60053
 		next;
 		mes "[強そうに見える男]";
 		mes "それと……こんなものしかありませんが";
@@ -429,34 +455,47 @@ payon.gat,139,68,4	script	薄暗い男#pa0829	795,{/* 60510 */
 			mes "‐　今はそっとしておこう‐";
 			close;
 		}
-		mes "‐小さなイニシャルが彫られた";
-		mes "　少し古ぼけた腕輪を";
-		mes "　キットンに見せてみた";
-		next;
-		mes "^999999[キットン]";
-		mes "キットンの腕輪！^000000";
-		next;
-		mes "^999999[キットン]";
-		mes "嬉しい。腕輪戻った！";
-		mes "嬉しい!!^000000";
-		next;
-		mes "^999999[キットン]";
-		mes "でも友達。昔言った。";
-		mes "キットン好きな装飾。";
-		mes "わからない。";
-		mes "だからいっぱい作った。";
-		mes "腕輪いっぱい。^000000";
-		next;
-		mes "^999999[キットン]";
-		mes "だからもし。";
-		mes "腕輪。新しいの。";
-		mes "あなた見つけた。";
-		mes "キットンに届ける。";
-		mes "キットン腕輪増える。嬉しい。";
-		mes "お願い。^000000";
-		next;
-		mes "^0000ff‐キットンの魂がまぶしく光る‐^000000";
-		misceffect 247; //60054
+		if(checkquest(114670)&8) {
+			mes "‐キットンに拾った";
+			mes "　古ぼけた腕輪を";
+			mes "　手渡した‐";
+			next;
+			mes "^999999[キットン]";
+			mes "新しい腕輪。";
+			mes "友達思い出す。";
+			mes "友達増えた。気がする。";
+			mes "嬉しい。^000000";
+		}
+		else {
+			mes "‐小さなイニシャルが彫られた";
+			mes "　少し古ぼけた腕輪を";
+			mes "　キットンに見せてみた";
+			next;
+			mes "^999999[キットン]";
+			mes "キットンの腕輪！^000000";
+			next;
+			mes "^999999[キットン]";
+			mes "嬉しい。腕輪戻った！";
+			mes "嬉しい!!^000000";
+			next;
+			mes "^999999[キットン]";
+			mes "でも友達。昔言った。";
+			mes "キットン好きな装飾。";
+			mes "わからない。";
+			mes "だからいっぱい作った。";
+			mes "腕輪いっぱい。^000000";
+			next;
+			mes "^999999[キットン]";
+			mes "だからもし。";
+			mes "腕輪。新しいの。";
+			mes "あなた見つけた。";
+			mes "キットンに届ける。";
+			mes "キットン腕輪増える。嬉しい。";
+			mes "お願い。^000000";
+			next;
+			mes "^0000ff‐キットンの魂がまぶしく光る‐^000000";
+			misceffect 247; //60054
+		}
 		next;
 		mes "^999999[キットン]";
 		mes "キットン嬉しい。";
@@ -514,11 +553,12 @@ dali.gat,83,67,5	script	古い立て札#1	857,{/* 58022 */
 }
 
 dali.gat,80,60,4	script	魔法学者	755,{/* 58023 */
-	if(checkquest(12325) & 0x2) {
+	if(checkquest(12325)&2 && checkquest(118921)&2) {
 		mes "‐^0000ff次元移動の痕跡が消えました。";
 		mes "　次元移動機を再び利用することが";
 		mes "　可能になりました。^000000‐";
 		delquest 12325;
+		delquest 118921;
 		close;
 	}
 	mes "[魔法学者]";
@@ -536,7 +576,7 @@ dali.gat,80,60,4	script	魔法学者	755,{/* 58023 */
 			mes "また来てください。";
 			close;
 		}
-		if(checkquest(12325)) {
+		if(checkquest(12325) || checkquest(118921)) {
 			mes "[魔法学者]";
 			mes "次元移動はどうでしたか。";
 			mes "次元移動は体への負担も";
@@ -679,6 +719,14 @@ OnInit:
 }
 
 dali.gat,77,58,4	script	次元移動機	10007,{/* 58024 */
+	if(checkquest(12325)&2 && checkquest(118921)&2) {
+		mes "‐^0000ff次元移動の痕跡が消えました。";
+		mes "　次元移動機を再び利用することが";
+		mes "　可能になりました。^000000‐";
+		delquest 12325;
+		delquest 118921;
+		close;
+	}
 	if(getonlinepartymember() < 1) {
 		mes "[次元移動機]";
 		mes "次元移動機は、";
@@ -697,7 +745,7 @@ dali.gat,77,58,4	script	次元移動機	10007,{/* 58024 */
 		mes "BaseLv140以上の能力が必要です。";
 		close;
 	}
-	if(checkquest(12325)) {
+	if(checkquest(12325) || checkquest(118921)) {
 		mes "[次元移動機]";
 		mes "移動不可、移動不可。";
 		mes "次元移動の痕跡が残っています。";
@@ -1086,7 +1134,14 @@ OnKilled:
 	end;
 }
 
-1@face.gat,149,92,0	warp	#虫1入口	2,2,1@face.gat,127,95	//56421
+1@face.gat,149,92,0	script	#虫1入口	45,2,2,{
+	if(BaseLevel < 160)
+		getexp 10000000,0;
+	else
+		getexp 20000000,0;
+	warp getmdmapname("1@face.gat"),127,95;	//56421
+	end;
+}
 
 1@face.gat,120,97,6	script	ケイオス#1	683,{/* 56422 */
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
@@ -1268,7 +1323,14 @@ OnKilled:
 	end;
 }
 
-1@face.gat,139,100,0	warp	#虫2入口	2,2,1@face.gat,155,113	//56428
+1@face.gat,139,100,0	script	#虫2入口	45,2,2,{
+	if(BaseLevel < 160)
+		getexp 10000000,0;
+	else
+		getexp 20000000,0;
+	warp getmdmapname("1@face.gat"),155,113;	//56428
+	end;
+}
 
 1@face.gat,153,113,7	script	ケイオス#2	683,{/* 56429 */
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
@@ -1423,6 +1485,10 @@ OnKilled:
 	viewpoint 2, 1, 1, 4, 0xFFFFFF; //64054
 	viewpoint 2, 1, 1, 5, 0xFFFFFF; //64054
 	viewpoint 2, 1, 1, 6, 0xFFFFFF; //64054
+	if(BaseLevel < 160)
+		getexp 10000000,0;
+	else
+		getexp 20000000,0;
 	warp getmdmapname("1@face.gat"),261,170;
 	end;
 }
@@ -1549,7 +1615,14 @@ OnKilled:
 	end;
 }
 
-1@face.gat,204,122,0	warp	#虫4入口	2,2,1@face.gat,210,145	//56469
+1@face.gat,204,122,0	script	#虫4入口	45,2,2,{
+	if(BaseLevel < 160)
+		getexp 10000000,0;
+	else
+		getexp 20000000,0;
+	warp getmdmapname("1@face.gat"),210,145;	//56469
+	end;
+}
 
 1@face.gat,213,147,0	script	#ケイon2	139,3,3,{/* 56470 */
 OnTouch:
@@ -1801,7 +1874,7 @@ OnTimer5000:
 	donpcevent getmdnpcname("#女王虫4")+"::OnSpawn";
 	end;
 OnTimer6000:
-	set 'chaos,rand(5);
+	set 'chaos,rand(6);
 	switch('chaos) {
 	case 0:
 		announce "ケイオス : おい！　北の方に奴を誘え！　俺の一撃を見せてやる！", 0x9, 0xff44aa, 0x190, 18, 0, 0;
@@ -1827,7 +1900,7 @@ OnTimer6000:
 		hideoffnpc getmdnpcname("#ケイ_西"); //64077
 		hideoffnpc getmdnpcname("ケイオス#西"); //64081
 		end;
-	case 4:
+	case 4: case 5:
 		// dummy
 	}
 	end;
@@ -1853,7 +1926,7 @@ OnTimer21000:
 		hideonnpc getmdnpcname("#ケイ_西"); //64077
 		hideonnpc getmdnpcname("ケイオス#西"); //64081
 		end;
-	case 4:
+	case 4: case 5:
 		// dummy
 	}
 	end;
@@ -1975,6 +2048,10 @@ OnTalk3:
 	next;
 	if(select("やめる","外に出る") == 1)
 		close;
+	if(BaseLevel < 160)
+		getexp 20000000,0;
+	else
+		getexp 40000000,0;
 	warp "dali.gat",85,62;
 	end;
 }
@@ -2317,24 +2394,31 @@ OnTimer15000:
 			announce '@time/60+ "分" +'@time%60+ "秒を記録しましたが最短記録を更新する事はできませんでした。", 0x9, 0xffff33, 0x190, 12, 0, 0;
 		setarray '@card,4700,4710,4720,4730,4740,4750,4701,4711,4721,4731,4741,4751,4702,4712,4722,4732,4742,4752,4703,4713,4723,4733,4743,4753,4704,4714,4724,4734,4744,4754,4705,4715,4725,4735,4745,4755,4706,4716,4726,4736,4746,4756;
 		if('@time<271){
+			if(rand(100)<10)
+				set '@itemid,20718;
+			else
+				set '@itemid,20717;
 			set '@rate,rand(1,100);
 			set '@amount,rand(1,100)<=20?2:1;
 			if('@rate <= 20){
-				for(set '@i,0; '@i<'@amount; set '@i,'@i+1) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(9,10),0,0,rand(4853,4858),'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+				for(set '@i,0; '@i<'@amount; set '@i,'@i+1) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),'@itemid,1,0,0,rand(9,10),0,0,rand(4853,4858),'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
 			} else if('@rate <= 50){
-				for(set '@i,0; '@i<'@amount; set '@i,'@i+1) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(5,9),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+				for(set '@i,0; '@i<'@amount; set '@i,'@i+1) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),'@itemid,1,0,0,rand(5,9),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
 			} else {
-				for(set '@i,0; '@i<'@amount; set '@i,'@i+1) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(3,7),0,0,0,0,'@card[rand(getarraysize('@card))];
+				for(set '@i,0; '@i<'@amount; set '@i,'@i+1) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),'@itemid,1,0,0,rand(3,7),0,0,0,0,'@card[rand(getarraysize('@card))];
 			}
 		} else {
+			if(rand(100)<5)
+				set '@itemid,20718;
+			else
+				set '@itemid,20717;
 			set '@rate,rand(1,100);
-			if('@rate <= 5)	dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(9,10),0,0,rand(4853,4858),'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
-			 else if('@rate <= 25) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(5,9),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
-			 else dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),rand(20717,20718),1,0,0,rand(3,7),0,0,0,0,'@card[rand(getarraysize('@card))];
+			if('@rate <= 5)	dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),'@itemid,1,0,0,rand(9,10),0,0,rand(4853,4858),'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+			 else if('@rate <= 25) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),'@itemid,1,0,0,rand(5,9),0,0,0,'@card[rand(getarraysize('@card))],'@card[rand(getarraysize('@card))];
+			 else if('@rate <= 60) dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),'@itemid,1,0,0,rand(3,7),0,0,0,0,'@card[rand(getarraysize('@card))];
+			 else dropitem2 getmdmapname("1@face.gat"),213+rand(-2,2),155+rand(-2,2),'@itemid,1,0,0,rand(3,9),0,0,0,0,0;
 		}
 		break;
-		//dropitem 20717, 1;
-		//dropitem 20717, 1;
 		end;
 	case 2:
 		// ガーネット、時をこえた指輪、フェイヨン移動スクロール
@@ -2414,8 +2498,8 @@ OnTimer15000:
 		}
 		end;
 	}
-OnTimer1000:
-	if('flag < 8)
+OnTimer2000:
+	if('flag < 8 && rand(100) < 85)
 		hideoffnpc; //56495
 	end;
 }
