@@ -15,6 +15,9 @@ dali.gat,98,141,3	script	次元の狭間研究学者#a1	903,{/* 57290 */
 	}
 	if(checkquest(9315)) {
 		if(checkquest(9308)) {
+			delquest 9308;
+			setquest 9308; //state=1
+			delquest 9308;
 		}
 		if(checkquest(9309)) {
 			delquest 9309;
@@ -42,6 +45,43 @@ dali.gat,98,141,3	script	次元の狭間研究学者#a1	903,{/* 57290 */
 			mes "そうかそうか。";
 			mes "少し情報が足りないが";
 			mes "非常に助かったよ。";
+			next;
+			mes "[次元の狭間研究学者]";
+			mes "だがまだまだ足りない！";
+			mes "また私を助けて欲しいのだ。";
+			mes "狭間でゲフェン魔法大会について";
+			mes "調べてくれないか？";
+			mes "待っているよ。";
+			delquest 9315;
+			setquest 9315; //state=1
+			delquest 9315;
+			close;
+		}
+		{
+			delquest 9308;
+			setquest 9308; //state=1
+			delquest 9308;
+			setquest 9310; //state=1
+			delquest 9310;
+			setquest 9311; //state=1
+			delquest 9311;
+			setquest 9312; //state=1
+			delquest 9312;
+			setquest 9313; //state=1
+			delquest 9313;
+			setquest 9314; //state=1
+			delquest 9314;
+			mes "[次元の狭間研究学者]";
+			mes "無事に帰ってきたか！";
+			mes "さあ、どんなことがあったのだ？";
+			next;
+			mes "‐あなたは狭間での出来事を";
+			mes "　話してあげた‐";
+			next;
+			mes "[次元の狭間研究学者]";
+			mes "おおお！";
+			mes "そうかそうか！";
+			mes "ありがとう、ありがとう!!";
 			next;
 			mes "[次元の狭間研究学者]";
 			mes "だがまだまだ足りない！";

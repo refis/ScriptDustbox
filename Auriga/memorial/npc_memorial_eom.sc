@@ -185,6 +185,7 @@ moro_cav.gat,45,75,0	script	世界樹に似た樹#eom_gate	844,{/* 65387 */
 		announce "メモリアルダンジョン[end_of_morocc] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")", 0x9, 0x00ff99, 0x190, 12, 0, 0;
 		setquest 96435; //state=1
 		//warp "1@eom.gat",101,16;
+		//warp "1@eom_jp.gat",45,66;
 		end;
 	case 1:	// パーティー未加入
 	case 2:	// ダンジョン未作成
@@ -207,6 +208,17 @@ moro_cav.gat,45,75,0	script	世界樹に似た樹#eom_gate	844,{/* 65387 */
 	}
 OnInit:
 	waitingroom "魔神殿入場", 0; //65387
+	end;
+}
+1@eom_jp.gat,45,75,0	script	世界樹に似た樹#eom_jp_0	844,{/* 78251 */
+	delquest 7598;
+	delquest 73730;
+	setquest 7598; //state=1
+	setquest 73730; //state=1
+	warp getmdmapname("1@eom.gat"),101,16;
+	end;
+OnInit:
+	waitingroom "魔神殿入場",0; //78251
 	end;
 }
 
@@ -707,7 +719,8 @@ OnTalk3:
 1@eom.gat,22,116,3	script	#icemob02	844,{/* 61698 (hide)*/}
 1@eom.gat,53,134,5	script	#icemob03	844,{/* 61699 (hide)*/}
 1@eom.gat,38,129,3	script	ブリナラネア#brinpc01	3091,{/* 61700 (hide)*/}
-
+1@eom.gat,1,1,0	script	callmon#eom2	139,{
+}
 1@eom.gat,59,147,3	script	ニーズヘッグ#eomnyd02	510,{/* 61704 */
 	mes "[ニーズヘッグ]";
 	mes "この先は灼熱の溶岩地帯が";
@@ -731,16 +744,209 @@ OnTalk3:
 	end;
 }
 1@eom.gat,148,100,3	script	ロキ#flamewolf	512,{/* 61706 */}
-1@eom.gat,168,133,3	script	ムスペルスコール#npc	3092,{/* 61707 (hide)*/}
+1@eom.gat,168,133,3	script	ムスペルスコール#npc	3092,5,5,{/* 61707 (hide)*/
+	end;
+OnTouch:
+	if('flag)
+		end;
+	set 'flag,1;
+	initnpctimer;
+	announce "ムスペルスコール : ……先ほどぶりですね。アハトです。", 0x9, 0xff0000, 0x190, 14, 0, 0;
+	end;
+OnTimer3000:
+	announce "ムスペルスコール : 一度滅びた身にも関わらず、このような姿になり、またあなたと相対するとは……。", 0x9, 0xff0000, 0x190, 14, 0, 0;
+	end;
+OnTimer6000:
+	announce "ムスペルスコール : しかし、我が主の望みとあらば、再びこの身が果てるまで尽くしましょう。", 0x9, 0xff0000, 0x190, 14, 0, 0;
+	end;
+OnTimer9000:
+	announce "ムスペルスコール : さあ、参りましょう。私たちの運命に終止符を打つのです！", 0x9, 0xff0000, 0x190, 14, 0, 0;
+	end;
+OnTimer10000:
+	misceffect 225; //78187
+	hideonnpc; //78187
+	donpcevent getmdnpcname("callmon#eom3")+ "::OnStart";
+	announce "ムスペルスコール : 灼熱の炎よ、全てを燃やし尽くしなさい！", 0x9, 0xff0000, 0x190, 14, 0, 0;
+	end;
+OnTimer18000:
+	stopnpctimer;
+	announce "ロキ : ムスペルスコールが溶岩を利用して回復をしようとしているぞ！", 0x9, 0x00ff00, 0x190, 12, 0, 0;
+	end;
+}
+1@eom.gat,1,1,0	script	callmon#eom3	139,{
+OnStart:
+	set '@mdmap$,getmdmapname("1@eom.gat");
+	set '@event1$,getmdnpcname("callmon#eom3")+"::OnFlameWolf";
+	set '@event2$,getmdnpcname("callmon#eom3")+"::OnKilled";
+	set 'mob1,callmonster('@mdmap$,180,129,"ムスペルスコール#01",3092,'@event1$);
+	set '@mob2,callmonster('@mdmap$,162,130,"狂気のカーサ",3089,'@event2$);
+	set '@mob3,callmonster('@mdmap$,165,130,"狂気のカーサ",3089,'@event2$);
+	set '@mob4,callmonster('@mdmap$,168,130,"狂気のカーサ",3089,'@event2$);
+	set '@mob5,callmonster('@mdmap$,171,130,"狂気のカーサ",3089,'@event2$);
+	set '@mob6,callmonster('@mdmap$,174,130,"狂気のカーサ",3089,'@event2$);
+	set '@mob7,callmonster('@mdmap$,162,133,"狂気のカーサ",3089,'@event2$);
+	set '@mob8,callmonster('@mdmap$,165,133,"狂気のカーサ",3089,'@event2$);
+	set '@mob9,callmonster('@mdmap$,168,133,"狂気のカーサ",3089,'@event2$);
+	set '@mob10,callmonster('@mdmap$,171,133,"狂気のカーサ",3089,'@event2$);
+	set '@mob11,callmonster('@mdmap$,174,133,"狂気のカーサ",3089,'@event2$);
+	set 'maxhp,getmobhp('mob1);
+	end;
+OnLeftLavaHeal:
+	if('mob1 == 0) end;
+	unittalk 'mob1,"ムスペルスコール : 我が主の作りだした灼熱の炎を甘く見ないことです！";
+	set 'hp,getmobhp('mob1);
+	set '@dummy,removemonster('mob1);
+	set 'mob1,callmonster(getmdmapname("1@eom.gat"),'@x['@r],'@y['@r],"ムスペルスコール#01",3092,getmdnpcname("callmon#eom3")+"::OnFlameWolf");
+	setmobhp 'mob1,'hp;
+	end;
+OnRightLavaHeal:
+	if('mob1 == 0) end;
+	set 'hp,getmobhp('mob1);
+	set '@dummy,removemonster('mob1);
+	set 'mob1,callmonster(getmdmapname("1@eom.gat"),180,129,"ムスペルスコール#01",3092,getmdnpcname("callmon#eom3")+"::OnFlameWolf");
+	setmobhp 'mob1,'hp;
+	end;
+OnWarpReturn:
+	if('mob1 == 0) end;
+	set 'hp,getmobhp('mob1);
+	set '@dummy,removemonster('mob1);
+	set 'mob1,callmonster(getmdmapname("1@eom.gat"),'@x['@r],'@y['@r],"ムスペルスコール#01",3092,getmdnpcname("callmon#eom3")+"::OnFlameWolf");
+	setmobhp 'mob1,'hp;
+	end;
+OnHellBurning1:
+	mobuseskill 'mob1,724,1,0,0,0,0;	// ファイアストーム
+	end;
+OnHellBurning2:
+	mobuseskill 'mob1,724,3,0,0,0,0;	// ファイアストーム
+	set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob);
+	sleep 2000;
+	mobuseskillpos 'mob1,80,10,'@x-2,'@y+2,0,0,0,0;	// ファイアーピラー
+	sleep 2000;
+	mobuseskillpos 'mob1,80,10,'@x+2,'@y+2,0,0,0,0;	// ファイアーピラー
+	sleep 2000;
+	mobuseskillpos 'mob1,80,10,'@x-2,'@y-2,0,0,0,0;	// ファイアーピラー
+	sleep 2000;
+	mobuseskillpos 'mob1,80,10,'@x+2,'@y-2,0,0,0,0;	// ファイアーピラー
+	end;
+OnHellBurning2:
+33	spawn10000
+39	回復出現	announce "ロキ : ムスペルスコールが溶岩を利用して回復をしようとしているぞ！", 0x9, 0x00ff00, 0x190, 12, 0, 0;
+42	退避
+46 出現			unittalk 'mob1,"ムスペルスコール : さすが、一度は私を倒しただけのことはありますね。ですが、まだです!!";
+58 獄炎 1		unittalk 'mob1,"ムスペルスコール : 灼熱の海に飲まれなさい！";
+100 回復退避	unittalk 'mob1,"ムスペルスコール : 我が主の作りだした灼熱の炎を甘く見ないことです！";
+101	回復出現	announce "ロキ : ムスペルスコールが溶岩を利用して回復をしようとしているぞ！", 0x9, 0x00ff00, 0x190, 12, 0, 0;
+103	退避
+107 出現		unittalk 'mob1,"ムスペルスコール : さすが、一度は私を倒しただけのことはありますね。ですが、まだです!!";
+121 回復退避	unittalk 'mob1,"ムスペルスコール : 我が主の作りだした灼熱の炎を甘く見ないことです！";
+142 獄炎 1		unittalk 'mob1,"ムスペルスコール : 灼熱の海に飲まれなさい！";
+210 獄炎 1		unittalk 'mob1,"ムスペルスコール : 灼熱の海に飲まれなさい！";
+243 		unittalk 'mob1,"ムスペルスコール : 灼熱の海に抱かれなさい！";	//60%以下
+244 獄炎 1
+246 左上FP
+248 右上FP
+250 左下FP
+252 右下FP
+322 		unittalk 'mob1,"ムスペルスコール : 灼熱の海に飲まれなさい！";
+323 獄炎 1
+335 		unittalk 'mob1,"ムスペルスコール : 灼熱の海に抱かれなさい！";	//60%以下
+336 獄炎 1
+338 左上FP
+340 右上FP
+342 左下FP
+344 右下FP
+414 		unittalk 'mob1,"ムスペルスコール : 灼熱の海に抱かれなさい！";	//60%以下
+415 獄炎 1
+504 		unittalk 'mob1,"ムスペルスコール : 灼熱の海に抱かれなさい！";	//60%以下
 
-1@eom.gat,154,119,0	script	流れる溶岩#lavapond01	844,{/* 61714 */}
-1@eom.gat,154,119,0	script	固まった溶岩#01	844,{/* 61715 (hide)*/}
-1@eom.gat,161,122,0	script	#lavazone11	139,{/* 61716 */}
-1@eom.gat,161,102,0	script	#lavazone12	139,{/* 61717 */}
-1@eom.gat,182,129,0	script	流れる溶岩#lavapond02	844,{/* 61718 */}
-1@eom.gat,182,129,0	script	固まった溶岩#02	844,{/* 61719 (hide)*/}
-1@eom.gat,163,150,0	script	#lavazone21	139,{/* 61720 (hide)*/}
-1@eom.gat,163,150,0	script	#lavazone22	139,{/* 61721 (hide)*/}
+@spawn(type: BL_MOB, ID: 12328, speed: 100, option: 0, view: 3092, pos: "0ev1@eom.gat"(168, 121), dir: 0, name: "ムスペルスコール#01")
+@spawn(type: BL_MOB, ID: 12570, speed: 100, option: 0, view: 3092, pos: "0ev1@eom.gat"(180, 129), dir: 0, name: "ムスペルスコール#01")
+
+}
+1@eom.gat,154,119,0	script	流れる溶岩#lavapond01	844,{/* 61714 */
+	if(countitem(22566) == 0) {
+		// 未調査
+		end;
+	}
+	mes "‐永久霜で流れ出す溶岩を";
+	mes "　止めることができます‐";
+	next;
+	if(select("霜を使用する","使用しない") == 2) {
+		// 未調査
+		close;
+	}
+	delitem 22566,1;
+	stopnpctimer;
+	donpcevent getmdnpcname("固まった溶岩#01")+ "::OnStart";
+	close;
+OnTimer3000:
+	initnpctimer;
+	misceffect 97;
+	end;
+}
+1@eom.gat,154,119,0	script	固まった溶岩#01	844,{/* 61715 (hide)*/
+	end;
+OnStart:
+	initnpctimer;
+	hideonnpc getmdnpcname("流れる溶岩#lavapond01"); //78194
+	hideoffnpc getmdnpcname("固まった溶岩#01"); //78195
+	hideonnpc getmdnpcname("#lavazone11"); //78196
+	hideonnpc getmdnpcname("#lavazone12"); //78197
+	hideonnpc getmdnpcname("ロキ#flamewolf"); //78186
+	end;
+OnTimer180000:
+	stopnpctimer;
+	announce "ロキ : 霜の効果が切れたか……。また溶岩が流れ始めたぞ！", 0x9, 0x00ff00, 0x190, 12, 0, 0;
+	hideonnpc getmdnpcname("固まった溶岩#01"); //78195
+	hideoffnpc getmdnpcname("流れる溶岩#lavapond01"); //78194
+	hideoffnpc getmdnpcname("#lavazone11"); //78196
+	hideoffnpc getmdnpcname("#lavazone12"); //78197
+	end;
+}
+1@eom.gat,161,122,0	script	#lavazone11	139,10,10,{/* 61716 */}
+1@eom.gat,161,102,0	script	#lavazone12	139,10,10,{/* 61717 */}
+1@eom.gat,182,129,0	script	流れる溶岩#lavapond02	844,{/* 61718 */
+	if(countitem(22566) == 0) {
+		// 未調査
+		end;
+	}
+	mes "‐永久霜で流れ出す溶岩を";
+	mes "　止めることができます‐";
+	next;
+	if(select("霜を使用する","使用しない") == 2) {
+		// 未調査
+		close;
+	}
+	delitem 22566,1;
+	stopnpctimer;
+	donpcevent getmdnpcname("固まった溶岩#02")+ "::OnStart";
+	close;
+OnTimer3000:
+	initnpctimer;
+	misceffect 97;
+	end;
+}
+1@eom.gat,182,129,0	script	固まった溶岩#02	844,{/* 61719 (hide)*/
+	end;
+OnStart:
+	initnpctimer;
+	hideonnpc getmdnpcname("流れる溶岩#lavapond02"); //78194
+	hideoffnpc getmdnpcname("固まった溶岩#02"); //78195
+	hideonnpc getmdnpcname("#lavazone21"); //78196
+	hideonnpc getmdnpcname("#lavazone22"); //78197
+	hideonnpc getmdnpcname("ロキ#flamewolf"); //78186
+	end;
+OnTimer180000:
+	stopnpctimer;
+	announce "ロキ : 霜の効果が切れたか……。また溶岩が流れ始めたぞ！", 0x9, 0x00ff00, 0x190, 12, 0, 0;
+	hideonnpc getmdnpcname("固まった溶岩#02"); //78195
+	hideoffnpc getmdnpcname("流れる溶岩#lavapond02"); //78194
+	hideoffnpc getmdnpcname("#lavazone21"); //78196
+	hideoffnpc getmdnpcname("#lavazone22"); //78197
+	end;
+}
+1@eom.gat,163,150,0	script	#lavazone21	139,10,10,{/* 61720 (hide)*/}
+1@eom.gat,163,150,0	script	#lavazone22	139,10,10,{/* 61721 (hide)*/}
 1@eom.gat,151,155,3	script	ロキ#flameend	512,{/* 61722 */
 	mes "[ロキ]";
 	mes "……侮っていたな。";
@@ -816,17 +1022,89 @@ OnTalk3:
 1@eom.gat,101,194,3	script	#morocc_god	3097,{/* 60803 (hide)*/}
 1@eom.gat,101,194,0	script	#moc_quest	139,{/* 60807 (hide)*/}
 1@eom.gat,102,197,3	script	絶望の神モロク#04	3097,{/* 60808 (hide)*/}
-1@eom.gat,104,194,1	script	ロキ#eomnyd04	512,{/* 60809 (hide)*/}
-1@eom.gat,99,194,7	script	ニーズヘッグ#eomnyd04	510,{/* 60810 (hide)*/}
-1@eom.gat,48,88,0	script	冷たい魔力の結晶#eom01	10043,{/* 60811 */}
-1@eom.gat,51,103,0	script	冷たい魔力の結晶#eom02	10043,{/* 60812 */}
-1@eom.gat,24,109,0	script	冷たい魔力の結晶#eom03	10043,{/* 60813 */}
-1@eom.gat,26,128,0	script	冷たい魔力の結晶#eom04	10043,{/* 60814 */}
-1@eom.gat,40,140,0	script	冷たい魔力の結晶#eom05	10043,{/* 60815 (hide)*/}
-1@eom.gat,38,139,0	script	冷たい魔力の結晶#eom06	10043,{/* 60816 (hide)*/}
-1@eom.gat,51,149,0	script	冷たい魔力の結晶#eom07	10043,{/* 60817 */}
-1@eom.gat,49,148,0	script	冷たい魔力の結晶#eom08	10043,{/* 60818 */}
-1@eom.gat,27,100,0	script	冷たい魔力の結晶#eom09	10043,{/* 60819 */}
-1@eom.gat,32,94,0	script	冷たい魔力の結晶#eom10	10043,{/* 60820 */}
-1@eom.gat,60,140,0	script	冷たい魔力の結晶#eom11	10043,{/* 60821 (hide)*/}
-1@eom.gat,54,97,0	script	冷たい魔力の結晶#eom12	10043,{/* 60822 */}
+1@eom.gat,104,194,1	script	ロキ#eomnyd04	512,{/* 60809 (hide)*/
+	mes "[ロキ]";
+	mes "魔王モロクの最期か。";
+	mes "長かった因縁もこれまでだ。";
+	cutin "ep14_roki01.bmp", 2;
+	close2;
+	cutin "ep14_roki01.bmp", 255;
+	end;
+}
+1@eom.gat,99,194,7	script	ニーズヘッグ#eomnyd04	510,{/* 60810 (hide)*/
+	mes "[ニーズヘッグ]";
+	mes "……これでやっと";
+	mes "魔王モロクの企みを";
+	mes "本当の意味で止めることが";
+	mes "出来ました。";
+	mes "ありがとうございます。";
+	cutin "ep14_nyd03.bmp", 2;
+	next;
+	mes "[ニーズヘッグ]";
+	mes "ここは彼の作りだした精神世界。";
+	mes "彼は身体を失ってもなお";
+	mes "この空間を永遠に彷徨い、";
+	mes "あがき続けるでしょう。";
+	cutin "ep14_nyd02.bmp", 2;
+	next;
+	mes "[ニーズヘッグ]";
+	mes "そしてまた、ここに来る全ての人が";
+	mes "今日のような出来事を繰り返します。";
+	next;
+	mes "[ニーズヘッグ]";
+	mes "今日の絶望を明日も。";
+	mes "そしてその明日もまた明日も……。";
+	mes "幾度となく続けるでしょう。";
+	next;
+	mes "[ニーズヘッグ]";
+	mes "私たちはそれを知っていても、";
+	mes "その同じ道をまた歩くでしょう。";
+	mes "その度に私は、";
+	mes "守護者としてあなたの側に……。";
+	cutin "ep14_nyd03.bmp", 2;
+	next;
+	cutin "ep14_nyd04.bmp", 2;
+	mes "[ニーズヘッグ]";
+	mes "話が長くなりました。";
+	mes "司令官が待っていますよね？";
+	mes "今回の件の報告をお願いします。";
+	mes "本当にありがとうございました。";
+	next;
+	mes "‐^ff0000これ以降、魔神殿に入ることは";
+	mes "　できなくなります。";
+	mes "　司令官アジフに報告してから、";
+	mes "　1回目の午前5時以降に、";
+	mes "　再度魔神殿に入ることが";
+	mes "　できるようになります^000000‐";
+	setquest 7597; //state=1
+	delquest 7593;
+	setquest 116545; //state=1
+	compquest 116545;
+	next;
+	menu "外に出る",-;
+	mes "[ニーズヘッグ]";
+	mes "遠征隊員がいる場所までお送りします。";
+	cutin "ep14_nyd04.bmp", 2;
+	close2;
+	cutin "ep14_nyd04.bmp", 255;
+	warp "morovol.gat",91,87;
+	end;
+}
+
+1@eom.gat,48,88,0	script	冷たい魔力の結晶#eom01	10043,{/* 60811 */
+	misceffect 362;
+	hideonnpc;
+	getitem 22566,1;
+	end;
+}
+1@eom.gat,51,103,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom02	10043
+1@eom.gat,24,109,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom03	10043
+1@eom.gat,26,128,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom04	10043
+1@eom.gat,40,140,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom05	10043
+1@eom.gat,38,139,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom06	10043
+1@eom.gat,51,149,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom07	10043
+1@eom.gat,49,148,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom08	10043
+1@eom.gat,27,100,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom09	10043
+1@eom.gat,32,94,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom10	10043
+1@eom.gat,60,140,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom11	10043
+1@eom.gat,54,97,0	duplicate(冷たい魔力の結晶#eom01)	冷たい魔力の結晶#eom12	10043
