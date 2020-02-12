@@ -1804,29 +1804,59 @@ OnStop:
 1@face.gat,1,3,0	script	#女王虫4	139,{
 OnStart:
 	if('mob) end;
+	set 'users,getmapusers(getmdmapname("1@face.gat"));
 	set 'mob,callmonster(getmdmapname("1@face.gat"),213,153,"女王フェイスワーム",2529,getmdnpcname("#女王虫4")+"::OnKilled");
-	setmobhp 'mob,26000000+getmapusers(getmdmapname("1@face.gat"))*2000000;
+	setmobhp 'mob,26000000+'users*2000000;
 	set 'mobmax,getmobhp('mob);
+	set 'oldhp,'mobmax;
 	end;
 OnSpawn:
-	//announce "アイリス : 巣から離れすぎだよ！　巣から離れすぎると、女王フェイスワームが落ち着くまでは凶暴になるから気をつけて！", 0x9, 0xff3333, 0x190, 15, 0, 0;
-	//2532
-
-	//announce "アイリス : まっず……。女王フェイスワームが地属性に脱皮したみたい……。", 0x9, 0x55ff00, 0x190, 18, 0, 0;
-	//2533
-
-	//announce "アイリス : まっず……。女王フェイスワームが水属性に脱皮したみたい……。", 0x9, 0x9999ff, 0x190, 18, 0, 0;
-	//2534
-
-	//announce "アイリス : まっず……。女王フェイスワームが風属性に脱皮したみたい……。", 0x9, 0xffff00, 0x190, 18, 0, 0;
-	//2535
-
-	announce "アイリス : 女王フェイスワームの姿が元に戻ったよ！", 0x9, 0xffffff, 0x190, 18, 0, 0;
-	set 'hp,getmobhp('mob);
-	set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob);
-	set '@dummy,removemonster(getvariableofnpc('mob,getmdnpcname("#女王虫4")));
-	set 'mob,callmonster(getmdmapname("1@face.gat"),'@x,'@y,"女王フェイスワーム",2529,getmdnpcname("#女王虫4")+"::OnKilled");
-	setmobhp 'mob,'hp;
+	if('mob) {
+		set 'hp,getmobhp('mob);
+		set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob);
+		if('oldhp - 'hp > ('users + 7) * 400000) {
+			announce "アイリス : 傷ついた女王フェイスワームが狂暴化した!!　さっき以上に攻撃力が増してるから気をつけて！", 0x9, 0xff3333, 0x190, 15, 0, 0;
+			set '@mobid,2532;
+		}
+		else if( (('@x < 190) || ('@x > 230)) || (('@y < 135) || ('@y > 175)) ) {
+			announce "アイリス : 巣から離れすぎだよ！　巣から離れすぎると、女王フェイスワームが落ち着くまでは凶暴になるから気をつけて！", 0x9, 0xff3333, 0x190, 15, 0, 0;
+			set '@mobid,2532;
+		}
+		else {
+			switch(rand(5)) {
+			case 0:
+				announce "アイリス : まっず……。女王フェイスワームが地属性に脱皮したみたい……。", 0x9, 0x55ff00, 0x190, 18, 0, 0;
+				set '@mobid,2533;
+			case 1:
+				announce "アイリス : まっず……。女王フェイスワームが水属性に脱皮したみたい……。", 0x9, 0x9999ff, 0x190, 18, 0, 0;
+				set '@mobid,2534;
+			case 2:
+				announce "アイリス : まっず……。女王フェイスワームが風属性に脱皮したみたい……。", 0x9, 0xffff00, 0x190, 18, 0, 0;
+				set '@mobid,2535;
+			case 3:
+			default:
+				announce "アイリス : 女王フェイスワームの姿が元に戻ったよ！", 0x9, 0xffffff, 0x190, 18, 0, 0;
+				set '@mobid,2529;
+				break;
+			}
+		}
+		set 'oldhp,'hp;
+		set '@dummy,removemonster(getvariableofnpc('mob,getmdnpcname("#女王虫4")));
+		set 'mob,callmonster(getmdmapname("1@face.gat"),'@x,'@y,"女王フェイスワーム",'@mobid,getmdnpcname("#女王虫4")+"::OnKilled");
+		setmobhp 'mob,'hp;
+	}
+	end;
+OnDamage:
+	if('mob) {
+		set 'hp,getmobhp('mob);
+		set '@users,getmapusers(getmdmapname("1@face.gat"));
+		set '@damage,10000 * rand(20,('@users+7)*25);
+		set '@facehp,'hp - '@damage;
+		if('facehp < 5000000)
+			set '@facehp,5000000;
+		setmobhp 'mob,'@facehp;
+		announce "アイリス : さすがケイオス！　攻撃は、女王フェイスワームに効いてるみたい！", 0x9, 0xffffff, 0x190, 18, 0, 0;
+	}
 	end;
 OnKilled:
 	set 'mob,0;
@@ -1941,10 +1971,86 @@ OnKilled:
 	end;
 }
 
-1@face.gat,214,172,0	script	#ケイ_北	139,{/* 56477 (hide)*/}
-1@face.gat,214,143,0	script	#ケイ_南	139,{/* 56478 (hide)*/}
-1@face.gat,226,158,0	script	#ケイ_東	139,{/* 56479 (hide)*/}
-1@face.gat,200,158,0	script	#ケイ_西	139,{/* 56480 (hide)*/}
+1@face.gat,214,172,0	script	#ケイ_北	139,2,2,{
+OnTouch:
+	set '@boss,getvariableofnpc('mob,getmdnpcname("#女王虫4"));
+	if('@boss) {
+		set '@dummy,getmapxy('@map$,'@x,'@y,3,'@boss);
+		if( (('@x > 205) && ('@x < 223)) && (('@y > 163) && ('@y < 181)) ) {
+			misceffect 17,getmdnpcname("#ケイ_北");
+			misceffect 90,getmdnpcname("#ケイ_北");
+			donpcevent getmdnpcname("#女王虫4")+"::OnDamage";
+		}
+		else {
+			// セリフ適当
+			unittalk getnpcid(getmdnpcname("ケイオス#北")),"ケイオス : もっと近くまで女王フェイスワームを連れてくるんだ！";
+		}
+	}
+	donpcevent getmdnpcname("ケイオス#北")+"::OnStop";
+	hideonnpc getmdnpcname("#ケイ_北"); //64077
+	hideonnpc getmdnpcname("ケイオス#北"); //64081
+	end;
+}
+1@face.gat,214,143,0	script	#ケイ_南	139,2,2,{
+OnTouch:
+	set '@boss,getvariableofnpc('mob,getmdnpcname("#女王虫4"));
+	if('@boss) {
+		set '@dummy,getmapxy('@map$,'@x,'@y,3,'@boss);
+		if( (('@x > 205) && ('@x < 223)) && (('@y > 134) && ('@y < 152)) ) {
+			misceffect 17,getmdnpcname("#ケイ_南");
+			misceffect 90,getmdnpcname("#ケイ_南");
+			donpcevent getmdnpcname("#女王虫4")+"::OnDamage";
+		}
+		else {
+			// セリフ適当
+			unittalk getnpcid(getmdnpcname("ケイオス#南")),"ケイオス : もっと近くまで女王フェイスワームを連れてくるんだ！";
+		}
+	}
+	donpcevent getmdnpcname("ケイオス#南")+"::OnStop";
+	hideonnpc getmdnpcname("#ケイ_南"); //64077
+	hideonnpc getmdnpcname("ケイオス#南"); //64081
+	end;
+}
+1@face.gat,226,158,0	script	#ケイ_東	139,2,2,{
+OnTouch:
+	set '@boss,getvariableofnpc('mob,getmdnpcname("#女王虫4"));
+	if('@boss) {
+		set '@dummy,getmapxy('@map$,'@x,'@y,3,'@boss);
+		if( (('@x > 217) && ('@x < 235)) && (('@y > 149) && ('@y < 167)) ) {
+			misceffect 17,getmdnpcname("#ケイ_東");
+			misceffect 90,getmdnpcname("#ケイ_東");
+			donpcevent getmdnpcname("#女王虫4")+"::OnDamage";
+		}
+		else {
+			// セリフ適当
+			unittalk getnpcid(getmdnpcname("ケイオス#東")),"ケイオス : もっと近くまで女王フェイスワームを連れてくるんだ！";
+		}
+	}
+	donpcevent getmdnpcname("ケイオス#東")+"::OnStop";
+	hideonnpc getmdnpcname("#ケイ_東"); //64077
+	hideonnpc getmdnpcname("ケイオス#東"); //64081
+	end;
+}
+1@face.gat,200,158,0	script	#ケイ_西	139,{
+OnTouch:
+	set '@boss,getvariableofnpc('mob,getmdnpcname("#女王虫4"));
+	if('@boss) {
+		set '@dummy,getmapxy('@map$,'@x,'@y,3,'@boss);
+		if( (('@x > 191) && ('@x < 209)) && (('@y > 149) && ('@y < 167)) ) {
+			misceffect 17,getmdnpcname("#ケイ_西");
+			misceffect 90,getmdnpcname("#ケイ_西");
+			donpcevent getmdnpcname("#女王虫4")+"::OnDamage";
+		}
+		else {
+			// セリフ適当
+			unittalk getnpcid(getmdnpcname("ケイオス#西")),"ケイオス : もっと近くまで女王フェイスワームを連れてくるんだ！";
+		}
+	}
+	donpcevent getmdnpcname("ケイオス#西")+"::OnStop";
+	hideonnpc getmdnpcname("#ケイ_西"); //64077
+	hideonnpc getmdnpcname("ケイオス#西"); //64081
+	end;
+}
 1@face.gat,214,172,5	script	ケイオス#北	683,{/* 56481 (hide)*/
 	//1550000
 	end;
