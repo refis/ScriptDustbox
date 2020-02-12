@@ -1827,12 +1827,15 @@ OnSpawn:
 			case 0:
 				announce "アイリス : まっず……。女王フェイスワームが地属性に脱皮したみたい……。", 0x9, 0x55ff00, 0x190, 18, 0, 0;
 				set '@mobid,2533;
+				break;
 			case 1:
 				announce "アイリス : まっず……。女王フェイスワームが水属性に脱皮したみたい……。", 0x9, 0x9999ff, 0x190, 18, 0, 0;
 				set '@mobid,2534;
+				break;
 			case 2:
 				announce "アイリス : まっず……。女王フェイスワームが風属性に脱皮したみたい……。", 0x9, 0xffff00, 0x190, 18, 0, 0;
 				set '@mobid,2535;
+				break;
 			case 3:
 			default:
 				announce "アイリス : 女王フェイスワームの姿が元に戻ったよ！", 0x9, 0xffffff, 0x190, 18, 0, 0;
