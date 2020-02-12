@@ -1,4 +1,10 @@
+//= Auriga Script ==============================================================
+// Ragnarok Online Hero in the Air Script	by refis
+//==============================================================================
 
+//============================================================
+// 専用装備精練NPC
+//------------------------------------------------------------
 dali02.gat,139,87,3	script	道楽裁縫師#refine	70,{
 	mes "[道楽裁縫師]";
 	mes "私は裁縫師をしています。";
@@ -92,7 +98,7 @@ dali02.gat,139,87,3	script	道楽裁縫師#refine	70,{
 	next;
 	switch(select(
 		(getequipid(2)!=0? "^nItemID^" +getequipid(2): "体-[装備していない]"),
-		(getequipid(5)!=0? "^nItemID^" +getequipid(5): "肩にかける物-[装備していない]")
+		(getequipid(5)!=0? "^nItemID^" +getequipid(5): "肩にかける物-[装備していない]"),
 		(getequipid(6)!=0? "^nItemID^" +getequipid(6): "靴-[装備していない]")
 	)) {
 	case 1: set '@itemid,getequipid(2); set '@menu,2; break;
@@ -129,7 +135,8 @@ dali02.gat,139,87,3	script	道楽裁縫師#refine	70,{
 	mes "素材にはどれを使いますか？";
 	next;
 	set '@rec,select(getitemname('@target[0]),getitemname('@target[1]),getitemname('@target[2]));
-	if(countitem('@target['@rec-1]) == 0) {
+	set '@req,('@itemid=='@target['@rec-1])? 2: 1;		// 対象装備と素材が同じ場合は2つ分判定が必要
+	if(countitem('@target['@rec-1]) < '@req) {
 		mes "[道楽裁縫師]";
 		mes "素材になる装備を";
 		mes "持っていないようです。";
@@ -188,7 +195,9 @@ OnInit:
 	end;
 }
 
-
+//============================================================
+// 専用装備交換NPC
+//------------------------------------------------------------
 dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{
 	mes "[飛行船愛好家]";
 	mes "ここでは飛行船装備の";
@@ -209,7 +218,8 @@ dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{
 		mes "[飛行船愛好家]";
 		mes "さて、何と交換しましょうか？";
 		next;
-		switch(select("ペルロックの帽子[1]","エクソダスジョーカーXIII[1]","やめる")) {
+		set '@menu,select("ペルロックの帽子[1]","エクソダスジョーカーXIII[1]","やめる");
+		switch('@menu) {
 		case 1:
 			mes "[飛行船愛好家]";
 			mes "ふむ。";
@@ -219,6 +229,7 @@ dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{
 			mes "そちらのアイテムだと";
 			mes "^ff0000[衣装]ペルロックの帽子^000000と";
 			mes "交換ではどうでしょうか？";
+			set '@gain,19144;
 			break;
 		case 2:
 			mes "[飛行船愛好家]";
@@ -230,6 +241,7 @@ dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{
 			mes "^ff0000+7以上の";
 			mes "ペルロック系装備^000000と";
 			mes "交換ではどうでしょうか？";
+			set '@gain,28214;
 			break;
 		case 3:
 			mes "[飛行船愛好家]";
@@ -249,11 +261,51 @@ dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{
 		mes "[飛行船愛好家]";
 		mes "では、どれと交換しましょう？";
 		next;
-		set '@menu,select("体-[装備していない]","肩にかける物-[装備していない]","靴-[装備していない]","衣装‐上‐[装備していない]");
+		switch(select(
+			(getequipid(2)!=0? "^nItemID^" +getequipid(2): "体-[装備していない]"),
+			(getequipid(5)!=0? "^nItemID^" +getequipid(5): "肩にかける物-[装備していない]"),
+			(getequipid(6)!=0? "^nItemID^" +getequipid(6): "靴-[装備していない]"),
+			(getequipid(12)!=0? "^nItemID^" +getequipid(12): "衣装‐上‐[装備していない]")
+		)) {
+		case 1: if(getequipid(2) == 15158 && '@menu == 2) set '@i,2; break;
+		case 2: if(getequipid(5) == 20791 && '@menu == 2) set '@i,5; break;
+		case 3: if(getequipid(6) == 22086 && '@menu == 2) set '@i,6; break;
+		case 4: if(getequipid(12) == 19914 && '@menu == 1) set '@i,12; break;
+		}
+		if('@i == 0) {
+			mes "[飛行船愛好家]";
+			mes "対象装備を装備していません。";
+			mes "必ず飛行船で入手した装備を";
+			mes "装備してくださいね。";
+			close;
+		}
+		// 以下未調査
+		if('@menu == 2 && getequiprefinerycnt('@i) < 7) {
+			mes "[飛行船愛好家]";
+			mes "対象装備の精練値が足りませんね。";
+			mes "^ff0000+7以上の";
+			mes "ペルロック系装備^000000を";
+			mes "装備してください。";
+			close;
+		}
 		mes "[飛行船愛好家]";
-		mes "対象装備を装備していません。";
-		mes "必ず飛行船で入手した装備を";
-		mes "装備してくださいね。";
+		mes "では、";
+		mes "^nItemID^" +getequipid('@i)+ "と";
+		mes "^nItemID^" +'@gain+ "を";
+		mes "交換します。";
+		mes "よろしいですか？";
+		next;
+		if(select("いいえ","はい") == 1) {
+			mes "[飛行船愛好家]";
+			mes "そうですか。";
+			mes "残念です。";
+			close;
+		}
+		delequip '@i;
+		getitem '@gain,1;
+		mes "[飛行船愛好家]";
+		mes "ありがとうございます！";
+		mes "大切に使ってくださいね！";
 		close;
 	case 3:
 		mes "[飛行船愛好家]";
@@ -350,7 +402,7 @@ dali02.gat,133,87,3	script	飛行船愛好家#sell	755,{
 	next;
 	switch(select(
 		(getequipid(2)!=0? "^nItemID^" +getequipid(2): "体-[装備していない]"),
-		(getequipid(5)!=0? "^nItemID^" +getequipid(5): "肩にかける物-[装備していない]")
+		(getequipid(5)!=0? "^nItemID^" +getequipid(5): "肩にかける物-[装備していない]"),
 		(getequipid(6)!=0? "^nItemID^" +getequipid(6): "靴-[装備していない]")
 	)) {
 	case 1: set '@itemid,getequipid(2); set '@menu,2; break;
@@ -407,6 +459,9 @@ OnInit:
 	end;
 }
 
+//============================================================
+// ダンジョン生成NPC
+//------------------------------------------------------------
 dali02.gat,136,79,3	script	探検家リオン#air1	945,{
 	mes "[探検家リオン]";
 	mes "私がここ数日間";
@@ -430,6 +485,11 @@ dali02.gat,136,79,3	script	探検家リオン#air1	945,{
 }
 
 dali02.gat,142,81,3	script	次元移動機#sara	10007,{
+	if(BaseLevel < 70) {
+		mes "^ff0000‐BaseLv70以上の方のみ";
+		mes "　入場可能なダンジョンです‐^000000";
+		close;
+	}
 	if(getonlinepartymember() < 1) {
 		mes "^ff0000‐次元の狭間に入場するためには";
 		mes "　パーティーを結成してください‐^000000";
@@ -514,46 +574,57 @@ OnInit:
 	end;
 }
 
+//============================================================
+// 飛行船襲撃
+//------------------------------------------------------------
 1@air1.gat,1,1,0	script	#HeroAirManager	139,{
 OnStart:
 	if('flag)
 		end;
 	set 'flag,1;
-	hideonnpc getmdnpcname("ワイバーン#air1"); //67057
-	hideonnpc getmdnpcname("ワイバーンキッド#1air1"); //67058
-	hideonnpc getmdnpcname("レッサーワイバーン#1air"); //67059
-	hideonnpc getmdnpcname("スカイジャイロ#1air1"); //67060
-	hideonnpc getmdnpcname("スカイジャイロ#1air1"); //67061
-	hideonnpc getmdnpcname("スカイグレムリン#1air1"); //67062
-	hideonnpc getmdnpcname("スカイグレムリン#2air1"); //67063
-	hideonnpc getmdnpcname("スカイグレムリン#3air1"); //67064
-	hideonnpc getmdnpcname("スカイグレムリン#4air1"); //67065
-	hideonnpc getmdnpcname("スカイグレムリン#5air1"); //67066
-	hideonnpc getmdnpcname("スカイグレムリン#6air1"); //67067
-	hideonnpc getmdnpcname("スカイグレムリン#7air1"); //67068
-	hideonnpc getmdnpcname("スカイグレムリン#8air1"); //67069
+	hideonnpc getmdnpcname("ワイバーン#air1");
+	hideonnpc getmdnpcname("ワイバーンキッド#1air1");
+	hideonnpc getmdnpcname("レッサーワイバーン#1air");
+	hideonnpc getmdnpcname("スカイジャイロ#1air1");
+	hideonnpc getmdnpcname("スカイジャイロ#1air2");
+	hideonnpc getmdnpcname("スカイグレムリン#1air1");
+	hideonnpc getmdnpcname("スカイグレムリン#2air1");
+	hideonnpc getmdnpcname("スカイグレムリン#3air1");
+	hideonnpc getmdnpcname("スカイグレムリン#4air1");
+	hideonnpc getmdnpcname("スカイグレムリン#5air1");
+	hideonnpc getmdnpcname("スカイグレムリン#6air1");
+	hideonnpc getmdnpcname("スカイグレムリン#7air1");
+	hideonnpc getmdnpcname("スカイグレムリン#8air1");
+	hideonnpc getmdnpcname("スカイグレムリン#1air2");
+	hideonnpc getmdnpcname("スカイグレムリン#2air2");
+	hideonnpc getmdnpcname("スカイグレムリン#3air2");
+	hideonnpc getmdnpcname("スカイグレムリン#4air2");
+	hideonnpc getmdnpcname("スカイグレムリン#5air2");
+	hideonnpc getmdnpcname("スカイグレムリン#6air2");
+	hideonnpc getmdnpcname("スカイグレムリン#7air2");
+	hideonnpc getmdnpcname("スカイグレムリン#8air2");
 
 	hideonnpc getmdnpcname("スカイグレムリン#2aair1");
-	hideonnpc getmdnpcname("アイリス#2air1"); //85351
-	hideonnpc getmdnpcname("ケイオス#2air1"); //85352
-	hideonnpc getmdnpcname("ロキ#air2"); //85372
+	hideonnpc getmdnpcname("アイリス#2air1");
+	hideonnpc getmdnpcname("ケイオス#2air1");
+	hideonnpc getmdnpcname("ロキ#air2");
 
-	hideonnpc getmdnpcname("アイリス#2air2"); //85352
-	hideonnpc getmdnpcname("船長ペルロック#air2"); //85352
-	hideonnpc getmdnpcname("船長ペルロック#2air2"); //85352
-	hideonnpc getmdnpcname("ケイオス#air2"); //85352
-	hideonnpc getmdnpcname("warp1#air1"); //85325
+	hideonnpc getmdnpcname("アイリス#2air2");
+	hideonnpc getmdnpcname("船長ペルロック#air2");
+	hideonnpc getmdnpcname("船長ペルロック#2air2");
+	hideonnpc getmdnpcname("ケイオス#air2");
+	hideonnpc getmdnpcname("warp1#air1");
 	hideonnpc getmdnpcname("warp2a#air1");
 	hideonnpc getmdnpcname("warp2b#air1");
-	hideonnpc getmdnpcname("warp3a#air1"); //85332
-	hideonnpc getmdnpcname("warp3b#air1"); //85333
-	hideonnpc getmdnpcname("warp4a#air2"); //85332
-	hideonnpc getmdnpcname("warp5a#air2"); //85332
+	hideonnpc getmdnpcname("warp3a#air1");
+	hideonnpc getmdnpcname("warp3b#air1");
+	hideonnpc getmdnpcname("warp4a#air2");
+	hideonnpc getmdnpcname("warp5a#air2");
 
 	end;
 }
 
-1@air1.gat,217,67,3	script	船長ペルロック#air1	873,{/* 85325 */
+1@air1.gat,217,67,3	script	船長ペルロック#air1	873,{
 	switch(HEROAIR_1QUE) {
 	case 0:
 		if(checkquest(120200)&8) {
@@ -564,19 +635,19 @@ OnStart:
 				mes "‐先を急ぐことにした‐";
 				close2;
 				set HEROAIR_1QUE,1;
-				hideoffnpc getmdnpcname("ワイバーン#air1"); //67057
-				hideoffnpc getmdnpcname("ワイバーンキッド#1air1"); //67058
-				hideoffnpc getmdnpcname("レッサーワイバーン#1air"); //67059
-				hideoffnpc getmdnpcname("スカイジャイロ#1air1"); //67060
-				hideoffnpc getmdnpcname("スカイジャイロ#1air1"); //67061
-				hideoffnpc getmdnpcname("スカイグレムリン#1air1"); //67062
-				hideoffnpc getmdnpcname("スカイグレムリン#2air1"); //67063
-				hideoffnpc getmdnpcname("スカイグレムリン#3air1"); //67064
-				hideoffnpc getmdnpcname("スカイグレムリン#4air1"); //67065
-				hideoffnpc getmdnpcname("スカイグレムリン#5air1"); //67066
-				hideoffnpc getmdnpcname("スカイグレムリン#6air1"); //67067
-				hideoffnpc getmdnpcname("スカイグレムリン#7air1"); //67068
-				hideoffnpc getmdnpcname("スカイグレムリン#8air1"); //67069
+				hideoffnpc getmdnpcname("ワイバーン#air1");
+				hideoffnpc getmdnpcname("ワイバーンキッド#1air1");
+				hideoffnpc getmdnpcname("レッサーワイバーン#1air");
+				hideoffnpc getmdnpcname("スカイジャイロ#1air1");
+				hideoffnpc getmdnpcname("スカイジャイロ#1air2");
+				hideoffnpc getmdnpcname("スカイグレムリン#1air1");
+				hideoffnpc getmdnpcname("スカイグレムリン#2air1");
+				hideoffnpc getmdnpcname("スカイグレムリン#3air1");
+				hideoffnpc getmdnpcname("スカイグレムリン#4air1");
+				hideoffnpc getmdnpcname("スカイグレムリン#5air1");
+				hideoffnpc getmdnpcname("スカイグレムリン#6air1");
+				hideoffnpc getmdnpcname("スカイグレムリン#7air1");
+				hideoffnpc getmdnpcname("スカイグレムリン#8air1");
 				donpcevent getmdnpcname("船長ペルロック#air1")+ "::OnStart";
 				end;
 			}
@@ -756,19 +827,19 @@ OnStart:
 		mes "ワイバーンからスカイグレムリンが";
 		mes "降りてきましたーっ!!";
 		set HEROAIR_1QUE,1;
-		hideoffnpc getmdnpcname("ワイバーン#air1"); //67057
-		hideoffnpc getmdnpcname("ワイバーンキッド#1air1"); //67058
-		hideoffnpc getmdnpcname("レッサーワイバーン#1air"); //67059
-		hideoffnpc getmdnpcname("スカイジャイロ#1air1"); //67060
-		hideoffnpc getmdnpcname("スカイジャイロ#1air1"); //67061
-		hideoffnpc getmdnpcname("スカイグレムリン#1air1"); //67062
-		hideoffnpc getmdnpcname("スカイグレムリン#2air1"); //67063
-		hideoffnpc getmdnpcname("スカイグレムリン#3air1"); //67064
-		hideoffnpc getmdnpcname("スカイグレムリン#4air1"); //67065
-		hideoffnpc getmdnpcname("スカイグレムリン#5air1"); //67066
-		hideoffnpc getmdnpcname("スカイグレムリン#6air1"); //67067
-		hideoffnpc getmdnpcname("スカイグレムリン#7air1"); //67068
-		hideoffnpc getmdnpcname("スカイグレムリン#8air1"); //67069
+		hideoffnpc getmdnpcname("ワイバーン#air1");
+		hideoffnpc getmdnpcname("ワイバーンキッド#1air1");
+		hideoffnpc getmdnpcname("レッサーワイバーン#1air");
+		hideoffnpc getmdnpcname("スカイジャイロ#1air1");
+		hideoffnpc getmdnpcname("スカイジャイロ#1air2");
+		hideoffnpc getmdnpcname("スカイグレムリン#1air1");
+		hideoffnpc getmdnpcname("スカイグレムリン#2air1");
+		hideoffnpc getmdnpcname("スカイグレムリン#3air1");
+		hideoffnpc getmdnpcname("スカイグレムリン#4air1");
+		hideoffnpc getmdnpcname("スカイグレムリン#5air1");
+		hideoffnpc getmdnpcname("スカイグレムリン#6air1");
+		hideoffnpc getmdnpcname("スカイグレムリン#7air1");
+		hideoffnpc getmdnpcname("スカイグレムリン#8air1");
 		next;
 	case 1:
 		cutin "h_chaos01.bmp", 2;
@@ -871,10 +942,10 @@ OnStart:
 	}
 OnStart:
 	initnpctimer;
-	hideoffnpc getmdnpcname("warp1#air1"); //85325
-	hideonnpc getmdnpcname("船長ペルロック#air1"); //85325
-	hideonnpc getmdnpcname("ケイオス#air1"); //85335
-	hideonnpc getmdnpcname("アイリス#air1"); //85334
+	hideoffnpc getmdnpcname("warp1#air1");
+	hideonnpc getmdnpcname("船長ペルロック#air1");
+	hideonnpc getmdnpcname("ケイオス#air1");
+	hideonnpc getmdnpcname("アイリス#air1");
 	end;
 OnTimer1000:
 	announce "モンスターが飛行船を破壊しようとしています。", 0x9, 0xffff00, 0x190, 12, 0, 0;
@@ -888,14 +959,14 @@ OnTimer7000:
 	end;
 }
 
-1@air1.gat,248,54,0	script	warp1#air1	45,2,2,{/* 85329 (hide)*/
-	hideonnpc getmdnpcname("warp1#air1"); //85329
+1@air1.gat,248,54,0	script	warp1#air1	45,2,2,{
+	hideonnpc getmdnpcname("warp1#air1");
 	donpcevent getmdnpcname("mob#air1")+ "::OnStart";
 	warp getmdmapname("1@air1.gat"),91,68;
 	end;
 }
 
-1@air1.gat,215,67,5	script	アイリス#air1	666,{/* 85334 */
+1@air1.gat,215,67,5	script	アイリス#air1	666,{
 	if(HEROAIR_1QUE == 0) {
 		cutin "h_iris02.bmp", 2;
 		mes "[アイリス]";
@@ -913,7 +984,8 @@ OnTimer7000:
 	cutin "h_iris01.bmp", 255;
 	end;
 }
-1@air1.gat,214,66,5	script	ケイオス#air1	683,{/* 85335 */
+
+1@air1.gat,214,66,5	script	ケイオス#air1	683,{
 	if(HEROAIR_1QUE == 0) {
 		cutin "h_chaos02.bmp", 2;
 		mes "[ケイオス]";
@@ -936,7 +1008,8 @@ OnTimer7000:
 	cutin "h_chaos02.bmp", 255;
 	end;
 }
-1@air1.gat,235,57,5	script	フェンリル#air1	664,{/* 85336 */
+
+1@air1.gat,235,57,5	script	フェンリル#air1	664,{
 	if(HEROAIR_1QUE == 0) {
 		cutin "fenrir_a.bmp", 2;
 		mes "[フェンリル]";
@@ -963,7 +1036,8 @@ OnTimer7000:
 	cutin "fenrir_a.bmp", 255;
 	end;
 }
-1@air1.gat,240,57,3	script	ロキ#air1	512,{/* 85337 */
+
+1@air1.gat,240,57,3	script	ロキ#air1	512,{
 	if(HEROAIR_1QUE == 0) {
 		cutin "ep14_roki02.bmp", 2;
 		mes "[ロキ]";
@@ -982,29 +1056,29 @@ OnTimer7000:
 	end;
 }
 
-1@air1.gat,213,75,5	script	ワイバーン#air1	2146,{/* 85338 (hide)*/}
-1@air1.gat,218,78,3	script	ワイバーンキッド#1air1	3185,{/* 85339 (hide)*/}
-1@air1.gat,208,78,5	script	レッサーワイバーン#1air	3186,{/* 85340 (hide)*/}
-1@air1.gat,200,78,5	script	スカイロータージャイロ#::スカイジャイロ#1air1	1392,{/* 85341 (hide)*/}
-1@air1.gat,223,78,3	script	スカイロータージャイロ#::スカイジャイロ#1air2	1392,{/* 85342 (hide)*/}
-1@air1.gat,236,57,3	script	スカイグレムリン#1air1	844,{/* 85343 (hide)*/}
-1@air1.gat,239,57,5	script	スカイグレムリン#2air1	844,{/* 85344 (hide)*/}
-1@air1.gat,230,50,5	script	スカイグレムリン#3air1	844,{/* 85345 (hide)*/}
-1@air1.gat,226,62,3	script	スカイグレムリン#4air1	844,{/* 85346 (hide)*/}
-1@air1.gat,241,48,3	script	スカイグレムリン#5air1	844,{/* 85347 (hide)*/}
-1@air1.gat,225,40,7	script	スカイグレムリン#6air1	844,{/* 85348 (hide)*/}
-1@air1.gat,236,48,7	script	スカイグレムリン#7air1	844,{/* 85349 (hide)*/}
-1@air1.gat,224,66,5	script	スカイグレムリン#8air1	844,{/* 85350 (hide)*/}
+1@air1.gat,213,75,5	script	ワイバーン#air1	2146,{}
+1@air1.gat,218,78,3	script	ワイバーンキッド#1air1	3185,{}
+1@air1.gat,208,78,5	script	レッサーワイバーン#1air	3186,{}
+1@air1.gat,200,78,5	script	スカイロータージャイロ::スカイジャイロ#1air1	1392,{}
+1@air1.gat,223,78,3	script	スカイロータージャイロ::スカイジャイロ#1air2	1392,{}
+1@air1.gat,236,57,3	script	スカイグレムリン#1air1	3183,{}
+1@air1.gat,239,57,5	script	スカイグレムリン#2air1	3183,{}
+1@air1.gat,230,50,5	script	スカイグレムリン#3air1	3183,{}
+1@air1.gat,226,62,3	script	スカイグレムリン#4air1	3183,{}
+1@air1.gat,241,48,3	script	スカイグレムリン#5air1	3183,{}
+1@air1.gat,225,40,7	script	スカイグレムリン#6air1	3183,{}
+1@air1.gat,236,48,7	script	スカイグレムリン#7air1	3183,{}
+1@air1.gat,224,66,5	script	スカイグレムリン#8air1	3183,{}
 
-
-1@air1.gat,58,197,3	script	旅行客#1air1	887,{/* 85360 */
+1@air1.gat,58,197,3	script	旅行客#1air1	887,{
 	mes "[旅行客]";
 	mes "……五月蝿いなあ……Zzz……。";
 	mes "静かにしてくれ……。";
 	mes "誰だよ、うなり声上げてるの……。";
 	close;
 }
-1@air1.gat,49,169,5	script	旅行客#2air1	887,{/* 85361 */
+
+1@air1.gat,49,169,5	script	旅行客#2air1	887,{
 	mes "[旅行客]";
 	mes "……くうう……ぐうう……。 ";
 	mes "……はっ。";
@@ -1013,7 +1087,8 @@ OnTimer7000:
 	mes "でも起きるの面倒だよ……。";
 	close;
 }
-1@air1.gat,42,205,3	script	小さな国の王#air1	956,{/* 85362 */
+
+1@air1.gat,42,205,3	script	小さな国の王#air1	956,{
 	mes "[小さな国の王]";
 	mes "……ううむ。 ";
 	mes "流石に故郷のベットほど";
@@ -1021,21 +1096,24 @@ OnTimer7000:
 	mes "……ぐぅ……Zzzz……。";
 	close;
 }
-1@air1.gat,43,191,4	script	王の護衛兵#1air1	105,{/* 85363 */
+
+1@air1.gat,43,191,4	script	王の護衛兵#1air1	105,{
 	mes "[王の護衛兵]";
 	mes "どんな事があっても";
 	mes "気持ちよくお休みになっている陛下を";
 	mes "起こしてはならない！";
 	close;
 }
-1@air1.gat,39,191,4	script	王の護衛兵#2air1	105,{/* 85364 */
+
+1@air1.gat,39,191,4	script	王の護衛兵#2air1	105,{
 	mes "[王の護衛兵]";
 	mes "どんな事があっても";
 	mes "気持ちよくお休みになっている陛下は";
 	mes "寝つきがいい！";
 	close;
 }
-1@air1.gat,93,193,3	script	飛行船乗務員#1air1	852,{/* 85365 */
+
+1@air1.gat,93,193,3	script	飛行船乗務員#1air1	852,{
 	if(HEROAIR_1QUE < 3) {
 		mes "[飛行船乗務員]";
 		mes "ここは機関室に行く入口だ。";
@@ -1049,7 +1127,8 @@ OnTimer7000:
 	mes "デッキまで退避するんだ！";
 	close;
 }
-1@air1.gat,22,182,7	script	飛行船乗務員#2air1	852,{/* 85366 */
+
+1@air1.gat,22,182,7	script	飛行船乗務員#2air1	852,{
 	if(HEROAIR_1QUE < 3) {
 		mes "[飛行船乗務員]";
 		mes "ううう、モンスターが多すぎる！";
@@ -1061,26 +1140,29 @@ OnTimer7000:
 	mes "あわわわわ……。";
 	close;
 }
-1@air1.gat,120,62,3	script	旅行中の騎士#air1	733,{/* 67073 */
+
+1@air1.gat,120,62,3	script	旅行中の騎士#air1	733,{
 	mes "[旅行中の騎士]";
 	mes "何なんだこいつらは……。";
 	mes "私が全部切ってしまおうか？";
 	mes "……いや、金にもならないなら";
 	mes "私がやる必要はないな……。";
 	close2;
-	emotion 54, getmdnpcname("旅行中の騎士#air1"); //67073
+	emotion 54, getmdnpcname("旅行中の騎士#air1");
 	end;
 }
-1@air1.gat,95,47,3	script	倒れた酔っ払い#air1	887,{/* 67074 */
+
+1@air1.gat,95,47,3	script	倒れた酔っ払い#air1	887,{
 	mes "[倒れた酔っ払い]";
 	mes "うああ……揺れる……！";
 	mes "揺れるのは、私の";
 	mes "恋心だけにしてくれ……むにゃ。";
 	close2;
-	emotion 53, getmdnpcname("倒れた酔っ払い#air1"); //67074
+	emotion 53, getmdnpcname("倒れた酔っ払い#air1");
 	end;
 }
-1@air1.gat,75,71,5	script	食事中のお金持ち#air1_0	55,{/* 67075 */
+
+1@air1.gat,75,71,5	script	食事中のお金持ち#air1_0	55,{
 	mes "[食事中のお金持ち]";
 	mes "な、なんだこの怪物たちは?!";
 	mes "私の大事な食事の時間の";
@@ -1088,7 +1170,8 @@ OnTimer7000:
 	mes "ボディーガード！　どこにいる！";
 	close;
 }
-1@air1.gat,61,88,5	script	無賃乗車した吟遊詩人#ai	51,{/* 67076 */
+
+1@air1.gat,61,88,5	script	無賃乗車した吟遊詩人#ai	51,{
 	mes "[無賃乗車した吟遊詩人]";
 	mes "ゴージャス～！";
 	mes "ファンタスティック～!!";
@@ -1096,7 +1179,8 @@ OnTimer7000:
 	mes "歌詞を考えないと！";
 	close;
 }
-1@air1.gat,46,61,5	script	飛行船食堂支配人#air1_0	61,{/* 67077 */
+
+1@air1.gat,46,61,5	script	飛行船食堂支配人#air1_0	61,{
 	mes "[飛行船食堂支配人]";
 	mes "凶悪な姿をしていますが、";
 	mes "あのモンスターたちも";
@@ -1104,7 +1188,8 @@ OnTimer7000:
 	mes "何にいたしますか？　お客様。";
 	close;
 }
-1@air1.gat,28,67,5	script	ギャンブラーマグイー#ai	853,{/* 67078 */
+
+1@air1.gat,28,67,5	script	ギャンブラーマグイー#ai	853,{
 	mes "[ギャンブラーマグイー]";
 	mes "おい！　カードに触るな！";
 	mes "ルールを守れ！";
@@ -1116,7 +1201,8 @@ OnTimer7000:
 	mes "なんだよ！　このモンスターたちは?!";
 	close;
 }
-1@air2.gat,120,62,3	script	旅行中の騎士#air2	733,{/* 85424 */
+
+1@air2.gat,120,62,3	script	旅行中の騎士#air2	733,{
 	mes "[旅行中の騎士]";
 	mes "爆発する！　飛ぶんだ……。";
 	mes "あの向こうに見える飛行船に";
@@ -1125,17 +1211,19 @@ OnTimer7000:
 	mes "飛ぶ自信がないんだあああ!!";
 	close;
 }
-1@air2.gat,95,47,3	script	倒れた酔っ払い#air2	887,{/* 85425 */
+
+1@air2.gat,95,47,3	script	倒れた酔っ払い#air2	887,{
 	mes "[倒れた酔っ払い]";
 	mes "揺れに続いて……";
 	mes "なんだか煙たい……。";
 	mes "どうなってんだ？";
 	mes "……ぐうう……Zzz……。";
 	close2;
-	emotion 53, getmdnpcname("倒れた酔っ払い#air2"); //85425
+	emotion 53, getmdnpcname("倒れた酔っ払い#air2");
 	end;
 }
-1@air2.gat,75,71,5	script	食事中の金持ち#air2	55,{/* 85426 */
+
+1@air2.gat,75,71,5	script	食事中の金持ち#air2	55,{
 	mes "[食事中の金持ち]";
 	mes "助けてくれ!!";
 	mes "金ならいくらでも出す！　お願いだ！";
@@ -1149,14 +1237,16 @@ OnTimer7000:
 	mes "お陰で逃げ遅れてしまった……。";
 	close;
 }
-1@air2.gat,61,88,5	script	無賃乗車した吟遊詩人#ai	51,{/* 85427 */
+
+1@air2.gat,61,88,5	script	無賃乗車した吟遊詩人#ai	51,{
 	mes "[無賃乗車した吟遊詩人]";
 	mes "ゴージャス～ファンタスティック～♪";
 	mes "爆発する船も素晴らしい～♪";
 	mes "ヒャッホーイ♪";
 	close;
 }
-1@air2.gat,46,61,5	script	飛行船食堂支配人#air2_0	61,{/* 85428 */
+
+1@air2.gat,46,61,5	script	飛行船食堂支配人#air2_0	61,{
 	mes "[飛行船食堂支配人]";
 	mes "この船が……落ちるのか……";
 	mes "私はこの船と運命を共にします。";
@@ -1168,7 +1258,8 @@ OnTimer7000:
 	mes "う、うわあ！　助けてえぇぇぇっ!!";
 	close;
 }
-1@air2.gat,28,67,5	script	ギャンブラーマグイー#ai	853,{/* 85429 */
+
+1@air2.gat,28,67,5	script	ギャンブラーマグイー#ai	853,{
 	mes "[ギャンブラーマグイー]";
 	mes "ギャンブラーの血が滾る!!";
 	mes "って、おい……本当に熱いじゃないか!!";
@@ -1210,8 +1301,8 @@ OnKilled3:
 	end;
 }
 
-1@air1.gat,104,72,0	warp	warp2a#air1	2,2,1@air1.gat,101,200	//66993
-1@air1.gat,104,52,0	warp	warp2b#air1	2,2,1@air1.gat,101,176	//85331
+1@air1.gat,104,72,0	warp	warp2a#air1	2,2,1@air1.gat,101,200
+1@air1.gat,104,52,0	warp	warp2b#air1	2,2,1@air1.gat,101,176
 
 1@air1.gat,1,1,0	script	mob#air2	139,{
 OnStart:
@@ -1239,22 +1330,22 @@ OnKilled3:
 	if('@count > 0)
 		end;
 	announce "このフロアにはもうモンスターの気配がないようだ。機関室入口へ向かおう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
-	hideoffnpc getmdnpcname("アイリス#2air1"); //67070
-	hideoffnpc getmdnpcname("ケイオス#2air1"); //67071
-	hideoffnpc getmdnpcname("スカイグレムリン#2aair1"); //67072
+	hideoffnpc getmdnpcname("アイリス#2air1");
+	hideoffnpc getmdnpcname("ケイオス#2air1");
+	hideoffnpc getmdnpcname("スカイグレムリン#2aair1");
 	end;
 }
 
-1@air1.gat,93,188,5	script	スカイグレムリン#2aair1	844,{/* 85353 (hide)*/
+1@air1.gat,93,188,5	script	スカイグレムリン#2aair1	3183,{
 	end;
 OnStart:
 OnTimer4000:
 	initnpctimer;
-	misceffect 106, getmdnpcname("スカイグレムリン#2aair1"); //67072
+	misceffect 106, getmdnpcname("スカイグレムリン#2aair1");
 	end;
 }
 
-1@air1.gat,88,189,5	script	アイリス#2air1	666,{/* 85351 (hide)*/
+1@air1.gat,88,189,5	script	アイリス#2air1	666,{
 	switch(HEROAIR_1QUE) {
 	case 1:
 		if(checkquest(120200)&8) {
@@ -1264,11 +1355,11 @@ OnTimer4000:
 			if(select("先を急ぐ","話を聞く") == 1) {
 				mes "‐先を急ぐことにした‐";
 				close2;
-				hideonnpc getmdnpcname("スカイグレムリン#2aair1"); //85353
-				hideoffnpc getmdnpcname("warp3a#air1"); //85332
-				hideoffnpc getmdnpcname("warp3b#air1"); //85333
-				hideonnpc getmdnpcname("アイリス#2air1"); //85351
-				hideonnpc getmdnpcname("ケイオス#2air1"); //85352
+				hideonnpc getmdnpcname("スカイグレムリン#2aair1");
+				hideoffnpc getmdnpcname("warp3a#air1");
+				hideoffnpc getmdnpcname("warp3b#air1");
+				hideonnpc getmdnpcname("アイリス#2air1");
+				hideonnpc getmdnpcname("ケイオス#2air1");
 				announce "モンスターの気配がする。倒しながら戻ったほうがいいだろう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
 				donpcevent getmdnpcname("スカイグレムリン#2aair1")+ "::OnStart";
 				end;
@@ -1309,16 +1400,16 @@ OnTimer4000:
 	case 2:
 		if(HEROAIR_1QUE == 1) {
 			set HEROAIR_1QUE,2;
-			hideonnpc getmdnpcname("スカイグレムリン#2aair1"); //85353
+			hideonnpc getmdnpcname("スカイグレムリン#2aair1");
 			next;
-			misceffect 183, getmdnpcname("スカイグレムリン#2aair1"); //85353
+			misceffect 183, getmdnpcname("スカイグレムリン#2aair1");
 			mes "^ff0000‐ジッ…ジジッ……";
 			mes "　バチバチ……バチッ……";
 			mes "　";
 			mes "　ズガガガガーンッ!!‐^000000";
 		}
 		else {
-			misceffect 183, getmdnpcname("スカイグレムリン#2aair1"); //67072
+			misceffect 183, getmdnpcname("スカイグレムリン#2aair1");
 			mes "‐^ff0000……ドガガガ……ッ!!^000000";
 			mes "　";
 			mes "　どこからか激しい音が鳴り響いた!!‐";
@@ -1353,15 +1444,16 @@ OnTimer4000:
 	}
 	end;
 OnStart:
-	hideonnpc getmdnpcname("アイリス#2air1"); //85351
-	hideonnpc getmdnpcname("ケイオス#2air1"); //85352
-	hideoffnpc getmdnpcname("warp3a#air1"); //85332
-	hideoffnpc getmdnpcname("warp3b#air1"); //85333
+	hideonnpc getmdnpcname("アイリス#2air1");
+	hideonnpc getmdnpcname("ケイオス#2air1");
+	hideoffnpc getmdnpcname("warp3a#air1");
+	hideoffnpc getmdnpcname("warp3b#air1");
 	donpcevent getmdnpcname("mob#air3")+ "::OnStart";
 	announce "モンスターの気配を感じる!!　モンスターを倒しながら戻ろう!!", 0x9, 0xffff00, 0x190, 12, 0, 0;
 	end;
 }
-1@air1.gat,88,187,5	script	ケイオス#2air1	683,{/* 85352 (hide)*/
+
+1@air1.gat,88,187,5	script	ケイオス#2air1	683,{
 	if(HEROAIR_1QUE == 1) {
 		cutin "h_chaos02.bmp", 2;
 		mes "[ケイオス]";
@@ -1408,86 +1500,84 @@ OnKilled3:
 	if('@count > 0)
 		end;
 	announce "この階にはもうモンスターの気配がないようだ。デッキまで上がろう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
-	hideoffnpc getmdnpcname("warp4a#air2"); //85332
+	hideoffnpc getmdnpcname("warp4a#air2");
 	end;
 }
 
-1@air1.gat,103,200,0	warp	warp3a#air1	2,2,1@air2.gat,104,72	//85332
-1@air1.gat,103,176,0	warp	warp3b#air1	2,2,1@air2.gat,104,52	//66996
-
-1@air2.gat,104,72,0	script	calla#air2	139,{/* 85367 */}
-1@air2.gat,104,52,0	script	callb#air2	139,{/* 85368 */}
+1@air1.gat,103,200,0	warp	warp3a#air1	2,2,1@air2.gat,104,72
+1@air1.gat,103,176,0	warp	warp3b#air1	2,2,1@air2.gat,104,52
 
 1@air2.gat,1,1,0	script	firecontrol#air	139,{
 OnStart:
 	initnpctimer;
 	end;
 OnTimer1000:
-	misceffect 106, "fire1#air2"; //98063
+	misceffect 106, getmdnpcname("fire1#air2");
 	end;
 OnTimer2000:
-	misceffect 106, "fire2#air2"; //98064
-	misceffect 106, "fire15#air2"; //99590
+	misceffect 106, getmdnpcname("fire2#air2");
+	misceffect 106, getmdnpcname("fire15#air2");
 	end;
 OnTimer3000:
-	misceffect 106, "fire3#air2"; //98136
+	misceffect 106, getmdnpcname("fire3#air2");
 	end;
 OnTimer3300:
-	misceffect 106, "fire5#air2"; //98138
+	misceffect 106, getmdnpcname("fire5#air2");
 	end;
 OnTimer5000:
-	misceffect 106, "fire4#air2"; //98137
+	misceffect 106, getmdnpcname("fire4#air2");
 	end;
 OnTimer5200:
 	initnpctimer;
 	end;
 }
-1@air2.gat,113,52,0	script	fire1#air2	139,{/* 85399 */}
-1@air2.gat,115,68,0	script	fire2#air2	139,{/* 85400 */}
-1@air2.gat,96,58,0	script	fire3#air2	139,{/* 85401 */}
-1@air2.gat,90,75,0	script	fire4#air2	139,{/* 85402 */}
-1@air2.gat,92,51,0	script	fire5#air2	139,{/* 85403 */}
-1@air2.gat,77,42,0	script	fire6#air2	139,{/* 85404 */}
-1@air2.gat,69,77,0	script	fire7#air2	139,{/* 85405 */}
-1@air2.gat,50,49,0	script	fire8#air2	139,{/* 85406 */}
-1@air2.gat,44,61,0	script	fire9#air2	139,{/* 85407 */}
-1@air2.gat,31,53,0	script	fire10#air2	139,{/* 85408 */}
-1@air2.gat,24,74,0	script	fire11#air2	139,{/* 85409 */}
-1@air2.gat,43,45,0	script	fire12#air2	139,{/* 85410 */}
-1@air2.gat,73,65,0	script	fire13#air2	139,{/* 85411 */}
-1@air2.gat,53,72,0	script	fire14#air2	139,{/* 85412 */}
-1@air2.gat,82,62,0	script	fire15#air2	139,{/* 85413 */}
-1@air2.gat,234,70,0	script	fire21#air2	139,{/* 85414 */}
-1@air2.gat,247,64,0	script	fire22#air2	139,{/* 85415 */}
-1@air2.gat,230,33,0	script	fire23#air2	139,{/* 85416 */}
-1@air2.gat,200,52,0	script	fire24#air2	139,{/* 85417 */}
-1@air2.gat,227,39,0	script	fire25#air2	139,{/* 85418 */}
-1@air2.gat,223,50,0	script	fire26#air2	139,{/* 85419 */}
-1@air2.gat,208,67,0	script	fire27#air2	139,{/* 85420 */}
-1@air2.gat,208,39,0	script	fire28#air2	139,{/* 85421 */}
-1@air2.gat,238,70,0	script	fire29#air2	139,{/* 85422 */}
-1@air2.gat,238,32,0	script	fire30#air2	139,{/* 85423 */}
 
-1@air2.gat,88,67,0	warp	warp4a#air2	2,2,1@air2.gat,247,53	//85371
+1@air2.gat,113,52,0	script	fire1#air2	139,{}
+1@air2.gat,115,68,0	script	fire2#air2	139,{}
+1@air2.gat,96,58,0	script	fire3#air2	139,{}
+1@air2.gat,90,75,0	script	fire4#air2	139,{}
+1@air2.gat,92,51,0	script	fire5#air2	139,{}
+1@air2.gat,77,42,0	script	fire6#air2	139,{}
+1@air2.gat,69,77,0	script	fire7#air2	139,{}
+1@air2.gat,50,49,0	script	fire8#air2	139,{}
+1@air2.gat,44,61,0	script	fire9#air2	139,{}
+1@air2.gat,31,53,0	script	fire10#air2	139,{}
+1@air2.gat,24,74,0	script	fire11#air2	139,{}
+1@air2.gat,43,45,0	script	fire12#air2	139,{}
+1@air2.gat,73,65,0	script	fire13#air2	139,{}
+1@air2.gat,53,72,0	script	fire14#air2	139,{}
+1@air2.gat,82,62,0	script	fire15#air2	139,{}
+1@air2.gat,234,70,0	script	fire21#air2	139,{}
+1@air2.gat,247,64,0	script	fire22#air2	139,{}
+1@air2.gat,230,33,0	script	fire23#air2	139,{}
+1@air2.gat,200,52,0	script	fire24#air2	139,{}
+1@air2.gat,227,39,0	script	fire25#air2	139,{}
+1@air2.gat,223,50,0	script	fire26#air2	139,{}
+1@air2.gat,208,67,0	script	fire27#air2	139,{}
+1@air2.gat,208,39,0	script	fire28#air2	139,{}
+1@air2.gat,238,70,0	script	fire29#air2	139,{}
+1@air2.gat,238,32,0	script	fire30#air2	139,{}
 
-1@air2.gat,213,75,5	script	ワイバーン#air2	2146,{/* 85383 */}
+1@air2.gat,88,67,0	warp	warp4a#air2	2,2,1@air2.gat,247,53
 
-1@air2.gat,235,59,3	script	ワイバーン#2air2	2146,{/* 85385 */}
-1@air2.gat,235,49,3	script	ワイバーン#3air2	2146,{/* 85386 */}
-1@air2.gat,218,78,3	script	ワイバーンキッド#1air2	3185,{/* 85387 */}
-1@air2.gat,208,78,5	script	レッサーワイバーン#2air	3186,{/* 85388 */}
-1@air2.gat,200,78,5	script	スカイロータージャイロ#	1392,{/* 85389 */}
-1@air2.gat,223,78,3	script	スカイロータージャイロ#	1392,{/* 85390 */}
-1@air2.gat,236,57,3	script	スカイグレムリン#1air2	844,{/* 85391 (hide)*/}
-1@air2.gat,239,57,5	script	スカイグレムリン#2air2	844,{/* 85392 (hide)*/}
-1@air2.gat,230,50,5	script	スカイグレムリン#3air2	844,{/* 85393 (hide)*/}
-1@air2.gat,226,62,3	script	スカイグレムリン#4air2	844,{/* 85394 (hide)*/}
-1@air2.gat,241,48,3	script	スカイグレムリン#5air2	844,{/* 85395 (hide)*/}
-1@air2.gat,225,40,7	script	スカイグレムリン#6air2	844,{/* 85396 (hide)*/}
-1@air2.gat,236,48,7	script	スカイグレムリン#7air2	844,{/* 85397 (hide)*/}
-1@air2.gat,224,66,5	script	スカイグレムリン#8air2	844,{/* 85398 (hide)*/}
+1@air2.gat,213,75,5	script	ワイバーン#air2	2146,{}
 
-1@air2.gat,229,56,5	script	ロキ#air2	512,{/* 85372 (hide)*/
+1@air2.gat,235,59,3	script	ワイバーン#2air2	2146,{}
+1@air2.gat,235,49,3	script	ワイバーン#3air2	2146,{}
+1@air2.gat,218,78,3	script	ワイバーンキッド#1air2	3185,{}
+1@air2.gat,208,78,5	script	レッサーワイバーン#2air	3186,{}
+1@air2.gat,200,78,5	script	スカイロータージャイロ	1392,{}
+1@air2.gat,223,78,3	script	スカイロータージャイロ	1392,{}
+1@air2.gat,236,57,3	script	スカイグレムリン#1air2	3183,{}
+1@air2.gat,239,57,5	script	スカイグレムリン#2air2	3183,{}
+1@air2.gat,230,50,5	script	スカイグレムリン#3air2	3183,{}
+1@air2.gat,226,62,3	script	スカイグレムリン#4air2	3183,{}
+1@air2.gat,241,48,3	script	スカイグレムリン#5air2	3183,{}
+1@air2.gat,225,40,7	script	スカイグレムリン#6air2	3183,{}
+1@air2.gat,236,48,7	script	スカイグレムリン#7air2	3183,{}
+1@air2.gat,224,66,5	script	スカイグレムリン#8air2	3183,{}
+
+1@air2.gat,229,56,5	script	ロキ#air2	512,{
 	cutin "ep14_roki02.bmp", 2;
 	mes "[ロキ]";
 	mes "次から次へと……面倒なやつらだ。";
@@ -1495,7 +1585,8 @@ OnTimer5200:
 	cutin "ep14_roki02.bmp", 255;
 	end;
 }
-1@air2.gat,229,54,5	script	フェンリル#air2	664,{/* 85373 */
+
+1@air2.gat,229,54,5	script	フェンリル#air2	664,{
 	if(checkquest(120200)&8) {
 		mes "‐フェンリルがモンスターと";
 		mes "　戦っている‐";
@@ -1503,11 +1594,11 @@ OnTimer5200:
 		if(select("先を急ぐ","話を聞く") == 1) {
 			mes "‐先を急ぐことにした‐";
 			close2;
-			hideonnpc getmdnpcname("ロキ#air2"); //85372
-			hideonnpc getmdnpcname("ワイバーン#2air2"); //85385
-			hideonnpc getmdnpcname("ワイバーン#3air2"); //85386
-			hideonnpc getmdnpcname("アイリス#air2"); //85374
-			hideonnpc getmdnpcname("フェンリル#air2"); //85373
+			hideonnpc getmdnpcname("ロキ#air2");
+			hideonnpc getmdnpcname("ワイバーン#2air2");
+			hideonnpc getmdnpcname("ワイバーン#3air2");
+			hideonnpc getmdnpcname("アイリス#air2");
+			hideonnpc getmdnpcname("フェンリル#air2");
 			donpcevent getmdnpcname("mob#air4")+ "::OnStart";
 			end;
 		}
@@ -1677,8 +1768,8 @@ OnTimer5200:
 	mes "[フェンリル]";
 	mes "だ、だめ!!";
 	next;
-	hideoffnpc getmdnpcname("ロキ#air2"); //85372
-	misceffect 183, getmdnpcname("ロキ#air2"); //85372
+	hideoffnpc getmdnpcname("ロキ#air2");
+	misceffect 183, getmdnpcname("ロキ#air2");
 	cutin "fenrir_b.bmp", 255;
 	mes "‐ワイバーンの炎が放たれた";
 	mes "　その瞬間……!!";
@@ -1713,22 +1804,23 @@ OnTimer5200:
 	mes "お前はあいつの相手をしてくれ。";
 	close2;
 	cutin "ep14_roki02.bmp", 255;
-	hideonnpc getmdnpcname("ロキ#air2"); //85372
-	hideonnpc getmdnpcname("ワイバーン#2air2"); //85385
-	hideonnpc getmdnpcname("ワイバーン#3air2"); //85386
-	hideonnpc getmdnpcname("アイリス#air2"); //85374
-	hideonnpc getmdnpcname("フェンリル#air2"); //85373
+	hideonnpc getmdnpcname("ロキ#air2");
+	hideonnpc getmdnpcname("ワイバーン#2air2");
+	hideonnpc getmdnpcname("ワイバーン#3air2");
+	hideonnpc getmdnpcname("アイリス#air2");
+	hideonnpc getmdnpcname("フェンリル#air2");
 	donpcevent getmdnpcname("mob#air4")+ "::OnStart";
 	end;
 OnEff1:
-	misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
+	misceffect 183, getmdnpcname("スカイグレムリン#1air2");
 	sleep 1000;
-	misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
+	misceffect 183, getmdnpcname("スカイグレムリン#2air2");
 	sleep 1000;
-	misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
+	misceffect 183, getmdnpcname("スカイグレムリン#3air2");
 	end;
 }
-1@air2.gat,241,54,3	script	アイリス#air2	666,{/* 85374 */
+
+1@air2.gat,241,54,3	script	アイリス#air2	666,{
 	cutin "h_iris01.bmp", 2;
 	mes "[アイリス]";
 	mes "せっかくの素敵な空の旅だったのに！";
@@ -1737,7 +1829,8 @@ OnEff1:
 	cutin "h_iris01.bmp", 255;
 	end;
 }
-1@air2.gat,232,51,5	script	アイリス#2air2	666,{/* 85375 (hide)*/
+
+1@air2.gat,232,51,5	script	アイリス#2air2	666,{
 	if(checkquest(120200)&8) {
 		mes "‐アイリスがスカイグレムリンと";
 		mes "　戦っている‐";
@@ -1762,18 +1855,18 @@ OnEff1:
 					mes "　船長は我に返り、攻撃の手を止めた‐";
 					close2;
 					set HEROAIR_1QUE,4;
-					hideonnpc getmdnpcname("船長ペルロック#air2"); //85384
-					hideonnpc getmdnpcname("アイリス#2air2"); //85375
-					hideonnpc getmdnpcname("スカイグレムリン#1air2"); //99361
-					hideonnpc getmdnpcname("スカイグレムリン#2air2"); //99362
-					hideonnpc getmdnpcname("スカイグレムリン#3air2"); //99363
-					hideonnpc getmdnpcname("スカイグレムリン#4air2"); //85394
-					hideonnpc getmdnpcname("スカイグレムリン#5air2"); //85395
-					hideonnpc getmdnpcname("スカイグレムリン#6air2"); //85396
-					hideonnpc getmdnpcname("スカイグレムリン#7air2"); //85397
-					hideonnpc getmdnpcname("スカイグレムリン#8air2"); //85398
-					hideoffnpc getmdnpcname("ケイオス#air2"); //92826
-					hideoffnpc getmdnpcname("船長ペルロック#2air2"); //99360
+					hideonnpc getmdnpcname("船長ペルロック#air2");
+					hideonnpc getmdnpcname("アイリス#2air2");
+					hideonnpc getmdnpcname("スカイグレムリン#1air2");
+					hideonnpc getmdnpcname("スカイグレムリン#2air2");
+					hideonnpc getmdnpcname("スカイグレムリン#3air2");
+					hideonnpc getmdnpcname("スカイグレムリン#4air2");
+					hideonnpc getmdnpcname("スカイグレムリン#5air2");
+					hideonnpc getmdnpcname("スカイグレムリン#6air2");
+					hideonnpc getmdnpcname("スカイグレムリン#7air2");
+					hideonnpc getmdnpcname("スカイグレムリン#8air2");
+					hideoffnpc getmdnpcname("ケイオス#air2");
+					hideoffnpc getmdnpcname("船長ペルロック#2air2");
 					end;
 				case 3:
 					mes "‐あなたは武器を構え、";
@@ -1835,12 +1928,12 @@ OnEff1:
 	cutin "h_iris01.bmp", 255;
 	mes "‐^ff0000パン！　パパン！　パンッ！^000000‐";
 	next;
-	misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
-	misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
-	misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
-	hideonnpc getmdnpcname("スカイグレムリン#1air2"); //85391
-	hideonnpc getmdnpcname("スカイグレムリン#2air2"); //85392
-	hideonnpc getmdnpcname("スカイグレムリン#3air2"); //85393
+	misceffect 183, getmdnpcname("スカイグレムリン#1air2");
+	misceffect 183, getmdnpcname("スカイグレムリン#2air2");
+	misceffect 183, getmdnpcname("スカイグレムリン#3air2");
+	hideonnpc getmdnpcname("スカイグレムリン#1air2");
+	hideonnpc getmdnpcname("スカイグレムリン#2air2");
+	hideonnpc getmdnpcname("スカイグレムリン#3air2");
 	mes "[スカイグレムリン]";
 	mes "クエエッ!!";
 	next;
@@ -1853,9 +1946,9 @@ OnEff1:
 	cutin "h_iris01.bmp", 255;
 	mes "‐^ff0000パン！　パパン！　パンッ！^000000‐";
 	next;
-	misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
-	misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
-	misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
+	misceffect 183, getmdnpcname("スカイグレムリン#1air2");
+	misceffect 183, getmdnpcname("スカイグレムリン#2air2");
+	misceffect 183, getmdnpcname("スカイグレムリン#3air2");
 	mes "[飛行船乗務員]";
 	mes "わあああ……！";
 	mes "エ、エンジンが！";
@@ -1874,15 +1967,15 @@ OnEff1:
 	cutin "h_iris01.bmp", 255;
 	mes "‐^ff0000パン！　パパン！　パンッ！^000000‐";
 	next;
-	misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
-	misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
+	misceffect 183, getmdnpcname("スカイグレムリン#1air2");
+	misceffect 183, getmdnpcname("スカイグレムリン#2air2");
 	cutin "fly_felrock2.bmp", 2;
 	mes "[船長ペルロック]";
 	mes "こいつら！";
 	mes "ゆるさん!!　全滅させてやる！";
 	mes "くははははーっ!!";
 	next;
-	misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
+	misceffect 183, getmdnpcname("スカイグレムリン#3air2");
 	cutin "h_iris01.bmp", 2;
 	mes "[アイリス]";
 	mes "ああ……だめ！";
@@ -1912,18 +2005,18 @@ OnEff1:
 			mes "　船長は我に返り、攻撃の手を止めた‐";
 			close2;
 			set HEROAIR_1QUE,4;
-			hideonnpc getmdnpcname("船長ペルロック#air2"); //85384
-			hideonnpc getmdnpcname("アイリス#2air2"); //85375
-			hideonnpc getmdnpcname("スカイグレムリン#1air2"); //99361
-			hideonnpc getmdnpcname("スカイグレムリン#2air2"); //99362
-			hideonnpc getmdnpcname("スカイグレムリン#3air2"); //99363
-			hideonnpc getmdnpcname("スカイグレムリン#4air2"); //85394
-			hideonnpc getmdnpcname("スカイグレムリン#5air2"); //85395
-			hideonnpc getmdnpcname("スカイグレムリン#6air2"); //85396
-			hideonnpc getmdnpcname("スカイグレムリン#7air2"); //85397
-			hideonnpc getmdnpcname("スカイグレムリン#8air2"); //85398
-			hideoffnpc getmdnpcname("ケイオス#air2"); //92826
-			hideoffnpc getmdnpcname("船長ペルロック#2air2"); //99360
+			hideonnpc getmdnpcname("船長ペルロック#air2");
+			hideonnpc getmdnpcname("アイリス#2air2");
+			hideonnpc getmdnpcname("スカイグレムリン#1air2");
+			hideonnpc getmdnpcname("スカイグレムリン#2air2");
+			hideonnpc getmdnpcname("スカイグレムリン#3air2");
+			hideonnpc getmdnpcname("スカイグレムリン#4air2");
+			hideonnpc getmdnpcname("スカイグレムリン#5air2");
+			hideonnpc getmdnpcname("スカイグレムリン#6air2");
+			hideonnpc getmdnpcname("スカイグレムリン#7air2");
+			hideonnpc getmdnpcname("スカイグレムリン#8air2");
+			hideoffnpc getmdnpcname("ケイオス#air2");
+			hideoffnpc getmdnpcname("船長ペルロック#2air2");
 			end;
 		case 3:
 			mes "‐あなたは武器を構え、";
@@ -1946,16 +2039,16 @@ OnEff1:
 		}
 	}
 OnStart:
-	hideonnpc getmdnpcname("船長ペルロック#air2"); //85384
-	hideonnpc getmdnpcname("アイリス#2air2"); //85375
-	hideonnpc getmdnpcname("スカイグレムリン#1air2"); //99361
-	hideonnpc getmdnpcname("スカイグレムリン#2air2"); //99362
-	hideonnpc getmdnpcname("スカイグレムリン#3air2"); //99363
-	hideonnpc getmdnpcname("スカイグレムリン#4air2"); //85394
-	hideonnpc getmdnpcname("スカイグレムリン#5air2"); //85395
-	hideonnpc getmdnpcname("スカイグレムリン#6air2"); //85396
-	hideonnpc getmdnpcname("スカイグレムリン#7air2"); //85397
-	hideonnpc getmdnpcname("スカイグレムリン#8air2"); //85398
+	hideonnpc getmdnpcname("船長ペルロック#air2");
+	hideonnpc getmdnpcname("アイリス#2air2");
+	hideonnpc getmdnpcname("スカイグレムリン#1air2");
+	hideonnpc getmdnpcname("スカイグレムリン#2air2");
+	hideonnpc getmdnpcname("スカイグレムリン#3air2");
+	hideonnpc getmdnpcname("スカイグレムリン#4air2");
+	hideonnpc getmdnpcname("スカイグレムリン#5air2");
+	hideonnpc getmdnpcname("スカイグレムリン#6air2");
+	hideonnpc getmdnpcname("スカイグレムリン#7air2");
+	hideonnpc getmdnpcname("スカイグレムリン#8air2");
 	end;
 }
 
@@ -1964,16 +2057,16 @@ OnStart:
 	monster getmdmapname("1@air2.gat"),235,49,"ワイバーン",3187,1,getmdnpcname("mob#air4")+ "::OnKilled";
 	end;
 OnKilled:
-	hideoffnpc getmdnpcname("アイリス#2air2"); //85375
-	hideoffnpc getmdnpcname("船長ペルロック#air2"); //85384
-	hideoffnpc getmdnpcname("スカイグレムリン#1air2"); //85391
-	hideoffnpc getmdnpcname("スカイグレムリン#2air2"); //85392
-	hideoffnpc getmdnpcname("スカイグレムリン#3air2"); //85393
-	hideoffnpc getmdnpcname("スカイグレムリン#4air2"); //85394
-	hideoffnpc getmdnpcname("スカイグレムリン#5air2"); //85395
-	hideoffnpc getmdnpcname("スカイグレムリン#6air2"); //85396
-	hideoffnpc getmdnpcname("スカイグレムリン#7air2"); //85397
-	hideoffnpc getmdnpcname("スカイグレムリン#8air2"); //85398
+	hideoffnpc getmdnpcname("アイリス#2air2");
+	hideoffnpc getmdnpcname("船長ペルロック#air2");
+	hideoffnpc getmdnpcname("スカイグレムリン#1air2");
+	hideoffnpc getmdnpcname("スカイグレムリン#2air2");
+	hideoffnpc getmdnpcname("スカイグレムリン#3air2");
+	hideoffnpc getmdnpcname("スカイグレムリン#4air2");
+	hideoffnpc getmdnpcname("スカイグレムリン#5air2");
+	hideoffnpc getmdnpcname("スカイグレムリン#6air2");
+	hideoffnpc getmdnpcname("スカイグレムリン#7air2");
+	hideoffnpc getmdnpcname("スカイグレムリン#8air2");
 	end;
 }
 
@@ -1985,12 +2078,12 @@ OnStart2:
 	monster getmdmapname("1@air2.gat"),247,51,"暴走した船長ペルロック",3181,1,getmdnpcname("callboss#air")+ "::OnKilled";
 	end;
 OnKilled:
-	hideoffnpc getmdnpcname("ケイオス#air2"); //85381
-	hideoffnpc getmdnpcname("船長ペルロック#2air2"); //85380
+	hideoffnpc getmdnpcname("ケイオス#air2");
+	hideoffnpc getmdnpcname("船長ペルロック#2air2");
 	end;
 }
 
-1@air2.gat,247,51,3	script	船長ペルロック#air2	873,{/* 85384 (hide)*/
+1@air2.gat,247,51,3	script	船長ペルロック#air2	873,{
 	cutin "fly_felrock2.bmp", 2;
 	mes "[船長ペルロック]";
 	mes "船を荒らす不届きもの達め！";
@@ -2000,7 +2093,7 @@ OnKilled:
 	end;
 }
 
-1@air2.gat,243,58,3	script	船長ペルロック#2air2	873,{/* 85380 (hide)*/
+1@air2.gat,243,58,3	script	船長ペルロック#2air2	873,{
 	cutin "fly_felrock2.bmp", 2;
 	mes "[船長ペルロック]";
 	mes "私の船を……!!";
@@ -2009,7 +2102,8 @@ OnKilled:
 	cutin "fly_felrock2.bmp", 255;
 	end;
 }
-1@air2.gat,239,58,5	script	ケイオス#air2	683,{/* 85381 (hide)*/
+
+1@air2.gat,239,58,5	script	ケイオス#air2	683,{
 	if(HEROAIR_1QUE >= 4 && HEROAIR_1QUE <= 6) {
 		if(checkquest(120200)&8) {
 			mes "‐船長は正気を取り戻したようで";
@@ -2069,9 +2163,9 @@ OnKilled:
 			mes "　フェンリルの居た足場を、";
 			mes "　崩壊させた!!‐";
 			next;
-			misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
-			misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
-			misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
+			misceffect 183, getmdnpcname("スカイグレムリン#1air2");
+			misceffect 183, getmdnpcname("スカイグレムリン#2air2");
+			misceffect 183, getmdnpcname("スカイグレムリン#3air2");
 			cutin "fenrir_b.bmp", 2;
 			mes "[フェンリル]";
 			mes "……!!";
@@ -2176,9 +2270,9 @@ OnKilled:
 			mes "　投げた風魔手裏剣はアイリスの";
 			mes "　足場を崩壊させた!!‐";
 			next;
-			misceffect 183, getmdnpcname("スカイグレムリン#1air2"); //85391
-			misceffect 183, getmdnpcname("スカイグレムリン#2air2"); //85392
-			misceffect 183, getmdnpcname("スカイグレムリン#3air2"); //85393
+			misceffect 183, getmdnpcname("スカイグレムリン#1air2");
+			misceffect 183, getmdnpcname("スカイグレムリン#2air2");
+			misceffect 183, getmdnpcname("スカイグレムリン#3air2");
 			cutin "h_iris01.bmp", 2;
 			mes "[アイリス]";
 			mes "きゃあああああ!!";
@@ -2577,7 +2671,7 @@ OnKilled:
 		mes "あんたは先に脱出してくれ！";
 		mes "俺たちもここを片付けたら";
 		mes "すぐ脱出する！";
-		hideoffnpc getmdnpcname("warp5a#air2"); //85382
+		hideoffnpc getmdnpcname("warp5a#air2");
 		if(HEROAIR_1QUE == 5)
 			set '@num,5;
 		else if(HEROAIR_1QUE == 6)
@@ -2607,7 +2701,7 @@ OnKilled:
 	end;
 }
 
-1@air2.gat,244,73,0	script	warp5a#air2	45,1,1,{/* 85382 (hide)*/
+1@air2.gat,244,73,0	script	warp5a#air2	45,1,1,{
 	mes "‐ここから時の通路へ戻れそうだ。";
 	mes "　時の通路へ戻りますか？‐";
 	next;
