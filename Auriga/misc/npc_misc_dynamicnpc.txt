@@ -387,7 +387,7 @@
 					mes "^8B008Bパースタ大陸^000000の";
 					mes "どこに向かわれますか？";
 					next;
-					switch(select(	"ラヘル",
+					switch(select(	"港町ラザーニャ",
 									"都市選択に戻る"
 					)) {
 					case 1: set '@map$,"lasagna.gat";		set '@x,298;	set '@y,238;	break;

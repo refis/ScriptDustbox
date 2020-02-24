@@ -4978,7 +4978,7 @@ harboro1.gat,347,65,3	script	ミズ・マックフィー#rock	74,{
 		mes "よろしくお願いします。";
 		close;
 	}
-	if(checkquest(1327)) {
+	if(checkquest(1323) || checkquest(1324) || checkquest(1325) || checkquest(1326) || checkquest(1327)) {
 		mes "[ミズ・マックフィー]";
 		mes "チョロンちゃんは";
 		mes "大人しくしていれば";
@@ -6333,10 +6333,17 @@ harboro1.gat,357,152,3	script	鋼鉄自警団上級受付	884,{
 	if(!checkquest(12389)) {//?
 	}
 	if(checkquest(12398)) {
+		if(checkquest(12398)) {
+			mes "[鋼鉄自警団上級受付]";
+			mes "次の依頼まではもう少しかかりそうだ。";
+			mes "また後で来てくれ。";
+			close;
+		}
+		delquest 12398;
 		mes "[鋼鉄自警団上級受付]";
-		mes "次の依頼まではもう少しかかりそうだ。";
-		mes "また後で来てくれ。";
-		close;
+		mes "よく来てくれた。";
+		mes "さっそくだが仕事の依頼だ。";
+		next;
 	}
 	if(checkquest(12402)) {
 		if(checkquest(12402) & 0x4) {
