@@ -1,7 +1,8 @@
-ice_d03_i.gat,0,0,0,0	monster	怒りのスノウアー	3793,80,0,0,0
-ice_d03_i.gat,0,0,0,0	monster	怒りのアイスタイタン	3794,80,0,0,0
-ice_d03_i.gat,0,0,0,0	monster	怒りのゲイズティ	3792,80,0,0,0
-ice_d03_i.gat,0,0,0,0	monster	鋭いアイシクル	3795,20,0,0,0
+ice_d03_i.gat,0,0,0,0	monster	怒りのゲイズティ		3792,80,5000,0,0
+ice_d03_i.gat,0,0,0,0	monster	怒りのスノウアー		3793,80,5000,0,0
+ice_d03_i.gat,0,0,0,0	monster	怒りのアイスタイタン	3794,80,5000,0,0
+ice_d03_i.gat,0,0,0,0	monster	鋭いアイシクル			3795,20,5000,0,0
+//ice_d03_i.gat,0,0,0,0	monster	覚醒クトルラナックス	3796,1,5000,0,0
 
 //鋭いアイシクル,怒りのゲイズティ,怒りのアイスタイタン,計10体ランダム沸き
 
@@ -619,3 +620,25 @@ ice_d03_i.gat,112,111,3	duplicate(乾いた土盛り#frozen1)	乾いた土盛り#frozen27	55
 ice_d03_i.gat,150,104,3	duplicate(乾いた土盛り#frozen1)	乾いた土盛り#frozen28	557
 ice_d03_i.gat,137,38,3	duplicate(乾いた土盛り#frozen1)	乾いた土盛り#frozen29	557
 ice_d03_i.gat,160,48,3	duplicate(乾いた土盛り#frozen1)	乾いた土盛り#frozen30	557
+
+ice_d03_i.gat,0,0,0	script	#IllFrozen	-1,{
+OnInit:
+	setarray 'moblist,3792,3794,3795;
+	for(set '@i,0;'@i<10;set '@i,'@i+1)
+		monster "ice_d03_i.gat",0,0,"--ja--",'moblist[rand(3)],1,"::OnSummon";
+	end;
+
+OnSummon:
+	if('mob == 0 && rand(500) == 0) {
+		set 'mob,callmonster("ice_d03_i.gat",0,0,"狂乱した冒険者",3765,strnpcinfo(0)+"::OnKilled");
+		unittalk 'mob,"狂乱した冒険者 : あなたは魔物に惑わされている！僕が救ってあげましょう！";
+	}
+	else {
+		monster "ice_d03_i.gat",0,0,"--ja--",'moblist[rand(3)],1,"::OnSummon";
+	}
+	end;
+OnKilled:
+	set 'mob,0;
+	monster "ice_d03_i.gat",0,0,"--ja--",'moblist[rand(3)],1,"::OnSummon";
+	end;
+}
