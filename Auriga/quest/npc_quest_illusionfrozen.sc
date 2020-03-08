@@ -45,25 +45,35 @@ OnTouch:
 		cloakoffnpc "ブリド#frozen01";
 		cloakoffnpc "ジェイス#frozen01";
 	}
-	else if(IL_FROZEN_QUE == 3) {
+	else if(IL_FROZEN_QUE == 3 || IL_FROZEN_QUE == 8) {
 		cloakoffnpc "ブリド#frozen01";
 		cloakoffnpc "ジェイス#frozen02";
 	}
-	else if(IL_FROZEN_QUE == 4) {
+	else if(IL_FROZEN_QUE == 4 || IL_FROZEN_QUE == 9) {
 		cloakoffnpc "ブリド#frozen02";
 		cloakoffnpc "ジェイス#frozen02";
 	}
 	else if(IL_FROZEN_QUE == 5) {
-		if(checkquest(15115) & 2) {
-			cloakoffnpc "ブリド#frozen01";
-			cloakoffnpc "ジェイス#frozen01";
+		if(checkquest(15115)) {
+			if(checkquest(15115) & 2) {
+				delquest 15115;
+				cloakoffnpc "ブリド#frozen01";
+				cloakoffnpc "ジェイス#frozen01";
+			}
+			end;
 		}
+		cloakoffnpc "ブリド#frozen01";
+		cloakoffnpc "ジェイス#frozen01";
+	}
+	else if(IL_FROZEN_QUE <= 7) {
+		cloakoffnpc "ブリド#frozen01";
+		cloakoffnpc "ジェイス#frozen01";
 	}
 	end;
 }
 
 ice_d03_i.gat,150,43,5	script	ブリド#frozen01	10036,{
-	if(IL_FROZEN_QUE == 3) {
+	if(IL_FROZEN_QUE == 3 || IL_FROZEN_QUE == 8) {
 		mes "[ブリド]";
 		mes "まさか本当に壊せるとは……";
 		mes "おいジェイス！大丈夫か？";
@@ -83,7 +93,12 @@ OnInit:
 }
 
 ice_d03_i.gat,155,43,3	script	ジェイス#frozen01	10035,{
-	if(IL_FROZEN_QUE == 0) {
+	if(IL_FROZEN_QUE == 0 || IL_FROZEN_QUE == 5) {
+		if(IL_FROZEN_QUE == 5) {
+			mes "^ff0000彼らは以前、氷から救出した筈なのに";
+			mes "どういう訳かまた氷漬けにされている。^000000";
+			next;
+		}
 		mes "[ジェイス]";
 		mes "ふぅ……このバカ野郎の所為で";
 		mes "こんな目に合って……。";
@@ -147,10 +162,24 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen01	10035,{
 		mes "[ブリド]";
 		mes "ああ…私たち2人とも焼死するぞ～。";
 		setquest 15110;
+		if(IL_FROZEN_QUE == 5) {
+			set IL_FROZEN_QUE,6;
+			next;
+			mes "^ff0000彼らは以前交わした会話を";
+			mes "繰り返している。";
+			mes "そしてこちらのことを";
+			mes "全然覚えていないようだ。^000000";
+			next;
+			mes "^ff0000火を使っても";
+			mes "どうにもならないのは知っているが、";
+			mes "兎に角、彼らの願いを";
+			mes "叶えるとしよう。^000000";
+			close;
+		}
 		set IL_FROZEN_QUE,1;
 		close;
 	}
-	else if(IL_FROZEN_QUE == 1) {
+	else if(IL_FROZEN_QUE == 1 || IL_FROZEN_QUE == 6) {
 		if(countitem(25309) < 10) {
 			mes "[ジェイス]";
 			mes "乾いた木の枝が10個必要だ。";
@@ -160,8 +189,21 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen01	10035,{
 			close;
 		}
 		delitem 25309,10;
-		chgquest 15110,15111;
-		set IL_FROZEN_QUE,2;
+		if(IL_FROZEN_QUE == 1) {
+			set '@flag,0;
+			chgquest 15110,15111;
+			set IL_FROZEN_QUE,2;
+		}
+		else {
+			set '@flag,rand(4);
+			switch('@flag) {
+			case 0: chgquest 15110,15111; break;
+			case 1: chgquest 15110,15117; break;
+			case 2: chgquest 15110,15118; break;
+			case 3: chgquest 15110,15119; break;
+			}
+			set IL_FROZEN_QUE,7;
+		}
 		mes "[ジェイス]";
 		mes "……乾いた木の枝を";
 		mes "持ってきてくれたのか。";
@@ -170,8 +212,13 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen01	10035,{
 		mes "私はジェイス、そしてこちらは……";
 		next;
 		mes "[ブリド]";
-		mes "ああ……";
-		mes "私たち2人とも焼死するぞ……。";
+		if(IL_FROZEN_QUE == 1) {
+			mes "ああ……";
+			mes "私たち2人とも焼死するぞ……。";
+		}
+		else {
+			mes "ああ…私たち2人とも焼死するぞ…";
+		}
 		next;
 		mes "[ジェイス]";
 		mes "……ふぅ、こちらはブリド。";
@@ -227,26 +274,62 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen01	10035,{
 		next;
 		mes "[ブリド]";
 		mes "聞いて驚け！";
-		mes "ブリド・レポート！";
-		mes "怒りのアイスタイタンの巻！";
-		next;
-		mes "[ブリド]";
-		mes "私の調査によると";
-		mes "怒りのアイスタイタンは";
-		mes "本来塵のように小さく";
-		mes "愛おしいモンスターだった。";
-		next;
-		mes "[ブリド]";
-		mes "しかし、この洞窟で";
-		mes "長く生きることで";
-		mes "体の氷が今みたいに";
-		mes "大きくなったらしい。";
-		next;
-		mes "[ブリド]";
-		mes "それじゃ不便で寒いよね！";
-		mes strcharinfo(0);
-		mes "君は、奴らの体が軽くなるよう";
-		mes "体に付いてる氷を取ってくれ。";
+		switch('@flag) {
+		case 0:
+			mes "ブリド・レポート！";
+			mes "怒りのアイスタイタンの巻！";
+			next;
+			mes "[ブリド]";
+			mes "私の調査によると";
+			mes "怒りのアイスタイタンは";
+			mes "本来塵のように小さく";
+			mes "愛おしいモンスターだった。";
+			next;
+			mes "[ブリド]";
+			mes "しかし、この洞窟で";
+			mes "長く生きることで";
+			mes "体の氷が今みたいに";
+			mes "大きくなったらしい。";
+			next;
+			mes "[ブリド]";
+			mes "それじゃ不便で寒いよね！";
+			mes strcharinfo(0);
+			mes "君は、奴らの体が軽くなるよう";
+			mes "体に付いてる氷を取ってくれ。";
+			break;
+		case 1:
+			// TODO
+			break;
+		case 2:
+			mes "ブリド・レポート！怒りのスノウアーの巻！";
+			next;
+			mes "[ブリド]";
+			mes "私の調査によると";
+			mes "怒りのスノウアーは本来";
+			mes "心豊かで素直な奴らで";
+			mes "いつも愛想よく挨拶をしていた。";
+			next;
+			mes "[ブリド]";
+			mes "しかし誰も挨拶を返さないから";
+			mes "頭に来てしまい、それ以後";
+			mes "挨拶をする振りして";
+			mes "相手を攻撃するようになったらしい。";
+			mes "本当に心痛む事情だよ……。";
+			next;
+			mes "- 説明を聞いていたら、";
+			mes "  呆れた顔でブリドを見つめる";
+			mes "  ジェイスの視線が感じられた。 -";
+			next;
+			mes "[ブリド]";
+			mes strcharinfo(0);
+			mes "君は、奴らがまた";
+			mes "素直になれるように";
+			mes "躾けてくれ。";
+			break;
+		case 3:
+			// TODO
+			break;
+		}
 		next;
 		mes "[ブリド]";
 		mes "そうすると奴らの出す冷気が";
@@ -265,7 +348,12 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen01	10035,{
 		mes "はぁ……問題は他の方法が";
 		mes "思い浮かばないことだよな。";
 		mes "こいつの話を実行してみるしかなさそうだ。";
-		mes "怒りのアイスタイタン10体を退治し";
+		switch('@flag) {
+		case 0: mes "怒りのアイスタイタン10体を退治し"; break;
+		case 1: mes "怒りのゲイズティ10体を退治し"; break;// TODO
+		case 2: mes "怒りのスノウアー10体を退治し"; break;
+		case 3: mes "鋭いアイシクル10体を退治し"; break;// TODO
+		}
 		mes "ここに戻ってくれないか？";
 		next;
 		mes "[ブリド]";
@@ -277,12 +365,42 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen01	10035,{
 		mes "兎に角、頼む。";
 		close;
 	}
-	else if(IL_FROZEN_QUE == 2) {
-		if(checkquest(15111) & 4 == 0) {
-			mes "[ジェイス]";
-			mes "怒りのアイスタイタンを";
-			mes "10体退治してきてくれ。";
-			close;
+	else if(IL_FROZEN_QUE == 2 || IL_FROZEN_QUE == 7) {
+		if(checkquest(15111)) {
+			if(checkquest(15111) & 4 == 0) {
+				mes "[ジェイス]";
+				mes "怒りのアイスタイタンを";
+				mes "10体退治してきてくれ。";
+				close;
+			}
+			set '@quest,15111;
+		}
+		else if(checkquest(15117)) {
+			if(checkquest(15117) & 4 == 0) {
+				mes "[ジェイス]";
+				mes "怒りのゲイズティを";
+				mes "10体退治してきてくれ。";
+				close;
+			}
+			set '@quest,15117;
+		}
+		else if(checkquest(15118)) {
+			if(checkquest(15118) & 4 == 0) {
+				mes "[ジェイス]";
+				mes "怒りのスノウアーを";
+				mes "10体退治してきてくれ。";
+				close;
+			}
+			set '@quest,15118;
+		}
+		else if(checkquest(15119)) {
+			if(checkquest(15119) & 4 == 0) {
+				mes "[ジェイス]";
+				mes "鋭いアイシクルを";
+				mes "10体退治してきてくれ。";
+				close;
+			}
+			set '@quest,15119;
 		}
 		mes "[ブリド]";
 		mes "おお、やっぱ私の言った通りだろ？";
@@ -322,61 +440,69 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen01	10035,{
 		mes "この洞窟に来たこと自体が";
 		mes "全ての災難の始まりだったんだ！";
 		next;
-		menu "バカげた話？",-;
-		mes "[ブリド]";
-		mes "バカげた話だと？";
-		mes "事実を述べただけさ！";
-		mes "ブリド・レポート！";
-		mes "氷の洞窟の謎の巻!!";
-		next;
-		mes "[ジェイス]";
-		mes "はぁ……";
-		next;
-		mes "[ブリド]";
-		mes "私の調査によると、ここは昔";
-		mes "地下世界の王国だったらしい。";
-		mes "洞窟の全てが黄金で出来てる";
-		mes "凄い場所だった。";
-		mes "エルドラドー！";
-		next;
-		mes "- ここでジェイスが呆れ顔になったが";
-		mes "  ブリドは構わず話を続けた。 -";
-		next;
-		mes "[ブリド]";
-		mes "宝を狙う外部の侵入者は";
-		mes "増えるばかり……。";
-		mes "悩む王様の前にある日";
-		mes "王国の外から来た勇者が現れた。";
-		next;
-		mes "[ブリド]";
-		mes "勇者は一人で侵入者たちを";
-		mes "全員蹴散らした。";
-		mes "王様は大喜びし、自分の娘と勇者を";
-		mes "結婚させたらしい。";
-		next;
-		mes "[ブリド]";
-		mes "しかしその勇者も宝を狙う悪党の一人で";
-		mes "王国の至宝を持ち逃げしたという。";
-		next;
-		mes "[ブリド]";
-		mes "裏切られ激怒した王様は";
-		mes "洞窟を全て氷漬けにしてしまい";
-		mes "誰も侵入出来ないよう";
-		mes "恐ろしいモンスターたちを放した。";
-		mes "そんな悲しい伝説があるんだ。";
-		next;
-		mes "[ブリド]";
-		mes "も……もちろん私は";
-		mes "宝を狙ってここに来たのではないぞ。";
-		mes "通り過ぎるついでに";
-		mes "気になって入っただけだぞ。";
-		next;
-		mes "[ジェイス]";
-		mes "この前、私に話したのと";
-		mes "内容が相当違うんだが。";
-		mes "お前のバカげた話を";
-		mes "鵜呑みした訳ではないけれど";
-		mes "好奇心で入りこんな目に合うとはね。";
+		if(IL_FROZEN_QUE == 7)
+			set '@str$,"もう知ってるんだから黙っていよう";
+		if(select("バカげた話？",'@str$) == 2) {
+			mes "[ブリド]";
+			mes "バカげた話だと？！";
+			mes "事実を述べただけさ！";
+		}
+		else {
+			mes "[ブリド]";
+			mes "バカげた話だと？";
+			mes "事実を述べただけさ！";
+			mes "ブリド・レポート！";
+			mes "氷の洞窟の謎の巻!!";
+			next;
+			mes "[ジェイス]";
+			mes "はぁ……";
+			next;
+			mes "[ブリド]";
+			mes "私の調査によると、ここは昔";
+			mes "地下世界の王国だったらしい。";
+			mes "洞窟の全てが黄金で出来てる";
+			mes "凄い場所だった。";
+			mes "エルドラドー！";
+			next;
+			mes "- ここでジェイスが呆れ顔になったが";
+			mes "  ブリドは構わず話を続けた。 -";
+			next;
+			mes "[ブリド]";
+			mes "宝を狙う外部の侵入者は";
+			mes "増えるばかり……。";
+			mes "悩む王様の前にある日";
+			mes "王国の外から来た勇者が現れた。";
+			next;
+			mes "[ブリド]";
+			mes "勇者は一人で侵入者たちを";
+			mes "全員蹴散らした。";
+			mes "王様は大喜びし、自分の娘と勇者を";
+			mes "結婚させたらしい。";
+			next;
+			mes "[ブリド]";
+			mes "しかしその勇者も宝を狙う悪党の一人で";
+			mes "王国の至宝を持ち逃げしたという。";
+			next;
+			mes "[ブリド]";
+			mes "裏切られ激怒した王様は";
+			mes "洞窟を全て氷漬けにしてしまい";
+			mes "誰も侵入出来ないよう";
+			mes "恐ろしいモンスターたちを放した。";
+			mes "そんな悲しい伝説があるんだ。";
+			next;
+			mes "[ブリド]";
+			mes "も……もちろん私は";
+			mes "宝を狙ってここに来たのではないぞ。";
+			mes "通り過ぎるついでに";
+			mes "気になって入っただけだぞ。";
+			next;
+			mes "[ジェイス]";
+			mes "この前、私に話したのと";
+			mes "内容が相当違うんだが。";
+			mes "お前のバカげた話を";
+			mes "鵜呑みした訳ではないけれど";
+			mes "好奇心で入りこんな目に合うとはね。";
+		}
 		next;
 		mes "[ブリド]";
 		mes "はっはっ！";
@@ -402,8 +528,11 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen01	10035,{
 		next;
 		mes "- ジェイスを覆う氷を";
 		mes "  力いっぱい殴りつけた！ -";
-		chgquest 15111,15112;
-		set IL_FROZEN_QUE,3;
+		chgquest '@quest,15112;
+		if(IL_FROZEN_QUE == 2)
+			set IL_FROZEN_QUE,3;
+		else
+			set IL_FROZEN_QUE,8;
 		cloakonnpc "ジェイス#frozen01";
 		cloakoffnpc "ジェイス#frozen02";
 		misceffect 135, "ジェイス#frozen02";
@@ -416,7 +545,7 @@ OnInit:
 }
 
 ice_d03_i.gat,155,43,3	script	ジェイス#frozen02	467,{
-	if(IL_FROZEN_QUE == 3) {
+	if(IL_FROZEN_QUE == 3 || IL_FROZEN_QUE == 8) {
 		mes "[ジェイス]";
 		mes "まさかと思ったが";
 		mes "本当に叩いて砕くとは。";
@@ -447,13 +576,16 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen02	467,{
 		mes "- ブリドを覆う氷を";
 		mes "  力いっぱい殴りつけた！ -";
 		chgquest 15112,15113;
-		set IL_FROZEN_QUE,4;
+		if(IL_FROZEN_QUE == 3)
+			set IL_FROZEN_QUE,4;
+		else
+			set IL_FROZEN_QUE,9;
 		cloakonnpc "ブリド#frozen01";
 		cloakoffnpc "ブリド#frozen02";
 		misceffect 135,"ブリド#frozen02";
 		close;
 	}
-	else if(IL_FROZEN_QUE == 4) {
+	else if(IL_FROZEN_QUE == 4 || IL_FROZEN_QUE == 9) {
 		mes "[ブリド]";
 		mes "おお！お蔭で助かった！";
 		mes "結構な実力者なんだな";
@@ -500,7 +632,13 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen02	467,{
 		mes "[ブリド]";
 		mes "だが王様が怒り出して以来";
 		mes "そのトカゲも王様の呪いを受け、";
-		mes "醜い氷のトカゲになってしまったという。";
+		if(IL_FROZEN_QUE == 4) {
+			mes "醜い氷のトカゲになってしまったという。";
+		}
+		else {
+			mes "醜い氷のトカゲに";
+			mes "なってしまったという。";
+		}
 		next;
 		mes "[ブリド]";
 		mes "今も主の愛情に飢え、";
@@ -537,15 +675,32 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen02	467,{
 		mes "  まるで始めから";
 		mes "  存在しなかったかのように。";
 		mes "  今まで夢でも見ていたんだろうか？ -";
-		delquest 15113;
-		setquest 15115;
-		setquest 15116;
-		delquest 15116;
-		setquest 202080;
-		set IL_FROZEN_QUE,5;
-		getitem 25271,10;
-		getexp 300000000,0,1;
-		getexp 0,60000000,0;
+		if(IL_FROZEN_QUE == 4) {
+			delquest 15113;
+			setquest 15115;
+			//setquest 15116;
+			//compquest 15116;
+			setquest 202080;
+			set IL_FROZEN_QUE,5;
+			getitem 25271,10;
+			getexp 300000000,0,1;
+			getexp 0,60000000,0;
+		}
+		else {
+			next;
+			mes "- しかし、毎回同じ繰り返しではなく";
+			mes "  少しずつ状況が変わるのをみると";
+			mes "  時空間が歪んでいくのではないだろうか。";
+			mes "  こんな疑問を前にも持ったような……。";
+			mes "  分からない。全てが不規則で";
+			mes "  繰り替えされてる。この考えさえも……。 -";
+			delquest 15113;
+			setquest 15115;
+			set IL_FROZEN_QUE,5;
+			getitem 25271,2;
+			getexp 100000000,0,1;
+			getexp 0,20000000,0;
+		}
 		cloakonnpc "ブリド#frozen02";
 		cloakonnpc "ジェイス#frozen02";
 		close;
@@ -563,7 +718,7 @@ ice_d03_i.gat,64,231,3	script	乾いた土盛り#frozen1	557,{
 		mes "　種類数を減らしてからまた調べよう‐";
 		close;
 	}
-	if(IL_FROZEN_QUE != 1) {
+	if(IL_FROZEN_QUE != 1 && IL_FROZEN_QUE != 6) {
 		mes "- 特に何もないようだ。 -";
 		close;
 	}
