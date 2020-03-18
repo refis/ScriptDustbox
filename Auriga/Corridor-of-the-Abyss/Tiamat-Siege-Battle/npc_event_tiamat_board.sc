@@ -48,7 +48,7 @@
 1_tiamat_08.gat,88,275,1	script	塔・南①2F#36C	835,2,2,{/* 282 */ unittalk "「城壁2F01」へ",1; }
 1_tiamat_08.gat,180,306,1	script	塔・南①3F#37A	835,2,2,{/* 283 */ unittalk "「塔・南①屋上」へ",1; }
 1_tiamat_08.gat,220,276,1	script	塔・南①3F#37B	835,2,2,{/* 284 */ unittalk "「塔・南①2F」へ",1; }
-1_tiamat_08.gat,176,275,1	script	塔・南①3F#37C	835,2,2,{/* 285 */ unittalk "「xxxxx」へ",1; }			//スタック
+1_tiamat_08.gat,176,275,1	script	塔・南①3F#37C	835,2,2,{/* 285 */ unittalk "「城壁通路01」へ",1; }
 1_tiamat_08.gat,8,218,1		script	塔・南西1F#48A	835,2,2,{/* 286 */ unittalk "「塔・南西2F」へ",1; }
 1_tiamat_08.gat,91,218,1	script	塔・南西2F#49A	835,2,2,{/* 287 */ unittalk "「塔・南西3F」へ",1; }
 1_tiamat_08.gat,132,176,1	script	塔・南西2F#49B	835,2,2,{/* 288 */ unittalk "「塔・南西1F」へ",1; }
@@ -56,8 +56,8 @@
 1_tiamat_08.gat,124,191,1	script	塔・南西2F#49D	835,2,2,{/* 290 */ unittalk "「城壁2F02」へ",1; }
 1_tiamat_08.gat,180,218,1	script	塔・南西3F#50A	835,2,2,{/* 291 */ unittalk "「塔・南西屋上」へ",1; }
 1_tiamat_08.gat,220,176,1	script	塔・南西3F#50B	835,2,2,{/* 292 */ unittalk "「塔・南西2F」へ",1; }
-1_tiamat_08.gat,207,219,1	script	塔・南西3F#50C	835,2,2,{/* 293 */ unittalk "「xxxxx」へ",1; }			//スタック
-1_tiamat_08.gat,212,191,1	script	塔・南西3F#50D	835,2,2,{/* 294 */ unittalk "「xxxxx」へ",1; }			//スタック
+1_tiamat_08.gat,207,219,1	script	塔・南西3F#50C	835,2,2,{/* 293 */ unittalk "「城壁通路03」へ",1; }
+1_tiamat_08.gat,212,191,1	script	塔・南西3F#50D	835,2,2,{/* 294 */ unittalk "「城壁通路01」へ",1; }
 1_tiamat_08.gat,8,134,1		script	塔・西1F#52A	835,2,2,{/* 295 */ unittalk "「塔・西2F」へ",1; }
 1_tiamat_08.gat,48,103,1	script	塔・西1F#52B	835,2,2,{/* 296 */ unittalk "「中庭(西)」へ",1; }
 1_tiamat_08.gat,102,134,1	script	塔・西2F#53A	835,2,2,{/* 297 */ unittalk "「塔・西3F」へ",1; }
@@ -66,8 +66,8 @@
 1_tiamat_08.gat,88,103,1	script	塔・西2F#53D	835,2,2,{/* 300 */ unittalk "「城壁2F02」へ",1; }
 1_tiamat_08.gat,190,134,1	script	塔・西3F#54A	835,2,2,{/* 301 */ unittalk "「塔・西屋上」へ",1; }
 1_tiamat_08.gat,220,103,1	script	塔・西3F#54B	835,2,2,{/* 302 */ unittalk "「塔・西2F」へ",1; }
-1_tiamat_08.gat,180,123,1	script	塔・西3F#54C	835,2,2,{/* 303 */ unittalk "「xxxxx」へ",1; }			//スタック
-1_tiamat_08.gat,176,103,1	script	塔・西3F#54D	835,2,2,{/* 304 */ unittalk "「xxxxx」へ",1; }			//スタック
+1_tiamat_08.gat,180,123,1	script	塔・西3F#54C	835,2,2,{/* 303 */ unittalk "「城壁通路05」へ",1; }
+1_tiamat_08.gat,176,103,1	script	塔・西3F#54D	835,2,2,{/* 304 */ unittalk "「城壁通路03」へ",1; }
 1_tiamat_08.gat,8,48,1		script	塔・北東1F#65A	835,2,2,{/* 305 */ unittalk "「塔・北東2F」へ",1; }
 1_tiamat_08.gat,48,18,1		script	塔・北東1F#65B	835,2,2,{/* 306 */ unittalk "「塔・北東B1F」へ",1; }
 1_tiamat_08.gat,4,17,1		script	塔・北東1F#65C	835,2,2,{/* 307 */ unittalk "「城壁1F08」へ",1; }
@@ -77,15 +77,15 @@
 1_tiamat_08.gat,99,4,1		script	塔・北東2F#66D	835,2,2,{/* 311 */ unittalk "「城壁2F07」へ",1; }
 1_tiamat_08.gat,179,48,1	script	塔・北東3F#67A	835,2,2,{/* 312 */ unittalk "「塔・北東屋上」へ",1; }
 1_tiamat_08.gat,220,18,1	script	塔・北東3F#67B	835,2,2,{/* 313 */ unittalk "「塔・北東2F」へ",1; }
-1_tiamat_08.gat,176,17,1	script	塔・北東3F#67C	835,2,2,{/* 314 */ unittalk "「zzzzz」へ",1; }			//スタック
-1_tiamat_08.gat,187,4,1		script	塔・北東3F#67D	835,2,2,{/* 315 */ unittalk "「zzzzz」へ",1; }			//スタック
+1_tiamat_08.gat,176,17,1	script	塔・北東3F#67C	835,2,2,{/* 314 */ unittalk "「城壁通路08」へ",1; }
+1_tiamat_08.gat,187,4,1		script	塔・北東3F#67D	835,2,2,{/* 315 */ unittalk "「城壁通路06」へ",1; }
 1_tiamat_08.gat,8,390,1		script	塔・北①1F#69A	835,2,2,{/* 316 */ unittalk "「塔・北①2F」へ",1; }
 1_tiamat_08.gat,92,389,1	script	塔・北①2F#70A	835,2,2,{/* 317 */ unittalk "「塔・北①3F」へ",1; }
 1_tiamat_08.gat,132,360,1	script	塔・北①2F#70B	835,2,2,{/* 318 */ unittalk "「塔・北①1F」へ",1; }
 1_tiamat_08.gat,88,359,1	script	塔・北①2F#70C	835,2,2,{/* 319 */ unittalk "「城壁2F04」へ",1; }
 1_tiamat_08.gat,180,390,1	script	塔・北①3F#71A	835,2,2,{/* 320 */ unittalk "「塔・北①4F」へ",1; }
 1_tiamat_08.gat,220,360,1	script	塔・北①3F#71B	835,2,2,{/* 321 */ unittalk "「塔・北①2F」へ",1; }
-1_tiamat_08.gat,176,359,1	script	塔・北①3F#71C	835,2,2,{/* 322 */ unittalk "「xxxxx」へ",1; }			//スタック
+1_tiamat_08.gat,176,359,1	script	塔・北①3F#71C	835,2,2,{/* 322 */ unittalk "「城壁通路07」へ",1; }
 1_tiamat_08.gat,265,390,1	script	塔・北①4F#72A	835,2,2,{/* 323 */ unittalk "「塔・北①天文台」へ",1; }
 1_tiamat_08.gat,306,360,1	script	塔・北①4F#72B	835,2,2,{/* 324 */ unittalk "「塔・北①3F」へ",1; }
 1_tiamat_08.gat,358,393,1	script	鐘楼1F#171A	835,2,2,{/* 325 */ unittalk "「鐘楼2F」へ",1; }
@@ -135,8 +135,8 @@
 1_tiamat_15.gat,159,64,1	script	医務室#104A	835,2,2,{/* 461 */ unittalk "「城内通路2F01」へ",1; }
 1_tiamat_17.gat,60,85,1	script	塔・南東2F#45A	835,2,2,{/* 477 */ unittalk "「城壁2F06」へ",1; }
 1_tiamat_17.gat,52,14,1	script	塔・南東2F#45B	835,2,2,{/* 478 */ unittalk "「城壁2F05」へ",1; }
-1_tiamat_18.gat,40,11,1	script	塔・南東3F#46A	835,2,2,{/* 489 */ unittalk "「zzzzz」へ",1; }				//スタック
-1_tiamat_18.gat,44,87,1	script	塔・南東3F#46B	835,2,2,{/* 490 */ unittalk "「zzzzz」へ",1; }				//スタック
+1_tiamat_18.gat,40,11,1	script	塔・南東3F#46A	835,2,2,{/* 489 */ unittalk "「城壁通路02」へ",1; }
+1_tiamat_18.gat,44,87,1	script	塔・南東3F#46B	835,2,2,{/* 490 */ unittalk "「城壁通路04」へ",1; }
 1_tiamat_20.gat,179,281,1	script	小ホール②#87A	835,2,2,{/* 502 */ unittalk "「大ホール」へ",1; }
 1_tiamat_20.gat,229,173,1	script	王子の寝室#114A	835,2,2,{/* 503 */ unittalk "「城内通路3F03」へ",1; }
 1_tiamat_20.gat,271,173,1	script	王女の寝室#115A	835,2,2,{/* 504 */ unittalk "「城内通路3F03」へ",1; }
@@ -149,7 +149,7 @@
 1_tiamat_22.gat,49,103,1	script	塔・北②2F#76C	835,2,2,{/* 524 */ unittalk "「城内通路2F03」へ",1; }
 1_tiamat_22.gat,120,111,1	script	塔・北②3F#77A	835,2,2,{/* 525 */ unittalk "「塔・北②2F」へ",1; }
 1_tiamat_22.gat,103,112,1	script	塔・北②3F#77B	835,2,2,{/* 526 */ unittalk "「塔・北②屋上」へ",1; }
-1_tiamat_22.gat,107,100,1	script	塔・北②3F#77C	835,2,2,{/* 527 */ unittalk "「zzzzz」へ",1; }			//スタック
+1_tiamat_22.gat,107,100,1	script	塔・北②3F#77C	835,2,2,{/* 527 */ unittalk "「城壁通路08」へ",1; }
 1_tiamat_23.gat,165,163,1	script	墓①#194A	835,2,2,{/* 562 */ unittalk "「カタコンベ通路」へ",1; }
 1_tiamat_23.gat,151,128,1	script	墓②#195A	835,2,2,{/* 563 */ unittalk "「カタコンベ通路」へ",1; }
 1_tiamat_23.gat,130,137,1	script	墓③#196A	835,2,2,{/* 564 */ unittalk "「カタコンベ通路」へ",1; }
@@ -248,11 +248,11 @@
 1_tiamat_40.gat,58,35,1	script	畜舎#9A	835,2,2,{/* 884 */ unittalk "「中庭(西)」へ",1; }
 1_tiamat_41.gat,92,6,1	script	城門①3F#16A	835,2,2,{/* 902 */ unittalk "「城門①屋上」へ",1; }
 1_tiamat_41.gat,76,76,1	script	塔・東3F#58A	835,2,2,{/* 903 */ unittalk "「塔・東屋上」へ",1; }
-1_tiamat_41.gat,68,89,1	script	塔・東3F#58B	835,2,2,{/* 904 */ unittalk "「zzzzz」へ",1; }			//スタック
-1_tiamat_41.gat,79,89,1	script	塔・東3F#58C	835,2,2,{/* 905 */ unittalk "「zzzzz」へ",1; }			//スタック
+1_tiamat_41.gat,68,89,1	script	塔・東3F#58B	835,2,2,{/* 904 */ unittalk "「城壁通路04」へ",1; }
+1_tiamat_41.gat,79,89,1	script	塔・東3F#58C	835,2,2,{/* 905 */ unittalk "「城壁通路06」へ",1; }
 1_tiamat_41.gat,17,76,1	script	塔・北西3F#62A	835,2,2,{/* 906 */ unittalk "「塔・北西屋上」へ",1; }
-1_tiamat_41.gat,16,89,1	script	塔・北西3F#62B	835,2,2,{/* 907 */ unittalk "「xxxxx」へ",1; }			//スタック
-1_tiamat_41.gat,27,89,1	script	塔・北西3F#62C	835,2,2,{/* 908 */ unittalk "「xxxxx」へ",1; }			//スタック
+1_tiamat_41.gat,16,89,1	script	塔・北西3F#62B	835,2,2,{/* 907 */ unittalk "「城壁通路05」へ",1; }
+1_tiamat_41.gat,27,89,1	script	塔・北西3F#62C	835,2,2,{/* 908 */ unittalk "「城壁通路07」へ",1; }
 1_tiamat_42.gat,93,51,1	script	秘密の庭#7A	835,2,2,{/* 990 */ unittalk "「噴水基部」へ",1; }
 1_tiamat_42.gat,90,214,1	script	エントランス#80A	835,2,2,{/* 991 */ unittalk "「城門②1F」へ",1; }
 1_tiamat_42.gat,115,254,1	script	エントランス#80B	835,2,2,{/* 992 */ unittalk "「城内通路1F01」へ",1; }
@@ -312,24 +312,24 @@
 1_tiamat_44.gat,87,124,1	script	礼拝堂#158D	835,2,2,{/* 1075 */ unittalk "「教会1F通路02」へ",1; }
 1_tiamat_44.gat,113,124,1	script	礼拝堂#158E	835,2,2,{/* 1076 */ unittalk "「教会1F通路01」へ",1; }
 1_tiamat_44.gat,35,175,1	script	懺悔室#159A	835,2,2,{/* 1077 */ unittalk "「礼拝堂」へ",1; }
-1_tiamat_45.gat,21,15,1	script	城壁通路01#27A	835,2,2,{/* 1088 */ unittalk "「xxxxx」へ",1; }
-1_tiamat_45.gat,38,9,1	script	城壁通路01#27B	835,2,2,{/* 1089 */ unittalk "「xxxxx」へ",1; }
-1_tiamat_45.gat,9,19,1	script	城壁通路03#29A	835,2,2,{/* 1090 */ unittalk "「xxxxx」へ",1; }
-1_tiamat_45.gat,10,82,1	script	城壁通路03#29B	835,2,2,{/* 1091 */ unittalk "「xxxxx」へ",1; }
-1_tiamat_46.gat,83,162,1	script	城壁通路02#28A	835,2,2,{/* 1100 */ unittalk "「zzzzz」へ",1; }
-1_tiamat_46.gat,55,159,1	script	城壁通路02#28B	835,2,2,{/* 1101 */ unittalk "「zzzzz」へ",1; }
-1_tiamat_46.gat,97,168,1	script	城壁通路04#30A	835,2,2,{/* 1102 */ unittalk "「zzzzz」へ",1; }
-1_tiamat_46.gat,97,230,1	script	城壁通路04#30B	835,2,2,{/* 1103 */ unittalk "「zzzzz」へ",1; }
+1_tiamat_45.gat,21,15,1	script	城壁通路01#27A	835,2,2,{/* 1088 */ unittalk "「塔・南西3F」へ",1; }
+1_tiamat_45.gat,38,9,1	script	城壁通路01#27B	835,2,2,{/* 1089 */ unittalk "「塔・南①3F」へ",1; }
+1_tiamat_45.gat,9,19,1	script	城壁通路03#29A	835,2,2,{/* 1090 */ unittalk "「塔・南西3F」へ",1; }
+1_tiamat_45.gat,10,82,1	script	城壁通路03#29B	835,2,2,{/* 1091 */ unittalk "「塔・西3F」へ",1; }
+1_tiamat_46.gat,83,162,1	script	城壁通路02#28A	835,2,2,{/* 1100 */ unittalk "「塔・南東3F」へ",1; }
+1_tiamat_46.gat,55,159,1	script	城壁通路02#28B	835,2,2,{/* 1101 */ unittalk "「塔・南②3F」へ",1; }
+1_tiamat_46.gat,97,168,1	script	城壁通路04#30A	835,2,2,{/* 1102 */ unittalk "「塔・南東3F」へ",1; }
+1_tiamat_46.gat,97,230,1	script	城壁通路04#30B	835,2,2,{/* 1103 */ unittalk "「塔・東3F」へ",1; }
 1_tiamat_47.gat,179,9,1		script	中庭(北)#5A	835,2,2,{/* 1109 */ unittalk "「中庭(中央)」へ",1; }
 1_tiamat_47.gat,169,60,1	script	中庭(北)#5B	835,2,2,{/* 1110 */ unittalk "「城門②1F」へ",1; }
-1_tiamat_48.gat,18,13,1	script	城壁通路05#31A	835,2,2,{/* 1117 */ unittalk "「xxxxx」へ",1; }
-1_tiamat_48.gat,10,47,1	script	城壁通路05#31B	835,2,2,{/* 1118 */ unittalk "「xxxxx」へ",1; }
-1_tiamat_48.gat,36,69,1	script	城壁通路07#33A	835,2,2,{/* 1119 */ unittalk "「xxxxx」へ",1; }
-1_tiamat_48.gat,60,69,1	script	城壁通路07#33B	835,2,2,{/* 1120 */ unittalk "「xxxxx」へ",1; }
-1_tiamat_49.gat,89,223,1	script	城壁通路06#32A	835,2,2,{/* 1129 */ unittalk "「zzzzz」へ",1; }
-1_tiamat_49.gat,96,265,1	script	城壁通路06#32B	835,2,2,{/* 1130 */ unittalk "「zzzzz」へ",1; }
-1_tiamat_49.gat,34,283,1	script	城壁通路08#34A	835,2,2,{/* 1131 */ unittalk "「zzzzz」へ",1; }
-1_tiamat_49.gat,74,283,1	script	城壁通路08#34B	835,2,2,{/* 1132 */ unittalk "「zzzzz」へ",1; }
+1_tiamat_48.gat,18,13,1	script	城壁通路05#31A	835,2,2,{/* 1117 */ unittalk "「塔・西3F」へ",1; }
+1_tiamat_48.gat,10,47,1	script	城壁通路05#31B	835,2,2,{/* 1118 */ unittalk "「塔・北西3F」へ",1; }
+1_tiamat_48.gat,36,69,1	script	城壁通路07#33A	835,2,2,{/* 1119 */ unittalk "「塔・北西3F」へ",1; }
+1_tiamat_48.gat,60,69,1	script	城壁通路07#33B	835,2,2,{/* 1120 */ unittalk "「塔・北①3F」へ",1; }
+1_tiamat_49.gat,89,223,1	script	城壁通路06#32A	835,2,2,{/* 1129 */ unittalk "「塔・東3F」へ",1; }
+1_tiamat_49.gat,96,265,1	script	城壁通路06#32B	835,2,2,{/* 1130 */ unittalk "「塔・北東3F」へ",1; }
+1_tiamat_49.gat,34,283,1	script	城壁通路08#34A	835,2,2,{/* 1131 */ unittalk "「塔・北②3F」へ",1; }
+1_tiamat_49.gat,74,283,1	script	城壁通路08#34B	835,2,2,{/* 1132 */ unittalk "「塔・北東3F」へ",1; }
 1_tiamat_49.gat,238,52,1	script	城門②1F#79A	835,2,2,{/* 1133 */ unittalk "「エントランス」へ",1; }
 1_tiamat_49.gat,248,6,1		script	城門②1F#79B	835,2,2,{/* 1134 */ unittalk "「中庭(北)」へ",1; }
 1_tiamat_50.gat,145,107,1	script	中庭(中央)#2A	835,2,2,{/* 1143 */ unittalk "「城門①1F」へ",1; }
@@ -409,13 +409,13 @@
 1_tiamat_61.gat,160,113,1	script	塔・南②1F#39B	835,2,2,{/* 1381 */ unittalk "「城門①1F」へ",1; }
 1_tiamat_61.gat,121,61,1	script	塔・南②2F#40A	835,2,2,{/* 1382 */ unittalk "「城壁2F05」へ",1; }
 1_tiamat_61.gat,103,54,1	script	塔・南②2F#40B	835,2,2,{/* 1383 */ unittalk "「塔・南②1F」へ",1; }
-1_tiamat_61.gat,51,61,1	script	塔・南②3F#41A	835,2,2,{/* 1384 */ unittalk "「zzzzz」へ",1; }				// スタック
+1_tiamat_61.gat,51,61,1	script	塔・南②3F#41A	835,2,2,{/* 1384 */ unittalk "「城壁通路02」へ",1; }
 1_tiamat_61.gat,107,94,1	script	図書室#97A	835,2,2,{/* 1385 */ unittalk "「謁見の間」へ",1; }
 1_tiamat_62.gat,14,94,1	script	王の寝室#112A	835,2,2,{/* 1390 */ unittalk "「王の部屋」へ",1; }
 1_tiamat_63.gat,231,264,1	script	噴水基部#126A	835,2,2,{/* 1401 */ unittalk "「秘密の庭」へ",1; }
 1_tiamat_63.gat,264,242,1	script	噴水基部#126B	835,2,2,{/* 1402 */ unittalk "「噴水最深部」へ",1; }
 1_tiamat_63.gat,217,242,1	script	噴水基部#126C	835,2,2,{/* 1403 */ unittalk "「水路01」へ",1; }
 1_tiamat_63.gat,257,267,1	script	噴水基部#126D	835,2,2,{/* 1404 */ unittalk "「水路02」へ",1; }
-1_tiamat_63.gat,275,249,1	script	噴水基部#126E	835,2,2,{/* 1405 */ unittalk "「水路03」へ",1; }
+1_tiamat_63.gat,275,249,1	script	噴水基部#126E	835,1,1,{/* 1405 */ unittalk "「水路03」へ",1; }
 2_tiamat_01.gat,198,44,1	script	地下祭儀場#186A	835,2,2,{/* 1468 */ unittalk "「地下祭壇」へ",1; }
 2_tiamat_00.gat,51,64,1	script	地下祭壇#188B	835,2,2,{/* 1433(hide) */ unittalk "「深淵の王座」へ",1; }
