@@ -11,7 +11,7 @@
 		warp "1_tiamat_55.gat",287,150;
 	else if($@tiamat_main == 3)	// 「深淵の王座」の前へ
 		warp "2_tiamat_00.gat",49,35;
-	else					// 「秘密の部屋」へ
+	else if($@tiamat_main == 4)	// 「秘密の部屋」へ
 		warp "3_tiamat_00.gat",155,73;
 	end;
 }
@@ -210,10 +210,10 @@
 1_tiamat_23.gat,155,130,0	script	area#k1951	45,2,2,{/* 542 */}
 1_tiamat_23.gat,130,133,0	script	area#k1961	45,2,2,{/* 543 */}
 1_tiamat_23.gat,137,165,0	script	area#k1971	45,2,2,{/* 544 */}
-1_tiamat_23.gat,170,159,0	script	area#k1983	45,2,2,{/* 545 */}
-1_tiamat_23.gat,155,123,0	script	area#k1984	45,2,2,{/* 546 */}
-1_tiamat_23.gat,124,133,0	script	area#k1985	45,2,2,{/* 547 */}
-1_tiamat_23.gat,136,172,0	script	area#k1986	45,2,2,{/* 548 */}
+1_tiamat_23.gat,170,159,0	script	area#k1983	45,2,2,{/* 545 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_23.gat,155,123,0	script	area#k1984	45,2,2,{/* 546 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_23.gat,124,133,0	script	area#k1985	45,2,2,{/* 547 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_23.gat,136,172,0	script	area#k1986	45,2,2,{/* 548 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_25.gat,23,144,0	warp	area#r641	2,2,1_tiamat_08.gat,48,13	//575
 1_tiamat_25.gat,52,127,0	warp	area#r642	2,2,1_tiamat_25.gat,150,15	//576
 1_tiamat_25.gat,150,10,0	warp	area#r1321	2,2,1_tiamat_25.gat,52,132	//577
@@ -236,7 +236,7 @@
 1_tiamat_26.gat,122,146,0	script	area#k1251	45,2,2,{/* 601 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_26.gat,68,225,0	script	area#k1291	45,2,2,{/* 602 */}
 1_tiamat_26.gat,67,150,0	script	area#k1292	45,2,2,{/* 603 */}
-1_tiamat_26.gat,235,175,0	script	area#k1992	45,2,2,{/* 604 */}
+1_tiamat_26.gat,235,175,0	script	area#k1992	45,2,2,{/* 604 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_29.gat,131,207,0	warp	area#r31	2,2,1_tiamat_50.gat,152,139	//640
 1_tiamat_29.gat,182,246,0	warp	area#r32	2,2,1_tiamat_34.gat,238,173	//641
 1_tiamat_29.gat,264,202,0	warp	area#r33	2,2,1_tiamat_14.gat,39,12	//642
@@ -380,7 +380,7 @@
 1_tiamat_42.gat,278,163,0	script	area#k1059	45,2,2,{/* 973 */}
 1_tiamat_42.gat,53,152,0	script	area#k1222	45,2,2,{/* 974 */}
 1_tiamat_42.gat,82,175,0	script	area#k1224	45,2,2,{/* 975 */}
-1_tiamat_42.gat,173,342,0	script	area#k892	45,2,2,{/* 976 */}
+1_tiamat_42.gat,173,342,0	script	area#k892	45,2,2,{/* 976 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_42.gat,247,111,0	script	area#k991	45,2,2,{/* 977 */}
 1_tiamat_42.gat,216,142,0	script	area#k1051	45,2,2,{/* 978 */}
 1_tiamat_43.gat,34,28,0		warp	area#r901	2,2,1_tiamat_42.gat,183,258	//1029

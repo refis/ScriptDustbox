@@ -4,7 +4,8 @@ OnInit:
 	end;
 OnStart:
 OnTimer5000:
-//OnClock:
+//OnClock1500:
+//OnClock2230:
 //	initnpctimer;
 	set $@tiamat_main,0;
 	set $@tiamat_milka,0;
@@ -81,22 +82,22 @@ OnLowen:
 		mes "お待ちしておりました。";
 		mes "ここが王城へ続く道です。";
 	}
-	else if($@tiamat_main) {
+	else if($@tiamat_main == 1) {
 		mes "[王女メア]";
 		mes "王城への道は開かれています。";
 		mes "気を引き締めて参りましょう。";
 	}
-	else if($@tiamat_main) {
+	else if($@tiamat_main == 2) {
 		mes "[王女メア]";
 		mes "いよいよ魔女との決戦です。";
 		mes "どうか、御武運を……。";
 	}
-	else if($@tiamat_main) {
+	else if($@tiamat_main == 3) {
 		mes "[王女メア]";
 		mes "……これが最後の戦いとなるでしょう。";
 		mes "全てを……貴方に託します。";
 	}
-	else if($@tiamat_main) {
+	else if($@tiamat_main == 4) {
 		unittalk "王女メア : ご協力ありがとうございました。探索の成果を秘密の部屋にて確認しましょう。",1;
 		end;
 	}
@@ -164,9 +165,11 @@ OnLowen:
 		mes "生きて帰ってきてくださいね……。";
 		close;
 	case 2:
-		//
 		mes "[王宮治療術士]";
+		mes "倉庫ですね";
+		mes "　";
 		mes "メア様のことを頼みます。";
+		mes "生きて帰ってきてくださいね……。";
 		close2;
 		openstorage;
 		end;
@@ -197,11 +200,18 @@ OnLowen:
 	end;
 }
 1_tiamat_00.gat,198,173,3	script	異形の魔人#1_tiamat_00	661,{/* 59 */
+	if(TIAMAT_WARP <= 0) {
+		mes "[異形の魔人]";
+		mes "貴方の転送回数は^0000ff三度^000000に";
+		mes "なりました。";
+		mes "これ以上願いを叶えることはできません。";
+		close;
+	}
 	mes "[異形の魔人]";
 	mes "貴方が望まれるのなら";
 	mes "^0000ff三度まで^000000城内で作戦中の隊に";
 	mes "転送してさし上げましょう。";
-	mes "^0000ff残り転送回数 : 3^000000";
+	mes "^0000ff残り転送回数 : " +TIAMAT_WARP+ "^000000";
 	next;
 	switch(select("やめる","ミルカ隊","ハウンド隊","ローウェン隊")) {
 	default:
@@ -211,7 +221,33 @@ OnLowen:
 		mes "私の力の範囲内であれば";
 		mes "願いを叶えましょう。";
 		close;
+	case 2:
+		set '@num,1000 + $@tiamat_milka;
+		set '@name$,"四騎士ミルカ#" + '@num + "_1";
+		break;
+	case 3:
+		set '@num,2000 + $@tiamat_milka;
+		set '@name$,"四騎士ハウンド#" + '@num + "_1";
+		break;
+	case 4:
+		set '@num,3000 + $@tiamat_milka;
+		set '@name$,"四騎士ローウェン#" + '@num + "_1";
+		break;
 	}
+	set '@dummy,getmapxy('@map$,'@x,'@y,1,'@name$);
+	if('@dummy == -1 || '@map$ == "-") {
+		mes "[異形の魔人]";
+		mes "様子がおかしいですね……。";
+		mes "安全のため、もう少し経ってから";
+		mes "試してみましょう。";
+		close;
+	}
+	set TIAMAT_WARP,TIAMAT_WARP-1;
+	misceffect 316,""; //self
+	misceffect 317,""; //self
+	misceffect 34,""; //self
+	warp '@map$,'@x,'@y;
+	end;
 }
 1_tiamat_00.gat,188,171,4	script	四騎士ミルカ#ex001	728,{/* 60 (hide)*/
 	mes "[四騎士ミルカ]";
