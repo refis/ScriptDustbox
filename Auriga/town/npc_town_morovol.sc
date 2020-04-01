@@ -6124,26 +6124,33 @@ moro_cav.gat,32,73,5	script	チェイコ#1	482,{
 		mes "それじゃあアップグレードしたい";
 		mes "アイテムの種類を教えてくれる？";
 		next;
-		switch(select("魔神の腕力(Str)","魔神の迅速(Agi)","魔神の体力(Vit)","魔神の知力(Int)","魔神の集中(Dex)","魔神の幸運(Luk)","やめる")) {
-		case 1:
+		set '@menu,select("魔神の腕力(Str)","魔神の迅速(Agi)","魔神の体力(Vit)","魔神の知力(Int)","魔神の集中(Dex)","魔神の幸運(Luk)","やめる")-1;
+		switch('@menu) {
+		case 0:
 			set '@upstate$,"魔神の腕力";
+			set '@need,4908;
+			break;
+		case 1:
+			set '@upstate$,"魔神の迅速";
+			set '@need,4914;
 			break;
 		case 2:
-			set '@upstate$,"魔神の迅速";
+			set '@upstate$,"魔神の体力";
+			set '@need,4917;
 			break;
 		case 3:
-			set '@upstate$,"魔神の体力";
+			set '@upstate$,"魔神の知力";
+			set '@need,4911;
 			break;
 		case 4:
-			set '@upstate$,"魔神の知力";
+			set '@upstate$,"魔神の集中";
+			set '@need,4920;
 			break;
 		case 5:
-			set '@upstate$,"魔神の集中";
+			set '@upstate$,"魔神の幸運";
+			set '@need,4923;
 			break;
 		case 6:
-			set '@upstate$,"魔神の幸運";
-			break;
-		case 7:
 			mes "[チェイコ]";
 			mes "挑戦したい時にまた来て。";
 			close;
@@ -6155,9 +6162,14 @@ moro_cav.gat,32,73,5	script	チェイコ#1	482,{
 		switch(select("第1段階　→　第2段階","第2段階　→　第3段階","やめる")) {
 		case 1:
 			set '@upgrade$,"第1段階　→　第2段階";
+			set '@amount,3;
+			set '@rate,6500;
 			break;
 		case 2:
 			set '@upgrade$,"第2段階　→　第3段階";
+			set '@need,'@need+1;
+			set '@amount,5;
+			set '@rate,2500;
 			break;
 		case 3:
 			mes "[チェイコ]";
@@ -6182,10 +6194,48 @@ moro_cav.gat,32,73,5	script	チェイコ#1	482,{
 		}
 		break;
 	}
+	if(countitem('@need) < '@amount) {
+		mes "[チェイコ]";
+		mes getitemname('@need)+ "が足りないわ。";
+		mes '@amount+ "個、必要よ。";
+		close;
+	}
 	mes "[チェイコ]";
-	mes "魔神の腕力1が足りないわ。";
-	mes "3個、必要よ。";
-	close;
+	mes "それじゃあ行くわ。";
+	mes "うまくいくよう祈ってね。";
+	next;
+	mes "[チェイコ]";
+	mes "ちぇい……チェイチェイ！";
+	mes "　";
+	mes "‐目を閉じて何か唱え始めた‐";
+	misceffect 72;
+	next;
+	mes "[チェイコ]";
+	mes "ちょいやー!!!";
+	misceffect 8;
+	next;
+	if(rand(10000) < '@rate) {
+		misceffect 182;
+		mes "[チェイコ]";
+		mes "や……やったー！　成功した！";
+		mes "ね？　すごいでしょ。";
+		mes "さぁ、これがアイテムよ。";
+		mes "また挑戦したかったら来てね。";
+		delitem '@need,'@amount;
+		getitem '@need+1,1;
+		close;
+	}
+	else {
+		misceffect 183;
+		mes "[チェイコ]";
+		mes "くっ、悔しい……。";
+		mes "失敗した……！";
+		mes "ごめんなさい。";
+		mes "次こそは成功させるから";
+		mes "また持ってきてください……。";
+		delitem '@need,'@amount;
+		close;
+	}
 OnInit:
 	waitingroom "魔神エンチャント",0;
 	end;
@@ -6459,7 +6509,7 @@ OnTimer24000:
 	end;
 }
 
-ecl_in01.gat,40,96,3	script	エクラージュガード#143_	447,{
+ecl_in01.gat,40,96,3	script	エクラージュガード	447,{
 	mes "[エクラージュガード]";
 	mes "なんの用ですか？";
 	next;
@@ -6535,6 +6585,7 @@ ecl_in01.gat,40,96,3	script	エクラージュガード#143_	447,{
 }
 
 ecl_in01.gat,47,106,6	script	カルデュイ#14301	624,{
+	end;
 OnTimer6000000:
 	announce "カルデュイ : エクラージュのすべての民よ。",0x9,0x00ff00;
 	end;
@@ -6542,6 +6593,7 @@ OnTimer6003000:
 	announce "カルデュイ : 世界樹イグドラシルの守護者としてオーブの魔力を解放して力を捧げる。",0x9,0x00ff00;
 	end;
 OnTimer6006000:
+	hideoffnpc "#ecl_orb_buff";
 	hideoffnpc "#ecl_buff_N";
 	hideoffnpc "#ecl_buff_E";
 	hideoffnpc "#ecl_buff_S";
@@ -6599,10 +6651,10 @@ ecl_in01.gat,48,67,0	script	オーブ#orb	844,{
 	close;
 }
 
-ecl_in01.gat,47,92,0	script	#ecl_buff_N	139,{/* 62712 (hide)*/}
-ecl_in01.gat,71,67,0	script	#ecl_buff_E	139,{/* 62713 (hide)*/}
-ecl_in01.gat,48,44,0	script	#ecl_buff_S	139,{/* 62714 (hide)*/}
-ecl_in01.gat,23,68,0	script	#ecl_buff_W	139,{/* 62715 (hide)*/}
+ecl_in01.gat,47,92,0	duplicate(#ecl_orb_buff)	#ecl_buff_N	139,10,10
+ecl_in01.gat,71,67,0	duplicate(#ecl_orb_buff)	#ecl_buff_E	139,10,10
+ecl_in01.gat,48,44,0	duplicate(#ecl_orb_buff)	#ecl_buff_S	139,10,10
+ecl_in01.gat,23,68,0	duplicate(#ecl_orb_buff)	#ecl_buff_W	139,10,10
 
 moro_vol.gat,0,0,0	script	moro_vol_mon	-1,{
 OnTimer10000:
@@ -6683,4 +6735,3 @@ OnInit:
 	set 'mob3,callmonster("moro_vol.gat",rand(212,220),rand(241,249),"冷気のモロクの現身",3041,"#moro_vol_mon::OnKilled3");
 	end;
 }
-
