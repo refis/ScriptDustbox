@@ -2,22 +2,68 @@ pab_base01.gat,340,95,4	script	部隊管理兵#pab_base01	418,{/* 942 */
 	mes "[部隊管理兵]";
 	mes "魔女討滅作戦に向けて";
 	mes "協力者を募集しています。";
-	{
+	set '@str1$,"^ff0000志願する^000000";
+	set '@str2$,"^888888報酬を受け取る^000000";
+	if(AB_TIAMAT) {
 		mes "　";
-		mes "登録人数 : 233^000000";
+		mes "登録人数 : " +$@tiamat_user+ "^000000";
 	}
+	//"^888888志願する^000000","^000000報酬を受け取る^000000"
 	next;
-	switch(select("^888888志願する^000000","^000000報酬を受け取る^000000","魔女討滅作戦について","会場情報を確認する","立ち去る")) {
+	switch(select('@str1$,'@str2$,"魔女討滅作戦について","会場情報を確認する","立ち去る")) {
 	case 1:
+		if($@tiamat_main < 0) {
+			mes "[部隊管理兵]";
+			mes "ご協力感謝いたします。";
+			mes "ただ、現在は作戦時間外か、";
+			mes "または作戦が既に終了しています。";
+			mes "次回以降の作戦に";
+			mes "ご協力をお願いします。";
+			close;
+		}
+		if(!AB_TIAMAT) {
+			delquest 123650;
+			delquest 123656;
+			mes "[部隊管理兵]";
+			mes "ありがとうございます。";
+			mes "会場は登録が完了すると";
+			mes "変更はできませんので、";
+			mes "ご注意ください。";
+			next;
+			if(select("登録する","立ち去る") == 2) {
+				mes "[部隊管理兵]";
+				mes "かしこまりました。";
+				mes "もしご協力いただけるのであれば";
+				mes "またお越しください。";
+				close;
+			}
+			mes "[部隊管理兵]";
+			mes "ご協力感謝いたします。";
+			mes "それでは案内いたしましょう。";
+			mes "私の後について来てください。";
+			close2;
+			setquest 123650;	// state=1
+			set AB_TIAMAT,1;
+			set $@tiamat_user,$@tiamat_user+1;
+			warp "1_tiamat_00.gat",182,150;
+			end;
+		}
 		mes "[部隊管理兵]";
 		mes "ご協力感謝いたします。";
-		mes "ただ、現在は作戦時間外か、";
-		mes "または作戦が既に終了しています。";
-		mes "次回以降の作戦に";
-		mes "ご協力をお願いします。";
-		close;
+		mes "それでは案内いたしましょう。";
+		mes "私の後について来てください。";
+		close2;
+		warp "1_tiamat_00.gat",182,150;
+		end;
 	case 2:
-		{
+		if($@tiamat_main >= 0) {
+			mes "[部隊管理兵]";
+			mes "現在は作戦時間です。";
+			mes "報酬の配布は、終了後に行いますので";
+			mes "終了後に、改めてお越しください。";
+			close;
+		}
+		if(!AB_TIAMAT) {
 			mes "[部隊管理兵]";
 			mes "報酬は作戦に、参加いただいた方に";
 			mes "お渡ししております。";
@@ -49,8 +95,11 @@ pab_base01.gat,340,95,4	script	部隊管理兵#pab_base01	418,{/* 942 */
 		break;
 	case 4:
 		mes "<<会場情報>>";
-		mes "登録人数 : 103";
-		mes "受付状況 : ^888888受付終了^000000";
+		mes "登録人数 : "+ $@tiamat_user;
+		if($@tiamat_main >= 0)
+			mes "受付状況 : ^ff0000受付中^000000";
+		else
+			mes "受付状況 : ^888888受付終了^000000";
 		next;
 		mes "[部隊管理兵]";
 		mes "突入の際は私にお申し付けください。";
@@ -292,6 +341,12 @@ pab_base01.gat,340,95,4	script	部隊管理兵#pab_base01	418,{/* 942 */
 			close;
 		}
 	}
+OnStart:
+	unittalk "部隊管理兵 : 魔女討滅作戦を開始しました。ご参加いただける方は私にお申し付けください。";
+	end;
+OnEnd:
+	unittalk "部隊管理兵 : [会場1]の作戦を終了いたしました。参加された方は報酬をお受取ください。";
+	end;
 }
 pab_base01.gat,336,95,5	script	チケット交換員#pab_base	90,{/* 943 */
 	mes "[チケット交換員]";
@@ -702,13 +757,3 @@ pab_base01.gat,332,131,4	script	焚き火#pab_base01_06	10252,{/* 1032 (hide)*/}
 pab_base01.gat,332,128,4	script	焚き火#pab_base01_07	10252,{/* 1033 (hide)*/}
 pab_base01.gat,325,130,4	script	焚き火#pab_base01_08	10252,{/* 1034 (hide)*/}
 pab_base01.gat,348,99,4		script	基地転送#pab_base01	406,{/* 1035 */}
-
-/*
-@spawn(type: BL_MOB, ID: 3457, speed: 2000, option: 4, view: 3871, pos: "pab_base01.gat"(267, 56), dir: 0, name: "")
-@spawn(type: BL_MOB, ID: 3458, speed: 2000, option: 4, view: 3871, pos: "pab_base01.gat"(267, 63), dir: 0, name: "")
-@spawn(type: BL_MOB, ID: 3459, speed: 2000, option: 4, view: 3871, pos: "pab_base01.gat"(267, 70), dir: 0, name: "")
-@spawn(type: BL_MOB, ID: 3460, speed: 2000, option: 4, view: 3871, pos: "pab_base01.gat"(267, 77), dir: 0, name: "")
-@spawn(type: BL_MOB, ID: 3461, speed: 2000, option: 4, view: 3871, pos: "pab_base01.gat"(267, 84), dir: 0, name: "")
-@spawn(type: BL_MOB, ID: 3462, speed: 2000, option: 4, view: 3871, pos: "pab_base01.gat"(267, 91), dir: 0, name: "")
-@spawn(type: BL_MOB, ID: 3463, speed: 2000, option: 4, view: 3871, pos: "pab_base01.gat"(267, 98), dir: 0, name: "")
-*/
