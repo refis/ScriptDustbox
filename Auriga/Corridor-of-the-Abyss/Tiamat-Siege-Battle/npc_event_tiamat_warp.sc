@@ -8,7 +8,7 @@
 	else if($@tiamat_main == 1)	// 「橋」へ
 		warp "1_tiamat_55.gat",287,150;
 	else if($@tiamat_main == 2)	// 「地下祭儀場」の前へ
-		warp "1_tiamat_55.gat",287,150;
+		warp "1_tiamat_35.gat",94,164;
 	else if($@tiamat_main == 3)	// 「深淵の王座」の前へ
 		warp "2_tiamat_00.gat",49,35;
 	else if($@tiamat_main == 4)	// 「秘密の部屋」へ
@@ -33,8 +33,8 @@
 1_tiamat_02.gat,150,171,0	warp	area#r961	2,2,1_tiamat_37.gat,99,106	//89
 1_tiamat_02.gat,260,203,0	warp	area#r1471	2,2,1_tiamat_31.gat,63,93	//90
 1_tiamat_02.gat,143,222,0	script	area#k921	45,2,2,{/* 91 */}
-1_tiamat_02.gat,192,214,0	script	area#k941	45,2,2,{/* 92 */}
-1_tiamat_02.gat,149,5,0		script	area#k841	45,2,2,{/* 93 */}
+1_tiamat_02.gat,192,214,0	script	area#k941	45,2,2,{/* 92 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_02.gat,149,5,0		script	area#k841	45,2,2,{/* 93 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_02.gat,47,260,0	script	area#k832	45,2,2,{/* 94 */}
 1_tiamat_02.gat,265,141,0	script	area#k612	45,2,2,{/* 95 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_02.gat,260,203,0	script	area#k1471	45,2,2,{/* 96 */}
@@ -206,10 +206,10 @@
 1_tiamat_23.gat,124,133,0	warp	area#r1985	2,2,1_tiamat_23.gat,135,133	//538
 1_tiamat_23.gat,136,172,0	warp	area#r1986	2,2,1_tiamat_23.gat,142,165	//539
 1_tiamat_23.gat,106,195,0	warp	area#r1987	2,2,1_tiamat_26.gat,173,175	//540
-1_tiamat_23.gat,165,159,0	script	area#k1941	45,2,2,{/* 541 */}
-1_tiamat_23.gat,155,130,0	script	area#k1951	45,2,2,{/* 542 */}
-1_tiamat_23.gat,130,133,0	script	area#k1961	45,2,2,{/* 543 */}
-1_tiamat_23.gat,137,165,0	script	area#k1971	45,2,2,{/* 544 */}
+1_tiamat_23.gat,165,159,0	script	area#k1941	45,2,2,{/* 541 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_23.gat,155,130,0	script	area#k1951	45,2,2,{/* 542 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_23.gat,130,133,0	script	area#k1961	45,2,2,{/* 543 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_23.gat,137,165,0	script	area#k1971	45,2,2,{/* 544 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_23.gat,170,159,0	script	area#k1983	45,2,2,{/* 545 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_23.gat,155,123,0	script	area#k1984	45,2,2,{/* 546 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_23.gat,124,133,0	script	area#k1985	45,2,2,{/* 547 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
@@ -243,38 +243,114 @@
 1_tiamat_29.gat,246,138,0	warp	area#r34	2,2,1_tiamat_31.gat,20,92	//643
 1_tiamat_29.gat,191,172,0	warp	area#r35	2,2,1_tiamat_40.gat,15,25	//644
 1_tiamat_29.gat,255,258,0	warp	area#r101	2,2,1_tiamat_36.gat,18,38	//645
-1_tiamat_29.gat,182,246,0	script	area#k32	45,2,2,{/* 646 */}
-1_tiamat_29.gat,191,172,0	script	area#k35	45,2,2,{/* 647 */}
-1_tiamat_29.gat,246,138,0	script	area#k34	45,2,2,{/* 648 */}
-1_tiamat_29.gat,131,207,0	script	area#k31	45,2,2,{/* 649 */}
+1_tiamat_29.gat,182,246,0	script	area#k32	45,2,2,{/* 646 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_29.gat,191,172,0	script	area#k35	45,2,2,{/* 647 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_29.gat,246,138,0	script	area#k34	45,2,2,{/* 648 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_29.gat,131,207,0	script	area#k31	45,2,2,{/* 649 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_30.gat,79,32,0		warp	area#r1511	2,2,1_tiamat_31.gat,264,81	//661
 1_tiamat_30.gat,79,70,0		warp	area#r1512	2,2,1_tiamat_56.gat,117,176	//662
 1_tiamat_30.gat,79,70,0		script	area#k1512	45,2,2,{/* 663 */}
 1_tiamat_31.gat,15,92,0		warp	area#r1421	2,2,1_tiamat_29.gat,246,143	//668
-1_tiamat_31.gat,63,87,0		warp	area#r1424	2,2,1_tiamat_31.gat,204,186	//671
+1_tiamat_31.gat,35,98,0		script	area#r1422	45,2,2,{/* 669 */
+	if(getiteminfo(getequipid(4),16) != 1 && getiteminfo(getequipid(4),16) != 8) {
+		pushpc 8,5;
+		misceffect 182,""; //self
+		misceffect 52,""; //self
+		misceffect 257,""; //self
+		unittalk getcharid(3),strcharinfo(0)+" : 結界を通り抜けるには「短剣・鈍器」の装着が必要だ……。",1;
+		end;
+	}
+	warp "1_tiamat_31.gat",204,284;
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer2000:
+	initnpctimer;
+	misceffect 213;
+	end;
+}
+1_tiamat_31.gat,35,87,0		script	area#r1423	45,2,2,{/* 670 */
+	if(getiteminfo(getequipid(4),16) != 3 && getiteminfo(getequipid(4),16) != 5) {
+		pushpc 4,5;
+		misceffect 182,""; //self
+		misceffect 52,""; //self
+		misceffect 257,""; //self
+		unittalk getcharid(3),strcharinfo(0)+" : 結界を通り抜けるには「両手剣・両手槍」の装着が必要だ……。",1;
+		end;
+	}
+	warp "1_tiamat_31.gat",148,186;
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer2000:
+	initnpctimer;
+	misceffect 213;
+	end;
+}
+1_tiamat_31.gat,63,87,0		script	area#r1424	45,2,2,{/* 671 (hide)*/
+	if(getiteminfo(getequipid(4),16) != 10 && getiteminfo(getequipid(4),16) != 23 && getiteminfo(getequipid(4),16) != 15) {
+		pushpc 4,5;
+		misceffect 182,""; //self
+		misceffect 52,""; //self
+		misceffect 257,""; //self
+		unittalk getcharid(3),strcharinfo(0)+" : 結界を通り抜けるには「片手杖・両手杖・本」の装着が必要だ……。",1;
+		end;
+	}
+	warp "1_tiamat_31.gat",204,186;
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer2000:
+	initnpctimer;
+	misceffect 213;
+	end;
+}
+1_tiamat_31.gat,90,87,0		script	area#r1425	45,2,2,{/* 672 (hide)*/
+	if(getiteminfo(getequipid(4),16) < 16 || getiteminfo(getequipid(4),16) > 22) {
+		pushpc 4,5;
+		misceffect 182,""; //self
+		misceffect 52,""; //self
+		misceffect 257,""; //self
+		unittalk getcharid(3),strcharinfo(0)+" : 結界を通り抜けるには「カタール・銃・風魔手裏剣」の装着が必要だ……。",1;
+		end;
+	}
+	warp "1_tiamat_31.gat",260,186;
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer2000:
+	initnpctimer;
+	misceffect 213;
+	end;
+}
 1_tiamat_31.gat,91,101,0	warp	area#r1426	2,2,1_tiamat_31.gat,282,65	//673
 1_tiamat_31.gat,63,97,0		warp	area#r1427	2,2,1_tiamat_02.gat,265,203	//674
+1_tiamat_31.gat,204,279,0	warp	area#r1431	2,2,1_tiamat_31.gat,35,93	//675
+1_tiamat_31.gat,148,191,0	warp	area#r1441	2,2,1_tiamat_31.gat,35,92	//676
 1_tiamat_31.gat,204,191,0	warp	area#r1451	2,2,1_tiamat_31.gat,63,92	//677
+1_tiamat_31.gat,260,191,0	warp	area#r1461	2,2,1_tiamat_31.gat,90,91	//678
 1_tiamat_31.gat,282,60,0	warp	area#r1481	2,2,1_tiamat_31.gat,91,96	//679
 1_tiamat_31.gat,248,68,0	warp	area#r1482	2,2,1_tiamat_31.gat,27,37	//680
 1_tiamat_31.gat,222,68,0	warp	area#r1483	2,2,1_tiamat_31.gat,88,278	//681
 1_tiamat_31.gat,269,82,0	warp	area#r1484	2,2,1_tiamat_30.gat,79,37	//682
 1_tiamat_31.gat,27,42,0		warp	area#r1491	2,2,1_tiamat_31.gat,248,63	//683
 1_tiamat_31.gat,88,273,0	warp	area#r1501	2,2,1_tiamat_31.gat,222,63	//684
-1_tiamat_31.gat,282,60,0	script	area#k1481	45,2,2,{/* 685 */}
-1_tiamat_31.gat,248,68,0	script	area#k1482	45,2,2,{/* 686 */}
+1_tiamat_31.gat,282,60,0	script	area#k1481	45,2,2,{/* 685 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_31.gat,248,68,0	script	area#k1482	45,2,2,{/* 686 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_31.gat,27,42,0		script	area#k1491	45,2,2,{/* 687 */}
-1_tiamat_31.gat,91,101,0	script	area#k1426	45,2,2,{/* 688 */}
-1_tiamat_31.gat,15,92,0		script	area#k1421	45,2,2,{/* 689 */}
-1_tiamat_31.gat,63,97,0		script	area#k1427	45,2,2,{/* 690 */}
+1_tiamat_31.gat,91,101,0	script	area#k1426	45,2,2,{/* 688 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_31.gat,15,92,0		script	area#k1421	45,2,2,{/* 689 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_31.gat,63,97,0		script	area#k1427	45,2,2,{/* 690 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_32.gat,32,128,0	warp	area#r981	2,2,1_tiamat_37.gat,136,73	//719
 1_tiamat_32.gat,27,189,0	warp	area#r1571	2,2,1_tiamat_42.gat,168,342	//720
 1_tiamat_32.gat,22,167,0	warp	area#r1572	2,2,1_tiamat_51.gat,339,115	//721
 1_tiamat_32.gat,45,168,0	warp	area#r1573	2,2,1_tiamat_38.gat,89,115	//722
-1_tiamat_32.gat,27,189,0	script	area#k1571	45,{/* 723 */}
-1_tiamat_32.gat,45,168,0	script	area#k1573	45,{/* 724 */}
-1_tiamat_32.gat,27,189,0	script	area#k1571	45,2,2,{/* 723 */}
-1_tiamat_32.gat,45,168,0	script	area#k1573	45,2,2,{/* 724 */}
+1_tiamat_32.gat,27,189,0	script	area#k1571	45,2,2,{/* 723 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_32.gat,45,168,0	script	area#k1573	45,2,2,{/* 724 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_33.gat,279,291,0	warp	area#r741	2,2,1_tiamat_22.gat,158,158	//746
 1_tiamat_33.gat,255,278,0	warp	area#r742	2,2,1_tiamat_26.gat,95,99	//747
 1_tiamat_34.gat,108,26,0	warp	area#r931	2,2,1_tiamat_58.gat,43,72	//755
@@ -287,8 +363,8 @@
 1_tiamat_34.gat,216,200,0	warp	area#r1531	2,2,1_tiamat_34.gat,236,182	//762
 1_tiamat_34.gat,216,182,0	warp	area#r1541	2,2,1_tiamat_34.gat,236,200	//763
 1_tiamat_34.gat,238,154,0	warp	area#r1551	2,2,1_tiamat_34.gat,249,212	//764
-1_tiamat_34.gat,238,169,0	script	area#k1521	45,2,2,{/* 765 */}
-1_tiamat_34.gat,236,219,0	script	area#k1525	45,2,2,{/* 766 */}
+1_tiamat_34.gat,238,169,0	script	area#k1521	45,2,2,{/* 765 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_34.gat,236,219,0	script	area#k1525	45,2,2,{/* 766 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_35.gat,159,163,0	warp	area#r1061	2,2,1_tiamat_42.gat,273,163	//786
 1_tiamat_35.gat,170,160,0	warp	area#r1062	2,2,1_tiamat_35.gat,51,164	//787
 1_tiamat_35.gat,120,163,0	warp	area#r1071	2,2,1_tiamat_22.gat,52,100	//788
@@ -301,7 +377,8 @@
 1_tiamat_35.gat,94,183,0	warp	area#r1873	2,2,2_tiamat_01.gat,196,37	//795
 1_tiamat_35.gat,159,163,0	script	area#k1061	45,2,2,{/* 796 */}
 1_tiamat_35.gat,120,163,0	script	area#k1071	45,2,2,{/* 797 */}
-1_tiamat_35.gat,107,164,0	script	area#k1872	45,2,2,{/* 798 */}
+1_tiamat_35.gat,107,164,0	script	area#k1872	45,2,2,{/* 798 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_35.gat,94,183,0	script	area#k1873	45,2,2,{/* 799 (hide)*/ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_36.gat,23,38,0		warp	area#r111	2,2,1_tiamat_29.gat,255,253	//813
 1_tiamat_36.gat,40,39,0		warp	area#r112	2,2,1_tiamat_26.gat,68,220	//814
 1_tiamat_36.gat,99,102,0	warp	area#r1931	2,2,1_tiamat_39.gat,18,58	//815
@@ -312,13 +389,13 @@
 1_tiamat_37.gat,141,73,0	warp	area#r954	2,2,1_tiamat_32.gat,32,123	//828
 1_tiamat_37.gat,94,77,0		warp	area#r955	2,2,1_tiamat_61.gat,103,98	//829
 1_tiamat_37.gat,21,113,0	warp	area#r1201	2,2,1_tiamat_42.gat,82,170	//830
-1_tiamat_37.gat,92,91,0		script	area#k951	45,2,2,{/* 831 */}
-1_tiamat_37.gat,141,110,0	script	area#k953	45,2,2,{/* 832 */}
+1_tiamat_37.gat,92,91,0		script	area#k951	45,2,2,{/* 831 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_37.gat,141,110,0	script	area#k953	45,2,2,{/* 832 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_37.gat,21,113,0	script	area#k1201	45,2,2,{/* 833 */}
 1_tiamat_38.gat,95,103,0	warp	area#r61	2,2,1_tiamat_05.gat,34,42	//845
 1_tiamat_38.gat,84,115,0	warp	area#r62	2,2,1_tiamat_32.gat,40,170	//846
 1_tiamat_38.gat,79,95,0		warp	area#r63	2,2,1_tiamat_22.gat,156,88	//847
-1_tiamat_38.gat,84,115,0	script	area#k62	45,{/* 848 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_38.gat,84,115,0	script	area#k62	45,2,2,{/* 848 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_39.gat,12,169,0	warp	area#r1701	2,2,1_tiamat_08.gat,390,355	//854
 1_tiamat_39.gat,7,179,0		warp	area#r1702	2,2,1_tiamat_59.gat,70,92	//855
 1_tiamat_39.gat,23,58,0		warp	area#r1901	2,2,1_tiamat_36.gat,99,97	//856
@@ -374,15 +451,15 @@
 1_tiamat_42.gat,53,152,0	warp	area#r1222	2,2,1_tiamat_43.gat,143,192	//945
 1_tiamat_42.gat,109,152,0	warp	area#r1223	2,2,1_tiamat_43.gat,140,80	//946
 1_tiamat_42.gat,82,175,0	warp	area#r1224	2,2,1_tiamat_37.gat,21,118	//947
-1_tiamat_42.gat,83,251,0	script	area#k803	45,2,2,{/* 970 */}
-1_tiamat_42.gat,164,176,0	script	area#k1057	45,2,2,{/* 971 */}
-1_tiamat_42.gat,253,148,0	script	area#k1058	45,2,2,{/* 972 */}
-1_tiamat_42.gat,278,163,0	script	area#k1059	45,2,2,{/* 973 */}
-1_tiamat_42.gat,53,152,0	script	area#k1222	45,2,2,{/* 974 */}
-1_tiamat_42.gat,82,175,0	script	area#k1224	45,2,2,{/* 975 */}
+1_tiamat_42.gat,83,251,0	script	area#k803	45,2,2,{/* 970 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_42.gat,164,176,0	script	area#k1057	45,2,2,{/* 971 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_42.gat,253,148,0	script	area#k1058	45,2,2,{/* 972 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_42.gat,278,163,0	script	area#k1059	45,2,2,{/* 973 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_42.gat,53,152,0	script	area#k1222	45,2,2,{/* 974 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_42.gat,82,175,0	script	area#k1224	45,2,2,{/* 975 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_42.gat,173,342,0	script	area#k892	45,2,2,{/* 976 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_42.gat,247,111,0	script	area#k991	45,2,2,{/* 977 */}
-1_tiamat_42.gat,216,142,0	script	area#k1051	45,2,2,{/* 978 */}
+1_tiamat_42.gat,216,142,0	script	area#k1051	45,2,2,{/* 978 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_43.gat,34,28,0		warp	area#r901	2,2,1_tiamat_42.gat,183,258	//1029
 1_tiamat_43.gat,33,178,0	warp	area#r1001	2,2,1_tiamat_42.gat,157,163	//1030
 1_tiamat_43.gat,33,128,0	warp	area#r1011	2,2,1_tiamat_42.gat,178,153	//1031
@@ -443,7 +520,7 @@
 1_tiamat_51.gat,375,109,0	warp	area#r1561	2,2,1_tiamat_34.gat,241,219	//1149
 1_tiamat_51.gat,339,120,0	warp	area#r1562	2,2,1_tiamat_32.gat,22,172	//1150
 1_tiamat_51.gat,194,244,0	warp	area#r1601	2,2,1_tiamat_44.gat,103,82	//1151
-1_tiamat_51.gat,375,109,0	script	area#k1561	45,2,2,{/* 1152 */}
+1_tiamat_51.gat,375,109,0	script	area#k1561	45,2,2,{/* 1152 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_52.gat,45,45,0		warp	area#r1771	2,2,1_tiamat_53.gat,260,280	//1161
 1_tiamat_52.gat,45,234,0	warp	area#r1772	2,2,1_tiamat_04.gat,70,30	//1162
 1_tiamat_52.gat,139,275,0	warp	area#r1801	2,2,1_tiamat_04.gat,142,174	//1163
@@ -529,10 +606,10 @@ OnTimer3000:
 1_tiamat_56.gat,120,4,0		warp	area#r252	2,2,1_tiamat_14.gat,47,67	//1269
 1_tiamat_56.gat,113,70,0	warp	area#r253	2,2,1_tiamat_42.gat,253,153	//1270
 1_tiamat_56.gat,235,119,0	warp	area#r261	2,2,1_tiamat_08.gat,93,12	//1271
-1_tiamat_56.gat,112,176,0	script	area#k243	45,2,2,{/* 1272 */}
-1_tiamat_56.gat,119,146,0	script	area#k241	45,2,2,{/* 1273 */}
-1_tiamat_56.gat,120,98,0	script	area#k251	45,2,2,{/* 1274 */}
-1_tiamat_56.gat,113,70,0	script	area#k253	45,2,2,{/* 1275 */}
+1_tiamat_56.gat,112,176,0	script	area#k243	45,2,2,{/* 1272 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_56.gat,119,146,0	script	area#k241	45,2,2,{/* 1273 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_56.gat,120,98,0	script	area#k251	45,2,2,{/* 1274 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_56.gat,113,70,0	script	area#k253	45,2,2,{/* 1275 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_57.gat,114,116,0	warp	area#r171	2,2,1_tiamat_57.gat,106,107	//1289
 1_tiamat_57.gat,136,129,0	warp	area#r172	2,2,1_tiamat_41.gat,97,9	//1290
 1_tiamat_57.gat,79,75,0	warp	area#r381	2,2,1_tiamat_08.gat,184,304	//1291
@@ -554,11 +631,11 @@ OnTimer3000:
 1_tiamat_58.gat,173,288,0	warp	area#r211	2,2,1_tiamat_08.gat,93,130	//1317
 1_tiamat_58.gat,69,288,0	warp	area#r212	2,2,1_tiamat_02.gat,273,118	//1318
 1_tiamat_58.gat,14,73,0		script	area#k911	45,2,2,{/* 1319 */}
-1_tiamat_58.gat,15,15,0		script	area#k2023	45,2,2,{/* 1320 */}
+1_tiamat_58.gat,15,15,0		script	area#k2023	45,2,2,{/* 1320 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_58.gat,173,288,0	script	area#k211	45,2,2,{/* 1321 */}
-1_tiamat_58.gat,61,60,0		script	area#k2012	45,2,2,{/* 1322 */}
-1_tiamat_58.gat,61,27,0		script	area#k2013	45,2,2,{/* 1323 */}
-1_tiamat_58.gat,46,12,0		script	area#k2022	45,2,2,{/* 1324 */}
+1_tiamat_58.gat,61,60,0		script	area#k2012	45,2,2,{/* 1322 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_58.gat,61,27,0		script	area#k2013	45,2,2,{/* 1323 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_58.gat,46,12,0		script	area#k2022	45,2,2,{/* 1324 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_59.gat,75,92,0	warp	area#r1751	2,2,1_tiamat_39.gat,12,179	//1349
 1_tiamat_59.gat,10,91,0	warp	area#r1752	2,2,1_tiamat_39.gat,12,42	//1350
 1_tiamat_60.gat,94,47,0	warp	area#r151	2,2,1_tiamat_55.gat,288,254	//1355
