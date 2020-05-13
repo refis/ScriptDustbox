@@ -1,5 +1,22 @@
 -	script	#tiamat_setwall	-1,{
 OnStart:
+	//äÓín
+	monster "pab_base01.gat",267,56,"#EF_WALL",3871,1;
+	areasetcell "pab_base01.gat",267,56-3,267,56+3,1;
+	setcell "pab_base01.gat",267,63,0;
+	monster "pab_base01.gat",267,63,"#EF_WALL",3871,1;
+	areasetcell "pab_base01.gat",267,63-3,267,63+3,1;
+	setcell "pab_base01.gat",267,70,0;
+	monster "pab_base01.gat",267,70,"#EF_WALL",3871,1;
+	areasetcell "pab_base01.gat",267,70-3,267,70+3,1;
+	monster "pab_base01.gat",267,77,"#EF_WALL",3871,1;
+	areasetcell "pab_base01.gat",267,77-3,267,77+3,1;
+	monster "pab_base01.gat",267,84,"#EF_WALL",3871,1;
+	areasetcell "pab_base01.gat",267,84-3,267,84+3,1;
+	monster "pab_base01.gat",267,91,"#EF_WALL",3871,1;
+	areasetcell "pab_base01.gat",267,91-3,267,91+3,1;
+	monster "pab_base01.gat",267,98,"#EF_WALL",3871,1;
+	areasetcell "pab_base01.gat",267,98-3,267,98+3,1;
 	//â§èÈì¸å˚
 	monster "1_tiamat_00.gat",194,141,"#EF_WALL",3870,1;
 	areasetcell "1_tiamat_00.gat",194-3,141,194+3,141,1;
@@ -56,6 +73,10 @@ OnStart:
 	areasetcell "1_tiamat_29.gat",139-3,215,139+3,215,1;
 	monster "1_tiamat_29.gat",132,215,"#EF_WALL",3870,1;
 	areasetcell "1_tiamat_29.gat",132-3,215,132+3,215,1;
+	//íÜíÎ(ñk)SpawnLock
+	areasetcell "1_tiamat_47.gat",169,42,193,47,1;
+	areasetcell "1_tiamat_47.gat",190,54,193,72,1;
+	areasetcell "1_tiamat_47.gat",176,60,179,86,1;
 	//ã≥âÔ1Fí òH01
 	monster "1_tiamat_54.gat",50,121,"#EF_WALL",3871,1;
 	areasetcell "1_tiamat_54.gat",50,121-3,50,121+3,1;
@@ -505,8 +526,10 @@ OnStart:
 	monster "1_tiamat_02.gat",257,200,"#EF_WALL",3871,1;
 	areasetcell "1_tiamat_02.gat",257,200-3,257,200+3,1;
 	//ï∫é…2FïêäÌå…
+	setcell "1_tiamat_30.gat",79,73,0;
 	monster "1_tiamat_30.gat",79,73,"#EF_WALL",3870,1;
 	areasetcell "1_tiamat_30.gat",79-3,73,79+3,73,1;
+	setcell "1_tiamat_30.gat",79,31,0;
 	monster "1_tiamat_30.gat",79,31,"#EF_WALL",3870,1;
 	areasetcell "1_tiamat_30.gat",79-3,31,79+3,31,1;
 	//ï∫é…1Fí òH
@@ -574,6 +597,15 @@ OnStart:
 	//îÈñßÇÃíÎ
 	monster "1_tiamat_42.gat",96,29,"#EF_WALL",3870,1;
 	areasetcell "1_tiamat_42.gat",96-3,29,96+3,29,1;
+	//ãqä‘
+	monster "1_tiamat_09.gat",213,139,"#EF_WALL",3871,1;
+	areasetcell "1_tiamat_09.gat",213,139-3,213,139+3,1;
+	monster "1_tiamat_09.gat",213,146,"#EF_WALL",3871,1;
+	areasetcell "1_tiamat_09.gat",213,146-3,213,146+3,1;
+	monster "1_tiamat_09.gat",244,111,"#EF_WALL",3870,1;
+	areasetcell "1_tiamat_09.gat",244-3,111,244+3,111,1;
+	monster "1_tiamat_09.gat",251,111,"#EF_WALL",3870,1;
+	areasetcell "1_tiamat_09.gat",251-3,111,251+3,111,1;
 	//ç’ìa
 	monster "1_tiamat_52.gat",123,178,"#EF_WALL",3870,1;
 	areasetcell "1_tiamat_52.gat",123-3,178,123+3,178,1;
@@ -595,6 +627,10 @@ OnStart:
 	monster "1_tiamat_04.gat",17,31,"#EF_WALL",3870,1;
 	areasetcell "1_tiamat_04.gat",17-3,31,17+3,31,1;
 	//ê_ìaëÂçLä‘
+	monster "1_tiamat_53.gat",225,190,"#EF_WALL",3871,1;
+	areasetcell "1_tiamat_53.gat",225,190-3,225,190+3,1;
+	monster "1_tiamat_53.gat",225,197,"#EF_WALL",3871,1;
+	areasetcell "1_tiamat_53.gat",225,197-3,225,197+3,1;
 	monster "1_tiamat_53.gat",225,218,"#EF_WALL",3871,1;
 	areasetcell "1_tiamat_53.gat",225,218-3,225,218+3,1;
 	monster "1_tiamat_53.gat",225,225,"#EF_WALL",3871,1;
@@ -603,4 +639,19 @@ OnStart:
 	areasetcell "1_tiamat_53.gat",225,246-3,225,246+3,1;
 	monster "1_tiamat_53.gat",225,253,"#EF_WALL",3871,1;
 	areasetcell "1_tiamat_53.gat",225,253-3,225,253+3,1;
+	//ê_ìaãRémÇÃä‘
+	monster "1_tiamat_53.gat",180,159,"#EF_WALL",3870,1;
+	areasetcell "1_tiamat_53.gat",180-3,159,180+3,159,1;
+	monster "1_tiamat_53.gat",187,159,"#EF_WALL",3870,1;
+	areasetcell "1_tiamat_53.gat",187-3,159,187+3,159,1;
+	//ê_ìaâ§î‹ÇÃä‘
+	monster "1_tiamat_53.gat",21,254,"#EF_WALL",3870,1;
+	areasetcell "1_tiamat_53.gat",21-3,254,21+3,254,1;
+	monster "1_tiamat_53.gat",60,254,"#EF_WALL",3870,1;
+	areasetcell "1_tiamat_53.gat",60-3,254,60+3,254,1;
+	//çTÇ¶ÇÃä‘
+	monster "1_tiamat_52.gat",138,201,"#EF_WALL",3870,1;
+	areasetcell "1_tiamat_52.gat",138-3,201,138+2,201,1;
+	monster "1_tiamat_52.gat",141,201,"#EF_WALL",3870,1;
+	areasetcell "1_tiamat_52.gat",141-2,201,141+3,201,1;
 }
