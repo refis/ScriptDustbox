@@ -955,8 +955,9 @@ prt_cas.gat,97,216,2	script	侍従#vip_alimi	968,{/* 60569 */
 	close;
 OnTalk1:
 	switch(Job) {
-	case Job_Oboro:			unittalk "侍従 : 揺るぎない信念のマスター" +strcharinfo(0)+ "様です。";	break;
 	case Job_ArchBishop:	unittalk "侍従 : 大いなる神の代理人" +strcharinfo(0)+ "様です。";	break;
+	case Job_Guillotine:	unittalk "侍従 : 静かなる闇の支配者" +strcharinfo(0)+ "様です。";	break;
+	default:		  		unittalk "侍従 : 揺るぎない信念のマスター" +strcharinfo(0)+ "様です。";	break;
 	}
 	end;
 }

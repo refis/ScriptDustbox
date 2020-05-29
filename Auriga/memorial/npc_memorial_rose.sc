@@ -233,7 +233,7 @@ verus01.gat,153,155,5	script	臨時次元移動機#pa0829_0	10007,{/* 59696 */
 	case 0:	// エラーなし
 		announce "メモリアルダンジョン[rose] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
 		setquest 12347;
-		warp "1@lab.gat",120,30;
+		//warp "1@lab.gat",120,30;
 		close;
 	case 1:	// パーティー未加入
 		mes "[臨時次元移動機]";

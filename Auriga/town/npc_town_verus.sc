@@ -1905,44 +1905,50 @@ verus04.gat,117,252,5	script	治療師ミヨ#atnd08	641,{/* 59258 */
 	mes "[ミヨ]";
 	mes "こんにちは。お疲れ様です。";
 	mes "体調はいかがですか？";
-	if(VER_1QUE < 5)
+	if(VER_1QUE < 5) {
 		set '@str$,"完全回復　^0000FF5000Zeny^000000　(通常料金)";
-	else
+		set '@cost,5000;
+	}
+	else {
 		set '@str$,"完全回復　^0000FF4500Zeny^000000　(割引料金)";
+		set '@cost,4500;
+	}
 	next;
 	if(select('@str$,"スマイル～") == 2) {
 		mes "[ミヨ]";
 		mes "スマイル～!!";
 		close;
 	}
-	if(VER_1QUE < 5) {
-		// 未調査
-		if(Zeny < 5000) {
-			close;
-		}
-		mes "[ミヨ]";
-		mes "完全回復ですね！";
-		mes "笑ったらすべての病気が治ります。";
-		mes "スマイル～！";
-		//npcskillsupport
-		percentheal 100,100;
-		set Zeny,Zeny-5000;
-	}
-	else {
-		if(Zeny < 4500) {
-			// 未調査
-			close;
-		}
+	if(Zeny < '@cost) {
 		mes "[ミヨ]";
 		mes "完全回復ですね！";
 		mes "正式登録をしている発掘団員さんには";
 		mes "割引していますよ！";
 		mes "笑ったらすべての病気が治ります。";
 		mes "スマイル～！";
-		//npcskillsupport
-		percentheal 100,100;
-		set Zeny,Zeny-4500;
+		next;
+		mes "[ミヨ]";
+		mes "……って、あれ？";
+		mes "お金が足りないみたいですよ？";
+		close;
 	}
+	if(VER_1QUE < 5) {
+		mes "[ミヨ]";
+		mes "完全回復ですね！";
+		mes "笑ったらすべての病気が治ります。";
+		mes "スマイル～！";
+	}
+	else {
+		mes "[ミヨ]";
+		mes "完全回復ですね！";
+		mes "正式登録をしている発掘団員さんには";
+		mes "割引していますよ！";
+		mes "笑ったらすべての病気が治ります。";
+		mes "スマイル～！";
+	}
+	//npcskillsupport
+	percentheal 100,100;
+	set Zeny,Zeny-'@cost;
 	close;
 }
 verus04.gat,141,193,5	script	考古学者アウレス#atnd09	10057,{/* 59259 */

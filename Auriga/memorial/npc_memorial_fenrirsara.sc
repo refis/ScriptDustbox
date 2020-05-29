@@ -1,4 +1,58 @@
-dali02.gat,97,142,3	script	バーンハード博士#a1	865,{/* 51020 */
+/*
+memorial
+26,glast_sara,3600,1@glast.gat,367,304,1@glast.gat,,,,,,,
+
+quest
+9336,フェンリルとサラ入場時間制限,05:00,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+9337,フェンリルとサラ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+120150,フェンリルとサラ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+120155,フェンリルとサラ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+120165,フェンリルとサラ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+120170,フェンリルとサラ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+120195,フェンリルとサラ入場時間制限,3600,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+mob
+3190,MM_SARAH,サラの幻影,160,5800000,0,500000,250000,3,4090,3065,76,55,143,101,106,188,205,136,10,12,1,7,20,1701,125,500,500,600,7444,1,15121,1,7510,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3191,MM_M_GIGAN1,双斧ギガンテス,120,143400,0,113200,62000,1,3135,120,34,42,156,51,30,62,125,21,10,12,1,6,47,1701,250,500,750,600,912,1,7229,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3192,MM_M_GIGAN2,機動の双斧ギガンテス,120,120000,0,0,0,1,3328,1089,59,55,212,65,43,21,77,15,10,12,1,6,47,1701,250,500,500,600,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3193,MM_M_GIGAN3,双斧レッドギガンテス,120,156300,0,112300,60150,1,3767,165,33,35,121,35,45,35,71,15,10,12,1,6,47,1701,300,500,750,600,6803,1,912,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3194,MM_L_GIGAN1,ギガンテス,120,112000,0,102000,51000,1,2172,82,55,57,135,75,12,72,100,91,10,12,2,6,47,1701,320,500,500,500,912,1,7229,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3195,MM_L_GIGAN2,機動のギガンテス,120,94175,0,100174,50174,1,2241,116,51,40,102,69,18,45,115,71,10,12,2,6,47,1701,200,500,500,500,912,1,7229,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3196,MM_L_GIGAN3,レッドギガンテス,123,133464,0,103024,52012,1,2557,61,78,50,203,81,1,66,120,103,10,12,2,6,47,1701,330,800,800,500,6803,1,912,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3197,MM_M_GARGOYLE,サラの使い魔,120,56780,0,0,0,9,1,89,44,43,147,60,66,57,71,70,10,12,1,6,64,133,200,1020,720,384,912,1,1769,1,1039,1,757,1,757,1,2619,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3198,MM_M_GALION,凶悪なガリオン,110,93165,0,0,0,1,101,77,36,71,133,42,71,45,66,45,10,12,1,2,41,133,150,864,624,360,7564,1,919,1,757,1,996,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3199,MM_M_MUTANT_DRAGON,MM_M_MUTANT_DRAGON,150,324891,0,0,0,4,1176,98,185,86,175,161,66,68,201,35,10,12,0,4,20,228,2000,1280,1080,240,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,512,0,0,0,0,0,0,0,0,0,0,0
+3200,MM_M_CHIMERA,MM_M_CHIMERA,150,301158,0,0,0,4,1029,148,199,10,166,175,110,88,188,85,10,12,0,0,20,228,200,1600,600,600,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,512,0,0,0,0,0,0,0,0,0,0,0
+
+mobskill
+3190,サラの幻影＠ファイアーウォール,chase,18,10,1000,0,5000,yes,target,always,0,,,,,,
+3190,サラの幻影＠ファイアーウォール,attack,18,10,1000,0,5000,yes,target,always,0,,,,,,
+3190,サラの幻影＠ピアーシングアタック,attack,158,2,500,0,5000,yes,target,always,0,,,,,,6
+3190,サラの幻影＠ホーリーアタック,chase,189,5,500,0,5000,yes,target,always,,,,,,,18
+3190,サラの幻影＠ホーリーアタック,attack,189,5,1000,0,5000,yes,target,always,,,,,,,18
+3190,サラの幻影＠ワイドスリープ,idle,668,5,1000,0,10000,no,self,always,,,,,,,,
+3190,サラの幻影＠ワイドスリープ,chase,668,5,1000,0,10000,no,self,always,,,,,,,,
+3190,サラの幻影＠ワイドスリープ,attack,668,5,1000,0,10000,no,self,always,,,,,,,,
+3190,サラの幻影＠ワイドストーン,idle,666,5,1000,0,10000,no,self,always,,,,,,,,
+3190,サラの幻影＠ワイドストーン,chase,666,5,1000,0,10000,no,self,always,,,,,,,,
+3190,サラの幻影＠ワイドストーン,attack,666,5,1000,0,10000,no,self,always,,,,,,,,
+3190,サラの幻影＠グランドクロス,attack,254,10,500,0,5000,no,self,always,,,,,,,
+3190,サラの幻影＠メテオストーム,idle,83,10,1000,0,10000,no,around,always,0,,,,,,
+3190,サラの幻影＠メテオストーム,attack,83,10,1000,0,10000,no,target,always,0,,,,,,
+3190,サラの幻影＠ラッシュアタック,attack,349,5,10000,500,120000,yes,self,myhpltmaxrate,30,,,,,,
+3190,サラの幻影＠ホーリークロス,attack,253,10,1000,0,5000,yes,target,always,0,,,,,,
+3190,サラの幻影＠ワイドソウルドレイン,chase,680,4,300,2000,10000,no,self,always,,,,,,,
+3190,サラの幻影＠ワイドソウルドレイン,attack,680,4,300,2000,10000,no,self,always,,,,,,,
+3190,サラの幻影＠チェンジダークネス,attack,168,1,10000,2000,60000,no,self,myhpltmaxrate,20,,,,,,
+3199,MM_M_MUTANT_DRAGON＠インビジブル,idle,353,1,10000,0,30000,yes,self,always,0,,,,,,
+3199,MM_M_MUTANT_DRAGON＠インビジブル,attack,353,1,10000,0,30000,yes,self,always,0,,,,,,
+3199,MM_M_MUTANT_DRAGON＠メテオストーム,attack,83,10,10000,0,10000,no,target,always,0,,,,,,
+3200,MM_M_CHIMERA＠インビジブル,idle,353,1,10000,0,30000,yes,self,always,0,,,,,,
+3200,MM_M_CHIMERA＠インビジブル,attack,353,1,10000,0,30000,yes,self,always,0,,,,,,
+3200,MM_M_CHIMERA＠アースストレイン,attack,2216,5,10000,0,10000,no,target,always,0,,,,,,
+*/
+
+dali02.gat,97,142,3	script	バーンハード博士#a1	865,{
 	if(checkquest(120165)&8 == 0) {
 		mes "[バーンハード博士]";
 		mes "私はシュバルツバルド最高の";
@@ -73,12 +127,12 @@ dali02.gat,97,142,3	script	バーンハード博士#a1	865,{/* 51020 */
 		mes "過去のグラストヘイムに行く時は";
 		mes "私に話しかけてくれ。";
 		mes "よろしく頼む。";
-		setquest 120165; //state=1
+		setquest 120165;
 		compquest 120165;
 		close;
 	}
 	if(checkquest(9337)) {
-		{
+		if(checkquest(9337)) {
 			mes "[バーンハード博士]";
 			mes "おお、君か。";
 			mes "過去のグラストヘイムは";
@@ -166,14 +220,14 @@ dali02.gat,97,142,3	script	バーンハード博士#a1	865,{/* 51020 */
 		mes "　^ff0000最後の入場から1時間経過後^000000";
 		mes "　に再度入場可能になります‐";
 		delquest 9337;
-		setquest 9337; //state=1
+		setquest 9337;
 		delquest 9337;
 		if('@itemid)
 			getitem '@itemid, 1;
 		close;
 	}
 	if(checkquest(9336)) {
-		if(checkquest(9336)&2 && checkquest(120195)&2) {
+//		if(checkquest(9336)&2 && checkquest(120195)&2) {
 			mes "[バーンハード博士]";
 			mes "次元移動機のエネルギー充填が";
 			mes "完了したようだ。";
@@ -189,10 +243,10 @@ dali02.gat,97,142,3	script	バーンハード博士#a1	865,{/* 51020 */
 			mes "もちろん、報酬は弾むぞ。";
 			delquest 9336;
 			delquest 120195;
-			setquest 120155; //state=1
-			compquest 120155;
+			setquest 120155;
+			delquest 120155;
 			close;
-		}
+//		}
 		mes "[バーンハード博士]";
 		mes "次元の狭間を開くには";
 		mes "多くのエネルギーが必要になるから、";
@@ -241,17 +295,386 @@ dali02.gat,97,142,3	script	バーンハード博士#a1	865,{/* 51020 */
 	mes "扉が開いたら、急いで向かってくれ。";
 	close;
 OnInit:
-	waitingroom "フェンリルとサラ",0; //51020
+	waitingroom "フェンリルとサラ",0;
 	end;
 }
 
-dali02.gat,93,146,6	script	助手#a1	851,{/* 51021 */
+dali02.gat,93,146,6	script	助手#a1	851,{
+	mes "[助手]";
+	mes "ギガンテスの破片を集めています。";
+	mes "特殊なピアスと交換したり、";
+	mes "精錬値+9以上のサラのローブを";
+	mes "覚醒させる事が出来ます。";
+	mes "また、ピアスには";
+	mes "無料でエンチャントも出来ますよ。";
+	next;
+	switch(select("ピアスの交換","エンチャント/初期化","サラのローブを覚醒させる","やめる")) {
+	case 1:
+		mes "[助手]";
+		mes "ピアスは2種類あります。";
+		mes "ヒールピアス、テレポートピアス";
+		mes "どちらも^ff0000ギガンテスの破片10個^000000で";
+		mes "交換可能ですよ。";
+		next;
+		switch(select("交換しない","ヒールピアスと交換","テレポートピアスと交換")) {
+		case 1:
+			mes "[助手]";
+			mes "そうですか。";
+			close;
+		case 2:
+			set '@gain,28384;
+			break;
+		case 3:
+			set '@gain,28385;
+			break;
+		}
+		if(checkitemblank() == 0) {
+			mes "[助手]";
+			mes "アイテムの種類数が多いです。";
+			mes "荷物を減らしてください。";
+			close;
+		}
+		if(countitem(6803) < 10) {
+			mes "[助手]";
+			mes "^006400ギガンテスの破片^00000010個を";
+			mes "持っていないようです。";
+			close;
+		}
+		delitem 6803,10;
+		getitem '@gain,1;
+		mes "[助手]";
+		mes "^006400ギガンテスの破片^00000010個と";
+		mes getitemname('@gain)+ "を";
+		mes "交換しました。";
+		close;
+	case 2:
+		break;
+	case 3:
+		mes "[助手]";
+		mes "こちらでは、サラのローブを";
+		mes "覚醒させたり、エンチャントを";
+		mes "行なう事ができます。";
+		next;
+		switch(select("サラのローブを覚醒させる","覚醒ローブエンチャント","覚醒ローブについて聞く","やめる")) {
+		case 1:
+			mes "[助手]";
+			mes "覚醒させる場合、精錬値やカードは";
+			mes "リセットされてしまいますので";
+			mes "ご注意ください。";
+			mes "また、覚醒したい";
+			mes "サラのローブを装備してから";
+			mes "話しかけてくださいね。";
+			next;
+			if(select("覚醒させる","やめておく") == 2) {
+				mes "[助手]";
+				mes "そうですか。";
+				close;
+			}
+			mes "[助手]";
+			mes "おや？";
+			mes "サラのローブを装備されていませんね。";
+			mes "覚醒させる場合には";
+			mes "サラのローブを装備してから";
+			mes "話しかけてくださいね。";
+			close;
+		case 2:
+			mes "[助手]";
+			mes "あなたは精錬値が+9以上の";
+			mes "覚醒ローブをお持ちですか？";
+			next;
+			mes "[助手]";
+			mes "もし、お持ちなら、";
+			mes "精錬値やカードはそのままに";
+			mes "暴走した魔力という能力を";
+			mes "覚醒ローブに";
+			mes "エンチャントします。";
+			next;
+			mes "[助手]";
+			mes "エンチャントしますか？";
+			next;
+			if(select("エンチャントをする","やめておく") == 2) {
+				mes "[助手]";
+				mes "そうですか。";
+				close;
+			}
+			mes "[助手]";
+			mes "おや？";
+			mes "覚醒ローブを";
+			mes "装備されていませんね。";
+			mes "エンチャントをする場合には";
+			mes "覚醒ローブを装備してから";
+			mes "話しかけてくださいね。";
+			close;
+		case 3:
+			mes "[助手]";
+			mes "こちらでは、精錬値が+9以上の";
+			mes "サラのローブを覚醒させることが";
+			mes "できます。";
+			next;
+			mes "[助手]";
+			mes "覚醒ローブの性能は";
+			mes "以下の通りです。";
+			next;
+			mes "[覚醒ローブ]";
+			mes "Mdef + 10";
+			mes "―――――――――――――";
+			mes "スキルディレイ - 10%";
+			mes "―――――――――――――";
+			mes "詠唱が中断されない";
+			mes "―――――――――――――";
+			mes "[覚醒ローブ]の";
+			mes "精錬値が1上がる度に、追加で";
+			mes "Matk + 15";
+			mes "闇属性魔法攻撃で";
+			mes "与えるダメージ + 2%";
+			mes "―――――――――――――";
+			mes "[ヒールピアス]";
+			mes "[テレポートピアス]と";
+			mes "共に装備時、追加で";
+			mes "詠唱時間 - 10%";
+			mes "固定詠唱時間 - 50%";
+			mes "―――――――――――――";
+			mes "[バースリーカード]と";
+			mes "共に装備時、";
+			mes "絶対に凍結状態にならない";
+			mes "―――――――――――――";
+			mes "系列 : 鎧";
+			mes "防御 : 35";
+			mes "重量 : 80";
+			mes "要求レベル : 100";
+			mes "装備 : ノービス系を除く全ての職業";
+			next;
+			mes "[助手]";
+			mes "また、覚醒ローブの";
+			mes "精錬値を+9以上にすると";
+			mes "特別なエンチャントを";
+			mes "覚醒ローブに";
+			mes "施して差し上げます。";
+			next;
+			mes "[助手]";
+			mes "なんと！、";
+			mes "精錬値やカードはそのままに";
+			mes "暴走した魔力という能力を";
+			mes "覚醒ローブに";
+			mes "エンチャントできるのです。";
+			next;
+			mes "[助手]";
+			mes "暴走した魔力の能力は";
+			mes "以下の通りです。";
+			next;
+			mes "[暴走した魔力]";
+			mes "魔法攻撃命中時、";
+			mes "一定確率で10秒間、";
+			mes "[暴走した魔力]発動";
+			mes "―――――――――――――";
+			mes "[暴走した魔力]発動時、";
+			mes "Int + 200";
+			mes "1秒毎にSP - 200";
+			mes "―――――――――――――";
+			mes "[カルデュイの耳]、";
+			mes "[ラフィネシールド]と";
+			mes "共に装備時、";
+			mes "[コメット]の";
+			mes "再使用待機時間減少効果が";
+			mes "発動しない";
+			mes "―――――――――――――";
+			mes "[堕ちた大神官ヒバムカード]";
+			mes "と共に装備時、";
+			mes "[堕ちた大神官ヒバムカード]";
+			mes "の効果が発動しない";
+			next;
+			mes "[助手]";
+			mes "とても魅力的だと思いますので";
+			mes "サラのローブをお持ちなら";
+			mes "ぜひ、覚醒やエンチャントを";
+			mes "ご依頼ください。";
+			close;
+		case 4:
+			mes "[助手]";
+			mes "そうですか。";
+			close;
+		}
+	case 4:
+		mes "[助手]";
+		mes "そうですか。";
+		close;
+	}
+	mes "[助手]";
+	mes "どちらをしますか？";
+	next;
+	switch(select("エンチャント","初期化","会話をやめる")) {
+	case 1:
+		set '@type,1;
+		break;
+	case 2:
+		set '@type,2;
+		mes "[助手]";
+		mes "初期化には^ff0000ギガンテスの破片5個^000000";
+		mes "必要です。";
+		next;
+		mes "[助手]";
+		mes "ですが、過去のグラストヘイムの";
+		mes "調査を完了してきた方には";
+		mes "^ff0000無料^000000で初期化をしています。";
+		mes "ぜひ、ご利用ください。";
+		next;
+		mes "^ff0000‐無料の初期化は繰り返し可能です。";
+		mes "　但し回数のストックは出来ません。‐^000000";
+		next;
+		mes "[助手]";
+		mes "なお、あなたは現在、";
+		if(checkquest(120170))
+			mes "^0000ff無料で初期化が可能^000000";
+		else
+			mes "^ff0000無料で初期化ができない^000000";
+		mes "みたいですね。";
+		next;
+		break;
+	case 3:
+		mes "[助手]";
+		mes "そうですか。";
+		close;
+	}
+	mes "[助手]";
+	mes "エンチャントまたは初期化をするには";
+	mes "ヒールピアスまたはテレポートピアスを";
+	mes "装備している必要があります。";
+	next;
+	switch(select(
+			(getequipid(7)!=0? "^nItemID^" +getequipid(7): "アクセサリー[1]‐装備していない"),
+			(getequipid(8)!=0? "^nItemID^" +getequipid(8): "アクセサリー[2]‐装備していない"))
+	) {
+	case 1: set '@itemid,getequipid(7); set '@menu,7; break;
+	case 2: set '@itemid,getequipid(8); set '@menu,8; break;
+	}
+	if('@itemid != 28384 && '@itemid != 28385) {
+		mes "[助手]";
+		mes "ヒールピアスまたはテレポートピアスを";
+		mes "装備してください。";
+		close;
+	}
+	if('@type == 1) {
+		if(getequipcardid('@menu,0)) {
+			mes "[助手]";
+			mes "すでにエンチャント済みですね。";
+			mes "　";
+			mes "初期化をすれば";
+			mes "もう一度エンチャントできます。";
+			close;
+		}
+		setarray '@table1$,"Str","Agi","Vit","Int","Dex","Luk";
+		setarray '@table2$,"MaxHP","MaxSP","Mdef";
+		mes "[助手]";
+		mes "一、二番目のスロットは";
+		mes "効果の種類を選択出来ます。";
+		mes "　";
+		mes "一番目のスロットに";
+		mes "どんな能力を付与しますか？";
+		next;
+		set '@socket1,select("Str","Agi","Vit","Int","Dex","Luk")-1;
+		switch('@socket1) {
+		case 0: setarray '@bonus1, 4700, 4701, 4702, 4703, 4704; break;
+		case 1: setarray '@bonus1, 4730, 4731, 4732, 4733, 4734; break;
+		case 2: setarray '@bonus1, 4740, 4741, 4742, 4743, 4744; break;
+		case 3: setarray '@bonus1, 4710, 4711, 4712, 4713, 4714; break;
+		case 4: setarray '@bonus1, 4720, 4721, 4722, 4723, 4724; break;
+		case 5: setarray '@bonus1, 4750, 4751, 4752, 4753, 4754; break;
+		}
+		mes "[助手]";
+		mes "二番目のスロットに";
+		mes "どんな能力を付与しますか？";
+		next;
+		set '@socket2,select("MaxHP","MaxSP","Mdef")-1;
+		switch('@socket2) {
+		case 0: setarray '@bonus2, 4861, 4862, 4867, 4868, 4900; break;
+		case 1: setarray '@bonus2, 4800, 4870, 4871, 4801, 4802; break;
+		case 2: setarray '@bonus2, 4890, 4786, 4891, 4787, 4892; break;
+		}
+		mes "[助手]";
+		mes "一番目のスロットは" +'@table1$['@socket1]+ "、";
+		mes "二番目のスロットは" +'@table2$['@socket2]+ "、";
+		mes "三番目、四番目のスロットは";
+		mes "ランダムで効果がつきます。";
+		mes "　";
+		mes "これでよろしいですか？";
+		next;
+		if(select("はい","いいえ") == 2) {
+			mes "[助手]";
+			mes "そうですか。";
+			mes "考えが決まってから";
+			mes "声をかけてください。";
+			close;
+		}
+		mes "[助手]";
+		mes "では、いきます。";
+		next;
+		if(checkitemblank() == 0) {
+			mes "[助手]";
+			mes "アイテムの種類数が多いです。";
+			mes "荷物を減らしてください。";
+			close;
+		}
+		misceffect 182,"";
+		misceffect 205,"";
+		misceffect 102,"";
+		misceffect 104,"";
+		set '@card[0],'@bonus1[rand(getarraysize('@bonus1))];
+		set '@card[1],'@bonus2[rand(getarraysize('@bonus2))];
+		set '@card[2],'@bonus3[rand(getarraysize('@bonus3))];
+		set '@card[3],'@bonus4[rand(getarraysize('@bonus4))];
+		delequip '@menu;
+		getitem2 '@itemid,1,1,0,0,'@card[0],'@card[1],'@card[2],'@card[3];
+		mes "[助手]";
+		mes "はい、どうぞ。";
+		close;
+	}
+	else {
+		mes "[助手]";
+		mes "初期化をした場合、失われた能力を";
+		mes "戻す事は不可能です。";
+		mes "本当に初期化しますか？";
+		next;
+		if(select("いいえ","はい") == 1) {
+			mes "[助手]";
+			mes "そうですか。";
+			close;
+		}
+		if(checkitemblank() == 0) {
+			mes "[助手]";
+			mes "アイテムの種類数が多いです。";
+			mes "荷物を減らしてください。";
+			close;
+		}
+		if(checkquest(120170)) {
+			setquest 120170;
+			delquest 120170;
+		}
+		else {
+			if(countitem(6803) < 5) {
+				mes "[助手]";
+				mes "残念ですがギガンテスの破片が";
+				mes "足りていません。";
+				mes "5個必要です。";
+				close;
+			}
+			delitem 6803,5;
+		}
+		misceffect 182,"";
+		misceffect 205,"";
+		misceffect 338,"";
+		delequip '@menu;
+		getitem '@itemid,1;
+		mes "[助手]";
+		mes "うまく初期化できました。";
+		close;
+	}
+
 OnInit:
-	waitingroom "交換・エンチャント", 20; //51021
+	waitingroom "交換・エンチャント",0;
 	end;
 }
 
-dali02.gat,99,148,3	script	次元移動機#XX1	10007,{/* 51022 */
+dali02.gat,99,148,3	script	次元移動機#XX1	10007,{
 	mes "‐フェンリルとサラが";
 	mes "　激しい戦闘を行った";
 	mes "　過去のグラストヘイムへと続く";
@@ -264,10 +687,9 @@ dali02.gat,99,148,3	script	次元移動機#XX1	10007,{/* 51022 */
 	switch(mdenter("glast_sara")) {
 	case 0:	// エラーなし
 		announce "メモリアルダンジョン[glast_sara] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
-		setquest 9336; //state=1
-		setquest 120195; //state=1
-			setquest 120160; //state=1	2週目
-			delquest 120160;
+		setquest 9336;
+		setquest 120195;
+		donpcevent getmdnpcname("FenrirSaraControl")+"::OnStart";
 		close2;
 		//warp "1@glast.gat",367,304;
 		end;
@@ -289,94 +711,156 @@ dali02.gat,99,148,3	script	次元移動機#XX1	10007,{/* 51022 */
 	}
 }
 
-1@glast.gat,359,294,4	script	フェンリル#glast_01	664,{/* 68034 */
+1@glast.gat,1,1,0	script	FenrirSaraControl	139,{
+OnStart:
+	if('flag)
+		end;
+	set 'flag,1;
+
+	hideonnpc getmdnpcname("#glast_move_01");
+	hideonnpc getmdnpcname("サラ・アイリン#glast_10");
+	hideonnpc getmdnpcname("#glast_move_04");
+	hideonnpc getmdnpcname("サラの幻影#glast_50");
+	hideonnpc getmdnpcname("フェンリル#glast_11");
+	hideonnpc getmdnpcname("#glast_move_01_jp");
+	hideonnpc getmdnpcname("サラ・アイリン#chase");
+	hideonnpc getmdnpcname("フェンリル#chase");
+	for(set '@i,1; '@i<=9; set '@i,'@i+1)
+		hideonnpc getmdnpcname("サラの幻影#chase_"+'@i);
+	for(set '@i,1; '@i<=9; set '@i,'@i+1)
+		hideonnpc getmdnpcname("宝箱#glast_sara"+'@i);
+	for(set '@i,1; '@i<=9; set '@i,'@i+1)
+		hideonnpc getmdnpcname("レッドギガンテス#fas_0"+'@i);
+	hideonnpc getmdnpcname("#fas_gimmick_1");
+	hideonnpc getmdnpcname("#fas_gimmick_2");
+	hideonnpc getmdnpcname("#fas_gimmick_3");
+	hideonnpc getmdnpcname("#fas_gimmick_4");
+	hideonnpc getmdnpcname("#fas_gimmick_5");
+	hideonnpc getmdnpcname("#glast_move_05");
+	hideonnpc getmdnpcname("#glast_move_06");
+	hideonnpc getmdnpcname("サラの幻影#ex_battle");
+
+	hideonnpc getmdnpcname("#effect_glast_event01");
+	hideonnpc getmdnpcname("#effect_glast_event02");
+	hideonnpc getmdnpcname("#effect_glast_event03");
+	hideonnpc getmdnpcname("#effect_glast_event04");
+	hideonnpc getmdnpcname("#effect_glast_event05");
+	hideonnpc getmdnpcname("#effect_glast_event06");
+	hideonnpc getmdnpcname("#effect_glast_event07");
+	hideonnpc getmdnpcname("#effect_glast_event08");
+
+	hideonnpc getmdnpcname("#fas_bgm_change01");
+	donpcevent getmdnpcname("#fas_effect1")+"::OnStart";
+	donpcevent getmdnpcname("#fas_effect2")+"::OnStart";
+	end;
+}
+
+1@glast.gat,359,294,4	script	フェンリル#glast_01	664,{
+	if(getnpctimer(1)) {
+		cutin "fenrir_a.bmp", 2;
+		mes "[フェンリル]";
+		mes "!?　あなたは……？";
+		next;
+		mes "[フェンリル]";
+		mes " ……敵、ではないようね。";
+		mes "私は、フェンリス・フェンリル。";
+		mes "あなたはここで何をしているの？";
+		mes "ここは危険な場所よ。";
+		close2;
+		cutin "fenrir_a.bmp", 255;
+		end;
+	}
 	mes "‐女性がいる‐";
 	next;
 	if(select("^0000FF会話を早める(ショートカット)^000000","^FF0000女性に話しかける^000000") == 1) {
+		mes "‐フェンリルについていこう‐";
+		close2;
+		hideonnpc getmdnpcname("フェンリル#glast_01");
+		hideonnpc getmdnpcname("#glast_event_3");
+		hideoffnpc getmdnpcname("#glast_move_01");
+		misceffect 6, getmdnpcname("#glast_move_01");
+		donpcevent getmdnpcname("callmon#fas")+"::OnStart1";
+		announce "‐フェンリルは南へ向かったようです。フェンリルについていこう！‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+		end;
 	}
 	initnpctimer;
-	close;
-OnTimer1000:
 	unittalk "フェンリル : !?　あなたは……？";
-	end;
-OnTimer1000:
+	close;
+OnTimer2000:
 	unittalk "フェンリル : ……敵、ではないようね。";
 	end;
-OnTimer1000:
+OnTimer4000:
 	unittalk "フェンリル : 私は、フェンリス・フェンリル。";
 	end;
-OnTimer1000:
+OnTimer6000:
 	unittalk "フェンリル : あなたはここで何をしているの？ここは危険な場所よ。";
 	end;
-OnTimer1000:
+OnTimer8000:
 	unittalk "フェンリル : ……!!";
 	end;
-OnTimer1000:
+OnTimer10000:
 	unittalk "フェンリル : 気を付けて！　モンスターが襲ってくるわっ!!";
 	end;
-OnTimer1000:
-	misceffect 60, "フェンリル#glast_01"; //68034
+OnTimer12000:
+	misceffect 60, getmdnpcname("フェンリル#glast_01");
+	monster getmdmapname("1@glast.gat"),355,294,"凶悪なガリオン",3198,1,getmdnpcname("フェンリル#glast_01")+"::OnKilled";
 	end;
-OnTimer1000:
-	@spawn(type: BL_MOB, ID: 38562, speed: 150, option: 0, view: 3198, pos: "1@glast.gat"(355, 294), dir: 0, name: "凶悪なガリオン")
-	end;
-OnTimer1000:
+OnTimer14000:
 	unittalk "フェンリル : 少し時間を稼いで！　私の魔法で倒すわ！";
 	end;
-OnTimer1000:
+OnTimer17000:
 	unittalk "フェンリル : 真なる天の怒りよ……";
 	end;
-OnTimer1000:
+OnTimer19000:
 	unittalk "フェンリル : 地軸を揺るがす雷よ……";
 	end;
-OnTimer1000:
+OnTimer21000:
 	unittalk "フェンリル : 私の行く手を塞ぐ者へ鉄槌を！";
 	end;
-OnTimer1000:
+OnTimer22000:
 	unittalk "フェンリル : 倒してくれたのね。";
 	end;
-OnTimer1000:
+OnTimer24000:
 	unittalk "フェンリル : ふぅ。何故こんなところにガリオンが……。";
 	end;
-OnTimer1000:
+OnTimer26000:
 	unittalk "フェンリル : この辺には生息していないはず。まさか奴らか……!!";
 	end;
-OnTimer1000:
+OnTimer28000:
 	unittalk "フェンリル : だとするとまずいわね……急がないと……！";
 	end;
-OnTimer1000:
-	hideoffnpc "#glast_event_3"; //68045
-	hideonnpc "#glast_event_3"; //68045
-	hideonnpc "#glast_event_3"; //68045
-	end;
-OnTimer1000:
+OnTimer30000:
 	unittalk "フェンリル : 私は探し物があって、グラストヘイムに来たの。";
 	end;
-OnTimer1000:
+OnTimer33000:
 	unittalk "フェンリル : だけど……ここにはそれを邪魔する奴らがいるみたいだわ。";
 	end;
-OnTimer1000:
+OnTimer35000:
 	unittalk "フェンリル : ……。";
 	end;
-OnTimer1000:
+OnTimer37000:
 	unittalk "フェンリル : ねぇ、私に協力してくれないかしら？　お願い。";
 	end;
-OnTimer1000:
+OnTimer39000:
 	unittalk "フェンリル : もし協力してくれるのならば私についてきて！　奴らが襲ってくる前に早く行きましょう！";
 	end;
-OnTimer1000:
+OnTimer42000:
+	hideonnpc getmdnpcname("フェンリル#glast_01");
+	misceffect 60, getmdnpcname("フェンリル#glast_01");
+	announce "‐フェンリルは南へ向かったようです。フェンリルについていこう！‐", 0x9, 0xffff00, 0x190, 20, 0, 0;
+	hideoffnpc getmdnpcname("#glast_move_01");
+	misceffect 6, getmdnpcname("#glast_move_01");
+	donpcevent getmdnpcname("callmon#fas")+"::OnStart1";
+	end;
+OnTimer43000:
 	stopnpctimer;
-	hideonnpc "フェンリル#glast_01"; //68034
-	misceffect 60, "フェンリル#glast_01"; //68034
-	announce "‐フェンリルは南へ向かったようです。フェンリルについていこう！‐", 0x1, 0xffff00, 0x190, 20, 0, 0;
-	hideoffnpc "#glast_move_01"; //68046
-	misceffect 6, "#glast_move_01"; //68046
-	misceffect 317, "#glast_move_01"; //68046
+	misceffect 317, getmdnpcname("#glast_move_01");
+	end;
+OnKilled:
 	end;
 }
-1@glast.gat,359,294,0	script	#glast_event_3	139,{/* 68045 (hide)*/}
 
-1@glast.gat,352,279,0	script	#glast_move_01	45,4,4,{/* 68046 (hide)*/
+1@glast.gat,352,279,0	script	#glast_move_01	45,4,4,{
 	mes "‐フェンリルを追いかけますか？‐";
 	next;
 	switch(select("^0000FF急いで移動する(ショートカット)^000000","^FF0000歩いて移動する^000000")) {
@@ -386,33 +870,61 @@ OnTimer1000:
 		close2;
 		warp getmdmapname("1@glast.gat"),47,264;
 		end;
+	case 2:
+		mes "‐あなたは歩いて";
+		mes "　フェンリルの後を追う事にした。";
+		mes "　フェンリルのいる";
+		mes "　西側の場所まで行こう‐";
+		close2;
+		warp getmdmapname("1@glast.gat"),347,265;
+		end;
 	}
 }
 
-1@glast.gat,347,265,0	script	#compass_1	139,{/* 68047 */}
-1@glast.gat,47,270,4	script	フェンリル#glast_03	664,{/* 68048 */}
-1@glast.gat,47,270,0	script	#glast_event_7	139,3,3,{/* 68049 */
-	viewpoint 2, 1, 1, 0, 0xFFFFFF00; //68049
-	hideonnpc "#glast_event_7"; //68049
+1@glast.gat,347,265,0	script	#fas_compass_1	139,4,4,{
+	viewpoint 1, 47, 270, 0, 0xFF0000;
+	end;
+}
+
+1@glast.gat,47,270,4	script	フェンリル#glast_03	664,{
 	cutin "fenrir_a.bmp", 2;
-	npctalk "フェンリル : 来てくれたのね、ありがとう！",getmdnpcname("フェンリル#glast_03");
-	set '@dummy,sleep2(2000);
-	npctalk "フェンリル : 時間がないわ！　さあ、こっちよ！",getmdnpcname("フェンリル#glast_03");
-	set '@dummy,sleep2(2000);
+	mes "[フェンリル]";
+	mes "来てくれたのね、";
+	mes "ありがとう！";
+	close2;
 	cutin "fenrir_a.bmp", 255;
-	hideonnpc "フェンリル#glast_03"; //68048
+	end;
+}
+
+1@glast.gat,47,270,0	script	#glast_event_7	139,5,5,{
+	viewpoint 2, 1, 1, 0, 0xFFFF00;
+	hideonnpc getmdnpcname("#glast_event_7");
+	cutin "fenrir_a.bmp", 2;
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_03")),"フェンリル : 来てくれたのね、ありがとう！";
+	set '@dummy,sleep2(2000);
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_03")),"フェンリル : 時間がないわ！　さあ、こっちよ！";
+	set '@dummy,sleep2(3000);
+	cutin "fenrir_a.bmp", 255;
+	hideonnpc getmdnpcname("フェンリル#glast_03");
 	warp getmdmapname("1@glast.gat"),40,348;
 	end;
 }
-1@glast.gat,43,347,0	script	#compass_8	139,3,3,{/* 68815 */
-	viewpoint 2, 1, 1, 0, 0xFFFF00; //68815
+
+1@glast.gat,43,347,0	script	#fas_compass_8	139,3,3,{
+	viewpoint 2, 1, 1, 0, 0xFFFF00;
 	end;
 }
-1@glast.gat,44,357,0	script	#glast_event_9	139,3,3,{/* 68816 */
+
+1@glast.gat,44,357,0	script	#glast_event_9	139,3,3,{
 	mes "‐古びた剣がある。";
 	mes "　フェンリルの探し物だろうか？‐";
 	next;
-	if(select("^0000FF先を急ごう(ショートカット)^000000","^FF0000フェンリルに話しかける^000000")) {
+	if(select("^0000FF先を急ごう(ショートカット)^000000","^FF0000フェンリルに話しかける^000000") == 1) {
+		mes "‐先を急ぐ事にした‐";
+		close2;
+		hideonnpc getmdnpcname("#glast_event_9");
+		mapwarp getmdmapname("1@glast.gat"),getmdmapname("1@glast.gat"),199,333;
+		end;
 	}
 	cutin "fenrir_a.bmp", 2;
 	mes "[フェンリル]";
@@ -420,1104 +932,908 @@ OnTimer1000:
 	mes "とうとう見つけたわ！";
 	close2;
 	cutin "fenrir_a.bmp", 255;
-	hideonnpc "#glast_event_9"; //68816
+	hideonnpc getmdnpcname("#glast_event_9");
 	initnpctimer;
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_04")),"フェンリル : これがバルドルが使っていた剣、センチネルブリーズね……。";
 	end;
-OnTimer1000:
-	npctalk "フェンリル : これがバルドルが使っていた剣、センチネルブリーズね……。",getmdnpcname("フェンリル#glast_04");
+OnTimer3000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_04")),"フェンリル : 千年が過ぎた今も……これでバルドルの行方を追う事が出来るわ！";
 	end;
-OnTimer1000:
-	npctalk "フェンリル : 千年が過ぎた今も……これでバルドルの行方を追う事が出来るわ！",getmdnpcname("フェンリル#glast_04");
+OnTimer6000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_04")),"フェンリル : バルドルの生まれ変わり……やっと、やっと探せるわっ!!";
 	end;
-OnTimer1000:
-	npctalk "フェンリル : バルドルの生まれ変わり……やっと、やっと探せるわっ!!",getmdnpcname("フェンリル#glast_04");
+OnTimer9000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_04")),"フェンリル : ……ッ!?　邪悪な力を感じる！";
 	end;
-OnTimer1000:
-	npctalk "フェンリル : ……ッ!?　邪悪な力を感じる！",getmdnpcname("フェンリル#glast_04");
+OnTimer12000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_04")),"フェンリル : 誰かいるわね！　出てきなさい！";
 	end;
-OnTimer1000:
-	npctalk "フェンリル : 誰かいるわね！　出てきなさい！",getmdnpcname("フェンリル#glast_04");
+OnTimer15000:
+	hideoffnpc getmdnpcname("サラ・アイリン#glast_10");
 	end;
-OnTimer1000:
-	hideoffnpc "サラ・アイリン#glast_10"; //68818
+OnTimer16000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_10")),"サラ : ふふふ……やっぱり追いかけて正解ね。思っていた通りだわ。";
 	end;
-OnTimer1000:
-	npctalk "サラ : ふふふ……やっぱり追いかけて正解ね。思っていた通りだわ。",getmdnpcname("サラ・アイリン#glast_10");
+OnTimer19000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_10")),"サラ : その剣が鍵なんでしょう？";
 	end;
-OnTimer1000:
-	npctalk "サラ : その剣が鍵なんでしょう？",getmdnpcname("サラ・アイリン#glast_10");
+OnTimer22000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_10")),"サラ : それを使えば、千年の封印でさえも解くことが出来る。そういう事ね、フェンリス・フェンリル？";
 	end;
-OnTimer1000:
-	npctalk "サラ : それを使えば、千年の封印でさえも解くことが出来る。そういう事ね、フェンリス・フェンリル？",getmdnpcname("サラ・アイリン#glast_10");
+OnTimer25000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_04")),"フェンリル : まさか……ヴァルキリー！";
 	end;
-OnTimer1000:
-	npctalk "フェンリル : まさか……ヴァルキリー！",getmdnpcname("フェンリル#glast_04");
+OnTimer28000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_10")),"サラ : 挨拶が遅れたわね。私の名前はサラ・アイリン。12ヴァルキリーの1人よ。";
 	end;
-OnTimer1000:
-	npctalk "サラ : 挨拶が遅れたわね。私の名前はサラ・アイリン。12ヴァルキリーの1人よ。",getmdnpcname("サラ・アイリン#glast_10");
+OnTimer31000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_10")),"サラ : フレイヤ様の願いを成し遂げるためにも……ふふふっ……この剣はいただくわっ！";
 	end;
-OnTimer1000:
-	npctalk "サラ : フレイヤ様の願いを成し遂げるためにも……ふふふっ……この剣はいただくわっ！",getmdnpcname("サラ・アイリン#glast_10");
+OnTimer34000:
+	hideonnpc getmdnpcname("サラ・アイリン#glast_10");
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_04")),"フェンリル : 待ちなさいっ！";
 	end;
-OnTimer1000:
-	hideonnpc "サラ・アイリン#glast_10"; //68818
+OnTimer35000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_04")),"フェンリル : サラを追うわ！　私についてきて！";
 	end;
-OnTimer1000:
-	npctalk "フェンリル : 待ちなさいっ！",getmdnpcname("フェンリル#glast_04");
-	end;
-OnTimer1000:
-	npctalk "フェンリル : サラを追うわ！　私についてきて！",getmdnpcname("フェンリル#glast_04");
-	end;
-OnTimer1000:
+OnTimer38000:
 	stopnpctimer;
-	hideoffnpc "#glast_event_warp_1"; //68819
-	hideoffnpc "#glast_event_warp_2"; //68820
-	hideoffnpc "#glast_event_warp_3"; //69357
-	hideoffnpc "#glast_event_warp_4"; //69358
-	hideoffnpc "#glast_event_warp_5"; //70121
-	hideoffnpc "#glast_event_warp_6"; //70122
-	hideoffnpc "#glast_event_warp_7"; //70123
+	mapwarp getmdmapname("1@glast.gat"),getmdmapname("1@glast.gat"),199,333;
 	end;
 }
-1@glast.gat,44,357,8	script	フェンリル#glast_04	664,{/* 68817 */}
-1@glast.gat,42,350,0	script	#glast_event_warp_1	139,5,5,{/* 68819 (hide)*/
-	warp getmdmapname("1@glast.gat"),199,333;
-	end;
-}
-1@glast.gat,44,366,0	script	#effect1	139,{/* 61189 */
+
+1@glast.gat,44,357,8	script	フェンリル#glast_04	664,{}
+
+1@glast.gat,46,364,4	script	サラ・アイリン#glast_10	10066,{}
+
+1@glast.gat,44,366,0	script	#fas_effect1	139,{
 OnStart:
 	initnpctimer;
 	end;
-OnTimer5000:
+OnTimer3000:
 	initnpctimer;
-	misceffect 222, "#effect1"; //61189
+	misceffect 222, getmdnpcname("#fas_effect1");
 	end;
 }
 
+1@glast.gat,200,346,4	script	サラ・アイリン#glast_jp	10066,{}
 
-//-----------------------------------------------------------------------------
+1@glast.gat,200,340,0	script	フェンリル#b	664,{
+	mes "‐フェンリルとサラが対峙している!‐";
+	next;
+	switch(select("^0000FF先に出口へ向かう(ショートカット)^000000","^FF0000戦闘を見届ける^000000","少し考える")) {
+	case 1:
+		hideonnpc getmdnpcname("フェンリル#b");
+		hideonnpc getmdnpcname("サラ・アイリン#glast_jp");
+		mapwarp getmdmapname("1@glast.gat"),getmdmapname("1@glast.gat"),201,202;
+		close;
+	case 2:
+		mes "‐二人の対決を見届ける事にした‐";
+		close2;
+		initnpctimer;
+		end;
+	case 3:
+		mes "‐対峙した二人を前に、";
+		mes "　あなたはどうすべきか";
+		mes "　もう少し考えてみることにした‐";
+		close;
+	}
+	end;
+OnTimer1000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_jp")),"サラ : やはり追って来たのね、フェンリス・フェンリル。";
+	end;
+OnTimer4000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#b")),"フェンリル : あなたにセンチネルブリーズは渡さないっ！";
+	end;
+OnTimer7000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_jp")),"サラ : ふん、威勢ばかりは立派ね。この私を倒せるなどと本気で思っているの？";
+	end;
+OnTimer10000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#b")),"フェンリル : 凄い自信ね。さすがはヴァルキリーってところかしら。";
+	end;
+OnTimer13000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#b")),"フェンリル : でも、私を甘くみない事ね！";
+	misceffect 8,getmdnpcname("フェンリル#b");
+	misceffect 521,getmdnpcname("フェンリル#b");
+	end;
+OnTimer14000:
+	misceffect 583,getmdnpcname("フェンリル#b");
+	end;
+OnTimer15000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_jp")),"サラ : 血を代価に召喚したのが火の精霊とは、貴様の血は随分と安いのね。";
+	end;
+OnTimer18000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#b")),"フェンリル : さて、それはどうかしら。";
+	end;
+OnTimer21000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_jp")),"サラ : ……いいわ。貴様の身体ごと、その自信も灰にしてあげる。";
+	setnpcdisplay getmdnpcname("サラ・アイリン#glast_jp"),3190;
+	hideoffnpc getmdnpcname("#fas_bgm_change01");
+	end;
+OnTimer24000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#b")),"フェンリル : 炎を司る汝に告げる。私が名はフェンリス・フェンリル。";
+	end;
+OnTimer27000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_jp")),"サラ : 天を切り裂く極限の力よ！　我が手に集いて力となれ。";
+	end;
+OnTimer30000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#b")),"フェンリル : 魂をも燃やし尽くす永久の業火を今ここに！";
+	misceffect 903,getmdnpcname("フェンリル#b");
+	end;
+OnTimer33000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_jp")),"サラ : 時空を貫く天空の剣！";
+	misceffect 831,getmdnpcname("サラ・アイリン#glast_jp");
+	end;
+OnTimer35000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#b")),"フェンリル : はぁぁっ!!";
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_jp")),"サラ : はぁぁっ!!";
+	end;
+OnTimer35500:
+	misceffect 886,getmdnpcname("フェンリル#b");
+	misceffect 930,getmdnpcname("フェンリル#b");
+	misceffect 916,getmdnpcname("サラ・アイリン#glast_jp");
+	end;
+OnTimer38500:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#glast_jp")),"サラ : 何ッ……!?";
+	end;
+OnTimer41500:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#b")),"フェンリル : 今です！　センチネルブリーズを！";
+	end;
+OnTimer45500:
+	hideonnpc getmdnpcname("フェンリル#b");
+	hideonnpc getmdnpcname("サラ・アイリン#glast_jp");
+	hideoffnpc getmdnpcname("フェンリル#chase");
+	hideoffnpc getmdnpcname("サラ・アイリン#chase");
+	end;
+OnTimer46500:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#chase")),"フェンリル : センチネルブリーズを手に入れたわ!!";
+	end;
+OnTimer49500:
+	stopnpctimer getmdnpcname("#effect2");
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#chase")),"サラ : くっ……！";
+	end;
+OnTimer52500:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#chase")),"フェンリル : ふふ……、少し私の力を甘く見たようね、ヴァルキリー。";
+	end;
+OnTimer55500:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#chase")),"サラ : くくく……楽しませてくれるじゃないか、フェンリス・フェンリル……！";
+	end;
+OnTimer58500:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#chase")),"サラ : このまま簡単に逃げられると思わない事ね！";
+	end;
+OnTimer61500:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#chase")),"サラ : 私の本気を見せてあげる。グラストヘイムを地獄と化してやるわ!!";
+	end;
+OnTimer63000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#chase")),"サラ : はぁぁぁぁ!!";
+	misceffect 651,getmdnpcname("サラ・アイリン#chase");
+	end;
+OnTimer66000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#chase")),"フェンリル : まずいっ……!!　風の精霊よ！瞬間移動させてっ！";
+	end;
+OnTimer69000:
+	unittalk getnpcid(0,getmdnpcname("フェンリル#chase")),"フェンリル : くっ……!?　先ほどの戦闘で力が……移動がうまくできないっ……！";
+	end;
+OnTimer71000:
+	unittalk getnpcid(0,getmdnpcname("サラ・アイリン#chase")),"サラ : 逃がすか!!";
+	end;
+OnTimer73000:
+	stopnpctimer;
+	mapwarp getmdmapname("1@glast.gat"),getmdmapname("1@glast.gat"),200,203;
+	end;
+}
 
+1@glast.gat,200,346,4	script	サラ・アイリン#chase	3190,{}
+1@glast.gat,198,350,4	script	フェンリル#chase	664,{}
 
-1@glast.gat,335,262,5	script	サラの幻影#chase_8	3190,{/* 58858 (hide)*/}
-1@glast.gat,351,269,0	script	#glast_move_04	45,{/* 58860 (hide)*/
+1@glast.gat,200,340,0	script	#fas_bgm_change01	139,20,20,{
+	musiceffect "44";
+	end;
+}
+
+1@glast.gat,200,350,0	script	#fas_effect2	139,{
+OnStart:
+	initnpctimer;
+	end;
+OnTimer3000:
+	initnpctimer;
+	misceffect 222, getmdnpcname("#fas_effect2");
+	end;
+}
+
+1@glast.gat,199,202,0	script	#fas_bgm_change02	139,3,3,{
+	musiceffect "147";
+	viewpoint 1, 351, 270, 0, 0xFF0000;
+	end;
+}
+
+1@glast.gat,199,205,0	script	#glast_time_q1	139,3,3,{
+	donpcevent getmdnpcname("callmon#fas")+"::OnStart2";
+	hideonnpc getmdnpcname("#glast_move_01");
+	hideoffnpc getmdnpcname("#glast_move_04");
+	hideoffnpc getmdnpcname("#fas_gimmick_1");
+	hideoffnpc getmdnpcname("#fas_gimmick_2");
+	hideoffnpc getmdnpcname("#fas_gimmick_3");
+	hideoffnpc getmdnpcname("#fas_gimmick_4");
+	hideoffnpc getmdnpcname("#fas_gimmick_5");
+	for(set '@i,1; '@i<=9; set '@i,'@i+1)
+		hideoffnpc getmdnpcname("宝箱#glast_sara"+'@i);
+	for(set '@i,1; '@i<=9; set '@i,'@i+1)
+		hideoffnpc getmdnpcname("レッドギガンテス#fas_0"+'@i);
+	if(rand(2))
+		hideonnpc getmdnpcname("宝箱#glast_sara8");
+	else
+		hideonnpc getmdnpcname("レッドギガンテス#fas_01");
+	if(rand(2))
+		hideonnpc getmdnpcname("宝箱#glast_sara6");
+	else
+		hideonnpc getmdnpcname("レッドギガンテス#fas_05");
+	if(rand(2))
+		hideonnpc getmdnpcname("宝箱#glast_sara1");
+	else
+		hideonnpc getmdnpcname("レッドギガンテス#fas_08");
+	if(rand(2))
+		hideonnpc getmdnpcname("宝箱#glast_sara9");
+	else
+		hideonnpc getmdnpcname("レッドギガンテス#fas_03");
+	sleep 1000;
+	announce "フェンリル : ごめんなさい、力が足りずうまく移動ができなかったわ。　入口で合流しましょう……！", 0x9, 0x00ebff, 0x0190, 20, 0, 0;
+	sleep 3000;
+	announce "サラ : 逃がさないぞ!!私の魔力の恐ろしさを見せつけてやるわ!!", 0x9, 0x00ebff, 0x0190, 20, 0, 0;
+	sleep 2000;
+	announce "‐サラの魔力の影響で、「サラの幻影」、「レッドギガンテス」、「秘宝」が出現しました！", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	initnpctimer;
+	sleep 2000;
+	announce "‐5分以内にフェンリルの元にたどり着くと、報酬経験値が大幅アップ！さらに「サラの幻影」と戦うことができます‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	sleep 1000;
+	donpcevent getmdnpcname("#fas_chase_timer")+"::OnStart";
+	end;
+OnTimer13000:
+OnTimer43000:
+OnTimer53000:
+	switch(rand(3)) {
+	case 0: announce "サラ : 私に楯突いた事を後悔しなさい！", 0x9, 0x00ebff, 0x0190, 20, 0, 0;	break;
+	case 1: announce "サラ : 逃げても無駄よ！　塵も残さず消し去ってあげる！", 0x9, 0x00ebff, 0x0190, 20, 0, 0;	break;
+	case 2: announce "サラ : あははは！　私から逃げられると思っているの？", 0x9, 0x00ebff, 0x0190, 20, 0, 0;	break;
+	}
+	end;
+OnTimer30000:
+	switch('cnt) {
+	case 0:
+		announce "サラ : ネズミみたいに逃げやがって!!　消滅させてやるっ!!", 0x9, 0x00ebff, 0x0190, 20, 0, 0;
+		sleep 2000;
+		announce "フェンリル : サラ、チューチュー。これで満足？捕まえてみなさいっ！", 0x9, 0x00ebff, 0x0190, 20, 0, 0;
+		hideonnpc getmdnpcname("#fas_bgm_change02");
+		sleep 2000;
+		announce "サラ : !!　フェンリル！この足でつぶしてやるわ!!", 0x9, 0x00ebff, 0x0190, 20, 0, 0;
+		break;
+	case 1: announce "サラ : どこにいる!!!", 0x9, 0x00ebff, 0x0190, 20, 0, 0; break;
+	case 2: announce "サラ : 私の魔法で粉々にしてやるわっ!!!", 0x9, 0x00ebff, 0x0190, 20, 0, 0; break;
+	case 3: announce "サラ : 全て、全てを破壊してあげるわっ!!", 0x9, 0x00ebff, 0x0190, 20, 0, 0;	break;
+	case 4: announce "サラ : 私が破壊してやる!!!!", 0x9, 0x00ebff, 0x0190, 20, 0, 0;	break;
+	}
+	end;
+OnTimer60000:
+	initnpctimer;
+	set 'cnt,'cnt+1;
+	announce "‐" +'cnt+ "分経過‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	end;
+}
+
+1@glast.gat,351,269,0	script	#glast_move_04	45,2,2,{
 	mes "‐この先に移動すると";
 	mes "　^ff0000パーティーメンバー全員^000000が";
 	mes "　^ff0000転送^000000されます。";
 	mes "　移動してもよろしいですか？";
 	if(select("いいえ","はい") == 1)
 		close;
-	announce "‐サラの魔力の影響が無くなった為、「レッドギガンテス」と「秘宝」が消滅しました‐", 0x1, 0xffff00, 0x190, 20, 0, 0;
-	hideonnpc "#glast_move_04"; //71052
-	warp getmdnpcname("1@glast.gat"),350,282;
+	announce "‐サラの魔力の影響が無くなった為、「レッドギガンテス」と「秘宝」が消滅しました‐", 0x9, 0xffff00, 0x190, 20, 0, 0;
+	stopnpctimer getmdnpcname("#glast_time_q1");
+	hideonnpc getmdnpcname("#glast_move_04");
+	hideoffnpc getmdnpcname("フェンリル#glast_11");
+	donpcevent getmdnpcname("サラの幻影#glast_50")+"::OnStart";
+	warp getmdmapname("1@glast.gat"),351,282;
 	end;
 }
 
-1@glast.gat,353,290,8	script	サラの幻影#glast_50	10066,{/* 61553 (hide)*/}
+1@glast.gat,353,290,8	script	サラの幻影#glast_50	10066,{
+	cutin "sarah_hero3_2.bmp", 2;
+	mes "[サラ]";
+	mes "なかなかやるじゃない、フェンリル。";
+	mes "うまく逃げたわね。";
+	next;
+	cutin "sarah_hero3.bmp", 2;
+	mes "[サラ]";
+	mes "ふふ……";
+	mes "今日はここまでにしてあげるわ。";
+	close2;
+	cutin "sarah_hero3.bmp", 255;
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer1000:
+	misceffect 718,getmdnpcname("サラの幻影#glast_50");
+	end;
+OnTimer2000:
+	hideoffnpc getmdnpcname("サラの幻影#glast_50");
+	misceffect 1065,getmdnpcname("サラの幻影#glast_50");
+	end;
+OnTimer3000:
+	unittalk getnpcid(0,getmdnpcname("サラの幻影#glast_50")),"サラ : なかなかやるじゃない、フェンリル。うまく逃げたわね。";
+	end;
+OnTimer6000:
+	unittalk getnpcid(0,getmdnpcname("サラの幻影#glast_50")),"サラ : ふふ……今日はここまでにしてあげるわ。";
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_11")),"フェンリル : 願わくば今日で終わりにして欲しいわね。";
+	end;
+OnTimer9000:
+	unittalk getnpcid(0,getmdnpcname("サラの幻影#glast_50")),"サラ : 残念だけど、これが最後だと思わない事ね。";
+	end;
+OnTimer12000:
+	unittalk getnpcid(0,getmdnpcname("サラの幻影#glast_50")),"サラ : きっとまた会う事になるわ!!";
+	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_11")),"フェンリル : そう……楽しみに待っているわ。サラ・アイリン。";
+	misceffect 718,getmdnpcname("サラの幻影#glast_50");
+	end;
+OnTimer13000:
+	stopnpctimer;
+	hideonnpc getmdnpcname("サラの幻影#glast_50");
+	end;
+}
 
-1@glast.gat,359,294,4	script	フェンリル#glast_11	664,{/* 65533 (hide)*/}
-1@glast.gat,376,303,0	script	#glast_move_05	45,{/* 65534 (hide)*/}
-1@glast.gat,352,279,0	script	#glast_move_01_	45,{/* 69520 */}
-1@glast.gat,352,279,0	script	#glast_move_01_jp	45,{/* 65535 (hide)*/}
+1@glast.gat,359,294,4	script	フェンリル#glast_11	664,{
+	if(checkquest(120155)){
+		cutin "fenrir_a.bmp", 2;
+		mes "[フェンリル]";
+		mes "また、どこかでお会いできると";
+		mes "良いですね。";
+		close2;
+		cutin "fenrir_a.bmp", 255;
+		end;
+	}
+	cutin "fenrir_a.bmp", 2;
+	mes "[フェンリル]";
+	mes "ご無事で何よりです。";
+	mes "私の力が足りなかったばかりに";
+	mes "ご迷惑をおかけしました。";
+	next;
+	if('flag == 0) {
+		set 'flag,1;
+		stopnpctimer getmdnpcname("#fas_effect1");
+		stopnpctimer getmdnpcname("#fas_effect2");
+		hideonnpc getmdnpcname("#fas_bgm_change01");
+		hideonnpc getmdnpcname("サラ・アイリン#chase");
+		hideonnpc getmdnpcname("フェンリル#chase");
+		hideoffnpc getmdnpcname("サラの幻影#ex_battle");
+		hideoffnpc getmdnpcname("#glast_move_01_jp");
+		hideoffnpc getmdnpcname("#glast_move_05");
+		misceffect 6,getmdnpcname("#glast_move_01_jp");
+		misceffect 6,getmdnpcname("#glast_move_05");
+		donpcevent getmdnpcname("callmon#fas")+"::OnStart3";
+		set '@dummy,sleep2(1000);
+		misceffect 317,getmdnpcname("#glast_move_01_jp");
+		misceffect 317,getmdnpcname("#glast_move_05");
+	}
+	mes "[フェンリル]";
+	mes "それにしても";
+	mes "随分早かったですね。";
+	next;
+	mes "[フェンリル]";
+	mes "……さて。私はそろそろ行きます。";
+	mes "手伝っていただいて";
+	mes "ありがとうございました。";
+	next;
+	mes "[フェンリル]";
+	mes "どうやら、先ほどサラの召喚した";
+	mes "幻影や使い魔が";
+	mes "まだ残っているようですが、";
+	mes "このまま放っておいても";
+	mes "他の冒険者に大きな被害が";
+	mes "出る事はないと思います。";
+	next;
+	mes "[フェンリル]";
+	mes "幸いサラ本人は居ませんから、";
+	mes "幻影程度ならどうにかなるでしょう。";
+	mes "もし、あなた方が奴らを";
+	mes "倒してくださると言うのであれば";
+	mes "ぜひお願いします。";
+	next;
+	mes "[フェンリル]";
+	mes "私は先を急ぎますので、";
+	mes "手伝うことはできませんが、";
+	mes "大きな力が残る場所へ移動できるよう";
+	mes "道を開いておきました。";
+	mes "もしその力と戦うのであれば、";
+	mes "南のワープより移動してください。";
+	next;
+	mes "[フェンリル]";
+	mes "もちろん、無理強いは出来ませんので";
+	mes "このままお帰りになっても";
+	mes "構いませんよ。";
+	mes "その場合はどうかお気をつけて";
+	mes "お帰り下さい。";
+	next;
+	mes "[フェンリル]";
+	mes "これはお手伝いをして頂いた";
+	mes "お礼です。";
+	mes "どうか、お受け取りください。";
+	next;
+	mes "^ff0000‐各種ピアスのエンチャントを";
+	mes "　無料で初期化できる権利を";
+	mes "　獲得しました‐^000000";
+	next;
+	mes "[フェンリル]";
+	mes "また、どこかでお会いできると";
+	mes "良いですね。";
+	if(checkitemblank() == 0) {
+		next;
+		mes "[フェンリル]";
+		mes "おや？";
+		mes "どうやら荷物の種類が多いようです。";
+		mes "荷物の種類を減らしてから";
+		mes "また声をかけてください。";
+		close2;
+		cutin "fenrir_a.bmp", 255;
+		end;
+	}
+	setquest 9337;
+	compquest 9337;
+	if(checkquest(120150) == 0) {
+		setquest 120150;
+		compquest 120150;
+	}
+	setquest 120155;
+	compquest 120155;
+	getexp 3000000,0,1;
+	getexp 0,1500000,0;
+	getitem 6803,1;
+	if(checkquest(120170) == 0) {
+		setquest 120170;
+		compquest 120170;
+	}
+	close2;
+	cutin "fenrir_a.bmp", 255;
+	end;
+}
 
-1@glast.gat,67,264,4	script	宝箱#glast_sara8	10005,{/* 65843 (hide)*/}
+1@glast.gat,352,279,0	script	#glast_move_01_jp	45,4,4,{
+	mes "‐ここからサラの幻影がいる場所へ";
+	mes "　行くことが出来るようだ‐";
+	next;
+	if(select("この場に留まる","先へ進む") == 1) {
+		mes "‐あなたはこの場に留まった‐";
+		close;
+	}
+	mes "‐先へ進むことにした‐";
+	close2;
+	warp getmdmapname("1@glast.gat"),199,333;
+	end;
+}
 
-1@glast.gat,42,273,0	script	#バリケード1_1	1905,{/* 65845 */}
-1@glast.gat,43,273,0	script	#バリケード1_2	1905,{/* 65846 */}
-1@glast.gat,44,273,0	script	#バリケード1_3	1905,{/* 65859 */}
-1@glast.gat,45,273,0	script	#バリケード1_4	1905,{/* 65977 */}
+1@glast.gat,1,1,0	script	#fas_chase_timer	139,{
+OnStart:
+OnTimer5000:
+	stopnpctimer;
+	for(set '@i,1; '@i<=9; set '@i,'@i+1) {
+		unittalk getnpcid(0,getmdnpcname("サラの幻影#chase_"+'@i)),"サラの幻影 : テレポート!!";
+		misceffect 34,getmdnpcname("サラの幻影#chase_"+'@i);
+	}
+	sleep 500;
+	for(set '@i,1; '@i<=9; set '@i,'@i+1) {
+		hideoffnpc getmdnpcname("サラの幻影#chase_"+'@i);
+		misceffect 135,getmdnpcname("サラの幻影#chase_"+'@i);
+		set '@dummy,getmapxy('@map$,'@x,'@y,1,getmdnpcname("サラの幻影#chase_"+'@i));
+		monster '@map$,'@x,'@y,"#meteo",3199,3,getmdnpcname("#fas_chase_timer")+"::OnKilled";
+		monster '@map$,'@x,'@y,"#earth",3200,1,getmdnpcname("#fas_chase_timer")+"::OnKilled";
+	}
+	sleep 4500;
+	for(set '@i,1; '@i<=9; set '@i,'@i+1)
+		hideonnpc getmdnpcname("サラの幻影#chase_"+'@i);
+	sleep 500;
+	killmonster getmdmapname("1@glast.gat"),getmdnpcname("#fas_chase_timer")+"::OnKilled";
+	sleep 2000;
+	initnpctimer;
+	end;
+}
 
-1@glast.gat,39,343,0	script	#バリケード3_1	1905,{/* 66043 */}
+1@glast.gat,194,214,5	script	サラの幻影#chase_1	3190,{}
+1@glast.gat,207,79,5	script	サラの幻影#chase_2	3190,{}
+1@glast.gat,259,54,5	script	サラの幻影#chase_3	3190,{}
+1@glast.gat,306,179,5	script	サラの幻影#chase_4	3190,{}
+1@glast.gat,357,204,5	script	サラの幻影#chase_5	3190,{}
+1@glast.gat,298,210,5	script	サラの幻影#chase_6	3190,{}
+1@glast.gat,321,250,5	script	サラの幻影#chase_7	3190,{}
+}1@glast.gat,335,262,5	script	サラの幻影#chase_8	3190,{}
+1@glast.gat,351,258,5	script	サラの幻影#chase_9	3190,{}
 
-1@glast.gat,42,343,0	script	#バリケード3_4	1905,{/* 66315 */}
+1@glast.gat,133,361,4	script	宝箱#glast_sara1	10005,{
+	// ダイヤモンド1カラット、ジャルゴン、ルビー、アメジスト、金塊、銀塊、銀塊、ギガンテスの破片、サラのローブ
+	setarray '@gain,730,912,723,719,7228,7229,7229,6803,15121;
+	setarray '@rate,1000,1000,1000,1000,300,300,300,100,10;
+	set '@dummy,getmapxy('@map$,'@x,'@y,1,getmdnpcname(strnpcinfo(0)));
+	hideonnpc;
+	misceffect 10;
+	for(set '@i,0; '@i<getarraysize('@gain); set '@i,'@i+1) {
+		set '@xs,'@x+rand(5)-2;
+		set '@ys,'@y+rand(5)-2;
+		if(rand(1000) < '@rate['@i])
+			dropitem '@map$,'@xs,'@ys,'@gain['@i],('@i==0? getmapusers('@map$): 1),0;
+	}
+	end;
+}
+1@glast.gat,267,351,4	duplicate(宝箱#glast_sara1)	宝箱#glast_sara2	10005
+1@glast.gat,176,178,4	duplicate(宝箱#glast_sara1)	宝箱#glast_sara3	10005
+1@glast.gat,200,135,4	duplicate(宝箱#glast_sara1)	宝箱#glast_sara4	10005
+1@glast.gat,97,38,4		duplicate(宝箱#glast_sara1)	宝箱#glast_sara5	10005
+1@glast.gat,366,190,4	duplicate(宝箱#glast_sara1)	宝箱#glast_sara6	10005
+1@glast.gat,62,279,4	duplicate(宝箱#glast_sara1)	宝箱#glast_sara7	10005
+1@glast.gat,67,264,4	duplicate(宝箱#glast_sara1)	宝箱#glast_sara8	10005
+1@glast.gat,302,194,4	duplicate(宝箱#glast_sara1)	宝箱#glast_sara9	10005
 
-1@glast.gat,67,264,4	script	レッドギガンテス#glast_	10067,{/* 66768 (hide)*/}
+1@glast.gat,67,264,4	script	レッドギガンテス#fas_01	10067,2,2,{
+	end;
+OnTouch:
+	hideonnpc;
+	monster getmdmapname("1@glast.gat"),67,264,"レッドギガンテス#X1",3196,1;
+	end;
+}
 
-1@glast.gat,45,343,0	script	#バリケード3_7	1905,{/* 66920 */}
-1@glast.gat,48,343,0	script	#バリケード3_10	1905,{/* 66975 */}
-1@glast.gat,60,364,0	script	#バリケード4_1	1905,{/* 66977 */}
-1@glast.gat,60,366,0	script	#バリケード4_3	1905,{/* 66978 */}
-1@glast.gat,60,368,0	script	#バリケード4_5	1905,{/* 66979 */}
+1@glast.gat,245,187,4	script	レッドギガンテス#fas_02	10067,2,2,{
+	end;
+OnTouch:
+	hideonnpc;
+	monster getmdmapname("1@glast.gat"),245,187,"双斧レッドギガンテス#X2",3193,1;
+	end;
+}
 
-1@glast.gat,352,304,4	script	#effect_glast_event01	844,{/* 68035 (hide)*/}
-1@glast.gat,360,304,4	script	#effect_glast_event01	844,{/* 68036 (hide)*/}
-1@glast.gat,367,304,4	script	#effect_glast_event01	844,{/* 68037 (hide)*/}
-1@glast.gat,366,295,4	script	#effect_glast_event01	844,{/* 68038 (hide)*/}
-1@glast.gat,359,296,4	script	#effect_glast_event01	844,{/* 68039 (hide)*/}
+1@glast.gat,302,197,4	script	レッドギガンテス#fas_03	10067,2,2,{
+	end;
+OnTouch:
+	hideonnpc;
+	monster getmdmapname("1@glast.gat"),302,197,"レッドギガンテス#X3",3196,1;
+	end;
+}
 
-1@glast.gat,353,294,4	script	#effect_glast_event01	844,{/* 68042 (hide)*/}
-1@glast.gat,356,284,4	script	#effect_glast_event01	844,{/* 68043 (hide)*/}
-1@glast.gat,345,283,4	script	#effect_glast_event01	844,{/* 68044 (hide)*/}
+1@glast.gat,299,85,6	script	レッドギガンテス#fas_04	10067,2,2,{
+	end;
+OnTouch:
+	hideonnpc;
+	monster getmdmapname("1@glast.gat"),299,85,"双斧レッドギガンテス#X4",3193,1;
+	end;
+}
 
-1@glast.gat,46,364,4	script	サラ・アイリン#glast_10	10066,{/* 68818 (hide)*/}
+1@glast.gat,366,190,4	script	レッドギガンテス#fas_05	10067,2,2,{
+	end;
+OnTouch:
+	hideonnpc;
+	monster getmdmapname("1@glast.gat"),366,190,"レッドギガンテス#X5",3196,1;
+	end;
+}
 
-1@glast.gat,52,346,0	script	#glast_event_warp_2	139,{/* 68820 (hide)*/}
+1@glast.gat,310,299,6	script	レッドギガンテス#fas_06	10067,2,2,{
+	end;
+OnTouch:
+	hideonnpc;
+	monster getmdmapname("1@glast.gat"),310,299,"双斧レッドギガンテス#X6",3193,1;
+	end;
+}
 
-1@glast.gat,62,279,4	script	宝箱#glast_sara7	10005,{/* 69327 (hide)*/}
+1@glast.gat,82,109,6	script	レッドギガンテス#fas_07	10067,2,2,{
+	end;
+OnTouch:
+	hideonnpc;
+	monster getmdmapname("1@glast.gat"),82,109,"レッドギガンテス#X7",3196,1;
+	end;
+}
 
-1@glast.gat,35,364,0	script	#glast_event_warp_3	139,{/* 69357 (hide)*/}
-1@glast.gat,41,364,0	script	#glast_event_warp_4	139,{/* 69358 (hide)*/}
-1@glast.gat,44,371,0	script	#glast_event_warp_5	139,{/* 70121 (hide)*/}
-1@glast.gat,54,362,0	script	#glast_event_warp_6	139,{/* 70122 (hide)*/}
-1@glast.gat,44,358,0	script	#glast_event_warp_7	139,{/* 70123 (hide)*/}
+1@glast.gat,133,361,4	script	レッドギガンテス#fas_08	10067,2,2,{
+	end;
+OnTouch:
+	hideonnpc;
+	monster getmdmapname("1@glast.gat"),133,361,"双斧レッドギガンテス#X8",3193,1;
+	end;
+}
 
+1@glast.gat,332,61,6	script	レッドギガンテス#fas_09	10067,2,2,{
+	end;
+OnTouch:
+	hideonnpc;
+	monster getmdmapname("1@glast.gat"),332,61,"レッドギガンテス#X5",3196,1;
+	end;
+}
 
+1@glast.gat,132,130,0	script	#fas_gimmick_1	139,6,2,{
+	hideonnpc;
+	set '@map$,getmdmapname("1@glast.gat");
+	set '@label$,getmdnpcname("#fas_gimmick_1")+"::OnKilled";
+	if(rand(2)) {
+		monster '@map$,131,120,"ギガンテス#ga1",3194,1,'@label$;
+		monster '@map$,132,120,"ギガンテス#ga2",3194,1,'@label$;
+		monster '@map$,133,120,"ギガンテス#ga3",3194,1,'@label$;
+	}
+	else {
+		monster '@map$,131,140,"ギガンテス#ga1",3194,1,'@label$;
+		monster '@map$,132,140,"ギガンテス#ga2",3194,1,'@label$;
+		monster '@map$,133,140,"ギガンテス#ga3",3194,1,'@label$;
+	}
+	end;
+OnKilled:
+	end;
+}
 
-1@glast.gat,345,274,0	script	#バリケード12_1	1905,{/* 70792 */}
-1@glast.gat,347,274,0	script	#バリケード12_3	1905,{/* 70793 */}
-1@glast.gat,349,274,0	script	#バリケード12_5	1905,{/* 71126 */}
-1@glast.gat,351,274,0	script	#バリケード12_7	1905,{/* 76437 */}
-1@glast.gat,353,274,0	script	#バリケード12_9	1905,{/* 76438 */}
-1@glast.gat,355,274,0	script	#バリケード12_11	1905,{/* 77020 */}
-1@glast.gat,357,274,0	script	#バリケード12_13	1905,{/* 77021 */}
-1@glast.gat,346,273,0	script	#バリケード12_16	1905,{/* 77022 */}
-1@glast.gat,348,273,0	script	#バリケード12_18	1905,{/* 77023 */}
-1@glast.gat,350,273,0	script	#バリケード12_20	1905,{/* 77024 */}
-1@glast.gat,352,273,0	script	#バリケード12_22	1905,{/* 78277 */}
-1@glast.gat,354,273,0	script	#バリケード12_24	1905,{/* 78278 */}
-1@glast.gat,356,273,0	script	#バリケード12_26	1905,{/* 78279 */}
-1@glast.gat,358,273,0	script	#バリケード12_28	1905,{/* 78280 */}
+1@glast.gat,268,130,0	script	#fas_gimmick_2	139,6,2,{
+	hideonnpc;
+	set '@map$,getmdmapname("1@glast.gat");
+	set '@label$,getmdnpcname("#fas_gimmick_2")+"::OnKilled";
+	if(rand(2)) {
+		monster '@map$,267,120,"ギガンテス#gb1",3194,1,'@label$;
+		monster '@map$,268,120,"ギガンテス#gb2",3194,1,'@label$;
+		monster '@map$,269,120,"ギガンテス#gb3",3194,1,'@label$;
+	}
+	else {
+		monster '@map$,267,140,"ギガンテス#gb1",3194,1,'@label$;
+		monster '@map$,268,140,"ギガンテス#gb2",3194,1,'@label$;
+		monster '@map$,269,140,"ギガンテス#gb3",3194,1,'@label$;
+	}
+	end;
+OnKilled:
+	end;
+}
 
-1@glast.gat,189,342,0	script	#glast_move_06_	45,{/* 71055 (hide)*/}
-1@glast.gat,200,346,4	script	サラ・アイリン#glast_jp	10066,{/* 71327 */}
-1@glast.gat,200,340,0	script	フェンリル#b_	664,{/* 71328 */}
-1@glast.gat,200,340,0	script	#bgm_change01_	139,{/* 71888 (hide)*/}
-1@glast.gat,200,346,4	script	サラ・アイリン#chase_0q	3190,{/* 71915 (hide)*/}
-1@glast.gat,200,346,4	script	サラの幻影#ex_battle_0q	10066,{/* 71353 (hide)*/}
-1@glast.gat,200,346,0	script	#ex_battle_sara_	139,{/* 71354 */}
+1@glast.gat,238,43,0	script	#fas_gimmick_3	139,2,8,{
+	hideonnpc;
+	set '@map$,getmdmapname("1@glast.gat");
+	set '@label$,getmdnpcname("#fas_gimmick_3")+"::OnKilled";
+	hideonnpc getmdnpcname("ガーゴイルの石像#fas_01");
+	hideonnpc getmdnpcname("ガーゴイルの石像#fas_02");
+	hideonnpc getmdnpcname("ガーゴイルの石像#fas_03");
+	hideonnpc getmdnpcname("ガーゴイルの石像#fas_04");
+	hideonnpc getmdnpcname("ガーゴイルの石像#fas_05");
+	hideonnpc getmdnpcname("ガーゴイルの石像#fas_06");
+	hideonnpc getmdnpcname("ガーゴイルの石像#fas_07");
+	hideonnpc getmdnpcname("ガーゴイルの石像#fas_08");
+	monster '@map$,227,48,"機動のギガンテス#gc1",3195,1,'@label$;
+	monster '@map$,250,48,"機動のギガンテス#gc2",3195,1,'@label$;
+	monster '@map$,230,51,"サラの使い魔#gc3",3197,1,'@label$;
+	monster '@map$,235,51,"サラの使い魔#gc4",3197,1,'@label$;
+	monster '@map$,240,51,"サラの使い魔#gc5",3197,1,'@label$;
+	monster '@map$,245,51,"サラの使い魔#gc6",3197,1,'@label$;
+	monster '@map$,230,44,"サラの使い魔#gc7",3197,1,'@label$;
+	monster '@map$,235,44,"サラの使い魔#gc8",3197,1,'@label$;
+	monster '@map$,240,44,"サラの使い魔#gc9",3197,1,'@label$;
+	monster '@map$,245,44,"サラの使い魔#gc10",3197,1,'@label$;
+	end;
+OnKilled:
+	end;
+}
 
-1@glast.gat,198,350,4	script	フェンリル#chase_	664,{/* 71893 (hide)*/}
-1@glast.gat,200,350,0	script	#effect2_	139,{/* 73457 */}
-1@glast.gat,199,202,0	script	#bgm_change02_	139,{/* 71890 */}
-1@glast.gat,199,205,0	script	#glast_time_q1_	139,{/* 71891 */}
-1@glast.gat,194,214,5	script	サラの幻影#chase_1_	3190,{/* 69528 (hide)*/}
-1@glast.gat,176,178,4	script	宝箱#glast_sara3_	10005,{/* 69377 */}
-1@glast.gat,245,187,4	script	レッドギガンテス#glast_	10067,{/* 71088 */}
-1@glast.gat,268,130,0	script	#monster_gimmick_2_	139,{/* 71092 */}
-1@glast.gat,200,135,4	script	宝箱#glast_sara4_	10005,{/* 69378 */}
-1@glast.gat,207,79,5	script	サラの幻影#chase_2_	3190,{/* 69529 (hide)*/}
-1@glast.gat,97,38,4	script	宝箱#glast_sara5_	10005,{/* 69379 */}
-1@glast.gat,82,109,6	script	レッドギガンテス#glast_	10067,{/* 69372 */}
-1@glast.gat,67,264,4	script	レッドギガンテス#glast_	10067,{/* 71087 */}
-1@glast.gat,67,264,4	script	宝箱#glast_sara8_	10005,{/* 69382 (hide)*/}
-1@glast.gat,62,279,4	script	宝箱#glast_sara7_	10005,{/* 69381 */}
-1@glast.gat,221,49,6	script	サラの幻影#ch1_	10066,{/* 71916 (hide)*/}
+1@glast.gat,298,204,0	script	#fas_gimmick_4	139,7,2,{
+	hideonnpc;
+	set '@map$,getmdmapname("1@glast.gat");
+	set '@label$,getmdnpcname("#fas_gimmick_4")+"::OnKilled";
+	monster '@map$,298,218,"機動のギガンテス#gd1",3195,1,'@label$;
+	monster '@map$,298,220,"機動のギガンテス#gd2",3195,1,'@label$;
+	monster '@map$,298,222,"機動のギガンテス#gd3",3195,1,'@label$;
+	monster '@map$,298,224,"機動のギガンテス#gd4",3195,1,'@label$;
+	end;
+OnKilled:
+	end;
+}
 
-1@glast.gat,259,54,5	script	サラの幻影#chase_3_	3190,{/* 69530 (hide)*/}
-1@glast.gat,299,85,6	script	レッドギガンテス#glast_	10067,{/* 71090 (hide)*/}
-1@glast.gat,306,179,5	script	サラの幻影#chase_4_	3190,{/* 69531 */}
-1@glast.gat,302,197,4	script	レッドギガンテス#glast_	10067,{/* 71089 */}
-1@glast.gat,302,194,4	script	宝箱#glast_sara9_	10005,{/* 69383 (hide)*/}
-1@glast.gat,298,204,0	script	#monster_gimmick_4_	139,{/* 71355 */}
-1@glast.gat,298,210,5	script	サラの幻影#chase_6_	3190,{/* 69533 (hide)*/}
-1@glast.gat,321,250,5	script	サラの幻影#chase_7_	3190,{/* 69534 (hide)*/}
-1@glast.gat,335,262,5	script	サラの幻影#chase_8_	3190,{/* 70903 */}
-1@glast.gat,347,265,0	script	#compass_1_	139,{/* 69521 (hide)*/}
-1@glast.gat,351,258,5	script	サラの幻影#chase_9_	3190,{/* 70999 (hide)*/}
+1@glast.gat,359,197,0	script	#fas_gimmick_5	139,5,5,{
+	hideonnpc;
+	set '@map$,getmdmapname("1@glast.gat");
+	set '@label$,getmdnpcname("#fas_gimmick_5")+"::OnKilled";
+	monster '@map$,355,209,"機動のギガンテス#ge1",3195,1,'@label$;
+	monster '@map$,355,207,"機動のギガンテス#ge2",3195,1,'@label$;
+	monster '@map$,355,205,"機動のギガンテス#ge3",3195,1,'@label$;
+	monster '@map$,355,203,"機動のギガンテス#ge4",3195,1,'@label$;
+	end;
+OnKilled:
+	end;
+}
 
-1@glast.gat,184,325,0	script	#バリケード6_2_	1905,{/* 69427 */}
-1@glast.gat,186,325,0	script	#バリケード6_4_	1905,{/* 69428 */}
-1@glast.gat,188,325,0	script	#バリケード6_6_	1905,{/* 69475 */}
-1@glast.gat,190,325,0	script	#バリケード6_8_	1905,{/* 71539 */}
-1@glast.gat,192,325,0	script	#バリケード6_10_	1905,{/* 71540 */}
-1@glast.gat,194,325,0	script	#バリケード6_12_	1905,{/* 71541 */}
-1@glast.gat,198,325,0	script	#バリケードcenter_2_	1905,{/* 71542 */}
+1@glast.gat,1,1,0	script	callmon#fas	139,{
+OnStart1:
+	set '@map$,getmdmapname("1@glast.gat");
+	set '@label$,getmdnpcname("callmon#fas")+"::OnKilled";
+	areamonster '@map$,60,188,75,206,"ギガンテス#aa1",3194,4,'@label$;
+	areamonster '@map$,60,188,75,206,"双斧ギガンテス#bb1",3191,4,'@label$;
+	areamonster '@map$,127,308,145,324,"ギガンテス#aa2",3194,4,'@label$;
+	areamonster '@map$,127,308,145,324,"双斧ギガンテス#bb2",3191,4,'@label$;
+	areamonster '@map$,257,318,273,331,"ギガンテス#aa3",3194,4,'@label$;
+	areamonster '@map$,257,318,273,331,"双斧ギガンテス#bb3",3191,4,'@label$;
+	areamonster '@map$,340,127,352,135,"ギガンテス#aa4",3194,4,'@label$;
+	areamonster '@map$,340,127,352,135,"双斧ギガンテス#bb4",3191,4,'@label$;
+	areamonster '@map$,190,40,205,56,"ギガンテス#aa5",3194,4,'@label$;
+	areamonster '@map$,190,40,205,56,"双斧ギガンテス#bb5",3191,4,'@label$;
+	areamonster '@map$,143,39,159,52,"ギガンテス#aa6",3194,4,'@label$;
+	areamonster '@map$,143,39,159,52,"双斧ギガンテス#bb6",3191,4,'@label$;
+	end;
+OnStart2:
+	set '@map$,getmdmapname("1@glast.gat");
+	set '@label$,getmdnpcname("callmon#fas")+"::OnKilled";
+	areamonster '@map$,60,155,78,173,"機動のギガンテス#aa1",3195,4,'@label$;
+	areamonster '@map$,60,155,78,173,"機動のギガンテス#bb1",3195,4,'@label$;
+	areamonster '@map$,293,76,309,93,"機動のギガンテス#aa1",3195,4,'@label$;
+	areamonster '@map$,293,76,309,93,"機動のギガンテス#bb1",3195,4,'@label$;
+	areamonster '@map$,329,253,344,271,"機動のギガンテス#aa1",3195,4,'@label$;
+	areamonster '@map$,329,253,344,271,"機動のギガンテス#bb1",3195,4,'@label$;
+	areamonster '@map$,209,56,223,70,"機動のギガンテス#aa1",3195,4,'@label$;
+	areamonster '@map$,209,56,223,70,"機動のギガンテス#bb1",3195,4,'@label$;
+	areamonster '@map$,331,65,344,83,"機動のギガンテス#aa1",3195,4,'@label$;
+	areamonster '@map$,331,65,344,83,"機動のギガンテス#bb1",3195,4,'@label$;
+	end;
+OnStart3:
+	set '@map$,getmdmapname("1@glast.gat");
+	set '@label$,getmdnpcname("callmon#fas")+"::OnKilled";
+	monster '@map$,183,333,"ギガンテス",3194,1,'@label$;
+	monster '@map$,183,331,"ギガンテス",3194,1,'@label$;
+	monster '@map$,183,329,"機動のギガンテス",3195,1,'@label$;
+	monster '@map$,183,327,"双斧ギガンテス",3191,1,'@label$;
+	monster '@map$,185,333,"双斧ギガンテス",3191,1,'@label$;
+	monster '@map$,185,331,"機動のギガンテス",3195,1,'@label$;
+	monster '@map$,185,329,"ギガンテス",3194,1,'@label$;
+	monster '@map$,185,327,"ギガンテス",3194,1,'@label$;
+	monster '@map$,213,333,"双斧ギガンテス",3191,1,'@label$;
+	monster '@map$,213,331,"機動のギガンテス",3195,1,'@label$;
+	monster '@map$,213,329,"双斧ギガンテス",3191,1,'@label$;
+	monster '@map$,213,327,"双斧ギガンテス",3191,1,'@label$;
+	monster '@map$,215,333,"機動のギガンテス",3195,1,'@label$;
+	monster '@map$,215,331,"双斧ギガンテス",3191,1,'@label$;
+	monster '@map$,215,329,"機動のギガンテス",3195,1,'@label$;
+	monster '@map$,215,327,"機動のギガンテス",3195,1,'@label$;
+	end;
+OnKilled:
+	end;
+}
 
-1@glast.gat,201,325,0	script	#バリケードcenter_5_	1905,{/* 71545 */}
+1@glast.gat,376,303,0	script	#glast_move_05	45,3,3,{
+	mes "‐ここから外に出れるようだ。";
+	mes "　外に出ますか？‐";
+	next;
+	if(select("外に出ない","外に出る") == 1) {
+		mes "‐あなたはその場から離れた‐";
+		close;
+	}
+	mes "‐外へ出ます‐";
+	close2;
+	warp "dali02.gat",91,140;
+	end;
+}
 
-1@glast.gat,205,325,0	script	#バリケード7_2_	1905,{/* 71546 */}
-1@glast.gat,207,325,0	script	#バリケード7_4_	1905,{/* 71547 */}
-1@glast.gat,209,325,0	script	#バリケード7_6_	1905,{/* 71548 */}
-1@glast.gat,211,325,0	script	#バリケード7_8_	1905,{/* 71549 */}
-1@glast.gat,213,325,0	script	#バリケード7_10_	1905,{/* 71550 */}
-1@glast.gat,215,325,0	script	#バリケード7_12	1905,{/* 71551 */}
+1@glast.gat,189,342,0	script	#glast_move_06	45,3,3,{
+	mes "‐ここから外に出れるようだ。";
+	mes "　外に出ますか？‐";
+	next;
+	if(select("外に出ない","外に出る") == 1) {
+		mes "‐あなたはその場から離れた‐";
+		close;
+	}
+	mes "‐外へ出ます‐";
+	close2;
+	getexp 4000000,0,1;
+	getexp 4000000,0,1;
+	getexp 4000000,0,1;
+	getexp 4000000,0,1;
+	getexp 4000000,0,1;
+	getexp 0,2000000,0;
+	getexp 0,2000000,0;
+	getexp 0,2000000,0;
+	getexp 0,2000000,0;
+	getexp 0,2000000,0;
+	warp "dali02.gat",91,140;
+	end;
+}
 
-1@glast.gat,180,328,0	script	#バリケード8_1_	1905,{/* 71552 */}
-1@glast.gat,180,330,0	script	#バリケード8_3_	1905,{/* 71685 */}
-1@glast.gat,180,332,0	script	#バリケード8_5_	1905,{/* 71686 */}
+1@glast.gat,200,346,4	script	サラの幻影#ex_battle	10066,{
+	mes "‐サラの幻影がいる。";
+	mes "　戦おうか？‐";
+	next;
+	if(select("戦う","やめておく") == 2) {
+		mes "‐今はやめておこう‐";
+		close;
+	}
+	mes "‐サラの幻影と戦おうと身構えると";
+	mes "　幻影もこちらに気付いたようだ‐";
+	close2;
+	donpcevent getmdnpcname("#ex_battle_sara")+"::OnStart";
+	end;
+}
 
-1@glast.gat,187,345,0	script	#バリケード9_1_	1905,{/* 71687 */}
-1@glast.gat,189,346,0	script	#バリケード9_2_	1905,{/* 71688 */}
+1@glast.gat,200,346,0	script	#ex_battle_sara	139,{
+OnStart:
+	sleep 3000;
+	hideonnpc getmdnpcname("サラの幻影#ex_battle");
+	monster getmdmapname("1@glast.gat"),200,346,"サラの幻影#1",3190,1,getmdnpcname("#ex_battle_sara")+"::OnKilled";
+	end;
+OnKilled:
+	hideoffnpc getmdnpcname("#glast_move_06");
+	misceffect 6,getmdnpcname("#glast_move_06");
+	sleep 1000;
+	misceffect 317,getmdnpcname("#glast_move_06");
+	end;
+}
 
-1@glast.gat,210,346,0	script	#バリケード10_1_	1905,{/* 71689 */}
-1@glast.gat,212,345,0	script	#バリケード10_2_	1905,{/* 71690 */}
+1@glast.gat,352,304,4	script	#effect_glast_event01	844,{}
+1@glast.gat,360,304,4	script	#effect_glast_event02	844,{}
+1@glast.gat,367,304,4	script	#effect_glast_event03	844,{}
+1@glast.gat,366,295,4	script	#effect_glast_event04	844,{}
+1@glast.gat,359,296,4	script	#effect_glast_event05	844,{}
+1@glast.gat,353,294,4	script	#effect_glast_event06	844,{}
+1@glast.gat,356,284,4	script	#effect_glast_event07	844,{}
+1@glast.gat,345,283,4	script	#effect_glast_event08	844,{}
 
-1@glast.gat,219,328,0	script	#バリケード11_1	1905,{/* 71691 */}
-1@glast.gat,219,330,0	script	#バリケード11_3	1905,{/* 71692 */}
-1@glast.gat,219,332,0	script	#バリケード11_5	1905,{/* 71872 */}
+1@glast.gat,230,51,3	script	ガーゴイルの石像#fas_01	10070,{}
+1@glast.gat,235,51,3	script	ガーゴイルの石像#fas_02	10070,{}
+1@glast.gat,240,51,3	script	ガーゴイルの石像#fas_03	10070,{}
+1@glast.gat,245,51,3	script	ガーゴイルの石像#fas_04	10070,{}
+1@glast.gat,230,44,1	script	ガーゴイルの石像#fas_05	10070,{}
+1@glast.gat,235,44,1	script	ガーゴイルの石像#fas_06	10070,{}
+1@glast.gat,240,44,1	script	ガーゴイルの石像#fas_07	10070,{}
+1@glast.gat,245,44,1	script	ガーゴイルの石像#fas_08	10070,{}
 
-1@glast.gat,238,43,0	script	#monster_gimmick_3_	139,{/* 71093 */}
-1@glast.gat,230,51,3	script	ガーゴイルの石像#glast_	10070,{/* 71094 */}
-1@glast.gat,235,51,3	script	ガーゴイルの石像#glast_	10070,{/* 71095 */}
-1@glast.gat,240,51,3	script	ガーゴイルの石像#glast_	10070,{/* 71096 */}
-1@glast.gat,245,51,3	script	ガーゴイルの石像#glast_	10070,{/* 71097 */}
-1@glast.gat,230,44,1	script	ガーゴイルの石像#glast_	10070,{/* 71098 */}
-1@glast.gat,235,44,1	script	ガーゴイルの石像#glast_	10070,{/* 71183 */}
-1@glast.gat,240,44,1	script	ガーゴイルの石像#glast_	10070,{/* 71318 */}
-1@glast.gat,245,44,1	script	ガーゴイルの石像#glast_	10070,{/* 71319 */}
+1@glast.gat,42,273,0	script	#バリケード1_1	1905,{}
+1@glast.gat,43,273,0	script	#バリケード1_2	1905,{}
+1@glast.gat,44,273,0	script	#バリケード1_3	1905,{}
+1@glast.gat,45,273,0	script	#バリケード1_4	1905,{}
 
+1@glast.gat,198,325,0	script	#バリケードcenter_2	1905,{}
 
-//--------------------------------------------------------------------------
+1@glast.gat,39,343,0	script	#バリケード3_1	1905,{}
+1@glast.gat,42,343,0	script	#バリケード3_4	1905,{}
+1@glast.gat,45,343,0	script	#バリケード3_7	1905,{}
+1@glast.gat,48,343,0	script	#バリケード3_10	1905,{}
 
+1@glast.gat,60,364,0	script	#バリケード4_1	1905,{}
+1@glast.gat,60,366,0	script	#バリケード4_3	1905,{}
+1@glast.gat,60,368,0	script	#バリケード4_5	1905,{}
 
-1@glast.gat,359,294,4	script	フェンリル#glast_01_	664,{/* 71827 */}
-1@glast.gat,359,296,4	script	#effect_glast_event01	844,{/* 71885 (hide)*/}
-1@glast.gat,353,294,4	script	#effect_glast_event01	844,{/* 71886 (hide)*/}
-1@glast.gat,359,294,0	script	#glast_event_3_	139,{/* 69519 (hide)*/}
-1@glast.gat,353,290,8	script	サラの幻影#glast_50_	10066,{/* 71330 (hide)*/}
-1@glast.gat,359,294,4	script	フェンリル#glast_11_	664,{/* 71331 (hide)*/}
-1@glast.gat,360,304,4	script	#effect_glast_event01	844,{/* 71850 (hide)*/}
-1@glast.gat,367,304,4	script	#effect_glast_event01	844,{/* 71871 (hide)*/}
-1@glast.gat,366,295,4	script	#effect_glast_event01	844,{/* 71884 (hide)*/}
-1@glast.gat,376,303,0	script	#glast_move_05_	45,{/* 71332 (hide)*/}
-1@glast.gat,352,304,4	script	#effect_glast_event01	844,{/* 71828 (hide)*/}
-1@glast.gat,356,284,4	script	#effect_glast_event01	844,{/* 71887 (hide)*/}
-misceffect 60, "フェンリル#glast_01_"; //71827
-@spawn(type: BL_MOB, ID: 36249, speed: 150, option: 0, view: 3198, pos: "1@glast.gat"(355, 294), dir: 0, name: "凶悪なガリオン")
-@nomalattack(src: "3198:凶悪なガリオン:1@glast.gat"(36249), dst: , damage: 0, sDelay: 624, dDelay: 412, tick: 785185920)
-@nomalattack(src: "3198:凶悪なガリオン:1@glast.gat"(36249), dst: , damage: 0, sDelay: 624, dDelay: 412, aDelay: 903)
-@nomalattack(src: "3198:凶悪なガリオン:1@glast.gat"(36249), dst: , damage: 0, sDelay: 624, dDelay: 412, aDelay: 903)
-@mob_defeated("3198:凶悪なガリオン:1@glast.gat"(36249))
-hideoffnpc "#glast_event_3_"; //69519
-hideonnpc "#glast_event_3_"; //69519
-hideonnpc "#glast_event_3_"; //69519
-hideonnpc "フェンリル#glast_01_"; //71827
-misceffect 60, "フェンリル#glast_01_"; //71827
-announce "‐フェンリルは南へ向かったようです。フェンリルについていこう！‐", 0x1, 0xffff00, 0x190, 20, 0, 0;
-1@glast.gat,345,283,4	script	#effect_glast_event01	844,{/* 69518 (hide)*/}
-1@glast.gat,352,279,0	script	#glast_move_01_	45,{/* 69520 */}
-1@glast.gat,352,279,0	script	#glast_move_01_jp_	45,{/* 71352 (hide)*/}
-1@glast.gat,345,274,0	script	#バリケード12_1_	1905,{/* 71873 */}
-1@glast.gat,347,274,0	script	#バリケード12_3_	1905,{/* 71874 */}
-1@glast.gat,349,274,0	script	#バリケード12_5_	1905,{/* 71875 */}
-1@glast.gat,351,274,0	script	#バリケード12_7_	1905,{/* 71876 */}
-1@glast.gat,353,274,0	script	#バリケード12_9_	1905,{/* 71877 */}
-1@glast.gat,355,274,0	script	#バリケード12_11_	1905,{/* 71878 */}
-1@glast.gat,357,274,0	script	#バリケード12_13_	1905,{/* 71879 */}
-1@glast.gat,346,273,0	script	#バリケード12_16_	1905,{/* 71880 */}
-1@glast.gat,348,273,0	script	#バリケード12_18_	1905,{/* 71881 */}
-1@glast.gat,350,273,0	script	#バリケード12_20_	1905,{/* 71882 */}
-1@glast.gat,352,273,0	script	#バリケード12_22_	1905,{/* 71883 */}
-1@glast.gat,354,273,0	script	#バリケード12_24_	1905,{/* 71901 */}
-1@glast.gat,356,273,0	script	#バリケード12_26_	1905,{/* 71919 */}
-1@glast.gat,358,273,0	script	#バリケード12_28_	1905,{/* 71921 */}
-1@glast.gat,351,269,0	script	#glast_move_04_	45,{/* 71052 (hide)*/}
-mes "‐フェンリルを追いかけますか？‐";
-next;
-select("^0000FF急いで移動する(ショートカット)^000000:^FF0000歩いて移動する^000000")
-mes "‐あなたはフェンリルの";
-mes "　後を急いで追いかけた‐";
-close;
-1@glast.gat,352,279,0	warp	#glast_move_01_	2,2,1@glast.gat,47,264 //69520 from_pos=(354, 280)
-1@glast.gat,47,270,4	script	フェンリル#glast_03_	664,{/* 69522 */}
-1@glast.gat,47,270,0	script	#glast_event_7_	139,{/* 69523 */}
-1@glast.gat,42,273,0	script	#バリケード1_1_	1905,{/* 69384 */}
-1@glast.gat,43,273,0	script	#バリケード1_2_	1905,{/* 69385 */}
-1@glast.gat,44,273,0	script	#バリケード1_3_	1905,{/* 69386 */}
-1@glast.gat,45,273,0	script	#バリケード1_4_	1905,{/* 69387 */}
-cutin "fenrir_a.bmp", 2;
-mes "[フェンリル]";
-mes "来てくれたのね、";
-mes "ありがとう！";
-close;
-cutin "fenrir_a.bmp", 255;
-viewpoint 2, 1, 1, 0, 0xFFFFFF00; //69523
-hideonnpc "#glast_event_7_"; //69523
-cutin "fenrir_a.bmp", 2;
-cutin "fenrir_a.bmp", 255;
-hideonnpc "フェンリル#glast_03_"; //69522
-@mapmoved(from: 1@glast.gat(47, 270), map: 1@glast.gat(40, 350))
-1@glast.gat,44,366,0	script	#effect1_	139,{/* 73456 */}
-misceffect 222, "#effect1_"; //73456
-cutin "fenrir_a.bmp", 2;
-mes "[フェンリル]";
-mes "この剣……";
-mes "とうとう見つけたわ！";
-close;
-misceffect 222, "#effect1_"; //73456
-cutin "fenrir_a.bmp", 255;
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-misceffect 222, "#effect1_"; //73456
-@mapmoved(from: 1@glast.gat(44, 366), map: 1@glast.gat(199, 333))
-1@glast.gat,189,342,0	script	#glast_move_06_	45,{/* 71055 (hide)*/}
-1@glast.gat,186,325,0	script	#バリケード6_4_	1905,{/* 69428 */}
-1@glast.gat,188,325,0	script	#バリケード6_6_	1905,{/* 69475 */}
-1@glast.gat,190,325,0	script	#バリケード6_8_	1905,{/* 71539 */}
-1@glast.gat,192,325,0	script	#バリケード6_10_	1905,{/* 71540 */}
-1@glast.gat,194,325,0	script	#バリケード6_12_	1905,{/* 71541 */}
-1@glast.gat,198,325,0	script	#バリケードcenter_2_	1905,{/* 71542 */}
-1@glast.gat,187,345,0	script	#バリケード9_1_	1905,{/* 71687 */}
-1@glast.gat,189,346,0	script	#バリケード9_2_	1905,{/* 71688 */}
-1@glast.gat,200,346,4	script	サラ・アイリン#glast_jp	10066,{/* 71327 */}
-1@glast.gat,200,340,0	script	フェンリル#b_	664,{/* 71328 */}
-1@glast.gat,200,340,0	script	#bgm_change01_	139,{/* 71888 (hide)*/}
-1@glast.gat,200,346,4	script	サラ・アイリン#chase_0q	3190,{/* 71915 (hide)*/}
-1@glast.gat,200,346,4	script	サラの幻影#ex_battle_0q	10066,{/* 71353 (hide)*/}
-1@glast.gat,200,346,0	script	#ex_battle_sara_	139,{/* 71354 */}
-1@glast.gat,201,325,0	script	#バリケードcenter_5_	1905,{/* 71545 */}
-1@glast.gat,205,325,0	script	#バリケード7_2_	1905,{/* 71546 */}
-1@glast.gat,207,325,0	script	#バリケード7_4_	1905,{/* 71547 */}
-1@glast.gat,209,325,0	script	#バリケード7_6_	1905,{/* 71548 */}
-1@glast.gat,211,325,0	script	#バリケード7_8_	1905,{/* 71549 */}
-1@glast.gat,213,325,0	script	#バリケード7_10_	1905,{/* 71550 */}
-1@glast.gat,210,346,0	script	#バリケード10_1_	1905,{/* 71689 */}
-1@glast.gat,212,345,0	script	#バリケード10_2_	1905,{/* 71690 */}
-mes "‐フェンリルとサラが対峙している!‐";
-next;
-select("^FF0000戦闘を見届ける^000000::少し考える")
-mes "‐対峙した二人を前に、";
-mes "　あなたはどうすべきか";
-mes "　もう少し考えてみることにした‐";
-close;
-1@glast.gat,184,325,0	script	#バリケード6_2_	1905,{/* 69427 */}
-1@glast.gat,198,350,4	script	フェンリル#chase_	664,{/* 71893 (hide)*/}
-1@glast.gat,200,350,0	script	#effect2_	139,{/* 73457 */}
-misceffect 222, "#effect2_"; //73457
-misceffect 222, "#effect2_"; //73457
-mes "‐フェンリルとサラが対峙している!‐";
-next;
-select("^FF0000戦闘を見届ける^000000::少し考える")
-mes "‐二人の対決を見届ける事にした‐";
-close;
-misceffect 222, "#effect2_"; //73457
-misceffect 222, "#effect2_"; //73457
-misceffect 222, "#effect2_"; //73457
-misceffect 222, "#effect2_"; //73457
-misceffect 222, "#effect2_"; //73457
-misceffect 8, "フェンリル#b_"; //71328
-misceffect 521, "フェンリル#b_"; //71328
-misceffect 583, "フェンリル#b_"; //71328
-misceffect 222, "#effect2_"; //73457
-misceffect 222, "#effect2_"; //73457
-hideoffnpc "#bgm_change01_"; //71888
-musiceffect "44";
-misceffect 222, "#effect2_"; //73457
-misceffect 222, "#effect2_"; //73457
-1@glast.gat,180,328,0	script	#バリケード8_1_	1905,{/* 71552 */}
-1@glast.gat,180,330,0	script	#バリケード8_3_	1905,{/* 71685 */}
-1@glast.gat,180,332,0	script	#バリケード8_5_	1905,{/* 71686 */}
-misceffect 222, "#effect2_"; //73457
-misceffect 903, "フェンリル#b_"; //71328
-misceffect 222, "#effect2_"; //73457
-misceffect 831, "サラ・アイリン#glast_jp"; //71327
-misceffect 222, "#effect2_"; //73457
-misceffect 886, "フェンリル#b_"; //71328
-misceffect 930, "フェンリル#b_"; //71328
-misceffect 916, "サラ・アイリン#glast_jp"; //71327
-misceffect 222, "#effect2_"; //73457
-misceffect 222, "#effect2_"; //73457
-misceffect 222, "#effect2_"; //73457
-hideonnpc "フェンリル#b_"; //71328
-hideonnpc "サラ・アイリン#glast_jp"; //71327
-hideoffnpc "フェンリル#chase_"; //71893
-hideoffnpc "サラ・アイリン#chase_0q"; //71915
-misceffect 222, "#effect2_"; //73457
-misceffect 222, "#effect2_"; //73457
-misceffect 651, "サラ・アイリン#chase_0q"; //71915
-1@glast.gat,189,342,0	warp	#glast_move_06_	2,2,1@glast.gat,201,204 //71055 from_pos=(193, 343)
-1@glast.gat,199,202,0	script	#bgm_change02_	139,{/* 71890 */}
-1@glast.gat,199,205,0	script	#glast_time_q1_	139,{/* 71891 */}
-1@glast.gat,194,214,5	script	サラの幻影#chase_1_	3190,{/* 69528 (hide)*/}
-musiceffect "147";
-setquest 120160; //state=1
-delquest 120160;
-viewpoint 1, 351, 270, 0, 0xFFFF0000; //71891
-announce "フェンリル : ごめんなさい、力が足りずうまく移動ができなかったわ。　入口で合流しましょう……！", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-announce "サラ : 逃がさないぞ!!私の魔力の恐ろしさを見せつけてやるわ!!", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-announce "‐サラの魔力の影響で、「サラの幻影」、「レッドギガンテス」、「秘宝」が出現しました！", 0x1, 0xffff00, 0x190, 20, 0, 0;
-1@glast.gat,176,178,4	script	宝箱#glast_sara3_	10005,{/* 69377 */}
-announce "‐5分以内にフェンリルの元にたどり着くと、報酬経験値が大幅アップ！さらに「サラの幻影」と戦うことができます‐", 0x1, 0xffff00, 0x190, 20, 0, 0;
-hideonnpc "宝箱#glast_sara3_"; //69377
-misceffect 10, "宝箱#glast_sara3_"; //69377
-announce "サラ : 私に楯突いた事を後悔しなさい！", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-delitem 938, 1;
-getitem 730, 1;
-delitem 7063, 1;
-getitem 7229, 1;
-getitem 7229, 1;
-announce "サラ : ネズミみたいに逃げやがって!!　消滅させてやるっ!!", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-announce "フェンリル : サラ、チューチュー。これで満足？捕まえてみなさいっ！", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-announce "サラ : あははは！　私から逃げられると思っているの？", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-announce "サラ : !!　フェンリル！この足でつぶしてやるわ!!", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-delitem 1013, 1;
-getitem 719, 1;
-delitem 930, 1;
-getitem 723, 1;
-announce "サラ : あははは！　私から逃げられると思っているの？", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-announce "‐1分経過‐", 0x1, 0xffff00, 0x190, 20, 0, 0;
-announce "サラ : あははは！　私から逃げられると思っているの？", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-1@glast.gat,245,187,4	script	レッドギガンテス#glast_	10067,{/* 71088 */}
-hideonnpc "レッドギガンテス#glast_"; //71088
-@spawn(type: BL_MOB, ID: 12374, speed: 300, option: 0, view: 3193, pos: "1@glast.gat"(245, 187), dir: 0, name: "双斧レッドギガンテス#X2")
-announce "サラ : どこにいる!!!", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-1@glast.gat,268,130,0	script	#monster_gimmick_2_	139,{/* 71092 */}
-announce "サラ : あははは！　私から逃げられると思っているの？", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-hideonnpc "#monster_gimmick_2_"; //71092
-@spawn(type: BL_MOB, ID: 3759, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(267, 140), dir: 0, name: "ギガンテス#gb1")
-@spawn(type: BL_MOB, ID: 4945, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(268, 140), dir: 0, name: "ギガンテス#gb2")
-@spawn(type: BL_MOB, ID: 5357, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(269, 140), dir: 0, name: "ギガンテス#gb3")
-@spawn(type: BL_MOB, ID: 16957, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(215, 72), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 14828, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(0, 0), dir: 0, name: "機動のギガンテス#aa1")
-announce "サラ : あははは！　私から逃げられると思っているの？", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-1@glast.gat,200,135,4	script	宝箱#glast_sara4_	10005,{/* 69378 */}
-hideonnpc "宝箱#glast_sara4_"; //69378
-misceffect 10, "宝箱#glast_sara4_"; //69378
-getitem 719, 1;
-getitem 723, 1;
-getitem 730, 1;
-announce "‐2分経過‐", 0x1, 0xffff00, 0x190, 20, 0, 0;
-getitem 7229, 1;
-1@glast.gat,207,79,5	script	サラの幻影#chase_2_	3190,{/* 69529 (hide)*/}
-@spawn(type: BL_MOB, ID: 13160, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(0, 0), dir: 0, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 15199, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(0, 0), dir: 0, name: "機動のギガンテス#bb1")
-misceffect 34, "サラの幻影#chase_2_"; //69529
-hideoffnpc "サラの幻影#chase_2_"; //69529
-misceffect 135, "サラの幻影#chase_2_"; //69529
-@spawn(type: BL_MOB, ID: 42452, speed: 2000, option: 0, view: 3199, pos: "1@glast.gat"(207, 79), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 32930, speed: 2000, option: 0, view: 3199, pos: "1@glast.gat"(207, 79), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 351, speed: 2000, option: 0, view: 3199, pos: "1@glast.gat"(207, 79), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 783, speed: 2000, option: 0, view: 3200, pos: "1@glast.gat"(207, 79), dir: 0, name: "#earth")
-@nomalattack(src: "3199:#meteo:1@glast.gat"(351), dst: , damage: 78, sDelay: 1000, dDelay: 412, tick: 785518623)
-@nomalattack(src: "3200:#earth:1@glast.gat"(783), dst: , damage: 78, sDelay: 1000, dDelay: 412, tick: 785518623)
-@nomalattack(src: "3199:#meteo:1@glast.gat"(32930), dst: , damage: 85, sDelay: 1000, dDelay: 412, tick: 785518623)
-@nomalattack(src: "3199:#meteo:1@glast.gat"(42452), dst: , damage: 94, sDelay: 1000, dDelay: 412, tick: 785518623)
-@changeoption(id: 351, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3199:#meteo:1@glast.gat"(351), dst: 351, skill: "インビジブル"(353), val: 1)
-@changeoption(id: 783, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3200:#earth:1@glast.gat"(783), dst: 783, skill: "インビジブル"(353), val: 1)
-@changeoption(id: 32930, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3199:#meteo:1@glast.gat"(32930), dst: 32930, skill: "インビジブル"(353), val: 1)
-@changeoption(id: 42452, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3199:#meteo:1@glast.gat"(42452), dst: 42452, skill: "インビジブル"(353), val: 1)
-announce "サラ : あははは！　私から逃げられると思っているの？", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-@spawn(type: BL_MOB, ID: 48145, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(190, 46), dir: 0, name: "ギガンテス#aa5")
-@spawn(type: BL_MOB, ID: 48206, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(158, 52), dir: 0, name: "ギガンテス#aa6")
-@spawn(type: BL_MOB, ID: 35448, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(157, 53), dir: 0, name: "双斧ギガンテス#bb6")
-@spawn(type: BL_MOB, ID: 31153, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(156, 40), dir: 0, name: "双斧ギガンテス#bb6")
-@spawn(type: BL_MOB, ID: 48538, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(151, 39), dir: 0, name: "ギガンテス#aa6")
-@spawn(type: BL_MOB, ID: 33718, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(151, 44), dir: 0, name: "双斧ギガンテス#bb6")
-@spawn(type: BL_MOB, ID: 32709, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(145, 47), dir: 0, name: "ギガンテス#aa6")
-@spawn(type: BL_MOB, ID: 5932, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(144, 38), dir: 0, name: "ギガンテス#aa6")
-@spawn(type: BL_MOB, ID: 47828, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(144, 43), dir: 0, name: "双斧ギガンテス#bb6")
-announce "サラ : 私の魔法で粉々にしてやるわっ!!!", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-1@glast.gat,97,38,4	script	宝箱#glast_sara5_	10005,{/* 69379 */}
-announce "サラ : あははは！　私から逃げられると思っているの？", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-hideonnpc "宝箱#glast_sara5_"; //69379
-misceffect 10, "宝箱#glast_sara5_"; //69379
-getitem 7229, 1;
-getitem 730, 1;
-getitem 719, 1;
-delitem 929, 1;
-getitem 7228, 1;
-delitem 1034, 1;
-getitem 6803, 1;
-getitem 7229, 1;
-getitem 723, 1;
-announce "サラ : あははは！　私から逃げられると思っているの？", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-1@glast.gat,82,109,6	script	レッドギガンテス#glast_	10067,{/* 69372 */}
-hideonnpc "レッドギガンテス#glast_"; //69372
-@spawn(type: BL_MOB, ID: 7142, speed: 350, option: 0, view: 3196, pos: "1@glast.gat"(82, 109), dir: 0, name: "レッドギガンテス#X7")
-@spawn(type: BL_MOB, ID: 29943, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(75, 157), dir: 0, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 40119, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(68, 159), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 41211, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(70, 155), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 18430, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(66, 161), dir: 0, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 36021, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(71, 163), dir: 0, name: "機動のギガンテス#bb1")
-announce "‐3分経過‐", 0x1, 0xffff00, 0x190, 20, 0, 0;
-@spawn(type: BL_MOB, ID: 20769, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(61, 158), dir: 0, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 30463, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(62, 163), dir: 0, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 42188, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(62, 164), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 37769, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(72, 188), dir: 0, name: "ギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 24037, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(72, 188), dir: 0, name: "双斧ギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 23050, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(75, 197), dir: 0, name: "ギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 37929, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(73, 195), dir: 0, name: "ギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 37994, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(69, 194), dir: 0, name: "ギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 38362, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(72, 206), dir: 0, name: "双斧ギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 1955, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(70, 203), dir: 0, name: "双斧ギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 26074, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(74, 203), dir: 0, name: "双斧ギガンテス#bb1")
-1@glast.gat,67,264,4	script	レッドギガンテス#glast_	10067,{/* 71087 */}
-1@glast.gat,67,264,4	script	宝箱#glast_sara8_	10005,{/* 69382 (hide)*/}
-hideonnpc "レッドギガンテス#glast_"; //71087
-@spawn(type: BL_MOB, ID: 15978, speed: 350, option: 0, view: 3196, pos: "1@glast.gat"(67, 264), dir: 0, name: "レッドギガンテス#X1")
-@nomalattack(src: "3196:レッドギガンテス#X1:1@glast.gat"(15978), dst: , damage: 0, sDelay: 800, dDelay: 412, tick: 785574826)
-1@glast.gat,62,279,4	script	宝箱#glast_sara7_	10005,{/* 69381 */}
-hideonnpc "宝箱#glast_sara7_"; //69381
-misceffect 10, "宝箱#glast_sara7_"; //69381
-getitem 7229, 1;
-announce "サラ : 逃げても無駄よ！　塵も残さず消し去ってあげる！", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-getitem 719, 1;
-getitem 730, 1;
-@nomalattack(src: "3196:レッドギガンテス#X1:1@glast.gat"(15978), dst: , damage: 0, sDelay: 800, dDelay: 412, aDelay: 8442)
-getitem 723, 1;
-@nomalattack(src: "3191:双斧ギガンテス#bb1:1@glast.gat"(1955), dst: , damage: 2255, sDelay: 750, dDelay: 412, tick: 785594983)
-@nomalattack(src: "3191:双斧ギガンテス#bb1:1@glast.gat"(1955), dst: , damage: 2260, sDelay: 750, dDelay: 412, aDelay: 1113)
-announce "サラ : 全て、全てを破壊してあげるわっ!!", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-announce "サラ : 逃げても無駄よ！　塵も残さず消し去ってあげる！", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-@spawn(type: BL_MOB, ID: 30957, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(177, 59), dir: 4, name: "ギガンテス#aa5")
-@spawn(type: BL_MOB, ID: 13313, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(177, 65), dir: 1, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 47813, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(190, 55), dir: 6, name: "双斧ギガンテス#bb5")
-@spawn(type: BL_MOB, ID: 47816, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(0, 0), dir: 0, name: "双斧ギガンテス#bb5")
-@spawn(type: BL_MOB, ID: 49986, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(199, 55), dir: 0, name: "双斧ギガンテス#bb5")
-@spawn(type: BL_MOB, ID: 48948, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(205, 47), dir: 0, name: "ギガンテス#aa5")
-@spawn(type: BL_MOB, ID: 47704, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(208, 44), dir: 0, name: "双斧ギガンテス#bb5")
-@spawn(type: BL_MOB, ID: 18333, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(208, 59), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 15462, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(210, 44), dir: 1, name: "機動のギガンテス#bb1")
-@nomalattack(src: "3194:ギガンテス#aa5:1@glast.gat"(48948), dst: , damage: 0, sDelay: 500, dDelay: 412, tick: 785619702)
-announce "サラ : 私に楯突いた事を後悔しなさい！", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-@nomalattack(src: "3191:双斧ギガンテス#bb5:1@glast.gat"(47704), dst: , damage: 2608, sDelay: 750, dDelay: 412, tick: 785620017)
-@nomalattack(src: "3195:機動のギガンテス#bb1:1@glast.gat"(15462), dst: , damage: 1724, sDelay: 500, dDelay: 412, tick: 785620143)
-1@glast.gat,221,49,6	script	サラの幻影#ch1_	10066,{/* 71916 (hide)*/}
-@spawn(type: BL_MOB, ID: 49627, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(222, 54), dir: 4, name: "ギガンテス#aa5")
-@nomalattack(src: "3195:機動のギガンテス#bb1:1@glast.gat"(15462), dst: , damage: 1573, sDelay: 500, dDelay: 412, aDelay: 924)
-1@glast.gat,230,51,3	script	ガーゴイルの石像#glast_	10070,{/* 71094 */}
-1@glast.gat,230,44,1	script	ガーゴイルの石像#glast_	10070,{/* 71098 */}
-1@glast.gat,235,51,3	script	ガーゴイルの石像#glast_	10070,{/* 71095 */}
-1@glast.gat,235,44,1	script	ガーゴイルの石像#glast_	10070,{/* 71183 */}
-1@glast.gat,238,43,0	script	#monster_gimmick_3_	139,{/* 71093 */}
-1@glast.gat,240,51,3	script	ガーゴイルの石像#glast_	10070,{/* 71096 */}
-1@glast.gat,240,44,1	script	ガーゴイルの石像#glast_	10070,{/* 71318 */}
-1@glast.gat,245,51,3	script	ガーゴイルの石像#glast_	10070,{/* 71097 */}
-1@glast.gat,245,44,1	script	ガーゴイルの石像#glast_	10070,{/* 71319 */}
-hideonnpc "#monster_gimmick_3_"; //71093
-hideonnpc "ガーゴイルの石像#glast_"; //71094
-hideonnpc "ガーゴイルの石像#glast_"; //71095
-hideonnpc "ガーゴイルの石像#glast_"; //71096
-hideonnpc "ガーゴイルの石像#glast_"; //71097
-hideonnpc "ガーゴイルの石像#glast_"; //71098
-hideonnpc "ガーゴイルの石像#glast_"; //71183
-hideonnpc "ガーゴイルの石像#glast_"; //71318
-hideonnpc "ガーゴイルの石像#glast_"; //71319
-@spawn(type: BL_MOB, ID: 11235, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(227, 48), dir: 0, name: "機動のギガンテス#gc1")
-@spawn(type: BL_MOB, ID: 46762, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(250, 48), dir: 0, name: "機動のギガンテス#gc2")
-@spawn(type: BL_MOB, ID: 8503, speed: 200, option: 0, view: 3197, pos: "1@glast.gat"(230, 51), dir: 0, name: "サラの使い魔#gc3")
-@spawn(type: BL_MOB, ID: 3021, speed: 200, option: 0, view: 3197, pos: "1@glast.gat"(235, 51), dir: 0, name: "サラの使い魔#gc4")
-@spawn(type: BL_MOB, ID: 4279, speed: 200, option: 0, view: 3197, pos: "1@glast.gat"(240, 51), dir: 0, name: "サラの使い魔#gc5")
-@spawn(type: BL_MOB, ID: 4516, speed: 200, option: 0, view: 3197, pos: "1@glast.gat"(245, 51), dir: 0, name: "サラの使い魔#gc6")
-@spawn(type: BL_MOB, ID: 5310, speed: 200, option: 0, view: 3197, pos: "1@glast.gat"(230, 44), dir: 0, name: "サラの使い魔#gc7")
-@spawn(type: BL_MOB, ID: 7227, speed: 200, option: 0, view: 3197, pos: "1@glast.gat"(235, 44), dir: 0, name: "サラの使い魔#gc8")
-@spawn(type: BL_MOB, ID: 7647, speed: 200, option: 0, view: 3197, pos: "1@glast.gat"(240, 44), dir: 0, name: "サラの使い魔#gc9")
-@spawn(type: BL_MOB, ID: 19285, speed: 200, option: 0, view: 3197, pos: "1@glast.gat"(245, 44), dir: 0, name: "サラの使い魔#gc10")
-@nomalattack(src: "3197:サラの使い魔#gc7:1@glast.gat"(5310), dst: , damage: 0, sDelay: 720, dDelay: 412, tick: 785625874)
-@nomalattack(src: "3197:サラの使い魔#gc8:1@glast.gat"(7227), dst: , damage: 0, sDelay: 720, dDelay: 412, tick: 785625875)
-@nomalattack(src: "3197:サラの使い魔#gc9:1@glast.gat"(7647), dst: , damage: 0, sDelay: 720, dDelay: 412, tick: 785625875)
-@nomalattack(src: "3197:サラの使い魔#gc10:1@glast.gat"(19285), dst: , damage: 0, sDelay: 720, dDelay: 412, tick: 785625875)
-@nomalattack(src: "3197:サラの使い魔#gc7:1@glast.gat"(5310), dst: , damage: 93, sDelay: 720, dDelay: 412, aDelay: 797)
-@nomalattack(src: "3197:サラの使い魔#gc8:1@glast.gat"(7227), dst: , damage: 0, sDelay: 720, dDelay: 412, aDelay: 796)
-@nomalattack(src: "3197:サラの使い魔#gc9:1@glast.gat"(7647), dst: , damage: 0, sDelay: 720, dDelay: 412, aDelay: 796)
-@nomalattack(src: "3197:サラの使い魔#gc10:1@glast.gat"(19285), dst: , damage: 0, sDelay: 720, dDelay: 412, aDelay: 796)
-announce "‐4分経過‐", 0x1, 0xffff00, 0x190, 20, 0, 0;
-1@glast.gat,259,54,5	script	サラの幻影#chase_3_	3190,{/* 69530 (hide)*/}
-misceffect 34, "サラの幻影#chase_3_"; //69530
-@spawn(type: BL_MOB, ID: 44104, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(299, 79), dir: 0, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 42949, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(305, 81), dir: 0, name: "機動のギガンテス#aa1")
-1@glast.gat,299,85,6	script	レッドギガンテス#glast_	10067,{/* 71090 (hide)*/}
-@spawn(type: BL_MOB, ID: 44310, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(305, 91), dir: 0, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 44515, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(300, 86), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 44651, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(292, 85), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 45186, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(304, 85), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 45242, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(306, 89), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 42565, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(303, 93), dir: 0, name: "機動のギガンテス#aa1")
-@nomalattack(src: "3195:機動のギガンテス#bb1:1@glast.gat"(45242), dst: , damage: 0, sDelay: 500, dDelay: 412, tick: 785633313)
-@changeoption(id: 9404, opt1: 0, opt2: 0, option: 4, karma: 0)
-@changeoption(id: 9418, opt1: 0, opt2: 0, option: 4, karma: 0)
-@changeoption(id: 9564, opt1: 0, opt2: 0, option: 4, karma: 0)
-@changeoption(id: 9572, opt1: 0, opt2: 0, option: 4, karma: 0)
-announce "サラ : 逃げても無駄よ！　塵も残さず消し去ってあげる！", 0x1, 0x00ebff, 0x190, 20, 0, 0;
-1@glast.gat,306,179,5	script	サラの幻影#chase_4_	3190,{/* 69531 */}
-@spawn(type: BL_MOB, ID: 9404, speed: 2000, option: 4, view: 3199, pos: "1@glast.gat"(306, 179), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 9418, speed: 2000, option: 4, view: 3199, pos: "1@glast.gat"(306, 179), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 9564, speed: 2000, option: 4, view: 3199, pos: "1@glast.gat"(306, 179), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 9572, speed: 2000, option: 4, view: 3200, pos: "1@glast.gat"(306, 179), dir: 0, name: "#earth")
-1@glast.gat,302,197,4	script	レッドギガンテス#glast_	10067,{/* 71089 */}
-1@glast.gat,302,194,4	script	宝箱#glast_sara9_	10005,{/* 69383 (hide)*/}
-@nomalattack(src: "3199:#meteo:1@glast.gat"(9404), dst: , damage: 78, sDelay: 1000, dDelay: 412, tick: 785640874)
-@nomalattack(src: "3199:#meteo:1@glast.gat"(9418), dst: , damage: 78, sDelay: 1000, dDelay: 412, tick: 785640874)
-@nomalattack(src: "3199:#meteo:1@glast.gat"(9564), dst: , damage: 85, sDelay: 1000, dDelay: 412, tick: 785640874)
-@nomalattack(src: "3200:#earth:1@glast.gat"(9572), dst: , damage: 94, sDelay: 1000, dDelay: 412, tick: 785640874)
-1@glast.gat,298,204,0	script	#monster_gimmick_4_	139,{/* 71355 */}
-hideonnpc "レッドギガンテス#glast_"; //71089
-@spawn(type: BL_MOB, ID: 12117, speed: 350, option: 0, view: 3196, pos: "1@glast.gat"(302, 197), dir: 0, name: "レッドギガンテス#X3")
-1@glast.gat,298,210,5	script	サラの幻影#chase_6_	3190,{/* 69533 (hide)*/}
-@changeoption(id: 6346, opt1: 0, opt2: 0, option: 4, karma: 0)
-@changeoption(id: 6538, opt1: 0, opt2: 0, option: 4, karma: 0)
-@changeoption(id: 6957, opt1: 0, opt2: 0, option: 4, karma: 0)
-@changeoption(id: 7072, opt1: 0, opt2: 0, option: 4, karma: 0)
-1@glast.gat,321,250,5	script	サラの幻影#chase_7_	3190,{/* 69534 (hide)*/}
-1@glast.gat,335,262,5	script	サラの幻影#chase_8_	3190,{/* 70903 */}
-@spawn(type: BL_MOB, ID: 49886, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(332, 255), dir: 0, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 3950, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(334, 261), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 1430, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(331, 255), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 12125, speed: 2000, option: 0, view: 3199, pos: "1@glast.gat"(335, 262), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 12274, speed: 2000, option: 0, view: 3199, pos: "1@glast.gat"(335, 262), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 12399, speed: 2000, option: 0, view: 3199, pos: "1@glast.gat"(335, 262), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 12714, speed: 2000, option: 0, view: 3200, pos: "1@glast.gat"(335, 262), dir: 0, name: "#earth")
-@changeoption(id: 12125, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3199:#meteo:1@glast.gat"(12125), dst: 12125, skill: "インビジブル"(353), val: 1)
-@changeoption(id: 12274, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3199:#meteo:1@glast.gat"(12274), dst: 12274, skill: "インビジブル"(353), val: 1)
-@changeoption(id: 12399, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3199:#meteo:1@glast.gat"(12399), dst: 12399, skill: "インビジブル"(353), val: 1)
-@changeoption(id: 12714, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3200:#earth:1@glast.gat"(12714), dst: 12714, skill: "インビジブル"(353), val: 1)
-@spawn(type: BL_MOB, ID: 3701, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(340, 267), dir: 0, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 15352, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(342, 266), dir: 0, name: "機動のギガンテス#bb1")
-@spawn(type: BL_MOB, ID: 24420, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(337, 262), dir: 0, name: "機動のギガンテス#bb1")
-@nomalattack(src: "3195:機動のギガンテス#aa1:1@glast.gat"(49886), dst: , damage: 0, sDelay: 500, dDelay: 412, tick: 785645032)
-@nomalattack(src: "3199:#meteo:1@glast.gat"(12125), dst: , damage: 78, sDelay: 1000, dDelay: 412, tick: 785645179)
-@nomalattack(src: "3199:#meteo:1@glast.gat"(12274), dst: , damage: 78, sDelay: 1000, dDelay: 412, tick: 785645179)
-@nomalattack(src: "3199:#meteo:1@glast.gat"(12399), dst: , damage: 0, sDelay: 1000, dDelay: 412, tick: 785645179)
-@nomalattack(src: "3200:#earth:1@glast.gat"(12714), dst: , damage: 85, sDelay: 1000, dDelay: 412, tick: 785645179)
-1@glast.gat,347,265,0	script	#compass_1_	139,{/* 69521 (hide)*/}
-1@glast.gat,351,258,5	script	サラの幻影#chase_9_	3190,{/* 70999 (hide)*/}
-@spawn(type: BL_MOB, ID: 49240, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(334, 271), dir: 0, name: "機動のギガンテス#aa1")
-@spawn(type: BL_MOB, ID: 10929, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(340, 270), dir: 0, name: "機動のギガンテス#aa1")
-hideonnpc "サラの幻影#chase_8_"; //70903
-misceffect 34, "サラの幻影#chase_9_"; //70999
-hideoffnpc "サラの幻影#chase_9_"; //70999
-misceffect 135, "サラの幻影#chase_9_"; //70999
-@spawn(type: BL_MOB, ID: 40226, speed: 2000, option: 0, view: 3199, pos: "1@glast.gat"(351, 258), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 40472, speed: 2000, option: 0, view: 3199, pos: "1@glast.gat"(351, 258), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 40515, speed: 2000, option: 0, view: 3199, pos: "1@glast.gat"(351, 258), dir: 0, name: "#meteo")
-@spawn(type: BL_MOB, ID: 41840, speed: 2000, option: 0, view: 3200, pos: "1@glast.gat"(351, 258), dir: 0, name: "#earth")
-@nomalattack(src: "3199:#meteo:1@glast.gat"(40226), dst: , damage: 94, sDelay: 1000, dDelay: 412, tick: 785646271)
-@nomalattack(src: "3199:#meteo:1@glast.gat"(40472), dst: , damage: 103, sDelay: 1000, dDelay: 412, tick: 785646271)
-@nomalattack(src: "3199:#meteo:1@glast.gat"(40515), dst: , damage: 112, sDelay: 1000, dDelay: 412, tick: 785646271)
-@nomalattack(src: "3200:#earth:1@glast.gat"(41840), dst: , damage: 0, sDelay: 1000, dDelay: 412, tick: 785646271)
-@changeoption(id: 40226, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3199:#meteo:1@glast.gat"(40226), dst: 40226, skill: "インビジブル"(353), val: 1)
-@changeoption(id: 40472, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3199:#meteo:1@glast.gat"(40472), dst: 40472, skill: "インビジブル"(353), val: 1)
-@changeoption(id: 40515, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3199:#meteo:1@glast.gat"(40515), dst: 40515, skill: "インビジブル"(353), val: 1)
-@changeoption(id: 41840, opt1: 0, opt2: 0, option: 4, karma: 0)
-@skillnodamage(src: "3200:#earth:1@glast.gat"(41840), dst: 41840, skill: "インビジブル"(353), val: 1)
-mes "‐この先に移動すると";
-mes "　^ff0000パーティーメンバー全員^000000が";
-mes "　^ff0000転送^000000されます。";
-mes "　移動してもよろしいですか？";
-select("いいえ:はい")
-hideonnpc "サラの幻影#chase_9_"; //70999
-@nomalattack(src: "3195:機動のギガンテス#aa1:1@glast.gat"(3701), dst: , damage: 1374, sDelay: 500, dDelay: 412, tick: 785651290)
-@nomalattack(src: "3195:機動のギガンテス#bb1:1@glast.gat"(15352), dst: , damage: 1287, sDelay: 500, dDelay: 412, tick: 785651290)
-@nomalattack(src: "3195:機動のギガンテス#aa1:1@glast.gat"(10929), dst: , damage: 0, sDelay: 500, dDelay: 412, tick: 785651353)
-@nomalattack(src: "3195:機動のギガンテス#aa1:1@glast.gat"(3701), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 903)
-@nomalattack(src: "3195:機動のギガンテス#bb1:1@glast.gat"(15352), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 903)
-@nomalattack(src: "3195:機動のギガンテス#aa1:1@glast.gat"(10929), dst: , damage: 1563, sDelay: 500, dDelay: 412, aDelay: 903)
-announce "‐サラの魔力の影響が無くなった為、「レッドギガンテス」と「秘宝」が消滅しました‐", 0x1, 0xffff00, 0x190, 20, 0, 0;
-hideonnpc "#glast_move_04_"; //71052
-1@glast.gat,351,269,0	warp	#glast_move_04_	2,2,1@glast.gat,350,282 //71052 from_pos=(351, 269)
-misceffect 718, "サラの幻影#glast_50_"; //71330
-hideoffnpc "サラの幻影#glast_50_"; //71330
-misceffect 1065, "サラの幻影#glast_50_"; //71330
-misceffect 718, "サラの幻影#glast_50_"; //71330
-hideonnpc "サラの幻影#glast_50_"; //71330
-cutin "fenrir_a.bmp", 2;
-mes "[フェンリル]";
-mes "ご無事で何よりです。";
-mes "私の力が足りなかったばかりに";
-mes "ご迷惑をおかけしました。";
-next;
-hideoffnpc "#glast_move_01_jp_"; //71352
-misceffect 6, "#glast_move_01_jp_"; //71352
-misceffect 317, "#glast_move_01_jp_"; //71352
-mes "[フェンリル]";
-mes "それにしても";
-mes "随分早かったですね。";
-next;
-mes "[フェンリル]";
-mes "……さて。私はそろそろ行きます。";
-mes "手伝っていただいて";
-mes "ありがとうございました。";
-next;
-mes "[フェンリル]";
-mes "どうやら、先ほどサラの召喚した";
-mes "幻影や使い魔が";
-mes "まだ残っているようですが、";
-mes "このまま放っておいても";
-mes "他の冒険者に大きな被害が";
-mes "出る事はないと思います。";
-next;
-mes "[フェンリル]";
-mes "幸いサラ本人は居ませんから、";
-mes "幻影程度ならどうにかなるでしょう。";
-mes "もし、あなた方が奴らを";
-mes "倒してくださると言うのであれば";
-mes "ぜひお願いします。";
-next;
-mes "[フェンリル]";
-mes "私は先を急ぎますので、";
-mes "手伝うことはできませんが、";
-mes "大きな力が残る場所へ移動できるよう";
-mes "道を開いておきました。";
-mes "もしその力と戦うのであれば、";
-mes "南のワープより移動してください。";
-next;
-mes "[フェンリル]";
-mes "もちろん、無理強いは出来ませんので";
-mes "このままお帰りになっても";
-mes "構いませんよ。";
-mes "その場合はどうかお気をつけて";
-mes "お帰り下さい。";
-next;
-mes "[フェンリル]";
-mes "これはお手伝いをして頂いた";
-mes "お礼です。";
-mes "どうか、お受け取りください。";
-next;
-mes "^ff0000‐各種ピアスのエンチャントを";
-mes "　無料で初期化できる権利を";
-mes "　獲得しました‐^000000";
-next;
-mes "[フェンリル]";
-mes "また、どこかでお会いできると";
-mes "良いですね。";
-next;
-mes "[フェンリル]";
-mes "おや？";
-mes "どうやら荷物の種類が多いようです。";
-mes "荷物の種類を減らしてから";
-mes "また声をかけてください。";
-close;
-cutin "fenrir_a.bmp", 255;
-delitem 932, 1;
-cutin "fenrir_a.bmp", 2;
-mes "[フェンリル]";
-mes "ご無事で何よりです。";
-mes "私の力が足りなかったばかりに";
-mes "ご迷惑をおかけしました。";
-next;
-mes "[フェンリル]";
-mes "それにしても";
-mes "随分早かったですね。";
-next;
-mes "[フェンリル]";
-mes "……さて。私はそろそろ行きます。";
-mes "手伝っていただいて";
-mes "ありがとうございました。";
-next;
-mes "[フェンリル]";
-mes "どうやら、先ほどサラの召喚した";
-mes "幻影や使い魔が";
-mes "まだ残っているようですが、";
-mes "このまま放っておいても";
-mes "他の冒険者に大きな被害が";
-mes "出る事はないと思います。";
-next;
-mes "[フェンリル]";
-mes "幸いサラ本人は居ませんから、";
-mes "幻影程度ならどうにかなるでしょう。";
-mes "もし、あなた方が奴らを";
-mes "倒してくださると言うのであれば";
-mes "ぜひお願いします。";
-next;
-mes "[フェンリル]";
-mes "私は先を急ぎますので、";
-mes "手伝うことはできませんが、";
-mes "大きな力が残る場所へ移動できるよう";
-mes "道を開いておきました。";
-mes "もしその力と戦うのであれば、";
-mes "南のワープより移動してください。";
-next;
-mes "[フェンリル]";
-mes "もちろん、無理強いは出来ませんので";
-mes "このままお帰りになっても";
-mes "構いませんよ。";
-mes "その場合はどうかお気をつけて";
-mes "お帰り下さい。";
-next;
-mes "[フェンリル]";
-mes "これはお手伝いをして頂いた";
-mes "お礼です。";
-mes "どうか、お受け取りください。";
-next;
-mes "^ff0000‐各種ピアスのエンチャントを";
-mes "　無料で初期化できる権利を";
-mes "　獲得しました‐^000000";
-next;
-mes "[フェンリル]";
-mes "また、どこかでお会いできると";
-mes "良いですね。";
-setquest 9337; //state=1
-delquest 9337;
-setquest 120150; //state=1
-delquest 120150;
-setquest 120155; //state=1
-delquest 120155;
-getexp 2998015,0; //3000000
-getexp 0,1498210; //1500000
-getitem 6803, 1;
-setquest 120170; //state=1
-delquest 120170;
-close;
-cutin "fenrir_a.bmp", 255;
-mes "[フェンリル]";
-mes "また、どこかでお会いできると";
-mes "良いですね。";
-close;
-cutin "fenrir_a.bmp", 255;
-getitem 932, 1;
-mes "‐ここからサラの幻影がいる場所へ";
-mes "　行くことが出来るようだ‐";
-next;
-select("この場に留まる:先へ進む")
-mes "‐先へ進むことにした‐";
-close;
-@mapmoved(from: 1@glast.gat(352, 279), map: 1@glast.gat(199, 333))
-@spawn(type: BL_MOB, ID: 12309, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(185, 333), dir: 0, name: "双斧ギガンテス")
-@spawn(type: BL_MOB, ID: 20133, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(185, 331), dir: 0, name: "機動のギガンテス")
-@spawn(type: BL_MOB, ID: 25266, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(185, 329), dir: 0, name: "ギガンテス")
-@spawn(type: BL_MOB, ID: 35027, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(185, 327), dir: 0, name: "ギガンテス")
-@spawn(type: BL_MOB, ID: 16986, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(213, 333), dir: 0, name: "双斧ギガンテス")
-@spawn(type: BL_MOB, ID: 746, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(213, 331), dir: 0, name: "機動のギガンテス")
-@spawn(type: BL_MOB, ID: 5468, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(213, 329), dir: 0, name: "双斧ギガンテス")
-@spawn(type: BL_MOB, ID: 11832, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(213, 327), dir: 0, name: "双斧ギガンテス")
-@spawn(type: BL_MOB, ID: 3923, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(183, 333), dir: 0, name: "ギガンテス")
-@spawn(type: BL_MOB, ID: 10794, speed: 320, option: 0, view: 3194, pos: "1@glast.gat"(183, 331), dir: 0, name: "ギガンテス")
-@spawn(type: BL_MOB, ID: 49714, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(183, 329), dir: 0, name: "機動のギガンテス")
-@spawn(type: BL_MOB, ID: 12498, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(183, 327), dir: 0, name: "双斧ギガンテス")
-@mob_defeated("3195:機動のギガンテス:1@glast.gat"(20133))
-getexp -2899826,0; //100174
-getexp 0,-1449826; //50174
-@spawn(type: BL_MOB, ID: 35204, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(0, 0), dir: 0, name: "機動のギガンテス")
-@spawn(type: BL_MOB, ID: 48364, speed: 250, option: 0, view: 3191, pos: "1@glast.gat"(0, 0), dir: 0, name: "双斧ギガンテス")
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(49714), dst: , damage: 1608, sDelay: 500, dDelay: 412, tick: 785745837)
-@mob_defeated("3194:ギガンテス:1@glast.gat"(25266))
-getexp 1826,0; //102000
-getexp 0,826; //51000
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(49714), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 903)
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(49714), dst: , damage: 1297, sDelay: 500, dDelay: 412, aDelay: 903)
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(49714), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 903)
-@mob_defeated("3195:機動のギガンテス:1@glast.gat"(49714))
-getexp -1826,0; //100174
-getexp 0,-826; //50174
-@mob_defeated("3194:ギガンテス:1@glast.gat"(35027))
-getexp 1826,0; //102000
-getexp 0,826; //51000
-@nomalattack(src: "3191:双斧ギガンテス:1@glast.gat"(48364), dst: , damage: 2549, sDelay: 750, dDelay: 412, tick: 785754972)
-@nomalattack(src: "3194:ギガンテス:1@glast.gat"(3923), dst: , damage: 0, sDelay: 500, dDelay: 412, tick: 785755518)
-@nomalattack(src: "3191:双斧ギガンテス:1@glast.gat"(48364), dst: , damage: 0, sDelay: 750, dDelay: 412, aDelay: 1113)
-@nomalattack(src: "3194:ギガンテス:1@glast.gat"(3923), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 1008)
-@nomalattack(src: "3194:ギガンテス:1@glast.gat"(10794), dst: , damage: 0, sDelay: 500, dDelay: 412, tick: 785756610)
-@mob_defeated("3194:ギガンテス:1@glast.gat"(3923))
-getexp 0,0; //102000
-getexp 0,0; //51000
-@nomalattack(src: "3191:双斧ギガンテス:1@glast.gat"(48364), dst: , damage: 0, sDelay: 750, dDelay: 412, aDelay: 1974)
-@spawn(type: BL_MOB, ID: 47360, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(0, 0), dir: 0, name: "機動のギガンテス")
-@spawn(type: BL_MOB, ID: 38796, speed: 200, option: 0, view: 3195, pos: "1@glast.gat"(0, 0), dir: 0, name: "機動のギガンテス")
-@mob_defeated("3194:ギガンテス:1@glast.gat"(10794))
-getexp 0,0; //102000
-getexp 0,0; //51000
-@mob_defeated("3191:双斧ギガンテス:1@glast.gat"(48364))
-getexp 11200,0; //113200
-getexp 0,11000; //62000
-@mob_defeated("3191:双斧ギガンテス:1@glast.gat"(12309))
-getexp 0,0; //113200
-getexp 0,0; //62000
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(35204), dst: , damage: 0, sDelay: 500, dDelay: 412, tick: 785767003)
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(47360), dst: , damage: 0, sDelay: 500, dDelay: 412, tick: 785767003)
-getitem 7229, 1;
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(35204), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 1617)
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(47360), dst: , damage: 1762, sDelay: 500, dDelay: 412, aDelay: 1617)
-@mob_defeated("3195:機動のギガンテス:1@glast.gat"(35204))
-getexp -13026,0; //100174
-getexp 0,-11826; //50174
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(47360), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 1722)
-@mob_defeated("3191:双斧ギガンテス:1@glast.gat"(12498))
-getexp 13026,0; //113200
-getexp 0,11826; //62000
-@mob_defeated("3195:機動のギガンテス:1@glast.gat"(47360))
-getexp -13026,0; //100174
-getexp 0,-11826; //50174
-@mob_defeated("3191:双斧ギガンテス:1@glast.gat"(16986))
-getexp 13026,0; //113200
-getexp 0,11826; //62000
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(38796), dst: , damage: 0, sDelay: 500, dDelay: 412, tick: 785776243)
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(38796), dst: , damage: 1775, sDelay: 500, dDelay: 412, aDelay: 903)
-@mob_defeated("3195:機動のギガンテス:1@glast.gat"(38796))
-getexp -13026,0; //100174
-getexp 0,-11826; //50174
-@mob_defeated("3191:双斧ギガンテス:1@glast.gat"(11832))
-getexp 13026,0; //113200
-getexp 0,11826; //62000
-@mob_defeated("3191:双斧ギガンテス:1@glast.gat"(5468))
-getexp 0,0; //113200
-getexp 0,0; //62000
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(746), dst: , damage: 0, sDelay: 500, dDelay: 412, tick: 785794036)
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(746), dst: , damage: 1771, sDelay: 500, dDelay: 412, aDelay: 903)
-@nomalattack(src: "3195:機動のギガンテス:1@glast.gat"(746), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 903)
-@mob_defeated("3195:機動のギガンテス:1@glast.gat"(746))
-getexp -13026,0; //100174
-getexp 0,-11826; //50174
-1@glast.gat,215,325,0	script	#バリケード7_12	1905,{/* 71551 */}
-1@glast.gat,219,328,0	script	#バリケード11_1	1905,{/* 71691 */}
-1@glast.gat,219,330,0	script	#バリケード11_3	1905,{/* 71692 */}
-1@glast.gat,219,332,0	script	#バリケード11_5	1905,{/* 71872 */}
-getitem 7229, 1;
-@nomalattack(src: ""(), dst: , damage: 0, sDelay: 0, dDelay: 0, tick: 785864470)
-@nomalattack(src: ""(), dst: , damage: 0, sDelay: 0, dDelay: 0, aDelay: 483)
-mes "‐サラの幻影がいる。";
-mes "　戦おうか？‐";
-next;
-select("戦う:やめておく")
-mes "‐サラの幻影と戦おうと身構えると";
-mes "　幻影もこちらに気付いたようだ‐";
-close;
-mes "‐サラの幻影がいる。";
-mes "　戦おうか？‐";
-next;
-hideonnpc "サラの幻影#ex_battle_0q"; //71353
-@spawn(type: BL_MOB, ID: 19622, speed: 125, option: 0, view: 3190, pos: "1@glast.gat"(200, 346), dir: 0, name: "サラの幻影#1")
-select("戦う:やめておく")
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 1875, sDelay: 500, dDelay: 412, tick: 785872375)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 504)
-close;
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2430, sDelay: 500, dDelay: 412, aDelay: 504)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , skill: "突き刺し攻撃"(158), skill_lv: -1, damage: 3470, sDelay: 500, dDelay: 412, tick: 785873888)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "範囲石化攻撃"(666), skill_lv: 5, damage: -30000, sDelay: 500, dDelay: 0, tick: 785874392)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2289, sDelay: 500, dDelay: 412, aDelay: 1513)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 1930, sDelay: 500, dDelay: 412, aDelay: 1008)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 504)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , skill: "聖属性攻撃"(189), skill_lv: -1, damage: 5352, sDelay: 500, dDelay: 412, tick: 785876912)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "グランドクロス"(254), val: 65535, tick: 785877416)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "グランドクロス"(254), skill_lv: 10, damage: 0, sDelay: 0, dDelay: 300, tick: 785877437)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "グランドクロス"(254), skill_lv: 10, damage: 0, sDelay: 0, dDelay: 300, tick: 785877752)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "グランドクロス"(254), skill_lv: 10, damage: 0, sDelay: 0, dDelay: 300, tick: 785878067)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 2016)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 515, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 498, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "ファイアーウォール"(18), val: 65535, tick: 785880440)
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 1008)
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 454, sDelay: 500, dDelay: 412, aDelay: 1008)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 361, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 468, sDelay: 500, dDelay: 412, aDelay: 504)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "範囲睡眠攻撃"(668), skill_lv: 5, damage: -30000, sDelay: 500, dDelay: 0, tick: 785883464)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 397, sDelay: 500, dDelay: 412, aDelay: 1008)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2539, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 1808, sDelay: 500, dDelay: 412, aDelay: 504)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "メテオストーム"(83), val: 65535, tick: 785885459)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 434, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 444, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 441, sDelay: 500, dDelay: 412, aDelay: 505)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 455, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 525, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 384, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 378, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 446, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 357, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 512, sDelay: 500, dDelay: 412, aDelay: 504)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "メテオストーム"(83), val: 65535, tick: 785890458)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 477, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 525, sDelay: 500, dDelay: 412, aDelay: 503)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 424, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 502, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 486, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 508, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 492, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 366, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 518, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 499, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 425, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 394, sDelay: 500, dDelay: 412, aDelay: 506)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 381, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 371, sDelay: 500, dDelay: 412, aDelay: 505)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 510)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 439, sDelay: 500, dDelay: 412, aDelay: 511)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 425, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 469, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 395, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 505, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 435, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 383, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 471, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 370, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2445, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2090, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2122, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2515, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2620, sDelay: 500, dDelay: 412, aDelay: 504)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , skill: "突き刺し攻撃"(158), skill_lv: -1, damage: 3301, sDelay: 500, dDelay: 412, tick: 785905657)
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "範囲石化攻撃"(666), skill_lv: 5, damage: -30000, sDelay: 500, dDelay: 0, tick: 785906160)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 1512)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2744, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2271, sDelay: 500, dDelay: 412, aDelay: 1008)
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2023, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 1829, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2439, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 0, sDelay: 500, dDelay: 412, aDelay: 504)
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 2363, sDelay: 500, dDelay: 412, aDelay: 504)
-@skillcasting(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "ラッシュアタック"(349), pl: 0, tick: 500)
-@skillnodamage(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "ラッシュアタック"(349), val: 5)
-misceffect 207,""; //self
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 6975, sDelay: 500, dDelay: 412, aDelay: 1512)
-misceffect 207,""; //self
-@nomalattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: , damage: 7984, sDelay: 500, dDelay: 412, aDelay: 504)
-misceffect 207,""; //self
-misceffect 207,""; //self
-misceffect 207,""; //self
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "ロードオブヴァーミリオン"(85), val: 65535, tick: 785915022)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "ロードオブヴァーミリオン"(85), val: 65535, tick: 785915022)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "ロードオブヴァーミリオン"(85), val: 65535, tick: 785915022)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "ロードオブヴァーミリオン"(85), val: 65535, tick: 785915022)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "サンダーストーム"(21), val: 65535, tick: 785915022)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "サンダーストーム"(21), val: 65535, tick: 785915022)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "サンダーストーム"(21), val: 65535, tick: 785915022)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "サンダーストーム"(21), val: 65535, tick: 785915023)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "グランドクロス"(254), val: 65535, tick: 785917752)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "グランドクロス"(254), skill_lv: 10, damage: 0, sDelay: 0, dDelay: 300, tick: 785917773)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "グランドクロス"(254), skill_lv: 10, damage: 0, sDelay: 0, dDelay: 300, tick: 785918088)
-@skillattack(src: "3190:サラの幻影#1:1@glast.gat"(19622), dst: 19622, skill: "グランドクロス"(254), skill_lv: 10, damage: 0, sDelay: 0, dDelay: 300, tick: 785918403)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "サンダーストーム"(21), val: 65535, tick: 785919054)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "サンダーストーム"(21), val: 65535, tick: 785919054)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "サンダーストーム"(21), val: 65535, tick: 785919054)
-@skillposeffect(src: "3190:サラの幻影#1:1@glast.gat"(19622), skill: "サンダーストーム"(21), val: 65535, tick: 785919054)
+1@glast.gat,201,325,0	script	#バリケードcenter_5	1905,{}
+
+1@glast.gat,184,325,0	script	#バリケード6_2	1905,{}
+1@glast.gat,186,325,0	script	#バリケード6_4	1905,{}
+1@glast.gat,188,325,0	script	#バリケード6_6	1905,{}
+1@glast.gat,190,325,0	script	#バリケード6_8	1905,{}
+1@glast.gat,192,325,0	script	#バリケード6_10	1905,{}
+1@glast.gat,194,325,0	script	#バリケード6_12	1905,{}
+
+1@glast.gat,205,325,0	script	#バリケード7_2	1905,{}
+1@glast.gat,207,325,0	script	#バリケード7_4	1905,{}
+1@glast.gat,209,325,0	script	#バリケード7_6	1905,{}
+1@glast.gat,211,325,0	script	#バリケード7_8	1905,{}
+1@glast.gat,213,325,0	script	#バリケード7_10	1905,{}
+1@glast.gat,215,325,0	script	#バリケード7_12	1905,{}
+
+1@glast.gat,180,328,0	script	#バリケード8_1	1905,{}
+1@glast.gat,180,330,0	script	#バリケード8_3	1905,{}
+1@glast.gat,180,332,0	script	#バリケード8_5	1905,{}
+
+1@glast.gat,187,345,0	script	#バリケード9_1	1905,{}
+1@glast.gat,189,346,0	script	#バリケード9_2	1905,{}
+
+1@glast.gat,210,346,0	script	#バリケード10_1	1905,{}
+1@glast.gat,212,345,0	script	#バリケード10_2	1905,{}
+
+1@glast.gat,219,328,0	script	#バリケード11_1	1905,{}
+1@glast.gat,219,330,0	script	#バリケード11_3	1905,{}
+1@glast.gat,219,332,0	script	#バリケード11_5	1905,{}
+
+1@glast.gat,345,274,0	script	#バリケード12_1	1905,{}
+1@glast.gat,347,274,0	script	#バリケード12_3	1905,{}
+1@glast.gat,349,274,0	script	#バリケード12_5	1905,{}
+1@glast.gat,351,274,0	script	#バリケード12_7	1905,{}
+1@glast.gat,353,274,0	script	#バリケード12_9	1905,{}
+1@glast.gat,355,274,0	script	#バリケード12_11	1905,{}
+1@glast.gat,357,274,0	script	#バリケード12_13	1905,{}
+1@glast.gat,346,273,0	script	#バリケード12_16	1905,{}
+1@glast.gat,348,273,0	script	#バリケード12_18	1905,{}
+1@glast.gat,350,273,0	script	#バリケード12_20	1905,{}
+1@glast.gat,352,273,0	script	#バリケード12_22	1905,{}
+1@glast.gat,354,273,0	script	#バリケード12_24	1905,{}
+1@glast.gat,356,273,0	script	#バリケード12_26	1905,{}
+1@glast.gat,358,273,0	script	#バリケード12_28	1905,{}
+
+1@glast.gat,198,238,0	script	#バリケード13_1	1905,{}
+1@glast.gat,199,238,0	script	#バリケード13_2	1905,{}
+1@glast.gat,200,238,0	script	#バリケード13_3	1905,{}
+1@glast.gat,201,238,0	script	#バリケード13_4	1905,{}
