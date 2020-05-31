@@ -614,7 +614,7 @@ OnEff7:
 	misceffect 182,getmdnpcname("#centrallab_gen_06");
 	misceffect 182,getmdnpcname("#centrallab_gen_02");
 	misceffect 182,getmdnpcname("#centrallab_gen_07");
-	end
+	end;
 OnEff8:
 	misceffect 182,getmdnpcname("#centrallab_gen_01");
 	misceffect 182,getmdnpcname("#centrallab_gen_03");
@@ -624,7 +624,7 @@ OnEff8:
 	misceffect 182,getmdnpcname("#centrallab_gen_02");
 	misceffect 182,getmdnpcname("#centrallab_gen_07");
 	misceffect 182,getmdnpcname("#centrallab_gen_09");
-	end
+	end;
 OnEff9:
 	misceffect 182,getmdnpcname("#centrallab_gen_01");
 	misceffect 182,getmdnpcname("#centrallab_gen_03");
@@ -635,7 +635,7 @@ OnEff9:
 	misceffect 182,getmdnpcname("#centrallab_gen_07");
 	misceffect 182,getmdnpcname("#centrallab_gen_09");
 	misceffect 182,getmdnpcname("#centrallab_gen_05");
-	end
+	end;
 OnStop:
 	stopnpctimer;
 	end;
@@ -698,7 +698,7 @@ OnEff7:
 	misceffect 106,getmdnpcname("#centrallab_gen_06");
 	misceffect 106,getmdnpcname("#centrallab_gen_02");
 	misceffect 106,getmdnpcname("#centrallab_gen_07");
-	end
+	end;
 OnEff8:
 	misceffect 106,getmdnpcname("#centrallab_gen_01");
 	misceffect 106,getmdnpcname("#centrallab_gen_03");
@@ -708,7 +708,7 @@ OnEff8:
 	misceffect 106,getmdnpcname("#centrallab_gen_02");
 	misceffect 106,getmdnpcname("#centrallab_gen_07");
 	misceffect 106,getmdnpcname("#centrallab_gen_09");
-	end
+	end;
 OnEff9:
 	misceffect 106,getmdnpcname("#centrallab_gen_01");
 	misceffect 106,getmdnpcname("#centrallab_gen_03");
@@ -719,7 +719,7 @@ OnEff9:
 	misceffect 106,getmdnpcname("#centrallab_gen_07");
 	misceffect 106,getmdnpcname("#centrallab_gen_09");
 	misceffect 106,getmdnpcname("#centrallab_gen_05");
-	end
+	end;
 OnStop:
 	stopnpctimer;
 	end;
@@ -924,7 +924,7 @@ OnTimer133000:
 	donpcevent getmdnpcname("#eff_event1")+ "::OnStop";
 	donpcevent getmdnpcname("#eff_event2")+ "::OnStop";
 	announce "MA-4885 : ……メイン装置の停止を確認。",0x9,0xffff00,0x190,13,0,0;
-	end
+	end;
 OnTimer135500:
 	announce "MA-4885 : ……。",0x9,0xffff00,0x190,13,0,0;
 	end;
@@ -1366,7 +1366,7 @@ OnTimer448000:
 	donpcevent getmdnpcname("#eff_event2")+ "::OnEff4";
 	end;
 OnTimer449000:
-	misceffect 90,getmdnpcname("#centrallab_gen_12";
+	misceffect 90,getmdnpcname("#centrallab_gen_12");
 	donpcevent getmdnpcname("#eff_event2")+ "::OnEff5";
 	end;
 OnTimer451000:

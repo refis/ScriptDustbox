@@ -1,3 +1,137 @@
+un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
+	mes "[マークイシャ]";
+	mes "この扉は今までと違って";
+	mes "明らかにこちら側から";
+	mes "塞いだ痕跡がありますね……。";
+	cutin "bu_mark4",0;
+	next;
+	cutin "bu_mark1",0;
+	mes "[マークイシャ]";
+	mes "どうしましょう。";
+	mes "扉を開いて中に入りますか？";
+	next;
+	if(checkquest(11380) || checkquest(11379)) {
+		mes "[マークイシャ]";
+		mes "まだ疲れているようですね。";
+		mes "ちゃんと休んで元気になったら";
+		mes "中を調べにいきましょう。";
+		cutin "bu_mark1.bmp", 0;
+		next;
+		mes "[マークイシャ]";
+		mes "そういえばタマリンが";
+		mes "誰かが掘って作ったと思われる";
+		mes "出口を見つけました。";
+		mes "ここを通れば外に出られそうですよ。";
+		next;
+		if(select("外に出たい","止めておく") == 2) {
+			cutin "bu_mark2.bmp", 0;
+			mes "[マークイシャ]";
+			mes "そうですか。";
+			mes "外に出たい時は";
+			mes "いつでも声をかけて下さいね。";
+			close2;
+			cutin "bu_mark2.bmp", 255;
+			end;
+		}
+		cutin "bu_mark2.bmp", 0;
+		mes "[マークイシャ]";
+		mes "かなり暗いので気をつけて";
+		mes "進んでくださいね。";
+		close2;
+		cutin "bu_mark2.bmp", 255;
+		warp "verus01.gat",115,190;
+		end;
+	}
+	if(getonlinepartymember() < 1) {
+		mes "[マークイシャ]";
+		mes "パーティーを組んで";
+		mes "いないようですね。";
+		mes "……嫌な予感がしますから、";
+		mes "必ずパーティーを組んでから";
+		mes "中に入ってください。";
+		close2;
+		cutin "bu_mark1",255;
+		end;
+	}
+	set '@party$,getpartyname(getcharid(1));
+	set '@leader$,getpartyleader(getcharid(1));
+	switch(select("扉を開ける","奥に入る","やめる","外に出たい")) {
+	case 1:
+		if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+			mes "パーティー名：" +'@party$;
+			mes "パーティーリーダー名：" +'@leader$;
+			mes "^0000fflast_room ^000000-予約失敗";
+			close2;
+			cutin "bu_mark1",255;
+			end;
+		}
+		mdcreate "last_room";
+		mes "[マークイシャ]";
+		mes "それでは扉を開きます。";
+		mes "完全に開いたら";
+		mes "中に入ってください。";
+		close2;
+		cutin "bu_mark1",255;
+		end;
+	case 2:
+		switch(mdenter("last_room")) {
+		case 0:	// エラーなし
+			//setquest 11380;
+			announce "メモリアルダンジョン[last_room] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
+			setquest 11379;
+			cutin "bu_mark1",255;
+			//warp "1@uns.gat",144,36;
+			end;
+		case 1:	// パーティー未加入
+			mes "[マークイシャ]";
+			mes "パーティーを組んで";
+			mes "いないようですね。";
+			mes "……嫌な予感がしますから、";
+			mes "必ずパーティーを組んでから";
+			mes "中に入ってください。";
+			close2;
+			cutin "bu_mark1",255;
+			end;
+		case 2:	// ダンジョン未作成
+			mes "[マークイシャ]";
+			mes "パーティーリーダーが";
+			mes "扉を開いていないようですね。";
+			mes "リーダーの方が先ず、";
+			mes "扉を開いてください。";
+			close2;
+			cutin "bu_mark1",255;
+			end;
+		default:	// その他エラー
+			close;
+		}
+	case 3:
+		cutin "bu_mark4",0;
+		mes "[マークイシャ]";
+		mes "そうですね。";
+		mes "何が起きるかわかりませんし";
+		mes "妥当な選択だと思います。";
+		mes "あいつもたまにはそんな風に、";
+		mes "リーダーらしく物事を考えて";
+		mes "発言して欲しいものです……。";
+		close2;
+		cutin "bu_mark4",255;
+		end;
+	case 4:
+		cutin "bu_mark2",0;
+		mes "[マークイシャ]";
+		mes "そういえばタマリンが";
+		mes "誰かが掘って作ったと思われる";
+		mes "出口を見つけたんです。";
+		mes "ここから外に出られると思いますが";
+		mes "かなり暗いので気をつけて";
+		mes "進んでくださいね。";
+		close2;
+		cutin "bu_mark2",255;
+		warp "verus01.gat",115,190;
+		end;
+	}
+}
+
 1@uns.gat,143,36,3	script	ベリティ#room1	10078,{/* 60061 (hide)*/
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		close;
@@ -225,7 +359,7 @@ OnKilled:
 1@uns.gat,157,94,0	script	#lrboom1	550,2,2,{/* 45212 */
 	end;
 OnTouch:
-	set '@num,substr(strnpcname(2),6);
+	set '@num,substr(strnpcinfo(2),6);
 	areamonster getmdmapname("1@uns.gat"),178,34,198,54,"機械部品",(3251 + (('@num-1) % 2)), 3;
 	announce "システムメッセージ : 第2区域で侵入者を確認。排除します。", 0x9, 0xff0000;
 	hideonnpc;

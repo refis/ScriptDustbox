@@ -643,8 +643,8 @@ verus04.gat,70,113,5	script	機械装置#mcd	10007,{/* 59229 */
 		mes "　パーティーに加入してください‐^000000";
 		close;
 	}
-	if(chackquest(13185)) {	//TODO
-		if(chackquest(13185)&2) {
+	if(checkquest(13185)) {	//TODO
+		if(checkquest(13185)&2) {
 			mes "[機械装置]";
 			mes "ピピピ、^0000ff再入場可能^000000！";
 			mes "　";
@@ -683,14 +683,14 @@ verus04.gat,70,113,5	script	機械装置#mcd	10007,{/* 59229 */
 			setquest 13185;
 			setquest 118245;
 			setquest 96452;
-			if(checkquest(118235)
+			if(checkquest(118235))
 				delquest 118235;
-			if(checkquest(118240)
+			if(checkquest(118240))
 				delquest 118240;
 			misceffect 316,""; //self
 			misceffect 317,""; //self
 			announce "メモリアルダンジョン[charleston] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
-			warp "1@mcd.gat",127,282;
+			//warp "1@mcd.gat",127,282;
 			end;
 		case 1:	// パーティー未加入
 			mes "‐^ff0000パーティーメンバーのみ";
@@ -841,156 +841,156 @@ OnInit:
 1@mcd.gat,1,1,0	script	CharlestonControl1	139,{
 OnStart:
 OnSpawn1:
-	@spawn(type: BL_MOB, ID: 24185, speed: 200, option: 0, view: 3127, pos: "1@mcd.gat"(24, 275), dir: 0, name: "通路保安装置1号")
+	//@spawn(type: BL_MOB, ID: 24185, speed: 200, option: 0, view: 3127, pos: "1@mcd.gat"(24, 275), dir: 0, name: "通路保安装置1号")
 OnKilled1:
 	announce "チャールストン1号 : 第1ゲートの保安装置が解除されました！　次は南西側の保安装置を破壊して下さい。", 0x1, 0xffff00, 0x190, 12, 0, 0;
-	hideoffnpc "1gate#1";
-	hideoffnpc "guide#1"; //78695
+	hideoffnpc "1gate#mcd";
+	hideoffnpc "guide#mcd1"; //78695
 OnSpawn2:
-	@spawn(type: BL_MOB, ID: 29784, speed: 200, option: 0, view: 3127, pos: "1@mcd.gat"(33, 59), dir: 0, name: "通路保安装置2号")
+	//@spawn(type: BL_MOB, ID: 29784, speed: 200, option: 0, view: 3127, pos: "1@mcd.gat"(33, 59), dir: 0, name: "通路保安装置2号")
 OnKilled2:
 	announce "チャールストン1号 : 第2ゲートの保安装置が解除されました！　南東側の保安装置に移動して下さい。", 0x1, 0xffff00, 0x190, 12, 0, 0;
-	hideoffnpc "2gate#1";
-	hideoffnpc "guide#3"; //78697
+	hideoffnpc "2gate#mcd";
+	hideoffnpc "guide#mcd3"; //78697
 OnSpawn3:
-	@spawn(type: BL_MOB, ID: 35482, speed: 200, option: 0, view: 3127, pos: "1@mcd.gat"(239, 30), dir: 0, name: "通路保安装置3号")
+	//@spawn(type: BL_MOB, ID: 35482, speed: 200, option: 0, view: 3127, pos: "1@mcd.gat"(239, 30), dir: 0, name: "通路保安装置3号")
 OnKilled3:
 	announce "チャールストン1号 : 第3ゲートの保安装置が解除されました！　東側の保安装置に移動して下さい。", 0x1, 0xffff00, 0x190, 12, 0, 0;
-	hideoffnpc "3gate#1";
-	hideoffnpc "guide#5"; //78697
-OnSpawn3:
-	@spawn(type: BL_MOB, ID: 10994, speed: 200, option: 0, view: 3127, pos: "1@mcd.gat"(281, 183), dir: 0, name: "通路保安装置4号")
-OnKilled3:
+	hideoffnpc "3gate#mcd";
+	hideoffnpc "guide#mcd5"; //78697
+OnSpawn4:
+	//@spawn(type: BL_MOB, ID: 10994, speed: 200, option: 0, view: 3127, pos: "1@mcd.gat"(281, 183), dir: 0, name: "通路保安装置4号")
+OnKilled4:
 	announce "チャールストン1号 : 第4ゲートの保安装置が解除されました！　中央3ラインの研究室まで来て下さい！", 0x1, 0xffff00, 0x190, 12, 0, 0;
-	hideoffnpc "4gate#1";
-	hideoffnpc "guide#7"; //78697
+	hideoffnpc "4gate#mcd";
+	hideoffnpc "guide#mcd7"; //78697
 }
 
-1@mcd.gat,44,211,0	script	1gate#1	45,3,3,{/* 59183 */
+1@mcd.gat,44,211,0	script	1gate#mcd	45,3,3,{/* 59183 */
 	warp "1@mcd.gat",41,200;
 	end;
 }
-1@mcd.gat,23,275,0	script	guide#1	139,20,20,{/* 59184 (hide)*/
+1@mcd.gat,23,275,0	script	guide#mcd1	139,20,20,{/* 59184 (hide)*/
 	viewpoint 2, 23, 275, 1, 0xFF00FF00; //78695
 	viewpoint 1, 44, 211, 1, 0xFF00FF00; //78695
 }
-1@mcd.gat,41,200,0	script	guide#2	139,3,3,{/* 59185 */
+1@mcd.gat,41,200,0	script	guide#mcd2	139,3,3,{/* 59185 */
 	viewpoint 2, 44, 211, 1, 0xFF00FF00; //78696
 	viewpoint 1, 33, 60, 1, 0xFF00FF00; //78696
 }
-1@mcd.gat,33,59,0	script	guide#3	139,20,20,{/* 59186 (hide)*/
+1@mcd.gat,33,59,0	script	guide#mcd3	139,20,20,{/* 59186 (hide)*/
 	viewpoint 2, 33, 60, 1, 0xFF00FF00; //78697
 	viewpoint 1, 58, 72, 1, 0xFF00FF00; //78697
 }
-1@mcd.gat,58,72,0	script	2gate#1	45,3,3,{/* 59187 (hide)*/
+1@mcd.gat,58,72,0	script	2gate#mcd	45,3,3,{/* 59187 (hide)*/
 	warp "1@mcd.gat",65,66;
 	end;
 }
-1@mcd.gat,65,66,0	script	guide#4	139,2,2,{/* 59188 */
+1@mcd.gat,65,66,0	script	guide#mcd4	139,2,2,{/* 59188 */
 	viewpoint 2, 58, 72, 1, 0xFF00FF00; //78699
 	viewpoint 1, 239, 29, 1, 0xFF00FF00; //78699
 }
-1@mcd.gat,239,30,0	script	guide#5	139,20,20,{/* 59189 (hide)*/
+1@mcd.gat,239,30,0	script	guide#mcd5	139,20,20,{/* 59189 (hide)*/
 	viewpoint 2, 239, 29, 1, 0xFF00FF00; //78700
 	viewpoint 1, 104, 50, 1, 0xFF00FF00; //78700
 }
-1@mcd.gat,104,50,0	script	3gate#1	45,3,3,{/* 59190 (hide)*/}
+1@mcd.gat,104,50,0	script	3gate#mcd	45,3,3,{/* 59190 (hide)*/
 	warp "1@mcd.gat",115,50;
 	end;
 }
-1@mcd.gat,117,50,0	script	guide#6	139,2,2,{/* 59191 */
+1@mcd.gat,117,50,0	script	guide#mcd6	139,2,2,{/* 59191 */
 	viewpoint 2, 104, 50, 1, 0xFF00FF00; //79943
 	viewpoint 1, 282, 183, 1, 0xFF00FF00; //79943
 }
-1@mcd.gat,281,183,0	script	guide#7	139,20,20,{/* 59192 (hide)*/
+1@mcd.gat,281,183,0	script	guide#mcd7	139,20,20,{/* 59192 (hide)*/
 	viewpoint 2, 282, 183, 1, 0xFF00FF00; //79944
 	viewpoint 1, 218, 211, 1, 0xFF00FF00; //79944
 }
-1@mcd.gat,218,211,0	script	4gate#1	45,3,3,{/* 59193 (hide)*/
+1@mcd.gat,218,211,0	script	4gate#mcd	45,3,3,{/* 59193 (hide)*/
 	warp "1@mcd.gat",210,217;
 	end;
 }
-1@mcd.gat,208,217,0	script	guide#8	139,2,2,{/* 59194 */
+1@mcd.gat,208,217,0	script	guide#mcd8	139,2,2,{/* 59194 */
 	viewpoint 2, 218, 211, 1, 0xFF00FF00; //79946
 	viewpoint 1, 211, 195, 1, 0xFF00FF00; //79946
 }
-1@mcd.gat,211,195,0	script	5gate#1	45,3,3,{/* 59195 */
+1@mcd.gat,211,195,0	script	5gate#mcd	45,3,3,{/* 59195 */
 	warp "1@mcd.gat",211,180;
 	end;
 }
-1@mcd.gat,212,180,0	script	guide#9	139,2,2,{/* 59196 */
+1@mcd.gat,212,180,0	script	guide#mcd9	139,2,2,{/* 59196 */
 	viewpoint 2, 211, 195, 1, 0xFF00FF00; //79948
 	viewpoint 1, 141, 199, 1, 0xFF00FF00; //79948
 }
-1@mcd.gat,141,199,0	warp	6gate#1	2,2,1@mcd.gat,141,207 //59197 from_pos=(141, 199)
-1@mcd.gat,142,203,0	warp	7gate#1	2,2,1@mcd.gat,136,200 //59198 from_pos=(140, 205)
-1@mcd.gat,130,127,0	warp	8gate#1	2,2,1@mcd.gat,129,143 //59199 from_pos=(130, 126)
-1@mcd.gat,127,262,0	script	mob#1	139,5,5,{/* 59200 */
-	hideonnpc "mob#1";
-	@spawn(type: BL_MOB, ID: 27430, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(111, 254), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 30504, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(109, 251), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 22265, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(108, 251), dir: 0, name: "保安ロボット")
+1@mcd.gat,141,199,0	warp	6gate#mcd	2,2,1@mcd.gat,141,207	//59197 from_pos=(141, 199)
+1@mcd.gat,142,203,0	warp	7gate#mcd	2,2,1@mcd.gat,136,200	//59198 from_pos=(140, 205)
+1@mcd.gat,130,127,0	warp	8gate#mcd	2,2,1@mcd.gat,129,143	//59199 from_pos=(130, 126)
+1@mcd.gat,127,262,0	script	mob#mcd1	139,5,5,{/* 59200 */
+	hideonnpc "mob#mcd1";
+	//@spawn(type: BL_MOB, ID: 27430, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(111, 254), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 30504, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(109, 251), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 22265, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(108, 251), dir: 0, name: "保安ロボット")
 }
-1@mcd.gat,67,234,0	script	mob#2	139,{/* 59201 */}
-1@mcd.gat,33,192,0	script	mob#3	139,{/* 59202 */
-	hideonnpc "mob#3"; //79954
-	@spawn(type: BL_MOB, ID: 27253, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(22, 167), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 27201, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(26, 164), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 27186, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(25, 163), dir: 0, name: "保安ロボット")
+1@mcd.gat,67,234,0	script	mob#mcd2	139,{/* 59201 */}
+1@mcd.gat,33,192,0	script	mob#mcd3	139,{/* 59202 */
+	hideonnpc "mob#mcd3"; //79954
+	//@spawn(type: BL_MOB, ID: 27253, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(22, 167), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 27201, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(26, 164), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 27186, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(25, 163), dir: 0, name: "保安ロボット")
 }
-1@mcd.gat,75,59,0	script	mob#4	139,{/* 59203 */
-	hideonnpc "mob#4"; //79955
-	@spawn(type: BL_MOB, ID: 21437, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(89, 47), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 17058, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(94, 48), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 17348, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(94, 52), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 35791, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(98, 53), dir: 0, name: "保安ロボット")
+1@mcd.gat,75,59,0	script	mob#mcd4	139,{/* 59203 */
+	hideonnpc "mob#mcd4"; //79955
+	//@spawn(type: BL_MOB, ID: 21437, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(89, 47), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 17058, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(94, 48), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 17348, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(94, 52), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 35791, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(98, 53), dir: 0, name: "保安ロボット")
 }
-1@mcd.gat,109,33,0	script	mob#5	139,{/* 59204 */
-	hideonnpc "mob#5"; //79956
-	@spawn(type: BL_MOB, ID: 24535, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(126, 27), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 29116, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(129, 25), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 29448, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(243, 27), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 30419, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(240, 35), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 35269, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(245, 29), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 35745, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(247, 20), dir: 0, name: "保安ロボット")
+1@mcd.gat,109,33,0	script	mob#mcd5	139,{/* 59204 */
+	hideonnpc "mob#mcd5"; //79956
+	//@spawn(type: BL_MOB, ID: 24535, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(126, 27), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 29116, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(129, 25), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 29448, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(243, 27), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 30419, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(240, 35), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 35269, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(245, 29), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 35745, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(247, 20), dir: 0, name: "保安ロボット")
 }
-1@mcd.gat,133,49,0	script	mob#6	139,{/* 59205 */
-	hideonnpc "mob#6"; //79957
-	@spawn(type: BL_MOB, ID: 23347, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(165, 52), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 23953, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(163, 55), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 24644, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(165, 53), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 22786, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(167, 52), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 23937, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(168, 53), dir: 0, name: "保安ロボット")
+1@mcd.gat,133,49,0	script	mob#mcd6	139,{/* 59205 */
+	hideonnpc "mob#mcd6"; //79957
+	//@spawn(type: BL_MOB, ID: 23347, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(165, 52), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 23953, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(163, 55), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 24644, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(165, 53), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 22786, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(167, 52), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 23937, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(168, 53), dir: 0, name: "保安ロボット")
 }
-1@mcd.gat,204,74,0	script	mob#7	139,{/* 59206 */
-	hideonnpc "mob#7"; //79958
-	@spawn(type: BL_MOB, ID: 33319, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(223, 134), dir: 0, name: "ステップ")
-	@spawn(type: BL_MOB, ID: 32473, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(218, 136), dir: 0, name: "ステップ")
-	@spawn(type: BL_MOB, ID: 27527, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(230, 149), dir: 0, name: "ステップ")
-	@spawn(type: BL_MOB, ID: 25574, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(222, 149), dir: 0, name: "ステップ")
-	@spawn(type: BL_MOB, ID: 27691, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(230, 149), dir: 0, name: "ステップ")
-	@spawn(type: BL_MOB, ID: 19743, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(233, 149), dir: 0, name: "ステップ")
-	@spawn(type: BL_MOB, ID: 26983, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(236, 182), dir: 0, name: "ステップ")
-	@spawn(type: BL_MOB, ID: 32635, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(231, 192), dir: 0, name: "ステップ")
-	@spawn(type: BL_MOB, ID: 37526, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(230, 199), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 37545, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(228, 199), dir: 0, name: "保安ロボット")
+1@mcd.gat,204,74,0	script	mob#mcd7	139,{/* 59206 */
+	hideonnpc "mob#mcd7"; //79958
+	//@spawn(type: BL_MOB, ID: 33319, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(223, 134), dir: 0, name: "ステップ")
+	//@spawn(type: BL_MOB, ID: 32473, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(218, 136), dir: 0, name: "ステップ")
+	//@spawn(type: BL_MOB, ID: 27527, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(230, 149), dir: 0, name: "ステップ")
+	//@spawn(type: BL_MOB, ID: 25574, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(222, 149), dir: 0, name: "ステップ")
+	//@spawn(type: BL_MOB, ID: 27691, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(230, 149), dir: 0, name: "ステップ")
+	//@spawn(type: BL_MOB, ID: 19743, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(233, 149), dir: 0, name: "ステップ")
+	//@spawn(type: BL_MOB, ID: 26983, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(236, 182), dir: 0, name: "ステップ")
+	//@spawn(type: BL_MOB, ID: 32635, speed: 100, option: 0, view: 3125, pos: "1@mcd.gat"(231, 192), dir: 0, name: "ステップ")
+	//@spawn(type: BL_MOB, ID: 37526, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(230, 199), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 37545, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(228, 199), dir: 0, name: "保安ロボット")
 }
-1@mcd.gat,204,224,0	script	mob#8	139,{/* 59207 */
-	hideonnpc "mob#8"; //79959
-	@spawn(type: BL_MOB, ID: 14545, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(128, 232), dir: 2, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 39664, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(133, 232), dir: 4, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 33489, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(127, 239), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 33772, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(200, 199), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 33832, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(205, 200), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 33613, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(0, 0), dir: 0, name: "保安ロボット")
+1@mcd.gat,204,224,0	script	mob#mcd8	139,{/* 59207 */
+	hideonnpc "mob#mcd8"; //79959
+	//@spawn(type: BL_MOB, ID: 14545, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(128, 232), dir: 2, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 39664, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(133, 232), dir: 4, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 33489, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(127, 239), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 33772, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(200, 199), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 33832, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(205, 200), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 33613, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(0, 0), dir: 0, name: "保安ロボット")
 }
-1@mcd.gat,157,61,0	script	mob#9	139,{/* 59208 */
-	hideonnpc "mob#9"; //79960
-	@spawn(type: BL_MOB, ID: 45440, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(134, 69), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 47100, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(132, 68), dir: 0, name: "保安ロボット")
-	@spawn(type: BL_MOB, ID: 37776, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(132, 69), dir: 0, name: "保安ロボット")
+1@mcd.gat,157,61,0	script	mob#mcd9	139,{/* 59208 */
+	hideonnpc "mob#mcd9"; //79960
+	//@spawn(type: BL_MOB, ID: 45440, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(134, 69), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 47100, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(132, 68), dir: 0, name: "保安ロボット")
+	//@spawn(type: BL_MOB, ID: 37776, speed: 200, option: 0, view: 3128, pos: "1@mcd.gat"(132, 69), dir: 0, name: "保安ロボット")
 }
-1@mcd.gat,175,147,0	script	mob#10	139,{/* 59209 */}
+1@mcd.gat,175,147,0	script	mob#mcd10	139,{/* 59209 */}
 
 1@mcd.gat,120,224,5	script	チャールストン2号#0	10054,{/* 58968 */
 	cutin "nale04.bmp", 0;
@@ -1165,10 +1165,10 @@ OnKilled3:
 		mes "私の方で強制的に";
 		mes "システムの再稼働をしてみます。";
 		next;
-		select("少し考える:断る（^0000ff中間報酬なし^000000）:手伝う（^ff0000中間報酬あり^000000）")
+		//select("少し考える:断る（^0000ff中間報酬なし^000000）:手伝う（^ff0000中間報酬あり^000000）")
 		mes "‐あなたはどうするか考えた‐";
 		next;
-		select("少し考える:断る（^0000ff中間報酬なし^000000）:手伝う（^ff0000中間報酬あり^000000）")
+		//select("少し考える:断る（^0000ff中間報酬なし^000000）:手伝う（^ff0000中間報酬あり^000000）")
 		mes "[チャールストン1号]";
 		mes "本当ですか!?";
 		mes "ありがとうございます！";
@@ -1308,10 +1308,10 @@ OnKilled3:
 		mes "3個の発電機を";
 		mes "チェックしていただけませんか？";
 		next;
-		select("少し考える:断る（^0000ff中間報酬なし^000000）:手伝う（^ff0000中間報酬あり^000000）")
+		//select("少し考える:断る（^0000ff中間報酬なし^000000）:手伝う（^ff0000中間報酬あり^000000）")
 		mes "‐あなたはどうするか考えた‐";
 		next;
-		select("少し考える:断る（^0000ff中間報酬なし^000000）:手伝う（^ff0000中間報酬あり^000000）")
+		//select("少し考える:断る（^0000ff中間報酬なし^000000）:手伝う（^ff0000中間報酬あり^000000）")
 		mes "[チャールストン1号]";
 		mes "本当ですか！";
 		mes "ありがとうございます！";
@@ -1384,7 +1384,7 @@ OnKilled3:
 	}
 }
 1@mcd.gat,123,217,4	script	チャールストン1号#3	10053,{/* 59006 (hide)*/
-	else if(CHARLESTON_1QUE == 7) {
+	if(CHARLESTON_1QUE == 7) {
 		viewpoint 2, 86, 231, 8, 0xFF00FF00; //59006
 		viewpoint 2, 172, 196, 9, 0xFF00FF00; //59006
 		viewpoint 2, 126, 84, 10, 0xFF00FF00; //59006
@@ -1578,8 +1578,8 @@ OnKilled3:
 	mes "こんな工場、壊してやる!!";
 	close2;
 	cutin "dalle01.bmp", 255;
-	hideonnpc "6gate#1"; //59197
-	hideonnpc "7gate#1"; //59198
+	hideonnpc "6gate#mcd"; //59197
+	hideonnpc "7gate#mcd"; //59198
 	misceffect 377, "チャールストン2号#1"; //59007
 	end;
 //killed
@@ -1717,8 +1717,8 @@ hideoffnpc "ヴェ博士#2"; //59013
 	mes "向かいましょう！";
 	close2;
 	cutin "dalle01.bmp", 255;
-	hideoffnpc "6gate#1"; //59197
-	hideoffnpc "7gate#1"; //59198
+	hideoffnpc "6gate#mcd"; //59197
+	hideoffnpc "7gate#mcd"; //59198
 	hideonnpc "チャールストン1号#5"; //59012
 	hideonnpc "チャールストン2号#2"; //59011
 	end;
@@ -1762,7 +1762,7 @@ hideoffnpc "ヴェ博士#2"; //59013
 	next;
 	mes "[チャールストン1号]";
 	mes "これで……どう!?";
-	misceffect 90, "8gate#1"; //59199
+	misceffect 90, "8gate#mcd"; //59199
 	next;
 	cutin "nale01.bmp", 0;
 	mes "[チャールストン2号]";
@@ -1780,10 +1780,10 @@ hideoffnpc "ヴェ博士#2"; //59013
 	mes "3号機は貰った！";
 	close2;
 	cutin "dalle01.bmp", 255;
-	misceffect 35, "8gate#1"; //59199
+	misceffect 35, "8gate#mcd"; //59199
 	hideonnpc "チャールストン1号#61_00"; //59015
 	hideonnpc "チャールストン2号#31_00"; //59017
-	hideoffnpc "8gate#1"; //59199
+	hideoffnpc "8gate#mcd"; //59199
 	end;
 }
 1@mcd.gat,127,129,5	script	チャールストン2号#3	10054,{/* 59016 (hide)*/
@@ -1808,7 +1808,7 @@ hideoffnpc "ヴェ博士#2"; //59013
 1@mcd.gat,129,149,0	script	boss#2	139,{/* 59025 */}
 1@mcd.gat,120,150,0	script	ボス#23	139,{/* 59026 (hide)*/}
 1@mcd.gat,132,148,4	script	チャールストン1号#9	10053,{/* 59027 (hide)*/
-	{
+	if(1) {
 		cutin "dalle04.bmp", 2;
 		mes "[チャールストン1号]";
 		mes "データ損失率39%";
@@ -1948,6 +1948,7 @@ OnStart:
 1@mcd.gat,111,74,5	script	#研究日誌03	844,{/* 59214 */}
 1@mcd.gat,128,74,5	script	#研究日誌04	844,{/* 59215 */}
 
+/*
 ヴェ博士 : 来たか1号機よ。今、2号機とメインシステムが強制的にリンクしていて制御ができないようだ……。
 チャールストン1号 : エネルギーが切れればそのうち止まるのでは？
 ヴェ博士 : それが……エネルギーを注入したばかりで1か月程はもつ計算だ。このままでは工場はすべて破壊されてしまう。
@@ -2038,4 +2039,4 @@ OnStart:
 チャールストン2号 : ……3号機は私が頂く！
 チャールストン1号 : あの方向は……！　2号機は3号機を奪取するつもりのようです！
 チャールストン1号 : 2号機が3号機を奪取したら工場はひとたまりもありません！　急いで工場中央のコアに向かいましょう！
-
+*/
