@@ -143,8 +143,8 @@
 // ver_eju.gat
 ver_eju.gat,0,0,0,0	monster	偵察型ウェルスギア	3154,80,0,0,0
 ver_eju.gat,0,0,0,0	monster	掘削型ウェルスギア	3153,25,0,0,0
-// ver_conn.gat
-ver_conn.gat,0,0,0,0	monster	偵察型ウェルスギア	3154,5,30000,0,0
+// ver_tunn.gat
+ver_tunn.gat,0,0,0,0	monster	偵察型ウェルスギア	3154,5,30000,0,0
 // verus01.gat
 verus01.gat,0,0,0,0	monster	スモッグ	3247,30,0,0,0
 verus01.gat,0,0,0,0	monster	探査型ウェルスギアⅡ	3249,10,0,0,0
@@ -170,12 +170,298 @@ un_bunker.gat,0,0,0,0	monster	黒いきのこ	1084,1,0,0,0
 un_bunker.gat,0,0,0,0	monster	チョンチョン	1011,2,0,0,0
 
 
+prontera.gat,122,52,3	script	楽園団空間移動員#1	729,{
+	mes "[楽園団空間移動員]";
+	mes "この世界の全てが";
+	mes "初めての経験であるあなた！";
+	mes "是非、ここに来てみてください！";
+	mes "その名もズバリ!!";
+	mes "^ff0000楽園団^000000の登場です！";
+	next;
+	mes "[楽園団空間移動員]";
+	mes "現在、正式稼動に向けて";
+	mes "暫定オープン中です。";
+	mes "正式稼動時は混むことが";
+	mes "予想されますので興味ある方は";
+	mes "今すぐ^ff0000楽園団^000000へ";
+	mes "お越しください！";
+	next;
+	if(select("楽園団に行きたい","会話をやめる") == 2) {
+		mes "[楽園団空間移動員]";
+		mes "いつでもあなたのご参加、";
+		mes "お待ちしています！";
+		close;
+	}
+	mes "[楽園団空間移動員]";
+	mes "さぁ、楽園団に行ってみましょう！";
+	mes "しゅっぱーつ！";
+	close2;
+	warp "moc_para01.gat",31,14;
+	end;
+OnInit:
+	waitingroom "楽園団",0;
+	end;
+}
+
+moc_para01.gat,27,35,5	script	事務担当ライム#eden	952,{
+	cutin "laime_evenor01",2;
+	if(checkquest(117099) & 0x8 == 0) {
+		mes "[ライム]";
+		mes "夢とロマンスを追い求める";
+		mes "冒険者たちよ。";
+		mes "あなた達の楽園は";
+		mes "恋人の温もりや、";
+		mes "安らぎの子守唄でもない。";
+		mes "そう、ここにあるのです。";
+		next;
+		cutin "laime_evenor02",2;
+		mes "[ライム]";
+		mes "はじめまして。";
+		mes "私は楽園団の受付担当";
+		mes "^0000FFライム・イヴェノル^000000と申します。";
+		mes "気軽にライムとお呼び下さい。";
+		mes "^FF0000登録証^000000をお持ちでないようなので";
+		mes "楽園団について説明しますね。";
+		next;
+		cutin "laime_evenor03",2;
+		mes "[ライム]";
+		mes "楽園団では、";
+		mes "ミッドガルド中の困っている人達を";
+		mes "助ける目的で作られた機関であり、";
+		mes "彼らの苦情や問題などを";
+		mes "解決する業務を行う予定です。";
+		next;
+		mes "[ライム]";
+		mes "予定と言った通り、";
+		mes "まだ準備段階の状態なんです。";
+		mes "というのも、担当する人間が";
+		mes "まだ足りない状態で……";
+		next;
+		mes "[ライム]";
+		mes "とはいえこれから続々と";
+		mes "人を増やして便利になる予定です。";
+		mes "是非、今後にご期待下さい。";
+		mes "簡単ですが説明は以上です。";
+		next;
+		mes "[ライム]";
+		mes "ちなみに楽園団への登録は";
+		mes "簡単な登録手続きを済ませば、";
+		mes "誰でも楽園団のメンバーになれます。";
+		mes "楽園団に入会されますか？";
+		next;
+		if(select("はい","いいえ") == 2) {
+			cutin "laime_evenor04",2;
+			mes "[ライム]";
+			mes "ふむ……残念です。";
+			mes "もし気が変わりましたら";
+			mes "また、声をかけてください。";
+			close2;
+			cutin "laime_evenor04",255;
+			end;
+		}
+		cutin "laime_evenor01",2;
+		mes "[ライム]";
+		mes "分かりました。";
+		mes "入会をご希望ですね。";
+		mes "ではこちらに名前を書いてください。";
+		next;
+		mes "-差し出された用紙に名前を書いた‐";
+		next;
+		emotion 21;
+		cutin "laime_evenor02",2;
+		mes "[ライム]";
+		mes "ありがとうございます。";
+		mes "^3131FF" +strcharinfo(0)+ "^000000様ですね？";
+		mes "楽園団会員リストに";
+		mes "あなたのお名前を登録いたしました。";
+		mes "これで登録作業は完了です。";
+		mes "ようこそ、楽園団へ！";
+		next;
+		cutin "laime_evenor01",2;
+		mes "[ライム]";
+		mes "最後に注意事項ですが";
+		mes "お渡しした登録証がないと";
+		mes "メンバー認証が出来ませんので";
+		mes "再度、登録手続きからとなります。";
+		mes "失くさないように気をつけて";
+		mes "お持ち下さい。";
+		next;
+		if(checkitemblank() == 0) {
+			mes "[ライム]";
+			mes "あらあら……。";
+			mes "登録証を渡そうと思いましたが";
+			mes "アイテムの種類数が多いようです。";
+			mes "種類の数を減らしてから";
+			mes "また声をかけてください。";
+			close2;
+			cutin "laime_evenor04.bmp", 255;
+			end;
+		}
+		cutin "laime_evenor04",2;
+		mes "[ライム]";
+		mes "何せ登録者数が多いもので";
+		mes "一人一人の顔を憶えるのは";
+		mes "不可能ですからね……。";
+		mes "この登録証で、判別しています。";
+		getitem 6219,1;
+		setquest 117099;
+		compquest 117099;
+		next;
+		cutin "laime_evenor01",2;
+		mes "[ライム]";
+		mes "ところで……";
+		mes "楽園団に登録されたなら是非、";
+		mes "楽園団メンバー専用の扉をくぐり";
+		mes "左手のワープポータルを抜けた";
+		mes "部屋に行ってみてください。";
+		next;
+		mes "[ライム]";
+		mes "そこに現在のメンバーが";
+		mes "集まっているはずです。";
+		mes "他の部屋はまだいろいろ";
+		mes "準備中ですので解放されるまで";
+		mes "今しばらくお待ちください。";
+		close2;
+		cutin "laime_evenor01",255;
+		end;
+	}
+	if(countitem(6219) < 1) {	// 楽園団の証
+		mes "[ライム]";
+		mes "^ff0000楽園団の証^000000を";
+		mes "無くしてしまったんですか？";
+		mes "再発行はすぐに出来ますが、";
+		mes "今すぐ再発行しますか？";
+		next;
+		if(select("再発行してもらう","今はまだいい") == 2) {
+			cutin "laime_evenor01",2;
+			mes "[ライム]";
+			mes "荷物の整理が必要ですか？";
+			mes "再発行する際には";
+			mes "声をかけてください。";
+			close2;
+			cutin "laime_evenor04",255;
+			end;
+		}
+		if(checkitemblank() == 0) {
+			mes "[ライム]";
+			mes "あらあら……。";
+			mes "登録証を渡そうと思いましたが";
+			mes "アイテムの種類数が多いようです。";
+			mes "種類の数を減らしてから";
+			mes "また声をかけてください。";
+			close2;
+			cutin "laime_evenor04.bmp", 255;
+			end;
+		}
+		cutin "laime_evenor04", 2;
+		mes "[ライム]";
+		mes "はい、新しい登録証です。";
+		mes "今度は無くさないよう";
+		mes "気を付けてくださいね。";
+		getitem 6219, 1;
+		close2;
+		cutin "laime_evenor04",255;
+		end;
+	}
+	mes "[ライム]";
+	mes "夢とロマンスを追い求める";
+	mes "冒険者たちよ。";
+	mes "あなた達の楽園は";
+	mes "恋人の温もりや、";
+	mes "安らぎの子守唄でもない。";
+	mes "そう、ここにあるのです。";
+	next;
+	cutin "laime_evenor01",2;
+	mes "[ライム]";
+	mes "おや、" +strcharinfo(0)+ "様。";
+	mes "楽園団に登録されたなら是非、";
+	mes "楽園団メンバー専用の扉をくぐり";
+	mes "左手のワープポータルを抜けた";
+	mes "部屋に行ってみてください。";
+	next;
+	mes "[ライム]";
+	mes "そこに現在のメンバーが";
+	mes "集まっているはずです。";
+	mes "他の部屋はまだいろいろ";
+	mes "準備中ですので解放されるまで";
+	mes "今しばらくお待ちください。";
+	close2;
+	cutin "laime_evenor01",255;
+	end;
+}
+
+moc_para01.gat,30,10,0	warp	#eden_out		1,1,prontera.gat,119,52
+moc_para01.gat,48,16,0	warp	#warp_2_2f		1,1,moc_para01.gat,48,164
+moc_para01.gat,47,161,0	warp	#warp_2_1f		1,1,moc_para01.gat,47,18
+moc_para01.gat,107,12,0	warp	#warp_2_din_2	1,1,moc_para01.gat,47,36
+moc_para01.gat,100,27,0	warp	#warp_2_gym		1,1,moc_para01.gat,47,85
+moc_para01.gat,49,86,0	warp	#warp_2_pass_1	1,1,moc_para01.gat,103,27
+
+moc_para01.gat,47,38,0	script	#warp_2_pass	45,1,1,{
+	if(countitem(6219) < 1) {	// 楽園団の証
+		mes "‐扉に注意書きが書いてある‐";
+		mes "　";
+		mes "‐^FF0000この先は楽園団メンバー専用ルームに";
+		mes "　なっております。";
+		mes "　楽園団メンバーの方なら";
+		mes "　いつでもご利用頂けます^000000‐";
+		next;
+		mes "‐この扉を開けるためには";
+		mes "　^FF0000楽園団への登録^000000が";
+		mes "　必要なようだ……‐";
+		close;
+	}
+	warp "moc_para01.gat",106,14;
+	end;
+}
+
+moc_para01.gat,16,22,7	script	老冒険家#eden	900,{
+	mes "[老冒険家]";
+	mes "私はアドバイザーとして";
+	mes "ここに呼ばれたんだ。";
+	mes "冒険者の楽園となるような";
+	mes "施設にするにはどうしたら";
+	mes "いいかとライムから";
+	mes "相談される日々だよ。";
+	next;
+	mes "[老冒険家]";
+	mes "私の時代にはこんな施設、";
+	mes "存在すらしなかったからね。";
+	mes "そう考えると今の若い冒険者は";
+	mes "恵まれているね。";
+	close;
+}
+
+moc_para01.gat,20,35,5	script	事務補助ニデ#eden	814,{
+	mes "[ニデ]";
+	mes "私が楽園団に配属されて";
+	mes "まだ間もないと思っていたのですが、";
+	mes "よくよく考えてみると";
+	mes "もう配属されて半月ほど、";
+	mes "経過していたのですね……。";
+	next;
+	mes "[ニデ]";
+	mes "つい時間を忘れてしまう程、";
+	mes "仕事に追われる日々を送っていました。";
+	mes "準備中な上に人手が全然、";
+	mes "足りない状態ですからね……。";
+	next;
+	mes "[ニデ]";
+	mes "こんな状態じゃ正式稼動は";
+	mes "いつになることやらと";
+	mes "暗くなりがちですけど、";
+	mes "皆さんの元気な姿を見ていると";
+	mes "頑張ろうという気になるので";
+	mes "助かっています。";
+	close;
+}
+
 //====================================================================
 // ファンタスマゴリカ
 //====================================================================
-moc_para01.gat,31,14,0	script	#atnevt01	139,{
+moc_para01.gat,31,14,0	script	#atnevt01	139,3,3,{
 	if(VER_1QUE == 0 && countitem(6219) >= 1) {	// 楽園団の証
-		if((Job >= Job_RuneKnight && job <= Job_Rebellion) || (Job == Job_Summoner && BaseLevel >= 90)) {
+		if((Job >= Job_RuneKnight && Job <= Job_Rebellion) || (Job == Job_Summoner && BaseLevel >= 90)) {
 			cutin "laime_evenor01",2;
 			mes "[ライム]";
 			mes "そういえば……";
@@ -3497,7 +3783,7 @@ verus04.gat,144,193,3	script	イアン・アトナド#atnd09	10056,{
 		mes "[イアン・アトナド]";
 		mes "わかった。";
 		mes "では、行くとしよう。";
-		close;
+		close2;
 		cutin "verus_ian01",255;
 		warp "lhz_in01.gat",275,229;
 		end;
@@ -4338,12 +4624,17 @@ verus03.gat,127,145,3	script	機械の残骸#atnd01	10042,3,3,{/* 59262 */
 		close;
 	}
 	hideonnpc;
+	initnpctimer;
 	delitem 713,1;
 	getitem 6756,1;
 	mes "‐凝集されたエネルギーを採取した‐";
 	close;
 OnTouch:
 	misceffect 362;
+	end;
+OnTimer30000:
+	stopnpctimer;
+	hideoffnpc;
 	end;
 }
 verus03.gat,84,152,3	duplicate(機械の残骸#atnd01)	機械の残骸#atnd02	10042,3,3	/* 59263 */
@@ -4620,6 +4911,7 @@ verus02.gat,60,30,1	script	散らばった文書#e152a01	10043,{/* 59494 (hide)*/
 			close;
 		}
 		hideonnpc;
+		initnpctimer;
 		mes "‐乱雑に散らばった書類の中に";
 		mes "　小さな円盤状の物体を見つけた‐";
 		next;
@@ -4654,6 +4946,7 @@ verus02.gat,60,30,1	script	散らばった文書#e152a01	10043,{/* 59494 (hide)*/
 			close;
 		}
 		hideonnpc;
+		initnpctimer;
 		mes "‐乱雑に散らばった書類の中に";
 		mes "　大切そうに置かれた";
 		mes "　メモリーレコードを見つけた。";
@@ -4685,6 +4978,7 @@ verus02.gat,60,30,1	script	散らばった文書#e152a01	10043,{/* 59494 (hide)*/
 			close;
 		}
 		hideonnpc;
+		initnpctimer;
 		mes "‐乱雑に散らばった書類の中に";
 		mes "　メモリーレコードを見つけた‐";
 		getitem 6757,1;
@@ -4692,6 +4986,10 @@ verus02.gat,60,30,1	script	散らばった文書#e152a01	10043,{/* 59494 (hide)*/
 	}
 	mes "‐特に変わったものは見当たらない‐";
 	close;
+OnTimer30000:
+	stopnpctimer;
+	hideoffnpc;
+	end;
 }
 
 verus02.gat,178,32,3	duplicate(散らばった文書#e152a01)	散らばった文書#e152a02	10043	/* 59495 */
@@ -8335,6 +8633,24 @@ yuno_fild07.gat,211,179,5	script	発掘地案内人#atd07	868,{/* 60509 */
 }
 
 yuno_fild07.gat,216,157,5	script	案内員エリシャ#ep15_1bs	831,{/* 59884 */
+	if(VER_1QUE < 4) {
+		mes "[エリシャ]";
+		mes "私たちレッケンベル社は";
+		mes "楽園団と協約して";
+		mes "ファンタスマゴリカ発掘団を";
+		mes "支援しています。";
+		mes "今まで見る事の出来なかった";
+		mes "神秘の遺跡！";
+		next;
+		mes "[エリシャ]";
+		mes "ウェルスシティの発掘に";
+		mes "参加したいなら、今すぐ";
+		mes "楽園団にお問い合わせを！";
+		mes "なお、発掘団についての";
+		mes "詳しい話も楽園団にて";
+		mes "説明させて頂いております♪";
+		close;
+	}
 	mes "[エリシャ]";
 	mes "はぁい♪";
 	mes "このエレベーターの利用には";
@@ -9315,12 +9631,21 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes "私に声をかけて下さい。";
 		next;
 		mes "[マークイシャ]";
-		mes "あ……！";
-		mes strcharinfo(0)+ "様、お久しぶりです。";
-		mes "エクラージュでもお世話に";
-		mes "なったのに……。";
-		mes "まさか今回も迷惑を";
-		mes "かけてしまうとは……。";
+		if(ECL_2QUE == 28) {
+			mes "あ……！";
+			mes strcharinfo(0)+ "様、お久しぶりです。";
+			mes "エクラージュでもお世話に";
+			mes "なったのに……。";
+			mes "まさか今回も迷惑を";
+			mes "かけてしまうとは……。";
+		}
+		else {
+			mes "ふう……。";
+			mes strcharinfo(0)+ "様のお蔭で、";
+			mes "助かりました……。";
+			mes "本当にあいつはいつになったら";
+			mes "大人しくなるのかな……。";
+		}
 		emotion 15,"マークイシャ#ep15_1elb";	//59139
 		cutin "bu_mark2",2;
 		next;
@@ -9372,17 +9697,23 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		mes strcharinfo(0)+ "さん。";
 		mes "テューがご迷惑を";
 		mes "おかけしました。";
-		mes "そして、お久しぶりです。";
-		emotion 15,"マギスティン#ep15_1elb";	//59142
-		next;
-		cutin "bu_du5",2;
-		mes "[テューリアン]";
-		mes strcharinfo(0)+ "……!?";
-		mes "む、無論憶えてるぞ！";
-		mes "確か、エクラージュで";
-		mes "アレして、コレしたよな!!";
-		mes "ひ、久しぶりだな!!";
-		mes "わはははははははっ!!";
+		if(ECL_2QUE == 28) {
+			mes "そして、お久しぶりです。";
+			emotion 15,"マギスティン#ep15_1elb";	//59142
+			next;
+			cutin "bu_du5",2;
+			mes "[テューリアン]";
+			mes strcharinfo(0)+ "……!?";
+			mes "む、無論憶えてるぞ！";
+			mes "確か、エクラージュで";
+			mes "アレして、コレしたよな!!";
+			mes "ひ、久しぶりだな!!";
+			mes "わはははははははっ!!";
+		}
+		else {
+			mes "そして、ありがとうございます。";
+			emotion 15,"マギスティン#ep15_1elb";	//59142
+		}
 		next;
 		mes "[タマリン]";
 		mes "聞き覚えある名前だなと思ったら";
@@ -9396,10 +9727,15 @@ verus04.gat,119,220,3	script	案内員スカーレット#ep15	125,{/* 59390 */
 		next;
 		mes "[アルプオカート]";
 		mes "……すまない、迷惑をかけた。";
-		mes "そして久しぶりだな。";
-		mes "あれからまたオリバーヒルベルトの";
-		mes "コレクションが増えたんだ……。";
-		cutin "bu_alp4",2;
+		if(ECL_2QUE == 28) {
+			mes "そして久しぶりだな。";
+			mes "あれからまたオリバーヒルベルトの";
+			mes "コレクションが増えたんだ……。";
+			cutin "bu_alp4",2;
+		}
+		else {
+			cutin "bu_alp1.bmp", 2;
+		}
 		emotion 15,"アルプオカート#ep15_1el";	//59141
 		next;
 		mes "[タマリン]";
@@ -9860,9 +10196,17 @@ verus04.gat,117,219,0	script	アルプオカート#ep15_1el	615,{/* 59395 */
 	if(VER2_QUE < 3) {
 		mes "[アルプオカート]";
 		mes "発掘か……いい素材だ……。";
-		mes "そういえば、オリバーヒルベルトの";
-		mes "小説でも発掘に関する話が";
-		mes "あったような気がする……。";
+		if(ECL_2QUE == 28) {
+			mes "そういえば、オリバーヒルベルトの";
+			mes "小説でも発掘に関する話が";
+			mes "あったような気がする……。";
+		}
+		else {
+			mes "ここの風景を見ていると、";
+			mes "発掘を題材にした本が読みたくなる。";
+			mes "こう見えて、本を読むのは";
+			mes "割と好きなんだ。";
+		}
 		cutin "bu_alp4",2;
 		close2;
 		cutin "bu_alp4",255;
@@ -9973,8 +10317,15 @@ verus04.gat,117,220,3	script	マギスティン#ep15_1elb	612,{/* 59396 */
 		mes "[マギスティン]";
 		mes "ファンタスマゴリカという名前、";
 		mes "響きが良くて綺麗だと思いません？";
-		mes "でも、エクラージュも";
-		mes "響きが良くて、私は好きです。";
+		if(ECL_2QUE == 28) {
+			mes "でも、エクラージュも";
+			mes "響きが良くて、私は好きです。";
+		}
+		else {
+			mes "今はこんな感じですけど……";
+			mes "きっと当時はとても";
+			mes "素敵な風景だった気がします。";
+		}
 		cutin "bu_maggi2",2;
 		close2;
 		cutin "bu_maggi2",255;
@@ -12493,62 +12844,43 @@ verus01.gat,123,181,3	script	ベリティ#Warper	10078,{/* 59699 */
 }
 un_bunker.gat,100,96,3	script	マークイシャ#シェルター	616,{/* 59700 */
 	if(VER_1QUE == 29) {
-		cutin "bu_mark1",0;
-		mes "[マークイシャ]";
-		mes "おや、私たち以外にも";
-		mes "こんなところに人が……。";
-		mes "よく見たら";
-		mes strcharinfo(0)+ "様ではないですか。";
-		next;
-		mes "[マークイシャ]";
-		mes "そうだ、" +strcharinfo(0)+ "様。";
-		mes "ここでこんなものを";
-		mes "見つけたのですが……。";
-		next;
-		mes "[マークイシャ]";
-		mes "私にはこれが何かわかりませんが、";
-		mes strcharinfo(0)+ "様なら";
-		mes "何かの役に立つかもしれません。";
-		mes "お渡ししておきますね。";
-		next;
-		if(checkitemblank() == 0) {
+		if(ECL_2QUE == 28 || VER_2QUE >= 5) {
+			cutin "bu_mark1",0;
 			mes "[マークイシャ]";
-			mes "おや……。";
-			mes "渡そうとしましたが、";
-			mes "荷物が多いみたいですね。";
-			mes "種類数を減らしてから";
-			mes "声をかけてください。";
-			close2;
-			cutin "bu_mark1.bmp", 255;
-			end;
+			mes "おや、私たち以外にも";
+			mes "こんなところに人が……。";
+			mes "よく見たら";
+			mes strcharinfo(0)+ "様ではないですか。";
+			next;
+			mes "[マークイシャ]";
+			mes "そうだ、" +strcharinfo(0)+ "様。";
+			mes "ここでこんなものを";
+			mes "見つけたのですが……。";
+			next;
+			mes "[マークイシャ]";
+			mes "私にはこれが何かわかりませんが、";
+			mes strcharinfo(0)+ "様なら";
+			mes "何かの役に立つかもしれません。";
+			mes "お渡ししておきますね。";
 		}
-		getitem 6824,2;
-		mes "‐実験棟のメモリーレコードを";
-		mes "　手に入れた。";
-		mes "　団長アルクイエンの元へ戻ろう‐";
-		set VER_1QUE,30;
-		delquest 118208;
-		setquest 118209;
-		close2;
-		cutin "bu_mark1",255;
-		end;
-		
-		cutin "bu_mark1.bmp", 0;
-		mes "[マークイシャ]";
-		mes "おや、私たち以外にも";
-		mes "こんなところに人が……。";
-		mes "あなたもここの調査に来た";
-		mes "冒険者ですか？";
-		next;
-		mes "[マークイシャ]";
-		mes "そうだ、ここで";
-		mes "こんなものを見つけたのですが……。";
-		next;
-		mes "[マークイシャ]";
-		mes "私にはこれが何かわかりませんが、";
-		mes "あなたなら";
-		mes "何かの役に立つかもしれません。";
-		mes "お渡ししておきますね。";
+		else {
+			cutin "bu_mark1.bmp", 0;
+			mes "[マークイシャ]";
+			mes "おや、私たち以外にも";
+			mes "こんなところに人が……。";
+			mes "あなたもここの調査に来た";
+			mes "冒険者ですか？";
+			next;
+			mes "[マークイシャ]";
+			mes "そうだ、ここで";
+			mes "こんなものを見つけたのですが……。";
+			next;
+			mes "[マークイシャ]";
+			mes "私にはこれが何かわかりませんが、";
+			mes "あなたなら";
+			mes "何かの役に立つかもしれません。";
+			mes "お渡ししておきますね。";
+		}
 		next;
 		if(checkitemblank() == 0) {
 			mes "[マークイシャ]";
@@ -13020,6 +13352,7 @@ un_bunker.gat,12,207,5	script	ベリティ#ミスト	10078,{/* 59704 */
 		end;
 	}
 }
+
 un_bunker.gat,56,206,0	script	#myst_1	45,1,1,{/* 59705 */
 	if(VER2_QUE == 20) {
 		mes "‐鍵は開いているようだが";
@@ -13201,22 +13534,37 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		mes "さて、どうしましょうね。";
 		cutin "EP15_2_brt_5",2;
 		next;
-		mes "[アルプオカート]";
-		mes "オリバーヒルベルトの小説にも";
-		mes "主人公が閉じ込められる";
-		mes "話があった気がする……。";
-		mes "ただその時は友人が、";
-		mes "助けに来てくれたしな……。";
-		cutin "bu_alp2",2;
-		next;
-		mes "[ベリティ]";
-		mes "残念ながらその小説のように";
-		mes "助けに来てくれる人は";
-		mes "居ないでしょうね。";
-		mes "とりあえず、戻る扉は";
-		mes "封鎖されて通れないことは";
-		mes "確かよ。";
-		cutin "EP15_2_brt_4",2;
+		if(ECL_2QUE == 28) {
+			mes "[アルプオカート]";
+			mes "オリバーヒルベルトの小説にも";
+			mes "主人公が閉じ込められる";
+			mes "話があった気がする……。";
+			mes "ただその時は友人が、";
+			mes "助けに来てくれたしな……。";
+			cutin "bu_alp2",2;
+			next;
+			mes "[ベリティ]";
+			mes "残念ながらその小説のように";
+			mes "助けに来てくれる人は";
+			mes "居ないでしょうね。";
+			mes "とりあえず、戻る扉は";
+			mes "封鎖されて通れないことは";
+			mes "確かよ。";
+			cutin "EP15_2_brt_4",2;
+		}
+		else {
+			mes "[アルプオカート]";
+			mes "かなり頑丈に出来た";
+			mes "扉のようだな……。";
+			mes "びくともしない。";
+			cutin "bu_alp2.bmp", 2;
+			next;
+			mes "[ベリティ]";
+			mes "とりあえず、戻る扉は";
+			mes "封鎖されて通れないことは";
+			mes "確かなようね……。";
+			cutin "EP15_2_brt_4.bmp", 2;
+		}
 		next;
 		mes "[テューリアン]";
 		mes "そういえばお姉さん！";
@@ -13259,17 +13607,28 @@ un_myst.gat,100,190,3	script	テューリアン#ホール	628,{/* 59706 */
 		next;
 		mes "[アルプオカート]";
 		mes "こういう場合……";
-		mes "オリバーヒルベルトの";
-		mes "作品なら……。";
-		cutin "bu_alp2",2;
-		next;
-		mes "[ベリティ]";
-		mes "残念ながらこれは現実よ。";
-		mes "お話のように奇跡は";
-		mes "おこらないでしょうね……。";
-		mes "とりあえず、戻る扉は";
-		mes "封鎖されて通れないことだけは";
-		mes "確かよ。";
+		if(ECL_2QUE == 28) {
+			mes "オリバーヒルベルトの";
+			mes "作品なら……。";
+			cutin "bu_alp2",2;
+			next;
+			mes "[ベリティ]";
+			mes "残念ながらこれは現実よ。";
+			mes "お話のように奇跡は";
+			mes "おこらないでしょうね……。";
+			mes "とりあえず、戻る扉は";
+			mes "封鎖されて通れないことだけは";
+			mes "確かよ。";
+		}
+		else {
+			mes "冷静に動くことが大事だ……。";
+			cutin "bu_alp2",2;
+			next;
+			mes "[ベリティ]";
+			mes "とりあえず、戻る扉は";
+			mes "封鎖されて通れないことだけは";
+			mes "確かなようね……。";
+		}
 		cutin "EP15_2_brt_4",2;
 		next;
 		mes "[テューリアン]";
@@ -13317,6 +13676,7 @@ un_myst.gat,124,189,0	script	#m101	45,1,1,{/* 59707 */
 		mes "　これは……";
 		mes "　この気持ちは一体……？‐";
 		misceffect 334,"";
+		set '@dummy,sleep2(2000);
 		next;
 		mes "‐そんな気持ちと裏腹に";
 		mes "　扉は静かに開いた……‐";
@@ -13781,6 +14141,38 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 	mes "どうしましょう。";
 	mes "扉を開いて中に入りますか？";
 	next;
+	if(checkquest(11380) || checkquest(11379)) {
+		mes "[マークイシャ]";
+		mes "まだ疲れているようですね。";
+		mes "ちゃんと休んで元気になったら";
+		mes "中を調べにいきましょう。";
+		cutin "bu_mark1.bmp", 0;
+		next;
+		mes "[マークイシャ]";
+		mes "そういえばタマリンが";
+		mes "誰かが掘って作ったと思われる";
+		mes "出口を見つけました。";
+		mes "ここを通れば外に出られそうですよ。";
+		next;
+		if(select("外に出たい","止めておく") == 2) {
+			cutin "bu_mark2.bmp", 0;
+			mes "[マークイシャ]";
+			mes "そうですか。";
+			mes "外に出たい時は";
+			mes "いつでも声をかけて下さいね。";
+			close2;
+			cutin "bu_mark2.bmp", 255;
+			end;
+		}
+		cutin "bu_mark2.bmp", 0;
+		mes "[マークイシャ]";
+		mes "かなり暗いので気をつけて";
+		mes "進んでくださいね。";
+		close2;
+		cutin "bu_mark2.bmp", 255;
+		warp "verus01.gat",115,190;
+		end;
+	}
 	if(getonlinepartymember() < 1) {
 		mes "[マークイシャ]";
 		mes "パーティーを組んで";
@@ -13815,11 +14207,11 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 	case 2:
 		switch(mdenter("last_room")) {
 		case 0:	// エラーなし
-			setquest 11380;
+			//setquest 11380;
 			announce "メモリアルダンジョン[last_room] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
 			setquest 11379;
 			cutin "bu_mark1",255;
-			warp "1@uns.gat",144,36;
+			//warp "1@uns.gat",144,36;
 			end;
 		case 1:	// パーティー未加入
 			mes "[マークイシャ]";
@@ -14299,6 +14691,9 @@ un_bunker.gat,382,335,3	script	箱#e152p00	10043,{/* 59506 */}
 un_bunker.gat,87,167,3	script	机の下#e152p01	10043,{/* 59507 */
 	mes "‐特に変わったものは見当たらない‐";
 	close;
+mes "‐メモリーレコードは十分に集まった。";
+mes "　これ以上調べる必要はなさそうだ‐";
+close;
 }
 un_bunker.gat,316,243,3	script	机の下#e152p02	10043,{/* 59508 */}
 un_bunker.gat,103,175,3	script	机の下#e152p03	10043,{/* 59509 */}

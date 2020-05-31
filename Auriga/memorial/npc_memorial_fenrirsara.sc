@@ -6,7 +6,6 @@ quest
 9336,フェンリルとサラ入場時間制限,05:00,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 9337,フェンリルとサラ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 120150,フェンリルとサラ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-120155,フェンリルとサラ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 120165,フェンリルとサラ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 120170,フェンリルとサラ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 120195,フェンリルとサラ入場時間制限,3600,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -27,9 +26,9 @@ mob
 mobskill
 3190,サラの幻影＠ファイアーウォール,chase,18,10,1000,0,5000,yes,target,always,0,,,,,,
 3190,サラの幻影＠ファイアーウォール,attack,18,10,1000,0,5000,yes,target,always,0,,,,,,
-3190,サラの幻影＠ピアーシングアタック,attack,158,2,500,0,5000,yes,target,always,0,,,,,,6
-3190,サラの幻影＠ホーリーアタック,chase,189,5,500,0,5000,yes,target,always,,,,,,,18
-3190,サラの幻影＠ホーリーアタック,attack,189,5,1000,0,5000,yes,target,always,,,,,,,18
+3190,サラの幻影＠ピアーシングアタック,attack,158,2,500,0,5000,yes,target,always,0,,,,,,
+3190,サラの幻影＠ホーリーアタック,chase,189,5,500,0,5000,yes,target,always,,,,,,,
+3190,サラの幻影＠ホーリーアタック,attack,189,5,1000,0,5000,yes,target,always,,,,,,,
 3190,サラの幻影＠ワイドスリープ,idle,668,5,1000,0,10000,no,self,always,,,,,,,,
 3190,サラの幻影＠ワイドスリープ,chase,668,5,1000,0,10000,no,self,always,,,,,,,,
 3190,サラの幻影＠ワイドスリープ,attack,668,5,1000,0,10000,no,self,always,,,,,,,,
@@ -49,7 +48,7 @@ mobskill
 3199,MM_M_MUTANT_DRAGON＠メテオストーム,attack,83,10,10000,0,10000,no,target,always,0,,,,,,
 3200,MM_M_CHIMERA＠インビジブル,idle,353,1,10000,0,30000,yes,self,always,0,,,,,,
 3200,MM_M_CHIMERA＠インビジブル,attack,353,1,10000,0,30000,yes,self,always,0,,,,,,
-3200,MM_M_CHIMERA＠アースストレイン,attack,2216,5,10000,0,10000,no,target,always,0,,,,,,
+3200,MM_M_CHIMERA＠アースストレイン,attack,2216,1,10000,0,10000,no,target,always,0,,,,,,
 */
 
 dali02.gat,97,142,3	script	バーンハード博士#a1	865,{
@@ -132,7 +131,7 @@ dali02.gat,97,142,3	script	バーンハード博士#a1	865,{
 		close;
 	}
 	if(checkquest(9337)) {
-		if(checkquest(9337)) {
+		if(checkquest(120150) == 0) {
 			mes "[バーンハード博士]";
 			mes "おお、君か。";
 			mes "過去のグラストヘイムは";
@@ -165,7 +164,8 @@ dali02.gat,97,142,3	script	バーンハード博士#a1	865,{
 				set '@itemid,28385;
 				break;
 			case 3:
-				//
+				mes "[バーンハード博士]";
+				mes "そうか。";
 				close;
 			}
 			mes "[バーンハード博士]";
@@ -222,12 +222,17 @@ dali02.gat,97,142,3	script	バーンハード博士#a1	865,{
 		delquest 9337;
 		setquest 9337;
 		delquest 9337;
+		//custom
+		if(checkquest(120150) == 0) {
+			setquest 120150;
+			compquest 120150;
+		}
 		if('@itemid)
 			getitem '@itemid, 1;
 		close;
 	}
 	if(checkquest(9336)) {
-//		if(checkquest(9336)&2 && checkquest(120195)&2) {
+		if(checkquest(9336)&2 && checkquest(120195)&2) {
 			mes "[バーンハード博士]";
 			mes "次元移動機のエネルギー充填が";
 			mes "完了したようだ。";
@@ -243,10 +248,8 @@ dali02.gat,97,142,3	script	バーンハード博士#a1	865,{
 			mes "もちろん、報酬は弾むぞ。";
 			delquest 9336;
 			delquest 120195;
-			setquest 120155;
-			delquest 120155;
 			close;
-//		}
+		}
 		mes "[バーンハード博士]";
 		mes "次元の狭間を開くには";
 		mes "多くのエネルギーが必要になるから、";
@@ -756,8 +759,9 @@ OnStart:
 }
 
 1@glast.gat,359,294,4	script	フェンリル#glast_01	664,{
-	if(getnpctimer(1)) {
-		cutin "fenrir_a.bmp", 2;
+	if(getnpctimer(1) || getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		//未調査
+		cutin "fenrir_a", 2;
 		mes "[フェンリル]";
 		mes "!?　あなたは……？";
 		next;
@@ -767,21 +771,23 @@ OnStart:
 		mes "あなたはここで何をしているの？";
 		mes "ここは危険な場所よ。";
 		close2;
-		cutin "fenrir_a.bmp", 255;
+		cutin "fenrir_a", 255;
 		end;
 	}
-	mes "‐女性がいる‐";
-	next;
-	if(select("^0000FF会話を早める(ショートカット)^000000","^FF0000女性に話しかける^000000") == 1) {
-		mes "‐フェンリルについていこう‐";
-		close2;
-		hideonnpc getmdnpcname("フェンリル#glast_01");
-		hideonnpc getmdnpcname("#glast_event_3");
-		hideoffnpc getmdnpcname("#glast_move_01");
-		misceffect 6, getmdnpcname("#glast_move_01");
-		donpcevent getmdnpcname("callmon#fas")+"::OnStart1";
-		announce "‐フェンリルは南へ向かったようです。フェンリルについていこう！‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
-		end;
+	if(checkquest(120150)) {
+		mes "‐女性がいる‐";
+		next;
+		if(select("^0000FF会話を早める(ショートカット)^000000","^FF0000女性に話しかける^000000") == 1) {
+			mes "‐フェンリルについていこう‐";
+			close2;
+			hideonnpc getmdnpcname("フェンリル#glast_01");
+			hideonnpc getmdnpcname("#glast_event_3");
+			hideoffnpc getmdnpcname("#glast_move_01");
+			misceffect 6, getmdnpcname("#glast_move_01");
+			donpcevent getmdnpcname("callmon#fas")+"::OnStart1";
+			announce "‐フェンリルは南へ向かったようです。フェンリルについていこう！‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+			end;
+		}
 	}
 	initnpctimer;
 	unittalk "フェンリル : !?　あなたは……？";
@@ -818,7 +824,20 @@ OnTimer21000:
 	unittalk "フェンリル : 私の行く手を塞ぐ者へ鉄槌を！";
 	end;
 OnTimer22000:
-	unittalk "フェンリル : 倒してくれたのね。";
+	if(getmapmobs(getmdmapname("1@glast.gat"),getmdnpcname("フェンリル#glast_01")+ "::OnKilled") > 0) {
+		unittalk "フェンリル : はああぁぁ！　サンダーストーム!!!";
+		misceffect 30,getmdnpcname("#effect_glast_event01");
+		misceffect 30,getmdnpcname("#effect_glast_event02");
+		misceffect 30,getmdnpcname("#effect_glast_event03");
+		misceffect 30,getmdnpcname("#effect_glast_event04");
+		misceffect 30,getmdnpcname("#effect_glast_event05");
+		misceffect 30,getmdnpcname("#effect_glast_event06");
+		misceffect 30,getmdnpcname("#effect_glast_event07");
+		misceffect 30,getmdnpcname("#effect_glast_event08");
+		killmonster getmdmapname("1@glast.gat"),getmdnpcname("フェンリル#glast_01")+ "::OnKilled";
+	}
+	else
+		unittalk "フェンリル : 倒してくれたのね。";
 	end;
 OnTimer24000:
 	unittalk "フェンリル : ふぅ。何故こんなところにガリオンが……。";
@@ -887,24 +906,28 @@ OnKilled:
 }
 
 1@glast.gat,47,270,4	script	フェンリル#glast_03	664,{
-	cutin "fenrir_a.bmp", 2;
+	cutin "fenrir_a", 2;
 	mes "[フェンリル]";
 	mes "来てくれたのね、";
 	mes "ありがとう！";
 	close2;
-	cutin "fenrir_a.bmp", 255;
+	cutin "fenrir_a", 255;
 	end;
 }
 
 1@glast.gat,47,270,0	script	#glast_event_7	139,5,5,{
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		//未調査
+		end;
+	}
 	viewpoint 2, 1, 1, 0, 0xFFFF00;
 	hideonnpc getmdnpcname("#glast_event_7");
-	cutin "fenrir_a.bmp", 2;
+	cutin "fenrir_a", 2;
 	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_03")),"フェンリル : 来てくれたのね、ありがとう！";
 	set '@dummy,sleep2(2000);
 	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_03")),"フェンリル : 時間がないわ！　さあ、こっちよ！";
 	set '@dummy,sleep2(3000);
-	cutin "fenrir_a.bmp", 255;
+	cutin "fenrir_a", 255;
 	hideonnpc getmdnpcname("フェンリル#glast_03");
 	warp getmdmapname("1@glast.gat"),40,348;
 	end;
@@ -916,22 +939,28 @@ OnKilled:
 }
 
 1@glast.gat,44,357,0	script	#glast_event_9	139,3,3,{
-	mes "‐古びた剣がある。";
-	mes "　フェンリルの探し物だろうか？‐";
-	next;
-	if(select("^0000FF先を急ごう(ショートカット)^000000","^FF0000フェンリルに話しかける^000000") == 1) {
-		mes "‐先を急ぐ事にした‐";
-		close2;
-		hideonnpc getmdnpcname("#glast_event_9");
-		mapwarp getmdmapname("1@glast.gat"),getmdmapname("1@glast.gat"),199,333;
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		//未調査
 		end;
 	}
-	cutin "fenrir_a.bmp", 2;
+	if(checkquest(120150)) {
+		mes "‐古びた剣がある。";
+		mes "　フェンリルの探し物だろうか？‐";
+		next;
+		if(select("^0000FF先を急ごう(ショートカット)^000000","^FF0000フェンリルに話しかける^000000") == 1) {
+			mes "‐先を急ぐ事にした‐";
+			close2;
+			hideonnpc getmdnpcname("#glast_event_9");
+			mapwarp getmdmapname("1@glast.gat"),getmdmapname("1@glast.gat"),199,333;
+			end;
+		}
+	}
+	cutin "fenrir_a", 2;
 	mes "[フェンリル]";
 	mes "この剣……";
 	mes "とうとう見つけたわ！";
 	close2;
-	cutin "fenrir_a.bmp", 255;
+	cutin "fenrir_a", 255;
 	hideonnpc getmdnpcname("#glast_event_9");
 	initnpctimer;
 	unittalk getnpcid(0,getmdnpcname("フェンリル#glast_04")),"フェンリル : これがバルドルが使っていた剣、センチネルブリーズね……。";
@@ -999,9 +1028,15 @@ OnTimer3000:
 1@glast.gat,200,346,4	script	サラ・アイリン#glast_jp	10066,{}
 
 1@glast.gat,200,340,0	script	フェンリル#b	664,{
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		//未調査
+		end;
+	}
 	mes "‐フェンリルとサラが対峙している!‐";
+	if(checkquest(120150))
+		set '@str$,"^0000FF先に出口へ向かう(ショートカット)^000000";
 	next;
-	switch(select("^0000FF先に出口へ向かう(ショートカット)^000000","^FF0000戦闘を見届ける^000000","少し考える")) {
+	switch(select('@str$,"^FF0000戦闘を見届ける^000000","少し考える")) {
 	case 1:
 		hideonnpc getmdnpcname("フェンリル#b");
 		hideonnpc getmdnpcname("サラ・アイリン#glast_jp");
@@ -1148,6 +1183,10 @@ OnTimer3000:
 }
 
 1@glast.gat,199,205,0	script	#glast_time_q1	139,3,3,{
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		//未調査
+		end;
+	}
 	donpcevent getmdnpcname("callmon#fas")+"::OnStart2";
 	hideonnpc getmdnpcname("#glast_move_01");
 	hideoffnpc getmdnpcname("#glast_move_04");
@@ -1213,10 +1252,52 @@ OnTimer30000:
 	case 4: announce "サラ : 私が破壊してやる!!!!", 0x9, 0x00ebff, 0x0190, 20, 0, 0;	break;
 	}
 	end;
+OnTimer50000:
+	if('cnt == 4)
+		announce "‐10秒前‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	end;
+OnTimer55000:
+	if('cnt == 4)
+		announce "‐5秒前‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	end;
+OnTimer56000:
+	if('cnt == 4)
+		announce "‐4秒前‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	end;
+OnTimer57000:
+	if('cnt == 4)
+		announce "‐3秒前‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	end;
+OnTimer58000:
+	if('cnt == 4)
+		announce "‐2秒前‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	end;
+OnTimer59000:
+	if('cnt == 4)
+		announce "‐1秒前‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	end;
 OnTimer60000:
-	initnpctimer;
-	set 'cnt,'cnt+1;
-	announce "‐" +'cnt+ "分経過‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	if('cnt == 4) {
+		stopnpctimer getmdnpcname("#fas_chase_timer");
+		announce "‐5分経過。「サラの幻影」が魔力を失い、消滅しました‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+		hideoffnpc getmdnpcname("フェンリル#glast_11");
+		hideoffnpc getmdnpcname("#glast_move_05");
+	}
+	else {
+		initnpctimer;
+		set 'cnt,'cnt+1;
+		announce "‐" +'cnt+ "分経過‐", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	}
+	end;
+OnTimer62000:
+	announce "フェンリル : お待たせしました！　魔力を十分回復できました！", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	end;
+OnTimer64000:
+	announce "フェンリル : これよりみなさんを入口まで転送します！", 0x9, 0xffff00, 0x0190, 20, 0, 0;
+	end;
+OnTimer66000:
+	stopnpctimer;
+	mapwarp getmdmapname("1@glast.gat"),getmdmapname("1@glast.gat"),351,282;
 	end;
 }
 
@@ -1229,25 +1310,26 @@ OnTimer60000:
 		close;
 	announce "‐サラの魔力の影響が無くなった為、「レッドギガンテス」と「秘宝」が消滅しました‐", 0x9, 0xffff00, 0x190, 20, 0, 0;
 	stopnpctimer getmdnpcname("#glast_time_q1");
+	stopnpctimer getmdnpcname("#fas_chase_timer");
 	hideonnpc getmdnpcname("#glast_move_04");
 	hideoffnpc getmdnpcname("フェンリル#glast_11");
 	donpcevent getmdnpcname("サラの幻影#glast_50")+"::OnStart";
-	warp getmdmapname("1@glast.gat"),351,282;
+	mapwarp getmdmapname("1@glast.gat"),getmdmapname("1@glast.gat"),351,282;
 	end;
 }
 
 1@glast.gat,353,290,8	script	サラの幻影#glast_50	10066,{
-	cutin "sarah_hero3_2.bmp", 2;
+	cutin "sarah_hero3_2", 2;
 	mes "[サラ]";
 	mes "なかなかやるじゃない、フェンリル。";
 	mes "うまく逃げたわね。";
 	next;
-	cutin "sarah_hero3.bmp", 2;
+	cutin "sarah_hero3", 2;
 	mes "[サラ]";
 	mes "ふふ……";
 	mes "今日はここまでにしてあげるわ。";
 	close2;
-	cutin "sarah_hero3.bmp", 255;
+	cutin "sarah_hero3", 255;
 	end;
 OnStart:
 	initnpctimer;
@@ -1281,21 +1363,47 @@ OnTimer13000:
 }
 
 1@glast.gat,359,294,4	script	フェンリル#glast_11	664,{
-	if(checkquest(120155)){
-		cutin "fenrir_a.bmp", 2;
+	if(checkquest(9337)){
+		cutin "fenrir_a", 2;
 		mes "[フェンリル]";
 		mes "また、どこかでお会いできると";
 		mes "良いですね。";
 		close2;
-		cutin "fenrir_a.bmp", 255;
+		cutin "fenrir_a", 255;
 		end;
 	}
-	cutin "fenrir_a.bmp", 2;
+	cutin "fenrir_a", 2;
 	mes "[フェンリル]";
 	mes "ご無事で何よりです。";
 	mes "私の力が足りなかったばかりに";
 	mes "ご迷惑をおかけしました。";
 	next;
+	set '@time,getnpctimer(0,getmdnpcname("#glast_time_q1"))/1000;
+	set '@time,'@time + getvariableofnpc('cnt,getmdnpcname("#glast_time_q1")) * 60;
+	if('@time >= 300) {
+		mes "[フェンリル]";
+		mes "サラの幻影が消えた隙に";
+		mes "どうにかみなさんを";
+		mes "転送することができました。";
+		next;
+		mes "[フェンリル]";
+		mes "……さて。私はそろそろ行きます。";
+		mes "手伝っていただいて";
+		mes "ありがとうございました。";
+		next;
+		mes "[フェンリル]";
+		mes "また、どこかでお会いできると";
+		mes "良いですね。";
+		setquest 9337;	// state=1
+		compquest 9337;
+		//if(checkquest(120150) == 0) {
+		//	setquest 120150;
+		//	compquest 120150;
+		//}
+		close2;
+		cutin "fenrir_a", 255;
+		end;
+	}
 	if('flag == 0) {
 		set 'flag,1;
 		stopnpctimer getmdnpcname("#fas_effect1");
@@ -1372,17 +1480,15 @@ OnTimer13000:
 		mes "荷物の種類を減らしてから";
 		mes "また声をかけてください。";
 		close2;
-		cutin "fenrir_a.bmp", 255;
+		cutin "fenrir_a", 255;
 		end;
 	}
 	setquest 9337;
 	compquest 9337;
-	if(checkquest(120150) == 0) {
-		setquest 120150;
-		compquest 120150;
-	}
-	setquest 120155;
-	compquest 120155;
+	//if(checkquest(120150) == 0) {
+	//	setquest 120150;
+	//	compquest 120150;
+	//}
 	getexp 3000000,0,1;
 	getexp 0,1500000,0;
 	getitem 6803,1;
@@ -1391,7 +1497,7 @@ OnTimer13000:
 		compquest 120170;
 	}
 	close2;
-	cutin "fenrir_a.bmp", 255;
+	cutin "fenrir_a", 255;
 	end;
 }
 
@@ -1453,8 +1559,8 @@ OnTimer5000:
 	hideonnpc;
 	misceffect 10;
 	for(set '@i,0; '@i<getarraysize('@gain); set '@i,'@i+1) {
-		set '@xs,'@x+rand(5)-2;
-		set '@ys,'@y+rand(5)-2;
+		set '@xs,'@x+rand(3)-1;
+		set '@ys,'@y+rand(3)-1;
 		if(rand(1000) < '@rate['@i])
 			dropitem '@map$,'@xs,'@ys,'@gain['@i],('@i==0? getmapusers('@map$): 1),0;
 	}
@@ -1619,7 +1725,7 @@ OnKilled:
 	end;
 }
 
-1@glast.gat,359,197,0	script	#fas_gimmick_5	139,5,5,{
+1@glast.gat,359,197,0	script	#fas_gimmick_5	139,15,2,{
 	hideonnpc;
 	set '@map$,getmdmapname("1@glast.gat");
 	set '@label$,getmdnpcname("#fas_gimmick_5")+"::OnKilled";
@@ -1736,6 +1842,7 @@ OnKilled:
 	mes "‐サラの幻影と戦おうと身構えると";
 	mes "　幻影もこちらに気付いたようだ‐";
 	close2;
+	hideonnpc getmdnpcname("サラの幻影#ex_battle");
 	donpcevent getmdnpcname("#ex_battle_sara")+"::OnStart";
 	end;
 }
@@ -1743,14 +1850,104 @@ OnKilled:
 1@glast.gat,200,346,0	script	#ex_battle_sara	139,{
 OnStart:
 	sleep 3000;
-	hideonnpc getmdnpcname("サラの幻影#ex_battle");
-	monster getmdmapname("1@glast.gat"),200,346,"サラの幻影#1",3190,1,getmdnpcname("#ex_battle_sara")+"::OnKilled";
+	initnpctimer;
+	set 'mob_id,callmonster(getmdmapname("1@glast.gat"),200,346,"サラの幻影#1",3190,getmdnpcname("#ex_battle_sara")+"::OnKilled");
+	end;
+OnTimer40000:
+	if(getmobhp('mob_id) <= 0) {
+		stopnpctimer;
+		end;
+	}
+	initnpctimer;
+	set '@map$,getmdmapname("1@glast.gat");
+	set '@label$,getmdnpcname("#ex_battle_sara")+"::OnKilled2";
+	killmonster '@map$,'@label$;
+	areamonster '@map$,183,327,215,333,"機動の双斧ギガンテス",3192,4,'@label$;
+	sleep 3000;
+	set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob_id);
+	switch(rand(5)) {
+	case 0:
+		mobuseskillpos 'mob_id,85,5,'@x-7,'@y,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x+7,'@y,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x,'@y+7,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x,'@y-7,0,0;	// ロードオブヴァーミリオン
+		end;
+	case 1:
+		mobuseskillpos 'mob_id,85,5,'@x-7,'@y,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x+7,'@y,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x,'@y+7,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x,'@y-7,0,0;	// ロードオブヴァーミリオン
+		sleep 5000;
+		mobuseskill 'mob_id,85,10,0,0,0,1;	// ロードオブヴァーミリオン
+		end;
+	case 2:
+		mobuseskillpos 'mob_id,85,5,'@x-7,'@y,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x+7,'@y,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x,'@y+7,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x,'@y-7,0,0;	// ロードオブヴァーミリオン
+		sleep 1000;
+		mobuseskillpos 'mob_id,21,5,'@x-6,'@y-6,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x-6,'@y+6,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x+6,'@y-6,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x+6,'@y+6,0,0;	// サンダーストーム
+		sleep 2000;
+		mobuseskillpos 'mob_id,21,5,'@x-3,'@y,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x+3,'@y,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x,'@y+3,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x,'@y-3,0,0;	// サンダーストーム
+		end;
+	case 3:
+		mobuseskillpos 'mob_id,85,5,'@x-7,'@y,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x+7,'@y,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x,'@y+7,0,0;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,85,5,'@x,'@y-7,0,0;	// ロードオブヴァーミリオン
+		sleep 1000;
+		mobuseskillpos 'mob_id,21,5,'@x-6,'@y-6,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x-6,'@y+6,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x+6,'@y-6,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x+6,'@y+6,0,0;	// サンダーストーム
+		sleep 3000;
+		mobuseskill 'mob_id,85,10,0,0,0,1;	// ロードオブヴァーミリオン
+		mobuseskillpos 'mob_id,21,5,'@x-3,'@y,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x+3,'@y,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x,'@y+3,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x,'@y-3,0,0;	// サンダーストーム
+		end;
+	case 4:
+		mobuseskillpos 'mob_id,21,10,'@x-rand(2,8),'@y,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,10,'@x,'@y+rand(2,8),0,0;	// サンダーストーム
+		sleep 500;
+		mobuseskillpos 'mob_id,21,10,'@x+rand(2,8),'@y,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,10,'@x,'@y-rand(2,8),0,0;	// サンダーストーム
+		sleep 500;
+		mobuseskillpos 'mob_id,21,5,'@x-9,'@y-9,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x-10,'@y+10,0,0;	// サンダーストーム
+		sleep 2500;
+		set '@r,rand(4,6);
+		mobuseskillpos 'mob_id,21,5,'@x-'@r,'@y-'@r,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x-'@r,'@y+'@r,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x+'@r,'@y-'@r,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,5,'@x+'@r,'@y+'@r,0,0;	// サンダーストーム
+		sleep 2000;
+		mobuseskillpos 'mob_id,21,10,'@x-rand(1,10),'@y,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,10,'@x-11,'@y-11,0,0;	// サンダーストーム
+		sleep 500;
+		mobuseskillpos 'mob_id,21,10,'@x,'@y+rand(1,10),0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,10,'@x,'@y-3,0,0;	// サンダーストーム
+		sleep 500;
+		mobuseskillpos 'mob_id,21,10,'@x+rand(2,6),'@y,0,0;	// サンダーストーム
+		mobuseskillpos 'mob_id,21,10,'@x-12,'@y-2,0,0;	// サンダーストーム
+		end;
+	}
 	end;
 OnKilled:
+	stopnpctimer;
 	hideoffnpc getmdnpcname("#glast_move_06");
 	misceffect 6,getmdnpcname("#glast_move_06");
 	sleep 1000;
 	misceffect 317,getmdnpcname("#glast_move_06");
+	end;
+OnKilled2:
 	end;
 }
 
