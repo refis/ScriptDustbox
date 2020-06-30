@@ -1,10 +1,10 @@
 moro_cav.gat,41,73,4	script	守護者ニーズヘッグ#epeo	510,{/* 65386 */
-	{
+	if(!checkquest(201720) || !checkquest(201725)) {	// ビオスの島、モルスの洞窟未クリア
+		cutin "ep14_nyd01.bmp", 2;
 		mes "[ニーズヘッグ]";
 		mes "あの黄色い種と赤い花、";
 		mes "それにこの樹……。";
 		mes "モロクは何を考えているのでしょう。";
-		cutin "ep14_nyd01.bmp", 2;
 		next;
 		mes "‐^ff0000魔神殿に入るには";
 		mes "　ビオスの島、モルスの洞窟を";
@@ -120,7 +120,7 @@ OnInit:
 	end;
 }
 moro_cav.gat,45,75,0	script	世界樹に似た樹#eom_gate	844,{/* 65387 */
-	{
+	if(!checkquest(201720) || !checkquest(201725)) {	// ビオスの島、モルスの洞窟未クリア
 		mes "[ニーズヘッグ]";
 		mes "あの黄色い種と赤い花、";
 		mes "それにこの樹……。";
@@ -210,7 +210,7 @@ OnInit:
 	waitingroom "魔神殿入場", 0; //65387
 	end;
 }
-1@eom_jp.gat,45,75,0	script	世界樹に似た樹#eom_jp_0	844,{/* 78251 */
+1@eom_jp.gat,45,75,0	script	世界樹に似た樹#eom_jp	844,{/* 78251 */
 	delquest 7598;
 	delquest 73730;
 	setquest 7598; //state=1

@@ -175,6 +175,8 @@ OnInit:
 
 1@rev.gat,27,181,0	script	#RZメモリアルスタート	139,1,1,{/* 75055 (hide)*/
 OnTouch:
+	if(getpartyleader(getcharid(1)) != strcharinfo(0))
+		end;
 	hideonnpc "#RZメモリアルスタート"; //70777
 	hideoffnpc "#RZイベント_1"; //70780
 	misceffect 1, "#RZメモリアルスタート"; //70777
@@ -202,6 +204,8 @@ OnStop:
 }
 1@rev.gat,31,181,0	script	#RZイベント_1	139,5,5,{/* 75058 (hide)*/
 OnTouch:
+	if(getpartyleader(getcharid(1)) != strcharinfo(0))
+		end;
 	set '@dummy,sleep2(2000);
 	announce "モロク : 誰だ？　私の休息の邪魔をするのは。", 0x9, 0x00ebff, 0x190, 12, 0, 0;
 	set '@dummy,sleep2(2000);
@@ -216,18 +220,20 @@ OnTouch:
 }
 1@rev.gat,31,181,0	script	#RZイベント_1-2	139,5,5,{/* 75059 */
 OnTouch:
+	if(getpartyleader(getcharid(1)) != strcharinfo(0))
+		end;
 	mes "‐後方から声が聞こえる？";
 	mes "　誰か来たのだろうか‐";
 	next;
 	set 'menu,select(
-		(? "イグリド": "？？？"),
-		(? "キド": "？？？"),
-		(? "ヒシエ": "？？？"),
+		(ASH_6QUE == 14 || ASH_6QUE == 15? "イグリド": "？？？"),
+		(ASH_5QUE >= 31? "キド": "？？？"),
+		(ECL_3QUE >= 33? "ヒシエ": "？？？"),
 		"誰もいない");
 	hideonnpc "#RZイベント_1"; //70780
 	switch('menu) {
 	case 1:
-		if() {
+		if(ASH_6QUE < 14 || ASH_6QUE > 15) {
 			mes "‐声が聞こえた気がしたが、";
 			mes "　気のせいだったようだ‐";
 			mes "‐^ff0000三ヶ国への報告書クエスト^000000を";
@@ -239,7 +245,28 @@ OnTouch:
 		hideoffnpc "教官長イグリド#入口"; //70783
 		break;
 	case 2:
+		if(ASH_5QUE < 31) {
+			mes "‐声が聞こえた気がしたが、";
+			mes "　気のせいだったようだ‐";
+			mes "‐^ff0000魔王モロク追跡クエスト^000000を";
+			mes "　クリアしていないため";
+			mes "　仲間はかけつけませんでした‐";
+			donpcevent getmdnpcname("#モルス入口スタート")+ "::OnStart";
+			close;
+		}
 		hideoffnpc "キド#入口"; //70783
+		break;
+	case 3:
+		if(ECL_3QUE < 33) {
+			mes "‐声が聞こえた気がしたが、";
+			mes "　気のせいだったようだ‐";
+			mes "‐^ff0000エクラージュの王クエスト^000000を";
+			mes "　クリアしていないため";
+			mes "　仲間はかけつけませんでした‐";
+			donpcevent getmdnpcname("#モルス入口スタート")+ "::OnStart";
+			close;
+		}
+		hideoffnpc "ヒシエ#入口"; //70783
 		break;
 	}
 	mes "‐仲間がかけつけた-";
@@ -255,6 +282,10 @@ OnStart:
 		announce "キド : モロクはどこにいる？", 0x9, 0x00ebff, 0x190, 12, 0, 0;
 		sleep 3000;
 	}
+	else if('menu == 3) {
+		announce "ヒシエ : モロクはどこだ？", 0x9, 0x00ebff, 0x190, 12, 0, 0;
+		sleep 3000;
+	}
 	announce "死神アンク : そんなにモロク様に会いたいですか？　ククク。", 0x9, 0x00ebff, 0x190, 12, 0, 0;
 	sleep 3000;
 	announce "死神アンク : ここはモロク様がご自身の精神で支配されている空間。", 0x9, 0x00ebff, 0x190, 12, 0, 0;
@@ -267,6 +298,10 @@ OnStart:
 	}
 	else if('menu == 2) {
 		announce "キド : ほう。", 0x9, 0x00ebff, 0x190, 12, 0, 0;
+		sleep 3000;
+	}
+	else if('menu == 3) {
+		announce "ヒシエ : ふむ。", 0x9, 0x00ebff, 0x190, 12, 0, 0;
 		sleep 3000;
 	}
 	announce "死神アンク : あなた方の思い通りにはいかないでしょう。", 0x1, 0x00ebff, 0x190, 12, 0, 0;
@@ -331,7 +366,7 @@ OnTimer6100:
 }
 1@rev.gat,25,183,5	script	キド#入口	884,{/* 75062 (hide)*/
 	mes "[キド]";
-	// 未調査
+	mes "敵が来るぞ！";
 	close;
 OnStart:
 	initnpctimer;
@@ -348,7 +383,26 @@ OnTimer6100:
 	unittalk "キド : さっそく敵さんのお出ましか。気を付けろ！";
 	end;
 }
-1@rev.gat,25,183,5	script	ヒシエ#入口	623,{/* 75063 (hide)*/}
+1@rev.gat,25,183,5	script	ヒシエ#入口	623,{/* 75063 (hide)*/
+	mes "[ヒシエ]";
+	mes "敵が来ているぞ！";
+	mes "注意しろ！";
+	close;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer100:
+	unittalk "ヒシエ : 間に合ったか。";
+	end;
+OnTimer3100:
+	donpcevent "#モルス入口スタート::OnStart";
+	unittalk "ヒシエ : そろそろカルの魔力が心配なんだ。急ぐ必要がある。俺も一緒に行かせてくれ。";
+	end;
+OnTimer6100:
+	stopnpctimer;
+	unittalk "ヒシエ : 敵が来ているな。油断するなよ！";
+	end;
+}
 1@rev.gat,60,184,5	script	教官長イグリド#入口奥	751,{/* 75064 (hide)*/
 	mes "[イグリド]";
 	mes "死神みてえな顔しやがって！";
@@ -359,7 +413,11 @@ OnTimer6100:
 	mes "目の前の敵に集中しろ。";
 	close;
 }
-1@rev.gat,60,184,5	script	ヒシエ#入口奥	623,{/* 75066 (hide)*/}
+1@rev.gat,60,184,5	script	ヒシエ#入口奥	623,{/* 75066 (hide)*/
+	mes "[ヒシエ]";
+	mes "得体のしれない奴だ。気を付けよう。";
+	close;
+}
 1@rev.gat,64,181,4	script	死神アンク#RZイベント_2	3029,{/* 75067 (hide)*/}
 1@rev.gat,34,126,4	script	死神アンク#RZイベント_3	3029,{/* 75068 (hide)*/
 	end;
