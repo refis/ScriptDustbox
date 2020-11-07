@@ -1,19 +1,8 @@
-ice_d03_i.gat,0,0,0,0	monster	怒りのゲイズティ		3792,80,5000,0,0
-ice_d03_i.gat,0,0,0,0	monster	怒りのスノウアー		3793,80,5000,0,0
-ice_d03_i.gat,0,0,0,0	monster	怒りのアイスタイタン	3794,80,5000,0,0
-ice_d03_i.gat,0,0,0,0	monster	鋭いアイシクル			3795,20,5000,0,0
-//ice_d03_i.gat,0,0,0,0	monster	覚醒クトルラナックス	3796,1,5000,0,0
-
-//鋭いアイシクル,怒りのゲイズティ,怒りのアイスタイタン,計10体ランダム沸き
-
-//@spawn(type: BL_MOB, ID: 10690, speed: 300, option: 0, view: 3792, pos: "ice_d03_i.gat"(152, 41), dir: 2, name: "怒りのゲイズティ")
-//@spawn(type: BL_MOB, ID: 10748, speed: 250, option: 0, view: 3793, pos: "ice_d03_i.gat"(141, 49), dir: 2, name: "怒りのスノウアー")
-//@spawn(type: BL_MOB, ID: 10882, speed: 280, option: 0, view: 3794, pos: "ice_d03_i.gat"(117, 44), dir: 2, name: "怒りのアイスタイタン")
-//@spawn(type: BL_MOB, ID: 10915, speed: 2000, option: 0, view: 3795, pos: "ice_d03_i.gat"(163, 46), dir: 0, name: "鋭いアイシクル")
-
 ice_dun02.gat,150,11,1	script	#tofrozen	10237,{
 	if(BaseLevel < 170) {
-		//TODO
+		//未調査
+		mes "- 精神がぼんやりしている。";
+		mes "  Base170以上で入場可能です。 -";
 		close;
 	}
 	mes "- 精神がぼんやりしている。";
@@ -351,7 +340,41 @@ ice_d03_i.gat,155,43,3	script	ジェイス#frozen01	10035,{
 			mes "躾けてくれ。";
 			break;
 		case 3:
-			// TODO
+			mes "ブリド・レポート！";
+			mes "鋭いアイシクルの巻！";
+			next;
+			mes "[ブリド]";
+			mes "私の調査によると、";
+			mes "この氷の洞窟にある";
+			mes "固い氷柱にさえ";
+			mes "深い事情があるんだから……";
+			next;
+			menu "氷柱にどんな事情が？",-;
+			mes "[ブリド]";
+			mes "どんな事情があるのかって？";
+			mes "それはな……うううう。";
+			next;
+			mes "^ff0000短い唸り声をあげながら";
+			mes "しばらくの間、何かを";
+			mes "深く考え込んだブリドは";
+			mes "やがて冷静な一言を吐き出した。^000000";
+			next;
+			mes "[ブリド]";
+			mes "氷柱はただの氷柱だよ。";
+			mes "そこに事情もクソもあるもんか。";
+			mes "そうだろ？";
+			next;
+			mes "[ジェイス]";
+			mes "ブリド、お前やっと正気に戻ったのか。";
+			next;
+			mes "[ブリド]";
+			mes strcharinfo(0);
+			mes "君は、事情の無い奴らに";
+			mes "事情が出来るよう、助けてくれ。";
+			next;
+			mes "[ジェイス]";
+			mes "一瞬でも正気に戻ったと思った";
+			mes "私がバカだった。";
 			break;
 		}
 		next;
@@ -804,7 +827,7 @@ ice_d03_i.gat,0,0,0	script	#IllFrozen	-1,{
 OnInit:
 	setarray 'moblist,3792,3794,3795;
 	for(set '@i,0;'@i<10;set '@i,'@i+1)
-		monster "ice_d03_i.gat",0,0,"--ja--",'moblist[rand(3)],1,"::OnSummon";
+		areamonster "ice_d03_i.gat",0,0,0,0,"--ja--",'moblist[rand(3)],1,"::OnSummon";
 	end;
 
 OnSummon:
@@ -813,11 +836,11 @@ OnSummon:
 		unittalk 'mob,"狂乱した冒険者 : あなたは魔物に惑わされている！僕が救ってあげましょう！";
 	}
 	else {
-		monster "ice_d03_i.gat",0,0,"--ja--",'moblist[rand(3)],1,"::OnSummon";
+		areamonster "ice_d03_i.gat",0,0,0,0,"--ja--",'moblist[rand(3)],1,"::OnSummon";
 	}
 	end;
 OnKilled:
 	set 'mob,0;
-	monster "ice_d03_i.gat",0,0,"--ja--",'moblist[rand(3)],1,"::OnSummon";
+	areamonster "ice_d03_i.gat",0,0,0,0,"--ja--",'moblist[rand(3)],1,"::OnSummon";
 	end;
 }

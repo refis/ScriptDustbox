@@ -1,43 +1,34 @@
-pay_d03_i.gat,100,75,60,40	monster	怒りの九尾狐	3759,10,5000,0,0
-pay_d03_i.gat,100,75,60,40	monster	怨恨のムナック	3760,15,5000,0,0
-pay_d03_i.gat,100,75,60,40	monster	怨恨のボンゴン	3761,15,5000,0,0
-pay_d03_i.gat,100,75,60,40	monster	怨恨のソヒー	3762,16,5000,0,0
+pay_d03_i.gat,100,75,60,40	monster	怒りの九尾狐		3759,10,5000,0,0
+pay_d03_i.gat,100,75,60,40	monster	怨恨のムナック		3760,15,5000,0,0
+pay_d03_i.gat,100,75,60,40	monster	怨恨のボンゴン		3761,15,5000,0,0
+pay_d03_i.gat,100,75,60,40	monster	怨恨のソヒー		3762,16,5000,0,0
 pay_d03_i.gat,100,75,60,40	monster	怨恨のAスケルトン	3763,10,5000,0,0
-pay_d03_i.gat,100,200,60,60	monster	怒りの九尾狐	3759,10,5000,0,0
-pay_d03_i.gat,100,200,60,60	monster	怨恨のムナック	3760,16,5000,0,0
-pay_d03_i.gat,100,200,60,60	monster	怨恨のボンゴン	3761,16,5000,0,0
-pay_d03_i.gat,100,200,60,60	monster	怨恨のソヒー	3762,16,5000,0,0
+pay_d03_i.gat,100,200,60,60	monster	怒りの九尾狐		3759,10,5000,0,0
+pay_d03_i.gat,100,200,60,60	monster	怨恨のムナック		3760,16,5000,0,0
+pay_d03_i.gat,100,200,60,60	monster	怨恨のボンゴン		3761,16,5000,0,0
+pay_d03_i.gat,100,200,60,60	monster	怨恨のソヒー		3762,16,5000,0,0
 pay_d03_i.gat,100,200,60,60	monster	怨恨のAスケルトン	3763,10,5000,0,0
-pay_d03_i.gat,210,220,60,40	monster	怒りの九尾狐	3759,10,5000,0,0
-pay_d03_i.gat,210,220,60,40	monster	怨恨のムナック	3760,15,5000,0,0
-pay_d03_i.gat,210,220,60,40	monster	怨恨のボンゴン	3761,16,5000,0,0
-pay_d03_i.gat,210,220,60,40	monster	怨恨のソヒー	3762,16,5000,0,0
+pay_d03_i.gat,210,220,60,40	monster	怒りの九尾狐		3759,10,5000,0,0
+pay_d03_i.gat,210,220,60,40	monster	怨恨のムナック		3760,15,5000,0,0
+pay_d03_i.gat,210,220,60,40	monster	怨恨のボンゴン		3761,16,5000,0,0
+pay_d03_i.gat,210,220,60,40	monster	怨恨のソヒー		3762,16,5000,0,0
 pay_d03_i.gat,210,220,60,40	monster	怨恨のAスケルトン	3763,10,5000,0,0
-pay_d03_i.gat,0,0,0,0	monster	怒りの九尾狐	3759,20,5000,0,0
-pay_d03_i.gat,0,0,0,0	monster	怨恨のムナック	3760,32,5000,0,0
-pay_d03_i.gat,0,0,0,0	monster	怨恨のボンゴン	3761,32,5000,0,0
-pay_d03_i.gat,0,0,0,0	monster	怨恨のソヒー	3762,32,5000,0,0
+pay_d03_i.gat,0,0,0,0	monster	怒りの九尾狐		3759,20,5000,0,0
+pay_d03_i.gat,0,0,0,0	monster	怨恨のムナック		3760,32,5000,0,0
+pay_d03_i.gat,0,0,0,0	monster	怨恨のボンゴン		3761,32,5000,0,0
+pay_d03_i.gat,0,0,0,0	monster	怨恨のソヒー		3762,32,5000,0,0
 pay_d03_i.gat,0,0,0,0	monster	怨恨のAスケルトン	3763,20,5000,0,0
-pay_d03_i.gat,154,112,0,0	monster	ウィスパー	1185,1,1800000,0,1
-pay_d03_i.gat,161,117,0,0	monster	ウィスパー	1185,1,1800000,0,1
-pay_d03_i.gat,81,61,0,0		monster	ウィスパー	1185,1,1800000,0,1
-pay_d03_i.gat,84,63,0,0		monster	ウィスパー	1185,1,1800000,0,1
-pay_d03_i.gat,228,61,4,4	monster	赤い草		1078,1,600000,300000,1
-pay_d03_i.gat,138,42,4,4	monster	青い草		1079,1,600000,300000,1
-pay_d03_i.gat,120,186,4,4	monster	緑色草		1080,1,600000,300000,1
-pay_d03_i.gat,88,35,4,4		monster	黄色草		1081,1,600000,300000,1
+pay_d03_i.gat,154,112,0,0	monster	ウィスパー		1185,1,1800000,0,1
+pay_d03_i.gat,161,117,0,0	monster	ウィスパー		1185,1,1800000,0,1
+pay_d03_i.gat,81,61,0,0		monster	ウィスパー		1185,1,1800000,0,1
+pay_d03_i.gat,84,63,0,0		monster	ウィスパー		1185,1,1800000,0,1
+pay_d03_i.gat,228,61,4,4	monster	赤い草			1078,1,600000,300000,1
+pay_d03_i.gat,138,42,4,4	monster	青い草			1079,1,600000,300000,1
+pay_d03_i.gat,120,186,4,4	monster	緑色草			1080,1,600000,300000,1
+pay_d03_i.gat,88,35,4,4		monster	黄色草			1081,1,600000,300000,1
+pay_d03_i.gat,0,0,0,0		monster	怒りの月夜花	3758,1,3600000,25200000,1
 
-//@spawn(type:,BL_MOB,ID:,9028,speed:,80,option:,0,view:,3759,pos:,pay_d03_i.gat,(210,171),dir:,0,name:,怒りの九尾狐,)
-//@spawn(type:,BL_MOB,ID:,9058,speed:,80,option:,0,view:,3760,pos:,pay_d03_i.gat,(189,240),dir:,0,name:,怨恨のムナック,)
-//@spawn(type:,BL_MOB,ID:,9084,speed:,80,option:,0,view:,3761,pos:,pay_d03_i.gat,(37,153),dir:,0,name:,怨恨のボンゴン,)
-//@spawn(type:,BL_MOB,ID:,9093,speed:,80,option:,0,view:,3762,pos:,pay_d03_i.gat,(238,217),dir:,0,name:,怨恨のソヒー,)
-//@spawn(type:,BL_MOB,ID:,9128,speed:,300,option:,0,view:,3763,pos:,pay_d03_i.gat,(61,129),dir:,0,name:,怨恨のAスケルトン,)
-//@spawn(type:,BL_MOB,ID:,63825,speed:,140,option:,0,view:,3764,pos:,pay_d03_i.gat,(94,188),dir:,3,name:,真理の魔法使い,)
-
-//ランダム沸き討伐で真理の魔法使い出現
-//怒りの九尾狐,怨恨のムナック,怨恨のボンゴン
-
-payon.gat,164,229,5	script	元老サンユル#ilp01	78,{/* 59894 */
+payon.gat,164,229,5	script	元老サンユル#ilp01	78,{
 	if(BaseLevel < 170) {
 		mes "[サンユル]";
 		mes "何か怪しい事が";
@@ -131,7 +122,7 @@ payon.gat,164,229,5	script	元老サンユル#ilp01	78,{/* 59894 */
 		mes "[ジャギョム]";
 		mes "その学士に会って";
 		mes "事情を聴いてみるのもいい。";
-		setquest 7776; //state=1
+		setquest 7776;
 		set IL_MOON_QUE,1;
 		next;
 		mes "- 学士のところに";
@@ -163,8 +154,6 @@ payon.gat,164,229,5	script	元老サンユル#ilp01	78,{/* 59894 */
 		mes "[ジャギョム]";
 		mes "その学士に会って";
 		mes "事情を聴いてみるのもいい。";
-		setquest 7776; //state=1
-		set IL_MOON_QUE,1;
 		next;
 		mes "- 学士のところに";
 		mes "  向かいますか？ -";
@@ -178,16 +167,15 @@ payon.gat,164,229,5	script	元老サンユル#ilp01	78,{/* 59894 */
 		warp "pay_arche.gat",48,133;
 		end;
 	}
-	else {
-		mes "[サンユル]";
-		mes "大したことなければいいが。";
-		mes "うん？裏山にある洞窟の話だ。 ";
-		mes "そこで起きている事のせいで";
-		mes "色々悩みが多くて困っている。";
-		close;
-	}
+	mes "[サンユル]";
+	mes "大したことなければいいが。";
+	mes "うん？裏山にある洞窟の話だ。 ";
+	mes "そこで起きている事のせいで";
+	mes "色々悩みが多くて困っている。";
+	close;
 }
-payon.gat,167,229,3	script	元老ジャギョム#ilp02	901,{/* 59895 */
+
+payon.gat,167,229,3	script	元老ジャギョム#ilp02	901,{
 	if(IL_MOON_QUE == 0) {
 		mes "[ジャギョム]";
 		mes "まずはムヒョンを待つことにしよう。";
@@ -202,17 +190,16 @@ payon.gat,167,229,3	script	元老ジャギョム#ilp02	901,{/* 59895 */
 		mes "行方を聞いてみたらいい。";
 		close;
 	}
-	else {
-		mes "[ジャギョム]";
-		mes "やはりこれからのことは";
-		mes "若い者たちに任すべきだな。";
-		mes "年寄の出る幕ではない。";
-		close;
-	}
+	mes "[ジャギョム]";
+	mes "やはりこれからのことは";
+	mes "若い者たちに任すべきだな。";
+	mes "年寄の出る幕ではない。";
+	close;
 }
-pay_arche.gat,48,137,3	script	青年学士#ilp03	92,{/* 59896 */
+
+pay_arche.gat,48,137,3	script	青年学士#ilp03	92,{
 	if(IL_MOON_QUE == 0) {
-		unittalk "青年学士 : どうして出てこないんだ……";
+		unittalk "青年学士 : どうして出てこないんだ……",1;
 		end;
 	}
 	else if(IL_MOON_QUE == 1) {
@@ -259,14 +246,14 @@ pay_arche.gat,48,137,3	script	青年学士#ilp03	92,{/* 59896 */
 		next;
 		mes "[青年学士]";
 		mes "何事もなければいいですが…";
-		cloakoffnpc "ムヒョン#ilp04"; //59897
-		cloakoffnpc "兵士シンジュウヒ#ilp05"; //59898
+		cloakoffnpc "ムヒョン#ilp04";
+		cloakoffnpc "兵士シンジュウヒ#ilp05";
 		set '@dummy,sleep2(2000);
-		donpcevent "青年学士#ilp03::OnTalk1";
+		unittalk "青年学士 : 出て来ました！無事みたいです！",1;
 		set '@dummy,sleep2(2000);
-		donpcevent "ムヒョン#ilp04::OnTalk1";
+		unittalk getnpcid(0,"ムヒョン#ilp04"),"ムヒョン : ああ！もうやめる！浄化なんかやめたぁぁぁ!!",1;
 		set '@dummy,sleep2(100);
-		donpcevent "兵士シンジュウヒ#ilp05::OnTalk1";
+		unittalk getnpcid(0,"兵士シンジュウヒ#ilp05"),"兵士シンジュウヒ : ……。",1;
 		next;
 		mes "[ムヒョン]";
 		mes "あれ、ホドニ？";
@@ -282,9 +269,9 @@ pay_arche.gat,48,137,3	script	青年学士#ilp03	92,{/* 59896 */
 		mes "ホドニに心配してもらう";
 		mes "筋合いはないから。";
 		set '@dummy,sleep2(2000);
-		donpcevent "兵士シンジュウヒ#ilp05::OnTalk2";
+		unittalk getnpcid(0,"兵士シンジュウヒ#ilp05"),"兵士シンジュウヒ : 適当にやってろ。",1;
 		set '@dummy,sleep2(100);
-		donpcevent "青年学士#ilp03::OnTalk2";
+		unittalk "青年学士 : ちょっと、酷くないか。",1;
 		next;
 		mes "[ムヒョン]";
 		mes "あ！私もうこれやめた。";
@@ -292,15 +279,15 @@ pay_arche.gat,48,137,3	script	青年学士#ilp03	92,{/* 59896 */
 		mes "代わりに伝えておいて！";
 		mes "それじゃあバイバイ！";
 		next;
-		cloakonnpc "ムヒョン#ilp04"; //59897
+		cloakonnpc "ムヒョン#ilp04";
 		mes "[青年学士]";
 		mes "……詳しい話は";
 		mes "何もしないで";
 		mes "行ってしまいましたね。";
 		set '@dummy,sleep2(1000);
-		donpcevent "青年学士#ilp03::OnTalk2";
+		unittalk getnpcid(0,"兵士シンジュウヒ#ilp05"),"兵士シンジュウヒ : ふう、それでは私もこれで失礼する。一旦ムヒョンを追うから、元老たちに伝えてくれ。",1;
 		set '@dummy,sleep2(1000);
-		cloakonnpc "兵士シンジュウヒ#ilp05"; //59898
+		cloakonnpc "兵士シンジュウヒ#ilp05";
 		next;
 		mes "[青年学士]";
 		mes "うわあ！ジュウヒまで！";
@@ -312,7 +299,7 @@ pay_arche.gat,48,137,3	script	青年学士#ilp03	92,{/* 59896 */
 		mes "[青年学士]";
 		mes "ムヒョンは多分^4d4dffフェイヨン離宮^000000へ向かったと思います。";
 		mes "一緒に行きませんか？";
-		chgquest 7776,7777; //state=1
+		chgquest 7776,7777;
 		set IL_MOON_QUE,2;
 		next;
 		if(select("一緒に行く","別々に行く") == 2) {
@@ -379,44 +366,24 @@ pay_arche.gat,48,137,3	script	青年学士#ilp03	92,{/* 59896 */
 		warp "pay_dun03.gat",145,43;
 		end;
 	}
-OnTalk1:
-	unittalk "青年学士 : 出て来ました！無事みたいです！";
-	end;
-OnTalk2:
-	unittalk "青年学士 : ちょっと、酷くないか。";
-	end;
 }
-pay_arche.gat,46,135,5	script	ムヒョン#ilp04	644,{/* 59897 (cloaking)*/
-	end;
-OnTalk1:
-	unittalk "ムヒョン : ああ！もうやめる！浄化なんかやめたぁぁぁ!!";
+
+pay_arche.gat,46,135,5	script	ムヒョン#ilp04	644,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-pay_arche.gat,44,133,7	script	兵士シンジュウヒ#ilp05	708,{/* 59898 (cloaking)*/
-	end;
-OnTalk1:
-	unittalk "兵士シンジュウヒ : ……。";
-	end;
-OnTalk2:
-	unittalk "兵士シンジュウヒ : 適当にやってろ。";
-	end;
-OnTalk3:
-	unittalk "兵士シンジュウヒ : ふう、それでは私もこれで失礼する。一旦ムヒョンを追うから、元老たちに伝えてくれ。";
+
+pay_arche.gat,44,133,7	script	兵士シンジュウヒ#ilp05	708,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-payon.gat,103,322,4	script	フェイヨン兵士 #ilp06	708,{/* 59899 */
-	if(IL_MOON_QUE < 2) {
-		mes "[兵士]";
-		mes "ここはフェイヨン離宮です。";
-		close;
-	}
-	else if(IL_MOON_QUE == 2) {
+
+payon.gat,103,322,4	script	フェイヨン兵士 #ilp06	708,{
+	if(IL_MOON_QUE == 2) {
 		mes "[ジュウヒ]";
 		mes "前に洞窟の前で見た";
 		mes "冒険者じゃないか。";
@@ -424,9 +391,12 @@ payon.gat,103,322,4	script	フェイヨン兵士 #ilp06	708,{/* 59899 */
 		mes "中に入ってみろ。";
 		close;
 	}
+	mes "[兵士]";
+	mes "ここはフェイヨン離宮です。";
+	close;
 }
 
-payon_in03.gat,33,95,3	script	ムヒョン#ilp07	644,{/* 59900 */
+payon_in03.gat,33,95,3	script	ムヒョン#ilp07	644,{
 	if(IL_MOON_QUE < 2) {
 		mes "[ムヒョン]";
 		mes "イェジョル先生を探しに来たなら";
@@ -434,40 +404,40 @@ payon_in03.gat,33,95,3	script	ムヒョン#ilp07	644,{/* 59900 */
 		close;
 	}
 	else if(IL_MOON_QUE == 2) {
-		unittalk "ムヒョン : だからいくら話しても私はもうやりません！";
+		unittalk "ムヒョン : だからいくら話しても私はもうやりません！",1;
 		set '@dummy,sleep2(3000);
-		unittalk "ムヒョン : これでもう三回目ですよ。もうこの悪夢とは関わりたくないです。";
+		unittalk "ムヒョン : これでもう三回目ですよ。もうこの悪夢とは関わりたくないです。",1;
 		set '@dummy,sleep2(100);
-		unittalk getcharid(3),strcharinfo(0)+ " : 悪夢？";
+		unittalk getcharid(3),strcharinfo(0)+ " : 悪夢？",1;
 		set '@dummy,sleep2(100);
-		donpcevent "青年学士#ilp08::OnTalk1";
+		unittalk getnpcid(0,"青年学士#ilp08"),"青年学士 : 悪夢？",1;
 		set '@dummy,sleep2(3000);
-		unittalk "ムヒョン : 狐の悪夢だよ。そこに九尾狐と月夜花がいたんだ。";
+		unittalk "ムヒョン : 狐の悪夢だよ。そこに九尾狐と月夜花がいたんだ。",1;
 		set '@dummy,sleep2(2000);
-		unittalk "ムヒョン : とても酷い内容だった。二度とあんな経験をしたくない。";
+		unittalk "ムヒョン : とても酷い内容だった。二度とあんな経験をしたくない。",1;
 		set '@dummy,sleep2(3000);
-		donpcevent "ジャギョム#ilp09::OnTalk1";
+		unittalk getnpcid(0,"ジャギョム#ilp09"),"ジャギョム : だけど君がやらなければ誰がそれを浄化するんだ？",1;
 		set '@dummy,sleep2(2000);
-		donpcevent "ジャギョム#ilp09::OnTalk2";
+		unittalk getnpcid(0,"ジャギョム#ilp09"),"ジャギョム : みんな出来ないと辞めていった。それでもムヒョン君は三回もやったじゃないか。",1;
 		set '@dummy,sleep2(2000);
-		unittalk "ムヒョン : それがですね、今回は嫌な夢で終わるだけではなかったんですよ。";
+		unittalk "ムヒョン : それがですね、今回は嫌な夢で終わるだけではなかったんですよ。",1;
 		set '@dummy,sleep2(2000);
-		unittalk "ムヒョン : 今までは狐玉に込められた悪夢の気を浄化すると、嫌な夢を見ていただけだったのに……";
+		unittalk "ムヒョン : 今までは狐玉に込められた悪夢の気を浄化すると、嫌な夢を見ていただけだったのに……",1;
 		set '@dummy,sleep2(3000);
-		donpcevent "青年学士#ilp08::OnTalk2";
+		unittalk getnpcid(0,"青年学士#ilp08"),"青年学士 : 今回は何が違うんですか？",1;
 		set '@dummy,sleep2(2000);
-		unittalk "ムヒョン : ……";
+		unittalk "ムヒョン : ……",1;
 		set '@dummy,sleep2(2000);
-		unittalk "ムヒョン : 夢と現実の境界が崩れるのではと不安を感じた。";
+		unittalk "ムヒョン : 夢と現実の境界が崩れるのではと不安を感じた。",1;
 		set '@dummy,sleep2(3000);
-		donpcevent "ジャギョム#ilp09::OnTalk3";
+		unittalk getnpcid(0,"ジャギョム#ilp09"),"ジャギョム : ……それは何の話だ！今まではただ九尾狐の怨念を鎮めるだけで良かったじゃないか。",1;
 		set '@dummy,sleep2(3000);
-		donpcevent "ジャギョム#ilp09::OnTalk4";
+		unittalk getnpcid(0,"ジャギョム#ilp09"),"ジャギョム : いったい洞窟で何を見たんだ？",1;
 		set '@dummy,sleep2(2000);
-		unittalk "ムヒョン : 私が言葉でいくら説明するより、直接見た方が良いと思いますよ。";
+		unittalk "ムヒョン : 私が言葉でいくら説明するより、直接見た方が良いと思いますよ。",1;
 		set '@dummy,sleep2(2000);
-		unittalk "ムヒョン : どうせなら強い方がいいです。今いらっしゃっている冒険者の人くらい。";
-		chgquest 7777,7778; //state=1
+		unittalk "ムヒョン : どうせなら強い方がいいです。今いらっしゃっている冒険者の人くらい。",1;
+		chgquest 7777,7778;
 		set IL_MOON_QUE,3;
 		end;
 	}
@@ -567,7 +537,7 @@ payon_in03.gat,33,95,3	script	ムヒョン#ilp07	644,{/* 59900 */
 		mes "丁度、先ほど浄化しようとしていた";
 		mes "狐の魂があるので、準備ができましたら";
 		mes "いつでも教えて下さい。";
-		chgquest 7778,7779; //state=1
+		chgquest 7778,7779;
 		set IL_MOON_QUE,4;
 		close;
 	}
@@ -594,99 +564,99 @@ payon_in03.gat,33,95,3	script	ムヒョン#ilp07	644,{/* 59900 */
 		mes "心の扉を開いて";
 		mes "受け入れなければなりません。";
 		close2;
-		npctalk "ムヒョン : 見よ、聞きなさい、彷徨う魂よ";
+		unittalk "ムヒョン : 見よ、聞きなさい、彷徨う魂よ",1;
 		set '@dummy,sleep2(100);
-		misceffect 389, "ムヒョン#ilp07"; //59900
-		misceffect 513, "ムヒョン#ilp07"; //59900
+		misceffect 389, "ムヒョン#ilp07";
+		misceffect 513, "ムヒョン#ilp07";
 		set '@dummy,sleep2(2500);
-		npctalk "ムヒョン : 三途の川の向こうを見ろ。";
+		unittalk "ムヒョン : 三途の川の向こうを見ろ。",1;
 		set '@dummy,sleep2(100);
-		misceffect 402, "ムヒョン#ilp07"; //59900
-		misceffect 458, "ムヒョン#ilp07"; //59900
+		misceffect 402, "ムヒョン#ilp07";
+		misceffect 458, "ムヒョン#ilp07";
 		set '@dummy,sleep2(400);
-		cloakoffnpc "#狐魂ilp10"; //59903
+		cloakoffnpc "#狐魂ilp10";
 		set '@dummy,sleep2(500);
-		cloakoffnpc "#狐魂ilp11"; //59904
+		cloakoffnpc "#狐魂ilp11";
 		set '@dummy,sleep2(500);
-		cloakoffnpc "#狐魂ilp12"; //59905
+		cloakoffnpc "#狐魂ilp12";
 		set '@dummy,sleep2(500);
-		cloakoffnpc "#狐魂ilp13"; //59906
+		cloakoffnpc "#狐魂ilp13";
 		set '@dummy,sleep2(500);
-		misceffect 368, "#狐魂ilp10"; //59903
-		misceffect 368, "#狐魂ilp11"; //59904
-		misceffect 368, "#狐魂ilp12"; //59905
-		misceffect 368, "#狐魂ilp13"; //59906
-		misceffect 458, "#狐魂ilp10"; //59903
-		misceffect 458, "#狐魂ilp11"; //59904
-		misceffect 458, "#狐魂ilp12"; //59905
-		misceffect 458, "#狐魂ilp13"; //59906
-		npctalk "ムヒョン : 見るな、聞くな、悔しい魂よ。";
-		misceffect 475,""; //self
-		misceffect 458, "#狐魂ilp10"; //59903
-		misceffect 458, "#狐魂ilp11"; //59904
-		misceffect 458, "#狐魂ilp12"; //59905
-		misceffect 458, "#狐魂ilp13"; //59906
-		npctalk "狐魂 : 死ね","#狐魂ilp10";
+		misceffect 368, "#狐魂ilp10";
+		misceffect 368, "#狐魂ilp11";
+		misceffect 368, "#狐魂ilp12";
+		misceffect 368, "#狐魂ilp13";
+		misceffect 458, "#狐魂ilp10";
+		misceffect 458, "#狐魂ilp11";
+		misceffect 458, "#狐魂ilp12";
+		misceffect 458, "#狐魂ilp13";
+		unittalk "ムヒョン : 見るな、聞くな、悔しい魂よ。",1;
+		misceffect 475,"";
+		misceffect 458, "#狐魂ilp10";
+		misceffect 458, "#狐魂ilp11";
+		misceffect 458, "#狐魂ilp12";
+		misceffect 458, "#狐魂ilp13";
+		unittalk getnpcid(0,"#狐魂ilp10"),"狐魂 : 死ね",1;
 		set '@dummy,sleep2(1000);
-		misceffect 480,""; //self
-		misceffect 458, "#狐魂ilp10"; //59903
-		misceffect 458, "#狐魂ilp11"; //59904
-		misceffect 458, "#狐魂ilp12"; //59905
-		misceffect 458, "#狐魂ilp13"; //59906
-		npctalk "狐魂 : 死ね","#狐魂ilp11";
-		npctalk "ムヒョン : この世から背を向け";
+		misceffect 480,"";
+		misceffect 458, "#狐魂ilp10";
+		misceffect 458, "#狐魂ilp11";
+		misceffect 458, "#狐魂ilp12";
+		misceffect 458, "#狐魂ilp13";
+		unittalk getnpcid(0,"#狐魂ilp11"),"狐魂 : 死ね";
+		unittalk "ムヒョン : この世から背を向け",1;
 		set '@dummy,sleep2(100);
-		misceffect 484,""; //self
-		misceffect 458, "#狐魂ilp10"; //59903
-		misceffect 458, "#狐魂ilp11"; //59904
-		misceffect 458, "#狐魂ilp12"; //59905
-		misceffect 458, "#狐魂ilp13"; //59906
-		npctalk "狐魂 : 死ね","#狐魂ilp12";
+		misceffect 484,"";
+		misceffect 458, "#狐魂ilp10";
+		misceffect 458, "#狐魂ilp11";
+		misceffect 458, "#狐魂ilp12";
+		misceffect 458, "#狐魂ilp13";
+		unittalk getnpcid(0,"#狐魂ilp12"),"狐魂 : 死ね",1;
 		set '@dummy,sleep2(1500);
-		misceffect 899, "ムヒョン#ilp07"; //59900
+		misceffect 899, "ムヒョン#ilp07";
 		set '@dummy,sleep2(100);
-		npctalk "狐魂 : 死ね","#狐魂ilp13";
+		unittalk getnpcid(0,"#狐魂ilp13"),"狐魂 : 死ね",1;
 		set '@dummy,sleep2(1000);
-		npctalk "ムヒョン : 重いものはここに置いて";
+		unittalk "ムヒョン : 重いものはここに置いて",1;
 		set '@dummy,sleep2(100);
-		misceffect 692, "#狐魂ilp10"; //59903
-		misceffect 692, "#狐魂ilp11"; //59904
-		misceffect 692, "#狐魂ilp12"; //59905
-		misceffect 692, "#狐魂ilp13"; //59906
-		npctalk "狐魂 : 死ね！！","#狐魂ilp10";
-		npctalk "狐魂 : 死ね！！","#狐魂ilp11";
-		npctalk "狐魂 : 死ね！！","#狐魂ilp12";
-		npctalk "狐魂 : 死ね！！","#狐魂ilp13";
+		misceffect 692, "#狐魂ilp10";
+		misceffect 692, "#狐魂ilp11";
+		misceffect 692, "#狐魂ilp12";
+		misceffect 692, "#狐魂ilp13";
+		unittalk getnpcid(0,"#狐魂ilp10"),"狐魂 : 死ね！！",1;
+		unittalk getnpcid(0,"#狐魂ilp11"),"狐魂 : 死ね！！",1;
+		unittalk getnpcid(0,"#狐魂ilp12"),"狐魂 : 死ね！！",1;
+		unittalk getnpcid(0,"#狐魂ilp13"),"狐魂 : 死ね！！",1;
 		set '@dummy,sleep2(1500);
-		misceffect 899, "ムヒョン#ilp07"; //59900
-		misceffect 563, "ムヒョン#ilp07"; //59900
+		misceffect 899, "ムヒョン#ilp07";
+		misceffect 563, "ムヒョン#ilp07";
 		set '@dummy,sleep2(2000);
-		npctalk "ムヒョン : 川の向こうへと飛んで行け";
+		unittalk "ムヒョン : 川の向こうへと飛んで行け",1;
 		set '@dummy,sleep2(100);
-		misceffect 626, "#狐魂ilp10"; //59903
-		misceffect 626, "#狐魂ilp11"; //59904
-		misceffect 626, "#狐魂ilp12"; //59905
-		misceffect 626, "#狐魂ilp13"; //59906
-		npctalk "狐魂 : 死ね！！！！","#狐魂ilp10";
-		misceffect 563, "ムヒョン#ilp07"; //59900
+		misceffect 626, "#狐魂ilp10";
+		misceffect 626, "#狐魂ilp11";
+		misceffect 626, "#狐魂ilp12";
+		misceffect 626, "#狐魂ilp13";
+		unittalk getnpcid(0,"#狐魂ilp10"),"狐魂 : 死ね！！！！",1;
+		misceffect 563, "ムヒョン#ilp07";
 		set '@dummy,sleep2(900);
-		npctalk "狐魂 : 死ね！！！！","#狐魂ilp11";
+		unittalk getnpcid(0,"#狐魂ilp11"),"狐魂 : 死ね！！！！",1;
 		set '@dummy,sleep2(100);
-		misceffect 563, "ムヒョン#ilp07"; //59900
+		misceffect 563, "ムヒョン#ilp07";
 		set '@dummy,sleep2(900);
-		npctalk "狐魂 : 死ね！！！！","#狐魂ilp12";
+		unittalk getnpcid(0,"#狐魂ilp12"),"狐魂 : 死ね！！！！",1;
 		set '@dummy,sleep2(100);
-		misceffect 563, "ムヒョン#ilp07"; //59900
+		misceffect 563, "ムヒョン#ilp07";
 		set '@dummy,sleep2(900);
-		npctalk "狐魂 : 死ね！！！！","#狐魂ilp13";
+		unittalk getnpcid(0,"#狐魂ilp13"),"狐魂 : 死ね！！！！",1;
 		set '@dummy,sleep2(1000);
-		npctalk "狐魂 : 死ね！！！！！","#狐魂ilp10";
-		npctalk "狐魂 : 死ね！！！！！","#狐魂ilp11";
-		npctalk "狐魂 : 死ね！！！！！","#狐魂ilp12";
-		npctalk "狐魂 : 死ね！！！！！","#狐魂ilp13";
-		misceffect 1072,""; //self
+		unittalk getnpcid(0,"#狐魂ilp10"),"狐魂 : 死ね！！！！！",1;
+		unittalk getnpcid(0,"#狐魂ilp11"),"狐魂 : 死ね！！！！！",1;
+		unittalk getnpcid(0,"#狐魂ilp12"),"狐魂 : 死ね！！！！！",1;
+		unittalk getnpcid(0,"#狐魂ilp13"),"狐魂 : 死ね！！！！！",1;
+		misceffect 1072,"";
 		set '@dummy,sleep2(400);
-		chgquest 7779,7780; //state=1
+		chgquest 7779,7780;
 		set IL_MOON_QUE,5;
 		warp "pay_dun03.gat",142,44;
 		end;
@@ -757,11 +727,11 @@ payon_in03.gat,33,95,3	script	ムヒョン#ilp07	644,{/* 59900 */
 		mes "私は解放！解放です！";
 		mes "ありがとうございます";
 		mes "冒険者様！";
-		chgquest 7788,202075; //state=1
+		chgquest 7788,202075;
 		set IL_MOON_QUE,10;
-		getexp 300000000,0; //
-		getexp 0,0; //0
-		getitem 25271, 10;
+		getexp 300000000,0,1;
+		getexp 0,60000000,0;
+		getitem 25271,10;
 		close;
 	}
 	else if(IL_MOON_QUE == 10) {
@@ -782,7 +752,8 @@ payon_in03.gat,33,95,3	script	ムヒョン#ilp07	644,{/* 59900 */
 		close;
 	}
 }
-payon_in03.gat,33,93,1	script	青年学士#ilp08	92,{/* 59901 */
+
+payon_in03.gat,33,93,1	script	青年学士#ilp08	92,{
 	if(IL_MOON_QUE < 2) {
 		mes "[青年学士]";
 		mes "フェイヨンは昔から";
@@ -793,11 +764,11 @@ payon_in03.gat,33,93,1	script	青年学士#ilp08	92,{/* 59901 */
 		close;
 	}
 	else if(IL_MOON_QUE == 2) {
-		unittalk "青年学士 : ムヒョンはとても興奮しています。話を聞いてみないといけないのですが……";
+		unittalk "青年学士 : ムヒョンはとても興奮しています。話を聞いてみないといけないのですが……",1;
 		end;
 	}
 	else if(IL_MOON_QUE < 5) {
-		unittalk "青年学士 : ムヒョンの話から聞いてみた方がよさそうです。";
+		unittalk "青年学士 : ムヒョンの話から聞いてみた方がよさそうです。",1;
 		end;
 	}
 	else if(IL_MOON_QUE == 5) {
@@ -829,25 +800,20 @@ payon_in03.gat,33,93,1	script	青年学士#ilp08	92,{/* 59901 */
 		mes "それでは廃村で会いましょう。";
 		close;
 	}
-OnTalk1:
-	unittalk "青年学士 : 悪夢？";
-	end;
-OnTalk2:
-	unittalk "青年学士 : 今回は何が違うんですか？";
-	end;
 }
-payon_in03.gat,30,96,5	script	ジャギョム#ilp09	901,{/* 59902 */
+
+payon_in03.gat,30,96,5	script	ジャギョム#ilp09	901,{
 	if(IL_MOON_QUE < 2) {
 		mes "[ジャギョム]";
 		mes "宮内では静かにしなさい。";
 		close;
 	}
 	else if(IL_MOON_QUE == 2) {
-		unittalk "ジャギョム : ムヒョン、君がやらないと誰が代わりになってやってくれると言うんだ？";
+		unittalk "ジャギョム : ムヒョン、君がやらないと誰が代わりになってやってくれると言うんだ？",1;
 		end;
 	}
 	else if(IL_MOON_QUE < 5) {
-		unittalk "ジャギョム : まずはムヒョンの話を聞いてみることにしよう。";
+		unittalk "ジャギョム : まずはムヒョンの話を聞いてみることにしよう。",1;
 		end;
 	}
 	else if(IL_MOON_QUE == 5) {
@@ -888,44 +854,37 @@ payon_in03.gat,30,96,5	script	ジャギョム#ilp09	901,{/* 59902 */
 		mes "伝えておこう。";
 		close;
 	}
-OnTalk1:
-	unittalk "ジャギョム : だけど君がやらなければ誰がそれを浄化するんだ？";
-	end;
-OnTalk2:
-	unittalk "ジャギョム : みんな出来ないと辞めていった。それでもムヒョン君は三回もやったじゃないか。";
-	end;
-OnTalk3:
-	unittalk "ジャギョム : ……それは何の話だ！今まではただ九尾狐の怨念を鎮めるだけで良かったじゃないか。";
-	end;
-OnTalk4:
-	unittalk "ジャギョム : いったい洞窟で何を見たんだ？";
-	end;
 }
-payon_in03.gat,31,96,5	script	#狐魂ilp10	1180,{/* 59903 (cloaking)*/
+
+payon_in03.gat,31,96,5	script	#狐魂ilp10	1180,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-payon_in03.gat,35,96,3	script	#狐魂ilp11	1180,{/* 59904 (cloaking)*/
+
+payon_in03.gat,35,96,3	script	#狐魂ilp11	1180,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-payon_in03.gat,31,93,7	script	#狐魂ilp12	1180,{/* 59905 (cloaking)*/
+
+payon_in03.gat,31,93,7	script	#狐魂ilp12	1180,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-payon_in03.gat,35,93,1	script	#狐魂ilp13	1180,{/* 59906 (cloaking)*/
+
+payon_in03.gat,35,93,1	script	#狐魂ilp13	1180,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-pay_dun03.gat,140,46,3	script	揺らぐ空間#ilp14	10043,{/* 61457 */
+
+pay_dun03.gat,140,46,3	script	揺らぐ空間#ilp14	10043,{
 	if(IL_MOON_QUE < 5) {
 		mes "怪しい気が揺らいでいる。";
 		mes "不気味な感じがする。";
@@ -934,9 +893,9 @@ pay_dun03.gat,140,46,3	script	揺らぐ空間#ilp14	10043,{/* 61457 */
 	else if(IL_MOON_QUE == 5) {
 		mes "空間が歪んでいるような部分が見える。";
 		next;
-		cloakoffnpc "青年学士#ilp15"; //61458
-		cloakoffnpc "兵士シンジュウヒ#ilp16"; //61459
-		npctalk "青年学士 : はあはあ、ここにいらっしゃったのですね。","青年学士#ilp15";
+		cloakoffnpc "青年学士#ilp15";
+		cloakoffnpc "兵士シンジュウヒ#ilp16";
+		unittalk getnpcid(0,"青年学士#ilp15"),"青年学士 : はあはあ、ここにいらっしゃったのですね。",1;
 		mes "[青年学士]";
 		mes "急に消えて";
 		mes "びっくりしました。";
@@ -952,27 +911,27 @@ pay_dun03.gat,140,46,3	script	揺らぐ空間#ilp14	10043,{/* 61457 */
 		mes "危険だと思いますが";
 		mes "ここにいるジュウヒと一緒なら";
 		mes "大丈夫だと思いませんか？！";
-		npctalk "兵士シンジュウヒ : 予想はしていたけど……ホドニ、お前は本当に適当じゃないか？","兵士シンジュウヒ#ilp16";
+		unittalk getnpcid(0,"兵士シンジュウヒ#ilp16"),"兵士シンジュウヒ : 予想はしていたけど……ホドニ、お前は本当に適当じゃないか？",1;
 		next;
 		mes "[青年学士]";
 		mes "それじゃ、こ……これに触れればいいのかな？";
-		npctalk "兵士シンジュウヒ : 勝手に触るな！","兵士シンジュウヒ#ilp16";
-		chgquest 7780,7781; //state=1
+		unittalk getnpcid(0,"兵士シンジュウヒ#ilp16"),"兵士シンジュウヒ : 勝手に触るな！",1;
+		chgquest 7780,7781;
 		set IL_MOON_QUE,6;
 		close2;	// 以下タイマー不明
-		misceffect 890, "青年学士#ilp15"; //61458
-		misceffect 895, "青年学士#ilp15"; //61458
-		npctalk "青年学士 : うわあああああ～！！！","青年学士#ilp15";
-		sleep 500;
-		npctalk "兵士シンジュウヒ : おい～！ホドニ！！！","兵士シンジュウヒ#ilp16";
-		sleep 2000;
-		cloakonnpc "青年学士#ilp15"; //61458
-		npctalk "兵士シンジュウヒ : ……あのバカが余計なことをしやがって！！！","兵士シンジュウヒ#ilp16";
-		sleep 2000;
-		misceffect 890, "兵士シンジュウヒ#ilp16"; //61459
-		misceffect 895, "兵士シンジュウヒ#ilp16"; //61459
-		sleep 500;
-		cloakonnpc "兵士シンジュウヒ#ilp16"; //61459
+		misceffect 890, "青年学士#ilp15";
+		misceffect 895, "青年学士#ilp15";
+		unittalk getnpcid(0,"青年学士#ilp15"),"青年学士 : うわあああああ～！！！",1;
+		set '@dummy,sleep2(500);
+		unittalk getnpcid(0,"兵士シンジュウヒ#ilp16"),"兵士シンジュウヒ : おい～！ホドニ！！！",1;
+		set '@dummy,sleep2(2000);
+		cloakonnpc "青年学士#ilp15";
+		unittalk getnpcid(0,"兵士シンジュウヒ#ilp16"),"兵士シンジュウヒ : ……あのバカが余計なことをしやがって！！！",1;
+		set '@dummy,sleep2(2000);
+		misceffect 890, "兵士シンジュウヒ#ilp16";
+		misceffect 895, "兵士シンジュウヒ#ilp16";
+		set '@dummy,sleep2(500);
+		cloakonnpc "兵士シンジュウヒ#ilp16";
 		end;
 	}
 	else {
@@ -988,20 +947,22 @@ pay_dun03.gat,140,46,3	script	揺らぐ空間#ilp14	10043,{/* 61457 */
 		end;
 	}
 }
-pay_dun03.gat,138,43,7	script	青年学士#ilp15	92,{/* 61458 (cloaking)*/
-	end;
-OnInit:
-	cloakonnpc;
-	end;
-}
-pay_dun03.gat,142,45,3	script	兵士シンジュウヒ#ilp16	708,{/* 61459 (cloaking)*/
+
+pay_dun03.gat,138,43,7	script	青年学士#ilp15	92,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 
-pay_d03_i.gat,149,45,4	script	学士ホドニ#ilp18	92,{/* 60840 */
+pay_dun03.gat,142,45,3	script	兵士シンジュウヒ#ilp16	708,{
+	end;
+OnInit:
+	cloakonnpc;
+	end;
+}
+
+pay_d03_i.gat,149,45,4	script	学士ホドニ#ilp18	92,{
 	if(IL_MOON_QUE == 6) {
 		mes "[ホドニ]";
 		mes "ちょっとこっちを見て下さい！";
@@ -1030,7 +991,7 @@ pay_d03_i.gat,149,45,4	script	学士ホドニ#ilp18	92,{/* 60840 */
 		mes "[ホドニ]";
 		mes "準備ができたら";
 		mes "話かけて下さい。";
-		chgquest 7781,7783; //state=1
+		chgquest 7781,7783;
 		set IL_MOON_QUE,7;
 		close;
 	}
@@ -1088,7 +1049,7 @@ pay_d03_i.gat,149,45,4	script	学士ホドニ#ilp18	92,{/* 60840 */
 		mes "周囲を調べてみますので";
 		mes "少し経ったら";
 		mes "もう一度話しかけてください。";
-		chgquest 7783,7782; //state=1
+		chgquest 7783,7782;
 		set IL_MOON_QUE,8;
 		close;
 	}
@@ -1145,10 +1106,10 @@ pay_d03_i.gat,149,45,4	script	学士ホドニ#ilp18	92,{/* 60840 */
 		mes "この現象に対する";
 		mes "何かしらの解答が";
 		mes "出るならいいですが。";
-		chgquest 7782,7788; //state=1
+		chgquest 7782,7788;
 		set IL_MOON_QUE,9;
-		getexp 150000000,0;
-		getexp 0,0;
+		getexp 150000000,0,1;
+		getexp 0,30000000,0;
 		getitem 25271, 5;
 		close;
 	}
@@ -1164,7 +1125,8 @@ pay_d03_i.gat,149,45,4	script	学士ホドニ#ilp18	92,{/* 60840 */
 	mes "出るならいいですが。";
 	close;
 }
-pay_d03_i.gat,152,45,3	script	兵士シンジュウヒ#ilp17	708,{/* 60841 */
+
+pay_d03_i.gat,152,45,3	script	兵士シンジュウヒ#ilp17	708,{
 	if(IL_MOON_QUE <= 6) {
 		mes "[ジュウヒ]";
 		mes "何の対策もないまま";
@@ -1186,26 +1148,51 @@ pay_d03_i.gat,152,45,3	script	兵士シンジュウヒ#ilp17	708,{/* 60841 */
 	next;
 	menu "怒りの九尾狐について",-;
 	if(checkquest(7785)) {
+		if(checkquest(7785)&2 == 0) {
+			mes "[ジュウヒ]";
+			mes "九尾狐の怒りは";
+			mes "一旦落ち着いたようですね。";
+			mes "^4d4dff次の午前5時を過ぎたら^000000";
+			mes "また来てください。";
+			next;
+			mes "[ジュウヒ]";
+			mes "ホドニの調査によれば";
+			mes "ここは月夜花の悪夢の中だそうです。";
+			mes "幻影にすぎない九尾狐ですが";
+			mes "こいつらが万が一";
+			mes "生きている人に害を及ぼすなら";
+			mes "退治するのは当然だと考えています。";
+			next;
+			mes "[ジュウヒ]";
+			mes "死霊に慈悲も";
+			mes "持たない奴だと言われても";
+			mes "返す言葉はありません。";
+			mes "それじゃ私はホドニと一緒に";
+			mes "他の場所を見回ってみることにします。";
+			close;
+		}
+		delquest 7785;
 		mes "[ジュウヒ]";
-		mes "九尾狐の怒りは";
-		mes "一旦落ち着いたようですね。";
-		mes "^4d4dff次の午前5時を過ぎたら^000000";
-		mes "また来てください。";
+		mes "少しは休めましたか？";
+		mes "変化のない日常ですがホドニが";
+		mes "付近の調査を円滑に行うために";
+		mes "周辺を整理したいので";
+		mes "^4d4dff怒りの九尾狐^000000を";
+		mes "少し退治してくれませんか？";
 		next;
+		if(select("受託する","断る") == 2) {
+			mes "[ジュウヒ]";
+			mes "遠くまで調査に出かけることは";
+			mes "出来なさそうですね。";
+			close;
+		}
 		mes "[ジュウヒ]";
-		mes "ホドニの調査によれば";
-		mes "ここは月夜花の悪夢の中だそうです。";
-		mes "幻影にすぎない九尾狐ですが";
-		mes "こいつらが万が一";
-		mes "生きている人に害を及ぼすなら";
-		mes "退治するのは当然だと考えています。";
-		next;
-		mes "[ジュウヒ]";
-		mes "死霊に慈悲も";
-		mes "持たない奴だと言われても";
-		mes "返す言葉はありません。";
-		mes "それじゃ私はホドニと一緒に";
-		mes "他の場所を見回ってみることにします。";
+		mes "それではお願いします。";
+		mes "^4d4dff怒りの九尾狐^000000の";
+		mes "心情を理解できないわけでは";
+		mes "ありませんけど、それはそれ";
+		mes "これはこれですから。";
+		setquest 7784;
 		close;
 	}
 	if(checkquest(7784)) {
@@ -1228,8 +1215,8 @@ pay_d03_i.gat,152,45,3	script	兵士シンジュウヒ#ilp17	708,{/* 60841 */
 		mes "しておいた方がよさそうですね。";
 		setquest 7785;
 		delquest 7784;
-		getexp 300000000,0;
-		getexp 0,60000000;
+		getexp 300000000,0,1;
+		getexp 0,60000000,0;
 		getitem 25271,15;
 		close;
 	}
@@ -1254,10 +1241,11 @@ pay_d03_i.gat,152,45,3	script	兵士シンジュウヒ#ilp17	708,{/* 60841 */
 	mes "心情を理解できないわけでは";
 	mes "ありませんけど、それはそれ";
 	mes "これはこれですから。";
-	setquest 7784; //state=1
+	setquest 7784;
 	close;
 }
-pay_d03_i.gat,140,46,3	script	揺らぐ空間#ilp10	10043,{/* 60842 */
+
+pay_d03_i.gat,140,46,3	script	揺らぐ空間#ilp10	10043,{
 	mes "元の廃村に戻ることができる。";
 	mes "どうしようかな？";
 	next;
@@ -1269,13 +1257,13 @@ pay_d03_i.gat,140,46,3	script	揺らぐ空間#ilp10	10043,{/* 60842 */
 	end;
 }
 
-pay_d03_i.gat,82,237,3	script	村人#ilp17	75,{/* 11196 */
+pay_d03_i.gat,82,237,3	script	村人#ilp17	75,{
 	mes "[村人]";
 	mes "あ……ああ……";
 	close;
 }
 
-pay_d03_i.gat,254,206,3	script	村人#ilp18	90,{/* 11197 */
+pay_d03_i.gat,254,206,3	script	村人#ilp18	90,{
 	mes "[村人]";
 	mes "それは違う……！";
 	mes "魔法を、魔法を止めて……！";
@@ -1283,7 +1271,7 @@ pay_d03_i.gat,254,206,3	script	村人#ilp18	90,{/* 11197 */
 	close;
 }
 
-pay_d03_i.gat,81,136,3	script	村人#ilp19	59,{/* 11198 */
+pay_d03_i.gat,81,136,3	script	村人#ilp19	59,{
 	mes "[村人]";
 	mes "いったい私たちが";
 	mes "何をしたと？";
@@ -1296,7 +1284,7 @@ pay_d03_i.gat,81,136,3	script	村人#ilp19	59,{/* 11198 */
 	close;
 }
 
-pay_d03_i.gat,160,260,3	script	村人#ilp21	59,{/* 11199 */
+pay_d03_i.gat,160,260,3	script	村人#ilp21	59,{
 	mes "[村人]";
 	mes "いったい、あなた達は……。";
 	mes "あの怪しい魔法使いは";
@@ -1309,7 +1297,7 @@ pay_d03_i.gat,160,260,3	script	村人#ilp21	59,{/* 11199 */
 	close;
 }
 
-pay_d03_i.gat,43,150,5	script	村人#ilp22	75,{/* 11200 */
+pay_d03_i.gat,43,150,5	script	村人#ilp22	75,{
 	mes "[村人]";
 	mes "どうか私たちを";
 	mes "放っておいてください！";
@@ -1324,4 +1312,55 @@ pay_d03_i.gat,43,150,5	script	村人#ilp22	75,{/* 11200 */
 	mes "どうか……";
 	mes "魔法を止めてください。どうか…";
 	close;
+}
+
+pay_d03_i.gat,0,0,0	script	#IllMoonlight	-1,{
+OnInit:
+	for(set '@i,0;'@i<5;set '@i,'@i+1)
+		areamonster "pay_d03_i.gat",40,35,160,115,"--ja--",3759+rand(3),1,"::OnSummon1";
+	for(set '@i,0;'@i<5;set '@i,'@i+1)
+		areamonster "pay_d03_i.gat",40,140,160,260,"--ja--",3759+rand(3),1,"::OnSummon2";
+	for(set '@i,0;'@i<5;set '@i,'@i+1)
+		areamonster "pay_d03_i.gat",150,180,270,260,"--ja--",3759+rand(3),1,"::OnSummon3";
+	end;
+
+OnSummon1:
+	if('mob1 == 0 && rand(1000) == 0) {
+		set 'mob1,callmonster("pay_d03_i.gat",96,83,"真理の魔法使い",3764,strnpcinfo(0)+"::OnKilled1");
+		unittalk 'mob1,"真理の魔法使い : 真理のための礎になりなさい";
+	}
+	else {
+		areamonster "pay_d03_i.gat",40,35,160,115,"--ja--",3759+rand(3),1,"::OnSummon1";
+	}
+	end;
+OnKilled1:
+	set 'mob1,0;
+	areamonster "pay_d03_i.gat",40,35,160,115,"--ja--",3759+rand(3),1,"::OnSummon1";
+	end;
+OnSummon2:
+	if('mob2 == 0 && rand(1000) == 0) {
+		set 'mob2,callmonster("pay_d03_i.gat",94,188,"真理の魔法使い",3764,strnpcinfo(0)+"::OnKilled2");
+		unittalk 'mob2,"真理の魔法使い : 真理のための礎になりなさい";
+	}
+	else {
+		areamonster "pay_d03_i.gat",40,140,160,260,"--ja--",3759+rand(3),1,"::OnSummon2";
+	}
+	end;
+OnKilled2:
+	set 'mob2,0;
+	areamonster "pay_d03_i.gat",40,140,160,260,"--ja--",3759+rand(3),1,"::OnSummon2";
+	end;
+OnSummon3:
+	if('mob3 == 0 && rand(1000) == 0) {
+		set 'mob3,callmonster("pay_d03_i.gat",210,221,"真理の魔法使い",3764,strnpcinfo(0)+"::OnKilled3");
+		unittalk 'mob3,"真理の魔法使い : 真理のための礎になりなさい";
+	}
+	else {
+		areamonster "pay_d03_i.gat",150,180,270,260,"--ja--",3759+rand(3),1,"::OnSummon3";
+	}
+	end;
+OnKilled3:
+	set 'mob3,0;
+	areamonster "pay_d03_i.gat",150,180,270,260,"--ja--",3759+rand(3),1,"::OnSummon3";
+	end;
 }
