@@ -85,22 +85,20 @@ prontera.gat,110,191,4	script	エヴォルツィオーネ#prt2	893,{/* 51220 */}
 	mes "アタシのキョーミは";
 	mes "止められないっ！";
 	next;
-	// 不装着メッセージは未調査
 	set '@menu,select(
-			(getequipid(1)!=0? "^nItemID^" +getequipid(1): "頭上段‐[装着していない]"),
-			(getequipid(2)!=0? "^nItemID^" +getequipid(2): "鎧‐[装着していない]"),
-			(getequipid(3)!=0? "^nItemID^" +getequipid(3): "左手‐[装着していない]")),
-			(getequipid(4)!=0? "^nItemID^" +getequipid(4): "右手‐[装着していない]"),
-			(getequipid(5)!=0? "^nItemID^" +getequipid(5): "肩にかける物-[装着していない]"),
-			(getequipid(6)!=0? "^nItemID^" +getequipid(6): "靴‐[装着していない]"),
-			(getequipid(7)!=0? "^nItemID^" +getequipid(7): "アクセサリー1‐[装着していない]"),
-			(getequipid(8)!=0? "^nItemID^" +getequipid(8): "アクセサリー2‐[装着していない]"),
-			(getequipid(9)!=0? "^nItemID^" +getequipid(9): "頭中段‐[装着していない]"),
-			(getequipid(10)!=0? "^nItemID^" +getequipid(10): "頭下段‐[装着していない]"),
+			(getequipid(1)!=0? "^nItemID^" +getequipid(1): ""),
+			(getequipid(2)!=0? "^nItemID^" +getequipid(2): ""),
+			(getequipid(3)!=0? "^nItemID^" +getequipid(3): "")),
+			(getequipid(4)!=0? "^nItemID^" +getequipid(4): ""),
+			(getequipid(5)!=0? "^nItemID^" +getequipid(5): ""),
+			(getequipid(6)!=0? "^nItemID^" +getequipid(6): ""),
+			(getequipid(7)!=0? "^nItemID^" +getequipid(7): ""),
+			(getequipid(8)!=0? "^nItemID^" +getequipid(8): ""),
+			(getequipid(9)!=0? "^nItemID^" +getequipid(9): ""),
+			(getequipid(10)!=0? "^nItemID^" +getequipid(10): ""),
 			"やっぱりやめる"
 	);
 	if('@menu == 11) {
-		// 未調査
 		mes "[エヴォルツィオーネ]";
 		mes "にゃはは、もう飽きちゃった？";
 		mes "ざんねーん。";
@@ -110,14 +108,6 @@ prontera.gat,110,191,4	script	エヴォルツィオーネ#prt2	893,{/* 51220 */}
 		close;
 	}
 	set '@itemid,getequipid('@menu);
-	if('@itemid == 0) {
-		// 未調査
-		mes "[エヴォルツィオーネ]";
-		mes "ん～ダメダメ。";
-		mes "装備してないじゃな～い。";
-		mes "ちゃんと持ってきて～。";
-		close;
-	}
 	setarray '@artifact,22138,22207,22170,22120,22134,470006,470008,22210;
 	for(set '@i,0; '@i < getarraysize('@artifact); set '@i,'@i+1) {
 		if('@itemid == '@artifact['@i])
