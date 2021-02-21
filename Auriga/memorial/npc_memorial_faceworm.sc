@@ -2340,12 +2340,12 @@ OnTouch:
 1@face.gat,186,130,3	duplicate(è_ÇÁÇ©Ç¢Ç≠Ç⁄Ç›#1)	è_ÇÁÇ©Ç¢Ç≠Ç⁄Ç›#59	557,5,5
 1@face.gat,232,340,5	duplicate(è_ÇÁÇ©Ç¢Ç≠Ç⁄Ç›#1)	è_ÇÁÇ©Ç¢Ç≠Ç⁄Ç›#60	557,5,5
 
-1@face.gat,163,130,0	script	#ñ“ì≈ìD1	139,5,5,{/* 56562 */
+1@face.gat,163,130,0	script	#ñ“ì≈ìD1	139,7,7,{/* 56562 */
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
 	hideonnpc;
-	set '@num,rand(10,15);
+	set '@num,rand(20,25);
 	set '@dummy,getmapxy('@map$,'@x,'@y,1);
 	areamonster '@map$,'@x-10,'@y-10,'@x+10,'@y+10,"ñ“ì≈ë‹",2531,'@num;
 	end;
@@ -2354,16 +2354,16 @@ OnTimer15000:
 	hideoffnpc;
 	end;
 }
-1@face.gat,165,147,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD2	139,5,5
-1@face.gat,163,166,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD3	139,5,5
-1@face.gat,183,197,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD4	139,5,5
+1@face.gat,165,147,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD2	139,7,7
+1@face.gat,163,166,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD3	139,10,10
+1@face.gat,183,197,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD4	139,10,10
 1@face.gat,202,204,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD5	139,5,5
 1@face.gat,237,220,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD6	139,5,5
 1@face.gat,240,258,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD7	139,5,5
 1@face.gat,292,277,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD8	139,5,5
 1@face.gat,248,322,0	duplicate(#ñ“ì≈ìD1)	#ñ“ì≈ìD9	139,5,5
 
-1@face.gat,158,120,0	script	#ñ“ì≈ìDa	139,10,1,{/* 56571 */
+1@face.gat,158,120,0	script	#ñ“ì≈ìDa	139,3,3,{/* 56571 */
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2387,7 +2387,7 @@ OnTimer15000:
 	monster '@map$,160,117,"ñ“ì≈ë‹",2531,1;
 	monster '@map$,162,117,"ñ“ì≈ë‹",2531,1;
 	end;
-OnTimer15000:
+OnTimer30000:
 	stopnpctimer;
 	hideoffnpc;
 	end;
@@ -2418,33 +2418,77 @@ OnTimer15000:
 	hideoffnpc;
 	end;
 }
-1@face.gat,277,343,0	script	#ñ“ì≈ìDc	139,{/* 56573 */}
+1@face.gat,277,343,0	script	#ñ“ì≈ìDc	139,5,5,{/* 56573 */
+	set '@map$,getmdmapname("1@face.gat");
+	initnpctimer;
+	misceffect 124;
+	hideonnpc;
+	areamonster '@map$,263,330,291,357,"ñ“ì≈ë‹",2531,20;
+	end;
+OnTimer20000:
+	stopnpctimer;
+	hideoffnpc;
+	end;
+}
 1@face.gat,174,133,0	script	#ñ“ì≈ìDd1	139,5,5,{/* 56574 */
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
 	hideonnpc;
 	monster '@map$,174,131,"ñ“ì≈ë‹",2531,1;
-	monster '@map$,175,131,"ñ“ì≈ë‹",2531,1;
-	monster '@map$,176,131,"ñ“ì≈ë‹",2531,1;
 	monster '@map$,174,132,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,175,131,"ñ“ì≈ë‹",2531,1;
 	monster '@map$,175,132,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,176,131,"ñ“ì≈ë‹",2531,1;
 	monster '@map$,176,132,"ñ“ì≈ë‹",2531,1;
 	monster '@map$,184,137,"ñ“ì≈ë‹",2531,1;
-	monster '@map$,185,137,"ñ“ì≈ë‹",2531,1;
-	monster '@map$,186,137,"ñ“ì≈ë‹",2531,1;
 	monster '@map$,184,138,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,185,137,"ñ“ì≈ë‹",2531,1;
 	monster '@map$,185,138,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,186,137,"ñ“ì≈ë‹",2531,1;
 	monster '@map$,186,138,"ñ“ì≈ë‹",2531,1;
 	end;
-OnTimer15000:
+OnTimer20000:
 	stopnpctimer;
 	hideoffnpc;
 	end;
 }
-1@face.gat,182,123,0	script	#ñ“ì≈ìDd2	139,{/* 56575 */}
-1@face.gat,237,299,0	script	#ñ“ì≈ìDe	139,{/* 56576 */}
-1@face.gat,245,230,0	script	#ñ“ì≈ìDf	139,{/* 56577 */
+1@face.gat,182,123,0	script	#ñ“ì≈ìDd2	139,3,3,{/* 56575 */
+	set '@map$,getmdmapname("1@face.gat");
+	initnpctimer;
+	misceffect 124;
+	hideonnpc;
+	monster '@map$,177,121,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,177,122,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,178,121,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,178,122,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,179,121,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,179,122,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,184,121,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,184,122,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,185,121,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,185,122,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,186,121,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,186,122,"ñ“ì≈ë‹",2531,1;
+	end;
+OnTimer20000:
+	stopnpctimer;
+	hideoffnpc;
+	end;
+}
+1@face.gat,237,299,0	script	#ñ“ì≈ìDe	139,5,5,{/* 56576 */
+	set '@map$,getmdmapname("1@face.gat");
+	initnpctimer;
+	misceffect 124;
+	hideonnpc;
+	areamonster '@map$,228,290,246,308,"ñ“ì≈ë‹",2531,25;
+	end;
+OnTimer20000:
+	stopnpctimer;
+	hideoffnpc;
+	end;
+}
+1@face.gat,245,230,0	script	#ñ“ì≈ìDf	139,10,10,{/* 56577 */
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2473,14 +2517,59 @@ OnTimer15000:
 	monster '@map$,246,242,"ñ“ì≈ë‹",2531,1;
 	monster '@map$,248,242,"ñ“ì≈ë‹",2531,1;
 	monster '@map$,250,242,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,236,245,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,238,245,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,240,245,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,242,245,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,244,245,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,246,245,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,248,245,"ñ“ì≈ë‹",2531,1;
+	monster '@map$,250,245,"ñ“ì≈ë‹",2531,1;
 	end;
-OnTimer15000:
+OnTimer20000:
 	stopnpctimer;
 	hideoffnpc;
 	end;
 }
-1@face.gat,249,337,0	script	#ñ“ì≈ìDg	139,{/* 56578 */}
-1@face.gat,159,194,0	script	#ñ“ì≈ìDh	139,{/* 56579 */}
+1@face.gat,249,337,0	script	#ñ“ì≈ìDg	139,10,10,{/* 56578 */
+	set '@map$,getmdmapname("1@face.gat");
+	initnpctimer;
+	misceffect 124;
+	hideonnpc;
+	areamonster '@map$,240,325,268,348,"ñ“ì≈ë‹",2531,20;
+	end;
+OnTimer20000:
+	stopnpctimer;
+	hideoffnpc;
+	end;
+}
+1@face.gat,159,194,0	script	#ñ“ì≈ìDh	139,5,5,{/* 56579 */
+	set '@map$,getmdmapname("1@face.gat");
+	initnpctimer;
+	misceffect 124;
+	hideonnpc;
+	areamonster '@map$,156,201,162,207,"ñ“ì≈ë‹",2531,16;
+	end;
+OnTimer30000:
+	stopnpctimer;
+	hideoffnpc;
+	end;
+}
+@spawn(type: BL_MOB, ID: 33978, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",238,196), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 70043, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",238,197), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 98031, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",239,196), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 22427, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",239,197), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 27646, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",240,196), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 28318, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",240,197), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 75756, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",241,196), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 87472, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",241,197), dir: 0, name"ñ“ì≈ë‹")
+
+@spawn(type: BL_MOB, ID: 78941, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",247,191), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 81507, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",247,192), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 78689, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",248,191), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 78836, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",248,192), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 79696, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",249,191), dir: 0, name"ñ“ì≈ë‹")
+@spawn(type: BL_MOB, ID: 79872, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",249,192), dir: 0, name"ñ“ì≈ë‹")
 1@face.gat,213,155,3	script	ëÂè§êlÇÃî†#1	10005,{/* 56580 (hide)*/
 	initnpctimer;
 	set 'flag,'flag+1;

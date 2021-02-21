@@ -1362,6 +1362,7 @@ OnTimer4000:
 				hideonnpc getmdnpcname("ケイオス#2air1");
 				announce "モンスターの気配がする。倒しながら戻ったほうがいいだろう。", 0x9, 0xffff00, 0x190, 12, 0, 0;
 				donpcevent getmdnpcname("スカイグレムリン#2aair1")+ "::OnStart";
+				donpcevent getmdnpcname("mob#air3")+ "::OnStart";
 				end;
 			}
 		}
