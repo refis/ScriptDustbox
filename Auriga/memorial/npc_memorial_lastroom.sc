@@ -79,6 +79,7 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 			//setquest 11380;
 			announce "メモリアルダンジョン[last_room] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")",0x9,0x00ff99,0x190,12,0,0;
 			setquest 11379;
+			donpcevent getmdnpcname("LastRoomManager1")+ "::OnStart";
 			cutin "bu_mark1",255;
 			//warp "1@uns.gat",144,36;
 			end;
@@ -130,6 +131,26 @@ un_myst.gat,163,38,5	script	マークイシャ	616,{/* 59723 */
 		warp "verus01.gat",115,190;
 		end;
 	}
+}
+
+1@uns.gat,1,1,0	script	LastRoomManager1	139,{
+OnStart:
+	if('flag)
+		end;
+	set 'flag,1;
+	hideonnpc getmdnpcname("#lrdoor4");
+	hideonnpc getmdnpcname("タマリン#room2");
+
+	hideonnpc getmdnpcname("ベリティ#room4");	// 62749
+	hideonnpc getmdnpcname("タマリン#room4");	// 54343
+	hideonnpc getmdnpcname("テューリアン#room4");	// 80038
+	hideonnpc getmdnpcname("マークイシャ#room4");	// 50139
+	hideonnpc getmdnpcname("マギスティン#room4");	// 68880
+	hideonnpc getmdnpcname("アルプオカート#room4");	// 82489
+
+	hideonnpc getmdnpcname("システムメッセージ#batt");	// 62749
+	hideonnpc getmdnpcname("ベリティ#battle1");	// 62749
+	end;
 }
 
 1@uns.gat,143,36,3	script	ベリティ#room1	10078,{/* 60061 (hide)*/
@@ -262,6 +283,7 @@ OnStart:
 	hideonnpc getmdnpcname("マークイシャ#room1");	// 60021
 	hideonnpc getmdnpcname("マギスティン#room1");	// 83656
 	hideonnpc getmdnpcname("アルプオカート#room1");	// 59533
+	hideonnpc;
 	end;
 OnTimer2000:
 	announce "システムメッセージ : 第1区域に侵入者を確認。直ちに退去してください。", 0x9, 0xff0000;
@@ -441,61 +463,64 @@ OnKilled:
 		initnpctimer;
 		killmonster getmdmapname("1@uns.gat"),getmdnpcname("#bosslr")+"::OnKilled";
 		hideoffnpc getmdnpcname("システムメッセージ#batt");	// 98902
-		announce "システムメッセージ : 防衛システムにエラー発生。", 0x9, 0xff0000;
-		unittalk getnpcid(0,getmdnpcname("システムメッセージ#batt")),"システムメッセージ : 防衛システムにエラー発生。";	// 98902
 	}
 	end;
 OnKilled2:
 	end;
-OnTimer2000:
+OnTimer1000:
+	announce "システムメッセージ : 防衛システムにエラー発生。", 0x9, 0xff0000;
+	unittalk getnpcid(0,getmdnpcname("システムメッセージ#batt")),"システムメッセージ : 防衛システムにエラー発生。";	// 98902
+	end;
+OnTimer6000:
 	unittalk getnpcid(0,getmdnpcname("ベリティ#battle1")),"ベリティ : ……。";	// 47199
 	end;
-OnTimer4000:
+OnTimer8000:
 	unittalk getnpcid(0,getmdnpcname("ベリティ#battle1")),"ベリティ : 排除……。制御……変更。";	// 47199
 	misceffect 432,getmdnpcname("ベリティ#battle1");	// 47199
 	end;
-OnTimer5000:
+OnTimer9000:
 	misceffect 452,getmdnpcname("ベリティ#battle1");	// 47199
 	end;
-OnTimer6000:
+OnTimer10000:
 	misceffect 257,getmdnpcname("ベリティ#battle1");	// 47199
 	end;
-OnTimer7000:
+OnTimer10500:
 	misceffect 30,getmdnpcname("ベリティ#battle1");	// 47199
 	end;
-OnTimer8000:
+OnTimer13000:
 	unittalk getnpcid(0,getmdnpcname("ベリティ#battle1")),"ベリティ : ……制御……確認。";	// 47199
 	end;
-OnTimer10000:
+OnTimer18000:
 	unittalk getnpcid(0,getmdnpcname("ベリティ#battle1")),"ベリティ : システムメッセージ1による補助システム構成……構築完了。";	// 47199
 	end;
-OnTimer12000:
+OnTimer23000:
 	unittalk getnpcid(0,getmdnpcname("ベリティ#battle1")),"ベリティ : 主目的を出力補助に設定……起動確認。";	// 47199
 	end;
-OnTimer14000:
+OnTimer28000:
 	announce "システムメッセージ : T_W_O_002bによる制御を確認。侵入者の排除を再開。", 0x9, 0xff0000;
 	misceffect 514,getmdnpcname("ベリティ#battle1");	// 47199
 	misceffect 94,getmdnpcname("ベリティ#battle1");	// 47199
 	end;
-OnTimer16000:
+OnTimer31000:
 	misceffect 8,getmdnpcname("ベリティ#battle1");	// 47199
 	misceffect 263,getmdnpcname("ベリティ#battle1");	// 47199
+	end;
+OnTimer32000:
 	misceffect 220,getmdnpcname("ベリティ#battle1");	// 47199
 	end;
-OnTimer18000:
+OnTimer33000:
 	hideonnpc getmdnpcname("ベリティ#battle1");	// 47199
 	hideonnpc getmdnpcname("システムメッセージ#batt");	// 98902
 	monster getmdmapname("1@uns.gat"),245,265,"T_W_O#002b",3254,1,getmdnpcname("#bosslr")+"::OnBossKilled";
 	areamonster getmdmapname("1@uns.gat"),225,250,265,280,"システムメッセージ1#2",3253,4,getmdnpcname("#bosslr")+"::OnKilled2";
 	end;
-	end;
-OnTimer20000:
+OnTimer35000:
 	announce "テューリアン : 急にどうしちまったんだよお姉さん！　くそっ……凄い力だ！", 0x9, 0x00ff00;
 	end;
-OnTimer24000:
+OnTimer40000:
 	announce "タマリン : あのシステムメッセージ1と呼んでいた物体……あれがエネルギーを供給しているようですね。", 0x9, 0x00ff00;
 	end;
-OnTimer28000:
+OnTimer45000:
 	stopnpctimer;
 	announce "タマリン : システムメッセージ1を倒せば、力を落とせるかも知れません！", 0x9, 0x00ff00;
 	end;

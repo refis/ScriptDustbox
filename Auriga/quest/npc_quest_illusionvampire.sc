@@ -925,6 +925,22 @@ gef_d01_i.gat,113,230,5	script	ジェム#ilgf01	79,{/* 2158 */
 		mes "マリナに話しかけてください。";
 		mes "元の場所へ送らせますから。";
 		close;
+	case 7;
+		cloakonnpc "ドラキュラ#ilgf02";	// 2175
+		cloakonnpc "キング#ilgf01";	// 2176
+		cloakonnpc "魔法使い#ilgf02";	// 2177
+		cloakoffnpc "魔法使い#ilgf01";	// 2172
+		mes "[ジェム]";
+		mes "ジュビリーは怪我の治療のため";
+		mes "地上に戻しましたが、";
+		mes "ジョジョがまだ……";
+		mes "どうか無事でいて欲しいです。";
+		next;
+		mes "[ジェム]";
+		mes "もしお帰りになるのなら、";
+		mes "マリナに話しかけてください。";
+		mes "元の場所へ送らせますから。";
+		close;
 	case 14;
 		mes "[ジェム]";
 		mes "冒険者様。";
@@ -1001,49 +1017,49 @@ gef_d01_i.gat,112,228,5	script	マリナ#ilgf01	746,{/* 2159 */
 }
 gef_d01_i.gat,93,178,5	script	マリナ#ilgf03	746,5,5,{/* 2160 (cloaking)*/
 	unittalk getnpcid(0,"マリナ#ilgf03"),"マリナ : 東の方から微かな気配を感じます。早く行ってみましょう！";	// 2160
-	set '@dummy,sleep2(2000);
+	set '@dummy,sleep2(1500);
 	misceffect 304,"マリナ#ilgf03";	// 2160
 	cloakonnpc "マリナ#ilgf03";	// 2160
 	end;
 }
 gef_d01_i.gat,127,153,5	script	マリナ#ilgf04	746,5,5,{/* 2161 (cloaking)*/
 	unittalk getnpcid(0,"マリナ#ilgf04"),"マリナ : 東の方の気配が強く段々強くなります。急いでください！";	// 2161
-	set '@dummy,sleep2(2000);
+	set '@dummy,sleep2(1500);
 	misceffect 304,"マリナ#ilgf04";	// 2161
 	cloakonnpc "マリナ#ilgf04";	// 2161
 	end;
 }
 gef_d01_i.gat,213,237,5	script	マリナ#ilgf05	746,5,5,{/* 2162 (cloaking)*/
 	unittalk getnpcid(0,"マリナ#ilgf05"),"マリナ : 南の方から微かな気配を感じます。急いでください！";	// 2162
-	set '@dummy,sleep2(2000);
+	set '@dummy,sleep2(1500);
 	misceffect 304,"マリナ#ilgf05";	// 2162
 	cloakonnpc "マリナ#ilgf05";	// 2162
 	end;
 }
 gef_d01_i.gat,150,224,5	script	マリナ#ilgf06	746,5,5,{/* 2163 (cloaking)*/
 	unittalk getnpcid(0,"マリナ#ilgf06"),"マリナ : 東の方から微かな気配を感じます。早く行ってみましょう！";	// 2163
-	set '@dummy,sleep2(2000);
+	set '@dummy,sleep2(1500);
 	misceffect 304,"マリナ#ilgf06";	// 2163
 	cloakonnpc "マリナ#ilgf06";	// 2163
 	end;
 }
 gef_d01_i.gat,208,144,5	script	マリナ#ilgf07	746,5,5,{/* 2164 (cloaking)*/
 	unittalk getnpcid(0,"マリナ#ilgf07"),"マリナ : 気配が近づいています！　あと少し東です！";	// 2164
-	set '@dummy,sleep2(2000);
+	set '@dummy,sleep2(1500);
 	misceffect 304,"マリナ#ilgf07";	// 2164
 	cloakonnpc "マリナ#ilgf07";	// 2164
 	end;
 }
-gef_d01_i.gat,250,130,5	script	マリナ#ilgf08	746,{/* 2165 */
+gef_d01_i.gat,250,130,5	script	マリナ#ilgf08	746,5,5,{/* 2165 */
 	unittalk getnpcid(0,"マリナ#ilgf08"),"マリナ : 北へ行ってみましょう！";	// 2165
-	set '@dummy,sleep2(2000);
+	set '@dummy,sleep2(1500);
 	misceffect 304,"マリナ#ilgf08";	// 2165
 	cloakonnpc "マリナ#ilgf08";	// 2165
 	end;
 }
-gef_d01_i.gat,255,202,5	script	マリナ#ilgf09	746,{/* 2166 */
+gef_d01_i.gat,255,202,5	script	マリナ#ilgf09	746,5,5,{/* 2166 */
 	unittalk getnpcid(0,"マリナ#ilgf09"),"マリナ : 南側へ行ってみましょう！";	// 2166
-	set '@dummy,sleep2(2000);
+	set '@dummy,sleep2(1500);
 	misceffect 304,"マリナ#ilgf09";	// 2166
 	cloakonnpc "マリナ#ilgf09";	// 2166
 	end;
@@ -1053,6 +1069,14 @@ gef_d01_i.gat,116,228,3	script	アントワーヌ#ilgf01	669,{/* 2167 */
 		mes "[アントワーヌ]";
 		mes "シスタージェム、";
 		mes "僕の話を聞いてください！";
+		close;
+	}
+	if(IL_VAMP_QUE == 6) {
+		mes "[アントワーヌ]";
+		mes "ジョジョはまだですよね？";
+		mes "少し心配ですね。";
+		mes "ジュビリーさんは治療のため、";
+		mes "地上に戻りました。";
 		close;
 	}
 	if(IL_VAMP_QUE == 14) {
@@ -1106,12 +1130,13 @@ gef_d01_i.gat,250,164,5	script	司祭#ilgf01	110,5,5,{/* 2168 */
 		mes "助けてください！";
 		mes "マリナさんが後悔しないためにも、";
 		mes "私を助けて！";
+		set '@dummy,sleep2(1000);
 		misceffect 315,"司祭#ilgf01";	// 2168
 		next;
 		mes "[マリナ]";
 		mes "全ての死人たちを土へ！";
 		unittalk getnpcid(0,"マリナ#ilgf10"),"マリナ : ターンアンデッド！";	// 2169
-		set '@dummy,sleep2(2000);
+		set '@dummy,sleep2(1000);
 		misceffect 82,"アンデッド#ilgf08";	// 2170
 		misceffect 82,"アンデッド#ilgf09";	// 2171
 		unittalk getnpcid(0,"アンデッド#ilgf08"),"アンデッド : くわああああ！";	// 2170
@@ -1259,7 +1284,8 @@ gef_d01_i.gat,250,164,5	script	司祭#ilgf01	110,5,5,{/* 2168 */
 	}
 	end;
 OnTouch:
-	unittalk getnpcid(0,"司祭#ilgf01"),"司祭 : 本当に困ったな……。";	// 2168
+	if(IL_VAMP_QUE == 6)
+		unittalk getnpcid(0,"司祭#ilgf01"),"司祭 : 本当に困ったな……。";	// 2168
 	end;
 }
 gef_d01_i.gat,253,165,3	script	マリナ#ilgf10	746,{/* 2169 (cloaking)*/}
@@ -2776,13 +2802,20 @@ gef_d01_i.gat,84,135,3	script	ドラキュラ#ilgf03	10137,{/* 2182 (cloaking)*/}
 gef_d01_i.gat,87,137,3	script	キング#ilgf02	799,{/* 2183 (cloaking)*/}
 gef_d01_i.gat,80,132,7	script	ジョジョ#ilgf01	735,{/* 2184 (cloaking)*/}
 gef_d01_i.gat,114,216,0	script	#ilgf01	139,3,0,{/* 2185 */
-	if(IL_VAMP_QUE < 7) {
-		misceffect 561,"";	// self
-		misceffect 561,"";	// self
-		misceffect 561,"";	// self
+	misceffect 561,"";	// self
+	if(IL_VAMP_QUE == 6) {
+		cloakonnpc "魔法使い#ilgf01";	// 2172
+		cloakoffnpc "司祭#ilgf01";	// 2167
+		cloakoffnpc "マリナ#ilgf03";	// 2159
+		cloakoffnpc "マリナ#ilgf04";	// 2160
+		cloakoffnpc "マリナ#ilgf05";	// 2161
+		cloakoffnpc "マリナ#ilgf06";	// 2162
+		cloakoffnpc "マリナ#ilgf07";	// 2163
+		cloakoffnpc "マリナ#ilgf08";	// 2164
+		cloakoffnpc "マリナ#ilgf09";	// 2165
 	}
 	if(IL_VAMP_QUE == 7) {
-		misceffect 561,"";	// self
+		cloakoffnpc "魔法使い#ilgf01";	// 2172
 		cloakonnpc "マリナ#ilgf07";	// 2164
 		cloakonnpc "司祭#ilgf01";	// 2168
 		cloakoffnpc "魔法使い#ilgf25";	// 2229
@@ -2811,15 +2844,15 @@ gef_d01_i.gat,114,216,0	script	#ilgf01	139,3,0,{/* 2185 */
 		cloakoffnpc "魔法使い#ilgf13";	// 2208
 		cloakoffnpc "名も無き墓#ilgf02";	// 2209
 		cloakoffnpc "魔法使い#ilgf11";	// 2206
-		hideoffnpc "魔法使い#ilgf09";	// 2204
-		hideoffnpc "魔法使い#ilgf10";	// 2205
+		cloakoffnpc "魔法使い#ilgf09";	// 2204
+		cloakoffnpc "魔法使い#ilgf10";	// 2205
 		cloakoffnpc "魔法使い#ilgf08";	// 2202
 		cloakoffnpc "名も無き墓#ilgf03";	// 2203
-		hideoffnpc "魔法使い#ilgf06";	// 2199
-		hideoffnpc "魔法使い#ilgf07";	// 2200
-		hideonnpc "アンデッド#ilgf06";	// 2201
-		hideoffnpc "魔法使い#ilgf27";	// 2232
-		hideoffnpc "魔法使い#ilgf28";	// 2233
+		cloakoffnpc "魔法使い#ilgf06";	// 2199
+		cloakoffnpc "魔法使い#ilgf07";	// 2200
+		cloakonnpc "アンデッド#ilgf06";	// 2201
+		cloakoffnpc "魔法使い#ilgf27";	// 2232
+		cloakoffnpc "魔法使い#ilgf28";	// 2233
 	}
 	if(IL_VAMP_QUE == 9) {
 		hideoffnpc "魔法使い#ilgf01";	// 2173
@@ -2839,23 +2872,26 @@ gef_d01_i.gat,114,216,0	script	#ilgf01	139,3,0,{/* 2185 */
 	}
 	end;
 }
-gef_d01_i.gat,96,135,0	script	#illcon01	139,{/* 2186 */}
-gef_d01_i.gat,81,135,0	script	#illcon02	139,{/* 2187 */
-	hideoffnpc "魔法使い#ilgf01";	// 2173
+gef_d01_i.gat,96,135,0	script	#illcon01	139,5,7,{/* 2186 */
+	cloakonnpc "魔法使い#ilgf01";	// 2173
 	cloakonnpc "ドラキュラ#ilgf03";	// 2182
 	cloakonnpc "キング#ilgf02";	// 2183
 	cloakonnpc "ジョジョ#ilgf01";	// 2184
 	cloakonnpc "ジェム#ilgf02";	// 2179
 	cloakonnpc "マリナ#ilgf02";	// 2180
 	cloakonnpc "アントワーヌ#ilgf02";	// 2181
+	end;
 }
-gef_d01_i.gat,81,120,0	script	#illcon03	139,{/* 2188 */}
-gef_d01_i.gat,96,120,0	script	#illcon04	139,{/* 2189 */}
-gef_d01_i.gat,174,83,0	script	#illcon05	139,{/* 2190 */
+gef_d01_i.gat,81,135,0	script	#illcon02	139,5,7,{/* 2187 */}
+gef_d01_i.gat,81,120,0	script	#illcon03	139,5,7,{/* 2188 */}
+gef_d01_i.gat,96,120,0	script	#illcon04	139,5,7,{/* 2189 */}
+
+gef_d01_i.gat,174,83,0	script	#illcon05	139,5,7,{/* 2190 */
 	if(IL_VAMP_QUE < 9) {
 		cloakonnpc "魔法使い#ilgf02";	// 2178
 		cloakonnpc "キング#ilgf01";	// 2177
 		cloakonnpc "ドラキュラ#ilgf02";	// 2176
+		end;
 	}
 	if(IL_VAMP_QUE == 9) {
 		cloakoffnpc "ドラキュラ#ilgf02";	// 2176
@@ -2863,183 +2899,262 @@ gef_d01_i.gat,174,83,0	script	#illcon05	139,{/* 2190 */
 		cloakoffnpc "魔法使い#ilgf02";	// 2178
 	}
 }
-gef_d01_i.gat,189,98,0	script	#illcon06	139,{/* 2191 */}
-gef_d01_i.gat,189,83,0	script	#illcon07	139,{/* 2192 */}
-gef_d01_i.gat,204,83,0	script	#illcon08	139,{/* 2193 */}
-gef_d01_i.gat,174,98,0	script	#illcon09	139,{/* 2194 */}
-gef_d01_i.gat,204,98,0	script	#illcon10	139,{/* 2195 */}
-gef_d01_i.gat,174,113,0	script	#illcon11	139,{/* 2196 */}
-gef_d01_i.gat,189,113,0	script	#illcon12	139,{/* 2197 */}
-gef_d01_i.gat,204,113,0	script	#illcon13	139,{/* 2198 */}
+gef_d01_i.gat,189,98,0	script	#illcon06	139,5,7,{/* 2191 */}
+gef_d01_i.gat,189,83,0	script	#illcon07	139,5,7,{/* 2192 */}
+gef_d01_i.gat,204,83,0	script	#illcon08	139,5,7,{/* 2193 */}
+gef_d01_i.gat,174,98,0	script	#illcon09	139,5,7,{/* 2194 */}
+gef_d01_i.gat,204,98,0	script	#illcon10	139,5,7,{/* 2195 */}
+gef_d01_i.gat,174,113,0	script	#illcon11	139,5,7,{/* 2196 */}
+gef_d01_i.gat,189,113,0	script	#illcon12	139,5,7,{/* 2197 */}
+gef_d01_i.gat,204,113,0	script	#illcon13	139,5,7,{/* 2198 */}
 
 //==============================================================================
 
-gef_d01_i.gat,49,113,3	script	魔法使い#ilgf06	669,{/* 2199 (cloaking)*/
+gef_d01_i.gat,49,113,3	script	魔法使い#ilgf06	669,5,5,{/* 2199 (cloaking)*/
+	end;
+OnTouch:
 	misceffect 1033,"アンデッド#ilgf06";	// 2201
+	set '@dummy,sleep2(1000);
 	hideoffnpc "アンデッド#ilgf06";	// 2201
 	unittalk getnpcid(0,"魔法使い#ilgf06"),"魔法使い : あっ！　消滅してしまった！";	// 2199
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf07"),"魔法使い : アンデッドだから、イグドラシルの葉の効果が逆に作用したんじゃない？";	// 2200
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf06"),"魔法使い : そうみたいね。これからはアンデッドに会ったらイグドラシルの葉を使えばいいんじゃない？";	// 2199
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf07"),"魔法使い : 天才だ！";	// 2200
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf06";	// 2199
 	cloakonnpc "魔法使い#ilgf07";	// 2200
-	hideoffnpc "アンデッド#ilgf06";	// 2201
+	cloakonnpc "アンデッド#ilgf06";	// 2201
 	misceffect 496,"魔法使い#ilgf06";	// 2199
 	misceffect 496,"魔法使い#ilgf07";	// 2200
 	misceffect 496,"アンデッド#ilgf06";	// 2201
+	end;
 }
 gef_d01_i.gat,46,112,5	script	魔法使い#ilgf07	937,{/* 2200 (cloaking)*/}
 gef_d01_i.gat,47,110,7	script	アンデッド#ilgf06	1036,{/* 2201 */}
 
 //==============================================================================
 
-gef_d01_i.gat,137,60,3	script	魔法使い#ilgf08	64,{/* 2202 (cloaking)*/
+gef_d01_i.gat,137,60,3	script	魔法使い#ilgf08	64,5,5,{/* 2202 (cloaking)*/
+	end;
+OnTouch:
 	misceffect 611,"名も無き墓#ilgf03";	// 2203
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf08"),"魔法使い : あれ、これでも起き上がらないな。どうやって奴らは動き回ってるんだろ？";	// 2202
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf08";	// 2202
 	cloakonnpc "名も無き墓#ilgf03";	// 2203
 	misceffect 496,"魔法使い#ilgf08";	// 2202
 	misceffect 496,"名も無き墓#ilgf03";	// 2203
+	end;
 }
 gef_d01_i.gat,136,58,5	script	名も無き墓#ilgf03	557,{/* 2203 (cloaking)*/}
 
 //==============================================================================
 
-gef_d01_i.gat,67,85,5	script	魔法使い#ilgf09	735,{/* 2204 (cloaking)*/
+gef_d01_i.gat,67,85,5	script	魔法使い#ilgf09	735,5,5,{/* 2204 (cloaking)*/
+	end;
+OnTouch:
 	unittalk getnpcid(0,"魔法使い#ilgf09"),"魔法使い : このジェムストーンを砕いて混ぜて使用すれば、あの肉体と魂を繋ぐ媒体を分離できるんじゃないだろうか？";	// 2204
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf10"),"魔法使い : 私の見解では、あのゾンビたちには魂が欠けているとみた。";	// 2205
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf09"),"魔法使い : ならいったいどうやって動いている？　あらゆる生物には魂が宿ってるんだよ！";	// 2204
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf10"),"魔法使い : 筋肉の反応？";	// 2205
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf09"),"魔法使い : あれはどう見ても死んだ体に魂が戻っている！　体から魂を自由に脱着できれば、私たちは肉体のもたらす苦痛から自由になれる！";	// 2204
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf10"),"魔法使い : どうだか……魂が無くても体だけ生きてるかも知れない。あれはどうみても……。";	// 2205
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf09"),"魔法使い : つべこべ言わずに、早くこれを砕いて。";	// 2204
-	@skillnodamage(src: "マットドレインリアー"(679), dst: (679), skill: "ヒール"(28), val: 1874)
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf09";	// 2204
 	cloakonnpc "魔法使い#ilgf10";	// 2205
 	misceffect 496,"魔法使い#ilgf09";	// 2204
 	misceffect 496,"魔法使い#ilgf10";	// 2205
+	end;
 }
 gef_d01_i.gat,67,83,1	script	魔法使い#ilgf10	673,{/* 2205 (cloaking)*/}
 
 //==============================================================================
 
-gef_d01_i.gat,156,234,3	script	魔法使い#ilgf11	567,{/* 2206 (cloaking)*/
+gef_d01_i.gat,156,234,3	script	魔法使い#ilgf11	567,5,5,{/* 2206 (cloaking)*/
+	end;
+OnTouch:
 	unittalk getnpcid(0,"魔法使い#ilgf11"),"魔法使い : ハロー！　冒険者？　何歳？　ここは初めて？";	// 2206
-	unittalk getcharid(3),""+strcharinfo(0)+" : 何故ノービスがこんな場所に……？",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : 何故ノービスがこんな場所に……？",1;	// self:hidden
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf11"),"魔法使い : 私がノービスに見える？　かわいいね。";	// 2206
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……何だろう？",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……何だろう？",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf11";	// 2206
 	misceffect 496,"魔法使い#ilgf11";	// 2206
+	end;
 }
 
 //==============================================================================
 
-gef_d01_i.gat,48,255,5	script	魔法使い#ilgf12	64,{/* 2207 (cloaking)*/
+gef_d01_i.gat,48,255,5	script	魔法使い#ilgf12	64,5,5,{/* 2207 (cloaking)*/
+	end;
+OnTouch:
 	unittalk getnpcid(0,"魔法使い#ilgf12"),"魔法使い : 48回目の実験。さぁ、今度は聖水をかけてみます。";	// 2207
+	set '@dummy,sleep2(1500);
 	misceffect 628,"名も無き墓#ilgf02";	// 2209
 	emotion 9,"名も無き墓#ilgf02";	// 2209
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf12"),"魔法使い : 何の変化もありませんでした。聖水の量を増やし49回目の実験を始めます。";	// 2207
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf13"),"魔法使い : 聖職者を呼んだ方がよくない？";	// 2208
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf12"),"魔法使い : いけません。聖職者たちはこいつらを見た途端、消そうとするでしょう。記録に集中して。";	// 2207
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf12";	// 2207
 	cloakonnpc "魔法使い#ilgf13";	// 2208
 	cloakonnpc "名も無き墓#ilgf02";	// 2209
 	misceffect 496,"魔法使い#ilgf12";	// 2207
 	misceffect 496,"魔法使い#ilgf13";	// 2208
 	misceffect 496,"名も無き墓#ilgf02";	// 2209
+	end;
 }
 gef_d01_i.gat,50,257,5	script	魔法使い#ilgf13	123,{/* 2208 (cloaking)*/}
 gef_d01_i.gat,50,254,5	script	名も無き墓#ilgf02	557,{/* 2209 (cloaking)*/}
 
 //==============================================================================
 
-gef_d01_i.gat,112,267,3	script	魔法使い#ilgf14	735,{/* 2210 */
+gef_d01_i.gat,112,267,3	script	魔法使い#ilgf14	735,5,5,{/* 2210 */
+	end;
+OnTouch:
 	unittalk getnpcid(0,"魔法使い#ilgf14"),"魔法使い : 起き上がれ！";	// 2210
+	set '@dummy,sleep2(1500);
 	misceffect 348,"名も無き墓#ilgf01";	// 2212
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf14"),"魔法使い : ダメだった。";	// 2210
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf15"),"魔法使い : 言ったじゃない。私が返魂のお札を457枚も使ってみたけどダメだったって。そもそも奴らは違う原理で動いてるんだよ。";	// 2211
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf14"),"魔法使い : その原理とは何？";	// 2210
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf15"),"魔法使い : 私が知るか。";	// 2211
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf14";	// 2210
 	cloakonnpc "魔法使い#ilgf15";	// 2211
 	cloakonnpc "名も無き墓#ilgf01";	// 2212
 	misceffect 496,"魔法使い#ilgf14";	// 2210
 	misceffect 496,"魔法使い#ilgf15";	// 2211
 	misceffect 496,"名も無き墓#ilgf01";	// 2212
+	end;
 }
 gef_d01_i.gat,110,266,5	script	魔法使い#ilgf15	937,{/* 2211 */}
 gef_d01_i.gat,111,264,5	script	名も無き墓#ilgf01	557,{/* 2212 */}
 
 //==============================================================================
 
-gef_d01_i.gat,55,167,3	script	魔法使い#ilgf16	937,{/* 2213 (cloaking)*/
+gef_d01_i.gat,55,167,3	script	魔法使い#ilgf16	937,5,5,{/* 2213 (cloaking)*/
+	end;
+OnTouch:
 	unittalk getnpcid(0,"魔法使い#ilgf16"),"魔法使い : ポピに会いたい。これに成功したら、真っ先にポピを呼びたい。";	// 2213
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf17"),"魔法使い : やめろ。あれを見ると無事に戻れそうにもない。骨の代わりにあんたの足の骨を噛むよ。";	// 2214
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf16";	// 2213
 	cloakonnpc "魔法使い#ilgf17";	// 2214
 	misceffect 496,"魔法使い#ilgf16";	// 2213
 	misceffect 496,"魔法使い#ilgf17";	// 2214
+	end;
 }
 gef_d01_i.gat,53,166,7	script	魔法使い#ilgf17	123,{/* 2214 (cloaking)*/}
 
 //==============================================================================
 
-gef_d01_i.gat,236,235,1	script	魔法使い#ilgf18	64,{/* 2215 (cloaking)*/
+gef_d01_i.gat,236,235,1	script	魔法使い#ilgf18	64,5,5,{/* 2215 (cloaking)*/
+	end;
+OnTouch:
 	unittalk getnpcid(0,"誰かの夢#ilgf18"),"誰かの夢 : ヒヒーン！";	// 2216
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf18"),"魔法使い : ああ！　ごめんなさい！　あなたが見せる夢は気持ち悪すぎる。";	// 2215
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf18";	// 2215
 	cloakonnpc "誰かの夢#ilgf18";	// 2216
 	misceffect 496,"魔法使い#ilgf18";	// 2215
 	misceffect 496,"誰かの夢#ilgf18";	// 2216
+	end;
 }
 gef_d01_i.gat,233,237,5	script	誰かの夢#ilgf18	1061,{/* 2216 (cloaking)*/}
 
 //==============================================================================
 
-gef_d01_i.gat,255,201,5	script	魔法使い#ilgf19	673,{/* 2217 (cloaking)*/
+gef_d01_i.gat,255,201,5	script	魔法使い#ilgf19	673,5,5,{/* 2217 (cloaking)*/
+	end;
+OnTouch:
 	misceffect 315,"魔法使い#ilgf19";	// 2217
 	misceffect 315,"魔法使い#ilgf20";	// 2218
 	unittalk getnpcid(0,"魔法使い#ilgf19"),"魔法使い : あ……どうしよう……思ったより強い。";	// 2217
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf20"),"魔法使い : 私たち、いつ帰れるの？";	// 2218
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf19"),"魔法使い : あれが行くまではダメ。今出たら殺される……。";	// 2217
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf19";	// 2217
 	cloakonnpc "魔法使い#ilgf20";	// 2218
 	cloakonnpc "アンデッド#ilgf05";	// 2219
 	misceffect 496,"魔法使い#ilgf19";	// 2217
 	misceffect 496,"魔法使い#ilgf20";	// 2218
 	misceffect 496,"アンデッド#ilgf05";	// 2219
+	end;
 }
 gef_d01_i.gat,254,200,5	script	魔法使い#ilgf20	123,{/* 2218 (cloaking)*/}
 gef_d01_i.gat,256,198,1	script	アンデッド#ilgf05	1036,{/* 2219 (cloaking)*/}
 
 //==============================================================================
 
-gef_d01_i.gat,204,146,1	script	魔法使い#ilgf21	673,{/* 2220 (cloaking)*/
+gef_d01_i.gat,204,146,1	script	魔法使い#ilgf21	673,5,5,{/* 2220 (cloaking)*/
+	end;
+OnTouch:
 	emotion 23,"魔法使い#ilgf21";	// 2220
 	unittalk getnpcid(0,"魔法使い#ilgf21"),"魔法使い : おい！　多過ぎるじゃないか！　一匹だけ連れて来てと言ったのに、こんなに連れて来てどうする！";	// 2220
+	set '@dummy,sleep2(1500);
 	emotion 26,"魔法使い#ilgf22";	// 2221
 	unittalk getnpcid(0,"魔法使い#ilgf22"),"魔法使い : しょうがないだろ！　いつの間にか増えちゃったんだから！";	// 2221
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf21"),"魔法使い : 頭を下げて！";	// 2220
+	set '@dummy,sleep2(1500);
 	misceffect 97,"アンデッド#ilgf02";	// 2222
 	misceffect 97,"アンデッド#ilgf03";	// 2223
 	misceffect 97,"アンデッド#ilgf04";	// 2224
+	set '@dummy,sleep2(1500);
 	cloakonnpc "アンデッド#ilgf02";	// 2222
 	cloakonnpc "アンデッド#ilgf03";	// 2223
 	cloakonnpc "アンデッド#ilgf04";	// 2224
 	unittalk getnpcid(0,"魔法使い#ilgf22"),"魔法使い : ふう……助かった。";	// 2221
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf21";	// 2220
 	cloakonnpc "魔法使い#ilgf22";	// 2221
 	misceffect 496,"魔法使い#ilgf21";	// 2220
 	misceffect 496,"魔法使い#ilgf22";	// 2221
+	end;
 }
 gef_d01_i.gat,202,149,5	script	魔法使い#ilgf22	937,{/* 2221 (cloaking)*/}
 gef_d01_i.gat,202,152,5	script	アンデッド#ilgf02	1036,{/* 2222 (cloaking)*/}
@@ -3048,66 +3163,98 @@ gef_d01_i.gat,204,151,3	script	アンデッド#ilgf04	1036,{/* 2224 (cloaking)*/}
 
 //==============================================================================
 
-gef_d01_i.gat,257,110,1	script	魔法使い#ilgf23	10224,{/* 2225 (cloaking)*/
+gef_d01_i.gat,257,110,1	script	魔法使い#ilgf23	10224,5,5,{/* 2225 (cloaking)*/
+	end;
+OnTouch:
 	unittalk getnpcid(0,"魔法使い#ilgf23"),"魔法使い : 何あれ、なんであんなに足が早いの？　調べる前に私があの世に行っちゃうわ。";	// 2225
+	set '@dummy,sleep2(1500);
 	misceffect 95,"早いアンデッド#ilgf01";	// 2226
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf23"),"魔法使い : あんなのをどうやって捕まえるの……。実験室に連れていきたいのに……。";	// 2225
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf23";	// 2225
 	cloakonnpc "早いアンデッド#ilgf01";	// 2226
 	misceffect 496,"魔法使い#ilgf23";	// 2225
 	misceffect 496,"早いアンデッド#ilgf01";	// 2226
+	end;
 }
 gef_d01_i.gat,253,112,5	script	早いアンデッド#ilgf01	1036,{/* 2226 (cloaking)*/}
 
 //==============================================================================
 
-gef_d01_i.gat,230,76,3	script	魔法使い#ilgf24	704,{/* 2227 (cloaking)*/
+gef_d01_i.gat,230,76,3	script	魔法使い#ilgf24	704,5,5,{/* 2227 (cloaking)*/
+	end;
+OnTouch:
 	unittalk getnpcid(0,"魔法使い#ilgf24"),"魔法使い : よしよし……胞子採集中に死ぬ訳にはいかん。";	// 2227
+	set '@dummy,sleep2(1500);
 	misceffect 543,"光るキノコ#ilgf01";	// 2228
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf24"),"魔法使い : これぐらいあれば、部屋中をこの光で飾れるかな？";	// 2227
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf24";	// 2227
 	cloakonnpc "光るキノコ#ilgf01";	// 2228
 	misceffect 496,"魔法使い#ilgf24";	// 2227
 	misceffect 496,"光るキノコ#ilgf01";	// 2228
+	end;
 }
 gef_d01_i.gat,228,75,3	script	光るキノコ#ilgf01	3755,{/* 2228 (cloaking)*/}
 
 //==============================================================================
 
-gef_d01_i.gat,93,34,1	script	魔法使い#ilgf25	10224,{/* 2229 (cloaking)*/
+gef_d01_i.gat,93,34,1	script	魔法使い#ilgf25	10224,5,5,{/* 2229 (cloaking)*/
+	end;
+OnTouch:
 	unittalk getnpcid(0,"魔法使い#ilgf25"),"魔法使い : 今度はスクロールとイグドラシルの葉を一緒に使ってみよう。私がスクロールを使うから、あんたはイグドラシルの葉を使って。";	// 2229
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf26"),"魔法使い : 了解。";	// 2230
+	set '@dummy,sleep2(1500);
 	misceffect 53,"アンデッド#ilgf01";	// 2231
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf25"),"魔法使い : 今回も失敗？";	// 2229
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf26"),"魔法使い : なんで上手くいかないの？　理論上はこれで人間になるはずじゃ？";	// 2230
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf25"),"魔法使い : 落ち着いて。次は違う方法でやってみよう。";	// 2229
-	@skillnodamage(src: "マットドレインリアー"(685), dst: (685), skill: "ヒール"(28), val: 1863)
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf25";	// 2229
 	cloakonnpc "魔法使い#ilgf26";	// 2230
 	cloakonnpc "アンデッド#ilgf01";	// 2231
 	misceffect 496,"魔法使い#ilgf25";	// 2229
 	misceffect 496,"魔法使い#ilgf26";	// 2230
 	misceffect 496,"アンデッド#ilgf01";	// 2231
+	end;
 }
 gef_d01_i.gat,94,37,3	script	魔法使い#ilgf26	64,{/* 2230 (cloaking)*/}
 gef_d01_i.gat,91,35,5	script	アンデッド#ilgf01	1036,{/* 2231 (cloaking)*/}
 
 //==============================================================================
 
-gef_d01_i.gat,101,124,3	script	魔法使い#ilgf27	10224,{/* 2232 (cloaking)*/
+gef_d01_i.gat,101,124,3	script	魔法使い#ilgf27	10224,5,5,{/* 2232 (cloaking)*/
+	end;
+OnTouch:
 	unittalk getnpcid(0,"魔法使い#ilgf27"),"魔法使い : こんなところで何の実験をするの？　捕えて持ち帰ったら？";	// 2232
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf28"),"魔法使い : ここに流れる気配を感じる？";	// 2233
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf27"),"魔法使い : それが何か？";	// 2232
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf28"),"魔法使い : この力を私たちが利用できると思わない？";	// 2233
+	set '@dummy,sleep2(1500);
 	unittalk getnpcid(0,"魔法使い#ilgf27"),"魔法使い : うーん……。";	// 2232
-	unittalk getcharid(3),""+strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1500);
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;	// self:hidden
+	set '@dummy,sleep2(1000);
 	cloakonnpc "魔法使い#ilgf27";	// 2232
 	cloakonnpc "魔法使い#ilgf28";	// 2233
 	misceffect 496,"魔法使い#ilgf27";	// 2232
 	misceffect 496,"魔法使い#ilgf28";	// 2233
+	end;
 }
 gef_d01_i.gat,99,122,7	script	魔法使い#ilgf28	10224,{/* 2233 (cloaking)*/}
 
