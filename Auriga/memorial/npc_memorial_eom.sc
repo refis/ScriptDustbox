@@ -2654,6 +2654,7 @@ OnStart:
 				misceffect 62,getmdnpcname("絶望の神モロク#04");
 				misceffect 266,getmdnpcname("絶望の神モロク#04");
 				hideonnpc getmdnpcname("絶望の神モロク#04");
+				set 'flag,2;
 				close;
 			}
 			set 'flag,1;

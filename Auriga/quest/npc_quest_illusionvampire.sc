@@ -85,9 +85,9 @@ gef_d01_j.gat,165,100,90,65	monster	安らぎを奪われし者		3752,35,5000,0,0
 3757,怒りのドラキュラ＠インビジブル,idle,353,1,2000,200,5000,yes,self,always,0,,,,,,
 3757,怒りのドラキュラ＠インビジブル,chase,353,1,2000,200,5000,yes,self,always,0,,,,,,
 3757,怒りのドラキュラ＠ワイドサイレンス,attack,663,5,2000,1000,15000,no,self,always,0,,,,,,
-3757,怒りのドラキュラ＠サモンスレイブ,attack,196,16,10000,700,15000,no,self,slavele,5,1419,,,,,
-3757,怒りのドラキュラ＠サモンスレイブ,idle,196,16,10000,700,15000,no,self,slavele,5,1419,,,,,
-3757,怒りのドラキュラ＠サモンスレイブ,idle,196,7,10000,0,15000,no,self,onspawn,0,3750,,,,,
+3757,怒りのドラキュラ＠サモンスレイブ,attack,196,16,10000,700,90000,no,self,slavele,5,1419,,,,,
+3757,怒りのドラキュラ＠サモンスレイブ,idle,196,16,10000,700,90000,no,self,slavele,5,1419,,,,,
+3757,怒りのドラキュラ＠サモンスレイブ,idle,196,7,10000,0,0,no,self,onspawn,0,3750,,,,,
 3757,怒りのドラキュラ＠デッドリーアタック,attack,203,1,3000,0,0,no,target,skillused,2008,,,,,,
 3757,怒りのドラキュラ＠デッドリーアタック,attack,203,1,3000,0,0,no,target,skillused,490,,,,,,
 3757,怒りのドラキュラ＠デッドリーアタック,attack,203,1,3000,0,0,no,target,skillused,271,,,,,,
@@ -3256,7 +3256,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf07"),"魔法使い : 天才だ！";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf06";
 	cloakonnpc "魔法使い#ilgf07";
@@ -3292,7 +3292,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf08"),"魔法使い : あれ、これでも起き上がらないな。どうやって奴らは動き回ってるんだろ？";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf08";
 	cloakonnpc "名も無き墓#ilgf03";
@@ -3330,7 +3330,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf09"),"魔法使い : つべこべ言わずに、早くこれを砕いて。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf09";
 	cloakonnpc "魔法使い#ilgf10";
@@ -3356,11 +3356,11 @@ OnTouch:
 	if(IL_VAMP_QUE != 7) end;
 	unittalk getnpcid(0,"魔法使い#ilgf11"),"魔法使い : ハロー！　冒険者？　何歳？　ここは初めて？";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : 何故ノービスがこんな場所に……？",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : 何故ノービスがこんな場所に……？",1;
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf11"),"魔法使い : 私がノービスに見える？　かわいいね。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……何だろう？",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……何だろう？",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf11";
 	misceffect 496,"魔法使い#ilgf11";
@@ -3387,7 +3387,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf12"),"魔法使い : いけません。聖職者たちはこいつらを見た途端、消そうとするでしょう。記録に集中して。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf12";
 	cloakonnpc "魔法使い#ilgf13";
@@ -3431,7 +3431,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf15"),"魔法使い : 私が知るか。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf14";
 	cloakonnpc "魔法使い#ilgf15";
@@ -3467,7 +3467,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf17"),"魔法使い : やめろ。あれを見ると無事に戻れそうにもない。骨の代わりにあんたの足の骨を噛むよ。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf16";
 	cloakonnpc "魔法使い#ilgf17";
@@ -3495,7 +3495,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf18"),"魔法使い : ああ！　ごめんなさい！　あなたが見せる夢は気持ち悪すぎる。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf18";
 	cloakonnpc "誰かの夢#ilgf18";
@@ -3527,7 +3527,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf19"),"魔法使い : あれが行くまではダメ。今出たら殺される……。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf19";
 	cloakonnpc "魔法使い#ilgf20";
@@ -3576,7 +3576,7 @@ OnTouch:
 	cloakonnpc "アンデッド#ilgf04";
 	unittalk getnpcid(0,"魔法使い#ilgf22"),"魔法使い : ふう……助かった。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf21";
 	cloakonnpc "魔法使い#ilgf22";
@@ -3624,7 +3624,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf23"),"魔法使い : あんなのをどうやって捕まえるの……。実験室に連れていきたいのに……。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf23";
 	cloakonnpc "早いアンデッド#ilgf01";
@@ -3654,7 +3654,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf24"),"魔法使い : これぐらいあれば、部屋中をこの光で飾れるかな？";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf24";
 	cloakonnpc "光るキノコ#ilgf01";
@@ -3690,7 +3690,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf25"),"魔法使い : 落ち着いて。次は違う方法でやってみよう。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf25";
 	cloakonnpc "魔法使い#ilgf26";
@@ -3732,7 +3732,7 @@ OnTouch:
 	if(!sleep2(1500)) end;
 	unittalk getnpcid(0,"魔法使い#ilgf27"),"魔法使い : うーん……。";
 	if(!sleep2(1500)) end;
-	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;:hidden
+	unittalk getcharid(3),strcharinfo(0)+" : これは……ノートの持ち主の古い記憶のようだ。",1;
 	if(!sleep2(1000)) end;
 	cloakonnpc "魔法使い#ilgf27";
 	cloakonnpc "魔法使い#ilgf28";
