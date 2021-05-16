@@ -5,6 +5,15 @@ moc_para01.gat,26,95,5	script	ロエル#sara	10040,{/* 65388 */
 	next;
 	switch(select("ダンジョンの探索","ペンダントの交換","ジターバグの牙の交換")) {
 	case 1:
+		if(checkquest(13181)) {
+			mes "[ロエル]";
+			mes "どうしたのですか？";
+			mes "準備が出来たら隣にいる";
+			mes "ルナインさんに話しかけて下さい。";
+			close2;
+			cutin "roel01.bmp", 255;
+			end;
+		}
 		if(checkquest(116509)) {
 			mes "[ロエル]";
 			mes "初めてシャルロシーと出会った";
@@ -66,15 +75,6 @@ moc_para01.gat,26,95,5	script	ロエル#sara	10040,{/* 65388 */
 			compquest 13181;
 			setquest 116509; //state=1
 			compquest 116509;
-			close2;
-			cutin "roel01.bmp", 255;
-			end;
-		}
-		if(checkquest(13181)) {
-			mes "[ロエル]";
-			mes "どうしたのですか？";
-			mes "準備が出来たら隣にいる";
-			mes "ルナインさんに話しかけて下さい。";
 			close2;
 			cutin "roel01.bmp", 255;
 			end;

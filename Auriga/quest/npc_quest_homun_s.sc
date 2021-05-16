@@ -1,5 +1,5 @@
 prontera.gat,230,198,3	script	ビオレル#prontera	542,{/* 51147 */
-	{
+	if(gethomuninfo(5) < 6009) {
 		mes "[ビオレル]";
 		mes "まだ進化した^FF4800ホムンクルス^000000を";
 		mes "所有していないようだね。";
@@ -20,7 +20,7 @@ prontera.gat,230,198,3	script	ビオレル#prontera	542,{/* 51147 */
 		mes "私の所に来てくれ。";
 		close;
 	}
-	{
+	if(gethomuninfo(1) < 99) {
 		mes "[ビオレル]";
 		mes "ほう、君は";
 		mes "^FF4800ホムンクルス^000000と";
@@ -33,7 +33,77 @@ prontera.gat,230,198,3	script	ビオレル#prontera	542,{/* 51147 */
 		mes "私の所に来てくれ。";
 		close;
 	}
-	{
+	else {
+		if(checkquest(4155)) {
+			mes "[ビオレル]";
+			mes "やぁ。";
+			mes "ホムンクルスについてかい？";
+			mes "詳しい話は家でするよ。";
+			next;
+			mes "[ビオレル]";
+			mes "私の家に行く準備はできた？";
+			next;
+			if(select("^005DFFビオレル^000000の家に行く","行かない") == 2) {
+				mes "[ビオレル]";
+				mes "現在の能力に限界を感じたら、";
+				mes "^FF4800ホムンクルス^000000と一緒に";
+				mes "是非訪れてくれ。";
+				close;
+			}
+			mes "[ビオレル]";
+			mes "よし。いい選択だ。";
+			mes "さあ、目を閉じて。";
+			mes "移動するよ。";
+			close2;
+			warp "que_house_s.gat",19,42;
+			end;
+		}
+		if(checkquest(4156) || checkquest(4157) || checkquest(4158)) {
+			mes "[ビオレル]";
+			mes "おや。";
+			mes "^005DFFジェイナ^000000の家に";
+			mes "行ったんだと思っていたがどうした。";
+			mes "ジェイナに会いに行くかい？";
+			next;
+			if(select("^005DFFジェイナ^000000の部屋に行く","行かない") == 2) {
+				mes "[ビオレル]";
+				mes "では、準備を終えたら来てくれ。";
+				mes "その時は必ず、";
+				mes "^FF4800ホムンクルス^000000と一緒に来てくれ。";
+				close;
+			}
+			mes "[ビオレル]";
+			mes "よし。いい選択だ。";
+			mes "さあ、目を閉じて。";
+			mes "移動するよ。";
+			close2;
+			warp "que_house_s.gat",63,41;
+			end;
+		}
+		if(checkquest(4159)) {
+			mes "[ビオレル]";
+			mes "やぁ。";
+			mes "ホムンクルスについてかい？";
+			mes "詳しい話は家でするよ。";
+			next;
+			mes "[ビオレル]";
+			mes "私の家に行く準備はできた？";
+			next;
+			if(select("^005DFFビオレル^000000の家に行く","行かない") == 2) {
+				mes "[ビオレル]";
+				mes "では、準備を終えたら来てくれ。";
+				mes "その時は必ず、";
+				mes "^FF4800ホムンクルス^000000と一緒に来てくれ。";
+				close;
+			}
+			mes "[ビオレル]";
+			mes "よし。いい選択だ。";
+			mes "さあ、目を閉じて。";
+			mes "移動するよ。";
+			close2;
+			warp "que_house_s.gat",19,42;
+			end;
+		}
 		mes "[ビオレル]";
 		mes "おお、素晴らしい～！";
 		mes "何かって？";
@@ -63,76 +133,6 @@ prontera.gat,230,198,3	script	ビオレル#prontera	542,{/* 51147 */
 		close2;
 		setquest 4154; //state=1
 		setquest 4155; //state=1
-		warp "que_house_s.gat",19,42;
-		end;
-	}
-	if(checkquest(4155)) {
-		mes "[ビオレル]";
-		mes "やぁ。";
-		mes "ホムンクルスについてかい？";
-		mes "詳しい話は家でするよ。";
-		next;
-		mes "[ビオレル]";
-		mes "私の家に行く準備はできた？";
-		next;
-		if(select("^005DFFビオレル^000000の家に行く","行かない") == 2) {
-			mes "[ビオレル]";
-			mes "現在の能力に限界を感じたら、";
-			mes "^FF4800ホムンクルス^000000と一緒に";
-			mes "是非訪れてくれ。";
-			close;
-		}
-		mes "[ビオレル]";
-		mes "よし。いい選択だ。";
-		mes "さあ、目を閉じて。";
-		mes "移動するよ。";
-		close2;
-		warp "que_house_s.gat",19,42;
-		end;
-	}
-	if(checkquest(4156) || checkquest(4157) || checkquest(4158)) {
-		mes "[ビオレル]";
-		mes "おや。";
-		mes "^005DFFジェイナ^000000の家に";
-		mes "行ったんだと思っていたがどうした。";
-		mes "ジェイナに会いに行くかい？";
-		next;
-		if(select("^005DFFジェイナ^000000の部屋に行く","行かない") == 2) {
-			mes "[ビオレル]";
-			mes "では、準備を終えたら来てくれ。";
-			mes "その時は必ず、";
-			mes "^FF4800ホムンクルス^000000と一緒に来てくれ。";
-			close;
-		}
-		mes "[ビオレル]";
-		mes "よし。いい選択だ。";
-		mes "さあ、目を閉じて。";
-		mes "移動するよ。";
-		close2;
-		warp "que_house_s.gat",63,41;
-		end;
-	}
-	if(checkquest(4159)) {
-		mes "[ビオレル]";
-		mes "やぁ。";
-		mes "ホムンクルスについてかい？";
-		mes "詳しい話は家でするよ。";
-		next;
-		mes "[ビオレル]";
-		mes "私の家に行く準備はできた？";
-		next;
-		if(select("^005DFFビオレル^000000の家に行く","行かない") == 2) {
-			mes "[ビオレル]";
-			mes "では、準備を終えたら来てくれ。";
-			mes "その時は必ず、";
-			mes "^FF4800ホムンクルス^000000と一緒に来てくれ。";
-			close;
-		}
-		mes "[ビオレル]";
-		mes "よし。いい選択だ。";
-		mes "さあ、目を閉じて。";
-		mes "移動するよ。";
-		close2;
 		warp "que_house_s.gat",19,42;
 		end;
 	}
@@ -860,7 +860,7 @@ que_house_s.gat,80,42,3	script	ジェイナ#homun_s	558,{/* 51149 */
 		mes "今のホムンクルスを";
 		mes "^0000FFエンブリオ^000000に戻す過程が必要です。";
 		next;
-		if() {
+		if(getitemblank() == 0) {
 			mes "[ジェイナ]";
 			mes "あら、荷物が多くて";
 			mes "^0000FFエンブリオ^000000を";
@@ -1164,7 +1164,7 @@ que_house_s.gat,83,47,3	script	魔法ボード#homun_s	857,{/* 51150 */
 	close;
 }
 que_house_s.gat,13,52,3	script	開かれている本#01homun_	111,{/* 51151 */
-	switch() {
+	switch(rand(6)) {
 	case 0:
 		mes "[本に書かれている文字]";
 		mes "狂気と天才性は紙一重である。";
@@ -1313,7 +1313,7 @@ que_house_s.gat,13,52,3	script	開かれている本#01homun_	111,{/* 51151 */
 	}
 }
 que_house_s.gat,16,52,3	script	開かれている本#02homun_	111,{/* 51152 */
-	switch() {
+	switch(rand(4)) {
 	case 0:
 		mes "[本に書かれている文字]";
 		mes "^005DFFドブリス^000000になんという";
@@ -1417,7 +1417,7 @@ OnInit:
 }
 que_house_s.gat,24,46,3	script	#homun_s	6002,{/* 51155 */}
 que_house_s.gat,24,46,3	script	ジョナダン#05homun_s	111,{/* 51156 */
-	{
+	if(gethomuninfo(5) < 6048) {
 		mes "[ジョナダン]";
 		mes "うわああ～うわああ！";
 		next;

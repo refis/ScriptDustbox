@@ -1,21 +1,23 @@
-//3802: 不吉なソリッドタートル
 //250,1452,483,528
+/*
 @skillcasting(src: 3802:"不吉なソリッドタートル"(6593), dst: 4631724, skill: "グラウンドアタック"(185), casttime: 500)
 @skillattack(src: 3802:"不吉なソリッドタートル"(6593), dst: (4631724), skill: "グラウンドアタック"(185), skill_lv: 65535, damage: 4919, sDelay: 483, dDelay: 504, div: 1, hit: 6, tick: 552715165)
 @skillnodamage(src: 3802:"不吉なソリッドタートル"(6593), dst: (6593), skill: "オートガード"(249), val: 5)
 @skillcasting(src: 3802:"不吉なソリッドタートル"(6593), dst: 4631724, skill: "スタンアタック"(179), casttime: 1500)
 @skillattack(src: 3802:"不吉なソリッドタートル"(6593), dst: (4631724), skill: "スタンアタック"(179), skill_lv: 65535, damage: 903, sDelay: 483, dDelay: 504, div: 1, hit: 6, tick: 552557527)
 
-unittalk '@mob_id,"不吉なソリッドタートル : ……。";	// 21990:不吉なソリッドタートル
-
+*/
 // tur_d04_i.gat
 tur_d04_i.gat,0,0,0,0	monster	不吉なヒートタートル	3803,10,5000,0,0
 tur_d04_i.gat,0,0,0,0	monster	不吉なフリーズタートル	3801,10,5000,0,0
+// tur_d03_j.gat
+tur_d03_j.gat,0,0,0,0	monster	不吉なフリーズタートル	3801,60,5000,0,0
+tur_d03_j.gat,0,0,0,0	monster	不吉なヒートタートル	3803,60,5000,0,0
 // tur_d04_j.gat
 tur_d04_j.gat,0,0,0,0	monster	不吉なアサルトタートル	3799,105,5000,0,0
 tur_d04_j.gat,0,0,0,0	monster	不吉なPタートル	3800,35,5000,0,0
 
-alberta.gat,211,28,5	script	騎士エイルバル#illtur	405,{/* 14339 */
+alberta.gat,211,28,5	script	騎士エイルバル#illtur	405,{
 	switch(IL_TUR_QUE) {
 	case 0:
 		mes "[騎士エイルバル]";
@@ -191,7 +193,7 @@ alberta.gat,211,28,5	script	騎士エイルバル#illtur	405,{/* 14339 */
 		end;
 	case 2:
 	case 3:
-		emotion 0,"騎士エイルバル#illtur";	// 14338
+		emotion 0,"騎士エイルバル#illtur";
 		mes "[騎士エイルバル]";
 		mes "冒険者様！ご無事でしたか！";
 		mes "イエルフェンに続いて";
@@ -199,7 +201,7 @@ alberta.gat,211,28,5	script	騎士エイルバル#illtur	405,{/* 14339 */
 		mes "本当に心配しておりました。";
 		next;
 		menu "イエルフェン教授の手掛かりを見つけました",-;
-		emotion 0,"騎士エイルバル#illtur";	// 14338
+		emotion 0,"騎士エイルバル#illtur";
 		mes "[騎士エイルバル]";
 		mes "本当ですか？";
 		mes "ああ、本当に良かった。";
@@ -237,7 +239,7 @@ alberta.gat,211,28,5	script	騎士エイルバル#illtur	405,{/* 14339 */
 	case 6:
 	case 7:
 	case 8:
-		emotion 0,"騎士エイルバル#illtur";	// 14339
+		emotion 0,"騎士エイルバル#illtur";
 		mes "[騎士エイルバル]";
 		mes "冒険者様！ご無事でしたか！";
 		mes "イエルフェンに続いて";
@@ -245,7 +247,7 @@ alberta.gat,211,28,5	script	騎士エイルバル#illtur	405,{/* 14339 */
 		mes "本当に心配しておりました。";
 		next;
 		menu "イエルフェン教授を見つけました",-;
-		emotion 0,"騎士エイルバル#illtur";	// 14339
+		emotion 0,"騎士エイルバル#illtur";
 		mes "[騎士エイルバル]";
 		mes "本当ですか？";
 		mes "ああ、本当に良かった。";
@@ -286,30 +288,23 @@ alberta.gat,211,28,5	script	騎士エイルバル#illtur	405,{/* 14339 */
 		case 1:
 			switch(select("悲しみの陽居村へ","悲しみの陽居村(クエスト)へ")) {
 			case 1:
-				mes "‐亀の甲羅の欠片を握りしめると";
-				mes "　風で髪の毛がなびくのを感じた。‐";
-				next;
-				mes "[騎士エイルバル]";
-				mes "どうか、お気をつけて。";
-				next;
-				mes "‐^424242完全に目の前が暗くなる前";
-				mes "　頬にやや冷たい空気が触れた……。^000000 ‐";
-				close2;
-				warp "tur_d03_j.gat",132,187;
-				end;
+				set '@map$,"tur_d03_j.gat";
+				break;
 			case 2:
-				mes "‐亀の甲羅の欠片を握りしめると";
-				mes "　風で髪の毛がなびくのを感じた。‐";
-				next;
-				mes "[騎士エイルバル]";
-				mes "どうか、お気をつけて。";
-				next;
-				mes "‐^424242完全に目の前が暗くなる前";
-				mes "　頬にやや冷たい空気が触れた……。^000000 ‐";
-				close2;
-				warp "tur_d03_i.gat",132,187;
-				end;
+				set '@map$,"tur_d03_i.gat";
+				break;
 			}
+			mes "‐亀の甲羅の欠片を握りしめると";
+			mes "　風で髪の毛がなびくのを感じた。‐";
+			next;
+			mes "[騎士エイルバル]";
+			mes "どうか、お気をつけて。";
+			next;
+			mes "‐^424242完全に目の前が暗くなる前";
+			mes "　頬にやや冷たい空気が触れた……。^000000 ‐";
+			close2;
+			warp '@map$,132,187;
+			end;
 		case 2:
 			mes "[騎士エイルバル]";
 			mes "冒険者様、こんにちは。";
@@ -364,7 +359,7 @@ alberta.gat,211,28,5	script	騎士エイルバル#illtur	405,{/* 14339 */
 	}
 }
 
-tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
+tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{
 	switch(IL_TUR_QUE) {
 	case 1:
 		mes "[少女]";
@@ -401,9 +396,9 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "分からないけど、";
 		mes "居そうな場所はいくつかあるから";
 		mes "教えてあげる。";
-		viewpoint 1, 80, 180, 1, 0xFFFF33;	// 0x144
-		viewpoint 1, 235, 187, 2, 0xFFFF33;	// 0x144
-		viewpoint 1, 217, 73, 3, 0xFFFF33;	// 0x144
+		viewpoint 1, 80, 180, 1, 0xFFFF33;
+		viewpoint 1, 235, 187, 2, 0xFFFF33;
+		viewpoint 1, 217, 73, 3, 0xFFFF33;
 		next;
 		mes "[少女]";
 		mes "^0000CDここの二か所、下の二か所^000000。";
@@ -421,7 +416,7 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "それを知る必要はない。";
 		next;
 		menu "どうやったら帰れる？",-;
-		emotion 9,"少女#illtur01";	// 2242
+		emotion 9,"少女#illtur01";
 		mes "[少女]";
 		mes "帰り方は知らない。";
 		mes "どこから来たのかも知らないのに、";
@@ -438,7 +433,7 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "　元の場所に帰りたい時は";
 		mes "　近付いて調べてみよう。^000000‐";
 		next;
-		misceffect 778,"少女#illtur01";	// 2242
+		misceffect 778,"少女#illtur01";
 		if(!sleep2(1000)) end;
 		misceffect 778,"";
 		misceffect 877,"";
@@ -459,9 +454,9 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "^FF0000あなたが見知らぬ息をする者であると、";
 		mes "決してバレないで。^000000";
 		delquest 16096;
-		setquest 16097;	// state=1
-		setquest 16098;	// state=1
-		setquest 16099;	// state=1
+		setquest 16097;
+		setquest 16098;
+		setquest 16099;
 		set IL_TUR_QUE,2;
 		close;
 	case 2:
@@ -478,17 +473,17 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "[少女]";
 		mes "居そうな場所はいくつかあるから";
 		mes "教えてあげる。";
-		viewpoint 1, 80, 180, 1, 0xFFFF33;	// 0x144
-		viewpoint 1, 235, 187, 2, 0xFFFF33;	// 0x144
-		viewpoint 1, 217, 73, 3, 0xFFFF33;	// 0x144
+		viewpoint 1, 80, 180, 1, 0xFFFF33;
+		viewpoint 1, 235, 187, 2, 0xFFFF33;
+		viewpoint 1, 217, 73, 3, 0xFFFF33;
 		close;
 	case 6:
 		mes "[少女]";
 		mes "無事だったんだね。二人とも。";
 		mes "……危険にさせてごめん。";
 		next;
-		cloakoffnpc "考古学者イエルフェン#il";	// 2244
-		emotion 4,"考古学者イエルフェン#il";	// 2244
+		cloakoffnpc "考古学者イエルフェン#i1";
+		emotion 4,"考古学者イエルフェン#i1";
 		mes "[考古学者イエルフェン]";
 		mes "……ふう、死ぬかと思いました。";
 		next;
@@ -505,7 +500,7 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "なぜ、そんなことをする？";
 		mes "傲慢だね。";
 		next;
-		emotion 32,"考古学者イエルフェン#il";	// 2244
+		emotion 32,"考古学者イエルフェン#i1";
 		mes "[考古学者イエルフェン]";
 		mes "僕は学者ですから。";
 		next;
@@ -529,15 +524,15 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "来ない方がいい。";
 		mes "ここは危ないから。";
 		next;
-		emotion 0,"考古学者イエルフェン#il";	// 2244
+		emotion 0,"考古学者イエルフェン#i1";
 		mes "[考古学者イエルフェン]";
 		mes "あなたが欲しいのは";
 		mes "それでもここに帰ってくる";
 		mes "誰かですよね。";
 		next;
 		if(!sleep2(3000)) end;
-		emotion 7,"少女#illtur01";	// 2242
-		unittalk getnpcid(0,"少女#illtur01"),"少女 : ……本当、勝手な考え。";	// 2242
+		emotion 7,"少女#illtur01";
+		unittalk getnpcid(0,"少女#illtur01"),"少女 : ……本当、勝手な考え。";
 		next;
 		mes "[少女]";
 		mes "ふう……分かった。";
@@ -558,15 +553,15 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "それじゃ、僕は";
 		mes "ちょっとこの辺を回ってきます。";
 		next;
-		cloakonnpc "考古学者イエルフェン#il";	// 2244
+		cloakonnpc "考古学者イエルフェン#i1";
 		mes "[少女]";
 		mes "少し待ってから";
 		mes "また話しかけてくれる？";
-		chgquest 16104,16116;	// state=1
+		chgquest 16104,16116;
 		set IL_TUR_QUE,7;
 		close;
 	case 7:
-		cloakoffnpc "考古学者イエルフェン#il";	// 2244
+		cloakoffnpc "考古学者イエルフェン#i1";
 		mes "[ナリン]";
 		mes "待ってくれてありがとう。";
 		mes "自己紹介から始めた方がいいよね。";
@@ -602,15 +597,15 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "結局は元に戻って";
 		mes "同じことを繰り返す。";
 		next;
-		unittalk getnpcid(0,"少女#illtur01"),"ナリン  :  私たちは増悪する。";	// 2242
+		unittalk getnpcid(0,"少女#illtur01"),"ナリン  :  私たちは増悪する。";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"少女#illtur01"),"ナリン  :  生きてる者。";	// 2242
+		unittalk getnpcid(0,"少女#illtur01"),"ナリン  :  生きてる者。";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"少女#illtur01"),"ナリン  :  怨念に縛られない者。";	// 2242
+		unittalk getnpcid(0,"少女#illtur01"),"ナリン  :  怨念に縛られない者。";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"少女#illtur01"),"ナリン  :  見知らぬ息をする者。";	// 2242
+		unittalk getnpcid(0,"少女#illtur01"),"ナリン  :  見知らぬ息をする者。";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"少女#illtur01"),"ナリン  :  最後の息を、聞きたがる。";	// 2242
+		unittalk getnpcid(0,"少女#illtur01"),"ナリン  :  最後の息を、聞きたがる。";
 		if(!sleep2(1000)) end;
 		mes "[ナリン]";
 		mes "だけど、幸いなことに";
@@ -646,7 +641,7 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "みんなを救いたい^000000。";
 		mes "という、ものだから。";
 		next;
-		emotion 7,"少女#illtur01";	// 2242
+		emotion 7,"少女#illtur01";
 		mes "[ナリン]";
 		mes "う……本当、バカな話だよ。";
 		mes "……ごめん、ちょっとだけ";
@@ -658,14 +653,14 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "ちょっと席を外しておきましょう。";
 		mes strcharinfo(0)+"様、行きましょうか。";
 		emotion 33,"";
-		chgquest 16116,16117;	// state=1
+		chgquest 16116,16117;
 		set IL_TUR_QUE,8;
 		close2;
-		cloakonnpc "考古学者イエルフェン#il";	// 2244
+		cloakonnpc "考古学者イエルフェン#i1";
 		end;
 	case 8:
-		cloakoffnpc "考古学者イエルフェン#il";	// 2244
-		emotion 2,"考古学者イエルフェン#il";	// 2244
+		cloakoffnpc "考古学者イエルフェン#i1";
+		emotion 2,"考古学者イエルフェン#i1";
 		mes "[考古学者イエルフェン]";
 		mes "もう宜しいのですか?";
 		mes "無理しなくて良いですよ。";
@@ -740,12 +735,12 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "弱くて、長く続かない。";
 		mes "切れる前に、出て行って。";
 		if(!sleep2(500)) end;
-		misceffect 778,"少女#illtur01";	// 2242
+		misceffect 778,"少女#illtur01";
 		if(!sleep2(1000)) end;
 		misceffect 778,"";
-		misceffect 778,"考古学者イエルフェン#il";	// 2244
+		misceffect 778,"考古学者イエルフェン#i1";
 		misceffect 877,"";
-		misceffect 877,"考古学者イエルフェン#il";	// 2244
+		misceffect 877,"考古学者イエルフェン#i1";
 		next;
 		menu "苦労したんだね",-;
 		mes "[ナリン]";
@@ -755,7 +750,7 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "言わないで。";
 		next;
 		menu "帰らない",-;
-		emotion 0,"少女#illtur01";	// 2242
+		emotion 0,"少女#illtur01";
 		mes "[ナリン]";
 		mes "何を言ってるの!?";
 		mes "話を聞いたら";
@@ -770,7 +765,7 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "自我を取り戻せるように";
 		mes "手伝いますよ。";
 		next;
-		emotion 9,"少女#illtur01";	// 2242
+		emotion 9,"少女#illtur01";
 		mes "[ナリン]";
 		mes "それは本当？";
 		mes "……ううん。";
@@ -859,9 +854,9 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		if(countitem(25315) > 0)
 			delitem 25315,1;
 		misceffect 861,"";
-		misceffect 861,"考古学者イエルフェン#il";	// 2244
+		misceffect 861,"考古学者イエルフェン#i1";
 		if(!sleep2(500)) end;
-		emotion 0,"考古学者イエルフェン#il";	// 2244
+		emotion 0,"考古学者イエルフェン#i1";
 		mes "[考古学者イエルフェン]";
 		mes "お、おや？持っていた";
 		mes "亀の甲羅の欠片が消えました。";
@@ -876,7 +871,7 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "[考古学者イエルフェン]";
 		mes "それはどういうことですか？";
 		next;
-		emotion 7,"少女#illtur01";	// 2242
+		emotion 7,"少女#illtur01";
 		mes "[ナリン]";
 		mes "詳しいことは知らない。";
 		mes "ただそうかも知れないだけ。";
@@ -922,7 +917,7 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "そうしてると、彼らもいつかは……。";
 		next;
 		menu "分かった",-;
-		emotion 40,"少女#illtur01";	// 2242
+		emotion 40,"少女#illtur01";
 		mes "[ナリン]";
 		mes "ふふ……。";
 		next;
@@ -932,7 +927,7 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 		mes "いつか二人に";
 		mes "出逢えるからだったかな……。";
 		next;
-		emotion 33,"少女#illtur01";	// 2242
+		emotion 33,"少女#illtur01";
 		mes "[ナリン]";
 		mes "きっと、そう。";
 		if(!sleep2(1000)) end;
@@ -957,14 +952,14 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 			close;
 		}
 		delquest 16117;
-		setquest 16105;	// state=1
-		setquest 202095;	// state=1
+		setquest 16105;
+		setquest 202095;
 		set IL_TUR_QUE,9;
-		getitem 25271,10;	//unexpected error
+		getitem 25271,10;
 		getexp 300000000,0,1;
 		getexp 0,60000000,0;
-		unittalk getnpcid(0,"考古学者イエルフェン#il"),"イエルフェン : それじゃ、また来ます！";	// 2244
-		cloakonnpc "考古学者イエルフェン#il";	// 2244
+		unittalk getnpcid(0,"考古学者イエルフェン#i1"),"イエルフェン : それじゃ、また来ます！";
+		cloakonnpc "考古学者イエルフェン#i1";
 		end;
 	case 9:
 		mes "[ナリン]";
@@ -983,7 +978,7 @@ tur_d03_i.gat,139,186,3	script	少女#illtur01	10238,{/* 2242 */
 	}
 }
 
-tur_d03_i.gat,132,194,3	script	光の群れ#illtur01	10042,{/* 2243 */
+tur_d03_i.gat,132,194,3	script	光の群れ#illtur01	10042,{
 	if(IL_TUR_QUE <= 1) {
 		mes "[少女]";
 		mes "また見知らぬ人。";
@@ -1042,14 +1037,14 @@ tur_d03_i.gat,132,194,3	script	光の群れ#illtur01	10042,{/* 2243 */
 	end;
 }
 
-tur_d03_i.gat,136,187,5	script	考古学者イエルフェン#il	740,{/* 2244 (cloaking)*/
+tur_d03_i.gat,136,187,5	script	考古学者イエルフェン#i1	740,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 
-tur_d03_i.gat,80,180,1	script	気の早い男#illtur01	10239,{/* 2245 */
+tur_d03_i.gat,80,180,1	script	気の早い男#illtur01	10239,{
 	switch(IL_TUR_QUE) {
 	case 0:
 		donpcevent "気の早い男#illtur01::OnTalk"+ rand(1,3);
@@ -1117,7 +1112,7 @@ tur_d03_i.gat,80,180,1	script	気の早い男#illtur01	10239,{/* 2245 */
 			mes "　場所が^0000CDもう一か所^000000ある。";
 			mes "　^0000CD薄暗い久陽宮^000000に";
 			mes "　降りて探してみるか。‐";
-			setquest 16100;	// state=1
+			setquest 16100;
 			set IL_TUR_QUE,3;
 			close;
 		}
@@ -1128,28 +1123,28 @@ tur_d03_i.gat,80,180,1	script	気の早い男#illtur01	10239,{/* 2245 */
 	}
 OnTalk1:
 	sleep 3000;
-	unittalk "気の早い男 : 我が子、なくしちゃった。なくしちゃったよ。愛しい我が子供。どこ行った？";	// 2245
+	unittalk "気の早い男 : 我が子、なくしちゃった。なくしちゃったよ。愛しい我が子供。どこ行った？";
 	sleep 3000;
-	unittalk "気の早い男 : 我が子？子供？なくしちゃっ、なく、我が娘……子供。どこ……どこ？";	// 2245
+	unittalk "気の早い男 : 我が子？子供？なくしちゃっ、なく、我が娘……子供。どこ……どこ？";
 	sleep 3000;
-	end
+	end;
 OnTalk2:
 	sleep 3000;
-	unittalk "気の早い男 : いない。探せられない。我が子。もういない。愛しい我が娘。";	// 2245
+	unittalk "気の早い男 : いない。探せられない。我が子。もういない。愛しい我が娘。";
 	sleep 3000;
-	unittalk "気の早い男 : もういない。探せられない……我が娘、我が……娘？娘、娘？我が……";	// 2245
+	unittalk "気の早い男 : もういない。探せられない……我が娘、我が……娘？娘、娘？我が……";
 	sleep 3000;
-	end
+	end;
 OnTalk3:
 	sleep 3000;
-	unittalk "気の早い男 : 子供がいない……我が子が、いなくなった。愛しい我が娘。";	// 2245
+	unittalk "気の早い男 : 子供がいない……我が子が、いなくなった。愛しい我が娘。";
 	sleep 3000;
-	unittalk "気の早い男 : 自分とそっくりな人形があんなに好きだったのに。もう人形はない。娘もいない。";	// 2245
+	unittalk "気の早い男 : 自分とそっくりな人形があんなに好きだったのに。もう人形はない。娘もいない。";
 	sleep 3000;
-	end
+	end;
 }
 
-tur_d03_i.gat,235,187,7	script	細かい軍人#illtur01	10240,{/* 2246 */
+tur_d03_i.gat,235,187,7	script	細かい軍人#illtur01	10240,{
 	switch(IL_TUR_QUE) {
 	default:
 		donpcevent "細かい軍人#illtur01::OnTalk"+ rand(1,3);
@@ -1190,13 +1185,13 @@ tur_d03_i.gat,235,187,7	script	細かい軍人#illtur01	10240,{/* 2246 */
 		next;
 		switch(select("近くで人を見なかった？","大丈夫ですか？")) {
 		case 1:
-			misceffect 563,"細かい軍人#illtur01";	// 2246
+			misceffect 563,"細かい軍人#illtur01";
 			mes "[細かい軍人]";
 			mes "^BDBDBD人^000000間？人間^BDBDBDだ^000000と？";
 			mes "そんなのがい^BDBDBDる^000000訳がない^BDBDBDじゃん^000000!!";
 			break;
 		case 2:
-			misceffect 563,"細かい軍人#illtur01";	// 2246
+			misceffect 563,"細かい軍人#illtur01";
 			mes "[細かい軍人]";
 			mes "^BDBDBD大^000000丈夫？何が！";
 			mes "大丈^BDBDBD夫な^000000訳が^BDBDBDな^000000いだろ!!";
@@ -1218,7 +1213,7 @@ tur_d03_i.gat,235,187,7	script	細かい軍人#illtur01	10240,{/* 2246 */
 			mes "　場所が^0000CDもう一か所^000000ある。";
 			mes "　^0000CD薄暗い久陽宮^000000に";
 			mes "　降りて探してみるか。‐";
-			setquest 16100;	// state=1
+			setquest 16100;
 			set IL_TUR_QUE,3;
 			close;
 		}
@@ -1229,28 +1224,28 @@ tur_d03_i.gat,235,187,7	script	細かい軍人#illtur01	10240,{/* 2246 */
 	}
 OnTalk1:
 	sleep 3000;
-	unittalk "細かい軍人 : クス……クスクス……ブツ、ブツブツ……クス……";	// 2246
+	unittalk "細かい軍人 : クス……クスクス……ブツ、ブツブツ……クス……";
 	sleep 3000;
-	unittalk "細かい軍人 : お、俺の宝物……クスクス、許さん……";	// 2246
+	unittalk "細かい軍人 : お、俺の宝物……クスクス、許さん……";
 	sleep 3000;
-	end
+	end;
 OnTalk2:
 	sleep 3000;
-	unittalk "細かい軍人 : 復讐……復讐しなきゃ…ブツブツ、ブツ、クスクス、クスクスクス……";	// 2246
+	unittalk "細かい軍人 : 復讐……復讐しなきゃ…ブツブツ、ブツ、クスクス、クスクスクス……";
 	sleep 3000;
-	unittalk "細かい軍人 : 全部……復讐しなきゃ…不吉なアサルトタートル……俺の宝物を奪った！";	// 2246
+	unittalk "細かい軍人 : 全部……復讐しなきゃ…不吉なアサルトタートル……俺の宝物を奪った！";
 	sleep 3000;
 	end;
 OnTalk3:
 	sleep 3000;
-	unittalk "細かい軍人 : 俺の宝物、不吉なアサルトタートルさえいなかったら……全部、ブツ、ブツブツ……";	// 2246
+	unittalk "細かい軍人 : 俺の宝物、不吉なアサルトタートルさえいなかったら……全部、ブツ、ブツブツ……";
 	sleep 3000;
-	unittalk "細かい軍人 : クスクス、宝物……俺の宝物……ブツ……ブツブツ、クスクス……";	// 2246
+	unittalk "細かい軍人 : クスクス、宝物……俺の宝物……ブツ……ブツブツ、クスクス……";
 	sleep 3000;
 	end;
 }
 
-tur_d04_i.gat,96,112,1	script	元気のない女#illtur01	10241,{/* 2247 */
+tur_d04_i.gat,96,112,1	script	元気のない女#illtur01	10241,{
 	switch(IL_TUR_QUE) {
 	case 0:
 	case 1:
@@ -1308,7 +1303,7 @@ tur_d04_i.gat,96,112,1	script	元気のない女#illtur01	10241,{/* 2247 */
 			mes "　場所が^0000CDもう一か所^000000ある。";
 			mes "　^0000CD薄暗い久陽宮^000000と言っていたので";
 			mes "　捜してみよう。-";
-			setquest 16100;	// state=1
+			setquest 16100;
 			set IL_TUR_QUE,3;
 			close;
 		}
@@ -1318,7 +1313,7 @@ tur_d04_i.gat,96,112,1	script	元気のない女#illtur01	10241,{/* 2247 */
 		close;
 	case 5:
 		donpcevent "元気のない女#illtur01::OnTalk"+ rand(1,3);
-		cloakoffnpc "考古学者イエルフェン#il";	// 2260
+		cloakoffnpc "考古学者イエルフェン#i2";
 		mes "[考古学者イエルフェン]";
 		mes "この周辺ですか？";
 		mes "何度か来た場所ですが……。";
@@ -1335,46 +1330,46 @@ tur_d04_i.gat,96,112,1	script	元気のない女#illtur01	10241,{/* 2247 */
 		mes "ここには僕たち二人以外";
 		mes "誰もいませんが。";
 		next;
-		unittalk getnpcid(0,"元気のない女#illtur01"),"あは、見つけた。";	// 2247
-		cloakonnpc "元気のない女#illtur01";	// 2247
-		misceffect 563,"怨霊#illtur01";	// 2261
-		misceffect 847,"怨霊#illtur01";	// 2261
-		cloakoffnpc "怨霊#illtur01";	// 2261
+		unittalk getnpcid(0,"元気のない女#illtur01"),"あは、見つけた。";
+		cloakonnpc "元気のない女#illtur01";
+		misceffect 563,"怨霊#illtur01";
+		misceffect 847,"怨霊#illtur01";
+		cloakoffnpc "怨霊#illtur01";
 		next;
-		misceffect 563,"怨霊#illtur02";	// 2262
-		misceffect 847,"怨霊#illtur02";	// 2262
-		cloakoffnpc "怨霊#illtur02";	// 2262
+		misceffect 563,"怨霊#illtur02";
+		misceffect 847,"怨霊#illtur02";
+		cloakoffnpc "怨霊#illtur02";
 		sc_start3 SC_BLIND,0,0,0,0,10000,10;
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"怨霊#illtur02"),"見つけた。";	// 2262
-		misceffect 847,"怨霊#illtur03";	// 2263
-		cloakoffnpc "怨霊#illtur03";	// 2263
+		unittalk getnpcid(0,"怨霊#illtur02"),"見つけた。";
+		misceffect 847,"怨霊#illtur03";
+		cloakoffnpc "怨霊#illtur03";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"怨霊#illtur03"),"息をする者だ。";	// 2263
-		misceffect 563,"怨霊#illtur04";	// 2264
-		misceffect 847,"怨霊#illtur04";	// 2264
-		cloakoffnpc "怨霊#illtur04";	// 2264
+		unittalk getnpcid(0,"怨霊#illtur03"),"息をする者だ。";
+		misceffect 563,"怨霊#illtur04";
+		misceffect 847,"怨霊#illtur04";
+		cloakoffnpc "怨霊#illtur04";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"怨霊#illtur04"),"生きてる者を見つけた。";	// 2264
-		misceffect 847,"怨霊#illtur05";	// 2265
-		cloakoffnpc "怨霊#illtur05";	// 2265
+		unittalk getnpcid(0,"怨霊#illtur04"),"生きてる者を見つけた。";
+		misceffect 847,"怨霊#illtur05";
+		cloakoffnpc "怨霊#illtur05";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"怨霊#illtur05"),"捕まえて！";	// 2265
-		misceffect 847,"怨霊#illtur06";	// 2266
-		cloakoffnpc "怨霊#illtur06";	// 2266
+		unittalk getnpcid(0,"怨霊#illtur05"),"捕まえて！";
+		misceffect 847,"怨霊#illtur06";
+		cloakoffnpc "怨霊#illtur06";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"怨霊#illtur06"),"殺せ！";	// 2266
-		misceffect 563,"怨霊#illtur07";	// 2267
-		misceffect 847,"怨霊#illtur07";	// 2267
-		cloakoffnpc "怨霊#illtur07";	// 2267
+		unittalk getnpcid(0,"怨霊#illtur06"),"殺せ！";
+		misceffect 563,"怨霊#illtur07";
+		misceffect 847,"怨霊#illtur07";
+		cloakoffnpc "怨霊#illtur07";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"怨霊#illtur07"),"バラバラにしろ！";	// 2267
+		unittalk getnpcid(0,"怨霊#illtur07"),"バラバラにしろ！";
 		mes "[考古学者イエルフェン]";
 		mes "うあ……ああああ！";
 		mes "なんだよこれは！";
 		next;
 		sc_end SC_BLIND;
-		cloakoffnpc "少女#illtur02";	// 2259
+		cloakoffnpc "少女#illtur02";
 		mes "[少女]";
 		mes "これを噛んで。";
 		mes "しーっ、静かに！";
@@ -1383,24 +1378,24 @@ tur_d04_i.gat,96,112,1	script	元気のない女#illtur01	10241,{/* 2247 */
 		next;
 		menu "これは亀の甲羅の欠片？",-;
 		misceffect 120,"";
-		unittalk getnpcid(0,"考古学者イエルフェン#il"),"イエルフェン : またあらわれまびた？このびどはだででづか？";	// 2260
+		unittalk getnpcid(0,"考古学者イエルフェン#i2"),"イエルフェン : またあらわれまびた？このびどはだででづか？";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"少女#illtur02"),"少女 : 息、止めて！喋らない！";	// 2259
+		unittalk getnpcid(0,"少女#illtur02"),"少女 : 息、止めて！喋らない！";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"考古学者イエルフェン#il"),"イエルフェン : はっ……。";	// 2260
-		misceffect 120,"考古学者イエルフェン#il";	// 2260
+		unittalk getnpcid(0,"考古学者イエルフェン#i2"),"イエルフェン : はっ……。";
+		misceffect 120,"考古学者イエルフェン#i2";
 		if(!sleep2(3000)) end;
-		unittalk getnpcid(0,"怨霊#illtur01"),"どこへ行った？";	// 2261
-		unittalk getnpcid(0,"怨霊#illtur03"),"生きた者たちが消えた。";	// 2263
-		unittalk getnpcid(0,"怨霊#illtur05"),"消えてしまった。";	// 2265
-		unittalk getnpcid(0,"怨霊#illtur07"),"どうやって消えた？";	// 2267
-		unittalk getnpcid(0,"怨霊#illtur04"),"誰の仕業だ？";	// 2264
+		unittalk getnpcid(0,"怨霊#illtur01"),"どこへ行った？";
+		unittalk getnpcid(0,"怨霊#illtur03"),"生きた者たちが消えた。";
+		unittalk getnpcid(0,"怨霊#illtur05"),"消えてしまった。";
+		unittalk getnpcid(0,"怨霊#illtur07"),"どうやって消えた？";
+		unittalk getnpcid(0,"怨霊#illtur04"),"誰の仕業だ？";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"怨霊#illtur02"),"消えてしまった！";	// 2262
-		unittalk getnpcid(0,"怨霊#illtur06"),"消えた。完全に消えちゃった！";	// 2266
-		unittalk getnpcid(0,"怨霊#illtur04"),"生きてる者たち、ハッキリ見たのに？";	// 2264
-		unittalk getnpcid(0,"怨霊#illtur03"),"見つけたのに、私が見つけ出したのに！";	// 2263
-		unittalk getnpcid(0,"怨霊#illtur05"),"バラバラにしなくちゃ！";	// 2265
+		unittalk getnpcid(0,"怨霊#illtur02"),"消えてしまった！";
+		unittalk getnpcid(0,"怨霊#illtur06"),"消えた。完全に消えちゃった！";
+		unittalk getnpcid(0,"怨霊#illtur04"),"生きてる者たち、ハッキリ見たのに？";
+		unittalk getnpcid(0,"怨霊#illtur03"),"見つけたのに、私が見つけ出したのに！";
+		unittalk getnpcid(0,"怨霊#illtur05"),"バラバラにしなくちゃ！";
 		if(!sleep2(1000)) end;
 		mes "[少女]";
 		mes "私も、もう二人の姿が見えない。";
@@ -1423,174 +1418,174 @@ tur_d04_i.gat,96,112,1	script	元気のない女#illtur01	10241,{/* 2247 */
 		mes "私と最初に出逢った場所、覚えてる？";
 		mes "待ってる。";
 		next;
-		unittalk getnpcid(0,"怨霊#illtur04"),"いない。生きてる者たちがいない。";	// 2264
+		unittalk getnpcid(0,"怨霊#illtur04"),"いない。生きてる者たちがいない。";
 		if(!sleep2(1000)) end;
-		misceffect 847,"怨霊#illtur04";	// 2264
-		cloakonnpc "怨霊#illtur04";	// 2264
-		unittalk getnpcid(0,"怨霊#illtur02"),"いない、我が子…";	// 2262
+		misceffect 847,"怨霊#illtur04";
+		cloakonnpc "怨霊#illtur04";
+		unittalk getnpcid(0,"怨霊#illtur02"),"いない、我が子…";
 		if(!sleep2(1000)) end;
-		misceffect 847,"怨霊#illtur02";	// 2262
-		cloakonnpc "怨霊#illtur02";	// 2262
-		unittalk getnpcid(0,"怨霊#illtur06"),"ここは死んだ者しかいない。";	// 2266
+		misceffect 847,"怨霊#illtur02";
+		cloakonnpc "怨霊#illtur02";
+		unittalk getnpcid(0,"怨霊#illtur06"),"ここは死んだ者しかいない。";
 		if(!sleep2(1000)) end;
-		misceffect 847,"怨霊#illtur06";	// 2266
-		cloakonnpc "怨霊#illtur06";	// 2266
-		unittalk getnpcid(0,"怨霊#illtur03"),"俺の宝物…";	// 2263
+		misceffect 847,"怨霊#illtur06";
+		cloakonnpc "怨霊#illtur06";
+		unittalk getnpcid(0,"怨霊#illtur03"),"俺の宝物…";
 		if(!sleep2(1000)) end;
-		misceffect 847,"怨霊#illtur03";	// 2263
-		cloakonnpc "怨霊#illtur03";	// 2263
-		unittalk getnpcid(0,"少女#illtur02"),"帰ろう、みんな。";	// 2259
+		misceffect 847,"怨霊#illtur03";
+		cloakonnpc "怨霊#illtur03";
+		unittalk getnpcid(0,"少女#illtur02"),"帰ろう、みんな。";
 		if(!sleep2(1000)) end;
-		cloakonnpc "少女#illtur02";	// 2259
-		unittalk getnpcid(0,"怨霊#illtur01"),"ひもじい…ひもじい。";	// 2261
+		cloakonnpc "少女#illtur02";
+		unittalk getnpcid(0,"怨霊#illtur01"),"ひもじい…ひもじい。";
 		if(!sleep2(1000)) end;
-		misceffect 847,"怨霊#illtur01";	// 2261
-		cloakonnpc "怨霊#illtur01";	// 2261
-		cloakoffnpc "元気のない女#illtur01";	// 2247
-		unittalk getnpcid(0,"怨霊#illtur07"),"いつもそうだったように。";	// 2267
+		misceffect 847,"怨霊#illtur01";
+		cloakonnpc "怨霊#illtur01";
+		cloakoffnpc "元気のない女#illtur01";
+		unittalk getnpcid(0,"怨霊#illtur07"),"いつもそうだったように。";
 		if(!sleep2(1000)) end;
-		misceffect 847,"怨霊#illtur07";	// 2267
-		cloakonnpc "怨霊#illtur07";	// 2267
-		unittalk getnpcid(0,"怨霊#illtur05"),"死人だけだ…";	// 2265
+		misceffect 847,"怨霊#illtur07";
+		cloakonnpc "怨霊#illtur07";
+		unittalk getnpcid(0,"怨霊#illtur05"),"死人だけだ…";
 		if(!sleep2(1000)) end;
-		misceffect 847,"怨霊#illtur05";	// 2265
-		cloakonnpc "怨霊#illtur05";	// 2265
+		misceffect 847,"怨霊#illtur05";
+		cloakonnpc "怨霊#illtur05";
 		if(!sleep2(3000)) end;
 		menu "あの子を信じましょう",-;
 		mes "‐^424242イエルフェン教授は";
 		mes "　息を止めたまま、頷いた。^000000‐";
-		chgquest 16103,16104;	// state=1
+		chgquest 16103,16104;
 		set IL_TUR_QUE,6;
 		close2;
-		cloakonnpc "考古学者イエルフェン#il";	// 2260
+		cloakonnpc "考古学者イエルフェン#i2";
 		end;
 	}
 	end;
 OnTalk1:
 	sleep 3000;
-	unittalk "元気のない女 : 助けてください。ひもじいです。どうか助けてください。";	// 2247
+	unittalk "元気のない女 : 助けてください。ひもじいです。どうか助けてください。";
 	sleep 3000;
-	unittalk "元気のない女 : もう何でも食べますから。どうか何でも恵んでください。";	// 2247
+	unittalk "元気のない女 : もう何でも食べますから。どうか何でも恵んでください。";
 	sleep 3000;
-	end
+	end;
 OnTalk2:
 	sleep 3000;
-	unittalk "元気のない女 : ひもじいです。ひもじいです。どうか助けてください。";	// 2247
+	unittalk "元気のない女 : ひもじいです。ひもじいです。どうか助けてください。";
 	sleep 3000;
-	unittalk "元気のない女 : このままじゃ死んでしまいます。死んでしまいます。死にます。";	// 2247
+	unittalk "元気のない女 : このままじゃ死んでしまいます。死んでしまいます。死にます。";
 	sleep 3000;
-	end
+	end;
 OnTalk3:
 	sleep 3000;
-	unittalk "元気のない女 : 飢え死になってしまいます。何か食べないと。死にます。";	// 2247
+	unittalk "元気のない女 : 飢え死になってしまいます。何か食べないと。死にます。";
 	sleep 3000;
-	unittalk "元気のない女 : ひもじいです。どうか助けてください。どうか……";	// 2247
+	unittalk "元気のない女 : ひもじいです。どうか助けてください。どうか……";
 	sleep 3000;
-	end
+	end;
 }
 
-tur_d03_i.gat,147,170,7	script	#illturg11	844,{/* 2252 */
+tur_d03_i.gat,147,170,7	script	#illturg11	844,{
 	mes "["+strcharinfo(0)+"]";
 	mes "何か見えた気がしたけど…";
 	close;
 }
-tur_d03_i.gat,137,170,0	script	#illturgg11	139,10,10,{/* 2253 */
-	setnpcdisplay "#illturg11",796;	// 2252
-	unittalk getnpcid(0,"#illturg11"),"ここどこ？みんなどこへ行った？";	// 2252
+tur_d03_i.gat,137,170,0	script	#illturgg11	139,10,10,{
+	setnpcdisplay "#illturg11",796;
+	unittalk getnpcid(0,"#illturg11"),"ここどこ？みんなどこへ行った？";
 	sleep 1000;
-	setnpcdisplay "#illturg11",844;	// 2252
-	unittalk getnpcid(0,"#illturg11"),"喉が渇いた……喉が。";	// 2252
+	setnpcdisplay "#illturg11",844;
+	unittalk getnpcid(0,"#illturg11"),"喉が渇いた……喉が。";
 	end;
 }
 
-tur_d03_i.gat,142,229,1	script	#illturg12	844,{/* 2254 */
+tur_d03_i.gat,142,229,1	script	#illturg12	844,{
 	mes "["+strcharinfo(0)+"]";
 	mes "ちょっと寒気がするようだ。";
 	close;
 }
-tur_d03_i.gat,146,223,0	script	#illturgg12	139,10,10,{/* 2255 */
-	setnpcdisplay "#illturg12",792;	// 2254
-	unittalk getnpcid(0,"#illturg12"),"嘘つき、嘘つき。";	// 2254
+tur_d03_i.gat,146,223,0	script	#illturgg12	139,10,10,{
+	setnpcdisplay "#illturg12",792;
+	unittalk getnpcid(0,"#illturg12"),"嘘つき、嘘つき。";
 	sleep 1000;
-	setnpcdisplay "#illturg12",844;	// 2254
-	unittalk getnpcid(0,"#illturg12"),"帰ってくると言ったのに？";	// 2254
+	setnpcdisplay "#illturg12",844;
+	unittalk getnpcid(0,"#illturg12"),"帰ってくると言ったのに？";
 	end;
 }
 
-tur_d03_i.gat,214,105,7	script	#illturg13	844,{/* 2256 */
+tur_d03_i.gat,214,105,7	script	#illturg13	844,{
 	mes "["+strcharinfo(0)+"]";
 	mes "気分がおかしい…";
 	close;
 }
-tur_d03_i.gat,207,104,0	script	#illturgg13	139,10,10,{/* 2257 */
-	setnpcdisplay "#illturg13",792;	// 2256
-	unittalk getnpcid(0,"#illturg13"),"あは、あははは、あはは……";	// 2256
+tur_d03_i.gat,207,104,0	script	#illturgg13	139,10,10,{
+	setnpcdisplay "#illturg13",792;
+	unittalk getnpcid(0,"#illturg13"),"あは、あははは、あはは……";
 	sleep 1000;
-	setnpcdisplay "#illturg13",844;	// 2256
-	unittalk getnpcid(0,"#illturg13"),"あはは……は……ふ、ふええん……";	// 2256
+	setnpcdisplay "#illturg13",844;
+	unittalk getnpcid(0,"#illturg13"),"あはは……は……ふ、ふええん……";
 	end;
 }
 
 tur_d03_i.gat,217,73,0	warp	illtur03_04	2,2,tur_d04_i.gat,99,186
 tur_d04_i.gat,99,191,0	warp	illtur04_03	2,2,tur_d03_i.gat,217,82
 
-tur_d04_i.gat,99,153,7	script	#illturg21	844,{/* 2268 */
+tur_d04_i.gat,99,153,7	script	#illturg21	844,{
 	mes "‐気のせいか。‐";
 	close;
 }
-tur_d04_i.gat,99,160,0	script	#illturgg21	139,10,10,{/* 2269 */
-	setnpcdisplay "#illturg21",792;	// 2268
-	unittalk getnpcid(0,"#illturg21"),"ここはどこ？隊長はどこへ行った？";	// 2268
+tur_d04_i.gat,99,160,0	script	#illturgg21	139,10,10,{
+	setnpcdisplay "#illturg21",792;
+	unittalk getnpcid(0,"#illturg21"),"ここはどこ？隊長はどこへ行った？";
 	sleep 1000;
-	setnpcdisplay "#illturg21",844;	// 2268
-	unittalk getnpcid(0,"#illturg21"),"誰かいるか？そこ誰だ？";	// 2268
+	setnpcdisplay "#illturg21",844;
+	unittalk getnpcid(0,"#illturg21"),"誰かいるか？そこ誰だ？";
 	end;
 }
-tur_d04_i.gat,37,137,7	script	#illturg22	844,{/* 2270 */
+tur_d04_i.gat,37,137,7	script	#illturg22	844,{
 	mes "‐何かを感じるが誰もいないようだ。‐";
 	close;
 }
-tur_d04_i.gat,45,137,0	script	#illturgg22	139,{/* 2271 */
-	setnpcdisplay "#illturg22",796;	// 2270
-	unittalk getnpcid(0,"#illturg22"),"はあ、はあ、寒い……帰りたい……";	// 2270
+tur_d04_i.gat,45,137,0	script	#illturgg22	139,{
+	setnpcdisplay "#illturg22",796;
+	unittalk getnpcid(0,"#illturg22"),"はあ、はあ、寒い……帰りたい……";
 	sleep 1000;
-	setnpcdisplay "#illturg22",844;	// 2270
-	unittalk getnpcid(0,"#illturg22"),"誰もいませんか？誰も……？";	// 2270
+	setnpcdisplay "#illturg22",844;
+	unittalk getnpcid(0,"#illturg22"),"誰もいませんか？誰も……？";
 	end;
 }
 
-tur_d04_i.gat,76,35,7	script	#illturg23	844,{/* 2272 */
+tur_d04_i.gat,76,35,7	script	#illturg23	844,{
 	mes "‐気分が悪くなった。‐";
 	close;
 }
-tur_d04_i.gat,69,31,0	script	#illturgg23	139,{/* 2273 */
-	setnpcdisplay "#illturg23",792;	// 2272
-	setnpcdisplay "#illturg23",844;	// 2272
-	unittalk getnpcid(0,"#illturg23"),"あはははははははははははははは";	// 2272
+tur_d04_i.gat,69,31,0	script	#illturgg23	139,{
+	setnpcdisplay "#illturg23",792;
+	setnpcdisplay "#illturg23",844;
+	unittalk getnpcid(0,"#illturg23"),"あはははははははははははははは";
 }
 
-tur_d04_i.gat,135,133,1	script	#illturg24	844,{/* 2274 */
+tur_d04_i.gat,135,133,1	script	#illturg24	844,{
 	mes "‐何か声が聞こえた気がした。‐";
 	close;
 }
-tur_d04_i.gat,137,126,0	script	#illturgg24	139,{/* 2275 */
-	setnpcdisplay "#illturg24",796;	// 2274
-	unittalk getnpcid(0,"#illturg24"),"待ってた？私を待ってくれた？";	// 2274
+tur_d04_i.gat,137,126,0	script	#illturgg24	139,{
+	setnpcdisplay "#illturg24",796;
+	unittalk getnpcid(0,"#illturg24"),"待ってた？私を待ってくれた？";
 	sleep 1000;
-	setnpcdisplay "#illturg24",844;	// 2274
-	unittalk getnpcid(0,"#illturg24"),"遅い、もう遅い。";	// 2274
+	setnpcdisplay "#illturg24",844;
+	unittalk getnpcid(0,"#illturg24"),"遅い、もう遅い。";
 	end;
 }
 
-tur_d04_i.gat,26,167,0	script	#illtur01	139,15,15,{/* 2248 */
+tur_d04_i.gat,26,167,0	script	#illtur01	139,15,15,{
 	if(IL_TUR_QUE == 3 || IL_TUR_QUE == 4)
-		cloakoffnpc "考古学者イエルフェン#t2";	// 2249
+		cloakoffnpc "考古学者イエルフェン#t2";
 	end;
 }
-tur_d04_i.gat,26,167,5	script	考古学者イエルフェン#t2	740,{/* 2249 (cloaking)*/
+tur_d04_i.gat,26,167,5	script	考古学者イエルフェン#t2	740,{
 	switch(IL_TUR_QUE) {
 	case 3:
-		emotion 0,"考古学者イエルフェン#il";	// 2249
+		emotion 0;
 		mes "[考古学者イエルフェン]";
 		mes "信じられない……人間、人間ですよね？";
 		mes "本当に人間ですよね？";
@@ -1637,7 +1632,7 @@ tur_d04_i.gat,26,167,5	script	考古学者イエルフェン#t2	740,{/* 2249 (cloaking)*/
 		mes "まともに記録を残す道具も無いので";
 		mes "集めてきます。";
 		next;
-		emotion 32,"考古学者イエルフェン#il";	// 2249
+		emotion 32;
 		mes "[考古学者イエルフェン]";
 		mes "ここに戻るつもりかって？";
 		mes "もちろん戻ります。";
@@ -1649,7 +1644,7 @@ tur_d04_i.gat,26,167,5	script	考古学者イエルフェン#t2	740,{/* 2249 (cloaking)*/
 		mes "　イエルフェンのお腹から";
 		mes "　鳴り響いた。‐";
 		next;
-		emotion 4,"考古学者イエルフェン#il";	// 2249
+		emotion 4;
 		mes "[考古学者イエルフェン]";
 		mes "う、うう……";
 		mes "すみません。どうしても腹が減って……";
@@ -1701,7 +1696,7 @@ tur_d04_i.gat,26,167,5	script	考古学者イエルフェン#t2	740,{/* 2249 (cloaking)*/
 		mes "いきなりサバイバルに挑むことになるとは。";
 		mes "僕は考古学者であり";
 		mes "物語の主人公ではないのに。";
-		chgquest 16100,16102;	// state=1
+		chgquest 16100,16102;
 		set IL_TUR_QUE,4;
 		close;
 	case 4:
@@ -1718,7 +1713,7 @@ tur_d04_i.gat,26,167,5	script	考古学者イエルフェン#t2	740,{/* 2249 (cloaking)*/
 			mes "動けそうにもありません……。";
 			close;
 		}
-		unittalk "あ、お帰りなさい、"+strcharinfo(0)+"様。";	// 2249
+		unittalk "あ、お帰りなさい、"+strcharinfo(0)+"様。";
 		mes "[考古学者イエルフェン]";
 		mes "あ、お帰りなさい";
 		mes strcharinfo(0)+"様。";
@@ -1741,7 +1736,7 @@ tur_d04_i.gat,26,167,5	script	考古学者イエルフェン#t2	740,{/* 2249 (cloaking)*/
 		mes "う、うええ……";
 		mes "ぺっぺっ！";
 		next;
-		emotion 28,"考古学者イエルフェン#il";	// 2249
+		emotion 28;
 		mes "[考古学者イエルフェン]";
 		mes "うぐ……申し訳ありません……";
 		mes "とても食えるものではありませんね。";
@@ -1755,7 +1750,7 @@ tur_d04_i.gat,26,167,5	script	考古学者イエルフェン#t2	740,{/* 2249 (cloaking)*/
 		mes "誰かが住んでいたら";
 		mes "助けを求めたのですが。";
 		next;
-		emotion 23,"考古学者イエルフェン#il";	// 2249
+		emotion 23;
 		mes "[考古学者イエルフェン]";
 		mes "本当ですか、人間が住んでいると？";
 		mes "住民たちを見たのですね？";
@@ -1793,7 +1788,7 @@ tur_d04_i.gat,26,167,5	script	考古学者イエルフェン#t2	740,{/* 2249 (cloaking)*/
 		emotion 20,"";
 		mes "‐^FF0000元気のない女^000000のところまで";
 		mes "　イエルフェンを案内しよう。‐";
-		chgquest 16102,16103;	// state=1
+		chgquest 16102,16103;
 		set IL_TUR_QUE,5;
 		close;
 	case 5:
@@ -1809,73 +1804,73 @@ OnInit:
 	end;
 }
 
-tur_d04_i.gat,100,112,3	script	少女#illtur02	10238,{/* 2259 (cloaking)*/
+tur_d04_i.gat,100,112,3	script	少女#illtur02	10238,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-tur_d04_i.gat,101,110,3	script	考古学者イエルフェン#t3	740,{/* 2260 (cloaking)*/
+tur_d04_i.gat,101,110,3	script	考古学者イエルフェン#i2	740,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-tur_d04_i.gat,96,112,5	script	怨霊#illtur01	792,{/* 2261 (cloaking)*/
-	unittalk "私は…何をしていたんだろ…";	// 2261
+tur_d04_i.gat,96,112,5	script	怨霊#illtur01	792,{
+	unittalk "私は…何をしていたんだろ…";
 	if(!sleep2(3000)) end;
-	cloakonnpc "怨霊#illtur01";	// 2261
-	cloakonnpc "怨霊#illtur02";	// 2262
-	cloakonnpc "怨霊#illtur03";	// 2263
-	cloakonnpc "怨霊#illtur04";	// 2264
-	cloakonnpc "怨霊#illtur05";	// 2265
-	cloakonnpc "怨霊#illtur06";	// 2266
-	cloakonnpc "怨霊#illtur07";	// 2267
+	cloakonnpc "怨霊#illtur01";
+	cloakonnpc "怨霊#illtur02";
+	cloakonnpc "怨霊#illtur03";
+	cloakonnpc "怨霊#illtur04";
+	cloakonnpc "怨霊#illtur05";
+	cloakonnpc "怨霊#illtur06";
+	cloakonnpc "怨霊#illtur07";
 	if(!sleep2(1000)) end;
-	cloakoffnpc "元気のない女#illtur01";	// 2247
+	cloakoffnpc "元気のない女#illtur01";
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-tur_d04_i.gat,94,108,7	script	怨霊#illtur02	796,{/* 2262 (cloaking)*/
+tur_d04_i.gat,94,108,7	script	怨霊#illtur02	796,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-tur_d04_i.gat,91,111,5	script	怨霊#illtur03	792,{/* 2263 (cloaking)*/
+tur_d04_i.gat,91,111,5	script	怨霊#illtur03	792,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-tur_d04_i.gat,97,104,7	script	怨霊#illtur04	792,{/* 2264 (cloaking)*/
+tur_d04_i.gat,97,104,7	script	怨霊#illtur04	792,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-tur_d04_i.gat,107,109,3	script	怨霊#illtur05	792,{/* 2265 (cloaking)*/
+tur_d04_i.gat,107,109,3	script	怨霊#illtur05	792,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-tur_d04_i.gat,104,112,3	script	怨霊#illtur06	796,{/* 2266 (cloaking)*/
+tur_d04_i.gat,104,112,3	script	怨霊#illtur06	796,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-tur_d04_i.gat,102,102,1	script	怨霊#illtur07	796,{/* 2267 (cloaking)*/
+tur_d04_i.gat,102,102,1	script	怨霊#illtur07	796,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 
-tur_d03_j.gat,132,194,3	script	光の群れ#illtur02	10042,{/* 2235 */
+tur_d03_j.gat,132,194,3	script	光の群れ#illtur02	10042,{
 	if(select("アルベルタに戻る","ここに残る") == 2) {
 		mes "‐まだここで";
 		mes "　やるべきことが残ってる。‐";
@@ -1885,21 +1880,25 @@ tur_d03_j.gat,132,194,3	script	光の群れ#illtur02	10042,{/* 2235 */
 	end;
 }
 
-tur_d03_j.gat,139,186,3	script	ナリン#illtur01	10238,{/* 2236 */
-	delquest 16105;
+tur_d03_j.gat,139,186,3	script	ナリン#illtur01	10238,{
+	if(checkquest(16105))
+		delquest 16105;
 	if(checkquest(16108)) {
-		mes "[ナリン]";
-		mes "姉さん……まだいたの？";
-		mes "呪術は一日過ぎたら";
-		mes "消えてしまうから……";
-		mes "^4d4dff次の午前5時を過ぎたら^000000";
-		mes "また来て。";
-		next;
-		mes "[ナリン]";
-		mes "私が姉さんを忘れたとしても";
-		mes "避けちゃダメ。";
-		mes "……絶対、絶対だよ。";
-		close;
+		if(checkquest(16108)&0x2 == 0) {
+			mes "[ナリン]";
+			mes "姉さん……まだいたの？";
+			mes "呪術は一日過ぎたら";
+			mes "消えてしまうから……";
+			mes "^4d4dff次の午前5時を過ぎたら^000000";
+			mes "また来て。";
+			next;
+			mes "[ナリン]";
+			mes "私が姉さんを忘れたとしても";
+			mes "避けちゃダメ。";
+			mes "……絶対、絶対だよ。";
+			close;
+		}
+		delquest 16108;
 	}
 	if(checkquest(16107)) {
 		if(checkquest(16110) == 0 && checkquest(16113) == 0) {
@@ -1915,7 +1914,7 @@ tur_d03_j.gat,139,186,3	script	ナリン#illtur01	10238,{/* 2236 */
 			mes "気を付けてね。";
 			close;
 		}
-		cloakoffnpc "考古学者イエルフェン#il";	// 2237
+		cloakoffnpc "考古学者イエルフェン#i3";
 		mes "[ナリン]";
 		mes "彼らの願いごとを";
 		mes "叶えてくれたんだね。";
@@ -1927,17 +1926,19 @@ tur_d03_j.gat,139,186,3	script	ナリン#illtur01	10238,{/* 2236 */
 		mes "また来てくれて……ありがとう。";
 		mes "明日も待ってるから。";
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"考古学者イエルフェン#il"),"イエルフェン : また明日、ナリンさん。";	// 2237
+		unittalk getnpcid(0,"考古学者イエルフェン#i3"),"イエルフェン : また明日、ナリンさん。";
 		close2;
-		delquest 16110;
-		delquest 16113;
+		if(checkquest(16110))
+			delquest 16110;
+		if(checkquest(16113))
+			delquest 16113;
 		delquest 16107;
-		setquest 16108;	// state=1
+		setquest 16108;
 		getitem 25271,2;
 		getexp 100000000,0,1;
 		getexp 0,20000000,0;
 		if(!sleep2(1000)) end;
-		cloakonnpc "考古学者イエルフェン#il";	// 2237
+		cloakonnpc "考古学者イエルフェン#i3";
 		end;
 	}
 	if(select("急いで話す(会話スキップ)","ゆっくり話す") == 2) {
@@ -1949,7 +1950,7 @@ tur_d03_j.gat,139,186,3	script	ナリン#illtur01	10238,{/* 2236 */
 		mes "[ナリン]";
 		mes "……また誰か来た。";
 		next;
-		cloakoffnpc "考古学者イエルフェン#il";	// 2237
+		cloakoffnpc "考古学者イエルフェン#i3";
 		mes "[考古学者イエルフェン]";
 		mes "僕も来ました。";
 		mes "お元気でしたか？";
@@ -1967,7 +1968,7 @@ tur_d03_j.gat,139,186,3	script	ナリン#illtur01	10238,{/* 2236 */
 		mes "[ナリン]";
 		mes "……………………うう。";
 		next;
-		emotion 4,"ナリン#illtur01";	// 2236
+		emotion 4;
 		mes "[ナリン]";
 		mes "……また……";
 		mes "忘れてしまった……。";
@@ -1990,29 +1991,32 @@ tur_d03_j.gat,139,186,3	script	ナリン#illtur01	10238,{/* 2236 */
 		mes "^4d4dff元気のない女^000000の";
 		mes "願いごとを叶えてあげて。";
 		next;
-		mes "[ナリン]";
-		mes "今日も二人が無事なように……。";
-		misceffect 778,"ナリン#illtur01";	// 2236
-		if(!sleep2(1000)) end;
-		misceffect 778,"";	// self
-		misceffect 778,"考古学者イエルフェン#il";	// 2237
-		misceffect 877,"";	// self
-		misceffect 877,"考古学者イエルフェン#il";	// 2237
-		setquest 16107;	// state=1
-		if(!sleep2(1000)) end;
-		cloakonnpc "考古学者イエルフェン#il";	// 2237
-		close;
 	}
+	else {
+		cloakoffnpc "考古学者イエルフェン#i3";
+	}
+	mes "[ナリン]";
+	mes "今日も二人が無事なように……。";
+	misceffect 778;
+	if(!sleep2(1000)) end;
+	misceffect 778,"";
+	misceffect 778,"考古学者イエルフェン#i3";
+	misceffect 877,"";
+	misceffect 877,"考古学者イエルフェン#i3";
+	setquest 16107;
+	if(!sleep2(1000)) end;
+	cloakonnpc "考古学者イエルフェン#i3";
+	close;
 }
 
-tur_d03_j.gat,136,187,5	script	考古学者イエルフェン#il	740,{/* 2237 (cloaking)*/
+tur_d03_j.gat,136,187,5	script	考古学者イエルフェン#i3	740,{
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 
-tur_d03_j.gat,80,180,1	script	気の早い男#illtur02	10239,{/* 2238 */
+tur_d03_j.gat,80,180,1	script	気の早い男#illtur02	10239,{
 	mes "[気の早い男]";
 	mes "なくしちゃった、なくしちゃった。";
 	mes "我が子。我が愛しい子。";
@@ -2026,7 +2030,7 @@ tur_d03_j.gat,80,180,1	script	気の早い男#illtur02	10239,{/* 2238 */
 	close;
 }
 
-tur_d03_j.gat,235,187,7	script	細かい軍人#illtur02	10240,{/* 2239 */
+tur_d03_j.gat,235,187,7	script	細かい軍人#illtur02	10240,{
 	if(checkquest(16110)) {
 		mes "[細かい軍人]";
 		mes "ふ……ふふ……ふふ^BDBDBDふ^000000ふ……";
@@ -2040,7 +2044,7 @@ tur_d03_j.gat,235,187,7	script	細かい軍人#illtur02	10240,{/* 2239 */
 	}
 	if(checkquest(16109)) {
 		if(checkquest(16109)&0x4 == 0 || countitem(25316) < 10) {
-			misceffect 563,"細かい軍人#illtur02";	// 2239
+			misceffect 563;
 			mes "[細かい軍人]";
 			mes "^FF0000足りない!!^000000";
 			next;
@@ -2059,7 +2063,7 @@ tur_d03_j.gat,235,187,7	script	細かい軍人#illtur02	10240,{/* 2239 */
 		mes "そして俺の、宝物……^FF0000ブツブツ^000000、ブツ";
 		mes "……宝物も持って^BDBDBDき^000000た？";
 		next;
-		misceffect 563,"細かい軍人#illtur02";	// 2239
+		misceffect 563;
 		mes "[細かい軍人]";
 		mes "^FF0000早く寄こせ^000000！俺の宝物！";
 		next;
@@ -2070,56 +2074,66 @@ tur_d03_j.gat,235,187,7	script	細かい軍人#illtur02	10240,{/* 2239 */
 		mes "綺麗、とっても綺麗だ。";
 		delitem 25316,10;
 		delquest 16109;
-		setquest 16110;	// state=1
+		setquest 16110;
 		close;
 	}
-	mes "[細かい軍人]";
-	mes "クスクス……^FF0000ブツ^000000、ブツ。";
-	mes "^FF0000クスクス^000000……。";
-	mes "あのく^BDBDBDそ^000000みたいな";
-	mes "モン^BDBDBDス^000000ターさえいなかったら……。";
-	next;
-	mes "[細かい軍人]";
-	mes "ぜ……全部、俺の物に^BDBDBDなれ^000000た^BDBDBDはず^000000なのに……。";
-	mes "お……俺の宝^BDBDBD物^000000が……";
-	mes "^FF0000クスクス^000000……。";
-	next;
-	menu "私が取り戻しましょう",-;
-	mes "[細かい軍人]";
-	mes "お前が？お前^BDBDBDが^000000行くだと？";
-	mes "行って^BDBDBD取り^000000戻せ！";
-	mes "俺の宝^BDBDBD物^000000！";
-	mes "奴らが持っているはずだ！";
-	mes "大事な宝物^BDBDBD^000000！";
-	next;
-	mes "[細かい軍人]";
-	mes "それと^0000CD不吉なヒートタートル^000000と";
-	mes "^0000CD不吉なフリーズタートル^000000を";
-	mes "10体……消せ！消し^BDBDBDて^000000しまえ!!";
-	mes "消し^BDBDBDて^000000しまえ!!";
-	next;
-	if(select("分かりました","また後で") == 2) {
+	if(checkquest(16107)) {
 		mes "[細かい軍人]";
-		mes "クスクス……";
-		mes "^FF0000ブツ^000000、ブツ。^FF0000クスクス^000000……";
+		mes "クスクス……^FF0000ブツ^000000、ブツ。";
+		mes "^FF0000クスクス^000000……。";
 		mes "あのく^BDBDBDそ^000000みたいな";
 		mes "モン^BDBDBDス^000000ターさえいなかったら……。";
 		next;
 		mes "[細かい軍人]";
-		mes "ぜ……全部、俺の物に";
-		mes "^BDBDBDなっ^000000た^BDBDBDはず^000000なのに……";
-		mes "お…俺の宝^BDBDBD物^000000が……";
+		mes "ぜ……全部、俺の物に^BDBDBDなれ^000000た^BDBDBDはず^000000なのに……。";
+		mes "お……俺の宝^BDBDBD物^000000が……";
 		mes "^FF0000クスクス^000000……。";
+		next;
+		menu "私が取り戻しましょう",-;
+		mes "[細かい軍人]";
+		mes "お前が？お前^BDBDBDが^000000行くだと？";
+		mes "行って^BDBDBD取り^000000戻せ！";
+		mes "俺の宝^BDBDBD物^000000！";
+		mes "奴らが持っているはずだ！";
+		mes "大事な宝物^BDBDBD^000000！";
+		next;
+		mes "[細かい軍人]";
+		mes "それと^0000CD不吉なヒートタートル^000000と";
+		mes "^0000CD不吉なフリーズタートル^000000を";
+		mes "10体……消せ！消し^BDBDBDて^000000しまえ!!";
+		mes "消し^BDBDBDて^000000しまえ!!";
+		next;
+		if(select("分かりました","また後で") == 2) {
+			mes "[細かい軍人]";
+			mes "クスクス……";
+			mes "^FF0000ブツ^000000、ブツ。^FF0000クスクス^000000……";
+			mes "あのく^BDBDBDそ^000000みたいな";
+			mes "モン^BDBDBDス^000000ターさえいなかったら……。";
+			next;
+			mes "[細かい軍人]";
+			mes "ぜ……全部、俺の物に";
+			mes "^BDBDBDなっ^000000た^BDBDBDはず^000000なのに……";
+			mes "お…俺の宝^BDBDBD物^000000が……";
+			mes "^FF0000クスクス^000000……。";
+			close;
+		}
+		mes "[細かい軍人]";
+		mes "^FF0000復讐^000000……クスクス";
+		mes "……俺の復讐^BDBDBDも^000000してくれ……。";
+		setquest 16109;
 		close;
 	}
 	mes "[細かい軍人]";
-	mes "^FF0000復讐^000000……クスクス";
-	mes "……俺の復讐^BDBDBDも^000000してくれ……。";
-	setquest 16109;	// state=1
+	mes "い^BDBDBDた^000000よ……生き^BDBDBDて^000000いたぞ……畜生！";
+	mes "^BDBDBD生き^000000ている?!俺は！";
+	mes "俺は死んだ^BDBDBDの^000000に！";
+	mes "ゆるさ^BDBDBDない^000000！探し^BDBDBD出し^000000て";
+	mes "^BDBDBD殺^000000してやる!!";
+	mes "^FF0000クス^000000……クスクス……。";
 	close;
 }
 
-tur_d04_j.gat,96,112,1	script	元気のない女#illtur02	10241,{/* 2240 */
+tur_d04_j.gat,96,112,1	script	元気のない女#illtur02	10241,{
 	if(checkquest(16113)) {
 		mes "[元気のない女]";
 		mes "ああ、もう腹いっぱい。";
@@ -2130,26 +2144,91 @@ tur_d04_j.gat,96,112,1	script	元気のない女#illtur02	10241,{/* 2240 */
 		mes "　満足しているようだ。‐";
 		close;
 	}
+	if(checkquest(16111)) {
+		if(checkquest(16111)&0x4 == 0 || countitem(7564) < 10) {
+			mes "[元気のない女]";
+			mes "狩りをお願いします。";
+			mes "タートルたちを。";
+			mes "^0000CD不吉なアサルトタートル、";
+			mes "不吉なPタートルを10体ずつ。^000000";
+			mes "持ってきてください。";
+			mes "^0000CD腐った肉を10個。^000000";
+			close;
+		}
+		mes "[元気のない女]";
+		mes "ああ、お肉の匂いだ。";
+		mes "お肉の匂い。";
+		mes "美味しそう、とっても美味しそう。";
+		mes "早くください。";
+		mes "ひもじいです。早く。";
+		next;
+		mes "[元気のない女]";
+		mes "コツッ、バリ、バリバリ";
+		mes "くちゃくちゃ、ごっくり……。";
+		mes "ああ、もう腹いっぱい。";
+		mes "これで死なない。もう腹いっぱい。";
+		mes "ありがとう。";
+		delitem 7564,10;
+		delquest 16111;
+		setquest 16113;
+		close;
+	}
+	if(checkquest(16107)) {
+		mes "[元気のない女]";
+		mes "ひもじいです。";
+		mes "助けてください、どうか。";
+		mes "ひもじいです。";
+		next;
+		menu "どうしたらいいですか？",-;
+		mes "[元気のない女]";
+		mes "助けてくれますか？本当に？";
+		mes "飢えて死なないように";
+		mes "助けてくれますか？";
+		next;
+		mes "[元気のない女]";
+		mes "それなら狩りをお願いします。";
+		mes "タートルたちを。";
+		mes "^0000CD不吉なアサルトタートル^000000、";
+		mes "^0000CD不吉なパーメットタートル^000000を10体ずつ。";
+		mes "持ってきてください。";
+		mes "^0000CD腐った肉を10個。^000000";
+		next;
+		if(select("分かりました","また後で") == 2) {
+			mes "[元気のない女]";
+			mes "それでは私、死んじゃいます。";
+			mes "すぐ飢えて死にます。";
+			next;
+			mes "[元気のない女]";
+			mes "^FF0000何でも食べるのに。";
+			mes "本当に何でも食べれるのに。";
+			mes "かりかりぽりぽりと";
+			mes "噛み砕き吸い込んで食べれるのに。^000000";
+			close;
+		}
+		mes "[元気のない女]";
+		mes "ありがとう。";
+		mes "肉、食べたら死にません。";
+		mes "もっと生きれます。";
+		mes "もっと……もっと";
+		mes "生きていけますよ。";
+		setquest 16111;
+		close;
+	}
 	mes "[元気のない女]";
-	mes "ああ、お肉の匂いだ。";
-	mes "お肉の匂い。";
-	mes "美味しそう、とっても美味しそう。";
-	mes "早くください。";
-	mes "ひもじいです。早く。";
+	mes "ひもじいです。";
+	mes "ひもじくて";
+	mes "動けそうにもありません。";
+	mes "どうか……どうか";
+	mes "慈悲を恵んでください。";
+	mes "あまりにも長く飢えてます……。";
 	next;
-	mes "[元気のない女]";
-	mes "コツッ、バリ、バリバリ";
-	mes "くちゃくちゃ、ごっくり……。";
-	mes "ああ、もう腹いっぱい。";
-	mes "これで死なない。もう腹いっぱい。";
-	mes "ありがとう。";
-	delitem 7564,10;
-	delquest 16111;
-	setquest 16113;	// state=1
+	mes "‐話しかけるのは危険そうだ。";
+	mes "　先にナリンに呪術を";
+	mes "　掛けてもらってこよう。‐";
 	close;
 }
 
-tur_d04_j.gat,26,167,5	script	考古学者イエルフェン#il	740,{/* 2241 */
+tur_d04_j.gat,26,167,5	script	考古学者イエルフェン#i4	740,{
 	mes "[考古学者イエルフェン]";
 	mes "こんにちは";
 	mes strcharinfo(0)+"さん。";
@@ -2171,5 +2250,45 @@ tur_d04_j.gat,26,167,5	script	考古学者イエルフェン#il	740,{/* 2241 */
 	close;
 }
 
-tur_d03_j.gat,217,73,0	warp	illtur03_04	2,2,tur_d04_j.gat,99,186 //tur_d03_j.gat from_pos=(217, 75)
-tur_d04_j.gat,99,191,0	warp	illtur04_03	2,2,tur_d03_j.gat,217,82 //tur_d04_j.gat from_pos=(98, 191)
+tur_d03_j.gat,217,73,0	warp	illtur03_04	2,2,tur_d04_j.gat,99,186
+tur_d04_j.gat,99,191,0	warp	illtur04_03	2,2,tur_d03_j.gat,217,82
+
+tur_d03_j.gat,0,0,0	script	#IllTurtleIsland01	-1,{
+OnInit:
+	for(set '@i,0;'@i<10;set '@i,'@i+1)
+		areamonster "tur_d03_j.gat",0,0,0,0,"--ja--",rand(2)? 3801: 3803,1,"::OnSummon";
+	end;
+OnSummon:
+	if('mob == 0 && rand(500) == 0) {
+		set 'mob,areacallmonster("tur_d03_j.gat",0,0,0,0,"不吉なソリッドタートル",3802,strnpcinfo(0)+"::OnKilled");
+		unittalk 'mob,"不吉なソリッドタートル : ……。";
+	}
+	else {
+		areamonster "tur_d03_j.gat",0,0,0,0,"--ja--",rand(2)? 3801: 3803,1,"::OnSummon";
+	}
+	end;
+OnKilled:
+	set 'mob,0;
+	areamonster "tur_d03_j.gat",0,0,0,0,"--ja--",rand(2)? 3801: 3803,1,"::OnSummon";
+	end;
+}
+
+tur_d04_j.gat,0,0,0	script	#IllTurtleIsland02	-1,{
+OnInit:
+	for(set '@i,0;'@i<10;set '@i,'@i+1)
+		areamonster "tur_d04_j.gat",0,0,0,0,"--ja--",rand(2)? 3799: 3800,1,"::OnSummon";
+	end;
+OnSummon:
+	if('mob == 0 && rand(500) == 0) {
+		set 'mob,areacallmonster("tur_d04_j.gat",0,0,0,0,"不吉なソリッドタートル",3802,strnpcinfo(0)+"::OnKilled");
+		unittalk 'mob,"不吉なソリッドタートル : ……。";
+	}
+	else {
+		areamonster "tur_d04_j.gat",0,0,0,0,"--ja--",rand(2)? 3799: 3800,1,"::OnSummon";
+	}
+	end;
+OnKilled:
+	set 'mob,0;
+	areamonster "tur_d04_j.gat",0,0,0,0,"--ja--",rand(2)? 3799: 3800,1,"::OnSummon";
+	end;
+}

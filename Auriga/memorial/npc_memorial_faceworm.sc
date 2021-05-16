@@ -2,12 +2,10 @@
 // Ragnarok Online Nest of Faceworm Script	by refis
 //==============================================================================
 
-22507,Old_Scroll,フェイヨン移動スクロール,2,1000,,10,,,,,2074075135,2,,,,,,{ switch(rand(8)){ case 0: warp "pay_dun04.gat",120,116; end; case 1: warp "payon_in03.gat",99,182; end; case 2: warp "payon_in02.gat",17,62; end; case 3: warp "payon_in01.gat",144,15; end; case 4: warp "pay_fild01.gat",141,211; end; case 5: warp "pay_fild04.gat",348,333; end; case 6: warp "pay_fild07.gat",200,186; end; case 7: warp "pay_fild10.gat",147,267; end; } },{}
-
 //============================================================
 // NPC
 //------------------------------------------------------------
-payon.gat,157,54,5	script	年配の女性#pa0829	103,{/* 60507 */
+payon.gat,157,54,5	script	年配の女性	103,{
 	if(checkquest(114655)) {
 		mes "‐年配の女性が今日も";
 		mes "　いつもの場所に一人";
@@ -80,7 +78,7 @@ payon.gat,157,54,5	script	年配の女性#pa0829	103,{/* 60507 */
 			mes "楽しく生きる事にするわ。";
 			next;
 			mes "‐^0000ffどこからか温かい気が感じられる^000000‐";
-			misceffect 72; //60051
+			misceffect 72;
 		}
 		next;
 		mes "[年配の女性]";
@@ -186,11 +184,11 @@ payon.gat,157,54,5	script	年配の女性#pa0829	103,{/* 60507 */
 	mes "　この年配の女性の指輪か";
 	mes "　確認してもらうために";
 	mes "　話しかけよう‐";
-	setquest 114655; //state=1
+	setquest 114655;
 	close;
 }
 
-payon.gat,161,54,3	script	異国的な商人#pa0829	99,{/* 60508 */
+payon.gat,161,54,3	script	異国的な商人	99,{
 	if(checkquest(114660)) {
 		mes "‐家族の手がかりを探す";
 		mes "　あの男性が今日も";
@@ -259,7 +257,7 @@ payon.gat,161,54,3	script	異国的な商人#pa0829	99,{/* 60508 */
 			mes "　微笑みが広がった^000000‐";
 			next;
 			mes "‐^0000ff優しい気を感じる^000000‐";
-			misceffect 72; //60052
+			misceffect 72;
 		}
 		next;
 		mes "[セルジオ]";
@@ -305,11 +303,11 @@ payon.gat,161,54,3	script	異国的な商人#pa0829	99,{/* 60508 */
 	mes "　手がかりになりそうな";
 	mes "　写真のようなものを拾ったら";
 	mes "　再度また話しかけよう‐";
-	setquest 114660; //state=1
+	setquest 114660;
 	close;
 }
 
-payon.gat,161,50,1	script	強そうに見える男#pa0829	88,{/* 60509 */
+payon.gat,161,50,1	script	強そうに見える男	88,{
 	if(checkquest(114665)) {
 		mes "‐大きな蛇を探す";
 		mes "　強そうに見える男が";
@@ -387,7 +385,7 @@ payon.gat,161,50,1	script	強そうに見える男#pa0829	88,{/* 60509 */
 			mes "ありがとうございました。";
 			next;
 			mes "‐^0000ff穏やかな気が感じられる^000000‐";
-			misceffect 72; //60053
+			misceffect 72;
 		}
 		next;
 		mes "[強そうに見える男]";
@@ -434,11 +432,11 @@ payon.gat,161,50,1	script	強そうに見える男#pa0829	88,{/* 60509 */
 	mes "‐この男の気持ちを少しでも";
 	mes "　救えるものの手がかりは";
 	mes "　フェイスワームの巣にありそうだ‐";
-	setquest 114665; //state=1
+	setquest 114665;
 	close;
 }
 
-payon.gat,139,68,4	script	薄暗い男#pa0829	795,{/* 60510 */
+payon.gat,139,68,4	script	薄暗い男	795,{
 	if(checkquest(114670)) {
 		mes "‐腕輪を探し求めている";
 		mes "　片言の幽霊の";
@@ -494,7 +492,7 @@ payon.gat,139,68,4	script	薄暗い男#pa0829	795,{/* 60510 */
 			mes "お願い。^000000";
 			next;
 			mes "^0000ff‐キットンの魂がまぶしく光る‐^000000";
-			misceffect 247; //60054
+			misceffect 247;
 		}
 		next;
 		mes "^999999[キットン]";
@@ -534,11 +532,11 @@ payon.gat,139,68,4	script	薄暗い男#pa0829	795,{/* 60510 */
 	mes "　フェイスワームの巣で";
 	mes "　腕輪を見つけたら";
 	mes "　声をかけてみよう‐";
-	setquest 114670; //state=1
+	setquest 114670;
 	close;
 }
 
-dali.gat,83,67,5	script	古い立て札#1	857,{/* 58022 */
+dali.gat,83,67,5	script	古い立て札	857,{
 	if($FacewormParty$ == "") {
 		mes "‐長い間、新しい記録が出なかった為";
 		mes "　掲示板が古くなりました‐";
@@ -552,7 +550,7 @@ dali.gat,83,67,5	script	古い立て札#1	857,{/* 58022 */
 	close;
 }
 
-dali.gat,80,60,4	script	魔法学者	755,{/* 58023 */
+dali.gat,80,60,4	script	魔法学者	755,{
 	if(checkquest(12325)&2 && checkquest(118921)&2) {
 		mes "‐^0000ff次元移動の痕跡が消えました。";
 		mes "　次元移動機を再び利用することが";
@@ -714,11 +712,11 @@ dali.gat,80,60,4	script	魔法学者	755,{/* 58023 */
 		close;
 	}
 OnInit:
-	waitingroom "フェイスワーム",0; //58023
+	waitingroom "フェイスワーム",0;
 	end;
 }
 
-dali.gat,77,58,4	script	次元移動機	10007,{/* 58024 */
+dali.gat,77,58,4	script	次元移動機	10007,{
 	if(checkquest(12325)&2 && checkquest(118921)&2) {
 		mes "‐^0000ff次元移動の痕跡が消えました。";
 		mes "　次元移動機を再び利用することが";
@@ -761,7 +759,8 @@ dali.gat,77,58,4	script	次元移動機	10007,{/* 58024 */
 	switch(mdenter("Faceworm")) {
 	case 0:
 		announce "[" +strcharinfo(1)+ "]パーティーの[" +strcharinfo(0)+ "]が[Faceworm]に入場します。",0x9,0x00ff99;
-		setquest 12325; //state=1
+		setquest 12325;
+		setquest 118921;
 		donpcevent getmdnpcname("#FacewarmManager")+ "::OnStart";
 		//warp "1@face.gat",112,353;
 		close;
@@ -809,7 +808,7 @@ OnStart:
 	end;
 }
 
-1@face.gat,110,348,6	script	ケイオス#0	683,{/* 56414 */
+1@face.gat,110,348,6	script	ケイオス#0	683,{
 	cutin "H_CHAOS01.bmp", 2;
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		mes "[ケイオス]";
@@ -936,8 +935,8 @@ OnStart:
 	donpcevent getmdnpcname("ケイオス#0")+ "::OnStart";
 	end;
 OnStart:
-	hideoffnpc getmdnpcname("ケイオス#01"); //56415
-	hideonnpc getmdnpcname("ケイオス#0"); //56414
+	hideoffnpc getmdnpcname("ケイオス#01");
+	hideonnpc getmdnpcname("ケイオス#0");
 	initnpctimer;
 	end;
 OnTimer5000:
@@ -971,8 +970,8 @@ OnTimer50000:
 	donpcevent getmdnpcname("ケイオス#01")+"::OnTalk6";
 	end;
 OnTimer55000:
-	hideonnpc getmdnpcname("ケイオス#01"); //56415
-	hideonnpc getmdnpcname("アイリス#0"); //56416
+	hideonnpc getmdnpcname("ケイオス#01");
+	hideonnpc getmdnpcname("アイリス#0");
 	end;
 OnTimer60000:
 	stopnpctimer;
@@ -982,7 +981,7 @@ OnTimer60000:
 	end;
 }
 
-1@face.gat,110,348,6	script	ケイオス#01	683,{/* 56415 (hide)*/
+1@face.gat,110,348,6	script	ケイオス#01	683,{
 	end;
 OnTalk1:
 	unittalk "ケイオス : しかしまさか、オレ達以外にも人がいるとはな……。";
@@ -1004,7 +1003,7 @@ OnTalk6:
 	end;
 }
 
-1@face.gat,116,346,3	script	アイリス#0	666,{/* 56416 */
+1@face.gat,116,346,3	script	アイリス#0	666,{
 	cutin "H_IRIS02.bmp", 2;
 	mes "[アイリス]";
 	mes "ごめんね～。";
@@ -1077,8 +1076,8 @@ OnKilled:
 	set 'mob,0;
 	donpcevent getmdnpcname("#ボス虫0_bc")+"::OnStop";
 	announce "アイリス : ダークフェイスワームが出てきた穴が見えるね。あの穴から次の場所に行けそうだよ。", 0x9, 0xffffff, 0x190, 18, 0, 0;
-	hideoffnpc getmdnpcname("#虫1褒賞"); //56495
-	hideoffnpc getmdnpcname("#虫1入口"); //56495
+	hideoffnpc getmdnpcname("#虫1褒賞");
+	hideoffnpc getmdnpcname("#虫1入口");
 	end;
 }
 
@@ -1139,11 +1138,11 @@ OnKilled:
 		getexp 10000000,0;
 	else
 		getexp 20000000,0;
-	warp getmdmapname("1@face.gat"),127,95;	//56421
+	warp getmdmapname("1@face.gat"),127,95;
 	end;
 }
 
-1@face.gat,120,97,6	script	ケイオス#1	683,{/* 56422 */
+1@face.gat,120,97,6	script	ケイオス#1	683,{
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		// 未調査
 		mes "[ケイオス]";
@@ -1224,7 +1223,7 @@ OnKilled:
 	mes "気をつけろよ。";
 	unittalk "ケイオス : とにかく俺たちが狙っている奴はここにもいなかったようだ。俺たちは先に行くからお前も気をつけろよ。";
 	next;
-	hideonnpc getmdnpcname("ケイオス#1"); //64041
+	hideonnpc getmdnpcname("ケイオス#1");
 	cutin "H_IRIS01.bmp", 2;
 	mes "[アイリス]";
 	mes "ケイオス!?";
@@ -1233,12 +1232,12 @@ OnKilled:
 	donpcevent getmdnpcname("アイリス#1")+"::OnTalk5";
 	close2;
 	cutin "H_IRIS02.bmp", 255;
-	hideonnpc getmdnpcname("アイリス#1"); //64042
+	hideonnpc getmdnpcname("アイリス#1");
 	initnpctimer;
-	viewpoint 1, 116, 292, 1, 0xFF8000; //64041
-	viewpoint 1, 163, 239, 2, 0xFF8000; //64041
-	viewpoint 1, 203, 286, 3, 0xFF8000; //64041
-	viewpoint 1, 99, 206, 4, 0xFF8000; //64041
+	viewpoint 1, 116, 292, 1, 0xFF8000;
+	viewpoint 1, 163, 239, 2, 0xFF8000;
+	viewpoint 1, 203, 286, 3, 0xFF8000;
+	viewpoint 1, 99, 206, 4, 0xFF8000;
 	donpcevent getmdnpcname("#虫1_mobdead")+"::OnStart";
 	donpcevent getmdnpcname("#虫1_timer")+"::OnStart";
 	announce "アイリス : この辺りのフェイスワームは周りに幼虫がたくさんいるみたい。", 0x9, 0x00ffff, 0x190, 18, 0, 0;
@@ -1247,7 +1246,7 @@ OnTimer3000:
 	announce "アイリス : くぼみごとに幼虫の数は違うみたいだけど……できるだけ近寄らないようにね！", 0x9, 0x00ffff, 0x190, 18, 0, 0;
 	end;
 }
-1@face.gat,129,97,3	script	アイリス#1	666,{/* 56423 */
+1@face.gat,129,97,3	script	アイリス#1	666,{
 	cutin "H_IRIS02.bmp", 2;
 	mes "[アイリス]";
 	mes "ケイオスは信じられる仲間よ。";
@@ -1318,8 +1317,8 @@ OnStart:
 OnKilled:
 	set 'mob,0;
 	announce "アイリス : 南の方から大きな音が聞こえたよ。南にいけば次の場所の手がかりがあるかも！", 0x9, 0xffffff, 0x190, 18, 0, 0;
-	hideoffnpc getmdnpcname("#虫2褒賞"); //56495
-	hideoffnpc getmdnpcname("#虫2入口"); //56495
+	hideoffnpc getmdnpcname("#虫2褒賞");
+	hideoffnpc getmdnpcname("#虫2入口");
 	end;
 }
 
@@ -1328,11 +1327,11 @@ OnKilled:
 		getexp 10000000,0;
 	else
 		getexp 20000000,0;
-	warp getmdmapname("1@face.gat"),155,113;	//56428
+	warp getmdmapname("1@face.gat"),155,113;
 	end;
 }
 
-1@face.gat,153,113,7	script	ケイオス#2	683,{/* 56429 */
+1@face.gat,153,113,7	script	ケイオス#2	683,{
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		// 未調査
 		mes "[ケイオス]";
@@ -1364,17 +1363,18 @@ OnKilled:
 	unittalk "ケイオス : まあ、そういう事だから俺たちは先に行くぜ。ついてくるなら気をつけろよ。";
 	close2;
 	cutin "H_CHAOS01.bmp", 255;
-	hideonnpc getmdnpcname("ケイオス#2"); //64048
-	hideonnpc getmdnpcname("アイリス#2"); //64049
-	viewpoint 1, 182, 127, 1, 0xFF8000; //64048
-	viewpoint 1, 166, 210, 2, 0xFF8000; //64048
-	viewpoint 1, 315, 335, 3, 0xFF8000; //64048
-	viewpoint 1, 221, 317, 4, 0xFF8000; //64048
+	hideonnpc getmdnpcname("ケイオス#2");
+	hideonnpc getmdnpcname("アイリス#2");
+	viewpoint 1, 182, 127, 1, 0xFF8000;
+	viewpoint 1, 166, 210, 2, 0xFF8000;
+	viewpoint 1, 315, 335, 3, 0xFF8000;
+	viewpoint 1, 221, 317, 4, 0xFF8000;
 	donpcevent getmdnpcname("#虫2_mobdead")+"::OnStart";
 	donpcevent getmdnpcname("#虫2_timer")+"::OnStart";
+	donpcevent getmdnpcname("#猛毒泥_timer")+"::OnStart";
 	end;
 }
-1@face.gat,160,113,1	script	アイリス#2	666,{/* 56430 */
+1@face.gat,160,113,1	script	アイリス#2	666,{
 	end;
 OnTalk1:
 	unittalk "アイリス : ここ、何か嫌だな……。ねえ、早く行こうよケイオス。";
@@ -1429,8 +1429,8 @@ OnKilled:
 	set 'mob,0;
 	donpcevent getmdnpcname("#ボス虫2_bc")+"::OnStop";
 	announce "アイリス : 南の方から石が崩れ落ちる音が聞こえた！　いってみよう！", 0x9, 0xffffff, 0x190, 18, 0, 0;
-	hideoffnpc getmdnpcname("#虫3褒賞"); //56495
-	hideoffnpc getmdnpcname("#虫3入口"); //56495
+	hideoffnpc getmdnpcname("#虫3褒賞");
+	hideoffnpc getmdnpcname("#虫3入口");
 	end;
 }
 
@@ -1479,12 +1479,12 @@ OnKilled:
 }
 
 1@face.gat,248,185,0	script	#虫3入口	45,2,2,{
-	viewpoint 2, 1, 1, 1, 0xFFFFFF; //64054
-	viewpoint 2, 1, 1, 2, 0xFFFFFF; //64054
-	viewpoint 2, 1, 1, 3, 0xFFFFFF; //64054
-	viewpoint 2, 1, 1, 4, 0xFFFFFF; //64054
-	viewpoint 2, 1, 1, 5, 0xFFFFFF; //64054
-	viewpoint 2, 1, 1, 6, 0xFFFFFF; //64054
+	viewpoint 2, 1, 1, 1, 0xFFFFFF;
+	viewpoint 2, 1, 1, 2, 0xFFFFFF;
+	viewpoint 2, 1, 1, 3, 0xFFFFFF;
+	viewpoint 2, 1, 1, 4, 0xFFFFFF;
+	viewpoint 2, 1, 1, 5, 0xFFFFFF;
+	viewpoint 2, 1, 1, 6, 0xFFFFFF;
 	if(BaseLevel < 160)
 		getexp 10000000,0;
 	else
@@ -1493,14 +1493,14 @@ OnKilled:
 	end;
 }
 
-1@face.gat,261,169,0	script	#ケイon	139,3,3,{/* 56436 */
+1@face.gat,261,169,0	script	#ケイon	139,3,3,{
 OnTouch:
 	hideonnpc;
 	initnpctimer;
 	donpcevent getmdnpcname("#虫3_timer")+"::OnStart";
 	donpcevent getmdnpcname("#虫3_mobdead")+"::OnStart";
 	donpcevent getmdnpcname("#虫3_猛毒地帯")+"::OnStart";
-	viewpoint 1, 268, 126, 1, 0xFF8000; //64055
+	viewpoint 1, 268, 126, 1, 0xFF8000;
 	end;
 OnTimer3000:
 	announce "ケイオス : おい、この辺りは猛毒地帯だから気を付けて進め。毒に触れないようにしろよ。", 0x9, 0xffff00, 0x190, 18, 0, 0;
@@ -1576,8 +1576,8 @@ OnKilled:
 	set 'mob,0;
 	donpcevent getmdnpcname("#ボス虫3_bc")+"::OnStop";
 	announce "アイリス : 石が崩れ落ちる音が聞こえた……。他の通路がみつかったみたい。", 0x9, 0xffffff, 0x190, 18, 0, 0;
-	hideoffnpc getmdnpcname("#虫4褒賞"); //56495
-	hideoffnpc getmdnpcname("#虫4入口"); //56495
+	hideoffnpc getmdnpcname("#虫4褒賞");
+	hideoffnpc getmdnpcname("#虫4入口");
 	end;
 }
 
@@ -1620,11 +1620,11 @@ OnKilled:
 		getexp 10000000,0;
 	else
 		getexp 20000000,0;
-	warp getmdmapname("1@face.gat"),210,145;	//56469
+	warp getmdmapname("1@face.gat"),210,145;
 	end;
 }
 
-1@face.gat,213,147,0	script	#ケイon2	139,3,3,{/* 56470 */
+1@face.gat,213,147,0	script	#ケイon2	139,3,3,{
 OnTouch:
 	hideonnpc;
 	initnpctimer;
@@ -1645,7 +1645,7 @@ OnTimer12000:
 	donpcevent getmdnpcname("ケイオス#4")+"::OnTalk3";
 	end;
 OnTimer17000:
-	hideonnpc getmdnpcname("ケイオス#4"); //64091
+	hideonnpc getmdnpcname("ケイオス#4");
 	end;
 OnTimer20000:
 	donpcevent getmdnpcname("アイリス#4")+"::OnTalk3";
@@ -1678,7 +1678,7 @@ OnTimer32200:
 	donpcevent getmdnpcname("ケイオス#5")+"::OnTalk8";
 	end;
 OnTimer37000:
-	hideoffnpc getmdnpcname("ケイオス#4"); //64091
+	hideoffnpc getmdnpcname("ケイオス#4");
 	end;
 OnTimer40000:
 	donpcevent getmdnpcname("ケイオス#4")+"::OnTalk4";
@@ -1690,15 +1690,15 @@ OnTimer46000:
 	donpcevent getmdnpcname("ケイオス#4")+"::OnTalk5";
 	end;
 OnTimer52000:
-	hideonnpc getmdnpcname("ケイオス#4"); //64091
+	hideonnpc getmdnpcname("ケイオス#4");
 	end;
 OnTimer53000:
 	donpcevent getmdnpcname("アイリス#4")+"::OnTalk6";
-	misceffect 1021, getmdnpcname("ケイオス#5"); //64090
-	misceffect 247, getmdnpcname("ケイオス#5"); //64090
+	misceffect 1021, getmdnpcname("ケイオス#5");
+	misceffect 247, getmdnpcname("ケイオス#5");
 	end;
 OnTimer58000:
-	hideonnpc getmdnpcname("アイリス#4"); //64092
+	hideonnpc getmdnpcname("アイリス#4");
 	end;
 OnTimer67000:
 	donpcevent getmdnpcname("#女王虫4")+"::OnStart";
@@ -1710,7 +1710,7 @@ OnTimer77000:
 	end;
 }
 
-1@face.gat,213,153,6	script	ケイオス#5	683,{/* 56471 (hide)*/
+1@face.gat,213,153,6	script	ケイオス#5	683,{
 	end;
 OnTalk1:
 	unittalk "ケイオス : うわああ！　何だこれ！";
@@ -1738,7 +1738,7 @@ OnTalk8:
 	end;
 }
 
-1@face.gat,208,149,7	script	ケイオス#4	683,{/* 56472 */
+1@face.gat,208,149,7	script	ケイオス#4	683,{
 	cutin "H_CHAOS01.bmp", 2;
 	mes "[ケイオス]";
 	mes "こいつは本当に変な穴だな。";
@@ -1762,7 +1762,7 @@ OnTalk5:
 	end;
 }
 
-1@face.gat,220,149,1	script	アイリス#4	666,{/* 56473 */
+1@face.gat,220,149,1	script	アイリス#4	666,{
 	cutin "H_IRIS01.bmp", 2;
 	mes "[アイリス]";
 	mes "怪しい気配がする……。";
@@ -1864,10 +1864,10 @@ OnDamage:
 OnKilled:
 	set 'mob,0;
 	donpcevent getmdnpcname("#女王虫4_bc")+"::OnStop";
-	hideonnpc getmdnpcname("#ケイon3"); //64088
-	hideoffnpc getmdnpcname("ケイオス#6"); //64089
-	hideoffnpc getmdnpcname("アイリス#6"); //64090
-	hideoffnpc getmdnpcname("大商人の箱#1"); //64178
+	hideonnpc getmdnpcname("#ケイon3");
+	hideoffnpc getmdnpcname("ケイオス#6");
+	hideoffnpc getmdnpcname("アイリス#6");
+	hideoffnpc getmdnpcname("大商人の箱#1");
 	end;
 }
 
@@ -1912,26 +1912,26 @@ OnTimer6000:
 	case 0:
 		announce "ケイオス : おい！　北の方に奴を誘え！　俺の一撃を見せてやる！", 0x9, 0xff44aa, 0x190, 18, 0, 0;
 		donpcevent getmdnpcname("ケイオス#北")+"::OnStart";
-		hideoffnpc getmdnpcname("#ケイ_北"); //64077
-		hideoffnpc getmdnpcname("ケイオス#北"); //64081
+		hideoffnpc getmdnpcname("#ケイ_北");
+		hideoffnpc getmdnpcname("ケイオス#北");
 		end;
 	case 1:
 		announce "ケイオス : おい！　南の方に奴を誘え！　俺の一撃を見せてやる！", 0x9, 0xff44aa, 0x190, 18, 0, 0;
 		donpcevent getmdnpcname("ケイオス#南")+"::OnStart";
-		hideoffnpc getmdnpcname("#ケイ_南"); //64077
-		hideoffnpc getmdnpcname("ケイオス#南"); //64081
+		hideoffnpc getmdnpcname("#ケイ_南");
+		hideoffnpc getmdnpcname("ケイオス#南");
 		end;
 	case 2:
 		announce "ケイオス : おい！　東の方に奴を誘え！　俺の一撃を見せてやる！", 0x9, 0xff44aa, 0x190, 18, 0, 0;
 		donpcevent getmdnpcname("ケイオス#東")+"::OnStart";
-		hideoffnpc getmdnpcname("#ケイ_東"); //64077
-		hideoffnpc getmdnpcname("ケイオス#東"); //64081
+		hideoffnpc getmdnpcname("#ケイ_東");
+		hideoffnpc getmdnpcname("ケイオス#東");81
 		end;
 	case 3:
 		announce "ケイオス : おい！　西の方に奴を誘え！　俺の一撃を見せてやる！", 0x9, 0xff44aa, 0x190, 18, 0, 0;
 		donpcevent getmdnpcname("ケイオス#西")+"::OnStart";
-		hideoffnpc getmdnpcname("#ケイ_西"); //64077
-		hideoffnpc getmdnpcname("ケイオス#西"); //64081
+		hideoffnpc getmdnpcname("#ケイ_西");
+		hideoffnpc getmdnpcname("ケイオス#西");
 		end;
 	case 4: case 5:
 		// dummy
@@ -1941,23 +1941,23 @@ OnTimer21000:
 	switch('chaos) {
 	case 0:
 		donpcevent getmdnpcname("ケイオス#北")+"::OnStop";
-		hideonnpc getmdnpcname("#ケイ_北"); //64077
-		hideonnpc getmdnpcname("ケイオス#北"); //64081
+		hideonnpc getmdnpcname("#ケイ_北");
+		hideonnpc getmdnpcname("ケイオス#北");
 		end;
 	case 1:
 		donpcevent getmdnpcname("ケイオス#南")+"::OnStop";
-		hideonnpc getmdnpcname("#ケイ_南"); //64077
-		hideonnpc getmdnpcname("ケイオス#南"); //64081
+		hideonnpc getmdnpcname("#ケイ_南");
+		hideonnpc getmdnpcname("ケイオス#南");
 		end;
 	case 2:
 		donpcevent getmdnpcname("ケイオス#東")+"::OnStop";
-		hideonnpc getmdnpcname("#ケイ_東"); //64077
-		hideonnpc getmdnpcname("ケイオス#東"); //64081
+		hideonnpc getmdnpcname("#ケイ_東");
+		hideonnpc getmdnpcname("ケイオス#東");
 		end;
 	case 3:
 		donpcevent getmdnpcname("ケイオス#西")+"::OnStop";
-		hideonnpc getmdnpcname("#ケイ_西"); //64077
-		hideonnpc getmdnpcname("ケイオス#西"); //64081
+		hideonnpc getmdnpcname("#ケイ_西");
+		hideonnpc getmdnpcname("ケイオス#西");
 		end;
 	case 4: case 5:
 		// dummy
@@ -1990,8 +1990,8 @@ OnTouch:
 		}
 	}
 	donpcevent getmdnpcname("ケイオス#北")+"::OnStop";
-	hideonnpc getmdnpcname("#ケイ_北"); //64077
-	hideonnpc getmdnpcname("ケイオス#北"); //64081
+	hideonnpc getmdnpcname("#ケイ_北");
+	hideonnpc getmdnpcname("ケイオス#北");
 	end;
 }
 1@face.gat,214,143,0	script	#ケイ_南	139,2,2,{
@@ -2010,8 +2010,8 @@ OnTouch:
 		}
 	}
 	donpcevent getmdnpcname("ケイオス#南")+"::OnStop";
-	hideonnpc getmdnpcname("#ケイ_南"); //64077
-	hideonnpc getmdnpcname("ケイオス#南"); //64081
+	hideonnpc getmdnpcname("#ケイ_南");
+	hideonnpc getmdnpcname("ケイオス#南");
 	end;
 }
 1@face.gat,226,158,0	script	#ケイ_東	139,2,2,{
@@ -2030,8 +2030,8 @@ OnTouch:
 		}
 	}
 	donpcevent getmdnpcname("ケイオス#東")+"::OnStop";
-	hideonnpc getmdnpcname("#ケイ_東"); //64077
-	hideonnpc getmdnpcname("ケイオス#東"); //64081
+	hideonnpc getmdnpcname("#ケイ_東");
+	hideonnpc getmdnpcname("ケイオス#東");
 	end;
 }
 1@face.gat,200,158,0	script	#ケイ_西	139,{
@@ -2050,12 +2050,11 @@ OnTouch:
 		}
 	}
 	donpcevent getmdnpcname("ケイオス#西")+"::OnStop";
-	hideonnpc getmdnpcname("#ケイ_西"); //64077
-	hideonnpc getmdnpcname("ケイオス#西"); //64081
+	hideonnpc getmdnpcname("#ケイ_西");
+	hideonnpc getmdnpcname("ケイオス#西");
 	end;
 }
-1@face.gat,214,172,5	script	ケイオス#北	683,{/* 56481 (hide)*/
-	//1550000
+1@face.gat,214,172,5	script	ケイオス#北	683,{
 	end;
 OnStart:
 	initnpctimer;
@@ -2070,7 +2069,7 @@ OnTimer1000:
 		set '@dummy,getmapxy('@map$,'@bx,'@by,3,'@boss);
 		set '@dummy,getmapxy('@map$,'@nx,'@ny,1);
 		if('@nx-10 < '@bx && '@nx+10 > '@bx && '@ny-10 < '@by && '@ny+10 > '@by) {
-			emotion 27; //64101
+			emotion 27;
 		}
 	}
 	end;
@@ -2079,7 +2078,7 @@ OnTimer1000:
 1@face.gat,226,158,3	duplicate(ケイオス#北)	ケイオス#東	683
 1@face.gat,200,158,6	duplicate(ケイオス#北)	ケイオス#西	683
 
-1@face.gat,212,156,0	script	#ケイon3	139,5,5,{/* 56490 (hide)*/
+1@face.gat,212,156,0	script	#ケイon3	139,5,5,{
 	end;
 OnTouch:
 	initnpctimer;
@@ -2110,13 +2109,13 @@ OnTimer24000:
 	end;
 OnTimer26000:
 	stopnpctimer;
-	hideonnpc getmdnpcname("アイリス#6"); //64090
-	hideonnpc getmdnpcname("ケイオス#6"); //64089
-	hideoffnpc getmdnpcname("次元移動機#6"); //64091
+	hideonnpc getmdnpcname("アイリス#6");
+	hideonnpc getmdnpcname("ケイオス#6");
+	hideoffnpc getmdnpcname("次元移動機#6");
 	end;
 }
 
-1@face.gat,209,159,6	script	ケイオス#6	683,{/* 56491 (hide)*/
+1@face.gat,209,159,6	script	ケイオス#6	683,{
 	end;
 OnTalk1:
 	unittalk "ケイオス : ふう……長い闘いだったな。";
@@ -2135,7 +2134,7 @@ OnTalk5:
 	end;
 }
 
-1@face.gat,220,159,4	script	アイリス#6	666,{/* 56492 (hide)*/
+1@face.gat,220,159,4	script	アイリス#6	666,{
 	end;
 OnTalk1:
 	unittalk "アイリス : だけど私達が探している奴じゃなかったみたい。";
@@ -2148,7 +2147,7 @@ OnTalk3:
 	end;
 }
 
-1@face.gat,215,159,4	script	次元移動機#6	10007,{/* 56493 (hide)*/
+1@face.gat,215,159,4	script	次元移動機#6	10007,{
 	mes "[次元移動機]";
 	mes "ここでの時間は終了になります。";
 	mes "外に出るかもう少し見回る事が";
@@ -2165,12 +2164,12 @@ OnTalk3:
 	end;
 }
 
-1@face.gat,155,82,3	script	#虫1褒賞	10005,15,15,{/* 56495 (hide)*/
+1@face.gat,155,82,3	script	#虫1褒賞	10005,15,15,{
 	donpcevent getmdnpcname("#虫0_timer")+"::OnStop";
 	set '@time,getnpctimer(0,getmdnpcname("#虫0_timer"))/1000;
 	announce "今回の戦闘に所要された時間は" +'@time/60+ "分" +'@time%60+ "秒です。", 0x9, 0xffff33, 0x190, 12, 0, 0;
-	misceffect 10; //56495
-	hideonnpc; //56495
+	misceffect 10;
+	hideonnpc;
 	setarray '@card,4700,4710,4720,4730,4740,4750,4701,4711,4721,4731,4741,4751,4702,4712,4722,4732,4742,4752,4703,4713,4723,4733,4743,4753,4704,4714,4724,4734,4744,4754;
 	if('@time <= 121){
 		if(rand(1,100) <= 70)
@@ -2184,16 +2183,16 @@ OnTalk3:
 	}
 	end;
 OnTouch:
-	viewpoint 2, 1, 1, 1, 0xFFFFFF; //56495
-	viewpoint 1, 127, 95, 2, 0x32CD32; //56495
+	viewpoint 2, 1, 1, 1, 0xFFFFFF;
+	viewpoint 1, 127, 95, 2, 0x32CD32;
 	end;
 }
-1@face.gat,162,271,3	script	#虫2褒賞	10005,15,15,{/* 56496 (hide)*/
+1@face.gat,162,271,3	script	#虫2褒賞	10005,15,15,{
 	set '@time,getnpctimer(0,getmdnpcname("#虫1_timer"))/1000;
 	donpcevent getmdnpcname("#虫1_timer")+"::OnStop";
 	announce "今回の戦闘に所要された時間は" +'@time/60+ "分" +'@time%60+ "秒です。", 0x9, 0xffff33, 0x190, 12, 0, 0;
-	misceffect 10; //56495
-	hideonnpc; //56495
+	misceffect 10;
+	hideonnpc;
 	setarray '@card,4700,4710,4720,4730,4740,4750,4701,4711,4721,4731,4741,4751,4702,4712,4722,4732,4742,4752,4703,4713,4723,4733,4743,4753,4704,4714,4724,4734,4744,4754;
 	if('@time <= 121){
 		if(rand(1,100) <= 70)
@@ -2208,20 +2207,20 @@ OnTouch:
 	dropitem getmdmapname("1@face.gat"),162+rand(-2,2),271+rand(-2,2),7228,getmapusers(getmdmapname("1@face.gat")),0;
 	end;
 OnTouch:
-	viewpoint 2, 1, 1, 1, 0xFFFFFF; //64115
-	viewpoint 2, 1, 1, 2, 0xFFFFFF; //64115
-	viewpoint 2, 1, 1, 3, 0xFFFFFF; //64115
-	viewpoint 2, 1, 1, 4, 0xFFFFFF; //64115
-	viewpoint 2, 1, 1, 5, 0xFFFFFF; //64115
-	viewpoint 1, 139, 100, 6, 0x32CD32; //64115
+	viewpoint 2, 1, 1, 1, 0xFFFFFF;
+	viewpoint 2, 1, 1, 2, 0xFFFFFF;
+	viewpoint 2, 1, 1, 3, 0xFFFFFF;
+	viewpoint 2, 1, 1, 4, 0xFFFFFF;
+	viewpoint 2, 1, 1, 5, 0xFFFFFF;
+	viewpoint 1, 139, 100, 6, 0x32CD32;
 	end;
 }
-1@face.gat,278,308,3	script	#虫3褒賞	10005,15,15,{/* 56497 (hide)*/
+1@face.gat,278,308,3	script	#虫3褒賞	10005,15,15,{
 	donpcevent getmdnpcname("#虫2_timer")+"::OnStop";
 	set '@time,getnpctimer(0,getmdnpcname("#虫2_timer"))/1000;
 	announce "今回の戦闘に所要された時間は" +'@time/60+ "分" +'@time%60+ "秒です。", 0x9, 0xffff33, 0x190, 12, 0, 0;
-	misceffect 10; //56495
-	hideonnpc; //56495
+	misceffect 10;
+	hideonnpc;
 	setarray '@card,4700,4710,4720,4730,4740,4750,4701,4711,4721,4731,4741,4751,4702,4712,4722,4732,4742,4752,4703,4713,4723,4733,4743,4753,4704,4714,4724,4734,4744,4754;
 	if('@time <= 121){
 		if(rand(1,100) <= 70)
@@ -2235,20 +2234,20 @@ OnTouch:
 	}
 	end;
 OnTouch:
-	viewpoint 2, 1, 1, 1, 0xFFFFFF; //64116
-	viewpoint 2, 1, 1, 2, 0xFFFFFF; //64116
-	viewpoint 2, 1, 1, 3, 0xFFFFFF; //64116
-	viewpoint 2, 1, 1, 4, 0xFFFFFF; //64116
-	viewpoint 2, 1, 1, 5, 0xFFFFFF; //64116
-	viewpoint 1, 248, 185, 6, 0x32CD32; //64116
+	viewpoint 2, 1, 1, 1, 0xFFFFFF;
+	viewpoint 2, 1, 1, 2, 0xFFFFFF;
+	viewpoint 2, 1, 1, 3, 0xFFFFFF;
+	viewpoint 2, 1, 1, 4, 0xFFFFFF;
+	viewpoint 2, 1, 1, 5, 0xFFFFFF;
+	viewpoint 1, 248, 185, 6, 0x32CD32;
 	end;
 }
-1@face.gat,214,108,3	script	#虫4褒賞	10005,{/* 56498 (hide)*/
+1@face.gat,214,108,3	script	#虫4褒賞	10005,{
 	donpcevent getmdnpcname("#虫3_timer")+"::OnStop";
 	set '@time,getnpctimer(0,getmdnpcname("#虫3_timer"))/1000;
 	announce "今回の戦闘に所要された時間は" +'@time/60+ "分" +'@time%60+ "秒です。", 0x9, 0xffff33, 0x190, 12, 0, 0;
-	misceffect 10; //56495
-	hideonnpc; //56495
+	misceffect 10;
+	hideonnpc;
 	setarray '@card,4700,4710,4720,4730,4740,4750,4701,4711,4721,4731,4741,4751,4702,4712,4722,4732,4742,4752,4703,4713,4723,4733,4743,4753,4704,4714,4724,4734,4744,4754;
 	if('@time <= 111){
 		if(rand(1,100) <= 70)
@@ -2263,9 +2262,9 @@ OnTouch:
 	dropitem getmdmapname("1@face.gat"),214+rand(-2,2),108+rand(-2,2),7444,getmapusers(getmdmapname("1@face.gat")),0;
 	end;
 OnTouch:
-	viewpoint 2, 1, 1, 1, 0xFFFFFF; //64117
-	viewpoint 2, 1, 1, 2, 0xFFFFFF; //64117
-	viewpoint 1, 204, 122, 3, 0x32CD32; //64117
+	viewpoint 2, 1, 1, 1, 0xFFFFFF;
+	viewpoint 2, 1, 1, 2, 0xFFFFFF;
+	viewpoint 1, 204, 122, 3, 0x32CD32;
 	end;
 }
 1@face.gat,61,132,5		script	柔らかいくぼみ#1	557,5,5,{
@@ -2340,18 +2339,32 @@ OnTouch:
 1@face.gat,186,130,3	duplicate(柔らかいくぼみ#1)	柔らかいくぼみ#59	557,5,5
 1@face.gat,232,340,5	duplicate(柔らかいくぼみ#1)	柔らかいくぼみ#60	557,5,5
 
-1@face.gat,163,130,0	script	#猛毒泥1	139,7,7,{/* 56562 */
+1@face.gat,163,130,0	script	#猛毒泥1	139,7,7,{
 	set '@map$,getmdmapname("1@face.gat");
+	set '@event$,getmdnpcname(strnpcinfo(0))+ "::OnKilled";
 	initnpctimer;
 	misceffect 124;
 	hideonnpc;
-	set '@num,rand(20,25);
-	set '@dummy,getmapxy('@map$,'@x,'@y,1);
-	areamonster '@map$,'@x-10,'@y-10,'@x+10,'@y+10,"猛毒袋",2531,'@num;
+	killmonster '@map$,'@event$;
+	set '@val,substr(strnpcinfo(2),6,1);
+	switch('@val) {
+	case 1: setarray .@xy[0],167,142,15; set '@num,25; break;
+	case 2: setarray .@xy[0],163,161,15; set '@num,30; break;
+	case 3: setarray .@xy[0],167,185,20; set '@num,50; break;
+	case 4: setarray .@xy[0],197,203,15; set '@num,30; break;
+	case 5: setarray .@xy[0],227,203,20; set '@num,50; break;
+	case 6: setarray .@xy[0],244,232,15; set '@num,30; break;
+	case 7: setarray .@xy[0],243,259,15; set '@num,40; break;
+	case 8: setarray .@xy[0],292,277,50; set '@num,50; break;
+	case 9: setarray .@xy[0],248,322,50; set '@num,50; break;
+	}
+	areamonster '@map$,'@xy[0]-'@xy[2],'@xy[1]-'@xy[2],'@xy[0]+'@xy[2],'@xy[1]+'@xy[2],"猛毒袋",2531,'@num,'@event$;
 	end;
 OnTimer15000:
 	stopnpctimer;
 	hideoffnpc;
+	end;
+OnKilled:
 	end;
 }
 1@face.gat,165,147,0	duplicate(#猛毒泥1)	#猛毒泥2	139,7,7
@@ -2363,7 +2376,7 @@ OnTimer15000:
 1@face.gat,292,277,0	duplicate(#猛毒泥1)	#猛毒泥8	139,5,5
 1@face.gat,248,322,0	duplicate(#猛毒泥1)	#猛毒泥9	139,5,5
 
-1@face.gat,158,120,0	script	#猛毒泥a	139,3,3,{/* 56571 */
+1@face.gat,158,120,0	script	#猛毒泥a	139,3,3,{
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2392,7 +2405,7 @@ OnTimer30000:
 	hideoffnpc;
 	end;
 }
-1@face.gat,248,186,0	script	#猛毒泥b	139,10,10,{/* 56572 */
+1@face.gat,248,186,0	script	#猛毒泥b	139,10,10,{
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2418,7 +2431,7 @@ OnTimer15000:
 	hideoffnpc;
 	end;
 }
-1@face.gat,277,343,0	script	#猛毒泥c	139,5,5,{/* 56573 */
+1@face.gat,277,343,0	script	#猛毒泥c	139,5,5,{
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2430,7 +2443,7 @@ OnTimer20000:
 	hideoffnpc;
 	end;
 }
-1@face.gat,174,133,0	script	#猛毒泥d1	139,5,5,{/* 56574 */
+1@face.gat,174,133,0	script	#猛毒泥d1	139,5,5,{
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2453,7 +2466,7 @@ OnTimer20000:
 	hideoffnpc;
 	end;
 }
-1@face.gat,182,123,0	script	#猛毒泥d2	139,3,3,{/* 56575 */
+1@face.gat,182,123,0	script	#猛毒泥d2	139,3,3,{
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2476,7 +2489,7 @@ OnTimer20000:
 	hideoffnpc;
 	end;
 }
-1@face.gat,237,299,0	script	#猛毒泥e	139,5,5,{/* 56576 */
+1@face.gat,237,299,0	script	#猛毒泥e	139,5,5,{
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2488,7 +2501,7 @@ OnTimer20000:
 	hideoffnpc;
 	end;
 }
-1@face.gat,245,230,0	script	#猛毒泥f	139,10,10,{/* 56577 */
+1@face.gat,245,230,0	script	#猛毒泥f	139,10,10,{
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2531,7 +2544,7 @@ OnTimer20000:
 	hideoffnpc;
 	end;
 }
-1@face.gat,249,337,0	script	#猛毒泥g	139,10,10,{/* 56578 */
+1@face.gat,249,337,0	script	#猛毒泥g	139,10,10,{
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2543,7 +2556,7 @@ OnTimer20000:
 	hideoffnpc;
 	end;
 }
-1@face.gat,159,194,0	script	#猛毒泥h	139,5,5,{/* 56579 */
+1@face.gat,159,194,0	script	#猛毒泥h	139,5,5,{
 	set '@map$,getmdmapname("1@face.gat");
 	initnpctimer;
 	misceffect 124;
@@ -2555,14 +2568,34 @@ OnTimer30000:
 	hideoffnpc;
 	end;
 }
-@spawn(type: BL_MOB, ID: 33978, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",238,196), dir: 0, name"猛毒袋")
-@spawn(type: BL_MOB, ID: 70043, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",238,197), dir: 0, name"猛毒袋")
-@spawn(type: BL_MOB, ID: 98031, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",239,196), dir: 0, name"猛毒袋")
-@spawn(type: BL_MOB, ID: 22427, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",239,197), dir: 0, name"猛毒袋")
-@spawn(type: BL_MOB, ID: 27646, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",240,196), dir: 0, name"猛毒袋")
-@spawn(type: BL_MOB, ID: 28318, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",240,197), dir: 0, name"猛毒袋")
-@spawn(type: BL_MOB, ID: 75756, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",241,196), dir: 0, name"猛毒袋")
-@spawn(type: BL_MOB, ID: 87472, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",241,197), dir: 0, name"猛毒袋")
+1@face.gat,1,1,0	script	#猛毒泥_timer	139,{
+OnStart:
+	initnpctimer;
+	end;
+OnTimer3000:
+	set '@map$,getmdmapname("1@face.gat");
+	monster '@map$,238,196,"猛毒袋",2531,1;
+	monster '@map$,238,197,"猛毒袋",2531,1;
+	monster '@map$,239,196,"猛毒袋",2531,1;
+	monster '@map$,239,197,"猛毒袋",2531,1;
+	monster '@map$,240,196,"猛毒袋",2531,1;
+	monster '@map$,240,197,"猛毒袋",2531,1;
+	monster '@map$,241,196,"猛毒袋",2531,1;
+	monster '@map$,241,197,"猛毒袋",2531,1;
+	end;
+OnTimer8000:
+	set '@map$,getmdmapname("1@face.gat");
+	monster '@map$,247,191,"猛毒袋",2531,1;
+	monster '@map$,247,192,"猛毒袋",2531,1;
+	monster '@map$,248,191,"猛毒袋",2531,1;
+	monster '@map$,248,192,"猛毒袋",2531,1;
+	monster '@map$,249,191,"猛毒袋",2531,1;
+	monster '@map$,249,192,"猛毒袋",2531,1;
+	end;
+OnTimer18000:
+	initnpctimer;
+	end;
+}
 
 @spawn(type: BL_MOB, ID: 78941, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",247,191), dir: 0, name"猛毒袋")
 @spawn(type: BL_MOB, ID: 81507, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",247,192), dir: 0, name"猛毒袋")
@@ -2570,11 +2603,11 @@ OnTimer30000:
 @spawn(type: BL_MOB, ID: 78836, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",248,192), dir: 0, name"猛毒袋")
 @spawn(type: BL_MOB, ID: 79696, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",249,191), dir: 0, name"猛毒袋")
 @spawn(type: BL_MOB, ID: 79872, speed: 2000, option: 0x0, class: 2531, pos: ("0q81@face.gat",249,192), dir: 0, name"猛毒袋")
-1@face.gat,213,155,3	script	大商人の箱#1	10005,{/* 56580 (hide)*/
+1@face.gat,213,155,3	script	大商人の箱#1	10005,{
 	initnpctimer;
 	set 'flag,'flag+1;
-	misceffect 10; //56495
-	hideonnpc; //56495
+	misceffect 10;
+	hideonnpc;
 	switch('flag) {
 	case 1:
 		donpcevent getmdnpcname("#女王虫4_timer")+"::OnStop";
@@ -2698,6 +2731,6 @@ OnTimer30000:
 	}
 OnTimer2000:
 	if('flag < 8 && rand(100) < 85)
-		hideoffnpc; //56495
+		hideoffnpc;
 	end;
 }
