@@ -33,7 +33,7 @@ prontera.gat,230,198,3	script	ビオレル#prontera	542,{/* 51147 */
 		mes "私の所に来てくれ。";
 		close;
 	}
-	else {
+	else if(gethomuninfo(5) < 6048) {
 		if(checkquest(4155)) {
 			mes "[ビオレル]";
 			mes "やぁ。";
@@ -58,7 +58,7 @@ prontera.gat,230,198,3	script	ビオレル#prontera	542,{/* 51147 */
 			warp "que_house_s.gat",19,42;
 			end;
 		}
-		if(checkquest(4156) || checkquest(4157) || checkquest(4158)) {
+		if(checkquest(4156) || checkquest(4157) || checkquest(4158) || checkquest(4159)) {
 			mes "[ビオレル]";
 			mes "おや。";
 			mes "^005DFFジェイナ^000000の家に";
@@ -80,7 +80,7 @@ prontera.gat,230,198,3	script	ビオレル#prontera	542,{/* 51147 */
 			warp "que_house_s.gat",63,41;
 			end;
 		}
-		if(checkquest(4159)) {
+		if(checkquest(4160)) {
 			mes "[ビオレル]";
 			mes "やぁ。";
 			mes "ホムンクルスについてかい？";
@@ -144,7 +144,7 @@ prontera.gat,230,198,3	script	ビオレル#prontera	542,{/* 51147 */
 	next;
 	switch(select("いいえ、大丈夫","忙しいので話しかけないで下さい","聞かせてください","いつもそこにいますね")) {
 	case 1:
-		emotion 18, "ビオレル#prontera"; //51147
+		emotion 18;
 		mes "[ビオレル]";
 		mes "そうか。";
 		mes "でも、会えてうれしかったよ。";
@@ -153,13 +153,13 @@ prontera.gat,230,198,3	script	ビオレル#prontera	542,{/* 51147 */
 		mes "気を付けてくれよ。";
 		close;
 	case 2:
-		emotion 23, "ビオレル#prontera"; //51147
+		emotion 23;
 		mes "[ビオレル]";
 		mes "ん！　そ、そうか。";
 		mes "私に用があって来たと思ったよ。";
 		close;
 	case 3:
-		emotion 5, "ビオレル#prontera"; //51147
+		emotion 5;
 		mes "[ビオレル]";
 		mes "そうだと思ったよ。";
 		mes "私の友人、ジェイナの";
@@ -297,7 +297,7 @@ prontera.gat,230,198,3	script	ビオレル#prontera	542,{/* 51147 */
 		mes "君にかかっている。";
 		close;
 	case 4:
-		emotion 4, "ビオレル#prontera"; //51147
+		emotion 4;
 		mes "[ビオレル]";
 		mes "いやいや、私は毎日ここに";
 		mes "立っているわけじゃないよ。";
@@ -530,7 +530,7 @@ que_house_s.gat,24,47,3	script	ビオレル#homun_s	542,{/* 51148 */
 		warp "que_house_s.gat",63,41;
 		end;
 	}
-	if(checkquest(4156) || checkquest(4157) || checkquest(4158)) {
+	if(checkquest(4156) || checkquest(4157) || checkquest(4158) || checkquest(4159)) {
 		mes "[ビオレル]";
 		mes "おや。";
 		mes "^005DFFジェイナ^000000の家に";
@@ -546,7 +546,7 @@ que_house_s.gat,24,47,3	script	ビオレル#homun_s	542,{/* 51148 */
 		warp "que_house_s.gat",63,41;
 		end;
 	}
-	if(checkquest(4159)) {
+	if(checkquest(4160)) {
 		musiceffect "33";
 		mes "[ビオレル]";
 		mes "^FF4800ホムンクルス^000000が";
@@ -633,11 +633,11 @@ que_house_s.gat,24,47,3	script	ビオレル#homun_s	542,{/* 51148 */
 					mes "大事な選択だからな。";
 					mes "ゆっくり考えてくれていいぞ。";
 					continue;
-				case 2: set '@card$,"Mer_Eira_Card.bmp";	set '@name$,"エイラ";		break;
-				case 3: set '@card$,"Mer_Sera_Card.bmp";	set '@name$,"セラ";			break;
-				case 4: set '@card$,"Mer_Dieter_Card.bmp";	set '@name$,"ディーター";	break;
-				case 5: set '@card$,"Mer_Bayeri_Card.bmp";	set '@name$,"バイエリー";	break;
-				case 6: set '@card$,"Mer_Eleanor_Card.bmp";	set '@name$,"エレノア";		break;
+				case 2: set '@card$,"Mer_Eira_Card.bmp";	set '@name$,"エイラ";		set '@homun_id,6048; break;
+				case 3: set '@card$,"Mer_Sera_Card.bmp";	set '@name$,"セラ";			set '@homun_id,6050; break;
+				case 4: set '@card$,"Mer_Dieter_Card.bmp";	set '@name$,"ディーター";	set '@homun_id,6051; break;
+				case 5: set '@card$,"Mer_Bayeri_Card.bmp";	set '@name$,"バイエリー";	set '@homun_id,6049; break;
+				case 6: set '@card$,"Mer_Eleanor_Card.bmp";	set '@name$,"エレノア";		set '@homun_id,6052; break;
 				}
 				cutin '@card$, 3;
 				mes "[ビオレル]";
@@ -653,6 +653,7 @@ que_house_s.gat,24,47,3	script	ビオレル#homun_s	542,{/* 51148 */
 				}
 				break;
 			}
+			set '@pay,50000;
 			cutin "Mer_Eira_Card.bmp", 255;
 			mes "[ビオレル]";
 			mes "わかった！";
@@ -680,6 +681,7 @@ que_house_s.gat,24,47,3	script	ビオレル#homun_s	542,{/* 51148 */
 				mes "では、もう一度よく考えてくれ。";
 				close;
 			}
+			set '@homun_id,6048+rand(5);
 			emotion 9, "ビオレル#homun_s"; //51148
 			mes "[ビオレル]";
 			mes "うむ。";
@@ -710,8 +712,10 @@ que_house_s.gat,24,47,3	script	ビオレル#homun_s	542,{/* 51148 */
 		mes "よし。もう少しで終わる！";
 		next;
 		misceffect 183,""; //self
+		set Zeny,Zeny-'@pay;
 		delquest 4160;
 		delquest 4154;
+		homunmutation '@homun_id;
 		emotion 2, "ビオレル#homun_s"; //51148
 		musiceffect "64";
 		mes "[ビオレル]";
@@ -860,7 +864,7 @@ que_house_s.gat,80,42,3	script	ジェイナ#homun_s	558,{/* 51149 */
 		mes "今のホムンクルスを";
 		mes "^0000FFエンブリオ^000000に戻す過程が必要です。";
 		next;
-		if(getitemblank() == 0) {
+		if(checkitemblank() == 0) {
 			mes "[ジェイナ]";
 			mes "あら、荷物が多くて";
 			mes "^0000FFエンブリオ^000000を";
@@ -909,7 +913,7 @@ que_house_s.gat,80,42,3	script	ジェイナ#homun_s	558,{/* 51149 */
 			mes "よかったかもしれませんね。";
 			close;
 		}
-		if(checkhom()==1) {
+		if(gethomuninfo(0)==0) {
 			mes "[ジェイナ]";
 			mes "あっ、待ってください。";
 			mes "変異を行うには";
@@ -949,7 +953,7 @@ que_house_s.gat,80,42,3	script	ジェイナ#homun_s	558,{/* 51149 */
 		mes "エンブリオ状態に……。";
 		next;
 		misceffect 42,""; //self
-		morphembryo;
+		//morphembryo;
 		setquest 4159;
 		delquest 4158;
 		emotion 2, "ジェイナ#homun_s"; //51149
