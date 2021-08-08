@@ -1220,7 +1220,7 @@ pab_camp.gat,32,192,6	script	ŠÇ—Š¯#pab_camp	419,{/* 51132 */
 				mes "[ŠÇ—Š¯]";
 				mes "‚»‚ê‚Å‚Í‚à‚¤ˆê“x";
 				mes "‚²à–¾‚¢‚½‚µ‚Ü‚·B";
-				continue
+				continue;
 			}
 			setquest 123606;
 			compquest 123606;

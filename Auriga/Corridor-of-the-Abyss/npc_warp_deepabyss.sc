@@ -177,7 +177,7 @@ pab_camp.gat,64,189,4	script	‚Ğ‚½‚Ş‚«‚È‰qm#pab_camp	417,{
 		next;
 		switch(select("•\‘w‰ñ˜L(¼)","•\‘w‰ñ˜L(“Œ)","æ‚è‚â‚ß‚é")) {
 		case 1:
-			warp "pab_dun07.gat",13,132);
+			warp "pab_dun07.gat",13,132;
 			end;
 		case 2:
 			warp "pab_dun07.gat",224,130;
@@ -415,7 +415,7 @@ pab_base01.gat,344,64,1	script	—ô‚¯–Ú#pab_base01	550,{
 	mes "@‚©‚ÑL‚¢¼‚Á‚½•—‚ª";
 	mes "@—¬‚ê‚Ä‚­‚é]";
 	next;
-	if(select("­‚µl‚¦‚é","—ô‚¯–Ú‚É”ò‚Ñ‚Ş") == ) {
+	if(select("­‚µl‚¦‚é","—ô‚¯–Ú‚É”ò‚Ñ‚Ş") == 1) {
 		mes "]‚ ‚È‚½‚Í—§‚¿‹‚Á‚½]";
 		close;
 	}
