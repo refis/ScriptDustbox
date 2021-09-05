@@ -542,8 +542,36 @@ OnInit:
 }
 
 verus04.gat,75,114,5	script	チャールストン#mcd	10054,{/* 59480 */
+	cutin "nale01",0;
 	if(checkquest(13184)) {
-		cutin "nale01",0;
+		{
+			cutin "nale03.bmp", 0;
+			mes "[チャールストン]";
+			mes "変わらない過去に";
+			mes "逃れたい現実に";
+			mes "不透明な未来に";
+			mes "失望しましたか？";
+			mes "諦めるのは悪い事ではありません。";
+			next;
+			if(select("続ける","やめる") == 1) {
+				mes "[チャールストン]";
+				mes "ありがとう。";
+				mes "最後まで私は続けます。";
+				mes "ロボットの宿命です。";
+				mes "たとえ可能性がなくても……。";
+				close2;
+				cutin "dalle01.bmp", 255;
+				end;
+			}
+			mes "[チャールストン]";
+			mes "わかりました。";
+			mes "諦めるのは";
+			mes "決して悪い事ではありません。";
+			delquest 13184;
+			close2;
+			cutin "dalle01.bmp", 255;
+			end;
+		}
 		mes "[チャールストン]";
 		mes "そこにある機械装置を";
 		mes "利用してください。";
@@ -553,7 +581,41 @@ verus04.gat,75,114,5	script	チャールストン#mcd	10054,{/* 59480 */
 		cutin "dalle01",255;
 		end;
 	}
-	cutin "nale01",0;
+	{
+		cutin "nale03.bmp", 0;
+		mes "[チャールストン]";
+		mes "また来てくれたのですね。";
+		mes "私の話を聞いて失望していませんか？";
+		mes "変わらない過去に絶望していませんか？";
+		mes "それでも私を……";
+		mes "手伝ってくれますか？";
+		next;
+		if(select("挑戦します","もう一度考えてみる") == 2) {
+			mes "[チャールストン]";
+			mes "わかりました。";
+			mes "ここまで来てくれてありがとう。";
+			close2;
+			cutin "nale01.bmp", 255;
+			end;
+		}
+		mes "[チャールストン]";
+		mes "ありがとう、冒険者の方。";
+		next;
+		mes "[チャールストン]";
+		mes "私はロボットですから";
+		mes "与えられた仕事を";
+		mes "繰り返します。";
+		next;
+		mes "[チャールストン]";
+		mes "どうか、あの時の記憶を";
+		mes "もう一度見せてください。";
+		mes "それが私に与えられた";
+		mes "仕事なのですから。";
+		setquest 13184;	// state=1
+		close2;
+		cutin "dalle01.bmp", 255;
+		end;
+	}
 	mes "[チャールストン]";
 	mes "こんにちは。";
 	mes "私は自立型人工知能を持つ";
@@ -664,8 +726,10 @@ verus04.gat,70,113,5	script	機械装置#mcd	10007,{/* 59229 */
 	}
 	mes "[機械装置]";
 	mes "ピピピ。";
+	if(getpartyleader(getcharid(1)) == strcharinfo(0))
+		set '@str$,"次元の扉を開く";
 	next;
-	switch(select("次元の扉を開く","扉から工場に入る","やめる")) {
+	switch(select('@str$,"扉から工場に入る","やめる")) {
 	case 1:
 		if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 			mes "パーティー名：" +'@party$;
@@ -697,8 +761,14 @@ verus04.gat,70,113,5	script	機械装置#mcd	10007,{/* 59229 */
 			mes "　入場することができます^000000‐";
 			close;
 		case 2:	// ダンジョン未作成
-			mes "‐^ff0000先に次元の扉を";
-			mes "　開けてください^000000‐";
+			if(getpartyleader(getcharid(1)) == strcharinfo(0)) {
+				mes "‐^ff0000先に次元の扉を";
+				mes "　開けてください^000000‐";
+			}
+			else {
+				mes "‐^ff0000パーティーリーダーが";
+				mes "　次元の扉を開いていません^000000‐";
+			}
 			close;
 		default:	// その他エラー
 			close;
@@ -716,6 +786,23 @@ OnInit:
 1@mcd.gat,127,277,4	script	チャールストン1号#0	10053,3,2,{/* 58967 */
 	viewpoint 1, 23, 275, 1, 0x00FF00; //64770
 	cutin "dalle03.bmp", 2;
+	{
+		mes "‐どうしようか？‐";
+		next;
+		if(select("先を急ぐ","話を聞く") == 1) {
+			mes "[チャールストン1号]";
+			mes "工場区画の北側にある研究室に";
+			mes "ヴェ博士が居るはずです！";
+			mes "博士に会って";
+			mes "詳しい話を聞くことにしましょう！";
+			mes "さぁ！　急いでください！";
+			unittalk "チャールストン1号 : 博士に会って詳しい話を聞くことにしましょう！　さぁ！　急いでください！";	// 68753
+			close2;
+			cutin "dalle01.bmp", 255;
+			hideonnpc "チャールストン1号#0";	// 68753
+			end;
+		}
+	}
 	mes "[チャールストン1号]";
 	mes "ここが……過去の記憶……。";
 	unittalk "チャールストン1号 : ここが……過去の記憶……。";
@@ -786,6 +873,35 @@ OnInit:
 			mes "まだ、よくわからない……。";
 		}
 		else {
+			{	// ジタバグクリア
+				cutin "shaloshi02.bmp", 2;
+				mes "[シャルロシー]";
+				mes strcharinfo(0)+"……。";
+				mes "来てくれたの？";
+				next;
+				cutin "shaloshi01.bmp", 2;
+				mes "[シャルロシー]";
+				mes "ニュオーズたちも";
+				mes "招待しているから";
+				mes "近くに居ると思う……。";
+				next;
+				mes "[シャルロシー]";
+				mes "……。";
+				next;
+				cutin "shaloshi02.bmp", 2;
+				mes "[シャルロシー]";
+				mes "あの悪夢の中で";
+				mes strcharinfo(0)+"が";
+				mes "頑張ってくれなかったら";
+				mes "私は今も独りだったと思う。";
+				next;
+				cutin "shaloshi01.bmp", 2;
+				mes "[シャルロシー]";
+				mes "……ありがとう。";
+				close2;
+				cutin "shaloshi01.bmp", 255;
+				end;
+			}
 			mes "[シャルロシー]";
 			mes "あなたは……。";
 			next;
@@ -829,6 +945,62 @@ OnInit:
 		cutin "shaloshi01.bmp", 255;
 		end;
 	case 3:
+		{
+			mes "[シャルロシー]";
+			mes "……音が止まった。";
+			mes strcharinfo(0)+"の";
+			mes "役割も終わりみたい。";
+			next;
+			mes "[シャルロシー]";
+			mes "帰りたいなら";
+			mes "元の場所に送ってあげる。";
+			mes "どうする？";
+			next;
+			if(select("戻る","ここに残る") == 2) {
+				//未調査
+			}
+			mes "[シャルロシー]";
+			mes "結構楽しい音だった。";
+			mes "ニュオーズと一緒なら";
+			mes "また会えるかも知れない。";
+			next;
+			mes "[シャルロシー]";
+			mes "私もまた他の音を";
+			mes "探しに行く。";
+			next;
+			mes "[シャルロシー]";
+			mes "あと……";
+			mes "これ、受け取って欲しい。";
+			mes "迷惑かけたお詫び……。";
+			mes "きっと……役に立つと思う。";
+			next;
+			mes "[シャルロシー]";
+			mes strcharinfo(0)+"も";
+			mes "久しぶりに会えて嬉しかった。";
+			mes "ばいばい、またね。";
+			cutin "shaloshi04.bmp", 2;
+			next;
+			mes "‐別れ際にシャルロシーが";
+			mes "　アイテムを差し出してきた。";
+			mes "　どちらを受け取ろうか？‐";
+			next;
+			switch(select("少し考える","古びた燃料タンク","チャールストンパーツ")) {
+			case 1:
+			case 2:
+				set '@gain,6962;
+				set '@num,3;
+				break;
+			case 3:
+			}
+			delquest 96452;
+			getitem '@gain,'@num;
+			getexp 1000000,0,1;
+			getexp 500000,0,1;
+			delquest 13184;
+			cutin "shaloshi01.bmp", 255;
+			warp "verus04.gat", 77, 123;	// from: 0ff1@mcd.gat(135, 203) port : 5129
+			end;
+		}
 		mes "[シャルロシー]";
 		mes "音……まだ止んでない。";
 		mes "チャールストンの記憶は";
@@ -1022,6 +1194,23 @@ OnKilled4:
 			close;
 		}
 		setpartyinmap CHARLESTON_1QUE,1;
+		{
+			mes "‐どうしようか？‐";
+			next;
+			if(select("先を急ぐ","話を聞く") == 1) {
+				cutin "dalle01.bmp", 2;
+				mes "[チャールストン1号]";
+				mes "ありがとうございます！";
+				mes "少し資料を整理します。";
+				mes "もう一度声をかけてください。";
+				unittalk getnpcid(0,"チャールストン1号#1"),"チャールストン1号 : ありがとうございます！　少し資料を整理します。もう一度声をかけてください。";	// 69657
+				close2;
+				cutin "dalle01.bmp", 255;
+				emotion 2,"チャールストン1号#1";	// 69657
+				setpartyinmap CHARLESTON_1QUE,3;
+				end;
+			}
+		}
 	case 1:
 		mes "[ヴェ博士]";
 		mes "来たか1号機よ。";
@@ -1127,6 +1316,39 @@ OnKilled4:
 		end;
 	}
 	else if(CHARLESTON_1QUE == 3) {
+		{
+			mes "‐どうしようか？‐";
+			next;
+			if(select("先を急ぐ","話を聞く") == 1) {
+				mes "‐システムの暴走を抑える";
+				mes "　手伝いをしますか？‐";
+				while(1) {
+					next;
+					switch(select("少し考える","断る（^0000ff中間報酬なし^000000）","手伝う（^ff0000中間報酬あり^000000）")) {
+					case 1:
+						mes "‐あなたはどうするか考えた‐";
+						continue;
+					case 2:
+						cutin "dalle01.bmp", 2;
+						mes "[チャールストン1号]";
+						mes "そうですか……。";
+						mes "それでは、私がシステムの";
+						mes "再稼働を行ないます。";
+						mes "作業をしますので";
+						mes "もう一度話しかけて下さい。";
+						unittalk "チャールストン1号 : そうですか……。それでは、私がシステムの再稼働を行ないます。作業をしますのでもう一度話しかけて下さい。";	// 69657
+						close2;
+						cutin "dalle01.bmp", 255;
+						setpartyinmap CHARLESTON_1QUE,5;
+						hideonnpc "チャールストン1号#1";	// 69657
+						hideoffnpc "チャールストン1号#2";	// 84864
+						hideonnpc "チャールストン1号#1";	// 69657
+						end;
+					case 3:
+						//todo
+				}
+			}
+		}
 		cutin "dalle01.bmp", 2;
 		mes "[チャールストン1号]";
 		mes "チャールストン工場の内部には";
@@ -1266,6 +1488,35 @@ OnKilled4:
 }
 1@mcd.gat,122,217,4	script	チャールストン1号#2	10053,{/* 58973 (hide)*/
 	if(CHARLESTON_1QUE == 5) {
+		{
+			mes "‐どうしようか？‐";
+			next;
+			if(select("先を急ぐ","話を聞く") == 1) {
+				mes "‐発電機の確認をする";
+				mes "　手伝いをしますか？‐";
+				while(1) {
+					next;
+					switch(select("少し考える","断る（^0000ff中間報酬なし^000000）","手伝う（^ff0000中間報酬あり^000000）")) {
+					case 1:
+						mes "‐あなたはどうするか考えた‐";
+						continue;
+					case 2:
+						cutin "dalle01.bmp", 2;
+						mes "[チャールストン1号]";
+						mes "それでは、作業を始めますので";
+						mes "もう一度話しかけてください。";
+						unittalk getnpcid(0,"チャールストン1号#2"),"チャールストン1号 : それでは、作業を始めますのでもう一度話しかけてください。";	// 84864
+						close;
+						cutin "dalle01.bmp", 255;
+						setpartyinmap CHARLESTON_1QUE,7;
+						hideonnpc "チャールストン1号#2";	// 84864
+						hideoffnpc "チャールストン1号#3";	// 93583
+						end;
+					case 3:
+						//todo
+				}
+			}
+		}
 		viewpoint 2, 84, 226, 1, 0xFF00FF00; //58973
 		viewpoint 2, 126, 84, 2, 0xFF00FF00; //58973
 		viewpoint 2, 111, 68, 3, 0xFF00FF00; //58973
@@ -1385,6 +1636,29 @@ OnKilled4:
 }
 1@mcd.gat,123,217,4	script	チャールストン1号#3	10053,{/* 59006 (hide)*/
 	if(CHARLESTON_1QUE == 7) {
+		{
+			cutin "dalle01.bmp", 2;
+			viewpoint 2, 86, 231, 8, 0x00FF00;	// 0x144
+			viewpoint 2, 172, 196, 9, 0x00FF00;	// 0x144
+			viewpoint 2, 126, 84, 10, 0x00FF00;	// 0x144
+			mes "‐どうしようか？‐";
+			next;
+			if(select("先を急ぐ","話を聞く") == 2) {
+				cutin "dalle01.bmp", 2;
+				mes "[チャールストン1号]";
+				mes "みなさん！";
+				mes "2号機はまだ遠くには行ってないはずです。";
+				mes "早く追いかけましょう！";
+				unittalk getnpcid(0,"チャールストン1号#3"),"チャールストン1号 : みなさん！　2号機はまだ遠くには行ってないはずです。早く追いかけましょう！";	// 93583
+				close2;
+				cutin "dalle01.bmp", 255;
+				hideonnpc "チャールストン1号#3";	// 93583
+				hideonnpc "チャールストン2号#0";	// 69402
+				hideoffnpc "チャールストン2号#1";	// 8706
+				hideoffnpc "チャールストン1号#4";	// 77998
+				end;
+			}
+		}
 		viewpoint 2, 86, 231, 8, 0xFF00FF00; //59006
 		viewpoint 2, 172, 196, 9, 0xFF00FF00; //59006
 		viewpoint 2, 126, 84, 10, 0xFF00FF00; //59006
@@ -1550,10 +1824,30 @@ OnKilled4:
 		close2;
 		cutin "dalle01.bmp", 255;
 		hideonnpc "チャールストン1号#3"; //59006
+		hideoffnpc "チャールストン2号#1";	// 8706
+		hideoffnpc "チャールストン1号#4";	// 77998
 		end;
 	}
 }
 1@mcd.gat,141,214,5	script	チャールストン2号#1	10054,{/* 59007 (hide)*/
+	{
+		mes "‐どうしようか？‐";
+		next;
+		if(select("先を急ぐ","話を聞く") == 1) {
+			cutin "nale03.bmp", 0;
+			mes "[チャールストン2号]";
+			mes "メインシステムは回復しちゃったけど、";
+			mes "まだ工場には接続しているんだ！";
+			mes "こんな工場、壊してやる!!";
+			unittalk "チャールストン2号 : メインシステムは回復しちゃったけど、まだ工場には接続しているんだ！　こんな工場、壊してやる!!";	// 8706
+			close2;
+			cutin "nale03.bmp", 255;
+			hideonnpc "6gate#mcd";	// 74222
+			hideonnpc "7gate#mcd";	// 74222
+			donpcevent "battle#mcd1::OnStart";
+			end;
+		}
+	}
 	cutin "nale03.bmp", 0;
 	mes "[チャールストン2号]";
 	mes "ついて来るなよ！";
@@ -1581,26 +1875,127 @@ OnKilled4:
 	hideonnpc "6gate#mcd"; //59197
 	hideonnpc "7gate#mcd"; //59198
 	misceffect 377, "チャールストン2号#1"; //59007
+	donpcevent "battle#mcd1::OnStart";
 	end;
-//killed
-hideonnpc "チャールストン2号#1"; //59007
-hideonnpc "チャールストン1号#4"; //59008
-hideoffnpc "チャールストン2号#2"; //59011
-hideoffnpc "チャールストン1号#5"; //59012
-hideoffnpc "ヴェ博士#2"; //59013
 }
 1@mcd.gat,146,214,4	script	チャールストン1号#4	10053,{/* 59008 (hide)*/
 	cutin "dalle02.bmp", 2;
 	mes "[チャールストン1号]";
-	mes "2号機がまた問題を起こしそうです。";
-	mes "引き続き協力をお願いします！";
+	{
+		mes "あわわ、このままでは";
+		mes "研究室が台無しになってしまいます！";
+	}
+	else {
+		mes "2号機がまた問題を起こしそうです。";
+		mes "引き続き協力をお願いします！";
+	}
 	close2;
 	cutin "dalle02.bmp", 255;
 	end;
 }
-1@mcd.gat,144,212,0	script	battle#1	139,{/* 59009 (hide)*/}
+1@mcd.gat,144,212,0	script	battle#mcd1	139,{/* 59009 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer2000:
+/* 10:16:44.034232 */	unittalk getnpcid(0,"チャールストン2号#1_0ff"),"チャールストン2号 : ついて来るな！　怪我をしてもいいのか!?";	// 8706
+OnTimer5000:
+/* 10:16:47.032211 */	unittalk getnpcid(0,"チャールストン1号#4_0ff"),"チャールストン1号 : ねえ、戻ろう？　博士も謝れば許してくれるよ。";	// 77998
+OnTimer8000:
+/* 10:16:50.032188 */	unittalk getnpcid(0,"チャールストン2号#1_0ff"),"チャールストン2号 : まだそんな事を……。私が本気だって見せてやる！";	// 8706
+/* 10:16:50.127935 */	misceffect 377,"チャールストン2号#1_0ff";	// 8706
+@spawn(type: BL_MOB, ID: 6386, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",141,204), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 6859, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",146,213), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 6995, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",144,220), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 8423, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",153,217), dir: 0, name"C-TYPE")
+
+OnTimer11000:
+/* 10:16:53.065076 */	unittalk getnpcid(0,"チャールストン2号#1_0ff"),"チャールストン2号 : ふふふ。どう？　工場とリンクしているとこんなことも出来るんだよ？";	// 8706
+@spawn(type: BL_MOB, ID: 64737, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",153,221), dir: 0, name"H-TYPE")
+@spawn(type: BL_MOB, ID: 64748, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",151,209), dir: 0, name"H-TYPE")
+@spawn(type: BL_MOB, ID: 64865, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",142,207), dir: 0, name"H-TYPE")
+
+OnTimer20000:
+/* 10:17:02.062096 */	unittalk getnpcid(0,"チャールストン2号#1_0ff"),"チャールストン2号 : このまま工場を吹き飛ばしてやる！";	// 8706
+@spawn(type: BL_MOB, ID: 45155, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",146,217), dir: 0, name"A-TYPE")
+@spawn(type: BL_MOB, ID: 45512, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",152,215), dir: 0, name"A-TYPE")
+@spawn(type: BL_MOB, ID: 47187, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",135,220), dir: 0, name"A-TYPE")
+
+OnTimer26000:
+/* 10:17:08.094963 */	unittalk getnpcid(0,"チャールストン1号#4_0ff"),"チャールストン1号 : お願い、止めて2号機！";	// 77998
+@spawn(type: BL_MOB, ID: 93763, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",143,203), dir: 0, name"L-TYPE")
+@spawn(type: BL_MOB, ID: 93800, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",136,212), dir: 0, name"L-TYPE")
+@spawn(type: BL_MOB, ID: 94126, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",143,208), dir: 0, name"L-TYPE")
+@spawn(type: BL_MOB, ID: 94637, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",152,203), dir: 0, name"L-TYPE")
+
+OnTimer32000:
+/* 10:17:14.123864 */	unittalk getnpcid(0,"チャールストン2号#1_0ff"),"チャールストン2号 : 全部壊してやる！";	// 8706
+@spawn(type: BL_MOB, ID: 50001, speed: 150, option: 0x0, class: 3126, pos: ("0ff1@mcd.gat",144,218), dir: 0, name"N-TYPE")
+@spawn(type: BL_MOB, ID: 50615, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",150,212), dir: 0, name"S-TYPE")
+@spawn(type: BL_MOB, ID: 50700, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",145,215), dir: 0, name"S-TYPE")
+@spawn(type: BL_MOB, ID: 51189, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",135,219), dir: 0, name"S-TYPE")
+
+@spawn(type: BL_MOB, ID: 65405, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",153,208), dir: 0, name"T-TYPE")
+@spawn(type: BL_MOB, ID: 65568, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",142,214), dir: 0, name"T-TYPE")
+@spawn(type: BL_MOB, ID: 66262, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",143,212), dir: 0, name"T-TYPE")
+
+@spawn(type: BL_MOB, ID: 47149, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",136,208), dir: 0, name"O-TYPE")
+@spawn(type: BL_MOB, ID: 69298, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",144,219), dir: 0, name"O-TYPE")
+@spawn(type: BL_MOB, ID: 69624, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",141,219), dir: 0, name"O-TYPE")
+
+@spawn(type: BL_MOB, ID: 80461, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",152,204), dir: 0, name"N-TYPE")
+@spawn(type: BL_MOB, ID: 13924, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",151,207), dir: 0, name"N-TYPE")
+@spawn(type: BL_MOB, ID: 40146, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",148,214), dir: 0, name"N-TYPE")
+
+/* 10:17:25.157359 */	unittalk getnpcid(0,"チャールストン2号#1_0ff"),"チャールストン2号 : ん……あれ……力が抜けていく……";	// 8706
+@spawn(type: BL_MOB, ID: 61764, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",145,212), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 26424, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",147,210), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 57695, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",143,216), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 61357, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",146,219), dir: 0, name"C-TYPE")
+
+@spawn(type: BL_MOB, ID: 77888, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",144,213), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 81610, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",145,213), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 88396, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",140,215), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 97280, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",139,207), dir: 0, name"C-TYPE")
+
+/* 10:17:31.154291 */	unittalk getnpcid(0,"チャールストン2号#1_0ff"),"チャールストン2号 : ううう……うるさいな！　私を工場を壊すんだ！";	// 8706
+@spawn(type: BL_MOB, ID: 88764, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",144,212), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 14426, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",142,209), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 19532, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",139,217), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 59468, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",144,219), dir: 0, name"C-TYPE")
+@spawn(type: BL_MOB, ID: 49430, speed: 200, option: 0x0, class: 3128, pos: ("0ff1@mcd.gat",140,218), dir: 0, name"C-TYPE")
+
+@spawn(type: BL_MOB, ID: 61057, speed: 200, option: 0x0, class: 3127, pos: ("0ff1@mcd.gat",148,218), dir: 0, name"N-TYPE")
+@spawn(type: BL_MOB, ID: 62671, speed: 150, option: 0x0, class: 3126, pos: ("0ff1@mcd.gat",139,217), dir: 0, name"N-TYPE")
+@spawn(type: BL_MOB, ID: 62897, speed: 150, option: 0x0, class: 3126, pos: ("0ff1@mcd.gat",146,216), dir: 0, name"N-TYPE")
+/* 10:17:36.407273 */	hideonnpc "チャールストン2号#1_0ff";	// 8706
+/* 10:17:36.499997 */	hideonnpc "チャールストン1号#4_0ff";	// 77998
+/* 10:17:36.503992 */	hideoffnpc "チャールストン2号#2_0ff";	// 35398
+/* 10:17:36.508971 */	hideoffnpc "チャールストン1号#5_0ff";	// 33536
+/* 10:17:36.512962 */	hideoffnpc "ヴェ博士#2_0ff";	// 54658
+}
 1@mcd.gat,144,212,0	script	battle#2	139,{/* 59010 */}
 1@mcd.gat,141,214,5	script	チャールストン2号#2	10054,{/* 59011 (hide)*/
+	{
+		mes "‐どうしようか？‐";
+		next;
+		if(select("先を急ぐ","話を聞く") == 1) {
+			cutin "dalle01.bmp", 2;
+			mes "[チャールストン1号]";
+			mes "2号機が3号機を奪取したら";
+			mes "工場はひとたまりもありません！";
+			mes "急いで工場中央のコアに";
+			mes "向かいましょう！";
+			unittalk getnpcid(0,"チャールストン1号#5"),"チャールストン1号 : 2号機が3号機を奪取したら工場はひとたまりもありません！　急いで工場中央のコアに向かいましょう！";	// 33536
+			close2;
+			cutin "dalle01.bmp", 255;
+			hideoffnpc "6gate#mcd";	// 74222
+			hideoffnpc "7gate#mcd";	// 74222
+			hideonnpc "チャールストン1号#5";	// 33536
+			hideonnpc "チャールストン2号#2";	// 35398
+			end;
+		}
+	}
 	cutin "dalle03.bmp", 2;
 	mes "[チャールストン1号]";
 	mes "残念だったね。";
@@ -1737,6 +2132,24 @@ hideoffnpc "ヴェ博士#2"; //59013
 	close;
 }
 1@mcd.gat,132,129,4	script	チャールストン1号#6	10053,{/* 59014 (hide)*/
+	{
+		mes "‐どうしようか？‐";
+		next;
+		if(select("先を急ぐ","話を聞く") == 1) {
+			cutin "nale01.bmp", 0;
+			mes "[チャールストン2号]";
+			mes "分かった！";
+			mes "すぐ用意して来るからここで待ってて！";
+			unittalk getnpcid(0,"チャールストン2号#3"),"チャールストン2号 : 分かった！　すぐ用意して来るからここで待ってて！";	// 17181
+			close2;
+			cutin "dalle01.bmp", 255;
+			hideonnpc "チャールストン1号#6_0ff";	// 95716
+			hideonnpc "チャールストン2号#3_0ff";	// 17181
+			hideoffnpc "チャールストン1号#61_0f";	// 16792
+			hideoffnpc "チャールストン2号#31_0f";	// 17492
+			end;
+		}
+	}
 	cutin "dalle01.bmp", 2;
 	mes "[チャールストン1号]";
 	mes "ここがチャールストン工場の中心。";
@@ -1746,6 +2159,25 @@ hideoffnpc "ヴェ博士#2"; //59013
 	end;
 }
 1@mcd.gat,132,129,4	script	チャールストン1号#61	10053,{/* 59015 (hide)*/
+	{
+		mes "‐どうしようか？‐";
+		next;
+		if(select("先を急ぐ","話を聞く") == 1) {
+			cutin "nale01.bmp", 0;
+			mes "[チャールストン2号]";
+			mes "とにかく、これで3号機のある";
+			mes "コアに行けるようになったんだな！";
+			mes "3号機は貰った！";
+			unittalk getnpcid(0,"チャールストン2号#31_0f"),"チャールストン2号 : とにかく、これで3号機のあるコアに行けるようになったんだな！　3号機は貰った！";	// 17492
+			close2;
+			cutin "dalle01.bmp", 255;
+			misceffect 35,"8gate#mcd";	// 74977
+			hideonnpc "チャールストン1号#61";	// 16792
+			hideonnpc "チャールストン2号#31";	// 17492
+			hideoffnpc "8gate#mcd";	// 74977
+			end;
+		}
+	}
 	cutin "nale04.bmp", 0;
 	mes "[チャールストン2号]";
 	mes "はあ……はあ……。";
@@ -1797,16 +2229,53 @@ hideoffnpc "ヴェ博士#2"; //59013
 	cutin "nale01.bmp", 255;
 	end;
 }
-1@mcd.gat,127,129,5	script	チャールストン2号#31	10054,{/* 59017 (hide)*/}
+1@mcd.gat,127,129,5	script	チャールストン2号#31	10054,{/* 59017 (hide)*/
+	cutin "nale01.bmp", 0;
+	mes "[チャールストン2号]";
+	mes "黒色火薬100個くらいなら";
+	mes "余裕で集められるよ。";
+	close2;
+	cutin "nale01.bmp", 255;
+	end;
+}
 
-1@mcd.gat,132,148,4	script	チャールストン1号#7	10053,{/* 59019 */}
+1@mcd.gat,132,148,4	script	チャールストン1号#7	10053,{/* 59019 */
+	{
+		mes "‐どうしようか？‐";
+		next;
+		if(select("先を急ぐ","話を聞く") == 1) {
+		close2;
+		unittalk getnpcid(0,"チャールストン1号#8"),"チャールストン1号 : 冒険者様、あとはお願いします！";	// 28789
+		hideonnpc "チャールストン1号#7";	// 22188
+		hideoffnpc "チャールストン1号#8";	// 28789
+		hideonnpc "チャールストン2号#4";	// 31203
+		mapwarp "1@mcd.gat","1@mcd.gat", 132, 144;	// from: 0ff1@mcd.gat(130, 149)
+		end;
+	}
+}
 1@mcd.gat,133,148,4	script	チャールストン1号#8	10053,{/* 59020 (hide)*/}
 1@mcd.gat,127,148,5	script	チャールストン2号#4	10054,{/* 59021 */}
 1@mcd.gat,130,153,5	script	チャールストン3号#0	10055,{/* 59022 (hide)*/}
 
-1@mcd.gat,129,155,0	script	boss#1	139,{/* 59024 (hide)*/}
+1@mcd.gat,129,155,0	script	boss#1	139,{/* 59024 (hide)*/
+OnStart:
+	initnpctimer;
+	end;
+OnTimer5000:
+	hideonnpc "boss#1";	// 66690
+	hideonnpc "チャールストン3号#0";	// 38105
+	hideonnpc "チャールストン1号#8";	// 28789
+	//@spawn(type: BL_MOB, ID: 58038, speed: 200, option: 0x0, class: 3124, pos: ("0ff1@mcd.gat",129,149), dir: 0, name"チャールストン3号")
+	hideoffnpc "ボス#23";	// 88600
+	end;
+}
 1@mcd.gat,129,149,0	script	boss#2	139,{/* 59025 */}
-1@mcd.gat,120,150,0	script	ボス#23	139,{/* 59026 (hide)*/}
+1@mcd.gat,120,150,0	script	ボス#23	139,{/* 59026 (hide)*/
+/* 10:32:42.780108 */	hideoffnpc "チャールストン2号#5_0ff";	// 48247
+/* 10:32:42.843941 */	hideoffnpc "チャールストン1号#9_0ff";	// 30956
+/* 10:32:42.847927 */	hideonnpc "ボス#23_0ff";	// 88600
+/* 10:32:42.850918 */	hideonnpc "boss#2_0ff";	// 72858
+}
 1@mcd.gat,132,148,4	script	チャールストン1号#9	10053,{/* 59027 (hide)*/
 	if(1) {
 		cutin "dalle04.bmp", 2;
@@ -1866,10 +2335,62 @@ hideoffnpc "ヴェ博士#2"; //59013
 	mes "今回のケースは記録すべきことが多い。";
 	close;
 }
-1@mcd.gat,121,215,4	script	チャールストン2号#7	10054,{/* 59032 (hide)*/}
+1@mcd.gat,121,215,4	script	チャールストン2号#7	10054,{/* 59032 (hide)*/
+	mes "‐どうしようか？‐";
+	next;
+	if(select("先を急ぐ","話を聞く") == 2) {
+		close2;
+		unittalk getnpcid(0,"ヴェ博士#3"),"ヴェ博士 : くく……クククク。";	// 39073
+		initnpctimer;
+		end;
+	}
+OnTimer3000:
+	hideonnpc "チャールストン2号#7";	// 84786
+	hideoffnpc "チャールストン2号#8";	// 25809
+	hideonnpc "ヴェ博士#3";	// 39073
+	hideoffnpc "ヴェ博士#4";	// 15108
+	end;
+}
 1@mcd.gat,129,149,0	script	end#1	139,{/* 59033 (hide)*/}
-1@mcd.gat,116,215,4	script	ヴェ博士#4	923,{/* 59034 (hide)*/}
-1@mcd.gat,121,215,4	script	チャールストン2号#8	10054,{/* 59035 (hide)*/}
+1@mcd.gat,116,215,4	script	ヴェ博士#4	923,{/* 59034 (hide)*/
+	{
+		mes "[ヴェ博士]";
+		mes "やはり、機械技術のみで";
+		mes "不死の体を得る事は、";
+		mes "難しいか……。";
+		next;
+		mes "[ヴェ博士]";
+		mes "単純な鉄の塊は使えない。";
+		mes "やはり、生命が必要か。";
+		mes "ふふふふふふ。";
+		close;
+	}
+/* 10:33:21.252219 */	if(select("先を急ぐ","話を聞く") == 2) {
+/* 10:33:22.529800 */	mes "[ヴェ博士]";
+/* 10:33:22.533793 */	mes "余計な事を話した。";
+/* 10:33:22.538778 */	mes "これ以上の用事はないだろう。";
+/* 10:33:22.541768 */	mes "ここまで来るようにした";
+/* 10:33:22.545757 */	mes "人物に元の世界に帰して貰うと良い。";
+/* 10:33:22.550744 */	close;
+/* 10:33:24.315027 */	announce "シャルロシー : 音が止まった……。あなたの役割も終わりみたい。", 0x9, 0x00ff00, 0x0190, 14, 0, 0;
+/* 10:33:27.343951 */	announce "シャルロシー : ……帰りたいなら私の所に来て欲しい。", 0x9, 0x00ff00, 0x0190, 14, 0, 0;
+}
+1@mcd.gat,121,215,4	script	チャールストン2号#8	10054,{/* 59035 (hide)*/
+	{
+		cutin "nale03.bmp", 0;
+		mes "‐機能停止した2号機がいる。";
+		mes "　目にはまだ力がある‐";
+		close2;
+		cutin "nale01.bmp", 255;
+		end;
+	}
+	cutin "nale03.bmp", 0;
+	mes "‐休眠モードのようだ";
+	mes "　微動だにしない‐";
+	close2;
+	cutin "nale01.bmp", 255;
+	end;
+}
 
 1@mcd.gat,86,231,5	script	発電機#1	844,2,2,{/* 59179 (hide)*/
 	end;
