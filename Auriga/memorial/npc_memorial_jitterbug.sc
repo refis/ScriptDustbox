@@ -57,7 +57,7 @@ moc_para01.gat,26,95,5	script	ロエル#sara	10040,{/* 65388 */
 			mes "[ロエル]";
 			mes "準備が出来たら隣にいる";
 			mes "ルナインさんに話しかけて下さい。";
-			setquest 13181; //state=1
+			setquest 13181;
 			close2;
 			cutin "roel01.bmp", 255;
 			end;
@@ -71,9 +71,9 @@ moc_para01.gat,26,95,5	script	ロエル#sara	10040,{/* 65388 */
 			mes "なんて、弱気はダメですよね！";
 			mes "大事なギルドメンバーのためです！";
 			mes "次も頑張りましょう！";
-			setquest 13181; //state=1
+			setquest 13181;
 			compquest 13181;
-			setquest 116509; //state=1
+			setquest 116509;
 			compquest 116509;
 			close2;
 			cutin "roel01.bmp", 255;
@@ -183,7 +183,7 @@ moc_para01.gat,26,95,5	script	ロエル#sara	10040,{/* 65388 */
 		mes "[ロエル]";
 		mes "準備が出来たら隣にいる";
 		mes "ルナインさんに話しかけて下さい。";
-		setquest 13181; //state=1
+		setquest 13181;
 		close2;
 		cutin "roel01.bmp", 255;
 		end;
@@ -267,9 +267,9 @@ moc_para01.gat,29,95,5	script	ルナイン#sara	10039,{/* 65389 */
 		switch(mdenter("jitterbug")) {
 		case 0:	// エラーなし
 			cutin "lunain01.bmp", 255;
-			setquest 13182; //state=1
-			misceffect 316,""; //self
-			misceffect 317,""; //self
+			setquest 13182;
+			misceffect 316,"";
+			misceffect 317,"";
 			announce "メモリアルダンジョン[jitterbug] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")", 0x1, 0x00ff99, 0x190, 12, 0, 0;
 			warp "1@jtb.gat",16,17;
 			end;
@@ -332,8 +332,8 @@ moc_para01.gat,29,95,5	script	ルナイン#sara	10039,{/* 65389 */
 				mes "わかったわ。";
 				mes "ワープポータルを開くから";
 				mes "入ってちょうだい。";
-				misceffect 316,""; //self
-				misceffect 317,""; //self
+				misceffect 316,"";
+				misceffect 317,"";
 				close2;
 				cutin "lunain01.bmp", 255;
 				end;
@@ -358,7 +358,7 @@ moc_para01.gat,29,95,5	script	ルナイン#sara	10039,{/* 65389 */
 		end;
 	}
 OnInit:
-	waitingroom "悪夢のジターバグ", 20; //65389
+	waitingroom "悪夢のジターバグ", 20;
 	end;
 }
 
@@ -500,13 +500,13 @@ moc_para01.gat,198,31,5	script	ミンミン#03	643,{/* 65390 */
 	mes "　受けたようだ……‐";
 	close2;
 	if(checkquest(116520) == 0) {
-		getexp 500000,0; //66722586
-		getexp 500000,0; //67222586
-		getexp 500000,0; //67722586
-		getexp 500000,0; //68222586
-		getexp 500000,0; //68722586
-		getexp 500000,0; //69222586
-		setquest 116520; //state=1
+		getexp 500000,0;
+		getexp 500000,0;
+		getexp 500000,0;
+		getexp 500000,0;
+		getexp 500000,0;
+		getexp 500000,0;
+		setquest 116520;
 		compquest 116520;
 	}
 	end;
@@ -889,13 +889,13 @@ moc_para01.gat,44,81,3	script	メロディージャック#1	648,8,8,{/* 65436 */
 		close;
 	}
 	else {
-		emotion 0, "メロディージャック#1"; //65436
+		emotion 0, "メロディージャック#1";
 		mes "[メロディージャック]";
 		mes "お前か……。";
 		mes "ニュオーズの件以来だな。";
 		mes "息災なようで何よりだ。";
 		next;
-		emotion 0, "メロディージャック#1"; //65436
+		emotion 0, "メロディージャック#1";
 		mes "[メロディージャック]";
 		mes "どうした、不思議そうな顔をして。";
 		mes "私の姿に可笑しい所でも";
@@ -933,7 +933,7 @@ moc_para01.gat,44,81,3	script	メロディージャック#1	648,8,8,{/* 65436 */
 		mes "簡単なことだろう？";
 		next;
 		if(select("手伝う","手伝わない") == 2) {
-			emotion 0, "メロディージャック#1"; //65436
+			emotion 0, "メロディージャック#1";
 			mes "[メロディージャック]";
 			mes "そうか。手間をかけさせたな。";
 			mes "この話は忘れてくれ。";
@@ -956,7 +956,7 @@ moc_para01.gat,44,81,3	script	メロディージャック#1	648,8,8,{/* 65436 */
 		close;
 	}
 OnTouch:
-	emotion 0, "メロディージャック#1"; //65436
+	emotion 0, "メロディージャック#1";
 	mes "[メロディージャック]";
 	mes "おい。";
 	mes "そこのお前……。";
@@ -1612,7 +1612,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 		cutin "rote01.bmp", 255;
 		mes "[？？？]";
 		mes "……だめ。";
-		misceffect 563,""; //self
+		misceffect 563,"";
 		next;
 		cutin "igu05.bmp", 2;
 		mes "[アイグ]";
@@ -1720,7 +1720,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 		mes "[？？？]";
 		mes "モロク……。";
 		next;
-		emotion 23, "ルナイン#03"; //61525
+		emotion 23, "ルナイン#03";
 		cutin "lunain02.bmp", 2;
 		mes "[ルナイン]";
 		mes strcharinfo(0) + "、";
@@ -1740,7 +1740,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 		mes "ルナイン！　後ろ！";
 		next;
 		cutin "lunain04.bmp", 2;
-		emotion 23, "ルナイン#03"; //61525
+		emotion 23, "ルナイン#03";
 		mes "[ルナイン]";
 		mes "え？　きゃああああっ!?";
 		mes "って、人間……!?";
@@ -1789,7 +1789,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 		mes "[ルナイン]";
 		mes "ニュオーズ様を知ってるの!?";
 		mes "って、キャッ！";
-		misceffect 563,""; //self
+		misceffect 563,"";
 		next;
 		cutin "lunain01.bmp", 255;
 		mes "[" + strcharinfo(0) + "]";
@@ -1912,7 +1912,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 	switch(JTB_1QUE) {
 	case 2:
 		cutin "nines03.bmp", 2;
-		emotion 2, "ニュオーズ#08"; //61538
+		emotion 2, "ニュオーズ#08";
 		mes "[ニュオーズ]";
 		mes "その温もりはいまだに遠く～";
 		mes "触れることすらかなわない～";
@@ -1922,7 +1922,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 		mes "さすがですねぇ、ニュオーズ様。";
 		next;
 		cutin "nines02.bmp", 2;
-		emotion 15, "ニュオーズ#08"; //61538
+		emotion 15, "ニュオーズ#08";
 		mes "[ニュオーズ]";
 		mes "ありがとう、ラギ君！";
 		mes "おや、" + strcharinfo(0) + "！";
@@ -2388,7 +2388,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 			mes "……ミンミンは女幹部？";
 			next;
 			cutin "gelca04.bmp", 2;
-			emotion 23, "ゲルカ#10"; //62998
+			emotion 23, "ゲルカ#10";
 			mes "[ゲルカ]";
 			mes "わわわわ、私じゃないですよ!?";
 			mes "私そんなこと言ってませんからっ！";
@@ -2400,13 +2400,13 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 			mes "この子、もしかして……。";
 			next;
 			cutin "shaloshi02.bmp", 2;
-			emotion 23, "ルナイン#10"; //62995
+			emotion 23, "ルナイン#10";
 			mes "[シャルロシー]";
 			mes "……やだ、私が";
 			mes "いつもニュ……（もごもご）";
 			next;
 			cutin "lunain04.bmp", 2;
-			emotion 19, "ルナイン#10"; //62995
+			emotion 19, "ルナイン#10";
 			mes "[ルナイン]";
 			mes "シ、シャルロシー!!";
 			mes "あなたもしかして";
@@ -2619,7 +2619,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 		next;
 		switch(select("シャルロシーの様子を見る","ロエルの様子を見る")) {
 		case 1:
-			misceffect 313, "ロエル#11"; //61547
+			misceffect 313, "ロエル#11";
 			cutin "lunain04.bmp", 255;
 			mes "‐ヒールされているロエルを見て";
 			mes "　シャルロシーは悲しげに口を開く‐";
@@ -2714,7 +2714,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 			cutin "lunain02.bmp", 255;
 			end;
 		case 2:
-			misceffect 313, "ロエル#11"; //63002
+			misceffect 313, "ロエル#11";
 			cutin "lunain02.bmp", 2;
 			mes "[ルナイン]";
 			mes "まったく……先陣きって、";
@@ -2868,7 +2868,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 			mes "ってことは……";
 			mes "倒すしかないわね。";
 			next;
-			misceffect 85, "ロエル#11"; //63002
+			misceffect 85, "ロエル#11";
 			cutin "roel03.bmp", 2;
 			mes "[ロエル]";
 			mes "ペ……ペルー!?";
@@ -3096,7 +3096,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 		mes "何か変だぞ！";
 		next;
 		cutin "nines01.bmp", 2;
-		misceffect 563,""; //self
+		misceffect 563,"";
 		mes "[ニュオーズ]";
 		mes "わっ！　また地震!?";
 		next;
@@ -3131,12 +3131,12 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 			mes "[シャルロシー]";
 			mes "……それは……。";
 			next;
-			emotion 0, "シャルロシー#12"; //61561
+			emotion 0, "シャルロシー#12";
 			cutin "shaloshi02.bmp", 2;
 			mes "[シャルロシー]";
 			mes "ペル……？";
 			next;
-			emotion 6, "ペル#12b"; //61560
+			emotion 6, "ペル#12b";
 			mes "[ペル]";
 			mes "ペルペルペル!!";
 			next;
@@ -3180,7 +3180,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 			cutin "arang01.bmp", 2;
 			mes "[アラン]";
 			mes "うわっ、地震!?";
-			misceffect 563,""; //self
+			misceffect 563,"";
 			next;
 			cutin "min02.bmp", 2;
 			mes "[ミンミン]";
@@ -3881,7 +3881,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 	mes "何本か採取しておいたわ。";
 	mes "まずは研究はしてみないと。";
 	next;
-	emotion 29, "ミンミン#end"; //61585
+	emotion 29, "ミンミン#end";
 	mes "[ミンミン]";
 	mes "ここにはまだ";
 	mes "研究しなきゃいけないものが";
@@ -3948,7 +3948,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 	mes "ここで休憩して帰ろう。";
 	next;
 	cutin "rote01.bmp", 2;
-	emotion 36, "ロテルト#end"; //61582
+	emotion 36, "ロテルト#end";
 	mes "[ロテルト]";
 	mes "そういや……";
 	mes "ニュオーズ!!";
@@ -3963,20 +3963,20 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 	mes "もうギルド名まで変更したのかい？";
 	next;
 	cutin "rote01.bmp", 2;
-	emotion 32, "ロテルト#end"; //61582
+	emotion 32, "ロテルト#end";
 	mes "[ロテルト]";
 	mes "ギルドマスターが変わったんだ！";
 	mes "ギルド名も変えるのが、普通だろ！";
 	mes "その……う～ん。";
 	mes "アレだ！　あの名前……。";
 	next;
-	emotion 54, "ミンミン#end"; //61585
+	emotion 54, "ミンミン#end";
 	cutin "min02.bmp", 2;
 	mes "[ミンミン]";
 	mes "新しい名前が思いつかないなら、";
 	mes "そのままにすれば？";
 	next;
-	emotion 52, "ロテルト#end"; //61582
+	emotion 52, "ロテルト#end";
 	cutin "rote01.bmp", 2;
 	mes "[ロテルト]";
 	mes "そんなことはできるか！";
@@ -3986,9 +3986,9 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 	mes "おっ、そうだ!!";
 	mes "これからは";
 	mes "「ロテルトの超必殺ギルド」だ！";
-	emotion 40, "ロテルト#end"; //61582
+	emotion 40, "ロテルト#end";
 	next;
-	emotion 57, "アイグ#end"; //61584
+	emotion 57, "アイグ#end";
 	cutin "igu05.bmp", 2;
 	mes "[アイグ]";
 	mes "変な名前、なの。";
@@ -4006,7 +4006,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 	mes "うわっダサッ！";
 	next;
 	cutin "rote01.bmp", 2;
-	emotion 36, "ロテルト#end"; //61582
+	emotion 36, "ロテルト#end";
 	mes "[ロテルト]";
 	mes "うるせー!!";
 	mes "ギルドマスターは俺だ！";
@@ -4016,7 +4016,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 	mes "[アラン]";
 	mes "……格好悪い。";
 	next;
-	emotion 29, "ミンミン#end"; //61585
+	emotion 29, "ミンミン#end";
 	cutin "min02.bmp", 2;
 	mes "[ミンミン]";
 	mes "その名前で決定っていうなら";
@@ -4026,13 +4026,13 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 	cutin "rote01.bmp", 2;
 	mes "[ロテルト]";
 	mes "なんだと！";
-	emotion 23, "ロテルト#end"; //61582
+	emotion 23, "ロテルト#end";
 	next;
 	cutin "min02.bmp", 255;
 	mes "[メロディージャック]";
 	mes "私は元々ギルドメンバーではないしな。";
 	mes "好きにさせて貰うぞ。";
-	emotion 9, "メロディージャック#end_"; //61590
+	emotion 9, "メロディージャック#end_";
 	next;
 	cutin "ragi01.bmp", 2;
 	mes "[ラギ]";
@@ -4045,7 +4045,7 @@ moc_para01.gat,41,76,3	script	ラギ#1	647,{/* 65438 */
 	mes "[アイグ]";
 	mes "あはは、大丈夫なの。";
 	mes "多分……。";
-	emotion 14, "アイグ#end"; //61584
+	emotion 14, "アイグ#end";
 	next;
 	cutin "lunain04.bmp", 2;
 	mes "[ルナイン]";
@@ -4459,43 +4459,44 @@ cutin "ragi01.bmp", 255;
 			mes "とっても楽しみだ！";
 			close2;
 			cutin "nines01.bmp", 255;
-			setquest 116500; //state=1
+			setquest 116500;
 			compquest 116500;
 			end;
 		}
 	}
-cutin "nines02.bmp", 2;
-mes "[ニュオーズ]";
-mes "素敵な曲ができて嬉しいな。";
-close;
-cutin "nines01.bmp", 255;
+	cutin "nines02.bmp", 2;
+	mes "[ニュオーズ]";
+	mes "素敵な曲ができて嬉しいな。";
+	close2;
+	cutin "nines01.bmp", 255;
+	end;
 }
 
-1@jtb.gat,45,47,0	warp	1番部屋出口	2,2,1@jtb.gat,100,14 //61593 from_pos=(46, 45)
-1@jtb.gat,135,17,0	warp	2番部屋出口	2,2,1@jtb.gat,184,17 //61594 from_pos=(135, 17)
-1@jtb.gat,220,23,0	warp	3番部屋出口	2,2,1@jtb.gat,183,128 //61595 from_pos=(217, 23)
-1@jtb.gat,209,133,0	warp	7番部屋出口	2,2,1@jtb.gat,277,95 //61599 from_pos=(209, 133)
-1@jtb.gat,307,122,0	warp	8番部屋出口	2,2,1@jtb.gat,359,97 //61600 from_pos=(307, 123)
-1@jtb.gat,386,133,0	warp	9番部屋出口	2,2,1@jtb.gat,13,214 //61601 from_pos=(387, 133)
-1@jtb.gat,49,196,0	warp	10番部屋出口	2,2,1@jtb.gat,95,201 //61602 from_pos=(49, 199)
+1@jtb.gat,45,47,0	warp	1番部屋出口	2,2,1@jtb.gat,100,14
+1@jtb.gat,135,17,0	warp	2番部屋出口	2,2,1@jtb.gat,184,17
+1@jtb.gat,220,23,0	warp	3番部屋出口	2,2,1@jtb.gat,183,128
+1@jtb.gat,209,133,0	warp	7番部屋出口	2,2,1@jtb.gat,277,95
+1@jtb.gat,307,122,0	warp	8番部屋出口	2,2,1@jtb.gat,359,97
+1@jtb.gat,386,133,0	warp	9番部屋出口	2,2,1@jtb.gat,13,214
+1@jtb.gat,49,196,0	warp	10番部屋出口	2,2,1@jtb.gat,95,201
 1@jtb.gat,133,197,0	script	11番部屋出口	45,{/* 61603 (hide)*/
 	mes "‐これまでの戦闘で得た";
 	mes "　経験からだろうか、";
 	mes "　少し成長できた気がする。‐";
 	close2;
-	setquest 116509; //state=1
+	setquest 116509;
 	compquest 116509;
-	getexp 1000000,0; //58221636
-	getexp 1000000,0; //59221636
-	getexp 1000000,0; //60221636
-	getexp 1000000,0; //61221636
-	getexp 0,1000000; //2034098
-	getexp 0,1000000; //3034098
+	getexp 1000000,0;
+	getexp 1000000,0;
+	getexp 1000000,0;
+	getexp 1000000,0;
+	getexp 0,1000000;
+	getexp 0,1000000;
 	warp "1@jtb.gat",181,198;
 	end;
 }
-1@jtb.gat,218,203,0	warp	12番部屋出口	2,2,1@jtb.gat,287,355 //61604 from_pos=(217, 203)
-1@jtb.gat,311,358,0	warp	トンネル部屋出口	2,2,1@jtb.gat,335,320 //61605 from_pos=(312, 359)
+1@jtb.gat,218,203,0	warp	12番部屋出口	2,2,1@jtb.gat,287,355
+1@jtb.gat,311,358,0	warp	トンネル部屋出口	2,2,1@jtb.gat,335,320
 1@jtb.gat,10,10,0	script	22番部屋出口	139,{/* 61606 (hide)*/}
 1@jtb.gat,391,30,0	script	23番部屋出口	45,{/* 61607 */
 	{
@@ -4545,18 +4546,18 @@ cutin "nines01.bmp", 255;
 	mes "‐移動しよう‐";
 	close2;
 	delquest 13181;
-	setquest 13183; //state=1
+	setquest 13183;
 	compquest 13183;
-	setquest 116508; //state=1
+	setquest 116508;
 	compquest 116508;
-	getexp 1000000,0; //62222586
-	getexp 1000000,0; //63222586
-	getexp 1000000,0; //64222586
-	getexp 1000000,0; //65222586
-	getexp 1000000,0; //66222586
-	getexp 0,1000000; //4034562
-	getexp 0,1000000; //5034562
-	getexp 0,500000; //5534562
+	getexp 1000000,0;
+	getexp 1000000,0;
+	getexp 1000000,0;
+	getexp 1000000,0;
+	getexp 1000000,0;
+	getexp 0,1000000;
+	getexp 0,1000000;
+	getexp 0,500000;
 	getitem 6719, 1;
 	warp "moc_para01.gat",30,88;
 	end;
