@@ -12672,7 +12672,9 @@ OnKilled:
 	hideoffnpc "四騎士ローウェン#b2_01"; //1441
 	sleep 3000;
 	announce "魔女ジラント : 此度の晩餐はここまでとしよう。その甘美な魂、一度に喰らうには惜しい。", 0x9, 0xff0000, 0x190, 26, 0, 0;
-	sleep 6000;
+	sleep 2000;
+	unittalk getnpcid(0,"魔女ジラント#b2_01"),"魔女ジラント : ふぅん……今回はここまでだ。楽しみは取っておくとしよう。";
+	sleep 4000;
 	announce "魔女ジラント : 楽しみは取っておくとしよう。", 0x9, 0xff0000, 0x190, 26, 0, 0;
 	sleep 6000;
 	misceffect 402, "魔女ジラント#b2_01"; //1462
@@ -12696,13 +12698,12 @@ OnKilled:
 	sleep 1000;
 	donpcevent "Angel#2_tiamat_00::OnStart";
 	hideoffnpc "四騎士ミルカ#1039_1"; //1865
+	hideoffnpc "四騎士ハウンド#2054_1"; //1929
+	hideoffnpc "四騎士ローウェン#3036_1"; //1984
 	misceffect 321, "area#r1861"; //1436
 	hideoffnpc "area#r1861"; //1436
-	hideoffnpc "四騎士ハウンド#2054_1"; //1929
 	announce "[神殿B1F 地下祭儀場] の結界が解け、[地下祭壇]へ続く道が現れました", 0x9, 0x00ebff, 0x190, 30, 0, 0;
 	hideoffnpc "地下祭儀場#186A"; //1468
-	sleep 1000;
-	hideoffnpc "四騎士ローウェン#3036_1"; //1984
 	end;
 }
 2_tiamat_01.gat,0,0,0	script	tiamat_mob#b2_03	139,{
@@ -12817,94 +12818,334 @@ OnTimer30000:
 2_tiamat_00.gat,0,0,0	script	Angel#2_tiamat_00	139,{
 OnStart:
 OnTimer3000:
-	initnpctimer;
+	set '@flag,0;
 	if($@tiamat_angel & (1<<0)) {
 		hideoffnpc "魔術師の魂#2_tiamat_00";
 		misceffect 179, "魔術師の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<1)) {
 		hideoffnpc "女教皇の魂#2_tiamat_00";
 		misceffect 179, "女教皇の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<2)) {
 		hideoffnpc "女帝の魂#2_tiamat_00";
 		misceffect 179, "女帝の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<3)) {
 		hideoffnpc "皇帝の魂#2_tiamat_00";
 		misceffect 179, "皇帝の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<4)) {
 		hideoffnpc "法王の魂#2_tiamat_00";
 		misceffect 179, "法王の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<5)) {
 		hideoffnpc "恋人の魂#2_tiamat_00";
 		misceffect 179, "恋人の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<6)) {
 		hideoffnpc "戦車の魂#2_tiamat_00";
 		misceffect 179, "戦車の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<7)) {
 		hideoffnpc "力の魂#2_tiamat_00";
 		misceffect 179, "力の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<8)) {
 		hideoffnpc "隠者の魂#2_tiamat_00";
 		misceffect 179, "隠者の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<9)) {
 		hideoffnpc "運命の輪の魂#2_tiamat_0";
 		misceffect 179, "運命の輪の魂#2_tiamat_0";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<10)) {
 		hideoffnpc "正義の魂#2_tiamat_00";
 		misceffect 179, "正義の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<11)) {
 		hideoffnpc "吊るされた男の魂#2_tiam";
 		misceffect 179, "吊るされた男の魂#2_tiam";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<12)) {
 		hideoffnpc "死神の魂#2_tiamat_00";
 		misceffect 179, "死神の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<13)) {
 		hideoffnpc "節制の魂#2_tiamat_00";
 		misceffect 179, "節制の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<14)) {
 		hideoffnpc "悪魔の魂#2_tiamat_00";
 		misceffect 179, "悪魔の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<15)) {
 		hideoffnpc "塔の魂#2_tiamat_00";
 		misceffect 179, "塔の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<16)) {
 		hideoffnpc "星の魂#2_tiamat_00";
 		misceffect 179, "星の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<17)) {
 		hideoffnpc "月の魂#2_tiamat_00";
 		misceffect 179, "月の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<18)) {
 		hideoffnpc "太陽の魂#2_tiamat_00";
 		misceffect 179, "太陽の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<19)) {
 		hideoffnpc "審判の魂#2_tiamat_00";
 		misceffect 179, "審判の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<20)) {
 		hideoffnpc "世界の魂#2_tiamat_00";
 		misceffect 179, "世界の魂#2_tiamat_00";
+		'@flag++;
 	}
 	if($@tiamat_angel & (1<<21)) {
 		hideoffnpc "愚者の魂#2_tiamat_00";
 		misceffect 179, "愚者の魂#2_tiamat_00";
+		'@flag++;
+	}
+	if('@flag < 22) {
+		initnpctimer;
 	}
 	end;
+OnTimer6000:
+	stopnpctimer;
+	announce "王城を護る全ての守護天使の魂が台座に揃いました", 0x9, 0xffff00, 0x190, 30, 0, 0;
+	misceffect 253, "魔術師の魂#2_tiamat_00"; //1410
+	misceffect 253, "女教皇の魂#2_tiamat_00"; //1411
+	misceffect 253, "女帝の魂#2_tiamat_00"; //1412
+	misceffect 253, "皇帝の魂#2_tiamat_00"; //1413
+	misceffect 253, "法王の魂#2_tiamat_00"; //1414
+	misceffect 253, "恋人の魂#2_tiamat_00"; //1415
+	misceffect 253, "戦車の魂#2_tiamat_00"; //1416
+	misceffect 253, "力の魂#2_tiamat_00"; //1417
+	misceffect 253, "隠者の魂#2_tiamat_00"; //1418
+	misceffect 253, "運命の輪の魂#2_tiamat_00"; //1419
+	misceffect 253, "正義の魂#2_tiamat_00"; //1420
+	misceffect 253, "吊るされた男の魂#2_tiamat_00"; //1421
+	sleep 1000;
+	misceffect 260, "魔術師の魂#2_tiamat_00"; //1410
+	misceffect 260, "女教皇の魂#2_tiamat_00"; //1411
+	misceffect 260, "女帝の魂#2_tiamat_00"; //1412
+	misceffect 260, "皇帝の魂#2_tiamat_00"; //1413
+	misceffect 260, "法王の魂#2_tiamat_00"; //1414
+	misceffect 260, "恋人の魂#2_tiamat_00"; //1415
+	misceffect 260, "戦車の魂#2_tiamat_00"; //1416
+	misceffect 260, "力の魂#2_tiamat_00"; //1417
+	misceffect 260, "隠者の魂#2_tiamat_00"; //1418
+	misceffect 260, "運命の輪の魂#2_tiamat_00"; //1419
+	misceffect 260, "正義の魂#2_tiamat_00"; //1420
+	misceffect 260, "吊るされた男の魂#2_tiamat_00"; //1421
+	misceffect 222, "area#r1881"; //1408
+	misceffect 222, "area#r1882"; //1409
+	sleep 2000;
+	misceffect 488, "area#r1881"; //1408
+	misceffect 488, "area#r1882"; //1409
+	donpcevent "tiamat_mob#b3_01::OnStart";
+	sleep 1000;
+	hideoffnpc "四騎士ミルカ#evt1040_1"; //1866
+	hideoffnpc "四騎士ハウンド#evt2055_"; //1930
+	hideoffnpc "四騎士ローウェン#evt303"; //1985
+	misceffect 321, "area#r1881"; //1408
+	hideoffnpc "area#r1881"; //1408
+	misceffect 321, "area#r1882"; //1409
+	hideoffnpc "area#r1882"; //1409
+	announce "[神殿B2F 地下祭壇] の結界が解け、[深淵の玉座]へ続く道が現れました", 0x9, 0x00ebff, 0x190, 30, 0, 0;
+	end;
 }
+2_tiamat_00.gat,0,0,0	script	tiamat_mob#b3_01	139,{
+OnStart:
+	initnpctimer;
+	setarray '@xy,31,46,35,46,39,46,30,49,41,49,30,53,41,53,30,57,41,57,30,61,41,61,30,65,41,65,30,69,41,69,30,73,41,73,31,76,35,76,39,76;
+	for('@i=0; '@i<getarraysize('@xy); '@i++)
+		monster "this",'@xy['@i*2],'@xy['@i*2+1]," ",3982,1,strnpcinfo(0)+ "::OnKilled";
+	areasetcell "2_tiamat_00.gat",29,45,42,77,1;
+	areasetcell "2_tiamat_00.gat",32,48,39,74,0;
+	end;
+OnTimer60000:
+	stopnpctimer;
+	announce "魔女ジラント : おのれ……我が寝所に無断で入ってくるとは！", 0x9, 0xff0000, 0x190, 26, 0, 0;
+	sleep 5000;
+	announce "魔女ジラント : このような屈辱は初めてだ……貴様ら、許さぬぞ！", 0x9, 0xff0000, 0x190, 26, 0, 0;
+	misceffect 419, "魔女ジラント#2_tiamat_0"; //1516
+	sleep 5000;
+	announce "魔女ジラント : ゆっくり喰らってやろうと思っていたが……もはや楽に死ねると思うな！", 0x9, 0xff0000, 0x190, 26, 0, 0;
+	misceffect 756, "魔女ジラント#2_tiamat_0"; //1516
+	misceffect 780, "魔女ジラント#2_tiamat_0"; //1516
+	misceffect 882, "魔女ジラント#2_tiamat_0"; //1516
+	sleep 5000;
+	announce "魔女ジラント : その身を八つに裂いた上で、魂を喰い尽くしてくれるわ！", 0x9, 0xff0000, 0x190, 26, 0, 0;
+	misceffect 90, "魔女ジラント#2_tiamat_0"; //1516
+	misceffect 262, "魔女ジラント#2_tiamat_0"; //1516
+	misceffect 936, "魔女ジラント#2_tiamat_0"; //1516
+	hideoffnpc "open_02#2_tiamat_02"; //1513
+	hideonnpc "open_02#2_tiamat_02"; //1513
+	sleep 5000;
+	announce "王女メア : ……魔女が本性を現しました。今なら完全に討ち滅ぼすことができましょう。", 0x9, 0x00ff00, 0x190, 26, 0, 0;
+	sleep 5000;
+	announce "王女メア : ですが……本性を現した魔女の力は計り知れません……。", 0x9, 0x00ff00, 0x190, 26, 0, 0;
+	sleep 5000;
+	announce "王女メア : どうか、御武運を……！", 0x9, 0x00ff00, 0x190, 26, 0, 0;
+	sleep 5000;
+	misceffect 911, "魔女ジラント#2_tiamat_0"; //1516
+	areasetcell "2_tiamat_00.gat",180,29,212,61,0;
+	killmonster "2_tiamat_00.gat","tiamat_mob#b3_01::OnKilled";
+	setnpcdisplay "魔女ジラント#2_tiamat_0",844;	// 1641
+	hideonnpc "魔女ジラント#2_tiamat_0"; //1516
+	hideonnpc "王女メア#2_tiamat_02"; //1517
+	hideonnpc "四騎士ミルカ#2_tiamat_0"; //1473
+	hideonnpc "四騎士ハウンド#2_tiamat"; //1474
+	hideonnpc "四騎士ローウェン#2_tiam"; //1475
+	donpcevent "tiamat_mob#b3_02::OnSpawn";
+	end;
+OnKilled:
+	end;
+}
+2_tiamat_00.gat,0,0,0	script	tiamat_mob#b3_02	139,{
+OnSpawn:
+	initnpctimer;
+	set 'flag,0;
+	set 'mob,callmonster("2_tiamat_00.gat",26,61,"古龍ジラント",20492,"tiamat_mob#b3_02::OnKilled");
+	set 'mobmaxhp,getmobhp('mob);
+	setarray '@xy,29,49,29,73,52,49,52,73;
+	for(set '@i,0; '@i<4; set '@i,'@i+1)
+		set 'hell['@i],callmonster("2_tiamat_00.gat",'@xy['@i*2],'@xy['@i*2+1],"#hell_00"+'@i,3855,"tiamat_mob#b2_01::OnKilled");
+	end;
+OnKilled:
+	hideoffnpc "clear_02#2_tiamat402";	// 1649
+	sleep 500;
+	hideonnpc "clear_02#2_tiamat402";	// 1649
+	announce "古龍ジラント : うおぉぉぉぉぉぉ！", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 7000;
+	misceffect 722,"魔女ジラント#2_tiamat40";	// 1641
+	hideoffnpc "魔女ジラント#2_tiamat40";	// 1641
+	setnpcdisplay "魔女ジラント#2_tiamat40",10273;	// 1641
+	hideoffnpc "王女メア#2_tiamat402";	// 1642
+	hideoffnpc "四騎士ミルカ#2_tiamat40";	// 1598
+	hideoffnpc "四騎士ハウンド#2_tiamat";	// 1599
+	hideoffnpc "四騎士ローウェン#2_tiam";	// 1600
+	sleep 3000;
+	announce "古龍ジラント : 神代の時代より生きながらえる我が……負ける……だと……。", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 6000;
+	announce "古龍ジラント : こ、こんな下賤な者どもに……み、認めぬ……！", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 6000;
+	announce "古龍ジラント : こうなれば我が魂を贄にして……貴様らを呪い殺してくれる！", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	misceffect 812,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 826,"魔女ジラント#2_tiamat40";	// 1641
+	sleep 6000;
+	announce "古龍ジラント : 一人では死なぬ！　呪われし深淵の底に共に沈もうぞ！", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	misceffect 366,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 409,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 781,"魔女ジラント#2_tiamat40";	// 1641
+	sleep 6000;
+	announce "王女メア : そうはさせません。貴女の魂は、私が浄化します。", 0x9, 0x00ff00, 0x0190, 26, 0, 0;
+	misceffect 58,"王女メア#2_tiamat402";	// 1642
+	sleep 6000;
+	misceffect 9,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 36,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 113,"魔女ジラント#2_tiamat40";	// 1641
+	announce "古龍ジラント : や、やめろっ！　我が求めるのは絶叫と騒乱！", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 6000;
+	misceffect 9,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 36,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 76,"魔女ジラント#2_tiamat40";	// 1641
+	announce "古龍ジラント : こ、こんな穏やかな死など……望んではおらぬ……うぉぉぉぉ……！", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 6000;
+	misceffect 9,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 36,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 91,"魔女ジラント#2_tiamat40";	// 1641
+	announce "王女メア : どうか安らかにお眠りください……。", 0x9, 0x00ff00, 0x0190, 26, 0, 0;
+	sleep 6000;
+	misceffect 9,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 36,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 440,"魔女ジラント#2_tiamat40";	// 1641
+	announce "王女メア : ……母様。", 0x9, 0x00ff00, 0x0190, 26, 0, 0;
+	sleep 3000;
+	misceffect 425,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 514,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 778,"魔女ジラント#2_tiamat40";	// 1641
+	misceffect 460,"魔女ジラント#2_tiamat40";	// 1641
+	setnpcdisplay "魔女ジラント#2_tiamat40",844;	// 1641
+	hideonnpc "魔女ジラント#2_tiamat40";	// 1641
+	sleep 6000;
+	announce "王女メア : 全て……終わりましたね……。", 0x9, 0x00ff00, 0x0190, 26, 0, 0;
+	sleep 6000;
+	announce "王女メア : 冒険者様に作戦の成果をお伝えしたいので、秘密の部屋に向かいましょう。", 0x9, 0x00ff00, 0x0190, 26, 0, 0;
+	sleep 6000;
+	donpcevent "#tiamat_finish::OnStart";
+	mapwarp "2_tiamat_00.gat","3_tiamat_00.gat", 155, 96;
+	end;
+}
+2_tiamat_00.gat,35,67,3	script	四騎士ミルカ#2_tiamat_0	728,{/* 1473 */}
+2_tiamat_00.gat,34,69,3	script	四騎士ハウンド#2_tiamat	420,{/* 1474 */}
+2_tiamat_00.gat,37,68,3	script	四騎士ローウェン#2_tiam	416,{/* 1475 */}
+2_tiamat_00.gat,29,49,0	script	pat3_01#2_tiamat_02	139,{/* 1480 (hide)*/}
+2_tiamat_00.gat,29,73,0	script	pat3_02#2_tiamat_02	139,{/* 1481 (hide)*/}
+2_tiamat_00.gat,52,49,0	script	pat3_03#2_tiamat_02	139,{/* 1482 (hide)*/}
+2_tiamat_00.gat,52,73,0	script	pat3_04#2_tiamat_02	139,{/* 1483 (hide)*/}
+2_tiamat_00.gat,29,49,0	script	pat3_05#2_tiamat_02	139,{/* 1484 (hide)*/}
+2_tiamat_00.gat,29,73,0	script	pat3_06#2_tiamat_02	139,{/* 1485 (hide)*/}
+2_tiamat_00.gat,52,49,0	script	pat3_07#2_tiamat_02	139,{/* 1486 (hide)*/}
+2_tiamat_00.gat,52,73,0	script	pat3_08#2_tiamat_02	139,{/* 1487 (hide)*/}
+2_tiamat_00.gat,29,49,0	script	spe2_01#2_tiamat_02	139,{/* 1488 (hide)*/}
+2_tiamat_00.gat,29,73,0	script	spe2_02#2_tiamat_02	139,{/* 1489 (hide)*/}
+2_tiamat_00.gat,52,49,0	script	spe2_03#2_tiamat_02	139,{/* 1490 (hide)*/}
+2_tiamat_00.gat,52,73,0	script	spe2_04#2_tiamat_02	139,{/* 1491 (hide)*/}
+2_tiamat_00.gat,29,49,0	script	spe3_01#2_tiamat_02	139,{/* 1492 (hide)*/}
+2_tiamat_00.gat,29,73,0	script	spe3_02#2_tiamat_02	139,{/* 1493 (hide)*/}
+2_tiamat_00.gat,52,49,0	script	spe3_03#2_tiamat_02	139,{/* 1494 (hide)*/}
+2_tiamat_00.gat,52,73,0	script	spe3_04#2_tiamat_02	139,{/* 1495 (hide)*/}
+2_tiamat_00.gat,29,49,0	script	spe4_01#2_tiamat_02	139,{/* 1496 (hide)*/}
+2_tiamat_00.gat,29,73,0	script	spe4_02#2_tiamat_02	139,{/* 1497 (hide)*/}
+2_tiamat_00.gat,52,49,0	script	spe4_03#2_tiamat_02	139,{/* 1498 (hide)*/}
+2_tiamat_00.gat,52,73,0	script	spe4_04#2_tiamat_02	139,{/* 1499 (hide)*/}
+2_tiamat_00.gat,29,49,0	script	spe5_01#2_tiamat_02	139,{/* 1500 (hide)*/}
+2_tiamat_00.gat,29,73,0	script	spe5_02#2_tiamat_02	139,{/* 1501 (hide)*/}
+2_tiamat_00.gat,52,49,0	script	spe5_03#2_tiamat_02	139,{/* 1502 (hide)*/}
+2_tiamat_00.gat,52,73,0	script	spe5_04#2_tiamat_02	139,{/* 1503 (hide)*/}
+2_tiamat_00.gat,29,49,0	script	spe6_01#2_tiamat_02	139,{/* 1504 (hide)*/}
+2_tiamat_00.gat,29,73,0	script	spe6_02#2_tiamat_02	139,{/* 1505 (hide)*/}
+2_tiamat_00.gat,52,49,0	script	spe6_03#2_tiamat_02	139,{/* 1506 (hide)*/}
+2_tiamat_00.gat,52,73,0	script	spe6_04#2_tiamat_02	139,{/* 1507 (hide)*/}
+2_tiamat_00.gat,29,49,0	script	spe6_05#2_tiamat_02	139,{/* 1508 (hide)*/}
+2_tiamat_00.gat,29,73,0	script	spe6_06#2_tiamat_02	139,{/* 1509 (hide)*/}
+2_tiamat_00.gat,52,49,0	script	spe6_07#2_tiamat_02	139,{/* 1510 (hide)*/}
+2_tiamat_00.gat,52,73,0	script	spe6_08#2_tiamat_02	139,{/* 1511 (hide)*/}
+2_tiamat_00.gat,29,49,0	script	open_01#2_tiamat_02	139,{/* 1512 (hide)*/}
+2_tiamat_00.gat,29,73,0	script	open_02#2_tiamat_02	139,{/* 1513 (hide)*/}
+2_tiamat_00.gat,52,49,0	script	open_03#2_tiamat_02	139,{/* 1514 (hide)*/}
+2_tiamat_00.gat,52,73,0	script	open_04#2_tiamat_02	139,{/* 1515 (hide)*/}
+2_tiamat_00.gat,26,61,6	script	魔女ジラント#2_tiamat_0	10272,{/* 1516 */}
+2_tiamat_00.gat,32,65,3	script	王女メア#2_tiamat_02	10361,{/* 1517 */}
+2_tiamat_00.gat,29,49,0	script	clear_01#2_tiamat_02	139,{/* 1523 (hide)*/}
+2_tiamat_00.gat,29,73,0	script	clear_02#2_tiamat_02	139,{/* 1524 (hide)*/}
+2_tiamat_00.gat,52,49,0	script	clear_03#2_tiamat_02	139,{/* 1525 (hide)*/}
+2_tiamat_00.gat,52,73,0	script	clear_04#2_tiamat_02	139,{/* 1526 (hide)*/}
+2_tiamat_00.gat,32,65,0	script	guest#part28_1	139,{/* 2069 (hide)*/}
+2_tiamat_00.gat,32,65,0	script	guest#part28_2	139,{/* 2070 (hide)*/}
+2_tiamat_00.gat,32,65,0	script	guest#part28_3	139,{/* 2071 */}

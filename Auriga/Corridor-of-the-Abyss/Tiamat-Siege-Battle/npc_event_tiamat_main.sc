@@ -98,6 +98,330 @@ OnLowen:
 	end;
 }
 
+3_tiamat_00.gat,0,0,0	script	#tiamat_finish	139,{
+OnStart:
+	if($@tiamat_user <= 0)
+		end;
+	if($@tiamat_main >= 4)
+		end;
+	set $@tiamat_main,4;
+	sleep 15000;
+	announce "王女メア : ご協力ありがとうございました。それでは成果を確認しましょう。", 0x9, 0x00ff00, 0x0190, 26, 0, 0;
+	sleep 3000;
+	announce "=========== 王城ティアマト 探索結果 ===========", 0x9, 0xffff00, 0x0190, 40, 0, 0;
+	sleep 1000;
+	announce "------------------ 王城地区 ------------------", 0x9, 0xffff00, 0x0190, 40, 0, 0;
+	sleep 1000;
+	announce "その他 100% （13 / 13）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "城1F 100% （12 / 12）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "城2F 100% （19 / 19）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "城3F 100% （17 / 17）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "城B1F 100% （7 / 7）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "監獄 100% （10 / 10）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "兵舎1F 83% （5 / 6）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "兵舎2F 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "使用人居住区 100% （6 / 6）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "王女メア : 王城地区 完全踏破。", 0x9, 0x00ff00, 0x0190, 30, 0, 0;
+	soundeffect "effect\lg_piety.wav", 0, 0;	// 0
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 704,"EF_0"+i+"#3_tiamat00";	// 1654
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 709,"EF_0"+i+"#3_tiamat00";	// 1654
+	sleep 1000;
+	announce "------------------ 外壁地区 ------------------", 0x9, 0xffff00, 0x0190, 40, 0, 0;
+	sleep 1000;
+	announce "塔・南① 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "塔・南② 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "塔・南東 100% （5 / 5）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "塔・南西 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "塔・西 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "塔・東 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "塔・北西 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "塔・北東 100% （5 / 5）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "塔・北① 100% （5 / 5）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "塔・北② 100% （5 / 5）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "城壁 100% （20 / 20）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "王女メア : 外壁地区 完全踏破。", 0x9, 0x00ff00, 0x0190, 30, 0, 0;
+	soundeffect "effect\lg_piety.wav", 0, 0;	// 0
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 704,"EF_0"+i+"#3_tiamat00";	// 1654
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 709,"EF_0"+i+"#3_tiamat00";	// 1654
+	sleep 1000;
+	announce "------------------ 教会地区 ------------------", 0x9, 0xffff00, 0x0190, 40, 0, 0;
+	sleep 1000;
+	announce "教会1F 100% （6 / 6）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "教会2F 100% （6 / 6）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "鐘楼 100% （6 / 6）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "カタコンベ 100% （11 / 11）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "王女メア : 教会地区 完全踏破。", 0x9, 0x00ff00, 0x0190, 30, 0, 0;
+	soundeffect "effect\lg_piety.wav", 0, 0;	// 0
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 704,"EF_0"+i+"#3_tiamat00";	// 1654
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 709,"EF_0"+i+"#3_tiamat00";	// 1654
+	sleep 1000;
+	announce "------------------ 神殿地区 ------------------", 0x9, 0xffff00, 0x0190, 40, 0, 0;
+	sleep 1000;
+	announce "神殿1F 100% （8 / 8）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "神殿B1F 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "神殿B2F 100% （2 / 2）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "王女メア : 神殿地区 完全踏破。", 0x9, 0x00ff00, 0x0190, 30, 0, 0;
+	soundeffect "effect\lg_piety.wav", 0, 0;	// 0
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 704,"EF_0"+i+"#3_tiamat00";	// 1654
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 709,"EF_0"+i+"#3_tiamat00";	// 1654
+	sleep 1000;
+	announce "------------------ 王城の宝箱 ------------------", 0x9, 0xffff00, 0x0190, 40, 0, 0;
+	sleep 1000;
+	announce "第四級 王城の宝箱 100% （108 / 108）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "第三級 王城の宝箱 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "第二級 王城の宝箱 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "第一級 王城の宝箱 100% （4 / 4）", 0x9, 0xffffff, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "王女メア : 王城の宝箱を全て回収しました。", 0x9, 0x00ff00, 0x0190, 30, 0, 0;
+	soundeffect "effect\lg_piety.wav", 0, 0;	// 0
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 704,"EF_0"+i+"#3_tiamat00";	// 1654
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 709,"EF_0"+i+"#3_tiamat00";	// 1654
+	sleep 1000;
+	announce "------------------ 王城の守護天使 ------------------", 0x9, 0xffff00, 0x0190, 40, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<0))
+		announce "第22の守護天使 愚者の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第22の守護天使 愚者の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<1))
+		announce "第21の守護天使 世界の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第21の守護天使 世界の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<2))
+		announce "第20の守護天使 審判の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第20の守護天使 審判の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<3))
+		announce "第19の守護天使 太陽の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第19の守護天使 太陽の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<4))
+		announce "第18の守護天使 月の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第18の守護天使 月の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<5))
+		announce "第17の守護天使 星の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第17の守護天使 星の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<6))
+		announce "第16の守護天使 塔の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第16の守護天使 塔の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<7))
+		announce "第15の守護天使 悪魔の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第15の守護天使 悪魔の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<8))
+		announce "第14の守護天使 節制の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第14の守護天使 節制の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<9))
+		announce "第13の守護天使 死神の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第13の守護天使 死神の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<10))
+		announce "第12の守護天使 吊るされた男の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第12の守護天使 吊るされた男の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<11))
+		announce "第11の守護天使 正義の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第11の守護天使 正義の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<12))
+		announce "第10の守護天使 運命の輪の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第10の守護天使 運命の輪の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<13))
+		announce "第9の守護天使 隠者の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第9の守護天使 隠者の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<14))
+		announce "第8の守護天使 力の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第8の守護天使 力の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<15))
+		announce "第7の守護天使 戦車の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第7の守護天使 戦車の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<16))
+		announce "第6の守護天使 恋人の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第6の守護天使 恋人の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<17))
+		announce "第5の守護天使 法王の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第5の守護天使 法王の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<18))
+		announce "第4の守護天使 皇帝の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第4の守護天使 皇帝の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<19))
+		announce "第3の守護天使 女帝の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第3の守護天使 女帝の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<20))
+		announce "第2の守護天使 女教皇の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第2の守護天使 女教皇の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel & (1<<21))
+		announce "第1の守護天使 魔術師の化身 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	else
+		announce "第1の守護天使 魔術師の化身 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	if($@tiamat_angel) {
+		announce "王女メア : 全ての守護天使を討滅しました。", 0x9, 0x00ff00, 0x0190, 30, 0, 0;
+		soundeffect "levelup.wav", 0, 0;	// 0
+		for(set i,1; i<=8; set i,i+1)
+			misceffect 704,"EF_0"+i+"#3_tiamat00";	// 1654
+		for(set i,1; i<=8; set i,i+1)
+			misceffect 709,"EF_0"+i+"#3_tiamat00";	// 1654
+	}
+	sleep 1000;
+	announce "------------------ 王城に棲まう龍 ------------------", 0x9, 0xffff00, 0x0190, 40, 0, 0;
+	sleep 1000;
+	announce "深淵の女王 魔女ジラント 討滅成功 !!", 0x9, 0x7fffd4, 0x0190, 26, 0, 0;
+	announce "深淵の女王 魔女ジラント 討滅失敗…", 0x9, 0xff0000, 0x190, 26, 0, 0;
+	sleep 1000;
+	announce "深淵の女王 古龍ジラント 討滅成功 !!", 0x9, 0x7fffd4, 0x190, 26, 0, 0;
+	announce "深淵の女王 古龍ジラント 討滅失敗…", 0x9, 0xff0000, 0x0190, 26, 0, 0;
+	sleep 1000;
+	announce "王女メア : 貴方たちこそ、真の英雄です。", 0x9, 0x00ff00, 0x190, 30, 0, 0;
+	emotion 14, "王女メア#3_tiamat_00"; //1537
+	soundeffect "effect\lg_piety.wav", 0, 0; //0
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 704,"EF_0"+i+"#3_tiamat00";	// 1654
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 709,"EF_0"+i+"#3_tiamat00";	// 1654
+	sleep 1000;
+	announce "------------------ 総合評価 ------------------", 0x9, 0xffff00, 0x0190, 40, 0, 0;
+	sleep 1000;
+	if('@point == 1000) {
+		set '@rank$,"SSS";
+		set '@effect,410;
+	}
+	else if('@point >= 900) {
+		set '@rank$,"S";
+		set '@effect,83;
+	}
+	else if('@point >= 800) {
+		set '@rank$,"A";
+		set '@effect,75;
+	}
+	announce "…… "+'@point+"点 !!     ランク : "+'@rank$, 0x9, 0xffffff, 0x190, 26, 0, 0;
+	soundeffect "complete.wav", 0, 0;	// 0
+	emotion 46,"王女メア#3_tiamat00";	// 1662
+	misceffect '@effect,"EF_09#3_tiamat00";	// 1661
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 894,"EF_0"+i+"#3_tiamat00";	// 1654
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 899,"EF_0"+i+"#3_tiamat00";	// 1654
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 709,"EF_0"+i+"#3_tiamat00";	// 1654
+	for(set i,1; i<=8; set i,i+1)
+		misceffect 338,"EF_0"+i+"#3_tiamat00";	// 1654
+	sleep 1000;
+	announce "===============================================", 0x9, 0xffff00, 0x0190, 40, 0, 0;
+	sleep 1000;
+	announce "王女メア : 以上です。　ご協力感謝いたします。", 0x9, 0x00ff00, 0x0190, 30, 0, 0;
+	sleep 3000;
+	announce "王女メア : 報酬は基地にいる「部隊管理兵」よりお受け取りください。", 0x9, 0x00ff00, 0x0190, 30, 0, 0;
+	sleep 7000;
+	announce "王女メア : それでは、王城の外までお送りいたします。準備の出来た方から私にお声掛けください。", 0x9, 0x00ff00, 0x0190, 30, 0, 0;
+	emotion 12,"王女メア#3_tiamat00";	// 1662
+	end;
+}
+
+3_tiamat_00.gat,154,123,0	script	EF_01#3_tiamat00	139,{/* 1653 (hide)*/}
+3_tiamat_00.gat,148,117,0	script	EF_02#3_tiamat00	139,{/* 1654 (hide)*/}
+3_tiamat_00.gat,160,117,0	script	EF_03#3_tiamat00	139,{/* 1655 (hide)*/}
+3_tiamat_00.gat,142,111,0	script	EF_04#3_tiamat00	139,{/* 1656 (hide)*/}
+3_tiamat_00.gat,166,111,0	script	EF_05#3_tiamat00	139,{/* 1657 (hide)*/}
+3_tiamat_00.gat,148,105,0	script	EF_06#3_tiamat00	139,{/* 1658 (hide)*/}
+3_tiamat_00.gat,160,105,0	script	EF_07#3_tiamat00	139,{/* 1659 (hide)*/}
+3_tiamat_00.gat,154,99,0	script	EF_08#3_tiamat00	139,{/* 1660 (hide)*/}
+3_tiamat_00.gat,154,111,0	script	EF_09#3_tiamat00	139,{/* 1661 (hide)*/}
+
+3_tiamat_00.gat,157,109,4	script	王女メア#3_tiamat00	10361,{/* 1662 */
+	mes "[王女メア]";
+	mes "ご協力ありがとうございました。";
+	mes "王城の外に出られますか？";
+	next;
+	if(select("話をやめる","外に出たい") == 1) {
+		mes "[王女メア]";
+		mes "わかりました。";
+		mes "外に出る際は改めて";
+		mes "私にお声掛けください。";
+		close;
+	}
+	mes "[王女メア]";
+	mes "わかりました。";
+	mes "それではお送りいたします。";
+	close2;
+	warp "pab_base04.gat",338,75;
+	end;
+}
+
 1_tiamat_00.gat,195,172,3	script	王女メア#1_tiamat_00	10361,{/* 55 */
 	if($@tiamat_main == 0) {
 		mes "[王女メア]";
@@ -2703,29 +3027,38 @@ OnStart:
 			end;
 		}
 		break;
+	case 5:
+		//mes "[試練の石碑]";
+		//mes "四騎士ローウェンは今どこに居る？";
+		//mes "　";
+		//mes "^ff0000回答を選択後に";
+		//mes "正解チェックを行います^000000";
+		//next;
+		//switch(select("その他エリア","城壁エリア","塔・南①エリア","塔・南②エリア","塔・南東エリア","塔・南西エリア","塔・西エリア","塔・東エリア","塔・北西エリア","塔・北東エリア","塔・北①エリア","塔・北②エリア","城1Fエリア","城2Fエリア","城3Fエリア","城B1Fエリア","監獄エリア","兵舎1Fエリア","兵舎2Fエリア","使用人居住区エリア","教会1Fエリア","教会2Fエリア","鐘楼エリア","神殿1Fエリア","神殿B1Fエリア","神殿B2Fエリア","カタコンベエリア")) {
+
 	}
 	unittalk "……";	// 28771
 	mes "[試練の石碑]";
 	mes "……";
 	close2;
 	if('@true) {
-		soundeffect "complete.wav", 0, 0;	// 0
-		unittalk getnpcid(0,"試練の石碑#r199_0qf"),"見事だ!!　通るが良い。";	// 28771
+		//areasoundeffect "complete.wav", 0, 0;	// 0
+		unittalk "見事だ!!　通るが良い。";	// 28771
+		sleep 2000;
+		misceffect 234,"area#r1992";	// 27360
 		announce "「"+strcharinfo(0)+"」が試練「王城のリドル」をクリアしました", 0x9, 0xffff00, 0x0190, 30, 0, 0;
-		misceffect 222,"area#r1992";	// 27360
-		sleep 2000;
-		misceffect 488,"area#r1992";	// 27360
-		announce "[カタコンベ 浮き橋] ⇔ [カタコンベ 祈りの間]の扉が開かれました", 0x9, 0x00ebff, 0x0190, 30, 0, 0;
-		sleep 2000;
-		misceffect 321,"area#r1992";	// 27360
-		hideoffnpc "area#r1992";	// 27360
-		killmonster "1_tiamat_26.gat","tiamat_mob#r199::OnKilled2";
 		misceffect 459,"試練の石碑#r199";	// 28771
 		hideonnpc "試練の石碑#r199";	// 28771
+		sleep 2000;
+		misceffect 406,"area#r1992";	// 27360
+		hideoffnpc "area#r1992";	// 27360
+		hideonnpc "area#k1992";	// 27360
+		announce "[カタコンベ 浮き橋] ⇔ [カタコンベ 祈りの間]の扉が開かれました", 0x9, 0x00ebff, 0x0190, 30, 0, 0;
+		killmonster "1_tiamat_26.gat","tiamat_mob#r199::OnKilled2";
 	}
 	else {
 		//TODO
-		unittalk getnpcid(0,"試練の石碑#r199_0qf"),"不正解!!　去るが良い。";	// 28771
+		unittalk "不正解!!　去るが良い。";	// 28771
 		sleep 2000;
 		warp "1_tiamat_00.gat",182,150;
 	}
