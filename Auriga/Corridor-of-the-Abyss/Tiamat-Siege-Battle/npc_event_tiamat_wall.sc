@@ -654,4 +654,10 @@ OnStart:
 	areasetcell "1_tiamat_52.gat",138-3,201,138+2,201,1;
 	monster "1_tiamat_52.gat",141,201,"#EF_WALL",3870,1;
 	areasetcell "1_tiamat_52.gat",141-2,201,141+3,201,1;
+	//ê[ï£ÇÃã ç¿
+	setcell "2_tiamat_02.gat",63,58,0;
+	setcell "2_tiamat_02.gat",63,65,0;
+	monster "2_tiamat_02.gat",63,58,"#EF_WALL",3871,1;
+	monster "2_tiamat_02.gat",63,65,"#EF_WALL",3871,1;
+	areasetcell "2_tiamat_02.gat",63,58,64,65,1;
 }

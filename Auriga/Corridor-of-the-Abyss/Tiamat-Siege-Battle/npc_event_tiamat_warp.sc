@@ -49,6 +49,7 @@
 1_tiamat_04.gat,14,62,0	warp	area#r1832	2,2,1_tiamat_53.gat,232,194	//150
 1_tiamat_04.gat,184,97,0	warp	area#r1841	2,2,1_tiamat_04.gat,142,200	//151
 1_tiamat_04.gat,184,134,0	warp	area#r1842	2,2,1_tiamat_35.gat,94,161	//152
+1_tiamat_04.gat,14,36,0	script	area#k1831	45,2,2,{/* 153 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_04.gat,142,205,0	script	area#k1812	45,2,2,{/* 154 */}
 1_tiamat_05.gat,34,47,0	warp	area#r121	2,2,1_tiamat_38.gat,90,103	//171
 1_tiamat_05.gat,25,37,0	warp	area#r122	2,2,1_tiamat_26.gat,130,107	//172
@@ -532,6 +533,8 @@ OnTimer2000:
 1_tiamat_53.gat,288,291,0	warp	area#r1764	2,2,1_tiamat_53.gat,40,217	//1177
 1_tiamat_53.gat,183,162,0	warp	area#r1781	2,2,1_tiamat_53.gat,231,286	//1178
 1_tiamat_53.gat,40,212,0	warp	area#r1791	2,2,1_tiamat_53.gat,288,286	//1179
+1_tiamat_53.gat,231,291,0	script	area#k1762	45,2,2,{/* 1181 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
+1_tiamat_53.gat,288,291,0	script	area#k1764	45,2,2,{/* 1183 */ unittalk getcharid(3),strcharinfo(0)+" : 鍵がかかっている……",1; }
 1_tiamat_54.gat,48,121,0	warp	area#r1611	2,2,1_tiamat_54.gat,57,120	//1202
 1_tiamat_54.gat,46,44,0		warp	area#r1621	2,2,1_tiamat_44.gat,110,122	//1203
 1_tiamat_54.gat,30,50,0		warp	area#r1622	2,2,1_tiamat_08.gat,351,386	//1204
