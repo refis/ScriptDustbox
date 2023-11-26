@@ -414,8 +414,8 @@ OnStart:
 	set '@mob9,callmonster('@mdmap$,104, 40,"魔神の破片",1921,'@event$);
 	set '@mob0,callmonster('@mdmap$,106, 40,"魔神の破片",1921,'@event$);
 	if(getmapusers('@mdmap$) <= 2) {
-		setmobhp '@mob1,getmobhp('@mob1)/2;
-		setmobhp '@mob6,getmobhp('@mob6)/2;
+		setmobhp '@mob1,5000000;
+		setmobhp '@mob6,5000000;
 	}
 	end;
 OnTimer3000:
@@ -441,11 +441,10 @@ OnKilled:
 	else
 		cutin "ep13_ahat_m", 2;
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
-		// 未調査
 		mes "[アハト]";
-		mes "初めてお目にかかりますね。";
-		mes "魔神の最初のしもべ、";
-		mes "アハトと申します。";
+		mes "魔神殿へようこそ。";
+		mes "あなたのお相手を務めることができ";
+		mes "光栄です。";
 		close2;
 		cutin "ep13_ahat_f", 255;
 		end;
@@ -900,6 +899,14 @@ OnTouch:
 
 1@eom.gat,100,122,3	script	モロク#mockid03	10038,{
 	cutin "morocc_kid", 2;
+	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
+		mes "[モロク]";
+		mes "あはは！";
+		mes "まだ生きてたんだね。驚いたよ。";
+		close2;
+		cutin "morocc_kid", 255;
+		end;
+	}
 	mes "[モロク]";
 	mes "あはは！　まだ生きてたんだね。";
 	mes "驚いたよ。";
@@ -987,22 +994,17 @@ OnTouch:
 	initnpctimer;
 	end;
 OnTimer3000:
-OnTimer6000:
-OnTimer9000:
-OnTimer12000:
-OnTimer15000:
-	// TODO
 	set '@mdmap$,getmdmapname("1@eom.gat");
 	set '@event$,getmdnpcname("ブリナラネア#brinpc01")+"::OnKilled";
 	set '@mob_id,getvariableofnpc('mob_id,getmdnpcname("callmon#eom2"));
 	set '@mobhp,getmobhp('@mob_id);
 	if('@mobhp < 25000000)
 		set 'type,4;
-	else if('@mobhp > 25000000 && '@mobhp < 30000000 && 'flag2 < 3)
+	else if('@mobhp > 20000000 && '@mobhp < 30000000)
 		set 'type,3;
-	else if('@mobhp > 30000000 && '@mobhp < 35000000 && 'flag2 < 2)
+	else if('@mobhp > 30000000 && '@mobhp < 40000000)
 		set 'type,2;
-	else if('@mobhp > 35000000 && '@mobhp < 40000000 && 'flag2 < 1)
+	else if('@mobhp > 40000000 && '@mobhp < 50000000)
 		set 'type,1;
 	else
 		set 'type,0;
@@ -1017,16 +1019,19 @@ OnTimer15000:
 			unittalk '@mob_id,"ブリナラネア : 眷属よ、敵を食らい尽くしなさい！";
 		else if('type == 3)
 			unittalk '@mob_id,"ブリナラネア : ふふふ……私の眷属はお腹を空かせているようです。";
+		sleep 500;
 		donpcevent getmdnpcname("callmon#eom2")+"::OnReSpawn";
+		set '@mob_id,getvariableofnpc('mob_id,getmdnpcname("callmon#eom2"));
+		mobuseskill '@mob_id,664,5,0,0,0,0;	// ワイドフリーズ
+		sleep 1000;
 		set '@count,getmapmobs('@mdmap$,'@event$ +'type);
 		if('@count <= 0) {
-			areamonster '@mdmap$,33,118,43,128," ",3088,5,'@event$ +'type;
+			set '@dummy,getmapxy('@mdmap$,'@x,'@y,3,'@mob_id);
+			areamonster '@mdmap$,'@x-5,'@y-5,'@x+5,'@y+5," ",3088,5,'@event$ +'type;
 		}
+		//sleep 15000;
+		initnpctimer;
 	}
-	end;
-OnTimer18000:
-	initnpctimer;
-	set 'flag2,'type;
 	end;
 OnKilled1:
 OnKilled2:
@@ -1085,13 +1090,13 @@ OnThunder1:
 	mobuseskill 'mob_id,664,5,0,0,0,0;	// ワイドフリーズ
 	sleep 1500;
 	set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob_id);
-	mobuseskillpos 'mob_id,21,10,'@x-3,'@y+3,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-3,'@y+3,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x+3,'@y+3,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+3,'@y+3,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x+3,'@y-3,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+3,'@y-3,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-3,'@y-3,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-3,'@y-3,0,0;	// サンダーストーム
 	end;
 OnThunder2:
 	if(getmobhp('mob_id) < 1) end;
@@ -1102,30 +1107,30 @@ OnThunder2:
 	mobuseskill 'mob_id,85,5,0,0,0,0;	// ロードオブヴァーミリオン
 	sleep 1000;
 	set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob_id);
-	mobuseskillpos 'mob_id,21,10,'@x-3,'@y+3,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+3,'@y+3,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+3,'@y-3,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-3,'@y-3,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-3,'@y+3,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+3,'@y+3,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+3,'@y-3,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-3,'@y-3,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-4,'@y+4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+4,'@y+4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+4,'@y-4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-4,'@y-4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-4,'@y+4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+4,'@y+4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+4,'@y-4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-4,'@y-4,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-5,'@y+5,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+5,'@y+5,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+5,'@y-5,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-5,'@y-5,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-5,'@y+5,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+5,'@y+5,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+5,'@y-5,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-5,'@y-5,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-6,'@y+6,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+6,'@y+6,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+6,'@y-6,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-6,'@y-6,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-6,'@y+6,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+6,'@y+6,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+6,'@y-6,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-6,'@y-6,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-7,'@y+7,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+7,'@y+7,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+7,'@y-7,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-7,'@y-7,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-7,'@y+7,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+7,'@y+7,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+7,'@y-7,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-7,'@y-7,0,0;	// サンダーストーム
 	end;
 OnIceSpider:
 	stopnpctimer;
@@ -1246,10 +1251,20 @@ OnStart:
 	mobuseskill 'mob1,724,1,0,0,0,0;	// ファイアストーム
 	end;
 OnTimer7000:
-	donpcevent getmdnpcname("callmon#eom3")+"::OnLeftLavaHeal";
+	unittalk 'mob1,"ムスペルスコール : 我が主の作りだした灼熱の炎を甘く見ないことです！";
+	callsub L_LavaHeal,1,156,117;
+	sleep 2000;
+	mobuseskill 'mob1,724,1,0,0,0,0;	// ファイアストーム
+	if(getmapmobs(getmdmapname("1@eom.gat"),getmdnpcname("callmon#eom3")+"::OnKilled1") < 6)
+		areamonster getmdmapname("1@eom.gat"),156-3,117-3,156+3,117+3,"狂気のカーサ",3089,3,getmdnpcname("callmon#eom3")+"::OnKilled1";
 	end;
 OnTimer10000:
-	donpcevent getmdnpcname("callmon#eom3")+"::OnRightLavaHeal";
+	callsub L_LavaHeal,2,180,129;
+	sleep 2000;
+	mobuseskill 'mob1,721,1,0,0,0,0;	// ワイドウェブ
+	mobuseskill 'mob1,724,1,0,0,0,0;	// ファイアストーム
+	if(getmapmobs(getmdmapname("1@eom.gat"),getmdnpcname("callmon#eom3")+"::OnKilled1") < 6)
+		areamonster getmdmapname("1@eom.gat"),180-3,129-3,180+3,129+3,"狂気のカーサ",3089,3,getmdnpcname("callmon#eom3")+"::OnKilled1";
 	end;
 OnTimer13000:
 	donpcevent getmdnpcname("callmon#eom3")+"::OnWarpReturn";
@@ -1261,30 +1276,24 @@ OnTimer27000:
 	if(getmobhp('mob1) > 22500000)
 		initnpctimer;
 	end;
-OnLeftLavaHeal:
-	if(getmobhp('mob1) < 1) end;
-	unittalk 'mob1,"ムスペルスコール : 我が主の作りだした灼熱の炎を甘く見ないことです！";
+L_Move:
 	set 'hp,getmobhp('mob1);
 	set '@dummy,removemonster('mob1);
-	set 'mob1,callmonster(getmdmapname("1@eom.gat"),156,117,"ムスペルスコール#01",3092,getmdnpcname("callmon#eom3")+"::OnFlameWolf");
+	set 'mob1,callmonster(getmdmapname("1@eom.gat"),getarg(0),getarg(1),"ムスペルスコール#01",3092,getmdnpcname("callmon#eom3")+"::OnFlameWolf");
 	setmobhp 'mob1,'hp;
 	set getvariableofnpc('mob_id,getmdnpcname("ムスペルスコール#npc")),'mob1;
-	sleep 2000;
-	mobuseskill 'mob1,724,1,0,0,0,0;	// ファイアストーム
-	areamonster getmdmapname("1@eom.gat"),156-3,117-3,156+3,117+3,"狂気のカーサ",3089,3,getmdnpcname("callmon#eom3")+"::OnKilled1";
-	end;
-OnRightLavaHeal:
+	return;
+L_LavaHeal:
 	if(getmobhp('mob1) < 1) end;
-	set 'hp,getmobhp('mob1);
-	set '@dummy,removemonster('mob1);
-	set 'mob1,callmonster(getmdmapname("1@eom.gat"),180,129,"ムスペルスコール#01",3092,getmdnpcname("callmon#eom3")+"::OnFlameWolf");
-	setmobhp 'mob1,'hp;
-	set getvariableofnpc('mob_id,getmdnpcname("ムスペルスコール#npc")),'mob1;
-	sleep 2000;
-	mobuseskill 'mob1,721,1,0,0,0,0;	// ワイドウェブ
-	mobuseskill 'mob1,724,1,0,0,0,0;	// ファイアストーム
-	areamonster getmdmapname("1@eom.gat"),180-3,129-3,180+3,129+3,"狂気のカーサ",3089,3,getmdnpcname("callmon#eom3")+"::OnKilled1";
-	end;
+	callsub L_Move,getarg(1),getarg(2);
+	if(getvariableofnpc('flag,getmdnpcname("固まった溶岩#0")+getarg(0)) != 1) {
+		announce "ロキ : ムスペルスコールが溶岩を利用して回復をしようとしているぞ！", 0x9, 0x00ff00;
+		for(set '@i,0; '@i<=8; set '@i,'@i+1) {
+			mobuseskill 'mob1,28,10,0,0,0,0;	// ヒール
+			sleep 100;
+		}
+	}
+	return;
 OnWarpReturn:
 	if(getmobhp('mob1) < 1) end;
 	unittalk 'mob1,"ムスペルスコール : さすが、一度は私を倒しただけのことはありますね。ですが、まだです!!";
@@ -1345,15 +1354,15 @@ OnHellBurning3:
 	monster '@mdmap$,'@x+13,'@y-13," ",2960,1,getmdnpcname("callmon#eom3")+"::OnKilled2";
 	monster '@mdmap$,'@x-13,'@y+13," ",2960,1,getmdnpcname("callmon#eom3")+"::OnKilled2";
 	sleep 4400;
-	mobuseskillpos 'mob1,83,5,'@x,'@y+6,0,0;	// メテオストーム
+	mobuseskillpos 'mob1,83,5,'@x,'@y+5,0,0;	// メテオストーム
 	sleep 1000;
 	killmonster getmdmapname("1@eom.gat"),getmdnpcname("callmon#eom3")+"::OnKilled2";
 	sleep 1000;
-	mobuseskillpos 'mob1,83,5,'@x,'@y-6,0,0;	// メテオストーム
+	mobuseskillpos 'mob1,83,5,'@x,'@y-5,0,0;	// メテオストーム
 	sleep 2000;
-	mobuseskillpos 'mob1,83,5,'@x,'@y+8,0,0;	// メテオストーム
+	mobuseskillpos 'mob1,83,5,'@x,'@y+10,0,0;	// メテオストーム
 	sleep 2000;
-	mobuseskillpos 'mob1,83,5,'@x,'@y+8,0,0;	// メテオストーム
+	mobuseskillpos 'mob1,83,5,'@x,'@y+10,0,0;	// メテオストーム
 	end;
 OnFlameWolf:
 	stopnpctimer;
@@ -1405,6 +1414,7 @@ OnTimer1000:
 1@eom.gat,154,119,0	script	固まった溶岩#01	844,{
 	end;
 OnStart:
+	set 'flag,1;
 	initnpctimer;
 	hideonnpc getmdnpcname("流れる溶岩#lavapond01");
 	hideoffnpc getmdnpcname("固まった溶岩#01");
@@ -1413,6 +1423,7 @@ OnStart:
 	hideonnpc getmdnpcname("ロキ#flamewolf");
 	end;
 OnTimer180000:
+	set 'flag,0;
 	stopnpctimer;
 	announce "ロキ : 霜の効果が切れたか……。また溶岩が流れ始めたぞ！", 0x9, 0x00ff00, 0x190, 12, 0, 0;
 	hideonnpc getmdnpcname("固まった溶岩#01");
@@ -1422,61 +1433,15 @@ OnTimer180000:
 	end;
 }
 
-1@eom.gat,161,122,0	script	#lavazone11	139,5,5,{
-OnTouch:
-	end;
-OnTouchNPC:
-	set '@mdmap$,getmdmapname("1@eom.gat");
-	set '@cnt,getareamobs('@mdmap$,161-5,122-5,161+5,122+5,3092);
-	if('@cnt > 0) {
-		announce "ロキ : ムスペルスコールが溶岩を利用して回復をしようとしているぞ！", 0x9, 0x00ff00;
-		areamobuseskill '@mdmap$,161-5,122-5,161+5,122+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,122-5,161+5,122+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,122-5,161+5,122+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,122-5,161+5,122+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,122-5,161+5,122+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,122-5,161+5,122+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,122-5,161+5,122+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,122-5,161+5,122+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,122-5,161+5,122+5,3092,28,10,0,0,0,0;
-	}
+1@eom.gat,161,122,0	script	#lavazone11	139,10,10,{
+	percentheal -3,0;
+	misceffect 310,"";
 	end;
 }
 
-1@eom.gat,161,102,0	script	#lavazone12	139,5,5,{
-OnTouch:
-	end;
-OnTouchNPC:
-	set '@mdmap$,getmdmapname("1@eom.gat");
-	set '@cnt,getareamobs('@mdmap$,161-5,102-5,161+5,102+5,3092);
-	if('@cnt > 0) {
-		announce "ロキ : ムスペルスコールが溶岩を利用して回復をしようとしているぞ！", 0x9, 0x00ff00;
-		areamobuseskill '@mdmap$,161-5,102-5,161+5,102+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,102-5,161+5,102+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,102-5,161+5,102+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,102-5,161+5,102+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,102-5,161+5,102+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,102-5,161+5,102+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,102-5,161+5,102+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,102-5,161+5,102+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,161-5,102-5,161+5,102+5,3092,28,10,0,0,0,0;
-	}
+1@eom.gat,161,102,0	script	#lavazone12	139,10,10,{
+	percentheal -3,0;
+	misceffect 310,"";
 	end;
 }
 
@@ -1507,6 +1472,7 @@ OnTimer1000:
 1@eom.gat,182,129,0	script	固まった溶岩#02	844,{
 	end;
 OnStart:
+	set 'flag,1;
 	initnpctimer;
 	hideonnpc getmdnpcname("流れる溶岩#lavapond02");
 	hideoffnpc getmdnpcname("固まった溶岩#02");
@@ -1515,6 +1481,7 @@ OnStart:
 	hideonnpc getmdnpcname("ロキ#flamewolf");
 	end;
 OnTimer180000:
+	set 'flag,0;
 	stopnpctimer;
 	announce "ロキ : 霜の効果が切れたか……。また溶岩が流れ始めたぞ！", 0x9, 0x00ff00, 0x190, 12, 0, 0;
 	hideonnpc getmdnpcname("固まった溶岩#02");
@@ -1524,36 +1491,17 @@ OnTimer180000:
 	end;
 }
 
-1@eom.gat,163,150,0	script	#lavazone21	139,5,5,{
-OnTouch:
-	end;
-OnTouchNPC:
-	set '@mdmap$,getmdmapname("1@eom.gat");
-	set '@cnt,getareamobs('@mdmap$,163-5,150-5,163+5,150+5,3092);
-	if('@cnt > 0) {
-		//announce "ロキ : ムスペルスコールが溶岩を利用して回復をしようとしているぞ！", 0x9, 0x00ff00;
-		areamobuseskill '@mdmap$,163-5,150-5,163+5,150+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,163-5,150-5,163+5,150+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,163-5,150-5,163+5,150+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,163-5,150-5,163+5,150+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,163-5,150-5,163+5,150+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,163-5,150-5,163+5,150+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,163-5,150-5,163+5,150+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,163-5,150-5,163+5,150+5,3092,28,10,0,0,0,0;
-		sleep 200;
-		areamobuseskill '@mdmap$,163-5,150-5,163+5,150+5,3092,28,10,0,0,0,0;
-	}
+1@eom.gat,163,150,0	script	#lavazone21	139,10,10,{
+	percentheal -3,0;
+	misceffect 310,"";
 	end;
 }
 
-1@eom.gat,163,150,0	script	#lavazone22	139,5,5,{}
+1@eom.gat,163,150,0	script	#lavazone22	139,10,10,{
+	percentheal -3,0;
+	misceffect 310,"";
+	end;
+}
 
 1@eom.gat,151,155,3	script	ロキ#flameend	512,{
 	mes "[ロキ]";
@@ -1862,7 +1810,7 @@ OnTimer6000:
 	}
 	if('@mobhp < 18000000 && 'flag == 2) {
 		set '@count,getmapmobs('@mdmap$,getmdnpcname("callmon#eom4")+"::OnKilled4");
-		if('@count < 1) {
+		if('@count < 3) {
 			set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob_id);
 			monster '@mdmap$,'@x-1,'@y,"狂気のカーサ",3089,1,getmdnpcname("callmon#eom4")+"::OnKilled4";
 			monster '@mdmap$,'@x,'@y-1,"狂気のカーサ",3089,1,getmdnpcname("callmon#eom4")+"::OnKilled4";
@@ -1929,10 +1877,10 @@ OnMoroccKidMS:
 	mobuseskill 'mob_id,724,3,0,0,0,0;	// ファイアストーム
 	sleep 2000;
 	set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob_id);
-	mobuseskillpos 'mob_id,83,5,'@x+rand(11)-5,'@y+rand(11)-5,0,0;	// メテオストーム
-	mobuseskillpos 'mob_id,83,5,'@x+rand(11)-5,'@y+rand(11)-5,0,0;	// メテオストーム
-	mobuseskillpos 'mob_id,83,5,'@x+rand(11)-5,'@y+rand(11)-5,0,0;	// メテオストーム
-	mobuseskillpos 'mob_id,83,5,'@x+rand(11)-5,'@y+rand(11)-5,0,0;	// メテオストーム
+	mobuseskillpos 'mob_id,83,5,'@x-5,'@y,0,0;	// メテオストーム
+	mobuseskillpos 'mob_id,83,5,'@x+5,'@y,0,0;	// メテオストーム
+	mobuseskillpos 'mob_id,83,5,'@x,'@y+5,0,0;	// メテオストーム
+	mobuseskillpos 'mob_id,83,5,'@x,'@y-5,0,0;	// メテオストーム
 	sleep 4000;
 	unittalk 'mob_id,"再生の半魔神 : ふふふ……！　もっと楽しもうよ！";
 	sleep 2000;
@@ -1947,37 +1895,37 @@ OnMoroccKidTS:
 	sleep 2000;
 	mobuseskill 'mob_id,721,1,0,0,0,0;	// ワイドウェブ
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-2,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+2,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+2,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-2,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-2,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+2,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+2,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-2,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-6,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+6,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+6,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-6,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-4,'@y+4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-4,'@y-4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+4,'@y+4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+4,'@y-4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-6,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+6,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+6,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-6,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-4,'@y+4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-4,'@y-4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+4,'@y+4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+4,'@y-4,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-10,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+10,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+10,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-10,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-8,'@y+8,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-8,'@y-8,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+8,'@y+8,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+8,'@y-8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-10,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+10,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+10,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-10,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-8,'@y+8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-8,'@y-8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+8,'@y+8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+8,'@y-8,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-16,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+16,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+16,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-16,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+12,'@y+12,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-12,'@y-12,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-12,'@y+12,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+12,'@y-12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-16,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+16,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+16,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-16,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+12,'@y+12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-12,'@y-12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-12,'@y+12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+12,'@y-12,0,0;	// サンダーストーム
 	sleep 1000;
 	initnpctimer;
 	end;
@@ -2023,8 +1971,7 @@ OnKilled:
 	end;
 OnKilled2:
 	unittalk 'mob_id3,"安息のモロク : すべての生者に安息を与えてやる!!　それが私からの慈悲だ!!";
-	//5秒間隔
-	//mobuseskill 'mob_id3,83,9,800,0,0,0;	// メテオストーム
+	mobuseskill 'mob_id3,83,9,800,0,0,0;	// メテオストーム
 	end;
 OnKilled3:
 	unittalk 'mob_id2,"太古のモロク : ガアアアアアアァァッ!!";
@@ -2147,37 +2094,37 @@ OnMoroccAdtTS:
 	mobuseskill 'mob_id,721,1,0,0,0,0;	// ワイドウェブ
 	sleep 1000;
 	set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob_id);
-	mobuseskillpos 'mob_id,21,10,'@x-2,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+2,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+2,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-2,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-2,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+2,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+2,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-2,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-6,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+6,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+6,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-6,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-4,'@y+4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-4,'@y-4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+4,'@y+4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+4,'@y-4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-6,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+6,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+6,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-6,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-4,'@y+4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-4,'@y-4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+4,'@y+4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+4,'@y-4,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-10,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+10,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+10,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-10,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-8,'@y+8,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-8,'@y-8,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+8,'@y+8,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+8,'@y-8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-10,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+10,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+10,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-10,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-8,'@y+8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-8,'@y-8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+8,'@y+8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+8,'@y-8,0,0;	// サンダーストーム
 	sleep 1000;
-	mobuseskillpos 'mob_id,21,10,'@x-16,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+16,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+16,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-16,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-12,'@y+12,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-12,'@y-12,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+12,'@y+12,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+12,'@y-12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-16,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+16,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+16,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-16,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-12,'@y+12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-12,'@y-12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+12,'@y+12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+12,'@y-12,0,0;	// サンダーストーム
 	sleep 1000;
 	initnpctimer;
 	end;
@@ -2246,19 +2193,17 @@ OnMoroccAdtFP:
 	initnpctimer;
 	end;
 OnMoroccAdtMS:
-	//TODO:timer, MS Lv
 	if(getmobhp('mob_id) < 1) end;
 	unittalk 'mob_id,"絶望の神モロク : 業火に焼かれる苦痛を味わえ!!";
 	sleep 2000;
 	mobuseskill 'mob_id,721,1,0,0,0,0;	// ワイドウェブ
 	sleep 1000;
 	mobuseskill 'mob_id,724,3,0,0,0,0;	// ファイアストーム
-	sleep 1000;
-	mobuseskill 'mob_id,83,9,0,0,0,0;	// メテオストーム
+	sleep 2000;
+	mobuseskill 'mob_id,83,10,0,0,0,0;	// メテオストーム
 	initnpctimer;
 	end;
 OnMoroccAdtFC:
-	//TODO:FC Lv
 	if(getmobhp('mob_id) < 1) end;
 	unittalk 'mob_id,"絶望の神モロク : その命、貰い受けるぞ!!";
 	sleep 2000;
@@ -2343,6 +2288,7 @@ OnMoroccAdtJF:
 	initnpctimer;
 	end;
 OnMoroccAdtFW:
+	if(getmobhp('mob_id) < 1) end;
 	unittalk 'mob_id,"絶望の神モロク : 痛みを感じる間もなく、燃やしつくしてやろう!!";
 	sleep 2000;
 	mobuseskill 'mob_id,721,1,0,0,0,0;	// ワイドウェブ
@@ -2395,37 +2341,37 @@ OnMoroccAdtTS2:
 	mobuseskill 'mob_id,84,28,0,0,0,1;	// ユピテルサンダー
 	sleep 1000;
 	set '@dummy,getmapxy('@map$,'@x,'@y,3,'mob_id);
-	mobuseskillpos 'mob_id,21,10,'@x-2,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+2,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+2,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-2,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-2,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+2,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+2,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-2,0,0;	// サンダーストーム
 	sleep 500;
-	mobuseskillpos 'mob_id,21,10,'@x-6,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+6,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+6,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-6,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-4,'@y+4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-4,'@y-4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+4,'@y+4,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+4,'@y-4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-6,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+6,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+6,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-6,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-4,'@y+4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-4,'@y-4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+4,'@y+4,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+4,'@y-4,0,0;	// サンダーストーム
 	sleep 500;
-	mobuseskillpos 'mob_id,21,10,'@x-10,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+10,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+10,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-10,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-8,'@y+8,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-8,'@y-8,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+8,'@y+8,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+8,'@y-8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-10,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+10,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+10,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-10,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-8,'@y+8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-8,'@y-8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+8,'@y+8,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+8,'@y-8,0,0;	// サンダーストーム
 	sleep 500;
-	mobuseskillpos 'mob_id,21,10,'@x-16,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+16,'@y,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y+16,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x,'@y-16,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-12,'@y+12,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x-12,'@y-12,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+12,'@y+12,0,0;	// サンダーストーム
-	mobuseskillpos 'mob_id,21,10,'@x+12,'@y-12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-16,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+16,'@y,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y+16,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x,'@y-16,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-12,'@y+12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x-12,'@y-12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+12,'@y+12,0,0;	// サンダーストーム
+	mobuseskillpos 'mob_id,21,20,'@x+12,'@y-12,0,0;	// サンダーストーム
 	sleep 500;
 	initnpctimer;
 	end;

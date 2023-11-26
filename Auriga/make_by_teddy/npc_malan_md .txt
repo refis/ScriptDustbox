@@ -261,111 +261,110 @@ mal_in01.gat,160,34,4	script	保管庫の管理人ミシン	545,{/* 59699 */
 	mes "[保管庫の管理人ミシン]";
 	mes "どうしたニャ？";
 	mes "ミシンにご用事？";
-	next;
-L_MENU:
-	switch(select("地下排水路の行き方を聞きたい","缶詰食べ過ぎお腹が出るにゃ","地下排水路に行く","なんでもありません")){
-	case 1:
-		mes "[保管庫の管理人ミシン]";
-		mes "地下排水路の行き方かニャ？";
-		mes "地下排水路に行くにはパーティーを";
-		mes "組んでいる必要があるニャ。";
+	while(1) {
 		next;
-		mes "[保管庫の管理人ミシン]";
-		mes "地下排水路の入口を開きたければ、";
-		mes "パーティーのボスが";
-		mes "ミシンに暗号を言うニャ。";
-		mes "そうしたらミシンが";
-		mes "地下排水路の入口を開くニャ。";
-		next;
-		mes "[保管庫の管理人ミシン]";
-		mes "あと、地下排水路は、";
-		mes "入場してから1回目の";
-		mes "^ff0000午前5時^000000を迎えると";
-		mes "もう一度入場できるようになるニャ。";
-		next;
-		mes "[保管庫の管理人ミシン]";
-		mes "但し、最後の入場をしてから";
-		mes "^ff00001時間^000000経過しないと";
-		mes "入場できないのニャ。";
-		mes "　";
-		mes "働きすぎは体に良くないニャ。";
-		mes "最低でも1時間はゆっくり休むニャ。";
-		next;
-		mes "[保管庫の管理人ミシン]";
-		mes "他になにかあるかニャ？";
-		next;
-		goto L_MENU;
-	case 2:
-		// PTリーダーじゃない
-		if(getpartyleader(getcharid(1)) != strcharinfo(0)){
-			// 未調査
-			mes "PTリーダーじゃないよ。";
-			close;
-		}
-		
-		// PTリーダーの場合
-		mdcreate "Pump";
-		mes "[保管庫の管理人ミシン]";
-		mes "パーティー名が";
-		mes "" + strcharinfo(1) + "。";
-		mes "パーティーリーダーが";
-		mes "" + strcharinfo(0) + "だニャ。";
-		next;
-		mes "[保管庫の管理人ミシン]";
-		mes "^FF0000地下排水路^000000への入り口を";
-		mes "開放するニャ。";
-		mes "確認したら、もう一度";
-		mes "ミシンに話しかけてニャ。";
-		close;
-	case 3:
-		if(checkquest(12254)){
-			if(!(checkquest(12254)&0x2)){
-				//未調査
-				mes "1時間のクールタイム中みたいだね。";
+		switch(select("地下排水路の行き方を聞きたい","缶詰食べ過ぎお腹が出るにゃ","地下排水路に行く","なんでもありません")){
+		case 1:
+			mes "[保管庫の管理人ミシン]";
+			mes "地下排水路の行き方かニャ？";
+			mes "地下排水路に行くにはパーティーを";
+			mes "組んでいる必要があるニャ。";
+			next;
+			mes "[保管庫の管理人ミシン]";
+			mes "地下排水路の入口を開きたければ、";
+			mes "パーティーのボスが";
+			mes "ミシンに暗号を言うニャ。";
+			mes "そうしたらミシンが";
+			mes "地下排水路の入口を開くニャ。";
+			next;
+			mes "[保管庫の管理人ミシン]";
+			mes "あと、地下排水路は、";
+			mes "入場してから1回目の";
+			mes "^ff0000午前5時^000000を迎えると";
+			mes "もう一度入場できるようになるニャ。";
+			next;
+			mes "[保管庫の管理人ミシン]";
+			mes "但し、最後の入場をしてから";
+			mes "^ff00001時間^000000経過しないと";
+			mes "入場できないのニャ。";
+			mes "　";
+			mes "働きすぎは体に良くないニャ。";
+			mes "最低でも1時間はゆっくり休むニャ。";
+			next;
+			mes "[保管庫の管理人ミシン]";
+			mes "他になにかあるかニャ？";
+			continue;
+		case 2:
+			// PTリーダーじゃない
+			if(getpartyleader(getcharid(1)) != strcharinfo(0)){
+				// 未調査
+				mes "PTリーダーじゃないよ。";
 				close;
 			}
-			delquest 12254;
-		}
-		
-		switch(mdenter("Pump")){
-		case 0:// エラーなし
-			//作成できたら
-			mes "‐地下排水路に入場します‐";
-			announce "メモリアルダンジョン[Pump] に入場しました　：　" +strcharinfo(1)+ " (" + strcharinfo(0) + ")", 0x1, 0x00ff99, 0x190, 12, 0, 0;
-			setquest 12254; //state=1	//入場
-			setquest 71495; //state=1	//クールタイム
-			//setquest 71490; //state=1
-			delquest 71490;
-			//@mapmoved(from: mal_in01.gat(172, 28), map: 0021@pump.gat(63, 98), addr: 211.13.241.91:5121)
-			donpcevent getmdnpcname("管理人ミシン#0")+ "::OnStart";
-			close;
-		case 1:// パーティー未加入
+			
+			// PTリーダーの場合
+			mdcreate "Pump";
 			mes "[保管庫の管理人ミシン]";
-			mes "ニャニャ、";
-			mes "パーティーを作るか";
-			mes "加入してないと";
-			mes "^FF0000地下排水路^000000には入れられないニャ！";
-			close;
-		case 2://ダンジョン未作成
-			//暗号を言わずに…(MD作成前 作成中)
-			mes "‐地下排水路に入場します‐";
-			next;//close;
+			mes "パーティー名が";
+			mes "" + strcharinfo(1) + "。";
+			mes "パーティーリーダーが";
+			mes "" + strcharinfo(0) + "だニャ。";
+			next;
 			mes "[保管庫の管理人ミシン]";
-			mes "ニャニャ……";
-			mes "^FF0000地下排水路^000000の入り口が";
-			mes "うまく開かなかったニャ。";
-			mes "パーティーリーダーがまだ";
-			mes "暗号を言っていないのニャ。";
+			mes "^FF0000地下排水路^000000への入り口を";
+			mes "開放するニャ。";
+			mes "確認したら、もう一度";
+			mes "ミシンに話しかけてニャ。";
 			close;
-		default:
+		case 3:
+			if(checkquest(12254)){
+				if(!(checkquest(12254)&0x2)){
+					//未調査
+					mes "1時間のクールタイム中みたいだね。";
+					close;
+				}
+				delquest 12254;
+			}
+			
+			switch(mdenter("Pump")){
+			case 0:// エラーなし
+				//作成できたら
+				mes "‐地下排水路に入場します‐";
+				announce "メモリアルダンジョン[Pump] に入場しました　：　" +strcharinfo(1)+ " (" + strcharinfo(0) + ")", 0x9, 0x00ff99, 0x190, 12, 0, 0;
+				setquest 12254; //state=1	//入場
+				setquest 71495; //state=1	//クールタイム
+				//setquest 71490; //state=1
+				delquest 71490;
+				//@mapmoved(from: mal_in01.gat(172, 28), map: 0021@pump.gat(63, 98), addr: 211.13.241.91:5121)
+				donpcevent getmdnpcname("管理人ミシン#0")+ "::OnStart";
+				close;
+			case 1:// パーティー未加入
+				mes "[保管庫の管理人ミシン]";
+				mes "ニャニャ、";
+				mes "パーティーを作るか";
+				mes "加入してないと";
+				mes "^FF0000地下排水路^000000には入れられないニャ！";
+				close;
+			case 2://ダンジョン未作成
+				//暗号を言わずに…(MD作成前 作成中)
+				mes "‐地下排水路に入場します‐";
+				next;//close;
+				mes "[保管庫の管理人ミシン]";
+				mes "ニャニャ……";
+				mes "^FF0000地下排水路^000000の入り口が";
+				mes "うまく開かなかったニャ。";
+				mes "パーティーリーダーがまだ";
+				mes "暗号を言っていないのニャ。";
+				close;
+			default:
+				close;
+			}
+		case 4://なんでもありません
+			mes "[保管庫の管理人ミシン]";
+			mes "なんでもないニャ？";
 			close;
 		}
-	case 4://なんでもありません
-		break;
 	}
-	mes "[保管庫の管理人ミシン]";
-	mes "なんでもないニャ？";
-	close;
 
 OnInit:
 	waitingroom "地下排水路", 0; //59699
