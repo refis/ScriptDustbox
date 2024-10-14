@@ -77,17 +77,17 @@ OnStart:
 
 1@twsd.gat,314,94,5	script	ルガン主教#20msd00	10474,{
 	misceffect 595,"";
-	sc_end EFST_MONSTER_TRANSFORM;
-	sc_start3 EFST_MONSTER_TRANSFORM,21530,0,0,0,180000,1;
+	sc_end SC_MONSTER_TRANSFORM;
+	sc_start3 SC_MONSTER_TRANSFORM,21530,0,0,0,180000,1;
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 		unittalk getcharid(3),strcharinfo(0)+" : パーティーリーダーに任せよう",1;
 		end;
 	}
-	set '@r00,getnpcid(0,getmdnpcname("ルガン主教#20msd00");
-	set '@r01,getnpcid(0,getmdnpcname("ルガン主教#20msd01");
-	set '@r02,getnpcid(0,getmdnpcname("ルガン主教#20msd02");
-	set '@hh00,getnpcid(0,getmdnpcname("ハートハンター#20msd00");
-	set '@hh01,getnpcid(0,getmdnpcname("ハートハンター#20msd01");
+	set '@r00,getnpcid(0,getmdnpcname("ルガン主教#20msd00"));
+	set '@r01,getnpcid(0,getmdnpcname("ルガン主教#20msd01"));
+	set '@r02,getnpcid(0,getmdnpcname("ルガン主教#20msd02"));
+	set '@hh00,getnpcid(0,getmdnpcname("ハートハンター#20msd00"));
+	set '@hh01,getnpcid(0,getmdnpcname("ハートハンター#20msd01"));
 	misceffect 453,getmdnpcname("Jガーディアン#ms00");
 	misceffect 453,getmdnpcname("Jガーディアン#ms01");
 	misceffect 453,getmdnpcname("Jガーディアン#ms02");
@@ -254,8 +254,8 @@ OnTimer2000:
 		unittalk getcharid(3),strcharinfo(0)+" : パーティーリーダーに任せよう",1;
 		end;
 	}
-	set '@c00,getnpcid(0,getmdnpcname("ルガン呪術師#20msd00");
-	set '@c01,getnpcid(0,getmdnpcname("ルガン呪術師#20msd01");
+	set '@c00,getnpcid(0,getmdnpcname("ルガン呪術師#20msd00"));
+	set '@c01,getnpcid(0,getmdnpcname("ルガン呪術師#20msd01"));
 	unittalk '@c00,"ルガン呪術師 : 何の騒ぎだ？";
 	if(!sleep2(1500)) end;
 	unittalk '@c01,"ルガン呪術師 : 主教に呼ばれて来たが、何が起きているんだ？";
@@ -635,12 +635,12 @@ OnKilled:
 	hideoffnpc getmdnpcname("ラスガンド#20msd20");
 	hideoffnpc getmdnpcname("ルガン主教#20msd20");
 	hideoffnpc getmdnpcname("ルガン主教#20msd21");
-	hideoffnpc getmdnpcname("ルガン主教#20msd22";
+	hideoffnpc getmdnpcname("ルガン主教#20msd22");
 	hideoffnpc getmdnpcname("ハートハンター#20msd20");
 	hideoffnpc getmdnpcname("ハートハンター#20msd21");
 	hideoffnpc getmdnpcname("ハートハンター#20msd22");
 	hideoffnpc getmdnpcname("ハートハンター#20msd23");
-	hideoffnpc getmdnpcname("ハートハンター#20msd24"));
+	hideoffnpc getmdnpcname("ハートハンター#20msd24");
 	initnpctimer getmdnpcname("サレクガンド#20msd20");
 	announce "‐西の方から声が聞こえる‐", 0x9, 0x00ffcc;
 	sleep 4000;

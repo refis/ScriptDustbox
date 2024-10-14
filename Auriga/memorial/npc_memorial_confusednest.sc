@@ -523,12 +523,15 @@ OnTimer500:
 OnTimer3500:
 	announce "ホルル : ルガンの壁を崩すぞ！", 0x9, 0xffff00, 0x0190, 30, 0, 0;
 	end;
+OnTimer4500:
+	misceffect 16,getmdnpcname("ホルル#19m20");
+	end;
 OnTimer6500:
 	announce "‐ルガンの壁の位置へ向かってみよう‐", 0x9, 0xffff00, 0x0190, 30, 0, 0;
 	end;
-OnTimer9500:
+OnTimer8500:
 	stopnpctimer;
-	set .scean,5;	// タイミング未調査
+	set .scean,5;
 	donpcevent getmdnpcname("ホルル#19m20")+ "::OnStart";
 	end;
 }
@@ -609,6 +612,13 @@ OnTimer9000:
 		end;
 	}
 	switch(.scean) {
+	case 4:
+		viewpoint 2, 23, 57, 1, 0xFFFF00;	// 52504
+		viewpoint 2, 21, 97, 2, 0xFFFF00;	// 52504
+		viewpoint 2, 75, 23, 3, 0xFFFF00;	// 52504
+		viewpoint 2, 51, 45, 4, 0xFFFF00;	// 52504
+		viewpoint 2, 31, 59, 5, 0xFFFF00;	// 52504
+		end;
 	case 5:
 		if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
 			unittalk "‐パーティーリーダーが進行を開始するまでお待ちください‐",1;
@@ -938,13 +948,13 @@ OnKilled3:
 		unittalk getnpcid(0,getmdnpcname("ハートハンター#19m32")),"ハートハンター : 装置が起動している限り、　改造された上級ルガンが次々続いて出てくるぜ。";	// 30266
 		if(!sleep2(2500)) end;
 		unittalk "ヴォークリンデ : つまり装置を止めれば良いわけね。教えてくれてありがとう。";	// 30262
-		emotion 23,getmdnpcname(getmdnpcname("ハートハンター#19m30");	// 30264
-		emotion 23,getmdnpcname(getmdnpcname("ハートハンター#19m31");	// 30265
-		emotion 23,getmdnpcname(getmdnpcname("ハートハンター#19m32");	// 30266
+		emotion 23,getmdnpcname("ハートハンター#19m30");	// 30264
+		emotion 23,getmdnpcname("ハートハンター#19m31");	// 30265
+		emotion 23,getmdnpcname("ハートハンター#19m32");	// 30266
 		if(!sleep2(2500)) end;
-		unittalk getnpcid(0,getmdnpcname(getmdnpcname("ハートハンター#19m31")),"ハートハンター : そうはいくかよ！　支援を呼べ！";	// 30265
+		unittalk getnpcid(0,getmdnpcname("ハートハンター#19m31")),"ハートハンター : そうはいくかよ！　支援を呼べ！";	// 30265
 		if(!sleep2(2000)) end;
-		unittalk getnpcid(0,getmdnpcname(getmdnpcname("ハートハンター#19m30")),"ハートハンター : 俺は次の装置に向かう！";	// 30264
+		unittalk getnpcid(0,getmdnpcname("ハートハンター#19m30")),"ハートハンター : 俺は次の装置に向かう！";	// 30264
 		if(!sleep2(2000)) end;
 		hideonnpc getmdnpcname("ハートハンター#19m30");	// 30264
 		hideonnpc getmdnpcname("ハートハンター#19m31");	// 30265
@@ -970,6 +980,7 @@ OnKilled3:
 		monster .mdmap$,243,173,"改造された上級ルガン",21534,1,'@label$;
 		hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30270
 		monster .mdmap$,246,175,"改造された上級ルガン",21534,1,'@label$;
+		//10秒ごとに!~!!!!!ランダム
 		unittalk "!!!!!";	// 30262
 		unittalk getnpcid(0,getmdnpcname("ミリアム#19m30")),"!!!!!";	// 30263
 		end;
@@ -984,6 +995,7 @@ OnKilled3:
 		misceffect 16;	// 30262
 		unittalk "ヴォークリンデ : この先に逃げたハートハンターは、私たちが追うわ。";	// 30262
 		viewpoint 1, 219, 148, 1, 0xFF3355;	// 30262
+		if(!sleep2(500)) end;
 		unittalk "ヴォークリンデ : 悪いけど、いったん戻って、注入装置を止めてちょうだい。";	// 30262
 		setarray '@xy3, 250,177,250,176,249,177,249,176,248,177,248,176,247,177,247,176,246,177,246,176,245,177,245,176,244,177,244,176,243,177,243,176,243,175,243,174,242,177,
 						242,176,242,175,242,174,241,177,241,176,241,175,241,174,240,177,240,176,240,175,240,174,239,177,239,176,239,175,239,174,238,177,238,176,238,175,238,174;
@@ -1006,6 +1018,9 @@ OnKilled:
 		unittalk "ヴォークリンデ : 片付いたみたいね。";	// 30262
 		set .scean,8;
 		initnpctimer;
+		//消えるタイミング未調査
+		hideonnpc getmdnpcname("sw_2_1");	// 30906
+		hideonnpc getmdnpcname("ホルル#19m20");	// 30940
 	}
 	end;
 OnStart:
@@ -1035,7 +1050,6 @@ OnTimer2000:
 	}
 	set '@label$,getmdnpcname("注入装置1#19m30")+ "::OnKilled";
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
-		// 未調査
 		unittalk "‐パーティーリーダーが進行を開始するまでお待ちください‐",1;
 		end;
 	}
@@ -1061,8 +1075,8 @@ OnKilled:
 		set .scean,9;
 		announce "‐注入装置1が停止しました‐", 0x9, 0x00ffcc;
 		if(!sleep2(3000)) end;
-		hideoffnpc getmdnpcname("注入装置2#19m31");
 		announce "‐注入装置2が追加稼動されます‐", 0x9, 0x00ffcc;
+		hideoffnpc getmdnpcname("注入装置2#19m31");
 		donpcevent getmdnpcname("注入装置2#19m31")+ "::OnStart";
 		end;
 	}
@@ -1080,7 +1094,6 @@ OnTimer2000:
 		end;
 	}
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
-		// 未調査
 		unittalk "‐パーティーリーダーが進行を開始するまでお待ちください‐",1;
 		end;
 	}
@@ -1100,8 +1113,8 @@ OnKilled:
 		set .scean,10;
 		announce "‐注入装置2が停止しました‐", 0x9, 0x00ffcc;
 		if(!sleep2(3000)) end;
-		hideoffnpc getmdnpcname("注入装置3#19m32");
 		announce "‐注入装置3が追加稼動されます‐", 0x9, 0x00ffcc;
+		hideoffnpc getmdnpcname("注入装置3#19m32");
 		donpcevent getmdnpcname("注入装置3#19m32")+ "::OnStart";
 		end;
 	}
@@ -1119,7 +1132,6 @@ OnTimer2000:
 		end;
 	}
 	if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
-		// 未調査
 		unittalk "‐パーティーリーダーが進行を開始するまでお待ちください‐",1;
 		end;
 	}
@@ -1139,9 +1151,6 @@ OnKilled:
 		set .scean,11;
 		announce "‐注入装置3が停止しました‐", 0x9, 0x00ffcc;
 		if(!sleep2(3000)) end;
-			//消えるタイミング未調査
-			hideonnpc getmdnpcname("sw_2_1");	// 30906
-			hideonnpc getmdnpcname("ホルル#19m20");	// 30940
 		hideoffnpc getmdnpcname("オーレリー#19m40");	// 30282
 		hideoffnpc getmdnpcname("レオン#19m40");	// 30284
 		hideoffnpc getmdnpcname("ハートハンター#19m40");	// 30285
@@ -1178,7 +1187,6 @@ OnTimer2000:
 }
 1@jorchs.gat,145,179,1	script	オーレリー#19m40	10465,{/* 30282 (hide)*/
 	if(distance(getcharid(3)) > 10) {
-		//未調査
 		unittalk getcharid(3),strcharinfo(0)+" : もっと近づこう",1;
 		end;
 	}
@@ -1218,8 +1226,9 @@ OnTimer2000:
 		unittalk getnpcid(0,getmdnpcname("レオン#19m40")),"レオン : さて、君たちには聞きたいことがある。";	// 30284
 		if(!sleep2(3000)) end;
 		announce "オーレリー : 注入装置を止めて来てちょうだい。", 0x9, 0x00ffcc;
-		//イベントなし？何秒か毎に追加で沸く？
-		monster .mdmap$,199,197,"改造された上級ルガン",21534,1;
+		//20秒毎に追加で沸く
+		set '@label$,getmdnpcname("注入装置3#19m40")+ "::OnKilled";
+		monster .mdmap$,199,197,"改造された上級ルガン",21534,1,'@label$;
 		hideonnpc getmdnpcname("注入装置3#19m32");	// 30277
 		hideoffnpc getmdnpcname("注入装置3#19m40");	// 30283
 		set .scean,12;
@@ -1231,7 +1240,6 @@ OnTimer2000:
 		end;
 	case 13:
 		if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
-			//未調査
 			unittalk "‐パーティーリーダーが進行を開始するまでお待ちください‐",1;
 			end;
 		}
@@ -1288,15 +1296,21 @@ OnInit:
 	}
 	switch('flag) {
 	case 0:
-		//未調査
+		set '@label$,getmdnpcname("注入装置3#19m40")+ "::OnKilled";
+		if('flag == 0 && getmapmobs(.mdmap$,'@label$) == 0) {
+			set 'flag,1;
+			set '@mob[1],callmonster(.mdmap$,191,199,"ハートハンターAT#1",21536,'@label$);
+			set '@mob[2],callmonster(.mdmap$,199,197,"ハートハンターAT#2",21536,'@label$);
+			set '@mob[3],callmonster(.mdmap$,202,207,"ハートハンターAT#3",21536,'@label$);
+			unittalk '@mob[1],"ハートハンター : ちくしょう！　装置を停止させたのか!!";	// 93280:ハートハンターAT#1
+			unittalk '@mob[2],"ハートハンター : そいつから離れた方が、お前のためだぞ！";	// 93281:ハートハンターAT#2
+			unittalk '@mob[3],"ハートハンター : 何が起きても知らないからな!!";	// 93282:ハートハンターAT#3
+		}
 		end;
 	case 1:
-		//未調査
-		unittalk "‐先に敵を倒そう‐",1;	// 30283
 		end;
 	case 2:
 		if(getpartyleader(getcharid(1)) != strcharinfo(0)) {
-			//未調査
 			unittalk "‐パーティーリーダーが進行を開始するまでお待ちください‐",1;
 			end;
 		}
@@ -1330,6 +1344,7 @@ OnTouch:
 OnKilled:
 	set '@label$,getmdnpcname("注入装置3#19m40")+ "::OnKilled";
 	if(getmapmobs(.mdmap$,'@label$) <= 0) {
+		sleep 500;
 		set 'flag,2;
 		announce "‐周囲の敵はいなくなった。注入装置3を停止させよう‐", 0x9, 0x00ffcc;
 		donpcevent getmdnpcname("注入装置3#19m40")+ "::OnStart";
@@ -1389,7 +1404,7 @@ OnTimer9500:
 	monster .mdmap$,141,178,"改造された上級ルガン",21534,1,'@label$;
 	end;
 OnKilled:
-	if(getmapmobs(.mdmap$,getmdnpcname("ConfusedNestControl5")+ "::OnKilled") <= 0) {
+	if('flag && getmapmobs(.mdmap$,getmdnpcname("ConfusedNestControl5")+ "::OnKilled") <= 0) {
 		hideoffnpc getmdnpcname("sw_4_1");	// 30281
 		announce "ホルル : イルシオンの区域に動きあり！　誰か確認してくれ！", 0x9, 0x00ffcc;
 		set '@label$,getmdnpcname("ConfusedNestControl5")+ "::OnKilled2";
@@ -1440,6 +1455,7 @@ OnKilled2:
 	viewpoint 2, 77, 146, 13, 0xFFFF00;	// 30129
 	viewpoint 2, 103, 215, 14, 0xFFFF00;	// 30129
 	viewpoint 1, 39, 251, 99, 0xFF0000;	// 30129
+	if(!sleep2(1000)) end;
 	warp .mdmap$,86,220;
 	end;
 }
@@ -1483,7 +1499,6 @@ OnStart:
 		end;
 	}
 	if(.lab & 1) {
-		//未調査
 		unittalk getcharid(3),strcharinfo(0)+" : 次の場所を探そう",1;	// self:hidden
 		viewpoint 2, 16, 135, 1, 0x99FFFF;	// 30086
 		viewpoint 1, 20, 195, 2, 0x99FFFF;	// 30086
@@ -1502,8 +1517,7 @@ OnStart:
 	unittalk '@mob[3],"ハートハンター : どうせお前が読んでも、わからねえよ!!";	// 6105:ハートハンターAT#3
 	end;
 OnKilled:
-OnKilled:
-	set .lab, .lab|2;
+	set .lab, .lab|1;
 	if(.lab & 7) {
 /* 21:29:52.127375 */	//@mob_defeated("ハートハンターAT#3"(6105), type: 1)
 /* 21:29:53.016993 */	announce "‐北西から奥に進もう‐", 0x9, 0xffff00, 0x0190, 30, 0, 0;
@@ -1516,8 +1530,8 @@ OnKilled:
 /* 21:29:56.080592 */	announce "ハートハンター : くくく！　誰が一番先に到着するかな？", 0x9, 0xffff00, 0x0190, 30, 0, 0;
 	}
 	else {
-		//未調査
 		announce "‐他にも何かありそうだ。捜索を継続しよう‐", 0x9, 0xffff00, 0x0190, 30, 0, 0;
+		unittalk getcharid(3),strcharinfo(0)+" : ユミルの心臓の欠片は、やはり無いか……。",1;	// self:hidden
 	}
 	end;
 }
@@ -1532,6 +1546,14 @@ OnStart:
 	set '@label$,getmdnpcname("研究装置2#19m41")+ "::OnKilled";
 	if(getmapmobs(.mdmap$,'@label$) > 0) {
 		unittalk getcharid(3),strcharinfo(0)+" : まずは敵を倒そう",1;	// self:hidden
+		end;
+	}
+	if(.lab & 7) {
+		unittalk getcharid(3),strcharinfo(0)+" : 北側から奥に向かおう",1;
+		viewpoint 2, 16, 135, 1, 0x99FFFF;	// 30943
+		viewpoint 2, 20, 195, 2, 0x99FFFF;	// 30943
+		viewpoint 2, 24, 142, 3, 0x99FFFF;	// 30943
+		viewpoint 1, 97, 220, 4, 0xFF0000;	// 30943
 		end;
 	}
 	if(.lab & 2) {
@@ -1552,6 +1574,10 @@ OnStart:
 OnKilled:
 	set .lab, .lab|2;
 	if(.lab & 7) {
+		sleep 1000;
+		announce "‐北西から奥に進もう‐", 0x9, 0xffff00, 0x0190, 30, 0, 0;
+		sleep 3000;
+		announce "ハートハンター : くくく！　誰が一番先に到着するかな？", 0x9, 0xffff00, 0x0190, 30, 0, 0;
 	}
 	else {
 		announce "‐他にも何かありそうだ。捜索を継続しよう‐", 0x9, 0xffff00, 0x0190, 30, 0, 0;
@@ -1559,6 +1585,14 @@ OnKilled:
 	end;
 }
 1@jorchs.gat,16,135,3	script	研究室の痕跡#19m40	10043,{/* 30958 */
+	if(.lab & 7) {
+		unittalk getcharid(3),strcharinfo(0)+" : 北側から奥に向かおう",1;
+		viewpoint 2, 16, 135, 1, 0x99FFFF;	// 30086
+		viewpoint 1, 20, 195, 2, 0x99FFFF;	// 30086
+		viewpoint 2, 24, 142, 3, 0x99FFFF;	// 30086
+		viewpoint 1, 97, 220, 4, 0xFF0000;	// 30086
+		end;
+	}
 	if(.lab & 4) {
 		unittalk getcharid(3),strcharinfo(0)+" : 重要そうな資料は、すべて運び出されている",1;	// self:hidden
 		end;
@@ -1571,6 +1605,10 @@ OnKilled:
 	if(!(.lab & 4)) {
 		set .lab,.lab|4;
 		if(.lab & 7) {
+			sleep 1000;
+			announce "‐北西から奥に進もう‐", 0x9, 0xffff00, 0x0190, 30, 0, 0;
+			sleep 3000;
+			announce "ハートハンター : くくく！　誰が一番先に到着するかな？", 0x9, 0xffff00, 0x0190, 30, 0, 0;
 		}
 		else {
 			announce "‐他にも何かありそうだ。捜索を継続しよう‐", 0x9, 0xffff00, 0x0190, 30, 0, 0;
@@ -1580,93 +1618,78 @@ OnKilled:
 }
 1@jorchs.gat,0,0,0	script	ConfusedNestControl6	-1,{
 OnStart:
-	initnpctimer;
-	end;
-OnTimer500:
+	sleep 500;
 	hideonnpc getmdnpcname("バゴット#19m50");	// 30181
 	announce "魔力注入準備。1段階の魔力注入が開始されます。", 0x9, 0x00ffcc;
+	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30949
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30932
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,35,254,"改造された上級ルガン",21534,1,'@label$;
 	monster .mdmap$,42,254,"改造された上級ルガン",21534,1,'@label$;
-	end;
-OnTimer5000:
+	sleep 4500;
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30917
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30297
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,37,254,"改造された上級ルガン",21534,1,'@label$;
 	monster .mdmap$,40,254,"改造された上級ルガン",21534,1,'@label$;
-	end;
-OnTimer9500:
+	sleep 4500;
 	hideonnpc getmdnpcname("凶暴なルガン#19m50");	// 30889
 	hideonnpc getmdnpcname("凶暴なルガン#19m51");	// 30878
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,31,249,"魔力暴走した上級ルガン",21590,1,'@label$;
 	monster .mdmap$,47,237,"魔力暴走した上級ルガン",21590,1,'@label$;
 	delmisceffect 453, getmdnpcname("凶暴なルガン#19m50");	// 30889
 	delmisceffect 453, getmdnpcname("凶暴なルガン#19m51");	// 30878
 	delmisceffect 754, getmdnpcname("凶暴なルガン#19m50");	// 30889
 	delmisceffect 754, getmdnpcname("凶暴なルガン#19m51");	// 30878
+	set .scean,15;
 	end;
-OnTimer12500:
-	//1段階倒し終わってから？
+OnStart2:
+	sleep 500;
 	announce "魔力注入準備。2段階の魔力注入が開始されます。", 0x9, 0x00ffcc;
+	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30879
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30140
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,34,254,"改造された上級ルガン",21534,1,'@label$;
 	monster .mdmap$,43,254,"改造された上級ルガン",21534,1,'@label$;
-	end;
-OnTimer17000:
+	sleep 4500;
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30892
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30874
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,38,254,"改造された上級ルガン",21534,1,'@label$;
 	monster .mdmap$,39,254,"改造された上級ルガン",21534,1,'@label$;
-	end;
-OnTimer21500:
+	sleep 4500;
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30289
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30933
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,36,254,"改造された上級ルガン",21534,1,'@label$;
 	monster .mdmap$,41,254,"改造された上級ルガン",21534,1,'@label$;
-	end;
-OnTimer26000:
+	sleep 4500;
 	hideonnpc getmdnpcname("凶暴なルガン#19m52");	// 30133
 	hideonnpc getmdnpcname("凶暴なルガン#19m53");	// 30880
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,47,249,"魔力暴走した上級ルガン",21590,1,'@label$;
 	monster .mdmap$,31,237,"魔力暴走した上級ルガン",21590,1,'@label$;
 	delmisceffect 453, getmdnpcname("凶暴なルガン#19m52");	// 30133
 	delmisceffect 453, getmdnpcname("凶暴なルガン#19m53");	// 30880
 	delmisceffect 754, getmdnpcname("凶暴なルガン#19m52");	// 30133
 	delmisceffect 754, getmdnpcname("凶暴なルガン#19m53");	// 30880
+	set .scean,16;
 	end;
-OnTimer30000:
-	//2段階倒し終わってから？
+OnStart3:
+	sleep 500;
 	announce "魔力注入準備。3段階の魔力注入が開始されます。", 0x9, 0x00ffcc;
+	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30304
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30130
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,35,254,"改造された上級ルガン",21534,1,'@label$;
 	monster .mdmap$,39,254,"改造された上級ルガン",21534,1,'@label$;
-	end;
-OnTimer34500:
+	sleep 4500;
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30944
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30149
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,37,254,"改造された上級ルガン",21534,1,'@label$;
 	monster .mdmap$,41,254,"改造された上級ルガン",21534,1,'@label$;
-	end;
-OnTimer39000:
+	sleep 4500;
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30927
 	hideonnpc getmdnpcname("改造された上級ルガン#19");	// 30887
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,38,254,"改造された上級ルガン",21534,1,'@label$;
 	monster .mdmap$,42,254,"改造された上級ルガン",21534,1,'@label$;
-	end;
-OnTimer43500:
+	sleep 4500;
 	hideonnpc getmdnpcname("ハートハンター#19m50");	// 30895
 	hideonnpc getmdnpcname("ハートハンター#19m51");	// 30156
 	hideonnpc getmdnpcname("ハートハンター#19m52");	// 30132
@@ -1676,13 +1699,10 @@ OnTimer43500:
 	unittalk '@mob[1],"ハートハンター : 全力で掛かれっ!!";	// 7639:ハートハンターAT#1
 	unittalk '@mob[2],"ハートハンター : おい、押されてるぞ！";	// 7676:ハートハンターAT#2
 	unittalk '@mob[3],"ハートハンター : くっ！　思ったより強い!!";	// 7902:ハートハンターAT#3
-	end;
-OnTimer48000:
-	set .scean,15;
+	sleep 4500;
 	hideonnpc getmdnpcname("凶暴なルガン#19m54");	// 30956
 	hideonnpc getmdnpcname("凶暴なルガン#19m55");	// 30899
 	hideonnpc getmdnpcname("凶暴なルガン#19m56");	// 30131
-	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
 	monster .mdmap$,27,243,"魔力暴走した上級ルガン",21590,1,'@label$;
 	monster .mdmap$,50,243,"魔力暴走した上級ルガン",21590,1,'@label$;
 	monster .mdmap$,39,235,"魔力暴走した上級ルガン",21590,1,'@label$;
@@ -1692,39 +1712,50 @@ OnTimer48000:
 	delmisceffect 754, getmdnpcname("凶暴なルガン#19m54");	// 30956
 	delmisceffect 754, getmdnpcname("凶暴なルガン#19m55");	// 30899
 	delmisceffect 754, getmdnpcname("凶暴なルガン#19m56");	// 30131
+	set .scean,17;
 	end;
 OnKilled:
 	set '@label$,getmdnpcname("ConfusedNestControl6")+ "::OnKilled";
-	if(.scean != 15 || getmapmobs(.mdmap$,'@label$) > 0)
-		end;
-	announce "‐奥へ進む道が開いた‐", 0x9, 0x00ffcc;
-	misceffect 224,"改造された上級ルガン#19m50";	// 30879
-	misceffect 224,"改造された上級ルガン#19m51";	// 30949
-	misceffect 224,"改造された上級ルガン#19m52";	// 30289
-	misceffect 224,"改造された上級ルガン#19m53";	// 30917
-	misceffect 224,"改造された上級ルガン#19m54";	// 30892
-	misceffect 224,"改造された上級ルガン#19m55";	// 30874
-	misceffect 224,"改造された上級ルガン#19m56";	// 30297
-	misceffect 224,"改造された上級ルガン#19m57";	// 30933
-	misceffect 224,"改造された上級ルガン#19m58";	// 30932
-	misceffect 224,"改造された上級ルガン#19m59";	// 30140
-	setnpcdisplay "改造された上級ルガン#19m50",844;	// 30879
-	setnpcdisplay "改造された上級ルガン#19m51",844;	// 30949
-	setnpcdisplay "改造された上級ルガン#19m52",844;	// 30289
-	setnpcdisplay "改造された上級ルガン#19m53",844;	// 30917
-	setnpcdisplay "改造された上級ルガン#19m54",844;	// 30892
-	setnpcdisplay "改造された上級ルガン#19m55",844;	// 30874
-	setnpcdisplay "改造された上級ルガン#19m56",844;	// 30297
-	setnpcdisplay "改造された上級ルガン#19m57",844;	// 30933
-	setnpcdisplay "改造された上級ルガン#19m58",844;	// 30932
-	setnpcdisplay "改造された上級ルガン#19m59",844;	// 30140
-	setarray '@xy5, 43,256,43,255,42,256,42,255,41,256,41,255,40,256,40,255,39,256,39,255,38,256,38,255,37,256,37,255,36,256,36,255,35,256,35,255,34,256,34,255;
-	for(set '@i,0; '@i < getarraysize('@xy5); set '@i,'@i+2)
-		setcell .mdmap$,'@xy5['@i],'@xy5['@i+1],0;
-	donpcevent getmdnpcname("中心部の門#19m61")+ "::OnStart"; 
+	if(getmapmobs(.mdmap$,'@label$) == 0) {
+		switch(.scean) {
+		case 15:
+			donpcevent getmdnpcname("ConfusedNestControl6")+ "::OnStart2"; 
+			end;
+		case 16:
+			donpcevent getmdnpcname("ConfusedNestControl6")+ "::OnStart3"; 
+			end;
+		case 17:
+			announce "‐奥へ進む道が開いた‐", 0x9, 0x00ffcc;
+			misceffect 224,"改造された上級ルガン#19m50";	// 30879
+			misceffect 224,"改造された上級ルガン#19m51";	// 30949
+			misceffect 224,"改造された上級ルガン#19m52";	// 30289
+			misceffect 224,"改造された上級ルガン#19m53";	// 30917
+			misceffect 224,"改造された上級ルガン#19m54";	// 30892
+			misceffect 224,"改造された上級ルガン#19m55";	// 30874
+			misceffect 224,"改造された上級ルガン#19m56";	// 30297
+			misceffect 224,"改造された上級ルガン#19m57";	// 30933
+			misceffect 224,"改造された上級ルガン#19m58";	// 30932
+			misceffect 224,"改造された上級ルガン#19m59";	// 30140
+			setnpcdisplay "改造された上級ルガン#19m50",844;	// 30879
+			setnpcdisplay "改造された上級ルガン#19m51",844;	// 30949
+			setnpcdisplay "改造された上級ルガン#19m52",844;	// 30289
+			setnpcdisplay "改造された上級ルガン#19m53",844;	// 30917
+			setnpcdisplay "改造された上級ルガン#19m54",844;	// 30892
+			setnpcdisplay "改造された上級ルガン#19m55",844;	// 30874
+			setnpcdisplay "改造された上級ルガン#19m56",844;	// 30297
+			setnpcdisplay "改造された上級ルガン#19m57",844;	// 30933
+			setnpcdisplay "改造された上級ルガン#19m58",844;	// 30932
+			setnpcdisplay "改造された上級ルガン#19m59",844;	// 30140
+			setarray '@xy5, 43,256,43,255,42,256,42,255,41,256,41,255,40,256,40,255,39,256,39,255,38,256,38,255,37,256,37,255,36,256,36,255,35,256,35,255,34,256,34,255;
+			for(set '@i,0; '@i < getarraysize('@xy5); set '@i,'@i+2)
+				setcell .mdmap$,'@xy5['@i],'@xy5['@i+1],0;
+			donpcevent getmdnpcname("中心部の門#19m61")+ "::OnStart"; 
+			end;
+		}
+	}
 	end;
 }
-1@jorchs.gat,39,251,5	script	ハートハンター#19m50	21536,14,14,{/* 30895 */
+1@jorchs.gat,39,251,5	script	ハートハンター#19m50	21536,5,5,{/* 30895 */
 	if(.scean == 13) {
 		set .scean,14;
 		misceffect 16;	// 30895
@@ -1814,7 +1845,7 @@ OnKilled:
 1@jorchs.gat,42,256,5	script	改造された上級ルガン#19m65	21534,{/* 30887 */}
 
 1@jorchs.gat,38,272,1	script	オーレリー#19m60	10465,{/* 30948 (hide)*/
-	if(.scean != 17)
+	if(.scean != 19)
 		end;
 	cutin "ep19_aurelie03.png", 2;
 	mes "[オーレリー]";
@@ -1857,9 +1888,9 @@ OnInit:
 1@jorchs.gat,21,254,5	script	アーウィン#19m60	21517,{/* 30298 (hide)*/}
 
 1@jorchs.gat,37,274,5	script	中心部の門#19m61	10043,{/* 30877 */
-	if(.scean != 15)
+	if(.scean != 17)
 		end;
-	set .scean,16;
+	set .scean,18;
 	stopnpctimer;
 	misceffect 16;	// 30877
 	hideoffnpc getmdnpcname("オーレリー#19m60");	// 30948
@@ -1925,7 +1956,7 @@ OnInit:
 	unittalk getnpcid(0,getmdnpcname("ホルル#19m60")),"ホルル : あまり気に入らないが、他に方法もなさそうだ……ここに監視係を残していこう。";	// 30896
 	if(!sleep2(2000)) end;
 	unittalk getnpcid(0,getmdnpcname("オーレリー#19m60")),"オーレリー : では、いったん氷の城に戻りましょう。ワープポータルを開くわ。";	// 30948
-	set .scean,17;
+	set .scean,19;
 	donpcevent getmdnpcname("オーレリー#19m60")+ "::OnStart"; 
 	end;
 OnStart:
@@ -1953,10 +1984,10 @@ OnTimer2000:
 21536,ハートハンターAT＠クリティカルスラッシュ,attack,170,1,2000,0,5000,no,target,always,0,,,,,,
 21536,ハートハンターAT＠コンボアタック,attack,171,3,2000,0,2000,no,target,always,0,,,,,,
 average 850
-@skillattack(src: 21536:"ハートハンターAT"(83099), dst: (4631724), skill: "ソウルブレイカー"(379), skill_lv: 65535, damage: 9734, sDelay: 1080, dDelay: 444, div: 1, hit: 6, tick: 559304844)
-@skillattack(src: 21536:"ハートハンターAT"(83099), dst: (4631724), skill: "ソウルブレイカー"(379), skill_lv: 65535, damage: 10784, sDelay: 1080, dDelay: 444, div: 1, hit: 6, tick: 559308965)
-@skillattack(src: 21536:"ハートハンターAT"(83099), dst: (4631724), skill: "ソウルブレイカー"(379), skill_lv: 65535, damage: 11179, sDelay: 1080, dDelay: 444, div: 1, hit: 6, tick: 559312072)
-@skillattack(src: 21536:"ハートハンターAT"(83099), dst: (4631724), skill: "ソウルブレイカー"(379), skill_lv: 65535, damage: 9869, sDelay: 1080, dDelay: 444, div: 1, hit: 6, tick: 559317196)
+@skillattack(src: 21536:"ハートハンターAT"(83099), dst: (), skill: "ソウルブレイカー"(379), skill_lv: 65535, damage: 9734, sDelay: 1080, dDelay: 444, div: 1, hit: 6, tick: 559304844)
+@skillattack(src: 21536:"ハートハンターAT"(83099), dst: (), skill: "ソウルブレイカー"(379), skill_lv: 65535, damage: 10784, sDelay: 1080, dDelay: 444, div: 1, hit: 6, tick: 559308965)
+@skillattack(src: 21536:"ハートハンターAT"(83099), dst: (), skill: "ソウルブレイカー"(379), skill_lv: 65535, damage: 11179, sDelay: 1080, dDelay: 444, div: 1, hit: 6, tick: 559312072)
+@skillattack(src: 21536:"ハートハンターAT"(83099), dst: (), skill: "ソウルブレイカー"(379), skill_lv: 65535, damage: 9869, sDelay: 1080, dDelay: 444, div: 1, hit: 6, tick: 559317196)
 21590,魔力暴走した上級ルガン＠アーススパイク,chase,90,4,5000,0,3000,no,target,always,0,,,,,,
 21590,魔力暴走した上級ルガン＠アーススパイク,attack,90,5,2000,0,5000,no,target,always,0,,,,,,
 21590,魔力暴走した上級ルガン＠ポイズンアタック,attack,188,8,2500,0,5000,no,target,always,0,,,,,,

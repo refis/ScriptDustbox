@@ -117,7 +117,7 @@ OnStart:
 				close;
 			}
 			chgquest 18232,18233;
-			set EP20_1QUE,79
+			set EP20_1QUE,79;
 			getitem 1001254,1;
 			mes "Å]äOÇ÷";
 			mes "Å@å¸Ç©Ç¢Ç‹Ç∑Ç©ÅHÅ]";

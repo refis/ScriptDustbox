@@ -133,31 +133,31 @@ OnQuestInfo:
 OnStart:
 	setnpcspeed 200;
 	npcwalkto 231,272,"ミリアム#ozmd3_210";	// 57361: speed:200
-	npcwalkwait
+	npcwalkwait;
 	setnpcspeed 150;
 	npcwalkto 221,272,"ミリアム#ozmd3_210";	// 57361: speed:150
-	npcwalkwait
+	npcwalkwait;
 	setnpcspeed 200;
 	npcwalkto 211,272,"ミリアム#ozmd3_210";	// 57361: speed:200
-	npcwalkwait
+	npcwalkwait;
 	setnpcspeed 150;
 	npcwalkto 201,272,"ミリアム#ozmd3_210";	// 57361: speed:150
-	npcwalkwait
+	npcwalkwait;
 	setnpcspeed 300;
 	npcwalkto 191,272,"ミリアム#ozmd3_210";	// 57361: speed:300
-	npcwalkwait
+	npcwalkwait;
 	setnpcspeed 200;
 	npcwalkto 181,272,"ミリアム#ozmd3_210";	// 57361: speed:200
-	npcwalkwait
+	npcwalkwait;
 	setnpcspeed 300;
 	npcwalkto 171,272,"ミリアム#ozmd3_210";	// 57361: speed:300
-	npcwalkwait
+	npcwalkwait;
 	setnpcspeed 200;
 	npcwalkto 161,272,"ミリアム#ozmd3_210";	// 57361: speed:200
-	npcwalkwait
+	npcwalkwait;
 	setnpcspeed 70;
 	npcwalkto 157,272,"ミリアム#ozmd3_210";	// 57361: speed:70
-	npcwalkwait
+	npcwalkwait;
 	hideoffnpc "アッシュトード#ozmd1_215";	// 59335
 	hideoffnpc "ミリアム#ozmd4_214";	// 59123
 	hideonnpc "ミリアム#ozmd3_210";	// 57361
@@ -412,19 +412,51 @@ OnTouch:
 1@oz.gat,22,187,5	script	ミリアム#ozmd7_233	10377,{/* 69819 (cloaking)*/}
 1@oz.gat,16,185,3	script	イムリル#ozmd7_234	10379,{/* 77288 (cloaking)*/}
 
-1@oz.gat,22,207,5	script	#oz01_236	723,{/* 90767 */}
-1@oz.gat,30,237,5	script	#oz02_237	723,{/* 6591 */}
-1@oz.gat,44,264,5	script	#oz03_238	723,{/* 6755 */}
-1@oz.gat,62,247,5	script	#oz04_239	723,{/* 11357 */}
-1@oz.gat,72,222,5	script	#oz05_240	723,{/* 71010 */}
-1@oz.gat,79,203,5	script	#oz06_241	723,{/* 72303 */}
+1@oz.gat,22,207,5	script	#oz01_236	723,4,4,{/* 90767 */
+	monster getmdmapname("1@oz.gat"),21,207,"アッシュトード#4",21295,1;
+	monster getmdmapname("1@oz.gat"),23,207,"ラケソン#4",21296,1;
+	hideonnpc;
+	end;
+}
+1@oz.gat,30,237,5	script	#oz02_237	723,4,4,{/* 6591 */
+	monster getmdmapname("1@oz.gat"),29,237,"アッシュトード#5",21295,1;
+	monster getmdmapname("1@oz.gat"),31,237,"ラケソン#5",21296,1;
+	hideonnpc;
+	end;
+}
+1@oz.gat,44,264,5	script	#oz03_238	723,4,4,{/* 6755 */
+	monster getmdmapname("1@oz.gat"),43,264,"アッシュトード#6",21295,1;
+	monster getmdmapname("1@oz.gat"),45,264,"ラケソン#6",21296,1;
+	hideonnpc;
+	end;
+}
+1@oz.gat,62,247,5	script	#oz04_239	723,4,4,{/* 11357 */
+	monster getmdmapname("1@oz.gat"),61,247,"アッシュトード#7",21295,1;
+	monster getmdmapname("1@oz.gat"),63,247,"ラケソン#7",21296,1;
+	hideonnpc;
+	end;
+}
+1@oz.gat,72,222,5	script	#oz05_240	723,4,4,{/* 71010 */
+	monster getmdmapname("1@oz.gat"),71,222,"アッシュトード#8",21295,1;
+	monster getmdmapname("1@oz.gat"),73,222,"ラケソン#8",21296,1;
+	hideonnpc;
+	end;
+}
+1@oz.gat,79,203,5	script	#oz06_241	723,4,4,{/* 72303 */
+	monster getmdmapname("1@oz.gat"),78,203,"アッシュトード#9",21295,1;
+	monster getmdmapname("1@oz.gat"),80,203,"ラケソン#9",21296,1;
+	hideonnpc;
+	end;
+}
 1@oz.gat,124,261,5	script	#oz07_242	723,4,4,{/* 72342 */
-@spawn(type: BL_MOB, ID: 71141, speed: 150, option: 0x0, class: 21295, pos: ("1@oz.gat",123,261), dir: 0, name"アッシュトード#10")
-@spawn(type: BL_MOB, ID: 75361, speed: 2000, option: 0x0, class: 21296, pos: ("1@oz.gat",125,261), dir: 0, name"ラケソン#10")
-hideonnpc "#oz07_242";	// 72342
+	monster getmdmapname("1@oz.gat"),123,261,"アッシュトード#10",21295,1;
+	monster getmdmapname("1@oz.gat"),125,261,"ラケソン#10",21296,1;
+	hideonnpc;
+	end;
 }
 1@oz.gat,139,279,5	script	#oz08_243	723,4,4,{/* 72620 */
-@spawn(type: BL_MOB, ID: 36451, speed: 150, option: 0x0, class: 21295, pos: ("1@oz.gat",138,279), dir: 0, name"アッシュトード#11")
-@spawn(type: BL_MOB, ID: 37023, speed: 2000, option: 0x0, class: 21296, pos: ("1@oz.gat",140,279), dir: 0, name"ラケソン#11")
-hideonnpc "#oz08_243";	// 72620
+	monster getmdmapname("1@oz.gat"),138,279,"アッシュトード#11",21295,1;
+	monster getmdmapname("1@oz.gat"),140,279,"ラケソン#11",21296,1;
+	hideonnpc;
+	end;
 }

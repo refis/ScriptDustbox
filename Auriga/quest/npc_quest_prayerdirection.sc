@@ -1,3 +1,20 @@
+ra_fild10.gat,0,0,0,0	monster	グレイゴート	21323,5,60000,0,0
+ra_fild10.gat,0,0,0,0	monster	子グレイウルフ	21324,5,60000,0,0
+ra_fild10.gat,0,0,0,0	monster	マグマリン	1836,75,5000,0,0
+ra_fild10.gat,0,0,0,0	monster	ドロセラ	1781,75,5000,0,0
+ra_fild10.gat,0,0,0,0	monster	ラケソン	21296,5,60000,0,0
+
+ra_fild11.gat,0,0,0,0	monster	グレイゴート	21323,5,60000,0,0
+ra_fild11.gat,0,0,0,0	monster	子グレイウルフ	21324,5,60000,0,0
+ra_fild11.gat,0,0,0,0	monster	ラケソン	21296,5,60000,0,0
+ra_fild11.gat,0,0,0,0	monster	ドロセラ	1781,75,5000,0,0
+
+// gw_fild01.gat
+gw_fild01.gat,0,0,0,0	monster	アッシュホッパー	21302,50,5000,0,0	// aid: 8898-8947
+gw_fild01.gat,0,0,0,0	monster	アッシュリン	21303,110,5000,0,0	// aid: 8948-9057
+gw_fild01.gat,0,0,0,0	monster	グレイウルフ	21304,35,5000,0,0	// aid: 9058-9092
+
+
 // EP18_1QUE
 
 ba_in01.gat,26,266,0	script	#ep18w11_147	139,15,15,{
@@ -1600,7 +1617,7 @@ OnQuestInfo:
 rachel.gat,70,147,3	script	マラム#ep18_ラヘル_047	10376,{/* 15867 */
 	switch(EP18_1QUE) {
 	case 15:
-		viewpoint 2, 70, 147, 18, 0x00FF00;	// 2285
+		viewpoint 2, 70, 147, 18, 0x00FF00;
 		cutin "ep18_maram_01.png", 2;
 		mes "[マラム]";
 		mes "ミリアムは、いつ来るのかな～。";
@@ -1716,7 +1733,7 @@ rachel.gat,70,147,3	script	マラム#ep18_ラヘル_047	10376,{/* 15867 */
 		mes "微塵も思っていないだろ？";
 		mes "お前はいつも楽観的だからな。";
 		next;
-		cloakoffnpc "ミリアム#ep18_ラヘル_04";	// 2287
+		cloakoffnpc "ミリアム#ep18_ラヘル_04";
 		cutin "ep18_maram_02.png", 2;
 		mes "[マラム]";
 		mes "あっ！　ミリアム！";
@@ -1766,7 +1783,7 @@ rachel.gat,70,147,3	script	マラム#ep18_ラヘル_047	10376,{/* 15867 */
 		mes "ボクの話を聞いてくれる？";
 		set EP18_1QUE,16;
 		delquest 11703;
-		setquest 11704;	// state=1
+		setquest 11704;
 		close2;
 		cutin "ep18_miriam_03.png", 255;
 		end;
@@ -1791,9 +1808,9 @@ rachel.gat,70,147,3	script	マラム#ep18_ラヘル_047	10376,{/* 15867 */
 		mes "置かれている状況も";
 		mes "理解していただけると思いますし。";
 		close2;
-		viewpoint 1, 87, 122, 18, 0x00FF00;	// 2285
+		viewpoint 1, 87, 122, 18, 0x00FF00;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "ミリアム#ep18_ラヘル_048";	// 2287
+		cloakonnpc "ミリアム#ep18_ラヘル_048";
 		end;
 	//18-20 未調査
 	case 21:
@@ -1826,7 +1843,7 @@ rachel.gat,70,147,3	script	マラム#ep18_ラヘル_047	10376,{/* 15867 */
 		mes "[タマリン]";
 		mes "この前は、どうも。";
 		mes "ニルエン大神官のご子息様。";
-		cloakoffnpc "タマリン#ep18_マラム_04";	// 2288
+		cloakoffnpc "タマリン#ep18_マラム_04";
 		cutin "ep18_tamarin_02.png", 1;
 		next;
 		cutin "ep18_maram_02.png", 2;
@@ -1835,7 +1852,7 @@ rachel.gat,70,147,3	script	マラム#ep18_ラヘル_047	10376,{/* 15867 */
 		mes strcharinfo(0)+"様の";
 		mes "お知り合いでしたか。";
 		next;
-		cloakoffnpc "ミリアム#ep18_ラヘル_04";	// 2287
+		cloakoffnpc "ミリアム#ep18_ラヘル_04";
 		cutin "ep18_miriam_02.png", 0;
 		mes "[ミリアム]";
 		mes "……マラム。";
@@ -1872,14 +1889,14 @@ rachel.gat,70,147,3	script	マラム#ep18_ラヘル_047	10376,{/* 15867 */
 		mes "もうすぐ出発すると伝えてください。";
 		mes "私と他のメンバーは着替えて";
 		mes "「^0000FF西の門^000000」で待機していますからね。";
-		viewpoint 1, 137, 85, 18, 0x00FF00;	// 2285
+		viewpoint 1, 137, 85, 18, 0x00FF00;
 		set EP18_1QUE,26;
 		delquest 11713;
-		setquest 11714;	// state=1
+		setquest 11714;
 		close2;
 		showevent 0, 1, "商人#ep18_ラヘル_0643_0";	// 2295: 137, 85
-		cloakonnpc "ミリアム#ep18_ラヘル_04";	// 2287
-		cloakonnpc "タマリン#ep18_マラム_04";	// 2288
+		cloakonnpc "ミリアム#ep18_ラヘル_04";
+		cloakonnpc "タマリン#ep18_マラム_04";
 		cutin "ep18_maram_01.png", 255;
 		end;
 	case 26:
@@ -1891,7 +1908,7 @@ rachel.gat,70,147,3	script	マラム#ep18_ラヘル_047	10376,{/* 15867 */
 		mes "私と他のメンバーは着替えて";
 		mes "「^0000FF西の門^000000」で待機していますからね。";
 		close2;
-		viewpoint 1, 137, 85, 18, 0x00FF00;	// 2285
+		viewpoint 1, 137, 85, 18, 0x00FF00;
 		cutin "ep18_maram_01.png", 255;
 		end;
 	case 27:
@@ -1985,11 +2002,11 @@ rachel.gat,62,144,5	script	ミリアム#ep18_ラヘル_048	10377,{/* 15869 (cloaking)*/
 		mes "理解していただけると思いますし。";
 		set EP18_1QUE,17;
 		delquest 11704;
-		setquest 11705;	// state=1
-		viewpoint 1, 87, 122, 18, 0x00FF00;	// 2287
+		setquest 11705;
+		viewpoint 1, 87, 122, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "ミリアム#ep18_ラヘル_048";	// 2287
+		cloakonnpc "ミリアム#ep18_ラヘル_048";
 		end;
 	}
 	else if(EP18_1QUE == 17) {
@@ -2001,7 +2018,7 @@ rachel.gat,62,144,5	script	ミリアム#ep18_ラヘル_048	10377,{/* 15869 (cloaking)*/
 		mes "マラムの友人で「ミリアム」と申します。";
 		close2;
 		cutin "ep18_miriam_03.png", 255;
-		cloakonnpc "ミリアム#ep18_ラヘル_048";	// 2287
+		cloakonnpc "ミリアム#ep18_ラヘル_048";
 		end;
 	}
 	end;
@@ -2061,8 +2078,8 @@ rachel.gat,87,122,7	script	商人#ep18_ラヘル_0641_01	942,{/* 15871 */
 		mes "他の店に行きましょうか。";
 		set EP18_1QUE,18;
 		delquest 11705;
-		setquest 11706;	// state=1
-		viewpoint 1, 107, 102, 18, 0x00FF00;	// 2289
+		setquest 11706;
+		viewpoint 1, 107, 102, 18, 0x00FF00;
 		close2;
 		showevent 0, 1, "商人#ep18_ラヘル_0642_02";	// 2290: 107, 102
 		cutin "ep18_maram_02.png", 255;
@@ -2080,7 +2097,7 @@ rachel.gat,87,122,7	script	商人#ep18_ラヘル_0641_01	942,{/* 15871 */
 		mes "気を取り直して";
 		mes "もう少し^ff0000南東^000000にある";
 		mes "他の店に行きましょうか。";
-		viewpoint 1, 107, 102, 18, 0x00FF00;	// 2289
+		viewpoint 1, 107, 102, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_02.png", 255;
 		end;
@@ -2141,9 +2158,9 @@ rachel.gat,107,102,7	script	商人#ep18_ラヘル_0642_02	943,{/* 15872 */
 		next;
 		set EP18_1QUE,19;
 		delquest 11706;
-		setquest 11707;	// state=1
-		cloakoffnpc "ミリアム#ep18_商人2_052";	// 2292
-		cloakoffnpc "マラム#ep18_商人2_053";	// 2293
+		setquest 11707;
+		cloakoffnpc "ミリアム#ep18_商人2_052";
+		cloakoffnpc "マラム#ep18_商人2_053";
 		cutin "ep18_maram_01.png", 255;
 		mes "[商人サンナット]";
 		mes "…………。";
@@ -2172,7 +2189,7 @@ rachel.gat,107,102,7	script	商人#ep18_ラヘル_0642_02	943,{/* 15872 */
 		mes "[商人サンナット]";
 		mes "すまんな……。";
 		close2;
-		viewpoint 1, 117, 104, 18, 0x00FF00;	// 2290
+		viewpoint 1, 117, 104, 18, 0x00FF00;
 		end;
 	}
 	else if(EP18_1QUE == 19 || EP18_1QUE == 20) {
@@ -2199,7 +2216,7 @@ rachel.gat,107,102,7	script	商人#ep18_ラヘル_0642_02	943,{/* 15872 */
 		mes "[商人サンナット]";
 		mes "すまんな……。";
 		close2;
-		viewpoint 1, 117, 104, 18, 0x00FF00;	// 2290
+		viewpoint 1, 117, 104, 18, 0x00FF00;
 		end;
 	}
 	else if(EP18_1QUE == 21) {
@@ -2212,7 +2229,7 @@ rachel.gat,107,102,7	script	商人#ep18_ラヘル_0642_02	943,{/* 15872 */
 		mes "[マラム]";
 		mes "ここから更に^ff0000南東^000000にある";
 		mes "別の店に行きましょう。";
-		viewpoint 1, 137, 85, 18, 0x00FF00;	// 2290
+		viewpoint 1, 137, 85, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_02.png", 255;
 		end;
@@ -2292,8 +2309,8 @@ rachel.gat,117,104,5	script	ミリアム#ep18_商人2_052	10377,{/* 15874 (cloaking)*/
 		mes "う～～ん……。";
 		set EP18_1QUE,20;
 		delquest 11707;
-		setquest 11708;	// state=1
-		viewpoint 1, 119, 103, 18, 0x00FF00;	// 2292
+		setquest 11708;
+		viewpoint 1, 119, 103, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_03.png", 255;
 		end;
@@ -2303,7 +2320,7 @@ rachel.gat,117,104,5	script	ミリアム#ep18_商人2_052	10377,{/* 15874 (cloaking)*/
 		mes "マラムが考え事してる。";
 		mes "何か良い案はないかな？";
 		cutin "ep18_miriam_03.png", 2;
-		viewpoint 1, 119, 103, 18, 0x00FF00;	// 2292
+		viewpoint 1, 119, 103, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_03.png", 255;
 		end;
@@ -2414,12 +2431,12 @@ rachel.gat,119,103,3	script	マラム#ep18_商人2_053	10376,{/* 15875 (cloaking)*/
 		mes "突っ立ってるだけで大丈夫ですよ！";
 		set EP18_1QUE,21;
 		delquest 11708;
-		setquest 11709;	// state=1
-		viewpoint 1, 137, 85, 18, 0x00FF00;	// 2293
+		setquest 11709;
+		viewpoint 1, 137, 85, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_02.png", 255;
-		cloakonnpc "ミリアム#ep18_商人2_052";	// 2292
-		cloakonnpc "マラム#ep18_商人2_053";	// 2293
+		cloakonnpc "ミリアム#ep18_商人2_052";
+		cloakonnpc "マラム#ep18_商人2_053";
 		end;
 	}
 	//21 未調査
@@ -2439,8 +2456,8 @@ OnTouch:
 	if(EP18_1QUE == 22)
 		cloakoffnpc "ミリアム#ep18_商人3_055";
 	else if(EP18_1QUE == 23) {
-		cloakoffnpc "ミリアム#ep18_商人3_055";	// 2296
-		cloakoffnpc "濡れバーガー#ep18_ラヘル饅";	// 2299
+		cloakoffnpc "ミリアム#ep18_商人3_055";
+		cloakoffnpc "濡れバーガー#ep18_ラヘル饅";
 	}
 	else
 		cloakonnpc "ミリアム#ep18_商人3_055";
@@ -2550,9 +2567,9 @@ rachel.gat,137,85,5	script	商人#ep18_ラヘル_0643_054	928,{/* 15877 */
 		mes "ここから^ff0000南西^000000にある屋台がいいかな。";
 		set EP18_1QUE,22;
 		delquest 11709;
-		setquest 11710;	// state=1
-		viewpoint 1, 105, 72, 18, 0x00FF00;	// 2295
-		cloakoffnpc "ミリアム#ep18_商人3_055";	// 2296
+		setquest 11710;
+		viewpoint 1, 105, 72, 18, 0x00FF00;
+		cloakoffnpc "ミリアム#ep18_商人3_055";
 		close2;
 		cutin "ep18_miriam_03.png", 255;
 		end;
@@ -2571,8 +2588,8 @@ rachel.gat,137,85,5	script	商人#ep18_ラヘル_0643_054	928,{/* 15877 */
 		mes "[ミリアム]";
 		mes "ちょっと、別の場所で話をしよう。";
 		mes "ここから^ff0000南西^000000にある屋台がいいかな。";
-		viewpoint 1, 105, 72, 18, 0x00FF00;	// 2295
-		cloakoffnpc "ミリアム#ep18_商人3_055";	// 2296
+		viewpoint 1, 105, 72, 18, 0x00FF00;
+		cloakoffnpc "ミリアム#ep18_商人3_055";
 		close2;
 		cutin "ep18_miriam_03.png", 255;
 		end;
@@ -2593,8 +2610,8 @@ rachel.gat,137,85,5	script	商人#ep18_ラヘル_0643_054	928,{/* 15877 */
 		mes "またご贔屓に～～～！";
 		set EP18_1QUE,27;
 		delquest 11714;
-		setquest 11715;	// state=1
-		viewpoint 1, 41, 132, 18, 0x00FF00;	// 2295
+		setquest 11715;
+		viewpoint 1, 41, 132, 18, 0x00FF00;
 		close;
 	}
 	else if(EP18_1QUE == 27) {
@@ -2603,7 +2620,7 @@ rachel.gat,137,85,5	script	商人#ep18_ラヘル_0643_054	928,{/* 15877 */
 		mes "「^0000FF西側の入口^000000」で品を受け取ってください。";
 		mes "お買い上げありがとうございました！";
 		mes "またご贔屓に～～～！";
-		viewpoint 1, 41, 132, 18, 0x00FF00;	// 2295
+		viewpoint 1, 41, 132, 18, 0x00FF00;
 		close;
 	}
 	mes "[商人レンシア]";
@@ -2697,11 +2714,11 @@ rachel.gat,105,72,5	script	ミリアム#ep18_商人3_055	10377,{/* 15878 */
 		mes "集合することにしましょう。";
 		set EP18_1QUE,23;
 		delquest 11710;
-		setquest 11711;	// state=1
-		viewpoint 1, 108, 73, 18, 0x00FF00;	// 2296
+		setquest 11711;
+		viewpoint 1, 108, 73, 18, 0x00FF00;
 		close2;
-		cloakonnpc "ミリアム#ep18_商人3_055";	// 2296
-		cloakoffnpc "濡れバーガー#ep18_ラヘ";	// 2299
+		cloakonnpc "ミリアム#ep18_商人3_055";
+		cloakoffnpc "濡れバーガー#ep18_ラヘ";
 		cutin "ep172_beta.bmp", 255;
 		end;
 	}
@@ -2725,10 +2742,10 @@ rachel.gat,105,72,5	script	ミリアム#ep18_商人3_055	10377,{/* 15878 */
 		mes "ぜひご賞味ください。";
 		mes "食べ終わったら、最初にお会いした場所で";
 		mes "集合することにしましょう。";
-		viewpoint 1, 108, 73, 18, 0x00FF00;	// 2296
+		viewpoint 1, 108, 73, 18, 0x00FF00;
 		close2;
-		cloakonnpc "ミリアム#ep18_商人3_055";	// 2296
-		cloakoffnpc "濡れバーガー#ep18_ラヘル饅";	// 2299
+		cloakonnpc "ミリアム#ep18_商人3_055";
+		cloakoffnpc "濡れバーガー#ep18_ラヘル饅";
 		cutin "ep172_beta.bmp", 255;
 		end;
 	}
@@ -2745,7 +2762,7 @@ OnInit:
 }
 rachel.gat,108,74,0	script	#ep18w09_145	139,14,14,{/* 15879 */
 	if(EP18_1QUE == 24) {
-		cloakoffnpc "濡れバーガー#ep18_ラヘル饅";	// 2299
+		cloakoffnpc "濡れバーガー#ep18_ラヘル饅";
 	}
 	end;
 }
@@ -2757,13 +2774,13 @@ OnInit:
 }
 rachel.gat,108,74,3	script	濡れバーガー#ep18_ラヘル饅	10428,{/* 15881 (cloaking)*/
 	if(EP18_1QUE == 23) {
-		cloakonnpc "ミリアム#ep18_商人3_055";	// 2296
+		cloakonnpc "ミリアム#ep18_商人3_055";
 		mes "^0000FF‐屋台の席に腰を下ろしマラムが";
 		mes "　注文した「濡れバーガー」を頬張る。";
 		mes "　スパイスが効いた異国情緒あふれる";
 		mes "　しっとりした肉まんのような味だ‐^000000";
 		next;
-		cloakoffnpc "タマリン#ep18_ラヘル饅";	// 2298
+		cloakoffnpc "タマリン#ep18_ラヘル饅";
 		cutin "ep18_tamarin_02.png", 1;
 		mes "[？？？]";
 		mes strcharinfo(0)+"様！";
@@ -2820,15 +2837,15 @@ rachel.gat,108,74,3	script	濡れバーガー#ep18_ラヘル饅	10428,{/* 15881 (cloaking)
 		mes "探しに行きましょう。";
 		set EP18_1QUE,24;
 		delquest 11711;
-		setquest 11712;	// state=1
-		viewpoint 1, 122, 120, 18, 0x00FF00;	// 2299
+		setquest 11712;
+		viewpoint 1, 122, 120, 18, 0x00FF00;
 		close2;
 		showevent 0, 1, "マークイシャ#ep18_ラヘ";	// 2300: 122, 120
 		cutin "ep18_tamarin_02.png", 255;
 		end;
 	}
 	else if(EP18_1QUE == 24) {
-		cloakoffnpc "タマリン#ep18_ラヘル饅";	// 2298
+		cloakoffnpc "タマリン#ep18_ラヘル饅";
 		cutin "ep18_tamarin_02.png", 2;
 		mes "[タマリン]";
 		mes "ぜひお手伝いさせてください！";
@@ -2839,7 +2856,7 @@ rachel.gat,108,74,3	script	濡れバーガー#ep18_ラヘル饅	10428,{/* 15881 (cloaking)
 		mes "二人は^ff0000広場^000000の付近にいるはずです。";
 		mes "では、濡れバーガーを食べ終わったら";
 		mes "探しに行きましょう。";
-		viewpoint 1, 122, 120, 18, 0x00FF00;	// 2299
+		viewpoint 1, 122, 120, 18, 0x00FF00;
 		close2;
 		cutin "ep18_tamarin_02.png", 255;
 		end;
@@ -2857,8 +2874,8 @@ OnInit:
 }
 rachel.gat,122,120,5	script	マークイシャ#ep18_ラヘル饅	10383,{/* 15882 */
 	if(EP18_1QUE == 24) {
-		cloakonnpc "タマリン#ep18_ラヘル饅";	// 2298
-		cloakonnpc "濡れバーガー#ep18_ラヘル饅";	// 2299
+		cloakonnpc "タマリン#ep18_ラヘル饅";
+		cloakonnpc "濡れバーガー#ep18_ラヘル饅";
 		cutin "ep18_mark_02.png", 0;
 		mes "[マークイシャ]";
 		mes "こんにちは";
@@ -2907,8 +2924,8 @@ rachel.gat,122,120,5	script	マークイシャ#ep18_ラヘル饅	10383,{/* 15882 */
 		mes "　最初に会った場所に行ってみよう‐^000000";
 		set EP18_1QUE,25;
 		delquest 11712;
-		setquest 11713;	// state=1
-		viewpoint 1, 70, 147, 18, 0x00FF00;	// 2300
+		setquest 11713;
+		viewpoint 1, 70, 147, 18, 0x00FF00;
 		close2;
 		showevent 0, 1, "マラム#ep18_ラヘル_047";	// 2285: 70, 147
 		cutin "ep18_tamarin_02.png", 255;
@@ -2930,7 +2947,7 @@ rachel.gat,122,120,5	script	マークイシャ#ep18_ラヘル饅	10383,{/* 15882 */
 		mes "^0000FF‐マラムは、最初に会った場所に";
 		mes "　集合しようと言っていた。";
 		mes "　最初に会った場所に行ってみよう‐^000000";
-		viewpoint 1, 70, 147, 18, 0x00FF00;	// 2300
+		viewpoint 1, 70, 147, 18, 0x00FF00;
 		close2;
 		cutin "ep18_tamarin_02.png", 255;
 		end;
@@ -2963,19 +2980,19 @@ rachel.gat,124,120,4	script	マギスティン#ep18_ラヘル饅	10365,{/* 15883 */
 }
 rachel.gat,41,132,0	script	#ep18w07_143	139,16,14,{/* 15884 */
 	if(EP18_1QUE == 27) {
-		cloakoffnpc "商人#ep18_ラヘル_0643j_";	// 2303
-		cloakoffnpc "箱#ep18_調達品1_060";	// 2305
-		cloakoffnpc "箱#ep18_調達品2_061";	// 2306
-		cloakoffnpc "箱#ep18_調達品3_062";	// 2307
-		cloakoffnpc "箱#ep18_調達品4_063";	// 2308
+		cloakoffnpc "商人#ep18_ラヘル_0643j_";
+		cloakoffnpc "箱#ep18_調達品1_060";
+		cloakoffnpc "箱#ep18_調達品2_061";
+		cloakoffnpc "箱#ep18_調達品3_062";
+		cloakoffnpc "箱#ep18_調達品4_063";
 	}
 	else if(EP18_1QUE == 28) {
-		cloakoffnpc "商人#ep18_ラヘル_0643j_";	// 2303
-		cloakoffnpc "マラム#ep18_商人3j_142";	// 2304
-		cloakoffnpc "箱#ep18_調達品1_060";	// 2305
-		cloakoffnpc "箱#ep18_調達品2_061";	// 2306
-		cloakoffnpc "箱#ep18_調達品3_062";	// 2307
-		cloakoffnpc "箱#ep18_調達品4_063";	// 2308
+		cloakoffnpc "商人#ep18_ラヘル_0643j_";
+		cloakoffnpc "マラム#ep18_商人3j_142";
+		cloakoffnpc "箱#ep18_調達品1_060";
+		cloakoffnpc "箱#ep18_調達品2_061";
+		cloakoffnpc "箱#ep18_調達品3_062";
+		cloakoffnpc "箱#ep18_調達品4_063";
 	}
 	end;
 }
@@ -2996,7 +3013,7 @@ rachel.gat,40,135,4	script	マラム#ep18_商人3j_142	10376,{/* 15886 (cloaking)*/
 	mes "^ff0000西側の門^000000を出たところで改めて";
 	mes "経路の確認をいたしましょう！";
 	close2;
-	viewpoint 1, 25, 125, 18, 0x00FF00;	// 2304
+	viewpoint 1, 25, 125, 18, 0x00FF00;
 	cutin "ep18_maram_01.png", 255;
 	end;
 OnInit:
@@ -3023,7 +3040,7 @@ OnInit:
 }
 rachel.gat,41,132,3	script	箱#ep18_調達品4_063	10250,{/* 15890 */
 	if(EP18_1QUE == 27) {
-		cloakoffnpc "マラム#ep18_商人3j_142";	// 2304
+		cloakoffnpc "マラム#ep18_商人3j_142";
 		mes "[商人レンシア]";
 		mes "カウ"+strcharinfo(0)+"ウル様！";
 		mes "ご注文の品に間違いないか";
@@ -3034,7 +3051,7 @@ rachel.gat,41,132,3	script	箱#ep18_調達品4_063	10250,{/* 15890 */
 		mes "どうも、ありがとうございます！";
 		mes "またのご利用をお待ちしております！";
 		next;
-		cloakonnpc "商人#ep18_ラヘル_0643j_";	// 2303
+		cloakonnpc "商人#ep18_ラヘル_0643j_";
 		mes "[マラム]";
 		mes "ではでは～";
 		mes "カウ"+strcharinfo(0)+"ウル様。";
@@ -3043,23 +3060,23 @@ rachel.gat,41,132,3	script	箱#ep18_調達品4_063	10250,{/* 15890 */
 		cutin "ep18_maram_01.png", 2;
 		set EP18_1QUE,28;
 		delquest 11715;
-		setquest 11716;	// state=1
-		viewpoint 1, 25, 125, 18, 0x00FF00;	// 2308
+		setquest 11716;
+		viewpoint 1, 25, 125, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_01.png", 255;
 		showevent 0, 1, "箱#ep18_調達品4_063";	// 2308: 41, 132
 		end;
 	}
 	else if(EP18_1QUE == 28) {
-		cloakoffnpc "マラム#ep18_商人3j_142";	// 2304
-		cloakonnpc "商人#ep18_ラヘル_0643j_";	// 2303
+		cloakoffnpc "マラム#ep18_商人3j_142";
+		cloakonnpc "商人#ep18_ラヘル_0643j_";
 		mes "[マラム]";
 		mes "ではでは～";
 		mes "カウ"+strcharinfo(0)+"ウル様。";
 		mes "^ff0000西側の門^000000を出たところで改めて";
 		mes "経路の確認をいたしましょう！";
 		cutin "ep18_maram_01.png", 2;
-		viewpoint 1, 25, 125, 18, 0x00FF00;	// 2308
+		viewpoint 1, 25, 125, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_01.png", 255;
 		end;
@@ -3077,10 +3094,10 @@ OnInit:
 }
 ra_fild11.gat,354,235,3	script	商人#ep18_ラヘル_064	10380,{/* 15891 */
 	if(EP18_1QUE == 28) {
-		cloakoffnpc "商人#ep18_ラヘル_065";	// 6912
-		cloakoffnpc "商人#ep18_ラヘル_066";	// 6913
-		cloakoffnpc "商人#ep18_ラヘル_067";	// 6914
-		cloakoffnpc "商人#ep18_ラヘル_068";	// 6915
+		cloakoffnpc "商人#ep18_ラヘル_065";
+		cloakoffnpc "商人#ep18_ラヘル_066";
+		cloakoffnpc "商人#ep18_ラヘル_067";
+		cloakoffnpc "商人#ep18_ラヘル_068";
 		cutin "ep18_merchant.png", 2;
 		mes "[変装したマラム]";
 		mes "望みの品が上手く手に入りました。";
@@ -3114,23 +3131,23 @@ ra_fild11.gat,354,235,3	script	商人#ep18_ラヘル_064	10380,{/* 15891 */
 		mes "詳しい場所は、ここでは言えませんが……";
 		mes "まずは^ff0000西^000000にある「^0000FFオズ峡谷^000000」に";
 		mes "移動しましょう。";
-		viewpoint 1, 28, 290, 18, 0x00FF00;	// 6911
+		viewpoint 1, 28, 290, 18, 0x00FF00;
 		set EP18_1QUE,29;
 		delquest 11716;
-		setquest 11717;	// state=1
+		setquest 11717;
 		close2;
-		cloakonnpc "商人#ep18_ラヘル_065";	// 6912
-		cloakonnpc "商人#ep18_ラヘル_066";	// 6913
-		cloakonnpc "商人#ep18_ラヘル_067";	// 6914
-		cloakonnpc "商人#ep18_ラヘル_068";	// 6915
+		cloakonnpc "商人#ep18_ラヘル_065";
+		cloakonnpc "商人#ep18_ラヘル_066";
+		cloakonnpc "商人#ep18_ラヘル_067";
+		cloakonnpc "商人#ep18_ラヘル_068";
 		cutin "ep18_merchant.png", 255;
 		end;
 	}
 	else if(EP18_1QUE == 29) {
-		cloakoffnpc "商人#ep18_ラヘル_065";	// 6912
-		cloakoffnpc "商人#ep18_ラヘル_066";	// 6913
-		cloakoffnpc "商人#ep18_ラヘル_067";	// 6914
-		cloakoffnpc "商人#ep18_ラヘル_068";	// 6915
+		cloakoffnpc "商人#ep18_ラヘル_065";
+		cloakoffnpc "商人#ep18_ラヘル_066";
+		cloakoffnpc "商人#ep18_ラヘル_067";
+		cloakoffnpc "商人#ep18_ラヘル_068";
 		cutin "ep18_merchant.png", 2;
 		mes "[変装したマラム]";
 		mes "引き続きで申し訳ありませんが";
@@ -3143,11 +3160,11 @@ ra_fild11.gat,354,235,3	script	商人#ep18_ラヘル_064	10380,{/* 15891 */
 		mes "まずは^ff0000西^000000にある「^0000FFオズ峡谷^000000」に";
 		mes "移動しましょう。";
 		close2;
-		viewpoint 1, 28, 290, 18, 0x00FF00;	// 6911
-		cloakonnpc "商人#ep18_ラヘル_065";	// 6912
-		cloakonnpc "商人#ep18_ラヘル_066";	// 6913
-		cloakonnpc "商人#ep18_ラヘル_067";	// 6914
-		cloakonnpc "商人#ep18_ラヘル_068";	// 6915
+		viewpoint 1, 28, 290, 18, 0x00FF00;
+		cloakonnpc "商人#ep18_ラヘル_065";
+		cloakonnpc "商人#ep18_ラヘル_066";
+		cloakonnpc "商人#ep18_ラヘル_067";
+		cloakonnpc "商人#ep18_ラヘル_068";
 		cutin "ep18_merchant.png", 255;
 		end;
 	}
@@ -3183,7 +3200,7 @@ OnInit:
 }
 ra_fild10.gat,379,283,0	script	#ep180_ra_fild10_1	139,2,2,{/* 15896 */
 	if(EP18_1QUE == 29)
-		viewpoint 1, 179, 176, 18, 0x00FF00;	// 6916
+		viewpoint 1, 179, 176, 18, 0x00FF00;
 	end;
 }
 ra_fild10.gat,179,176,5	script	商人#ep18_峡谷_065	10380,{/* 15897 */
@@ -3197,7 +3214,7 @@ ra_fild10.gat,179,176,5	script	商人#ep18_峡谷_065	10380,{/* 15897 */
 		mes "少ししたら声をかけていただけますか？";
 		set EP18_1QUE,30;
 		delquest 11717;
-		setquest 11719;	// state=1
+		setquest 11719;
 		close2;
 		cutin "ep18_merchant.png", 255;
 		end;
@@ -3352,7 +3369,7 @@ gw_fild01.gat,276,339,3	script	マラム#ep18_オズの出口_066	10376,{/* 15898 (cloak
 	mes "ここから^ff0000西^000000に進めば";
 	mes "原住民たちが隠れ住む村の";
 	mes "入口に到着します。";
-	viewpoint 1, 35, 102, 18, 0x00FF00;	// 6820
+	viewpoint 1, 35, 102, 18, 0x00FF00;
 	close2;
 	cutin "ep18_maram_01.png", 255;
 	end;
@@ -3361,56 +3378,56 @@ OnInit:
 	end;
 }
 gw_fild01.gat,273,339,3	script	#ep18_オズの出口前_067	10428,7,7,{/* 15899 */
-	if(EP18_1QUE >= 31 && EP18_1QUE 2= 32) {	//未調査
-		cloakoffnpc "マラム#ep18_オズの出口_066";	// 6820
+	if(EP18_1QUE >= 31 && EP18_1QUE <= 32) {	//未調査
+		cloakoffnpc "マラム#ep18_オズの出口_066";
 		cutin "ep18_maram_01.png", 2;
 		mes "[マラム]";
 		mes "ここから^ff0000西^000000に進めば";
 		mes "原住民たちが隠れ住む村の";
 		mes "入口に到着します。";
 		mes "さあ、行きましょう。";
-		viewpoint 1, 35, 102, 18, 0x00FF00;	// 6821
+		viewpoint 1, 35, 102, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "マラム#ep18_オズの出口_066";	// 6820
+		cloakonnpc "マラム#ep18_オズの出口_066";
 	}
 	end;
 OnTouch:
 	if(EP18_1QUE == 31) {
-		cloakoffnpc "マラム#ep18_オズの出口_066";	// 6820
+		cloakoffnpc "マラム#ep18_オズの出口_066";
 		cutin "ep18_maram_01.png", 2;
 		set EP18_1QUE,32;
 		delquest 11720;
-		setquest 11721;	// state=1
+		setquest 11721;
 		mes "[マラム]";
 		mes "ふぅ……";
 		mes "無事に抜けられましたね。";
 		mes "ここまで来れば、もう少しです。";
 		next;
-		@showevent 0, 1;	// 6822: 35, 102
+		//@showevent 0, 1;	// 6822: 35, 102
 		mes "[マラム]";
 		mes "ここから^ff0000西^000000に進めば";
 		mes "原住民たちが隠れ住む村の";
 		mes "入口に到着します。";
 		mes "さあ、行きましょう。";
-		viewpoint 1, 35, 102, 18, 0x00FF00;	// 6821
+		viewpoint 1, 35, 102, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "マラム#ep18_オズの出口_066";	// 6820
+		cloakonnpc "マラム#ep18_オズの出口_066";
 		end;
 	}
 	else if(EP18_1QUE == 32) {
-		cloakoffnpc "マラム#ep18_オズの出口_066";	// 6820
+		cloakoffnpc "マラム#ep18_オズの出口_066";
 		cutin "ep18_maram_01.png", 2;
 		mes "[マラム]";
 		mes "ここから^ff0000西^000000に進めば";
 		mes "原住民たちが隠れ住む村の";
 		mes "入口に到着します。";
 		mes "さあ、行きましょう。";
-		viewpoint 1, 35, 102, 18, 0x00FF00;	// 6821
+		viewpoint 1, 35, 102, 18, 0x00FF00;
 		close2;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "マラム#ep18_オズの出口_066";	// 6820
+		cloakonnpc "マラム#ep18_オズの出口_066";
 		end;
 	}
 	end;
@@ -3443,7 +3460,7 @@ gw_fild01.gat,35,102,5	script	マラム#ep18_gw_068	10376,{/* 15900 */
 		mes "[キャンパー]";
 		mes "ん～～～新手の詐欺師かな？";
 		next;
-		cloakoffnpc "ミリアム#ep18_gw_069";	// 6823
+		cloakoffnpc "ミリアム#ep18_gw_069";
 		cutin "ep18_miriam_03.png", 0;
 		mes "[ミリアム]";
 		mes "詐欺師っぽくはあるね。";
@@ -3455,7 +3472,7 @@ gw_fild01.gat,35,102,5	script	マラム#ep18_gw_068	10376,{/* 15900 */
 		mes "[キャンパー]";
 		mes "さあ……何のことやら？";
 		next;
-		cloakoffnpc "イムリル#ep18_gw_071";	// 6826
+		cloakoffnpc "イムリル#ep18_gw_071";
 		cutin "ep18_imril_02.png", 0;
 		mes "[イムリル]";
 		mes "キミたちを通すつもりは無いってさ。";
@@ -3469,14 +3486,14 @@ gw_fild01.gat,35,102,5	script	マラム#ep18_gw_068	10376,{/* 15900 */
 		mes "イムリル！　ちょっと待ってくれよ!!";
 		set EP18_1QUE,33;
 		delquest 11721;
-		setquest 11722;	// state=1
+		setquest 11722;
 		close2;
 		cutin "ep18_maram_01.png", 255;
 		end;
 	}
 	if(EP18_1QUE == 33) {
 		cutin "ep18_maram_01.png", 2;
-		cloakoffnpc "イムリル#ep18_gw_071";	// 6826
+		cloakoffnpc "イムリル#ep18_gw_071";
 		mes "[マラム]";
 		mes "あっ!!";
 		mes "もしかして、知らない人たちと";
@@ -3494,7 +3511,7 @@ gw_fild01.gat,35,102,5	script	マラム#ep18_gw_068	10376,{/* 15900 */
 		mes "伝えてくれたのかなぁ。";
 		next;
 		cutin "ep18_miriam_03.png", 0;
-		cloakoffnpc "ミリアム#ep18_gw_069";	// 6823
+		cloakoffnpc "ミリアム#ep18_gw_069";
 		mes "[ミリアム]";
 		mes "……もしダメだったら";
 		mes "ラヘルに帰るしかないよ。";
@@ -3532,7 +3549,7 @@ gw_fild01.gat,35,102,5	script	マラム#ep18_gw_068	10376,{/* 15900 */
 		mes "ボクだって、みんなのことを……。";
 		next;
 		cutin "ep18_suad_01.png", 1;
-		cloakoffnpc "スアド#ep18_gw_070";	// 6824
+		cloakoffnpc "スアド#ep18_gw_070";
 		mes "[スアド]";
 		mes "己が楽観的な性格だと知ってるのなら";
 		mes "もう少し慎重に行動したらどうだ？";
@@ -3696,11 +3713,11 @@ gw_fild01.gat,35,102,5	script	マラム#ep18_gw_068	10376,{/* 15900 */
 		mes "スアドの気が変わらないうちにね。";
 		set EP18_1QUE,35;
 		delquest 11723;
-		setquest 11724;	// state=1
+		setquest 11724;
 		close2;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "ミリアム#ep18_gw_069";	// 6823
-		cloakonnpc "スアド#ep18_gw_070";	// 6824
+		cloakonnpc "ミリアム#ep18_gw_069";
+		cloakonnpc "スアド#ep18_gw_070";
 		warp "wolfvill.gat", 152, 113;
 		end;
 	}
@@ -3800,9 +3817,9 @@ gw_fild01.gat,37,105,5	script	イムリル#ep18_gw_071	10379,{/* 15904 (cloaking)*/
 		mes "……来てくれると良いのですが。";
 		set EP18_1QUE,34;
 		delquest 11722;
-		setquest 11723;	// state=1
+		setquest 11723;
 		close2;
-		cloakonnpc "イムリル#ep18_gw_071";	// 6826
+		cloakonnpc "イムリル#ep18_gw_071";
 		cutin "ep18_maram_01.png", 255;
 		end;
 	}
@@ -3843,8 +3860,8 @@ wolfvill.gat,143,113,5	script	イムリル#ep18_wv_076	10379,{/* 15909 */
 		mes "あのカタブツがよそ者を";
 		mes "村に招き入れるなんて！";
 		next;
-		cloakoffnpc "ミリアム#ep18_wv_075";	// 2310
-		cloakoffnpc "マラム#ep18_wv_074";	// 2309
+		cloakoffnpc "ミリアム#ep18_wv_075";
+		cloakoffnpc "マラム#ep18_wv_074";
 		cutin "ep18_miriam_01.png", 2;
 		mes "[ミリアム]";
 		mes "ヒドイ物言いだね。";
@@ -3900,23 +3917,23 @@ wolfvill.gat,143,113,5	script	イムリル#ep18_wv_076	10379,{/* 15909 */
 		mes "　信頼関係を築こう‐";
 		set EP18_1QUE,36;
 		delquest 11724;
-		setquest 11718;	// state=1
-		setquest 130101;	// state=1
-		setquest 130102;	// state=1
-		setquest 130103;	// state=1
-		setquest 130104;	// state=1
-		setquest 130105;	// state=1
-		setquest 130106;	// state=1
-		setquest 130107;	// state=1
-		setquest 130108;	// state=1
-		setquest 130109;	// state=1
-		setquest 130110;	// state=1
-		setquest 130111;	// state=1
-		setquest 130112;	// state=1
-		setquest 130113;	// state=1
-		setquest 130114;	// state=1
-		cloakonnpc "ミリアム#ep18_wv_075";	// 2310
-		cloakonnpc "マラム#ep18_wv_074";	// 2309
+		setquest 11718;
+		setquest 130101;
+		setquest 130102;
+		setquest 130103;
+		setquest 130104;
+		setquest 130105;
+		setquest 130106;
+		setquest 130107;
+		setquest 130108;
+		setquest 130109;
+		setquest 130110;
+		setquest 130111;
+		setquest 130112;
+		setquest 130113;
+		setquest 130114;
+		cloakonnpc "ミリアム#ep18_wv_075";
+		cloakonnpc "マラム#ep18_wv_074";
 		close;
 	}
 	if(EP18_1QUE >= 36) {
@@ -4001,7 +4018,7 @@ wolfvill.gat,143,113,5	script	イムリル#ep18_wv_076	10379,{/* 15909 */
 				mes "行商人たちにとって";
 				mes "迷惑なモンスターなんだ！頼むよ！";
 				delquest 11735;
-				setquest 11738;	// state=1
+				setquest 11738;
 				close2;
 				cutin "ep18_imril_04.png", 255;
 				end;
@@ -4059,7 +4076,7 @@ wolfvill.gat,143,113,5	script	イムリル#ep18_wv_076	10379,{/* 15909 */
 				mes "場所は、覚えてるよね？";
 				mes "よろしく！";
 				delquest 130114;
-				setquest 11725;	// state=1
+				setquest 11725;
 				close2;
 				cutin "ep18_imril_03.png", 255;
 				end;
@@ -4099,7 +4116,7 @@ wolfvill.gat,143,113,5	script	イムリル#ep18_wv_076	10379,{/* 15909 */
 			}
 			if(checkquest(11738)&4) {
 				delquest 11738;
-				setquest 11739;	// state=1
+				setquest 11739;
 				getitem 1000405,4;
 				getexp 487500000,0,0;
 				getexp 0,500000000,0;
@@ -4141,7 +4158,7 @@ wolfvill.gat,143,113,5	script	イムリル#ep18_wv_076	10379,{/* 15909 */
 				getexp 0,500000000,0;
 				getexp 487500000,0,0;
 				getexp 0,500000000,0;
-				setquest 130134;	// state=1
+				setquest 130134;
 				compquest 130134;
 				mes "[イムリル]";
 				mes "もう終わったの!?";
@@ -4178,8 +4195,8 @@ wolfvill.gat,143,113,5	script	イムリル#ep18_wv_076	10379,{/* 15909 */
 				mes "同じ村の住民だと思ってるよ！";
 				if(EP18_1QUE == 37) {
 					next;
-					unittalk getnpcid(0,"村の少年#区別_077"),"村の少年 : 冒険者さん、大会議がはじまるよ！冒険者さんの席もあるんだって！";	// 2312
-					emotion 12,"村の少年#区別_077";	// 2312
+					unittalk getnpcid(0,"村の少年#区別_077"),"村の少年 : 冒険者さん、大会議がはじまるよ！冒険者さんの席もあるんだって！";
+					emotion 12,"村の少年#区別_077";
 					mes "[イムリル]";
 					mes "ほら、^ff0000大会議^000000の席まで";
 					mes "用意されたってさ。";
@@ -4242,25 +4259,25 @@ wolfvill.gat,141,123,3	script	村の少年#区別_077	944,{/* 15910 */
 		mes "早く向かってください！";
 		set EP18_1QUE,38;
 		delquest 18082;
-		setquest 16567;	// state=1
+		setquest 16567;
 		close2;
-		cloakoffnpc "スアド#1_079";	// 2314
-		cloakoffnpc "ミリアム#1_080";	// 2315
-		cloakoffnpc "マラム#1_082";	// 2317
-		cloakoffnpc "熱血青年#過激派1_083";	// 2318
-		cloakoffnpc "過激派の若者#過激派2_08";	// 2319
-		cloakoffnpc "豪快な青年#過激派3_085";	// 2320
-		cloakoffnpc "血の気の多い青年#過激派";	// 2321
-		cloakoffnpc "怒った青年#過激派5_087";	// 2322
-		cloakoffnpc "地着きの老人#老年層1_08";	// 2323
-		cloakoffnpc "慌てる壮年#老年層2_089";	// 2324
-		cloakoffnpc "内気な壮年#老年層3_090";	// 2325
-		cloakoffnpc "臆病な老人#老年層4_091";	// 2326
-		cloakoffnpc "熱血壮年#武器所持者1_09";	// 2327
-		cloakoffnpc "弱気な青年#中立派1_093";	// 2328
-		cloakoffnpc "無口な青年#中立派2_094";	// 2329
-		cloakoffnpc "中立派の青年#中立派3_09";	// 2330
-		cloakoffnpc "過激派の青年#過激派2_09";	// 2331
+		cloakoffnpc "スアド#1_079";
+		cloakoffnpc "ミリアム#1_080";
+		cloakoffnpc "マラム#1_082";
+		cloakoffnpc "熱血青年#過激派1_083";
+		cloakoffnpc "過激派の若者#過激派2_08";
+		cloakoffnpc "豪快な青年#過激派3_085";
+		cloakoffnpc "血の気の多い青年#過激派";
+		cloakoffnpc "怒った青年#過激派5_087";
+		cloakoffnpc "地着きの老人#老年層1_08";
+		cloakoffnpc "慌てる壮年#老年層2_089";
+		cloakoffnpc "内気な壮年#老年層3_090";
+		cloakoffnpc "臆病な老人#老年層4_091";
+		cloakoffnpc "熱血壮年#武器所持者1_09";
+		cloakoffnpc "弱気な青年#中立派1_093";
+		cloakoffnpc "無口な青年#中立派2_094";
+		cloakoffnpc "中立派の青年#中立派3_09";
+		cloakoffnpc "過激派の青年#過激派2_09";
 		end;
 	}
 	if(EP18_1QUE == 38) {
@@ -4270,23 +4287,23 @@ wolfvill.gat,141,123,3	script	村の少年#区別_077	944,{/* 15910 */
 		mes "早く向かってください！";
 		mes "大会議が始まりますよ！";
 		close2;
-		cloakoffnpc "スアド#1_079";	// 2314
-		cloakoffnpc "ミリアム#1_080";	// 2315
-		cloakoffnpc "マラム#1_082";	// 2317
-		cloakoffnpc "熱血青年#過激派1_083";	// 2318
-		cloakoffnpc "過激派の若者#過激派2_08";	// 2319
-		cloakoffnpc "豪快な青年#過激派3_085";	// 2320
-		cloakoffnpc "血の気の多い青年#過激派";	// 2321
-		cloakoffnpc "怒った青年#過激派5_087";	// 2322
-		cloakoffnpc "地着きの老人#老年層1_08";	// 2323
-		cloakoffnpc "慌てる壮年#老年層2_089";	// 2324
-		cloakoffnpc "内気な壮年#老年層3_090";	// 2325
-		cloakoffnpc "臆病な老人#老年層4_091";	// 2326
-		cloakoffnpc "熱血壮年#武器所持者1_09";	// 2327
-		cloakoffnpc "弱気な青年#中立派1_093";	// 2328
-		cloakoffnpc "無口な青年#中立派2_094";	// 2329
-		cloakoffnpc "中立派の青年#中立派3_09";	// 2330
-		cloakoffnpc "過激派の青年#過激派2_09";	// 2331
+		cloakoffnpc "スアド#1_079";
+		cloakoffnpc "ミリアム#1_080";
+		cloakoffnpc "マラム#1_082";
+		cloakoffnpc "熱血青年#過激派1_083";
+		cloakoffnpc "過激派の若者#過激派2_08";
+		cloakoffnpc "豪快な青年#過激派3_085";
+		cloakoffnpc "血の気の多い青年#過激派";
+		cloakoffnpc "怒った青年#過激派5_087";
+		cloakoffnpc "地着きの老人#老年層1_08";
+		cloakoffnpc "慌てる壮年#老年層2_089";
+		cloakoffnpc "内気な壮年#老年層3_090";
+		cloakoffnpc "臆病な老人#老年層4_091";
+		cloakoffnpc "熱血壮年#武器所持者1_09";
+		cloakoffnpc "弱気な青年#中立派1_093";
+		cloakoffnpc "無口な青年#中立派2_094";
+		cloakoffnpc "中立派の青年#中立派3_09";
+		cloakoffnpc "過激派の青年#過激派2_09";
 		end;
 	}
 	mes "[少年]";
@@ -4313,81 +4330,81 @@ OnQuestInfo:
 }
 wolfvill.gat,146,148,0	script	#大会議1_078	139,14,14,{/* 15911 */
 	if(EP18_1QUE >= 38 && EP18_1QUE <= 40) {
-		cloakoffnpc "スアド#1_079";	// 2314
-		cloakoffnpc "ミリアム#1_080";	// 2315
-		cloakoffnpc "マラム#1_082";	// 2317
-		cloakoffnpc "熱血青年#過激派1_083";	// 2318
-		cloakoffnpc "過激派の若者#過激派2_08";	// 2319
-		cloakoffnpc "豪快な青年#過激派3_085";	// 2320
-		cloakoffnpc "血の気の多い青年#過激派";	// 2321
-		cloakoffnpc "怒った青年#過激派5_087";	// 2322
-		cloakoffnpc "地着きの老人#老年層1_08";	// 2323
-		cloakoffnpc "慌てる壮年#老年層2_089";	// 2324
-		cloakoffnpc "内気な壮年#老年層3_090";	// 2325
-		cloakoffnpc "臆病な老人#老年層4_091";	// 2326
-		cloakoffnpc "熱血壮年#武器所持者1_09";	// 2327
-		cloakoffnpc "弱気な青年#中立派1_093";	// 2328
-		cloakoffnpc "無口な青年#中立派2_094";	// 2329
-		cloakoffnpc "中立派の青年#中立派3_09";	// 2330
-		cloakoffnpc "過激派の青年#過激派2_09";	// 2331
+		cloakoffnpc "スアド#1_079";
+		cloakoffnpc "ミリアム#1_080";
+		cloakoffnpc "マラム#1_082";
+		cloakoffnpc "熱血青年#過激派1_083";
+		cloakoffnpc "過激派の若者#過激派2_08";
+		cloakoffnpc "豪快な青年#過激派3_085";
+		cloakoffnpc "血の気の多い青年#過激派";
+		cloakoffnpc "怒った青年#過激派5_087";
+		cloakoffnpc "地着きの老人#老年層1_08";
+		cloakoffnpc "慌てる壮年#老年層2_089";
+		cloakoffnpc "内気な壮年#老年層3_090";
+		cloakoffnpc "臆病な老人#老年層4_091";
+		cloakoffnpc "熱血壮年#武器所持者1_09";
+		cloakoffnpc "弱気な青年#中立派1_093";
+		cloakoffnpc "無口な青年#中立派2_094";
+		cloakoffnpc "中立派の青年#中立派3_09";
+		cloakoffnpc "過激派の青年#過激派2_09";
 	}
 	else if(EP18_1QUE == 41) {
-		cloakoffnpc "スアド#1_079";	// 2420
-		cloakoffnpc "ミリアム#1_080";	// 2421
-		cloakoffnpc "マラム#1_082";	// 2423
-		cloakonnpc "熱血青年#過激派1_083";	// 2424
-		cloakonnpc "過激派の若者#過激派2_08";	// 2425
-		cloakoffnpc "豪快な青年#過激派3_085";	// 2426
-		cloakonnpc "血の気の多い青年#過激派";	// 2427
-		cloakonnpc "怒った青年#過激派5_087";	// 2428
-		cloakonnpc "地着きの老人#老年層1_08";	// 2429
-		cloakonnpc "慌てる壮年#老年層2_089";	// 2430
-		cloakonnpc "内気な壮年#老年層3_090";	// 2431
-		cloakonnpc "臆病な老人#老年層4_091";	// 2432
-		cloakonnpc "熱血壮年#武器所持者1_09";	// 2433
-		cloakonnpc "弱気な青年#中立派1_093";	// 2434
-		cloakonnpc "無口な青年#中立派2_094";	// 2435
-		cloakonnpc "中立派の青年#中立派3_09";	// 2436
-		cloakoffnpc "過激派の青年#過激派2_09";	// 2437
+		cloakoffnpc "スアド#1_079";
+		cloakoffnpc "ミリアム#1_080";
+		cloakoffnpc "マラム#1_082";
+		cloakonnpc "熱血青年#過激派1_083";
+		cloakonnpc "過激派の若者#過激派2_08";
+		cloakoffnpc "豪快な青年#過激派3_085";
+		cloakonnpc "血の気の多い青年#過激派";
+		cloakonnpc "怒った青年#過激派5_087";
+		cloakonnpc "地着きの老人#老年層1_08";
+		cloakonnpc "慌てる壮年#老年層2_089";
+		cloakonnpc "内気な壮年#老年層3_090";
+		cloakonnpc "臆病な老人#老年層4_091";
+		cloakonnpc "熱血壮年#武器所持者1_09";
+		cloakonnpc "弱気な青年#中立派1_093";
+		cloakonnpc "無口な青年#中立派2_094";
+		cloakonnpc "中立派の青年#中立派3_09";
+		cloakoffnpc "過激派の青年#過激派2_09";
 	}
 	else if(EP18_1QUE == 42) {
-		cloakonnpc "スアド#1_079";	// 2420
-		cloakonnpc "ミリアム#1_080";	// 2421
-		cloakonnpc "マラム#1_082";	// 2423
-		cloakonnpc "熱血青年#過激派1_083";	// 2424
-		cloakonnpc "過激派の若者#過激派2_08";	// 2425
-		cloakoffnpc "豪快な青年#過激派3_085";	// 2426
-		cloakonnpc "血の気の多い青年#過激派";	// 2427
-		cloakonnpc "怒った青年#過激派5_087";	// 2428
-		cloakonnpc "地着きの老人#老年層1_08";	// 2429
-		cloakonnpc "慌てる壮年#老年層2_089";	// 2430
-		cloakonnpc "内気な壮年#老年層3_090";	// 2431
-		cloakonnpc "臆病な老人#老年層4_091";	// 2432
-		cloakonnpc "熱血壮年#武器所持者1_09";	// 2433
-		cloakonnpc "弱気な青年#中立派1_093";	// 2434
-		cloakonnpc "無口な青年#中立派2_094";	// 2435
-		cloakonnpc "中立派の青年#中立派3_09";	// 2436
-		cloakoffnpc "過激派の青年#過激派2_09";	// 2437
+		cloakonnpc "スアド#1_079";
+		cloakonnpc "ミリアム#1_080";
+		cloakonnpc "マラム#1_082";
+		cloakonnpc "熱血青年#過激派1_083";
+		cloakonnpc "過激派の若者#過激派2_08";
+		cloakoffnpc "豪快な青年#過激派3_085";
+		cloakonnpc "血の気の多い青年#過激派";
+		cloakonnpc "怒った青年#過激派5_087";
+		cloakonnpc "地着きの老人#老年層1_08";
+		cloakonnpc "慌てる壮年#老年層2_089";
+		cloakonnpc "内気な壮年#老年層3_090";
+		cloakonnpc "臆病な老人#老年層4_091";
+		cloakonnpc "熱血壮年#武器所持者1_09";
+		cloakonnpc "弱気な青年#中立派1_093";
+		cloakonnpc "無口な青年#中立派2_094";
+		cloakonnpc "中立派の青年#中立派3_09";
+		cloakoffnpc "過激派の青年#過激派2_09";
 	}
 	else {
-		cloakonnpc "スアド#1_079";	// 2314
-		cloakonnpc "ミリアム#1_080";	// 2315
-		cloakonnpc "マラム#1_082";	// 2317
-		cloakonnpc "熱血青年#過激派1_083";	// 2318
-		cloakonnpc "過激派の若者#過激派2_08";	// 2319
-		cloakonnpc "豪快な青年#過激派3_085";	// 2320
-		cloakonnpc "血の気の多い青年#過激派";	// 2321
-		cloakonnpc "怒った青年#過激派5_087";	// 2322
-		cloakonnpc "地着きの老人#老年層1_08";	// 2323
-		cloakonnpc "慌てる壮年#老年層2_089";	// 2324
-		cloakonnpc "内気な壮年#老年層3_090";	// 2325
-		cloakonnpc "臆病な老人#老年層4_091";	// 2326
-		cloakonnpc "熱血壮年#武器所持者1_09";	// 2327
-		cloakonnpc "弱気な青年#中立派1_093";	// 2328
-		cloakonnpc "無口な青年#中立派2_094";	// 2329
-		cloakonnpc "中立派の青年#中立派3_09";	// 2330
-		cloakonnpc "過激派の青年#過激派2_09";	// 2331
-		cloakonnpc "マラム#1_081";	// 2316
+		cloakonnpc "スアド#1_079";
+		cloakonnpc "ミリアム#1_080";
+		cloakonnpc "マラム#1_082";
+		cloakonnpc "熱血青年#過激派1_083";
+		cloakonnpc "過激派の若者#過激派2_08";
+		cloakonnpc "豪快な青年#過激派3_085";
+		cloakonnpc "血の気の多い青年#過激派";
+		cloakonnpc "怒った青年#過激派5_087";
+		cloakonnpc "地着きの老人#老年層1_08";
+		cloakonnpc "慌てる壮年#老年層2_089";
+		cloakonnpc "内気な壮年#老年層3_090";
+		cloakonnpc "臆病な老人#老年層4_091";
+		cloakonnpc "熱血壮年#武器所持者1_09";
+		cloakonnpc "弱気な青年#中立派1_093";
+		cloakonnpc "無口な青年#中立派2_094";
+		cloakonnpc "中立派の青年#中立派3_09";
+		cloakonnpc "過激派の青年#過激派2_09";
+		cloakonnpc "マラム#1_081";
 	}
 	end;
 }
@@ -4424,10 +4441,10 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "会議が始まるでしょうからね。";
 		set EP18_1QUE,39;
 		delquest 16567;
-		setquest 16568;	// state=1
-		setquest 16569;	// state=1
-		setquest 16570;	// state=1
-		setquest 16571;	// state=1
+		setquest 16568;
+		setquest 16569;
+		setquest 16570;
+		setquest 16571;
 		close2;
 		showevent 0, 1, "熱血青年#過激派1_083";	// 2318: 145, 146
 		showevent 0, 1, "地着きの老人#老年層1_08";	// 2323: 139, 148
@@ -4478,22 +4495,22 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "意見があれば自由に発言してくれ。";
 		next;
 		cutin "ep18_suad_01.png", 255;
-		emotion 7,"熱血青年#過激派1_083";	// 2424
+		emotion 7,"熱血青年#過激派1_083";
 		mes "[熱血青年]";
 		mes "ラヘルの移住の民たちに";
 		mes "思い知らせてやろう！";
 		mes "奴らの神殿を破壊するんだ！";
-		unittalk getnpcid(0,"過激派の若者#過激派2_08"),"過激派の若者 : そうだ！そうだ！";	// 2425
-		unittalk getnpcid(0,"血の気の多い青年#過激派"),"血の気の多い青年 : 全部壊してしまえ！！";	// 2427
+		unittalk getnpcid(0,"過激派の若者#過激派2_08"),"過激派の若者 : そうだ！そうだ！";
+		unittalk getnpcid(0,"血の気の多い青年#過激派"),"血の気の多い青年 : 全部壊してしまえ！！";
 		next;
 		mes "[地着きの老人]";
 		mes "我らは貧しいとは言え";
 		mes "今までこの村で平和にやって来た。";
 		mes "いきなり神殿を破壊するなどというのは";
 		mes "あまりに暴力的すぎる。";
-		unittalk getnpcid(0,"臆病な老人#老年層4_091"),"臆病な老人 : そうじゃ。短絡的すぎるわい。";	// 2432
+		unittalk getnpcid(0,"臆病な老人#老年層4_091"),"臆病な老人 : そうじゃ。短絡的すぎるわい。";
 		next;
-		emotion 7,"熱血青年#過激派1_083";	// 2424
+		emotion 7,"熱血青年#過激派1_083";
 		mes "[熱血青年]";
 		mes "いつまでこんな猫の額みたいな場所に";
 		mes "隠れているつもりなんだ！";
@@ -4503,22 +4520,22 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "[熱血青年]";
 		mes "この地は元々原住民のものだ！";
 		mes "それを取り戻す時が来たんだよ！";
-		unittalk getnpcid(0,"過激派の若者#過激派2_08"),"過激派の若者 : 奪うんじゃない！　取り戻すんだ！";	// 2425
-		unittalk getnpcid(0,"血の気の多い青年#過激派"),"血の気の多い青年 : そうだ、これは正当な闘争だ！";	// 2427
+		unittalk getnpcid(0,"過激派の若者#過激派2_08"),"過激派の若者 : 奪うんじゃない！　取り戻すんだ！";
+		unittalk getnpcid(0,"血の気の多い青年#過激派"),"血の気の多い青年 : そうだ、これは正当な闘争だ！";
 		next;
 		mes "[地着きの老人]";
 		mes "口で言うのは簡単じゃが";
 		mes "争えば血が流れ、大勢の仲間が死ぬ。";
 		mes "いったいそれで何を得ようというのか？";
-		unittalk getnpcid(0,"内気な壮年#老年層3_090"),"内気な壮年 : 戦の経験もないヤツは……わかってない。";	// 2431
+		unittalk getnpcid(0,"内気な壮年#老年層3_090"),"内気な壮年 : 戦の経験もないヤツは……わかってない。";
 		next;
 		mes "[過激派の若者]";
 		mes "今まで俺たちが血を流してないと？";
 		mes "流して来たさ！　たくさんの血と涙をな！";
 		mes "街でどんな目に遭ってきたと";
 		mes "思ってるんだ！";
-		unittalk getnpcid(0,"過激派の青年#過激派2_09"),"過激派の青年 : 臆病者たちめ！";	// 2437
-		unittalk getnpcid(0,"怒った青年#過激派5_087"),"怒った青年 : お前らはみんな、迫害する側と同じだ！";	// 2428
+		unittalk getnpcid(0,"過激派の青年#過激派2_09"),"過激派の青年 : 臆病者たちめ！";
+		unittalk getnpcid(0,"怒った青年#過激派5_087"),"怒った青年 : お前らはみんな、迫害する側と同じだ！";
 		next;
 		cutin "ep18_maram_03.png", 2;
 		mes "[マラム]";
@@ -4526,7 +4543,7 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "スアド……？";
 		next;
 		cutin "ep18_suad_03.png", 1;
-		emotion 9,"スアド#1_079";	// 2420
+		emotion 9,"スアド#1_079";
 		mes "[スアド]";
 		mes "…………";
 		mes "……。";
@@ -4550,7 +4567,7 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "命を懸けて戦う覚悟ができてるんだ！";
 		next;
 		cutin "ep18_suad_01.png", 1;
-		emotion 1,"スアド#1_079";	// 2420
+		emotion 1,"スアド#1_079";
 		mes "[スアド]";
 		mes "そこまでだ！";
 		mes "ここは、お互いの怒りをぶつけあうために";
@@ -4559,7 +4576,7 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "より良い未来を築くための場だ。";
 		next;
 		cutin "ep18_suad_01.png", 255;
-		emotion 7,"熱血青年#過激派1_083";	// 2424
+		emotion 7,"熱血青年#過激派1_083";
 		mes "[熱血青年]";
 		mes "より良い未来を築くために";
 		mes "邪魔者を打倒しろって言ってるんです！";
@@ -4577,8 +4594,8 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "……いい加減にしろ。";
 		mes "俺は、どちらにも加担しない。";
 		mes "両方の立場と根拠を聞く。";
-		unittalk getnpcid(0,"慌てる壮年#老年層2_089"),"慌てる壮年 : ……。";	// 2430
-		unittalk getnpcid(0,"過激派の若者#過激派2_08"),"過激派の若者 : ……。";	// 2425
+		unittalk getnpcid(0,"慌てる壮年#老年層2_089"),"慌てる壮年 : ……。";
+		unittalk getnpcid(0,"過激派の若者#過激派2_08"),"過激派の若者 : ……。";
 		next;
 		cutin "ep18_suad_01.png", 1;
 		mes "[スアド]";
@@ -4596,7 +4613,7 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "　武器が握られている‐^000000";
 		next;
 		cutin "ep18_maram_03.png", 2;
-		emotion 1,"マラム#1_082";	// 2423
+		emotion 1,"マラム#1_082";
 		mes "[マラム]";
 		mes "あの武器は……";
 		mes "私たちが持ち込んだものとは";
@@ -4652,7 +4669,7 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "ううむ……。";
 		next;
 		cutin "ep18_suad_01.png", 1;
-		emotion 0,"スアド#1_079";	// 2420
+		emotion 0,"スアド#1_079";
 		mes "[スアド]";
 		mes "ある程度意見が出そろったな。";
 		mes "俺たちの意志を示す為に";
@@ -4677,18 +4694,18 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "追って会議を行う。";
 		mes "これにて今回の大会議は閉会だ。";
 		next;
-		cloakonnpc "熱血青年#過激派1_083";	// 2424
-		cloakonnpc "無口な青年#中立派2_094";	// 2435
-		cloakonnpc "内気な壮年#老年層3_090";	// 2431
-		cloakonnpc "怒った青年#過激派5_087";	// 2428
-		cloakonnpc "地着きの老人#老年層1_08";	// 2429
-		cloakonnpc "慌てる壮年#老年層2_089";	// 2430
-		cloakonnpc "血の気の多い青年#過激派";	// 2427
-		cloakonnpc "弱気な青年#中立派1_093";	// 2434
-		cloakonnpc "熱血壮年#武器所持者1_09";	// 2433
-		cloakonnpc "過激派の若者#過激派2_08";	// 2425
-		cloakonnpc "中立派の青年#中立派3_09";	// 2436
-		cloakonnpc "臆病な老人#老年層4_091";	// 2432
+		cloakonnpc "熱血青年#過激派1_083";
+		cloakonnpc "無口な青年#中立派2_094";
+		cloakonnpc "内気な壮年#老年層3_090";
+		cloakonnpc "怒った青年#過激派5_087";
+		cloakonnpc "地着きの老人#老年層1_08";
+		cloakonnpc "慌てる壮年#老年層2_089";
+		cloakonnpc "血の気の多い青年#過激派";
+		cloakonnpc "弱気な青年#中立派1_093";
+		cloakonnpc "熱血壮年#武器所持者1_09";
+		cloakonnpc "過激派の若者#過激派2_08";
+		cloakonnpc "中立派の青年#中立派3_09";
+		cloakonnpc "臆病な老人#老年層4_091";
 		cutin "ep18_suad_01.png", 255;
 		mes "^0000FF‐会議の参加者は";
 		mes "　各々感じたことを語りながら";
@@ -4707,7 +4724,7 @@ wolfvill.gat,144,151,5	script	スアド#1_079	10378,{/* 15912 (cloaking)*/
 		mes "冒険者さんもボクの話を聞いて欲しい。";
 		set EP18_1QUE,41;
 		delquest 16572;
-		setquest 16573;	// state=1
+		setquest 16573;
 		close2;
 		cutin "ep18_suad_03.png", 255;
 		end;
@@ -4868,11 +4885,11 @@ wolfvill.gat,148,153,3	script	ミリアム#1_080	10377,{/* 15913 (cloaking)*/
 		mes "交渉事なら、私の出番ですよ！";
 		set EP18_1QUE,42;
 		delquest 16573;
-		setquest 16574;	// state=1
+		setquest 16574;
 		close2;
 		cutin "ep18_suad_03.png", 255;
-		cloakonnpc "ミリアム#1_080";	// 2421
-		cloakonnpc "マラム#1_082";	// 2423
+		cloakonnpc "ミリアム#1_080";
+		cloakonnpc "マラム#1_082";
 		end;
 	}
 	if(EP18_1QUE == 42) {//未調査
@@ -4974,20 +4991,20 @@ wolfvill.gat,145,146,5	script	熱血青年#過激派1_083	10397,{/* 15916 (cloaking)*/
 		mes "おぉーっ！";
 		mes "俺たちは負けない！";
 		mes "必ず勝つ！";
-		unittalk getnpcid(0,"過激派の若者#過激派2_082"),"過激派の若者 : 頑張れ！";	// 2425
-		unittalk getnpcid(0,"過激派の青年#過激派2_096"),"過激派の青年 : 勝つぞ！勝つぞ！";	// 2437
-		unittalk getnpcid(0,"豪快な青年#過激派3_085"),"豪快な青年 : 絶対に負けない！";	// 2426
-		unittalk getnpcid(0,"血の気の多い青年#過激派4_086"),"血の気の多い青年 : 頑張れ～～！";	// 2427
-		unittalk getnpcid(0,"怒った青年#過激派5_087"),"怒った青年 : 目にものみせてやる！";	// 2428
+		unittalk getnpcid(0,"過激派の若者#過激派2_082"),"過激派の若者 : 頑張れ！";
+		unittalk getnpcid(0,"過激派の青年#過激派2_096"),"過激派の青年 : 勝つぞ！勝つぞ！";
+		unittalk getnpcid(0,"豪快な青年#過激派3_085"),"豪快な青年 : 絶対に負けない！";
+		unittalk getnpcid(0,"血の気の多い青年#過激派4_086"),"血の気の多い青年 : 頑張れ～～！";
+		unittalk getnpcid(0,"怒った青年#過激派5_087"),"怒った青年 : 目にものみせてやる！";
 		next;
 		mes "[熱血青年]";
 		mes "俺たち自身の居場所を取り戻すため！";
 		mes "俺たちがやるべきは明白だ！";
 		delquest 16568;
 		if(!checkquest(16568) && !checkquest(16569) && !checkquest(16570) && !checkquest(16571)) {
-			unittalk getcharid(3),strcharinfo(0)+" : 話を聞いて回った。そろそろ会議が始まるだろう",1;	// self:hidden
+			unittalk getcharid(3),strcharinfo(0)+" : 話を聞いて回った。そろそろ会議が始まるだろう",1;
 			set EP18_1QUE,40;
-			setquest 16572;	// state=1
+			setquest 16572;
 		}
 		close;
 	}
@@ -5006,7 +5023,7 @@ OnInit:
 	end;
 }
 wolfvill.gat,147,148,3	script	過激派の若者#過激派2_082	939,{/* 15917 (cloaking)*/
-	unittalk "過激派の若者 : 勝つぞ！　勝たなきゃならん！";	// 2319
+	unittalk "過激派の若者 : 勝つぞ！　勝たなきゃならん！";
 	end;
 OnInit:
 	cloakonnpc;
@@ -5014,21 +5031,21 @@ OnInit:
 }
 wolfvill.gat,145,144,7	script	豪快な青年#過激派3_085	10398,{/* 15918 (cloaking)*/
 	if(EP18_1QUE != 42)
-		unittalk "豪快な青年 : 勝つのは俺たちだ！";	// 2320
+		unittalk "豪快な青年 : 勝つのは俺たちだ！";
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 wolfvill.gat,148,144,1	script	血の気の多い青年#過激派4_086	10399,{/* 15919 (cloaking)*/
-	unittalk "血の気の多い青年 : 奴らの神殿を破壊しよう！";	// 2321
+	unittalk "血の気の多い青年 : 奴らの神殿を破壊しよう！";
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 wolfvill.gat,143,148,5	script	怒った青年#過激派5_087	10398,{/* 15920 (cloaking)*/
-	unittalk "怒った青年 : 奴らを駆逐してやる！";	// 2322
+	unittalk "怒った青年 : 奴らを駆逐してやる！";
 	end;
 OnInit:
 	cloakonnpc;
@@ -5053,9 +5070,9 @@ wolfvill.gat,139,148,5	script	地着きの老人#老年層1_088	10393,{/* 15921 (cloaking
 		mes "ワシら年寄りが諫めねばならん。";
 		delquest 16569;
 		if(!checkquest(16568) && !checkquest(16569) && !checkquest(16570) && !checkquest(16571)) {
-			unittalk getcharid(3),strcharinfo(0)+" : 話を聞いて回った。そろそろ会議が始まるだろう",1;	// self:hidden
+			unittalk getcharid(3),strcharinfo(0)+" : 話を聞いて回った。そろそろ会議が始まるだろう",1;
 			set EP18_1QUE,40;
-			setquest 16572;	// state=1
+			setquest 16572;
 		}
 		close;
 	}
@@ -5071,21 +5088,21 @@ OnInit:
 	end;
 }
 wolfvill.gat,140,150,5	script	慌てる壮年#老年層2_089	10395,{/* 15922 (cloaking)*/
-	unittalk "慌てる壮年 : 最近の若者ときたら……";	// 2324
+	unittalk "慌てる壮年 : 最近の若者ときたら……";
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 wolfvill.gat,138,145,7	script	内気な壮年#老年層3_090	10396,{/* 15923 (cloaking)*/
-	unittalk "内気な壮年 : 考えが短絡的すぎる。";	// 2325
+	unittalk "内気な壮年 : 考えが短絡的すぎる。";
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 wolfvill.gat,141,146,7	script	臆病な老人#老年層4_091	945,{/* 15924 (cloaking)*/
-	unittalk "臆病な老人 : 私たちの意見も聞いてもらわねば……";	// 2326
+	unittalk "臆病な老人 : 私たちの意見も聞いてもらわねば……";
 	end;
 OnInit:
 	cloakonnpc;
@@ -5131,9 +5148,9 @@ wolfvill.gat,150,147,1	script	熱血壮年#武器所持者1_092	929,{/* 15925 (cloaking)*
 		mes "がははは！";
 		delquest 16570;
 		if(!checkquest(16568) && !checkquest(16569) && !checkquest(16570) && !checkquest(16571)) {
-			unittalk getcharid(3),strcharinfo(0)+" : 話を聞いて回った。そろそろ会議が始まるだろう",1;	// self:hidden
+			unittalk getcharid(3),strcharinfo(0)+" : 話を聞いて回った。そろそろ会議が始まるだろう",1;
 			set EP18_1QUE,40;
-			setquest 16572;	// state=1
+			setquest 16572;
 		}
 		close;
 	}
@@ -5173,9 +5190,9 @@ wolfvill.gat,152,145,1	script	弱気な青年#中立派1_093	931,{/* 15926 (cloaking)*/
 		mes "虎の威を借る狐ってやつか……。";
 		delquest 16571;
 		if(!checkquest(16568) && !checkquest(16569) && !checkquest(16570) && !checkquest(16571)) {
-			unittalk getcharid(3),strcharinfo(0)+" : 話を聞いて回った。そろそろ会議が始まるだろう",1;	// self:hidden
+			unittalk getcharid(3),strcharinfo(0)+" : 話を聞いて回った。そろそろ会議が始まるだろう",1;
 			set EP18_1QUE,40;
-			setquest 16572;	// state=1
+			setquest 16572;
 		}
 		close;
 	}
@@ -5194,14 +5211,14 @@ OnInit:
 	end;
 }
 wolfvill.gat,154,146,1	script	無口な青年#中立派2_094	10398,{/* 15927 (cloaking)*/
-	unittalk "無口な青年 : ……。";	// 2329
+	unittalk "無口な青年 : ……。";
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 wolfvill.gat,151,150,1	script	中立派の青年#中立派3_095	10397,{/* 15928 (cloaking)*/
-	unittalk "中立派の青年 : 私は誰の意見にも賛成しません。皆、思慮が足りてない。";	// 2330
+	unittalk "中立派の青年 : 私は誰の意見にも賛成しません。皆、思慮が足りてない。";
 	end;
 OnInit:
 	cloakonnpc;
@@ -5209,10 +5226,10 @@ OnInit:
 }
 wolfvill.gat,143,145,7	script	過激派の青年#過激派2_096	934,{/* 15929 (cloaking)*/
 	if(EP18_1QUE == 42) {
-		cloakonnpc "スアド#1_079";	// 2420
-		cloakonnpc "ミリアム#1_080";	// 2421
-		cloakonnpc "マラム#1_082";	// 2423
-		cloakoffnpc "マラム#1_081";	// 2422
+		cloakonnpc "スアド#1_079";
+		cloakonnpc "ミリアム#1_080";
+		cloakonnpc "マラム#1_082";
+		cloakoffnpc "マラム#1_081";
 		mes "[過激派の青年]";
 		mes "さっきの見たか？";
 		mes "大会議でこの武器を見せたら";
@@ -5298,7 +5315,7 @@ wolfvill.gat,143,145,7	script	過激派の青年#過激派2_096	934,{/* 15929 (cloaking)*
 		mes "ラヘルに戻る必要がありますね。";
 		set EP18_1QUE,43;
 		delquest 16574;
-		setquest 16575;	// state=1
+		setquest 16575;
 		close2;
 		cutin "ep18_maram_01.png", 255;
 		end;
@@ -5364,7 +5381,7 @@ rachel.gat,75,44,3	script	ヒゲ坊ジャック#武器商人	928,{/* 15931 */
 		mes "この店こそが、オレのすべて！";
 		mes "さあ、ゆっくり見ていってくれ！";
 		next;
-		cloakoffnpc "マラム#1_082_2";	// 2438
+		cloakoffnpc "マラム#1_082_2";
 		cutin "ep18_maram_01.png", 2;
 		mes "[マラム]";
 		mes "この方が「ヒゲ坊ジャック」さんの";
@@ -5386,7 +5403,7 @@ rachel.gat,75,44,3	script	ヒゲ坊ジャック#武器商人	928,{/* 15931 */
 			mes "で、出直しましょう！";
 			close2;
 			cutin "ep18_maram_01.png", 255;
-			cloakonnpc "マラム#1_082_2";	// 2438
+			cloakonnpc "マラム#1_082_2";
 			end;
 		case 2:
 			cutin "ep18_maram_01.png", 255;
@@ -5409,10 +5426,10 @@ rachel.gat,75,44,3	script	ヒゲ坊ジャック#武器商人	928,{/* 15931 */
 			mes "じゃあな！";
 			set EP18_1QUE,44;
 			delquest 16575;
-			setquest 16576;	// state=1
+			setquest 16576;
 			close2;
 			cutin "ep18_maram_01.png", 255;
-			cloakonnpc "マラム#1_082_2";	// 2438
+			cloakonnpc "マラム#1_082_2";
 			end;
 		case 3:
 			cutin "ep18_maram_01.png", 255;
@@ -5420,7 +5437,7 @@ rachel.gat,75,44,3	script	ヒゲ坊ジャック#武器商人	928,{/* 15931 */
 			mes "うちの店では靴下は売ってないぞ？";
 			mes "金物屋なんだが。";
 			close2;
-			cloakonnpc "マラム#1_082_2";	// 2438
+			cloakonnpc "マラム#1_082_2";
 			end;
 		case 4:
 			cutin "ep18_maram_01.png", 255;
@@ -5428,7 +5445,7 @@ rachel.gat,75,44,3	script	ヒゲ坊ジャック#武器商人	928,{/* 15931 */
 			mes "そういうのは花屋に行って";
 			mes "探してくれないか？";
 			close2;
-			cloakonnpc "マラム#1_082_2";	// 2438
+			cloakonnpc "マラム#1_082_2";
 			end;
 		}
 	}
@@ -5471,7 +5488,7 @@ OnInit:
 }
 veins.gat,293,282,3	script	ダンデロン#武器商_ベインス	943,{/* 16055 */
 	if(EP18_1QUE == 44) {
-		cloakoffnpc "マラム#1_082_3";	// 7607
+		cloakoffnpc "マラム#1_082_3";
 		cutin "ep18_maram_01.png", 2;
 		mes "[マラム]";
 		mes "こんにちは。";
@@ -5592,15 +5609,15 @@ veins.gat,293,282,3	script	ダンデロン#武器商_ベインス	943,{/* 16055 */
 		mes "トール火山で落ち合いましょうか。";
 		set EP18_1QUE,45;
 		delquest 16576;
-		setquest 16577;	// state=1
+		setquest 16577;
 		close2;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "マラム#1_082_3";	// 7607
+		cloakonnpc "マラム#1_082_3";
 		end;
 	}
 	//47まで転送？
 	if(EP18_1QUE >= 45 && EP18_1QUE <= 47) {
-		cloakoffnpc "マラム#1_082_3";	// 7607
+		cloakoffnpc "マラム#1_082_3";
 		mes "[ダンデロン]";
 		mes "俺はもう足を洗ったんだ。";
 		mes "何も知らん！";
@@ -5619,7 +5636,7 @@ veins.gat,293,282,3	script	ダンデロン#武器商_ベインス	943,{/* 16055 */
 		mes "トール火山で落ち合いましょうか。";
 		next;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "マラム#1_082_3";	// 7607
+		cloakonnpc "マラム#1_082_3";
 		mes "‐トール火山へ向かいますか？‐";
 		next;
 		if(select("はい","いいえ") == 2) {
@@ -5642,7 +5659,7 @@ OnQuestInfo:
 
 thor_v01.gat,169,169,0	script	#ep180_maram	139,14,14,{/* 16183 */
 	if(EP18_1QUE >= 45)
-		cloakoffnpc "マラム#軍事基地-秘密通路";	// 8435
+		cloakoffnpc "マラム#軍事基地-秘密通路";
 	end;
 }
 thor_v01.gat,169,169,3	script	マラム#軍事基地-秘密通路	10376,{/* 16184 (cloaking)*/
@@ -5727,7 +5744,7 @@ que_thr.gat,133,53,5	script	マラム#軍事基地1_101	10376,{/* 15932 */
 		mes "ここからやり直せば大丈夫です。";
 		set EP18_1QUE,46;
 		delquest 16577;
-		setquest 16578;	// state=1
+		setquest 16578;
 	}
 	else if(EP18_1QUE <= 47) {
 		cutin "ep18_maram_01.png", 2;
@@ -5852,8 +5869,8 @@ OnQuestInfo:
 }
 wolfvill.gat,140,112,0	script	#sms01_102	139,14,14,{/* 15933 */
 	if(EP18_1QUE == 48 || EP18_1QUE == 49) {
-		cloakoffnpc "スアド#sms01_103";	// 2442
-		unittalk getnpcid(0,"スアド#sms01_103"),"スアド : ……。";	// 2442
+		cloakoffnpc "スアド#sms01_103";
+		unittalk getnpcid(0,"スアド#sms01_103"),"スアド : ……。";
 	}
 	end;
 }
@@ -5885,8 +5902,8 @@ wolfvill.gat,140,112,5	script	スアド#sms01_103	10378,{/* 15934 (cloaking)*/
 		mes "血気盛んな奴らも";
 		mes "少しは大人しくなるだろう。";
 		next;
-		cloakoffnpc "ミリアム#sms01_104";	// 2443
-		cloakoffnpc "マラム#sms01_105";	// 2444
+		cloakoffnpc "ミリアム#sms01_104";
+		cloakoffnpc "マラム#sms01_105";
 		cutin "ep18_maram_03.png", 2;
 		mes "[マラム]";
 		mes "スアドォ～～！　スアド、スアドッ!!";
@@ -5949,11 +5966,11 @@ wolfvill.gat,140,112,5	script	スアド#sms01_103	10378,{/* 15934 (cloaking)*/
 		mes "探し出して、話を聞く。";
 		set EP18_1QUE,49;
 		delquest 16580;
-		setquest 17517;	// state=1
+		setquest 17517;
 		close2;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "マラム#sms01_105";	// 2444
-		cloakonnpc "ミリアム#sms01_104";	// 2443
+		cloakonnpc "マラム#sms01_105";
+		cloakonnpc "ミリアム#sms01_104";
 		end;
 	}
 	if(EP18_1QUE == 49) {
@@ -6001,19 +6018,19 @@ wolfvill.gat,131,258,1	script	略奪品#sms02_107	10250,{/* 15938 */}
 wolfvill.gat,132,258,1	script	略奪品#sms03_108	10250,{/* 15939 */}
 wolfvill.gat,131,257,1	script	略奪品#sms04_109	10250,20,20,{/* 15940 */
 	if(EP18_1QUE == 49) {
-		cloakoffnpc "スアド#sms02_113";	// 2452
-		cloakoffnpc "マラム#sms02_115";	// 2454
-		cloakoffnpc "ミリアム#sms02_114";	// 2453
+		cloakoffnpc "スアド#sms02_113";
+		cloakoffnpc "マラム#sms02_115";
+		cloakoffnpc "ミリアム#sms02_114";
 		cutin "ep18_maram_03.png", 2;
 		mes "[マラム]";
 		mes "あった……";
 		mes "隊商から奪われた荷物だ。";
 		next;
 		cutin "ep18_maram_03.png", 255;
-		cloakoffnpc "ラマクス#sms01_110";	// 2449
-		cloakoffnpc "クーン#sms01_111";	// 2450
-		cloakoffnpc "ヨピ#sms01_112";	// 2451
-		emotion 1,"ラマクス#sms01_110";	// 2449
+		cloakoffnpc "ラマクス#sms01_110";
+		cloakoffnpc "クーン#sms01_111";
+		cloakoffnpc "ヨピ#sms01_112";
+		emotion 1,"ラマクス#sms01_110";
 		mes "[ラマクス]";
 		mes "俺たちの戦利品を見に来たのか？";
 		mes "お！";
@@ -6052,9 +6069,9 @@ wolfvill.gat,131,257,1	script	略奪品#sms04_109	10250,20,20,{/* 15940 */
 		mes "それに～スアドもきっと喜ぶと思うよ？";
 		mes "なにせ「アーマッド商会」の奴らから";
 		mes "荷物を奪って来たんだからさ～。";
-		emotion 0,"スアド#sms02_113";	// 2452
-		emotion 23,"ミリアム#sms02_114";	// 2453
-		emotion 23,"マラム#sms02_115";	// 2454
+		emotion 0,"スアド#sms02_113";
+		emotion 23,"ミリアム#sms02_114";
+		emotion 23,"マラム#sms02_115";
 		next;
 		cutin "ep18_suad_04.png", 1;
 		mes "[スアド]";
@@ -6089,21 +6106,21 @@ wolfvill.gat,131,257,1	script	略奪品#sms04_109	10250,20,20,{/* 15940 */
 		mes "スアド……？";
 		set EP18_1QUE,50;
 		delquest 17517;
-		setquest 17518;	// state=1
+		setquest 17518;
 		close2;
 		cutin "ep18_maram_03.png", 255;
 		end;
 	}
 	if(EP18_1QUE == 50) {
-		cloakoffnpc "スアド#sms02_113";	// 2452
-		cloakoffnpc "マラム#sms02_115";	// 2454
-		cloakoffnpc "ミリアム#sms02_114";	// 2453
-		cloakoffnpc "ラマクス#sms01_110";	// 2449
-		cloakoffnpc "クーン#sms01_111";	// 2450
-		cloakoffnpc "ヨピ#sms01_112";	// 2451
-		cloakonnpc "住民#sms01_116";	// 2455
-		cloakonnpc "住民#sms02_117";	// 2456
-		cloakonnpc "住民#sms03_118";	// 2457
+		cloakoffnpc "スアド#sms02_113";
+		cloakoffnpc "マラム#sms02_115";
+		cloakoffnpc "ミリアム#sms02_114";
+		cloakoffnpc "ラマクス#sms01_110";
+		cloakoffnpc "クーン#sms01_111";
+		cloakoffnpc "ヨピ#sms01_112";
+		cloakonnpc "住民#sms01_116";
+		cloakonnpc "住民#sms02_117";
+		cloakonnpc "住民#sms03_118";
 	}
 	end;
 OnQuestInfo:
@@ -6114,50 +6131,50 @@ OnQuestInfo:
 	end;
 OnTouch:
 	if(EP18_1QUE == 49) {
-		cloakoffnpc "スアド#sms02_113";	// 2452
-		cloakoffnpc "マラム#sms02_115";	// 2454
-		cloakoffnpc "ミリアム#sms02_114";	// 2453
-		cloakonnpc "ラマクス#sms01_110";	// 2449
-		cloakonnpc "クーン#sms01_111";	// 2450
-		cloakonnpc "ヨピ#sms01_112";	// 2451
-		cloakonnpc "住民#sms01_116";	// 2455
-		cloakonnpc "住民#sms02_117";	// 2456
-		cloakonnpc "住民#sms03_118";	// 2457
+		cloakoffnpc "スアド#sms02_113";
+		cloakoffnpc "マラム#sms02_115";
+		cloakoffnpc "ミリアム#sms02_114";
+		cloakonnpc "ラマクス#sms01_110";
+		cloakonnpc "クーン#sms01_111";
+		cloakonnpc "ヨピ#sms01_112";
+		cloakonnpc "住民#sms01_116";
+		cloakonnpc "住民#sms02_117";
+		cloakonnpc "住民#sms03_118";
 	}
 	else if(EP18_1QUE == 50) {//	未調査
-		cloakoffnpc "スアド#sms02_113";	// 2452
-		cloakoffnpc "マラム#sms02_115";	// 2454
-		cloakoffnpc "ミリアム#sms02_114";	// 2453
-		cloakoffnpc "ラマクス#sms01_110";	// 2449
-		cloakoffnpc "クーン#sms01_111";	// 2450
-		cloakoffnpc "ヨピ#sms01_112";	// 2451
-		cloakonnpc "住民#sms01_116";	// 2455
-		cloakonnpc "住民#sms02_117";	// 2456
-		cloakonnpc "住民#sms03_118";	// 2457
+		cloakoffnpc "スアド#sms02_113";
+		cloakoffnpc "マラム#sms02_115";
+		cloakoffnpc "ミリアム#sms02_114";
+		cloakoffnpc "ラマクス#sms01_110";
+		cloakoffnpc "クーン#sms01_111";
+		cloakoffnpc "ヨピ#sms01_112";
+		cloakonnpc "住民#sms01_116";
+		cloakonnpc "住民#sms02_117";
+		cloakonnpc "住民#sms03_118";
 	}
 	else if(EP18_1QUE == 51) {
-		cloakonnpc "スアド#sms02_113";	// 2452
-		cloakonnpc "マラム#sms02_115";	// 2454
-		cloakonnpc "ミリアム#sms02_114";	// 2453
-		cloakoffnpc "ラマクス#sms01_110";	// 2449
-		cloakonnpc "クーン#sms01_111";	// 2450
-		cloakonnpc "ヨピ#sms01_112";	// 2451
-		cloakonnpc "住民#sms01_116";	// 2455
-		cloakonnpc "住民#sms02_117";	// 2456
-		cloakonnpc "住民#sms03_118";	// 2457
+		cloakonnpc "スアド#sms02_113";
+		cloakonnpc "マラム#sms02_115";
+		cloakonnpc "ミリアム#sms02_114";
+		cloakoffnpc "ラマクス#sms01_110";
+		cloakonnpc "クーン#sms01_111";
+		cloakonnpc "ヨピ#sms01_112";
+		cloakonnpc "住民#sms01_116";
+		cloakonnpc "住民#sms02_117";
+		cloakonnpc "住民#sms03_118";
 	}
 	end;
 }
 wolfvill.gat,131,252,3	script	ラマクス#sms01_110	21292,{/* 15941 (cloaking)*/
 	if(EP18_1QUE == 50) {
-		cloakoffnpc "スアド#sms02_113";	// 2452
-		cloakoffnpc "マラム#sms02_115";	// 2454
-		cloakoffnpc "ミリアム#sms02_114";	// 2453
-		cloakoffnpc "クーン#sms01_111";	// 2450
-		cloakoffnpc "ヨピ#sms01_112";	// 2451
-		cloakonnpc "住民#sms01_116";	// 2455
-		cloakonnpc "住民#sms02_117";	// 2456
-		cloakonnpc "住民#sms03_118";	// 2457
+		cloakoffnpc "スアド#sms02_113";
+		cloakoffnpc "マラム#sms02_115";
+		cloakoffnpc "ミリアム#sms02_114";
+		cloakoffnpc "クーン#sms01_111";
+		cloakoffnpc "ヨピ#sms01_112";
+		cloakonnpc "住民#sms01_116";
+		cloakonnpc "住民#sms02_117";
+		cloakonnpc "住民#sms03_118";
 		mes "[ラマクス]";
 		mes "この武器さえあれば～";
 		mes "復讐だって成し遂げられる！";
@@ -6173,9 +6190,9 @@ wolfvill.gat,131,252,3	script	ラマクス#sms01_110	21292,{/* 15941 (cloaking)*/
 		mes "^0000FF‐スアドが黙り込んでいる間に";
 		mes "　騒ぎを聞きつけ住民たちが";
 		mes "　次々と集まって来た‐^000000";
-		cloakoffnpc "住民#sms01_116";	// 2455
-		cloakoffnpc "住民#sms02_117";	// 2456
-		cloakoffnpc "住民#sms03_118";	// 2457
+		cloakoffnpc "住民#sms01_116";
+		cloakoffnpc "住民#sms02_117";
+		cloakoffnpc "住民#sms03_118";
 		next;
 		mes "[住民]";
 		mes "街の隊商を襲撃したって聞いたぞ！";
@@ -6195,11 +6212,11 @@ wolfvill.gat,131,252,3	script	ラマクス#sms01_110	21292,{/* 15941 (cloaking)*/
 		mes "俺たちも手伝うぜ！";
 		mes "いい加減、やられっぱなしの生活には";
 		mes "うんざりしていたからな！";
-		unittalk getnpcid(0,"住民#sms02_117"),"住民 : そうだ！そうだ！";	// 2456
-		unittalk getnpcid(0,"住民#sms01_116"),"住民 : 私たちにもできる！";	// 2455
-		unittalk getnpcid(0,"ラマクス#sms01_110"),"ラマクス : だろう？　オレたちに時がきた！";	// 2449
-		unittalk getnpcid(0,"クーン#sms01_111"),"クーン : いつまでこんな生活を送るつもりだ？";	// 2450
-		unittalk getnpcid(0,"ヨピ#sms01_112"),"ヨピ : そうだ！";	// 2451
+		unittalk getnpcid(0,"住民#sms02_117"),"住民 : そうだ！そうだ！";
+		unittalk getnpcid(0,"住民#sms01_116"),"住民 : 私たちにもできる！";
+		unittalk getnpcid(0,"ラマクス#sms01_110"),"ラマクス : だろう？　オレたちに時がきた！";
+		unittalk getnpcid(0,"クーン#sms01_111"),"クーン : いつまでこんな生活を送るつもりだ？";
+		unittalk getnpcid(0,"ヨピ#sms01_112"),"ヨピ : そうだ！";
 		next;
 		cutin "ep18_maram_03.png", 2;
 		mes "[マラム]";
@@ -6308,9 +6325,9 @@ wolfvill.gat,131,252,3	script	ラマクス#sms01_110	21292,{/* 15941 (cloaking)*/
 		cutin "ep18_suad_02.png", 255;
 		mes "[住民]";
 		mes "……スアドの言う通りだ！";
-		unittalk getnpcid(0,"住民#sms03_118"),"住民 : 武器に頼る必要は無い！";	// 2457
-		unittalk getnpcid(0,"住民#sms01_116"),"住民 : 俺たちの誇りを見せてやる！";	// 2455
-		unittalk getnpcid(0,"住民#sms02_117"),"住民 : 臆病者はいない！";	// 2456
+		unittalk getnpcid(0,"住民#sms03_118"),"住民 : 武器に頼る必要は無い！";
+		unittalk getnpcid(0,"住民#sms01_116"),"住民 : 俺たちの誇りを見せてやる！";
+		unittalk getnpcid(0,"住民#sms02_117"),"住民 : 臆病者はいない！";
 		next;
 		cutin "ep18_maram_01.png", 2;
 		mes "[マラム]";
@@ -6356,19 +6373,19 @@ wolfvill.gat,131,252,3	script	ラマクス#sms01_110	21292,{/* 15941 (cloaking)*/
 		mes "デモは、ラヘルの大神殿で行う予定だ。";
 		mes "準備ができたらラヘルの神殿前に来い。";
 		mes "ミリアムも準備を怠るな。";
-		cloakonnpc "住民#sms01_116";	// 2455
-		cloakonnpc "住民#sms02_117";	// 2456
-		cloakonnpc "住民#sms03_118";	// 2457
+		cloakonnpc "住民#sms01_116";
+		cloakonnpc "住民#sms02_117";
+		cloakonnpc "住民#sms03_118";
 		set EP18_1QUE,51;
 		delquest 17518;
-		setquest 17519;	// state=1
+		setquest 17519;
 		close2;
 		cutin "ep18_suad_01.png", 255;
-		cloakonnpc "スアド#sms02_113";	// 2452
-		cloakonnpc "マラム#sms02_115";	// 2454
-		cloakonnpc "ミリアム#sms02_114";	// 2453
-		cloakonnpc "クーン#sms01_111";	// 2450
-		cloakonnpc "ヨピ#sms01_112";	// 2451
+		cloakonnpc "スアド#sms02_113";
+		cloakonnpc "マラム#sms02_115";
+		cloakonnpc "ミリアム#sms02_114";
+		cloakonnpc "クーン#sms01_111";
+		cloakonnpc "ヨピ#sms01_112";
 		end;
 	}
 	if(EP18_1QUE == 51) {
@@ -6461,7 +6478,7 @@ rachel.gat,169,245,3	script	平凡な人#sms04_119	10399,{/* 15950 */
 		mes "^ff0000宿屋の中庭^000000で";
 		mes "今後の件について";
 		mes "相談するみたいですよ？";
-		viewpoint 1, 116, 200, 18, 0x00FF00;	// 2458
+		viewpoint 1, 116, 200, 18, 0x00FF00;
 		next;
 		mes "‐^ff0000宿屋の中庭^000000へ向かいますか？‐";
 		next;
@@ -6481,7 +6498,7 @@ rachel.gat,169,245,3	script	平凡な人#sms04_119	10399,{/* 15950 */
 		mes "関係者以外は近寄らないでください～。";
 		next;
 		cutin "ep18_suad_01.png", 2;
-		cloakoffnpc "スアド#sms03_120";	// 2459
+		cloakoffnpc "スアド#sms03_120";
 		mes "[スアド]";
 		mes "警戒しなくていい。";
 		mes "こいつは俺たちのデモについてくる";
@@ -6489,17 +6506,17 @@ rachel.gat,169,245,3	script	平凡な人#sms04_119	10399,{/* 15950 */
 		mes "俺たちの正当性を証明してくれる。";
 		next;
 		cutin "ep18_miriam_01.png", 0;
-		cloakoffnpc "ミリアム#sms03_121";	// 2460
+		cloakoffnpc "ミリアム#sms03_121";
 		mes "[ミリアム]";
 		mes "これで全員揃ったね。";
 		set EP18_1QUE,52;
 		delquest 17519;
-		setquest 17520;	// state=1
+		setquest 17520;
 		next;
 	}
 	else if(EP18_1QUE == 52) {
-		cloakoffnpc "スアド#sms03_120";	// 2459
-		cloakoffnpc "ミリアム#sms03_121";	// 2460
+		cloakoffnpc "スアド#sms03_120";
+		cloakoffnpc "ミリアム#sms03_121";
 	}
 	cutin "ep18_suad_01.png", 2;
 	mes "[スアド]";
@@ -6607,25 +6624,25 @@ OnInit:
 }
 rachel.gat,116,200,0	script	#ep18w14_150	139,14,14,{/* 15953 */
 	if(EP18_1QUE == 53) {
-		cloakoffnpc "ニルエン#sms01_122";	// 2462
-		cloakoffnpc "ジェド#sms01_123";	// 2463
-		cloakoffnpc "ミリアム#sms04_125";	// 2465
-		cloakoffnpc "スアド#sms04_124";	// 2464
+		cloakoffnpc "ニルエン#sms01_122";
+		cloakoffnpc "ジェド#sms01_123";
+		cloakoffnpc "ミリアム#sms04_125";
+		cloakoffnpc "スアド#sms04_124";
 	}
 	if(EP18_1QUE == 54) {
-		cloakoffnpc "ニルエン#sms01_122";	// 2462
-		cloakoffnpc "ジェド#sms01_123";	// 2463
+		cloakoffnpc "ニルエン#sms01_122";
+		cloakoffnpc "ジェド#sms01_123";
 	}
 	if(EP18_1QUE == 55) {
-		cloakoffnpc "ニルエン#sms01_122";	// 2462
+		cloakoffnpc "ニルエン#sms01_122";
 	}
 	end;
 }
 rachel.gat,116,200,5	script	ニルエン#sms01_122	915,{/* 15954 (cloaking)*/
 	if(EP18_1QUE == 53) {
-		cloakoffnpc "ジェド#sms01_123";	// 2463
-		cloakoffnpc "スアド#sms04_124";	// 2464
-		cloakoffnpc "ミリアム#sms04_125";	// 2465
+		cloakoffnpc "ジェド#sms01_123";
+		cloakoffnpc "スアド#sms04_124";
+		cloakoffnpc "ミリアム#sms04_125";
 		cutin "ra_gwoman.bmp", 2;
 		mes "[ニルエン大神官]";
 		mes "ようやく一息つきました。";
@@ -6739,11 +6756,11 @@ rachel.gat,116,200,5	script	ニルエン#sms01_122	915,{/* 15954 (cloaking)*/
 		mes "準備ができたら来てください。";
 		set EP18_1QUE,54;
 		delquest 17521;
-		setquest 17525;	// state=1
+		setquest 17525;
 		close2;
 		cutin "ep18_miriam_01.png", 255;
-		cloakonnpc "ミリアム#sms04_125";	// 2465
-		cloakonnpc "スアド#sms04_124";	// 2464
+		cloakonnpc "ミリアム#sms04_125";
+		cloakonnpc "スアド#sms04_124";
 		end;
 	}
 	if(EP18_1QUE >= 54 && EP18_1QUE <= 55) {
@@ -6815,16 +6832,16 @@ OnInit:
 
 oz_dun01.gat,223,114,0	script	#ep180_oz_c12	139,{/* 15958 */
 	if(EP18_1QUE == 54) {
-		cloakonnpc "マラム#c12_01_128";	// 8404
-		cloakonnpc "スアド#c12_01_129";	// 8405
-		cloakonnpc "ミリアム#c12_01_130";	// 8406
-		cloakonnpc "アイラ#c12_01_131";	// 8407
+		cloakonnpc "マラム#c12_01_128";
+		cloakonnpc "スアド#c12_01_129";
+		cloakonnpc "ミリアム#c12_01_130";
+		cloakonnpc "アイラ#c12_01_131";
 	}
 	if(EP18_1QUE == 55) {
-		cloakoffnpc "マラム#c12_01_128";	// 8404
-		cloakoffnpc "スアド#c12_01_129";	// 8405
-		cloakoffnpc "ミリアム#c12_01_130";	// 8406
-		cloakoffnpc "アイラ#c12_01_131";	// 8407
+		cloakoffnpc "マラム#c12_01_128";
+		cloakoffnpc "スアド#c12_01_129";
+		cloakoffnpc "ミリアム#c12_01_130";
+		cloakoffnpc "アイラ#c12_01_131";
 	}
 	end;
 }
@@ -6832,8 +6849,8 @@ oz_dun01.gat,223,114,3	script	約束の場所#c12_evt01_127	10043,{/* 15959 */
 	if(EP18_1QUE == 54) {
 		mes "^0000FF‐ミリアムに指定された場所には";
 		mes "　マラムとスアドが待っていた‐^000000";
-		cloakoffnpc "マラム#c12_01_128";	// 8404
-		cloakoffnpc "スアド#c12_01_129";	// 8405
+		cloakoffnpc "マラム#c12_01_128";
+		cloakoffnpc "スアド#c12_01_129";
 		next;
 		cutin "ep18_maram_03.png", 2;
 		mes "[マラム]";
@@ -6850,8 +6867,8 @@ oz_dun01.gat,223,114,3	script	約束の場所#c12_evt01_127	10043,{/* 15959 */
 		mes "やるべき事をやったんだ。";
 		mes "……それで十分だ。";
 		next;
-		cloakoffnpc "ミリアム#c12_01_130";	// 8406
-		cloakoffnpc "アイラ#c12_01_131";	// 8407
+		cloakoffnpc "ミリアム#c12_01_130";
+		cloakoffnpc "アイラ#c12_01_131";
 		cutin "ep18_miriam_01.png", 0;
 		mes "[ミリアム]";
 		mes "もうみんな集まってるのか。";
@@ -6957,12 +6974,12 @@ oz_dun01.gat,223,114,3	script	約束の場所#c12_evt01_127	10043,{/* 15959 */
 		mes "準備はよろしいですか？";
 		set EP18_1QUE,55;
 		delquest 17525;
-		setquest 18083;	// state=1
+		setquest 18083;
 		close2;
 		end;
 	}
 	if(EP18_1QUE == 55) {
-		unittalk getnpcid(0,"アイラ#c12_01_131"),"アイラ : 準備できましたか？",1;	// 8407
+		unittalk getnpcid(0,"アイラ#c12_01_131"),"アイラ : 準備できましたか？",1;
 		end;
 	}
 	end;
@@ -6974,7 +6991,7 @@ OnQuestInfo:
 	end;
 }
 oz_dun01.gat,225,119,3	script	マラム#c12_01_128	10376,{/* 15960 (cloaking)*/
-	end
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -7116,7 +7133,7 @@ OnInit:
 }
 oz_dun01.gat,27,184,0	script	#ep18w10_152	139,14,14,{/* 15972 */
 	if(checkquest(11725) || checkquest(11726))
-		cloakoffnpc "イムリル#ep18_sb1";	// 8409
+		cloakoffnpc "イムリル#ep18_sb1";
 	end;
 }
 oz_dun01.gat,27,184,5	script	イムリル#ep18_sb1	10379,{/* 15973 (cloaking)*/
@@ -7135,7 +7152,7 @@ oz_dun01.gat,27,184,5	script	イムリル#ep18_sb1	10379,{/* 15973 (cloaking)*/
 		mes "まずこの道は^e5555e一本道^000000だから";
 		mes "このまま歩いて進めばいい。";
 		delquest 11725;
-		setquest 11726;	// state=1
+		setquest 11726;
 		close2;
 		cutin "ep18_imril_02.png", 255;
 		end;
@@ -7190,7 +7207,7 @@ oz_dun01.gat,68,284,5	script	箱#ep18_sb1	10250,{/* 15974 */
 		mes "この荷物は後で回収するとして";
 		mes "先に進もう。";
 		delquest 11726;
-		setquest 11727;	// state=1
+		setquest 11727;
 		close2;
 		cutin "ep18_imril_02.png", 255;
 		end;
@@ -7214,7 +7231,7 @@ oz_dun01.gat,68,284,5	script	箱#ep18_sb1	10250,{/* 15974 */
 		mes "この荷物は後で回収するとして";
 		mes "先に進もう。";
 		delquest 11726;
-		setquest 11727;	// state=1
+		setquest 11727;
 		close2;
 		cutin "ep18_imril_02.png", 255;
 		end;
@@ -7230,7 +7247,7 @@ OnQuestInfo:
 }
 oz_dun01.gat,65,189,0	script	#ep18w10_153	139,{/* 15975 */
 	if(checkquest(11727))
-		cloakoffnpc "険しい道#ep18_sb1";	// 8412
+		cloakoffnpc "険しい道#ep18_sb1";
 	end;
 }
 oz_dun01.gat,65,189,5	script	険しい道#ep18_sb1	10428,{/* 15976 (cloaking)*/
@@ -7246,7 +7263,7 @@ oz_dun01.gat,65,189,5	script	険しい道#ep18_sb1	10428,{/* 15976 (cloaking)*/
 		mes "ここからはもっと下りだ。";
 		mes "^e5555e南の方^000000に進もう。";
 		delquest 11727;
-		setquest 11728;	// state=1
+		setquest 11728;
 		close2;
 		cutin "ep18_imril_02.png", 255;
 		end;
@@ -7279,7 +7296,7 @@ OnInit:
 }
 oz_dun01.gat,111,96,0	script	#ep18w10_154	139,14,14,{/* 8413 */
 	if(checkquest(11728))
-		cloakoffnpc "蒸気の出る穴#ep18_sb1";	// 8414
+		cloakoffnpc "蒸気の出る穴#ep18_sb1";
 	end;
 }
 oz_dun01.gat,111,96,5	script	蒸気の出る穴#ep18_sb1	10428,{/* 8414 (cloaking)*/
@@ -7304,8 +7321,8 @@ oz_dun01.gat,111,96,5	script	蒸気の出る穴#ep18_sb1	10428,{/* 8414 (cloaking)*/
 		mes "‐近くでイムリルを呼ぶ声が聞こえた。";
 		mes "　声の主を探してみよう‐";
 		delquest 11728;
-		setquest 11729;	// state=1
-		cloakoffnpc "休んでいる男性#ep18_sb1";	// 8416
+		setquest 11729;
+		cloakoffnpc "休んでいる男性#ep18_sb1";
 		close;
 	}
 	end;
@@ -7322,7 +7339,7 @@ OnInit:
 
 oz_dun01.gat,100,92,0	script	#ep18w10_155	139,14,14,{/* 8415 */
 	if(checkquest(11729) || checkquest(11730) || checkquest(11731))
-		cloakoffnpc "休んでいる男性#ep18_sb1";	// 8416
+		cloakoffnpc "休んでいる男性#ep18_sb1";
 	end;
 }
 oz_dun01.gat,100,92,3	script	休んでいる男性#ep18_sb1	10396,{/* 8416 (cloaking)*/
@@ -7381,7 +7398,7 @@ oz_dun01.gat,100,92,3	script	休んでいる男性#ep18_sb1	10396,{/* 8416 (cloaking)*/
 		mes "……すまないが、";
 		mes "言葉に甘えるとしよう。";
 		delquest 11729;
-		setquest 11730;	// state=1
+		setquest 11730;
 		close2;
 		cutin "ep18_imril_02.png", 255;
 		end;
@@ -7430,7 +7447,7 @@ oz_dun01.gat,100,92,3	script	休んでいる男性#ep18_sb1	10396,{/* 8416 (cloaking)*/
 		mes "[イムリル]";
 		mes "もう少し奥も調査しておくか。";
 		delquest 11730;
-		setquest 11731;	// state=1
+		setquest 11731;
 		close2;
 		cutin "ep18_imril_01.png", 255;
 		end;
@@ -7463,7 +7480,7 @@ oz_dun01.gat,134,56,5	script	箱#ep18_sb2	10250,{/* 8417 */
 		mes "先に奥の方を";
 		mes "調査しに行こう。";
 		delquest 11731;
-		setquest 11732;	// state=1
+		setquest 11732;
 		close2;
 		cutin "ep18_imril_01.png", 255;
 		end;
@@ -7495,7 +7512,7 @@ OnQuestInfo:
 
 oz_dun01.gat,110,37,0	script	#ep18w10_156	139,{/* 8418 */
 	if(checkquest(11732) || checkquest(11733))
-		cloakoffnpc "熱気#ep18_sb2";	// 8419
+		cloakoffnpc "熱気#ep18_sb2";
 	end;
 }
 oz_dun01.gat,110,37,5	script	熱気#ep18_sb2	10428,{/* 8419 (cloaking)*/
@@ -7518,7 +7535,7 @@ oz_dun01.gat,110,37,5	script	熱気#ep18_sb2	10428,{/* 8419 (cloaking)*/
 		mes "さて……それじゃ意を決して";
 		mes "下に降りるとするか。";
 		delquest 11732;
-		setquest 11733;	// state=1
+		setquest 11733;
 		close2;
 		cutin "ep18_imril_01.png", 255;
 		end;
@@ -7558,7 +7575,7 @@ OnInit:
 }
 oz_dun02.gat,152,276,0	script	#ep18w10_157	139,14,14,{/* 8420 */
 	if(checkquest(11733) || checkquest(11734))
-		cloakoffnpc "イムリル#ep18_sb3";	// 8421
+		cloakoffnpc "イムリル#ep18_sb3";
 	end;
 }
 oz_dun02.gat,152,276,5	script	イムリル#ep18_sb3	10379,{/* 8421 (cloaking)*/
@@ -7574,7 +7591,7 @@ oz_dun02.gat,152,276,5	script	イムリル#ep18_sb3	10379,{/* 8421 (cloaking)*/
 		mes "長居は危険だから";
 		mes "少し回ったら村に帰った方がいいな。";
 		delquest 11733;
-		setquest 11734;	// state=1
+		setquest 11734;
 		close2;
 		cutin "ep18_imril_02.png", 255;
 		end;
@@ -7662,8 +7679,8 @@ oz_dun02.gat,143,231,3	script	老人#ep18_sb1	10393,{/* 8422 */
 		mes "これ以上、ここにいたら";
 		mes "干からびちゃうよ。";
 		delquest 11734;
-		setquest 11735;	// state=1
-		cloakonnpc "イムリル#ep18_sb3";	// 8421
+		setquest 11735;
+		cloakonnpc "イムリル#ep18_sb3";
 		close2;
 		cutin "ep18_imril_02.png", 255;
 		end;
@@ -7706,7 +7723,62 @@ oz_dun01.gat,112,30,0	script	#to_oz_dun02	45,1,1,{/* 8431 */
 oz_dun02.gat,142,284,0	warp	#to_oz_dun01	1,1,oz_dun01.gat,112,34	// 8432 from: oz_dun02.gat(142, 283)
 
 rachel.gat,176,80,0	script	#灰色森花スタート	139,5,5,{/* 15987 */
-OnTouch:
+	if(checkquest(130111)) {
+		cloakoffnpc "貪欲な男性#E18_1";
+		cloakoffnpc "虐待される子供#E18_2";
+		mes "‐貪欲そうな男が";
+		mes "　子供を叱りつけている‐";
+		next;
+		if(select("様子を見てみる","無視する") == 2) {
+			mes "‐その場を去った‐";
+			close;
+		}
+		mes "[貪欲な男性]";
+		mes "行き場のない原住民のお前に";
+		mes "仕事をくれてやったのに";
+		mes "お客様の財布に手を出すとは！";
+		mes "え～い、お前はクビだ！";
+		mes "すぐに失せろ！";
+		next;
+		misceffect 0,"虐待される子供#E18_2";
+		mes "[子供]";
+		mes "社長、すみませんでした。";
+		mes "どうかクビだけは……";
+		mes "父さんの薬代が要るんです！";
+		mes "せめて今までの給料だけでも……。";
+		next;
+		emotion 28,"虐待される子供#E18_2";
+		misceffect 0,"虐待される子供#E18_2";
+		cloakonnpc "虐待される子供#E18_2";
+		cloakoffnpc "虐待される子供#E18_4";
+		emotion 6,"貪欲な男性#E18_1";
+		unittalk getnpcid(0,"貪欲な男性#E18_1"),"貪欲な男性 : ええい、むかつく。";
+		mes "[貪欲な男性]";
+		mes "はあ？　給料だぁ！？";
+		mes "財布を盗んでおいて給与だと？";
+		mes "賠償を請求したいのは、こっちだ！";
+		mes "さっさと失せろ！";
+		next;
+		delquest 130111;
+		setquest 5932;
+		cloakonnpc "貪欲な男性#E18_1";
+		close;
+	}
+	else if(checkquest(5932)) {
+		cloakonnpc "虐待される子供#E18_2";
+		cloakoffnpc "虐待される子供#E18_4";
+	}
+	else {
+		cloakonnpc "貪欲な男性#E18_1";
+		cloakonnpc "虐待される子供#E18_2";
+		cloakonnpc "虐待される子供#E18_4";
+	}
+	end;
+OnQuestInfo:
+	if(checkquest(130111))
+		showevent 0, 3, "#灰色森花スタート";
+	else
+		showevent 9999,0,"#灰色森花スタート";
 	end;
 }
 rachel.gat,169,79,0	script	#演出用ワープ	45,{/* 15988 */}
@@ -7721,29 +7793,594 @@ OnInit:
 	end;
 }
 rachel.gat,180,80,4	script	虐待される子供#E18_4	944,{/* 15991 (cloaking)*/
+	if(checkquest(5932)) {
+		mes "[子供]";
+		mes "……あ～あ。";
+		mes "楽な仕事だったから";
+		mes "結構気に入ってたんだけど";
+		mes "盗みがバレちゃしょうがねえや。";
+		next;
+		menu "大丈夫？",-;
+		mes "[子供]";
+		mes "あん？";
+		mes "なんだ、よそ者か。";
+		mes "同情なんていらないぜ。";
+		mes "ここいらじゃ原住民への差別は";
+		mes "日常茶飯事だからな。";
+		next;
+		mes "‐目の前の子供はそう言うと";
+		mes "　懐から小銭入れを取り出した‐";
+		next;
+		mes "[子供]";
+		mes "社長もアホだよなぁ。";
+		mes "俺が盗んだのは社長の財布なのに。";
+		mes "さ～～て、幾ら入ってるかなぁ。";
+		next;
+		mes "[子供]";
+		mes "いち、に、さん、し、ご、ろく……";
+		mes "お！";
+		mes "さっすが社長さん。";
+		mes "たんまり持ってるねぇ。";
+		next;
+		menu "返した方が良いんじゃない？",-;
+		mes "[子供]";
+		mes "ばっかお前！";
+		mes "俺はあいつから給料もらってないの。";
+		mes "これは正当な報酬ってわけ。";
+		mes "さ～って、事業資金も溜まったし";
+		mes "ここいらで一旗揚げるとするか！";
+		next;
+		menu "事業資金？",-;
+		mes "[子供]";
+		mes "お前、目ざといなぁ……";
+		mes "はは～ん、さては俺のかっちょいい";
+		mes "事業のアイデアを知りたいんだな？";
+		next;
+		mes "[子供]";
+		mes "俺の事業を手伝う気があるなら";
+		mes "教えてやってもいいぜ。";
+		mes "その気があるなら、俺のところに来な。";
+		mes "おっと、俺の名前を教えておいて";
+		mes "やらねえとな。";
+		next;
+		delquest 5932;
+		setquest 5933;
+	}
+	mes "[メザイ]";
+	mes "俺の名前は「^0000FFメザイ^000000」だ。";
+	mes "忘れんなよ？";
+	mes "そんじゃな！";
+	cloakonnpc "虐待される子供#E18_4";
+	next;
+	mes "-メザイの元に向かいますか？-";
+	next;
+	if(select("メザイの元に向かう","やめておく") == 2) {
+		mes "-その場から離れた-";
+		close;
+	}
+	mes "-メザイの元に向かう事にした-";
+	close2;
+	warp "rachel.gat", 70, 129;
+	end;
+OnQuestInfo:
+	if(checkquest(5932))
+		showevent 0, 3, "虐待される子供#E18_4";
+	else
+		showevent 9999,0,"虐待される子供#E18_4";
+	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 rachel.gat,66,135,0	script	#フラワールーム本店	139,14,14,{/* 15992 */
 OnTouch:
-	cloakonnpc "メザイ#E18_5";
-	cloakonnpc "ハーフフラワー#E18_6";
-	cloakonnpc "メザイ#E18_7";
+	if(checkquest(5933) || checkquest(5934)) {
+		cloakoffnpc "メザイ#E18_5";
+		cloakonnpc "メザイ#E18_7";
+	}
+	else if(checkquest(5935)) {
+		cloakoffnpc "メザイ#E18_5";
+		cloakoffnpc "ハーフフラワー#E18_6";
+		cloakonnpc "メザイ#E18_7";
+	}
+	else if(checkquest(5936)) {
+		if(checkquest(5936)&8) {
+			cloakonnpc "メザイ#E18_5";
+			cloakonnpc "ハーフフラワー#E18_6";
+			cloakoffnpc "メザイ#E18_7";
+		}
+		else {
+			cloakoffnpc "メザイ#E18_5";
+			cloakonnpc "ハーフフラワー#E18_6";
+			cloakonnpc "メザイ#E18_7";
+		}
+	}
+	else {
+		cloakonnpc "メザイ#E18_5";
+		cloakonnpc "ハーフフラワー#E18_6";
+		cloakonnpc "メザイ#E18_7";
+	}
 	end;
 }
 rachel.gat,70,135,4	script	メザイ#E18_5	944,{/* 15993 (cloaking)*/
+	if(checkquest(5933)) {
+		mes "[メザイ]";
+		mes "らっしゃっせー……";
+		mes "って、なんだ、さっきの冒険者か。";
+		mes "ここに来たってことは……";
+		mes "俺の事業を手伝ってくれるんだな？";
+		next;
+		if(select("話を聞きたい","興味ない") == 2) {
+			mes "[メザイ]";
+			mes "なんだ、冷やかしかよ。";
+			mes "帰れ帰れ！";
+			close;
+		}
+		mes "[メザイ]";
+		mes "よーし、耳の穴をかっぽじって";
+		mes "よーく聞けよ！";
+		mes "俺の事業ってのは、この街で";
+		mes "花を売ることだ！";
+		next;
+		menu "それだけ？",-;
+		mes "[メザイ]";
+		mes "はぁ～これだからよそ者は！";
+		mes "砂漠の街で花を売るってのが";
+		mes "どれだけ革新的なことか";
+		mes "わかってねえだろ？";
+		next;
+		mes "[メザイ]";
+		mes "この街で売られてる花は";
+		mes "ぜ～～んぶ造花なんだ。";
+		mes "つまり、偽物！";
+		mes "だけど、俺が売ろうとしてるのは";
+		mes "本物の生花なんだよ！";
+		next;
+		menu "生花をどうやって手に入れる？",-;
+		mes "[メザイ]";
+		mes "ふ～ん、鋭いな、よそ者。";
+		mes "気にいったぜ。";
+		mes "そうそう、そこが肝ってわけだ。";
+		next;
+		mes "[メザイ]";
+		mes "「ハーフフラワー」って知ってるか？";
+		mes "もっとも、原住民でなきゃ";
+		mes "聞いたこともないだろうけどな。";
+		next;
+		mes "[メザイ]";
+		mes "ハーフフラワーってのは";
+		mes "灰色狼の森にのみ咲く花だ。";
+		mes "俺のオトンがオカンに";
+		mes "プロポーズする時に贈ったんだ。";
+		next;
+		mes "[メザイ]";
+		mes "オカンはとっくに死んじまって";
+		mes "オトンも飲んだくれになってるけど";
+		mes "俺はオトンから";
+		mes "ハーフフラワーについて";
+		mes "いろいろ聞かされてきたのさ。";
+		next;
+		mes "[メザイ]";
+		mes "ハーフフラワーが咲く場所が";
+		mes "木の根元なら何だかんだ……";
+		mes "石の下ならああのこうの……";
+		mes "草の側なら……ってな風に。";
+		next;
+		mes "[メザイ]";
+		mes "ま、そういうわけで";
+		mes "ハーフフラワーを仕入れて";
+		mes "街で売るって事業を思いついたのさ。";
+		mes "じゃあ、こっからが本題だ。";
+		next;
+		mes "[メザイ]";
+		mes "冒険者のアンタには";
+		mes "「ハーフフラワー」を仕入れてきて";
+		mes "欲しいんだ。";
+		mes "まずは安定的に商品となるものを";
+		mes "仕入れるのが大事だからな。";
+		next;
+		if(select("手伝う","今は無理だ") == 2) {
+			mes "[メザイ]";
+			mes "ちぇっ！";
+			mes "せっかくビッグになれる";
+			mes "チャンスなのにな！";
+			close;
+		}
+		mes "[メザイ]";
+		mes "へっへっへ！";
+		mes "それじゃ、俺と契約しよう。";
+		mes "これから俺のことは";
+		mes "「シャチョーさん」と呼ぶように。";
+		next;
+		delquest 5933;
+		setquest 5934;
+		mes "[メザイ]";
+		mes "代わりに、社員教育は";
+		mes "バッチリしてやるからな。";
+		mes "まず、ハーフフラワーの採取方法から";
+		mes "教えてやるから";
+		mes "準備ができたら、話しかけてくれ。";
+		close;
+	}
+	if(checkquest(5934)) {
+		mes "[メザイ]";
+		mes "おっほん！　";
+		mes "ハーフフラワーの採集について";
+		mes "講義をはじめる。";
+		mes "準備はいいか？";
+		next;
+		if(select("始めてくださいシャッチョーさん","ちょっと待って") == 2) {
+			mes "[メザイ]";
+			mes "さっさと準備してくれよ～。";
+			close;
+		}
+		mes "[メザイ]";
+		mes "では、始めるぞ！";
+		mes "ハーフフラワーの採集は";
+		mes "大きく分けて4つの工程に分けられる。";
+		mes "先ず始めに「茎」を切るんだ。";
+		next;
+		mes "[メザイ]";
+		mes "二番目は、切った茎から";
+		mes "葉っぱを除去して……";
+		next;
+		mes "[メザイ]";
+		mes "三番目にお花を挿す小さい瓶に";
+		mes "水と秘伝の粉を入れて……";
+		mes "よく混ぜる！";
+		next;
+		mes "[メザイ]";
+		mes "最後は、小さい瓶に茎の先端を浸けて";
+		mes "花が痛まないように丁寧に包装！";
+		mes "ほい、完成！";
+		next;
+		mes "[メザイ]";
+		mes "簡単だろ？　まあ実際には";
+		mes "花が咲いてる場所によって";
+		mes "茎を切る角度や除去する葉っぱの数や";
+		mes "水に入れる粉の量が違うから";
+		mes "あとでマニュアルを渡すよ。";
+		next;
+		mes "[メザイ]";
+		mes "さて、注目～。";
+		mes "ここに練習用のハーフフラワーがある。";
+		mes "こいつで練習してもらう。";
+		next;
+		delquest 5934;
+		setquest 5935;
+		cloakoffnpc "ハーフフラワー#E18_6";
+		mes "[メザイ]";
+		mes "今回は、木の下に咲くタイプで";
+		mes "やるとするかー。";
+		mes "準備ができたら花を調べてくれよ。";
+		close;
+	}
+	if(checkquest(5935)) {
+		mes "[メザイ]";
+		mes "さて、注目～。";
+		mes "ここに練習用のハーフフラワーがある。";
+		mes "こいつで練習してもらう。";
+		next;
+		mes "[メザイ]";
+		mes "今回は、木の下に咲くタイプで";
+		mes "やるとするかー。";
+		mes "準備ができたら花を調べてくれよ。";
+		close;
+	}
+	if(checkquest(5936)) {
+		if(countitem(1000407) == 0) {
+			cloakoffnpc "ハーフフラワー#E18_6";
+			setquest 5935;
+			delquest 5936;
+			mes "[メザイ]";
+			mes "なんだぁ？";
+			mes "練習用のハーフフラワーが枯れてるな。";
+			mes "これじゃ売り物になんねえよ。";
+			mes "もう一回、練習しなきゃダメだ。";
+			close;
+		}
+		mes "[メザイ]";
+		mes "お疲れぃ！";
+		mes "なかなかやるじゃん。";
+		mes "物覚えが早くて助かるぜ。";
+		mes "今の要領で花を仕入れてくるんだ。";
+		next;
+		mes "[メザイ]";
+		mes "ちなみに、花は鮮度が命だ！";
+		mes "手に入れた花は";
+		mes "できるだけ早く持って来てくれよ。";
+		next;
+		mes "[メザイ]";
+		mes "採取方法を上手くやればその分";
+		mes "長持ちするからな。";
+		next;
+		delitem 1000407,1;
+		compquest 5936;
+		cloakonnpc "メザイ#E18_5";
+		cloakoffnpc "メザイ#E18_7";
+		mes "[メザイ]";
+		mes "さて、本格的な仕事は";
+		mes "これからだ！";
+		mes "また来てくれよ。";
+		mes "そんじゃな！";
+		close;
+	}
+	end;
+OnQuestInfo:
+	if(checkquest(5933) || checkquest(5934) || (checkquest(5936) && !(checkquest(5936)&8)))
+		showevent 0, 3, "メザイ#E18_5";
+	else
+		showevent 9999,0,"メザイ#E18_5";
+	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 rachel.gat,72,133,4	script	ハーフフラワー#E18_6	10392,{/* 15994 (cloaking)*/
+	if(checkquest(5935)) {
+		mes "^0000FF‐練習用のハーフフラワーだ‐^000000";
+		next;
+		mes "[メザイ]";
+		mes "今回は、木の下にハーフフラワーが";
+		mes "咲いていると想定したパターンで";
+		mes "練習するからな。";
+		next;
+		mes "^ff0000[インフォメーション]";
+		mes "クエストウィンドウの";
+		mes "「灰色狼の森の花」を";
+		mes "確認して進めてみましょう。^000000";
+		next;
+		mes "[メザイ]";
+		mes "まずは、ハーフフラワーの茎を切る！";
+		next;
+		switch(select("10度の角度で切る","20度の角度で切る","30度の角度で切る","40度の角度で切る")) {
+		}
+		progressbar 1;	//color=0xffff00
+		mes "[メザイ]";
+		mes "次は葉を落とす。";
+		mes "残したい葉っぱ以外は";
+		mes "全部除去するんだぞ。";
+		next;
+		switch(select("2枚を残す","4枚を残す","6枚を残す","8枚を残す")) {
+		}
+		progressbar 1;	//color=0xffff00
+		mes "[メザイ]";
+		mes "次は、瓶に水を入れるんだ。";
+		next;
+		switch(select("20mlを入れる","30mlを入れる","40mlを入れる","50mlを入れる")) {
+		}
+		progressbar 1;	//color=0xffff00
+		mes "[メザイ]";
+		mes "水を入れたら";
+		mes "俺が作った秘伝の粉を";
+		mes "瓶に入れて水と混ぜる！";
+		next;
+		switch(select("2グラム入れる","4グラム入れる","6グラム入れる","8グラム入れる")) {
+		}
+		progressbar 1;	//color=0xffff00
+		mes "[メザイ]";
+		mes "最後は、切った花を";
+		mes "瓶に入れて包装すれば！";
+		mes "でっきあがりーー！";
+		next;
+		// 採取方法の一致で制限時間延長
+		getitem2 1000407,1,1,0,0,0,0,0,0,1800;
+		delquest 5935;
+		setquest 5936;
+		cloakonnpc "ハーフフラワー#E18_6";
+		mes "[メザイ]";
+		mes "じゃあ、今採取したハーフフラワーを";
+		mes "俺に渡してくれ！";
+		close;
+	}
+	end;
+OnQuestInfo:
+	if(checkquest(5935))
+		showevent 0, 3, "ハーフフラワー#E18_6";
+	else
+		showevent 9999,0,"ハーフフラワー#E18_6";
+	end;
 OnInit:
+	setnpctitle "練習用";
 	cloakonnpc;
 	end;
 }
 rachel.gat,70,135,4	script	メザイ#E18_7	944,{/* 15995 (cloaking)*/
+	if(checkquest(5942) && !checkquest(5943)) {
+		cloakoffnpc "お客#E18_8";
+		unittalk getnpcid(0,"お客#E18_8"),"お客 : ふむふむ……";
+		if(!sleep2(1000)) end;
+		mes "[メザイ社長]";
+		mes "らっしゃっせー！";
+		mes "お客様！";
+		mes "今日は何をご所望ですか？";
+		next;
+		mes "[お客]";
+		mes "ふむ……いつものヤツをお願いするよ。";
+		mes "ところで、相談なんだが";
+		mes "ここって配達サービスはやってないの？";
+		next;
+		mes "[お客]";
+		mes "毎回買いに来るのが面倒でな。";
+		mes "配達サービスがあるなら";
+		mes "それで頼みたいんだが。";
+		next;
+		mes "[メザイ社長]";
+		mes "はっはぁ～！";
+		mes "配達サービスももちろん可能です！";
+		mes "なにせ、今から始めちゃいますから！";
+		next;
+		mes "[お客]";
+		mes "ほほ～そりゃよかった。";
+		mes "では今日から配達してくれ。";
+		mes "誰に送って欲しいのか教えるから。";
+		next;
+		cloakonnpc "お客#E18_8";
+		setquest 5943;
+		compquest 5943;
+		mes "[メザイ社長]";
+		mes "……というわけだ！";
+		mes "今日からこの『フラワールーム』は";
+		mes "配達サービスを開始するぞ！";
+		mes "もちろん、手伝ってくれよな！";
+		mes "ヨロシク！";
+		close;
+	}
+	if(checkquest(5936) && checkquest(5936)&8) {
+		mes "[メザイ社長]";
+		mes "よし！";
+		mes "じゃあ今から俺の店";
+		mes "『フラワールーム』の開業式をやろうと";
+		mes "思う！";
+		mes "あんたも参加してけよ。";
+		next;
+		mes "[メザイ社長]";
+		mes "まずはシャチョーの挨拶だ。";
+		mes "うおっほん！";
+		next;
+		mes "[メザイ社長]";
+		mes "俺はラヘルの生花キングになる!!";
+		mes "超ビッグになってやるから";
+		mes "そこんとこ、ヨロシク！";
+		next;
+		delquest 5936;
+		setquest 5942;
+		compquest 5942;
+		mes "[メザイ社長]";
+		mes "以上！";
+		mes "開業式終わり！";
+		mes "さあ、働くぞーー！";
+		next;
+	}
+	if(checkquest(5943)) {
+		unittalk "メザイ社長 : 今日も、はりきってくぞー！";
+		unittalk "メザイ社長 : 今日は木曜か？　まだまだ働くぞーー！";
+	}
+	mes "[メザイ社長]";
+	mes "今日もヨロシクな！";
+	next;
+	switch(select("今は手伝えない","ハーフフラワーの採集","ハーフフラワーの配送")) {
+	case 1:
+		mes "[メザイ社長]";
+		mes "おいおい！";
+		mes "そんなんじゃビッグになれねぇぞ！";
+		close;
+	case 2:
+		if(checkquest(5947)) {
+			mes "[メザイ社長]";
+			mes "配達に行くんだろ？";
+			mes "今日は配達に専念してくれよな！";
+			close;
+		}
+		mes "[メザイ社長]";
+		mes "お！　ハーフフラワーの採集に";
+		mes "行ってくれるのか？";
+		next;
+		if(select("採集してきます","やっぱりやめます") == 2) {
+			mes "[メザイ社長]";
+			mes "おいおい！";
+			mes "そんなんじゃビッグになれねぇぞ！";
+			close;
+		}
+	case 3:
+		if(checkquest(5947)) {
+			mes "[メザイ社長]";
+			mes "渡したメモに書かれた";
+			mes "宛先に届けてくれ。";
+			mes "間違えるなよ～？";
+			close;
+		}
+		if(checkquest(5949)) {
+			delquest 5947;
+			delquest 5949;
+			setquest 5937;
+			getitem 1000405,5;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+			mes "[メザイ社長]";
+			mes "間違った宛先に";
+			mes "花を届けてねぇか？";
+			mes "ま、いっか！";
+			mes "お代は先にもらってるしな！";
+			mes "バレねぇバレねぇ！";
+			next;
+			mes "[メザイ社長]";
+			mes "次は気を付けようぜ！";
+			mes "お疲れぃ！";
+			close;
+		}
+		mes "[メザイ社長]";
+		mes "お！";
+		mes "配達に出てくれるのか。";
+		mes "へへっ助かるぜ！";
+		next;
+		if(select("配達先を教えて","やっぱりやめる") == 2) {
+			mes "[メザイ社長]";
+			mes "おいおい！";
+			mes "そんなんじゃビッグになれねぇぞ！";
+			close;
+		}
+		getitem 1000407,1;	//名前入り
+		setquest 5947;
+		mes "[メザイ社長]";
+		mes "あいよ！";
+		mes "メモを渡すから、そこに書かれた";
+		mes "宛先に届けてくれ。";
+		mes "間違えるなよ～？";
+		next;
+		mes "[メザイ社長]";
+		mes "花にはあんたの名前が入ってるが";
+		mes "確認手続き用だから";
+		mes "あんまり気にしなくて良いぜ。";
+		mes "んじゃ、ヨロシクな！";
+		close;
+	}
+OnQuestInfo:
+	if((checkquest(5936) && checkquest(5936)&8) || checkquest(5942))
+		showevent 0, 3, "メザイ#E18_7";
+	else
+		showevent 9999,0,"メザイ#E18_7";
+	end;
 OnInit:
+	setnpctitle "フラワールーム";
 	cloakonnpc;
 	end;
 }
@@ -7787,6 +8424,57 @@ rachel.gat,163,196,4	script	モリー#E18_D2	916,{/* 16031 */
 	mes "ありますように……。";
 	close;
 }
+veins.gat,231,335,4	script	アーシャ#E18_D3	815,{/* 7609 */
+	if(checkquest(5947)) {
+		if(checkquest(5948)) {
+			mes "[アーシャ]";
+			mes "ハーフフラワーを見れただけで";
+			mes "ベインスまで来た甲斐がありました。";
+			close;
+		}
+		mes "[アーシャ]";
+		mes "注文してたお花";
+		mes "そろそろ届くかな？";
+		mes "あっ！";
+		next;
+		if(select("お花のお届けに参りました","人違いのようです") == 2) {
+			mes "[アーシャ]";
+			mes "それは、お疲れ様です。";
+			close;
+		}
+		delitem 1000407,1;
+		setquest 5948;
+		mes "[アーシャ]";
+		mes "待ってました。";
+		mes "ハーフフラワーというのですか？";
+		mes "ベインスまで来た甲斐がありました。";
+		close;
+	}
+}
+veins.gat,192,345,6	script	マーシャ#E18_D4	817,{/* 7610 */
+	if(checkquest(5947)) {
+		if(checkquest(5948)) {
+		}
+		mes "[マーシャ]";
+		mes "知り合いがお花を送ってくれると";
+		mes "言っていました。";
+		mes "あら、綺麗なお花……。";
+		mes "でも私の好みとはちょっと違いますね。";
+		next;
+		if(select("お花のお届けに参りました","人違いのようです") == 2) {
+			mes "[マーシャ]";
+			mes "そうですか。";
+			mes "それは、残念です。";
+			close;
+		}
+	}
+	mes "[マーシャ]";
+	mes "知ってますか？";
+	mes "わたしの着ている衣装は";
+	mes "海の向こうのどこかにある";
+	mes "龍之城という街の伝統衣装なんです。";
+	close;
+}
 rachel.gat,31,89,6	script	ティーリング#E18_D5	91,{/* 16032 */
 	mes "[ティーリング]";
 	mes "いらっしゃいませ～。";
@@ -7804,6 +8492,35 @@ rachel.gat,55,106,6	script	ディーリング#E18_D6	724,{/* 16033 */
 	close;
 }
 wolfvill.gat,90,261,6	script	ゼイル#E18_D7	959,{/* 16034 */
+	if(checkquest(5947)) {
+		mes "[ゼイル]";
+		mes "……よそ者？";
+		mes "まさか、花を配達してるの？";
+		mes "私がお願いをしたお花屋さんとは";
+		mes "違うようだけど……。";
+		next;
+		if(select("お花のお届けに参りました","人違いのようです") == 2) {
+			mes "[ゼイル]";
+			mes "そう……";
+			mes "違ったのならごめんなさい。";
+			close;
+		}
+		delitem 1000407,1;
+		setquest 5949;
+		mes "[ゼイル]";
+		mes "う～～ん？";
+		mes "送り主の名前に心当たりは";
+		mes "無いのだけれど……";
+		mes "まあ、いいか。";
+		close;
+	}
+	if(checkquest(5949)) {
+		mes "[ゼイル]";
+		mes "う～～ん？";
+		mes "送り主の名前に心当たりは";
+		mes "無いのだけれど……";
+		close;
+	}
 	mes "[ゼイル]";
 	mes "人が少ない場所を探して";
 	mes "ここに来たのだけれど";
@@ -7811,6 +8528,25 @@ wolfvill.gat,90,261,6	script	ゼイル#E18_D7	959,{/* 16034 */
 	close;
 }
 wolfvill.gat,269,68,4	script	セイル#E18_D8	960,{/* 16035 */
+	if(checkquest(5947)) {
+		mes "[セイル]";
+		mes "お花……ねぇ。";
+		mes "ここまで本当に届くのかしら？";
+		next;
+		if(select("お花のお届けに参りました","人違いのようです") == 2) {
+			mes "[セイル]";
+			mes "ふ、ふん！";
+			mes "期待なんてしてないんだから！";
+			close;
+		}
+	}
+	if(checkquest(5949)) {
+		mes "[セイル]";
+		mes "やっぱりこんな場所じゃ";
+		mes "お花なんて届かないのね……";
+		mes "ぐすん。";
+		close;
+	}
 	mes "[セイル]";
 	mes "灰色狼の村へようこそ～！";
 	close;
@@ -7834,7 +8570,7 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		close;
 	}
 	if(checkquest(17505)) {
-		cloakoffnpc "マラム#hms01";	// 2396
+		cloakoffnpc "マラム#hms01";
 		mes "[エゼキエル]";
 		mes "お年寄りたちはどうだった？";
 		mes "まあ、その表情を見れば";
@@ -7873,10 +8609,10 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		mes "[マラム]";
 		mes "うぅ、力仕事は苦手なんだけど……。";
 		delquest 17505;
-		setquest 17506;	// state=1
+		setquest 17506;
 		close2;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "マラム#hms01";	// 2396
+		cloakonnpc "マラム#hms01";
 		end;
 	}
 	if(checkquest(17506)) {
@@ -7901,7 +8637,7 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		mes "「"+strcharinfo(0)+"診療所」と";
 		mes "名づけさせていただきますよ！";
 		next;
-		cloakoffnpc "マラム#hms01";	// 2396
+		cloakoffnpc "マラム#hms01";
 		cutin "ep18_maram_02.png", 2;
 		mes "[マラム]";
 		mes "うん！　それはいい考えだ。";
@@ -7909,9 +8645,9 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		mes "ここに残りますよ。";
 		next;
 		cutin "ep18_maram_02.png", 255;
-		cloakoffnpc "老人#hms01";	// 2397
-		cloakoffnpc "老人#hms02";	// 2398
-		cloakoffnpc "老人#hms03";	// 2399
+		cloakoffnpc "老人#hms01";
+		cloakoffnpc "老人#hms02";
+		cloakoffnpc "老人#hms03";
 		mes "[老人]";
 		mes "おい！";
 		mes "何をしておるんじゃ！";
@@ -7960,8 +8696,8 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		mes "困ったなぁ……あれ？";
 		next;
 		cutin "ep18_maram_02.png", 255;
-		cloakoffnpc "村人#hms01";	// 2400
-		cloakoffnpc "負傷者#hms01";	// 2401
+		cloakoffnpc "村人#hms01";
+		cloakoffnpc "負傷者#hms01";
 		mes "[ヨエル]";
 		mes "痛いっ！";
 		mes "痛いよぉーーー！";
@@ -7977,7 +8713,7 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		mes "連れて来たんだ。";
 		next;
 		cutin "ep18_imril_01.png", 255;
-		emotion 28,"負傷者#hms01";	// 2401
+		emotion 28,"負傷者#hms01";
 		mes "[ヨエル]";
 		mes "ボクはもうダメだぁ！";
 		mes "ボクが死んだら、頑張って集めた";
@@ -8030,7 +8766,7 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		mes "凄腕なんですから。";
 		next;
 		cutin "ep18_maram_02.png", 255;
-		misceffect 14,"負傷者#hms01";	// 2401
+		misceffect 14,"負傷者#hms01";
 		mes "[エゼキエル]";
 		mes "こう見えて、とはなんだ？";
 		mes "ふぅ……設備さえ整っていれば";
@@ -8038,21 +8774,21 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		mes "まあ、仕方がない。";
 		mes "おりゃぁぁ～～～！";
 		next;
-		misceffect 101,"負傷者#hms01";	// 2401
+		misceffect 101,"負傷者#hms01";
 		mes "[ヨエル]";
 		mes "ぎゃあーーー！";
 		mes "死ぬーーーっ!!!";
-		unittalk getnpcid(0,"老人#hms01"),"そんなっ!!";	// 2397
-		unittalk getnpcid(0,"老人#hms02"),"あれで殺してしまうんじゃないのか？";	// 2398
-		unittalk getnpcid(0,"老人#hms03"),"早く止めるんじゃ～～！";	// 2399
+		unittalk getnpcid(0,"老人#hms01"),"そんなっ!!";
+		unittalk getnpcid(0,"老人#hms02"),"あれで殺してしまうんじゃないのか？";
+		unittalk getnpcid(0,"老人#hms03"),"早く止めるんじゃ～～！";
 		delitem 1000406,10;
 		delquest 17506;
-		setquest 17507;	// state=1
+		setquest 17507;
 		close;
 	}
 	if(checkquest(17507)) {
-		misceffect 305,"負傷者#hms01";	// 2401
-		misceffect 14,"負傷者#hms01";	// 2401
+		misceffect 305,"負傷者#hms01";
+		misceffect 14,"負傷者#hms01";
 		mes "[エゼキエル]";
 		mes "……はい、終わりました。";
 		mes "しばらくは無理せず";
@@ -8105,9 +8841,9 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		mes "乗らねばならぬ！";
 		mes "この大きな波に～!!";
 		next;
-		cloakonnpc "老人#hms01";	// 2397
-		cloakonnpc "老人#hms02";	// 2398
-		cloakonnpc "老人#hms03";	// 2399
+		cloakonnpc "老人#hms01";
+		cloakonnpc "老人#hms02";
+		cloakonnpc "老人#hms03";
 		mes "[エゼキエル]";
 		mes "えっと……";
 		mes "診療所を建てても良いってこと？";
@@ -8143,7 +8879,7 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 			close;
 		}
 		delquest 17507;
-		setquest 17509;	// state=1
+		setquest 17509;
 		getitem 1000405,2;
 		getexp 337500000,0,0;
 		getexp 0,350000000,0;
@@ -8185,15 +8921,15 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		getexp 0,350000000,0;
 		getexp 337500000,0,0;
 		getexp 0,350000000,0;
-		setquest 130127;	// state=1
+		setquest 130127;
 		compquest 130127;
 		mes "[エゼキエル]";
 		mes "また何かお願いすることが";
 		mes "あるかもしれませんが";
 		mes "その時は、よろしくお願いいたします！";
-		cloakonnpc "マラム#hms01";	// 2396
-		cloakonnpc "村人#hms01";	// 2400
-		cloakonnpc "負傷者#hms01";	// 2401
+		cloakonnpc "マラム#hms01";
+		cloakonnpc "村人#hms01";
+		cloakonnpc "負傷者#hms01";
 		close;
 	}
 	if(checkquest(17509)) {
@@ -8229,7 +8965,7 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 	mes "探すことなのだから。";
 	next;
 	menu "あの人は……？",-;
-	cloakoffnpc "マラム#hms01";	// 2396
+	cloakoffnpc "マラム#hms01";
 	cutin "ep18_maram_01.png", 2;
 	mes "[マラム]";
 	mes "相変わらずだなぁ……";
@@ -8323,13 +9059,13 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 	mes "ここの人々の役に立ちたいのです。";
 	mes "どうかお願いいたします。";
 	delquest 130107;
-	setquest 17504;	// state=1
+	setquest 17504;
 	close2;
-	cloakonnpc "マラム#hms01";	// 2396
+	cloakonnpc "マラム#hms01";
 	end;
 OnTouch:
 	if(checkquest(130107))
-		unittalk "エゼキエル : エゼキエル、お前は富貴栄華を極める為に、ここに来たとでも言うのか？";	// 2395
+		unittalk "エゼキエル : エゼキエル、お前は富貴栄華を極める為に、ここに来たとでも言うのか？";
 	end;
 OnQuestInfo:
 	if(checkquest(17506) && countitem(1000406) < 10)
@@ -8466,7 +9202,7 @@ wolfvill.gat,176,111,3	script	老人#hms04	10393,{/* 16048 */
 		mes "戻りましょうか。";
 		mes "どうするか考えないと。";
 		delquest 17504;
-		setquest 17505;	// state=1
+		setquest 17505;
 		close2;
 		cutin "ep18_maram_01.png", 255;
 		end;
@@ -8555,7 +9291,7 @@ wolfvill.gat,147,97,5	script	アヒール#ep18	944,3,3,{/* 16054 */
 		mes "^ff0000　・クエスト「祈りの方向」を途中まで進行‐^000000";
 		close;
 	}
-	if(checkquest(16548) {
+	if(checkquest(16548)) {
 		if(!(checkquest(16548)&4)) {
 			//未調査
 		}
@@ -8577,7 +9313,7 @@ wolfvill.gat,147,97,5	script	アヒール#ep18	944,3,3,{/* 16054 */
 			close;
 		}
 		delquest 16548;
-		setquest 16550;	// state=1
+		setquest 16550;
 		getitem 1000405,4;
 		getexp 487500000,0,0;
 		getexp 0,500000000,0;
@@ -8619,7 +9355,7 @@ wolfvill.gat,147,97,5	script	アヒール#ep18	944,3,3,{/* 16054 */
 		getexp 0,500000000,0;
 		getexp 487500000,0,0;
 		getexp 0,500000000,0;
-		setquest 130133;	// state=1
+		setquest 130133;
 		compquest 130133;
 		mes "[アヒール]";
 		mes "こちらは、今晩安眠できることへの";
@@ -8627,7 +9363,7 @@ wolfvill.gat,147,97,5	script	アヒール#ep18	944,3,3,{/* 16054 */
 		mes "どうぞ受け取ってください！";
 		close;
 	}
-	if(checkquest(16550) {
+	if(checkquest(16550)) {
 		mes "[アヒール]";
 		mes "明日になると、また戻ってきそうなので";
 		mes "日が変わったらまた討伐に";
@@ -8681,10 +9417,10 @@ wolfvill.gat,147,97,5	script	アヒール#ep18	944,3,3,{/* 16054 */
 	mes "お礼も用意しますので";
 	mes "よろしくお願いしますね！";
 	delquest 130113;
-	setquest 16548;	// state=1
+	setquest 16548;
 	close;
 OnTouch:
-	unittalk "アヒール : 眠い……くたびれたよぉ。";	// 2414
+	unittalk "アヒール : 眠い……くたびれたよぉ。";
 	end;
 OnQuestInfo:
 	if(checkquest(16548) && !(checkquest(16548)&4))
@@ -8714,7 +9450,30 @@ wolfvill.gat,61,170,5	script	民俗学者グドラ#ep18	919,{/* 16056 */
 		next;
 		switch(rand(3)) {
 		case 0:
-			//未調査
+			mes "[民俗学者グドラ]";
+			mes "これは……";
+			mes "聞いたこともない物語です。";
+			mes "しかし……何かおかしい。";
+			mes "誰から聞いた話ですか？";
+			next;
+			mes "[民俗学者グドラ]";
+			mes "ディナルが……";
+			mes "自分で作った物語なんですか!?";
+			mes "私が知りたいのは";
+			mes "昔話の類なのですが……。";
+			next;
+			mes "[民俗学者グドラ]";
+			mes "しかし……";
+			mes "ふむ、これは……悪くありません。";
+			mes "粗削りですが";
+			mes "独創的で素敵なお話です。";
+			next;
+			mes "[民俗学者グドラ]";
+			mes "本来の目的とは異なりますが";
+			mes "この物語の続きを聞きたいですね。";
+			mes "よろしければまたディナルから";
+			mes "お話を聞いて来てください。";
+			break;
 		case 1:
 			mes "[民俗学者グドラ]";
 			mes "これはアミラが聞かせてくれた";
@@ -8772,7 +9531,7 @@ wolfvill.gat,61,170,5	script	民俗学者グドラ#ep18	919,{/* 16056 */
 		}
 		delitem 1000408,1;
 		delquest 16554;
-		setquest 16559;	// state=1
+		setquest 16559;
 		getitem 1000405,1;
 		getexp 225000000,0,0;
 		getexp 0,200000000,0;
@@ -8814,7 +9573,7 @@ wolfvill.gat,61,170,5	script	民俗学者グドラ#ep18	919,{/* 16056 */
 		getexp 0,200000000,0;
 		getexp 225000000,0,0;
 		getexp 0,200000000,0;
-		setquest 130129;	// state=1
+		setquest 130129;
 		compquest 130129;
 		mes "[民俗学者グドラ]";
 		mes "今日はここまでにしましょう。";
@@ -8830,6 +9589,153 @@ wolfvill.gat,61,170,5	script	民俗学者グドラ#ep18	919,{/* 16056 */
 		mes "それと「シャーニナ」お婆さんから";
 		mes "話を聞いてきてください。";
 		mes "よろしくお願いしますね。";
+		close;
+	}
+	if(checkquest(16559)){
+		if(checkquest(16559) & 0x02 == 0){
+			mes "[民俗学者グドラ]";
+			mes "今日はここまでにしましょう。";
+			mes "早くお話を集めたいのは山々なのですが";
+			mes "村の人も話疲れてしまいますから。";
+			next;
+			mes "[民俗学者グドラ]";
+			mes "冒険者さんも今日は休んでください。";
+			mes "私も集めてもらったお話を";
+			mes "整理したいですからね。";
+			close;
+		}
+		delquest 16559;
+		mes "[民俗学者グドラ]";
+		mes "前回はありがとうございました。";
+		mes "本日も村の人たちから";
+		mes "お話を聞いてきてもらえますか？";
+		next;
+		mes "[民俗学者グドラ]";
+		mes "「ディナル」という女の子と";
+		mes "「アミラ」という女性。";
+		mes "それと「シャーニナ」お婆さんから";
+		mes "話を聞いてきてください。";
+		mes "それでは、記録用の手帳をどうぞ。";
+		next;
+		if(select("行ってきます！","今は時間がないです") == 2) {
+			mes "[民俗学者グドラ]";
+			mes "それは仕方ありませんね。";
+			mes "またお時間ができたらで良いので";
+			mes "ぜひお願いいたします。";
+			mes "継続は力ですから";
+			mes "歩みを止めるわけにはいきません。";
+			close;
+		}
+		setquest 16555;
+		setquest 16556;
+		setquest 16557;
+		getitem 1000408,1;
+		mes "[民俗学者グドラ]";
+		mes "ありがとうございます。";
+		mes "この恩は、立派な本を作り上げて";
+		mes "お返ししたいと思います。";
+		mes "あ、もちろん報酬は用意してますので";
+		mes "ご心配なく。";
+		close;
+	}
+	if(checkquest(16555) || checkquest(16556) || checkquest(16557)) {
+		mes "[民俗学者グドラ]";
+		mes "「ディナル」という女の子と";
+		mes "「アミラ」という女性。";
+		mes "それと「シャーニナ」お婆さんから";
+		mes "話を聞いてきてください。";
+		mes "よろしくお願いしますね。";
+		close;
+	}
+	if(checkquest(16558)){
+		switch(rand(3)) {
+			case 0:
+				mes "[民俗学者グドラ]";
+				mes "今日もディナルが";
+				mes "創作神話を聞かせてくれたのですね？";
+				mes "実は続きが気になってたんです。";
+				mes "どれどれ……。";
+				next;
+				mes "[民俗学者グドラ]";
+				mes "ほ～～これは素晴らしいです。";
+				mes "ディナルには小説家の才能があります。";
+				mes "私の仕事がひと段落したら";
+				mes "ディナルから許可をもらって";
+				mes "この物語も出版したいですね。";
+				next;
+				mes "[民俗学者グドラ]";
+				mes "私の本来の目的とは異なりますが";
+				mes "この才能を埋もれたままにしておくのは";
+				mes "惜しいですから。";
+				mes "よろしければまたディナルから";
+				mes "お話を聞いて来てくださいね。";
+				next;
+				break;
+			case 1:
+				mes "[民俗学者グドラ]";
+				mes "アミラの物語の中には";
+				mes "私が知っている神話も多くあります。";
+				mes "おそらく原住民たちの間で";
+				mes "古くから語り継がれていた";
+				mes "共通の神話なのでしょう。";
+				next;
+				mes "[民俗学者グドラ]";
+				mes "ところが、私の知っている神話とは";
+				mes "異なる部分も存在します。";
+				mes "この違いは何なのか？";
+				mes "何が原因となって違いが生じたのか？";
+				next;
+				mes "[民俗学者グドラ]";
+				mes "この差異を研究することこそ";
+				mes "正に私の主要な研究テーマなのです。";
+				mes "うふふふ……素晴らしい！";
+				next;
+				mes "[民俗学者グドラ]";
+				mes "これからも、アミラの話を聞いて";
+				mes "記録していただけるとありがたいです！";
+				mes "うふふふふふ！";
+				next;
+				break;
+			case 2:
+				mes "[民俗学者グドラ]";
+				mes "ふぅん、ほぅ……";
+				mes "これは今の子供たちには";
+				mes "聞かせられない童話ですね。";
+				mes "今の基準では受け入れ難い";
+				mes "差別的な固定観念が染み付いています。";
+				next;
+				mes "[民俗学者グドラ]";
+				mes "文化の多様性は";
+				mes "考え方の多様性に繋がります。";
+				next;
+				mes "[民俗学者グドラ]";
+				mes "ですから、機会があればぜひ";
+				mes "シャーニナお婆さんから";
+				mes "お話を聞いて来てくださいね。";
+				mes "偏狭な考え方を避けるためにも";
+				mes "この物語は、きちんと記録に残します。";
+				next;
+				break;
+		}
+		delitem 1000408,1;
+		getitem 1000405,1;
+		setquest 16555;
+		delquest 16555;
+		setquest 16556;
+		delquest 16556;
+		setquest 16557;
+		delquest 16557;
+		delquest 16558;
+		setquest 16559;
+		for(set '@i,0; '@i< 20 ; set '@i,'@i+1){
+			getexp 150000000,0,0;
+			getexp 0,100000000,0;
+		}
+		mes "[民俗学者グドラ]";
+		mes "今日はここまでにしましょう。";
+		mes "こちらが本日の手当てとなります。";
+		mes "また、明日以降お手伝いいただけると";
+		mes "助かります。";
 		close;
 	}
 	mes "[民俗学者グドラ]";
@@ -8893,9 +9799,9 @@ wolfvill.gat,61,170,5	script	民俗学者グドラ#ep18	919,{/* 16056 */
 		end;
 	}
 	delquest 130109;
-	setquest 16551;	// state=1
-	setquest 16552;	// state=1
-	setquest 16553;	// state=1
+	setquest 16551;
+	setquest 16552;
+	setquest 16553;
 	getitem 1000408,1;
 	mes "[民俗学者グドラ]";
 	mes "「ディナル」という女の子と";
@@ -8939,8 +9845,69 @@ wolfvill.gat,106,224,3	script	ディナル#ep18	941,{/* 16057 */
 		delquest 16551;
 		if(!checkquest(16551) && !checkquest(16552) && !checkquest(16553)) {
 			unittalk getcharid(3),strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;
-			setquest 16554;	// state=1
+			setquest 16554;
 		}
+		close;
+	}
+	if(checkquest(16555)){
+		mes "[ディナル]";
+		mes "今日も私のお話を聞きにきたのね！";
+		mes "グドラおばさんが私の話を";
+		mes "本にしてくれるって言ってたの。";
+		mes "うれしいな～！";
+		next;
+		switch(rand(3)) {
+			case 0:
+				mes "[ディナル]";
+				mes "えっと……";
+				mes "前回にどこまで話をしたっけ？";
+				mes "妖精の金色の瞳が";
+				mes "すごく綺麗だったところまで？";
+				mes "覚えてたんですね！";
+				next;
+				mes "[ディナル]";
+				mes "それで竜と妖精は";
+				mes "永遠の友達になりました。";
+				mes "そう……「親友」と書いて";
+				mes "「ライバル」と読む仲です。";
+				break;
+			case 1:
+				mes "[ディナル]";
+				mes "えっと……";
+				mes "前回にどこまで話をしたっけ？";
+				mes "竜と妖精が最後の勝負をする";
+				mes "ところでしたっけ？";
+				next;
+				mes "[ディナル]";
+				mes "竜が最後に";
+				mes "巨大な金属の塔を呼び出すと";
+				mes "妖精は巨大な火の精霊を呼んで";
+				mes "対抗しました……。";
+				break;
+			case 2:
+				mes "[ディナル]";
+				mes "今日も私のお話を聞きにきたのね！";
+				mes "グドラおばさんが私の話を";
+				mes "本にしてくれるって言ってたの。";
+				mes "うれしいな～！";
+				next;
+				mes "[ディナル]";
+				mes "えっと……";
+				mes "前回にどこまで話をしたっけ？";
+				mes "サファイアの瞳を持つ竜が";
+				mes "紫色の妖精と出逢う場面でしたよね？";
+				next;
+				mes "[ディナル]";
+				mes "紫色の妖精は、妖精たちの中でも";
+				mes "一番優れた1人でした。";
+				mes "それをどうやって証明したのか……。";
+				break;
+		}
+		delquest 16555;
+		if(!checkquest(16555) && !checkquest(16556) && !checkquest(16557)) {
+				unittalk getcharid(3),""+strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;	// self:hidden
+				setquest 16558;
+			}
 		close;
 	}
 	mes "[ディナル]";
@@ -8984,8 +9951,31 @@ wolfvill.gat,180,204,3	script	アミラ#ep18	940,{/* 16058 */
 		delquest 16552;
 		if(!checkquest(16551) && !checkquest(16552) && !checkquest(16553)) {
 			unittalk getcharid(3),strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;
-			setquest 16554;	// state=1
+			setquest 16554;
 		}
+		close;
+	}
+	if(checkquest(16552)) {
+		mes "[アミラ]";
+		mes "今日もグドラのお手伝い？";
+		mes "私の話って何の役に立つのかしら？";
+		mes "まあ、そんなことは良いか。";
+		next;
+		mes "[アミラ]";
+		mes "次のお話を聞かせてあげる。";
+		mes "これも私のお爺ちゃんから";
+		mes "聞いた話だけど……";
+		mes "とある神たちは未だ……。";
+		next;
+		mes "[アミラ]";
+		mes "……それで、うん？";
+		mes "ちゃんと思い出せないけど";
+		mes "とにかく大事なことは……。";
+		delquest 16556;
+		if(!checkquest(16555) && !checkquest(16556) && !checkquest(16557)) {
+				unittalk getcharid(3),""+strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;	// self:hidden
+				setquest 16558;
+			}
 		close;
 	}
 	mes "[アミラ]";
@@ -9024,8 +10014,37 @@ wolfvill.gat,154,184,5	script	シャーニナ#ep18	942,{/* 16059 */
 		delquest 16553;
 		if(!checkquest(16551) && !checkquest(16552) && !checkquest(16553)) {
 			unittalk getcharid(3),strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;
-			setquest 16554;	// state=1
+			setquest 16554;
 		}
+		close;
+	}
+	if(checkquest(16557)) {
+		mes "[シャーニナ]";
+		mes "今日も話を聞きにきたのかい？";
+		mes "毎度毎度、酔狂だねぇ。";
+		mes "ふ～ん、私の話は貴重だって？";
+		mes "そうかいそうかい。";
+		next;
+		mes "[シャーニナ]";
+		mes "さて……今日はどうしようかね。";
+		mes "鳥の物語をする順番だっけ？";
+		next;
+		mes "[シャーニナ]";
+		mes "それとも前回の話が";
+		mes "まだ終わってなかったかね？";
+		mes "鍛冶屋が空から現れた";
+		mes "ミミズクに乗って";
+		mes "空へ上るところまで聞いたのかい？";
+		next;
+		mes "[シャーニナ]";
+		mes "記憶力が良いのう。";
+		mes "ではその続きを始めようか。";
+		mes "可哀そうな天女は思わず……。";
+		delquest 16557;
+		if(!checkquest(16555) && !checkquest(16556) && !checkquest(16557)) {
+				unittalk getcharid(3),""+strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;	// self:hidden
+				setquest 16558;
+			}
 		close;
 	}
 	mes "[シャーニナ]";
@@ -9082,7 +10101,7 @@ wolfvill.gat,85,111,3	script	ズラン#ep18	931,{/* 16060 */
 		mes "俺たちの話を立ち聞きしてる";
 		mes "アンタは誰?";
 		delquest 130105;
-		setquest 16560;	// state=1
+		setquest 16560;
 		close;
 	}
 	if(checkquest(16566)) {
@@ -9124,7 +10143,7 @@ wolfvill.gat,85,111,3	script	ズラン#ep18	931,{/* 16060 */
 			end;
 		}
 		delquest 16566;
-		setquest 202335;	// state=1
+		setquest 202335;
 		getitem 1000405,10;
 		getexp 1350000000,0,0;
 		getexp 0,1200000000,0;
@@ -9166,7 +10185,7 @@ wolfvill.gat,85,111,3	script	ズラン#ep18	931,{/* 16060 */
 		getexp 0,1200000000,0;
 		getexp 1350000000,0,0;
 		getexp 0,1200000000,0;
-		setquest 130125;	// state=1
+		setquest 130125;
 		compquest 130125;
 		mes "[ズラン]";
 		mes "あんたみたいな世話焼きがいて";
@@ -9259,7 +10278,7 @@ wolfvill.gat,83,109,5	script	カヤル#ep18	99,{/* 16061 */
 			mes "というわけで、冒険者さんに";
 			mes "お願いしてるってわけです。";
 			delquest 16560;
-			setquest 16561;	// state=1
+			setquest 16561;
 			close;
 		}
 		if(checkquest(16566)) {
@@ -9333,7 +10352,7 @@ wolfvill.gat,87,109,3	script	レッドセル#ep18	943,{/* 16062 */
 		mes "まあ、とにかくなんでもいいよ！";
 		mes "アハブおじさんを何とかして～！";
 		delquest 16561;
-		setquest 16562;	// state=1
+		setquest 16562;
 		close;
 	}
 	if(checkquest(16562)) {
@@ -9430,7 +10449,7 @@ wolfvill.gat,127,155,3	script	アハブ#ep18	928,{/* 16063 */
 		mes "「キュウグルトソース」だ！";
 		mes "急いで行ってくれ！";
 		delquest 16562;
-		setquest 16563;	// state=1
+		setquest 16563;
 		close;
 	}
 	if(checkquest(16563)) {
@@ -9472,7 +10491,7 @@ wolfvill.gat,127,155,3	script	アハブ#ep18	928,{/* 16063 */
 		mes "御高説を賜ろうじゃないか！";
 		mes "……食べながら聞いてやるぞ！";
 		delquest 16564;
-		setquest 16565;	// state=1
+		setquest 16565;
 		close;
 	}
 	if(checkquest(16565)) {
@@ -9570,7 +10589,7 @@ wolfvill.gat,127,155,3	script	アハブ#ep18	928,{/* 16063 */
 		mes "儂の我儘に付き合ってくれて";
 		mes "ありがとう……感謝してるよ。";
 		delquest 16565;
-		setquest 16566;	// state=1
+		setquest 16566;
 		close;
 	}
 	if(checkquest(16566)) {
@@ -9632,7 +10651,7 @@ rachel.gat,135,64,3	script	店主#ep18	930,{/* 16064 */
 		mes "封を開けたら早く食べてくださいね。";
 		mes "はい、どうぞ！";
 		delquest 16563;
-		setquest 16564;	// state=1
+		setquest 16564;
 		close;
 	}
 	mes "[店主]";
@@ -9654,34 +10673,394 @@ OnQuestInfo:
 	end;
 }
 rachel.gat,38,44,3	script	サマリアム#ep18	921,{/* 16065 */
-	mes "^ff0000‐クエスト「子供たちも知っている」は";
-	mes "　下記の条件を満たすと進行可能です。";
-	mes "　・クエスト「祈りの方向」を途中まで進行‐^000000";
+	if(EP18_1QUE < 36) {
+		mes "^ff0000‐クエスト「子供たちも知っている」は";
+		mes "　下記の条件を満たすと進行可能です。";
+		mes "　・クエスト「祈りの方向」を途中まで進行‐^000000";
+		close;
+	}
+	if(checkquest(130102)) {
+		mes "[サマリアム]";
+		mes "ナイマン、オレ喉乾いた！";
+		mes "水を持って来てくれよ！";
+		mes "ここからお前んちが";
+		mes "一番近いだろ～？";
+		next;
+		mes "[カルゥ]";
+		mes "ドライフルーツも持って来て。";
+		mes "家に無ければ買ってきて。";
+		next;
+		mes "[ナイマン]";
+		mes "食べ物は……無いよ。";
+		mes "それにボク、お金も持ってないし……。";
+		next;
+		mes "[ラクシー]";
+		mes "え～～嘘だ～？";
+		mes "本当は、俺たちに水もドライフルーツも";
+		mes "あげたくないんだろ？";
+		next;
+		mes "[サマリアム]";
+		mes "がっかりだな～ナイマン。";
+		mes "心の友だと思ってたのに！";
+		next;
+		mes "[ナイマン]";
+		mes "み、水はあるから";
+		mes "持ってくるよ！";
+		next;
+		mes "[サマリアム]";
+		mes "水を買うにも金は必要だろ？";
+		mes "お前んちに金があるのかよ～？";
+		delquest 130102;
+		setquest 16581;
+		close;
+	}
+	mes "[サマリアム]";
+	mes "遊びすぎて腹減った！";
+	mes "喉も乾いたし！";
+	mes "どこか涼しいところで";
+	mes "冷たいお茶とドライフルーツが";
+	mes "食べたいなぁ！";
 	close;
+OnQuestInfo:
+	if(checkquest(130102))
+		showevent 0, 3, "サマリアム#ep18";
+	else
+		showevent 9999,0,"サマリアム#ep18";
+	end;
 }
 rachel.gat,37,42,7	script	カルゥ#ep18	931,{/* 16066 */
+	if(checkquest(16581)) {
+		mes "[カルゥ]";
+		mes "お金ないの？";
+		mes "ナイマンの父ちゃんは";
+		mes "ラクシーのところの反物屋で";
+		mes "働いてるんでしょ？";
+		next;
+		mes "[ラクシー]";
+		mes "母ちゃんは、ナイマンの父ちゃんに";
+		mes "ちゃんと金は払ってる！";
+		mes "なのに、ナイマンは俺たちに";
+		mes "ドライフルーツのひとつも";
+		mes "くれないんだな～？";
+		next;
+		mes "[サマリアム]";
+		mes "おい、お前ら～もうやめろよ。";
+		mes "ナイマンのところはお金が無いんだから！";
+		mes "可哀そうだろ～？";
+		next;
+		mes "[ナイマン]";
+		mes "違う！";
+		mes "可哀そうじゃない……";
+		mes "可哀そうじゃないよ!!";
+		next;
+		mes "[サマリアム]";
+		mes "冗談だって！";
+		mes "そうムキになるなよな！";
+		mes "やっぱり原住民は怒りっぽいって";
+		mes "本当だったんだな～。";
+		next;
+		mes "[カルゥ]";
+		mes "そんなんでも一緒に遊んであげてる";
+		mes "俺たちに感謝してくれよな？";
+		delquest 16581;
+		setquest 16582;
+		close;
+	}
 	mes "[カルゥ]";
 	mes "甘いお茶に冷たい氷をいれて";
 	mes "がぶがぶ飲みたいな～。";
 	close;
+OnQuestInfo:
+	if(checkquest(16581))
+		showevent 0, 3, "カルゥ#ep18";
+	else
+		showevent 9999,0,"カルゥ#ep18";
+	end;
 }
 rachel.gat,40,45,3	script	ラクシー#ep18	944,{/* 16067 */
+	if(checkquest(16582)) {
+		mes "[ラクシー]";
+		mes "そうだそうだ！";
+		mes "俺たちに感謝しろ～！";
+		next;
+		menu "見てられないな",-,"いい加減にしろ",-;
+		mes "[ラクシー]";
+		mes "うん？";
+		mes "なんかよそ者が言ってるぞ？";
+		next;
+		menu "それのどこが遊びなんだ？",-,"いじめてるだけだろ",-;
+		mes "[サマリアム]";
+		mes "よそ者だから知らないんでしょ？";
+		mes "ナイマンは原住民。";
+		mes "俺たちは移住の民なんだ。";
+		next;
+		mes "[サマリアム]";
+		mes "原住民は、移住の民に比べて";
+		mes "いろいろ「足りない」んだ。";
+		mes "ラクシーの母ちゃんも言ってる。";
+		mes "原住民は仕事を覚えるのが遅いし";
+		mes "怒りっぽいって！";
+		next;
+		mes "[サマリアム]";
+		mes "それなのに、一緒に遊んでやってる";
+		mes "俺たちに口出しするっての？";
+		delquest 16582;
+		setquest 16583;
+		close;
+	}
 	mes "[ラクシー]";
 	mes "ナイマンの家が一番近いよね？";
 	mes "お茶とお菓子を持って来れないの？";
 	close;
+OnQuestInfo:
+	if(checkquest(16582))
+		showevent 0, 3, "ラクシー#ep18";
+	else
+		showevent 9999,0,"ラクシー#ep18";
+	end;
 }
 rachel.gat,36,45,5	script	ナイマン#ep18	941,{/* 16068 */
+	if(checkquest(16583)) {
+		mes "[ナイマン]";
+		mes "……。";
+		next;
+		menu "どうしてあの子たちと遊んでるの？",-;
+		mes "[ナイマン]";
+		mes "それは……友達ですから。";
+		mes "この子たちじゃなきゃ";
+		mes "私と遊んでくれる子もいないし。";
+		next;
+		mes "[ナイマン]";
+		mes "……家から水を持ってくるよ。";
+		mes "それと……怒ってごめん。";
+		next;
+		cloakonnpc "ナイマン#ep18";
+		mes "[サマリアム]";
+		mes "まぁ、遊んでるとそんなこともあるよな？";
+		mes "あんまり気にするなよ！";
+		next;
+		cloakonnpc "サマリアム#ep18";
+		mes "[ラクシー]";
+		mes "他の場所で遊ぼうぜ。";
+		mes "異邦人に邪魔されないように！";
+		next;
+		delquest 16583;
+		setquest 202340;
+		getitem 1000405,10;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		setquest 130122;
+		compquest 130122;
+		mes "[カルゥ]";
+		mes "ほら異邦人！";
+		mes "俺からのお駄賃！";
+		mes "もう邪魔しないでくれよなー。";
+		mes "じゃ、行こうぜー！";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "（……原住民と移住の民か。";
+		mes "　子供たちの間にも";
+		mes "　こういう意識が浸透してるのか）";
+		cloakonnpc "ラクシー#ep18";
+		cloakonnpc "カルゥ#ep18";
+		close;
+	}
 	mes "[ナイマン]";
 	mes "暑い……家に帰りたい。";
 	mes "けど、まだまだ遊びたいし……。";
 	close;
+OnQuestInfo:
+	if(checkquest(16583))
+		showevent 0, 3, "ナイマン#ep18";
+	else
+		showevent 9999,0,"ナイマン#ep18";
+	end;
 }
 rachel.gat,181,51,3	script	アモディピン#ep18	929,{/* 16069 */
-	mes "^ff0000‐クエスト「労働の対価」は";
-	mes "　下記の条件を満たすと進行可能です。";
-	mes "　・クエスト「祈りの方向」を途中まで進行‐^000000";
+	if(EP18_1QUE < 36) {
+		mes "^ff0000‐クエスト「労働の対価」は";
+		mes "　下記の条件を満たすと進行可能です。";
+		mes "　・クエスト「祈りの方向」を途中まで進行‐^000000";
+		close;
+	}
+	if(checkquest(130101)) {
+		mes "[アモディピン]";
+		mes "今日も給料をもらえないなんて！";
+		mes "もう三か月目なんだぞ……";
+		mes "こんな店、すぐに辞めたいけど";
+		mes "そうしたら未払いの給与がもらえない。";
+		next;
+		mes "[アモディピン]";
+		mes "仮に仕事を辞めても";
+		mes "私みたいな原住民は";
+		mes "すぐに仕事が見つからないし";
+		mes "ああ、どうしたらいいんだ！";
+		next;
+		mes "[アモディピン]";
+		mes "はっ！";
+		mes "貴方、冒険者ですね！";
+		mes "厚かましいとは思いますが";
+		mes "お願いがございます！";
+		next;
+		mes "[アモディピン]";
+		mes "うちの社長に未払いの給料を";
+		mes "私に支払うよう催促してもらえません？";
+		next;
+		mes "[アモディピン]";
+		mes "実は、社長は「冒険者」に";
+		mes "憧れてるんです。";
+		mes "私の話は聞いてくれませんが";
+		mes "貴方の話なら聞いてくれるに";
+		mes "違いありませんよ。";
+		next;
+		if(select("やってみましょう","今は時間がないです") == 2) {
+			mes "[アモディピン]";
+			mes "そんな殺生な～～！";
+			close;
+		}
+		mes "[アモディピン]";
+		mes "ありがとうございます！";
+		mes "ありがとうございます！";
+		mes "社長の名前は「ダヒル」です。";
+		mes "よろしくお願します！";
+		delquest 130101;
+		setquest 16584;
+		close;
+	}
+	if(checkquest(16585)) {
+		mes "[アモディピン]";
+		mes "お帰りなさい！";
+		mes "で、いかがでしたか？";
+		mes "上手くやっていただけました？";
+		next;
+		mes "[アモディピン]";
+		mes "給料を支払ってくれると！";
+		mes "ああ、おかげさまで子供たちに";
+		mes "腹いっぱいの食事と";
+		mes "服を買ってやれます！";
+		mes "ありがとうございます！";
+		next;
+		mes "[アモディピン]";
+		mes "は～～でも、明日からまた";
+		mes "小言を言われるんだろうなぁ。";
+		mes "まあ、給料もらえるから";
+		mes "我慢我慢。";
+		next;
+		mes "[アモディピン]";
+		mes "そりゃ～腹は立ちますけど";
+		mes "原住民が街で暮らしていく以上は";
+		mes "これぐらいのことは我慢しないと";
+		mes "やっていけないんですよ。";
+		next;
+		mes "[アモディピン]";
+		mes "街から逃げ出した原住民の村が";
+		mes "あるって噂も聞いたことありますが";
+		mes "子供もいますからね。";
+		mes "そんなところに行く勇気はないです。";
+		next;
+		delquest 16585;
+		setquest 202345;
+		getitem 1000405,10;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		setquest 130121;
+		compquest 130121;
+		mes "[アモディピン]";
+		mes "とにかく、貴方は私の恩人です。";
+		mes "お忙しいところ";
+		mes "本当にありがとうございました。";
+		mes "旅の御無事を祈ってますよ。";
+		close;
+	}
+	mes "[アモディピン]";
+	mes "毎日毎日、その日の食べ物や";
+	mes "子供たちのことが心配で……";
+	mes "悩み事のない日はありません。";
+	mes "原住民として生まれただけで";
+	mes "どうしてこんなに苦労をするのか……。";
 	close;
+OnQuestInfo:
+	if(checkquest(130101) || checkquest(16585))
+		showevent 0, 3, "アモディピン#ep18";
+	else
+		showevent 9999,0,"アモディピン#ep18";
+	end;
 }
 rachel.gat,136,95,3	script	ダヒル#ep18	930,{/* 16070 */
 	mes "[ダヒル]";
@@ -9696,7 +11075,55 @@ rachel.gat,136,95,3	script	ダヒル#ep18	930,{/* 16070 */
 	mes "しかし、足に怪我を負ってしまい";
 	mes "冒険者となる道を断念したのです。";
 	mes "いや～あれは痛かったな～！";
+	if(checkquest(16584)) {
+		next;
+		mes "[ダヒル]";
+		mes "よろしければ、冒険者様のご活躍を";
+		mes "聞かせていただけませんか？";
+		mes "私は、冒険者様のお話を聞くのが";
+		mes "大好きなんですよ。";
+		next;
+		menu "違う話をしに来ました",-;
+		mes "[ダヒル]";
+		mes "アモディピンの給料ですか？";
+		mes "アモディピンから頼まれた訳ですか？";
+		mes "来月、一気に払うと言っていたのに";
+		mes "冒険者様を利用するとは";
+		mes "如何にも原住民らしい小癪な手を！";
+		next;
+		menu "どういうことですか？",-;
+		mes "[ダヒル]";
+		mes "原住民は私達移住の民と違って";
+		mes "人の後ろに隠れることを好みます。";
+		mes "まったく困ったものだ！";
+		next;
+		menu "給料の未払いは間違ってる",-,"それは差別では？",-;
+		mes "[ダヒル]";
+		mes "いやいや、わかってますって！";
+		mes "今はキャッシュを持ち合わせて";
+		mes "いないだけです！";
+		next;
+		mes "[ダヒル]";
+		mes "まぁ、確かに～アモディピンへの";
+		mes "支払いが一番最後になりましたが～。";
+		mes "あくまで順番の問題です。はい。";
+		next;
+		mes "[ダヒル]";
+		mes "ええい！";
+		mes "明日には給与を支払うし";
+		mes "今回のことも叱らないと";
+		mes "アモディピンにお伝えください！";
+		mes "今、辞められても困りますからね！";
+		delquest 16584;
+		setquest 16585;
+	}
 	close;
+OnQuestInfo:
+	if(checkquest(16584))
+		showevent 0, 3, "ダヒル#ep18";
+	else
+		showevent 9999,0,"ダヒル#ep18";
+	end;
 }
 wolfvill.gat,188,140,7	script	カスレ#町の住民	10401,{/* 16071 */
 	mes "[カスレ]";
@@ -9734,21 +11161,21 @@ wolfvill.gat,224,230,3	script	ニニシ#町の住民	10402,{/* 16073 */
 }
 wolfvill.gat,53,234,0	script	#ep18_wp01	139,14,14,{/* 16074 */
 	if(checkquest(130104)) {
-		cloakoffnpc "ハザール#ep18_1";	// 2434
-		cloakoffnpc "カミル#ep18_1";	// 2436
-		cloakoffnpc "輸送用荷車#ep18_1";	// 2435
+		cloakoffnpc "ハザール#ep18_1";
+		cloakoffnpc "カミル#ep18_1";
+		cloakoffnpc "輸送用荷車#ep18_1";
 	}
 	else if(checkquest(12532)) {
-		cloakoffnpc "ハザール#ep18_1";	// 2434
-		cloakoffnpc "輸送用荷車#ep18_1";	// 2435
+		cloakoffnpc "ハザール#ep18_1";
+		cloakoffnpc "輸送用荷車#ep18_1";
 	}
 	else if(checkquest(12533)) {
 		//Non
 	}
 	else {
-		cloakonnpc "ハザール#ep18_1";	// 2434
-		cloakonnpc "カミル#ep18_1";	// 2436
-		cloakonnpc "輸送用荷車#ep18_1";	// 2435
+		cloakonnpc "ハザール#ep18_1";
+		cloakonnpc "カミル#ep18_1";
+		cloakonnpc "輸送用荷車#ep18_1";
 	}
 	end;
 }
@@ -9769,8 +11196,8 @@ wolfvill.gat,50,234,6	script	ハザール#ep18_1	10389,{/* 16075 (cloaking)*/
 		mes "冒険者というのはみんな";
 		mes "お前さんみたいに器用なのかね？";
 		next;
-		cloakoffnpc "カミル#ep18_1";	// 2436
-		cloakoffnpc "輸送用荷車#ep18_1";	// 2435
+		cloakoffnpc "カミル#ep18_1";
+		cloakoffnpc "輸送用荷車#ep18_1";
 		mes "[カミル]";
 		mes "親方！";
 		mes "目録を確認しました。";
@@ -9793,8 +11220,8 @@ wolfvill.gat,50,234,6	script	ハザール#ep18_1	10389,{/* 16075 (cloaking)*/
 		mes "本当にありがとうございます。";
 		mes "では親方、行って参ります！";
 		next;
-		cloakonnpc "カミル#ep18_1";	// 2436
-		cloakonnpc "輸送用荷車#ep18_1";	// 2435
+		cloakonnpc "カミル#ep18_1";
+		cloakonnpc "輸送用荷車#ep18_1";
 		mes "[ハザール]";
 		mes "やれやれ……";
 		mes "こたびは弟子を助けてくださり";
@@ -9826,7 +11253,7 @@ wolfvill.gat,50,234,6	script	ハザール#ep18_1	10389,{/* 16075 (cloaking)*/
 		mes strcharinfo(0)+"さん。";
 		mes "よろしく頼みますぞ。";
 		delquest 12532;
-		setquest 12533;	// state=1
+		setquest 12533;
 		close;
 	}
 	if(checkquest(12533)) {
@@ -9837,7 +11264,7 @@ wolfvill.gat,50,234,6	script	ハザール#ep18_1	10389,{/* 16075 (cloaking)*/
 		mes strcharinfo(0)+"さん。";
 		mes "よろしく頼みますぞ。";
 		close2;
-		cloakonnpc "ハザール#ep18_1";	// 2434
+		cloakonnpc "ハザール#ep18_1";
 		end;
 	}
 	if(checkquest(130104)) {
@@ -9918,9 +11345,9 @@ wolfvill.gat,50,234,6	script	ハザール#ep18_1	10389,{/* 16075 (cloaking)*/
 		mes "では、僕は荷物の確認のために";
 		mes "席を外します。";
 		delquest 130104;
-		setquest 12532;	// state=1
+		setquest 12532;
 		close2;
-		cloakonnpc "カミル#ep18_1";	// 2436
+		cloakonnpc "カミル#ep18_1";
 		end;
 	}
 OnQuestInfo:
@@ -9951,16 +11378,16 @@ wolfvill.gat,53,234,4	script	輸送用荷車#ep18_1	10390,{/* 16076 (cloaking)*/
 			close;
 		}
 		if(rand(100) < 50) {
-			misceffect 154,"輸送用荷車#ep18_1";	// 2435
+			misceffect 154,"輸送用荷車#ep18_1";
 			mes "^0000FF‐上手く補強できた！‐^000000";
 			delitem 7197,1;
-			delmisceffect 1090, "輸送用荷車#ep18_1";	// 2435
+			delmisceffect 1090, "輸送用荷車#ep18_1";
 			compquest 12532;
 			close;
 		}
 		else {
 			//未調査
-			misceffect 155,"輸送用荷車#ep18_1";	// 2435
+			misceffect 155,"輸送用荷車#ep18_1";
 			mes "^0000FF‐補強に失敗してしまった！‐^000000";
 			delitem 7197,1;
 			close;
@@ -9987,50 +11414,527 @@ OnInit:
 	cloakonnpc;
 	end;
 }
-gw_fild01.gat,115,130,0	script	#ep18_wp02	139,{/* 16078 */}
+gw_fild01.gat,115,130,0	script	#ep18_wp02	139,5,5,{/* 16078 */
+	if(checkquest(12533)) {
+		cloakoffnpc "輸送用荷車#ep18_2";
+	}
+	end;
+}
 gw_fild01.gat,115,130,4	script	輸送用荷車#ep18_2	10390,{/* 16079 (cloaking)*/
+	if(checkquest(12533)) {
+		mes "^0000FF‐カミルが率いていた荷車だ。";
+		mes "　積荷が周囲に散乱している。";
+		mes "　何か良くないことが起きたに違いない。";
+		mes "　カミルを探した方が良いだろう‐^000000";
+		delquest 12533;
+		setquest 12534;
+		close;
+	}
+	if(checkquest(12534)) {
+		mes "^0000FF‐カミルが率いていた荷車だ。";
+		mes "　積荷が周囲に散乱している‐^000000";
+		close;
+	}
+	end;
+OnQuestInfo:
+	if(checkquest(12533))
+		showevent 0, 3, "輸送用荷車#ep18_2";
+	else
+		showevent 9999,0,"輸送用荷車#ep18_2";
+	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-gw_fild01.gat,202,102,0	script	#ep18_wp03	139,{/* 16080 */}
+gw_fild01.gat,202,102,0	script	#ep18_wp03	139,4,4,{/* 16080 */
+	if(checkquest(12534)) {
+		if(!(checkquest(12534)&8))
+			cloakoffnpc "#ep18_2_mon";
+		cloakoffnpc "カミル#ep18_2";
+	}
+	else {
+		cloakonnpc "カミル#ep18_2";
+		cloakonnpc "#ep18_2_mon";
+	}
+	end;
+}
 gw_fild01.gat,205,102,4	script	#ep18_2_mon	21304,{/* 16081 (cloaking)*/
+	if(checkquest(12534)) {
+		unittalk getnpcid(0,"#ep18_2_mon"),"ぐるるる…";
+		unittalk getnpcid(0,"カミル#ep18_2"),"ちくしょう";
+		mes "^0000FF‐カミルがモンスターと対峙している。";
+		mes "　状況はあまり良くなさそうだ。";
+		mes "　カミルを支援した方が良いだろう‐^000000";
+		while(1) {
+			next;
+			switch(select("戦闘の助言を行う","モンスターを直接倒す","知らんぷりして通り過ぎる")) {
+			case 1:
+				mes "^0000ffカミルに狼への攻撃方法を指示しよう^000000";
+				set '@kamir_hp,1000;
+				set '@mon_hp,1000;
+				break;
+			case 2:
+				mes "["+strcharinfo(0)+"]";
+				mes "（いや……";
+				mes "　彼の成長のためにもここは";
+				mes "　助言してあげる方がいいだろう)";
+				continue;
+			case 3:
+				mes "^0000FF‐いったん出直すことにしよう‐^000000";
+				close;
+			}
+			break;
+		}
+		do {
+			mes "狼の生命力 - ^ff0000" +'@mon_hp+ "^000000";
+			mes "カミルの生命力 - ^0000ff" +'@kamir_hp+ "^000000";
+			next;
+			switch(select("弱攻撃(高い確率)","中攻撃(普通の確率)","強攻撃(低い確率)","会心の一撃(奇跡的な確率)","いったん退却する")) {
+			case 1:
+				set '@rate,90;
+				set '@damage,10;
+				break;
+			case 2:
+				set '@rate,60;
+				set '@damage,30;
+				break;
+			case 3:
+				set '@rate,30;
+				set '@damage,70;
+				break;
+			case 4:
+				set '@rate,10;
+				set '@damage,200;
+				break;
+			case 5:
+				mes "^0000FF‐いったん出直すことにしよう‐^000000";
+				close;
+			}
+			if('@rate < rand(100)) {
+				misceffect 537,"#ep18_2_mon";
+				misceffect 567,"#ep18_2_mon";
+				unittalk getnpcid(0,"#ep18_2_mon"),"-"+ '@damage;
+				unittalk getnpcid(0,"カミル#ep18_2")," ";
+			}
+			else {
+				misceffect 537,"カミル#ep18_2";
+				misceffect 567,"カミル#ep18_2";
+				unittalk getnpcid(0,"#ep18_2_mon")," ";
+				unittalk getnpcid(0,"カミル#ep18_2"),"-"+ '@damage;
+			}
+		} while('@mon_hp <= 0 || '@kamir_hp <= 0);
+		if('@mon_hp <= 0) {
+			mes "^0000ff狼を倒した！^000000";
+			compquest 12534;
+			cloakonnpc "#ep18_2_mon";
+			close;
+		}
+		else {
+			mes "^0000ff一度撤退しよう！^000000";
+			close;
+		}
+	}
+OnQuestInfo:
+	if(checkquest(12534) && !(checkquest(12534)&8))
+		showevent 0, 3, "#ep18_2_mon";
+	else
+		showevent 9999,0,"#ep18_2_mon";
+	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 gw_fild01.gat,201,102,6	script	カミル#ep18_2	10388,{/* 16082 (cloaking)*/
+	if(checkquest(12534) && checkquest(12534)&8) {
+		mes "[カミル]";
+		mes "はぁ……はぁ……";
+		mes "ありがとうございます、冒険者様。";
+		mes "助言をいただかなければ";
+		mes "今頃僕は、モンスターの腹の中でした。";
+		next;
+		mes "[カミル]";
+		mes "荷馬車をご覧になられたと思いますが";
+		mes "奴らに積荷を奪われてしまって……";
+		mes "全部を取り返すのは無理でしたが";
+		mes "なんとか一部を取り戻せました。";
+		next;
+		mes "[カミル]";
+		mes "僕は取り戻せた分の積荷を持って";
+		mes "村に戻り、今回の失敗の罰を";
+		mes "受けるつもりです。";
+		next;
+		menu "今回は事故ではないですか？",-;
+		mes "[カミル]";
+		mes "……数か月分の食料や生活必需品と";
+		mes "交換する予定の積荷だったんです。";
+		mes "決して軽い罪ではありません。";
+		next;
+		mes "[カミル]";
+		mes "元々、親方は僕が荷物を運ぶことに";
+		mes "反対しておられたんです。";
+		mes "にも関わらず無理を通したのは僕です。";
+		mes "すべて僕の責任です。";
+		next;
+		mes "[カミル]";
+		mes "もし僕が逃げたりしたら";
+		mes "親方が代わりに";
+		mes "責任を負うことになります。";
+		mes "それだけはあってはいけません。";
+		next;
+		mes "[カミル]";
+		mes "……ご協力に感謝いたします。";
+		mes "僕は村に戻ります。";
+		mes "運命が許してくれれば";
+		mes "また会えると思います……。";
+		delquest 12534;
+		setquest 12535;
+		close2;
+		cloakonnpc "カミル#ep18_2";
+		end;
+	}
+	if(checkquest(12535)) {
+		// 未調査
+	}
+	mes "^0000FF‐今は話を聞けない状態のようだ‐^000000";
+	close;
+OnQuestInfo:
+	if(checkquest(12534) && checkquest(12534)&8)
+		showevent 0, 3, "カミル#ep18_2";
+	else
+		showevent 9999,0,"カミル#ep18_2";
+	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-wolfvill.gat,76,210,0	script	#ep18_wp03	139,{/* 16083 */}
+wolfvill.gat,76,210,0	script	#ep18_wp03	139,4,4,{/* 16083 */
+	if(checkquest(12535) || checkquest(12531)) {
+		cloakoffnpc "ハザール#ep18_3";
+		cloakoffnpc "カミル#ep18_3";
+		cloakoffnpc "立会人#ep18_31";
+		cloakoffnpc "立会人#ep18_32";
+		cloakoffnpc "立会人#ep18_33";
+	}
+	else {
+		cloakonnpc "ハザール#ep18_3";
+		cloakonnpc "カミル#ep18_3";
+		cloakonnpc "立会人#ep18_31";
+		cloakonnpc "立会人#ep18_32";
+		cloakonnpc "立会人#ep18_33";
+	}
+	end;
+}
 wolfvill.gat,75,214,4	script	ハザール#ep18_3	10389,{/* 16084 (cloaking)*/
+	if(checkquest(12535)) {
+		mes "^0000FF‐村の隊商主たちによる会議が";
+		mes "　行われている‐^000000";
+		next;
+		mes "[ハザール]";
+		mes "皆にはまことに申し訳ない……";
+		mes "大事な積荷を失うとは";
+		mes "儂の不徳の致すところ。";
+		next;
+		mes "[立会人]";
+		mes "ハザール、お前のせいではない。";
+		mes "無理やり隊商を率いようとした";
+		mes "カミルの責任だろう？";
+		next;
+		mes "[ハザール]";
+		mes "いや。弟子に経験を積ませるために";
+		mes "隊商を率いるように言ったのは";
+		mes "儂なのじゃ。";
+		next;
+		mes "[カミル]";
+		mes "違います！";
+		mes "僕がわがままを言って";
+		mes "師匠に役を譲っていただいたのです！";
+		mes "全ての責任は僕にあります！";
+		next;
+		mes "[ハザール]";
+		mes "カミル！";
+		mes "お前は黙っておれ！";
+		unittalk getnpcid(0,"立会人#ep18_31"),"はぁ……";
+		unittalk getnpcid(0,"立会人#ep18_32"),"ふぅむ……";
+		unittalk getnpcid(0,"立会人#ep18_33"),"やれやれ……";
+		next;
+		mes "[立会人]";
+		mes "俺たちもカミルを幼い頃から";
+		mes "見守ってきた立場だ。";
+		mes "事情は分からなくもない。";
+		next;
+		mes "[立会人]";
+		mes "事情は分かるが";
+		mes "隊商には隊商の掟がある。";
+		next;
+		mes "[立会人]";
+		mes "隊商の掟に従えば";
+		mes "カミルの首を差し出さねばならん。";
+		next;
+		mes "[カミル]";
+		mes "掟に従います。";
+		mes "僕の責任なのですから";
+		mes "ケジメをつけさせてください。";
+		next;
+		mes "[ハザール]";
+		mes "口を慎め、カミル！";
+		next;
+		mes "[立会人]";
+		mes "そう結論を急ぐな……";
+		mes "まずは被害の状況を確認しよう。";
+		next;
+		mes "[立会人]";
+		mes "革を失ったことによって";
+		mes "本来購入できるはずだった食糧などを";
+		mes "予定通りに購入できなかった。";
+		mes "ここまでは間違いないな？";
+		next;
+		mes "[立会人]";
+		mes "うむ……";
+		mes "それなら、今すぐに隊商たちで";
+		mes "捜索隊を組織し";
+		mes "モンスターに奪われた荷を";
+		mes "探せば良いのではないか？";
+		next;
+		mes "[立会人]";
+		mes "それはそうだが";
+		mes "我らが捜索隊を組織すれば";
+		mes "今回の件、村中に知れ渡るだろう。";
+		next;
+		mes "[立会人]";
+		mes "……そうなれば、カミルを";
+		mes "処罰しなければならなくなるな。";
+		next;
+		menu "手を貸しましょうか？",-;
+		mes "[ハザール]";
+		mes strcharinfo(0)+"さん？";
+		mes "しかし……";
+		mes "部外者の手を借りるわけには……。";
+		next;
+		mes "[立会人]";
+		mes "いや。";
+		mes "部外者であることの方が都合が良い。";
+		mes "部外者が荷物を探し出してくれれば";
+		mes "今回の件は隊商内だけで";
+		mes "完結したことにできる。";
+		next;
+		mes "[ハザール]";
+		mes strcharinfo(0)+"さん……";
+		mes "本当に手を貸してくださるのか？";
+		mes "我々の代わりに";
+		mes "積荷を探してきてくれると？";
+		next;
+		menu "お任せください！",-;
+		mes "[立会人]";
+		mes "カミルのために動いてくれるとは";
+		mes "……感謝いたします。";
+		next;
+		mes "[立会人]";
+		mes "私からも感謝いたします。";
+		mes "カミルはまだまだ未熟ですが";
+		mes "失うには惜しい人物ですからな。";
+		next;
+		mes "[ハザール]";
+		mes "本当に、なんと礼を言えば良いか……";
+		mes "カミル、冒険者様に積荷を";
+		mes "失くした場所をお伝えしなさい。";
+		next;
+		mes "[カミル]";
+		mes "は、はい！";
+		mes "わかりました！";
+		mes "　";
+		mes "^0000FF‐カミルから積み荷を失くした場所を";
+		mes "　教えてもらった‐^000000";
+		delquest 12535;
+		setquest 12536;
+		setquest 12537;
+		setquest 12538;
+		setquest 12539;
+		next;
+		mes "[ハザール]";
+		mes "何卒よろしくお願いいたします。";
+		close2;
+		cloakonnpc "ハザール#ep18_3";
+		cloakonnpc "カミル#ep18_3";
+		cloakonnpc "立会人#ep18_31";
+		cloakonnpc "立会人#ep18_32";
+		cloakonnpc "立会人#ep18_33";
+		end;
+	}
+	if(checkquest(12531)) {
+		mes "^0000FF‐村の隊商主たちによる会議が";
+		mes "　行われている。";
+		mes "　彼らに見つけた積荷を渡した‐^000000";
+		next;
+		mes "[立会人]";
+		mes "おお……こんなにも早く!?";
+		next;
+		mes "[立会人]";
+		mes "どれどれ……？";
+		mes "うむ……少し足りないようだが";
+		mes "これぐらいの量は、不良品として";
+		mes "取引対象にならなかったものとして";
+		mes "処理できますな。";
+		next;
+		mes "[立会人]";
+		mes "許容範囲内であれば";
+		mes "今回の会議の案件も";
+		mes "変更するべきでしょうな。";
+		next;
+		mes "[立会人]";
+		mes "交易品の遺失に関してではなく";
+		mes "隊商の出発が遅延している件に";
+		mes "変更するということで";
+		mes "構いませんな？";
+		next;
+		mes "[ハザール]";
+		mes "出発が予定より二日遅れておる。";
+		mes "この件について結論を出してくだされ。";
+		next;
+		mes "[立会人]";
+		mes "では、遅延の責任を取って";
+		mes "カミルには3か月間の";
+		mes "雑務に当たることを言いつける。";
+		mes "事務作業を行いつつ";
+		mes "今回の件を反省してもらおう。";
+		next;
+		mes "[立会人]";
+		mes "異議なし！";
+		mes "　";
+		mes "[立会人]";
+		mes "私も異議ありません。";
+		next;
+		mes "[ハザール]";
+		mes "よかったの、カミル。";
+		mes "打ち首は免れたわい。";
+		next;
+		mes "[カミル]";
+		mes "ありがとうございます、親方。";
+		mes "隊商主の皆様にも感謝いたします。";
+		next;
+		delquest 12531;
+		setquest 202330;
+		getitem 1000405,20;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		getexp 1800000000,0,0;
+		getexp 0,1500000000,0;
+		setquest 130124;
+		compquest 130124;
+		mes "[カミル]";
+		mes strcharinfo(0)+"様も";
+		mes "本当にありがとうございました！";
+		mes "貴方は私の命の恩人です。";
+		mes "……ささやかですがお礼の品を";
+		mes "用意しました。お受け取りください。";
+		emotion 28,"立会人#ep18_31";
+		close2;
+		cloakonnpc "ハザール#ep18_3";
+		cloakonnpc "カミル#ep18_3";
+		cloakonnpc "立会人#ep18_31";
+		cloakonnpc "立会人#ep18_32";
+		cloakonnpc "立会人#ep18_33";
+	}
+	end;
+OnQuestInfo:
+	if(checkquest(12535) || checkquest(12531))
+		showevent 0, 3, "ハザール#ep18_3";
+	else
+		showevent 9999,0,"ハザール#ep18_3";
+	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 wolfvill.gat,79,213,3	script	カミル#ep18_3	10388,{/* 16085 (cloaking)*/
+	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 wolfvill.gat,72,209,8	script	立会人#ep18_31	929,{/* 16086 (cloaking)*/
+	mes "[立会人]";
+	mes "会議中の雑談は禁止されておる。";
+	close;
 OnInit:
 	cloakonnpc;
 	end;
 }
 wolfvill.gat,74,208,8	script	立会人#ep18_32	928,{/* 16087 (cloaking)*/
+	mes "[立会人]";
+	mes "雑談している暇は無いぞ。";
+	close;
 OnInit:
 	cloakonnpc;
 	end;
 }
 wolfvill.gat,77,207,8	script	立会人#ep18_33	931,{/* 16088 (cloaking)*/
+	mes "[立会人]";
+	mes "すまないが";
+	mes "後にしてくれないか？";
+	mes "今は会議中なんだ。";
+	close;
 OnInit:
 	cloakonnpc;
 	end;
 }
 gw_fild01.gat,242,325,4	script	#ep18_12536	10428,{/* 16089 (cloaking)*/
+	if(checkquest(12536)) {
+		misceffect 561,"#ep18_12536";
+		progressbar 2,"#ep18_12536";	//color=0xffff00
+		delmisceffect 561, "#ep18_12536";
+		misceffect 135,"#ep18_12536";
+		delquest 12536;
+		if(checkquest(12536) || checkquest(12537) || checkquest(12538) || checkquest(12539))
+			unittalk getcharid(3),strcharinfo(0)+" : ‐荷物を見つけた！‐",1;
+		else {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐荷物を見つけた！もう充分回収できたようだ‐",1;
+			setquest 12531;
+		}
+		cloakonnpc "#ep18_12536";
+	}
+	end;
+OnQuestInfo:
+	if(checkquest(12536))
+		showevent 0, 3, "#ep18_12536";
+	else
+		showevent 9999,0,"#ep18_12536";
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -10049,22 +11953,80 @@ OnInit:
 }
 gw_fild01.gat,347,194,0	script	#wp12538	139,{/* 16094 */}
 gw_fild01.gat,230,52,4	script	#ep18_12539	10428,{/* 16095 (cloaking)*/
+	if(checkquest(12539)) {
+		misceffect 561,"#ep18_12539";
+		progressbar 2,"#ep18_12539";	//color=0xffff00
+		delmisceffect 561, "#ep18_12539";
+		misceffect 135,"#ep18_12539";
+		delquest 12539;
+		if(checkquest(12536) || checkquest(12537) || checkquest(12538) || checkquest(12539))
+			unittalk getcharid(3),strcharinfo(0)+" : ‐荷物を見つけた！‐",1;
+		else {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐荷物を見つけた！もう充分回収できたようだ‐",1;
+			setquest 12531;
+		}
+		cloakonnpc "#ep18_12539";
+	}
+	end;
+OnQuestInfo:
+	if(checkquest(12539))
+		showevent 0, 3, "#ep18_12539";
+	else
+		showevent 9999,0,"#ep18_12539";
+	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
-gw_fild01.gat,230,52,0	script	#wp12539	139,{/* 16096 */}
+gw_fild01.gat,230,52,0	script	#wp12539	139,5,5,{/* 16096 */
+	if(checkquest(12539))
+		cloakoffnpc "#ep18_12539";
+	end;
+}
 rachel.gat,155,236,0	script	#ep18w12_148	139,14,14,{/* 16097 */
-OnTouch:
-	cloakonnpc "平静な神官ジュノーク#atm0";
+	if(EP18_1QUE >= 36)
+		cloakoffnpc "平静な神官ジュノーク#atm0";
+	else
+		cloakonnpc "平静な神官ジュノーク#atm0";
 	end;
 }
 rachel.gat,155,236,3	script	平静な神官ジュノーク#atm0	935,{/* 16098 (cloaking)*/
+	// 初回未調査
+	mes "[ジュノーク]";
+	mes "お変わりありませんか？";
+	mes "よろしければ今日も";
+	mes "原住民たちと移住の民たちの様子を";
+	mes "調査してきてもらえませんか？";
+	next;
+	if(select("手伝いましょう","今は時間が無い") == 2) {
+		mes "[ジュノーク]";
+		mes "それは残念です。";
+		mes "とても悲しい……。";
+		close;
+	}
+	mes "[ジュノーク]";
+	mes "では、こちらが指定する";
+	mes "原住民と移住の民の3人ずつから";
+	mes "お話を聞いてきてください。";
+	mes "よろしくお願いいたします。";
+	delquest 3504;
+	setquest 3503;
+	setquest 3495;
+	setquest 3496;
+	setquest 3497;
+	setquest 3498;
+	setquest 3499;
+	setquest 3501;
+	close;
 OnInit:
 	cloakonnpc;
 	end;
 }
 rachel.gat,69,234,3	script	ジャラド#atm1	921,{/* 16099 */
+	if(checkquest(3496)) {
+		if(checkquest(3496)&8) {
+		}
+	}
 	mes "[ジャラド]";
 	mes "こんにちは。";
 	mes "最近、街の雰囲気が怪しい気がします。";
@@ -10073,6 +12035,49 @@ rachel.gat,69,234,3	script	ジャラド#atm1	921,{/* 16099 */
 	close;
 }
 rachel.gat,100,72,3	script	ロヒ#atm2	919,{/* 16100 */
+	if(checkquest(3496)) {
+		if(checkquest(3496)&8) {
+			mes "[ロヒ]";
+			mes "今日も明るい気持ちで";
+			mes "仕事に向かえます。";
+			close;
+		}
+		mes "[ロヒ]";
+		mes "こんにちは、お元気ですか。";
+		mes "ようやくジーナ様から適切な給料を";
+		mes "もらえるようになりました。";
+		next;
+		mes "[ロヒ]";
+		mes "これもマラム様や神官たちが";
+		mes "不当な状況を改善しようと";
+		mes "動いてくださったおかげです。";
+		mes "本当に感謝しています。";
+		next;
+		mes "[ロヒ]";
+		mes "今後、他の原住民たちの処遇も";
+		mes "改善させていくことでしょう。";
+		mes "悩み事も解決したので";
+		mes "ゆっくり眠れそうです。";
+		next;
+		compquest 3494;
+		mes "[ロヒ]";
+		mes "それでは、";
+		mes "今日も良い日になりますように。";
+		mes "　";
+		mes "^0000FF‐ロヒから話を聞いた。";
+		for(set '@i,3493; '@i < 3502; set '@i,'@i+1) {
+			if(checkquest('@i) & 8)
+				set '@cnt,'@cnt+1;
+		}
+		if('@cnt >= 6) {
+			mes "　6人全員から話を聞くことができた。";
+			mes "　ジュノークに報告しよう‐^000000";
+			setquest 3505;
+		}
+		else
+			mes "　次の会話相手を探してみよう‐^000000";
+		close;
+	}
 	mes "[ロヒ]";
 	mes "こんにちは、ロヒです。";
 	mes "ようやく新しい仕事を見つけましたが";
@@ -10080,6 +12085,50 @@ rachel.gat,100,72,3	script	ロヒ#atm2	919,{/* 16100 */
 	close;
 }
 rachel.gat,258,207,3	script	ジョジン#atm3	918,{/* 16101 */
+	if(checkquest(3495)) {
+		if(checkquest(3495)&8) {
+			mes "[ジョジン]";
+			mes "これまでつらい時期を過ごしてきたけど";
+			mes "今は将来に期待することが";
+			mes "できるようになったよ。";
+			close;
+		}
+		mes "[ジョジン]";
+		mes "お元気？　僕はジョジンと申します。";
+		next;
+		mes "[ジョジン]";
+		mes "以前に、建物を売却するかどうか";
+		mes "悩んでいるって言ってたけど";
+		mes "売却せずに済みそうだよ。";
+		next;
+		mes "[ジョジン]";
+		mes "神殿の神官たちが";
+		mes "原住民に対して、移住の民と同等の";
+		mes "権利を認めてくれたんだ。";
+		next;
+		mes "[ジョジン]";
+		mes "そうなれば、僕の事業も安定するし";
+		mes "建物を売らずに済むからね。";
+		mes "良い知らせを伝えられて、僕も嬉しい。";
+		next;
+		compquest 3495;
+		mes "[ジョジン]";
+		mes "ではでは、よい一日を。";
+		mes "　";
+		mes "^0000FF‐ジョジンから話を聞いた。";
+		for(set '@i,3493; '@i < 3502; set '@i,'@i+1) {
+			if(checkquest('@i) & 8)
+				set '@cnt,'@cnt+1;
+		}
+		if('@cnt >= 6) {
+			mes "　6人全員から話を聞くことができた。";
+			mes "　ジュノークに報告しよう‐^000000";
+			setquest 3505;
+		}
+		else
+			mes "　次の会話相手を探してみよう‐^000000";
+		close;
+	}
 	mes "[ジョジン]";
 	mes "お元気？　僕はジョジンと申します。";
 	next;
@@ -10091,6 +12140,46 @@ rachel.gat,258,207,3	script	ジョジン#atm3	918,{/* 16101 */
 	close;
 }
 rachel.gat,159,173,3	script	スクアイン#atm4	870,{/* 16102 */
+	if(checkquest(3496)) {
+		if(checkquest(3496)&8) {
+			mes "[スクアイン]";
+			mes "今日もやりがいのある一日が";
+			mes "始まるぞぉ！";
+			close;
+		}
+		mes "[スクアイン]";
+		mes "この街で一番貧乏だった";
+		mes "スクアインと申します。";
+		mes "ありがたいことに";
+		mes "お仕事をもらえたんです。";
+		next;
+		mes "[スクアイン]";
+		mes "これで他人に頼ってばかりの生活とも";
+		mes "おさらばです。";
+		next;
+		mes "[スクアイン]";
+		mes "今まで多くの人のお世話になったので";
+		mes "これからは、私も他人を助けるような";
+		mes "人になろうと思ってます。";
+		next;
+		compquest 3496;
+		mes "[スクアイン]";
+		mes "では、お気をつけて。";
+		mes "　";
+		mes "^0000FF‐スクアインから話を聞いた。";
+		for(set '@i,3493; '@i < 3502; set '@i,'@i+1) {
+			if(checkquest('@i) & 8)
+				set '@cnt,'@cnt+1;
+		}
+		if('@cnt >= 6) {
+			mes "　6人全員から話を聞くことができた。";
+			mes "　ジュノークに報告しよう‐^000000";
+			setquest 3505;
+		}
+		else
+			mes "　次の会話相手を探してみよう‐^000000";
+		close;
+	}
 	mes "[スクアイン]";
 	mes "こんにちは。";
 	mes "この街で一番貧乏な";
@@ -10099,6 +12188,53 @@ rachel.gat,159,173,3	script	スクアイン#atm4	870,{/* 16102 */
 	close;
 }
 rachel.gat,190,30,5	script	セナド#atm5	746,{/* 16103 */
+	if(checkquest(3497)) {
+		if(checkquest(3497)&8) {
+			mes "[セナド]";
+			mes "闘いで負けたことが";
+			mes "いつのことだったのか";
+			mes "もう思い出せません。";
+			close;
+		}
+		mes "[セナド]";
+		mes "こんにちは。";
+		mes "武闘家のセナドと言います。";
+		next;
+		mes "[セナド]";
+		mes "私に試合を申し込んできたのは";
+		mes "移住の民でしたが";
+		mes "私自身は、原住民の代表として";
+		mes "負けられない！　という思いは";
+		mes "持っていませんでした。";
+		next;
+		mes "[セナド]";
+		mes "それよりも、自由に強敵と闘える";
+		mes "環境が整備されたことの方が";
+		mes "私には重要でしたからね。";
+		next;
+		mes "[セナド]";
+		mes "試合の結果ですか？";
+		mes "もちろん、私の勝ちです。";
+		mes "次はぜひ、貴方とも戦いたいものです。";
+		next;
+		compquest 3497;
+		mes "[セナド]";
+		mes "それでは、またお会いしましょう。";
+		mes "　";
+		mes "^0000FF‐セナドから話を聞いた。";
+		for(set '@i,3493; '@i < 3502; set '@i,'@i+1) {
+			if(checkquest('@i) & 8)
+				set '@cnt,'@cnt+1;
+		}
+		if('@cnt >= 6) {
+			mes "　6人全員から話を聞くことができた。";
+			mes "　ジュノークに報告しよう‐^000000";
+			setquest 3505;
+		}
+		else
+			mes "　次の会話相手を探してみよう‐^000000";
+		close;
+	}
 	mes "[セナド]";
 	mes "こんにちは。";
 	mes "武闘家のセナドと言います。";
@@ -10108,6 +12244,53 @@ rachel.gat,190,30,5	script	セナド#atm5	746,{/* 16103 */
 	close;
 }
 rachel.gat,210,52,5	script	ジェイパー#atm6	46,{/* 16104 */
+	if(checkquest(3498)) {
+		if(checkquest(3498)&8) {
+			mes "[ジェイパー]";
+			mes "まぁ、他の商人たちも";
+			mes "商売がしやすくなるってことは";
+			mes "条件が一緒ってことだからな。";
+			mes "もう一度、頑張ってみるさ！";
+			close;
+		}
+		mes "[ジェイパー]";
+		mes "元気かね。";
+		mes "商人組合をやっているジェイパーだ。";
+		mes "今回、街で起こったいざこざのおかげで";
+		mes "いろいろ思うことがあったよ。";
+		next;
+		mes "[ジェイパー]";
+		mes "自分の商圏から原住民の商人を";
+		mes "追い出したり";
+		mes "原住民たちを安い給料で";
+		mes "雇っていたり……";
+		mes "それができなくなったがね。";
+		next;
+		mes "[ジェイパー]";
+		mes "本音を言えば";
+		mes "納得できないことも多いんだが";
+		mes "長い目で見れば、商圏が発展する";
+		mes "機会を得たと思えば";
+		mes "そう悪い話でもないよな。";
+		next;
+		compquest 3498;
+		mes "[ジェイパー]";
+		mes "では、またね。";
+		mes "　";
+		mes "^0000FF‐ジェイパーから話を聞いた。";
+		for(set '@i,3493; '@i < 3502; set '@i,'@i+1) {
+			if(checkquest('@i) & 8)
+				set '@cnt,'@cnt+1;
+		}
+		if('@cnt >= 6) {
+			mes "　6人全員から話を聞くことができた。";
+			mes "　ジュノークに報告しよう‐^000000";
+			setquest 3505;
+		}
+		else
+			mes "　次の会話相手を探してみよう‐^000000";
+		close;
+	}
 	mes "[ジェイパー]";
 	mes "元気かね。";
 	mes "商人組合をやっているジェイパーだ。";
@@ -10116,6 +12299,52 @@ rachel.gat,210,52,5	script	ジェイパー#atm6	46,{/* 16104 */
 	close;
 }
 rachel.gat,40,73,7	script	シロアン#atm7	67,{/* 16105 */
+	if(checkquest(3499)) {
+		if(checkquest(3499)&8) {
+			mes "[シロアン]";
+			mes "結果的に、落ちるところに";
+			mes "落ちたようで良かったです。";
+			close;
+		}
+		mes "[シロアン]";
+		mes "ジェイパーさんの秘書をしている";
+		mes "シロアンと申します。";
+		next;
+		mes "[シロアン]";
+		mes "ジェイパーさんが神官たちの法令を";
+		mes "受け入れたのは意外でした。";
+		mes "てっきり、法令を無視するかと";
+		mes "思っていましたから。";
+		next;
+		mes "[シロアン]";
+		mes "もちろん合理的な人ですから";
+		mes "考えた末にそれが賢明であるとの";
+		mes "判断なのでしょうが。";
+		next;
+		mes "[シロアン]";
+		mes "原住民たちへのお給料も増やしましたが";
+		mes "おかげで原住民たちとの摩擦も";
+		mes "少なくなりました。";
+		mes "本当によかったです。";
+		next;
+		compquest 3499;
+		mes "[シロアン]";
+		mes "では、平穏な一日になりますように。";
+		mes "　";
+		mes "^0000FF‐シロアンから話を聞いた";
+		for(set '@i,3493; '@i < 3502; set '@i,'@i+1) {
+			if(checkquest('@i) & 8)
+				set '@cnt,'@cnt+1;
+		}
+		if('@cnt >= 6) {
+			mes "　6人全員から話を聞くことができた。";
+			mes "　ジュノークに報告しよう‐^000000";
+			setquest 3505;
+		}
+		else
+			mes "　次の会話相手を探してみよう‐^000000";
+		close;
+	}
 	mes "[シロアン]";
 	mes "こんにちは。";
 	mes "ジェイパーさんの秘書をしている";
@@ -10125,6 +12354,10 @@ rachel.gat,40,73,7	script	シロアン#atm7	67,{/* 16105 */
 	close;
 }
 rachel.gat,88,151,3	script	イシラ#atm8	68,{/* 16106 */
+	if(checkquest(3496)) {
+		if(checkquest(3496)&8) {
+		}
+	}
 	mes "[イシラ]";
 	mes "こんにちは、イシラと申します。";
 	mes "近頃、聖都全体が騒がしいですね。";
@@ -10132,12 +12365,97 @@ rachel.gat,88,151,3	script	イシラ#atm8	68,{/* 16106 */
 	close;
 }
 rachel.gat,240,182,5	script	ジーナ#atm9	69,{/* 16107 */
+	if(checkquest(3501)) {
+		if(checkquest(3501)&8) {
+			mes "[ジーナ]";
+			mes "私は少しばかり";
+			mes "利己的すぎたのでしょうか？";
+			close;
+		}
+		mes "[ジーナ]";
+		mes "こんにちは。";
+		mes "移住の民のジーナと申します。";
+		next;
+		mes "[ジーナ]";
+		mes "原住民たちとの関係の中で";
+		mes "落ち込むことが多かったのですが";
+		mes "ようやく前向きに考えられるように";
+		mes "なってきました。";
+		next;
+		mes "[ジーナ]";
+		mes "彼らの犠牲の上で成り立つ";
+		mes "事業を起こしても";
+		mes "長続きはしなかったことでしょう。";
+		mes "今回の件で、いろいろと";
+		mes "気付かされました。";
+		next;
+		compquest 3501;
+		mes "[ジーナ]";
+		mes "では、良い一日を。";
+		mes "　";
+		mes "^0000FF‐ジーナから話を聞いた。";
+		for(set '@i,3493; '@i < 3502; set '@i,'@i+1) {
+			if(checkquest('@i) & 8)
+				set '@cnt,'@cnt+1;
+		}
+		if('@cnt >= 6) {
+			mes "　6人全員から話を聞くことができた。";
+			mes "　ジュノークに報告しよう‐^000000";
+			setquest 3505;
+		}
+		else
+			mes "　次の会話相手を探してみよう‐^000000";
+		close;
+	}
 	mes "[ジーナ]";
 	mes "こんにちは。";
 	mes "移住の民のジーナと申します。";
 	close;
 }
 rachel.gat,212,52,3	script	ハリ#atm10	74,{/* 16108 */
+	if(checkquest(3496)) {
+		if(checkquest(3496)&8) {
+			mes "[ハリ]";
+			mes "今日も良い一日を";
+			mes "お過ごしくださいませ。";
+			close;
+		}
+		mes "[ハリ]";
+		mes "こんにちは、私は「ハリ」。";
+		mes "意地っ張りのジェイパーと私は";
+		mes "夫婦なんですよ。";
+		next;
+		mes "[ハリ]";
+		mes "原住民たちとの給与交渉も";
+		mes "折り合いをつけることができて";
+		mes "ほっとしています。";
+		mes "ジェイパーは、給与を増やす気は";
+		mes "なかったみたいですけど。";
+		next;
+		mes "[ハリ]";
+		mes "お互いにギクシャクしたまま";
+		mes "仕事なんてできないですからね。";
+		mes "売上は下がりますが";
+		mes "私は納得していますよ。";
+		next;
+		compquest 3502;
+		mes "[ハリ]";
+		mes "では、お気をつけてお帰り下さい。";
+		mes "　";
+		mes "^0000FF‐ハリから話を聞いた。";
+		for(set '@i,3493; '@i < 3502; set '@i,'@i+1) {
+			if(checkquest('@i) & 8)
+				set '@cnt,'@cnt+1;
+		}
+		if('@cnt >= 6) {
+			mes "　6人全員から話を聞くことができた。";
+			mes "　ジュノークに報告しよう‐^000000";
+			setquest 3505;
+		}
+		else
+			mes "　次の会話相手を探してみよう‐^000000";
+		close;
+	}
 	mes "[ハリ]";
 	mes "こんにちは、私は「ハリ」。";
 	mes "意地っ張りのジェイパーと私は";
@@ -10146,8 +12464,8 @@ rachel.gat,212,52,3	script	ハリ#atm10	74,{/* 16108 */
 }
 ra_in01.gat,388,59,0	script	#ep18w01	139,14,14,{/* 16109 */
 	if(checkquest(8718)) {
-		cloakoffnpc "従業員#ep1800";	// 2562
-		cloakonnpc "支配人#ep18";	// 2564
+		cloakoffnpc "従業員#ep1800";
+		cloakonnpc "支配人#ep18";
 	}
 	end;
 }
@@ -10211,21 +12529,21 @@ ra_in01.gat,388,59,5	script	従業員#ep1800	930,{/* 16110 (cloaking)*/
 		mes "[ホリム]";
 		mes "ありがとうございます！";
 		next;
-		cloakoffnpc "支配人#ep18";	// 2564
-		unittalk getnpcid(0,"支配人#ep18"),"支配人  :  手が空いてるスタッフは、ちょっと来てくれ！";	// 2564
+		cloakoffnpc "支配人#ep18";
+		unittalk getnpcid(0,"支配人#ep18"),"支配人  :  手が空いてるスタッフは、ちょっと来てくれ！";
 		mes "[ホリム]";
 		mes "すみません。";
 		mes "今は仕事中なので";
 		mes "もう行かないと。";
 		next;
-		cloakonnpc "支配人#ep18";	// 2564
+		cloakonnpc "支配人#ep18";
 		mes "[ホリム]";
 		mes "ラヘルの西門の外でお会いしましょう。";
 		mes "よろしくお願いしますね。";
 		delquest 8718;
-		setquest 8698;	// state=1
+		setquest 8698;
 		close2;
-		cloakonnpc "従業員#ep1800";	// 2562
+		cloakonnpc "従業員#ep1800";
 		end;
 	}
 	if(checkquest(8698)) {
@@ -10262,7 +12580,7 @@ OnInit:
 }
 ra_fild11.gat,350,236,0	script	#ep18w02	139,14,14,{/* 16113 */
 	if(checkquest(8698))
-		cloakoffnpc "ホリム#ep1810";	// 8424
+		cloakoffnpc "ホリム#ep1810";
 	end;
 }
 ra_fild11.gat,350,236,3	script	ホリム#ep1810	930,{/* 16114 (cloaking)*/
@@ -10284,8 +12602,8 @@ ra_fild11.gat,350,236,3	script	ホリム#ep1810	930,{/* 16114 (cloaking)*/
 		mes "冒険者様の向かう先に";
 		mes "私も移動します。";
 		delquest 8698;
-		setquest 8699;	// state=1
-		cloakonnpc "ホリム#ep1810";	// 8424
+		setquest 8699;
+		cloakonnpc "ホリム#ep1810";
 		next;
 		mes "^0000FF‐灰色狼の村へ向かおう‐^000000";
 		close;
@@ -10303,7 +12621,7 @@ OnInit:
 }
 ra_fild10.gat,375,293,0	script	#horim02	139,14,14,{/* 16115 */
 	if(checkquest(8699))
-		cloakoffnpc "ホリム#ep1811";	// 8426
+		cloakoffnpc "ホリム#ep1811";
 	end;
 }
 ra_fild10.gat,375,293,5	script	ホリム#ep1811	930,{/* 16116 (cloaking)*/
@@ -10320,8 +12638,8 @@ ra_fild10.gat,375,293,5	script	ホリム#ep1811	930,{/* 16116 (cloaking)*/
 		mes "私は無事に辿りつけるでしょうか？";
 		mes "いろいろ考えてしまいます。";
 		delquest 8699;
-		setquest 8700;	// state=1
-		cloakonnpc "ホリム#ep1811";	// 8426
+		setquest 8700;
+		cloakonnpc "ホリム#ep1811";
 		next;
 		mes "^0000FF‐灰色狼の村へ向かおう‐^000000";
 		close;
@@ -10339,7 +12657,7 @@ OnInit:
 }
 oz_dun01.gat,285,170,0	script	#ep18w04	139,14,14,{/* 16117 */
 	if(checkquest(8700))
-		cloakoffnpc "ホリム#ep1812";	// 8426
+		cloakoffnpc "ホリム#ep1812";
 	end;
 }
 oz_dun01.gat,285,170,5	script	ホリム#ep1812	930,{/* 16118 (cloaking)*/
@@ -10364,8 +12682,8 @@ oz_dun01.gat,285,170,5	script	ホリム#ep1812	930,{/* 16118 (cloaking)*/
 		mes "力仕事には自信があります。";
 		mes "さあ、行きましょう。";
 		delquest 8700;
-		setquest 8701;	// state=1
-		cloakonnpc "ホリム#ep1812";	// 8428
+		setquest 8701;
+		cloakonnpc "ホリム#ep1812";
 		next;
 		mes "^0000FF‐灰色狼の村へ向かおう‐^000000";
 		close;
@@ -10383,7 +12701,7 @@ OnInit:
 }
 gw_fild01.gat,272,342,0	script	#ep18w04	139,{/* 16119 */
 	if(checkquest(8701))
-		cloakoffnpc "ホリム#ep1813";	// 8296
+		cloakoffnpc "ホリム#ep1813";
 	end;
 }
 gw_fild01.gat,272,342,5	script	ホリム#ep1813	930,{/* 16120 (cloaking)*/
@@ -10405,8 +12723,8 @@ gw_fild01.gat,272,342,5	script	ホリム#ep1813	930,{/* 16120 (cloaking)*/
 		mes "[ホリム]";
 		mes "……行きましょう。";
 		delquest 8701;
-		setquest 8702;	// state=1
-		cloakonnpc "ホリム#ep1813";	// 8296
+		setquest 8702;
+		cloakonnpc "ホリム#ep1813";
 		next;
 		mes "^0000FF‐灰色狼の村へ向かおう‐^000000";
 		close;
@@ -10424,7 +12742,7 @@ OnInit:
 }
 gw_fild01.gat,36,99,0	script	#horimF	139,14,14,{/* 16121 */
 	if(checkquest(8702))
-		cloakoffnpc "ホリム#ep1814";	// 8296
+		cloakoffnpc "ホリム#ep1814";
 	end;
 }
 gw_fild01.gat,36,99,5	script	ホリム#ep1814	930,{/* 16122 (cloaking)*/
@@ -10476,7 +12794,7 @@ gw_fild01.gat,36,99,5	script	ホリム#ep1814	930,{/* 16122 (cloaking)*/
 		mes "スアドも言ってたからね。";
 		close2;
 		delquest 8702;
-		setquest 8703;	// state=1
+		setquest 8703;
 		warp "wolfvill.gat", 270, 26;
 		end;
 	}
@@ -10493,7 +12811,7 @@ OnInit:
 }
 wolfvill.gat,266,26,0	script	#horimG	139,14,14,{/* 16123 */
 	if(checkquest(8703))
-		cloakoffnpc "ホリム#ep1815";	// 8296
+		cloakoffnpc "ホリム#ep1815";
 	end;
 }
 wolfvill.gat,266,26,5	script	ホリム#ep1815	930,{/* 16124 (cloaking)*/
@@ -10533,7 +12851,7 @@ wolfvill.gat,266,26,5	script	ホリム#ep1815	930,{/* 16124 (cloaking)*/
 			end;
 		}
 		delquest 8703;
-		setquest 202325;	// state=1
+		setquest 202325;
 		getitem 1000405,10;
 		getexp 1350000000,0,0;
 		getexp 0,1200000000,0;
@@ -10575,13 +12893,13 @@ wolfvill.gat,266,26,5	script	ホリム#ep1815	930,{/* 16124 (cloaking)*/
 		getexp 0,1200000000,0;
 		getexp 1350000000,0,0;
 		getexp 0,1200000000,0;
-		setquest 130123;	// state=1
+		setquest 130123;
 		compquest 130123;
 		mes "[ホリム]";
 		mes "冒険者さまの旅路に";
 		mes "祝福があらんことを……。";
 		close2;
-		cloakonnpc "ホリム#ep1815";	// 2566
+		cloakonnpc "ホリム#ep1815";
 		end;
 	}
 	if(checkquest(202325)) {
@@ -10625,7 +12943,17 @@ wolfvill.gat,182,82,5	script	アルベル#ep18	931,{/* 16125 */
 		close;
 	}
 	if(checkquest(8718)) {
-		//未調査
+		mes "[アルベル]";
+		mes "俺にいちいち報告しなくていい。";
+		mes "ただホリムが元気にやってるか";
+		mes "確認してくれればいい。";
+		close;
+	}
+	if(checkquest(8698) || checkquest(8699) || checkquest(8700) || checkquest(8701) || checkquest(8702) || checkquest(8703)){
+		mes "[アルベル]";
+		mes "ホリムがここに来るって？";
+		mes "そ、そうか……";
+		mes "よかった、よかったよ……。";
 		close;
 	}
 	mes "[アルベル]";
@@ -10663,7 +12991,7 @@ wolfvill.gat,182,82,5	script	アルベル#ep18	931,{/* 16125 */
 	mes "確認してくれればいい。";
 	mes "俺にも報告しなくていいからな。";
 	delquest 130103;
-	setquest 8718;	// state=1
+	setquest 8718;
 	close;
 OnQuestInfo:
 	if(checkquest(130103))
@@ -10703,10 +13031,10 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		mes "あんな危険な場所に";
 		mes "独りで行かせるなんてできない。";
 		next;
-		setnpcdisplay "メエメエ#wms01",21324;	// 2466
-		cloakoffnpc "アイシャ#wms01";	// 2465
-		cloakoffnpc "メエメエ#wms01";	// 2466
-		cloakoffnpc "マラム#wms01";	// 2463
+		setnpcdisplay "メエメエ#wms01",21324;
+		cloakoffnpc "アイシャ#wms01";
+		cloakoffnpc "メエメエ#wms01";
+		cloakoffnpc "マラム#wms01";
 		mes "[アイシャ]";
 		mes "スカニア！";
 		next;
@@ -10715,7 +13043,7 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		mes "何の用だ？";
 		mes "あの狼は群れに返したのかよ？";
 		next;
-		unittalk getnpcid(0,"メエメエ#wms01"),"わん！！";	// 2466
+		unittalk getnpcid(0,"メエメエ#wms01"),"わん！！";
 		mes "[スカニア]";
 		mes "うっそだろ……";
 		mes "お、狼を羊の前に連れてくるなんて";
@@ -10736,7 +13064,7 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		mes "この親を亡くした小さいメエメエを";
 		mes "自然に返せるわけないじゃない！";
 		next;
-		setnpcdisplay "メエメエ#wms01",21324;	// 2466
+		setnpcdisplay "メエメエ#wms01",21324;
 		mes "[スカニア]";
 		mes "親を失った……？";
 		mes "え、そうなの？";
@@ -10765,10 +13093,10 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		mes "証拠を見せてあげる。";
 		mes "メエメエ！　お座り！　お手！";
 		next;
-		emotion 12,"アイシャ#wms01";	// 2465
-		unittalk getnpcid(0,"メエメエ#wms01"),"わん！！";	// 2466
-		emotion 11,"メエメエ#wms01";	// 2466
-		unittalk getnpcid(0,"アイシャ#wms01"),"よくできました！　うちのメエメエは超賢い！";	// 2465
+		emotion 12,"アイシャ#wms01";
+		unittalk getnpcid(0,"メエメエ#wms01"),"わん！！";
+		emotion 11,"メエメエ#wms01";
+		unittalk getnpcid(0,"アイシャ#wms01"),"よくできました！　うちのメエメエは超賢い！";
 		mes "[スカニア]";
 		mes "……本当だ。";
 		mes "しかし、誰がどうやって訓練するのさ？";
@@ -10806,7 +13134,7 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		mes "口だけは達者でしょ？";
 		mes "大人たちを説得してもらわないと！";
 		next;
-		unittalk getnpcid(0,"メエメエ#wms01"),"わん！";	// 2466
+		unittalk getnpcid(0,"メエメエ#wms01"),"わん！";
 		cutin "ep18_maram_02.png", 2;
 		mes "[マラム]";
 		mes "ははは……";
@@ -10815,14 +13143,14 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		mes "お願いしますね。";
 		next;
 		cutin "ep18_maram_01.png", 255;
-		cloakonnpc "アイシャ#wms01";	// 2465
-		cloakonnpc "メエメエ#wms01";	// 2466
-		cloakonnpc "マラム#wms01";	// 2463
+		cloakonnpc "アイシャ#wms01";
+		cloakonnpc "メエメエ#wms01";
+		cloakonnpc "マラム#wms01";
 		mes "[スカニア]";
 		mes "これからよろしくな！";
 		mes "期待してるぜ！";
 		delquest 17512;
-		setquest 17513;	// state=1
+		setquest 17513;
 		close;
 	}
 	if(checkquest(17513)) {
@@ -10855,7 +13183,7 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 			close;
 		}
 		delquest 17515;
-		setquest 17516;	// state=1
+		setquest 17516;
 		getitem 1000405,3;
 		getexp 225000000,0,0;
 		getexp 0,175000000,0;
@@ -10897,9 +13225,9 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		getexp 0,175000000,0;
 		getexp 225000000,0,0;
 		getexp 0,175000000,0;
-		setquest 130130;	// state=1
+		setquest 130130;
 		compquest 130130;
-		hideoffnpc "ワンワン#wms01";	// 2464
+		hideoffnpc "ワンワン#wms01";
 		mes "[スカニア]";
 		mes "お疲れさま！";
 		mes "ワンワンも満足そうだな！";
@@ -10919,9 +13247,9 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 	mes "勉強しなくちゃいけない。";
 	mes "息を吸い込み、吐き出す！";
 	mes "そうだ！　お前は天才だな！";
-	unittalk getnpcid(0,"ワンワン#wms01"),"メェ？";	// 2464
+	unittalk getnpcid(0,"ワンワン#wms01"),"メェ？";
 	next;
-	cloakoffnpc "マラム#wms01";	// 2463
+	cloakoffnpc "マラム#wms01";
 	cutin "ep18_maram_02.png", 2;
 	mes "[マラム]";
 	mes "こんにちは、スカニア！";
@@ -10991,13 +13319,13 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 	mes "聞くとは思えないけどね。";
 	mes "まあ、頑張ってよね。";
 	delquest 130110;
-	setquest 17510;	// state=1
+	setquest 17510;
 	close2;
-	cloakonnpc "マラム#wms01";	// 2463
+	cloakonnpc "マラム#wms01";
 	end;
 OnTouch:
 	if(!checkquest(17510))
-		unittalk "ワンワン、散歩したいだろうけど、少しだけ我慢してくれ";	// 2462
+		unittalk "ワンワン、散歩したいだろうけど、少しだけ我慢してくれ";
 	end;
 OnQuestInfo:
 	if(checkquest(130110) || checkquest(17512))
@@ -11013,8 +13341,8 @@ OnInit:
 	end;
 }
 wolfvill.gat,121,119,3	script	ワンワン#wms01	21323,{/* 16128 */
-	emotion 2,"ワンワン#wms01";	// 2464
-	unittalk getnpcid(0,"ワンワン#wms01"),"メエェェェェーー！";	// 2464
+	emotion 2,"ワンワン#wms01";
+	unittalk getnpcid(0,"ワンワン#wms01"),"メエェェェェーー！";
 	end;
 }
 wolfvill.gat,120,117,1	script	アイシャ#wms01	919,{/* 16129 (cloaking)*/
@@ -11028,23 +13356,23 @@ OnInit:
 	end;
 }
 wolfvill.gat,124,116,3	script	ヤギヤギ#wms01	890,{/* 16131 */
-	unittalk "もぐ…";	// 2467
+	unittalk "もぐ…";
 	end;
 }
 wolfvill.gat,121,113,1	script	デカコッコ#wms01	428,{/* 16132 */
-	unittalk "コケコッコー";	// 2468
+	unittalk "コケコッコー";
 	end;
 }
 wolfvill.gat,117,113,7	script	チビコッコ#wms01	10285,{/* 16133 */
-	unittalk "コッココココ～";	// 2469
+	unittalk "コッココココ～";
 	end;
 }
 wolfvill.gat,123,110,5	script	オキャクサマ#wms01	10285,{/* 16134 */
-	unittalk "……コ？";	// 2470
+	unittalk "……コ？";
 	end;
 }
 wolfvill.gat,125,111,3	script	カワイイ#wms01	10285,{/* 16135 */
-	unittalk "コッ！！コッコ！！";	// 2471
+	unittalk "コッ！！コッコ！！";
 	end;
 }
 wolfvill.gat,99,178,5	script	アイシャ#wms02	919,{/* 16136 */
@@ -11143,7 +13471,7 @@ wolfvill.gat,99,178,5	script	アイシャ#wms02	919,{/* 16136 */
 		mes "褒めた時にご褒美としてあげる";
 		mes "「にく」を「1」つ用意してよね！";
 		delquest 17510;
-		setquest 17511;	// state=1
+		setquest 17511;
 		close;
 	}
 	if(checkquest(17511)) {
@@ -11205,7 +13533,7 @@ wolfvill.gat,100,177,1	script	メエメエ#wms02	21324,{/* 16137 */
 		next;
 		cutin "ep18_maram_01.png", 255;
 		menu "メエメエの目をじっと見つめる",-;
-		emotion 1,"メエメエ#wms02";	// 2473
+		emotion 1,"メエメエ#wms02";
 		mes "[メエメエ]";
 		mes "わん？";
 		next;
@@ -11220,7 +13548,7 @@ wolfvill.gat,100,177,1	script	メエメエ#wms02	21324,{/* 16137 */
 		mes "言う事を聞いてくれたら";
 		mes "お肉をあげるからね～。";
 		next;
-		emotion 3,"メエメエ#wms02";	// 2473
+		emotion 3,"メエメエ#wms02";
 		mes "[メエメエ]";
 		mes "わん！　わん！";
 		next;
@@ -11230,7 +13558,7 @@ wolfvill.gat,100,177,1	script	メエメエ#wms02	21324,{/* 16137 */
 		mes "待て！";
 		mes "よくできました。さぁ、お肉だよ。";
 		next;
-		emotion 3,"メエメエ#wms02";	// 2473
+		emotion 3,"メエメエ#wms02";
 		mes "[アイシャ]";
 		mes "あら～、あらあら！";
 		mes "今の見た!?";
@@ -11263,7 +13591,7 @@ wolfvill.gat,100,177,1	script	メエメエ#wms02	21324,{/* 16137 */
 		mes "あいつにわからせてやるんだ！";
 		delitem 517,1;
 		delquest 17511;
-		setquest 17512;	// state=1
+		setquest 17512;
 		close;
 	}
 	if(checkquest(17512)) {
@@ -11278,13 +13606,13 @@ wolfvill.gat,100,177,1	script	メエメエ#wms02	21324,{/* 16137 */
 	if(checkquest(17514)) {//未調査
 	}
 	if(checkquest(17515)) {
-		emotion 1;	// 2473
+		emotion 1;
 		mes "[メエメエ]";
 		mes "わん？";
 		close;
 	}
-	emotion 1;	// 2473
-	unittalk "わん？";	// 2473
+	emotion 1;
+	unittalk "わん？";
 	mes "[アイシャ]";
 	mes "うちのメエメエに触らないで！";
 	mes "メエメエが嫌がってるじゃん！";
@@ -11300,71 +13628,71 @@ OnQuestInfo:
 }
 gw_fild01.gat,26,101,0	script	#wms01	139,3,3,{/* 16138 */
 	if(checkquest(17513)) {
-		cloakoffnpc "ワンワン#wms02";	// 6870
-		cloakoffnpc "メエメエ#wms03";	// 6871
+		cloakoffnpc "ワンワン#wms02";
+		cloakoffnpc "メエメエ#wms03";
 	}
 	end;
 }
 gw_fild01.gat,138,106,5	script	草#wms01	10430,{/* 16139 */
 	if(checkquest(17513)) {
 		delquest 17513;
-		setquest 17514;	// state=1
-		setnpcdisplay "ワンワン#wms02",21323;	// 6870
-		setnpcdisplay "メエメエ#wms03",21324;	// 6871
-		cloakoffnpc "ワンワン#wms02";	// 6870
-		cloakoffnpc "メエメエ#wms03";	// 6871
-		unittalk getcharid(3),strcharinfo(0)+" : もう来てたの？　ここがお気に入りなのかな？　他に行きたい場所はある？",1;	// self:hidden
+		setquest 17514;
+		setnpcdisplay "ワンワン#wms02",21323;
+		setnpcdisplay "メエメエ#wms03",21324;
+		cloakoffnpc "ワンワン#wms02";
+		cloakoffnpc "メエメエ#wms03";
+		unittalk getcharid(3),strcharinfo(0)+" : もう来てたの？　ここがお気に入りなのかな？　他に行きたい場所はある？",1;
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"ワンワン#wms02"),"メェェェェ！";	// 6870
+		unittalk getnpcid(0,"ワンワン#wms02"),"メェェェェ！";
 		if(!sleep2(1000)) end;
-		cloakonnpc "ワンワン#wms02";	// 6870
-		cloakonnpc "メエメエ#wms03";	// 6871
-		setnpcdisplay "ワンワン#wms02",844;	// 6870
-		setnpcdisplay "メエメエ#wms03",844;	// 6871
-		unittalk getcharid(3),strcharinfo(0)+" : メエメエ、ワンワンのことをよろしくね！",1;	// self:hidden
+		cloakonnpc "ワンワン#wms02";
+		cloakonnpc "メエメエ#wms03";
+		setnpcdisplay "ワンワン#wms02",844;
+		setnpcdisplay "メエメエ#wms03",844;
+		unittalk getcharid(3),strcharinfo(0)+" : メエメエ、ワンワンのことをよろしくね！",1;
 		if(!sleep2(1000)) end;
-		unittalk getcharid(3),strcharinfo(0)+" : ワンワンの誘導はメエメエに任せて、ワンワンが落ち着いて草を食べられるよう「アッシュリン」を15体くらい討伐して、もう一度ここに戻ってこよう。",1;	// self:hidden
+		unittalk getcharid(3),strcharinfo(0)+" : ワンワンの誘導はメエメエに任せて、ワンワンが落ち着いて草を食べられるよう「アッシュリン」を15体くらい討伐して、もう一度ここに戻ってこよう。",1;
 		end;
 	}
 	if(checkquest(17514)) {
 		if(!(checkquest(17514)&4)) {
-			unittalk getcharid(3),strcharinfo(0)+" : ワンワンが落ち着いて草を食べられるよう「アッシュリン」を15体討伐して、もう一度ここに戻ってこよう。",1;	// self:hidden
+			unittalk getcharid(3),strcharinfo(0)+" : ワンワンが落ち着いて草を食べられるよう「アッシュリン」を15体討伐して、もう一度ここに戻ってこよう。",1;
 			end;
 		}
 		delquest 17514;
-		setquest 17515;	// state=1
-		setnpcdisplay "ワンワン#wms02",21323;	// 6870
-		setnpcdisplay "メエメエ#wms03",21324;	// 6871
-		cloakoffnpc "ワンワン#wms02";	// 6870
-		cloakoffnpc "メエメエ#wms03";	// 6871
-		cloakonnpc "ワンワン#wms03";	// 6872
-		cloakonnpc "メエメエ#wms04";	// 6873
-		unittalk getcharid(3),strcharinfo(0)+" : お腹いっぱいになった？",1;	// self:hidden
+		setquest 17515;
+		setnpcdisplay "ワンワン#wms02",21323;
+		setnpcdisplay "メエメエ#wms03",21324;
+		cloakoffnpc "ワンワン#wms02";
+		cloakoffnpc "メエメエ#wms03";
+		cloakonnpc "ワンワン#wms03";
+		cloakonnpc "メエメエ#wms04";
+		unittalk getcharid(3),strcharinfo(0)+" : お腹いっぱいになった？",1;
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"ワンワン#wms02"),"メェェェェ！";	// 6870
+		unittalk getnpcid(0,"ワンワン#wms02"),"メェェェェ！";
 		if(!sleep2(1000)) end;
-		unittalk getcharid(3),""+strcharinfo(0)+" : メエメエはワンワンを守ってくれたんだよね？",1;	// self:hidden
+		unittalk getcharid(3),""+strcharinfo(0)+" : メエメエはワンワンを守ってくれたんだよね？",1;
 		if(!sleep2(1000)) end;
-		unittalk getnpcid(0,"メエメエ#wms03"),"わん！！！";	// 6871
+		unittalk getnpcid(0,"メエメエ#wms03"),"わん！！！";
 		if(!sleep2(1000)) end;
-		unittalk getcharid(3),strcharinfo(0)+" : よくできました。そろそろお家に帰ろうか。",1;	// self:hidden
-		cloakonnpc "ワンワン#wms02";	// 6870
-		cloakonnpc "メエメエ#wms03";	// 6871
-		cloakonnpc "ワンワン#wms03";	// 6872
-		cloakonnpc "メエメエ#wms04";	// 6873
-		setnpcdisplay "ワンワン#wms02",844;	// 6870
-		setnpcdisplay "メエメエ#wms03",844;	// 6871
+		unittalk getcharid(3),strcharinfo(0)+" : よくできました。そろそろお家に帰ろうか。",1;
+		cloakonnpc "ワンワン#wms02";
+		cloakonnpc "メエメエ#wms03";
+		cloakonnpc "ワンワン#wms03";
+		cloakonnpc "メエメエ#wms04";
+		setnpcdisplay "ワンワン#wms02",844;
+		setnpcdisplay "メエメエ#wms03",844;
 		if(!sleep2(1000)) end;
 		unittalk getcharid(3),strcharinfo(0)+" : 灰色狼の村にいる「スカニア」の所に戻ろう。",1;
 		end;
 	}
 	if(checkquest(17515)) {
-		cloakonnpc "ワンワン#wms02";	// 6870
-		cloakonnpc "メエメエ#wms03";	// 6871
-		cloakonnpc "ワンワン#wms03";	// 6872
-		cloakonnpc "メエメエ#wms04";	// 6873
-		setnpcdisplay "ワンワン#wms02",844;	// 6870
-		setnpcdisplay "メエメエ#wms03",844;	// 6871
+		cloakonnpc "ワンワン#wms02";
+		cloakonnpc "メエメエ#wms03";
+		cloakonnpc "ワンワン#wms03";
+		cloakonnpc "メエメエ#wms04";
+		setnpcdisplay "ワンワン#wms02",844;
+		setnpcdisplay "メエメエ#wms03",844;
 		unittalk getcharid(3),strcharinfo(0)+" : 灰色狼の村にいる「スカニア」の所に戻ろう。",1;
 	}
 	end;
@@ -11378,14 +13706,14 @@ OnQuestInfo:
 	end;
 }
 gw_fild01.gat,140,103,3	script	ワンワン#wms02	844,{/* 16140 (cloaking)*/
-	unittalk "メェェェェ？";	// 6870
+	unittalk "メェェェェ？";
 	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 gw_fild01.gat,136,103,7	script	メエメエ#wms03	844,{/* 16141 (cloaking)*/
-	unittalk "わん！！";	// 6871
+	unittalk "わん！！";
 	end;
 OnInit:
 	cloakonnpc;
@@ -11448,16 +13776,16 @@ wolfvill.gat,202,166,3	script	エルイン#ep18	919,{/* 16146 */
 		}
 		if(countitem(1000412)) delitem 1000412,countitem(1000412);
 		if(countitem(1000413)) delitem 1000413,countitem(1000413);
-		setquest 8689;	// state=1
-		setquest 130151;	// state=1
+		setquest 8689;
+		setquest 130151;
 		delquest 130151;
-		setquest 130152;	// state=1
+		setquest 130152;
 		delquest 130152;
-		setquest 130153;	// state=1
+		setquest 130153;
 		delquest 130153;
-		setquest 130154;	// state=1
+		setquest 130154;
 		delquest 130154;
-		setquest 130155;	// state=1
+		setquest 130155;
 		delquest 130155;
 		delquest 8688;
 		getitem 1000405,3;
@@ -11501,12 +13829,12 @@ wolfvill.gat,202,166,3	script	エルイン#ep18	919,{/* 16146 */
 		getexp 0,350000000,0;
 		getexp 337500000,0,0;
 		getexp 0,350000000,0;
-		setquest 130132;	// state=1
+		setquest 130132;
 		compquest 130132;
 		if(checkquest(130132)) {
 			set EP18_1QUE,37;
 			delquest 11718;
-			setquest 18082;	// state=1
+			setquest 18082;
 		}
 		mes "[エルイン]";
 		mes "…よし、お疲れ様。";
@@ -11567,12 +13895,12 @@ wolfvill.gat,202,166,3	script	エルイン#ep18	919,{/* 16146 */
 	mes "[エルイン]";
 	mes "じゃあ、お願いするわね。";
 	delquest 130112;
-	setquest 130151;	// state=1
-	setquest 130152;	// state=1
-	setquest 130153;	// state=1
-	setquest 130154;	// state=1
-	setquest 130155;	// state=1
-	setquest 8688;	// state=1
+	setquest 130151;
+	setquest 130152;
+	setquest 130153;
+	setquest 130154;
+	setquest 130155;
+	setquest 8688;
 	close;
 OnQuestInfo:
 	if(checkquest(130112) || 
@@ -11595,9 +13923,9 @@ gw_fild01.gat,335,241,0	script	設置した罠#005	844,{/* 6879 */
 			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
 			end;
 		}
-		misceffect 101,"設置した罠#005";	// 6879
+		misceffect 101,"設置した罠#005";
 		progressbar 1;	//color=0xffff00
-		misceffect 18,"設置した罠#005";	// 6879
+		misceffect 18,"設置した罠#005";
 		if(checkitemblank() == 0) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐持ち物が多いようだ‐",1;
 			end;
@@ -11680,18 +14008,98 @@ rachel.gat,103,141,5	script	聖物販売員#ep18	943,{/* 16167 */
 		}
 		set Zeny, Zeny -550;
 		delquest 8691;
-		setquest 8692;	// state=1
+		setquest 8692;
 		getitem 1000410,1;
 		mes "[聖物販売員]";
 		mes "ご購入ありがとうございま～す！";
 		mes "フレイヤ様のご加護があらんことを～！";
 		close;
 	}
-	if(checkquest(8692)) {
+	if(checkquest(8692) || checkquest(8696)) {
 		mes "[聖物販売員]";
 		mes "ご購入ありがとうございま～す！";
 		mes "フレイヤ様のご加護があらんことを～！";
 		close;
+	}
+	if(checkquest(8695)){
+		mes "[聖物販売員]";
+		mes "「浄水用聖物」の販売に参りました！";
+		mes "1人1つだけですよ、";
+		mes "さぁさぁ～お早めにご購入くださ～い！";
+		next;
+		switch(select("聖物を買う","説明を聞く","やめる")) {
+			case 1:
+				mes "[聖物販売員]";
+				mes "550Zenyになります～";
+				next;
+				if(select("買う","買わない") == 2) {
+					mes "[聖物販売員]";
+					mes "貴方には必要なかったようですね。";
+					mes "もし必要になったら";
+					mes "買いに来てくださいね～。";
+					close;
+				}
+				if(checkitemblank() == 0) {//未調査
+					mes "^009eff【インフォメーション】";
+					mes "これ以上多くの種類の";
+					mes "荷物を持つことが出来ません。";
+					mes "1個以上の空きを作ってください。^000000";
+					close2;
+					cutin "ra_gwoman.bmp", 255;
+					end;
+				}
+				if(Zeny < 550) {//未調査
+					mes "[聖物販売員]";
+					mes "お金が足りませんねぇ？";
+					close;
+				}
+				set Zeny, Zeny -550;
+				delquest 8695;
+				setquest 8696;
+				getitem 1000410,1;
+				mes "[聖物販売員]";
+				mes "ご購入ありがとうございま～す！";
+				mes "フレイヤ様のご加護があらんことを～！";
+				close;
+			case 2:
+				mes "[聖物販売員]";
+				mes "ああ～異国の方でしたか～。";
+				mes "簡単に説明しますと";
+				mes "汚染された水を一気に浄化してくれる";
+				mes "聖別された道具のことですよ～。";
+				next;
+				mes "[聖物販売員]";
+				mes "神殿で作ってるものですが～";
+				mes "今じゃ水路も整備されてますから";
+				mes "昔ほど需要があるわけではないんです。";
+				mes "でも、少量だけ作られているんです。";
+				next;
+				mes "[聖物販売員]";
+				mes "ただ、数日内に使う必要があって";
+				mes "大量に在庫を置けません。";
+				mes "隊商の皆さんなどは";
+				mes "飲み水が切れた時の緊急用に";
+				mes "買っていかれることがありますよ～。";
+				next;
+				mes "[聖物販売員]";
+				mes "浄化された水は沸かしてから";
+				mes "飲んだ方が良いですよ～。";
+				mes "沸かさずに飲んだ人から";
+				mes "変な臭いがするとクレームが";
+				mes "入ったことがあるので～。";
+				next;
+				mes "[聖物販売員]";
+				mes "おひとつ";
+				mes "550Zenyになります。";
+				mes "よろしければ買って行ってくださいね！";
+				close;
+			case 3:
+				mes "[聖物販売員]";
+				mes "貴方には必要なかったようですね。";
+				mes "もし必要になったら";
+				mes "買いに来てくださいね～。";
+				close;
+		}
 	}
 	mes "[聖物販売員]";
 	mes "「浄水用聖物」の販売に参りました！";
@@ -11717,7 +14125,7 @@ wolfvill.gat,103,230,3	script	ブダン#ep18	931,{/* 16168 */
 		mes "　・クエスト「祈りの方向」を途中まで進行‐^000000";
 		close;
 	}
-	if(checkquest(8691)) {
+	if(checkquest(8691) || checkquest(8695)) {
 		mes "[ブダン]";
 		mes "ラヘルに行けば";
 		mes "「聖物販売員」がいるはずだ。";
@@ -11725,7 +14133,7 @@ wolfvill.gat,103,230,3	script	ブダン#ep18	931,{/* 16168 */
 		mes "買ってきてくれ。頼んだよ。";
 		close;
 	}
-	if(checkquest(8692)) {
+	if(checkquest(8692) || checkquest(8696)) {
 		mes "[ブダン]";
 		mes "「浄水用聖物」は";
 		mes "無事に購入できたようだな。";
@@ -11744,7 +14152,7 @@ wolfvill.gat,103,230,3	script	ブダン#ep18	931,{/* 16168 */
 		}
 		delitem 1000411,1;
 		delquest 8693;
-		setquest 8694;	// state=1
+		setquest 8694;
 		getitem 1000405,2;
 		getexp 337500000,0,0;
 		getexp 0,350000000,0;
@@ -11786,7 +14194,7 @@ wolfvill.gat,103,230,3	script	ブダン#ep18	931,{/* 16168 */
 		getexp 0,350000000,0;
 		getexp 337500000,0,0;
 		getexp 0,350000000,0;
-		setquest 130126;	// state=1
+		setquest 130126;
 		compquest 130126;
 		mes "[ブダン]";
 		mes "ありがとう！　助かったよ。";
@@ -11800,12 +14208,66 @@ wolfvill.gat,103,230,3	script	ブダン#ep18	931,{/* 16168 */
 		mes "よろしく頼むよ。";
 		close;
 	}
-	if(checkquest(8694)) {
+	if(checkquest(8697)){
+		if(checkitemblank() == 0) {//未調査
+			mes "^009eff【インフォメーション】";
+			mes "これ以上多くの種類の";
+			mes "荷物を持つことが出来ません。";
+			mes "1個以上の空きを作ってください。^000000";
+			close;
+		}
+		delitem 1000411,1;
+		setquest 8695;
+		delquest 8695;
+		setquest 8696;
+		delquest 8696;
+		delquest 8697;
+		setquest 8694;
+		getitem 1000405,2;
+		for(set '@i,0; '@i< 20 ; set '@i,'@i+1){
+			getexp 225000000,0,0;
+			getexp 0,175000000,0;
+		}
 		mes "[ブダン]";
-		mes "これだけ綺麗な水があれば";
-		mes "今日の分は大丈夫だろう。";
-		mes "もし、よければ明日以降も";
+		mes "ありがとう！　助かったよ。";
+		mes "おかげで子供たちに安全な水を";
+		mes "飲ませてやることができる。";
+		next;
+		mes "[ブダン]";
+		mes "もし良かったら、明日以降も";
 		mes "手伝ってくれると助かる。";
+		mes "子供たちの為にも";
+		mes "よろしく頼むよ。";
+		close;
+	}
+	if(checkquest(8694)) {
+		if(checkquest(8694) & 0x02 == 0){
+			mes "[ブダン]";
+			mes "これだけ綺麗な水があれば";
+			mes "今日の分は大丈夫だろう。";
+			mes "もし、よければ明日以降も";
+			mes "手伝ってくれると助かる。";
+			close;
+		}
+		delquest 8694;
+		mes "[ブダン]";
+		mes "やあ、来てくれたんだな。";
+		mes "前と同じように";
+		mes "綺麗な水の確保を手伝ってくれないか？";
+		next;
+		if(select("やりましょう","今は時間がない") == 2) {
+			mes "[ブダン]";
+			mes "そうか……仕方がない。";
+			mes "また別の人にお願いするとしよう。";
+			close;
+		}
+		mes "[ブダン]";
+		mes "助かるよ。";
+		mes "ラヘルに行けば";
+		mes "「聖物販売員」がいるはずだ。";
+		mes "適当な理由をつけて「浄水用聖物」を";
+		mes "買ってきてくれ。頼んだよ。";
+		setquest 8695;
 		close;
 	}
 	mes "[ブダン]";
@@ -11861,7 +14323,7 @@ wolfvill.gat,103,230,3	script	ブダン#ep18	931,{/* 16168 */
 	mes "適当な理由をつけて「浄水用聖物」を";
 	mes "買ってきてくれ。頼んだよ。";
 	delquest 130106;
-	setquest 8691;	// state=1
+	setquest 8691;
 	close;
 OnQuestInfo:
 	if(checkquest(130106) || checkquest(8693))
@@ -11878,10 +14340,10 @@ wolfvill.gat,104,235,0	script	飲用水の水瓶#ep1801	844,{/* 16169 */
 		mes "　もう片方に入っている水は濁っていて";
 		mes "　今のままでは飲めそうにない‐^000000";
 		next;
-		misceffect 441,"飲用水の水瓶#ep1801";	// 2478
-		misceffect 444,"飲用水の水瓶#ep1801";	// 2478
-		misceffect 14,"飲用水の水瓶#ep1801";	// 2478
-		misceffect 44,"飲用水の水瓶#ep1801";	// 2478
+		misceffect 441,"飲用水の水瓶#ep1801";
+		misceffect 444,"飲用水の水瓶#ep1801";
+		misceffect 14,"飲用水の水瓶#ep1801";
+		misceffect 44,"飲用水の水瓶#ep1801";
 		mes "^0000FF‐濁っている方の水瓶に";
 		mes "　「浄水用聖物」を入れると";
 		mes "　不思議な光を放った。";
@@ -11898,13 +14360,37 @@ wolfvill.gat,104,235,0	script	飲用水の水瓶#ep1801	844,{/* 16169 */
 		}
 		delitem 1000410,1;
 		delquest 8692;
-		setquest 8693;	// state=1
+		setquest 8693;
 		getitem 1000411,1;
 		mes "^0000FF‐綺麗になった水を汲んだ。";
 		mes "　ブダンのところに持って行こう‐^000000";
 		close;
 	}
-	if(checkquest(8693)) {
+	if(checkquest(8696)) {
+		mes "^0000FF‐村全体で使われる";
+		mes "　飲用水の水瓶だ。";
+		mes "　片方には綺麗な水が入っているが";
+		mes "　もう片方に入っている水は濁っていて";
+		mes "　今のままでは飲めそうにない‐^000000";
+		next;
+		misceffect 441,"飲用水の水瓶#ep1801";
+		misceffect 444,"飲用水の水瓶#ep1801";
+		misceffect 14,"飲用水の水瓶#ep1801";
+		misceffect 44,"飲用水の水瓶#ep1801";
+		mes "^0000FF‐濁っている方の水瓶に";
+		mes "　「浄水用聖物」を入れると";
+		mes "　不思議な光を放った。";
+		mes "　瞬く間に水が綺麗になっていく‐^000000";
+		next;
+		delitem 1000410,1;
+		getitem 1000411,1;
+		delquest 8696;
+		setquest 8697;
+		mes "^0000FF‐綺麗になった水を汲んだ。";
+		mes "　ブダンのところに持って行こう‐^000000";
+		close;
+	}
+	if(checkquest(8693) || checkquest(8697)) {
 		mes "^0000FF‐綺麗になった水を汲んだ。";
 		mes "　ブダンのところに持って行こう‐^000000";
 		close;
@@ -11935,7 +14421,7 @@ ra_fild10.gat,175,179,3	script	ロープ#ra_to_oz_dun01	10024,{/* 16170 */
 	if(select("ロープを使って下る","使わない") == 2) {
 		mes "‐ロープを使わなかった‐";
 		close2;
-		emotion 9,"";	// self
+		emotion 9,"";
 		end;
 	}
 	mes "‐ロープを使って下った‐";
@@ -11955,7 +14441,7 @@ oz_dun01.gat,284,164,3	script	ロープ#to_ra_fild10	10024,{/* 16171 */
 	if(select("ロープを使って上る","使わない") == 2) {
 		mes "‐ロープを使わなかった‐";
 		close2;
-		emotion 9,"";	// self
+		emotion 9,"";
 		end;
 	}
 	mes "‐ロープを使って上った‐";
@@ -11976,7 +14462,7 @@ oz_dun01.gat,28,190,3	script	ロープ#to_gw_fild01	10024,{/* 16174 */
 	if(select("ロープを使って上る","使わない") == 2) {
 		mes "‐ロープを使わなかった‐";
 		close2;
-		emotion 9,"";	// self
+		emotion 9,"";
 		end;
 	}
 	mes "‐ロープを使って上った‐";
@@ -11998,7 +14484,7 @@ gw_fild01.gat,279,335,3	script	ロープ#to_oz_dun01	10024,{/* 16175 */
 	if(select("ロープを使って下る","使わない") == 2) {
 		mes "‐ロープを使わなかった‐";
 		close2;
-		emotion 9,"";	// self
+		emotion 9,"";
 		end;
 	}
 	mes "‐ロープを使って下った‐";
@@ -12046,7 +14532,7 @@ gw_fild01.gat,32,101,3	script	キャンパー#to_wolfvill	881,{/* 16179 */
 		mes "[門番]";
 		mes "オズの迷路へ行くのか？";
 		mes "オズの迷路はあっちの方角だぜ。";
-		viewpoint 1, 275, 337, 18, 0x00FF00;	// 6884
+		viewpoint 1, 275, 337, 18, 0x00FF00;
 		next;
 		mes "‐オズの迷路へ向かいますか？‐";
 		next;
@@ -12110,8 +14596,8 @@ rachel.gat,106,144,5	script	行商人#ep18_0_1	10380,{/* 16180 */
 		mes "お金がないなら送れないな";
 		close;
 	}
-	misceffect 58,"行商人#ep18_0_1";	// 2479
-	misceffect 35,"";	// self
+	misceffect 58,"行商人#ep18_0_1";
+	misceffect 35,"";
 	mes "[行商人]";
 	mes "毎度あり！";
 	mes "それじゃ。出発だ。";
@@ -12151,8 +14637,8 @@ wolfvill.gat,136,113,5	script	行商人#ep18_0_2	10380,{/* 16181 */
 		mes "お金がないなら送れないな";
 		close;
 	}
-	misceffect 58,"行商人#ep18_0_2";	// 2480
-	misceffect 35,"";	// self
+	misceffect 58,"行商人#ep18_0_2";
+	misceffect 35,"";
 	mes "[行商人]";
 	mes "毎度あり！";
 	mes "それじゃ。出発だ。";
@@ -12208,21 +14694,21 @@ wolfvill.gat,167,135,3	script	アサド#wolfvill	10397,{
 	mes "また、対象アイテムを";
 	mes "複数所持している場合は";
 	mes "何れかのアイテムが使用されます。";
-	callbarterlist "アサド#wolfvill";
+//	callbarterlist "アサド#wolfvill";
 	close;
 OnInit:
-	barterlist "アサド#wolfvill",100626,0,1000405,100,0;
-	barterlist "アサド#wolfvill",450177,0,1000405,100,0;
-	barterlist "アサド#wolfvill",450178,0,1000405,100,0;
-	barterlist "アサド#wolfvill",480091,0,1000405,100,0;
-	barterlist "アサド#wolfvill",480090,0,1000405,100,0;
-	barterlist "アサド#wolfvill",470087,0,1000405,100,0;
-	barterlist "アサド#wolfvill",470088,0,1000405,100,0;
-	barterlist "アサド#wolfvill",490107,0,1000405,100,0;
-	barterlist "アサド#wolfvill",490108,0,1000405,100,0;
-	barterlist "アサド#wolfvill",490106,0,1000405,100,0;
-	barterlist "アサド#wolfvill",490109,0,1000405,100,0;
-	setunitgroup 1065;
+//	barterlist "アサド#wolfvill",100626,0,1000405,100,0;
+//	barterlist "アサド#wolfvill",450177,0,1000405,100,0;
+//	barterlist "アサド#wolfvill",450178,0,1000405,100,0;
+//	barterlist "アサド#wolfvill",480091,0,1000405,100,0;
+//	barterlist "アサド#wolfvill",480090,0,1000405,100,0;
+//	barterlist "アサド#wolfvill",470087,0,1000405,100,0;
+//	barterlist "アサド#wolfvill",470088,0,1000405,100,0;
+//	barterlist "アサド#wolfvill",490107,0,1000405,100,0;
+//	barterlist "アサド#wolfvill",490108,0,1000405,100,0;
+//	barterlist "アサド#wolfvill",490106,0,1000405,100,0;
+//	barterlist "アサド#wolfvill",490109,0,1000405,100,0;
+	setnpcgroup 1065;
 	setnpctitle "[アイテム交換]";
 	end;
 }
@@ -12456,13 +14942,7 @@ wolfvill.gat,164,137,3	script	エメット#wolfvill	10399,{
 				if('@r < '@rate['@j])
 					break;
 			}
-			set '@card['@slot],'@ench['@j];
-			if('@slot == 1)
-				setequipcard '@pos,0,'@ench['@j],0,0,2;
-			else if('@slot == 2)
-				setequipcard '@pos,0,0,'@ench['@j],0,2;
-			else if('@slot == 3)
-				setequipcard '@pos,0,0,0,'@ench['@j],2;
+			setequipcardid '@pos,'@slot,'@ench['@j],2;
 			misceffect 589,"";
 			misceffect 729,"";
 			misceffect 847,"";
@@ -12572,13 +15052,7 @@ wolfvill.gat,164,137,3	script	エメット#wolfvill	10399,{
 						if('@amount > 0)
 							getitem 1000405,'@amount;
 					}
-					set '@card['@slot],'@ench['@j];
-					if('@slot == 1)
-						setequipcard '@pos,0,'@ench['@j],0,0,2;
-					else if('@slot == 2)
-						setequipcard '@pos,0,0,'@ench['@j],0,2;
-					else if('@slot == 3)
-						setequipcard '@pos,0,0,0,'@ench['@j],2;
+					setequipcardid '@pos,'@slot,'@ench['@j],2;
 					misceffect 589,"";
 					misceffect 729,"";
 					misceffect 847,"";
@@ -12599,14 +15073,14 @@ wolfvill.gat,164,137,3	script	エメット#wolfvill	10399,{
 	}
 	close;
 OnInit:
-	setunitgroup 1016;
+	setnpcgroup 1016;
 	setnpctitle "[グレイウルフ強化]";
 	end;
 }
 wolfvill.gat,170,131,3	script	バムダッド#wolfvill	10394,{
 	end;
 OnInit:
-	setunitgroup 1016;
+	setnpcgroup 1016;
 	setnpctitle "[フィデス作成・強化]";
 	end;
 }

@@ -5,11 +5,11 @@ OnStart:
 	set 'flag,1;
 
 	for(set '@i,1; '@i <= 17; set '@i,'@i+1)
-		donpcevent "監視塔#監視" +'@i+ "_002::OnStart";
-	hideonnpc "マラム#ロック装置1_021";
-	hideonnpc "マラム#ロック装置2_026";
-	hideonnpc "マラム#ロック装置3_029";
-	hideonnpc "マラム#ロック装置4_033";
+		donpcevent getmdnpcname("監視塔#監視" +'@i+ "_002")+"::OnStart";
+	hideonnpc getmdnpcname("マラム#ロック装置1_021");
+	hideonnpc getmdnpcname("マラム#ロック装置2_026");
+	hideonnpc getmdnpcname("マラム#ロック装置3_029");
+	hideonnpc getmdnpcname("マラム#ロック装置4_033");
 	end;
 }
 
@@ -43,12 +43,12 @@ OnTouch:
 	sleep 2000;
 	announce "施設放送 : 不審者を探知！　担当の警備兵は現場に急行せよ！", 0x9, 0xff0000;
 	sleep 4000;
-	@spawn(type: BL_MOB, ID: 83901, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",121,229), dir: 0, name"基地の兵士")
-	@spawn(type: BL_MOB, ID: 83902, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",120,228), dir: 0, name"基地の兵士")
-	@spawn(type: BL_MOB, ID: 83903, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",119,228), dir: 0, name"基地の兵士")
-	@spawn(type: BL_MOB, ID: 83904, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",119,228), dir: 0, name"基地の兵士")
-	@spawn(type: BL_MOB, ID: 83905, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",121,228), dir: 0, name"基地の兵士")
-	@spawn(type: BL_MOB, ID: 83906, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",122,228), dir: 0, name"基地の兵士")
+	monster getmdmapname("1@tcamp.gat"),121,229,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),120,228,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),119,228,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),119,228,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),121,228,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),122,228,"基地の兵士",21309,1;
 	end;
 OnStart:
 	initnpctimer;
@@ -58,15 +58,27 @@ OnTimer2000:
 	misceffect 8;
 	end;
 }
-1@tcamp.gat,135,228,3	script	監視塔#監視2_003	10248,{/* 77177 */
-unittalk getnpcid(0,"監視塔#監視2_003"),"監視塔 : 不審者を感知!!";	// 77177
-announce "施設放送 : 不審者を探知！　担当の警備兵は現場に急行せよ！", 0x9, 0xff0000;
-@spawn(type: BL_MOB, ID: 93152, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",135,227), dir: 0, name"基地の兵士")
-@spawn(type: BL_MOB, ID: 93153, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",133,226), dir: 0, name"基地の兵士")
-@spawn(type: BL_MOB, ID: 93154, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",137,228), dir: 0, name"基地の兵士")
-@spawn(type: BL_MOB, ID: 93155, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",135,228), dir: 0, name"基地の兵士")
-@spawn(type: BL_MOB, ID: 93156, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",135,228), dir: 0, name"基地の兵士")
-@spawn(type: BL_MOB, ID: 93157, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",136,228), dir: 0, name"基地の兵士")
+1@tcamp.gat,135,228,3	script	監視塔#監視2_003	10248,7,7,{/* 77177 */
+OnTouch:
+	stopnpctimer;
+	unittalk "監視塔 : 不審者を感知!!";
+	sleep 2000;
+	announce "施設放送 : 不審者を探知！　担当の警備兵は現場に急行せよ！", 0x9, 0xff0000;
+	sleep 4000;
+	monster getmdmapname("1@tcamp.gat"),135,227,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),133,226,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),137,228,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),135,228,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),135,228,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),136,228,"基地の兵士",21309,1;
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer2000:
+	initnpctimer;
+	misceffect 8;
+	end;
 }
 1@tcamp.gat,152,133,3	script	監視塔#監視3_004	10248,{/* 77178 */}
 1@tcamp.gat,167,133,3	script	監視塔#監視4_005	10248,{/* 77224 */}
@@ -77,17 +89,28 @@ announce "施設放送 : 不審者を探知！　担当の警備兵は現場に急行せよ！", 0x9, 0xff0
 1@tcamp.gat,88,92,3		script	監視塔#監視9_010	10248,{/* 77229 */}
 1@tcamp.gat,240,148,3	script	監視塔#監視10_011	10248,{/* 77230 */}
 1@tcamp.gat,156,71,3	script	監視塔#監視11_012	10248,{/* 77231 */}
-1@tcamp.gat,176,194,3	script	監視塔#監視12_013	10248,{/* 77232 */}
-misceffect 8,"監視塔#監視12_013";	// 77232
-unittalk getnpcid(0,"監視塔#監視12_013"),"監視塔 : 不審者を感知!!";	// 77232
-announce "施設放送 : 不審者を探知！　担当の警備兵は現場に急行せよ！", 0x9, 0xff0000;
-@spawn(type: BL_MOB, ID: 92482, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",176,196), dir: 0, name"基地の兵士")
-@spawn(type: BL_MOB, ID: 92483, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",177,195), dir: 0, name"基地の兵士")
-@spawn(type: BL_MOB, ID: 92484, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",177,193), dir: 0, name"基地の兵士")
-@spawn(type: BL_MOB, ID: 92485, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",176,195), dir: 0, name"基地の兵士")
-@spawn(type: BL_MOB, ID: 92486, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",176,194), dir: 0, name"基地の兵士")
-@spawn(type: BL_MOB, ID: 92487, speed: 150, option: 0x0, class: 21309, pos: ("1@tcamp.gat",176,193), dir: 0, name"基地の兵士")
-
+1@tcamp.gat,176,194,3	script	監視塔#監視12_013	10248,7,7,{/* 77232 */
+OnTouch:
+	stopnpctimer;
+	unittalk "監視塔 : 不審者を感知!!";
+	sleep 2000;
+	announce "施設放送 : 不審者を探知！　担当の警備兵は現場に急行せよ！", 0x9, 0xff0000;
+	sleep 4000;
+	monster getmdmapname("1@tcamp.gat"),176,196,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),177,195,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),177,193,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),176,195,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),176,194,"基地の兵士",21309,1;
+	monster getmdmapname("1@tcamp.gat"),176,193,"基地の兵士",21309,1;
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnTimer2000:
+	initnpctimer;
+	misceffect 8;
+	end;
+}
 1@tcamp.gat,192,194,3	script	監視塔#監視13_014	10248,{/* 77233 */}
 1@tcamp.gat,142,153,3	script	監視塔#監視14_015	10248,{/* 77234 */}
 1@tcamp.gat,142,168,3	script	監視塔#監視15_016	10248,{/* 79279 */}
@@ -95,43 +118,45 @@ announce "施設放送 : 不審者を探知！　担当の警備兵は現場に急行せよ！", 0x9, 0xff0
 1@tcamp.gat,237,90,3	script	監視塔#監視17_018	10248,{/* 79537 */}
 
 1@tcamp.gat,138,216,3	script	ロック装置#1-1_019	10024,{/* 79281 */
-hideoffnpc "マラム#ロック装置1_021";	// 79404
-unittalk getnpcid(0,"マラム#ロック装置1_021"),"マラム : ロックが掛かっていますね。私にお任せを……。";	// 79404
-progressbar 10,"マラム#ロック装置1_021";	//color=0x3131ff
-unittalk getnpcid(0,"マラム#ロック装置1_021"),"マラム : これで通れますよ。器用なもんでしょう？";	// 79404
-hideonnpc "ロック装置#1-1_019";	// 79281
-hideonnpc "ロック装置#1-2_020";	// 79400
-setcell "1@tcamp.gat", 137, 216, 0;
-setcell "1@tcamp.gat", 138, 216, 0;
-setcell "1@tcamp.gat", 139, 216, 0;
-setcell "1@tcamp.gat", 140, 216, 0;
-setcell "1@tcamp.gat", 141, 216, 0;
-setcell "1@tcamp.gat", 142, 216, 0;
-hideonnpc "マラム#ロック装置1_021";	// 79404
+	hideoffnpc getmdnpcname("マラム#ロック装置1_021");	// 79404
+	unittalk getnpcid(0,getmdnpcname("マラム#ロック装置1_021")),"マラム : ロックが掛かっていますね。私にお任せを……。";	// 79404
+	progressbar 10,getmdnpcname("マラム#ロック装置1_021");	//color=0x3131ff
+	unittalk getnpcid(0,getmdnpcname("マラム#ロック装置1_021")),"マラム : これで通れますよ。器用なもんでしょう？";	// 79404
+	hideonnpc getmdnpcname("ロック装置#1-1_019");	// 79281
+	hideonnpc getmdnpcname("ロック装置#1-2_020");	// 79400
+	setcell getmdmapname("1@tcamp.gat"), 137, 216, 0;
+	setcell getmdmapname("1@tcamp.gat"), 138, 216, 0;
+	setcell getmdmapname("1@tcamp.gat"), 139, 216, 0;
+	setcell getmdmapname("1@tcamp.gat"), 140, 216, 0;
+	setcell getmdmapname("1@tcamp.gat"), 141, 216, 0;
+	setcell getmdmapname("1@tcamp.gat"), 142, 216, 0;
+	hideonnpc getmdnpcname("マラム#ロック装置1_021");	// 79404
+	end;
 }
 1@tcamp.gat,141,216,3	script	ロック装置#1-2_020	10024,{/* 79400 */}
 1@tcamp.gat,140,218,3	script	マラム#ロック装置1_021	10376,{/* 79404 (hide)*/}
 
 1@tcamp.gat,136,145,3	script	ロック装置#2-1_022	10024,{/* 79415 */
-/* 19:46:21.329677 */	hideoffnpc "マラム#ロック装置2_026";	// 79461
-/* 19:46:21.371536 */	unittalk getnpcid(0,"マラム#ロック装置2_026"),"マラム : この先は警備が厳しそうですね。";	// 79461
-/* 19:46:21.377518 */	progressbar 10,"マラム#ロック装置2_026";	//color=0x3131ff
-/* 19:46:31.138842 */	unittalk getnpcid(0,"マラム#ロック装置2_026"),"マラム : これで進めますが、慎重に行きましょう。";	// 79461
-/* 19:46:31.173747 */	hideonnpc "ロック装置#2-1_022";	// 79415
-/* 19:46:31.176738 */	hideonnpc "ロック装置#2-2_023";	// 79418
-/* 19:46:31.180729 */	hideonnpc "ロック装置#2-3_024";	// 79459
-/* 19:46:31.184718 */	hideonnpc "ロック装置#2-4_025";	// 79460
-setcell "1@tcamp.gat", 135, 145, 0;
-setcell "1@tcamp.gat", 136, 145, 0;
-setcell "1@tcamp.gat", 137, 145, 0;
-setcell "1@tcamp.gat", 138, 145, 0;
-setcell "1@tcamp.gat", 139, 145, 0;
-setcell "1@tcamp.gat", 140, 145, 0;
-setcell "1@tcamp.gat", 141, 145, 0;
-setcell "1@tcamp.gat", 142, 145, 0;
-setcell "1@tcamp.gat", 143, 145, 0;
-setcell "1@tcamp.gat", 144, 145, 0;
-/* 19:46:36.173341 */	hideonnpc "マラム#ロック装置2_026";	// 79461
+	hideoffnpc getmdnpcname("マラム#ロック装置2_026");	// 79461
+	unittalk getnpcid(0,getmdnpcname("マラム#ロック装置2_026")),"マラム : この先は警備が厳しそうですね。";	// 79461
+	progressbar 10,getmdnpcname("マラム#ロック装置2_026");	//color=0x3131ff
+	unittalk getnpcid(0,getmdnpcname("マラム#ロック装置2_026")),"マラム : これで進めますが、慎重に行きましょう。";	// 79461
+	hideonnpc getmdnpcname("ロック装置#2-1_022");	// 79415
+	hideonnpc getmdnpcname("ロック装置#2-2_023");	// 79418
+	hideonnpc getmdnpcname("ロック装置#2-3_024");	// 79459
+	hideonnpc getmdnpcname("ロック装置#2-4_025");	// 79460
+	setcell getmdmapname("1@tcamp.gat"), 135, 145, 0;
+	setcell getmdmapname("1@tcamp.gat"), 136, 145, 0;
+	setcell getmdmapname("1@tcamp.gat"), 137, 145, 0;
+	setcell getmdmapname("1@tcamp.gat"), 138, 145, 0;
+	setcell getmdmapname("1@tcamp.gat"), 139, 145, 0;
+	setcell getmdmapname("1@tcamp.gat"), 140, 145, 0;
+	setcell getmdmapname("1@tcamp.gat"), 141, 145, 0;
+	setcell getmdmapname("1@tcamp.gat"), 142, 145, 0;
+	setcell getmdmapname("1@tcamp.gat"), 143, 145, 0;
+	setcell getmdmapname("1@tcamp.gat"), 144, 145, 0;
+	hideonnpc getmdnpcname("マラム#ロック装置2_026");	// 79461
+	end;
 }
 1@tcamp.gat,138,145,3	script	ロック装置#2-2_023	10024,{/* 79418 */}
 1@tcamp.gat,141,145,3	script	ロック装置#2-3_024	10024,{/* 79459 */}
@@ -147,40 +172,42 @@ setcell "1@tcamp.gat", 144, 145, 0;
 }
 
 1@tcamp.gat,223,109,3	script	ロック装置#3-1_027	10024,{/* 79462 */
-/* 19:44:22.795374 */	hideoffnpc "マラム#ロック装置3_029";	// 79439
-/* 19:44:22.826292 */	unittalk getnpcid(0,"マラム#ロック装置3_029"),"マラム : 建物の中も厳しい警備が敷かれていますね。";	// 79439
-/* 19:44:22.854219 */	progressbar 10,"マラム#ロック装置3_029";	//color=0x3131ff
-/* 19:44:32.140000 */	unittalk getnpcid(0,"マラム#ロック装置3_029"),"マラム : 引き続き、慎重に進みましょう。";	// 79439
-/* 19:44:32.171915 */	hideonnpc "ロック装置#3-1_027";	// 79462
-/* 19:44:32.175904 */	hideonnpc "ロック装置#3-2_028";	// 79438
-setcell "1@tcamp.gat", 223, 110, 0;
-setcell "1@tcamp.gat", 223, 109, 0;
-setcell "1@tcamp.gat", 223, 108, 0;
-setcell "1@tcamp.gat", 223, 107, 0;
-setcell "1@tcamp.gat", 223, 106, 0;
-setcell "1@tcamp.gat", 223, 105, 0;
-/* 19:44:37.169460 */	hideonnpc "マラム#ロック装置3_029";	// 79439
+	hideoffnpc getmdnpcname("マラム#ロック装置3_029");	// 79439
+	unittalk getnpcid(0,getmdnpcname("マラム#ロック装置3_029")),"マラム : 建物の中も厳しい警備が敷かれていますね。";	// 79439
+	progressbar 10,getmdnpcname("マラム#ロック装置3_029");	//color=0x3131ff
+	unittalk getnpcid(0,getmdnpcname("マラム#ロック装置3_029")),"マラム : 引き続き、慎重に進みましょう。";	// 79439
+	hideonnpc getmdnpcname("ロック装置#3-1_027");	// 79462
+	hideonnpc getmdnpcname("ロック装置#3-2_028");	// 79438
+	setcell getmdmapname("1@tcamp.gat"), 223, 110, 0;
+	setcell getmdmapname("1@tcamp.gat"), 223, 109, 0;
+	setcell getmdmapname("1@tcamp.gat"), 223, 108, 0;
+	setcell getmdmapname("1@tcamp.gat"), 223, 107, 0;
+	setcell getmdmapname("1@tcamp.gat"), 223, 106, 0;
+	setcell getmdmapname("1@tcamp.gat"), 223, 105, 0;
+	hideonnpc getmdnpcname("マラム#ロック装置3_029");	// 79439
+	end;
 }
 1@tcamp.gat,223,106,3	script	ロック装置#3-2_028	10024,{/* 79438 */}
 1@tcamp.gat,226,114,3	script	マラム#ロック装置3_029	10376,{/* 79439 (hide)*/}
 
 1@tcamp.gat,80,99,3	script	ロック装置#4-1_030	10024,{/* 79441 */
-/* 19:53:29.206054 */	hideoffnpc "マラム#ロック装置4_033";	// 79401
-/* 19:53:29.236170 */	unittalk getnpcid(0,"マラム#ロック装置4_033"),"マラム : この先が指令所みたいです。重要なものが集まる場所ですね。";	// 79401
-/* 19:53:29.244150 */	progressbar 10,"マラム#ロック装置4_033";	//color=0x3131ff
-/* 19:53:39.169913 */	unittalk getnpcid(0,"マラム#ロック装置4_033"),"マラム : 探しているものが見つかれば良いのですが……。";	// 79401
-/* 19:53:39.203824 */	hideonnpc "ロック装置#4-1_030";	// 79441
-/* 19:53:39.206817 */	hideonnpc "ロック装置#4-2_031";	// 79442
-/* 19:53:39.211830 */	hideonnpc "ロック装置#4-3_032";	// 79581
-setcell "1@tcamp.gat", 80, 100, 0;
-setcell "1@tcamp.gat", 80, 99, 0;
-setcell "1@tcamp.gat", 80, 98, 0;
-setcell "1@tcamp.gat", 80, 97, 0;
-setcell "1@tcamp.gat", 80, 96, 0;
-setcell "1@tcamp.gat", 80, 95, 0;
-setcell "1@tcamp.gat", 80, 94, 0;
-setcell "1@tcamp.gat", 80, 93, 0;
-/* 19:53:44.203665 */	hideonnpc "マラム#ロック装置4_033";	// 79401
+	hideoffnpc getmdnpcname("マラム#ロック装置4_033");	// 79401
+	unittalk getnpcid(0,getmdnpcname("マラム#ロック装置4_033")),"マラム : この先が指令所みたいです。重要なものが集まる場所ですね。";	// 79401
+	progressbar 10,getmdnpcname("マラム#ロック装置4_033");	//color=0x3131ff
+	unittalk getnpcid(0,getmdnpcname("マラム#ロック装置4_033")),"マラム : 探しているものが見つかれば良いのですが……。";	// 79401
+	hideonnpc getmdnpcname("ロック装置#4-1_030");	// 79441
+	hideonnpc getmdnpcname("ロック装置#4-2_031");	// 79442
+	hideonnpc getmdnpcname("ロック装置#4-3_032");	// 79581
+	setcell getmdmapname("1@tcamp.gat"), 80, 100, 0;
+	setcell getmdmapname("1@tcamp.gat"), 80, 99, 0;
+	setcell getmdmapname("1@tcamp.gat"), 80, 98, 0;
+	setcell getmdmapname("1@tcamp.gat"), 80, 97, 0;
+	setcell getmdmapname("1@tcamp.gat"), 80, 96, 0;
+	setcell getmdmapname("1@tcamp.gat"), 80, 95, 0;
+	setcell getmdmapname("1@tcamp.gat"), 80, 94, 0;
+	setcell getmdmapname("1@tcamp.gat"), 80, 93, 0;
+	hideonnpc getmdnpcname("マラム#ロック装置4_033");	// 79401
+	end;
 }
 1@tcamp.gat,80,97,3	script	ロック装置#4-2_031	10024,{/* 79442 */}
 1@tcamp.gat,80,95,3	script	ロック装置#4-3_032	10024,{/* 79581 */}
@@ -197,7 +224,7 @@ setcell "1@tcamp.gat", 80, 93, 0;
 }
 
 1@tcamp.gat,194,232,0	script	#tc_hwarp3_035	139,14,14,{/* 79403 */
-	cloakoffnpc "マラム#基地4_036";	// 79407
+	cloakoffnpc getmdnpcname("マラム#基地4_036");	// 79407
 	end;
 }
 1@tcamp.gat,194,232,3	script	マラム#基地4_036	10376,{/* 79407 */
@@ -213,7 +240,7 @@ setcell "1@tcamp.gat", 80, 93, 0;
 	mes "何かあるとしたら、そちらでしょう。";
 	close2;
 	cutin "ep18_maram_01.png", 255;
-	cloakonnpc "マラム#基地4_036";	// 79407
+	cloakonnpc getmdnpcname("マラム#基地4_036");	// 79407
 	end;
 }
 
@@ -294,8 +321,6 @@ setcell "1@tcamp.gat", 80, 93, 0;
 	delquest 16578;
 	setquest 16579;	// state=1
 	close2;
-	showevent 9999, 0, "ミリアム#基地1_037_0e0";	// 79408: 34, 100
-	showevent 1, 1, "マラム#基地5_038_0e0";	// 79412: 32, 102
 	cutin "ep18_miriam_02.png", 255;
 	end;
 OnQuestInfo:

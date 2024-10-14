@@ -130,7 +130,7 @@ wolfvill.gat,223,83,3	script	人当たりがいい住民#ep19	10398,{/* 2497 */
 		mes "案内していただけませんか？";
 		next;
 		cutin "ep18_miriam_01.png", 255;
-		setquest 18119;, showevent 0, 1, スマートエリー#ep19_000;	// 5565: 26, 266
+		setquest 18119;
 		set EP19_1QUE,1;
 		mes "‐バルムント邸へ向かいますか？‐";
 		next;
@@ -164,10 +164,14 @@ wolfvill.gat,223,83,3	script	人当たりがいい住民#ep19	10398,{/* 2497 */
 		mes "いろいろやってくれてありがとう！";
 		close;
 	}
+OnQuestInfo:
+	if(BaseLevel >= 220 && EP18_1QUE >= 100 && EP19_1QUE == 0)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	cloakonnpc;
-//	if(BaseLevel >= 220 && EP18_1QUE >= 100)
-//		//showevent 0, 1, 人当たりがいい住民#ep19;	// 2497: 223, 83
 	end;
 }
 
@@ -241,7 +245,7 @@ ba_in01.gat,26,266,3	script	スマートエリー#ep19_000	10354,{/* 5565 (cloaking)*/
 		next;
 		cutin "ep172_beta.bmp", 255;
 		delquest 18119;
-		setquest 130460;	//showevent 0, 1, #ep172_in01_in;	// 5331: 197, 279 showevent 0, 1, スマートエリー#ep19_000;	// 5565: 26, 266
+		setquest 130460;
 		set EP19_1QUE,2;
 		mes "‐次の目的地へ向かいますか？‐";
 		next;
@@ -282,6 +286,12 @@ ba_in01.gat,26,266,3	script	スマートエリー#ep19_000	10354,{/* 5565 (cloaking)*/
 		cutin "ep172_beta.bmp", 255;
 		end;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 1 || EP19_1QUE == 2)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -515,7 +525,7 @@ ba_in01.gat,384,114,4	script	スマートエリー#ep19elly	10354,{/* 5567 (cloaking)*/
 		cutin "ep16_crux_findel02.bmp", 255;
 		set EP19_1QUE,3;
 		delquest 130460;
-		setquest 18120;	//showevent 9999, 0, スマートエリー#ep19elly;	// 5567: 384, 114 showevent 0, 1, クルックス#ep19crux01;	// 5569: 386, 110
+		setquest 18120;
 		end;
 	case 3:
 		cutin "ep172_beta.bmp", 2;
@@ -528,6 +538,12 @@ ba_in01.gat,384,114,4	script	スマートエリー#ep19elly	10354,{/* 5567 (cloaking)*/
 		cutin "ep172_beta.bmp", 255;
 		end;
 	}
+OnQuestInfo:
+	if(EP19_1QUE == 2)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -597,6 +613,12 @@ ba_in01.gat,386,110,3	script	クルックス#ep19crux01	10118,{/* 5569 (cloaking)*/
 	cutin "ep16_crux_findel02.bmp", 255;
 	warp "prt_cas.gat", 146, 337;
 	end;
+OnQuestInfo:
+	if(EP19_1QUE == 3)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -627,7 +649,16 @@ OnInit:
 	end;
 }
 
-ba_maison.gat,197,279,0	warp	#ep172_in01_in	2,2,ba_in01.gat,271,269	// 5331 from: ba_maison.gat(197, 279)
+ba_maison.gat,197,279,0	script	#ep172_in01_in	45,2,2,{
+	warp "ba_in01.gat",271,269;
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 2)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
+}
 
 ba_in01.gat,383,104,1	script	マラム#ep19maram02	10376,{/* 5571 (cloaking)*/
 	switch(EP19_1QUE) {
@@ -698,13 +729,7 @@ OnTouch:
 		cutin "ep16_crux_findel02.bmp", 255;
 		end;
 	}
-	else if(EP19_1QUE == 4) {
-		//showevent 9999, 0, #ep172_main_evt04;	// 5571: 138, 342
-		//showevent 9999, 0, ニーヒル・ハイネン#ep17;	// 5573: 325, 263
-		//showevent 9999, 0, クルックス#ep19crux02;	// 5612: 320, 270
-		//showevent 0, 1, ニーヒル#ep19nh01;	// 5616: 331, 343
-		//showevent 9999, 0, レハール#ep19lehar02;	// 5617: 334, 342
-	}
+	end;
 }
 prt_cas.gat,149,331,4	script	クルックス#ep19_2	10118,{/* 5610 (cloaking)*/
 	if(EP19_1QUE == 3) {
@@ -725,8 +750,6 @@ prt_cas.gat,309,287,0	script	#ep19_evt03	139,3,3,{/* 5611 */
 	if(EP19_1QUE == 3) {
 		cloakoffnpc "クルックス#ep19crux02";
 		cloakoffnpc "キャサリン#ep19c01";
-		//showevent 9999, 0, ニーヒル#ep19nh01;	// 5616: 331, 343
-		//showevent 9999, 0, レハール#ep19lehar02;	// 5617: 334, 342
 	}
 	else if(EP19_1QUE == 4) {
 		cloakoffnpc "レハール#ep19lehar01";
@@ -910,11 +933,6 @@ prt_cas.gat,320,270,4	script	クルックス#ep19crux02	10118,{/* 5612 (cloaking)*/
 		delquest 18120;
 		setquest 18121;
 		set EP19_1QUE,4;
-		//showevent 9999, 0, #ep172_main_evt04;	// 5571: 138, 342
-		//showevent 9999, 0, ニーヒル・ハイネン#ep17;	// 5573: 325, 263
-		//showevent 9999, 0, クルックス#ep19crux02;	// 5612: 320, 270
-		//showevent 0, 1, ニーヒル#ep19nh01;	// 5616: 331, 343
-		//showevent 9999, 0, レハール#ep19lehar02;	// 5617: 334, 342
 		end;
 	}
 OnInit:
@@ -1108,7 +1126,6 @@ prt_cas.gat,331,343,4	script	ニーヒル#ep19nh01	10304,{/* 5616 (cloaking)*/
 		}
 		delquest 18121;
 		setquest 18122;
-		//showevent 9999, 0, #ep172_main_evt04;	// 5571: 138, 342
 		set EP19_1QUE,5;
 		getitem 1000607,1;
 		mes "[ニーヒル]";
@@ -1118,11 +1135,6 @@ prt_cas.gat,331,343,4	script	ニーヒル#ep19nh01	10304,{/* 5616 (cloaking)*/
 		mes "他にも支援が必要な時は";
 		mes "遠慮せずに言ってください。";
 		close2;
-		//showevent 9999, 0, #ep172_main_evt04;	// 5571: 138, 342
-		//showevent 9999, 0, ニーヒル・ハイネン#ep17;	// 5573: 325, 263
-		//showevent 9999, 0, クルックス#ep19crux02;	// 5612: 320, 270
-		//showevent 9999, 0, ニーヒル#ep19nh01;	// 5616: 331, 343
-		//showevent 0, 1, レハール#ep19lehar02;	// 5617: 334, 342
 		cutin "ep171_nihil01.bmp", 255;
 		end;
 	case 5:
@@ -1135,6 +1147,12 @@ prt_cas.gat,331,343,4	script	ニーヒル#ep19nh01	10304,{/* 5616 (cloaking)*/
 		cutin "ep171_nihil01.bmp", 255;
 		end;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 4)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -1167,6 +1185,12 @@ prt_cas.gat,334,342,3	script	レハール#ep19lehar02	10469,{/* 5617 (cloaking)*/
 		warp "ba_maison.gat", 187, 248;
 		end;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 5)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -1311,25 +1335,10 @@ ba_maison.gat,191,248,4	script	ジンジャー#ep19gg01_	10354,{/* 5574 (cloaking)*/
 		next;
 		cutin "ep172_beta.bmp", 255;
 		delquest 18122;
-		setquest 18123;	//showevent 0, 1, ジンジャー#ep19gg01_;	// 5574: 191, 248 showevent 0, 1, ジンジャー#ep19gg01;	// 5579: 30, 264
+		setquest 18123;
 		set EP19_1QUE,6;
 		mes "‐次の目的地へ向かいますか？‐";
 		next;
-		//showevent 9999, 0, 邸宅管理者アルファ#172n;	// 5168: 74, 150
-		//showevent 9999, 0, クルックス#ep172_clx02;	// 5260: 38, 219
-		//showevent 0, 3, タマリン#1研究所前;	// 5263: 70, 145
-		//showevent 9999, 0, #ep172_lab2_in;	// 5306: 78, 146
-		//showevent 0, 1, #ep172_proom2_in;	// 5315: 33, 225
-		//showevent 9999, 0, #ep172_sroom1_in;	// 5317: 103, 323
-		//showevent 0, 1, #ep172_in01_in;	// 5331: 197, 279
-		//showevent 0, 1, #ep172_pw03_in;	// 5350: 88, 272
-		//showevent 9999, 0, ニド#jh_ba;	// 5369: 169, 270
-		//showevent 9999, 0, 隠れている自動人形#he_a;	// 5384: 120, 321
-		//showevent 0, 1, 隠れている自動人形#he_a;	// 5385: 120, 321
-		//showevent 9999, 0, #スタート;	// 5393: 200, 264
-		//showevent 9999, 0, 奇妙な草#移動用ワープ;	// 5396: 206, 267
-		//showevent 0, 1, エウロパ#eorpa;	// 5552: 79, 278
-		//showevent 0, 1, ジンジャー#ep19gg01_;	// 5574: 191, 248
 		if(select("向かう","やめる") == 2) {
 			mes "‐その場にとどまった‐";
 			close;
@@ -1357,6 +1366,12 @@ ba_maison.gat,191,248,4	script	ジンジャー#ep19gg01_	10354,{/* 5574 (cloaking)*/
 		warp "ba_in01.gat", 28, 262;
 		end;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 6)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -1419,14 +1434,6 @@ ba_in01.gat,30,264,4	script	ジンジャー#ep19gg01	10354,{/* 5579 */
 			set EP19_1QUE,7;
 		}
 		close2;
-		//showevent 9999, 0, スマートエリー#ep172_el;	// 5249: 26, 266
-		//showevent 0, 1, アーモンド#ep172_amd01;	// 5381: 28, 255
-		//showevent 9999, 0, スウィーティ#ep172_swty;	// 5382: 32, 250
-		//showevent 9999, 0, スマートエリー#ep18ely0;	// 5553: 26, 266
-		//showevent 9999, 0, スマートエリー#ep19_000;	// 5565: 26, 266
-		//showevent 9999, 0, スマートエリー#ep19elly;	// 5567: 384, 114
-		//showevent 9999, 0, クルックス#ep19crux01;	// 5569: 386, 110
-		//showevent 0, 1, ジンジャー#ep19gg01;	// 5579: 30, 264
 		cutin "ep172_beta.bmp", 255;
 		warp "air_if.gat", 53, 71;	// from: ba_in01.gat(28, 262) port : 5121
 		end;
@@ -1499,6 +1506,14 @@ ba_in01.gat,30,264,4	script	ジンジャー#ep19gg01	10354,{/* 5579 */
 		cutin "ep172_beta.bmp", 255;
 		end;
 	}
+OnQuestInfo:
+	if(EP19_1QUE == 6 || EP19_1QUE == 7)
+		showevent 0, 1;
+	else if(EP19_1QUE >= 9)
+		showevent 6, 3;
+	else
+		showevent 9999,0;
+	end;
 }
 
 ba_in01.gat,341,371,0	warp	#ep172_room02_in	1,1,ba_in01.gat,375,101	// 5341 from: ba_in01.gat(341, 370)
@@ -1508,8 +1523,6 @@ air_if.gat,54,68,0	script	#ep19_evt06	139,7,7,{/* 2501 */
 	switch(EP19_1QUE) {
 	case 7:
 	case 8:
-		//showevent 9999, 0, ジンジャー#ep19gg03;	// 2505: 46, 71
-		//showevent 0, 1, レハール#ep19lehar03;	// 2509: 32, 63
 		cloakoffnpc "レイジー#ep19lazy02";
 		cloakoffnpc "マラム#ep19maram03";
 		cloakoffnpc "ミリアム#ep19miriam03";
@@ -1642,8 +1655,6 @@ air_if.gat,46,71,4	script	ジンジャー#ep19gg03	10354,{/* 2505 */
 		setquest 18129;
 		delitem 1000607,1;
 		set EP19_1QUE,8;
-		//showevent 9999, 0, ジンジャー#ep19gg03;	// 2505: 46, 71
-		//showevent 0, 1, レハール#ep19lehar03;	// 2509: 32, 63
 		end;
 	case 8:
 		cutin "ep172_beta.bmp", 2;
@@ -1731,7 +1742,14 @@ air_if.gat,46,71,4	script	ジンジャー#ep19gg03	10354,{/* 2505 */
 			end;
 		}
 	}
+OnQuestInfo:
+	if(EP19_1QUE == 7 || EP19_1QUE == 9)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 }
+
 air_if.gat,31,58,1	script	レイジー#ep19lazy02	10454,{/* 2506 */
 	switch(EP19_1QUE) {
 	case 7:
@@ -2009,9 +2027,6 @@ air_if.gat,32,63,3	script	レハール#ep19lehar03	10469,{/* 2509 */
 		delquest 18129;
 		setquest 18124;
 		set EP19_1QUE,9;
-		//showevent 0, 1, ジンジャー#ep19gg03;	// 2505: 46, 71
-		//showevent 9999, 0, レハール#ep19lehar03;	// 2509: 32, 63
-		//showevent 6, 3, ジンジャー#ep19gg01;	// 5579: 30, 264
 		end;
 	case 9:
 		cutin "ep19_lehar01.png", 2;
@@ -2023,6 +2038,12 @@ air_if.gat,32,63,3	script	レハール#ep19lehar03	10469,{/* 2509 */
 		cutin "ep19_lehar01.png", 255;
 		end;
 	}
+OnQuestInfo:
+	if(EP19_1QUE == 8)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -2063,8 +2084,6 @@ jor_tail.gat,216,51,5	script	ジンジャー#ep19gg04	10354,14,14,{/* 2510 */
 OnTouch:
 	switch(EP19_1QUE) {
 	case 9:
-		//showevent 0, 1, レハール#ep19lehar04;	// 2514: 221, 53
-		//showevent 9999, 0, ヘルロック#ep19;	// 2910: 211, 63
 		cloakoffnpc "レイジー#ep19lazyjt";
 		cloakoffnpc "マラム#ep19maramjt";
 		cloakoffnpc "ミリアム#ep19miriamjt";
@@ -2142,11 +2161,6 @@ jor_tail.gat,221,53,3	script	レハール#ep19lehar04	10469,{/* 2514 (cloaking)*/
 		setquest 18125;	
 		set EP19_1QUE,10;
 		viewpoint 1, 219, 294, 1, 0xFFFF00;
-		//showevent 0, 1, #to_jor_back1_3;	// 2454: 219, 294
-		//showevent 9999, 0, レハール#ep19lehar04;	// 2514: 221, 53
-		//showevent 0, 1, #to_icecastle;	// 2456: 385, 229
-		//showevent 0, 1, #to_icas_in;	// 2470: 213, 175
-		//showevent 0, 1, レハール#ep19lehar06;	// 2525: 141, 216
 		end;
 	case 10:
 		cutin "ep19_lehar01.png", 0;
@@ -2160,6 +2174,12 @@ jor_tail.gat,221,53,3	script	レハール#ep19lehar04	10469,{/* 2514 (cloaking)*/
 		viewpoint 1, 219, 294, 1, 0xFFFF00;
 		end;
 	}
+OnQuestInfo:
+	if(EP19_1QUE == 9)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -2239,12 +2259,14 @@ OnInit:
 	end;
 }
 
-icecastle.gat,204,165,0	script	#ep19_evt_3	139,7,7,{/* 2522 */
+/*
+icecastle.gat,204,165,0	script	#ep19_evt_3	139,7,7,{/ 2522 /
 	cloakonnpc "レハール#ep19lehar_1";
 	if(EP19_1QUE == 10)
 		cloakoffnpc "レハール#ep19lehar_1";
 	end;
 }
+*/
 
 icecastle.gat,204,165,3	script	レハール#ep19lehar_1	10469,{/* 2523 (cloaking)*/
 	cutin "ep19_lehar01.png", 2;
@@ -2483,25 +2505,6 @@ icas_in.gat,141,216,3	script	レハール#ep19lehar06	10469,{/* 2525 (cloaking)*/
 		setquest 18126;
 		set EP19_1QUE,11;
 		cutin "ep19_voglinde03.png", 255;
-		//showevent 9999, 0, レハール#ep19lehar06;	// 2525: 141, 216
-		//showevent 0, 1, レオン#ep19leon01;	// 2526: 138, 220
-		//showevent 9999, 0, オーレリー#e19ms00;	// 2546: 34, 189
-		//showevent 9999, 0, ホルル#e19ms00;	// 2547: 32, 184
-		//showevent 9999, 0, チェロロン#ep19re2;	// 2678: 245, 197
-		//showevent 9999, 0, レイジー#ep19re2;	// 2680: 245, 197
-		//showevent 9999, 0, ミリアム#ep19re1;	// 2681: 249, 199
-		//showevent 9999, 0, ホルル#i19ms00;	// 2686: 247, 116
-		//showevent 9999, 0, ヴェルグンデ#i19ms00;	// 2687: 244, 117
-		//showevent 9999, 0, レイジー#i19ms00;	// 2688: 246, 119
-		//showevent 9999, 0, オーレリー#i19ms00;	// 2693: 249, 113
-		//showevent 9999, 0, ゾリャラ#ep19_dq_kitche;	// 2780: 241, 66
-		//showevent 9999, 0, レオン#ep19leon02;	// 2781: 42, 252
-		//showevent 9999, 0, ミリアム#ep19_dq_victim;	// 2783: 48, 252
-		//showevent 9999, 0, ミリアム#ep19miriam06;	// 2787: 260, 180
-		//showevent 9999, 0, マラム#ep19maram05;	// 2788: 262, 179
-		//showevent 9999, 0, ヴォークリンデ#ep19;	// 2904: 163, 226
-		//showevent 9999, 0, マラム#ep19;	// 2908: 130, 201
-		//showevent 9999, 0, レハール#ep19;	// 2909: 136, 197
 		end;
 	case 11:
 		cloakoffnpc "レイジー#ep19lazy03";
@@ -2529,6 +2532,12 @@ icas_in.gat,141,216,3	script	レハール#ep19lehar06	10469,{/* 2525 (cloaking)*/
 		cutin "ep19_lehar01.png", 255;
 		end;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 10)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -2673,9 +2682,6 @@ icas_in.gat,138,220,4	script	レオン#ep19leon01	10464,{/* 2526 (cloaking)*/
 			mes "さて、私も仕事に出かけますか。";
 			mes "よろしければ、一緒に行きませんか？";
 			next;
-			//showevent 0, 1, レオン#ep19leon01;	// 2526: 138, 220
-			//showevent 0, 3, ヴォークリンデ#ep19;	// 2904: 163, 226
-			//showevent 0, 1, パトロール隊長#iws;	// 2533: 23, 115
 			cutin "ep19_lehar01.png", 255;
 		}
 		else if(EP19_1QUE == 12) {
@@ -2732,8 +2738,14 @@ icas_in.gat,138,220,4	script	レオン#ep19leon01	10464,{/* 2526 (cloaking)*/
 		}
 	}
 	end;
+OnQuestInfo:
+	if(EP19_1QUE == 11 || EP19_1QUE == 12)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
-	setnpctitle "[守護者]";	// NPC:レオン#ep19leon01(2526)
+	setnpctitle "[守護者]";
 	cloakonnpc;
 	end;
 }
@@ -2741,7 +2753,7 @@ OnInit:
 icas_in.gat,141,220,3	script	オーレリー#ep19arl01	10465,{/* 2527 (cloaking)*/
 	end;
 OnInit:
-	setnpctitle "[守護者]";	// NPC:オーレリー#ep19arl01(2527)
+	setnpctitle "[守護者]";
 	cloakonnpc;
 	end;
 }
@@ -2866,7 +2878,7 @@ icecastle.gat,23,115,8	script	パトロール隊長#iws	21518,{/* 2533 */
 		mes "名誉隊員として登録させてもらおう。";
 		next;
 		delquest 18127;
-		setquest 130470;	//showevent 0, 1, パトロール隊長#iws;	// 2533: 23, 115
+		setquest 130470;
 		set EP19_1QUE,13;
 		mes "[パトロール隊長]";
 		mes "さっそくパトロールに出掛けよう。";
@@ -2989,6 +3001,12 @@ icecastle.gat,23,115,8	script	パトロール隊長#iws	21518,{/* 2533 */
 		messize 180,364;
 		close;
 	}
+OnQuestInfo:
+	if(EP19_1QUE == 12 || EP19_1QUE == 13)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	setnpctitle "<イーグルパトロール隊>";	// NPC:パトロール隊長#iws(2533)
 	end;
@@ -3161,8 +3179,6 @@ jor_back2.gat,250,30,2	script	謎の青年#flunch	10453,{/* 2541 (cloaking)*/
 		delquest 5983;
 		setquest 5984;
 		set EP19_1QUE,15;
-		//showevent 0, 1, 謎の青年#flunch;	// 2541: 250, 30
-		//showevent 0, 1, ホルル#if19ms;	// 2544: 27, 126
 		getitem 101162,1;
 		mes "[マヒル]";
 		mes "せっかくですから";
@@ -3210,8 +3226,14 @@ jor_back2.gat,250,30,2	script	謎の青年#flunch	10453,{/* 2541 (cloaking)*/
 		warp "icecastle.gat", 27, 121;
 		end;
 	}
+OnQuestInfo:
+	if(EP19_1QUE == 14 || EP19_1QUE == 15)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
-	setnpctitle "<HU-210426>";	// NPC:謎の青年#flunch(2541)
+	setnpctitle "<HU-210426>";
 	cloakonnpc;
 	end;
 }
@@ -3231,7 +3253,6 @@ OnInit:
 
 icecastle.gat,27,126,0	script	#e19ms00	139,9,9,{/* 2543 */
 	if(EP19_1QUE == 10) {
-		//showevent 0, 1, #to_icas_in;	// 2470: 213, 175
 		viewpoint 1, 213, 175, 1, 0xFFFF00;
 	}
 	if(EP19_1QUE == 15 || EP19_1QUE == 58)
@@ -3302,19 +3323,10 @@ icecastle.gat,27,126,3	script	ホルル#if19ms	10461,{/* 2544 (cloaking)*/
 		cutin "ep19_iwin06.png", 255;
 		cloakonnpc "ホルル#if19ms";
 		delquest 5984;
-		setquest 17639; showevent 0, 1, オーレリー#e19ms00;	// 2546: 34, 189
+		setquest 17639;
 		set EP19_1QUE,16;
 		mes "‐氷の城 室内へ向かいますか？‐";
 		next;
-		//showevent 9999, 0, #to_jor_back1;	// 2457: 17, 123
-		//showevent 9999, 0, #to_icas_in;	// 2470: 213, 175
-		//showevent 9999, 0, #in_house5;	// 2494: 62, 137
-		//showevent 9999, 0, パトロール隊長#iws;	// 2533: 23, 115
-		//showevent 0, 1, ホルル#if19ms;	// 2544: 27, 126
-		//showevent 9999, 0, ホルル#ep19_dq_dowsing;	// 2791: 27, 126
-		//showevent 9999, 0, シャリャラ#ep19iwin06;	// 2822: 52, 124
-		//showevent 9999, 0, レハール#ep19_3;	// 2916: 27, 123
-		//showevent 9999, 0, #in_house1;	// 2917: 59, 213
 		if(select("向かう","やめる") == 2) {
 			// 未調査
 			mes "‐その場にとどまった‐";
@@ -3360,15 +3372,18 @@ icecastle.gat,27,126,3	script	ホルル#if19ms	10461,{/* 2544 (cloaking)*/
 		setquest 17640;
 		set EP19_1QUE,59;
 		close2;
-		//showevent 0, 1, #in_house5;	// 2494: 62, 137
-		//showevent 9999, 0, ホルル#if19ms;	// 2544: 27, 126
-		//showevent 0, 1, ホルル#i19ms00;	// 2686: 247, 116
 		cutin "ep19_iwin06.png", 255;
 		cloakonnpc "ホルル#if19ms";
 		end;
 	case 59:
 		// 未調査
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 15 || EP19_1QUE == 16 || EP19_1QUE == 58)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -3651,30 +3666,10 @@ icas_in.gat,34,189,5	script	オーレリー#e19ms00	10465,{/* 2546 (cloaking)*/
 		next;
 		cutin "ep19_aurelie01.png", 255;
 		delquest 17639;
-		setquest 17619;	//showevent 0, 1, #to_jor_back1;	// 2457: 17, 123　showevent 0, 1, #to_jor_back2;	// 2458: 226, 387　showevent 0, 1, #to_jor_back3;	// 2460: 13, 248　showevent 0, 1, ホルル#e19ms12;	// 2565: 99, 318
+		setquest 17619;
 		set EP19_1QUE,17;
 		mes "‐城の外へ向かいますか？‐";
 		next;
-		//showevent 9999, 0, レハール#ep19lehar06;	// 2525: 141, 216
-		//showevent 9999, 0, レオン#ep19leon01;	// 2526: 138, 220
-		//showevent 0, 1, オーレリー#e19ms00;	// 2546: 34, 189
-		//showevent 9999, 0, ホルル#e19ms00;	// 2547: 32, 184
-		//showevent 9999, 0, チェロロン#ep19re2;	// 2678: 245, 197
-		//showevent 9999, 0, レイジー#ep19re2;	// 2680: 245, 197
-		//showevent 9999, 0, ミリアム#ep19re1;	// 2681: 249, 199
-		//showevent 9999, 0, ホルル#i19ms00;	// 2686: 247, 116
-		//showevent 9999, 0, ヴェルグンデ#i19ms00;	// 2687: 244, 117
-		//showevent 9999, 0, レイジー#i19ms00;	// 2688: 246, 119
-		//showevent 9999, 0, オーレリー#i19ms00;	// 2693: 249, 113
-		//showevent 9999, 0, ゾリャラ#ep19_dq_kitche;	// 2780: 241, 66
-		//showevent 9999, 0, レオン#ep19leon02;	// 2781: 42, 252
-		//showevent 9999, 0, ミリアム#ep19_dq_victim;	// 2783: 48, 252
-		//showevent 9999, 0, ミリアム#ep19miriam06;	// 2787: 260, 180
-		//showevent 9999, 0, マラム#ep19maram05;	// 2788: 262, 179
-		//showevent 0, 3, ヴォークリンデ#ep19;	// 2904: 163, 226
-		//showevent 9999, 0, マラム#ep19;	// 2908: 130, 201
-		//showevent 9999, 0, レハール#ep19;	// 2909: 136, 197
-		//showevent 9999, 0, ヴェルグンデ#ep19vell02;	// 2955: 185, 63
 		if(select("向かう","やめる") == 2) {
 			mes "‐その場にとどまった‐";
 			close;
@@ -4124,8 +4119,14 @@ icas_in.gat,34,189,5	script	オーレリー#e19ms00	10465,{/* 2546 (cloaking)*/
 		end;
 	}
 	end;
+OnQuestInfo:
+	if(EP19_1QUE == 16 || EP19_1QUE == 17 || EP19_1QUE == 34)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
-	setnpctitle "[守護者]";	// NPC:オーレリー#e19ms00(2546)
+	setnpctitle "[守護者]";
 	cloakonnpc;
 	end;
 }
@@ -4701,11 +4702,9 @@ jor_back3.gat,99,318,3	script	ホルル#e19ms12	21529,{/* 2565 (cloaking)*/
 		if(!sleep2(1000)) end;
 		cloakonnpc "レイジー#e19ms12";
 		delquest 17619;
-		setquest 17620; //showevent 0, 1, #to_jor_dun02;	// 2464: 10, 238 showevent 0, 1,ミリアム#e19ms20;	// 2572: 263, 170
+		setquest 17620;
 		set EP19_1QUE,18;
 		close;
-		//showevent 0, 1, #to_jor_dun01;	// 2462: 63, 326
-		//showevent 9999, 0, ホルル#e19ms12;	// 2565: 99, 318
 	}
 	if(EP19_1QUE == 18) {
 		mes "[ホルル]";
@@ -4715,6 +4714,12 @@ jor_back3.gat,99,318,3	script	ホルル#e19ms12	21529,{/* 2565 (cloaking)*/
 		mes "入口は、洞窟状になっているから。";
 		close;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 17)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -4900,7 +4905,6 @@ jor_dun02.gat,263,170,3	script	ミリアム#e19ms20	21529,{/* 2572 (cloaking)*/
 		set EP19_1QUE,19;
 		viewpoint 1, 18, 31, 2, 0xFFFF00;
 		close2;
-		//showevent 9999, 0, ミリアム#e19ms20;	// 2572: 263, 170
 		cloakonnpc "レイジー#e19ms21";
 		cloakonnpc "ルガン#e19ms21";
 		cloakonnpc "ルガン#e19ms22";
@@ -4963,11 +4967,6 @@ jor_dun02.gat,263,170,3	script	ミリアム#e19ms20	21529,{/* 2572 (cloaking)*/
 		setquest 17628;
 		set EP19_1QUE,26;
 		next;
-		//showevent 9999, 0, ミリアム#e19ms20;	// 2572: 263, 170
-		//showevent 9999, 0, 警備ルガン#e19ms95;	// 2618: 153, 239
-		//showevent 9999, 0, ミリアム#e19ms91;	// 2621: 150, 269
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 0, 1, ルガン司祭#e19ms81;	// 2600: 23, 58
 		cutin "ep19_juncea01.png", 255;
 		mes "‐上級孵化場へ向かいますか？‐";
 		next;
@@ -5004,6 +5003,12 @@ jor_dun02.gat,263,170,3	script	ミリアム#e19ms20	21529,{/* 2572 (cloaking)*/
 		warp "jor_nest.gat", 28, 61;
 		end;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 18 || EP19_1QUE == 25)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -5159,30 +5164,6 @@ jor_nest.gat,185,49,3	script	ルガン司祭#e19ms31	10470,5,5,{/* 2578 */
 		setquest 17622;
 		set EP19_1QUE,20;
 		close2;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 0, 1, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 9999, 0, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 		cloakonnpc "ルガン主教#e19ms31";
 		cloakonnpc "レイジー#e19ms31";
 		end;
@@ -5304,30 +5285,6 @@ jor_nest.gat,196,202,5	script	ルガン主教#e19ms41	10474,{/* 2584 (cloaking)*/
 		setquest 17623;
 		set EP19_1QUE,21;
 		close2;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 0, 1, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 9999, 0, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 		// 未調査
 		cloakonnpc "ルガン主教#e19ms41";
 		cloakonnpc "レイジー#e19ms41";
@@ -5340,6 +5297,12 @@ jor_nest.gat,196,202,5	script	ルガン主教#e19ms41	10474,{/* 2584 (cloaking)*/
 		mes "連れて行かねば。";
 		close;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 20)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -5399,30 +5362,6 @@ jor_nest.gat,115,187,3	script	ルガン主教#e19ms51	10474,{/* 2587 (cloaking)*/
 		setquest 17624;
 		set EP19_1QUE,22;
 		close2;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 0, 1, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 0, 3, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 9999, 0, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 		cloakonnpc "レイジー#e19ms51";
 		cloakonnpc "ルガン主教#e19ms51";
 		end;
@@ -5433,6 +5372,12 @@ jor_nest.gat,115,187,3	script	ルガン主教#e19ms51	10474,{/* 2587 (cloaking)*/
 		mes "……さあ、もう次の場所に行こう。";
 		close;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 21)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -5625,30 +5570,6 @@ jor_nest.gat,53,244,1	script	ルガン主教#e19ms61	10474,{/* 2590 (cloaking)*/
 		setquest 17625;
 		set EP19_1QUE,23;
 		close;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 0, 1, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 	}
 	if(EP19_1QUE == 23) {
 		mes "[ルガン主教]";
@@ -5657,6 +5578,12 @@ jor_nest.gat,53,244,1	script	ルガン主教#e19ms61	10474,{/* 2590 (cloaking)*/
 		mes "イルシオン区画にいるはずだ。";
 		close;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 22)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -5730,7 +5657,6 @@ jor_nest.gat,22,141,0	script	#e19ms71	139,14,14,{/* 2594 */
 			delquest 16655;
 			setquest 130475;
 			set EP19_1QUE,53;
-			//showevent 0, 1, 見知らぬ箱#ep19re1;	// 2682: 19, 190
 		}
 		close;
 	}
@@ -5863,30 +5789,6 @@ jor_nest.gat,22,141,5	script	ユンケア#e19ms71	10455,{/* 2595 (cloaking)*/
 		setquest 17626;
 		set EP19_1QUE,24;
 		close2;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 0, 1, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 		cutin "ep19_juncea03.png", 255;
 		end;
 	case 24:
@@ -5982,31 +5884,6 @@ jor_nest.gat,22,141,5	script	ユンケア#e19ms71	10455,{/* 2595 (cloaking)*/
 		setquest 17627;
 		set EP19_1QUE,25;
 		next;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 0, 1, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
-		//showevent 0, 1, ミリアム#e19ms20;	// 2572: 263, 170
 		cutin "ep19_juncea01.png", 255;
 		mes "‐一度ミリアムたちの元へ戻ろう‐";
 		mes "　";
@@ -6167,30 +6044,6 @@ jor_nest.gat,22,141,5	script	ユンケア#e19ms71	10455,{/* 2595 (cloaking)*/
 		set EP19_1QUE,28;
 		cutin "ep19_juncea04.png", 255;
 		close;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 0, 1, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 	case 28:
 		cutin "ep19_juncea01.png", 2;
 		cloakoffnpc "レイジー#e19ms72";
@@ -6355,30 +6208,6 @@ jor_nest.gat,22,141,5	script	ユンケア#e19ms71	10455,{/* 2595 (cloaking)*/
 		setquest 17632;
 		set EP19_1QUE,30;
 		close2;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 0, 1, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 		cloakonnpc "レイジー#e19ms72";
 		cutin "ep19_juncea04.png", 255;
 		end;
@@ -6392,6 +6221,12 @@ jor_nest.gat,22,141,5	script	ユンケア#e19ms71	10455,{/* 2595 (cloaking)*/
 		cutin "ep19_juncea01.png", 255;
 		end;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE >= 23 && EP19_1QUE <= 25 || EP19_1QUE == 27 || EP19_1QUE == 29)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -6494,30 +6329,6 @@ jor_nest.gat,26,142,3	script	バゴット#e19ms71	10386,{/* 2596 (cloaking)*/
 		setquest 17631;
 		set EP19_1QUE,29;
 		close2;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 0, 1, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 		cloakonnpc "バゴット#e19ms71";
 		cloakonnpc "サレクガンド#e19ms71";
 		cutin "ep18_bagot_03.png", 255;
@@ -6526,6 +6337,12 @@ jor_nest.gat,26,142,3	script	バゴット#e19ms71	10386,{/* 2596 (cloaking)*/
 	if(EP19_1QUE == 29) {
 		// 未調査
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 28)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -6647,34 +6464,9 @@ jor_nest.gat,23,58,5	script	ルガン司祭#e19ms81	10470,{/* 2600 (cloaking)*/
 		}
 		set EP19_1QUE,27;
 		delquest 17628;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
 		setquest 17629;
-		getitem 1000606,1;	//unexpected error
+		getitem 1000606,1;
 		close;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 0, 1, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 	}
 	if(EP19_1QUE == 27) {
 		mes "[ルガン司祭]";
@@ -6690,6 +6482,12 @@ jor_nest.gat,23,58,5	script	ルガン司祭#e19ms81	10470,{/* 2600 (cloaking)*/
 		mes "あまりここには来ては駄目だぞ。";
 		close;
 	}
+OnQuestInfo:
+	if(EP19_1QUE == 26)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -6801,36 +6599,18 @@ jor_nest.gat,87,164,3	script	レイジー#e19ms71	10475,{/* 2606 (cloaking)*/
 		setquest 17633;
 		set EP19_1QUE,31;
 		close2;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 0, 1, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 		cloakonnpc "レイジー#e19ms71";
 		end;
 	}
 	if(EP19_1QUE == 31) {
 		cloakonnpc "ユンケア#e19ms71";
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 30)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -6882,31 +6662,6 @@ jor_nest.gat,24,252,1	script	レイジー#e19ms91	10475,{/* 2608 (cloaking)*/
 		set EP19_1QUE,32;
 		mes "‐下級区域へ向かいますか？‐";
 		next;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
-		//showevent 0, 1, 警備ルガン#e19ms95;	// 2618: 153, 239
 		if(select("向かう","やめる") == 2) {
 			mes "‐その場にとどまった‐";
 			close;
@@ -6934,6 +6689,12 @@ jor_nest.gat,24,252,1	script	レイジー#e19ms91	10475,{/* 2608 (cloaking)*/
 		warp "jor_dun02.gat", 153, 234;
 		end;
 	}
+OnQuestInfo:
+	if(EP19_1QUE == 31)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -7027,9 +6788,6 @@ jor_dun02.gat,153,239,3	script	警備ルガン#e19ms95	10470,{/* 2618 */
 		setquest 17635;
 		set EP19_1QUE,33;
 		close2;
-		//showevent 9999, 0, ミリアム#e19ms20;	// 2572: 263, 170
-		//showevent 9999, 0, 警備ルガン#e19ms95;	// 2618: 153, 239
-		//showevent 0, 1, ミリアム#e19ms91;	// 2621: 150, 269
 		cloakonnpc "レイジー#e19ms92";
 		cloakoffnpc "ミリアム#e19ms91";
 		cloakoffnpc "レハール#e19ms91";
@@ -7051,6 +6809,12 @@ jor_dun02.gat,153,239,3	script	警備ルガン#e19ms95	10470,{/* 2618 */
 	mes "交代の時間か……？";
 	mes "違うのか……。";
 	close;
+OnQuestInfo:
+	if(EP19_1QUE == 32)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 }
 jor_dun02.gat,150,237,7	script	レイジー#e19ms92	10475,{/* 2619 (cloaking)*/
 	end;
@@ -7137,10 +6901,6 @@ jor_dun02.gat,150,269,3	script	ミリアム#e19ms91	21529,{/* 2621 (cloaking)*/
 		setquest 17636;
 		set EP19_1QUE,34;
 		next;
-		//showevent 9999, 0, ミリアム#e19ms20;	// 2572: 263, 170
-		//showevent 9999, 0, 警備ルガン#e19ms95;	// 2618: 153, 239
-		//showevent 0, 1, ミリアム#e19ms91;	// 2621: 150, 269
-		//showevent 0, 1, オーレリー#e19ms00;	// 2546: 34, 189
 		mes "‐氷の城へ向かいますか？‐";
 		next;
 		if(select("向かう","やめる") == 2) {
@@ -7170,6 +6930,12 @@ jor_dun02.gat,150,269,3	script	ミリアム#e19ms91	21529,{/* 2621 (cloaking)*/
 		warp "icas_in.gat", 35, 186;
 		end;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 33 || EP19_1QUE == 34)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -7578,30 +7344,6 @@ jor_nest.gat,127,207,3	script	レイジー#ep19re1	10475,{/* 2661 (cloaking)*/
 		setquest 16639;
 		set EP19_1QUE,36;
 		close2;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 0, 1, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 0, 3, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 		cloakonnpc "レイジー#ep19re1";
 		end;
 	case 36:
@@ -7734,30 +7476,6 @@ jor_nest.gat,127,207,3	script	レイジー#ep19re1	10475,{/* 2661 (cloaking)*/
 		setquest 16646;
 		set EP19_1QUE,43;
 		close;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 9999, 0, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 0, 1, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
 	case 43:
 		mes "[レイジー]";
 		mes strcharinfo(0)+"は";
@@ -7815,25 +7533,18 @@ jor_nest.gat,19,142,3	script	書類の山#ep19re1	10391,{/* 2662 (cloaking)*/
 		setquest 16640;
 		set EP19_1QUE,37;
 		close;
-		//showevent 9999, 0, ルガン司祭#e19ms31;	// 2578: 185, 49
-		//showevent 9999, 0, ルガン主教#e19ms41;	// 2584: 196, 202
-		//showevent 9999, 0, ルガン主教#e19ms51;	// 2587: 115, 187
-		//showevent 9999, 0, ルガン主教#e19ms61;	// 2590: 53, 244
-		//showevent 9999, 0, #e19ms71;	// 2594: 22, 141
-		//showevent 9999, 0, ユンケア#e19ms71;	// 2595: 22, 141
-		//showevent 9999, 0, バゴット#e19ms71;	// 2596: 26, 142
-		//showevent 9999, 0, ルガン司祭#e19ms81;	// 2600: 23, 58
-		//showevent 9999, 0, レイジー#e19ms71;	// 2606: 87, 164
-		//showevent 9999, 0, レイジー#e19ms91;	// 2608: 24, 252
-		//showevent 9999, 0, レイジー#ep19re1;	// 2661: 127, 207
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 0, 1, 書類の山#ep19re2;	// 2664: 21, 195
 	}
 	if(EP19_1QUE >= 37) {
 		mes "["+strcharinfo(0)+"]";
 		mes "この書類の山は、調査済だ。";
 		close;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 36)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -7955,20 +7666,6 @@ jor_nest.gat,21,195,3	script	書類の山#ep19re2	10391,{/* 2664 (cloaking)*/
 		setquest 16641;
 		set EP19_1QUE,38;
 		close;
-		//showevent 9999, 0, 書類の山#ep19re1;	// 2662: 19, 142
-		//showevent 9999, 0, 書類の山#ep19re2;	// 2664: 21, 195
-		//showevent 0, 1, バゴットの研究室#warp_e;	// 2666: 66, 260
-		//showevent 9999, 0, ルガン警備兵#ep19re1;	// 2672: 173, 177
-		//showevent 9999, 0, 書類の山#ep19re5;	// 2674: 181, 173
-		//showevent 9999, 0, ユンケア#ep19re1;	// 2675: 31, 140
-		//showevent 9999, 0, 見知らぬ箱#ep19re1;	// 2682: 19, 190
-		//showevent 9999, 0, 空の試験管#ep19re1;	// 2683: 20, 194
-		//showevent 9999, 0, ルガン#ep19re1;	// 2684: 24, 185
-		//showevent 9999, 0, ミミルガンド#ep19r;	// 2792: 34, 79
-		//showevent 6, 3, シャリャラ#ep19iwin07;	// 2824: 273, 23
-		//showevent 9999, 0, ロープ#whl;	// 2958: 22, 255
-		//showevent 9999, 0, アロロン#ep19re2;	// 2960: 63, 257
-		//
 	}
 	if(EP19_1QUE == 38) {
 		mes "["+strcharinfo(0)+"]";
@@ -7978,6 +7675,12 @@ jor_nest.gat,21,195,3	script	書類の山#ep19re2	10391,{/* 2664 (cloaking)*/
 		mes "　行ってみようか）";
 		close;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 37)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -8136,6 +7839,12 @@ jor_nest.gat,66,260,3	script	バゴットの研究室#warp_e	10046,{/* 2666 */
 		}
 	}
 	unittalk getcharid(3),strcharinfo(0)+" : 門に鍵がかかっている",1;
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 38)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 }
 
@@ -8477,6 +8186,12 @@ jor_nest.gat,181,173,3	script	書類の山#ep19re5	10391,{/* 2674 (cloaking)*/
 	if(EP19_1QUE == 43) {
 		// 未調査
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 41)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -9108,6 +8823,12 @@ jor_nest.gat,31,140,5	script	ユンケア#ep19re1	10455,{/* 2675 (cloaking)*/
 		end;
 	}
 	end;
+OnQuestInfo:
+	if(EP19_1QUE == 43)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -9549,6 +9270,12 @@ jor_nest.gat,19,190,3	script	見知らぬ箱#ep19re1	10250,{/* 2682 (cloaking)*/
 	mes "["+strcharinfo(0)+"]";
 	mes "（何かの箱が置かれている）";
 	close;
+OnQuestInfo:
+	if(EP19_1QUE == 53)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -9915,6 +9642,12 @@ icas_in.gat,247,116,1	script	ホルル#i19ms00	10461,{/* 2686 (cloaking)*/
 		cutin "ep19_iwin06.png", 255;
 		end;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 59)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -14187,6 +13920,12 @@ jor_nest.gat,34,79,5	script	ミミルガンド#ep19r	10473,{/* 2792 */
 		}
 		return substr('@num$,0,('@len - '@sep['@type])) +"."+ substr('@num$,('@len - '@sep['@type])) +'@c$['@type];
 	}
+OnQuestInfo:
+	if(EP19_1QUE >= 22)
+		showevent 0, 3;
+	else
+		showevent 9999,0;
+	end;
 }
 
 jor_nest.gat,37,75,1	script	ベルベルガンド#ep19r	10470,{/* 2793 */
@@ -15590,6 +15329,12 @@ jor_nest.gat,273,23,3	script	シャリャラ#ep19iwin07	21529,{/* 2824 (cloaking)*/
 	close2;
 	warp "icecastle.gat", 55, 120;
 	end;
+OnQuestInfo:
+	if(EP19_1QUE >= 23)
+		showevent 6, 3;
+	else
+		showevent 9999,0;
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -16534,6 +16279,12 @@ icas_in.gat,163,226,3	script	ヴォークリンデ#ep19	10467,{/* 2904 (cloaking)*/
 		warp "jor_tail.gat", 214, 61;	// from: icas_in.gat(159, 224)
 		end;
 	}
+	end;
+OnQuestInfo:
+	if(EP19_1QUE >= 12 && EP19_2QUE == 0)
+		showevent 0, 3;
+	else
+		showevent 9999,0;
 	end;
 OnInit:
 	cloakonnpc;
@@ -18131,7 +17882,8 @@ icecastle.gat,59,213,0	script	#in_house1	45,1,1,{/* 2917 */
 }
 
 icas_in.gat,33,109,0	warp	#out_house1	1,1,icecastle.gat,60,211	// 2918 from: icas_in.gat(34, 110)
-icas_in.gat,32,122,0	script	#seizyo_sw	139,10,10,{/* 2919 */
+/*
+icas_in.gat,32,122,0	script	#seizyo_sw	139,10,10,{/ 2919 /
 	switch(EP19_2QUE) {
 	case 0:
 		end;
@@ -18152,6 +17904,7 @@ icas_in.gat,32,122,0	script	#seizyo_sw	139,10,10,{/* 2919 */
 	}
 	end;
 }
+*/
 icas_in.gat,34,121,3	script	ヴォークリンデ#ep19_roo	10467,{/* 2920 (cloaking)*/
 	end;
 OnInit:
@@ -18700,11 +18453,19 @@ icas_in.gat,32,123,5	script	フリーデリケ#ep19_seizy	10458,{/* 2925 (cloaking)*/
 				cutin "ep19_friederike01.png", 255;
 				end;
 			case 3:
-				mes "[フリーデリケ]";
-				mes "イスガルドの調査は上手く行ってますか？";
-				mes "外は凄く寒いですよね。";
-				mes "早く終わって、";
-				mes "部屋で休めたらいいのに……。";
+				if(rand(2)) {
+					mes "[フリーデリケ]";
+					mes "わぁ！";
+					mes "今日はどんな面白い話を";
+					mes "聞かせてくださいますか？";
+				}
+				else {
+					mes "[フリーデリケ]";
+					mes "イスガルドの調査は上手く行ってますか？";
+					mes "外は凄く寒いですよね。";
+					mes "早く終わって、";
+					mes "部屋で休めたらいいのに……。";
+				}
 				cutin "ep19_friederike04.png", 2;
 				close2;
 				cutin "ep19_friederike04.png", 255;
@@ -21145,7 +20906,7 @@ jor_ab01_.gat,115,14,3	script	アルプオカート#ep19_1_a	10384,{/* 5825 */
 	cutin "ep18_alf_01.png", 255;
 	end;
 }
-jor_ab01_.gat,163,253,3	script	何かの痕跡#ep19_1	10045,{/* 5828 */
+jor_ab01_.gat,163,253,3	script	何かの痕跡#ep19_1	10045,{/* 5828 */}
 jor_ab01_.gat,117,141,3	script	何かの痕跡#ep19_2	10045,{/* 5829 */
 	unittalk getcharid(3),""+strcharinfo(0)+" : ‐何かの痕跡がある。調べてみよう‐",1;
 	progressbar 1;	//color=0xb04a23
@@ -21305,7 +21066,8 @@ OnInit:
 	setnpctitle "[アイテム交換]";	// NPC:マラム#ep19trader(2952)
 	end;
 }
-icas_in.gat,175,63,3	script	ホヨヨ#ep19trader	10461,{/* 2953 */
+/*
+icas_in.gat,175,63,3	script	ホヨヨ#ep19trader	10461,{/ 2953 /
 	cutin "ep19_iwin02.png", 2;
 	cutin "ep19_iwin02.png", 2;
 	mes "[ホヨヨ]";
@@ -21385,6 +21147,7 @@ OnInit:
 	setnpctitle "[干しアイスフナムシ]";	// NPC:ホヨヨ#ep19trader(2953)
 	end;
 }
+*/
 icas_in.gat,185,63,3	script	ヴェルグンデ#ep19vell02	10468,{/* 2955 */
 	cutin "ep19_vellgunde01.png", 2;
 	mes "[ヴェルグンデ]";
@@ -21643,12 +21406,147 @@ icas_in.gat,185,63,3	script	ヴェルグンデ#ep19vell02	10468,{/* 2955 */
 			mes "どれにエンチャントを施すの？";
 			messize 180,280;
 			next;
-			mes "^ff0000エンチャント対象のアイテムを";
-			mes "装着していません。";
-			messize 180,280;
-			close2;
-			cutin "ep19_vellgunde01.png", 255;
-			end;
+			{
+				mes "^ff0000エンチャント対象のアイテムを";
+				mes "装着していません。";
+				messize 180,280;
+				close2;
+				cutin "ep19_vellgunde01.png", 255;
+				end;
+			}
+			menu "^nItemID^480391",-;
+			mes "[ヴェルグンデ]";
+			mes "「^0000ff<ITEM>雪花のマフラー(取引不可)[0]<INFO>480391</INFO></ITEM>^000000」ね。";
+			mes "どのスロットにするの？";
+			mes "　";
+			mes "^0000ff<現在のエンチャント>^000000";
+			mes "第2スロット : <ITEM>Luk + 5<INFO>4754</INFO></ITEM>";
+			mes "第3スロット : <ITEM>完全回避 + 25<INFO>27398</INFO></ITEM>";
+			mes "第4スロット : <ITEM>Mdef50%無視<INFO>29650</INFO></ITEM>";
+			messize 190,364;
+			next;
+			switch(select("第2スロット","第3スロット","第4スロット")) {
+			}
+			mes "[ヴェルグンデ]";
+			mes "確認したわ。この内容で";
+			mes "エンチャントして良いかしら？";
+			mes "　";
+			mes "^0000ff<エンチャントに必要なアイテム>^000000";
+			mes "<ITEM>雪花の花びら<INFO>1000608</INFO></ITEM> 1個";
+			mes "　";
+			mes "^0000ff<エンチャント対象>^000000";
+			mes "<ITEM>雪花のマフラー(取引不可)[0]<INFO>480391</INFO></ITEM>";
+			mes "　";
+			mes "^0000ff<現在のエンチャント>^000000";
+			mes "第2スロット : <ITEM>Luk + 5<INFO>4754</INFO></ITEM>";
+			messize 260,364;
+			next;
+			switch(select("少し考える","いいえ","はい","指定したエンチャントが付くまで実行")) {
+			case 1:
+				//continue;
+			case 2:
+				cutin "ep19_vellgunde01.png", 2;
+				mes "[ヴェルグンデ]";
+				mes "そう。";
+				mes "またくるといいわ。";
+				messize 180,280;
+				close2;
+				cutin "ep19_vellgunde01.png", 255;
+				end;
+			case 3:
+				mes "付与するエンチャントを";
+				mes "選択してください。";
+				mes "　";
+				mes "^0000ff<現在のエンチャント>^000000";
+				mes "第2スロット : <ITEM>Special Vit<INFO>4855</INFO></ITEM>";
+				messize 180,280;
+				next;
+				switch(select("Str + 5","Agi + 5","Vit + 5","Int + 5","Dex + 5","Luk + 5","Special Str","Special Agi","Special Vit","次のページ")) {
+				}
+				mes "付与するエンチャントを";
+				mes "選択してください。";
+				mes "　";
+				mes "^0000ff<現在のエンチャント>^000000";
+				mes "第2スロット : <ITEM>Special Vit<INFO>4855</INFO></ITEM>";
+				messize 180,280;
+				next;
+				switch(select("Special Int","Special Dex","Special Luk","雪花の魔力(練武I)","雪花の魔力(練魔I)","やめる")) {
+				}
+				cutin "ep19_vellgunde01.png", 2;
+				mes "[ヴェルグンデ]";
+				mes "そう。";
+				mes "またくるといいわ。";
+				messize 180,280;
+				close2;
+				cutin "ep19_vellgunde01.png", 255;
+				end;
+			case 4:
+				mes "エンチャント結果が";
+				mes "「^0000ff<ITEM>雪花の魔力(練魔I)<INFO>311102</INFO></ITEM>^000000」になるまで";
+				mes "連続して実行します。";
+				mes "よろしいですか？";
+				//mes "^22ac38※やや珍しいですが付与されやすい効果です。^000000";
+				mes "^920783※かなりの回数挑戦すれば付与できる可能性があります。^000000";
+				mes "　";
+				mes "^ff0000※必要なアイテムを全て預かり、";
+				mes "指定したエンチャントが付与された時点で";
+				mes "残りのアイテムをお返しいたします。";
+				mes "　";
+				mes "※必要アイテムが無くなるまで";
+				mes "連続して実行します。";
+				mes "　";
+				mes "※必要アイテムを全て消費しても";
+				mes "選んだエンチャントが";
+				mes "付与されなかった場合は";
+				mes "最後に行ったエンチャントの";
+				mes "内容が装備に付与されます。";
+				mes "　";
+				mes "※メンテナンスや、サーバーとの接続が";
+				mes "切断されるなどのトラブルが";
+				mes "発生した場合、残りのアイテムが";
+				mes "お返しできない場合があります。";
+				mes "予めご了承下さい。";
+				messize 472,364;
+				while(1) {
+					next;
+					switch(select("少し考える","いいえ","はい")) {
+					case 1:
+						continue;
+					case 2:
+						cutin "ep19_vellgunde01.png", 2;
+						mes "[ヴェルグンデ]";
+						mes "そう。";
+						mes "またくるといいわ。";
+						messize 180,280;
+						close2;
+						cutin "ep19_vellgunde01.png", 255;
+						end;
+					case 3:
+						break;
+					}
+					break;
+				}
+				delitem 1000608,1;
+				//getitem 1000608,941;
+				itempreview 131;
+				misceffect 589,"";	// self
+				misceffect 729,"";	// self
+				misceffect 847,"";	// self
+				mes "<エンチャント結果>";
+				mes "実施結果 : <ITEM>Special Vit<INFO>4855</INFO></ITEM>";
+				mes "実施回数 : 113";
+				messize 180,280;
+				next;
+				mes "[ヴェルグンデ]";
+				mes "……さぁ、できたわ。";
+				mes "雪花エンチャントをしたいときは";
+				mes "「<ITEM>雪花の花びら<INFO>1000608</INFO></ITEM>」を持って";
+				mes "私の所まで来るといいわ。";
+				messize 180,280;
+				close2;
+				cutin "ep19_vellgunde01.png", 255;
+				end;
+			}
 		case 2:
 			mes "[ヴェルグンデ]";
 			mes "まずは装備を確認させて。";
@@ -21722,10 +21620,37 @@ jor_tail.gat,98,287,0	warp	#to_jor_back1_1	1,1,jor_back1.gat,98,13	// 2450 from:
 jor_back1.gat,98,10,0	warp	#to_tail_1		1,1,jor_tail.gat,98,284	// 2451 from: jor_back1.gat(98, 11)
 jor_tail.gat,134,281,0	warp	#to_jor_back1_2	1,1,jor_back1.gat,131,13	// 2452 from: jor_tail.gat(135, 282)
 jor_back1.gat,131,10,0	warp	#to_tail_2		1,1,jor_tail.gat,139,280	// 2453 from: jor_back1.gat(131, 11)
-jor_tail.gat,219,294,0	warp	#to_jor_back1_3	1,1,jor_back1.gat,222,22	// 2454 from: jor_tail.gat(220, 294)
+jor_tail.gat,219,294,0	script	#to_jor_back1_3	45,1,1,{
+	warp "jor_back1.gat",222,22;
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 10)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
+}
 jor_back1.gat,222,19,0	warp	#to_tail_3		1,1,jor_tail.gat,219,291	// 2455 from: jor_back1.gat(221, 20)
-jor_back1.gat,385,229,0	warp	#to_icecastle	1,1,icecastle.gat,20,123	// 2456 from: jor_back1.gat(384, 229)
-icecastle.gat,17,123,0	warp	#to_jor_back1	1,1,jor_back1.gat,380,229	// 2457 from: icecastle.gat(18, 123)
+jor_back1.gat,385,229,0	script	#to_icecastle	45,1,1,{
+	warp "icecastle.gat",20,123;
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 10)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
+}
+icecastle.gat,17,123,0	script	#to_jor_back1	45,1,1,{
+	warp "jor_back1.gat",380,229;
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 17)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
+}
 jor_back1.gat,226,387,0	script	#to_jor_back2	45,1,1,{
 	if(EP19_1QUE >= 68) {
 		mes "‐どちらへ向かおうか？‐";
@@ -21744,6 +21669,12 @@ jor_back1.gat,226,387,0	script	#to_jor_back2	45,1,1,{
 		}
 	}
 	warp "jor_back2.gat",229,17;
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 17)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 }
 jor_back2.gat,229,12,0	warp	#to_jor_back1	1,1,jor_back1.gat,226,384	// 2459 from: jor_back2.gat(229, 13)
@@ -21765,6 +21696,12 @@ jor_back2.gat,13,248,0	script	#to_jor_back3	45,1,1,{
 		}
 	}
 	warp "jor_back3.gat",364,245;
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 17)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 }
 jor_back2_.gat,13,248,0	duplicate(#to_jor_back3)	#to_jor_back3_	45,1,1
@@ -21813,6 +21750,12 @@ jor_back3.gat,63,326,0	script	#to_jor_dun01	45,1,1,{
 		close;
 	}
 	warp "jor_dun01.gat",113,10;
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 18)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
 	end;
 }
 jor_back3_.gat,63,326,0	duplicate(#to_jor_dun01)	#to_jor_dun01_	45,1,1
@@ -21866,6 +21809,12 @@ jor_dun01.gat,10,238,0	script	#to_jor_dun02	45,1,1,{/* 2464 */
 	}
 	warp "jor_dun02.gat",282,87;
 	end;
+OnQuestInfo:
+	if(EP19_1QUE == 18)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
 }
 jor_dun01_.gat,10,238,0	duplicate(#to_jor_dun02)	#to_jor_dun02_	45,1,1
 
@@ -21900,7 +21849,16 @@ jor_nest.gat,282,18,0	script	#to_jor_dun02		45,1,1,{
 	end;
 }
 jor_que.gat,286,87,0	warp	#jor_que_jor_dun01_1	1,1,jor_dun01.gat,12,238	// 2469 from: jor_que.gat(285, 88)
-icecastle.gat,213,175,0	warp	#to_icas_in			1,1,icas_in.gat,138,187	// 2470 from: icecastle.gat(213, 174)
+icecastle.gat,213,175,0	script	#to_icas_in			45,1,1,{
+	warp "icas_in.gat",138,187;
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 10)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
+}
 icas_in.gat,138,183,0	warp	#out_icas			1,1,icecastle.gat,208,168	// 2471 from: icas_in.gat(138, 184)
 icas_in.gat,85,257,0	warp	#in_icas_room_L		1,1,icas_in.gat,49,258	// 2472 from: icas_in.gat(86, 257)
 icas_in.gat,53,258,0	warp	#out_icas_romm_L	1,1,icas_in.gat,89,257	// 2473 from: icas_in.gat(52, 258)
@@ -21932,7 +21890,16 @@ icecastle.gat,88,241,0	warp	#in_house3		1,1,icas_in.gat,138,112	// 2490 from: ic
 icas_in.gat,138,109,0	warp	#out_house3		1,1,icecastle.gat,88,238	// 2491 from: icas_in.gat(138, 110)
 icecastle.gat,159,243,0	warp	#in_house4		1,1,icas_in.gat,191,112	// 2492 from: icecastle.gat(158, 243)
 icas_in.gat,191,109,0	warp	#out_house4		1,1,icecastle.gat,159,241	// 2493 from: icas_in.gat(191, 110)
-icecastle.gat,62,137,0	warp	#in_house5		1,1,icas_in.gat,249,112	// 2494 from: icecastle.gat(62, 137)
+icecastle.gat,62,137,0	script	#in_house5		45,1,1,{
+	warp "icas_in.gat",249,112;
+	end;
+OnQuestInfo:
+	if(EP19_1QUE == 59)
+		showevent 0, 1;
+	else
+		showevent 9999,0;
+	end;
+}
 icas_in.gat,249,109,0	warp	#out_house5		1,1,icecastle.gat,62,134	// 2495 from: icas_in.gat(249, 110)
 
 icecastle.gat,61,112,5	script	メイン倉庫#icecastle	464,{/* 2826 */}
@@ -22219,7 +22186,6 @@ jor_nest.gat,22,255,6	script	ロープ#whl	10024,3,3,{/* 2958 */
 	}
 	else {
 	}
-}
 OnTouch:
 	delmisceffect 581, "#whl_effect";
 	misceffect 581,"#whl_effect";
@@ -22324,7 +22290,7 @@ jor_nest.gat,63,257,3	script	アロロン#ep19re2	10461,{/* 2960 (cloaking)*/
 		messize 180,280;
 		close2;
 		cutin "ep19_iwin01.png", 255;
-		switch(mdenter("はじめてのパトロール")) {
+		switch(mdenter("シミュレーション戦闘")) {
 		case 0:	// エラーなし
 			announce "メモリアルダンジョン[シミュレーション戦闘] に入場しました　：　" +strcharinfo(1)+ " (" +strcharinfo(0)+ ")", 0x9, 0x00ff99;
 			donpcevent getmdnpcname("FirstPatrolControl1")+ "::OnStart";
@@ -22396,7 +22362,7 @@ cutin "ep19_iwin01.png", 255;
 		setquest 130631;
 		mdcreate "シミュレーション戦闘";
 		mes "■パーティー名";
-		mes "^009eff#ふえふえ^000000";
+		mes "^009eff"+strcharinfo(1)+"^000000";
 		mes "■パーティーリーダー";
 		mes "^009eff"+strcharinfo(0)+"^000000";
 		mes "　";
@@ -22411,6 +22377,106 @@ OnInit:
 	setnpcgroup 1013;	// NPC:アロロン#ep19re2(2946)
 	setnpctitle "[MDの生成と入場]";	// NPC:アロロン#ep19re2(2946)
 	cloakonnpc;
+	end;
+}
+
+izlude.gat,161,98,3	script	イクシド#izlude	897,{/* 4182 */
+	mes "[イクシド]";
+	mes "その昔、ワシは修行の末";
+	mes "武具の限界を遥かに超えた";
+	mes "力を引き出すことができる";
+	mes "特別な能力に目覚めた……。";
+	next;
+	mes "[イクシド]";
+	mes "命がけで世界を旅する";
+	mes "冒険者達の力にならんと";
+	mes "腕を振るううちに";
+	mes "いつしかこの能力は";
+	mes "「^FF0000超越^000000」と";
+	mes "呼ばれるようになったのだ。";
+	next;
+	mes "[イクシド]";
+	mes "おぬしの武具ももしかしたら";
+	mes "超越することが";
+	mes "できるやもしれんぞ。";
+	mes "　";
+	mes "<URL>[超越]<INFO>https://ragnarokonline.gungho.jp/gameguide/system/equip-powerup/transcendence.html</INFO></URL>";
+	next;
+	if(select("超越を依頼する","立ち去る") == 2) {
+		mes "[イクシド]";
+		mes "……そうか。";
+		mes "気が変わったら";
+		mes "いつでも来てくれ。";
+		close;
+	}
+	mes "[イクシド]";
+	mes "超越を行う前の注意として";
+	mes "^FF0000対象の武具を精錬値10に^000000";
+	mes "^FF0000しておく必要がある。^000000";
+	mes "さらに^FF0000超越に成功した場合、^000000";
+	mes "^FF0000超越段階が1進むかわりに^000000";
+	mes "^FF0000精錬値が0に戻ってしまう。^000000";
+	next;
+	mes "[イクシド]";
+	mes "この点を十分に念頭に置いたうえで";
+	mes "私に依頼するかどうか決めておくれ。";
+	mes "　";
+	mes "……それでは武具を見せてもらおうか。";
+	close;
+OnInit:
+	setnpcgroup 1016;	// NPC:イクシド#izlude(4182)
+	setnpctitle "[超越]";	// NPC:イクシド#izlude(4182)
+	end;
+}
+
+izlude.gat,152,105,5	script	ビョント#izlude	120,{/* 4183 */
+	emotion 27,"ビョント#izlude";	// 4183
+	mes "[ビョント]";
+	mes "ワシは鍛冶屋のビョント！";
+	mes "ワシの特別な精錬では";
+	mes "「^FF0000超越^000000」した装備を";
+	mes "精錬することができる！";
+	next;
+	mes "[ビョント]";
+	mes "^0000ff街で行える^000000";
+	mes "^0000ffオリデオコンや^000000";
+	mes "^0000ffエルニウムを使った^000000";
+	mes "^0000ff精錬よりも成功率の高い精錬が^000000";
+	mes "^0000ff行えるうえに失敗しても、^000000";
+	mes "^0000ff装備は破壊されないぞ！^000000";
+	next;
+	mes "[ビョント]";
+	mes "^0000ff精錬値9から10にする時だけは^000000";
+	mes "^0000ffオリデオコンや^000000";
+	mes "^0000ffエルニウムを使った精錬と^000000";
+	mes "^0000ff同じ成功率だから^000000";
+	mes "^0000ff注意してくれ！^000000";
+	next;
+	mes "[ビョント]";
+	mes "ただし、失敗したら";
+	mes "^FF0000精錬値が「1」下がってしまう。^000000";
+	mes "その時は、まだまだ修行が";
+	mes "足りなかったと思ってくれ！";
+	next;
+	if(select("精錬を依頼する","立ち去る") == 2) {
+		mes "[ビョント]";
+		mes "それなら代わりに";
+		mes "おぬしを鍛錬してやろうか!?";
+		mes "遠慮は不要だ！";
+		mes "さぁ、かかってこい！";
+		close;
+	}
+	mes "[ビョント]";
+	mes "どれを精錬するんだ!?";
+	messize 180,280;
+	next;
+	mes "^ff0000精練可能なアイテムを";
+	mes "^ff0000装着していません。";
+	messize 180,280;
+	close;
+OnInit:
+	setnpcgroup 1016;	// NPC:ビョント#izlude(4183)
+	setnpctitle "[超越武具精錬]";	// NPC:ビョント#izlude(4183)
 	end;
 }
 
