@@ -898,7 +898,6 @@ icecastle.gat,205,170,3	script(CLOAKED)	ホルル#ep20_1	10461,{/* 3335 (cloaking)*
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐氷の城 室内へ";
 		mes "　向かった‐";
 		close2;
@@ -933,7 +932,7 @@ OnQuestInfo:
 }
 
 icas_in.gat,258,196,0	script	#ep20_re01	139,5,5,{/* 3336 */
-	if(EP20_1QUE <= 1 || EP20_1QUE == 5) {//0?
+	if(EP20_1QUE == 1 || EP20_1QUE == 5) {
 		cloakoffnpc "レオン#ep20_re01";
 		cloakoffnpc "オーレリー#ep20_re01";
 		cloakoffnpc "レイジー#ep20_re01";
@@ -975,7 +974,6 @@ icas_in.gat,258,196,0	script	#ep20_re01	139,5,5,{/* 3336 */
 }
 icas_in.gat,262,202,5	script(CLOAKED)	レオン#ep20_re01	10464,{/* 3337 (cloaking)*/
 	switch(EP20_1QUE) {
-	case 0:	//
 	case 1:
 		cutin "ep19_leon01.png", 2;
 		mes "[レオン]";
@@ -1110,7 +1108,6 @@ icas_in.gat,262,202,5	script(CLOAKED)	レオン#ep20_re01	10464,{/* 3337 (cloaking)
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐古代の氷の峡谷 東部へ";
 		mes "　向かった‐";
 		close2;
@@ -1226,7 +1223,6 @@ icas_in.gat,262,202,5	script(CLOAKED)	レオン#ep20_re01	10464,{/* 3337 (cloaking)
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐イスガルド 室内へ";
 		mes "　向かった‐";
 		close2;
@@ -2125,7 +2121,6 @@ jor_safty1.gat,64,328,5	script	レハール#ep20_re03	10469,{/* 3349 */
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐安全な場所へ";
 		mes "　向かった‐";
 		close2;
@@ -2133,10 +2128,8 @@ jor_safty1.gat,64,328,5	script	レハール#ep20_re03	10469,{/* 3349 */
 		end;
 	}
 	if(EP20_1QUE == 3) {
-		//
 		cutin "ep19_lehar05.png", 2;
 		mes "[レハール]";
-		mes "冗談言ってる場合じゃないですよ！";
 		mes "縄張りから離れないと……皆さん！";
 		mes "私の後について来てください！";
 		next;
@@ -2196,13 +2189,132 @@ jor_safty1.gat,72,333,3	script(CLOAKED)	古代アイスウィンド#ep20	21966,{/* 3353 (
 }
 
 jor_safty1.gat,195,327,5	script	レハール#ep20_re04	10469,{/* 3354 */
-	if(EP20_1QUE != 3) {
+	if(EP20_1QUE == 3) {
+		cutin "ep19_lehar04.png", 2;
+		mes "[レハール]";
+		mes "はぁはぁ……。";
+		mes "ここなら安全なはずです……";
+		mes "ちょっと休みましょう。";
+		next;
+		cutin "ep19_leizi02.png", 2;
+		mes "[レイジー]";
+		mes "いや～ビックリしたな！";
+		mes "あんなデカイ鳥に追い回されるなんて！";
+		mes "甥っ子ちゃんが";
+		mes "ここの地理に詳しくて良かったよ！";
+		next;
 		cutin "ep19_lehar01.png", 2;
 		mes "[レハール]";
+		mes "昔はここに、冒険ごっこに来ては";
+		mes "よく追い回されてましたからね。";
+		mes "やんちゃだった自分の経験が";
+		mes "役に立つ日が来るなんて。";
+		next;
+		cutin "ep19_leizi03.png", 2;
+		mes "[レイジー]";
+		mes "それに比べて";
+		mes "そっちの白いまんまるは……";
+		mes "誰と誰の言葉が通じるって？";
+		mes "そもそも相手はまったく";
+		mes "コミュニケーション取るつもりが";
+		mes "なかったみたいだけど？";
+		next;
+		cutin "ep19_iwin06.png", 2;
+		mes "[ホルル]";
+		mes "それが……わ、分かりません。";
+		mes "以前は、あんな激しくはなかったのに!?";
+		next;
+		cutin "ep18_miriam_01.png", 0;
+		mes "[ミリアム]";
+		mes "皆さん！";
+		mes "見てください、これ……";
+		mes "何か地面に設置されてます。";
+		next;
+		cutin "ep19_lehar05.png", 2;
+		mes "[レハール]";
+		mes "ひとつやふたつじゃありませんね。";
+		mes "うん？　この装置からは";
+		mes "魔力の流れを感じます。";
+		next;
+		mes "[レハール]";
+		mes "……ふんっ！";
+		mes "くっ……びくともしない。";
+		mes "動かすのは無理か……。";
+		next;
+		cutin "ep19_leizi03.png", 2;
+		mes "[レイジー]";
+		mes "いかにも怪しい装置は、調べなくちゃ。";
+		mes "何か方法はない？";
+		mes "バラシてみる？";
+		next;
+		cutin "ep19_leizi03.png", 255;
+		menu "解体するのは難しそうです",-;
+		cutin "ep19_leizi03.png", 2;
+		mes "[レイジー]";
+		mes "そうみたいだな。";
+		mes "がっちり地面に固定されているし。";
+		mes "どうにかして持って帰り……。";
+		next;
+		cutin "ep19_iwin09.png", 2;
+		mes "[ホルル]";
+		mes "そ、そんな!?";
+		mes "これは、どういうこと!!??";
+		next;
+		cutin "ep19_iwin09.png", 2;
+		mes "[ホルル]";
+		mes "これを見てください！";
+		mes "アーウィンの羽毛です！";
+		mes "それに、うっすらとですが";
+		mes "アーウィンの足跡も残ってます！";
+		next;
+		cutin "ep18_miriam_01.png", 0;
+		mes "[ミリアム]";
+		mes "古代アイスウィンドの足跡では……？";
+		next;
+		cutin "ep19_iwin07.png", 2;
+		mes "[ホルル]";
+		mes "あんな野蛮な鳥と";
+		mes "守護者たちの区別もつかないんですか！";
+		mes "ほら、このふわふわで見事な羽毛!!";
+		mes "あんなゴワゴワな羽毛と";
+		mes "一緒にしないで！";
+		emotion 7,"ホルル#ep20_re04",1;
+		next;
+		menu "アーウィンがここにいた？",-;
+		cutin "ep19_iwin09.png", 2;
+		mes "[ホルル]";
+		mes "……う～～ん。";
+		mes "あ、アーウィン以外の痕跡もあります。";
+		mes "何かを引きずったかのような……。";
+		next;
+		cutin "ep18_miriam_02.png", 0;
+		mes "[ミリアム]";
+		mes "これは……";
+		mes "見覚えがありますよね？";
+		emotion 19,"ミリアム#ep20_re04",1;
+		next;
+		cutin "ep19_leizi03.png", 2;
+		mes "[レイジー]";
+		mes "ルガン！";
+		mes "ルガンがにょろにょろと移動した跡だ！";
+		mes "ほら、この鱗の跡！　間違いない。";
+		mes "遂に奴らの痕跡を見つけたぞ！";
+		next;
+		cutin "ep19_iwin06.png", 2;
+		mes "[ホルル]";
+		mes "この付近を調査しなければ！";
+		mes "慎重に！　注意深く！";
+		next;
+		cutin "ep19_lehar01.png", 2;
+		mes "[レハール]";
+		mes "そうしましょう。";
 		mes "周囲を調査して、何か見つけたら";
 		mes "すぐに集まりましょう。";
+		mes "バラバラに動くのは危険ですからね。";
 		next;
-		cutin "ep19_lehar05.png", 255;
+		cutin "ep19_iwin06.png", 255;
+		chgquest 16692,16693;
+		set EP20_1QUE,4;
 		mes "‐古代の氷の峡谷 東部へ";
 		mes "　向かいますか？‐";
 		next;
@@ -2216,131 +2328,12 @@ jor_safty1.gat,195,327,5	script	レハール#ep20_re04	10469,{/* 3354 */
 		warp "jor_back5.gat", 355, 350;
 		end;
 	}
-	cutin "ep19_lehar04.png", 2;
-	mes "[レハール]";
-	mes "はぁはぁ……。";
-	mes "ここなら安全なはずです……";
-	mes "ちょっと休みましょう。";
-	next;
-	cutin "ep19_leizi02.png", 2;
-	mes "[レイジー]";
-	mes "いや～ビックリしたな！";
-	mes "あんなデカイ鳥に追い回されるなんて！";
-	mes "甥っ子ちゃんが";
-	mes "ここの地理に詳しくて良かったよ！";
-	next;
 	cutin "ep19_lehar01.png", 2;
 	mes "[レハール]";
-	mes "昔はここに、冒険ごっこに来ては";
-	mes "よく追い回されてましたからね。";
-	mes "やんちゃだった自分の経験が";
-	mes "役に立つ日が来るなんて。";
-	next;
-	cutin "ep19_leizi03.png", 2;
-	mes "[レイジー]";
-	mes "それに比べて";
-	mes "そっちの白いまんまるは……";
-	mes "誰と誰の言葉が通じるって？";
-	mes "そもそも相手はまったく";
-	mes "コミュニケーション取るつもりが";
-	mes "なかったみたいだけど？";
-	next;
-	cutin "ep19_iwin06.png", 2;
-	mes "[ホルル]";
-	mes "それが……わ、分かりません。";
-	mes "以前は、あんな激しくはなかったのに!?";
-	next;
-	cutin "ep18_miriam_01.png", 0;
-	mes "[ミリアム]";
-	mes "皆さん！";
-	mes "見てください、これ……";
-	mes "何か地面に設置されてます。";
-	next;
-	cutin "ep19_lehar05.png", 2;
-	mes "[レハール]";
-	mes "ひとつやふたつじゃありませんね。";
-	mes "うん？　この装置からは";
-	mes "魔力の流れを感じます。";
-	next;
-	mes "[レハール]";
-	mes "……ふんっ！";
-	mes "くっ……びくともしない。";
-	mes "動かすのは無理か……。";
-	next;
-	cutin "ep19_leizi03.png", 2;
-	mes "[レイジー]";
-	mes "いかにも怪しい装置は、調べなくちゃ。";
-	mes "何か方法はない？";
-	mes "バラシてみる？";
-	next;
-	cutin "ep19_leizi03.png", 255;
-	menu "解体するのは難しそうです",-;
-	cutin "ep19_leizi03.png", 2;
-	mes "[レイジー]";
-	mes "そうみたいだな。";
-	mes "がっちり地面に固定されているし。";
-	mes "どうにかして持って帰り……。";
-	next;
-	cutin "ep19_iwin09.png", 2;
-	mes "[ホルル]";
-	mes "そ、そんな!?";
-	mes "これは、どういうこと!!??";
-	next;
-	cutin "ep19_iwin09.png", 2;
-	mes "[ホルル]";
-	mes "これを見てください！";
-	mes "アーウィンの羽毛です！";
-	mes "それに、うっすらとですが";
-	mes "アーウィンの足跡も残ってます！";
-	next;
-	cutin "ep18_miriam_01.png", 0;
-	mes "[ミリアム]";
-	mes "古代アイスウィンドの足跡では……？";
-	next;
-	cutin "ep19_iwin07.png", 2;
-	mes "[ホルル]";
-	mes "あんな野蛮な鳥と";
-	mes "守護者たちの区別もつかないんですか！";
-	mes "ほら、このふわふわで見事な羽毛!!";
-	mes "あんなゴワゴワな羽毛と";
-	mes "一緒にしないで！";
-	emotion 7,"ホルル#ep20_re04",1;
-	next;
-	menu "アーウィンがここにいた？",-;
-	cutin "ep19_iwin09.png", 2;
-	mes "[ホルル]";
-	mes "……う～～ん。";
-	mes "あ、アーウィン以外の痕跡もあります。";
-	mes "何かを引きずったかのような……。";
-	next;
-	cutin "ep18_miriam_02.png", 0;
-	mes "[ミリアム]";
-	mes "これは……";
-	mes "見覚えがありますよね？";
-	emotion 19,"ミリアム#ep20_re04",1;
-	next;
-	cutin "ep19_leizi03.png", 2;
-	mes "[レイジー]";
-	mes "ルガン！";
-	mes "ルガンがにょろにょろと移動した跡だ！";
-	mes "ほら、この鱗の跡！　間違いない。";
-	mes "遂に奴らの痕跡を見つけたぞ！";
-	next;
-	cutin "ep19_iwin06.png", 2;
-	mes "[ホルル]";
-	mes "この付近を調査しなければ！";
-	mes "慎重に！　注意深く！";
-	next;
-	cutin "ep19_lehar01.png", 2;
-	mes "[レハール]";
-	mes "そうしましょう。";
 	mes "周囲を調査して、何か見つけたら";
 	mes "すぐに集まりましょう。";
-	mes "バラバラに動くのは危険ですからね。";
 	next;
-	cutin "ep19_iwin06.png", 255;
-	chgquest 16692,16693;
-	set EP20_1QUE,4;
+	cutin "ep19_lehar05.png", 255;
 	mes "‐古代の氷の峡谷 東部へ";
 	mes "　向かいますか？‐";
 	next;
@@ -2348,7 +2341,6 @@ jor_safty1.gat,195,327,5	script	レハール#ep20_re04	10469,{/* 3354 */
 		mes "‐その場にとどまった‐";
 		close;
 	}
-	//
 	mes "‐古代の氷の峡谷 東部へ";
 	mes "　向かった‐";
 	close2;
@@ -2501,13 +2493,65 @@ jor_back5.gat,353,353,7	script(CLOAKED)	ホルル#ep20_re05	10461,{/* 3368 (cloakin
 }
 
 jor_safty1.gat,330,327,5	script	ミリアム#ep20_re06	10377,{/* 3369 */
-	if(EP20_1QUE != 4) {
+	if(EP20_1QUE == 4) {
+		cutin "ep18_miriam_03.png", 0;
+		mes "[ミリアム]";
+		mes "突き当りで凍り付いていたもの";
+		mes "皆さん見ましたよね？";
+		mes "……ルガンの死体でした。";
+		next;
+		cutin "ep19_leizi03.png", 2;
+		mes "[レイジー]";
+		mes "どうやら、古代アイスウィンドたちに";
+		mes "やられたみたいだな。";
+		mes "近くに巣らしきものがあったけど";
+		mes "卵でも盗もうとしてやられたのかな？";
+		next;
+		cutin "ep19_lehar02.png", 2;
+		mes "[レハール]";
+		mes "ふふふ……ジャーン!!";
+		mes "あの恐ろしい現場から";
+		mes "持ってきましたよ！";
+		mes "さあ、見てください!!";
+		next;
+		cutin "ep18_miriam_01.png", 0;
+		mes "[ミリアム]";
+		mes "え？";
+		mes "いったい何を持ってきたんですか？";
+		next;
+		cutin "ep19_lehar01.png", 2;
+		mes "[レハール]";
+		mes "まだ地面に固定されてない";
+		mes "あの怪しい装置です！";
+		mes "凍ったルガンの近くに落ちてました。";
+		mes "これを設置している最中に";
+		mes "襲われたみたいですよ。";
+		next;
+		cutin "ep19_leizi01.png", 2;
+		emotion 2,"レイジー#ep20_re06",1;
+		mes "[レイジー]";
+		mes "甥っ子ちゃん！　いいセンスだっ！";
+		mes "ルガンの痕跡だけでなく";
+		mes "怪しい装置まで手に入ったぞ！";
+		mes "ここまで来た甲斐があったよ～。";
+		next;
+		mes "[レイジー]";
+		mes "よし、いったん氷の城に戻ろう。";
+		mes "その怪しい装置について";
+		mes "詳しく調べなくちゃ！";
+		mes "これ以上、調査をするにしても";
+		mes "もっと計画を練った方が良い。";
+		next;
+		cutin "ep19_leizi03.png", 255;
+		menu "そうしましょう",-;
 		cutin "ep18_miriam_01.png", 0;
 		mes "[ミリアム]";
 		mes "そうですね。";
-		mes "いったん「氷の城」に戻りましょう。";
+		mes "では「氷の城」に戻りましょう。";
 		next;
 		cutin "ep18_miriam_01.png", 255;
+		chgquest 16693,16694;
+		set EP20_1QUE,5;
 		mes "‐イスガルド 氷の城へ";
 		mes "　向かいますか？‐";
 		next;
@@ -2521,64 +2565,12 @@ jor_safty1.gat,330,327,5	script	ミリアム#ep20_re06	10377,{/* 3369 */
 		warp "icas_in.gat", 261, 196;
 		end;
 	}
-	cutin "ep18_miriam_03.png", 0;
-	mes "[ミリアム]";
-	mes "突き当りで凍り付いていたもの";
-	mes "皆さん見ましたよね？";
-	mes "……ルガンの死体でした。";
-	next;
-	cutin "ep19_leizi03.png", 2;
-	mes "[レイジー]";
-	mes "どうやら、古代アイスウィンドたちに";
-	mes "やられたみたいだな。";
-	mes "近くに巣らしきものがあったけど";
-	mes "卵でも盗もうとしてやられたのかな？";
-	next;
-	cutin "ep19_lehar02.png", 2;
-	mes "[レハール]";
-	mes "ふふふ……ジャーン!!";
-	mes "あの恐ろしい現場から";
-	mes "持ってきましたよ！";
-	mes "さあ、見てください!!";
-	next;
-	cutin "ep18_miriam_01.png", 0;
-	mes "[ミリアム]";
-	mes "え？";
-	mes "いったい何を持ってきたんですか？";
-	next;
-	cutin "ep19_lehar01.png", 2;
-	mes "[レハール]";
-	mes "まだ地面に固定されてない";
-	mes "あの怪しい装置です！";
-	mes "凍ったルガンの近くに落ちてました。";
-	mes "これを設置している最中に";
-	mes "襲われたみたいですよ。";
-	next;
-	cutin "ep19_leizi01.png", 2;
-	emotion 2,"レイジー#ep20_re06",1;
-	mes "[レイジー]";
-	mes "甥っ子ちゃん！　いいセンスだっ！";
-	mes "ルガンの痕跡だけでなく";
-	mes "怪しい装置まで手に入ったぞ！";
-	mes "ここまで来た甲斐があったよ～。";
-	next;
-	mes "[レイジー]";
-	mes "よし、いったん氷の城に戻ろう。";
-	mes "その怪しい装置について";
-	mes "詳しく調べなくちゃ！";
-	mes "これ以上、調査をするにしても";
-	mes "もっと計画を練った方が良い。";
-	next;
-	cutin "ep19_leizi03.png", 255;
-	menu "そうしましょう",-;
 	cutin "ep18_miriam_01.png", 0;
 	mes "[ミリアム]";
 	mes "そうですね。";
-	mes "では「氷の城」に戻りましょう。";
+	mes "いったん「氷の城」に戻りましょう。";
 	next;
 	cutin "ep18_miriam_01.png", 255;
-	chgquest 16693,16694;
-	set EP20_1QUE,5;
 	mes "‐イスガルド 氷の城へ";
 	mes "　向かいますか？‐";
 	next;
@@ -2586,7 +2578,6 @@ jor_safty1.gat,330,327,5	script	ミリアム#ep20_re06	10377,{/* 3369 */
 		mes "‐その場にとどまった‐";
 		close;
 	}
-	//
 	mes "‐イスガルド 氷の城へ";
 	mes "　向かった‐";
 	close2;
@@ -2695,7 +2686,6 @@ icas_in.gat,259,219,5	script(CLOAKED)	ホルル#ep20_re07	10461,{/* 3374 (cloaking)
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐兵舎へ";
 		mes "　向かった‐";
 		close2;
@@ -2860,7 +2850,6 @@ icas_in.gat,259,219,5	script(CLOAKED)	ホルル#ep20_re07	10461,{/* 3374 (cloaking)
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐ヴェルグンデの所へ";
 		mes "　向かった‐";
 		close2;
@@ -2971,7 +2960,6 @@ icas_in.gat,113,41,5	script(CLOAKED)	トルル#ep20_re01	10461,{/* 3377 (cloaking)*
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐旅館へ";
 		mes "　向かった‐";
 		close2;
@@ -3065,7 +3053,6 @@ icas_in.gat,92,113,5	script(CLOAKED)	チャルル#ep20_re01	10461,{/* 3379 (cloaking
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐路地裏へ";
 		mes "　向かった‐";
 		close2;
@@ -3151,7 +3138,6 @@ icecastle.gat,209,243,3	script(CLOAKED)	路地裏#ep20_re01	10429,{/* 3381 (cloakin
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐イスガルド 室内へ";
 		mes "　向かった‐";
 		close2;
@@ -12172,18 +12158,18 @@ icecastle.gat,55,124,3	script	クエストボード#ep20_dq_	857,{/* 3676 */
 						"遭難者捜索","ヴォークリンデの殲滅作戦①","ヴォークリンデの殲滅作戦②","スパイ捜索","諜報情報の回収",
 						"ルガンの根絶","アーウィンのアーウィン心配","ぷにぷに珍味収集①","ぷにぷに珍味収集②","一日の締めにヘビイチゴ",
 						"声の出ない答えの例示","仲直りしたらいいな①","仲直りしたらいいな②","蛇の迷路の掃除";
-	setarray '@questid, 18130,11831,0,11849,8788,	11852,11854,11813,17651,18139,
+	setarray '@questid, 18130,11831,11836,11849,8788,	11852,11854,11813,17651,18139,
 						18134,18236,18238,19162,19165,	23110,18234,8855,8857,17718,
 						8844,11953,11955,17710;
 	setarray '@questid2,0,0,0,11835,0,	0,11858,0,17661,0,
 						18136,0,0,19163,19166,	0,0,0,0,0,
 						0,0,0,0;
-	setarray '@coolid,  18131,11832,0,11850,8789,	11853,11859,11814,17662,18140,
+	setarray '@coolid,  18131,11832,11837,11850,8789,	11853,11859,11814,17662,18140,
 						18137,18237,18239,19164,19167,	23111,18235,8856,8858,17721,
 						8845,11954,11956,17711;
-	setarray '@itemlist,1000706,3,23228,10,0,0,1000830,10,	1000708,30,0,1000705,5,0,1000707,5,
-						0,0,0,0,0,	0,0,1001233,5,1001232,5,0,1001231,5,1001154,3,
-						1001244,5,0,0,0;
+	setarray '@itemlist,1000706,3,0,1000708,10,-1,-1,1000830,10,0,	1000708,30,-1,1000705,5,-1,1000707,5,
+						-1,-1,-1,-1,-1,	-1,-1,1001233,5,1001232,5,0,1001231,5,0,1001154,3,0,
+						1001244,5,-1,-1,-1;
 	setarray '@gainlist,1000608,3,1000608,4,0,0,1000608,2,1000608,2,	1000608,3,1000608,2,1000608,3,1000608,2,1000608,3,
 						1000608,2,1000608,10,1000608,10,1001217,3,1001217,3,	1001217,10,1001217,10,1001217,10,1001217,10,1001217,3,
 						1001217,10,1001217,10,1001217,10,1001217,10;
@@ -12192,22 +12178,34 @@ icecastle.gat,55,124,3	script	クエストボード#ep20_dq_	857,{/* 3676 */
 						225000000,175000000,400000000,300000000,400000000,300000000,400000000,300000000,400000000,300000000,
 						400000000,300000000,1100000000,825000000,950000000,712500000,1100000000,825000000,200000000,150000000,
 						475000000,356250000,475000000,356250000,475000000,356250000,400000000,300000000;
-	// ToDo: quest flag or BaseLevel missmuch
-	// [^888888開始条件未達成^000000] 
+	// ToDo: クエストフラグ or BaseLevel 不一致判定
+	// "[^888888開始条件未達成^000000] "
+	// ToDo: getquestmaxcountが受注済みクエストのみ有効なので討伐対象用データリストが必要
 	set '@sel,callfunc("IsgardDQ",'@questname$,'@itemlist,'@questid,'@coolid,'@gainlist,'@explist);
 	// 以下個別処理
-	for('@j=0;'@j<getarraysize('@itemlist);'@j++) {
-		if('@itemlist['@j] == 0)	// 納品無しはスキップして一つ先の配列へ
-			continue;
+	for('@j=0;'@j<getarraysize('@itemlist);set '@j,'@j+2) {
 		// 選択クエスト配列分回したので離脱
 		if('@sel == '@k)
 			break;
-		'@j++;	// 納品ありを通過するときは二つ先へ飛ぶのでここで追加
-		'@k++;
+		if('@itemlist['@j] < 0) {	// 今のリストIDが0以下なら納品無し
+			'@j--;	// 1つだけ読み取りを進めるためにデクリメントして準備
+		}
+		else	// それ以外なら納品あり
+		if('@itemlist['@j+2] == 0) {	// 次のリストIDが0なら単体納品
+			'@j++;	// 0以下配列をスキップする
+		}
+		else
+		if('@itemlist['@j+2] > 0) {	// 次もアイテムがあるなら複数納品
+			do { set '@j,'@j+2; } while('@itemlist['@j] > 0);
+			if('@itemlist['@j] == 0) {
+				'@j--;	// 1つだけ読み取りを進めるためにデクリメントして準備
+			}
+		}
+		'@k++;	// クエストカウントを増やす
 	}
 	mes "<<B>クエスト</B>>";
 	mes "「^ff0000"+'@questname$['@sel]+"^000000」";
-	if('@questid2 > 0) {	// 会話系クエスト
+	if('@questid2['@sel] > 0) {	// 会話系クエスト
 		mes "を受注しますか？";
 	}
 	else if(getquestmaxcount('@questid['@sel]) > 0 && '@itemlist['@j] > 0) {	// 討伐+納品クエスト
@@ -12220,7 +12218,7 @@ icecastle.gat,55,124,3	script	クエストボード#ep20_dq_	857,{/* 3676 */
 		// とりあえず2枠のチェックまでにする
 		mes "アイテム：<ITEM>["+getitemname('@itemlist['@j])+"]<INFO>"+'@itemlist['@j]+"</INFO></ITEM>　"+'@itemlist['@j+1]+"個";
 		if('@itemlist['@j+2] > 0)	// 2枠目もIDがあるので納品2品とする
-			mes "アイテム：<ITEM>["+getitemname('@itemlist['@j+2])+"]<INFO>"+'@itemlist['@j]+"</INFO></ITEM>　"+'@itemlist['@j+3]+"個";
+			mes "アイテム：<ITEM>["+getitemname('@itemlist['@j+2])+"]<INFO>"+'@itemlist['@j+2]+"</INFO></ITEM>　"+'@itemlist['@j+3]+"個";
 		mes "の納品の";
 		mes "両方の達成で報告が可能です。";
 		mes "クエストを受注しますか？";
@@ -12234,6 +12232,8 @@ icecastle.gat,55,124,3	script	クエストボード#ep20_dq_	857,{/* 3676 */
 	else if('@itemlist['@j] > 0) {	// 納品のみクエスト
 		mes "<内容>";
 		mes "アイテム：<ITEM>["+getitemname('@itemlist['@j])+"]<INFO>"+'@itemlist['@j]+"</INFO></ITEM>　"+'@itemlist['@j+1]+"個";
+		if('@itemlist['@j+2] > 0)	// 2枠目もIDがあるので納品2品とする
+			mes "アイテム：<ITEM>["+getitemname('@itemlist['@j+2])+"]<INFO>"+'@itemlist['@j+2]+"</INFO></ITEM>　"+'@itemlist['@j+3]+"個";
 		mes "の納品を受注しますか？";
 	}
 	else {
@@ -15065,8 +15065,8 @@ OnQuestInfo:
 		showevent 0, 3, "オリリョ鳥兵#ep20_DQ_2";
 	end;
 OnInit:
-	setarray 'Question$,"ババヤガ","ジェスター";
-	setarray 'Answer$,"古木の枝","狐の尻尾";
+	setarray 'Question$,"ババヤガ","ジェスター","ウルフ","オークウォリアー","スポア";
+	setarray 'Answer$,"古木の枝","狐の尻尾","ハエの羽","焼きいも";
 	set 'TodayQuestion,rand(getarraysize('Question$));
 	set 'TodayAnswer,rand(getarraysize('Answer$));
 	setnpctitle "<イーグルパトロール隊>";
@@ -15222,41 +15222,61 @@ icecastle.gat,238,185,2	script	怪しいアーウィン#SSQ02	10461,7,7,{/* 3713 */
 		if(!sleep2(1500)) end;
 		unittalk getcharid(3),strcharinfo(0)+" : "+'@str$+"…"+'@str$+"…返答をどうぞ。",1;
 		if(!sleep2(1500)) end;
-		emotion 23,"怪しいアーウィン#SSQ02";
-		unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : ん？"+'@str$+"？それ合ってる？作業番長のポさんが教えてくれたのと違うんだけど？あのなに、スプァイか？",1;
-		if(!sleep2(800)) end;
-		cloakoffnpc "二等兵ロルル#SSQ02";
-		if(!sleep2(800)) end;
-		unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: 連絡を受けて参りました。",1;
-		if(!sleep2(1500)) end;
-		emotion 38,"怪しいアーウィン#SSQ02";
-		unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : おや、パトロール隊の後輩たちじゃないか。隊長殿はお元気かの？あ！？こちらの、何だ。スプァイ！そう、スプァイみたい。",1;
-		if(!sleep2(1500)) end;
-		emotion 1,"二等兵ロルル#SSQ02";
-		unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: スプァイ？あぁ、スパイですね。この人が？勘違いのようですね。私たちの仕事を手伝っている冒険者殿です。",1;
-		if(!sleep2(1500)) end;
-		unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : え？スプァイじゃないの？スプァイじゃないのに、なんで間違ったの？",1;
-		if(!sleep2(1500)) end;
-		unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: ご存じの通り、合言葉って覚えにくいじゃありませんか。どうやら忘れたようですね。",1;
-		if(!sleep2(1500)) end;
-		emotion 20,"怪しいアーウィン#SSQ02";
-		unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : そんな…ちょっと足りなさそうだけど、仕事とか任せていいのか不安だな。そうだ！こんなことしてる時じゃない。",1;
-		if(!sleep2(1500)) end;
-		unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: お忙しいですか？",1;
-		if(!sleep2(1500)) end;
-		unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : とんでもないよ。寒い時に氷でつなぎ合わせたのが、ちょっと暖かくなった途端に溶け出して大惨事だよ。",1;
-		if(!sleep2(1500)) end;
-		unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: お気をつけて。",1;
-		unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : うん～パトロール隊の後輩もお疲れさん～。",1;
-		if(!sleep2(800)) end;
-		cloakonnpc "怪しいアーウィン#SSQ02";
-		if(!sleep2(800)) end;
-		unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: 冒険者殿、では私も行きます。お忘れになった合言葉は、オリリョ鳥兵殿から確認お願いします。",1;
-		if(!sleep2(1500)) end;
-		emotion 12,"二等兵ロルル#SSQ02";
-		unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: 私はもう行きます～",1;
-		cloakonnpc "二等兵ロルル#SSQ02";
-		close;
+		set '@today_q,getvariableofnpc('TodayQuestion,"オリリョ鳥兵#ep20_DQ_2");
+		set '@q$,getvariableofnpc(getelementofarray('Question$,'@today_q),"オリリョ鳥兵#ep20_DQ_2");
+		set '@today_a,getvariableofnpc('TodayAnswer,"オリリョ鳥兵#ep20_DQ_2");
+		set '@a$,getvariableofnpc(getelementofarray('Answer$,'@today_a),"オリリョ鳥兵#ep20_DQ_2");
+		if('@str$ != '@q$) {
+			emotion 23,"怪しいアーウィン#SSQ02";
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : ん？"+'@str$+"？それ合ってる？作業番長のポさんが教えてくれたのと違うんだけど？あのなに、スプァイか？",1;
+			if(!sleep2(800)) end;
+			cloakoffnpc "二等兵ロルル#SSQ02";
+			if(!sleep2(800)) end;
+			unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: 連絡を受けて参りました。",1;
+			if(!sleep2(1500)) end;
+			emotion 38,"怪しいアーウィン#SSQ02";
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : おや、パトロール隊の後輩たちじゃないか。隊長殿はお元気かの？あ！？こちらの、何だ。スプァイ！そう、スプァイみたい。",1;
+			if(!sleep2(1500)) end;
+			emotion 1,"二等兵ロルル#SSQ02";
+			unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: スプァイ？あぁ、スパイですね。この人が？勘違いのようですね。私たちの仕事を手伝っている冒険者殿です。",1;
+			if(!sleep2(1500)) end;
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : え？スプァイじゃないの？スプァイじゃないのに、なんで間違ったの？",1;
+			if(!sleep2(1500)) end;
+			unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: ご存じの通り、合言葉って覚えにくいじゃありませんか。どうやら忘れたようですね。",1;
+			if(!sleep2(1500)) end;
+			emotion 20,"怪しいアーウィン#SSQ02";
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : そんな…ちょっと足りなさそうだけど、仕事とか任せていいのか不安だな。そうだ！こんなことしてる時じゃない。",1;
+			if(!sleep2(1500)) end;
+			unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: お忙しいですか？",1;
+			if(!sleep2(1500)) end;
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : とんでもないよ。寒い時に氷でつなぎ合わせたのが、ちょっと暖かくなった途端に溶け出して大惨事だよ。",1;
+			if(!sleep2(1500)) end;
+			unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: お気をつけて。",1;
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : うん～パトロール隊の後輩もお疲れさん～。",1;
+			if(!sleep2(800)) end;
+			cloakonnpc "怪しいアーウィン#SSQ02";
+			if(!sleep2(800)) end;
+			unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: 冒険者殿、では私も行きます。お忘れになった合言葉は、オリリョ鳥兵殿から確認お願いします。",1;
+			if(!sleep2(1500)) end;
+			emotion 12,"二等兵ロルル#SSQ02";
+			unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: 私はもう行きます～",1;
+			cloakonnpc "二等兵ロルル#SSQ02";
+			close;
+		}
+		if(rand(3)) {	// 不明
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : 合言葉？あ！さっき作業番長のポさんが教えた、あのおかしな単語のことだよな、"+'@a$+"だったけ？",1;	// 3716
+			if(!sleep2(1500)) end;
+			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
+			if(!sleep2(1500)) end;
+			emotion 20,"怪しいアーウィン#SSQ02";
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : 冒険者さん、お疲れ様。あ、そうだ。街の物は気を付けて使ってくれ。直すの面倒くさいから。",1;
+			cloakonnpc "怪しいアーウィン#SSQ02";
+			if(!checkquest(19169)) {
+				setquest 19169;
+				delquest 19169;
+			}
+			close;
+		}
 	}
 	cloakonnpc "怪しいアーウィン#SSQ02";
 	emotion 22,"",1;
@@ -15331,7 +15351,7 @@ icecastle.gat,132,182,6	script	怪しいアーウィン#SSQ03	10461,7,7,{/* 3715 */
 			close;
 		}
 		if(rand(3)) {	// 不明
-			unittalk getnpcid(0,"怪しいアーウィン#SSQ03"),"怪しいアーウィン : え？合言葉？ヒクッ…あの…あの何だ…そう、狐の尻尾、これだ！…合ってるよな？",1;
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ03"),"怪しいアーウィン : え？合言葉？ヒクッ…あの…あの何だ…そう、"+'@a$+"、これだ！…合ってるよな？",1;
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
 			if(!sleep2(1500)) end;
@@ -15343,6 +15363,35 @@ icecastle.gat,132,182,6	script	怪しいアーウィン#SSQ03	10461,7,7,{/* 3715 */
 			}
 			close;
 		}
+		emotion 54,"怪しいアーウィン#SSQ03",1;
+		unittalk getnpcid(0,"怪しいアーウィン#SSQ03"),"怪しいアーウィン : ちっ！やっとこの毛玉に少し慣れてきたと思いきや、演技ももう終わりか？",1;
+		if(!sleep2(800)) end;
+		cloakoffnpc "一等兵ホリリュ#SSQ03";
+		if(!sleep2(700)) end;
+		unittalk getnpcid(0,"一等兵ホリリュ#SSQ03"),"一等兵ホリリュ: 連絡を受けて参りましたが、すでに状況は解決されたようですね。",1;
+		if(!sleep2(1500)) end;
+		unittalk getnpcid(0,"怪しいアーウィン#SSQ03"),"怪しいアーウィン : 捕虜になった私を連れて行く者がお前か？私を捕虜として礼遇してくれように要請をしたい。",1;
+		if(!sleep2(1500)) end;
+		emotion 6,"一等兵ホリリュ#SSQ03",1;
+		unittalk getnpcid(0,"一等兵ホリリュ#SSQ03"),"一等兵ホリリュ: 待遇を決めるのは私じゃない。黙って付いて来い。",1;
+		if(!sleep2(1500)) end;
+		unittalk getnpcid(0,"一等兵ホリリュ#SSQ03"),"一等兵ホリリュ: 冒険者殿、では連れて行きますね。お疲れ様でした。",1;
+		if(!sleep2(800)) end;
+		cloakonnpc "怪しいアーウィン#SSQ03";
+		cloakonnpc "一等兵ホリリュ#SSQ03";
+		if(checkquest(19168)) delquest 19168;
+		if(checkquest(19169)) delquest 19169;
+		if(checkquest(19171)) delquest 19171;
+		if(checkquest(19172)) delquest 19172;
+		if(checkquest(19173)) delquest 19173;
+		if(checkquest(19174)) delquest 19174;
+		if(checkquest(19175)) delquest 19175;
+		if(checkquest(19176)) delquest 19176;
+		if(checkquest(19177)) delquest 19177;
+		delquest 19162;
+		setquest 19163;
+		unittalk getcharid(3),strcharinfo(0)+" : (氷城に潜入したスパイの捜索に成果が出た。オリリョに報告しよう。)",1;
+		close;
 	}
 	cloakonnpc "怪しいアーウィン#SSQ03";
 	emotion 22,"",1;
@@ -15426,6 +15475,34 @@ icecastle.gat,66,71,8	script	怪しいアーウィン#SSQ04	10461,7,7,{/* 3717 */
 			}
 			close;
 		}
+		emotion 57,"怪しいアーウィン#SSQ04";
+		unittalk getnpcid(0,"怪しいアーウィン#SSQ04"),"怪しいアーウィン : あ…合言葉だと…本当酷いじゃないか。",1;
+		if(!sleep2(800)) end;
+		cloakoffnpc "一等兵ソルル#SSQ04";
+		unittalk getnpcid(0,"一等兵ソルル#SSQ04"),"一等兵ソルル: 連絡を受けて参りました。",1;
+		if(!sleep2(1500)) end;
+		unittalk getnpcid(0,"怪しいアーウィン#SSQ04"),"怪しいアーウィン : ああ……どうしてこんなにも早く警備が来るんだ。あの冷たい海を渡ってやっと侵入したというのに…",1;
+		if(!sleep2(1500)) end;
+		emotion 27,"一等兵ソルル#SSQ04";
+		unittalk getnpcid(0,"怪しいアーウィン#SSQ04"),"怪しいアーウィン : ちくしょうっ！！",1;
+		if(!sleep2(1500)) end;
+		unittalk getnpcid(0,"一等兵ソルル#SSQ04"),"一等兵ソルル: どう見ても潜入したルガンですね。冒険者殿、ご協力感謝いたします。さあ、こっちに来い！",1;
+		if(!sleep2(800)) end;
+		cloakonnpc "怪しいアーウィン#SSQ04";
+		cloakonnpc "一等兵ソルル#SSQ04";
+		if(checkquest(19168)) delquest 19168;
+		if(checkquest(19169)) delquest 19169;
+		if(checkquest(19170)) delquest 19170;
+		if(checkquest(19172)) delquest 19172;
+		if(checkquest(19173)) delquest 19173;
+		if(checkquest(19174)) delquest 19174;
+		if(checkquest(19175)) delquest 19175;
+		if(checkquest(19176)) delquest 19176;
+		if(checkquest(19177)) delquest 19177;
+		delquest 19162;
+		setquest 19163;
+		unittalk getcharid(3),strcharinfo(0)+" : (氷城に潜入したスパイの捜索に成果が出た。オリリョに報告しよう。)",1;
+		close;
 	}
 	cloakonnpc "怪しいアーウィン#SSQ04";
 	emotion 22,"",1;
@@ -15710,7 +15787,7 @@ icecastle.gat,96,245,2	script	怪しいアーウィン#SSQ07	10461,7,7,{/* 3723 */
 			close;
 		}
 		if(rand(3)) {	// 不明
-			unittalk getnpcid(0,"怪しいアーウィン#SSQ07"),"怪しいアーウィン : 合言葉か…！！あ、思い出した！狐の尻尾ですよね？",1;
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ07"),"怪しいアーウィン : 合言葉か…！！あ、思い出した！"+'@a$+"ですよね？",1;
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),""+strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
 			if(!sleep2(1500)) end;
@@ -15982,6 +16059,17 @@ icecastle.gat,228,134,8	script	怪しいアーウィン#SSQ10	10461,7,7,{/* 3729 */
 			close;
 		}
 		if(rand(3)) {	// 不明
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ10"),"怪しいアーウィン : 合言葉は"+'@a$+"ですよね？",1;
+			if(!sleep2(1500)) end;
+			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
+			if(!sleep2(1500)) end;
+			unittalk getnpcid(0,"怪しいアーウィン#SSQ10"),"怪しいアーウィン : 中古品取引掲示板を見ていらした方かと思ったのに…また偽の売買情報だったようですね。もう行きます。",1;
+			cloakonnpc "怪しいアーウィン#SSQ10";
+			if(!checkquest(19177)) {
+				setquest 19177;
+				compquest 19177;
+			}
+			close;
 		}
 		unittalk getnpcid(0,"怪しいアーウィン#SSQ10"),"怪しいアーウィン : あの、いくらセキュリティが大事でも、そんなことをさせて恥ずかしくないのか？",1;
 		if(!sleep2(1500)) end;
@@ -16109,249 +16197,180 @@ jor_root3.gat,347,147,4	duplicate(接触場所#EP20_DQ)	接触場所#Q19176	10429,5,5	/*
 // 新しい生活の拠り所クエスト
 //------------------------------------------------------------
 icas_in.gat,243,66,5	script	トリョリョ#ep20_DQ_5	10461,{/* 3740 */
-	if(EP20_1QUE == 100) {
-		if(!checkquest(131260)) {
+	if(EP20_1QUE < 100) {
+		mes "[トリョリョ]";
+		mes "元々、従兄弟たちと";
+		mes "交流がなかったわけじゃないけれど";
+		mes "一日中一緒にいるとそわそわする。";
+		next;
+		mes "^e6328c‐このクエストを進行するには^000000";
+		mes "^e6328c　以下の条件を満たす必要があります‐^000000";
+		mes "^e6328c　・クエスト「死なない者」のクリア^000000";
+		mes "　";
+		mes "<URL>EPISODE：ISGARD ～死なない者～<INFO>https://ragnarokonline.gungho.jp/special/episode/isgard2/</INFO></URL>";
+		close;
+	}
+	if(!checkquest(131260)) {
+		mes "[トリョリョ]";
+		mes "会えて嬉しいよ、人間。";
+		mes "私は……。";
+		next;
+		mes "[ホリャラ]";
+		mes "我が従兄弟！";
+		unittalk getnpcid(0,"ホリャラ#ep19in"),"ホリャラ : お父さんの弟の息子だよ！",1;
+		next;
+		mes "[ゾリャラ]";
+		mes "……我が従兄弟なんだ。";
+		next;
+		mes "[トリョリョ]";
+		mes "……うむ。";
+		mes "今回、保育園に配属されたトリョリョだ。";
+		unittalk getnpcid(0,"ゾリャラ#ep19_dq_kitche"),"ゾリャラ : 食堂。食堂。",1;
+		next;
+		mes "[トリョリョ]";
+		mes "……食堂の厨房に配属された";
+		mes "トリョリョだ。";
+		unittalk getnpcid(0,"ホリャラ#ep19in"),"ホリャラ : キャハハ！",1;
+		unittalk getnpcid(0,"トラルン#ep19in"),"トラルン : キャハハ！",1;
+		next;
+		mes "[トリョリョ]";
+		mes "パトロールは、どうも適正に会わない……";
+		mes "それで向いてるものをやりに来たよ。";
+		mes "こう見えても、子供たちを眠らせることは";
+		mes "得意なんだ。";
+		next;
+		mes "[トリョリョ]";
+		mes "……話は変わるが";
+		mes "ゾリャラに聞いた話では";
+		mes "君は色々と物々交換をしてくれる";
+		mes "らしいじゃないか。";
+		next;
+		mes "[トリョリョ]";
+		mes "私もここに配属された以上、";
+		mes "子供たちが好きそうな物を用意したい。";
+		mes "そこらへんにいるウミウシを倒して";
+		mes "食材を手に入れたいんだ。";
+		next;
+		mes "[トリョリョ]";
+		mes "だが、私は適性が合わず";
+		mes "パトロールから外された身……";
+		mes "私より強い人間よ。";
+		mes "手伝ってくれないか？";
+		next;
+		if(select("代わりに狩りに行く","慰める") == 2) {
 			mes "[トリョリョ]";
-			mes "会えて嬉しいよ、人間。";
-			mes "私は……。";
-			next;
-			mes "[ホリャラ]";
-			mes "我が従兄弟！";
-			unittalk getnpcid(0,"ホリャラ#ep19in"),"ホリャラ : お父さんの弟の息子だよ！",1;
-			next;
-			mes "[ゾリャラ]";
-			mes "……我が従兄弟なんだ。";
-			next;
-			mes "[トリョリョ]";
-			mes "……うむ。";
-			mes "今回、保育園に配属されたトリョリョだ。";
-			unittalk getnpcid(0,"ゾリャラ#ep19_dq_kitche"),"ゾリャラ : 食堂。食堂。",1;
-			next;
-			mes "[トリョリョ]";
-			mes "……食堂の厨房に配属された";
-			mes "トリョリョだ。";
-			unittalk getnpcid(0,"ホリャラ#ep19in"),"ホリャラ : キャハハ！",1;
-			unittalk getnpcid(0,"トラルン#ep19in"),"トラルン : キャハハ！",1;
-			next;
-			mes "[トリョリョ]";
-			mes "パトロールは、どうも適正に会わない……";
-			mes "それで向いてるものをやりに来たよ。";
-			mes "こう見えても、子供たちを眠らせることは";
-			mes "得意なんだ。";
-			next;
-			mes "[トリョリョ]";
-			mes "……話は変わるが";
-			mes "ゾリャラに聞いた話では";
-			mes "君は色々と物々交換をしてくれる";
-			mes "らしいじゃないか。";
-			next;
-			mes "[トリョリョ]";
-			mes "私もここに配属された以上、";
-			mes "子供たちが好きそうな物を用意したい。";
-			mes "そこらへんにいるウミウシを倒して";
-			mes "食材を手に入れたいんだ。";
-			next;
-			mes "[トリョリョ]";
-			mes "だが、私は適性が合わず";
-			mes "パトロールから外された身……";
-			mes "私より強い人間よ。";
-			mes "手伝ってくれないか？";
-			next;
-			if(select("代わりに狩りに行く","慰める") == 2) {
-				mes "[トリョリョ]";
-				mes "いつものことではあるけれど……";
-				mes "そう。いつものことだよ……。";
-				unittalk getnpcid(0,"ゾリャラ#ep19_dq_kitche"),"ゾリャラ : そこでぽかんとしていないで、私の仕事を手伝ってくれ！",1;
-				unittalk getnpcid(0,"トリョリョ#ep20_DQ_5"),"トリョリョ : おっとと、行くよ、行く！　ちょっと待て！",1;
-				close;
-			}
-			mes "[トリョリョ]";
-			mes "ありがとう、人間！";
-			mes "詳細を伝えるから";
-			mes "もう一度話しかけてくれ。";
-			close2;
-			setquest 131260;
-			compquest 131260;
-			end;
+			mes "いつものことではあるけれど……";
+			mes "そう。いつものことだよ……。";
+			unittalk getnpcid(0,"ゾリャラ#ep19_dq_kitche"),"ゾリャラ : そこでぽかんとしていないで、私の仕事を手伝ってくれ！",1;
+			unittalk getnpcid(0,"トリョリョ#ep20_DQ_5"),"トリョリョ : おっとと、行くよ、行く！　ちょっと待て！",1;
+			close;
 		}
 		mes "[トリョリョ]";
-		mes "私もここに配属された以上、子供たちが好きそうな物をお願いしたい。";
-		mes "そこらへんにいるウミウシを倒して";
-		mes "食材を採ってきて欲しい。";
-		while(1) {
+		mes "ありがとう、人間！";
+		mes "詳細を伝えるから";
+		mes "もう一度話しかけてくれ。";
+		close2;
+		setquest 131260;
+		compquest 131260;
+		end;
+	}
+	mes "[トリョリョ]";
+	mes "私もここに配属された以上、子供たちが好きそうな物をお願いしたい。";
+	mes "そこらへんにいるウミウシを倒して";
+	mes "食材を採ってきて欲しい。";
+	while(1) {
+		next;
+		if(select("クエストの受注や報告を行う","ダンジョンに移動する(凍て付いた鱗の海辺)") == 2) {
+			mes "^ff0000‐移動には500Zenyが必要です‐^000000";
 			next;
-			if(select("クエストの受注や報告を行う","ダンジョンに移動する(凍て付いた鱗の海辺)") == 2) {
-				mes "^ff0000‐移動には500Zenyが必要です‐^000000";
+			if(!checkquest(8855) && !checkquest(8857)) {
+				mes "[トリョリョ]";
+				cutin "ep19_iwin03.png", 2;
+				mes "まだ、頼んでない依頼があるんだが、";
+				mes "もう、現地に向かうか？";
 				next;
-				if(!checkquest(8855) && !checkquest(8857)) {
-					mes "[トリョリョ]";
-					cutin "ep19_iwin03.png", 2;
-					mes "まだ、頼んでない依頼があるんだが、";
-					mes "もう、現地に向かうか？";
-					next;
-					if(select("クエストの受注や報告を行う","ダンジョンに移動する(凍て付いた鱗の海辺)") == 1)
-						break;
-					mes "[トリョリョ]";
-					cutin "ep19_iwin03.png", 2;
-					mes "よし！";
-					mes "それじゃ現地へ向かってくれ！";
-				}
-				else {
-					mes "[トリョリョ]";
-					cutin "ep19_iwin03.png", 2;
-					mes "よし！";
-					mes "さっそく現地に向かうか？";
-				}
+				if(select("クエストの受注や報告を行う","ダンジョンに移動する(凍て付いた鱗の海辺)") == 1)
+					break;
+				mes "[トリョリョ]";
+				cutin "ep19_iwin03.png", 2;
+				mes "よし！";
+				mes "それじゃ現地へ向かってくれ！";
+			}
+			else {
+				mes "[トリョリョ]";
+				cutin "ep19_iwin03.png", 2;
+				mes "よし！";
+				mes "さっそく現地に向かうか？";
+			}
+			close2;
+			cutin "kafra_01.bmp", 255;
+			if(Zeny < 500)
+				end;
+			set Zeny, Zeny -500;
+			warp "jor_back4j.gat", 10, 370;
+			end;
+		}
+		break;
+	}
+	setarray '@questname$,"ぷにぷに珍味収集①","ぷにぷに珍味収集②";
+	setarray '@questid,8855,8857;
+	setarray '@itemlist,1001233,5,1001232,5,0,1001231,5;
+	setarray '@coolid,8856,8858;
+	setarray '@gainlist,1001217,10,1001217,10;
+	setarray '@explist,950000000,712500000,1100000000,825000000;
+	set '@sel,callfunc("IsgardDQ",'@questname$,'@itemlist,'@questid,'@coolid,'@gainlist,'@explist);
+	// 以下個別処理
+	switch('@sel) {
+	case 0:	// ぷにぷに珍味収集①
+		if(checkquest(8856)) {
+			if(checkquest(8856)&2 == 0) {
+				mes "[トリョリョ]";
+				cutin "ep19_iwin03.png", 2;
+				mes "ありがとう、人間。";
+				mes "明日またお願いするよ。";
+				mes "そうそう、持ってきてくれた食材だけど、";
+				mes "前に他の人間が味わってみて仰天してたよ。";
+				mes "人間の口には会わないのかも知れない。";
+				next;
+				mes "[インフォメーション]";
+				mes "<<B>クエスト</B>>";
+				mes "「^ff0000ぷにぷに珍味収集①^000000」";
+				mes "は時間制限中です。^000000";
 				close2;
 				cutin "kafra_01.bmp", 255;
-				if(Zeny < 500)
-					end;
-				set Zeny, Zeny -500;
-				warp "jor_back4j.gat", 10, 370;
 				end;
 			}
-			break;
 		}
-		setarray '@questname$,"ぷにぷに珍味収集①","ぷにぷに珍味収集②";
-		setarray '@questid,8855,8857;
-		setarray '@itemlist,1001233,5,1001232,5,0,1001231,5;
-		setarray '@coolid,8856,8858;
-		setarray '@gainlist,1001217,10,1001217,10;
-		setarray '@explist,950000000,712500000,1100000000,825000000;
-		set '@sel,callfunc("IsgardDQ",'@questname$,'@itemlist,'@questid,'@coolid,'@gainlist,'@explist);
-		// 以下個別処理
-		switch('@sel) {
-		case 0:	// ぷにぷに珍味収集①
-			if(checkquest(8856)) {
-				if(checkquest(8856)&2 == 0) {
-					mes "[トリョリョ]";
-					cutin "ep19_iwin03.png", 2;
-					mes "ありがとう、人間。";
-					mes "明日またお願いするよ。";
-					mes "そうそう、持ってきてくれた食材だけど、";
-					mes "前に他の人間が味わってみて仰天してたよ。";
-					mes "人間の口には会わないのかも知れない。";
-					next;
-					mes "[インフォメーション]";
-					mes "<<B>クエスト</B>>";
-					mes "「^ff0000ぷにぷに珍味収集①^000000」";
-					mes "は時間制限中です。^000000";
-					close2;
-					cutin "kafra_01.bmp", 255;
-					end;
-				}
-			}
-			if(checkquest(8855)) {
-				if(checkquest(8855)&4 == 0 || countitem(1001233) < 5 || countitem(1001232) < 5) {
-					mes "[トリョリョ]";
-					cutin "ep19_iwin03.png", 2;
-					mes "^e5555e天使ウミウシ^000000と";
-					mes "^e5555e雪ウサギウミウシ^000000を各10匹ずつ倒して、";
-					mes "<ITEM>[ほどよく甘いぷにぷに蛍光細胞]<INFO>1001233</INFO></ITEM> 5個と";
-					mes "<ITEM>[すこし塩辛いぷにぷに蛍光細胞]<INFO>1001232</INFO></ITEM> 5個を";
-					mes "採ってきてくれ。";
-					next;
-					mes "<<B>クエスト</B>>";
-					mes "「^ff0000ぷにぷに珍味収集①^000000」";
-					mes "は受注済みのクエストです。";
-					mes "こちらのクエストを破棄しますか？";
-					next;
-					if(select("やめる","破棄する") == 1) {
-						mes "^ff0000[インフォメーション]^000000";
-						mes "^ff0000処理を中断しました。^000000";
-						close2;
-						cutin "kafra_01.bmp", 255;
-						end;
-					}
-					delquest 8855;
-					mes "<<B>クエスト</B>>";
-					mes "「^ff0000ぷにぷに珍味収集①^000000」";
-					mes "を破棄しました。";
-					close2;
-					cutin "kafra_01.bmp", 255;
-					end;
-				}
-				mes "<<B>クエスト</B>>";
-				mes "「^ff0000ぷにぷに珍味収集①^000000」";
-				mes "<内容1>";
-				mes "対象：<URL>天使ウミウシ<INFO>https://rotool.gungho.jp/monster/EP20_ANGEL_ICESLUG</INFO></URL>　10体";
-				mes "対象：<URL>雪ウサギウミウシ<INFO>https://rotool.gungho.jp/monster/EP20_RABBIT_ICESLUG</INFO></URL>　10体";
-				mes "の討伐と";
-				next;
-				mes "<内容2>";
-				mes "アイテム：<ITEM>ほどよく甘いぷにぷに蛍光細胞<INFO>1001233</INFO></ITEM>　5個";
-				mes "アイテム：<ITEM>すこし塩辛いぷにぷに蛍光細胞<INFO>1001232</INFO></ITEM>　5個";
-				mes "の納品";
-				next;
-				mes "^0000ff<<B>報酬</B>>^000000";
-				mes "BaseExp 19G ( 19000000000 )";
-				mes "※950000000を20回受け取ります。";
-				mes "JobExp 14.25G ( 14250000000 )";
-				mes "※712500000を20回受け取ります。";
-				next;
-				mes "^0000ff<<B>報酬</B>>^000000";
-				mes "アイテム：<ITEM>神聖な猫のひげ<INFO>1001217</INFO></ITEM>　10個";
+		if(checkquest(8855)) {
+			if(checkquest(8855)&4 == 0 || countitem(1001233) < 5 || countitem(1001232) < 5) {
+				mes "[トリョリョ]";
+				cutin "ep19_iwin03.png", 2;
+				mes "^e5555e天使ウミウシ^000000と";
+				mes "^e5555e雪ウサギウミウシ^000000を各10匹ずつ倒して、";
+				mes "<ITEM>[ほどよく甘いぷにぷに蛍光細胞]<INFO>1001233</INFO></ITEM> 5個と";
+				mes "<ITEM>[すこし塩辛いぷにぷに蛍光細胞]<INFO>1001232</INFO></ITEM> 5個を";
+				mes "採ってきてくれ。";
 				next;
 				mes "<<B>クエスト</B>>";
 				mes "「^ff0000ぷにぷに珍味収集①^000000」";
-				mes "を報告しますか？";
+				mes "は受注済みのクエストです。";
+				mes "こちらのクエストを破棄しますか？";
 				next;
-				if(select("報告する","やめる") == 2) {
+				if(select("やめる","破棄する") == 1) {
 					mes "^ff0000[インフォメーション]^000000";
 					mes "^ff0000処理を中断しました。^000000";
 					close2;
 					cutin "kafra_01.bmp", 255;
 					end;
 				}
-				if(checkitemblank() == 0) {
-					mes "[インフォメーション]";
-					mes "これ以上多くの種類の";
-					mes "荷物を持つことが出来ません。";
-					mes "1個以上の空きを作ってください。";
-					close2;
-					cutin "kafra_01.bmp", 255;
-					end;
-				}
-				delitem 1001233,5;
-				delitem 1001232,5;
 				delquest 8855;
-				setquest 8856;
-				getitem 1001217,10;
-				for('@i=0; '@i < 20; '@i++)
-					getexp 950000000,0,0;
-				for('@i=0; '@i < 20; '@i++)
-					getexp 0,712500000,0;
-				mes "[トリョリョ]";
-				cutin "ep19_iwin03.png", 2;
-				mes "ありがとう、人間！";
-				next;
-				mes "^0000ff<<B>報酬</B>>^000000";
-				mes "BaseExp 19G";
-				mes "( 19000000000 )";
-				mes "※950000000 BaseExpを";
-				mes "　20回受け取りました。";
-				next;
-				mes "^0000ff<<B>報酬</B>>^000000";
-				mes "JobExp 14.25G";
-				mes "( 14250000000 )";
-				mes "※712500000 JobExpを";
-				mes "　20回受け取りました。";
-				next;
-				mes "^0000ff<<B>報酬</B>>^000000";
-				mes "アイテム：<ITEM>神聖な猫のひげ<INFO>1001217</INFO></ITEM>　10個";
-				mes "を獲得しました。";
+				mes "<<B>クエスト</B>>";
+				mes "「^ff0000ぷにぷに珍味収集①^000000」";
+				mes "を破棄しました。";
 				close2;
 				cutin "kafra_01.bmp", 255;
 				end;
 			}
-			mes "[トリョリョ]";
-			cutin "ep19_iwin03.png", 2;
-			mes "^e5555e天使ウミウシ^000000と";
-			mes "^e5555e雪ウサギウミウシ^000000を各10匹ずつ倒して、";
-			mes "<ITEM>[ほどよく甘いぷにぷに蛍光細胞]<INFO>1001233</INFO></ITEM> 5個と";
-			mes "<ITEM>[すこし塩辛いぷにぷに蛍光細胞]<INFO>1001232</INFO></ITEM> 5個を";
-			mes "採ってきてくれ。";
-			next;
 			mes "<<B>クエスト</B>>";
 			mes "「^ff0000ぷにぷに珍味収集①^000000」";
 			mes "<内容1>";
@@ -16362,160 +16381,165 @@ icas_in.gat,243,66,5	script	トリョリョ#ep20_DQ_5	10461,{/* 3740 */
 			mes "<内容2>";
 			mes "アイテム：<ITEM>ほどよく甘いぷにぷに蛍光細胞<INFO>1001233</INFO></ITEM>　5個";
 			mes "アイテム：<ITEM>すこし塩辛いぷにぷに蛍光細胞<INFO>1001232</INFO></ITEM>　5個";
-			mes "の納品の";
-			mes "両方の達成で報告が可能です。";
-			mes "クエストを受注しますか？";
+			mes "の納品";
 			next;
-			if(select("受注する","やめる") == 2) {
-				mes "[トリョリョ]";
-				cutin "ep19_iwin03.png", 2;
-				mes "む、中断するのか？";
-				mes "それがあれば、";
-				mes "育児の手間が減るだが……仕方がない。";
-				mes "また手が空いた時に頼むよ！";
-				next;
+			mes "^0000ff<<B>報酬</B>>^000000";
+			mes "BaseExp 19G ( 19000000000 )";
+			mes "※950000000を20回受け取ります。";
+			mes "JobExp 14.25G ( 14250000000 )";
+			mes "※712500000を20回受け取ります。";
+			next;
+			mes "^0000ff<<B>報酬</B>>^000000";
+			mes "アイテム：<ITEM>神聖な猫のひげ<INFO>1001217</INFO></ITEM>　10個";
+			next;
+			mes "<<B>クエスト</B>>";
+			mes "「^ff0000ぷにぷに珍味収集①^000000」";
+			mes "を報告しますか？";
+			next;
+			if(select("報告する","やめる") == 2) {
 				mes "^ff0000[インフォメーション]^000000";
 				mes "^ff0000処理を中断しました。^000000";
 				close2;
 				cutin "kafra_01.bmp", 255;
 				end;
 			}
-			setquest 8855;
-			if(checkquest(8856)) delquest 8856;
+			if(checkitemblank() == 0) {
+				mes "[インフォメーション]";
+				mes "これ以上多くの種類の";
+				mes "荷物を持つことが出来ません。";
+				mes "1個以上の空きを作ってください。";
+				close2;
+				cutin "kafra_01.bmp", 255;
+				end;
+			}
+			delitem 1001233,5;
+			delitem 1001232,5;
+			delquest 8855;
+			setquest 8856;
+			getitem 1001217,10;
+			for('@i=0; '@i < 20; '@i++)
+				getexp 950000000,0,0;
+			for('@i=0; '@i < 20; '@i++)
+				getexp 0,712500000,0;
 			mes "[トリョリョ]";
 			cutin "ep19_iwin03.png", 2;
 			mes "ありがとう、人間！";
 			next;
-			mes "<<B>クエスト</B>>";
-			mes "「^ff0000ぷにぷに珍味収集①^000000」";
-			mes "を受注しました。";
+			mes "^0000ff<<B>報酬</B>>^000000";
+			mes "BaseExp 19G";
+			mes "( 19000000000 )";
+			mes "※950000000 BaseExpを";
+			mes "　20回受け取りました。";
+			next;
+			mes "^0000ff<<B>報酬</B>>^000000";
+			mes "JobExp 14.25G";
+			mes "( 14250000000 )";
+			mes "※712500000 JobExpを";
+			mes "　20回受け取りました。";
+			next;
+			mes "^0000ff<<B>報酬</B>>^000000";
+			mes "アイテム：<ITEM>神聖な猫のひげ<INFO>1001217</INFO></ITEM>　10個";
+			mes "を獲得しました。";
 			close2;
 			cutin "kafra_01.bmp", 255;
 			end;
-		case 1:	// ぷにぷに珍味収集②
-			if(checkquest(8858)) {
-				if(checkquest(8858)&2 == 0) {
-					mes "[トリョリョ]";
-					cutin "ep19_iwin03.png", 2;
-					mes "ありがとう、人間。";
-					mes "明日またお願いするよ。";
-					mes "そうそう、持ってきてくれた食材だけど、";
-					mes "前に他の人間が味わってみて仰天してたよ。";
-					mes "人間の口には会わないのかも知れない。";
-					next;
-					mes "[インフォメーション]";
-					mes "<<B>クエスト</B>>";
-					mes "「^ff0000ぷにぷに珍味収集②^000000」";
-					mes "は時間制限中です。^000000";
-					close2;
-					cutin "kafra_01.bmp", 255;
-					end;
-				}
+		}
+		mes "[トリョリョ]";
+		cutin "ep19_iwin03.png", 2;
+		mes "^e5555e天使ウミウシ^000000と";
+		mes "^e5555e雪ウサギウミウシ^000000を各10匹ずつ倒して、";
+		mes "<ITEM>[ほどよく甘いぷにぷに蛍光細胞]<INFO>1001233</INFO></ITEM> 5個と";
+		mes "<ITEM>[すこし塩辛いぷにぷに蛍光細胞]<INFO>1001232</INFO></ITEM> 5個を";
+		mes "採ってきてくれ。";
+		next;
+		mes "<<B>クエスト</B>>";
+		mes "「^ff0000ぷにぷに珍味収集①^000000」";
+		mes "<内容1>";
+		mes "対象：<URL>天使ウミウシ<INFO>https://rotool.gungho.jp/monster/EP20_ANGEL_ICESLUG</INFO></URL>　10体";
+		mes "対象：<URL>雪ウサギウミウシ<INFO>https://rotool.gungho.jp/monster/EP20_RABBIT_ICESLUG</INFO></URL>　10体";
+		mes "の討伐と";
+		next;
+		mes "<内容2>";
+		mes "アイテム：<ITEM>ほどよく甘いぷにぷに蛍光細胞<INFO>1001233</INFO></ITEM>　5個";
+		mes "アイテム：<ITEM>すこし塩辛いぷにぷに蛍光細胞<INFO>1001232</INFO></ITEM>　5個";
+		mes "の納品の";
+		mes "両方の達成で報告が可能です。";
+		mes "クエストを受注しますか？";
+		next;
+		if(select("受注する","やめる") == 2) {
+			mes "[トリョリョ]";
+			cutin "ep19_iwin03.png", 2;
+			mes "む、中断するのか？";
+			mes "それがあれば、";
+			mes "育児の手間が減るだが……仕方がない。";
+			mes "また手が空いた時に頼むよ！";
+			next;
+			mes "^ff0000[インフォメーション]^000000";
+			mes "^ff0000処理を中断しました。^000000";
+			close2;
+			cutin "kafra_01.bmp", 255;
+			end;
+		}
+		setquest 8855;
+		if(checkquest(8856)) delquest 8856;
+		mes "[トリョリョ]";
+		cutin "ep19_iwin03.png", 2;
+		mes "ありがとう、人間！";
+		next;
+		mes "<<B>クエスト</B>>";
+		mes "「^ff0000ぷにぷに珍味収集①^000000」";
+		mes "を受注しました。";
+		close2;
+		cutin "kafra_01.bmp", 255;
+		end;
+	case 1:	// ぷにぷに珍味収集②
+		if(checkquest(8858)) {
+			if(checkquest(8858)&2 == 0) {
+				mes "[トリョリョ]";
+				cutin "ep19_iwin03.png", 2;
+				mes "ありがとう、人間。";
+				mes "明日またお願いするよ。";
+				mes "そうそう、持ってきてくれた食材だけど、";
+				mes "前に他の人間が味わってみて仰天してたよ。";
+				mes "人間の口には会わないのかも知れない。";
+				next;
+				mes "[インフォメーション]";
+				mes "<<B>クエスト</B>>";
+				mes "「^ff0000ぷにぷに珍味収集②^000000」";
+				mes "は時間制限中です。^000000";
+				close2;
+				cutin "kafra_01.bmp", 255;
+				end;
 			}
-			if(checkquest(8857)) {
-				if(checkquest(8857)&4 == 0 || countitem(1001231) < 5) {
-					mes "[トリョリョ]";
-					cutin "ep19_iwin03.png", 2;
-					mes "^e5555eメリベウミウシ^000000を15匹倒して";
-					mes "<ITEM>[ちょっと酸っぱいぷにぷに蛍光細胞]<INFO>1001231</INFO></ITEM> 5個を";
-					mes "採ってきてくれ。";
-					next;
-					mes "<<B>クエスト</B>>";
-					mes "「^ff0000ぷにぷに珍味収集②^000000」";
-					mes "は受注済みのクエストです。";
-					mes "こちらのクエストを破棄しますか？";
-					next;
-					if(select("やめる","破棄する") == 1) {
-						mes "^ff0000[インフォメーション]^000000";
-						mes "^ff0000処理を中断しました。^000000";
-						close2;
-						cutin "kafra_01.bmp", 255;
-						end;
-					}
-					delquest 8857;
-					mes "<<B>クエスト</B>>";
-					mes "「^ff0000ぷにぷに珍味収集②^000000」";
-					mes "を破棄しました。";
-					close2;
-					cutin "kafra_01.bmp", 255;
-					end;
-				}
-				mes "<<B>クエスト</B>>";
-				mes "「^ff0000ぷにぷに珍味収集②^000000」";
-				mes "<内容1>";
-				mes "対象：<URL>メリベウミウシ<INFO>https://rotool.gungho.jp/monster/EP20_MELIBE_ICESLUG</INFO></URL>　15体";
-				mes "の討伐と";
-				next;
-				mes "<内容2>";
-				mes "アイテム：<ITEM>ちょっと酸っぱいぷにぷに蛍光細胞<INFO>1001231</INFO></ITEM>　5個";
-				mes "の納品";
-				next;
-				mes "^0000ff<<B>報酬</B>>^000000";
-				mes "BaseExp 22G ( 22000000000 )";
-				mes "※1100000000を20回受け取ります。";
-				mes "JobExp 16.5G ( 16500000000 )";
-				mes "※825000000を20回受け取ります。";
-				next;
-				mes "^0000ff<<B>報酬</B>>^000000";
-				mes "アイテム：<ITEM>神聖な猫のひげ<INFO>1001217</INFO></ITEM>　10個";
+		}
+		if(checkquest(8857)) {
+			if(checkquest(8857)&4 == 0 || countitem(1001231) < 5) {
+				mes "[トリョリョ]";
+				cutin "ep19_iwin03.png", 2;
+				mes "^e5555eメリベウミウシ^000000を15匹倒して";
+				mes "<ITEM>[ちょっと酸っぱいぷにぷに蛍光細胞]<INFO>1001231</INFO></ITEM> 5個を";
+				mes "採ってきてくれ。";
 				next;
 				mes "<<B>クエスト</B>>";
 				mes "「^ff0000ぷにぷに珍味収集②^000000」";
-				mes "を報告しますか？";
+				mes "は受注済みのクエストです。";
+				mes "こちらのクエストを破棄しますか？";
 				next;
-				if(select("報告する","やめる") == 2) {
+				if(select("やめる","破棄する") == 1) {
 					mes "^ff0000[インフォメーション]^000000";
 					mes "^ff0000処理を中断しました。^000000";
 					close2;
 					cutin "kafra_01.bmp", 255;
 					end;
 				}
-				if(checkitemblank() == 0) {
-					mes "[インフォメーション]";
-					mes "これ以上多くの種類の";
-					mes "荷物を持つことが出来ません。";
-					mes "1個以上の空きを作ってください。";
-					close2;
-					cutin "kafra_01.bmp", 255;
-					end;
-				}
-				delitem 1001231,5;
 				delquest 8857;
-				setquest 8858;
-				getitem 1001217,10;
-				for('@i=0; '@i < 20; '@i++)
-					getexp 1100000000,0,0;
-				for('@i=0; '@i < 20; '@i++)
-					getexp 0,825000000,0;
-				mes "[トリョリョ]";
-				cutin "ep19_iwin03.png", 2;
-				mes "ありがとう、人間！";
-				next;
-				mes "^0000ff<<B>報酬</B>>^000000";
-				mes "BaseExp 22G";
-				mes "( 22000000000 )";
-				mes "※1100000000 BaseExpを";
-				mes "　20回受け取りました。";
-				next;
-				mes "^0000ff<<B>報酬</B>>^000000";
-				mes "JobExp 16.5G";
-				mes "( 16500000000 )";
-				mes "※825000000 JobExpを";
-				mes "　20回受け取りました。";
-				next;
-				mes "^0000ff<<B>報酬</B>>^000000";
-				mes "アイテム：<ITEM>神聖な猫のひげ<INFO>1001217</INFO></ITEM>　10個";
-				mes "を獲得しました。";
+				mes "<<B>クエスト</B>>";
+				mes "「^ff0000ぷにぷに珍味収集②^000000」";
+				mes "を破棄しました。";
 				close2;
 				cutin "kafra_01.bmp", 255;
 				end;
 			}
-			mes "[トリョリョ]";
-			cutin "ep19_iwin03.png", 2;
-			mes "^e5555eメリベウミウシ^000000を15匹倒して";
-			mes "<ITEM>[ちょっと酸っぱいぷにぷに蛍光細胞]<INFO>1001231</INFO></ITEM> 5個を";
-			mes "採ってきてくれ。";
-			next;
 			mes "<<B>クエスト</B>>";
 			mes "「^ff0000ぷにぷに珍味収集②^000000」";
 			mes "<内容1>";
@@ -16524,40 +16548,114 @@ icas_in.gat,243,66,5	script	トリョリョ#ep20_DQ_5	10461,{/* 3740 */
 			next;
 			mes "<内容2>";
 			mes "アイテム：<ITEM>ちょっと酸っぱいぷにぷに蛍光細胞<INFO>1001231</INFO></ITEM>　5個";
-			mes "の納品の";
-			mes "両方の達成で報告が可能です。";
-			mes "クエストを受注しますか？";
+			mes "の納品";
 			next;
-			if(select("受注する","やめる") == 2) {
-				mes "[トリョリョ]";
-				cutin "ep19_iwin03.png", 2;
-				mes "む、中断するのか？";
-				mes "それがあれば、";
-				mes "育児の手間が減るだが……仕方がない。";
-				mes "また手が空いた時に頼むよ！";
-				next;
+			mes "^0000ff<<B>報酬</B>>^000000";
+			mes "BaseExp 22G ( 22000000000 )";
+			mes "※1100000000を20回受け取ります。";
+			mes "JobExp 16.5G ( 16500000000 )";
+			mes "※825000000を20回受け取ります。";
+			next;
+			mes "^0000ff<<B>報酬</B>>^000000";
+			mes "アイテム：<ITEM>神聖な猫のひげ<INFO>1001217</INFO></ITEM>　10個";
+			next;
+			mes "<<B>クエスト</B>>";
+			mes "「^ff0000ぷにぷに珍味収集②^000000」";
+			mes "を報告しますか？";
+			next;
+			if(select("報告する","やめる") == 2) {
 				mes "^ff0000[インフォメーション]^000000";
 				mes "^ff0000処理を中断しました。^000000";
 				close2;
 				cutin "kafra_01.bmp", 255;
 				end;
 			}
-			setquest 8857;
-			if(checkquest(8858)) delquest 8858;
+			if(checkitemblank() == 0) {
+				mes "[インフォメーション]";
+				mes "これ以上多くの種類の";
+				mes "荷物を持つことが出来ません。";
+				mes "1個以上の空きを作ってください。";
+				close2;
+				cutin "kafra_01.bmp", 255;
+				end;
+			}
+			delitem 1001231,5;
+			delquest 8857;
+			setquest 8858;
+			getitem 1001217,10;
+			for('@i=0; '@i < 20; '@i++)
+				getexp 1100000000,0,0;
+			for('@i=0; '@i < 20; '@i++)
+				getexp 0,825000000,0;
 			mes "[トリョリョ]";
 			cutin "ep19_iwin03.png", 2;
 			mes "ありがとう、人間！";
 			next;
-			mes "<<B>クエスト</B>>";
-			mes "「^ff0000ぷにぷに珍味収集②^000000」";
-			mes "を受注しました。";
+			mes "^0000ff<<B>報酬</B>>^000000";
+			mes "BaseExp 22G";
+			mes "( 22000000000 )";
+			mes "※1100000000 BaseExpを";
+			mes "　20回受け取りました。";
+			next;
+			mes "^0000ff<<B>報酬</B>>^000000";
+			mes "JobExp 16.5G";
+			mes "( 16500000000 )";
+			mes "※825000000 JobExpを";
+			mes "　20回受け取りました。";
+			next;
+			mes "^0000ff<<B>報酬</B>>^000000";
+			mes "アイテム：<ITEM>神聖な猫のひげ<INFO>1001217</INFO></ITEM>　10個";
+			mes "を獲得しました。";
 			close2;
 			cutin "kafra_01.bmp", 255;
 			end;
 		}
+		mes "[トリョリョ]";
+		cutin "ep19_iwin03.png", 2;
+		mes "^e5555eメリベウミウシ^000000を15匹倒して";
+		mes "<ITEM>[ちょっと酸っぱいぷにぷに蛍光細胞]<INFO>1001231</INFO></ITEM> 5個を";
+		mes "採ってきてくれ。";
+		next;
+		mes "<<B>クエスト</B>>";
+		mes "「^ff0000ぷにぷに珍味収集②^000000」";
+		mes "<内容1>";
+		mes "対象：<URL>メリベウミウシ<INFO>https://rotool.gungho.jp/monster/EP20_MELIBE_ICESLUG</INFO></URL>　15体";
+		mes "の討伐と";
+		next;
+		mes "<内容2>";
+		mes "アイテム：<ITEM>ちょっと酸っぱいぷにぷに蛍光細胞<INFO>1001231</INFO></ITEM>　5個";
+		mes "の納品の";
+		mes "両方の達成で報告が可能です。";
+		mes "クエストを受注しますか？";
+		next;
+		if(select("受注する","やめる") == 2) {
+			mes "[トリョリョ]";
+			cutin "ep19_iwin03.png", 2;
+			mes "む、中断するのか？";
+			mes "それがあれば、";
+			mes "育児の手間が減るだが……仕方がない。";
+			mes "また手が空いた時に頼むよ！";
+			next;
+			mes "^ff0000[インフォメーション]^000000";
+			mes "^ff0000処理を中断しました。^000000";
+			close2;
+			cutin "kafra_01.bmp", 255;
+			end;
+		}
+		setquest 8857;
+		if(checkquest(8858)) delquest 8858;
+		mes "[トリョリョ]";
+		cutin "ep19_iwin03.png", 2;
+		mes "ありがとう、人間！";
+		next;
+		mes "<<B>クエスト</B>>";
+		mes "「^ff0000ぷにぷに珍味収集②^000000」";
+		mes "を受注しました。";
+		close2;
+		cutin "kafra_01.bmp", 255;
+		end;
 	}
-	//未調査
-	close;
+	end;
 OnQuestInfo:
 	if(EP20_1QUE == 100) {
 		if((checkquest(8855) && checkquest(8855)&4 == 0 || countitem(1001233) < 5 || countitem(1001232) < 5) && 

@@ -8933,6 +8933,66 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		close;
 	}
 	if(checkquest(17509)) {
+		if(!(checkquest(17509)&2)){
+			mes "[エゼキエル]";
+			mes "資材の調達、ありがとうございます。";
+			mes "現段階では十分に足りていますが";
+			mes "別の日になったら";
+			mes "新たにお願いするかもしれません。";
+			mes "その時は、またよろしくお願いします！";
+			close;
+		}
+		delquest 17509;
+		mes "[エゼキエル]";
+		mes "冒険者様、こんにちは。";
+		mes "工事は順調……なのですが";
+		mes "物資が幾つか足りないのです。";
+		next;
+		mes "[エゼキエル]";
+		mes "冒険者様にお願いがあるのですが";
+		mes "「ベリーカタイ結晶」を「10」個";
+		mes "調達して来てもらえませんか？";
+		mes "建築資材として必要なのですが";
+		mes "手に入れるのが困難で……。";
+		next;
+		if(select("持ってきます","今は時間が無くて……") == 2) {
+			mes "[エゼキエル]";
+			mes "大丈夫ですよ。";
+			mes "マラムにも調達をお願いしてますから。";
+			mes "まあ、いつ届くかわかりませんが。";
+			close;
+		}
+		mes "[エゼキエル]";
+		mes "ありがとうございます！";
+		mes "「ベリーカタイ結晶」は";
+		mes "グレイウルフを倒すと手に入ります。";
+		mes "よろしくお願いします。";
+		setquest 17508;
+		close;
+	}
+	if(checkquest(17508)) {
+		if(countitem(1000406) < 10) {
+			mes "[エゼキエル]";
+			mes "冒険者様にお願いがあるのですが";
+			mes "「ベリーカタイ結晶」を「10」個";
+			mes "調達して来てもらえませんか？";
+			mes "建築資材として必要なのですが";
+			mes "私では手に入れられなくて……。";
+			next;
+			mes "[エゼキエル]";
+			mes "「ベリーカタイ結晶」は";
+			mes "グレイウルフを倒すと手に入ります。";
+			mes "よろしくお願いします。";
+			close;
+		}
+		delitem 1000406,10;
+		getitem 1000405,2;
+		delquest 17508;
+		setquest 17509;
+		for(set '@i,0; '@i< 20 ; set '@i,'@i+1){
+			getexp 225000000,0,0;
+			getexp 0,175000000,0;
+		}
 		mes "[エゼキエル]";
 		mes "資材の調達、ありがとうございます。";
 		mes "現段階では十分に足りていますが";
@@ -9216,6 +9276,12 @@ wolfvill.gat,176,111,3	script	老人#hms04	10393,{/* 16048 */
 		mes "この件にはもう関わらんでくれ。";
 		close;
 	}
+	if(checkquest(130127) & 0x8){
+		mes "[老人]";
+		mes "診療所ができれば";
+		mes "この村はもっと良くなるのう。";
+		close;
+	}
 	mes "[老人]";
 	mes "新しく村に来た者たちを";
 	mes "訪ねてみるとしようかのう。";
@@ -9228,12 +9294,40 @@ OnQuestInfo:
 	end;
 }
 wolfvill.gat,174,111,5	script	老人#hms05	10394,{/* 16049 */
+	if(checkquest(17505)) {
+		mes "[老人]";
+		mes "よそ者には分からんかもしれんが";
+		mes "私たちには私たちのやり方がある。";
+		close;
+	}
+	if(checkquest(130127) & 0x8){
+		mes "[老人]";
+		mes "ふ～む、この歳になって";
+		mes "考え方を変えることになるとは";
+		mes "思ってもみんかったわい。";
+		close;
+	}
 	mes "[老人]";
 	mes "何か困ったことがあれば";
 	mes "相談に乗りますぞ？";
 	close;
 }
 wolfvill.gat,178,110,3	script	老人#hms06	10395,{/* 16050 */
+	if(checkquest(17505)) {
+		mes "[老人]";
+		mes "ここでの生活を変えたいという人は";
+		mes "確かにおるよ。";
+		mes "じゃが、今のままでも問題はあるまい。";
+		mes "ならば、変える必要も無かろう。";
+		close;
+	}
+	if(checkquest(130127) & 0x8){
+		mes "[老人]";
+		mes "診療所を建てるのに";
+		mes "必要なものはあるかね？";
+		mes "儂らも協力させてもらうぞ。";
+		close;
+	}
 	mes "[老人]";
 	mes "儂らに聞きたいことでも";
 	mes "あるのかね？";
@@ -9905,7 +9999,7 @@ wolfvill.gat,106,224,3	script	ディナル#ep18	941,{/* 16057 */
 		}
 		delquest 16555;
 		if(!checkquest(16555) && !checkquest(16556) && !checkquest(16557)) {
-				unittalk getcharid(3),""+strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;	// self:hidden
+				unittalk getcharid(3),strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;
 				setquest 16558;
 			}
 		close;
@@ -9973,7 +10067,7 @@ wolfvill.gat,180,204,3	script	アミラ#ep18	940,{/* 16058 */
 		mes "とにかく大事なことは……。";
 		delquest 16556;
 		if(!checkquest(16555) && !checkquest(16556) && !checkquest(16557)) {
-				unittalk getcharid(3),""+strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;	// self:hidden
+				unittalk getcharid(3),strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;
 				setquest 16558;
 			}
 		close;
@@ -10042,7 +10136,7 @@ wolfvill.gat,154,184,5	script	シャーニナ#ep18	942,{/* 16059 */
 		mes "可哀そうな天女は思わず……。";
 		delquest 16557;
 		if(!checkquest(16555) && !checkquest(16556) && !checkquest(16557)) {
-				unittalk getcharid(3),""+strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;	// self:hidden
+				unittalk getcharid(3),strcharinfo(0)+" : 3人の物語を書き留めた。グドラのところへ戻ろう！",1;
 				setquest 16558;
 			}
 		close;
@@ -13153,7 +13247,7 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		setquest 17513;
 		close;
 	}
-	if(checkquest(17513)) {
+	if(checkquest(17513) || checkquest(17514)) {
 		mes "[スカニア]";
 		mes "冒険者様は羊飼い代行業を頼む。";
 		mes "灰色狼の森でワンワンたちの";
@@ -13171,8 +13265,6 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		mes "倒してほしい。";
 		mes "じゃあ、よろしく！";
 		close;
-	}
-	if(checkquest(17514)) {//未調査
 	}
 	if(checkquest(17515)) {
 		if(checkitemblank() == 0) {
@@ -13225,8 +13317,10 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		getexp 0,175000000,0;
 		getexp 225000000,0,0;
 		getexp 0,175000000,0;
-		setquest 130130;
-		compquest 130130;
+		if(!(checkquest(130130) & 8)) {
+			setquest 130130;
+			compquest 130130;
+		}
 		hideoffnpc "ワンワン#wms01";
 		mes "[スカニア]";
 		mes "お疲れさま！";
@@ -13235,11 +13329,104 @@ wolfvill.gat,117,119,5	script	スカニア#wms01	10398,5,5,{/* 16126 */
 		close;
 	}
 	if(checkquest(17516)) {
+		if(!(checkquest(17516) & 2)) {
+			mes "[スカニア]";
+			mes "今日はもう散歩の必要はないよ。";
+			mes "食べて物を消化する時間も必要だし";
+			mes "また明日になったら来てくれよ！";
+			close;
+		}
+		delquest 17516;
 		mes "[スカニア]";
-		mes "今日はもう散歩の必要はないよ。";
-		mes "食べて物を消化する時間も必要だし";
-		mes "また明日になったら来てくれよ！";
-		close;
+		mes "よう、そろそろ散歩の時間だけど";
+		mes "アイシャはまだ来てないのか？";
+		next;
+		setnpcdisplay "メエメエ#wms01",21324;
+		cloakoffnpc "アイシャ#wms01";
+		cloakoffnpc "メエメエ#wms01";
+		mes "[アイシャ]";
+		mes "じゃーん！　私たち登場！";
+		mes "　";
+		mes "[メエメエ]";
+		mes "わん！！";
+		next;
+		mes "[スカニア]";
+		mes "こっちの準備はいいぜ！";
+		mes "冒険者様は羊飼い代行業を頼む。";
+		mes "灰色狼の森でワンワンたちの";
+		mes "散歩のサポートをしてやってくれ。";
+		next;
+		if(select("もちろんです","今日はちょっと忙しくて") == 2) {
+			mes "[スカニア]";
+			mes "ええ？";
+			mes "まだ用事があったのかよ。";
+			mes "用事を済ませてから来てくれよな！";
+			close;
+		}
+		mes "[スカニア]";
+		mes "ありがとう。";
+		mes "まずは、灰色狼の森にある、";
+		mes "ワンワンのお気に入りの「草」が";
+		mes "あるところに向かってくれ。";
+		next;
+		mes "[ワンワン]";
+		mes "メェエエエエー！";
+		next;
+		mes "[スカニア]";
+		mes "その後は、ワンワンが";
+		mes "草を食べるのを邪魔してくる";
+		mes "「アッシュリン」も「15」体";
+		mes "倒してほしい。";
+		mes "じゃあ、よろしく！";
+		setquest 17513;	//
+		close2;
+		cloakonnpc "メエメエ#wms01";	// 2707
+		cloakonnpc "ワンワン#wms01";	// 2705
+		end;
+	}
+	if(checkquest(130130) & 0x8) {
+		setnpcdisplay "メエメエ#wms01",21324;
+		cloakoffnpc "アイシャ#wms01";
+		cloakoffnpc "メエメエ#wms01";
+		mes "[アイシャ]";
+		mes "じゃーん！　私たち登場！";
+		mes "　";
+		mes "[メエメエ]";
+		mes "わん！！";
+		next;
+		mes "[スカニア]";
+		mes "こっちの準備はいいぜ！";
+		mes "冒険者様は羊飼い代行業を頼む。";
+		mes "灰色狼の森でワンワンたちの";
+		mes "散歩のサポートをしてやってくれ。";
+		next;
+		if(select("もちろんです","今日はちょっと忙しくて") == 2) {
+			mes "[スカニア]";
+			mes "ええ？";
+			mes "まだ用事があったのかよ。";
+			mes "用事を済ませてから来てくれよな！";
+			close;
+		}
+		mes "[スカニア]";
+		mes "ありがとう。";
+		mes "まずは、灰色狼の森にある、";
+		mes "ワンワンのお気に入りの「草」が";
+		mes "あるところに向かってくれ。";
+		next;
+		mes "[ワンワン]";
+		mes "メェエエエエー！";
+		next;
+		mes "[スカニア]";
+		mes "その後は、ワンワンが";
+		mes "草を食べるのを邪魔してくる";
+		mes "「アッシュリン」も「15」体";
+		mes "倒してほしい。";
+		mes "じゃあ、よろしく！";
+		setquest 17513;
+		close2;
+		cloakonnpc "メエメエ#wms01";
+		cloakonnpc "ワンワン#wms01";
+		end;
 	}
 	mes "[スカニア]";
 	mes "ワンワン！";
@@ -13341,16 +13528,21 @@ OnInit:
 	end;
 }
 wolfvill.gat,121,119,3	script	ワンワン#wms01	21323,{/* 16128 */
-	emotion 2,"ワンワン#wms01";
-	unittalk getnpcid(0,"ワンワン#wms01"),"メエェェェェーー！";
+	emotion 2;
+	unittalk "メエェェェェーー！";
 	end;
 }
 wolfvill.gat,120,117,1	script	アイシャ#wms01	919,{/* 16129 (cloaking)*/
+	unittalk "うちのメエメエのアレを見せてあげようか？　マジで可愛いんだからさ！";
+	end;
 OnInit:
 	cloakonnpc;
 	end;
 }
 wolfvill.gat,119,117,1	script	メエメエ#wms01	21324,{/* 16130 (cloaking)*/
+	emotion 1,"メエメエ#wms01";
+	unittalk "わん？";
+	end;
 OnInit:
 	cloakonnpc;
 	end;
@@ -13601,11 +13793,7 @@ wolfvill.gat,100,177,1	script	メエメエ#wms02	21324,{/* 16137 */
 		mes "あいつにわからせてやるんだ！";
 		close;
 	}
-	if(checkquest(17513)) {//未調査
-	}
-	if(checkquest(17514)) {//未調査
-	}
-	if(checkquest(17515)) {
+	if(checkquest(17513)|| checkquest(17514) || checkquest(17515)) {
 		emotion 1;
 		mes "[メエメエ]";
 		mes "わん？";
@@ -13776,6 +13964,7 @@ wolfvill.gat,202,166,3	script	エルイン#ep18	919,{/* 16146 */
 		}
 		if(countitem(1000412)) delitem 1000412,countitem(1000412);
 		if(countitem(1000413)) delitem 1000413,countitem(1000413);
+		if(countitem(1000414)) delitem 1000414,countitem(1000414);
 		setquest 8689;
 		setquest 130151;
 		delquest 130151;
@@ -13841,20 +14030,155 @@ wolfvill.gat,202,166,3	script	エルイン#ep18	919,{/* 16146 */
 		mes "もし明日以降も暇してるなら";
 		mes "またお願いしてもいい？";
 		next;
-		if(select("いいですよ","明日は忙しいかも") == 1) {
+		if(select("いいですよ","明日は忙しいかも") == 2) {
 			mes "[エルイン]";
-			mes "私は、立ってる者は親でも使う";
-			mes "主義だからね。助かるよ。";
-			mes "ありがとう。";
+			mes "そう……";
+			mes "まあ、また仕事が欲しかったら";
+			mes "声を掛けてちょうだい。";
+			close;
+		}
+		mes "[エルイン]";
+		mes "私は、立ってる者は親でも使う";
+		mes "主義だからね。助かるよ。";
+		mes "ありがとう。";
+		close;
+	}
+	if(checkquest(8689)) {
+		if(!(checkquest(8689)&2)) {
+			mes "[エルイン]";
+			mes "今日はもう帰って休んで。";
+			mes "仕事は明日また";
+			mes "お願いするから。";
+			close;
+		}
+		delquest 8689;
+		mes "[エルイン]";
+		mes "もしかして、また暇してる？";
+		mes "良ければ仕事を受けてくれない？";
+		next;
+		switch(select("罠を調べに行く","雑談する","やめておく")) {
+			case 1:
+				mes "[エルイン]";
+				mes "灰色の森の5か所に";
+				mes "罠を仕掛けてあるから";
+				mes "獲物が掛かっていたら5個ほど";
+				mes "回収してきて。";
+				next;
+				mes "[エルイン]";
+				mes "掛かってなくても";
+				mes "罠をそのままにしておけば";
+				mes "しばらくしたら掛かるかも。";
+				next;
+				mes "[エルイン]";
+				mes "じゃあ、お願いするわね。";
+				setquest 130151;
+				setquest 130152;
+				setquest 130153;
+				setquest 130154;
+				setquest 130155;
+				setquest 8690;
+				close;
+			case 2:
+				mes "[エルイン]";
+				mes "いつから罠猟を始めたか？";
+				mes "さぁね……";
+				mes "冒険者を辞めた時からかしら。";
+				close;
+			case 3:
+				mes "[エルイン]";
+				mes "気が散るから";
+				mes "あまりうろうろしないでくれる？";
+				close;
+		}
+	}
+	if(checkquest(8690)) {
+		if( checkquest(130151) || checkquest(130152) ||
+			checkquest(130153) || checkquest(130154) || checkquest(130155)) {
+			mes "[エルイン]";
+			mes "灰色の森の5か所に";
+			mes "罠を仕掛けてあるから";
+			mes "獲物が掛かっていたら5個ほど";
+			mes "回収してきて。";
+			next;
+			mes "[エルイン]";
+			mes "掛かってなくても";
+			mes "罠をそのままにしておけば";
+			mes "しばらくしたら掛かるかも。";
+			close;
+		}
+		if(countitem(1000412)) delitem 1000412,countitem(1000412);
+		if(countitem(1000413)) delitem 1000413,countitem(1000413);
+		if(countitem(1000414)) delitem 1000413,countitem(1000414);
+		setquest 8689;
+		setquest 130151;
+		delquest 130151;
+		setquest 130152;
+		delquest 130152;
+		setquest 130153;
+		delquest 130153;
+		setquest 130154;
+		delquest 130154;
+		setquest 130155;
+		delquest 130155;
+		delquest 8690;
+		getitem 1000405,3;
+		for(set '@i,0; '@i< 20 ; set '@i,'@i+1){
+			getexp 225000000,0,0;
+			getexp 0,175000000,0;
+		}
+		mes "[エルイン]";
+		mes "…よし、お疲れ様。";
+		mes "もし明日以降も暇してるなら";
+		mes "またお願いしてもいい？";
+		next;
+		if(select("いいですよ","明日は忙しいかも") == 2) {
+			mes "[エルイン]";
+			mes "そう……";
+			mes "まあ、また仕事が欲しかったら";
+			mes "声を掛けてちょうだい。";
 			close;
 		}
 	}
-	if(checkquest(8689)) {
+	//2回目以降のクエストCT明けに選択肢１以外を選択した時のために記述
+	if(checkquest(130132) & 0x8) {
 		mes "[エルイン]";
-		mes "今日はもう帰って休んで。";
-		mes "仕事は明日また";
-		mes "お願いするから。";
-		close;
+		mes "もしかして、また暇してる？";
+		mes "良ければ仕事を受けてくれない？";
+		next;
+		switch(select("罠を調べに行く","雑談する","やめておく")) {
+			case 1:
+				mes "[エルイン]";
+				mes "灰色の森の5か所に";
+				mes "罠を仕掛けてあるから";
+				mes "獲物が掛かっていたら5個ほど";
+				mes "回収してきて。";
+				next;
+				mes "[エルイン]";
+				mes "掛かってなくても";
+				mes "罠をそのままにしておけば";
+				mes "しばらくしたら掛かるかも。";
+				next;
+				mes "[エルイン]";
+				mes "じゃあ、お願いするわね。";
+				setquest 130151;
+				setquest 130152;
+				setquest 130153;
+				setquest 130154;
+				setquest 130155;
+				setquest 8690;
+				close;
+			case 2:
+				mes "[エルイン]";
+				mes "いつから罠猟を始めたか？";
+				mes "さぁね……";
+				mes "冒険者を辞めた時からかしら。";
+				close;
+			case 3:
+				mes "[エルイン]";
+				mes "気が散るから";
+				mes "あまりうろうろしないでくれる？";
+				close;
+		}
 	}
 	mes "[エルイン]";
 	mes "……外から冒険者が来たと";
@@ -13913,15 +14237,16 @@ OnQuestInfo:
 	end;
 }
 
-gw_fild01.gat,24,122,0	script	設置した罠#001	844,{/* 6875 */}
-gw_fild01.gat,93,113,0	script	設置した罠#002	844,{/* 6876 */}
-gw_fild01.gat,229,205,0	script	設置した罠#003	844,{/* 6877 */}
-gw_fild01.gat,153,212,0	script	設置した罠#004	844,{/* 6878 */}
-gw_fild01.gat,335,241,0	script	設置した罠#005	844,{/* 6879 */
-	if(checkquest(8688)) {
-		if(!checkquest(130155)) {
+gw_fild01.gat,24,122,0	script	設置した罠#001	844,{/* 6875 */
+if(checkquest(8688)) {
+		if(!checkquest(130151)) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
 			end;
+		}
+		if(!checkquest(130151) && !checkquest(130152) && 
+		!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
+			end;		
 		}
 		misceffect 101,"設置した罠#005";
 		progressbar 1;	//color=0xffff00
@@ -13934,7 +14259,139 @@ gw_fild01.gat,335,241,0	script	設置した罠#005	844,{/* 6879 */
 			unittalk getcharid(3),strcharinfo(0)+" : ‐何も掛かっていなかった‐",1;
 			end;
 		}
-		getitem rand(1000412,1000413),1;
+		getitem rand(1000412,1000413,1000414),1;
+		delquest 130151;
+		end;
+	}
+OnQuestInfo:
+	if(checkquest(130151))
+		showevent 0, 3, "設置した罠#001";
+	else
+		showevent 9999,0,"設置した罠#001";
+	end;
+}
+gw_fild01.gat,93,113,0	script	設置した罠#002	844,{/* 6876 */
+if(checkquest(8688)) {
+		if(!checkquest(130152)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
+			end;
+		}
+		if(!checkquest(130151) && !checkquest(130152) && 
+		!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
+			end;		
+		}
+		misceffect 101,"設置した罠#005";
+		progressbar 1;	//color=0xffff00
+		misceffect 18,"設置した罠#005";
+		if(checkitemblank() == 0) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐持ち物が多いようだ‐",1;
+			end;
+		}
+		if(rand(100) < 20) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐何も掛かっていなかった‐",1;
+			end;
+		}
+		getitem rand(1000412,1000413,1000414),1;
+		delquest 130152;
+		end;
+	}
+OnQuestInfo:
+	if(checkquest(130152))
+		showevent 0, 3, "設置した罠#002";
+	else
+		showevent 9999,0,"設置した罠#002";
+	end;
+}
+gw_fild01.gat,229,205,0	script	設置した罠#003	844,{/* 6877 */
+if(checkquest(8688)) {
+		if(!checkquest(130153)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
+			end;
+		}
+		if(!checkquest(130151) && !checkquest(130152) && 
+		!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
+			end;		
+		}
+		misceffect 101,"設置した罠#005";
+		progressbar 1;	//color=0xffff00
+		misceffect 18,"設置した罠#005";
+		if(checkitemblank() == 0) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐持ち物が多いようだ‐",1;
+			end;
+		}
+		if(rand(100) < 20) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐何も掛かっていなかった‐",1;
+			end;
+		}
+		getitem rand(1000412,1000413,1000414),1;
+		delquest 130153;
+		end;
+	}
+OnQuestInfo:
+	if(checkquest(130153))
+		showevent 0, 3, "設置した罠#003";
+	else
+		showevent 9999,0,"設置した罠#003";
+	end;
+}
+gw_fild01.gat,153,212,0	script	設置した罠#004	844,{/* 6878 */
+if(checkquest(8688)) {
+		if(!checkquest(130154)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
+			end;
+		}
+		if(!checkquest(130151) && !checkquest(130152) && 
+		!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
+			end;		
+		}
+		misceffect 101,"設置した罠#005";
+		progressbar 1;	//color=0xffff00
+		misceffect 18,"設置した罠#005";
+		if(checkitemblank() == 0) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐持ち物が多いようだ‐",1;
+			end;
+		}
+		if(rand(100) < 20) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐何も掛かっていなかった‐",1;
+			end;
+		}
+		getitem rand(1000412,1000413,1000414),1;
+		delquest 130154;
+		end;
+	}
+OnQuestInfo:
+	if(checkquest(130154))
+		showevent 0, 3, "設置した罠#004";
+	else
+		showevent 9999,0,"設置した罠#004";
+	end;
+}
+gw_fild01.gat,335,241,0	script	設置した罠#005	844,{/* 6879 */
+	if(checkquest(8688)) {
+		if(!checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
+			end;
+		}
+		if(!checkquest(130151) && !checkquest(130152) && 
+		!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
+			end;		
+		}
+		misceffect 101,"設置した罠#005";
+		progressbar 1;	//color=0xffff00
+		misceffect 18,"設置した罠#005";
+		if(checkitemblank() == 0) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐持ち物が多いようだ‐",1;
+			end;
+		}
+		if(rand(100) < 20) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐何も掛かっていなかった‐",1;
+			end;
+		}
+		getitem rand(1000412,1000413,1000414),1;//動物
 		delquest 130155;
 		end;
 	}
@@ -14001,9 +14458,9 @@ rachel.gat,103,141,5	script	聖物販売員#ep18	943,{/* 16167 */
 			cutin "ra_gwoman.bmp", 255;
 			end;
 		}
-		if(Zeny < 550) {//未調査
-			mes "[聖物販売員]";
-			mes "お金が足りませんねぇ？";
+		if(Zeny < 550) {
+			mes "おや～？";
+			mes "お金が足りないようですよ。";
 			close;
 		}
 		set Zeny, Zeny -550;
@@ -14021,7 +14478,7 @@ rachel.gat,103,141,5	script	聖物販売員#ep18	943,{/* 16167 */
 		mes "フレイヤ様のご加護があらんことを～！";
 		close;
 	}
-	if(checkquest(8695)){
+	if(checkquest(8695)) {
 		mes "[聖物販売員]";
 		mes "「浄水用聖物」の販売に参りました！";
 		mes "1人1つだけですよ、";
@@ -14048,9 +14505,10 @@ rachel.gat,103,141,5	script	聖物販売員#ep18	943,{/* 16167 */
 					cutin "ra_gwoman.bmp", 255;
 					end;
 				}
-				if(Zeny < 550) {//未調査
+				if(Zeny < 550) {
 					mes "[聖物販売員]";
-					mes "お金が足りませんねぇ？";
+					mes "おや～？";
+					mes "お金が足りないようですよ。";
 					close;
 				}
 				set Zeny, Zeny -550;
@@ -15078,7 +15536,302 @@ OnInit:
 	end;
 }
 wolfvill.gat,170,131,3	script	バムダッド#wolfvill	10394,{
+	function ENCHANT_NAME;
+
+	function ENCHANT_NAME {
+		set '@value,getarg(0);
+		if('@value > 0) {
+			set '@name$,"<ITEM>"+ getitemname('@value) +"<INFO>"+ '@value +"</INFO></ITEM>";
+		} else {
+			set '@name$,"エンチャント無し";
+		}
+		return '@name$;
+	}
+
+	mes "[バムダッド]";
+	mes "やぁ冒険者さん。";
+	mes "私に何か用かな？";
+	mes "　";
+	//mes "<URL>フィデスシリーズの詳細を見る<INFO>https://ragnarokonline.gungho.jp/gameguide/system/expand-item/fides.html</INFO></URL>";
+	messize 180,280;
+	next;
+	switch(select("フィデスエンチャント","浄化の儀式","立ち去る")) {
+	case 1:
+		switch(select("グループ1","グループ2","立ち去る")) {
+		case 1:
+			setarray '@equiplist,520008,520009,530013,530014,610021,610023,700030,700033,580017,580019,640019,640021,
+								 560018,560020,570017,570019,700031,700034,540019,540024,630012,630013,500026,500028,
+								 550024,550029,810002,810008,590021,590023,540023,540045,550025,550064,510032,510033,
+								 550028,550066;
+			mes "[バムダッド]";
+			mes "まずはお前さんの装備している武器を";
+			mes "確認させてもらうよ。";
+			mes "どれにエンチャントしたいんだい。";
+			messize 180,280;
+			next;
+			set '@itemid,-1;
+			set '@max,getarraysize('@equiplist);
+			for('@i=0; '@i < '@max; '@i++) {
+				if(getequipid(4) == '@equiplist['@i]) {
+					set '@menu$,"^nItemID^"+getequipid(4);
+					set '@itemid,getequipid(4);
+					break;
+				}
+			}
+			if('@itemid == -1) {
+				mes "^ff0000エンチャント対象のアイテムを";
+				mes "装着していません。";
+				messize 180,280;
+				close;
+			}
+			menu '@menu$,-;
+			mes "[バムダッド]";
+			mes "「^0000ff<ITEM>"+ getitemname('@itemid) +"["+ getiteminfo('@itemid,10) +"]<INFO>"+ '@itemid +"</INFO></ITEM>^000000」か。";
+			mes "どのスロットに行うんだい？";
+			mes "　";
+			mes "^0000ff<現在のエンチャント>^000000";
+			mes "第2スロット : "+ ENCHANT_NAME(getequipcardid(4,1));
+			mes "第3スロット : "+ ENCHANT_NAME(getequipcardid(4,2));
+			mes "第4スロット : "+ ENCHANT_NAME(getequipcardid(4,3));
+			messize 184,364;
+			next;
+			set '@slot,select("第2スロット","第3スロット","第4スロット");
+			set '@reqrefine,11 - '@slot;
+			set '@table,83 - '@slot;
+			if(getequiprefinerycnt(4) < '@reqrefine) {
+				mes "^ff0000エンチャントに必要な";
+				mes "精錬値が不足しています。";
+				messize 180,280;
+				close;
+			}
+			mes "[バムダッド]";
+			mes "最終確認だよ。";
+			mes "エンチャントして良いかな？";
+			mes "　";
+			mes "^0000ff<エンチャントに必要なアイテム>^000000";
+			mes "<ITEM>アメジストの欠片<INFO>1000405</INFO></ITEM> 1個";
+			mes "　";
+			mes "^0000ff<エンチャント対象>^000000";
+			mes "<ITEM>"+ getitemname('@itemid) +"["+ getiteminfo('@itemid,10) +"]<INFO>"+ '@itemid +"</INFO></ITEM>";
+			mes "　";
+			mes "^0000ff<現在のエンチャント>^000000";
+			mes "第"+ ('@slot+1) +"スロット : "+ ENCHANT_NAME(getequipcardid(4,'@slot));
+			messize 258,280;
+			next;
+			while(1) {
+				switch(select("少し考える","いいえ","はい","指定したエンチャントが付くまで実行")) {
+				case 1:
+					continue;
+				case 2:
+					goto L_Cancel;
+				case 3:
+					// 未調査
+					if(countitem(1000405) < 1) {
+						mes "^ff0000エンチャントに必要なアイテムが";
+						mes "不足しています。";
+						messize 180,280;
+						close;
+					}
+					delitem 1000405,1;
+					//set '@card,getenchantitemid('@table,0);
+					setequipcardid 4,'@slot,'@card,2;
+					misceffect 589,"";
+					misceffect 729,"";
+					misceffect 847,"";
+					mes "[バムダッド]";
+					mes "ほら、できたよ。";
+					mes "エンチャントをしたくなったら";
+					mes "「<ITEM>アメジストの欠片<INFO>1000405</INFO></ITEM>」を持って";
+					mes "私のところまでおいで。";
+					messize 180,280;
+					close;
+				case 4:
+					if(@enchant_count > 0)
+						deletearray @enchant_itemid,@enchant_count;
+					//getenchantlist '@table,0;
+					set '@max,@enchant_count;
+					for('@i = 0; '@i < '@max; '@i++)
+						set '@list$['@i],getitemname(@enchant_itemid['@i]);
+					do {
+						if('@max > 9)
+							set '@copy,9;
+						else
+							set '@copy,'@max;
+						copyarray '@e_menu$['@pmax][0],'@list$['@pmax*9],'@copy;
+						// 選択肢が10個未満か10丁度なら「やめる」
+						if('@copy < 9 || '@max == 9) {
+							set '@e_menu$['@pmax]['@copy],"やめる";
+							set '@end,'@copy;
+						} else {
+							set '@e_menu$['@pmax]['@copy],"次のページ";
+						}
+						'@pmax++;
+						set '@max,'@max - '@copy;
+					} while('@max > 0);
+					set '@page,1;
+					while(1) {
+						mes "付与するエンチャントを";
+						mes "選択してください。";
+						mes "　";
+						mes "^0000ff<現在のエンチャント>^000000";
+						mes "第"+ ('@slot+1) +"スロット : "+ ENCHANT_NAME(getequipcardid(4,'@slot));
+						messize 180,280;
+						next;
+						set '@select,select(printarray('@e_menu$['@page-1][0])) - 1;
+						if('@page == '@pmax && '@select == '@end) {
+							goto L_Cancel;
+						} else if('@select != 9) {
+							set '@enchantid,9 * ('@page - 1) + '@select;
+							break;
+						}
+						'@page++;
+					}
+					set '@expect,@enchant_itemid['@enchantid];
+					mes "エンチャント結果が";
+					mes "「^0000ff<ITEM>"+ getitemname('@expect) +"<INFO>"+ '@expect +"</INFO></ITEM>^000000」になるまで";
+					mes "連続して実行します。";
+					mes "よろしいですか？";
+					mes "　";
+					mes "^ff0000※必要なアイテムを全て預かり、";
+					mes "指定したエンチャントが付与された時点で";
+					mes "残りのアイテムをお返しいたします。";
+					mes "　";
+					mes "※必要アイテムが無くなるまで";
+					mes "連続して実行します。";
+					mes "　";
+					mes "※必要アイテムを全て消費しても";
+					mes "選んだエンチャントが";
+					mes "付与されなかった場合は";
+					mes "最後に行ったエンチャントの";
+					mes "内容が装備に付与されます。";
+					mes "　";
+					mes "※メンテナンスや、サーバーとの接続が";
+					mes "切断されるなどのトラブルが";
+					mes "発生した場合、残りのアイテムが";
+					mes "お返しできない場合があります。";
+					mes "予めご了承下さい。";
+					messize 454,364;
+					next;
+					while(1) {
+						switch(select("少し考える","いいえ","はい")) {
+						case 1:
+							continue;
+						case 2:
+							goto L_Cancel;
+						case 3:
+							break;
+						}
+						break;
+					}
+					// 未調査
+					if(countitem(1000405) < 1) {
+						mes "^ff0000エンチャントに必要なアイテムが";
+						mes "不足しています。";
+						messize 180,280;
+						close;
+					}
+					set '@amount,countitem(1000405);
+					delitem 1000405,'@amount;
+					for('@t = 0; '@t < '@amount; '@t++) {
+						//set '@card,getenchantitemid('@table,0);
+						if('@card == '@expect)
+							break;
+					}
+					if('@t < '@amount) {
+						set '@amount,'@amount - '@t;
+						if('@amount > 0)
+							getitem 1000405,'@amount;
+					}
+					misceffect 589,"";
+					misceffect 729,"";
+					misceffect 847,"";
+					setequipcardid 4,'@slot,'@card,2;
+					mes "<エンチャント結果>";
+					mes "実施結果 : <ITEM>"+ getitemname('@card) +"<INFO>"+ '@card +"</INFO></ITEM>";
+					mes "実施回数 :"+ ('@t+1);
+					messize 180,280;
+					next;
+					mes "[バムダッド]";
+					mes "ほら、できたよ。";
+					mes "エンチャントをしたくなったら";
+					mes "「<ITEM>アメジストの欠片<INFO>1000405</INFO></ITEM>」を持って";
+					mes "私のところまでおいで。";
+					messize 180,280;
+					close;
+				}
+			}
+			close;
+		case 2:
+			setarray '@equiplist,520008,530013,610021,700030,580017,640019,560018,570017,700031,540019,630012,500026,
+								 550024,810002,590021,540023,550025,510032,550028;
+			mes "[バムダッド]";
+			mes "まずはお前さんの装備している武器を";
+			mes "確認させてもらうよ。";
+			mes "どれにエンチャントしたいんだい。";
+			messize 180,280;
+			next;
+			set '@itemid,-1;
+			set '@max,getarraysize('@equiplist);
+			for('@i=0; '@i < '@max; '@i++) {
+				if(getequipid(4) == '@equiplist['@i]) {
+					set '@menu$,"^nItemID^"+getequipid(4);
+					set '@itemid,getequipid(4);
+					break;
+				}
+			}
+			if('@itemid == -1 || getequipgrade(4) < 1) {
+				mes "^ff0000エンチャント対象のアイテムを";
+				mes "装着していません。";
+				messize 180,280;
+				close;
+			}
+			// 未調査
+			close;
+		case 3:
+			goto L_Cancel;
+		}
+		close;
+	case 2:
+		mes "[バムダッド]";
+		mes "どちらの材料をつかうんだい？";
+		messize 180,280;
+		next;
+		switch(select("浄化図面で儀式を行う","浄化の聖水で儀式を行う","立ち去る")) {
+		case 1:
+			mes "^0000ff材料となるアイテムの精錬値、";
+			mes "装着されているカードや";
+			mes "エンチャントなどは引き継がれません。";
+			mes "また、対象アイテムを";
+			mes "複数所持している場合は";
+			mes "何れかのアイテムが使用されます。";
+			messize 180,280;
+			next;
+			callbarterlist "#fides_blueprint";
+			close;
+		case 2:
+			mes "^0000ff材料となるアイテムの精錬値、";
+			mes "装着されているカードや";
+			mes "エンチャントなどは引き継がれません。";
+			mes "また、対象アイテムを";
+			mes "複数所持している場合は";
+			mes "何れかのアイテムが使用されます。";
+			messize 180,280;
+			next;
+			callbarterlist "#fides_holywater";
+			close;
+		case 3:
+			goto L_Cancel;
+		}
+	case 3:
+		goto L_Cancel;
+	}
 	end;
+L_Cancel:
+	mes "[バムダッド]";
+	mes "用事があったらまたおいで。";
+	mes "私はいつでもここにいるから。";
+	messize 180,280;
+	close;
 OnInit:
 	setnpcgroup 1016;
 	setnpctitle "[フィデス作成・強化]";

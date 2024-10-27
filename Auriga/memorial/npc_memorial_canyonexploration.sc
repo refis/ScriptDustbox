@@ -28,7 +28,7 @@
 		set .scene,1;
 		close;
 	}
-	if(.scene == 1) {
+	if(.scene >= 1) {
 		cutin "ep19_lehar02.png", 2;
 		mes "[レハール]";
 		mes "ここから3時の方向にある装置が";
@@ -47,6 +47,15 @@ OnTouch:
 }
 
 1@20cn1.gat,171,105,5	script(HIDDEN)	見知らぬアーウィン#ep20_01	21976,9,9,{
+	if(.scene >= 2) {
+		misceffect 962,"";
+		mes "[見知らぬアーウィンたち]";
+		mes "背中を見せたぞ！";
+		mes "いまだ！　かかれっ!!";
+		close2;
+		warp getmdmapname("1@20cn2.gat"), 271, 138;
+		end;
+	}
 	mes "[見知らぬアーウィン]";
 	mes "そこにいるのは誰だ！";
 	mes "隠れようとしても無駄だぞ！";
@@ -117,7 +126,8 @@ OnTouch:
 	mes "背中を見せたぞ！";
 	mes "いまだ！　かかれっ!!";
 	close2;
-	stopnpctimer;
+	//stopnpctimer;
+	set .scene,2;
 	initnpctimer getmdnpcname("レハール#ep20MD_re02_09");
 	warp getmdmapname("1@20cn2.gat"), 271, 138;
 	end;
@@ -140,7 +150,7 @@ OnTouch:
 }
 
 1@20cn2.gat,271,134,3	script	レハール#ep20MD_re02_09	10469,2,2,{
-	if(.scene == 1) {
+	if(.scene == 2) {
 		mes "["+strcharinfo(0)+"]";
 		mes "……。";
 		next;
@@ -318,10 +328,10 @@ OnTouch:
 		unittalk "レハール : ううっ……行っちゃいましたね。";
 		cutin "ep18_bagot_03.png", 255;
 		hideonnpc getmdnpcname("バゴット#ep20MD_re01_09");
-		set .scene,2;
+		set .scene,3;
 		end;
 	}
-	if(.scene == 2) {
+	if(.scene == 3) {
 		cutin "ep19_lehar03.png", 2;
 		mes "[レハール]";
 		mes "はぁ……どうしましょう。";
@@ -393,10 +403,10 @@ OnTouch:
 		hideoffnpc getmdnpcname("猫#ep20MD_re01_1_09");
 		initnpctimer getmdnpcname("猫#ep20MD_re01_1_09");
 		unittalk getnpcid(0,getmdnpcname("猫#ep20MD_re01_1_09")),"猫 : ヤンニャン。";
-		set .scene,3;
+		set .scene,4;
 		end;
 	}
-	if(.scene == 3) {
+	if(.scene == 4) {
 		cutin "ep19_lehar03.png", 2;
 		mes "[レハール]";
 		mes "どうしましょう。";
@@ -429,7 +439,7 @@ OnInit:
 }
 
 1@20cn2.gat,269,136,3	script(HIDDEN)	猫#ep20MD_re01_1_09	22006,{
-	if(.scene == 3) {
+	if(.scene == 4) {
 		cutin "ep20_nyar01.png", 1;
 		mes "[白い猫]";
 		mes "ムミャ。";
@@ -477,11 +487,32 @@ OnInit:
 		mes "あの猫について行きましょう！";
 		close2;
 		cutin "ep19_lehar03.png", 255;
-		stopnpctimer;
+		//stopnpctimer;
+		set .scene,5;
 		initnpctimer getmdnpcname("レハール#ep20MD_re03_09");
 		warp getmdmapname("1@20cn2.gat"), 59, 257;
 		end;
 	}
+	if(.scene == 5) {
+		cutin "ep19_lehar01.png", 2;
+		mes "[レハール]";
+		mes "檻から出られますよ！";
+		mes "何が起きたのかわかりませんが";
+		mes "あの猫について行きましょう！";
+		close2;
+		cutin "ep19_lehar03.png", 255;
+		warp getmdmapname("1@20cn2.gat"), 59, 257;
+		end;
+	}
+	cutin "ep20_nyar01.png", 1;
+	mes "[白い猫]";
+	mes "ムミャ。";
+	close2;
+	cutin "ep20_nyar01.png", 255;
+	if(.scene == 6)
+		warp getmdmapname("1@20cn2.gat"), 110, 66;
+	else
+		warp getmdmapname("1@20cn2.gat"), 35, 23;
 	end;
 OnTimer2000:
 	initnpctimer;
@@ -724,6 +755,7 @@ OnTimer2000:
 	cutin "ep19_lehar04.png", 255;
 	stopnpctimer;
 	initnpctimer getmdnpcname("猫#ep20MD_re04_09");
+	set .scene,6;
 	hideonnpc getmdnpcname("レハール#ep20MD_re04_09");
 	hideonnpc getmdnpcname("猫#ep20MD_re03_09");
 	hideonnpc getmdnpcname("アーウィン#ep20MD_re01_09");
@@ -823,6 +855,7 @@ OnTouch:
 	stopnpctimer;
 	hideonnpc getmdnpcname("レハール#ep20MD_re05_09");
 	viewpoint 1, 96, 65, 1, 0xFF0000;
+	setnpcspeed 200;
 	npcwalkto 96,65,getmdnpcname("猫#ep20MD_re04_09");
 	npcwalkwait;
 	initnpctimer getmdnpcname("猫#ep20MD_re04_1_09");
@@ -910,6 +943,7 @@ OnInit:
 	close2;
 	cutin "ep19_lehar05.png", 255;
 	stopnpctimer;
+	set .scene,7;
 	initnpctimer getmdnpcname("レハール#ep20MD_re06_09");
 	hideonnpc getmdnpcname("猫#ep20MD_re04_1_09");
 	hideonnpc getmdnpcname("レハール#ep20MD_re05_1_09");
@@ -950,8 +984,8 @@ OnInit:
 	end;
 }
 
-1@20cn2.gat,32,22,5	script(HIDDEN)	レハール#ep20MD_re06_09	10469,{
-	if(.scene == 3) {
+1@20cn2.gat,32,22,5	script(HIDDEN)	レハール#ep20MD_re06_09	10469,2,2,{
+	if(.scene == 7) {
 		cutin "ep19_lehar05.png", 2;
 		mes "[レハール]";
 		mes "見てください！";
@@ -1010,7 +1044,7 @@ OnInit:
 		viewpoint 1, 33, 14, 1, 0xFF0000;
 		stopnpctimer;
 		initnpctimer getmdnpcname("#ep20MD_re02_09");
-		set .scene,4;
+		set .scene,8;
 		end;
 	}
 	cutin "ep19_lehar01.png", 2;
@@ -1022,6 +1056,9 @@ OnInit:
 	close2;
 	viewpoint 1, 33, 14, 1, 0xFF0000;
 	cutin "ep19_lehar05.png", 255;
+	end;
+OnTouch:
+	unittalk "レハール : ああっ、あれを見てください！";
 	end;
 OnTimer2000:
 	initnpctimer;
@@ -1039,11 +1076,10 @@ OnTimer2000:
 
 1@20cn2.gat,33,15,0	script	#ep20MD_re02_09	45,2,2,{
 OnTouch:
-	if(.scene < 4) {
+	if(.scene < 8) {
 		unittalk getcharid(3),strcharinfo(0)+" : 扉には鍵がかかっているようだ。",1;
 		end;
 	}
-	unittalk getnpcid(0,getmdnpcname("レハール#ep20MD_re06_09")),"レハール : ああっ、あれを見てください！";
 	cutin "ep19_lehar01.png", 2;
 	mes "[レハール]";
 	mes "外に出ましょう！";
@@ -1124,7 +1160,10 @@ OnTouch:
 		mes "‐その場にとどまった‐";
 		close;
 	}
-	//miss
+	mes "‐イスガルド 氷の城へ";
+	mes "　向かった‐";
+	close2;
+	warp "icecastle.gat",201,165;
 	end;
 OnTimer2000:
 	initnpctimer;

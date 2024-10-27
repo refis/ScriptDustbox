@@ -13169,56 +13169,60 @@ OnInit:
 }
 
 jor_back2_.gat,222,123,7	script	指示された場所#e19ms00	10432,{/* 6043 */
-	for(set '@i,0; '@i < 6; set '@i,'@i+1) {
-		if(checkquest(17652+'@i))
-			'@j++;
-	}
-	if(checkquest(17661)) {
-		mes "‐6カ所すべてに超強力触覚を埋めた。";
-		mes "　ホルルの元へもどろう‐";
-		close;
-	}
-	set '@num,substr(strnpcinfo(0),-1);
-	set '@quest,17652+'@num;
-	if(checkquest('@quest)) {
+	if(checkquest(17651)) {
+		for(set '@i,0; '@i < 6; set '@i,'@i+1) {
+			if(checkquest(17652+'@i))
+				'@j++;
+		}
+		if(checkquest(17661)) {
+			mes "‐6カ所すべてに超強力触覚を埋めた。";
+			mes "　ホルルの元へもどろう‐";
+			close;
+		}
+		set '@num,substr(strnpcinfo(0),-1);
+		set '@quest,17652+'@num;
+		if(checkquest('@quest)) {
+			mes "‐超強力触覚を埋め終えた。";
+			mes "　他の場所に行こう‐";
+			close;
+		}
+		mes "‐指示された場所はここのようだ。";
+		mes "　超強力触覚を埋めよう‐";
+		next;
+		misceffect 101;
+		progressbar 1;	//color=0xffff00
+		misceffect 18;
+		next;
+		setquest '@quest;
+		compquest '@quest;
+		delitem 1000842,1;
+		//showevent 9999, 0, "指示された場所#e19ms01";	// 6043: 222, 123
+		if('@j == 5) {
+			//showevent 9999, 0, "指示された場所#e19ms02";	// 6044: 49, 175
+			//@showevent 0, 3;	// 6045: 308, 99
+			setquest 17661;
+			setquest 17652;
+			delquest 17652;
+			setquest 17653;
+			delquest 17653;
+			setquest 17654;
+			delquest 17654;
+			setquest 17655;
+			delquest 17655;
+			setquest 17656;
+			delquest 17656;
+			setquest 17657;
+			delquest 17657;
+			mes "‐6カ所すべてに超強力触覚を埋めた。";
+			mes "　ホルルの元へもどろう‐";
+			close;
+		}
 		mes "‐超強力触覚を埋め終えた。";
 		mes "　他の場所に行こう‐";
 		close;
 	}
-	mes "‐指示された場所はここのようだ。";
-	mes "　超強力触覚を埋めよう‐";
-	next;
-	misceffect 101;
-	progressbar 1;	//color=0xffff00
-	misceffect 18;
-	next;
-	setquest '@quest;
-	compquest '@quest;
-	delitem 1000842,1;
-	//showevent 9999, 0, "指示された場所#e19ms01";	// 6043: 222, 123
-	if('@j == 5) {
-		//showevent 9999, 0, "指示された場所#e19ms02";	// 6044: 49, 175
-		//@showevent 0, 3;	// 6045: 308, 99
-		setquest 17661;
-		setquest 17652;
-		delquest 17652;
-		setquest 17653;
-		delquest 17653;
-		setquest 17654;
-		delquest 17654;
-		setquest 17655;
-		delquest 17655;
-		setquest 17656;
-		delquest 17656;
-		setquest 17657;
-		delquest 17657;
-		mes "‐6カ所すべてに超強力触覚を埋めた。";
-		mes "　ホルルの元へもどろう‐";
-		close;
-	}
-	mes "‐超強力触覚を埋め終えた。";
-	mes "　他の場所に行こう‐";
-	close;
+	unittalk getcharid(3),strcharinfo(0)+" : 白い雪と氷の大地が広がっている。",1;
+	end;
 }
 
 jor_back2_.gat,49,175,7		duplicate(指示された場所#e19ms00)	指示された場所#e19ms01	10432	/* 6044 */
@@ -16417,7 +16421,7 @@ icas_in.gat,136,197,3	script	レハール#ep19	10469,{/* 2909 (cloaking)*/
 		mes "[マラム]";
 		mes "一緒にいたですって？";
 		cutin "ep18_maram_03.png", 2;
-		hideoffnpc "マラム#ep19";
+		cloakoffnpc "マラム#ep19";
 		next;
 		mes "[レハール]";
 		mes "はい。";
@@ -17192,7 +17196,7 @@ p_cas_gr_2.gat,20,32,3	script	旅行用鞄#ep19_1	10459,{/* 5606 (cloaking)*/
 		end;
 	case 9:
 		mes "‐アリスを待つ間、聖女と話してみよう‐";
-		hideoffnpc "聖女#ep19";
+		cloakoffnpc "聖女#ep19";
 		close;
 	case 10:
 	case 11:
@@ -17859,7 +17863,7 @@ icecastle.gat,27,123,3	script	レハール#ep19_3	10469,{/* 2916 (cloaking)*/
 		mes "[レハール]";
 		mes "先ずはそこの家に入りましょう。";
 		mes "外に長くいると風邪をひいてしまいます。";
-		hideoffnpc "レハール#ep19_3";
+		cloakoffnpc "レハール#ep19_3";
 		cutin "ep19_lehar05.png", 2;
 		close2;
 		cutin "ep19_lehar05.png", 255;
@@ -19180,7 +19184,7 @@ icas_in.gat,27,116,5	script	シュルル#ep19_dq_jorab	10461,{/* 2927 (cloaking)*/
 					cutin "kafra_01.bmp", 255;
 					end;
 				}
-				delitem 23228,10;
+				delitem 1000708,10;
 				delquest 11831;
 				setquest 11832;
 				getitem 1000608,4;
