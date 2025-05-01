@@ -962,7 +962,7 @@ icas_in.gat,258,196,0	script	#ep20_re01	139,5,5,{/* 3336 */
 	else if(EP20_1QUE == 13) {
 		cloakoffnpc "ミリアム#ep20_re01";
 	}
-	else if(EP20_1QUE == 14 || EP20_1QUE == 15) {//15?
+	else if(EP20_1QUE == 14 || EP20_1QUE == 15) {
 		cloakoffnpc "レオン#ep20_re01";
 		cloakoffnpc "オーレリー#ep20_re01";
 		cloakoffnpc "レイジー#ep20_re01";
@@ -1576,7 +1576,6 @@ icas_in.gat,263,200,3	script(CLOAKED)	レイジー#ep20_re01	10454,{/* 3339 (cloakin
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐蛇の巣の門の前へ";
 		mes "　向かった‐";
 		close2;
@@ -1960,7 +1959,6 @@ icas_in.gat,260,205,5	script(CLOAKED)	ヴェルグンデ#ep20_re01	10468,{/* 3343 (clo
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐城の前へ";
 		mes "　向かった‐";
 		close2;
@@ -2412,7 +2410,7 @@ jor_back5.gat,353,352,0	script	#ep20_re03	139,5,5,{/* 3363 */
 		cloakoffnpc "レイジー#ep20_re05";
 		cloakoffnpc "レハール#ep20_re05";
 		cloakoffnpc "ホルル#ep20_re05";
-		cloakoffnpc "魔力の感じられる設置物#";
+		cloakoffnpc "魔力の感じられる設置物#06";
 	}
 	else if(EP20_1QUE == 5) {
 		cloakoffnpc "ミリアム#ep20_re05";
@@ -2477,7 +2475,7 @@ jor_back5.gat,355,354,7	script(CLOAKED)	レハール#ep20_re05	10469,{/* 3366 (cloak
 	cutin "ep19_lehar03.png", 255;
 	end;
 }
-jor_back5.gat,356,355,3	script(CLOAKED)	魔力の感じられる設置物#	10540,{/* 3367 (cloaking)*/
+jor_back5.gat,356,355,3	script(CLOAKED)	魔力の感じられる設置物#06	10540,{/* 3367 (cloaking)*/
 	mes "‐魔力の感じられる";
 	mes "　奇妙な装置が設置されている‐";
 	close;
@@ -3313,7 +3311,11 @@ OnInit:
 	setnpctitle "[MDの生成と入場]";
 	end;
 }
-jor_back5.gat,365,187,3	script	魔力の感じられる設置物#	10538,{/* 3385 */}
+jor_back5.gat,365,187,3	script	魔力の感じられる設置物#	10538,{/* 3385 */
+	mes "‐魔力の感じられる";
+	mes "　奇妙な装置が設置されている‐";
+	close;
+}
 jor_back6.gat,122,180,3	script	魔力の感じられる設置物#	10539,{/* 3395 */
 	mes "‐魔力の感じられる";
 	mes "　奇妙な装置が設置されている‐";
@@ -3327,7 +3329,7 @@ jor_nest.gat,38,268,0	script	#20ms00	139,6,6,{/* 3398 */
 		cloakoffnpc "ミリアム#20ms00";
 		cloakoffnpc "レハール#20ms00";
 	}
-	if(EP20_1QUE >= 17) //24で確認
+	if(EP20_1QUE >= 18)
 		cloakoffnpc "門#20ms00";
 	end;
 }
@@ -3516,7 +3518,6 @@ jor_nest.gat,40,274,3	script(CLOAKED)	ホルル#20ms00	10470,{/* 3401 (cloaking)*/
 			mes "‐その場にとどまった‐";
 			close;
 		}
-		//
 		mes "‐中へ";
 		mes "　向かった‐";
 		close2;
@@ -3562,12 +3563,13 @@ jor_root1.gat,32,34,5	script(CLOAKED)	ルガン呪術師#20ms10	21985,{/* 3405 (cloaki
 		mes "どうして、ここに人間が!?";
 		close;
 	}
-	//timer missing
 	emotion 23,"ルガン呪術師#20ms10",1;
-	unittalk getnpcid(0,"ルガン呪術師#20ms10"),"ルガン呪術師 : 貴様人間だな！　私の目は誤魔化せん！",1;
+	unittalk "ルガン呪術師 : 貴様人間だな！　私の目は誤魔化せん！",1;
+	if(!sleep2(1000)) end;
 	unittalk getcharid(3),strcharinfo(0)+" : 人間を感知するルガンがいる。感知する奴を処理しながら、みんなと合流しよう",1;
 	misceffect 0,"ルガン呪術師#20ms10",1;
-	unittalk getnpcid(0,"ルガン呪術師#20ms10"),"ルガン呪術師 : ぐあっ!!",1;
+	unittalk "ルガン呪術師 : ぐあっ!!",1;
+	if(!sleep2(500)) end;
 	cloakonnpc "ルガン呪術師#20ms10";
 	cloakoffnpc "形跡#20ms10";
 	chgquest 17692,17693;
@@ -15065,11 +15067,13 @@ OnQuestInfo:
 		showevent 0, 3, "オリリョ鳥兵#ep20_DQ_2";
 	end;
 OnInit:
-	setarray 'Question$,"ババヤガ","ジェスター","ウルフ","オークウォリアー","スポア";
-	setarray 'Answer$,"古木の枝","狐の尻尾","ハエの羽","焼きいも";
+	setnpctitle "<イーグルパトロール隊>";
+OnHour05:
+	setarray 'Question$,"ババヤガ","ジェスター","ウルフ","オークウォリアー","スポア","ウィロー","ポポリン","コボルドリーダー","サベージ","クラベン";
+	setarray 'Answer$,"古木の枝","狐の尻尾","ハエの羽","焼きいも","きのこの胞子","人魚の心臓","拡大鏡","かえるの卵","サソリの尻尾";
 	set 'TodayQuestion,rand(getarraysize('Question$));
 	set 'TodayAnswer,rand(getarraysize('Answer$));
-	setnpctitle "<イーグルパトロール隊>";
+	set 'TodaySpy,rand(1,10);
 	end;
 }
 icas_in.gat,104,60,2	script(CLOAKED)	補給官ゴリル#ep20iw	21518,{/* 3709 (cloaking)*/
@@ -15145,7 +15149,7 @@ icecastle.gat,204,238,2	script	怪しいアーウィン#SSQ01	10461,{/* 3711 */
 			cloakonnpc "上等兵モルラン#SSQ01";
 			close;
 		}
-		if(rand(3)) {	// 不明
+		if(getvariableofnpc('TodaySpy,"オリリョ鳥兵#ep20_DQ_2") != 1) {
 			unittalk getnpcid(0,"怪しいアーウィン#SSQ01"),"怪しいアーウィン : 合言葉？答えは"+'@a$+"だったかな？",1;
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
@@ -15263,7 +15267,7 @@ icecastle.gat,238,185,2	script	怪しいアーウィン#SSQ02	10461,7,7,{/* 3713 */
 			cloakonnpc "二等兵ロルル#SSQ02";
 			close;
 		}
-		if(rand(3)) {	// 不明
+		if(getvariableofnpc('TodaySpy,"オリリョ鳥兵#ep20_DQ_2") != 2) {
 			unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : 合言葉？あ！さっき作業番長のポさんが教えた、あのおかしな単語のことだよな、"+'@a$+"だったけ？",1;	// 3716
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
@@ -15277,6 +15281,36 @@ icecastle.gat,238,185,2	script	怪しいアーウィン#SSQ02	10461,7,7,{/* 3713 */
 			}
 			close;
 		}
+		emotion 57,"怪しいアーウィン#SSQ02",1;
+		unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : くっ…苦労してここまで来たというのに、バレてしまうとは…",1;
+		if(!sleep2(1500)) end;
+		cloakoffnpc "二等兵ロルル#SSQ02";
+		if(!sleep2(750)) end;
+		unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: 連絡を受けて参りました。",1;
+		if(!sleep2(1500)) end;
+		unittalk getnpcid(0,"怪しいアーウィン#SSQ02"),"怪しいアーウィン : 素直に捕まるから、捕虜として待遇してくれ。",1;
+		if(!sleep2(1500)) end;
+		emotion 53,"二等兵ロルル#SSQ02",1;
+		unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: あっ！冒険者殿、やりましたね。",1;
+		if(!sleep2(1500)) end;
+		emotion 21,"二等兵ロルル#SSQ02",1;
+		unittalk getnpcid(0,"二等兵ロルル#SSQ02"),"二等兵ロルル: ではスパイを引き渡してください。お疲れ様でした、冒険者殿。",1;
+		if(!sleep2(750)) end;
+		cloakonnpc "二等兵ロルル#SSQ02";
+		cloakonnpc "怪しいアーウィン#SSQ02";
+		if(checkquest(19168)) delquest 19168;
+		if(checkquest(19170)) delquest 19170;
+		if(checkquest(19171)) delquest 19171;
+		if(checkquest(19172)) delquest 19172;
+		if(checkquest(19173)) delquest 19173;
+		if(checkquest(19174)) delquest 19174;
+		if(checkquest(19175)) delquest 19175;
+		if(checkquest(19176)) delquest 19176;
+		if(checkquest(19177)) delquest 19177;
+		delquest 19162;
+		setquest 19163;
+		unittalk getcharid(3),""+strcharinfo(0)+" : (氷城に潜入したスパイの捜索に成果が出た。オリリョに報告しよう。)",1;
+		close;
 	}
 	cloakonnpc "怪しいアーウィン#SSQ02";
 	emotion 22,"",1;
@@ -15350,7 +15384,7 @@ icecastle.gat,132,182,6	script	怪しいアーウィン#SSQ03	10461,7,7,{/* 3715 */
 			cloakonnpc "怪しいアーウィン#SSQ03";
 			close;
 		}
-		if(rand(3)) {	// 不明
+		if(getvariableofnpc('TodaySpy,"オリリョ鳥兵#ep20_DQ_2") != 3) {
 			unittalk getnpcid(0,"怪しいアーウィン#SSQ03"),"怪しいアーウィン : え？合言葉？ヒクッ…あの…あの何だ…そう、"+'@a$+"、これだ！…合ってるよな？",1;
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
@@ -15461,7 +15495,7 @@ icecastle.gat,66,71,8	script	怪しいアーウィン#SSQ04	10461,7,7,{/* 3717 */
 			cloakonnpc "一等兵ソルル#SSQ04";
 			close;
 		}
-		if(rand(3)) {	// 不明
+		if(getvariableofnpc('TodaySpy,"オリリョ鳥兵#ep20_DQ_2") != 4) {
 			unittalk getnpcid(0,"怪しいアーウィン#SSQ04"),"怪しいアーウィン : ●●●？●●● "+'@a$+"●●？",1;
 			unittalk getcharid(3),strcharinfo(0)+" : (小さい声だったが、どうしてか合言葉だけは明確に聞こえた。)",1;
 			if(!sleep2(1500)) end;
@@ -15577,7 +15611,7 @@ icecastle.gat,58,223,8	script	怪しいアーウィン#SSQ05	10461,7,7,{/* 3719 */
 			cloakonnpc "二等兵トラリ#SSQ05";
 			close;
 		}
-		if(rand(3)) {	// 不明
+		if(getvariableofnpc('TodaySpy,"オリリョ鳥兵#ep20_DQ_2") != 5) {
 			unittalk getnpcid(0,"怪しいアーウィン#SSQ05"),"怪しいアーウィン : "+'@a$+"です。",1;
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
@@ -15679,7 +15713,7 @@ icecastle.gat,54,209,8	script	怪しいアーウィン#SSQ06	10461,7,7,{/* 3721 */
 			cloakonnpc "怪しいアーウィン#SSQ06";
 			close;
 		}
-		if(rand(3)) {	// 不明
+		if(getvariableofnpc('TodaySpy,"オリリョ鳥兵#ep20_DQ_2") != 6) {
 			unittalk getnpcid(0,"怪しいアーウィン#SSQ06"),"怪しいアーウィン : "+'@a$+"！これで合ってるよね？スパイじゃないから、静かにしてくれ。重要なものを観察してるから。",1;
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
@@ -15694,6 +15728,48 @@ icecastle.gat,54,209,8	script	怪しいアーウィン#SSQ06	10461,7,7,{/* 3721 */
 			}
 			close;
 		}
+		unittalk getnpcid(0,"ナドヤガンド#ep20_DQ_6"),"怪しいアーウィン : あの、いくらセキュリティが大事でも、そんなことをさせて恥ずかしくないのか？",1;
+		if(!sleep2(1500)) end;
+		emotion 40,"ナドヤガンド#ep20_DQ_6";
+		unittalk getnpcid(0,"ナドヤガンド#ep20_DQ_6"),"怪しいアーウィン : キャロット～、キャロット！キャロット～、キャロット！",1;
+		if(!sleep2(3000)) end;
+		emotion 19,"ナドヤガンド#ep20_DQ_6";
+		unittalk getnpcid(0,"ナドヤガンド#ep20_DQ_6"),"怪しいアーウィン : これじゃない？あ…ということは、私いまバレたよな？",1;
+		if(!sleep2(1500)) end;
+		emotion 9,"ナドヤガンド#ep20_DQ_6";
+		unittalk getnpcid(0,"ナドヤガンド#ep20_DQ_6"),"怪しいアーウィン : … … …。",1;
+		unittalk getcharid(3),strcharinfo(0)+" : … … …。",1;
+		if(!sleep2(700)) end;
+		cloakoffnpc "ホルル#20ms60";
+		if(!sleep2(700)) end;
+		emotion 56,"ホルル#20ms60";
+		unittalk getnpcid(0,"ホルル#20ms60"),"上等兵ポルリョ: (?▽?)/ … ……～",1;
+		if(!sleep2(1500)) end;
+		emotion 56,"ホルル#20ms60";
+		unittalk getnpcid(0,"ホルル#20ms60"),"上等兵ポルリョ: (?_?)？…… …？",1;
+		if(!sleep2(1500)) end;
+		unittalk getcharid(3),strcharinfo(0)+" : 潜入したルガンのスパイを見付けました。お互い気まずいから、早く連れて行ってください。",1;
+		if(!sleep2(1500)) end;
+		emotion 56,"ホルル#20ms60";
+		emotion 9,"ナドヤガンド#ep20_DQ_6";
+		unittalk getnpcid(0,"ホルル#20ms60"),"上等兵ポルリョ: (-_-a)？… …… ……… ……",1;
+		unittalk getnpcid(0,"ナドヤガンド#ep20_DQ_6"),"怪しいアーウィン : … … …",1;
+		if(!sleep2(800)) end;
+		cloakonnpc "ナドヤガンド#ep20_DQ_6";
+		cloakonnpc "ホルル#20ms60";
+		if(checkquest(19168)) delquest 19168;
+		if(checkquest(19169)) delquest 19169;
+		if(checkquest(19170)) delquest 19170;
+		if(checkquest(19171)) delquest 19171;
+		if(checkquest(19172)) delquest 19172;
+		if(checkquest(19174)) delquest 19174;
+		if(checkquest(19175)) delquest 19175;
+		if(checkquest(19176)) delquest 19176;
+		if(checkquest(19177)) delquest 19177;
+		delquest 19162;
+		setquest 19163;
+		unittalk getcharid(3),strcharinfo(0)+" : (氷城に潜入したスパイの捜索に成果が出た。オリリョに報告しよう。)",1;
+		close;
 	}
 	cloakonnpc "怪しいアーウィン#SSQ06";
 	emotion 22,"",1;
@@ -15786,7 +15862,7 @@ icecastle.gat,96,245,2	script	怪しいアーウィン#SSQ07	10461,7,7,{/* 3723 */
 			cloakonnpc "上等兵ポルリョ#SSQ07";
 			close;
 		}
-		if(rand(3)) {	// 不明
+		if(getvariableofnpc('TodaySpy,"オリリョ鳥兵#ep20_DQ_2") != 7) {
 			unittalk getnpcid(0,"怪しいアーウィン#SSQ07"),"怪しいアーウィン : 合言葉か…！！あ、思い出した！"+'@a$+"ですよね？",1;
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),""+strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
@@ -15867,7 +15943,7 @@ icecastle.gat,134,268,4	script	怪しいアーウィン#SSQ08	10461,7,7,{/* 3725 */
 			unittalk getcharid(3),strcharinfo(0)+" : ？？？？？",1;
 			close;
 		}
-		if(rand(3)) {	// 不明
+		if(getvariableofnpc('TodaySpy,"オリリョ鳥兵#ep20_DQ_2") != 8) {
 			unittalk getnpcid(0,"怪しいアーウィン#SSQ08"),"怪しいアーウィン : 合言葉は"+'@a$+"。そしてしーっ！静かにしてくれ。この絶壁に残った痕跡を調査しているから…",1;
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
@@ -15883,6 +15959,33 @@ icecastle.gat,134,268,4	script	怪しいアーウィン#SSQ08	10461,7,7,{/* 3725 */
 			}
 			close;
 		}
+		unittalk getnpcid(0,"怪しいアーウィン#SSQ08"),"怪しいアーウィン : 知ってる？この絶壁には伝説があるらしい。しかし誰もその伝説を知らない。",1;
+		if(!sleep2(1500)) end;
+		unittalk getcharid(3),strcharinfo(0)+" : 怪しい…私は合言葉を聞いてみたんだけど？",1;
+		if(!sleep2(800)) end;
+		cloakoffnpc "二等兵トラロン#SSQ08";
+		if(!sleep2(800)) end;
+		emotion 2,"二等兵トラロン#SSQ08",1;
+		unittalk getnpcid(0,"二等兵トラロン#SSQ08"),"二等兵トラロン: ジャーン！二等兵トラロン様、通報を受けて参上～",1;
+		if(!sleep2(1500)) end;
+		emotion 22,"二等兵トラロン#SSQ08",1;
+		unittalk getnpcid(0,"怪しいアーウィン#SSQ08"),"怪しいアーウィン : うぐっ！用意は完ぺきだったのに！合言葉だなんて！",1;
+		if(!sleep2(1500)) end;
+		emotion 5,"二等兵トラロン#SSQ08",1;
+		unittalk getnpcid(0,"二等兵トラロン#SSQ08"),"二等兵トラロン: 私たちも馬鹿ではないからね。",1;
+		if(!sleep2(1500)) end;
+		unittalk getnpcid(0,"二等兵トラロン#SSQ08"),"二等兵トラロン: ハハ、冒険者殿。昼夜を問わずご苦労様です。",1;
+		if(!sleep2(1500)) end;
+		unittalk getnpcid(0,"二等兵トラロン#SSQ08"),"二等兵トラロン: 冒険者殿が手伝ってくださり、感謝していますよ。",1;
+		if(!sleep2(1500)) end;
+		unittalk getnpcid(0,"二等兵トラロン#SSQ08"),"二等兵トラロン: では、スパイの身柄を引き受けますね。",1;
+		if(!sleep2(800)) end;
+		cloakonnpc "怪しいアーウィン#SSQ08";
+		cloakonnpc "二等兵トラロン#SSQ08";
+		delquest 19162;
+		setquest 19163;
+		unittalk getcharid(3),strcharinfo(0)+" : (氷城に潜入したスパイの捜索に成果が出た。オリリョに報告しよう。)",1;
+		close;
 	}
 	cloakonnpc "怪しいアーウィン#SSQ08";
 	emotion 22,"",1;
@@ -15961,7 +16064,7 @@ icecastle.gat,154,247,6	script	怪しいアーウィン#SSQ09	10461,7,7,{/* 3727 */
 			cloakonnpc "上等兵モルリュ#SSQ09";
 			close;
 		}
-		if(rand(3)) {	// 不明
+		if(getvariableofnpc('TodaySpy,"オリリョ鳥兵#ep20_DQ_2") != 9) {
 			unittalk getnpcid(0,"怪しいアーウィン#SSQ09"),"怪しいアーウィン : 合言葉は"+'@a$+"です！お疲れ様です、冒険者殿！",1;
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
@@ -16058,7 +16161,7 @@ icecastle.gat,228,134,8	script	怪しいアーウィン#SSQ10	10461,7,7,{/* 3729 */
 			unittalk getcharid(3),strcharinfo(0)+" : (ふむ…何を言ってたんだろ？わからない。)",1;
 			close;
 		}
-		if(rand(3)) {	// 不明
+		if(getvariableofnpc('TodaySpy,"オリリョ鳥兵#ep20_DQ_2") != 10) {
 			unittalk getnpcid(0,"怪しいアーウィン#SSQ10"),"怪しいアーウィン : 合言葉は"+'@a$+"ですよね？",1;
 			if(!sleep2(1500)) end;
 			unittalk getcharid(3),strcharinfo(0)+" : はい、合ってます。確認しました。失礼いたしました。",1;
@@ -16137,7 +16240,7 @@ OnInit:
 	end;
 }
 
--	script	接触場所#EP20_DQ	-1,{/* 3732 */
+-	script	接触場所#EP20_DQ	-1,{
 	if(checkquest(19165)) {
 		unittalk getcharid(3),strcharinfo(0)+" : （指定された場所から、気配を感じる）",1;
 		set '@today_q,getvariableofnpc('TodayQuestion,"オリリョ鳥兵#ep20_DQ_2");
@@ -16184,7 +16287,8 @@ OnQuestInfo:
 		showevent 9999, 0;
 	end;
 }
-jor_back5.gat,296,149,4	duplicate(接触場所#EP20_DQ)	接触場所#Q19169	10429,5,5,	/* 3732 */
+jor_nest.gat,171,84,4	duplicate(接触場所#EP20_DQ)	接触場所#Q19168	10429,5,5	/* 3731 */
+jor_back5.gat,296,149,4	duplicate(接触場所#EP20_DQ)	接触場所#Q19169	10429,5,5	/* 3732 */
 jor_twice.gat,76,100,4	duplicate(接触場所#EP20_DQ)	接触場所#Q19170	10429,5,5	/* 3733 */
 jor_maze.gat,253,267,4	duplicate(接触場所#EP20_DQ)	接触場所#Q19171	10429,5,5	/* 3734 */
 jor_root1.gat,39,93,4	duplicate(接触場所#EP20_DQ)	接触場所#Q19172	10429,5,5	/* 3735 */

@@ -4023,9 +4023,18 @@ wolfvill.gat,143,113,5	script	イムリル#ep18_wv_076	10379,{/* 15909 */
 				cutin "ep18_imril_04.png", 255;
 				end;
 			}
-			if(checkquest(11725)) {
-				//未調査
-				close;
+			if(checkquest(11725) || checkquest(11726) || checkquest(11727) || checkquest(11728) 
+			|| checkquest(11729) || checkquest(11730) || checkquest(11731) || checkquest(11732) 
+			|| checkquest(11733) || checkquest(11734)) {
+				mes "[イムリル]";
+				mes "品を運ぶにも、溶岩の対処をするにも";
+				mes "ネックとなるのはモンスターだな。";
+				mes "一匹の残らず駆逐できたら";
+				mes "いいんだけどな。";
+				cutin "ep18_imril_01.png", 2;
+				close2;
+				cutin "ep18_imril_01.png", 255;
+				end;
 			}
 			if(checkquest(130114)) {
 				cutin "ep18_imril_03.png", 2;
@@ -4105,16 +4114,30 @@ wolfvill.gat,143,113,5	script	イムリル#ep18_wv_076	10379,{/* 15909 */
 				end;
 			}
 			if(checkquest(11739)) {
-				mes "[イムリル]";
-				mes "今日は、お疲れ様。";
-				mes "村は人手が少ないからさ。";
-				mes "明日も手伝ってくれると助かるよ。";
-				cutin "ep18_imril_04.png", 2;
-				close2;
-				cutin "ep18_imril_04.png", 255;
-				end;
+				if(!(checkquest(11739)&2)) {
+					mes "[イムリル]";
+					mes "今日は、お疲れ様。";
+					mes "村は人手が少ないからさ。";
+					mes "明日も手伝ってくれると助かるよ。";
+					cutin "ep18_imril_04.png", 2;
+					close2;
+					cutin "ep18_imril_04.png", 255;
+					end;
+				}
+				delquest 11739;
 			}
-			if(checkquest(11738)&4) {
+			if(checkquest(11738)) {
+				if(!(checkquest(11738)&4)) {
+					mes "[イムリル]";
+					mes "^e5555e「ホットモル」を「15」体^000000";
+					mes "退治して欲しい。";
+					mes "少しでもモンスターの数が減れば";
+					mes "迷路を通る行商人たちも";
+					mes "安全に行き来できるようになるから。";
+					close2;
+					cutin "ep18_imril_03.png", 255;
+					end;
+				}
 				delquest 11738;
 				setquest 11739;
 				getitem 1000405,4;
@@ -4176,8 +4199,23 @@ wolfvill.gat,143,113,5	script	イムリル#ep18_wv_076	10379,{/* 15909 */
 			mes "少しでもモンスターの数が減れば";
 			mes "迷路を通る行商人たちも";
 			mes "安全に行き来できるようになるから。";
+			next;
+			if(select("請け負う","やめておく") == 2) {
+				mes "[イムリル]";
+				mes "なに、忙しいの？";
+				mes "それなら、仕方ないかぁ。";
+				cutin "ep18_imril_02.png", 2;
+				close2;
+				cutin "ep18_imril_02.png", 255;
+				end;
+			}
+			cutin "ep18_imril_04.png", 2;
+			mes "[イムリル]";
+			mes "頼んだよ。";
+			mes "気を付けてね。";
+			setquest 11738;
 			close2;
-			cutin "ep18_imril_03.png", 255;
+			cutin "ep18_imril_04.png", 255;
 			end;
 		case 2:
 			mes "[イムリル]";
@@ -7245,7 +7283,7 @@ OnQuestInfo:
 		showevent 9999,0,"箱#ep18_sb1";
 	end;
 }
-oz_dun01.gat,65,189,0	script	#ep18w10_153	139,{/* 15975 */
+oz_dun01.gat,65,189,0	script	#ep18w10_153	139,14,14,{/* 15975 */
 	if(checkquest(11727))
 		cloakoffnpc "険しい道#ep18_sb1";
 	end;
@@ -7510,7 +7548,7 @@ OnQuestInfo:
 	end;
 }
 
-oz_dun01.gat,110,37,0	script	#ep18w10_156	139,{/* 8418 */
+oz_dun01.gat,110,37,0	script	#ep18w10_156	139,14,14,{/* 8418 */
 	if(checkquest(11732) || checkquest(11733))
 		cloakoffnpc "熱気#ep18_sb2";
 	end;
@@ -9001,6 +9039,34 @@ wolfvill.gat,171,253,5	script	エゼキエル#hms01	930,5,5,{/* 16036 */
 		mes "その時は、またよろしくお願いします！";
 		close;
 	}
+	if(checkquest(130127)) {
+		mes "[エゼキエル]";
+		mes "冒険者様、こんにちは。";
+		mes "工事は順調……なのですが";
+		mes "物資が幾つか足りないのです。";
+		next;
+		mes "[エゼキエル]";
+		mes "冒険者様にお願いがあるのですが";
+		mes "「ベリーカタイ結晶」を「10」個";
+		mes "調達して来てもらえませんか？";
+		mes "建築資材として必要なのですが";
+		mes "手に入れるのが困難で……。";
+		next;
+		if(select("持ってきます","今は時間が無くて……") == 2) {
+			mes "[エゼキエル]";
+			mes "大丈夫ですよ。";
+			mes "マラムにも調達をお願いしてますから。";
+			mes "まあ、いつ届くかわかりませんが。";
+			close;
+		}
+		mes "[エゼキエル]";
+		mes "ありがとうございます！";
+		mes "「ベリーカタイ結晶」は";
+		mes "グレイウルフを倒すと手に入ります。";
+		mes "よろしくお願いします。";
+		setquest 17508;
+		close;
+	}
 	mes "[エゼキエル]";
 	mes "エゼキエル、お前は富貴栄華を";
 	mes "極める為に";
@@ -9387,7 +9453,12 @@ wolfvill.gat,147,97,5	script	アヒール#ep18	944,3,3,{/* 16054 */
 	}
 	if(checkquest(16548)) {
 		if(!(checkquest(16548)&4)) {
-			//未調査
+			mes "[アヒール]";
+			mes "「ファイアウィンドカイト」を";
+			mes "「15」体";
+			mes "やっつけてください。";
+			mes "お礼も用意しておきますからね。";
+			close;
 		}
 		mes "[アヒール]";
 		mes "ありがとうございます！";
@@ -9458,10 +9529,105 @@ wolfvill.gat,147,97,5	script	アヒール#ep18	944,3,3,{/* 16054 */
 		close;
 	}
 	if(checkquest(16550)) {
+		if(!(checkquest(16550)&2)) {
+			mes "[アヒール]";
+			mes "明日になると、また戻ってきそうなので";
+			mes "日が変わったらまた討伐に";
+			mes "行っていただけるとありがたいです。";
+			close;
+		}
+		delquest 16550;
+		mes "[アヒール]";
+		mes "ふあぁ……、今日も眠くて眠くて。";
+		mes "あ、冒険者様。";
+		mes "また「ファイアウィンドカイト」を";
+		mes "「15」体";
+		mes "やっつけてもらえませんか？";
+		next;
+		mes "[アヒール]";
+		mes "一群を狩れば、他の群れも";
+		mes "大人しくなると思います。";
+		mes "どうか、お願いします！";
+		next;
+		if(select("任せて","今は時間が無い") == 2) {
+			mes "[アヒール]";
+			mes "う～～ん……";
+			mes "今夜も寝不足になりそう……。";
+			close;
+		}
+		mes "[アヒール]";
+		mes "心ばかりですけど";
+		mes "お礼も用意しますので";
+		mes "よろしくお願いしますね！";
+		setquest 16549;	// state=1
+		close;
+	}
+	//２回目以降
+	if(checkquest(16549)) {
+		if(!(checkquest(16549)&4)) {
+			mes "[アヒール]";
+			mes "「ファイアウィンドカイト」を";
+			mes "「15」体";
+			mes "やっつけてください。";
+			mes "お礼も用意しておきますからね。";
+			close;
+		}
+		mes "[アヒール]";
+		mes "ありがとうございます！";
+		mes "おかげさまで今夜はぐっすり";
+		mes "眠れそうです。";
+		next;
 		mes "[アヒール]";
 		mes "明日になると、また戻ってきそうなので";
 		mes "日が変わったらまた討伐に";
 		mes "行っていただけるとありがたいです。";
+		next;
+		if(checkitemblank() == 0) {
+			mes "^009eff【インフォメーション】";
+			mes "これ以上多くの種類の";
+			mes "荷物を持つことが出来ません。";
+			mes "1個以上の空きを作ってください。^000000";
+			close;
+		}
+		delquest 16549;
+		setquest 16550;
+		getitem 1000405,4;
+		for(set '@i,0; '@i< 20 ; set '@i,'@i+1){
+			getexp 325000000,0,0;
+			getexp 0,250000000,0;
+		}
+		mes "[アヒール]";
+		mes "こちらは、今晩安眠できることへの";
+		mes "感謝の印です。";
+		mes "どうぞ受け取ってください！";
+		close;
+	}
+
+	//CT明けでクエスト再受注しなかった時用
+	if(checkquest(130133)&8) {
+		mes "[アヒール]";
+		mes "ふあぁ……、今日も眠くて眠くて。";
+		mes "あ、冒険者様。";
+		mes "また「ファイアウィンドカイト」を";
+		mes "「15」体";
+		mes "やっつけてもらえませんか？";
+		next;
+		mes "[アヒール]";
+		mes "一群を狩れば、他の群れも";
+		mes "大人しくなると思います。";
+		mes "どうか、お願いします！";
+		next;
+		if(select("任せて","今は時間が無い") == 2) {
+			mes "[アヒール]";
+			mes "う～～ん……";
+			mes "今夜も寝不足になりそう……。";
+			close;
+		}
+		mes "[アヒール]";
+		mes "心ばかりですけど";
+		mes "お礼も用意しますので";
+		mes "よろしくお願いしますね！";
+		setquest 16549;	// state=1
 		close;
 	}
 	mes "[アヒール]";
@@ -9832,6 +9998,41 @@ wolfvill.gat,61,170,5	script	民俗学者グドラ#ep18	919,{/* 16056 */
 		mes "助かります。";
 		close;
 	}
+	//CT明けで再受注しなかった時用
+	if(checkquest(130129)&8){
+		mes "[民俗学者グドラ]";
+		mes "前回はありがとうございました。";
+		mes "本日も村の人たちから";
+		mes "お話を聞いてきてもらえますか？";
+		next;
+		mes "[民俗学者グドラ]";
+		mes "「ディナル」という女の子と";
+		mes "「アミラ」という女性。";
+		mes "それと「シャーニナ」お婆さんから";
+		mes "話を聞いてきてください。";
+		mes "それでは、記録用の手帳をどうぞ。";
+		next;
+		if(select("行ってきます！","今は時間がないです") == 2) {
+			mes "[民俗学者グドラ]";
+			mes "それは仕方ありませんね。";
+			mes "またお時間ができたらで良いので";
+			mes "ぜひお願いいたします。";
+			mes "継続は力ですから";
+			mes "歩みを止めるわけにはいきません。";
+			close;
+		}
+		setquest 16555;
+		setquest 16556;
+		setquest 16557;
+		getitem 1000408,1;
+		mes "[民俗学者グドラ]";
+		mes "ありがとうございます。";
+		mes "この恩は、立派な本を作り上げて";
+		mes "お返ししたいと思います。";
+		mes "あ、もちろん報酬は用意してますので";
+		mes "ご心配なく。";
+		close;
+	}
 	mes "[民俗学者グドラ]";
 	mes "初めてお会いする方ですね。";
 	mes "どちら様でしょうか？";
@@ -10049,7 +10250,7 @@ wolfvill.gat,180,204,3	script	アミラ#ep18	940,{/* 16058 */
 		}
 		close;
 	}
-	if(checkquest(16552)) {
+	if(checkquest(16556)) {
 		mes "[アミラ]";
 		mes "今日もグドラのお手伝い？";
 		mes "私の話って何の役に立つのかしら？";
@@ -14138,6 +14339,11 @@ wolfvill.gat,202,166,3	script	エルイン#ep18	919,{/* 16146 */
 			mes "声を掛けてちょうだい。";
 			close;
 		}
+		mes "[エルイン]";
+		mes "私は、立ってる者は親でも使う";
+		mes "主義だからね。助かるよ。";
+		mes "ありがとう。";
+		close;
 	}
 	//2回目以降のクエストCT明けに選択肢１以外を選択した時のために記述
 	if(checkquest(130132) & 0x8) {
@@ -14238,19 +14444,19 @@ OnQuestInfo:
 }
 
 gw_fild01.gat,24,122,0	script	設置した罠#001	844,{/* 6875 */
-if(checkquest(8688)) {
+if(checkquest(8688) || checkquest(8690)) {
+		if(!checkquest(130151) && !checkquest(130152) && 
+			!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
+			end;		
+		}
 		if(!checkquest(130151)) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
 			end;
 		}
-		if(!checkquest(130151) && !checkquest(130152) && 
-		!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
-			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
-			end;		
-		}
-		misceffect 101,"設置した罠#005";
+		misceffect 101,"設置した罠#001";
 		progressbar 1;	//color=0xffff00
-		misceffect 18,"設置した罠#005";
+		misceffect 18,"設置した罠#001";
 		if(checkitemblank() == 0) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐持ち物が多いようだ‐",1;
 			end;
@@ -14271,19 +14477,19 @@ OnQuestInfo:
 	end;
 }
 gw_fild01.gat,93,113,0	script	設置した罠#002	844,{/* 6876 */
-if(checkquest(8688)) {
+	if(checkquest(8688) || checkquest(8690)) {
+		if(!checkquest(130151) && !checkquest(130152) && 
+			!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
+			end;		
+		}
 		if(!checkquest(130152)) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
 			end;
 		}
-		if(!checkquest(130151) && !checkquest(130152) && 
-		!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
-			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
-			end;		
-		}
-		misceffect 101,"設置した罠#005";
+		misceffect 101,"設置した罠#002";
 		progressbar 1;	//color=0xffff00
-		misceffect 18,"設置した罠#005";
+		misceffect 18,"設置した罠#002";
 		if(checkitemblank() == 0) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐持ち物が多いようだ‐",1;
 			end;
@@ -14304,19 +14510,19 @@ OnQuestInfo:
 	end;
 }
 gw_fild01.gat,229,205,0	script	設置した罠#003	844,{/* 6877 */
-if(checkquest(8688)) {
+	if(checkquest(8688) || checkquest(8690)) {
+		if(!checkquest(130151) && !checkquest(130152) && 
+			!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
+			end;		
+		}
 		if(!checkquest(130153)) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
 			end;
 		}
-		if(!checkquest(130151) && !checkquest(130152) && 
-		!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
-			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
-			end;		
-		}
-		misceffect 101,"設置した罠#005";
+		misceffect 101,"設置した罠#003";
 		progressbar 1;	//color=0xffff00
-		misceffect 18,"設置した罠#005";
+		misceffect 18,"設置した罠#003";
 		if(checkitemblank() == 0) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐持ち物が多いようだ‐",1;
 			end;
@@ -14337,19 +14543,19 @@ OnQuestInfo:
 	end;
 }
 gw_fild01.gat,153,212,0	script	設置した罠#004	844,{/* 6878 */
-if(checkquest(8688)) {
+	if(checkquest(8688) || checkquest(8690)) {
+		if(!checkquest(130151) && !checkquest(130152) && 
+			!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
+			end;		
+		}
 		if(!checkquest(130154)) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
 			end;
 		}
-		if(!checkquest(130151) && !checkquest(130152) && 
-		!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
-			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
-			end;		
-		}
-		misceffect 101,"設置した罠#005";
+		misceffect 101,"設置した罠#004";
 		progressbar 1;	//color=0xffff00
-		misceffect 18,"設置した罠#005";
+		misceffect 18,"設置した罠#004";
 		if(checkitemblank() == 0) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐持ち物が多いようだ‐",1;
 			end;
@@ -14370,15 +14576,15 @@ OnQuestInfo:
 	end;
 }
 gw_fild01.gat,335,241,0	script	設置した罠#005	844,{/* 6879 */
-	if(checkquest(8688)) {
+	if(checkquest(8688) || checkquest(8690)) {
+		if(!checkquest(130151) && !checkquest(130152) && 
+			!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
+			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
+			end;		
+		}
 		if(!checkquest(130155)) {
 			unittalk getcharid(3),strcharinfo(0)+" : ‐他の罠を探してみよう‐",1;
 			end;
-		}
-		if(!checkquest(130151) && !checkquest(130152) && 
-		!checkquest(130153) && !checkquest(130154) && !checkquest(130155)) {
-			unittalk getcharid(3),strcharinfo(0)+" : ‐全て調べた！エルインに報告しよう！‐",1;
-			end;		
 		}
 		misceffect 101,"設置した罠#005";
 		progressbar 1;	//color=0xffff00
@@ -14708,6 +14914,8 @@ wolfvill.gat,103,230,3	script	ブダン#ep18	931,{/* 16168 */
 			close;
 		}
 		delquest 8694;
+	}
+	if(checkquest(130126)&8) {
 		mes "[ブダン]";
 		mes "やあ、来てくれたんだな。";
 		mes "前と同じように";
